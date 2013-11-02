@@ -1,0 +1,213 @@
+inherited ftmNaprclose: TftmNaprclose
+  Left = 340
+  Top = 536
+  HelpKeyword = 'Close_naprav_stud.htm'
+  Caption = #1047#1072#1082#1088#1099#1090#1100' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
+  ClientHeight = 217
+  ClientWidth = 336
+  OldCreateOrder = True
+  OnShow = FormShow
+  ExplicitWidth = 342
+  ExplicitHeight = 246
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Bevel1: TBevel
+    Width = 336
+    Height = 176
+    ExplicitTop = 2
+    ExplicitWidth = 336
+    ExplicitHeight = 176
+  end
+  object Label1: TLabel [1]
+    Left = 13
+    Top = 7
+    Width = 71
+    Height = 13
+    Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077':'
+  end
+  object Label2: TLabel [2]
+    Left = 13
+    Top = 87
+    Width = 41
+    Height = 13
+    Caption = #1054#1094#1077#1085#1082#1072':'
+  end
+  object Label3: TLabel [3]
+    Left = 124
+    Top = 87
+    Width = 61
+    Height = 13
+    Caption = #1044#1072#1090#1072' '#1089#1076#1072#1095#1080':'
+  end
+  object Label4: TLabel [4]
+    Left = 13
+    Top = 47
+    Width = 71
+    Height = 13
+    Caption = #1069#1082#1079#1072#1084#1077#1085#1072#1090#1086#1088':'
+  end
+  object Label13: TLabel [5]
+    Left = 85
+    Top = 47
+    Width = 4
+    Height = 13
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label5: TLabel [6]
+    Left = 85
+    Top = 7
+    Width = 4
+    Height = 13
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label6: TLabel [7]
+    Left = 55
+    Top = 87
+    Width = 4
+    Height = 13
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label7: TLabel [8]
+    Left = 186
+    Top = 87
+    Width = 4
+    Height = 13
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label8: TLabel [9]
+    Left = 13
+    Top = 128
+    Width = 30
+    Height = 13
+    Caption = #1058#1077#1084#1072':'
+  end
+  object Label9: TLabel [10]
+    Left = 44
+    Top = 128
+    Width = 4
+    Height = 13
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  inherited Panel1: TPanel
+    Top = 176
+    Width = 336
+    ExplicitTop = 176
+    ExplicitWidth = 336
+    inherited bbOK: TBitBtn
+      Left = 78
+      Top = 6
+      Enabled = False
+      ExplicitLeft = 78
+      ExplicitTop = 6
+    end
+    inherited bbApply: TBitBtn
+      Left = 244
+      Top = 6
+      Enabled = False
+      ExplicitLeft = 244
+      ExplicitTop = 6
+    end
+    inherited bbCancel: TBitBtn
+      Left = 161
+      Top = 6
+      ExplicitLeft = 161
+      ExplicitTop = 6
+    end
+    inherited bbSprav: TBitBtn
+      Visible = False
+    end
+  end
+  object dbcbeNapr: TDBLookupComboboxEh [12]
+    Left = 13
+    Top = 21
+    Width = 314
+    Height = 19
+    EditButtons = <>
+    Flat = True
+    KeyField = 'Ik_ved'
+    ListField = 'OutColumn'
+    ListSource = dmUspevaemost.dsNapravl
+    TabOrder = 1
+    Visible = True
+    OnChange = dbcbeNaprChange
+  end
+  object dbcbeMark: TDBLookupComboboxEh [13]
+    Left = 13
+    Top = 103
+    Width = 104
+    Height = 19
+    EditButtons = <>
+    Flat = True
+    KeyField = 'Cosenca'
+    ListField = 'ShortName'
+    ListSource = dmUspevaemost.dsMark
+    TabOrder = 2
+    Visible = True
+    OnChange = dbcbeNaprChange
+  end
+  object dbdteExam: TDBDateTimeEditEh [14]
+    Left = 124
+    Top = 103
+    Width = 203
+    Height = 19
+    EditButtons = <>
+    Flat = True
+    Kind = dtkDateEh
+    TabOrder = 3
+    Visible = True
+    OnChange = dbcbeNaprChange
+  end
+  object dbcbeEx: TDBLookupComboboxEh [15]
+    Left = 13
+    Top = 64
+    Width = 314
+    Height = 19
+    EditButtons = <>
+    Flat = True
+    KeyField = 'itab_n'
+    ListField = 'NamePrepod'
+    ListSource = dmUspevaemost.dsPrepodVed
+    TabOrder = 4
+    Visible = True
+  end
+  object eTema: TDBEditEh [16]
+    Left = 13
+    Top = 144
+    Width = 314
+    Height = 19
+    EditButtons = <>
+    Flat = True
+    TabOrder = 5
+    Visible = True
+  end
+end

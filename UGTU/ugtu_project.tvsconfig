@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<TgConfig Version="3" SubLevelDisabled="False">
+  <Option Name="namespaceFolder.AbiturientAbitTables" Type="System.String" Value="Domain\Controllers" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.ApplicationController" Type="System.String" Value="Domain\Controllers" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.CSB" Type="System.String" Value="Utils\ShareAPG" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.ABIT_nabor_frame" Type="System.String" Value="Presentation\Frames" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.VersionController" Type="System.String" Value="Domain\Controllers" Category="General" IsBrowsable="False" />
+</TgConfig>

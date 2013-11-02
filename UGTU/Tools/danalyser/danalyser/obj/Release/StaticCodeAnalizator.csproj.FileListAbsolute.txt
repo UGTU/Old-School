@@ -1,0 +1,31 @@
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalizator\StaticCodeAnalizator\bin\Release\StaticCodeAnalizator.exe.config
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\bin\Release\StaticCodeAnalizator.exe.config
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.csproj.ResolveComReference.cache
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\bin\Release\StaticCodeAnalizator.exe
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\bin\Release\StaticCodeAnalizator.pdb
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Dialogs.Regex.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Dialogs.Regexes.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Dialogs.Settings.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Forms.aboutForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Forms.editorForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Forms.mainForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Properties.Resources.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.csproj.GenerateResource.Cache
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.exe
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.pdb
+G:\StaticCodeAnalysator\StaticCodeAnalizator\bin\Release\StaticCodeAnalizator.exe.config
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.csproj.ResolveComReference.cache
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.exe
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.pdb
+G:\StaticCodeAnalysator\StaticCodeAnalizator\bin\Release\StaticCodeAnalizator.exe
+G:\StaticCodeAnalysator\StaticCodeAnalizator\bin\Release\StaticCodeAnalizator.pdb
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\ResolveAssemblyReference.cache
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Dialogs.Regex.resources
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Dialogs.Regexes.resources
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Dialogs.Settings.resources
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Forms.aboutForm.resources
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Forms.editorForm.resources
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Interface.Forms.mainForm.resources
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.Properties.Resources.resources
+G:\StaticCodeAnalysator\StaticCodeAnalizator\obj\Release\StaticCodeAnalizator.csproj.GenerateResource.Cache

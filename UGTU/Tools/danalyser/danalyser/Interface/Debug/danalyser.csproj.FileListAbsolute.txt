@@ -1,0 +1,51 @@
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\bin\Debug\StaticCodeAnalizator.exe.config
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\danalyser.csproj.ResolveComReference.cache
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\StaticCodeAnalizator.exe
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\StaticCodeAnalizator.pdb
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\bin\Debug\StaticCodeAnalizator.exe
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\bin\Debug\StaticCodeAnalizator.pdb
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\DelphiAnalyzator.Interface.Dialogs.Regex.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\DelphiAnalyzator.Interface.Dialogs.Regexes.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\DelphiAnalyzator.Interface.Dialogs.Settings.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\DelphiAnalyzator.Interface.Forms.aboutForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\DelphiAnalyzator.Interface.Forms.editorForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\DelphiAnalyzator.Interface.Forms.mainForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\DelphiAnalyzator.Properties.Resources.resources
+C:\Documents and Settings\cha0s\Рабочий стол\StaticCodeAnalysator\StaticCodeAnalizator\obj\Debug\danalyser.csproj.GenerateResource.Cache
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\StaticCodeAnalizator\bin\Debug\StaticCodeAnalizator.exe.config
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\StaticCodeAnalizator\obj\Debug\danalyser.csproj.ResolveComReference.cache
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\StaticCodeAnalizator\obj\Debug\StaticCodeAnalizator.exe
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\StaticCodeAnalizator\obj\Debug\StaticCodeAnalizator.pdb
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\StaticCodeAnalizator\bin\Debug\danalyser.exe.config
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\bin\Debug\danalyser.exe.config
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\danalyser.csproj.ResolveComReference.cache
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\bin\Debug\danalyser.exe
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\bin\Debug\danalyser.pdb
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\danalyser.csproj.GenerateResource.Cache
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\danalyser.exe
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\danalyser.pdb
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Properties.Resources.resources
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Forms.mainForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Dialogs.Regex.resources
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Dialogs.lsAnalysis.resources
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Dialogs.Regexes.resources
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Dialogs.Settings.resources
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Forms.aboutForm.resources
+C:\Documents and Settings\cha0s\Рабочий стол\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Forms.editorForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\bin\Debug\danalyser.exe.config
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\danalyser.csproj.ResolveComReference.cache
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\danalyser.exe
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\danalyser.pdb
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\ResolveAssemblyReference.cache
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Dialogs.lsAnalysis.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Dialogs.Settings.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Forms.aboutForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Forms.editorForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Forms.mainForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\DelphiAnalyser.Properties.Resources.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\danalyser.csproj.GenerateResource.Cache
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\bin\Debug\danalyser.exe
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\bin\Debug\danalyser.pdb
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Debug\DelphiAnalyser.Interface.Dialogs.SearchForm.resources

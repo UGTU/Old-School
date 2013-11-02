@@ -1,0 +1,20 @@
+CREATE NONCLUSTERED INDEX [noncluster_index_Potok_shema] ON [dbo].[Potok_shema] 
+(
+	[ik_shema_of_potok] ASC,
+	[ik_potok] ASC
+)WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]
+
+CREATE NONCLUSTERED INDEX [noncluster_index_Content_plan_nagr] ON [dbo].[Content_plan_nagr] 
+(
+	[ik_vid_zanyat] ASC,
+	[ik_plan_nagr] ASC,
+	[ik_shema_of_potok] ASC,
+	[ik_content_plan_nagr] ASC
+)WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]
+
+
+CREATE NONCLUSTERED INDEX [noncluster_index_Prepod_plan_nagr] ON [dbo].[Prepod_plan_nagr] 
+(
+	[ik_content_plan_nagr] ASC,
+	[ik_id_prepod] ASC
+)WITH (SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF) ON [PRIMARY]

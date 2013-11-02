@@ -1,0 +1,16 @@
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\bin\Release\danalyser.exe.config
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\danalyser.csproj.ResolveComReference.cache
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\bin\Release\danalyser.exe
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\bin\Release\danalyser.pdb
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\ResolveAssemblyReference.cache
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Interface.Dialogs.lsAnalysis.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Interface.Dialogs.OpenWith.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Interface.Dialogs.SearchForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Interface.Dialogs.Settings.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Interface.Forms.aboutForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Interface.Forms.editorForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Interface.Forms.mainForm.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\DelphiAnalyser.Properties.Resources.resources
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\danalyser.csproj.GenerateResource.Cache
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\danalyser.exe
+C:\Главное меню\6.Программирование\C#\danalyser\danalyser\obj\Release\danalyser.pdb

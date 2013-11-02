@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://ist.ugtu.net/ExceptionSchema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://ist.ugtu.net/ExceptionSchema.xsd"
+    xmlns:mstns="http://ist.ugtu.net/ExceptionSchema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation xml:lang="ru">
+      Схема базы данных ошибок ИС УГТУ
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="Exceptions" type="ExceptionsType"/>
+  <xs:complexType name="ExceptionsType">
+    <xs:sequence>
+      <xs:element name="Exception" type="ExceptionType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>  
+  </xs:complexType>
+
+  <xs:complexType name="ExceptionType">
+    <xs:sequence>
+      <xs:element name="Summary" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+      <xs:element name="Caused" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+      <xs:element name="Solution" type="xs:string" minOccurs="0" maxOccurs="1"></xs:element>
+    </xs:sequence>    
+    <xs:attribute name="ExceptionClass" type="xs:string" use="required">      
+    </xs:attribute>    
+    <xs:attribute name="ErrorCode" type="xs:integer" use="optional">
+    </xs:attribute>    
+    <xs:attribute name="URI" type="xs:anyURI" use="optional">
+    </xs:attribute>
+    <xs:attribute name="HelpTopic" type="xs:string" use="optional">
+    </xs:attribute>
+    <xs:attribute name="Action" default="None" use="optional">
+      <xs:simpleType>
+        <xs:list itemType="Actions"/>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="Severity" use="required">
+      <xs:simpleType>
+        <xs:list itemType="Severities"/>
+      </xs:simpleType>
+    </xs:attribute>        
+  </xs:complexType>
+  <xs:simpleType name="Actions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Restart"/>      
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Severities">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Fatal"/>
+      <xs:enumeration value="Stop"/>
+      <xs:enumeration value="Warning"/>
+      <xs:enumeration value="Hint"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
+
+
