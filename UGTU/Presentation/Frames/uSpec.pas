@@ -17,7 +17,7 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Buttons, ToolWin, ComCtrls, ExtCtrls, DB,
   ADODB, Grids, DBGridEh, uUchPlan, ImgList, ActnList, DateUtils, UchPlanController,
   GridsEh, uAcademFrame, udmStudentData, udmUspevaemost, uAverageBalls, uFgos,
-  uFgosController;
+  uFgosController, ConstantRepository;
 
 type
   TfmSpec = class(TfmBase)
@@ -119,15 +119,20 @@ begin
       ToolButton5.Hint:='Удалить программу';
     end;
   end;
-  if (VidGos=1) then TabSheet2.TabVisible:=false; //скрыть вкладку ФГОС для старых специальностей
+  if (VidGos=FGOS2) then TabSheet2.TabVisible:=false; //скрыть вкладку ФГОС для старых специальностей
   fmUchPlan1.IK:= SpecIK;
   fmUchPlan1.dirIK:=directionIK;
   fmUchPlan1.VidGos:= VidGos;
   fmUchPlan1.Connection:= Connection;
   fmUchPlan1.Read;
   fmUchPlan1.Refresh;
-  dsSpclz.DataSet:= TADODataSet.Create(nil);
-  TUchPlanController.Instance.getAllSpecializations(@dsSpclz.DataSet, SpecIK, false);
+  if VidGos=FGOS2 then
+  begin
+    dsSpclz.DataSet:= TADODataSet.Create(nil);
+    TUchPlanController.Instance.getAllSpecializations(@dsSpclz.DataSet, SpecIK, false);
+  end
+  else
+
   fmFgos1.IK:= SpecIK;
   fmFgos1.vidGos:= VidGos;
   fmFgos1.Connection:= Connection;

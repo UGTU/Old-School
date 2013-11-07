@@ -138,23 +138,24 @@ inherited fmUchPlan: TfmUchPlan
           BevelOuter = bvNone
           TabOrder = 0
           object Splitter1: TSplitter
-            Left = 204
+            Left = 450
             Top = 0
             Height = 448
+            ExplicitLeft = 204
             ExplicitTop = 25
             ExplicitHeight = 462
           end
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 204
+            Width = 450
             Height = 448
             Align = alLeft
             BevelOuter = bvNone
             Constraints.MinWidth = 200
             TabOrder = 0
             DesignSize = (
-              204
+              450
               448)
             object Label5: TLabel
               Left = 5
@@ -172,7 +173,7 @@ inherited fmUchPlan: TfmUchPlan
             object dbgDisc: TDBGridEh
               Left = 5
               Top = 28
-              Width = 197
+              Width = 443
               Height = 420
               AllowedOperations = []
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -190,7 +191,7 @@ inherited fmUchPlan: TfmUchPlan
               FooterFont.Height = -11
               FooterFont.Name = 'MS Sans Serif'
               FooterFont.Style = []
-              Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = PopupMenu1
               TabOrder = 0
@@ -205,21 +206,21 @@ inherited fmUchPlan: TfmUchPlan
             end
           end
           object Panel6: TPanel
-            Left = 207
+            Left = 453
             Top = 0
-            Width = 595
+            Width = 349
             Height = 448
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
             Visible = False
             DesignSize = (
-              595
+              349
               448)
             object ScrollBox2: TScrollBox
               Left = 1
               Top = 0
-              Width = 595
+              Width = 349
               Height = 448
               Anchors = [akLeft, akTop, akRight, akBottom]
               BorderStyle = bsNone
@@ -539,7 +540,7 @@ inherited fmUchPlan: TfmUchPlan
           end
         end
         object dbcbSpclz: TDBLookupComboboxEh
-          Left = 126
+          Left = 125
           Top = 5
           Width = 662
           Height = 19
@@ -553,7 +554,7 @@ inherited fmUchPlan: TfmUchPlan
         object dbcbFormEd: TDBLookupComboboxEh
           Left = 126
           Top = 30
-          Width = 283
+          Width = 371
           Height = 19
           EditButtons = <>
           Flat = True
@@ -909,7 +910,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

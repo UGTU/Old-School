@@ -8,7 +8,7 @@ uses
   ImgList, ToolWin, ActnList, Grids, DBGrids, DBGridEh, Menus, Mask,
   DBCtrlsEh, DBLookupEh, UchPlanController, GeneralController, GridsEh, DBTVSpecobj, udmUchPlan,
   uFgosController, Fgos_Application3Report, Fgos_Application5Report,
-  Fgos_Application12Report,uWaitingController, uAddDiscRelation;
+  Fgos_Application12Report,uWaitingController, uAddDiscRelation, ConstantRepository;
 
 const FISCULTURA=10; //для особого учета зачетных единиц физической культуры
 
@@ -175,6 +175,7 @@ type
     procedure GetSemesters();
   public
     IKPlan:integer;
+    nameSpclz: string;  //именование Профиль/Программа/Специализация
     procedure CloseFrame; override;
     property IK: Integer read fIK write fIK;
     property dirIK: Integer read fdirIK write fdirIK;
@@ -214,20 +215,24 @@ begin
   TGeneralController.Instance.InitializeLockupCB(@dbcbGrpDisc, 'IK_grp_disc', 'name_grp_disc');
   TGeneralController.Instance.InitializeLockupCB(@dbcbKaf, 'ik_kaf', 'short_name_kaf');
   TGeneralController.Instance.InitializeLockupCB(@dbcbPdgrpDisc,'iK_pdgrp_disc', 'name_pdgrp_disc');
-  if (VidGos=2) then flagFgos:=true;
+
+  flagFgos:=(VidGos=FGOS3);
+
+  dbcbSpclz.Visible := (VidGos=FGOS2);
+  Label1.Visible := (VidGos=FGOS2);
 
   //видны ли зачетные единицы
-  Label33.Visible:= (VidGos=2);
-  Label32.Visible:= (VidGos=2);
+  Label33.Visible:= (VidGos=FGOS3);
+  Label32.Visible:= (VidGos=FGOS3);
 
   //видны ли компетенции
-  Label34.Visible:= (VidGos=2);
-  Label35.Visible:= (VidGos=2);
+  Label34.Visible:= (VidGos=FGOS3);
+  Label35.Visible:= (VidGos=FGOS3);
 
-  //дотупны ли приложения № 3, 5, 12 (индексы 0, 2, 3 соответственно)
-  PopupMenu2.Items.Items[0].Visible:=  (VidGos=2);
-  PopupMenu2.Items.Items[2].Visible:=  (VidGos=2);
-  PopupMenu2.Items.Items[3].Visible:=  (VidGos=2);
+  //доступны ли приложения № 3, 5, 12 (индексы 0, 2, 3 соответственно)
+  PopupMenu2.Items.Items[0].Visible:=  (VidGos=FGOS3);
+  PopupMenu2.Items.Items[2].Visible:=  (VidGos=FGOS3);
+  PopupMenu2.Items.Items[3].Visible:=  (VidGos=FGOS3);
 
   dsGetFgosBySpec.DataSet:=TFgosController.Instance.getFgosBySpec(IK);
   dsGetAllDiscFgos.DataSet:= TGeneralController.Instance.GetNewADODataSet(false);
@@ -236,24 +241,26 @@ begin
 
 //  dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value;
   case(dirIK) of
-  1: Label1.Caption:='Профиль:';
-  3: Label1.Caption:='Программа:';
-  else Label1.Caption:='Специализация:';
+  1: nameSpclz := 'Профиль';
+  3: nameSpclz := 'Программа';
+  else nameSpclz := 'Специализация';
   end;
+  Label1.Caption:= nameSpclz + ':';
+
   //если нет требуемого фгоса, то не грузим профили
   dsGetFgosBySpec.DataSet:=TFgosController.Instance.getFgosBySpec(IK);
-  dbcbSpclz.KeyValue:= TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, IK, true);
 
-
-
-  if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value<>NULL or (VidGos<>2)) then
+  {if VidGos=FGOS2 then
   begin
-    
+
+  end; }
+  dbgDisc.DataSource.DataSet.FieldByName('cName_spclz_short').Visible := (VidGos=FGOS3);
+
+  if (VidGos<>FGOS3) then dbcbSpclz.KeyValue:= TUchPlanController.Instance.getUchPlanSpecializations(@dbcbSpclz.ListSource.DataSet, IK, true);
+  if ((VidGos<>FGOS3)or(dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value<>NULL)) then
     if dbcbSpclz.KeyValue = NULL then
-    begin
-      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, IK, 0, true);
-    end;
-  end;
+      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, IK, 0, VidGos, true);
+
   for i:= 0 to actList.ActionCount-1 do
     actList.Actions[i].OnUpdate(actList.Actions[i]);
 end;
@@ -284,10 +291,13 @@ try
   frmUchPlanAddDisc.IK:= -1;
   frmUchPlanAddDisc.iUchPlan:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
   frmUchPlanAddDisc.VidGos:=VidGos;
+  frmUchPlanAddDisc.SpecIK := IK;
+  frmUchPlanAddDisc.nameSpclz := nameSpclz;
   frmUchPlanAddDisc.dbcbCklDisc.Tag:= dbcbCklDisc.KeyValue;
   frmUchPlanAddDisc.dbcbGrpDisc.Tag:= dbcbGrpDisc.KeyValue;
   frmUchPlanAddDisc.dbcbPdgrpDisc.Tag:= dbcbPdgrpDisc.KeyValue;
   frmUchPlanAddDisc.Read(fSemesterStr);
+  if VidGos=FGOS3 then frmUchPlanAddDisc.dbcbSpclz.KeyValue := key_CommonProfile;
   if ((frmUchPlanAddDisc.ShowModal() = mrOk) or (frmUchPlanAddDisc.bbApply.Tag = 1)) then
     GetDisciplines;
 finally
@@ -305,12 +315,15 @@ try
   frmUchPlanAddDisc.IK:= dsDisc.DataSet.FieldByName('ik_disc_uch_plan').AsInteger;
   frmUchPlanAddDisc.iUchPlan:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
   frmUchPlanAddDisc.VidGos:=VidGos;
+  frmUchPlanAddDisc.SpecIK := IK;
+  frmUchPlanAddDisc.nameSpclz := nameSpclz;
   frmUchPlanAddDisc.Tag:= 2;
   frmUchPlanAddDisc.Read(fSemesterStr);
   frmUchPlanAddDisc.Edit6.Text:= Trim(dsDisc.DataSet.FieldByName('cname_ckl_disc1').AsString);
   frmUchPlanAddDisc.iHour_gos:= dsDisc.DataSet.FieldByName('iHour_gos').AsInteger;
   frmUchPlanAddDisc.iIndivid:= dsDisc.DataSet.FieldByName('iIndivid').AsInteger;
   frmUchPlanAddDisc.dbcbDisc.KeyValue:= dsDisc.DataSet.FieldByName('ik_disc').AsInteger;
+  if VidGos=FGOS3 then frmUchPlanAddDisc.dbcbSpclz.KeyValue := dsDisc.DataSet.FieldByName('ik_spclz').AsInteger;
   frmUchPlanAddDisc.dbeGroupVibor.Value:= dsDisc.DataSet.FieldByName('ViborGroup').AsString;
   if (dsDisc.DataSet.FieldByName('ik_default_kaf').Value = NULL) then
     frmUchPlanAddDisc.dbcbKaf.KeyValue:= 1
@@ -381,7 +394,7 @@ begin
     TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
     dbcbSpclz.KeyValue:= TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, IK, true);
     if dbcbSpclz.KeyValue = NULL then
-      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, IK, 0, true);
+      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, IK, 0, VidGos, true);
     for i:= 0 to actList.ActionCount-1 do
     actList.Actions[i].OnUpdate(actList.Actions[i]);
    // LocalLog.AddEntry('План удалён');
@@ -497,7 +510,7 @@ begin
   end
   else splzIK := dbcbSpclz.KeyValue;
   if Assigned(dbcbFormEd.ListSource) then
-    dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, IK, splzIK, true);
+    dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, IK, splzIK, VidGos, true);
 end;
 
 procedure TfmUchPlan.dbcbFormEdKeyValueChanged(Sender: TObject);
@@ -509,7 +522,7 @@ begin
   begin
     if dbcbSpclz.KeyValue = NULL then spz := 0 else spz := dbcbSpclz.KeyValue;
 
-    dbcbYear.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYear.ListSource.DataSet, IK, spz, dbcbFormEd.KeyValue, true);
+    dbcbYear.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYear.ListSource.DataSet, IK, spz, dbcbFormEd.KeyValue,VidGos, true);
   //  dbcbYearUtv.KeyValue:= TUchPlanController.Instance.getCurrentYearsUtv(@dbcbYearUtv.ListSource.DataSet, IK, spz, dbcbFormEd.KeyValue, true);
     dbcbYear.ListSource.DataSet.Last;
  //   dbcbYearUtv.ListSource.DataSet.Last;
@@ -543,7 +556,7 @@ begin
     fSemesterStr:= TUchPlanController.Instance.GetSemestersInStr(@dsSemLength.DataSet, dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger, 'ik_vid_zanyat');
     IKPlan:=dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
     dmUchPlan.adodsUchPlan.close;
-    dmUchPlan.adodsUchPlan.CommandText := 'select * from Uch_pl where (ik_uch_plan = '+inttostr(IkPlan)+')';
+    dmUchPlan.adodsUchPlan.CommandText := 'select * from Uch_pl where (ik_uch_plan = '+inttostr(IkPlan)+') and is_main = ' + IntToStr(VidGos-1);
     dmUchPlan.adodsUchPlan.open;
     with dmUchPlan.adodsUchPlan do
     dtpDateUtv.Date := StrToDate(copy(FieldByName('date_utv').AsString,9,2) + '.' + copy(FieldByName('date_utv').AsString,6,2) + '.' +  copy(FieldByName('date_utv').AsString,0,4));

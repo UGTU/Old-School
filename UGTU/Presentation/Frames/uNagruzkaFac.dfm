@@ -38,6 +38,10 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\FrameFac.htm'
         Caption = #1057#1087#1080#1089#1086#1082' '#1082#1072#1092#1077#1076#1088
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -115,6 +119,10 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\Add_NormOfTime.htm'
         Caption = #1053#1086#1088#1084#1099' '#1074#1088#1077#1084#1077#1085#1080
         ImageIndex = 4
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Bevel2: TBevel
           Left = 0
           Top = 381
@@ -323,7 +331,7 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
               Left = 5
               Top = 25
               Width = 535
-              Height = 120
+              Height = 118
               Anchors = [akLeft, akTop, akRight, akBottom]
               AutoFitColWidths = True
               ColumnDefValues.Title.TitleButton = True
@@ -442,6 +450,10 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\Add_PlanContingent.htm'
         Caption = #1054#1078#1080#1076#1072#1077#1084#1099#1081' '#1082#1086#1085#1090#1080#1085#1075#1077#1085#1090
         ImageIndex = 8
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Bevel1: TBevel
           Left = 0
           Top = 381
@@ -621,7 +633,7 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
     Left = 488
     Top = 73
     Bitmap = {
-      494C01010E001300240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010E0013002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000C7C3C300827878008278780082787800827878008278

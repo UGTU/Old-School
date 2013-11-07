@@ -70,6 +70,10 @@ type
     Bevel3: TBevel;
     actAddDiscRelation: TAction;
     Label17: TLabel;
+    lblSpclz: TLabel;
+    dsSpclz: TDataSource;
+    dbcbSpclz: TDBLookupComboboxEh;
+    lblNotice: TLabel;
     procedure sgDiscDblClick(Sender: TObject);
     procedure sgDiscSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
@@ -103,6 +107,8 @@ type
     procedure actSpravUpdate(Sender: TObject);
     procedure actCmptncExecute(Sender: TObject);
     procedure actAddDiscRelationExecute(Sender: TObject);
+    procedure dbcbSpclzMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
   private
     isCellTextChange: boolean;
     curRow, curCol: integer;
@@ -117,6 +123,7 @@ type
     fStrCmptncList: TStringList;
     fDiscRelationList: TStringList;
     namedisc: string;
+    isMerge: bool;
     procedure FillColumnValues;
     procedure SetDiscType(discType: integer);
     procedure CalcSRS;
@@ -127,6 +134,7 @@ type
     procedure SetCompetenceList(const Value: TStringList);
     procedure SetStrCmptncList (const Value: TStringList);
     procedure SetDiscRelationList (const Value: TStringList);
+    procedure CheckSimilarDiscipline;
     property CompetenceList: TStringList read fCompetenceList write SetCompetenceList;
     property StrCmptncList: TStringList read fStrCmptncList write SetStrCmptncList;
     property DiscRelationList: TStringList read fDiscRelationList write SetDiscRelationList;
@@ -137,6 +145,8 @@ type
   public
     iUchPlan:integer;
     VidGos: integer;
+    SpecIK: integer;
+    nameSpclz: string;  //именование Профиль/Программа/Специализация
     property iHour_gos: integer read fHourGos write SetHourGos;
     property iIndivid: integer read fIndividHour write SetIndividHour;
 
@@ -151,7 +161,8 @@ implementation
 
 {$R *.dfm}
 
-uses uUchPlanEditControlVZ, uUchPlanEditAuditorVZ, uBaseFrame, uAddDiscCompetence, uAddDiscRelation;
+uses uUchPlanEditControlVZ, uUchPlanEditAuditorVZ, uBaseFrame, uAddDiscCompetence, uAddDiscRelation,
+     ConstantRepository;
 
 { TfrmUchPlanAddDisc }
 
@@ -193,6 +204,17 @@ begin
   TUchPlanController.Instance.getAllPodGroups(@dbcbPdgrpDisc.ListSource.DataSet, false);
   TGeneralController.Instance.InitializeLockupCB(@dbcbKaf, 'ik_kaf', 'name_kaf');
   TUchPlanController.Instance.getAllDepartments(@dbcbKaf.ListSource.DataSet, false);
+
+  //Профиль дисциплин будет только для ФГОС3------------------------------------
+  dbcbSpclz.Visible := VidGos=FGOS3;
+  lblSpclz.Visible := VidGos=FGOS3;
+  if VidGos=FGOS3 then  
+  begin
+    lblSpclz.Caption := nameSpclz + ' дисциплины:';
+    TGeneralController.Instance.InitializeLockupCB(@dbcbSpclz, 'ik_spclz', 'cName_spclz_short');
+    TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, SpecIK, false);
+  end;
+  //----------------------------------------------------------------------------
 
   if self.IK >= 0 then
   begin
@@ -238,7 +260,7 @@ end;
 
 function TfrmUchPlanAddDisc.DoApply: boolean;
 var
-  DiscInUchPlanIK: integer;
+  DiscInUchPlanIK, SpclzIK: integer;
 begin
   if ((Label22.Tag < 0) or (fixRow.Count > 0)) then
   begin
@@ -255,8 +277,11 @@ begin
   begin
     dbeGroupVibor.Value:='0';
   end;
+
+  if dbcbSpclz.KeyValue = Null then SpclzIK := 0 else SpclzIK := dbcbSpclz.KeyValue;
+  
   if not TUchPlanController.Instance.SaveDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue, dbcbGrpDisc.KeyValue,
-  dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
+  dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, SpclzIK, iHour_gos, iIndivid,
   StrToInt(dbeGroupVibor.Value), Edit6.Text,fStrCmptncList,fDiscRelationList) then //передаю не компетенции, а структуру
   begin
     Result:= false;
@@ -264,7 +289,7 @@ begin
   end
   else                 //если сохранение прошло
     if cbOtherUchPl.Checked then
-    begin       //аналогичное изменение дисциплпны в более новых планах
+    begin       //аналогичное изменение дисциплины в более новых планах
       TUchPlanController.Instance.ChangeDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue,
       dbcbGrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
       StrToInt(dbeGroupVibor.Value), Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
@@ -609,6 +634,47 @@ begin
   end;
 end;
 
+procedure TfrmUchPlanAddDisc.CheckSimilarDiscipline;
+var ds: TADODataSet;
+    msStr: string;
+    i, pgr: integer;
+begin
+  if dbcbPdgrpDisc.KeyValue = NULL then pgr := 0 else pgr := dbcbPdgrpDisc.KeyValue;
+  
+  ds := TGeneralController.Instance.GetNewADODataSet(true);
+  ds.CommandText := 'select * from GetSimilarDisc('+ IntToStr(IK) +
+                    ','+IntToStr(iUchPlan)+','+IntToStr(dbcbDisc.KeyValue)+','+
+                    IntToStr(dbcbCklDisc.KeyValue)+','+IntToStr(dbcbGrpDisc.KeyValue)+
+                    ','+IntToStr(pgr)+')';
+  ds.Open;
+  if ds.RecordCount<>0 then //уже есть такая дисциплина
+  begin
+    //с таким же профилем
+    ds.Filter := 'ik_spclz='+IntToStr(dbcbSpclz.KeyValue);
+    ds.Filtered := true;
+    if ds.RecordCount<>0 then
+    begin
+      // pnlNotice.Caption :=
+       lblNotice.Caption := nameSpclz + ' ' + ds.FieldByName('cName_spclz_short').AsString +
+       ' уже имеет такую дисциплину в текущем учебном плане';
+       lblNotice.Width := 145;
+       IsModified:= false;
+    end else
+      //если назначен общий профиль
+      if dbcbSpclz.KeyValue=key_CommonProfile then
+      begin
+        ds.Filtered := false;
+        msStr := 'В текущем учебном плане уже есть данная дисциплина.' + #13 + nameSpclz + ': ';
+        for i := 0 to ds.RecordCount - 1 do
+          msStr := msStr + ds.FieldByName('cName_spclz').AsString + #13;
+        msStr := msStr + #13 + 'Вы хотите их объединить в одну дисциплину?';
+        isMerge := MessageBox(Handle, PAnsiChar(msStr), 'Объединение дисциплин',
+               MB_YESNO) = IDYES;
+      end;
+
+  end;
+end;
+
 procedure TfrmUchPlanAddDisc.dbcbDiscKeyValueChanged(Sender: TObject);
 var
   i: integer;
@@ -637,6 +703,11 @@ end;
 procedure TfrmUchPlanAddDisc.dbcbGrpDiscKeyValueChanged(Sender: TObject);
 begin
   IsModified:= (dbcbCklDisc.KeyValue <> NULL) and (dbcbGrpDisc.KeyValue <> NULL) and (dbcbDisc.KeyValue <> NULL) and (dbcbKaf.KeyValue <> NULL);
+
+  isMerge := False;
+  lblNotice.Caption := '';
+  if (IsModified)and(VidGos=FGOS3) then CheckSimilarDiscipline;
+
   if (dbcbCklDisc.KeyValue <> NULL) and (dbcbGrpDisc.KeyValue <> NULL) and (Edit6.Text = '') then
     if (dbcbCklDisc.ListSource.DataSet.FieldByName('Ccode_ckl_disc').Value <> NULL) and (dbcbGrpDisc.ListSource.DataSet.FieldByName('Ccode_grp_disc').Value <> NULL) then
       Edit6.Text:= dbcbCklDisc.ListSource.DataSet.FieldByName('Ccode_ckl_disc').AsString + '.' + dbcbGrpDisc.ListSource.DataSet.FieldByName('Ccode_grp_disc').AsString + '.';
@@ -655,6 +726,14 @@ begin
     dbeGroupVibor.Visible:= false;
     lGroupVibor.Visible:= false;
   end
+end;
+
+procedure TfrmUchPlanAddDisc.dbcbSpclzMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if dbcbSpclz.KeyValue>=0 then
+     dbcbSpclz.Hint := dbcbSpclz.ListSource.DataSet.FieldByName('cName_spclz').AsString;
+
 end;
 
 procedure TfrmUchPlanAddDisc.Edit7Exit(Sender: TObject);

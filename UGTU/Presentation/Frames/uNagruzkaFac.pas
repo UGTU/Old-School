@@ -536,6 +536,7 @@ begin
   frmGroupEdt.SpecFacIK := tempDS.FieldByName('ik_spec_fac').Value;
   frmGroupEdt.dbneYear.MaxValue := CurrentYear;
   frmGroupEdt.edtName.Text := tempDS.FieldByName('Cname_grup').Value;
+  //frmGroupEdt.ProfIK := tempDS.FieldByName('ik_spclz').Value;
   frmGroupEdt.dbneYear.Value := tempDS.FieldByName('nYear_post').Value;
   frmGroupEdt.LoadUchPlan(tempDS.FieldByName('ik_spec_fac').Value);
   if tempDS.FieldByName('Ik_uch_plan').Value<> NULL then

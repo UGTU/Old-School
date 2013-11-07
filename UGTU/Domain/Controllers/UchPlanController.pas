@@ -11,7 +11,8 @@ interface
 
 uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM, uDMUgtuStructure,
-  Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj, ComCtrls, Math;
+  Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj, ComCtrls, Math,
+  ConstantRepository;
 
 const FISCULTURA=10; //для особого учета зачетных единиц физической культуры
       FISCULTURA_CIKL = 19;  //для особого учета зачетных единиц физической культуры
@@ -150,19 +151,19 @@ type
       getCurrentFormEd - загружает в SourceDataSet все формы обучения, для которых существует уч. план с параметрами SpecIK, SpclzIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK: integer; isShowFirst: boolean): Variant;
+    function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
 
     {
       getCurrentSpecializations - загружает в SourceDataSet все специализации, для которых существует уч. план с параметром SpecIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
     function getCurrentSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
-
+    function getUchPlanSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
     {
       getCurrentYears - загружает в SourceDataSet все года, для которых существует уч. план с параметрами SpecIK, SpclzIK, FormEdIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentYears(SourceDataSet: PDataSet; SpecIK, SpclzIK, FormEdIK: integer; isShowFirst: boolean): Variant;
+    function getCurrentYears(SourceDataSet: PDataSet; SpecIK, SpclzIK, FormEdIK, VidGos: integer; isShowFirst: boolean): Variant;
     function getCurrentYearsUtv(SourceDataSet: PDataSet; SpecIK, SpclzIK, FormEdIK: integer; isShowFirst: boolean): Variant;
     {
       getCurrentDisciplines - загружает в SourceDataSet все дисциплины из уч. плана UchPlanIK, которые относятся к циклу DiscCycleIK и группе DiscGroupIK
@@ -282,7 +283,7 @@ type
            CodeGOS - шифр дисциплины по ГОС
     }
     function SaveDiscInUchPlan(UchPlanIK: integer; var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK,
-        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum: integer;
+        DiscIK, KafedraIK, SpclzIK, GOSHour, IndividHour, GroupViborNum: integer;
         CodeGOS: string; aStrCompetenceList, DiscRelationList: TStringList): Boolean;   {aCompetenceList}
 
     {
@@ -594,14 +595,14 @@ begin
 end;
 
 function TUchPlanController.getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, 
-        SpclzIK: integer; isShowFirst: boolean): Variant;
+        SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
 var tempQuery: string;
 begin
   tempQuery := 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz';
-  if (SpclzIK <> NULL)and(SpclzIK <>0)
+  if (SpclzIK <> NULL)and(SpclzIK <>0)and(SpclzIK<>key_CommonProfile)
       then tempQuery := tempQuery + ' = ' + IntToStr(SpclzIK)
       else tempQuery := tempQuery + ' is null';
-  tempQuery := tempQuery + '))) ORDER BY Cname_form_ed';
+  tempQuery := tempQuery + ')) and is_main = ' + IntToStr(VidGos-1) + ') ORDER BY Cname_form_ed';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, tempQuery,'ik_form_ed', isShowFirst, NULL);
 //  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz = ' + IntToStr(SpclzIK) + '))) ORDER BY Cname_form_ed', 'ik_form_ed', isShowFirst, NULL);
 end;
@@ -610,18 +611,18 @@ function TUchPlanController.getCurrentSpecializations(SourceDataSet: PDataSet;
         SpecIK: integer; isShowFirst: boolean): Variant;
 begin
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,
-    'Select distinct Uch_pl.iK_spclz, spclz.cName_spclz_short, spclz.cName_spclz From Uch_pl Left join spclz on Uch_pl.iK_spclz = spclz.iK_spclz Where Uch_pl.ik_spec = ' + IntToStr(SpecIK),
+    'select * from GetSpclzForSpec(' + IntToStr(SpecIK)+') order by is_common desc',
     'ik_spclz', isShowFirst, NULL);
 end;
 
 function TUchPlanController.getCurrentYears(SourceDataSet: PDataSet; SpecIK, 
-        SpclzIK, FormEdIK: integer; isShowFirst: boolean): Variant;
+        SpclzIK, FormEdIK,VidGos: integer; isShowFirst: boolean): Variant;
 var tempQuery: string;
 begin
   tempQuery := 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_form_ed = ' + VarToStr(FormEdIK) + ')';
   if (SpclzIK <> NULL)and(SpclzIK <>0) then tempQuery := tempQuery +  ' and (Uch_pl.ik_spclz = ' + VarToStr(SpclzIK) + ') '
     else tempQuery := tempQuery +  ' and (Uch_pl.ik_spclz is null ) ';
-  tempQuery := tempQuery +  'ORDER BY year_value';
+  tempQuery := tempQuery + 'and is_main = ' + IntToStr(VidGos-1) + ' ORDER BY year_value';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,tempQuery, 'ik_year_uch_pl', isShowFirst, NULL);
 //  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_spclz = ' + VarToStr(SpclzIK) + ') and (Uch_pl.ik_form_ed = ' + VarToStr(FormEdIK) + ') ORDER BY year_value', 'ik_year_uch_pl', isShowFirst, NULL);
 end;
@@ -871,6 +872,14 @@ begin
       end;
     if (Length(number) > 0) then Result.Add(number);
   end;
+end;
+
+function TUchPlanController.getUchPlanSpecializations(SourceDataSet: PDataSet;
+  SpecIK: integer; isShowFirst: boolean): Variant;
+begin
+  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,
+    'select * from spclz where ik_spclz in (select ik_spclz from Uch_pl where ik_spec=' + IntToStr(SpecIK)+') order by ik_spec',
+    'ik_spclz', isShowFirst, NULL);
 end;
 
 function TUchPlanController.CheckSemesterString(
@@ -1331,7 +1340,7 @@ begin
 end;
 
 function TUchPlanController.SaveDiscInUchPlan(UchPlanIK: integer;
-  var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour,
+  var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, SpclzIK, GOSHour,
   IndividHour, GroupViborNum: integer; CodeGOS: string; aStrCompetenceList, DiscRelationList: TStringList): Boolean;   {aCompetenceList}
 var
   DataSet: TADOStoredProc;
@@ -1359,6 +1368,7 @@ begin
     DataSet.Parameters.CreateParameter('@Cname_ckl_disc_gos',ftString, pdInput, 20, CodeGOS);
     DataSet.Parameters.CreateParameter('@ik_pdgrp_disc',ftInteger,pdInput,0,PodGroupIK);
     DataSet.Parameters.CreateParameter('@ViborGroup',ftInteger, pdInput, 0, GroupViborNum);
+    if SpclzIK<>0 then DataSet.Parameters.CreateParameter('@ik_spclz',ftInteger, pdInput, 0, SpclzIK);
     try
       DataSet.Open;
       DiscInUchPlanIK:= DataSet.FieldByName('ReturnValue').AsInteger;

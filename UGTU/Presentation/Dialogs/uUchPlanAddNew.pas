@@ -251,7 +251,7 @@ begin
   dbcbSpclzCopy.KeyValue:= TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclzCopy.ListSource.DataSet, Label2.Tag, true);
   if dbcbSpclzCopy.KeyValue = NULL then
   begin
-    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, 0, true);
+    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, 0, VidGos, true);
   end;
   isAlreadyLoad:= true;
 end;
@@ -266,7 +266,7 @@ begin
     splzIK:=0;
   end  else splzIK := dbcbSpclz.KeyValue;
   if Assigned(dbcbFormEdCopy.ListSource) then
-    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, splzIK, true);
+    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, splzIK, VidGos, true);
 end;
 
 procedure TfrmUchPlanAddNew.dbcbFormEdCopyKeyValueChanged(Sender: TObject);
@@ -278,7 +278,7 @@ begin
 
   if (dbcbFormEdCopy.KeyValue <> NULL) then
   begin
-    dbcbYearCopy.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYearCopy.ListSource.DataSet, Label2.Tag, spczIK, dbcbFormEdCopy.KeyValue, true);
+    dbcbYearCopy.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYearCopy.ListSource.DataSet, Label2.Tag, spczIK, dbcbFormEdCopy.KeyValue,VidGos, true);
 
    // dbcbYearUtvCopy.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYearUtvCopy.ListSource.DataSet, Label2.Tag, dbcbSpclzCopy.KeyValue, dbcbFormEdCopy.KeyValue, true);
   end;
