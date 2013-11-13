@@ -11,7 +11,9 @@ object dmPrikaz: TdmPrikaz
     Connection = dm.DBConnect
     CursorType = ctStatic
     OnCalcFields = adodsPrikazCalcFields
-    CommandText = 'select * from Prikaz '#13#10'order by Nn_prikaz'
+    CommandText = 
+      'select *, [Nn_prikaz]+'#39' '#1086#1090' '#39'+CONVERT(VARCHAR(10),[Dd_prikaz],104' +
+      ') NN_Date from Prikaz '#13#10'order by Nn_prikaz'
     Parameters = <>
     Left = 270
     Top = 49
@@ -53,9 +55,9 @@ object dmPrikaz: TdmPrikaz
       Lookup = True
     end
     object adodsPrikazoldNN_Date: TStringField
-      FieldKind = fkCalculated
       FieldName = 'NN_Date'
-      Calculated = True
+      ReadOnly = True
+      Size = 34
     end
   end
   object dsPrikType: TDataSource
@@ -64,6 +66,7 @@ object dmPrikaz: TdmPrikaz
     Top = 86
   end
   object adodsPrikType: TADODataSet
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     CommandText = 'typePrikaz'
@@ -177,12 +180,9 @@ object dmPrikaz: TdmPrikaz
       Size = 100
     end
     object adodsPrikazNN_Date: TStringField
-      DisplayWidth = 40
-      FieldKind = fkCalculated
       FieldName = 'NN_Date'
-      Visible = False
-      Size = 50
-      Calculated = True
+      ReadOnly = True
+      Size = 34
     end
   end
 end
