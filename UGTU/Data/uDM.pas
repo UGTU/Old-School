@@ -515,6 +515,8 @@ type
     aspDeleteOldNagr: TADOStoredProc;
     aspDeletePotokSemestr: TADOStoredProc;
     adodsPostupViewSchoolAverMark: TFloatField;
+    aspGetDiscplinesiK_spclz: TIntegerField;
+    aspGetDiscplinescName_spclz_short: TStringField;
     procedure DataModuleCreate(Sender: TObject);
 
 

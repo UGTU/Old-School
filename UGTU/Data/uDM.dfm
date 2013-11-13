@@ -12,7 +12,6 @@ object dm: Tdm
       'et Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;' +
       'Tag with column collation when possible=False;'
     IsolationLevel = ilReadUncommitted
-    KeepConnection = False
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     AfterConnect = DBConnectAfterConnect
@@ -456,7 +455,7 @@ object dm: Tdm
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
-        Value = Null
+        Value = 0
       end
       item
         Name = '@ik_uch_plan'
@@ -538,6 +537,7 @@ object dm: Tdm
     end
     object aspGetDiscplinescName_disc: TStringField
       DisplayLabel = #1053#1072#1079#1074#1072#1085#1080#1077' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1099
+      DisplayWidth = 150
       FieldName = 'cName_disc'
       Size = 100
     end
@@ -560,6 +560,15 @@ object dm: Tdm
     object aspGetDiscplinesiK_pdgrp_disc: TIntegerField
       FieldName = 'iK_pdgrp_disc'
       Visible = False
+    end
+    object aspGetDiscplinesiK_spclz: TIntegerField
+      FieldName = 'iK_spclz'
+      Visible = False
+    end
+    object aspGetDiscplinescName_spclz_short: TStringField
+      DisplayLabel = #1055#1088#1086#1092#1080#1083#1100
+      DisplayWidth = 40
+      FieldName = 'cName_spclz_short'
     end
   end
   object adsVidNagruzki: TADODataSet
