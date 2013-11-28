@@ -72,6 +72,10 @@ object dmGroupActions: TdmGroupActions
         Attributes = [paNullable]
         DataType = ftDateTime
         Value = Null
+      end
+      item
+        Name = '@ik_spclz'
+        Value = Null
       end>
     Left = 149
     Top = 33
@@ -120,24 +124,28 @@ object dmGroupActions: TdmGroupActions
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Ik_grupNew'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Ik_zach'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Ik_prikaz'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 52
     Top = 97

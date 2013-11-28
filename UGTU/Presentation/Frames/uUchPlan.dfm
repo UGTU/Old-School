@@ -54,28 +54,28 @@ inherited fmUchPlan: TfmUchPlan
           Left = 115
           Top = 8
           Width = 3
-          Height = 13
+          Height = 16
           Alignment = taRightJustify
         end
         object Label16: TLabel
           Left = 30
           Top = 30
-          Width = 89
-          Height = 13
+          Width = 113
+          Height = 16
           Caption = #1060#1086#1088#1084#1072' '#1086#1073#1091#1095#1077#1085#1080#1103':'
         end
         object Label2: TLabel
           Left = 36
           Top = 54
-          Width = 82
-          Height = 13
+          Width = 106
+          Height = 16
           Caption = #1043#1086#1076' '#1074#1089#1090#1091#1087#1083#1077#1085#1080#1103':'
         end
         object Label3: TLabel
           Left = 34
           Top = 91
-          Width = 86
-          Height = 13
+          Width = 109
+          Height = 16
           Caption = #1062#1080#1082#1083' '#1076#1080#1089#1094#1080#1087#1083#1080#1085':'
         end
         object Bevel6: TBevel
@@ -90,43 +90,43 @@ inherited fmUchPlan: TfmUchPlan
         object Label4: TLabel
           Left = 25
           Top = 115
-          Width = 95
-          Height = 13
+          Width = 124
+          Height = 16
           Caption = #1043#1088#1091#1087#1087#1072' '#1076#1080#1089#1094#1080#1087#1083#1080#1085':'
         end
         object Label29: TLabel
           Left = 74
           Top = 168
-          Width = 47
-          Height = 13
+          Width = 59
+          Height = 16
           Caption = #1057#1077#1084#1077#1089#1090#1088':'
         end
         object Label30: TLabel
           Left = 35
           Top = 65
-          Width = 56
-          Height = 13
+          Width = 73
+          Height = 16
           Caption = #1074' '#1076#1077#1081#1089#1090#1074#1080#1077
         end
         object Label31: TLabel
           Left = 286
           Top = 168
-          Width = 66
-          Height = 13
+          Width = 84
+          Height = 16
           Caption = #1042#1080#1076' '#1079#1072#1085#1103#1090#1080#1103':'
         end
         object Label36: TLabel
           Left = 262
           Top = 58
-          Width = 101
-          Height = 13
+          Width = 128
+          Height = 16
           Caption = #1044#1072#1090#1072' '#1091#1090#1074#1077#1088#1078#1076#1077#1085#1080#1103' :'
         end
         object Label37: TLabel
           Left = 7
           Top = 139
-          Width = 114
-          Height = 13
+          Width = 149
+          Height = 16
           Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' '#1076#1080#1089#1094#1080#1087#1083#1080#1085':'
         end
         object Panel2: TPanel
@@ -299,29 +299,29 @@ inherited fmUchPlan: TfmUchPlan
                 object Label12: TLabel
                   Left = 5
                   Top = 96
-                  Width = 131
-                  Height = 13
+                  Width = 168
+                  Height = 16
                   Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1095#1072#1089#1086#1074':'
                 end
                 object Label13: TLabel
                   Left = 210
                   Top = 36
-                  Width = 111
-                  Height = 13
+                  Width = 140
+                  Height = 16
                   Caption = #1051#1077#1082#1094#1080#1086#1085#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
                 end
                 object Label14: TLabel
                   Left = 199
                   Top = 56
-                  Width = 122
-                  Height = 13
+                  Width = 156
+                  Height = 16
                   Caption = #1051#1072#1073#1086#1088#1072#1090#1086#1088#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
                 end
                 object Label15: TLabel
                   Left = 202
                   Top = 76
-                  Width = 119
-                  Height = 13
+                  Width = 153
+                  Height = 16
                   Caption = #1055#1088#1072#1082#1090#1080#1095#1077#1089#1082#1080#1077' '#1079#1072#1085#1103#1090#1080#1103':'
                 end
                 object Label17: TLabel
@@ -353,15 +353,15 @@ inherited fmUchPlan: TfmUchPlan
                 object Label19: TLabel
                   Left = 187
                   Top = 116
-                  Width = 134
-                  Height = 13
+                  Width = 173
+                  Height = 16
                   Caption = #1048#1085#1076#1080#1074#1080#1076#1091#1072#1083#1100#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
                 end
                 object Label20: TLabel
                   Left = 297
                   Top = 136
-                  Width = 24
-                  Height = 13
+                  Width = 30
+                  Height = 16
                   Caption = #1057#1056#1057':'
                 end
                 object Label21: TLabel
@@ -419,8 +419,8 @@ inherited fmUchPlan: TfmUchPlan
                 object Label25: TLabel
                   Left = 194
                   Top = 96
-                  Width = 127
-                  Height = 13
+                  Width = 164
+                  Height = 16
                   Caption = #1042#1089#1077#1075#1086' '#1072#1091#1076#1080#1090#1086#1088#1085#1099#1093' '#1095#1072#1089#1086#1074':'
                 end
                 object Label26: TLabel
@@ -498,8 +498,8 @@ inherited fmUchPlan: TfmUchPlan
                 object Label32: TLabel
                   Left = 5
                   Top = 115
-                  Width = 151
-                  Height = 13
+                  Width = 197
+                  Height = 16
                   Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1079#1072#1095#1077#1090#1085#1099#1093' '#1077#1076#1080#1085#1080#1094':'
                 end
                 object Label33: TLabel
@@ -518,8 +518,8 @@ inherited fmUchPlan: TfmUchPlan
                 object Label34: TLabel
                   Left = 367
                   Top = 36
-                  Width = 71
-                  Height = 13
+                  Width = 91
+                  Height = 16
                   Caption = #1050#1086#1084#1087#1077#1090#1077#1085#1094#1080#1080':'
                 end
                 object Label35: TLabel
@@ -543,7 +543,7 @@ inherited fmUchPlan: TfmUchPlan
           Left = 125
           Top = 5
           Width = 662
-          Height = 19
+          Height = 22
           Anchors = [akLeft, akTop, akRight]
           EditButtons = <>
           Flat = True
@@ -555,7 +555,7 @@ inherited fmUchPlan: TfmUchPlan
           Left = 126
           Top = 30
           Width = 371
-          Height = 19
+          Height = 22
           EditButtons = <>
           Flat = True
           TabOrder = 2
@@ -566,7 +566,7 @@ inherited fmUchPlan: TfmUchPlan
           Left = 126
           Top = 56
           Width = 123
-          Height = 19
+          Height = 22
           EditButtons = <>
           Flat = True
           TabOrder = 3
@@ -577,7 +577,7 @@ inherited fmUchPlan: TfmUchPlan
           Left = 126
           Top = 88
           Width = 670
-          Height = 19
+          Height = 22
           Anchors = [akLeft, akTop, akRight]
           EditButtons = <>
           Flat = True
@@ -589,7 +589,7 @@ inherited fmUchPlan: TfmUchPlan
           Left = 126
           Top = 113
           Width = 670
-          Height = 19
+          Height = 22
           Anchors = [akLeft, akTop, akRight]
           EditButtons = <>
           Flat = True
@@ -608,8 +608,8 @@ inherited fmUchPlan: TfmUchPlan
           object Label27: TLabel
             Left = 8
             Top = 10
-            Width = 48
-            Height = 13
+            Width = 62
+            Height = 16
             Caption = #1050#1072#1092#1077#1076#1088#1072':'
           end
           object SpeedButton1: TSpeedButton
@@ -635,7 +635,7 @@ inherited fmUchPlan: TfmUchPlan
             Left = 64
             Top = 8
             Width = 137
-            Height = 19
+            Height = 22
             EditButtons = <>
             Flat = True
             TabOrder = 0
@@ -646,7 +646,7 @@ inherited fmUchPlan: TfmUchPlan
           Left = 127
           Top = 167
           Width = 80
-          Height = 19
+          Height = 22
           Hint = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
           EditButtons = <>
           Flat = True
@@ -688,7 +688,7 @@ inherited fmUchPlan: TfmUchPlan
           Left = 358
           Top = 167
           Width = 279
-          Height = 19
+          Height = 22
           Hint = #1042#1080#1076' '#1079#1072#1085#1103#1090#1080#1103', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
           EditButtons = <>
           Flat = True
@@ -750,7 +750,7 @@ inherited fmUchPlan: TfmUchPlan
         Left = 126
         Top = 139
         Width = 671
-        Height = 19
+        Height = 22
         EditButtons = <>
         Flat = True
         TabOrder = 1
@@ -894,8 +894,8 @@ inherited fmUchPlan: TfmUchPlan
     object Label28: TLabel
       Left = 84
       Top = 16
-      Width = 166
-      Height = 13
+      Width = 209
+      Height = 16
       Caption = #1069#1082#1089#1087#1086#1088#1090' '#1076#1072#1085#1085#1099#1093' '#1074' Microsoft Excel'
     end
     object ProgressBar1: TProgressBar
@@ -910,7 +910,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -2889,42 +2889,16 @@ end;
 procedure TfmGroup.actEdtGroupExecute(Sender: TObject);
 var
   r:integer;
-  Grp: TDBNodeGroupObject;
 begin
   inherited;
   dm.adospGetUchPlnGroup.Active := false;
-  Grp := TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject);
-  with dm.adospGetUchPlnGroup.Parameters do
-  begin
-    Clear;
-    AddParameter;
-    Items[0].Value := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik;
-  end;
-  dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
+
   frmGroupEdt:=TfrmGroupEdt.Create(self);
-  frmGroupEdt.bEdit := true;
-  frmGroupEdt.dbneYear.MaxValue := CurrentYear;
-  frmGroupEdt.edtName.Text := Grp.Name;
-  frmGroupEdt.dblcbUchPln.KeyValue := Grp.UchPlanIK;
-  try
-    frmGroupEdt.dbneYear.Value := Grp.FoundYear;
-  except
-  end;
-  frmGroupEdt.ik := Grp.ik;
-  frmGroupEdt.edtName.Text := Grp.Name;
+  frmGroupEdt.ik := TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
+  frmGroupEdt.SpecFacIK := TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik;
+  frmGroupEdt.WithSpec := false;
+  frmGroupEdt.Edit := true;
 
-  if Grp.DateCreate<>0 then
-    frmGroupEdt.dbdteCreate.Value:=Grp.DateCreate
-  else
-    frmGroupEdt.dbdteCreate.Value := null;
-  if Grp.Dateexit<>0 then
-    frmGroupEdt.dbdteExit.Value := Grp.Dateexit
-  else
-    frmGroupEdt.dbdteExit.Value := null;
-
-  frmGroupEdt.Caption := 'Редактирование группы';
-  frmGroupEdt.IsModified:= false;
   r:= frmGroupEdt.ShowModal;
   if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
   begin
@@ -2937,7 +2911,6 @@ end;
 
 procedure TfmGroup.actCreateAttestExecute(Sender: TObject);
 var ik_grup:integer;
-    //nSem: Integer;
     numAtt: integer;
 begin
 
@@ -2946,9 +2919,7 @@ begin
   numAtt:= nAtt.Value;
 
   haveAtt:= TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem, numAtt, IsBrs);
-
   actCreateAttest.Enabled := false;
-
   TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, numAtt, IsBRS);
 
   RefreshView;

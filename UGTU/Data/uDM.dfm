@@ -499,8 +499,8 @@ object dm: Tdm
         Precision = 10
         Value = Null
       end>
-    Left = 665
-    Top = 301
+    Left = 649
+    Top = 293
     object aspGetDiscplinesik_disc: TIntegerField
       FieldName = 'ik_disc'
       Visible = False
@@ -3356,5 +3356,24 @@ object dm: Tdm
       end>
     Left = 328
     Top = 328
+  end
+  object adsProfile: TADODataSet
+    Connection = DBConnect
+    CursorType = ctStatic
+    CommandText = 'select * from GetProfileEduBranches'
+    Parameters = <
+      item
+        Name = '@ik_uch_pl'
+        DataType = ftString
+        Size = 1
+        Value = '0'
+      end>
+    Left = 24
+    Top = 584
+  end
+  object dsProfileForGroup: TDataSource
+    DataSet = adsProfile
+    Left = 8
+    Top = 552
   end
 end

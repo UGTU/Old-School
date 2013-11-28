@@ -21,7 +21,7 @@ type
     Label6: TLabel;
     Panel2: TPanel;
     Splitter1: TSplitter;
-    Panel3: TPanel;
+    pnlDiscProp: TPanel;
     Panel4: TPanel;
     sgDisc: TStringGrid;
     ScrollBox1: TScrollBox;
@@ -36,12 +36,31 @@ type
     Panel5: TPanel;
     Timer1: TTimer;
     Label13: TLabel;
+    lGroupVibor: TLabel;
+    dbeGroupVibor: TDBEditEh;
+    cbOtherUchPl: TCheckBox;
+    imgCmptnc: TImageList;
+    actListCmptnc: TActionList;
+    actCmptnc: TAction;
+    Label14: TLabel;
+    dbcbPdgrpDisc: TDBLookupComboboxEh;
+    actAddDiscRelation: TAction;
+    Label17: TLabel;
+    dsSpclz: TDataSource;
+    pnlProfile: TPanel;
+    dbcbSpclz: TDBLookupComboboxEh;
+    lblSpclz: TLabel;
+    pnlMain: TPanel;
+    allCompetence: TLabel;
+    Bevel2: TBevel;
+    Bevel3: TBevel;
     Bevel6: TBevel;
     Bevel7: TBevel;
     Edit5: TDBEditEh;
     Edit7: TDBEditEh;
     Label11: TLabel;
     Label15: TLabel;
+    Label16: TLabel;
     Label18: TLabel;
     Label19: TLabel;
     Label20: TLabel;
@@ -52,28 +71,11 @@ type
     Label26: TLabel;
     Label27: TLabel;
     Label7: TLabel;
-    lGroupVibor: TLabel;
-    dbeGroupVibor: TDBEditEh;
-    cbOtherUchPl: TCheckBox;
     lblCompetence: TLabel;
-    allCompetence: TLabel;
-    imgCmptnc: TImageList;
-    actListCmptnc: TActionList;
-    actCmptnc: TAction;
+    lblNotice: TLabel;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
-    Label14: TLabel;
-    dbcbPdgrpDisc: TDBLookupComboboxEh;
-    Bevel2: TBevel;
-    Label16: TLabel;
     Button1: TButton;
-    Bevel3: TBevel;
-    actAddDiscRelation: TAction;
-    Label17: TLabel;
-    lblSpclz: TLabel;
-    dsSpclz: TDataSource;
-    dbcbSpclz: TDBLookupComboboxEh;
-    lblNotice: TLabel;
     procedure sgDiscDblClick(Sender: TObject);
     procedure sgDiscSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
@@ -146,6 +148,7 @@ type
     iUchPlan:integer;
     VidGos: integer;
     SpecIK: integer;
+    SpclzIK: integer;
     nameSpclz: string;  //именование Профиль/Программа/Специализация
     property iHour_gos: integer read fHourGos write SetHourGos;
     property iIndivid: integer read fIndividHour write SetIndividHour;
@@ -206,13 +209,13 @@ begin
   TUchPlanController.Instance.getAllDepartments(@dbcbKaf.ListSource.DataSet, false);
 
   //Профиль дисциплин будет только для ФГОС3------------------------------------
-  dbcbSpclz.Visible := VidGos=FGOS3;
-  lblSpclz.Visible := VidGos=FGOS3;
-  if VidGos=FGOS3 then  
+  pnlProfile.Visible := VidGos=FGOS3;
+  if VidGos=FGOS3 then
   begin
     lblSpclz.Caption := nameSpclz + ' дисциплины:';
     TGeneralController.Instance.InitializeLockupCB(@dbcbSpclz, 'ik_spclz', 'cName_spclz_short');
     TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, SpecIK, false);
+    dbcbSpclz.KeyValue := SpclzIK;
   end;
   //----------------------------------------------------------------------------
 
@@ -897,12 +900,12 @@ begin
   if (discType = 2) or (discType = 3)or(discType = 12) then
   begin
     Label7.Caption:= 'Количество недель:';
-    Label7.Left:= Edit5.Left - 108;
+    //Label7.Left:= Edit5.Left - 108;
   end
   else
   begin
     Label7.Caption:= 'Общее количество часов:';
-    Label7.Left:= Edit5.Left - 140;
+    //Label7.Left:= Edit5.Left - 140;
   end;
   Edit7.Enabled:= discType = 1;
   Label19.Enabled:= discType = 1;

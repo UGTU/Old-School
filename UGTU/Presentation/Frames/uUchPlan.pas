@@ -297,7 +297,7 @@ try
   frmUchPlanAddDisc.dbcbGrpDisc.Tag:= dbcbGrpDisc.KeyValue;
   frmUchPlanAddDisc.dbcbPdgrpDisc.Tag:= dbcbPdgrpDisc.KeyValue;
   frmUchPlanAddDisc.Read(fSemesterStr);
-  if VidGos=FGOS3 then frmUchPlanAddDisc.dbcbSpclz.KeyValue := key_CommonProfile;
+  frmUchPlanAddDisc.SpclzIK := key_CommonProfile;
   if ((frmUchPlanAddDisc.ShowModal() = mrOk) or (frmUchPlanAddDisc.bbApply.Tag = 1)) then
     GetDisciplines;
 finally
@@ -317,13 +317,14 @@ try
   frmUchPlanAddDisc.VidGos:=VidGos;
   frmUchPlanAddDisc.SpecIK := IK;
   frmUchPlanAddDisc.nameSpclz := nameSpclz;
+  if VidGos=FGOS3 then frmUchPlanAddDisc.SpclzIK := dsDisc.DataSet.FieldByName('ik_spclz').AsInteger;
   frmUchPlanAddDisc.Tag:= 2;
   frmUchPlanAddDisc.Read(fSemesterStr);
   frmUchPlanAddDisc.Edit6.Text:= Trim(dsDisc.DataSet.FieldByName('cname_ckl_disc1').AsString);
   frmUchPlanAddDisc.iHour_gos:= dsDisc.DataSet.FieldByName('iHour_gos').AsInteger;
   frmUchPlanAddDisc.iIndivid:= dsDisc.DataSet.FieldByName('iIndivid').AsInteger;
   frmUchPlanAddDisc.dbcbDisc.KeyValue:= dsDisc.DataSet.FieldByName('ik_disc').AsInteger;
-  if VidGos=FGOS3 then frmUchPlanAddDisc.dbcbSpclz.KeyValue := dsDisc.DataSet.FieldByName('ik_spclz').AsInteger;
+
   frmUchPlanAddDisc.dbeGroupVibor.Value:= dsDisc.DataSet.FieldByName('ViborGroup').AsString;
   if (dsDisc.DataSet.FieldByName('ik_default_kaf').Value = NULL) then
     frmUchPlanAddDisc.dbcbKaf.KeyValue:= 1

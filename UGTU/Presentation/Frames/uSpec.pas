@@ -190,7 +190,7 @@ var
   r:integer;
 begin
   inherited;
-  dm.adospGetUchPlnGroup.Active := false;
+ { dm.adospGetUchPlnGroup.Active := false;
   with dm.adospGetUchPlnGroup.Parameters do
   begin
     Clear;
@@ -198,16 +198,18 @@ begin
     Items[0].Value := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
   end;
   dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
+  dm.adospGetUchPlnGroup.Active := true;    }
   frmGroupEdt:=TfrmGroupEdt.Create(self);
+  frmGroupEdt.SpecFacIK := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
   frmGroupEdt.WithSpec := false;
+  frmGroupEdt.Edit := false;
   try
-    frmGroupEdt.bEdit := false;
+   {
     frmGroupEdt.dbneYear.MaxValue := CurrentYear;
     frmGroupEdt.Caption := 'Добавление группы';
     frmGroupEdt.edtName.Text := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ShortName;
     frmGroupEdt.edtName.Text := frmGroupEdt.edtName.Text+'-'+Copy(IntToStr(CurrentYear), 3, 2);
-    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);
+    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);}
     r:= frmGroupEdt.ShowModal;
     if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
     begin
@@ -225,37 +227,10 @@ var
   r:integer;
 begin
   inherited;
-  dm.adospGetUchPlnGroup.Active := false;
-  with dm.adospGetUchPlnGroup.Parameters do
-  begin
-    Clear;
-    AddParameter;
-    Items[0].Value := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
-  end;
-  dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
   frmGroupEdt:=TfrmGroupEdt.Create(self);
-  frmGroupEdt.WithSpec := false;
-  frmGroupEdt.bEdit := true;                  
-  frmGroupEdt.dbneYear.MaxValue := CurrentYear;
-  frmGroupEdt.edtName.Text := DataSet.FieldByName('Cname_grup').Value;
-  frmGroupEdt.dbneYear.Value := DataSet.FieldByName('nYear_post').Value;
-  if DataSet.FieldByName('Ik_uch_plan').Value<> NULL then
-    frmGroupEdt.dblcbUchPln.KeyValue := DataSet.FieldByName('Ik_uch_plan').Value
-  else
-    frmGroupEdt.dblcbUchPln.KeyValue := -1;
   frmGroupEdt.ik := DataSet.FieldByName('Ik_grup').Value;
-  frmGroupEdt.edtName.Text := DataSet.FieldByName('Cname_grup').Value;
-
-  if DataSet.FieldByName('DateCreate').Value <>NULL then
-    frmGroupEdt.dbdteCreate.Text := DataSet.FieldByName('DateCreate').Value
-  else frmGroupEdt.dbdteCreate.Value := null;
-  if DataSet.FieldByName('DateExit').Value <>NULL then
-    frmGroupEdt.dbdteExit.Text := DataSet.FieldByName('DateExit').Value
-  else frmGroupEdt.dbdteExit.value := null;
-    
-  frmGroupEdt.Caption := 'Редактирование группы';
-  frmGroupEdt.IsModified:= false;
+  frmGroupEdt.WithSpec := false;
+  frmGroupEdt.Edit := true;
   r:= frmGroupEdt.ShowModal;
   if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
   begin

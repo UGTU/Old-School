@@ -331,7 +331,7 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
               Left = 5
               Top = 25
               Width = 535
-              Height = 118
+              Height = 117
               Anchors = [akLeft, akTop, akRight, akBottom]
               AutoFitColWidths = True
               ColumnDefValues.Title.TitleButton = True
@@ -633,7 +633,7 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
     Left = 488
     Top = 73
     Bitmap = {
-      494C01010E0013002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010E001300300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000C7C3C300827878008278780082787800827878008278

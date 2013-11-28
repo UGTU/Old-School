@@ -517,6 +517,8 @@ type
     adodsPostupViewSchoolAverMark: TFloatField;
     aspGetDiscplinesiK_spclz: TIntegerField;
     aspGetDiscplinescName_spclz_short: TStringField;
+    adsProfile: TADODataSet;
+    dsProfileForGroup: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
 
 

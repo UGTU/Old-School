@@ -1403,22 +1403,11 @@ begin
   (ActiveFrame as TfmSpec).actAddGroupExecute(nil) else
 
   begin
-    dm.adospGetUchPlnGroup.Active := false;
-  with dm.adospGetUchPlnGroup.Parameters do
-  begin
-    Clear;
-    AddParameter;
-    Items[0].Value := actAddGroup.Tag;
-  end;
-  dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
   frmGroupEdt:=TfrmGroupEdt.Create(self);
   try
-    frmGroupEdt.Tag:=actAddGroup.Tag;;
-    frmGroupEdt.bEdit := false;
-    frmGroupEdt.dbneYear.MaxValue := CurrentYear;
-    frmGroupEdt.Caption := 'Добавление группы';
-    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);
+    frmGroupEdt.SpecFacIK := actAddGroup.Tag;
+    frmGroupEdt.WithSpec := false;
+    frmGroupEdt.Edit := false;
     frmGroupEdt.ShowModal;
   finally
     frmGroupEdt.Free;

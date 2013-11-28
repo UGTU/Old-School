@@ -599,7 +599,7 @@ function TUchPlanController.getCurrentFormEd(SourceDataSet: PDataSet; SpecIK,
 var tempQuery: string;
 begin
   tempQuery := 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz';
-  if (SpclzIK <> NULL)and(SpclzIK <>0)and(SpclzIK<>key_CommonProfile)
+  if (SpclzIK <> NULL)and(SpclzIK<>key_CommonProfile)
       then tempQuery := tempQuery + ' = ' + IntToStr(SpclzIK)
       else tempQuery := tempQuery + ' is null';
   tempQuery := tempQuery + ')) and is_main = ' + IntToStr(VidGos-1) + ') ORDER BY Cname_form_ed';

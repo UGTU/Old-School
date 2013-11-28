@@ -369,12 +369,13 @@ var
 begin
   frmGroupEdt:=TfrmGroupEdt.Create(self);
   frmGroupEdt.WithSpec := true;
+  frmGroupEdt.FacIK := Self.IK;
   try
-    frmGroupEdt.bEdit := false;
-    frmGroupEdt.dbneYear.MaxValue := CurrentYear;
+    frmGroupEdt.Edit := false;
+   { frmGroupEdt.dbneYear.MaxValue := CurrentYear;
     frmGroupEdt.Caption := 'Добавление группы';
     frmGroupEdt.FacIK := Self.IK;
-    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);
+    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);}
     r:= frmGroupEdt.ShowModal;
     if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
   finally
@@ -513,49 +514,14 @@ end;
 procedure TfmNagruzkaFac.dbgPlanContingentDblClick(Sender: TObject);
 var
   r:integer;
-  tempDS: TADODataSet;
+
 begin
-  dm.adospGetUchPlnGroup.Active := false;
-  with dm.adospGetUchPlnGroup.Parameters do
-  begin
-    Clear;
-    AddParameter;
-    Items[0].Value := dsPlanContingentOfSepGroups.DataSet.FieldByName('ik_grup').AsInteger;
-  end;
-  dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
 
-  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
-  tempDS.CommandText := 'select Grup.*, rsf.ik_fac from Grup, Relation_spec_fac rsf where rsf.ik_spec_fac=Grup.ik_spec_fac and ik_grup=' + dsPlanContingentOfSepGroups.DataSet.FieldByName('ik_grup').AsString;
-  tempDS.Open;
-  
   frmGroupEdt:=TfrmGroupEdt.Create(self);
-
-  frmGroupEdt.bEdit := true;
-  frmGroupEdt.WithSpec := true;
-  frmGroupEdt.SpecFacIK := tempDS.FieldByName('ik_spec_fac').Value;
-  frmGroupEdt.dbneYear.MaxValue := CurrentYear;
-  frmGroupEdt.edtName.Text := tempDS.FieldByName('Cname_grup').Value;
-  //frmGroupEdt.ProfIK := tempDS.FieldByName('ik_spclz').Value;
-  frmGroupEdt.dbneYear.Value := tempDS.FieldByName('nYear_post').Value;
-  frmGroupEdt.LoadUchPlan(tempDS.FieldByName('ik_spec_fac').Value);
-  if tempDS.FieldByName('Ik_uch_plan').Value<> NULL then
-    frmGroupEdt.dblcbUchPln.KeyValue := tempDS.FieldByName('Ik_uch_plan').Value
-  else
-    frmGroupEdt.dblcbUchPln.KeyValue := -1;
-  frmGroupEdt.ik := tempDS.FieldByName('Ik_grup').Value;
-  frmGroupEdt.FacIK := tempDS.FieldByName('ik_fac').Value;
-  frmGroupEdt.edtName.Text := tempDS.FieldByName('Cname_grup').Value;
-
-  if tempDS.FieldByName('DateCreate').Value <>NULL then
-    frmGroupEdt.dbdteCreate.Text := tempDS.FieldByName('DateCreate').Value
-  else frmGroupEdt.dbdteCreate.Value := null;
-  if tempDS.FieldByName('DateExit').Value <>NULL then
-    frmGroupEdt.dbdteExit.Text := tempDS.FieldByName('DateExit').Value
-  else frmGroupEdt.dbdteExit.value := null;
-    
-  frmGroupEdt.Caption := 'Редактирование группы';
-  frmGroupEdt.IsModified:= false;
+  frmGroupEdt.ik := dsPlanContingentOfSepGroups.DataSet.FieldByName('ik_grup').AsInteger;
+  frmGroupEdt.WithSpec := false;  //не редактировать специальность
+  frmGroupEdt.Edit := true;      //редактирование группы
+  
   r:= frmGroupEdt.ShowModal;
   if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
   begin
@@ -563,9 +529,6 @@ begin
     dsPlanContingentOfSepGroups.DataSet.Active:=true;
   end;
   frmGroupEdt.Free;
-
-  tempDS.Close;
-  tempDS.Free;
 
 end;
 
