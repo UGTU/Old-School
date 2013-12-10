@@ -52,6 +52,8 @@ type
     fmAverageBallsSpec: TfmAverageBalls;
     TabSheet2: TTabSheet;
     fmFgos1: TfmFgos;
+    tsWorkPlan: TTabSheet;
+    fmUchPlan2: TfmUchPlan;
     procedure DBGridEh1DblClick(Sender: TObject);
     procedure actAddGroupExecute(Sender: TObject);
     procedure actEdtGroupExecute(Sender: TObject);
@@ -119,25 +121,37 @@ begin
       ToolButton5.Hint:='Удалить программу';
     end;
   end;
-  if (VidGos=FGOS2) then TabSheet2.TabVisible:=false; //скрыть вкладку ФГОС для старых специальностей
+  //работа с планами-эталонами
   fmUchPlan1.IK:= SpecIK;
   fmUchPlan1.dirIK:=directionIK;
   fmUchPlan1.VidGos:= VidGos;
   fmUchPlan1.Connection:= Connection;
-  fmUchPlan1.Read;
+  fmUchPlan1.ReadModelUchPlan;
   fmUchPlan1.Refresh;
+
+  //работа с рабочими учебными планами групп
+  fmUchPlan2.IK:= SpecIK;
+  fmUchPlan2.dirIK:=directionIK;
+  fmUchPlan2.VidGos:= VidGos;
+  fmUchPlan2.Connection:= Connection;
+  fmUchPlan2.ReadWorkUchPlan;
+  fmUchPlan2.Refresh;
+
   if VidGos=FGOS2 then
   begin
     dsSpclz.DataSet:= TADODataSet.Create(nil);
     TUchPlanController.Instance.getAllSpecializations(@dsSpclz.DataSet, SpecIK, false);
+    TabSheet2.TabVisible:=false; //скрыть вкладку ФГОС для старых специальностей
   end
   else
+  begin
+    fmFgos1.IK:= SpecIK;
+    fmFgos1.vidGos:= VidGos;
+    fmFgos1.Connection:= Connection;
+    fmFgos1.Read;
+    fmFgos1.Refresh;
+  end;
 
-  fmFgos1.IK:= SpecIK;
-  fmFgos1.vidGos:= VidGos;
-  fmFgos1.Connection:= Connection;
-  fmFgos1.Read;
-  fmFgos1.Refresh;
   PageControl1Change(PageControl1);
 end;
 

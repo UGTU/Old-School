@@ -152,11 +152,16 @@ type
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
     function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
+    
 
     {
       getCurrentSpecializations - загружает в SourceDataSet все специализации, для которых существует уч. план с параметром SpecIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
+    //Выбирает учебный план для группы
+    function getUchPlanForGroup(aIK_group: integer): Integer;
+
+
     function getCurrentSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
     function getUchPlanSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
     {
@@ -418,6 +423,8 @@ var
   weekCountExceptionList: TVidZanyatExceptionList;
   vidZanyatTaskCountList: TVidZanyatExceptionList;
 
+
+
 const
   Excel_GUID: TGUID = '{000208D5-0000-0000-C000-000000000046}';
 
@@ -602,7 +609,7 @@ begin
   if (SpclzIK <> NULL)and(SpclzIK<>key_CommonProfile)
       then tempQuery := tempQuery + ' = ' + IntToStr(SpclzIK)
       else tempQuery := tempQuery + ' is null';
-  tempQuery := tempQuery + ')) and is_main = ' + IntToStr(VidGos-1) + ') ORDER BY Cname_form_ed';
+  tempQuery := tempQuery + ')) and is_main is not null ) ORDER BY Cname_form_ed';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, tempQuery,'ik_form_ed', isShowFirst, NULL);
 //  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz = ' + IntToStr(SpclzIK) + '))) ORDER BY Cname_form_ed', 'ik_form_ed', isShowFirst, NULL);
 end;
@@ -871,6 +878,18 @@ begin
         end;
       end;
     if (Length(number) > 0) then Result.Add(number);
+  end;
+end;
+
+function TUchPlanController.getUchPlanForGroup(aIK_group: integer): Integer;
+begin
+  with dm.adsGroups do
+  begin
+    Open;
+    Filter := 'ik_grup=' + IntToStr(aIK_group);
+    Filtered := True;
+    Result := FieldByName('Ik_uch_plan').AsInteger;
+    if Result = NULL then Result := 0;
   end;
 end;
 

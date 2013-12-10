@@ -3376,4 +3376,11 @@ object dm: Tdm
     Left = 8
     Top = 552
   end
+  object adsGroups: TADODataSet
+    Connection = DBConnect
+    CommandText = 'select * from Grup'
+    Parameters = <>
+    Left = 32
+    Top = 656
+  end
 end

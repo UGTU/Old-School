@@ -106,8 +106,7 @@ end;
 
 procedure TfrmGroupEdt.LoadUchPlan(aSpecFacIK: integer);
 begin
-  {if (not WithSpec)or(SpecFacIK>0) then
-  begin }
+
     dm.adospGetUchPlnGroup.Active := false;
     with dm.adospGetUchPlnGroup.Parameters do
     begin
@@ -117,8 +116,7 @@ begin
     end;
     dm.adospGetUchPlnGroup.ExecProc;
     dm.adospGetUchPlnGroup.Active := true;
- { end
-  else  dm.adospGetUchPlnGroup.Close;}
+
 end;
 
 procedure TfrmGroupEdt.SetEditStatus(aEdit: boolean);

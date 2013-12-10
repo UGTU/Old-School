@@ -519,6 +519,7 @@ type
     aspGetDiscplinescName_spclz_short: TStringField;
     adsProfile: TADODataSet;
     dsProfileForGroup: TDataSource;
+    adsGroups: TADODataSet;
     procedure DataModuleCreate(Sender: TObject);
 
 

@@ -49,15 +49,12 @@ object frmMain: TfrmMain
       item
         Width = 50
       end>
-    ExplicitTop = 710
-    ExplicitWidth = 931
   end
   object MainMenuBar: TActionMainMenuBar
     Left = 0
     Top = 0
     Width = 1146
     Height = 32
-    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -65,13 +62,12 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clMenuText
     Font.Height = -15
     Font.Name = 'Segoe UI'
     Font.Style = []
     Spacing = 0
     OnPopup = MainMenuBarPopup
-    ExplicitHeight = 33
   end
   object ActionToolBar1: TActionToolBar
     Left = 0
@@ -84,8 +80,6 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     Constraints.MinHeight = 32
     Spacing = 1
-    ExplicitTop = 33
-    ExplicitHeight = 67
   end
   object Panel1: TPanel
     Left = 468
@@ -98,8 +92,6 @@ object frmMain: TfrmMain
     Constraints.MinWidth = 668
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 100
-    ExplicitHeight = 610
     object Panel7: TPanel
       Left = 494
       Top = 0
@@ -112,7 +104,7 @@ object frmMain: TfrmMain
       Left = 0
       Top = 0
       Width = 678
-      Height = 610
+      Height = 629
       Align = alClient
       BevelOuter = bvNone
       Constraints.MinHeight = 492
@@ -239,8 +231,6 @@ object frmMain: TfrmMain
     OnMouseEnter = Panel2MouseEnter
     OnMouseLeave = Panel2MouseLeave
     OnResize = Panel2Resize
-    ExplicitTop = 100
-    ExplicitHeight = 610
     object Image1: TImage
       Left = -1
       Top = 266
@@ -284,8 +274,6 @@ object frmMain: TfrmMain
     DockSite = True
     ParentBackground = False
     TabOrder = 7
-    ExplicitTop = 100
-    ExplicitHeight = 610
     object Panel6: TPanel
       Left = 1
       Top = 1
@@ -295,7 +283,6 @@ object frmMain: TfrmMain
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 608
       object Button1: TButton
         Left = 6
         Top = 542
@@ -315,8 +302,6 @@ object frmMain: TfrmMain
         BevelOuter = bvNone
         Caption = 'pnlTree'
         TabOrder = 1
-        ExplicitWidth = 454
-        ExplicitHeight = 65
         object DBDekTreeView_TEST1: TDBDekTreeView_TEST
           Left = 0
           Top = 0
@@ -347,8 +332,6 @@ object frmMain: TfrmMain
           OnDblClick = DBDekTreeView_TEST1DblClick
           OnExpanding = DBDekTreeView_TEST1Expanding
           OnMouseDown = DBDekTreeView_TEST1MouseDown
-          ExplicitWidth = 454
-          ExplicitHeight = 65
         end
       end
       object pnlImage: TPanel
@@ -364,15 +347,15 @@ object frmMain: TfrmMain
         ParentBackground = False
         TabOrder = 2
         Visible = False
-        ExplicitTop = 66
-        ExplicitWidth = 454
         object imgChristmas: TImage
           Left = 0
           Top = 0
-          Width = 454
-          Height = 540
+          Width = 455
+          Height = 541
           Align = alClient
           Center = True
+          ExplicitWidth = 454
+          ExplicitHeight = 540
         end
       end
     end
@@ -406,7 +389,6 @@ object frmMain: TfrmMain
       ColorMap.BtnSelectedColor = clBtnFace
       ColorMap.UnusedColor = clWhite
       Spacing = 0
-      ExplicitWidth = 187
     end
   end
   object MainMenu1: TMainMenu

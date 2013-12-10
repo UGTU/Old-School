@@ -350,7 +350,7 @@ var tempDS: TADODataSet;
 begin
 
   fmUchPlan.Connection:= Connection;
-  fmUchPlan.Read;
+  fmUchPlan.ReadModelUchPlan;
 
   if dmUgtuStructure.adodsFacultyAll.Active=false then
      dmUgtuStructure.adodsFacultyAll.Active:=true;

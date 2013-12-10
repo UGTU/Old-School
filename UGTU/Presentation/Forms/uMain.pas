@@ -1824,7 +1824,7 @@ var
   ik_grup, usrAnswer: Integer;
   node:ttreenode;
 begin
-  //showmessage('ok');
+
   if lastCancel then
   begin
     lastCancel := false;
@@ -1856,20 +1856,41 @@ begin
       end;
     LastSelectedNode := DBDekTreeView_TEST1.Selected;
     end;
-    node:=DBDekTreeView_TEST1.Selected.Parent;
 
-    DBDekTreeView_TEST1.Select(node);
-    DBDekTreeView_TEST1Change(sender,node);
-
-    if (FFrame is TfmSpec) then with (FFrame as TfmSpec) do
+    //проверим, есть ли у группы учебный план
+    if (TUchPlanController.Instance.getUchPlanForGroup(ik_grup)<>0) then
     begin
-    PageControl1.ActivePageIndex:=2;
-    fmUchPlan1.dbcbSpclz.KeyValue:=TUchPlanController.Instance.getGrupSpecializations(ik_grup);
-    fmUchPlan1.dbcbFormEd.KeyValue:=TUchPlanController.Instance.getGrupFormEd(ik_grup);
-    fmUchPlan1.dbcbYear.KeyValue:=TUchPlanController.Instance.getGrupYear(ik_grup);
-    alreadySpec:=true;
+      //тогда открываем учебный план
+      node:=DBDekTreeView_TEST1.Selected.Parent;
+      DBDekTreeView_TEST1.Select(node);
+      DBDekTreeView_TEST1Change(sender,node);
+      if (FFrame is TfmSpec) then with (FFrame as TfmSpec) do
+      begin
+        PageControl1.ActivePageIndex:=6;
+        fmUchPlan2.Group := ik_grup;
+        alreadySpec:=true;
+      end;
+    end
+    else
+    begin
+      if MessageDlg('Для данной группы не назначен учебный план. Перейти к выбору учебного плана для группы?',mtConfirmation,
+               [mbYes, mbNo],0)=mrYes  then
+      begin
+        frmGroupEdt:=TfrmGroupEdt.Create(self);
+        try
+          frmGroupEdt.ik := ik_grup;
+          frmGroupEdt.WithSpec := false;
+          frmGroupEdt.Edit := true;
+          frmGroupEdt.ShowModal;
+        finally
+          frmGroupEdt.Free;
+        end;
+      end;
+
     end;
-    end;
+
+
+  end;
 
 end;
 
