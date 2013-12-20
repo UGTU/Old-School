@@ -227,6 +227,9 @@ object dmUspevaemost: TdmUspevaemost
       FieldName = 'cNumber_ved'
       Size = 50
     end
+    object adospVedTopiHour_gos: TIntegerField
+      FieldName = 'iHour_gos'
+    end
   end
   object dsSelVedGroup: TDataSource
     DataSet = adospSelVedGroup

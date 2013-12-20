@@ -2357,9 +2357,13 @@ begin
 
 	  //вывод дисциплины
 	  //dmUspevaemost.adospVedTop
-	  str:='Дисциплина       '+
+	  str:='Дисциплина          '+
       dmUspevaemost.adospVedTop.FieldByName('cName_disc').AsString;
 	  FindRange := E.Cells.Replace(What := '#Discpl#',Replacement:=str);
+
+    str:='Общее количество часов       '+
+      dmUspevaemost.adospVedTop.FieldByName('iHour_gos').AsString;
+	  FindRange := E.Cells.Replace(What := '#HourCount#',Replacement:=str);
 
 	  //вывод экзаменатора adospVedTop
 	  str:='Экзаменатор      '+
@@ -2393,9 +2397,13 @@ begin
     str:='Группа: '+dmUgtuStructure.adoqSelAllGroups.FieldByName('cname_grup').AsString;
     FindRange := E.Cells.Replace(What := '#groupName#',Replacement:=str);
 
-    str:='Дисциплина       '+
+    str:='Дисциплина         '+
       dmUspevaemost.adospVedTop.FieldByName('cName_disc').AsString;
 	  FindRange := E.Cells.Replace(What := '#Discpl#',Replacement:=str);
+
+    str:='Общее количество часов       '+
+      dmUspevaemost.adospVedTop.FieldByName('iHour_gos').AsString;
+	  FindRange := E.Cells.Replace(What := '#HourCount#',Replacement:=str);
     //копируем строчки в приложение - нужное кол-во
     for i := 1 to Count do
 	  begin
