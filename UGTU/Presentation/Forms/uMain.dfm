@@ -2,15 +2,15 @@ object frmMain: TfrmMain
   Left = 221
   Top = 140
   Caption = #1048#1057' '#1059#1043#1058#1059
-  ClientHeight = 734
-  ClientWidth = 1146
+  ClientHeight = 596
+  ClientWidth = 931
   Color = clBtnFace
-  Constraints.MinHeight = 674
-  Constraints.MinWidth = 606
+  Constraints.MinHeight = 548
+  Constraints.MinWidth = 492
   DragKind = dkDock
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -14
+  Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   KeyPreview = True
@@ -22,22 +22,21 @@ object frmMain: TfrmMain
   OnResize = FormResize
   OnShow = FormShow
   DesignSize = (
-    1146
-    734)
-  PixelsPerInch = 120
-  TextHeight = 16
+    931
+    596)
+  PixelsPerInch = 96
+  TextHeight = 13
   object Splitter1: TSplitter
-    Left = 464
-    Top = 86
-    Width = 4
-    Height = 629
-    ExplicitTop = 100
-    ExplicitHeight = 610
+    Left = 377
+    Top = 81
+    Height = 496
+    ExplicitTop = 70
+    ExplicitHeight = 511
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 715
-    Width = 1146
+    Top = 577
+    Width = 931
     Height = 19
     Panels = <
       item
@@ -49,12 +48,15 @@ object frmMain: TfrmMain
       item
         Width = 50
       end>
+    ExplicitTop = 581
+    ExplicitWidth = 1146
   end
   object MainMenuBar: TActionMainMenuBar
     Left = 0
     Top = 0
-    Width = 1146
-    Height = 32
+    Width = 931
+    Height = 27
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -62,78 +64,83 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
-    Font.Height = -15
+    Font.Color = clWindowText
+    Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Spacing = 0
     OnPopup = MainMenuBarPopup
+    ExplicitHeight = 26
   end
   object ActionToolBar1: TActionToolBar
     Left = 0
-    Top = 32
-    Width = 1146
+    Top = 27
+    Width = 931
     Height = 54
     ActionManager = ActionManager1
     ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
     ColorMap.UnusedColor = clWhite
-    Constraints.MinHeight = 32
+    Constraints.MinHeight = 26
     Spacing = 1
+    ExplicitTop = 26
+    ExplicitHeight = 44
   end
   object Panel1: TPanel
-    Left = 468
-    Top = 86
-    Width = 678
-    Height = 629
+    Left = 380
+    Top = 81
+    Width = 551
+    Height = 496
     Align = alClient
     BevelOuter = bvNone
-    Constraints.MinHeight = 492
-    Constraints.MinWidth = 668
+    Constraints.MinHeight = 400
+    Constraints.MinWidth = 543
     ParentBackground = False
     TabOrder = 3
+    ExplicitTop = 70
+    ExplicitHeight = 511
     object Panel7: TPanel
-      Left = 494
+      Left = 401
       Top = 0
-      Width = 30
-      Height = 23
+      Width = 25
+      Height = 19
       BevelOuter = bvNone
       TabOrder = 0
     end
     object Panel4: TPanel
       Left = 0
       Top = 0
-      Width = 678
-      Height = 629
+      Width = 551
+      Height = 511
       Align = alClient
       BevelOuter = bvNone
-      Constraints.MinHeight = 492
-      Constraints.MinWidth = 668
+      Constraints.MinHeight = 400
+      Constraints.MinWidth = 543
       ParentBackground = False
       TabOrder = 1
       object Panel5: TPanel
-        Left = 494
+        Left = 401
         Top = 0
-        Width = 30
-        Height = 23
+        Width = 25
+        Height = 19
         BevelOuter = bvNone
         TabOrder = 0
       end
     end
   end
   object StudSearchPanel: TPanel
-    Left = 587
-    Top = 31
-    Width = 554
-    Height = 31
+    Left = 477
+    Top = 25
+    Width = 450
+    Height = 25
     Anchors = [akTop, akRight]
     BevelOuter = bvNone
     TabOrder = 4
     object cmbSearch: TDBComboBoxEh
-      Left = 149
-      Top = 5
-      Width = 145
-      Height = 22
+      Left = 121
+      Top = 4
+      Width = 118
+      Height = 19
       EditButtons = <>
       Flat = True
       Items.Strings = (
@@ -145,10 +152,10 @@ object frmMain: TfrmMain
       OnChange = cmbSearchChange
     end
     object dbcbeSearch: TDBLookupComboboxEh
-      Left = 299
-      Top = 5
-      Width = 252
-      Height = 22
+      Left = 243
+      Top = 4
+      Width = 205
+      Height = 19
       EditButtons = <>
       Flat = True
       KeyField = 'Ik_zach'
@@ -160,28 +167,28 @@ object frmMain: TfrmMain
       OnKeyPress = dbcbeSearchKeyPress
     end
     object StaticText1: TStaticText
-      Left = 41
-      Top = 9
-      Width = 111
-      Height = 20
+      Left = 33
+      Top = 7
+      Width = 87
+      Height = 17
       Caption = #1055#1086#1080#1089#1082' '#1089#1090#1091#1076#1077#1085#1090#1072':'
       TabOrder = 2
     end
   end
   object TeacherSearchPanel: TPanel
-    Left = 572
-    Top = 32
-    Width = 574
-    Height = 31
+    Left = 465
+    Top = 26
+    Width = 466
+    Height = 25
     Anchors = [akTop, akRight]
     BevelOuter = bvNone
     TabOrder = 5
     Visible = False
     object cmbTeachSearch: TDBComboBoxEh
-      Left = 165
-      Top = 4
-      Width = 145
-      Height = 22
+      Left = 134
+      Top = 3
+      Width = 118
+      Height = 19
       EditButtons = <>
       Flat = True
       Items.Strings = (
@@ -195,10 +202,10 @@ object frmMain: TfrmMain
       OnChange = cmbTeachSearchChange
     end
     object dbcbeTeachSearch: TDBLookupComboboxEh
-      Left = 314
-      Top = 4
-      Width = 252
-      Height = 22
+      Left = 255
+      Top = 3
+      Width = 205
+      Height = 19
       EditButtons = <>
       Flat = True
       KeyField = 'itab_n'
@@ -210,19 +217,19 @@ object frmMain: TfrmMain
       OnKeyPress = dbcbeSearchKeyPress
     end
     object StaticText2: TStaticText
-      Left = 17
-      Top = 6
-      Width = 152
-      Height = 20
+      Left = 14
+      Top = 5
+      Width = 119
+      Height = 17
       Caption = #1055#1086#1080#1089#1082' '#1087#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1103':'
       TabOrder = 2
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 86
-    Width = 5
-    Height = 629
+    Top = 81
+    Width = 4
+    Height = 496
     Align = alLeft
     BevelOuter = bvNone
     ParentBackground = False
@@ -231,11 +238,13 @@ object frmMain: TfrmMain
     OnMouseEnter = Panel2MouseEnter
     OnMouseLeave = Panel2MouseLeave
     OnResize = Panel2Resize
+    ExplicitTop = 70
+    ExplicitHeight = 511
     object Image1: TImage
       Left = -1
-      Top = 266
-      Width = 10
-      Height = 10
+      Top = 216
+      Width = 8
+      Height = 8
       Picture.Data = {
         055449636F6E0000010001000509000001001800DC0000001600000028000000
         05000000120000000100180000000000B4000000000000000000000000000000
@@ -249,9 +258,9 @@ object frmMain: TfrmMain
     end
     object Image2: TImage
       Left = 0
-      Top = 266
-      Width = 7
-      Height = 11
+      Top = 216
+      Width = 6
+      Height = 9
       Picture.Data = {
         055449636F6E0000010001000509000001001800DC0000001600000028000000
         05000000120000000100180000000000B4000000000000000000000000000000
@@ -264,30 +273,33 @@ object frmMain: TfrmMain
     end
   end
   object Panel3: TPanel
-    Left = 5
-    Top = 86
-    Width = 459
-    Height = 629
+    Left = 4
+    Top = 81
+    Width = 373
+    Height = 496
     Align = alLeft
     Color = clSilver
-    Constraints.MaxWidth = 492
+    Constraints.MaxWidth = 400
     DockSite = True
     ParentBackground = False
     TabOrder = 7
+    ExplicitTop = 70
+    ExplicitHeight = 511
     object Panel6: TPanel
       Left = 1
       Top = 1
-      Width = 457
-      Height = 627
+      Width = 371
+      Height = 494
       Align = alClient
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 509
       object Button1: TButton
-        Left = 6
-        Top = 542
-        Width = 92
-        Height = 30
+        Left = 5
+        Top = 440
+        Width = 75
+        Height = 25
         Caption = #1054#1090#1082#1072#1079#1072#1090#1100
         TabOrder = 0
         Visible = False
@@ -296,25 +308,27 @@ object frmMain: TfrmMain
       object pnlTree: TPanel
         Left = 1
         Top = 1
-        Width = 455
-        Height = 84
+        Width = 369
+        Height = 52
         Align = alClient
         BevelOuter = bvNone
         Caption = 'pnlTree'
         TabOrder = 1
+        ExplicitWidth = 370
+        ExplicitHeight = 68
         object DBDekTreeView_TEST1: TDBDekTreeView_TEST
           Left = 0
           Top = 0
-          Width = 455
-          Height = 84
+          Width = 369
+          Height = 52
           Align = alClient
           BorderStyle = bsNone
           ChangeDelay = 200
-          Constraints.MaxWidth = 492
-          Constraints.MinWidth = 185
+          Constraints.MaxWidth = 400
+          Constraints.MinWidth = 150
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -17
+          Font.Height = -15
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           Images = TreeIcons
@@ -332,13 +346,15 @@ object frmMain: TfrmMain
           OnDblClick = DBDekTreeView_TEST1DblClick
           OnExpanding = DBDekTreeView_TEST1Expanding
           OnMouseDown = DBDekTreeView_TEST1MouseDown
+          ExplicitWidth = 370
+          ExplicitHeight = 68
         end
       end
       object pnlImage: TPanel
         Left = 1
-        Top = 85
-        Width = 455
-        Height = 541
+        Top = 53
+        Width = 369
+        Height = 440
         Align = alBottom
         BevelEdges = []
         BevelOuter = bvNone
@@ -347,32 +363,32 @@ object frmMain: TfrmMain
         ParentBackground = False
         TabOrder = 2
         Visible = False
+        ExplicitTop = 69
+        ExplicitWidth = 370
         object imgChristmas: TImage
           Left = 0
           Top = 0
-          Width = 455
-          Height = 541
+          Width = 370
+          Height = 440
           Align = alClient
           Center = True
-          ExplicitWidth = 454
-          ExplicitHeight = 540
         end
       end
     end
   end
   object Panel13: TPanel
-    Left = 1595
+    Left = 1296
     Top = 0
-    Width = 31
-    Height = 28
+    Width = 25
+    Height = 23
     BevelOuter = bvNone
     TabOrder = 8
   end
   object ScheduleBookmarksPanel: TPanel
-    Left = 955
-    Top = 31
-    Width = 188
-    Height = 32
+    Left = 776
+    Top = 25
+    Width = 153
+    Height = 26
     Anchors = [akTop, akRight]
     BevelOuter = bvNone
     TabOrder = 9
@@ -380,8 +396,8 @@ object frmMain: TfrmMain
     object ActionToolBar2: TActionToolBar
       Left = 0
       Top = 0
-      Width = 184
-      Height = 32
+      Width = 152
+      Height = 26
       ActionManager = ActionManager1
       Align = alLeft
       Caption = 'ActionToolBar2'
@@ -389,6 +405,7 @@ object frmMain: TfrmMain
       ColorMap.BtnSelectedColor = clBtnFace
       ColorMap.UnusedColor = clWhite
       Spacing = 0
+      ExplicitWidth = 150
     end
   end
   object MainMenu1: TMainMenu
@@ -988,7 +1005,7 @@ object frmMain: TfrmMain
     Left = 311
     Top = 82
     Bitmap = {
-      494C010149005100500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010149005100580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3507,7 +3524,7 @@ object frmMain: TfrmMain
     Left = 278
     Top = 82
     Bitmap = {
-      494C010131004900500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010131004900580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF

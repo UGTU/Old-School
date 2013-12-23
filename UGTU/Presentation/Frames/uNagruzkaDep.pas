@@ -355,8 +355,8 @@ begin
   if dmUgtuStructure.adodsFacultyAll.Active=false then
      dmUgtuStructure.adodsFacultyAll.Active:=true;
 
-  if dm.aspGetDiscplines.Active=true then
-     dm.aspGetDiscplines.Active:=false;
+  if dm.aspGetDiscWork.Active=true then
+     dm.aspGetDiscWork.Active:=false;
 
   PageControl1.ActivePageIndex:= 0;
   Refresh;
@@ -1149,7 +1149,7 @@ end;
 procedure TfmNagruzkaDep.dbcbeSpecKeyValueChanged(Sender: TObject);
 begin
   try
-  if dbcbeSpec.KeyValue<>NULL then fmUchPlan.IK := dbcbeSpec.KeyValue;
+  if dbcbeSpec.KeyValue<>NULL then fmUchPlan.SpecIK := dbcbeSpec.KeyValue;
 
   fmUchPlan.dbcbSpclz.ListSource:=dmUgtuStructure.dsSpclzForNagr;
   dmUgtuStructure.adospSpclzForNagr.Active := false;

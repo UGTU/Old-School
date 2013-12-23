@@ -35,7 +35,6 @@ type
     actEdtGroup: TAction;
     actDelGroup: TAction;
     ImageList1: TImageList;
-    fmUchPlan1: TfmUchPlan;
     tsSpclz: TTabSheet;
     dbgSpclz: TDBGridEh;
     ToolBar2: TToolBar;
@@ -54,6 +53,11 @@ type
     fmFgos1: TfmFgos;
     tsWorkPlan: TTabSheet;
     fmUchPlan2: TfmUchPlan;
+    fmUchPlan1: TfmUchPlan;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     procedure DBGridEh1DblClick(Sender: TObject);
     procedure actAddGroupExecute(Sender: TObject);
     procedure actEdtGroupExecute(Sender: TObject);
@@ -71,12 +75,12 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure ToolButton7Click(Sender: TObject);
   private
-    Fik: Integer;
+    SpFacik: Integer;
     SpecIK: Integer;
     directionIK:integer;
     VidGos:integer;
   public
-    property ik: Integer read Fik write Fik;
+    property ik: Integer read SpFacik write SpFacik;
     procedure Read;
     procedure DoRefreshFrame;override;
     procedure CloseFrame; override;
@@ -121,16 +125,24 @@ begin
       ToolButton5.Hint:='Удалить программу';
     end;
   end;
+
+  if (VidGos>FGOS2) then
+  begin
   //работа с планами-эталонами
-  fmUchPlan1.IK:= SpecIK;
-  fmUchPlan1.dirIK:=directionIK;
-  fmUchPlan1.VidGos:= VidGos;
-  fmUchPlan1.Connection:= Connection;
-  fmUchPlan1.ReadModelUchPlan;
-  fmUchPlan1.Refresh;
+    fmUchPlan1.SpecIK:= SpecIK;
+    fmUchPlan1.dirIK:=directionIK;
+    fmUchPlan1.VidGos:= VidGos;
+    fmUchPlan1.Connection:= Connection;
+    fmUchPlan1.ReadModelUchPlan;
+    fmUchPlan1.Refresh;
+  end;
+
+  //планы-эталоны правятся только для ФГОС3
+  fmUchPlan1.Visible := (VidGos>FGOS2);
 
   //работа с рабочими учебными планами групп
-  fmUchPlan2.IK:= SpecIK;
+  fmUchPlan2.SpecIK:= SpecIK;
+  fmUchPlan2.SpecFacIK := SpFacik;
   fmUchPlan2.dirIK:=directionIK;
   fmUchPlan2.VidGos:= VidGos;
   fmUchPlan2.Connection:= Connection;
@@ -402,6 +414,7 @@ end;
 procedure TfmSpec.CloseFrame;
 begin
   fmUchPlan1.CloseFrame;
+  fmUchPlan2.CloseFrame;
   if dsSpclz.DataSet <> nil then
     if dsSpclz.DataSet.Active then dsSpclz.DataSet.Close;
   inherited;
@@ -431,7 +444,7 @@ begin
       if (dsSpclz.DataSet.Active) then
        frmMain.StatusBar1.Panels[1].Text:= 'Специализация: ' + dsSpclz.DataSet.FieldByName('cName_spclz_short').AsString;
    end;
-  2:  begin
+  2:  if (VidGos>FGOS2) then begin
   TApplicationController.GetInstance.AddLogEntry('Переход на список учебных планов');
   if ((fmUchPlan1.dbcbSpclz.KeyValue <> NULL) and (fmUchPlan1.dbcbFormEd.KeyValue <> NULL) and (fmUchPlan1.dbcbYear.KeyValue <> NULL)) then
       frmMain.StatusBar1.Panels[1].Text:= 'Учебный план: ' + fmUchPlan1.dbcbSpclz.ListSource.DataSet.FieldByName('cName_spclz_short').AsString + ', ' + AnsiLowerCase(fmUchPlan1.dbcbFormEd.Text) + ', ' + fmUchPlan1.dbcbYear.Text
@@ -441,7 +454,7 @@ begin
 
   3: begin
     dmStudentData.adodsAcadem.Active:=false;
-    dmStudentData.adodsAcadem.CommandText := 'select * from AcademStud where [Ik_spec]='+inttostr(FIk);
+    dmStudentData.adodsAcadem.CommandText := 'select * from AcademStud where [Ik_spec]='+inttostr(SpFacik);
     dmStudentData.adodsAcademStringField11.Visible:=false;
     dmStudentData.adodsAcadem.Active:=true;
     frmMain.Comment(TDBNodeSpecObject(FrameObject).Name, 'Академических отпусков: '+inttostr(dmStudentData.adodsAcadem.RecordCount));

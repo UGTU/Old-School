@@ -1873,8 +1873,8 @@ begin
     end
     else
     begin
-      if MessageDlg('Для данной группы не назначен учебный план. Перейти к выбору учебного плана для группы?',mtConfirmation,
-               [mbYes, mbNo],0)=mrYes  then
+      if MessageBox(Handle, PAnsiChar('Перейти к выбору учебного плана для группы?'),
+      'Для группы не назначен учебный план', MB_YESNO)=IDYES then
       begin
         frmGroupEdt:=TfrmGroupEdt.Create(self);
         try
@@ -2260,12 +2260,11 @@ end;
 
 procedure TfrmMain.DBDekTreeView_TEST1Click(Sender: TObject);
 begin
-if DBDekTreeView_TEST1.Selected.Expanded then
-actCollapseExpand.Caption:='Свернуть' else
-actCollapseExpand.Caption:='Развернуть';
+  if DBDekTreeView_TEST1.Selected.Expanded then
+    actCollapseExpand.Caption:='Свернуть'
+  else actCollapseExpand.Caption:='Развернуть';
 
-if pnlImage.Visible then pnlImage.Visible := false;
-
+  if pnlImage.Visible then pnlImage.Visible := false;
 end;
 
 procedure TfrmMain.cmbSearchChange(Sender: TObject);
@@ -2325,9 +2324,9 @@ end;
 
 procedure TfrmMain.actFindExecute(Sender: TObject);
 begin
-if dbcbeSearch.KeyValue=Null then exit;
-if not DBDekTreeView_TEST1.FindAndSelectByValue(dbcbeSearch.KeyValue) then
-showmessage('Не удалось найти данного студента!');
+  if dbcbeSearch.KeyValue=Null then exit;
+  if not DBDekTreeView_TEST1.FindAndSelectByValue(dbcbeSearch.KeyValue) then
+    showmessage('Не удалось найти данного студента!');
 end;
 
 procedure TfrmMain.actFindTeachExecute(Sender: TObject);

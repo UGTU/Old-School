@@ -1,19 +1,19 @@
 inherited fmSpec: TfmSpec
-  Width = 711
+  Width = 936
   Height = 710
-  ExplicitWidth = 711
+  ExplicitWidth = 936
   ExplicitHeight = 710
   inherited Panel1: TPanel
-    Width = 711
+    Width = 936
     Height = 710
-    ExplicitWidth = 711
+    ExplicitWidth = 936
     ExplicitHeight = 710
     object PageControl1: TPageControl
       Left = 2
       Top = 2
-      Width = 707
+      Width = 932
       Height = 706
-      ActivePage = tsWorkPlan
+      ActivePage = TabSheet1
       Align = alClient
       Images = frmMain.ImageList1
       Style = tsFlatButtons
@@ -22,10 +22,14 @@ inherited fmSpec: TfmSpec
       object tsGroups: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1075#1088#1091#1087#1087
         ImageIndex = 38
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DBGridEh1: TDBGridEh
           Left = 0
           Top = 22
-          Width = 699
+          Width = 924
           Height = 650
           Align = alClient
           AutoFitColWidths = True
@@ -34,7 +38,7 @@ inherited fmSpec: TfmSpec
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -42,7 +46,7 @@ inherited fmSpec: TfmSpec
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDblClick = DBGridEh1DblClick
@@ -81,7 +85,7 @@ inherited fmSpec: TfmSpec
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
-          Width = 699
+          Width = 924
           Height = 22
           Caption = 'ToolBar1'
           Images = ImageList1
@@ -130,10 +134,14 @@ inherited fmSpec: TfmSpec
       object tsSpclz: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1089#1087#1077#1094#1080#1072#1083#1080#1079#1072#1094#1080#1081
         ImageIndex = 19
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgSpclz: TDBGridEh
           Left = 0
           Top = 22
-          Width = 699
+          Width = 924
           Height = 650
           Align = alClient
           AutoFitColWidths = True
@@ -142,7 +150,7 @@ inherited fmSpec: TfmSpec
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -150,7 +158,7 @@ inherited fmSpec: TfmSpec
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDblClick = dbgSpclzDblClick
@@ -191,7 +199,7 @@ inherited fmSpec: TfmSpec
         object ToolBar2: TToolBar
           Left = 0
           Top = 0
-          Width = 699
+          Width = 924
           Height = 22
           AutoSize = True
           Caption = 'ToolBar1'
@@ -224,300 +232,261 @@ inherited fmSpec: TfmSpec
         Caption = #1059#1095#1077#1073#1085#1099#1081' '#1087#1083#1072#1085
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
+        Font.Height = -13
+        Font.Name = 'Tahoma'
         Font.Style = []
         ImageIndex = 39
         ParentFont = False
+        DesignSize = (
+          924
+          674)
+        object Panel2: TPanel
+          Left = 177
+          Top = 195
+          Width = 572
+          Height = 226
+          Anchors = [akLeft, akTop, akRight]
+          TabOrder = 1
+          DesignSize = (
+            572
+            226)
+          object Label1: TLabel
+            Left = 115
+            Top = 83
+            Width = 362
+            Height = 24
+            Anchors = [akLeft, akTop, akRight]
+            Caption = #1059#1095#1077#1073#1085#1099#1077' '#1087#1083#1072#1085#1099' '#1076#1083#1103' '#1060#1043#1054#1057' 2 '#1087#1086#1082#1086#1083#1077#1085#1080#1103
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -20
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label2: TLabel
+            Left = 57
+            Top = 125
+            Width = 466
+            Height = 24
+            Anchors = [akLeft, akTop, akRight]
+            Caption = #1088#1077#1076#1072#1082#1090#1080#1088#1091#1102#1090#1089#1103' '#1074#1086' '#1074#1082#1083#1072#1076#1082#1077' "'#1056#1072#1073#1086#1095#1080#1077' '#1087#1083#1072#1085#1099' '#1075#1088#1091#1087#1087'"'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -20
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label3: TLabel
+            Left = 233
+            Top = 44
+            Width = 98
+            Height = 24
+            Anchors = [akLeft, akTop, akRight]
+            Caption = #1042#1085#1080#1084#1072#1085#1080#1077'!'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -20
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+          end
+        end
         inline fmUchPlan1: TfmUchPlan
           Left = 0
           Top = 0
-          Width = 699
-          Height = 672
+          Width = 924
+          Height = 674
           Align = alClient
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          ExplicitWidth = 699
-          ExplicitHeight = 672
+          Visible = False
+          ExplicitWidth = 924
+          ExplicitHeight = 674
           inherited Panel1: TPanel
-            Width = 699
-            Height = 672
-            ExplicitWidth = 699
-            ExplicitHeight = 672
+            Width = 924
+            Height = 674
+            ExplicitWidth = 924
+            ExplicitHeight = 674
             inherited pnlAll: TPanel
-              Width = 699
-              Height = 620
-              ExplicitWidth = 699
-              ExplicitHeight = 626
+              Width = 924
+              Height = 592
+              ExplicitWidth = 924
+              ExplicitHeight = 592
               inherited ScrollBox1: TScrollBox
-                Width = 697
-                Height = 618
-                ExplicitWidth = 697
-                ExplicitHeight = 648
+                Width = 922
+                Height = 590
+                ExplicitWidth = 922
+                ExplicitHeight = 590
                 inherited Bevel1: TBevel
-                  Width = 694
-                  ExplicitWidth = 455
+                  Width = 919
+                  ExplicitWidth = 919
                 end
                 inherited Bevel2: TBevel
-                  Width = 694
-                  ExplicitWidth = 455
+                  Width = 919
+                  ExplicitWidth = 919
                 end
                 inherited Label16: TLabel
-                  Width = 89
-                  Height = 13
-                  Font.Height = -11
-                  ParentFont = False
-                  ExplicitWidth = 89
-                  ExplicitHeight = 13
+                  Width = 113
+                  Height = 16
+                  ExplicitWidth = 113
+                  ExplicitHeight = 16
                 end
                 inherited Label2: TLabel
-                  Width = 82
-                  Height = 13
-                  ExplicitWidth = 82
-                  ExplicitHeight = 13
+                  Width = 106
+                  Height = 16
+                  ExplicitWidth = 106
+                  ExplicitHeight = 16
                 end
                 inherited Label3: TLabel
-                  Width = 86
-                  Height = 13
-                  ExplicitWidth = 86
-                  ExplicitHeight = 13
+                  Width = 109
+                  Height = 16
+                  ExplicitWidth = 109
+                  ExplicitHeight = 16
                 end
                 inherited Bevel6: TBevel
-                  Width = 838
-                  ExplicitWidth = 838
+                  Width = 919
+                  ExplicitWidth = 919
                 end
                 inherited Label4: TLabel
-                  Width = 95
-                  Height = 13
-                  ExplicitWidth = 95
-                  ExplicitHeight = 13
+                  Width = 124
+                  Height = 16
+                  ExplicitWidth = 124
+                  ExplicitHeight = 16
                 end
                 inherited Label29: TLabel
-                  Width = 47
-                  Height = 13
-                  ExplicitWidth = 47
-                  ExplicitHeight = 13
+                  Width = 59
+                  Height = 16
+                  ExplicitWidth = 59
+                  ExplicitHeight = 16
                 end
                 inherited Label30: TLabel
-                  Width = 56
-                  Height = 13
-                  ExplicitWidth = 56
-                  ExplicitHeight = 13
+                  Width = 73
+                  Height = 16
+                  ExplicitWidth = 73
+                  ExplicitHeight = 16
                 end
                 inherited Label31: TLabel
-                  Width = 66
-                  Height = 13
-                  ExplicitWidth = 66
-                  ExplicitHeight = 13
+                  Width = 84
+                  Height = 16
+                  ExplicitWidth = 84
+                  ExplicitHeight = 16
                 end
                 inherited Label36: TLabel
-                  Width = 101
-                  Height = 13
-                  ExplicitWidth = 101
-                  ExplicitHeight = 13
+                  Width = 128
+                  Height = 16
+                  ExplicitWidth = 128
+                  ExplicitHeight = 16
                 end
                 inherited Label37: TLabel
-                  Width = 114
-                  Height = 13
-                  ExplicitWidth = 114
-                  ExplicitHeight = 13
+                  Width = 149
+                  Height = 16
+                  ExplicitWidth = 149
+                  ExplicitHeight = 16
                 end
                 inherited Panel2: TPanel
-                  Width = 697
-                  Height = 414
-                  ExplicitWidth = 697
-                  ExplicitHeight = 444
+                  Width = 921
+                  Height = 393
+                  ExplicitWidth = 921
+                  ExplicitHeight = 393
                   inherited Splitter1: TSplitter
-                    Height = 414
-                    ExplicitTop = 0
-                    ExplicitHeight = 470
+                    Height = 393
+                    ExplicitHeight = 389
                   end
                   inherited Panel5: TPanel
-                    Height = 414
-                    ExplicitHeight = 444
+                    Height = 393
+                    ExplicitHeight = 393
                     inherited dbgDisc: TDBGridEh
-                      Top = 27
-                      Height = 384
+                      Height = 365
                     end
                   end
                   inherited Panel6: TPanel
-                    Width = 244
-                    Height = 414
-                    ExplicitWidth = 244
-                    ExplicitHeight = 444
+                    Width = 468
+                    Height = 393
+                    ExplicitWidth = 468
+                    ExplicitHeight = 393
                     inherited ScrollBox2: TScrollBox
-                      Width = 244
-                      Height = 414
-                      ExplicitWidth = 244
-                      ExplicitHeight = 444
-                      inherited sgDisc: TStringGrid
-                        Width = 409
-                        Height = 143
-                        ExplicitWidth = 409
-                        ExplicitHeight = 143
-                      end
-                      inherited Panel7: TPanel
-                        inherited Label12: TLabel
-                          Width = 131
-                          Height = 13
-                          ExplicitWidth = 131
-                          ExplicitHeight = 13
-                        end
-                        inherited Label13: TLabel
-                          Width = 111
-                          Height = 13
-                          ExplicitWidth = 111
-                          ExplicitHeight = 13
-                        end
-                        inherited Label14: TLabel
-                          Width = 122
-                          Height = 13
-                          ExplicitWidth = 122
-                          ExplicitHeight = 13
-                        end
-                        inherited Label15: TLabel
-                          Width = 119
-                          Height = 13
-                          ExplicitWidth = 119
-                          ExplicitHeight = 13
-                        end
-                        inherited Label19: TLabel
-                          Width = 134
-                          Height = 13
-                          ExplicitWidth = 134
-                          ExplicitHeight = 13
-                        end
-                        inherited Label20: TLabel
-                          Width = 24
-                          Height = 13
-                          ExplicitWidth = 24
-                          ExplicitHeight = 13
-                        end
-                        inherited Label25: TLabel
-                          Width = 127
-                          Height = 13
-                          ExplicitWidth = 127
-                          ExplicitHeight = 13
-                        end
-                        inherited Label32: TLabel
-                          Width = 151
-                          Height = 13
-                          ExplicitWidth = 151
-                          ExplicitHeight = 13
-                        end
-                        inherited Label34: TLabel
-                          Width = 71
-                          Height = 13
-                          ExplicitWidth = 71
-                          ExplicitHeight = 13
-                        end
-                      end
+                      Width = 468
+                      Height = 393
+                      ExplicitWidth = 468
+                      ExplicitHeight = 393
                     end
                   end
                 end
-                inherited dbcbFormEd: TDBLookupComboboxEh
-                  Height = 19
-                  ExplicitHeight = 19
-                end
-                inherited dbcbYear: TDBLookupComboboxEh
-                  Height = 19
-                  ExplicitHeight = 19
-                end
                 inherited dbcbCklDisc: TDBLookupComboboxEh
-                  Width = 578
-                  Height = 19
-                  ExplicitWidth = 578
-                  ExplicitHeight = 19
+                  Width = 718
+                  ExplicitWidth = 718
                 end
                 inherited dbcbGrpDisc: TDBLookupComboboxEh
-                  Width = 578
-                  Height = 19
-                  ExplicitWidth = 578
-                  ExplicitHeight = 19
+                  Width = 718
+                  ExplicitWidth = 718
                 end
                 inherited Panel8: TPanel
                   inherited Label27: TLabel
-                    Width = 48
-                    Height = 13
-                    ExplicitWidth = 48
-                    ExplicitHeight = 13
-                  end
-                  inherited dbcbKaf: TDBLookupComboboxEh
-                    Height = 19
-                    ExplicitHeight = 19
+                    Width = 62
+                    Height = 16
+                    ExplicitWidth = 62
+                    ExplicitHeight = 16
                   end
                 end
-                inherited cmbxSem: TDBComboBoxEh
-                  Height = 19
-                  AlwaysShowBorder = True
-                  ExplicitHeight = 19
-                end
-                inherited cmbxVidZan: TDBComboBoxEh
-                  Width = 365
-                  Height = 19
-                  ExplicitWidth = 365
-                  ExplicitHeight = 19
-                end
-              end
-              inherited dbcbPdgrpDisc: TDBLookupComboboxEh
-                Height = 19
-                ExplicitHeight = 19
               end
             end
             inherited pnlTools: TPanel
-              Width = 699
-              ExplicitWidth = 699
+              Width = 924
+              ExplicitWidth = 924
               inherited ToolBar1: TToolBar
-                Width = 699
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 699
+                Width = 924
+                ExplicitWidth = 924
               end
             end
-            inherited pnlSpclzGrup: TPanel
-              Width = 699
-              inherited lblSpclzGroup: TLabel
-                Left = 105
-                Width = 3
-                Height = 13
-                ExplicitLeft = 105
-                ExplicitWidth = 3
-                ExplicitHeight = 13
+            inherited pnlGroup: TPanel
+              Width = 924
+              ExplicitWidth = 924
+              inherited lblGroup: TLabel
+                Width = 53
+                Height = 16
+                ExplicitWidth = 53
+                ExplicitHeight = 16
+              end
+              inherited dbcbGroup: TDBLookupComboboxEh
+                Width = 781
+                ExplicitWidth = 781
+              end
+            end
+            inherited pnlSpclz: TPanel
+              Width = 924
+              ExplicitWidth = 924
+              inherited lblSpclz: TLabel
+                Left = 72
+                Width = 47
+                Height = 16
+                ExplicitLeft = 72
+                ExplicitWidth = 47
+                ExplicitHeight = 16
               end
               inherited dbcbSpclz: TDBLookupComboboxEh
-                Height = 19
-                ExplicitHeight = 19
+                Width = 781
+                ExplicitWidth = 781
               end
-            end
-          end
-          inherited pnlSave: TPanel
-            Left = 79
-            Top = 590
-            Width = 460
-            ExplicitLeft = 79
-            ExplicitTop = 590
-            ExplicitWidth = 460
-            inherited bbSave: TBitBtn
-              Left = 290
-              ExplicitLeft = 290
             end
           end
           inherited Panel9: TPanel
             inherited Label28: TLabel
-              Width = 166
-              Height = 13
-              ExplicitWidth = 166
-              ExplicitHeight = 13
+              Width = 209
+              Height = 16
+              ExplicitWidth = 209
+              ExplicitHeight = 16
             end
           end
           inherited ImageList1: TImageList
             Bitmap = {
-              494C010108000C00240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010108000C00340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003000000001002000000000000030
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -928,41 +897,41 @@ inherited fmSpec: TfmSpec
         inline fmAcadem: TfmAcadem
           Left = 0
           Top = 0
-          Width = 699
-          Height = 672
+          Width = 924
+          Height = 674
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 699
-          ExplicitHeight = 672
+          ExplicitWidth = 924
+          ExplicitHeight = 674
           inherited Panel1: TPanel
-            Width = 699
-            Height = 635
-            ExplicitWidth = 699
+            Width = 924
+            Height = 637
+            ExplicitWidth = 924
             ExplicitHeight = 635
             inherited tbAcadem: TToolBar
-              Width = 695
-              ExplicitWidth = 695
+              Width = 920
+              ExplicitWidth = 920
               inherited tbPrint: TToolButton
                 ExplicitWidth = 23
               end
             end
             inherited dbgeAcadem: TDBGridEh
-              Width = 695
+              Width = 920
               Height = 608
             end
           end
           inherited pnlSave: TPanel
-            Top = 635
-            Width = 699
+            Top = 637
+            Width = 924
             ExplicitTop = 635
-            ExplicitWidth = 699
+            ExplicitWidth = 924
             inherited bbSave: TBitBtn
-              Left = 530
-              ExplicitLeft = 530
+              Left = 755
+              ExplicitLeft = 755
             end
             inherited bbUndo: TBitBtn
-              Left = 362
-              ExplicitLeft = 362
+              Left = 587
+              ExplicitLeft = 587
             end
           end
         end
@@ -973,33 +942,33 @@ inherited fmSpec: TfmSpec
         inline fmAverageBallsSpec: TfmAverageBalls
           Left = 0
           Top = 0
-          Width = 699
-          Height = 672
+          Width = 924
+          Height = 674
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 699
-          ExplicitHeight = 672
+          ExplicitWidth = 924
+          ExplicitHeight = 674
           inherited Panel1: TPanel
-            Width = 699
-            Height = 635
-            ExplicitWidth = 699
+            Width = 924
+            Height = 637
+            ExplicitWidth = 924
             ExplicitHeight = 635
             inherited tbAcadem: TToolBar
-              Width = 695
-              ExplicitWidth = 695
+              Width = 920
+              ExplicitWidth = 920
               inherited tbPrint: TToolButton
                 ExplicitWidth = 23
               end
             end
             inherited lvBalls: TListView
-              Width = 695
+              Width = 920
               Height = 576
-              ExplicitWidth = 695
+              ExplicitWidth = 920
               ExplicitHeight = 576
             end
             inherited pnlFilters: TPanel
-              Width = 695
-              ExplicitWidth = 695
+              Width = 920
+              ExplicitWidth = 920
               inherited dbcbeSemAtt: TDBComboBoxEh
                 Height = 22
                 ExplicitHeight = 22
@@ -1011,22 +980,22 @@ inherited fmSpec: TfmSpec
             end
           end
           inherited pnlSave: TPanel
-            Top = 635
-            Width = 699
+            Top = 637
+            Width = 924
             ExplicitTop = 635
-            ExplicitWidth = 699
+            ExplicitWidth = 924
             inherited bbSave: TBitBtn
-              Left = 530
-              ExplicitLeft = 530
+              Left = 755
+              ExplicitLeft = 755
             end
             inherited bbUndo: TBitBtn
-              Left = 362
-              ExplicitLeft = 362
+              Left = 587
+              ExplicitLeft = 587
             end
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -1173,44 +1142,44 @@ inherited fmSpec: TfmSpec
         inline fmFgos1: TfmFgos
           Left = 0
           Top = 0
-          Width = 699
-          Height = 672
+          Width = 924
+          Height = 674
           Align = alClient
           Constraints.MinWidth = 648
           TabOrder = 0
-          ExplicitWidth = 699
-          ExplicitHeight = 672
+          ExplicitWidth = 924
+          ExplicitHeight = 674
           inherited Panel1: TPanel
-            Width = 699
-            Height = 635
-            ExplicitWidth = 699
+            Width = 924
+            Height = 637
+            ExplicitWidth = 924
             ExplicitHeight = 635
             inherited Panel2: TPanel
-              Width = 695
-              ExplicitWidth = 695
+              Width = 920
+              ExplicitWidth = 920
             end
             inherited Panel3: TPanel
-              Width = 695
-              ExplicitWidth = 695
+              Width = 920
+              ExplicitWidth = 920
             end
             inherited Panel4: TPanel
-              Width = 695
-              ExplicitWidth = 695
+              Width = 920
+              ExplicitWidth = 920
               inherited dbcbTypeCompetence: TDBLookupComboboxEh
-                Width = 563
+                Width = 788
                 Height = 22
-                ExplicitWidth = 563
+                ExplicitWidth = 788
                 ExplicitHeight = 22
               end
             end
             inherited ToolBar1: TToolBar
-              Width = 695
-              ExplicitWidth = 695
+              Width = 920
+              ExplicitWidth = 920
             end
             inherited Panel5: TPanel
-              Left = 660
+              Left = 885
               Height = 400
-              ExplicitLeft = 660
+              ExplicitLeft = 885
               ExplicitHeight = 400
               inherited ToolBar7: TToolBar
                 inherited ToolButton11: TToolButton
@@ -1219,27 +1188,27 @@ inherited fmSpec: TfmSpec
               end
             end
             inherited DBGridEh1: TDBGridEh
-              Width = 658
+              Width = 883
               Height = 400
             end
           end
           inherited pnlSave: TPanel
-            Top = 635
-            Width = 699
+            Top = 637
+            Width = 924
             ExplicitTop = 635
-            ExplicitWidth = 699
+            ExplicitWidth = 924
             inherited bbSave: TBitBtn
-              Left = 530
-              ExplicitLeft = 530
+              Left = 755
+              ExplicitLeft = 755
             end
             inherited bbUndo: TBitBtn
-              Left = 362
-              ExplicitLeft = 362
+              Left = 587
+              ExplicitLeft = 587
             end
           end
           inherited imgFgos: TImageList
             Bitmap = {
-              494C010149005100580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010149005100640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003001000001002000000000000030
               0100000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -3756,7 +3725,7 @@ inherited fmSpec: TfmSpec
           end
           inherited imgCmptnc: TImageList
             Bitmap = {
-              494C010103000400280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010103000400340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -3903,8 +3872,8 @@ inherited fmSpec: TfmSpec
         inline fmUchPlan2: TfmUchPlan
           Left = 0
           Top = 0
-          Width = 699
-          Height = 672
+          Width = 924
+          Height = 674
           Align = alClient
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -3913,52 +3882,149 @@ inherited fmSpec: TfmSpec
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          ExplicitLeft = -106
-          ExplicitTop = 6
+          ExplicitWidth = 924
+          ExplicitHeight = 674
           inherited Panel1: TPanel
-            Width = 699
-            Height = 672
+            Width = 924
+            Height = 674
+            ExplicitWidth = 924
+            ExplicitHeight = 672
             inherited pnlAll: TPanel
-              Width = 699
-              Height = 620
+              Width = 924
+              Height = 592
+              ExplicitWidth = 924
+              ExplicitHeight = 590
               inherited ScrollBox1: TScrollBox
-                Width = 697
-                Height = 618
+                Width = 922
+                Height = 590
+                ExplicitWidth = 922
+                ExplicitHeight = 588
                 inherited Bevel1: TBevel
-                  Width = 694
+                  Width = 919
+                  ExplicitWidth = 919
                 end
                 inherited Bevel2: TBevel
-                  Width = 694
+                  Top = 162
+                  Width = 919
+                  ExplicitTop = 162
+                  ExplicitWidth = 919
+                end
+                inherited Label16: TLabel
+                  Width = 113
+                  Height = 16
+                  ExplicitWidth = 113
+                  ExplicitHeight = 16
+                end
+                inherited Label2: TLabel
+                  Left = 14
+                  Width = 106
+                  Height = 16
+                  ExplicitLeft = 14
+                  ExplicitWidth = 106
+                  ExplicitHeight = 16
+                end
+                inherited Label3: TLabel
+                  Left = 47
+                  Top = 90
+                  Width = 109
+                  Height = 16
+                  ExplicitLeft = 47
+                  ExplicitTop = 90
+                  ExplicitWidth = 109
+                  ExplicitHeight = 16
                 end
                 inherited Bevel6: TBevel
-                  Width = 694
+                  Width = 919
+                  ExplicitWidth = 919
+                end
+                inherited Label4: TLabel
+                  Left = 32
+                  Width = 124
+                  Height = 16
+                  ExplicitLeft = 32
+                  ExplicitWidth = 124
+                  ExplicitHeight = 16
+                end
+                inherited Label29: TLabel
+                  Left = 62
+                  Top = 170
+                  Width = 59
+                  Height = 16
+                  ExplicitLeft = 62
+                  ExplicitTop = 170
+                  ExplicitWidth = 59
+                  ExplicitHeight = 16
+                end
+                inherited Label30: TLabel
+                  Left = 47
+                  Width = 73
+                  Height = 16
+                  ExplicitLeft = 47
+                  ExplicitWidth = 73
+                  ExplicitHeight = 16
+                end
+                inherited Label31: TLabel
+                  Left = 268
+                  Top = 170
+                  Width = 84
+                  Height = 16
+                  ExplicitLeft = 268
+                  ExplicitTop = 170
+                  ExplicitWidth = 84
+                  ExplicitHeight = 16
+                end
+                inherited Label36: TLabel
+                  Width = 128
+                  Height = 16
+                  ExplicitWidth = 128
+                  ExplicitHeight = 16
+                end
+                inherited Label37: TLabel
+                  Width = 149
+                  Height = 16
+                  ExplicitWidth = 149
+                  ExplicitHeight = 16
                 end
                 inherited Panel2: TPanel
-                  Width = 696
-                  Height = 424
+                  Width = 921
+                  Height = 393
+                  ExplicitWidth = 921
+                  ExplicitHeight = 394
                   inherited Splitter1: TSplitter
-                    Height = 424
+                    Height = 394
+                    ExplicitHeight = 389
                   end
                   inherited Panel5: TPanel
-                    Height = 424
+                    Height = 394
+                    ExplicitHeight = 394
                     inherited dbgDisc: TDBGridEh
-                      Height = 396
+                      Height = 366
                     end
                   end
                   inherited Panel6: TPanel
-                    Width = 243
-                    Height = 424
+                    Width = 468
+                    Height = 394
+                    ExplicitWidth = 468
+                    ExplicitHeight = 394
                     inherited ScrollBox2: TScrollBox
-                      Width = 243
-                      Height = 424
+                      Width = 468
+                      Height = 394
+                      ExplicitWidth = 468
+                      ExplicitHeight = 394
                     end
                   end
                 end
-                inherited dbcbCklDisc: TDBLookupComboboxEh
-                  Width = 564
-                end
                 inherited dbcbGrpDisc: TDBLookupComboboxEh
-                  Width = 564
+                  Top = 112
+                  ExplicitTop = 112
+                end
+                inherited Panel8: TPanel
+                  inherited Label27: TLabel
+                    Width = 62
+                    Height = 16
+                    ExplicitWidth = 62
+                    ExplicitHeight = 16
+                  end
                 end
                 inherited cmbxSem: TDBComboBoxEh
                   Width = 130
@@ -3966,42 +4032,65 @@ inherited fmSpec: TfmSpec
                 end
                 inherited cmbxVidZan: TDBComboBoxEh
                   Top = 166
-                  Width = 332
-                  Height = 23
+                  Width = 554
                   ExplicitTop = 166
-                  ExplicitWidth = 332
-                  ExplicitHeight = 23
+                  ExplicitWidth = 554
                 end
               end
               inherited dbcbPdgrpDisc: TDBLookupComboboxEh
-                Left = 127
-                Width = 564
-                ExplicitLeft = 127
-                ExplicitWidth = 564
+                Anchors = [akLeft, akTop, akRight]
               end
             end
             inherited pnlTools: TPanel
-              Width = 699
+              Width = 924
+              ExplicitWidth = 924
               inherited ToolBar1: TToolBar
-                Width = 699
-                ExplicitLeft = 0
-                ExplicitTop = 0
-                ExplicitWidth = 699
+                Width = 924
+                ExplicitWidth = 924
               end
             end
-            inherited pnlSpclzGrup: TPanel
-              Width = 699
-              inherited lblSpclzGroup: TLabel
-                Left = 105
-                Width = 3
-                ExplicitLeft = 105
-                ExplicitWidth = 3
+            inherited pnlGroup: TPanel
+              Width = 924
+              ExplicitWidth = 924
+              inherited lblGroup: TLabel
+                Width = 53
+                Height = 16
+                ExplicitWidth = 53
+                ExplicitHeight = 16
               end
+              inherited dbcbGroup: TDBLookupComboboxEh
+                Width = 750
+                ExplicitWidth = 750
+              end
+            end
+            inherited pnlSpclz: TPanel
+              Width = 924
+              ExplicitWidth = 924
+              inherited lblSpclz: TLabel
+                Left = 111
+                Width = 47
+                Height = 16
+                ExplicitLeft = 111
+                ExplicitWidth = 47
+                ExplicitHeight = 16
+              end
+              inherited dbcbSpclz: TDBLookupComboboxEh
+                Width = 750
+                ExplicitWidth = 750
+              end
+            end
+          end
+          inherited Panel9: TPanel
+            inherited Label28: TLabel
+              Width = 209
+              Height = 16
+              ExplicitWidth = 209
+              ExplicitHeight = 16
             end
           end
           inherited ImageList1: TImageList
             Bitmap = {
-              494C010108000C00240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010108000C00340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003000000001002000000000000030
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -4489,7 +4578,7 @@ inherited fmSpec: TfmSpec
     Left = 265
     Top = 221
     Bitmap = {
-      494C01010B000E00180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000E00240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000009B9C93FF363733FF2E2E2BFF2E2E
       2BFF32322FFF282823FF00000000363632FF2C2C2AFF30312DFF979794FF0000

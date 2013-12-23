@@ -152,8 +152,8 @@ type
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
     function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
-    
 
+    function getCurrentGroups(SourceDataSet: PDataSet; SpecFacIK: integer; isShowFirst: boolean): Variant;
     {
       getCurrentSpecializations - загружает в SourceDataSet все специализации, для которых существует уч. план с параметром SpecIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
@@ -174,7 +174,7 @@ type
       getCurrentDisciplines - загружает в SourceDataSet все дисциплины из уч. плана UchPlanIK, которые относятся к циклу DiscCycleIK и группе DiscGroupIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentDisciplines(UchPlanIK, DiscCycleIK, DiscGroupIK,DiscPodGroupIK, n_sem, vid_zanIK: integer): TDataSet;
+    function getCurrentDisciplines(aTPlan: integer;UchPlanIK, DiscCycleIK, DiscGroupIK,DiscPodGroupIK, n_sem, vid_zanIK: integer): TDataSet;
      {
         getDiscExceptionsZE - загружает в  SourceDataSet значение ЗЕ (зачетных единиц)для выбранной дисциплины,
         для которых существуют исключения по ФГОСу.
@@ -605,13 +605,20 @@ function TUchPlanController.getCurrentFormEd(SourceDataSet: PDataSet; SpecIK,
         SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
 var tempQuery: string;
 begin
-  tempQuery := 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz';
-  if (SpclzIK <> NULL)and(SpclzIK<>key_CommonProfile)
-      then tempQuery := tempQuery + ' = ' + IntToStr(SpclzIK)
-      else tempQuery := tempQuery + ' is null';
-  tempQuery := tempQuery + ')) and is_main is not null ) ORDER BY Cname_form_ed';
+  tempQuery := 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ik_spec = ' + IntToStr(SpecIK);
+  tempQuery := tempQuery + ' and is_main = 1 ) ORDER BY Cname_form_ed';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, tempQuery,'ik_form_ed', isShowFirst, NULL);
-//  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz = ' + IntToStr(SpclzIK) + '))) ORDER BY Cname_form_ed', 'ik_form_ed', isShowFirst, NULL);
+end;
+
+function TUchPlanController.getCurrentGroups(SourceDataSet: PDataSet;
+  SpecFacIK: integer; isShowFirst: boolean): Variant;
+var tempQuery: string;
+begin
+  tempQuery := 'Select * from Grup where ik_spec_fac = '+IntToStr(SpecFacIK)+
+  ' and DateExit > GetDate()';
+
+  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, tempQuery, 'ik_grup', isShowFirst, NULL);
+
 end;
 
 function TUchPlanController.getCurrentSpecializations(SourceDataSet: PDataSet; 
@@ -626,12 +633,11 @@ function TUchPlanController.getCurrentYears(SourceDataSet: PDataSet; SpecIK,
         SpclzIK, FormEdIK,VidGos: integer; isShowFirst: boolean): Variant;
 var tempQuery: string;
 begin
-  tempQuery := 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_form_ed = ' + VarToStr(FormEdIK) + ')';
-  if (SpclzIK <> NULL)and(SpclzIK <>0) then tempQuery := tempQuery +  ' and (Uch_pl.ik_spclz = ' + VarToStr(SpclzIK) + ') '
-    else tempQuery := tempQuery +  ' and (Uch_pl.ik_spclz is null ) ';
-  tempQuery := tempQuery + 'and is_main = ' + IntToStr(VidGos-1) + ' ORDER BY year_value';
+  tempQuery := 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl '+
+  'INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl'+
+  ' Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_form_ed = ' +
+  VarToStr(FormEdIK) + ') and is_main = 1 ORDER BY year_value';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,tempQuery, 'ik_year_uch_pl', isShowFirst, NULL);
-//  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_spclz = ' + VarToStr(SpclzIK) + ') and (Uch_pl.ik_form_ed = ' + VarToStr(FormEdIK) + ') ORDER BY year_value', 'ik_year_uch_pl', isShowFirst, NULL);
 end;
 
 function TUchPlanController.getCurrentYearsUtv(SourceDataSet: PDataSet; SpecIK,
@@ -671,21 +677,27 @@ begin
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select grp_disc.IK_grp_disc, RTRIM(grp_disc.Cname_grp_disc) as name_grp_disc From grp_disc where VidGos='+IntToStr(VidGos)+' or VidGos=3 ORDER BY Cname_grp_disc', 'ik_grp_disc', isShowFirst, NULL);
 end;
 
-function TUchPlanController.getCurrentDisciplines(UchPlanIK, DiscCycleIK, DiscGroupIK, DiscPodGroupIK,
+function TUchPlanController.getCurrentDisciplines(aTPlan: integer;UchPlanIK, DiscCycleIK, DiscGroupIK, DiscPodGroupIK,
 n_Sem, vid_zanIK: integer): TDataSet;
 var i:integer;
+    aSP:TADOStoredProc;
 begin
-  if (dm.aspGetDiscplines.Active) then dm.aspGetDiscplines.Close;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_uch_plan').Value:= UchPlanIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_ckl_disc').Value:= DiscCycleIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_grp_disc').Value:= DiscGroupIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_pdgrp_disc').Value:= DiscPodGroupIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@n_sem').Value:= n_sem;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_vid_zan').Value:= vid_zanIK;
+  case aTPlan of
+    key_ModelPlan: aSP := dm.aspGetDiscModel;
+    key_WorkPlan:  aSP := dm.aspGetDiscWork;
+  end;
 
-  dm.aspGetDiscplines.Open;
-  Result:= dm.aspGetDiscplines;
+  if (aSP.Active) then aSP.Close;
+  aSP.Parameters.ParamByName('@ik_uch_plan').Value:= UchPlanIK;
+  aSP.Parameters.ParamByName('@ik_ckl_disc').Value:= DiscCycleIK;
+  aSP.Parameters.ParamByName('@ik_grp_disc').Value:= DiscGroupIK;
+  aSP.Parameters.ParamByName('@ik_pdgrp_disc').Value:= DiscPodGroupIK;
+  aSP.Parameters.ParamByName('@n_sem').Value:= n_sem;
+  aSP.Parameters.ParamByName('@ik_vid_zan').Value:= vid_zanIK;
 
+  aSP.Open;
+  Result:= aSP;
+  //dm.aspGetDiscplines
 end;
 
 function TUchPlanController.getDiscZE(FgosIK: Integer): TDataSet;
