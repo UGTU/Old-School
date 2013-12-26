@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 691
       Height = 620
-      ActivePage = tsNapr
+      ActivePage = tsStudents
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -23,10 +23,6 @@ inherited fmGroup: TfmGroup
       OnChanging = pcMainChanging
       object tsStudents: TTabSheet
         Caption = #1057#1086#1089#1090#1072#1074' '#1075#1088#1091#1087#1087#1099
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgStudList: TDBGridEh
           Left = 0
           Top = 29
@@ -39,14 +35,14 @@ inherited fmGroup: TfmGroup
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDblClick = dbgStudListDblClick
@@ -342,6 +338,10 @@ inherited fmGroup: TfmGroup
       object tsAttBRS: TTabSheet
         Caption = #1056#1091#1073#1077#1078#1085#1099#1081' '#1082#1086#1085#1090#1088#1086#1083#1100
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgrdBRSAtt: TDBGridEh
           Left = 0
           Top = 81
@@ -355,7 +355,7 @@ inherited fmGroup: TfmGroup
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -363,7 +363,7 @@ inherited fmGroup: TfmGroup
           TabOrder = 3
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnCellClick = dbgrdBRSAttCellClick
@@ -622,22 +622,22 @@ inherited fmGroup: TfmGroup
           object Label9: TLabel
             Left = 8
             Top = 5
-            Width = 54
-            Height = 16
+            Width = 46
+            Height = 13
             Caption = #1057#1077#1084#1077#1089#1090#1088':'
           end
           object Label11: TLabel
             Left = 112
             Top = 5
-            Width = 49
-            Height = 16
+            Width = 42
+            Height = 13
             Caption = #1052#1086#1076#1091#1083#1100':'
           end
           object Label2: TLabel
-            Left = 255
+            Left = 266
             Top = 6
-            Width = 76
-            Height = 16
+            Width = 65
+            Height = 13
             Alignment = taRightJustify
             Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072':'
           end
@@ -729,18 +729,18 @@ inherited fmGroup: TfmGroup
               721
               32)
             object Label16: TLabel
-              Left = 232
+              Left = 244
               Top = 7
-              Width = 96
-              Height = 16
+              Width = 84
+              Height = 13
               Alignment = taRightJustify
               Caption = #1055#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1100':'
             end
             object Label17: TLabel
               Left = 6
               Top = 7
-              Width = 168
-              Height = 16
+              Width = 145
+              Height = 13
               Caption = #1044#1072#1090#1072' '#1088#1091#1073#1077#1078#1085#1086#1075#1086' '#1080#1089#1087#1099#1090#1072#1085#1080#1103':'
             end
             object dbcbeExaminer: TDBLookupComboboxEh
@@ -774,12 +774,13 @@ inherited fmGroup: TfmGroup
         end
         object Panel5: TPanel
           Left = 0
-          Top = 556
+          Top = 559
           Width = 683
           Height = 30
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
+          ExplicitTop = 556
           DesignSize = (
             683
             30)
@@ -876,6 +877,10 @@ inherited fmGroup: TfmGroup
       object tsAtt: TTabSheet
         Caption = #1040#1090#1090#1077#1089#1090#1072#1094#1080#1080
         ImageIndex = 6
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgeAtt: TDBGridEh
           Left = 0
           Top = 84
@@ -889,7 +894,7 @@ inherited fmGroup: TfmGroup
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -897,7 +902,7 @@ inherited fmGroup: TfmGroup
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           Columns = <
@@ -1107,43 +1112,43 @@ inherited fmGroup: TfmGroup
           object Label19: TLabel
             Left = 149
             Top = 12
-            Width = 86
-            Height = 16
+            Width = 76
+            Height = 13
             Caption = #1040#1090#1090#1077#1089#1090#1072#1094#1080#1103' '#8470
           end
           object Label18: TLabel
             Left = 20
             Top = 13
-            Width = 54
-            Height = 16
+            Width = 46
+            Height = 13
             Caption = #1057#1077#1084#1077#1089#1090#1088':'
           end
           object Label20: TLabel
             Left = 314
             Top = 12
-            Width = 76
-            Height = 16
+            Width = 65
+            Height = 13
             Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072':'
           end
           object Label22: TLabel
             Left = 295
             Top = 38
-            Width = 96
-            Height = 16
+            Width = 84
+            Height = 13
             Caption = #1055#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1100':'
           end
           object Label21: TLabel
             Left = 2
             Top = 38
-            Width = 75
-            Height = 16
+            Width = 64
+            Height = 13
             Caption = #1053#1072#1095#1080#1085#1072#1077#1090#1089#1103':'
           end
           object Label15: TLabel
             Left = 144
             Top = 37
-            Width = 93
-            Height = 16
+            Width = 81
+            Height = 13
             Caption = #1047#1072#1082#1072#1085#1095#1080#1074#1072#1077#1090#1089#1103':'
           end
           object dbcbeDisc: TDBLookupComboboxEh
@@ -1267,6 +1272,10 @@ inherited fmGroup: TfmGroup
       object tsVed: TTabSheet
         Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1080
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgrdVed: TDBGridEh
           Left = 0
           Top = 84
@@ -1280,7 +1289,7 @@ inherited fmGroup: TfmGroup
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1289,7 +1298,7 @@ inherited fmGroup: TfmGroup
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnDrawColumnCell = dbgrdVedDrawColumnCell
@@ -1454,8 +1463,8 @@ inherited fmGroup: TfmGroup
           object lVinost: TLabel
             Left = 192
             Top = 8
-            Width = 109
-            Height = 16
+            Width = 92
+            Height = 13
             Caption = #1042#1099#1085#1086#1089#1085#1086#1081' '#1101#1082#1079#1072#1084#1077#1085
           end
           object dbcbxClosed: TDBCheckBoxEh
@@ -1560,37 +1569,37 @@ inherited fmGroup: TfmGroup
           object Label1: TLabel
             Left = 150
             Top = 5
-            Width = 76
-            Height = 16
+            Width = 65
+            Height = 13
             Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072':'
           end
           object Label3: TLabel
             Left = 5
             Top = 6
-            Width = 54
-            Height = 16
+            Width = 46
+            Height = 13
             Caption = #1057#1077#1084#1077#1089#1090#1088':'
           end
           object Label4: TLabel
             Left = 131
             Top = 33
-            Width = 96
-            Height = 16
+            Width = 84
+            Height = 13
             Caption = #1055#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1100':'
           end
           object Label5: TLabel
             Left = 547
             Top = 33
-            Width = 34
-            Height = 16
+            Width = 30
+            Height = 13
             Anchors = [akTop, akRight]
             Caption = #1044#1072#1090#1072':'
           end
           object Label6: TLabel
             Left = 34
             Top = 33
-            Width = 15
-            Height = 16
+            Width = 13
+            Height = 13
             Caption = #8470
           end
           object dbcmbxPrepodVed: TDBLookupComboboxEh
@@ -1698,7 +1707,7 @@ inherited fmGroup: TfmGroup
         ImageIndex = 3
         object Panel6: TPanel
           Left = 0
-          Top = 556
+          Top = 559
           Width = 683
           Height = 30
           Align = alBottom
@@ -1787,7 +1796,7 @@ inherited fmGroup: TfmGroup
           Left = 0
           Top = 57
           Width = 683
-          Height = 499
+          Height = 502
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
@@ -1796,7 +1805,7 @@ inherited fmGroup: TfmGroup
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -1806,7 +1815,7 @@ inherited fmGroup: TfmGroup
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnTitleClick = dbgrdNaprTitleClick
@@ -1930,15 +1939,15 @@ inherited fmGroup: TfmGroup
           object Label7: TLabel
             Left = 5
             Top = 9
-            Width = 49
-            Height = 16
+            Width = 42
+            Height = 13
             Caption = #1057#1077#1084#1077#1089#1090#1088
           end
           object Label10: TLabel
             Left = 127
             Top = 8
-            Width = 71
-            Height = 16
+            Width = 61
+            Height = 13
             Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
           end
           object cmbxSemNapr: TDBComboBoxEh
@@ -2270,22 +2279,22 @@ inherited fmGroup: TfmGroup
           object Label12: TLabel
             Left = 24
             Top = 6
-            Width = 152
-            Height = 16
+            Width = 131
+            Height = 13
             Caption = '- '#1054#1090#1083#1080#1095#1085#1080#1082#1080' '#1080' '#1093#1086#1088#1086#1096#1080#1089#1090#1099
           end
           object Label13: TLabel
             Left = 182
             Top = 6
-            Width = 247
-            Height = 16
+            Width = 210
+            Height = 13
             Caption = '- '#1045#1089#1090#1100' '#1090#1088#1086#1081#1082#1080' '#1080#1083#1080' '#1085#1077' '#1091#1083#1086#1078#1080#1083#1080#1089#1100' '#1074' '#1089#1077#1089#1089#1080#1102
           end
           object Label14: TLabel
             Left = 419
             Top = 6
-            Width = 160
-            Height = 16
+            Width = 138
+            Height = 13
             Caption = '- '#1045#1089#1090#1100' '#1085#1077' '#1089#1076#1072#1085#1085#1099#1081' '#1087#1088#1077#1076#1084#1077#1090
           end
         end
@@ -2293,6 +2302,10 @@ inherited fmGroup: TfmGroup
       object tsDiplom: TTabSheet
         Caption = #1044#1080#1087#1083#1086#1084
         ImageIndex = 5
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
@@ -2332,7 +2345,7 @@ inherited fmGroup: TfmGroup
           FooterColor = clWindow
           FooterFont.Charset = DEFAULT_CHARSET
           FooterFont.Color = clWindowText
-          FooterFont.Height = -13
+          FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -2341,7 +2354,7 @@ inherited fmGroup: TfmGroup
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
-          TitleFont.Height = -13
+          TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
           OnCellClick = dbgDiplomCellClick
@@ -2524,14 +2537,14 @@ inherited fmGroup: TfmGroup
           Left = 0
           Top = 0
           Width = 683
-          Height = 586
+          Height = 589
           Align = alClient
           TabOrder = 0
           ExplicitWidth = 683
-          ExplicitHeight = 586
+          ExplicitHeight = 589
           inherited Panel1: TPanel
             Width = 683
-            Height = 549
+            Height = 552
             ExplicitWidth = 683
             ExplicitHeight = 552
             inherited tbAcadem: TToolBar
@@ -2550,7 +2563,7 @@ inherited fmGroup: TfmGroup
             end
           end
           inherited pnlSave: TPanel
-            Top = 549
+            Top = 552
             Width = 683
             ExplicitTop = 552
             ExplicitWidth = 683
@@ -2565,7 +2578,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2738,7 +2751,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3409,7 +3422,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

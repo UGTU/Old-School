@@ -3518,5 +3518,9 @@ object dm: Tdm
       DisplayWidth = 40
       FieldName = 'cName_spclz_short'
     end
+    object aspGetDiscWorkik_spclz: TIntegerField
+      FieldName = 'ik_spclz'
+      Visible = False
+    end
   end
 end

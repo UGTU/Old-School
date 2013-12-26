@@ -540,6 +540,7 @@ type
     aspGetDiscWorklpract: TBooleanField;
     aspGetDiscWorkik_type_disc: TWordField;
     aspGetDiscWorkcName_spclz_short: TStringField;
+    aspGetDiscWorkik_spclz: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
 
 

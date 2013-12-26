@@ -153,7 +153,7 @@ type
     }
     function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
 
-    function getCurrentGroups(SourceDataSet: PDataSet; SpecFacIK: integer; isShowFirst: boolean): Variant;
+    function getCurrentGroups(SourceDataSet: PDataSet; SpecFacIK: integer; isShowFirst, IsFilter: boolean): Variant;
     {
       getCurrentSpecializations - загружает в SourceDataSet все специализации, для которых существует уч. план с параметром SpecIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
@@ -611,14 +611,12 @@ begin
 end;
 
 function TUchPlanController.getCurrentGroups(SourceDataSet: PDataSet;
-  SpecFacIK: integer; isShowFirst: boolean): Variant;
+  SpecFacIK: integer; isShowFirst, IsFilter: boolean): Variant;
 var tempQuery: string;
 begin
-  tempQuery := 'Select * from Grup where ik_spec_fac = '+IntToStr(SpecFacIK)+
-  ' and DateExit > GetDate()';
-
+  //показывать все, или только текущие
+  tempQuery := 'Select * from GetCurrentGrup('+IntToStr(SpecFacIK)+')';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, tempQuery, 'ik_grup', isShowFirst, NULL);
-
 end;
 
 function TUchPlanController.getCurrentSpecializations(SourceDataSet: PDataSet; 

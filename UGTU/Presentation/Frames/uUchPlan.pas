@@ -169,6 +169,8 @@ type
     procedure actFgosApp12Execute(Sender: TObject);
     procedure actFgosApp12Update(Sender: TObject);
     procedure dbcbGroupKeyValueChanged(Sender: TObject);
+    procedure cbApprovedMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     fdirIK: integer;
     fSpclzIK,fYearIK, fFormIK: integer;
@@ -225,11 +227,6 @@ begin
     cbApproved.Visible := true;
     dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, 0, VidGos, true);
 
-
-
-
-
-
    { if (VidGos<>FGOS3) then
       dbcbSpclz.KeyValue:= TUchPlanController.Instance.getUchPlanSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true)
     else }
@@ -267,7 +264,10 @@ begin
 
 
   //dbcbGroup.KeyValue:=
-  TUchPlanController.Instance.getCurrentGroups(@dbcbGroup.ListSource.DataSet, fSpecFacIK, false);
+  TUchPlanController.Instance.getCurrentGroups(@dbcbGroup.ListSource.DataSet, fSpecFacIK, false,false);
+  dbcbGroup.ListSource.DataSet.Filter := 'isCurrent	= 1';
+  dbcbGroup.ListSource.DataSet.Filtered := true;
+
   dbcbGroup.KeyValue := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
  // fGroupIK := dbcbGroup.KeyValue;
 
@@ -303,8 +303,10 @@ end;
 
 procedure TfmUchPlan.ActionAddDiscExecute(Sender: TObject);
 begin
+  if not cbApproved.Checked then
+  begin
   frmUchPlanAddDisc:= TfrmUchPlanAddDisc.CreateDialog(Application, Connection, nil);
-try
+  try
   frmUchPlanAddDisc.Tag:= 1;
   frmUchPlanAddDisc.IK:= -1;
   frmUchPlanAddDisc.iUchPlan:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
@@ -318,18 +320,21 @@ try
   frmUchPlanAddDisc.SpclzIK := key_CommonProfile;
   if ((frmUchPlanAddDisc.ShowModal() = mrOk) or (frmUchPlanAddDisc.bbApply.Tag = 1)) then
     GetDisciplines;
-finally
-  frmUchPlanAddDisc.Free;
-end;
+  finally
+    frmUchPlanAddDisc.Free;
+  end;
+  end;
 end;
 
 procedure TfmUchPlan.ActionEditDiscExecute(Sender: TObject);
 var
   index:integer;
 begin
+  if not cbApproved.Checked then
+  begin
   frmUchPlanAddDisc:= TfrmUchPlanAddDisc.CreateDialog(Application, Connection, nil);
  // LocalLog.AddEntry('Редактирование дисциплины '+Trim(dsDisc.DataSet.FieldByName('cname_disc').AsString));
-try
+  try
   frmUchPlanAddDisc.IK:= dsDisc.DataSet.FieldByName('ik_disc_uch_plan').AsInteger;
   frmUchPlanAddDisc.iUchPlan:= IKPlan;
   frmUchPlanAddDisc.VidGos:=VidGos;
@@ -358,55 +363,59 @@ try
     GetDisciplines;
     dsDisc.DataSet.Locate('ik_disc',index,[loPartialKey]);
   end;
-finally
-  frmUchPlanAddDisc.Free;
-end;
+  finally
+    frmUchPlanAddDisc.Free;
+  end;
+  end;
 end;
 
 procedure TfmUchPlan.ActionEditUchPlanExecute(Sender: TObject);
 begin
-//LocalLog.AddEntry('Добавление/редактирование учебного плана');
-dsGetFgosBySpec.DataSet:=TFgosController.Instance.getFgosBySpec(fSpecIK);
-if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value=NULL and (VidGos=2))
-then
-  Application.MessageBox('Необходимо создать ФГОС для текущего направления подготовки','Учебный план',MB_ICONERROR)
-else
+  if not cbApproved.Checked then
   begin
-    frmUchPlanAddNew:= TfrmUchPlanAddNew.CreateDialog(Application, Connection, nil);
-    try
+//LocalLog.AddEntry('Добавление/редактирование учебного плана');
+  dsGetFgosBySpec.DataSet:=TFgosController.Instance.getFgosBySpec(fSpecIK);
+  if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value=NULL and (VidGos=2))
+  then
+    Application.MessageBox('Необходимо создать ФГОС для текущего направления подготовки','Учебный план',MB_ICONERROR)
+    else
+    begin
+      frmUchPlanAddNew:= TfrmUchPlanAddNew.CreateDialog(Application, Connection, nil);
       try
-        frmUchPlanAddNew.IK:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
-      except
-        frmUchPlanAddNew.IK:=0;
-      end;
-  //frmUchPlanAddNew.IK:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
-      frmUchPlanAddNew.Tag:= (sender as TAction).Tag;
-      frmUchPlanAddNew.Label2.Tag:= fSpecIK;
-      frmUchPlanAddNew.Label3.Tag:=dirIK;
-      frmUchPlanAddNew.Label1.Tag:=VidGos;
-      frmUchPlanAddNew.CallFrame:= self;
-      frmUchPlanAddNew.SpecFac:=TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
-      frmUchPlanAddNew.Read;
-      if ((frmUchPlanAddNew.ShowModal() = mrOk) or (frmUchPlanAddNew.bbApply.Tag = 1)) then
-      begin
-        TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
-        dbcbSpclz.ListSource.DataSet.Open;
-        dbcbSpclz.KeyValue:= frmUchPlanAddNew.dbcbSpclz.KeyValue;
-        dbcbFormEd.KeyValue:= frmUchPlanAddNew.dbcbFormEd.KeyValue;
-        dbcbYear.KeyValue:= frmUchPlanAddNew.dbcbYear.KeyValue;
-        dtpDateUtv.Date:= frmUchPlanAddNew.dtpDateUtv.Date;
-    // LocalLog.AddEntry('Добавлен/изменен учебный план '+dbcbSpclz.Text+' '+dbcbFormEd.text+' '+dbcbYear.Text);
-      end;
-    finally
+        try
+          frmUchPlanAddNew.IK:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
+        except
+          frmUchPlanAddNew.IK:=0;
+        end;
+        frmUchPlanAddNew.Tag:= (sender as TAction).Tag;
+        frmUchPlanAddNew.Label2.Tag:= fSpecIK;
+        frmUchPlanAddNew.Label3.Tag:=dirIK;
+        frmUchPlanAddNew.Label1.Tag:=VidGos;
+        frmUchPlanAddNew.CallFrame:= self;
+        frmUchPlanAddNew.SpecFac:=TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
+        frmUchPlanAddNew.Read;
+        if ((frmUchPlanAddNew.ShowModal() = mrOk) or (frmUchPlanAddNew.bbApply.Tag = 1)) then
+        begin
+          TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
+          dbcbSpclz.ListSource.DataSet.Open;
+          dbcbSpclz.KeyValue:= frmUchPlanAddNew.dbcbSpclz.KeyValue;
+          dbcbFormEd.KeyValue:= frmUchPlanAddNew.dbcbFormEd.KeyValue;
+          dbcbYear.KeyValue:= frmUchPlanAddNew.dbcbYear.KeyValue;
+          dtpDateUtv.Date:= frmUchPlanAddNew.dtpDateUtv.Date;
+        end;
+      finally
       frmUchPlanAddNew.Free;
     end;
+  end;
   end;
 end;
 
 procedure TfmUchPlan.ActionRemUchPlanExecute(Sender: TObject);
 var i: integer;
 begin
-//LocalLog.AddEntry('Удаление учебного плана '+dbcbSpclz.Text+' '+dbcbFormEd.Text+' '+dbcbYear.Text);
+  if not cbApproved.Checked then
+  begin
+  //LocalLog.AddEntry('Удаление учебного плана '+dbcbSpclz.Text+' '+dbcbFormEd.Text+' '+dbcbYear.Text);
   if (Application.MessageBox(PChar('Вы уверены, что хотите удалить выбранный учебный план?'),'Учебный план',MB_YESNO) = mrYes) then
   begin
     TUchPlanController.Instance.DeleteUchPlan(dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger);
@@ -418,15 +427,19 @@ begin
     actList.Actions[i].OnUpdate(actList.Actions[i]);
    // LocalLog.AddEntry('План удалён');
   end;
+  end;
 end;
 
 procedure TfmUchPlan.ActionRemDiscExecute(Sender: TObject);
 begin
+  if not cbApproved.Checked then
+  begin
   if (Application.MessageBox('Удалить выбранную дисциплину? ','Учебный план',MB_YESNO) = mrYes) then
   begin
    // LocalLog.AddEntry('Удаление дисциплины '+(dsDisc.DataSet.FieldByName('cname_disc').AsString));
     TUchPlanController.Instance.DeleteDiscFormUchPlan(dsDisc.DataSet.FieldByName('ik_disc_uch_plan').Value);
     GetDisciplines;
+  end;
   end;
 end;
 
@@ -443,6 +456,8 @@ end;
 
 procedure TfmUchPlan.ActionSemLengthExecute(Sender: TObject);
 begin
+  if not cbApproved.Checked then
+  begin
   frmUchPlSemLength:= TfrmUchPlSemLength.CreateDialog(Self, Connection, nil);
  // LocalLog.AddEntry('Длительность семестров');
 
@@ -456,9 +471,10 @@ try
     fSemesterStr:= TUchPlanController.Instance.GetSemestersInStr(@dsSemLength.DataSet, dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger, 'ik_vid_zanyat');
     dsDiscDataChange(Sender, nil);
   end;
-finally
-  frmUchPlSemLength.Free;
-end;
+  finally
+    frmUchPlSemLength.Free;
+  end;
+  end;
 end;
 
 procedure TfmUchPlan.Label10MouseMove(Sender: TObject; Shift: TShiftState;
@@ -557,6 +573,7 @@ begin
      dtpDateUtv.Date :=vDateFormat.DecodeDate(tempDS.FieldByName('date_utv').AsString)
      else dtpDateUtv.Date := Now;
   dbcbYear.KeyValue:=tempDS.FieldByName('ik_year').AsInteger;
+  cbApproved.Checked := tempDS.FieldByName('IsChecked').AsBoolean;
 
   tempDS.Close;
   tempDS.Free;
@@ -718,6 +735,16 @@ begin
       tempDS.Open;
       dtpDateUtv.Date :=vDateFormat.DecodeDate(tempDS.FieldByName('date_utv').AsString);
       FIKPlan := tempDS.FieldByName('ik_uch_plan').AsInteger;
+      if tempDS.FieldByName('IsChecked').AsBoolean then
+      begin
+        cbApproved.State := cbChecked;
+        cbApproved.Font.Style := cbApproved.Font.Style + [fsBold];
+      end  else
+      begin
+       cbApproved.State := cbUnChecked;
+       cbApproved.Font.Style := cbApproved.Font.Style - [fsBold];
+      end;
+
       tempDS.Close;
       tempDS.Free;
     end;
@@ -847,7 +874,9 @@ end;
 procedure TfmUchPlan.dbgDiscDblClick(Sender: TObject);
 begin
   inherited;
-  if (dsDisc.DataSet.Active) and (dsDisc.DataSet.FieldByName('ik_disc').AsInteger>0) then ActionEditDiscExecute(Sender);
+  if (dsDisc.DataSet.Active) and (dsDisc.DataSet.FieldByName('ik_disc').AsInteger>0)
+    then
+      ActionEditDiscExecute(Sender);
 end;
 
 procedure TfmUchPlan.GetSemesters();
@@ -883,6 +912,25 @@ procedure TfmUchPlan.actLoadSelectionUpdate(Sender: TObject);
 begin
   inherited;
   actLoadSelection.Enabled:= dbcbKaf.KeyValue <> NULL;
+end;
+
+procedure TfmUchPlan.cbApprovedMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var tempProc: TADOStoredProc;
+begin
+  tempProc := TADOStoredProc.Create(nil);
+   try
+     tempProc.ProcedureName:= 'ChangePlanStatus;1';
+     tempProc.Connection:= dm.DBConnect;
+     tempProc.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 4, FIKPlan);
+     tempProc.Open;
+     if (Sender as TCheckBox).Checked then
+       cbApproved.Font.Style := cbApproved.Font.Style - [fsBold]
+       else cbApproved.Font.Style := cbApproved.Font.Style + [fsBold];
+   except
+     MessageBox(Handle, 'У вас нет доступа на изменение статуса плана.','Запрет на редактирование',MB_OK);
+   end;
+   tempProc.Free;
 end;
 
 procedure TfmUchPlan.actLoadSelectionExecute(Sender: TObject);
