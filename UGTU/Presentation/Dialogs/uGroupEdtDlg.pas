@@ -38,6 +38,7 @@ type
     procedure edtNameChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure dbcbSpecKeyValueChanged(Sender: TObject);
+    procedure dbcbProfileKeyValueChanged(Sender: TObject);
   private
     bEdit: boolean;
     procedure ChangeGroupName;
@@ -217,6 +218,15 @@ begin
   if (CheckBox1.Checked) then
     MessageBox(Handle, 'Внимание! Полное копирование оценок возможно только в том случае, когда все предметы текущего учебного плана группы совпадают с предметами назначаемого учебного плана!',
 					  'ИС УГТУ', MB_OK)
+end;
+
+procedure TfrmGroupEdt.dbcbProfileKeyValueChanged(Sender: TObject);
+begin
+  if dbcbProfile.KeyValue<>null then
+  begin
+     if dbcbProfile.KeyValue <> 0 then ShowMessage('Меняем профиль');
+     
+  end;
 end;
 
 procedure TfrmGroupEdt.dbcbSpecKeyValueChanged(Sender: TObject);
