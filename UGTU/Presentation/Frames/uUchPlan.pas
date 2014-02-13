@@ -134,6 +134,9 @@ type
     dbcbSpclz: TDBLookupComboboxEh;
     lblSpclz: TLabel;
     cbApproved: TCheckBox;
+    ToolBar2: TToolBar;
+    ToolButton12: TToolButton;
+    lblProfile: TLabel;
     procedure ActionRemUchPlanUpdate(Sender: TObject);
     procedure ActionRemUchPlanExecute(Sender: TObject);
     procedure ActionRemDiscUpdate(Sender: TObject);
@@ -148,7 +151,6 @@ type
     procedure sgDiscMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
     procedure ScrollBox2Resize(Sender: TObject);
-    procedure dbcbSpclzKeyValueChanged(Sender: TObject);
     procedure dbcbFormEdKeyValueChanged(Sender: TObject);
     procedure dbcbYearKeyValueChanged(Sender: TObject);
     procedure dbcbCklDiscKeyValueChanged(Sender: TObject);
@@ -183,6 +185,7 @@ type
     flagFgos:boolean;
     fTypePlan: integer;
     IsSetPlan: boolean;
+    fGroupDataSet: TADODataSet;
     procedure SetDiscType(discType: Integer);
     procedure GetDisciplines;
     procedure GetSemesters();
@@ -219,14 +222,15 @@ var
   i:integer;
 begin
   inherited;
-
+    fGroupIK := 0;
     fTypePlan := key_ModelPlan;
     IsSetPlan := false;
     dsDisc.DataSet := dm.aspGetDiscModel;
     SetVisualProperty;  //визуальные настройки
     cbApproved.Visible := true;
     dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, 0, VidGos, true);
-
+    //if (dbcbYear.KeyValue = NULL) then dbcbFormEdKeyValueChanged(nil);
+    
    { if (VidGos<>FGOS3) then
       dbcbSpclz.KeyValue:= TUchPlanController.Instance.getUchPlanSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true)
     else }
@@ -234,6 +238,8 @@ begin
  { if ((VidGos<>FGOS3)or(dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value<>NULL)) then
     if dbcbSpclz.KeyValue = NULL then
   }
+  if not IsSetPlan then
+    frmMain.StatusBar1.Panels[1].Text:= 'Учебный план: <не выбран>';
 end;
 
 procedure TfmUchPlan.ReadWorkUchPlan;
@@ -242,6 +248,8 @@ begin
   //заглушка
   fTypePlan := key_WorkPlan;
   dsDisc.DataSet := dm.aspGetDiscWork;
+  fGroupDataSet := TGeneralController.Instance.GetNewADODataSet(true);
+
   SetVisualProperty;  //визуальные настройки
   //------------вынести кнопки на отдельные панели------------------------------
   ToolButton1.Visible := false;
@@ -268,7 +276,8 @@ begin
   dbcbGroup.ListSource.DataSet.Filter := 'isCurrent	= 1';
   dbcbGroup.ListSource.DataSet.Filtered := true;
 
-  dbcbGroup.KeyValue := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
+  if fGroupIK<>0 then SetGroupUchPlan(fGroupIK)
+  else dbcbGroup.KeyValue := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
  // fGroupIK := dbcbGroup.KeyValue;
 
   //если нет требуемого фгоса, то не грузим профили
@@ -448,7 +457,7 @@ begin
 
   dsDisc.DataSet:= TUchPlanController.Instance.getCurrentDisciplines
   (fTypePlan,IKPlan, dbcbCklDisc.KeyValue,
-   dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, cmbxSem.ItemIndex, strtoint(cmbxVidZan.KeyItems[cmbxVidZan.ItemIndex]));
+   dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, cmbxSem.ItemIndex, strtoint(cmbxVidZan.KeyItems[cmbxVidZan.ItemIndex]),fGroupIK);
   if (dsDisc.DataSet.RecordCount = 0) then
     Panel6.Visible:= false
   else Panel6.Visible:= true;
@@ -536,8 +545,15 @@ begin
 end;
 
 procedure TfmUchPlan.SetGroupUchPlan(const aGroupIK: integer);
+var Pname: string;
 begin
   fGroupIK := aGroupIK;
+  fGroupDataSet.Close;
+  fGroupDataSet.CommandText := 'select * from GrupInfo(' + IntToStr(fGroupIK) + ')';
+  fGroupDataSet.Open;
+  Pname := fGroupDataSet.FieldByName('Cname_spec').AsString;
+    if Pname<>'' then lblProfile.Caption := nameSpclz + ' группы: ' +  Pname
+      else lblProfile.Caption := nameSpclz + ' группы: общий';
   IKPlan := TUchPlanController.Instance.getUchPlanForGroup(aGroupIK);
 end;
 
@@ -546,7 +562,7 @@ var tempDS: TADODataSet;
   format : TFormatSettings;
   newDate : TDateFormat;
 begin
-  if aUchPlan<> FIKPlan then //если план поменялся
+ // if aUchPlan<>FIKPlan then //если план поменялся
   begin
     FIKPlan := aUchPlan;
     IsSetPlan := true;
@@ -574,9 +590,10 @@ begin
      else dtpDateUtv.Date := Now;
   dbcbYear.KeyValue:=tempDS.FieldByName('ik_year').AsInteger;
   cbApproved.Checked := tempDS.FieldByName('IsChecked').AsBoolean;
-
   tempDS.Close;
   tempDS.Free;
+
+  SetUchPlanProperties(FIKPlan);
 
   IsSetPlan := false;
   end;
@@ -667,24 +684,6 @@ begin
 
 end;
 
-procedure TfmUchPlan.dbcbSpclzKeyValueChanged(Sender: TObject);
-var splzIK: integer;
-begin
- { if (Sender as TDBLookupComboboxEh).KeyValue <> fSpclzIK  then
-  begin
-    fSpclzIK := (Sender as TDBLookupComboboxEh).KeyValue;
-    TGeneralController.Instance.CloseLockupCB(@dbcbFormEd);
-    if (dbcbSpclz.KeyValue = NULL) then
-    begin
-      dbcbSpclz.Text := '';
-      splzIK:=0;
-    end
-    else splzIK := dbcbSpclz.KeyValue;
-    if Assigned(dbcbFormEd.ListSource) then
-      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, splzIK, VidGos, true);
- end;    }
-end;
-
 procedure TfmUchPlan.dbcbFormEdKeyValueChanged(Sender: TObject);
 var spz: integer;
 begin
@@ -697,36 +696,25 @@ begin
       TGeneralController.Instance.CloseLockupCB(@dbcbYear);
       dbcbYear.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYear.ListSource.DataSet, fSpecIK, spz, dbcbFormEd.KeyValue,VidGos, true);
     end;
-  
-  {if (fGroupIK<>0)and((Sender as TDBLookupComboboxEh).KeyValue<>fFormIK) then
-  begin
-
-
-    if ((dbcbFormEd.KeyValue <> NULL)) then
-    begin
-      if dbcbSpclz.KeyValue = NULL then spz := 0 else spz := dbcbSpclz.KeyValue;
-      dbcbYear.ListSource.DataSet.Last;
-      dbcbYear.KeyValue:= dbcbYear.ListSource.DataSet.FieldByName('ik_year_uch_pl').Value;
-    end
-    else dtpDateUtv.Date := Now;
-  end;   }
   end;
 end;
 
 procedure TfmUchPlan.dbcbGroupKeyValueChanged(Sender: TObject);
+
 begin
   if (Sender as TDBLookupComboboxEh).KeyValue<>NULL then
+  begin
     Group := (Sender as TDBLookupComboboxEh).KeyValue;
+  end;
 end;
 
 procedure TfmUchPlan.dbcbYearKeyValueChanged(Sender: TObject);
 var tempDS: TADODataSet;
 begin
-  if (dbcbYear.KeyValue <> NULL) then
+  if dbcbYear.KeyValue<>null then
   begin
     fYearIK := dbcbYear.KeyValue;
-    //если план не назначался первоначально, находим его
-    if not IsSetPlan then
+    if fTypePlan = key_ModelPlan then
     begin
       tempDS := TGeneralController.Instance.GetNewADODataSet(true);
       tempDS.CommandText := 'select * from Uch_pl where ik_year_uch_pl = ' +
@@ -744,14 +732,11 @@ begin
        cbApproved.State := cbUnChecked;
        cbApproved.Font.Style := cbApproved.Font.Style - [fsBold];
       end;
-
       tempDS.Close;
       tempDS.Free;
+      SetUchPlanProperties(FIKPlan);
     end;
-    SetUchPlanProperties(FIKPlan);
-  end
-  else frmMain.StatusBar1.Panels[1].Text:= 'Учебный план: <не выбран>';
-
+  end;
 end;
 
 procedure TfmUchPlan.dbcbCklDiscKeyValueChanged(Sender: TObject);
@@ -907,6 +892,8 @@ begin
     Panel8.Visible:= false;
   end;
 end;
+
+
 
 procedure TfmUchPlan.actLoadSelectionUpdate(Sender: TObject);
 begin

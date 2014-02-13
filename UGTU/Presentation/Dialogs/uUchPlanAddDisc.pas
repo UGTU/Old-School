@@ -784,12 +784,15 @@ end;
 
 procedure TfrmUchPlanAddDisc.Edit7KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
+var
+  individ : integer;
 begin
   inherited;
   if ((ssCtrl in Shift) and (Key = VK_SPACE)) then
   begin
-    if (iIndivid = round(StrToInt(Label27.Caption) * TUchPlanController.Instance.GetConsultationPercent)) then exit;
-    iIndivid:= round(StrToInt(Label27.Caption) * TUchPlanController.Instance.GetConsultationPercent);
+    individ := round(StrToInt(Label27.Caption) * TUchPlanController.Instance.GetConsultationPercent);
+    if (iIndivid = individ) then exit;
+    iIndivid:= individ;
     isIndividMod:= true;
     dbcbGrpDiscKeyValueChanged(nil);
   end;

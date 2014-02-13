@@ -17,8 +17,8 @@ object dm: Tdm
     AfterConnect = DBConnectAfterConnect
     OnExecuteComplete = DBConnectExecuteComplete
     OnWillExecute = DBConnectWillExecute
-    Left = 15
-    Top = 12
+    Left = 31
+    Top = 124
   end
   object dsSelVedEkz: TDataSource
     DataSet = adospWriteVer
@@ -77,33 +77,6 @@ object dm: Tdm
       FieldName = 'nameZOsenca'
       Size = 10
     end
-  end
-  object dsGetUchPlnGroup: TDataSource
-    DataSet = adospGetUchPlnGroup
-    Left = 1054
-    Top = 551
-  end
-  object adospGetUchPlnGroup: TADOStoredProc
-    Connection = DBConnect
-    CursorType = ctStatic
-    ProcedureName = 'GetUchPlanForGroup;1'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-        Value = 0
-      end
-      item
-        Name = '@ik_spec_fac'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = 20
-      end>
-    Left = 957
-    Top = 553
   end
   object adodsVidExam: TADODataSet
     Connection = DBConnect
@@ -498,6 +471,12 @@ object dm: Tdm
         DataType = ftInteger
         Precision = 10
         Value = Null
+      end
+      item
+        Name = '@ik_grup'
+        DataType = ftInteger
+        Size = 1
+        Value = '0'
       end>
     Left = 649
     Top = 293
@@ -3368,13 +3347,13 @@ object dm: Tdm
         Size = 1
         Value = '0'
       end>
-    Left = 24
-    Top = 584
+    Left = 32
+    Top = 456
   end
   object dsProfileForGroup: TDataSource
     DataSet = adsProfile
-    Left = 8
-    Top = 552
+    Left = 32
+    Top = 400
   end
   object adsGroups: TADODataSet
     Connection = DBConnect
@@ -3436,6 +3415,11 @@ object dm: Tdm
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ik_grup'
+        DataType = ftInteger
         Value = 0
       end>
     Left = 544
@@ -3522,5 +3506,55 @@ object dm: Tdm
       FieldName = 'ik_spclz'
       Visible = False
     end
+  end
+  object adsGetUchPlanGrup: TADODataSet
+    Connection = DBConnect
+    CursorType = ctStatic
+    CommandText = 'select * from GetUchPlanForGroup'
+    Parameters = <>
+    Left = 1032
+    Top = 584
+  end
+  object dsGetUchPlnGroup: TDataSource
+    DataSet = adsGetUchPlanGrup
+    Left = 1038
+    Top = 631
+  end
+  object aspAddRupGrup: TADOStoredProc
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    ProcedureName = 'AddRUPForGroup;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = -6
+      end
+      item
+        Name = '@grup_comment'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 100
+        Value = Null
+      end
+      item
+        Name = '@ik_main_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@inserted_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Direction = pdInputOutput
+        Precision = 10
+        Value = Null
+      end>
+    Left = 176
+    Top = 696
   end
 end

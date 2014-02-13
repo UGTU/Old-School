@@ -917,27 +917,48 @@ inherited fmUchPlan: TfmUchPlan
       Align = alTop
       TabOrder = 2
       Visible = False
-      DesignSize = (
-        956
-        30)
       object lblGroup: TLabel
-        Left = 66
-        Top = 7
+        Left = 8
+        Top = 9
         Width = 41
         Height = 13
         Caption = #1043#1088#1091#1087#1087#1072' :'
       end
+      object lblProfile: TLabel
+        Left = 414
+        Top = 9
+        Width = 39
+        Height = 13
+        Caption = 'lblProfile'
+      end
       object dbcbGroup: TDBLookupComboboxEh
-        Left = 125
-        Top = 2
-        Width = 813
+        Left = 55
+        Top = 6
+        Width = 324
         Height = 19
-        Anchors = [akLeft, akTop, akRight]
         EditButtons = <>
         Flat = True
         TabOrder = 0
         Visible = True
         OnKeyValueChanged = dbcbGroupKeyValueChanged
+      end
+      object ToolBar2: TToolBar
+        Left = 385
+        Top = 5
+        Width = 23
+        Height = 23
+        Align = alNone
+        AutoSize = True
+        ButtonHeight = 23
+        Caption = 'ToolBar2'
+        Images = frmMain.ImageList1
+        TabOrder = 1
+        object ToolButton12: TToolButton
+          Left = 0
+          Top = 0
+          Caption = 'ToolButton12'
+          ImageIndex = 34
+        end
       end
     end
     object pnlSpclz: TPanel
@@ -952,9 +973,9 @@ inherited fmUchPlan: TfmUchPlan
         956
         30)
       object lblSpclz: TLabel
-        Left = 83
-        Top = 8
-        Width = 36
+        Left = 9
+        Top = 7
+        Width = 110
         Height = 13
         Alignment = taRightJustify
         Anchors = [akLeft, akTop, akRight]
@@ -970,7 +991,6 @@ inherited fmUchPlan: TfmUchPlan
         Flat = True
         TabOrder = 0
         Visible = True
-        OnKeyValueChanged = dbcbSpclzKeyValueChanged
       end
     end
   end
@@ -1020,7 +1040,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

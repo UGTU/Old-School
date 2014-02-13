@@ -2,6 +2,7 @@ inherited frmGroupEdt: TfrmGroupEdt
   Left = 190
   Top = 189
   HelpKeyword = 'Edit_group.htm'
+  AutoSize = True
   Caption = 'frmGroupEdt'
   ClientHeight = 317
   ClientWidth = 324
@@ -238,7 +239,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       OnKeyValueChanged = dbcbSpecKeyValueChanged
     end
   end
-  object Panel4: TPanel [4]
+  object pnlProfile: TPanel [4]
     Left = 0
     Top = 219
     Width = 324
@@ -283,7 +284,7 @@ inherited frmGroupEdt: TfrmGroupEdt
   end
   object dsSpec: TDataSource
     DataSet = dmUgtuStructure.adsSpecFac
-    Left = 280
-    Top = 184
+    Left = 232
+    Top = 65528
   end
 end

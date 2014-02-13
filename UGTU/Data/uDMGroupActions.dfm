@@ -75,6 +75,7 @@ object dmGroupActions: TdmGroupActions
       end
       item
         Name = '@ik_spclz'
+        DataType = ftInteger
         Value = Null
       end>
     Left = 149

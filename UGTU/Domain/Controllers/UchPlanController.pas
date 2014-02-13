@@ -174,7 +174,7 @@ type
       getCurrentDisciplines - загружает в SourceDataSet все дисциплины из уч. плана UchPlanIK, которые относятся к циклу DiscCycleIK и группе DiscGroupIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentDisciplines(aTPlan: integer;UchPlanIK, DiscCycleIK, DiscGroupIK,DiscPodGroupIK, n_sem, vid_zanIK: integer): TDataSet;
+    function getCurrentDisciplines(aTPlan: integer;UchPlanIK, DiscCycleIK, DiscGroupIK,DiscPodGroupIK, n_sem, vid_zanIK, grupIK: integer): TDataSet;
      {
         getDiscExceptionsZE - загружает в  SourceDataSet значение ЗЕ (зачетных единиц)для выбранной дисциплины,
         для которых существуют исключения по ФГОСу.
@@ -676,7 +676,7 @@ begin
 end;
 
 function TUchPlanController.getCurrentDisciplines(aTPlan: integer;UchPlanIK, DiscCycleIK, DiscGroupIK, DiscPodGroupIK,
-n_Sem, vid_zanIK: integer): TDataSet;
+n_Sem, vid_zanIK,grupIK: integer): TDataSet;
 var i:integer;
     aSP:TADOStoredProc;
 begin
@@ -692,6 +692,7 @@ begin
   aSP.Parameters.ParamByName('@ik_pdgrp_disc').Value:= DiscPodGroupIK;
   aSP.Parameters.ParamByName('@n_sem').Value:= n_sem;
   aSP.Parameters.ParamByName('@ik_vid_zan').Value:= vid_zanIK;
+  aSP.Parameters.ParamByName('@ik_grup').Value:= grupIK;
 
   aSP.Open;
   Result:= aSP;
@@ -895,6 +896,7 @@ function TUchPlanController.getUchPlanForGroup(aIK_group: integer): Integer;
 begin
   with dm.adsGroups do
   begin
+    Close;
     Open;
     Filter := 'ik_grup=' + IntToStr(aIK_group);
     Filtered := True;
@@ -1377,7 +1379,7 @@ var
   i, n: integer;
   semKafList: TSemKafList;
 begin
-  DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan318', false);
+  DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan', false);
   tempDS:= TGeneralController.Instance.GetNewADODataSet(true);
   semKafList:= TSemKafList.Create;
   dm.qContentUchPlan.Connection.BeginTrans;
@@ -1398,9 +1400,10 @@ begin
     DataSet.Parameters.CreateParameter('@ik_pdgrp_disc',ftInteger,pdInput,0,PodGroupIK);
     DataSet.Parameters.CreateParameter('@ViborGroup',ftInteger, pdInput, 0, GroupViborNum);
     if SpclzIK<>0 then DataSet.Parameters.CreateParameter('@ik_spclz',ftInteger, pdInput, 0, SpclzIK);
+    DataSet.Parameters.CreateParameter('@inserted_uch_plan',ftInteger, pdOutput, 0, 0);
     try
-      DataSet.Open;
-      DiscInUchPlanIK:= DataSet.FieldByName('ReturnValue').AsInteger;
+      DataSet.ExecProc;
+      DiscInUchPlanIK:= DataSet.Parameters.ParamByName('@inserted_uch_plan').Value; //DataSet.FieldByName('ReturnValue').AsInteger;
     finally
       DataSet.Close;
       DataSet.Free;

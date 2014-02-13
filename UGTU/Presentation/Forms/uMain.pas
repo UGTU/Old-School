@@ -1143,28 +1143,34 @@ end;
 procedure TfrmMain.actTreeRefreshActionExecute(Sender: TObject);
 var dbNode:TDbNodeObject;
 begin
-dbNode:=DBDekTreeView_test1.Selected.Data;
+  dbNode:=DBDekTreeView_test1.Selected.Data;
+  if dbNode is TDBNodeGroupObject then
+  begin
+    if ActShowAllStudent.Checked then
+    begin
+      TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAll;
+      ActShowStud.Caption:=ActShowAllStudent.Caption;
+    end else
+      if actShowAcademStudent.Checked then
+      begin
+        TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAcademOnly;
+        ActShowStud.Caption:=ActShowAcademStudent.Caption;
+      end else
+        if actShowOtchislStudent.Checked then
+        begin
+          TDBNodeGroupObject(dbNode).ShowStudents:=ssShowExiledOnly;
+          ActShowStud.Caption:=actShowOtchislStudent.Caption;
+        end
+        else
+        begin
+          TDBNodeGroupObject(dbNode).ShowStudents:=ssShowActualOnly;
+          ActShowStud.Caption:=actShowUnOtchislStudent.Caption;
+        end;
+  end;
 
-if dbNode is TDBNodeGroupObject then begin
-if ActShowAllStudent.Checked then begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAll;
-ActShowStud.Caption:=ActShowAllStudent.Caption;
-end else
-if actShowAcademStudent.Checked then  begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAcademOnly;
-ActShowStud.Caption:=ActShowAcademStudent.Caption;
-end else
-if actShowOtchislStudent.Checked then  begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowExiledOnly;
-ActShowStud.Caption:=actShowOtchislStudent.Caption;
-end else begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowActualOnly;
-ActShowStud.Caption:=actShowUnOtchislStudent.Caption;
-end;
-end;
-
-if dbNode is TDBNodeAbitObject then begin
-if actFilterAllYear.Checked then begin
+  if dbNode is TDBNodeAbitObject then
+  begin
+    if actFilterAllYear.Checked then begin
 TDBNodeAbitObject(dbNode).ShowAllYears:=true;
 actYearFilter.Caption:=actFilterAllYear.Caption;
 end else
@@ -1273,9 +1279,9 @@ actFilterKaf.Caption:=actCurrentKaf.Caption;
 end;
 end;
 
-if dbNode<> nil then
-   DBDekTreeView_test1.RefreshNodeExecute(DBDekTreeView_test1.Selected);
-FFrame.RefreshFrame;
+  if dbNode<> nil then
+    DBDekTreeView_test1.RefreshNodeExecute(DBDekTreeView_test1.Selected);
+//  FFrame.RefreshFrame;
 end;
 
 procedure TfrmMain.DBDekTreeView_TEST1Collapsing(Sender: TObject;

@@ -24,8 +24,6 @@ type
     DBConnect: TADOConnection;
     dsSelVedEkz: TDataSource;
     adospSelVedEkz: TADOStoredProc;
-    dsGetUchPlnGroup: TDataSource;
-    adospGetUchPlnGroup: TADOStoredProc;
     adodsVidExam: TADODataSet;
     dsVidExam: TDataSource;
     adospSelVedEkzNumber: TIntegerField;
@@ -541,8 +539,10 @@ type
     aspGetDiscWorkik_type_disc: TWordField;
     aspGetDiscWorkcName_spclz_short: TStringField;
     aspGetDiscWorkik_spclz: TIntegerField;
+    adsGetUchPlanGrup: TADODataSet;
+    dsGetUchPlnGroup: TDataSource;
+    aspAddRupGrup: TADOStoredProc;
     procedure DataModuleCreate(Sender: TObject);
-
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);
 

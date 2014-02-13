@@ -74,11 +74,14 @@ type
     procedure dsSpclzDataChange(Sender: TObject; Field: TField);
     procedure PageControl1Change(Sender: TObject);
     procedure ToolButton7Click(Sender: TObject);
+    procedure fmUchPlan2ToolButton12Click(Sender: TObject);
   private
     SpFacik: Integer;
     SpecIK: Integer;
     directionIK:integer;
     VidGos:integer;
+    procedure RefreshGroup;
+
   public
     property ik: Integer read SpFacik write SpFacik;
     procedure Read;
@@ -167,6 +170,17 @@ begin
   PageControl1Change(PageControl1);
 end;
 
+procedure TfmSpec.RefreshGroup;
+begin
+  DataSet.Active:=false;
+  DataSet.Active:=true;
+  fmUchPlan2.dbcbGroup.ListSource.DataSet.Close;
+  fmUchPlan2.dbcbGroup.ListSource.DataSet.Open;
+  fmUchPlan2.ReadWorkUchPlan;
+  DBGridEh1.DataSource.DataSet.Refresh;
+  //frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected.Parent);
+end;
+
 procedure TfmSpec.ToolButton7Click(Sender: TObject);
 begin
   frmMain.ActGroupMgr.Execute;
@@ -187,10 +201,9 @@ end;
 
 procedure TfmSpec.DoRefreshFrame;
 begin
-PageControl1Change(self);
+  PageControl1Change(self);
 
-if FrameObject=nil then exit;
-
+  if FrameObject=nil then exit;
   DataSet := (FrameObject as TDBNodeSpecObject).AdoDataset;
   read;
   DBGridEh1.Refresh;
@@ -260,9 +273,9 @@ begin
   r:= frmGroupEdt.ShowModal;
   if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
   begin
-    DataSet.Active:=false;
-    DataSet.Active:=true;
-    frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected);
+     RefreshGroup;
+
+   // frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected);
   end;
   frmGroupEdt.Free;
 end;
@@ -425,6 +438,17 @@ begin
   inherited;
   fmUchPlan1.ActionEditUchPlanExecute(Sender);
 
+end;
+
+procedure TfmSpec.fmUchPlan2ToolButton12Click(Sender: TObject);
+var grIK: integer;
+begin
+  //inherited;
+  grIK := fmUchPlan2.dbcbGroup.KeyValue;
+  DataSet :=  fmUchPlan2.dbcbGroup.ListSource.DataSet as TADODataSet;
+  actEdtGroupExecute(nil);
+ // fmUchPlan2.dbcbGroup.KeyValue :=  grIK;
+ // PageControl1.ActivePageIndex := 6;
 end;
 
 procedure TfmSpec.PageControl1Change(Sender: TObject);

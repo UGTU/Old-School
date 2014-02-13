@@ -2891,11 +2891,11 @@ var
   r:integer;
 begin
   inherited;
-  dm.adospGetUchPlnGroup.Active := false;
+ // dm.adospGetUchPlnGroup.Active := false;
 
   frmGroupEdt:=TfrmGroupEdt.Create(self);
   frmGroupEdt.ik := TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
-  frmGroupEdt.SpecFacIK := TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik;
+  frmGroupEdt.SpecFacIK := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik;
   frmGroupEdt.WithSpec := false;
   frmGroupEdt.Edit := true;
 
@@ -2989,23 +2989,30 @@ var
 begin
   inherited;
   Grp := TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject);
-  if MessageDlg('Вы уверены, что хотите удалить выбранные группы?', mtConfirmation,
-               [mbYes, mbNo], 0) = mrYes then
+  if MessageBox(Handle, 'Вы уверены, что хотите удалить выбранные группы?', 'ИС УГТУ', MB_YESNO)=IDYES
+    then
+ { if MessageDlg('Вы уверены, что хотите удалить выбранные группы?', mtConfirmation,
+               [mbYes, mbNo], 0) = mrYes then}
   begin
     ik := Grp.ik;
-    with dmGroupActions.adospAppendGrup.Parameters do
-    begin
-      ParamByName('@flag').Value:= -1;
-      ParamByName('@ik_spec_fac').Value:= Null;
-      ParamByName('@Cname_grup').Value:= Null;
-      ParamByName('@Ik_uch_plan').Value:= Null;
-      ParamByName('@nYear_post').Value:= Null;
-      ParamByName('@Ik_grup').Value:= ik;
+    try
+      with dmGroupActions.adospAppendGrup.Parameters do
+      begin
+        ParamByName('@flag').Value:= -1;
+        ParamByName('@ik_spec_fac').Value:= Null;
+        ParamByName('@Cname_grup').Value:= Null;
+        ParamByName('@Ik_uch_plan').Value:= Null;
+        ParamByName('@nYear_post').Value:= Null;
+        ParamByName('@Ik_grup').Value:= ik;
+      end;
+      dmGroupActions.adospAppendGrup.ExecProc;
+      DataSet.Active:=false;
+      DataSet.Active:=true;
+      frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected.Parent);
+    except
+      ShowMessage('Невозможно удалить группу. Существуют данные, связанные с группой: студенты, ведомости и т.д.');
     end;
-    dmGroupActions.adospAppendGrup.ExecProc;
-    DataSet.Active:=false;
-    DataSet.Active:=true;
-    frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected.Parent);
+
   end;
 end;
 

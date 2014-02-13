@@ -3,237 +3,236 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   Top = 257
   HelpKeyword = 'Add_discip_in_plan.htm'
   Caption = 'frmUchPlanAddDisc'
-  ClientHeight = 816
-  ClientWidth = 784
-  Constraints.MinHeight = 197
-  Constraints.MinWidth = 402
+  ClientHeight = 663
+  ClientWidth = 637
+  Constraints.MinHeight = 160
+  Constraints.MinWidth = 327
   OldCreateOrder = True
-  ExplicitWidth = 790
-  ExplicitHeight = 851
-  PixelsPerInch = 120
-  TextHeight = 16
+  ExplicitWidth = 643
+  ExplicitHeight = 692
+  PixelsPerInch = 96
+  TextHeight = 13
   inherited Bevel1: TBevel
-    Top = 763
-    Width = 784
-    Height = 9
+    Top = 620
+    Width = 637
+    Height = 7
     Align = alBottom
     Shape = bsBottomLine
     Style = bsLowered
-    ExplicitTop = 763
-    ExplicitWidth = 784
-    ExplicitHeight = 9
+    ExplicitTop = 620
+    ExplicitWidth = 637
+    ExplicitHeight = 7
   end
   object Label5: TLabel [1]
-    Left = 6
-    Top = 192
-    Width = 208
-    Height = 16
+    Left = 5
+    Top = 156
+    Width = 163
+    Height = 13
     Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1074#1080#1076#1072#1084' '#1079#1072#1085#1103#1090#1080#1081':'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label4: TLabel [2]
-    Left = 6
-    Top = 130
-    Width = 173
-    Height = 16
+    Left = 5
+    Top = 106
+    Width = 134
+    Height = 13
     Caption = #1050#1072#1092#1077#1076#1088#1072' ('#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102')  :'
   end
   object Label3: TLabel [3]
-    Left = 82
-    Top = 101
-    Width = 89
-    Height = 16
+    Left = 67
+    Top = 82
+    Width = 72
+    Height = 13
     Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072'  :'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label2: TLabel [4]
-    Left = 48
-    Top = 42
-    Width = 130
-    Height = 16
+    Left = 39
+    Top = 34
+    Width = 101
+    Height = 13
     Caption = #1043#1088#1091#1087#1087#1072' '#1076#1080#1089#1094#1080#1087#1083#1080#1085'  :'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label1: TLabel [5]
-    Left = 59
-    Top = 12
-    Width = 115
-    Height = 16
+    Left = 48
+    Top = 10
+    Width = 92
+    Height = 13
     Caption = #1062#1080#1082#1083' '#1076#1080#1089#1094#1080#1087#1083#1080#1085'  :'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label8: TLabel [6]
-    Left = 52
-    Top = 160
-    Width = 124
-    Height = 16
+    Left = 42
+    Top = 130
+    Width = 97
+    Height = 13
     Caption = #1064#1080#1092#1088' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1099':'
   end
   object Label6: TLabel [7]
-    Left = 10
-    Top = 522
-    Width = 168
-    Height = 16
+    Left = 8
+    Top = 424
+    Width = 131
+    Height = 13
     Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1095#1072#1089#1086#1074':'
   end
   object Label9: TLabel [8]
-    Left = 164
-    Top = 12
-    Width = 5
-    Height = 16
+    Left = 133
+    Top = 10
+    Width = 4
+    Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label10: TLabel [9]
-    Left = 164
-    Top = 42
-    Width = 5
-    Height = 16
+    Left = 133
+    Top = 34
+    Width = 4
+    Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label12: TLabel [10]
-    Left = 162
-    Top = 101
-    Width = 5
-    Height = 16
+    Left = 132
+    Top = 82
+    Width = 4
+    Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label13: TLabel [11]
-    Left = 162
-    Top = 130
-    Width = 5
-    Height = 16
+    Left = 132
+    Top = 106
+    Width = 4
+    Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object lGroupVibor: TLabel [12]
-    Left = 404
-    Top = 160
-    Width = 167
-    Height = 16
+    Left = 328
+    Top = 130
+    Width = 131
+    Height = 13
     Caption = #1053#1086#1084#1077#1088' '#1075#1088#1091#1087#1087#1099' '#1087#1086' '#1074#1099#1073#1086#1088#1091':'
   end
   object Label14: TLabel [13]
-    Left = 26
-    Top = 71
-    Width = 155
-    Height = 16
+    Left = 21
+    Top = 58
+    Width = 120
+    Height = 13
     Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' '#1076#1080#1089#1094#1080#1087#1083#1080#1085'  :'
   end
   object Label17: TLabel [14]
-    Left = 164
-    Top = 71
-    Width = 5
-    Height = 16
+    Left = 133
+    Top = 58
+    Width = 4
+    Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -15
+    Font.Height = -12
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   inherited Panel1: TPanel
-    Top = 772
-    Width = 784
-    Height = 44
+    Top = 627
+    Width = 637
+    Height = 36
     BevelOuter = bvNone
     TabOrder = 6
-    ExplicitTop = 772
-    ExplicitWidth = 784
-    ExplicitHeight = 44
+    ExplicitTop = 627
+    ExplicitWidth = 637
+    ExplicitHeight = 36
     inherited bbOK: TBitBtn
-      Left = 468
-      Top = 7
-      ExplicitLeft = 468
-      ExplicitTop = 7
+      Left = 380
+      Top = 6
+      ExplicitLeft = 380
+      ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
-      Left = 672
-      Top = 7
+      Left = 546
+      Top = 6
       TabOrder = 2
-      ExplicitLeft = 672
-      ExplicitTop = 7
+      ExplicitLeft = 546
+      ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
-      Left = 570
-      Top = 7
+      Left = 463
+      Top = 6
       TabOrder = 1
-      ExplicitLeft = 570
-      ExplicitTop = 7
+      ExplicitLeft = 463
+      ExplicitTop = 6
     end
     inherited bbSprav: TBitBtn
-      Left = 6
-      Top = 6
-      Width = 139
-      ExplicitLeft = 6
-      ExplicitTop = 6
-      ExplicitWidth = 139
+      Left = 5
+      Top = 5
+      Width = 113
+      ExplicitLeft = 5
+      ExplicitTop = 5
+      ExplicitWidth = 113
     end
   end
   object Panel2: TPanel [16]
-    Left = 6
-    Top = 222
-    Width = 768
-    Height = 516
+    Left = 5
+    Top = 180
+    Width = 624
+    Height = 420
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Caption = 'Panel2'
     TabOrder = 5
     object Splitter1: TSplitter
-      Left = 455
+      Left = 370
       Top = 0
-      Width = 4
-      Height = 516
-      ExplicitHeight = 517
+      Height = 420
+      ExplicitHeight = 419
     end
     object pnlDiscProp: TPanel
-      Left = 459
+      Left = 373
       Top = 0
-      Width = 309
-      Height = 516
+      Width = 251
+      Height = 420
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
@@ -242,32 +241,32 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
       object ScrollBox1: TScrollBox
         Left = 0
         Top = 0
-        Width = 309
-        Height = 516
+        Width = 251
+        Height = 420
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 0
         object pnlProfile: TPanel
           Left = 0
           Top = 0
-          Width = 309
-          Height = 65
+          Width = 251
+          Height = 53
           Align = alTop
           TabOrder = 0
           object lblSpclz: TLabel
-            Left = 12
-            Top = 4
-            Width = 146
-            Height = 16
+            Left = 10
+            Top = 3
+            Width = 114
+            Height = 13
             Caption = #1055#1088#1086#1092#1080#1083#1100' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1099':'
             ParentShowHint = False
             ShowHint = True
           end
           object dbcbSpclz: TDBLookupComboboxEh
-            Left = 12
-            Top = 27
-            Width = 246
-            Height = 24
+            Left = 10
+            Top = 22
+            Width = 200
+            Height = 21
             EditButtons = <>
             ListSource = dsSpclz
             ParentShowHint = False
@@ -280,253 +279,253 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         end
         object pnlMain: TPanel
           Left = 0
-          Top = 65
-          Width = 309
-          Height = 451
+          Top = 53
+          Width = 251
+          Height = 367
           Align = alClient
           TabOrder = 1
           DesignSize = (
-            309
-            451)
+            251
+            367)
           object allCompetence: TLabel
-            Left = 50
-            Top = 279
+            Left = 41
+            Top = 227
             Width = 3
-            Height = 16
+            Height = 13
             WordWrap = True
           end
           object Bevel2: TBevel
-            Left = 17
-            Top = 261
-            Width = 280
-            Height = 11
+            Left = 14
+            Top = 212
+            Width = 227
+            Height = 9
             Shape = bsTopLine
           end
           object Bevel3: TBevel
-            Left = 17
-            Top = 356
-            Width = 176
-            Height = 11
+            Left = 14
+            Top = 289
+            Width = 143
+            Height = 9
             Shape = bsTopLine
           end
           object Bevel6: TBevel
-            Left = 17
-            Top = 113
-            Width = 280
-            Height = 11
+            Left = 14
+            Top = 92
+            Width = 227
+            Height = 9
             Shape = bsTopLine
           end
           object Bevel7: TBevel
-            Left = 17
-            Top = 218
-            Width = 280
-            Height = 12
+            Left = 14
+            Top = 177
+            Width = 227
+            Height = 10
             Shape = bsTopLine
           end
           object Label11: TLabel
-            Left = 138
-            Top = 137
-            Width = 51
-            Height = 16
+            Left = 112
+            Top = 111
+            Width = 41
+            Height = 13
             Caption = #1051#1077#1082#1094#1080#1080':'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label15: TLabel
-            Left = 33
-            Top = 159
-            Width = 156
-            Height = 16
+            Left = 27
+            Top = 129
+            Width = 122
+            Height = 13
             Caption = #1051#1072#1073#1086#1088#1072#1090#1086#1088#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label16: TLabel
-            Left = 15
-            Top = 278
-            Width = 174
-            Height = 16
+            Left = 12
+            Top = 226
+            Width = 137
+            Height = 13
             Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072' '#1086#1087#1080#1088#1072#1077#1090#1089#1103' '#1085#1072':'
             Color = clMenu
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentColor = False
             ParentFont = False
           end
           object Label18: TLabel
-            Left = 36
-            Top = 181
-            Width = 153
-            Height = 16
+            Left = 29
+            Top = 147
+            Width = 119
+            Height = 13
             Caption = #1055#1088#1072#1082#1090#1080#1095#1077#1089#1082#1080#1077' '#1079#1072#1085#1103#1090#1080#1103':'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label19: TLabel
-            Left = 60
-            Top = 54
-            Width = 173
-            Height = 16
+            Left = 55
+            Top = 44
+            Width = 134
+            Height = 13
             Alignment = taRightJustify
             Caption = #1048#1085#1076#1080#1074#1080#1076#1091#1072#1083#1100#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label20: TLabel
-            Left = 203
-            Top = 85
-            Width = 30
-            Height = 16
+            Left = 165
+            Top = 69
+            Width = 24
+            Height = 13
             Caption = #1057#1056#1057':'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label22: TLabel
-            Left = 239
-            Top = 85
-            Width = 22
-            Height = 16
+            Left = 194
+            Top = 69
+            Width = 3
+            Height = 13
             Caption = '-'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label23: TLabel
-            Left = 195
-            Top = 137
-            Width = 33
-            Height = 16
+            Left = 158
+            Top = 111
+            Width = 3
+            Height = 13
             Caption = '-'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label24: TLabel
-            Left = 195
-            Top = 159
-            Width = 14
-            Height = 16
+            Left = 158
+            Top = 129
+            Width = 3
+            Height = 13
             Caption = '-'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label25: TLabel
-            Left = 195
-            Top = 181
-            Width = 17
-            Height = 16
+            Left = 158
+            Top = 147
+            Width = 3
+            Height = 13
             Caption = '-'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label26: TLabel
-            Left = 25
-            Top = 236
-            Width = 164
-            Height = 16
+            Left = 20
+            Top = 192
+            Width = 127
+            Height = 13
             Caption = #1042#1089#1077#1075#1086' '#1072#1091#1076#1080#1090#1086#1088#1085#1099#1093' '#1095#1072#1089#1086#1074':'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label27: TLabel
-            Left = 195
-            Top = 236
-            Width = 14
-            Height = 16
+            Left = 158
+            Top = 192
+            Width = 3
+            Height = 13
             Caption = '-'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object Label7: TLabel
-            Left = 6
-            Top = 24
-            Width = 227
-            Height = 16
+            Left = 5
+            Top = 20
+            Width = 184
+            Height = 13
             Alignment = taRightJustify
             AutoSize = False
             Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1085#1077#1076#1077#1083#1100':'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
           end
           object lblCompetence: TLabel
-            Left = 95
-            Top = 318
-            Width = 94
-            Height = 16
+            Left = 77
+            Top = 258
+            Width = 74
+            Height = 13
             Caption = #1050#1086#1084#1087#1077#1090#1077#1085#1094#1080#1080' :'
           end
           object lblNotice: TLabel
-            Left = 12
-            Top = 374
+            Left = 10
+            Top = 304
             Width = 5
-            Height = 16
+            Height = 13
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clRed
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = [fsBold]
             ParentFont = False
             WordWrap = True
           end
           object Edit5: TDBEditEh
-            Left = 239
-            Top = 21
-            Width = 50
-            Height = 22
+            Left = 194
+            Top = 17
+            Width = 41
+            Height = 19
             AlwaysShowBorder = True
             EditButtons = <>
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             Flat = True
@@ -539,15 +538,15 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             OnKeyPress = Edit5KeyPress
           end
           object Edit7: TDBEditEh
-            Left = 239
-            Top = 49
-            Width = 50
-            Height = 22
+            Left = 194
+            Top = 40
+            Width = 41
+            Height = 19
             AlwaysShowBorder = True
             EditButtons = <>
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -15
+            Font.Height = -12
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             Flat = True
@@ -579,10 +578,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             end
           end
           object Button1: TButton
-            Left = 215
-            Top = 265
-            Width = 29
-            Height = 31
+            Left = 175
+            Top = 215
+            Width = 23
+            Height = 26
             Action = actAddDiscRelation
             Anchors = [akTop]
             Caption = '...'
@@ -596,8 +595,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     object Panel4: TPanel
       Left = 0
       Top = 0
-      Width = 455
-      Height = 516
+      Width = 370
+      Height = 420
       Align = alLeft
       Anchors = [akLeft, akTop, akRight, akBottom]
       BevelOuter = bvNone
@@ -606,11 +605,11 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
       object sgDisc: TStringGrid
         Left = 0
         Top = 0
-        Width = 455
-        Height = 516
+        Width = 370
+        Height = 420
         Align = alClient
         ColCount = 3
-        Constraints.MinWidth = 455
+        Constraints.MinWidth = 370
         DefaultColWidth = 150
         DefaultRowHeight = 18
         FixedCols = 0
@@ -635,10 +634,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     end
   end
   object Edit6: TDBEditEh [17]
-    Left = 178
-    Top = 156
-    Width = 157
-    Height = 22
+    Left = 145
+    Top = 127
+    Width = 127
+    Height = 19
     AlwaysShowBorder = True
     EditButtons = <>
     Flat = True
@@ -649,10 +648,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnKeyPress = Edit6KeyPress
   end
   object dbcbCklDisc: TDBLookupComboboxEh [18]
-    Left = 178
-    Top = 6
-    Width = 596
-    Height = 22
+    Left = 145
+    Top = 5
+    Width = 484
+    Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
     EditButtons = <>
@@ -662,10 +661,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
   end
   object dbcbGrpDisc: TDBLookupComboboxEh [19]
-    Left = 178
-    Top = 37
-    Width = 596
-    Height = 22
+    Left = 145
+    Top = 30
+    Width = 484
+    Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
     EditButtons = <>
@@ -675,10 +674,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
   end
   object dbcbDisc: TDBLookupComboboxEh [20]
-    Left = 178
-    Top = 97
-    Width = 596
-    Height = 22
+    Left = 145
+    Top = 79
+    Width = 484
+    Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
     DropDownBox.Options = [dlgColLinesEh, dlgAutoSortMarkingEh]
@@ -689,10 +688,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnKeyValueChanged = dbcbDiscKeyValueChanged
   end
   object dbcbKaf: TDBLookupComboboxEh [21]
-    Left = 178
-    Top = 127
-    Width = 596
-    Height = 22
+    Left = 145
+    Top = 103
+    Width = 484
+    Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
     DropDownBox.Options = [dlgColLinesEh, dlgAutoSortMarkingEh]
@@ -703,10 +702,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
   end
   object Panel5: TPanel [22]
-    Left = 170
-    Top = 192
-    Width = 474
-    Height = 22
+    Left = 138
+    Top = 156
+    Width = 385
+    Height = 18
     Caption = 
       #1053#1072#1078#1084#1080#1090#1077' <CTRL + '#1055#1088#1086#1073#1077#1083'>, '#1095#1090#1086#1073#1099' '#1091#1089#1090#1072#1085#1086#1074#1080#1090#1100' '#1079#1085#1072#1095#1077#1085#1080#1077' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102'.' +
       '..'
@@ -715,10 +714,10 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Visible = False
   end
   object dbeGroupVibor: TDBEditEh [23]
-    Left = 570
-    Top = 156
-    Width = 204
-    Height = 22
+    Left = 463
+    Top = 127
+    Width = 166
+    Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
     EditButtons = <>
@@ -730,19 +729,19 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnKeyPress = Edit5KeyPress
   end
   object cbOtherUchPl: TCheckBox [24]
-    Left = 6
-    Top = 743
-    Width = 481
-    Height = 21
+    Left = 5
+    Top = 604
+    Width = 391
+    Height = 17
     Anchors = [akLeft, akBottom]
     Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103' '#1076#1083#1103' '#1091#1095#1077#1073#1085#1099#1093' '#1087#1083#1072#1085#1086#1074', '#1091#1090#1074#1077#1088#1078#1076#1077#1085#1085#1099#1093' '#1087#1086#1079#1076#1085#1077#1077
     TabOrder = 9
   end
   object dbcbPdgrpDisc: TDBLookupComboboxEh [25]
-    Left = 180
-    Top = 68
-    Width = 595
-    Height = 22
+    Left = 146
+    Top = 55
+    Width = 484
+    Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
     EditButtons = <>
@@ -776,7 +775,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Left = 440
     Top = 560
     Bitmap = {
-      494C0101030004002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
