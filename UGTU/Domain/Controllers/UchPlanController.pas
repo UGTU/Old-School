@@ -1379,34 +1379,32 @@ var
   i, n: integer;
   semKafList: TSemKafList;
 begin
-  DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan', false);
+ // DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan', false);
   tempDS:= TGeneralController.Instance.GetNewADODataSet(true);
   semKafList:= TSemKafList.Create;
   dm.qContentUchPlan.Connection.BeginTrans;
   try
-    if DiscInUchPlanIK < 0 then
-      DataSet.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 1)
-    else
-      DataSet.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 2);
-    DataSet.Parameters.CreateParameter('@ik_disc_uch_plan',ftInteger,pdInput, 0, DiscInUchPlanIK);
-    DataSet.Parameters.CreateParameter('@ik_uch_plan',ftInteger,pdInput, 0, UchPlanIK);
-    DataSet.Parameters.CreateParameter('@ik_disc',ftInteger,pdInput,0, DiscIK);
-    DataSet.Parameters.CreateParameter('@ik_default_kaf',ftInteger,pdInput,0, KafedraIK);
-    DataSet.Parameters.CreateParameter('@iHour_gos',ftInteger,pdInput,0, GOSHour);
-    DataSet.Parameters.CreateParameter('@iIndivid',ftInteger,pdInput,0, IndividHour);
-    DataSet.Parameters.CreateParameter('@ik_ckl_disc',ftInteger,pdInput,0,CycleIK);
-    DataSet.Parameters.CreateParameter('@ik_grp_disc',ftInteger,pdInput,0,GroupIK);
-    DataSet.Parameters.CreateParameter('@Cname_ckl_disc_gos',ftString, pdInput, 20, CodeGOS);
-    DataSet.Parameters.CreateParameter('@ik_pdgrp_disc',ftInteger,pdInput,0,PodGroupIK);
-    DataSet.Parameters.CreateParameter('@ViborGroup',ftInteger, pdInput, 0, GroupViborNum);
-    if SpclzIK<>0 then DataSet.Parameters.CreateParameter('@ik_spclz',ftInteger, pdInput, 0, SpclzIK);
-    DataSet.Parameters.CreateParameter('@inserted_uch_plan',ftInteger, pdOutput, 0, 0);
-    try
-      DataSet.ExecProc;
-      DiscInUchPlanIK:= DataSet.Parameters.ParamByName('@inserted_uch_plan').Value; //DataSet.FieldByName('ReturnValue').AsInteger;
-    finally
-      DataSet.Close;
-      DataSet.Free;
+    with dm.aspUpdateDiscInPlan do
+    begin
+      Connection := dm.DBConnect;
+      if DiscInUchPlanIK < 0 then
+        Parameters.ParamByName('@i_type').Value := 1
+      else Parameters.ParamByName('@i_type').Value := 2;
+      Parameters.ParamByName('@ik_disc_uch_plan').Value :=  DiscInUchPlanIK;
+      Parameters.ParamByName('@ik_uch_plan').Value := UchPlanIK;
+      Parameters.ParamByName('@ik_disc').Value := DiscIK;
+      Parameters.ParamByName('@ik_default_kaf').Value :=  KafedraIK;
+      Parameters.ParamByName('@iHour_gos').Value := GOSHour;
+      Parameters.ParamByName('@iIndivid').Value := IndividHour;
+      Parameters.ParamByName('@ik_ckl_disc').Value := CycleIK;
+      Parameters.ParamByName('@ik_grp_disc').Value := GroupIK;
+      Parameters.ParamByName('@Cname_ckl_disc_gos').Value := CodeGOS;
+      Parameters.ParamByName('@ik_pdgrp_disc').Value := PodGroupIK;
+      Parameters.ParamByName('@ViborGroup').Value := GroupViborNum;
+      if SpclzIK=0 then Parameters.ParamByName('@ik_spclz').Value := Null;
+      Parameters.ParamByName('@ik_spclz').Value := SpclzIK;
+      ExecProc;
+      DiscInUchPlanIK := Parameters.ParamByName('@RETURN_VALUE').Value;
     end;
 
     dm.qContentUchPlan.First;

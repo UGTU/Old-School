@@ -542,6 +542,7 @@ type
     adsGetUchPlanGrup: TADODataSet;
     dsGetUchPlnGroup: TDataSource;
     aspAddRupGrup: TADOStoredProc;
+    aspUpdateDiscInPlan: TADOStoredProc;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

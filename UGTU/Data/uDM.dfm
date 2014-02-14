@@ -476,7 +476,7 @@ object dm: Tdm
         Name = '@ik_grup'
         DataType = ftInteger
         Size = 1
-        Value = '0'
+        Value = 0
       end>
     Left = 649
     Top = 293
@@ -3555,6 +3555,103 @@ object dm: Tdm
         Value = Null
       end>
     Left = 176
+    Top = 696
+  end
+  object aspUpdateDiscInPlan: TADOStoredProc
+    Connection = DBConnect
+    ProcedureName = 'UpdateDiscInUchPlan;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@i_type'
+        Attributes = [paNullable]
+        DataType = ftWord
+        Precision = 3
+      end
+      item
+        Name = '@ik_disc_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_default_kaf'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@iHour_gos'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@iIndivid'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_ckl_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_grp_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@Cname_ckl_disc_gos'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = '@ik_pdgrp_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ViborGroup'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_spclz'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@source_disc_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 288
     Top = 696
   end
 end
