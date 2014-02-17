@@ -16,7 +16,6 @@ type
     adodsPrikazoldDd_prikazVst: TDateTimeField;
     adodsPrikazoldik_typePrikaz: TIntegerField;
     adodsPrikazoldName_type: TStringField;
-    adodsPrikazoldNN_Date: TStringField;
     dsPrikType: TDataSource;
     adodsPrikType: TADODataSet;
     aspPrikaz: TADOStoredProc;
@@ -30,6 +29,7 @@ type
     adodsPrikazNamePrikaz: TStringField;
     adodsPrikazcTypePrikaz: TStringField;
     adodsPrikazNN_Date: TStringField;
+    adodsPrikazoldNN_Date: TStringField;
 
     procedure adodsPrikazCalcFields(DataSet: TDataSet);
   private
