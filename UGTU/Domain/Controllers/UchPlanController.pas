@@ -11,7 +11,8 @@ interface
 
 uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM, uDMUgtuStructure,
-  Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj, ComCtrls, Math;
+  Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj, ComCtrls, Math,
+  ConstantRepository;
 
 const FISCULTURA=10; //дл€ особого учета зачетных единиц физической культуры
       FISCULTURA_CIKL = 19;  //дл€ особого учета зачетных единиц физической культуры
@@ -150,25 +151,30 @@ type
       getCurrentFormEd - загружает в SourceDataSet все формы обучени€, дл€ которых существует уч. план с параметрами SpecIK, SpclzIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK: integer; isShowFirst: boolean): Variant;
+    function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
 
+    function getCurrentGroups(SourceDataSet: PDataSet; SpecFacIK: integer; isShowFirst, IsFilter: boolean): Variant;
     {
       getCurrentSpecializations - загружает в SourceDataSet все специализации, дл€ которых существует уч. план с параметром SpecIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
+    //¬ыбирает учебный план дл€ группы
+    function getUchPlanForGroup(aIK_group: integer): Integer;
 
+
+    function getCurrentSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
+    function getUchPlanSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
     {
       getCurrentYears - загружает в SourceDataSet все года, дл€ которых существует уч. план с параметрами SpecIK, SpclzIK, FormEdIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentYears(SourceDataSet: PDataSet; SpecIK, SpclzIK, FormEdIK: integer; isShowFirst: boolean): Variant;
+    function getCurrentYears(SourceDataSet: PDataSet; SpecIK, SpclzIK, FormEdIK, VidGos: integer; isShowFirst: boolean): Variant;
     function getCurrentYearsUtv(SourceDataSet: PDataSet; SpecIK, SpclzIK, FormEdIK: integer; isShowFirst: boolean): Variant;
     {
       getCurrentDisciplines - загружает в SourceDataSet все дисциплины из уч. плана UchPlanIK, которые относ€тс€ к циклу DiscCycleIK и группе DiscGroupIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentDisciplines(UchPlanIK, DiscCycleIK, DiscGroupIK,DiscPodGroupIK, n_sem, vid_zanIK: integer): TDataSet;
+    function getCurrentDisciplines(aTPlan: integer;UchPlanIK, DiscCycleIK, DiscGroupIK,DiscPodGroupIK, n_sem, vid_zanIK, grupIK: integer): TDataSet;
      {
         getDiscExceptionsZE - загружает в  SourceDataSet значение «≈ (зачетных единиц)дл€ выбранной дисциплины,
         дл€ которых существуют исключени€ по ‘√ќ—у.
@@ -282,7 +288,7 @@ type
            CodeGOS - шифр дисциплины по √ќ—
     }
     function SaveDiscInUchPlan(UchPlanIK: integer; var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK,
-        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum: integer;
+        DiscIK, KafedraIK, SpclzIK, GOSHour, IndividHour, GroupViborNum: integer;
         CodeGOS: string; aStrCompetenceList, DiscRelationList: TStringList): Boolean;   {aCompetenceList}
 
     {
@@ -416,6 +422,8 @@ var
   arColumns: array of TColumnInfo;
   weekCountExceptionList: TVidZanyatExceptionList;
   vidZanyatTaskCountList: TVidZanyatExceptionList;
+
+
 
 const
   Excel_GUID: TGUID = '{000208D5-0000-0000-C000-000000000046}';
@@ -594,36 +602,40 @@ begin
 end;
 
 function TUchPlanController.getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, 
-        SpclzIK: integer; isShowFirst: boolean): Variant;
+        SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
 var tempQuery: string;
 begin
-  tempQuery := 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz';
-  if (SpclzIK <> NULL)and(SpclzIK <>0)
-      then tempQuery := tempQuery + ' = ' + IntToStr(SpclzIK)
-      else tempQuery := tempQuery + ' is null';
-  tempQuery := tempQuery + '))) ORDER BY Cname_form_ed';
+  tempQuery := 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ik_spec = ' + IntToStr(SpecIK);
+  tempQuery := tempQuery + ' and is_main = 1 ) ORDER BY Cname_form_ed';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, tempQuery,'ik_form_ed', isShowFirst, NULL);
-//  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ((ik_spec = ' + IntToStr(SpecIK) + ') and (ik_spclz = ' + IntToStr(SpclzIK) + '))) ORDER BY Cname_form_ed', 'ik_form_ed', isShowFirst, NULL);
+end;
+
+function TUchPlanController.getCurrentGroups(SourceDataSet: PDataSet;
+  SpecFacIK: integer; isShowFirst, IsFilter: boolean): Variant;
+var tempQuery: string;
+begin
+  //показывать все, или только текущие
+  tempQuery := 'Select * from GetCurrentGrup('+IntToStr(SpecFacIK)+')';
+  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, tempQuery, 'ik_grup', isShowFirst, NULL);
 end;
 
 function TUchPlanController.getCurrentSpecializations(SourceDataSet: PDataSet; 
         SpecIK: integer; isShowFirst: boolean): Variant;
 begin
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,
-    'Select distinct Uch_pl.iK_spclz, spclz.cName_spclz_short, spclz.cName_spclz From Uch_pl Left join spclz on Uch_pl.iK_spclz = spclz.iK_spclz Where Uch_pl.ik_spec = ' + IntToStr(SpecIK),
+    'select * from GetSpclzForSpec(' + IntToStr(SpecIK)+') order by is_common desc',
     'ik_spclz', isShowFirst, NULL);
 end;
 
 function TUchPlanController.getCurrentYears(SourceDataSet: PDataSet; SpecIK, 
-        SpclzIK, FormEdIK: integer; isShowFirst: boolean): Variant;
+        SpclzIK, FormEdIK,VidGos: integer; isShowFirst: boolean): Variant;
 var tempQuery: string;
 begin
-  tempQuery := 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_form_ed = ' + VarToStr(FormEdIK) + ')';
-  if (SpclzIK <> NULL)and(SpclzIK <>0) then tempQuery := tempQuery +  ' and (Uch_pl.ik_spclz = ' + VarToStr(SpclzIK) + ') '
-    else tempQuery := tempQuery +  ' and (Uch_pl.ik_spclz is null ) ';
-  tempQuery := tempQuery +  'ORDER BY year_value';
+  tempQuery := 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl '+
+  'INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl'+
+  ' Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_form_ed = ' +
+  VarToStr(FormEdIK) + ') and is_main = 1 ORDER BY year_value';
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,tempQuery, 'ik_year_uch_pl', isShowFirst, NULL);
-//  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select Uch_pl.ik_uch_plan, Year_uch_pl.* From Uch_pl INNER JOIN Year_uch_pl ON Uch_pl.ik_year_uch_pl = Year_uch_pl.ik_year_uch_pl Where (Uch_pl.ik_spec = ' + IntToStr(SpecIK) + ') and (Uch_pl.ik_spclz = ' + VarToStr(SpclzIK) + ') and (Uch_pl.ik_form_ed = ' + VarToStr(FormEdIK) + ') ORDER BY year_value', 'ik_year_uch_pl', isShowFirst, NULL);
 end;
 
 function TUchPlanController.getCurrentYearsUtv(SourceDataSet: PDataSet; SpecIK,
@@ -663,21 +675,28 @@ begin
   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'Select grp_disc.IK_grp_disc, RTRIM(grp_disc.Cname_grp_disc) as name_grp_disc From grp_disc where VidGos='+IntToStr(VidGos)+' or VidGos=3 ORDER BY Cname_grp_disc', 'ik_grp_disc', isShowFirst, NULL);
 end;
 
-function TUchPlanController.getCurrentDisciplines(UchPlanIK, DiscCycleIK, DiscGroupIK, DiscPodGroupIK,
-n_Sem, vid_zanIK: integer): TDataSet;
+function TUchPlanController.getCurrentDisciplines(aTPlan: integer;UchPlanIK, DiscCycleIK, DiscGroupIK, DiscPodGroupIK,
+n_Sem, vid_zanIK,grupIK: integer): TDataSet;
 var i:integer;
+    aSP:TADOStoredProc;
 begin
-  if (dm.aspGetDiscplines.Active) then dm.aspGetDiscplines.Close;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_uch_plan').Value:= UchPlanIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_ckl_disc').Value:= DiscCycleIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_grp_disc').Value:= DiscGroupIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_pdgrp_disc').Value:= DiscPodGroupIK;
-  dm.aspGetDiscplines.Parameters.ParamByName('@n_sem').Value:= n_sem;
-  dm.aspGetDiscplines.Parameters.ParamByName('@ik_vid_zan').Value:= vid_zanIK;
+  case aTPlan of
+    key_ModelPlan: aSP := dm.aspGetDiscModel;
+    key_WorkPlan:  aSP := dm.aspGetDiscWork;
+  end;
 
-  dm.aspGetDiscplines.Open;
-  Result:= dm.aspGetDiscplines;
+  if (aSP.Active) then aSP.Close;
+  aSP.Parameters.ParamByName('@ik_uch_plan').Value:= UchPlanIK;
+  aSP.Parameters.ParamByName('@ik_ckl_disc').Value:= DiscCycleIK;
+  aSP.Parameters.ParamByName('@ik_grp_disc').Value:= DiscGroupIK;
+  aSP.Parameters.ParamByName('@ik_pdgrp_disc').Value:= DiscPodGroupIK;
+  aSP.Parameters.ParamByName('@n_sem').Value:= n_sem;
+  aSP.Parameters.ParamByName('@ik_vid_zan').Value:= vid_zanIK;
+  aSP.Parameters.ParamByName('@ik_grup').Value:= grupIK;
 
+  aSP.Open;
+  Result:= aSP;
+  //dm.aspGetDiscplines
 end;
 
 function TUchPlanController.getDiscZE(FgosIK: Integer): TDataSet;
@@ -871,6 +890,27 @@ begin
       end;
     if (Length(number) > 0) then Result.Add(number);
   end;
+end;
+
+function TUchPlanController.getUchPlanForGroup(aIK_group: integer): Integer;
+begin
+  with dm.adsGroups do
+  begin
+    Close;
+    Open;
+    Filter := 'ik_grup=' + IntToStr(aIK_group);
+    Filtered := True;
+    Result := FieldByName('Ik_uch_plan').AsInteger;
+    if Result = NULL then Result := 0;
+  end;
+end;
+
+function TUchPlanController.getUchPlanSpecializations(SourceDataSet: PDataSet;
+  SpecIK: integer; isShowFirst: boolean): Variant;
+begin
+  Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,
+    'select * from spclz where ik_spclz in (select ik_spclz from Uch_pl where ik_spec=' + IntToStr(SpecIK)+') order by ik_spec',
+    'ik_spclz', isShowFirst, NULL);
 end;
 
 function TUchPlanController.CheckSemesterString(
@@ -1331,7 +1371,7 @@ begin
 end;
 
 function TUchPlanController.SaveDiscInUchPlan(UchPlanIK: integer;
-  var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour,
+  var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, SpclzIK, GOSHour,
   IndividHour, GroupViborNum: integer; CodeGOS: string; aStrCompetenceList, DiscRelationList: TStringList): Boolean;   {aCompetenceList}
 var
   DataSet: TADOStoredProc;
@@ -1339,32 +1379,32 @@ var
   i, n: integer;
   semKafList: TSemKafList;
 begin
-  DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan318', false);
+ // DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan', false);
   tempDS:= TGeneralController.Instance.GetNewADODataSet(true);
   semKafList:= TSemKafList.Create;
   dm.qContentUchPlan.Connection.BeginTrans;
   try
-    if DiscInUchPlanIK < 0 then
-      DataSet.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 1)
-    else
-      DataSet.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 2);
-    DataSet.Parameters.CreateParameter('@ik_disc_uch_plan',ftInteger,pdInput, 0, DiscInUchPlanIK);
-    DataSet.Parameters.CreateParameter('@ik_uch_plan',ftInteger,pdInput, 0, UchPlanIK);
-    DataSet.Parameters.CreateParameter('@ik_disc',ftInteger,pdInput,0, DiscIK);
-    DataSet.Parameters.CreateParameter('@ik_default_kaf',ftInteger,pdInput,0, KafedraIK);
-    DataSet.Parameters.CreateParameter('@iHour_gos',ftInteger,pdInput,0, GOSHour);
-    DataSet.Parameters.CreateParameter('@iIndivid',ftInteger,pdInput,0, IndividHour);
-    DataSet.Parameters.CreateParameter('@ik_ckl_disc',ftInteger,pdInput,0,CycleIK);
-    DataSet.Parameters.CreateParameter('@ik_grp_disc',ftInteger,pdInput,0,GroupIK);
-    DataSet.Parameters.CreateParameter('@Cname_ckl_disc_gos',ftString, pdInput, 20, CodeGOS);
-    DataSet.Parameters.CreateParameter('@ik_pdgrp_disc',ftInteger,pdInput,0,PodGroupIK);
-    DataSet.Parameters.CreateParameter('@ViborGroup',ftInteger, pdInput, 0, GroupViborNum);
-    try
-      DataSet.Open;
-      DiscInUchPlanIK:= DataSet.FieldByName('ReturnValue').AsInteger;
-    finally
-      DataSet.Close;
-      DataSet.Free;
+    with dm.aspUpdateDiscInPlan do
+    begin
+      Connection := dm.DBConnect;
+      if DiscInUchPlanIK < 0 then
+        Parameters.ParamByName('@i_type').Value := 1
+      else Parameters.ParamByName('@i_type').Value := 2;
+      Parameters.ParamByName('@ik_disc_uch_plan').Value :=  DiscInUchPlanIK;
+      Parameters.ParamByName('@ik_uch_plan').Value := UchPlanIK;
+      Parameters.ParamByName('@ik_disc').Value := DiscIK;
+      Parameters.ParamByName('@ik_default_kaf').Value :=  KafedraIK;
+      Parameters.ParamByName('@iHour_gos').Value := GOSHour;
+      Parameters.ParamByName('@iIndivid').Value := IndividHour;
+      Parameters.ParamByName('@ik_ckl_disc').Value := CycleIK;
+      Parameters.ParamByName('@ik_grp_disc').Value := GroupIK;
+      Parameters.ParamByName('@Cname_ckl_disc_gos').Value := CodeGOS;
+      Parameters.ParamByName('@ik_pdgrp_disc').Value := PodGroupIK;
+      Parameters.ParamByName('@ViborGroup').Value := GroupViborNum;
+      if SpclzIK=0 then Parameters.ParamByName('@ik_spclz').Value := Null;
+      Parameters.ParamByName('@ik_spclz').Value := SpclzIK;
+      ExecProc;
+      DiscInUchPlanIK := Parameters.ParamByName('@RETURN_VALUE').Value;
     end;
 
     dm.qContentUchPlan.First;

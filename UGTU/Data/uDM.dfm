@@ -12,14 +12,13 @@ object dm: Tdm
       'et Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;' +
       'Tag with column collation when possible=False;'
     IsolationLevel = ilReadUncommitted
-    KeepConnection = False
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
     AfterConnect = DBConnectAfterConnect
     OnExecuteComplete = DBConnectExecuteComplete
     OnWillExecute = DBConnectWillExecute
-    Left = 15
-    Top = 12
+    Left = 31
+    Top = 124
   end
   object dsSelVedEkz: TDataSource
     DataSet = adospWriteVer
@@ -78,33 +77,6 @@ object dm: Tdm
       FieldName = 'nameZOsenca'
       Size = 10
     end
-  end
-  object dsGetUchPlnGroup: TDataSource
-    DataSet = adospGetUchPlnGroup
-    Left = 1054
-    Top = 551
-  end
-  object adospGetUchPlnGroup: TADOStoredProc
-    Connection = DBConnect
-    CursorType = ctStatic
-    ProcedureName = 'GetUchPlanForGroup;1'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-        Value = 0
-      end
-      item
-        Name = '@ik_spec_fac'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = 20
-      end>
-    Left = 957
-    Top = 553
   end
   object adodsVidExam: TADODataSet
     Connection = DBConnect
@@ -445,7 +417,7 @@ object dm: Tdm
     Left = 745
     Top = 304
   end
-  object aspGetDiscplines: TADOStoredProc
+  object aspGetDiscModel: TADOStoredProc
     Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
@@ -456,7 +428,7 @@ object dm: Tdm
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
-        Value = Null
+        Value = 0
       end
       item
         Name = '@ik_uch_plan'
@@ -499,67 +471,83 @@ object dm: Tdm
         DataType = ftInteger
         Precision = 10
         Value = Null
+      end
+      item
+        Name = '@ik_grup'
+        DataType = ftInteger
+        Size = 1
+        Value = 0
       end>
-    Left = 665
-    Top = 301
-    object aspGetDiscplinesik_disc: TIntegerField
+    Left = 649
+    Top = 293
+    object aspGetDiscModelik_disc: TIntegerField
       FieldName = 'ik_disc'
       Visible = False
     end
-    object aspGetDiscplinesik_grp_disc: TIntegerField
+    object aspGetDiscModelik_grp_disc: TIntegerField
       FieldName = 'ik_grp_disc'
       Visible = False
     end
-    object aspGetDiscplinesik_ckl_disc: TIntegerField
+    object aspGetDiscModelik_ckl_disc: TIntegerField
       FieldName = 'ik_ckl_disc'
       Visible = False
     end
-    object aspGetDiscplinescname_ckl_disc1: TStringField
+    object aspGetDiscModelcname_ckl_disc1: TStringField
       FieldName = 'cname_ckl_disc1'
       Visible = False
       Size = 15
     end
-    object aspGetDiscplinesik_uch_plan: TIntegerField
+    object aspGetDiscModelik_uch_plan: TIntegerField
       FieldName = 'ik_uch_plan'
       Visible = False
     end
-    object aspGetDiscplinesiHour_gos: TIntegerField
+    object aspGetDiscModeliHour_gos: TIntegerField
       FieldName = 'iHour_gos'
       Visible = False
     end
-    object aspGetDiscplinesik_disc_uch_plan: TAutoIncField
+    object aspGetDiscModelik_disc_uch_plan: TAutoIncField
       FieldName = 'ik_disc_uch_plan'
       ReadOnly = True
       Visible = False
     end
-    object aspGetDiscplinesik_default_kaf: TIntegerField
+    object aspGetDiscModelik_default_kaf: TIntegerField
       FieldName = 'ik_default_kaf'
       Visible = False
     end
-    object aspGetDiscplinescName_disc: TStringField
+    object aspGetDiscModelcName_disc: TStringField
       DisplayLabel = #1053#1072#1079#1074#1072#1085#1080#1077' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1099
+      DisplayWidth = 150
       FieldName = 'cName_disc'
       Size = 100
     end
-    object aspGetDiscplinesiIndivid: TIntegerField
+    object aspGetDiscModeliIndivid: TIntegerField
       FieldName = 'iIndivid'
       Visible = False
     end
-    object aspGetDiscplineslPract: TBooleanField
+    object aspGetDiscModellPract: TBooleanField
       FieldName = 'lPract'
       Visible = False
     end
-    object aspGetDiscplinesik_type_disc: TWordField
+    object aspGetDiscModelik_type_disc: TWordField
       FieldName = 'ik_type_disc'
       Visible = False
     end
-    object aspGetDiscplinesViborGroup: TIntegerField
+    object aspGetDiscModelViborGroup: TIntegerField
       FieldName = 'ViborGroup'
       Visible = False
     end
-    object aspGetDiscplinesiK_pdgrp_disc: TIntegerField
+    object aspGetDiscModeliK_pdgrp_disc: TIntegerField
       FieldName = 'iK_pdgrp_disc'
       Visible = False
+    end
+    object aspGetDiscModeliK_spclz: TIntegerField
+      FieldName = 'iK_spclz'
+      Visible = False
+    end
+    object aspGetDiscModelcName_spclz_short: TStringField
+      DisplayLabel = #1055#1088#1086#1092#1080#1083#1100
+      DisplayWidth = 40
+      FieldName = 'cName_spclz_short'
     end
   end
   object adsVidNagruzki: TADODataSet
@@ -3347,5 +3335,323 @@ object dm: Tdm
       end>
     Left = 328
     Top = 328
+  end
+  object adsProfile: TADODataSet
+    Connection = DBConnect
+    CursorType = ctStatic
+    CommandText = 'select * from GetProfileEduBranches'
+    Parameters = <
+      item
+        Name = '@ik_uch_pl'
+        DataType = ftString
+        Size = 1
+        Value = '0'
+      end>
+    Left = 32
+    Top = 456
+  end
+  object dsProfileForGroup: TDataSource
+    DataSet = adsProfile
+    Left = 32
+    Top = 400
+  end
+  object adsGroups: TADODataSet
+    Connection = DBConnect
+    CommandText = 'select * from Grup'
+    Parameters = <>
+    Left = 32
+    Top = 656
+  end
+  object aspGetDiscWork: TADOStoredProc
+    Connection = DBConnect
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    ProcedureName = 'GetDisciplines_4filters;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ik_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ik_ckl_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ik_grp_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ik_pdgrp_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@n_sem'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ik_vid_zan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@ik_grup'
+        DataType = ftInteger
+        Value = 0
+      end>
+    Left = 544
+    Top = 296
+    object aspGetDiscWorkik_disc: TIntegerField
+      FieldName = 'ik_disc'
+      Visible = False
+    end
+    object aspGetDiscWorkik_grp_disc: TIntegerField
+      FieldName = 'ik_grp_disc'
+      Visible = False
+    end
+    object aspGetDiscWorkik_ckl_disc: TIntegerField
+      FieldName = 'ik_ckl_disc'
+      Visible = False
+    end
+    object aspGetDiscWorkik_pdgrp_disc: TIntegerField
+      FieldName = 'ik_pdgrp_disc'
+      Visible = False
+    end
+    object aspGetDiscWorkik_podckl: TIntegerField
+      FieldName = 'ik_podckl'
+      Visible = False
+    end
+    object aspGetDiscWorkcname_ckl_disc1: TStringField
+      FieldName = 'cname_ckl_disc1'
+      Visible = False
+    end
+    object aspGetDiscWorkik_uch_plan: TIntegerField
+      FieldName = 'ik_uch_plan'
+      Visible = False
+    end
+    object aspGetDiscWorkuchet: TBooleanField
+      FieldName = 'uchet'
+      Visible = False
+    end
+    object aspGetDiscWorkihour_gos: TIntegerField
+      FieldName = 'ihour_gos'
+      Visible = False
+    end
+    object aspGetDiscWorkik_disc_uch_plan: TIntegerField
+      FieldName = 'ik_disc_uch_plan'
+      Visible = False
+    end
+    object aspGetDiscWorkik_default_kaf: TIntegerField
+      FieldName = 'ik_default_kaf'
+      Visible = False
+    end
+    object aspGetDiscWorkiindivid: TIntegerField
+      FieldName = 'iindivid'
+      Visible = False
+    end
+    object aspGetDiscWorkViborGroup: TIntegerField
+      FieldName = 'ViborGroup'
+      Visible = False
+    end
+    object aspGetDiscWorkiK_disc1: TIntegerField
+      FieldName = 'iK_disc1'
+      Visible = False
+    end
+    object aspGetDiscWorkcname_disc: TStringField
+      DisplayWidth = 150
+      FieldName = 'cname_disc'
+      Size = 500
+    end
+    object aspGetDiscWorkcshortname: TStringField
+      FieldName = 'cshortname'
+      Visible = False
+      Size = 40
+    end
+    object aspGetDiscWorklpract: TBooleanField
+      FieldName = 'lpract'
+      Visible = False
+    end
+    object aspGetDiscWorkik_type_disc: TWordField
+      FieldName = 'ik_type_disc'
+      Visible = False
+    end
+    object aspGetDiscWorkcName_spclz_short: TStringField
+      DisplayWidth = 40
+      FieldName = 'cName_spclz_short'
+    end
+    object aspGetDiscWorkik_spclz: TIntegerField
+      FieldName = 'ik_spclz'
+      Visible = False
+    end
+  end
+  object adsGetUchPlanGrup: TADODataSet
+    Connection = DBConnect
+    CursorType = ctStatic
+    CommandText = 'select * from GetUchPlanForGroup'
+    Parameters = <>
+    Left = 1032
+    Top = 584
+  end
+  object dsGetUchPlnGroup: TDataSource
+    DataSet = adsGetUchPlanGrup
+    Left = 1038
+    Top = 631
+  end
+  object aspAddRupGrup: TADOStoredProc
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    ProcedureName = 'AddRUPForGroup;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = -6
+      end
+      item
+        Name = '@grup_comment'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 100
+        Value = Null
+      end
+      item
+        Name = '@ik_main_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@inserted_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Direction = pdInputOutput
+        Precision = 10
+        Value = Null
+      end>
+    Left = 176
+    Top = 696
+  end
+  object aspUpdateDiscInPlan: TADOStoredProc
+    Connection = DBConnect
+    ProcedureName = 'UpdateDiscInUchPlan;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@i_type'
+        Attributes = [paNullable]
+        DataType = ftWord
+        Precision = 3
+      end
+      item
+        Name = '@ik_disc_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_default_kaf'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@iHour_gos'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@iIndivid'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_ckl_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_grp_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@Cname_ckl_disc_gos'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = '@ik_pdgrp_disc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ViborGroup'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_spclz'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@source_disc_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 288
+    Top = 696
   end
 end
