@@ -1873,7 +1873,7 @@ begin
       if (FFrame is TfmSpec) then with (FFrame as TfmSpec) do
       begin
         PageControl1.ActivePageIndex:=6;
-        fmUchPlan2.Group := ik_grup;
+        fmUchPlan2.dbcbGroup.KeyValue := ik_grup;
         alreadySpec:=true;
       end;
     end

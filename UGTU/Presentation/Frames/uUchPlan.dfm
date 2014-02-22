@@ -915,6 +915,8 @@ inherited fmUchPlan: TfmUchPlan
       Width = 956
       Height = 30
       Align = alTop
+      Color = clMoneyGreen
+      ParentBackground = False
       TabOrder = 2
       Visible = False
       object lblGroup: TLabel
@@ -973,9 +975,9 @@ inherited fmUchPlan: TfmUchPlan
         956
         30)
       object lblSpclz: TLabel
-        Left = 9
+        Left = 83
         Top = 7
-        Width = 110
+        Width = 36
         Height = 13
         Alignment = taRightJustify
         Anchors = [akLeft, akTop, akRight]
@@ -991,6 +993,7 @@ inherited fmUchPlan: TfmUchPlan
         Flat = True
         TabOrder = 0
         Visible = True
+        OnKeyValueChanged = dbcbSpclzKeyValueChanged
       end
     end
   end
@@ -1040,7 +1043,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

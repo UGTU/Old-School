@@ -161,8 +161,12 @@ type
     //Выбирает учебный план для группы
     function getUchPlanForGroup(aIK_group: integer): Integer;
 
+    //выбирает только профили, которые подходят группе
+    function getSpecializationsForGrup(SourceDataSet: PDataSet; aIK_group: integer): Integer;
 
     function getCurrentSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
+
+
     function getUchPlanSpecializations(SourceDataSet: PDataSet; SpecIK: integer; isShowFirst: boolean): Variant;
     {
       getCurrentYears - загружает в SourceDataSet все года, для которых существует уч. план с параметрами SpecIK, SpclzIK, FormEdIK
@@ -796,6 +800,14 @@ begin
   Result:= DataSet.FieldByName('ik_spec').AsInteger;
   DataSet.Close;
   DataSet.Free;
+end;
+
+function TUchPlanController.getSpecializationsForGrup(SourceDataSet: PDataSet;
+  aIK_group: integer): Integer;
+begin
+    TGeneralController.Instance.getDataSetValues(SourceDataSet,
+    'select * from GetSpclzByGrup(' + IntToStr(aIK_group)+') order by is_common desc',
+    'ik_spclz', false, NULL);
 end;
 
 function TUchPlanController.getVidGosFromSpecFac(SpecFacIK: integer): Integer;

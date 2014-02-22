@@ -173,12 +173,13 @@ type
     procedure dbcbGroupKeyValueChanged(Sender: TObject);
     procedure cbApprovedMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure dbcbSpclzKeyValueChanged(Sender: TObject);
   private
     fdirIK: integer;
     fSpclzIK,fYearIK, fFormIK: integer;
     FIKPlan: integer;
     fSpecIK, fSpecFacIK: integer;
-    fGroupIK: integer;
+    fGroupIK, fGrupSpclszIK: integer;
     fCurrentDiscType: integer;
     fSemesterStr: string;
     fVidGos:integer;
@@ -187,7 +188,7 @@ type
     IsSetPlan: boolean;
     fGroupDataSet: TADODataSet;
     procedure SetDiscType(discType: Integer);
-    procedure GetDisciplines;
+
     procedure GetSemesters();
     procedure SetGroupUchPlan(const aGroupIK: integer);
     procedure SetUchPlan(const aUchPlan: integer);
@@ -203,6 +204,7 @@ type
     property VidGos: Integer read fVidGos write fVidGos;
     procedure ReadModelUchPlan;
     procedure ReadWorkUchPlan;
+    procedure GetDisciplines;
     property Group: integer read fGroupIK write SetGroupUchPlan;
     property IKPlan:integer read FIKPlan write SetUchPlan;
   end;
@@ -276,8 +278,8 @@ begin
   dbcbGroup.ListSource.DataSet.Filter := 'isCurrent	= 1';
   dbcbGroup.ListSource.DataSet.Filtered := true;
 
-  if fGroupIK<>0 then SetGroupUchPlan(fGroupIK)
-  else dbcbGroup.KeyValue := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
+ { if fGroupIK<>0 then SetGroupUchPlan(fGroupIK)
+  else }dbcbGroup.KeyValue := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
  // fGroupIK := dbcbGroup.KeyValue;
 
   //если нет требуемого фгоса, то не грузим профили
@@ -318,15 +320,17 @@ begin
   try
   frmUchPlanAddDisc.Tag:= 1;
   frmUchPlanAddDisc.IK:= -1;
-  frmUchPlanAddDisc.iUchPlan:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
+  frmUchPlanAddDisc.iUchPlan:= FIKPlan;//dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
   frmUchPlanAddDisc.VidGos:=VidGos;
   frmUchPlanAddDisc.SpecIK := fSpecIK;
   frmUchPlanAddDisc.nameSpclz := nameSpclz;
   frmUchPlanAddDisc.dbcbCklDisc.Tag:= dbcbCklDisc.KeyValue;
   frmUchPlanAddDisc.dbcbGrpDisc.Tag:= dbcbGrpDisc.KeyValue;
   frmUchPlanAddDisc.dbcbPdgrpDisc.Tag:= dbcbPdgrpDisc.KeyValue;
+  frmUchPlanAddDisc.GrupIK := fGroupIK;
+  if VidGos=FGOS2 then frmUchPlanAddDisc.SpclzIK := fSpclzIK
+    else frmUchPlanAddDisc.SpclzIK := key_CommonProfile;
   frmUchPlanAddDisc.Read(fSemesterStr);
-  frmUchPlanAddDisc.SpclzIK := key_CommonProfile;
   if ((frmUchPlanAddDisc.ShowModal() = mrOk) or (frmUchPlanAddDisc.bbApply.Tag = 1)) then
     GetDisciplines;
   finally
@@ -349,13 +353,17 @@ begin
   frmUchPlanAddDisc.VidGos:=VidGos;
   frmUchPlanAddDisc.SpecIK := fSpecIK;
   frmUchPlanAddDisc.nameSpclz := nameSpclz;
-  if VidGos=FGOS3 then frmUchPlanAddDisc.SpclzIK := dsDisc.DataSet.FieldByName('ik_spclz').AsInteger;
+ // if VidGos=FGOS3 then frmUchPlanAddDisc.SpclzIK := dsDisc.DataSet.FieldByName('ik_spclz').AsInteger;
   frmUchPlanAddDisc.Tag:= 2;
+  frmUchPlanAddDisc.GrupIK := fGroupIK;
+  if VidGos=FGOS2 then frmUchPlanAddDisc.SpclzIK := fSpclzIK
+    else frmUchPlanAddDisc.SpclzIK := dsDisc.DataSet.FieldByName('ik_spclz').AsInteger;
   frmUchPlanAddDisc.Read(fSemesterStr);
   frmUchPlanAddDisc.Edit6.Text:= Trim(dsDisc.DataSet.FieldByName('cname_ckl_disc1').AsString);
   frmUchPlanAddDisc.iHour_gos:= dsDisc.DataSet.FieldByName('iHour_gos').AsInteger;
   frmUchPlanAddDisc.iIndivid:= dsDisc.DataSet.FieldByName('iIndivid').AsInteger;
   frmUchPlanAddDisc.dbcbDisc.KeyValue:= dsDisc.DataSet.FieldByName('ik_disc').AsInteger;
+  
 
   frmUchPlanAddDisc.dbeGroupVibor.Value:= dsDisc.DataSet.FieldByName('ViborGroup').AsString;
   if (dsDisc.DataSet.FieldByName('ik_default_kaf').Value = NULL) then
@@ -546,11 +554,14 @@ end;
 
 procedure TfmUchPlan.SetGroupUchPlan(const aGroupIK: integer);
 var Pname: string;
+    spIK: integer;
 begin
   fGroupIK := aGroupIK;
   fGroupDataSet.Close;
   fGroupDataSet.CommandText := 'select * from GrupInfo(' + IntToStr(fGroupIK) + ')';
   fGroupDataSet.Open;
+  fGrupSpclszIK :=  fGroupDataSet.FieldByName('ik_spclz').AsInteger;  //специализация группы
+
   Pname := fGroupDataSet.FieldByName('Cname_spec').AsString;
     if Pname<>'' then lblProfile.Caption := nameSpclz + ' группы: ' +  Pname
       else lblProfile.Caption := nameSpclz + ' группы: общий';
@@ -706,6 +717,11 @@ begin
   begin
     Group := (Sender as TDBLookupComboboxEh).KeyValue;
   end;
+end;
+
+procedure TfmUchPlan.dbcbSpclzKeyValueChanged(Sender: TObject);
+begin
+  fSpclzIK := dbcbSpclz.KeyValue;
 end;
 
 procedure TfmUchPlan.dbcbYearKeyValueChanged(Sender: TObject);
@@ -947,7 +963,7 @@ begin
   TGeneralController.Instance.ReleaseLockupCB(@dbcbCklDisc);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbYear);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbFormEd);
-  TGeneralController.Instance.ReleaseLockupCB(@dbcbSpclz);
+  if VidGos>FGOS2 then TGeneralController.Instance.ReleaseLockupCB(@dbcbSpclz);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbKaf);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbPdgrpDisc);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbGroup);

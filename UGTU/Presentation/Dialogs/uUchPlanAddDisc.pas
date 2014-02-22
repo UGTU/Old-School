@@ -149,6 +149,7 @@ type
     VidGos: integer;
     SpecIK: integer;
     SpclzIK: integer;
+    GrupIK: integer;
     nameSpclz: string;  //именование Профиль/Программа/Специализация
     property iHour_gos: integer read fHourGos write SetHourGos;
     property iIndivid: integer read fIndividHour write SetIndividHour;
@@ -214,8 +215,11 @@ begin
   begin
     lblSpclz.Caption := nameSpclz + ' дисциплины:';
     TGeneralController.Instance.InitializeLockupCB(@dbcbSpclz, 'ik_spclz', 'cName_spclz_short');
-    TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, SpecIK, false);
+    if (GrupIK = 0) then
+       TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, SpecIK, false)
+       else TUchPlanController.Instance.getSpecializationsForGrup(@dbcbSpclz.ListSource.DataSet, GrupIK);
     dbcbSpclz.KeyValue := SpclzIK;
+    //dbcbSpclz.Enabled := (GrupIK = 0)or(IK = -1);   //если дисциплина группы, то не давать менять профиль
   end;
   //----------------------------------------------------------------------------
 
@@ -263,7 +267,7 @@ end;
 
 function TfrmUchPlanAddDisc.DoApply: boolean;
 var
-  DiscInUchPlanIK, SpclzIK: integer;
+  DiscInUchPlanIK: integer;
 begin
   if ((Label22.Tag < 0) or (fixRow.Count > 0)) then
   begin
@@ -281,7 +285,7 @@ begin
     dbeGroupVibor.Value:='0';
   end;
 
-  if dbcbSpclz.KeyValue = Null then SpclzIK := 0 else SpclzIK := dbcbSpclz.KeyValue;
+  //if dbcbSpclz.KeyValue = Null then SpclzIK := 0 else SpclzIK := dbcbSpclz.KeyValue;
   
   if not TUchPlanController.Instance.SaveDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue, dbcbGrpDisc.KeyValue,
   dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, SpclzIK, iHour_gos, iIndivid,
@@ -648,7 +652,7 @@ begin
   ds.CommandText := 'select * from GetSimilarDisc('+ IntToStr(IK) +
                     ','+IntToStr(iUchPlan)+','+IntToStr(dbcbDisc.KeyValue)+','+
                     IntToStr(dbcbCklDisc.KeyValue)+','+IntToStr(dbcbGrpDisc.KeyValue)+
-                    ','+IntToStr(pgr)+')';
+                    ','+IntToStr(pgr)+') where ik_spclz<>' + IntToStr(SpclzIK);
   ds.Open;
   if ds.RecordCount<>0 then //уже есть такая дисциплина
   begin
@@ -664,9 +668,9 @@ begin
        IsModified:= false;
     end else
       //если назначен общий профиль
-      if dbcbSpclz.KeyValue=key_CommonProfile then
+      if (dbcbSpclz.KeyValue=key_CommonProfile) then
       begin
-        ds.Filtered := false;
+        ds.Filtered :=false;
         msStr := 'В текущем учебном плане уже есть данная дисциплина.' + #13 + nameSpclz + ': ';
         for i := 0 to ds.RecordCount - 1 do
           msStr := msStr + ds.FieldByName('cName_spclz').AsString + #13;
@@ -707,6 +711,8 @@ procedure TfrmUchPlanAddDisc.dbcbGrpDiscKeyValueChanged(Sender: TObject);
 begin
   IsModified:= (dbcbCklDisc.KeyValue <> NULL) and (dbcbGrpDisc.KeyValue <> NULL) and (dbcbDisc.KeyValue <> NULL) and (dbcbKaf.KeyValue <> NULL);
 
+  if VidGos>FGOS2 then SpclzIK := dbcbSpclz.KeyValue;
+  
   isMerge := False;
   lblNotice.Caption := '';
   if (IsModified)and(VidGos=FGOS3) then CheckSimilarDiscipline;

@@ -152,13 +152,11 @@ begin
   fmUchPlan2.ReadWorkUchPlan;
   fmUchPlan2.Refresh;
 
-  if VidGos=FGOS2 then
-  begin
-    dsSpclz.DataSet:= TADODataSet.Create(nil);
-    TUchPlanController.Instance.getAllSpecializations(@dsSpclz.DataSet, SpecIK, false);
-    TabSheet2.TabVisible:=false; //скрыть вкладку ФГОС для старых специальностей
-  end
-  else
+  TabSheet2.TabVisible:=(VidGos>FGOS2);  //скрыть вкладку ФГОС для старых специальностей
+  dsSpclz.DataSet:= TADODataSet.Create(nil);
+  TUchPlanController.Instance.getAllSpecializations(@dsSpclz.DataSet, SpecIK, false);
+
+  if VidGos>FGOS2 then
   begin
     fmFgos1.IK:= SpecIK;
     fmFgos1.vidGos:= VidGos;
@@ -176,7 +174,8 @@ begin
   DataSet.Active:=true;
   fmUchPlan2.dbcbGroup.ListSource.DataSet.Close;
   fmUchPlan2.dbcbGroup.ListSource.DataSet.Open;
-  fmUchPlan2.ReadWorkUchPlan;
+  //fmUchPlan2.ReadWorkUchPlan;
+  fmUchPlan2.Group := fmUchPlan2.dbcbGroup.KeyValue;
   DBGridEh1.DataSource.DataSet.Refresh;
   //frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected.Parent);
 end;
@@ -345,7 +344,7 @@ begin
     frmSpecAddSpclz.Tag:= -1
   else
   begin
-    frmSpecAddSpclz.Tag:= dsSpclz.DataSet.FieldByName('ik_spclz').AsInteger;
+    frmSpecAddSpclz.Tag:= dsSpclz.DataSet.FieldByName('iK_spclz').AsInteger;
     frmSpecAddSpclz.dbeShSpclz.Text:= dsSpclz.DataSet.FieldByName('Csh_spclz').AsString;
     frmSpecAddSpclz.dbeName.Text:= dsSpclz.DataSet.FieldByName('cName_spclz').AsString;
     frmSpecAddSpclz.dbeNameShort.Text:= dsSpclz.DataSet.FieldByName('cName_spclz_short').AsString;
@@ -356,8 +355,11 @@ begin
   begin
     dsSpclz.DataSet.Close;
     dsSpclz.DataSet.Open;
-    fmUchPlan1.dbcbSpclz.ListSource.DataSet.Close;
-    fmUchPlan1.dbcbSpclz.ListSource.DataSet.Open;
+    if VidGos=FGOS2 then
+    begin
+      fmUchPlan1.dbcbSpclz.ListSource.DataSet.Close;
+      fmUchPlan1.dbcbSpclz.ListSource.DataSet.Open;
+    end;
   end;
 end;
 
@@ -402,7 +404,7 @@ begin
     tempStoredProc.Connection:= Connection;
     tempStoredProc.ProcedureName:= 'UpdateSpclz';
     tempStoredProc.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 3);
-    tempStoredProc.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, dbgSpclz.DataSource.DataSet.FieldByName('ik_spclz').AsInteger);
+    tempStoredProc.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, dbgSpclz.DataSource.DataSet.FieldByName('iK_spclz').AsInteger);
     try
       tempStoredProc.Connection.BeginTrans;
       tempStoredProc.ExecProc;
