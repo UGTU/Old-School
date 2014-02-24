@@ -55,7 +55,6 @@ type
     IK,FacIK: Integer;
 
     FParentUchPlan,FUchPlan: integer;
-    //up_new: boolean;
     WithSpec: boolean;
     VidGos: integer;
     SpecFacIK: integer;
@@ -80,8 +79,6 @@ uses uDM, DBTVgroupObj, DBTVSpecObj, DBTVFacObj, uGroup,
 procedure TfrmGroupEdt.FormShow(Sender: TObject);
 begin
   inherited;
-  //Panel4.Visible := (VidGos>1);   //профиль только по ФГОС 2 и выше
-
 
   if not WithSpec then SpecFacIK := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
  
@@ -140,14 +137,6 @@ var tempDS: TADODataSet;
 begin
   Caption := 'Добавление новой группы';
   FUchPlan := 0;
-  
-  LoadUchPlan(SpecFacIK);
-  dblcbUchPln.ListSource.DataSet.Last;
-  dblcbUchPln.KeyValue := dblcbUchPln.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
-  dbcbProfile.KeyValue := 0;      //по-умолчанию, Общий профиль
-
-  dbneYear.MaxValue := CurrentYear;
-  dbneYear.Value := CurrentYear;
 
   tempDS := TGeneralController.Instance.GetNewADODataSet(true);
   tempDS.CommandText := 'select eb.Cshort_spec from Relation_spec_fac rsf inner join EducationBranch eb ' +
@@ -155,10 +144,21 @@ begin
   tempDS.Open;
   edtName.Text :=  tempDS.FieldByName('Cshort_spec').Value;
   edtName.Text := edtName.Text+'-'+Copy(IntToStr(CurrentYear), 3, 2);
-
-  IsModified:= (edtName.Text <> '') and (dbneYear.Text <> '');
   tempDS.Close;
   tempDS.Free;
+
+  dbneYear.MaxValue := CurrentYear;
+  dbneYear.Value := CurrentYear;
+
+  LoadUchPlan(SpecFacIK);
+  dblcbUchPln.ListSource.DataSet.Last;
+  dblcbUchPln.KeyValue := dblcbUchPln.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
+  dbcbProfile.KeyValue := 0;      //по-умолчанию, Общий профиль
+
+
+
+  IsModified:= (edtName.Text <> '') and (dbneYear.Text <> '');
+
 
 end;
 
@@ -186,7 +186,8 @@ begin
     begin
       year_obuch := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).StudyYears;
     end;
-    edtName.Text := DM.adsGetUchPlanGrup.FieldByName('Cshort_spec').AsString+'-'+Copy(dbneYear.Value, 3, 2);
+    if dblcbUchPln.KeyValue<>NULL then
+      edtName.Text := DM.adsGetUchPlanGrup.FieldByName('Cshort_spec').AsString+'-'+Copy(dbneYear.Value, 3, 2);
   end
   else
   if dbcbSpec.KeyValue<>NULL then
@@ -235,7 +236,6 @@ end;
 
 procedure TfrmGroupEdt.dblcbUchPlnChange(Sender: TObject);
 begin
-  //inherited;
   if (bEdit) then
     if ((dblcbUchPln.KeyValue <> FParentUchPlan)and(VidGos>FGOS2))
       or ((dblcbUchPln.KeyValue <> FUchPlan)and(VidGos = FGOS2)) then
@@ -248,8 +248,6 @@ procedure TfrmGroupEdt.dbneYearChange(Sender: TObject);
 begin
   inherited;
   if not bEdit then ChangeGroupName;
- // dblcbUchPln.ListSource.DataSet.Filter := 'year_value = ' + string((Sender as TDBNumberEditEh).Value);
- // dblcbUchPln.ListSource.DataSet.Filtered := true;
 end;
 
 procedure TfrmGroupEdt.edtNameChange(Sender: TObject);
@@ -314,9 +312,6 @@ try
       ParamByName('@ik_spclz').Value:= dbcbProfile.KeyValue
       else  ParamByName('@ik_spclz').Value:= null;
 
-
-
-
     ParamByName('@nYear_post').Value:= dbneYear.Value;
     if dbdteCreate.Text='  .  .    ' then
       ParamByName('@DateCreate').Value:= Null
@@ -359,7 +354,6 @@ begin
   dbneYear.Value := tempDS.FieldByName('nYear_post').Value;
 
   LoadUchPlan(SpecFacIK);
-  //dblcbUchPln.KeyValue := -1;
 
   if (VidGos>FGOS2)and(tempDS.FieldByName('Id_parent').Value<> NULL) then
   begin
