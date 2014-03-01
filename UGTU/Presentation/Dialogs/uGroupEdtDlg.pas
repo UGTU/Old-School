@@ -28,7 +28,7 @@ type
     Label5: TLabel;
     dsSpec: TDataSource;
     dbcbSpec: TDBLookupComboboxEh;
-    Panel4: TPanel;
+    pnlProfile: TPanel;
     Label8: TLabel;
     dbcbProfile: TDBLookupComboboxEh;
 
@@ -38,21 +38,29 @@ type
     procedure edtNameChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure dbcbSpecKeyValueChanged(Sender: TObject);
-
+    procedure dbcbProfileKeyValueChanged(Sender: TObject);
+  private
+    bEdit: boolean;
     procedure ChangeGroupName;
-
+    procedure LoadUchPlan(aSpecFacIK: integer);
+    procedure LoadProfile(aUchPlan: integer);
+    procedure SetEditStatus(aEdit: boolean);
+    procedure uchPlanModify;
   protected
     function DoApply:boolean; override;
     function DoCancel:boolean;override;
+
   public
     { Public declarations }
-    ik, FacIK: Integer;
-    SpecFacIK: integer;
-    bEdit: Boolean;
-    up_new: boolean;
+    IK,FacIK: Integer;
+
+    FParentUchPlan,FUchPlan: integer;
     WithSpec: boolean;
     VidGos: integer;
-    procedure LoadUchPlan(aSpecFacIK: integer);
+    SpecFacIK: integer;
+    property Edit: Boolean write SetEditStatus;
+    procedure AddRead;
+    procedure EditRead;
   end;
 
 var
@@ -62,7 +70,8 @@ var
 implementation
 
 uses uDM, DBTVgroupObj, DBTVSpecObj, DBTVFacObj, uGroup,
-  uSpec,ABIT_zachislenie_frame, uDMGroupActions, uMain, uDMUgtuStructure;
+  uSpec,ABIT_zachislenie_frame, uDMGroupActions, uMain, uDMUgtuStructure,
+  ConstantRepository;
 
 {$R *.dfm}
 
@@ -70,23 +79,9 @@ uses uDM, DBTVgroupObj, DBTVSpecObj, DBTVFacObj, uGroup,
 procedure TfrmGroupEdt.FormShow(Sender: TObject);
 begin
   inherited;
-  Panel4.Visible := (VidGos>1);   //профиль только по ФГОС 2 и выше
 
   if not WithSpec then SpecFacIK := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
-
-
-  //LoadUchPlan(SpecFacIK);
-
-  if not bEdit then
-  begin
-  try
-    dbneYear.Value := CurrentYear;
-  except
-
-  end;
-  end;
-  if dblcbUchPln.KeyValue >0 then
-    up_new:=true;
+ 
   Panel3.Visible := (WithSpec);
   //подгружаем специальности
   if (WithSpec) then
@@ -102,23 +97,69 @@ begin
 
 end;
 
+procedure TfrmGroupEdt.LoadProfile(aUchPlan: integer);
+begin
+  pnlProfile.Visible := (VidGos>FGOS2);
+  if VidGos>FGOS2 then
+  begin
+    dm.adsProfile.Close;
+    dm.adsProfile.CommandText := 'select * from GetProfileEduBranches(' + IntToStr(aUchPlan)+')';
+    dm.adsProfile.Open;
+  end;
+end;
+
 procedure TfrmGroupEdt.LoadUchPlan(aSpecFacIK: integer);
 begin
-  if (not WithSpec)or(SpecFacIK>0) then
-  begin
-    dm.adospGetUchPlnGroup.Active := false;
-    with dm.adospGetUchPlnGroup.Parameters do
-    begin
-      Clear;
-      AddParameter;
-      {if not WithSpec then Items[0].Value := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik
-         else Items[0].Value := dbcbSpec.KeyValue;   }
-      Items[0].Value := aSpecFacIK;
-    end;
-    dm.adospGetUchPlnGroup.ExecProc;
-    dm.adospGetUchPlnGroup.Active := true;
-  end
-  else  dm.adospGetUchPlnGroup.Close;
+  dblcbUchPln.ListSource.DataSet.Close;     // dm.adsGetUchPlanGrup
+  (dblcbUchPln.ListSource.DataSet as TADODataSet).CommandText := 'select * from GetUchPlanForGroup('+
+  IntToStr(aSpecFacIK)+','+dbneYear.Text+')';
+  dblcbUchPln.ListSource.DataSet.Open;
+  VidGos := dblcbUchPln.ListSource.DataSet.FieldByName('VidGos').AsInteger;
+  pnlProfile.Visible := (VidGos > FGOS2);
+end;
+
+procedure TfrmGroupEdt.SetEditStatus(aEdit: boolean);
+var tempDS: TADODataSet;
+begin
+  bEdit := aEdit;
+  if aEdit then EditRead else AddRead;
+end;
+
+procedure TfrmGroupEdt.uchPlanModify;
+begin
+  frmGroupEdt.CheckBox1.Enabled:=true;
+  frmGroupEdt.CheckBox1.Checked := true;
+  IsModified := (edtName.Text <> '') and (dbneYear.Text <> '');
+end;
+
+procedure TfrmGroupEdt.AddRead;
+var tempDS: TADODataSet;
+begin
+  Caption := 'Добавление новой группы';
+  FUchPlan := 0;
+
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDS.CommandText := 'select eb.Cshort_spec from Relation_spec_fac rsf inner join EducationBranch eb ' +
+                        'on eb.ik_spec = rsf.ik_spec where rsf.ik_spec_fac=' + IntToStr(SpecFacIK);
+  tempDS.Open;
+  edtName.Text :=  tempDS.FieldByName('Cshort_spec').Value;
+  edtName.Text := edtName.Text+'-'+Copy(IntToStr(CurrentYear), 3, 2);
+  tempDS.Close;
+  tempDS.Free;
+
+  dbneYear.MaxValue := CurrentYear;
+  dbneYear.Value := CurrentYear;
+
+  LoadUchPlan(SpecFacIK);
+  dblcbUchPln.ListSource.DataSet.Last;
+  dblcbUchPln.KeyValue := dblcbUchPln.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
+  dbcbProfile.KeyValue := 0;      //по-умолчанию, Общий профиль
+
+
+
+  IsModified:= (edtName.Text <> '') and (dbneYear.Text <> '');
+
+
 end;
 
 procedure TfrmGroupEdt.ChangeGroupName;
@@ -145,11 +186,12 @@ begin
     begin
       year_obuch := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).StudyYears;
     end;
-    edtName.Text := DM.adospGetUchPlnGroup.FieldByName('Cshort_spec').AsString+'-'+Copy(dbneYear.Value, 3, 2);
+    if dblcbUchPln.KeyValue<>NULL then
+      edtName.Text := DM.adsGetUchPlanGrup.FieldByName('Cshort_spec').AsString+'-'+Copy(dbneYear.Value, 3, 2);
   end
   else
   if dbcbSpec.KeyValue<>NULL then
-  
+
   begin
    tempDS :=  TGeneralController.Instance.GetNewADODataSet(true);
    tempDS.CommandText := 'select Cshort_spec,YearObuch from Spec_stud, Relation_spec_fac where Spec_stud.ik_spec = Relation_spec_fac.ik_spec and ik_spec_fac =' + IntToStr(dbcbSpec.KeyValue);
@@ -172,9 +214,17 @@ end;
 procedure TfrmGroupEdt.CheckBox1Click(Sender: TObject);
 begin
   inherited;
-  if (CheckBox1.Checked) then
+  if (CheckBox1.Checked)and(bEdit) then
     MessageBox(Handle, 'Внимание! Полное копирование оценок возможно только в том случае, когда все предметы текущего учебного плана группы совпадают с предметами назначаемого учебного плана!',
 					  'ИС УГТУ', MB_OK)
+end;
+
+procedure TfrmGroupEdt.dbcbProfileKeyValueChanged(Sender: TObject);
+begin
+  if dbcbProfile.KeyValue<>null then
+  begin
+    IsModified := (edtName.Text <> '') and (dbneYear.Text <> '');
+  end;
 end;
 
 procedure TfrmGroupEdt.dbcbSpecKeyValueChanged(Sender: TObject);
@@ -186,17 +236,12 @@ end;
 
 procedure TfrmGroupEdt.dblcbUchPlnChange(Sender: TObject);
 begin
-  inherited;
-  //frmGroupEdt.CheckBox1.Visible:=false;
-  //frmGroupEdt.Label5.Visible:=false;
-  //frmGroupEdt.Height:=165;         
-  if up_new then
-    begin
-    frmGroupEdt.CheckBox1.Enabled:=true;
-    end;
-  
+  if (bEdit) then
+    if ((dblcbUchPln.KeyValue <> FParentUchPlan)and(VidGos>FGOS2))
+      or ((dblcbUchPln.KeyValue <> FUchPlan)and(VidGos = FGOS2)) then
+        uchPlanModify;
 
-  IsModified := (edtName.Text <> '') and (dbneYear.Text <> ''); //and (dblcbUchPln.KeyValue <> NULL);
+  LoadProfile((Sender as TDBLookupComboboxEh).KeyValue);
 end;
 
 procedure TfrmGroupEdt.dbneYearChange(Sender: TObject);
@@ -213,32 +258,42 @@ end;
 
 function TfrmGroupEdt.DoApply: boolean;
 var SpecFacIK: integer;
+    tempProc: TADOStoredProc;
 begin
 try
   dm.DBConnect.BeginTrans;
-
-if not bEdit then
-begin
-  with dmGroupActions.adospAppendGrup.Parameters do
+  //создание учебного плана
+  if (VidGos>FGOS2)and((FUchPlan = 0) or (dblcbUchPln.KeyValue<>FParentUchPlan)) then
+    with dm.aspAddRupGrup do
+    begin
+      Connection := dm.DBConnect;
+      Active := false;
+      Parameters.ParamByName('@ik_main_plan').Value := dblcbUchPln.KeyValue;
+      Parameters.ParamByName('@grup_comment').Value := edtName.Text;
+      ExecProc;
+      FUchPlan := Parameters.ParamByName('@inserted_uch_plan').Value;
+    end;
+  if VidGos=FGOS2 then FUchPlan := dblcbUchPln.KeyValue;
+  
+  if not bEdit then
   begin
-    ParamByName('@flag').Value:= 1;
-  end;
-
-end
-else
-begin
-
-  if (CheckBox1.Checked) then  //перенос оценок со старого уч. плана
-    TUchPlanController.Instance.UpdateUspev(ik, dblcbUchPln.KeyValue);
-
-  with dmGroupActions.adospAppendGrup.Parameters do
+    with dmGroupActions.adospAppendGrup.Parameters do
+    begin
+      ParamByName('@flag').Value:= 1;
+    end;
+  end
+  else
   begin
-    ParamByName('@flag').Value:= 0;
-    ParamByName('@Ik_grup').Value:= ik;
-  end;
+    if (CheckBox1.Checked) then  //перенос оценок со старого уч. плана
+      TUchPlanController.Instance.UpdateUspev(ik, dblcbUchPln.KeyValue);
 
-end;
-with dmGroupActions.adospAppendGrup.Parameters do
+    with dmGroupActions.adospAppendGrup.Parameters do
+    begin
+      ParamByName('@flag').Value:= 0;
+      ParamByName('@Ik_grup').Value:= ik;
+    end;
+  end;
+  with dmGroupActions.adospAppendGrup.Parameters do
   begin
     //если идет добавление группы в ИС "Деканат"
     if not WithSpec then
@@ -252,8 +307,11 @@ with dmGroupActions.adospAppendGrup.Parameters do
     else ParamByName('@ik_spec_fac').Value:= dbcbSpec.KeyValue;
 
     ParamByName('@Cname_grup').Value:= edtName.Text;
-    if dblcbUchPln.KeyValue<0 then ParamByName('@Ik_uch_plan').Value:= NULL
-        else ParamByName('@Ik_uch_plan').Value:= dblcbUchPln.KeyValue;
+    ParamByName('@ik_uch_plan').Value:= FUchPlan;
+    if (dbcbProfile.KeyValue<>0) then
+      ParamByName('@ik_spclz').Value:= dbcbProfile.KeyValue
+      else  ParamByName('@ik_spclz').Value:= null;
+
     ParamByName('@nYear_post').Value:= dbneYear.Value;
     if dbdteCreate.Text='  .  .    ' then
       ParamByName('@DateCreate').Value:= Null
@@ -276,8 +334,55 @@ end;
 
 function TfrmGroupEdt.DoCancel: boolean;
 begin
-Result:= true;
+  Result:= true;
 end;
 
+
+procedure TfrmGroupEdt.EditRead;
+var tempDS: TADODataSet;
+begin
+  Caption := 'Редактирование группы';
+
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDS.CommandText := 'select * from GrupInfo(' + IntToStr(ik)+')';
+  tempDS.Open;
+
+  dbneYear.MaxValue := CurrentYear;
+  SpecFacIK := tempDS.FieldByName('ik_spec_fac').Value;
+  //заполняем интерфейсные элементы
+  edtName.Text := tempDS.FieldByName('Cname_grup').Value;
+  dbneYear.Value := tempDS.FieldByName('nYear_post').Value;
+
+  LoadUchPlan(SpecFacIK);
+
+  if (VidGos>FGOS2)and(tempDS.FieldByName('Id_parent').Value<> NULL) then
+  begin
+      FParentUchPlan := tempDS.FieldByName('Id_parent').AsInteger;
+      dblcbUchPln.KeyValue := tempDS.FieldByName('Id_parent').Value;
+  end;
+
+  if tempDS.FieldByName('Ik_uch_plan').Value<> NULL  then
+  begin
+    FUchPlan := tempDS.FieldByName('Ik_uch_plan').Value;
+    if VidGos=FGOS2 then
+      dblcbUchPln.KeyValue := tempDS.FieldByName('Ik_uch_plan').Value;
+  end;
+
+  if tempDS.FieldByName('ik_spclz').Value <> NULL then
+    dbcbProfile.KeyValue := tempDS.FieldByName('ik_spclz').Value
+  else dbcbProfile.KeyValue := 0;
+
+  if tempDS.FieldByName('DateCreate').Value <>NULL then
+    dbdteCreate.Text := tempDS.FieldByName('DateCreate').Value
+  else dbdteCreate.Value := null;
+  if tempDS.FieldByName('DateExit').Value <>NULL then
+    dbdteExit.Text := tempDS.FieldByName('DateExit').Value
+  else dbdteExit.value := null;
+
+  IsModified:= false;
+  tempDS.Close;
+  tempDS.Free;
+
+end;
 
 end.

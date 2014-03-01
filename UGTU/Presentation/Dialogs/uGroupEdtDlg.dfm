@@ -2,9 +2,12 @@ inherited frmGroupEdt: TfrmGroupEdt
   Left = 190
   Top = 189
   HelpKeyword = 'Edit_group.htm'
+  AutoSize = True
   Caption = 'frmGroupEdt'
   ClientHeight = 317
   ClientWidth = 324
+  Constraints.MinHeight = 160
+  Constraints.MinWidth = 327
   OldCreateOrder = True
   OnShow = FormShow
   ExplicitWidth = 330
@@ -12,12 +15,12 @@ inherited frmGroupEdt: TfrmGroupEdt
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Top = 105
+    Top = 49
     Width = 324
     Height = 170
-    ExplicitTop = -105
-    ExplicitWidth = 260
-    ExplicitHeight = 253
+    ExplicitTop = 49
+    ExplicitWidth = 324
+    ExplicitHeight = 170
   end
   inherited Panel1: TPanel
     Top = 275
@@ -59,7 +62,7 @@ inherited frmGroupEdt: TfrmGroupEdt
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 105
+    Top = 49
     Width = 324
     Height = 170
     Align = alClient
@@ -86,7 +89,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Caption = '*'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
@@ -99,7 +102,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Caption = '*'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
-      Font.Height = -11
+      Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
@@ -167,7 +170,7 @@ inherited frmGroupEdt: TfrmGroupEdt
     end
     object dblcbUchPln: TDBLookupComboboxEh
       Left = 16
-      Top = 103
+      Top = 102
       Width = 294
       Height = 19
       EditButtons = <>
@@ -236,12 +239,12 @@ inherited frmGroupEdt: TfrmGroupEdt
       OnKeyValueChanged = dbcbSpecKeyValueChanged
     end
   end
-  object Panel4: TPanel [4]
+  object pnlProfile: TPanel [4]
     Left = 0
-    Top = 49
+    Top = 219
     Width = 324
     Height = 56
-    Align = alTop
+    Align = alBottom
     TabOrder = 3
     object Label8: TLabel
       Left = 16
@@ -257,12 +260,14 @@ inherited frmGroupEdt: TfrmGroupEdt
       Height = 19
       EditButtons = <>
       Flat = True
+      KeyField = 'ik_spclz'
+      ListField = 'Cname'
+      ListSource = dm.dsProfileForGroup
       ParentShowHint = False
       TabOrder = 0
       Tooltips = True
       Visible = True
-      OnChange = dblcbUchPlnChange
-      OnKeyValueChanged = dbcbSpecKeyValueChanged
+      OnKeyValueChanged = dbcbProfileKeyValueChanged
     end
   end
   inherited actBaseDialog: TActionList
@@ -279,7 +284,7 @@ inherited frmGroupEdt: TfrmGroupEdt
   end
   object dsSpec: TDataSource
     DataSet = dmUgtuStructure.adsSpecFac
-    Left = 280
-    Top = 184
+    Left = 232
+    Top = 65528
   end
 end

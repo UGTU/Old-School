@@ -30,9 +30,8 @@ object frmMain: TfrmMain
     Left = 377
     Top = 81
     Height = 496
-    ExplicitLeft = 289
-    ExplicitTop = 46
-    ExplicitHeight = 540
+    ExplicitTop = 70
+    ExplicitHeight = 511
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -55,7 +54,6 @@ object frmMain: TfrmMain
     Top = 0
     Width = 931
     Height = 27
-    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -63,7 +61,7 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clMenuText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -298,7 +296,7 @@ object frmMain: TfrmMain
         Left = 1
         Top = 1
         Width = 369
-        Height = 53
+        Height = 52
         Align = alClient
         BevelOuter = bvNone
         Caption = 'pnlTree'
@@ -307,7 +305,7 @@ object frmMain: TfrmMain
           Left = 0
           Top = 0
           Width = 369
-          Height = 53
+          Height = 52
           Align = alClient
           BorderStyle = bsNone
           ChangeDelay = 200
@@ -315,7 +313,7 @@ object frmMain: TfrmMain
           Constraints.MinWidth = 150
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -13
+          Font.Height = -15
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           Images = TreeIcons
@@ -337,9 +335,9 @@ object frmMain: TfrmMain
       end
       object pnlImage: TPanel
         Left = 1
-        Top = 54
+        Top = 53
         Width = 369
-        Height = 439
+        Height = 440
         Align = alBottom
         BevelEdges = []
         BevelOuter = bvNone
@@ -352,13 +350,10 @@ object frmMain: TfrmMain
           Left = 0
           Top = 0
           Width = 369
-          Height = 439
+          Height = 440
           Align = alClient
           Center = True
-          ExplicitLeft = 1
-          ExplicitTop = -2
-          ExplicitWidth = 367
-          ExplicitHeight = 357
+          ExplicitWidth = 370
         end
       end
     end
@@ -685,7 +680,6 @@ object frmMain: TfrmMain
     object actDelGroup: TAction
       Category = 'catGroupAct'
       Caption = #1059#1076#1072#1083#1080#1090#1100' '#1075#1088#1091#1087#1087#1091'...'
-      Enabled = False
       Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1075#1088#1091#1087#1087#1091'...'
       ImageIndex = 33
       OnExecute = actDelGroupExecute
@@ -991,7 +985,7 @@ object frmMain: TfrmMain
     Left = 311
     Top = 82
     Bitmap = {
-      494C0101490051004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010149005100600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3510,7 +3504,7 @@ object frmMain: TfrmMain
     Left = 278
     Top = 82
     Bitmap = {
-      494C0101310049004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010131004900600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF

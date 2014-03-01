@@ -343,7 +343,8 @@ uses
   uCertificateDialog in 'Presentation\Dialogs\uCertificateDialog.pas' {frmEGECertificateCheck},
   EgeCheckService in 'ExternalServicesConsuming\EgeCheckService.pas',
   uXMLEGEReader in 'Domain\Controllers\uXMLEGEReader.pas',
-  A_EGECertReport in 'Domain\Reports\A_EGECertReport.pas';
+  A_EGECertReport in 'Domain\Reports\A_EGECertReport.pas',
+  DateFormat in 'Domain\Classes\DateFormat.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

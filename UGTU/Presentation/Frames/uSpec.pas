@@ -17,7 +17,7 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Buttons, ToolWin, ComCtrls, ExtCtrls, DB,
   ADODB, Grids, DBGridEh, uUchPlan, ImgList, ActnList, DateUtils, UchPlanController,
   GridsEh, uAcademFrame, udmStudentData, udmUspevaemost, uAverageBalls, uFgos,
-  uFgosController;
+  uFgosController, ConstantRepository;
 
 type
   TfmSpec = class(TfmBase)
@@ -35,7 +35,6 @@ type
     actEdtGroup: TAction;
     actDelGroup: TAction;
     ImageList1: TImageList;
-    fmUchPlan1: TfmUchPlan;
     tsSpclz: TTabSheet;
     dbgSpclz: TDBGridEh;
     ToolBar2: TToolBar;
@@ -52,6 +51,13 @@ type
     fmAverageBallsSpec: TfmAverageBalls;
     TabSheet2: TTabSheet;
     fmFgos1: TfmFgos;
+    tsWorkPlan: TTabSheet;
+    fmUchPlan2: TfmUchPlan;
+    fmUchPlan1: TfmUchPlan;
+    Panel2: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     procedure DBGridEh1DblClick(Sender: TObject);
     procedure actAddGroupExecute(Sender: TObject);
     procedure actEdtGroupExecute(Sender: TObject);
@@ -68,13 +74,16 @@ type
     procedure dsSpclzDataChange(Sender: TObject; Field: TField);
     procedure PageControl1Change(Sender: TObject);
     procedure ToolButton7Click(Sender: TObject);
+    procedure fmUchPlan2ToolButton12Click(Sender: TObject);
   private
-    Fik: Integer;
+    SpFacik: Integer;
     SpecIK: Integer;
     directionIK:integer;
     VidGos:integer;
+    procedure RefreshGroup;
+
   public
-    property ik: Integer read Fik write Fik;
+    property ik: Integer read SpFacik write SpFacik;
     procedure Read;
     procedure DoRefreshFrame;override;
     procedure CloseFrame; override;
@@ -119,21 +128,56 @@ begin
       ToolButton5.Hint:='Удалить программу';
     end;
   end;
-  if (VidGos=1) then TabSheet2.TabVisible:=false; //скрыть вкладку ФГОС для старых специальностей
-  fmUchPlan1.IK:= SpecIK;
-  fmUchPlan1.dirIK:=directionIK;
-  fmUchPlan1.VidGos:= VidGos;
-  fmUchPlan1.Connection:= Connection;
-  fmUchPlan1.Read;
-  fmUchPlan1.Refresh;
+
+  if (VidGos>FGOS2) then
+  begin
+  //работа с планами-эталонами
+    fmUchPlan1.SpecIK:= SpecIK;
+    fmUchPlan1.dirIK:=directionIK;
+    fmUchPlan1.VidGos:= VidGos;
+    fmUchPlan1.Connection:= Connection;
+    fmUchPlan1.ReadModelUchPlan;
+    fmUchPlan1.Refresh;
+  end;
+
+  //планы-эталоны правятся только для ФГОС3
+  fmUchPlan1.Visible := (VidGos>FGOS2);
+
+  //работа с рабочими учебными планами групп
+  fmUchPlan2.SpecIK:= SpecIK;
+  fmUchPlan2.SpecFacIK := SpFacik;
+  fmUchPlan2.dirIK:=directionIK;
+  fmUchPlan2.VidGos:= VidGos;
+  fmUchPlan2.Connection:= Connection;
+  fmUchPlan2.ReadWorkUchPlan;
+  fmUchPlan2.Refresh;
+
+  TabSheet2.TabVisible:=(VidGos>FGOS2);  //скрыть вкладку ФГОС для старых специальностей
   dsSpclz.DataSet:= TADODataSet.Create(nil);
   TUchPlanController.Instance.getAllSpecializations(@dsSpclz.DataSet, SpecIK, false);
-  fmFgos1.IK:= SpecIK;
-  fmFgos1.vidGos:= VidGos;
-  fmFgos1.Connection:= Connection;
-  fmFgos1.Read;
-  fmFgos1.Refresh;
+
+  if VidGos>FGOS2 then
+  begin
+    fmFgos1.IK:= SpecIK;
+    fmFgos1.vidGos:= VidGos;
+    fmFgos1.Connection:= Connection;
+    fmFgos1.Read;
+    fmFgos1.Refresh;
+  end;
+
   PageControl1Change(PageControl1);
+end;
+
+procedure TfmSpec.RefreshGroup;
+begin
+  DataSet.Active:=false;
+  DataSet.Active:=true;
+  fmUchPlan2.dbcbGroup.ListSource.DataSet.Close;
+  fmUchPlan2.dbcbGroup.ListSource.DataSet.Open;
+  //fmUchPlan2.ReadWorkUchPlan;
+  fmUchPlan2.Group := fmUchPlan2.dbcbGroup.KeyValue;
+  DBGridEh1.DataSource.DataSet.Refresh;
+  //frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected.Parent);
 end;
 
 procedure TfmSpec.ToolButton7Click(Sender: TObject);
@@ -156,10 +200,9 @@ end;
 
 procedure TfmSpec.DoRefreshFrame;
 begin
-PageControl1Change(self);
+  PageControl1Change(self);
 
-if FrameObject=nil then exit;
-
+  if FrameObject=nil then exit;
   DataSet := (FrameObject as TDBNodeSpecObject).AdoDataset;
   read;
   DBGridEh1.Refresh;
@@ -185,7 +228,7 @@ var
   r:integer;
 begin
   inherited;
-  dm.adospGetUchPlnGroup.Active := false;
+ { dm.adospGetUchPlnGroup.Active := false;
   with dm.adospGetUchPlnGroup.Parameters do
   begin
     Clear;
@@ -193,16 +236,18 @@ begin
     Items[0].Value := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
   end;
   dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
+  dm.adospGetUchPlnGroup.Active := true;    }
   frmGroupEdt:=TfrmGroupEdt.Create(self);
+  frmGroupEdt.SpecFacIK := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
   frmGroupEdt.WithSpec := false;
+  frmGroupEdt.Edit := false;
   try
-    frmGroupEdt.bEdit := false;
+   {
     frmGroupEdt.dbneYear.MaxValue := CurrentYear;
     frmGroupEdt.Caption := 'Добавление группы';
     frmGroupEdt.edtName.Text := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ShortName;
     frmGroupEdt.edtName.Text := frmGroupEdt.edtName.Text+'-'+Copy(IntToStr(CurrentYear), 3, 2);
-    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);
+    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);}
     r:= frmGroupEdt.ShowModal;
     if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
     begin
@@ -220,43 +265,16 @@ var
   r:integer;
 begin
   inherited;
-  dm.adospGetUchPlnGroup.Active := false;
-  with dm.adospGetUchPlnGroup.Parameters do
-  begin
-    Clear;
-    AddParameter;
-    Items[0].Value := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
-  end;
-  dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
   frmGroupEdt:=TfrmGroupEdt.Create(self);
-  frmGroupEdt.WithSpec := false;
-  frmGroupEdt.bEdit := true;                  
-  frmGroupEdt.dbneYear.MaxValue := CurrentYear;
-  frmGroupEdt.edtName.Text := DataSet.FieldByName('Cname_grup').Value;
-  frmGroupEdt.dbneYear.Value := DataSet.FieldByName('nYear_post').Value;
-  if DataSet.FieldByName('Ik_uch_plan').Value<> NULL then
-    frmGroupEdt.dblcbUchPln.KeyValue := DataSet.FieldByName('Ik_uch_plan').Value
-  else
-    frmGroupEdt.dblcbUchPln.KeyValue := -1;
   frmGroupEdt.ik := DataSet.FieldByName('Ik_grup').Value;
-  frmGroupEdt.edtName.Text := DataSet.FieldByName('Cname_grup').Value;
-
-  if DataSet.FieldByName('DateCreate').Value <>NULL then
-    frmGroupEdt.dbdteCreate.Text := DataSet.FieldByName('DateCreate').Value
-  else frmGroupEdt.dbdteCreate.Value := null;
-  if DataSet.FieldByName('DateExit').Value <>NULL then
-    frmGroupEdt.dbdteExit.Text := DataSet.FieldByName('DateExit').Value
-  else frmGroupEdt.dbdteExit.value := null;
-    
-  frmGroupEdt.Caption := 'Редактирование группы';
-  frmGroupEdt.IsModified:= false;
+  frmGroupEdt.WithSpec := false;
+  frmGroupEdt.Edit := true;
   r:= frmGroupEdt.ShowModal;
   if ((r = mrOK) or (frmGroupEdt.bbApply.Tag = 1)) then
   begin
-    DataSet.Active:=false;
-    DataSet.Active:=true;
-    frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected);
+     RefreshGroup;
+
+   // frmMain.DBDekTreeView_TEST1.RefreshNodeExecute(frmMain.DBDekTreeView_TEST1.Selected);
   end;
   frmGroupEdt.Free;
 end;
@@ -326,7 +344,7 @@ begin
     frmSpecAddSpclz.Tag:= -1
   else
   begin
-    frmSpecAddSpclz.Tag:= dsSpclz.DataSet.FieldByName('ik_spclz').AsInteger;
+    frmSpecAddSpclz.Tag:= dsSpclz.DataSet.FieldByName('iK_spclz').AsInteger;
     frmSpecAddSpclz.dbeShSpclz.Text:= dsSpclz.DataSet.FieldByName('Csh_spclz').AsString;
     frmSpecAddSpclz.dbeName.Text:= dsSpclz.DataSet.FieldByName('cName_spclz').AsString;
     frmSpecAddSpclz.dbeNameShort.Text:= dsSpclz.DataSet.FieldByName('cName_spclz_short').AsString;
@@ -337,8 +355,11 @@ begin
   begin
     dsSpclz.DataSet.Close;
     dsSpclz.DataSet.Open;
-    fmUchPlan1.dbcbSpclz.ListSource.DataSet.Close;
-    fmUchPlan1.dbcbSpclz.ListSource.DataSet.Open;
+    if VidGos=FGOS2 then
+    begin
+      fmUchPlan1.dbcbSpclz.ListSource.DataSet.Close;
+      fmUchPlan1.dbcbSpclz.ListSource.DataSet.Open;
+    end;
   end;
 end;
 
@@ -383,7 +404,7 @@ begin
     tempStoredProc.Connection:= Connection;
     tempStoredProc.ProcedureName:= 'UpdateSpclz';
     tempStoredProc.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 3);
-    tempStoredProc.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, dbgSpclz.DataSource.DataSet.FieldByName('ik_spclz').AsInteger);
+    tempStoredProc.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, dbgSpclz.DataSource.DataSet.FieldByName('iK_spclz').AsInteger);
     try
       tempStoredProc.Connection.BeginTrans;
       tempStoredProc.ExecProc;
@@ -408,6 +429,7 @@ end;
 procedure TfmSpec.CloseFrame;
 begin
   fmUchPlan1.CloseFrame;
+  fmUchPlan2.CloseFrame;
   if dsSpclz.DataSet <> nil then
     if dsSpclz.DataSet.Active then dsSpclz.DataSet.Close;
   inherited;
@@ -418,6 +440,17 @@ begin
   inherited;
   fmUchPlan1.ActionEditUchPlanExecute(Sender);
 
+end;
+
+procedure TfmSpec.fmUchPlan2ToolButton12Click(Sender: TObject);
+var grIK: integer;
+begin
+  //inherited;
+  grIK := fmUchPlan2.dbcbGroup.KeyValue;
+  DataSet :=  fmUchPlan2.dbcbGroup.ListSource.DataSet as TADODataSet;
+  actEdtGroupExecute(nil);
+ // fmUchPlan2.dbcbGroup.KeyValue :=  grIK;
+ // PageControl1.ActivePageIndex := 6;
 end;
 
 procedure TfmSpec.PageControl1Change(Sender: TObject);
@@ -437,7 +470,7 @@ begin
       if (dsSpclz.DataSet.Active) then
        frmMain.StatusBar1.Panels[1].Text:= 'Специализация: ' + dsSpclz.DataSet.FieldByName('cName_spclz_short').AsString;
    end;
-  2:  begin
+  2:  if (VidGos>FGOS2) then begin
   TApplicationController.GetInstance.AddLogEntry('Переход на список учебных планов');
   if ((fmUchPlan1.dbcbSpclz.KeyValue <> NULL) and (fmUchPlan1.dbcbFormEd.KeyValue <> NULL) and (fmUchPlan1.dbcbYear.KeyValue <> NULL)) then
       frmMain.StatusBar1.Panels[1].Text:= 'Учебный план: ' + fmUchPlan1.dbcbSpclz.ListSource.DataSet.FieldByName('cName_spclz_short').AsString + ', ' + AnsiLowerCase(fmUchPlan1.dbcbFormEd.Text) + ', ' + fmUchPlan1.dbcbYear.Text
@@ -447,7 +480,7 @@ begin
 
   3: begin
     dmStudentData.adodsAcadem.Active:=false;
-    dmStudentData.adodsAcadem.CommandText := 'select * from AcademStud where [Ik_spec]='+inttostr(FIk);
+    dmStudentData.adodsAcadem.CommandText := 'select * from AcademStud where [Ik_spec]='+inttostr(SpFacik);
     dmStudentData.adodsAcademStringField11.Visible:=false;
     dmStudentData.adodsAcadem.Active:=true;
     frmMain.Comment(TDBNodeSpecObject(FrameObject).Name, 'Академических отпусков: '+inttostr(dmStudentData.adodsAcadem.RecordCount));

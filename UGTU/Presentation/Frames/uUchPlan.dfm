@@ -1,41 +1,41 @@
 inherited fmUchPlan: TfmUchPlan
-  Width = 805
-  Height = 666
+  Width = 956
+  Height = 669
   Font.Name = 'MS Sans Serif'
   ParentFont = False
-  ExplicitWidth = 805
-  ExplicitHeight = 666
+  ExplicitWidth = 956
+  ExplicitHeight = 669
   inherited Panel1: TPanel
-    Width = 805
-    Height = 666
+    Width = 956
+    Height = 669
     BevelInner = bvNone
     BevelOuter = bvNone
-    ExplicitWidth = 805
-    ExplicitHeight = 666
-    object Panel3: TPanel
+    ExplicitWidth = 956
+    ExplicitHeight = 669
+    object pnlAll: TPanel
       Left = 0
-      Top = 22
-      Width = 805
-      Height = 644
+      Top = 82
+      Width = 956
+      Height = 587
       Align = alClient
       BevelOuter = bvLowered
-      Caption = 'Panel3'
+      Caption = 'pnlAll'
       TabOrder = 0
       object ScrollBox1: TScrollBox
         Left = 1
         Top = 1
-        Width = 803
-        Height = 642
+        Width = 954
+        Height = 585
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 0
         DesignSize = (
-          803
-          642)
+          954
+          585)
         object Bevel1: TBevel
           Left = 0
           Top = 81
-          Width = 800
+          Width = 951
           Height = 7
           Anchors = [akLeft, akTop, akRight]
           Shape = bsTopLine
@@ -44,29 +44,22 @@ inherited fmUchPlan: TfmUchPlan
         object Bevel2: TBevel
           Left = 0
           Top = 160
-          Width = 800
+          Width = 951
           Height = 2
           Anchors = [akLeft, akTop, akRight]
           Shape = bsTopLine
           ExplicitWidth = 799
         end
-        object Label1: TLabel
-          Left = 115
-          Top = 8
-          Width = 3
-          Height = 13
-          Alignment = taRightJustify
-        end
         object Label16: TLabel
-          Left = 30
-          Top = 30
+          Left = 7
+          Top = 15
           Width = 89
           Height = 13
           Caption = #1060#1086#1088#1084#1072' '#1086#1073#1091#1095#1077#1085#1080#1103':'
         end
         object Label2: TLabel
-          Left = 36
-          Top = 54
+          Left = 7
+          Top = 42
           Width = 82
           Height = 13
           Caption = #1043#1086#1076' '#1074#1089#1090#1091#1087#1083#1077#1085#1080#1103':'
@@ -81,7 +74,7 @@ inherited fmUchPlan: TfmUchPlan
         object Bevel6: TBevel
           Left = -2
           Top = 190
-          Width = 800
+          Width = 951
           Height = 2
           Anchors = [akLeft, akTop, akRight]
           Shape = bsTopLine
@@ -95,21 +88,21 @@ inherited fmUchPlan: TfmUchPlan
           Caption = #1043#1088#1091#1087#1087#1072' '#1076#1080#1089#1094#1080#1087#1083#1080#1085':'
         end
         object Label29: TLabel
-          Left = 74
+          Left = 97
           Top = 168
           Width = 47
           Height = 13
           Caption = #1057#1077#1084#1077#1089#1090#1088':'
         end
         object Label30: TLabel
-          Left = 35
-          Top = 65
+          Left = 7
+          Top = 59
           Width = 56
           Height = 13
           Caption = #1074' '#1076#1077#1081#1089#1090#1074#1080#1077
         end
         object Label31: TLabel
-          Left = 286
+          Left = 263
           Top = 168
           Width = 66
           Height = 13
@@ -117,7 +110,7 @@ inherited fmUchPlan: TfmUchPlan
         end
         object Label36: TLabel
           Left = 262
-          Top = 58
+          Top = 51
           Width = 101
           Height = 13
           Caption = #1044#1072#1090#1072' '#1091#1090#1074#1077#1088#1078#1076#1077#1085#1080#1103' :'
@@ -132,30 +125,31 @@ inherited fmUchPlan: TfmUchPlan
         object Panel2: TPanel
           Left = 0
           Top = 192
-          Width = 802
-          Height = 448
+          Width = 953
+          Height = 391
           Anchors = [akLeft, akTop, akRight, akBottom]
           BevelOuter = bvNone
           TabOrder = 0
           object Splitter1: TSplitter
-            Left = 204
+            Left = 450
             Top = 0
-            Height = 448
+            Height = 391
+            ExplicitLeft = 204
             ExplicitTop = 25
             ExplicitHeight = 462
           end
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 204
-            Height = 448
+            Width = 450
+            Height = 391
             Align = alLeft
             BevelOuter = bvNone
             Constraints.MinWidth = 200
             TabOrder = 0
             DesignSize = (
-              204
-              448)
+              450
+              391)
             object Label5: TLabel
               Left = 5
               Top = 6
@@ -172,8 +166,8 @@ inherited fmUchPlan: TfmUchPlan
             object dbgDisc: TDBGridEh
               Left = 5
               Top = 28
-              Width = 197
-              Height = 420
+              Width = 443
+              Height = 363
               AllowedOperations = []
               Anchors = [akLeft, akTop, akRight, akBottom]
               AutoFitColWidths = True
@@ -190,7 +184,7 @@ inherited fmUchPlan: TfmUchPlan
               FooterFont.Height = -11
               FooterFont.Name = 'MS Sans Serif'
               FooterFont.Style = []
-              Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = PopupMenu1
               TabOrder = 0
@@ -205,22 +199,22 @@ inherited fmUchPlan: TfmUchPlan
             end
           end
           object Panel6: TPanel
-            Left = 207
+            Left = 453
             Top = 0
-            Width = 595
-            Height = 448
+            Width = 500
+            Height = 391
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
             Visible = False
             DesignSize = (
-              595
-              448)
+              500
+              391)
             object ScrollBox2: TScrollBox
               Left = 1
               Top = 0
-              Width = 595
-              Height = 448
+              Width = 500
+              Height = 391
               Anchors = [akLeft, akTop, akRight, akBottom]
               BorderStyle = bsNone
               TabOrder = 0
@@ -269,7 +263,7 @@ inherited fmUchPlan: TfmUchPlan
                   Shape = bsTopLine
                 end
                 object Label10: TLabel
-                  Left = 80
+                  Left = 83
                   Top = 36
                   Width = 3
                   Height = 13
@@ -301,27 +295,51 @@ inherited fmUchPlan: TfmUchPlan
                   Width = 131
                   Height = 13
                   Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1095#1072#1089#1086#1074':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label13: TLabel
-                  Left = 210
-                  Top = 36
+                  Left = 217
+                  Top = 54
                   Width = 111
                   Height = 13
                   Caption = #1051#1077#1082#1094#1080#1086#1085#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label14: TLabel
-                  Left = 199
-                  Top = 56
+                  Left = 206
+                  Top = 74
                   Width = 122
                   Height = 13
                   Caption = #1051#1072#1073#1086#1088#1072#1090#1086#1088#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label15: TLabel
-                  Left = 202
-                  Top = 76
+                  Left = 209
+                  Top = 94
                   Width = 119
                   Height = 13
                   Caption = #1055#1088#1072#1082#1090#1080#1095#1077#1089#1082#1080#1077' '#1079#1072#1085#1103#1090#1080#1103':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label17: TLabel
                   Left = 162
@@ -337,8 +355,8 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object Label18: TLabel
-                  Left = 326
-                  Top = 36
+                  Left = 334
+                  Top = 54
                   Width = 6
                   Height = 13
                   Caption = '0'
@@ -350,22 +368,35 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object Label19: TLabel
-                  Left = 187
-                  Top = 116
+                  Left = 194
+                  Top = 134
                   Width = 134
                   Height = 13
                   Caption = #1048#1085#1076#1080#1074#1080#1076#1091#1072#1083#1100#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label20: TLabel
-                  Left = 297
-                  Top = 136
+                  Left = 304
+                  Top = 153
                   Width = 24
                   Height = 13
+                  Alignment = taRightJustify
                   Caption = #1057#1056#1057':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label21: TLabel
-                  Left = 326
-                  Top = 56
+                  Left = 334
+                  Top = 74
                   Width = 6
                   Height = 13
                   Caption = '0'
@@ -377,8 +408,8 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object Label22: TLabel
-                  Left = 326
-                  Top = 76
+                  Left = 334
+                  Top = 95
                   Width = 6
                   Height = 13
                   Caption = '0'
@@ -390,8 +421,8 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object Label23: TLabel
-                  Left = 326
-                  Top = 116
+                  Left = 334
+                  Top = 134
                   Width = 6
                   Height = 13
                   Caption = '0'
@@ -403,8 +434,8 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object Label24: TLabel
-                  Left = 326
-                  Top = 136
+                  Left = 334
+                  Top = 153
                   Width = 6
                   Height = 13
                   Caption = '0'
@@ -416,15 +447,21 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object Label25: TLabel
-                  Left = 194
-                  Top = 96
+                  Left = 201
+                  Top = 114
                   Width = 127
                   Height = 13
                   Caption = #1042#1089#1077#1075#1086' '#1072#1091#1076#1080#1090#1086#1088#1085#1099#1093' '#1095#1072#1089#1086#1074':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label26: TLabel
-                  Left = 326
-                  Top = 96
+                  Left = 334
+                  Top = 115
                   Width = 6
                   Height = 13
                   Caption = '0'
@@ -476,7 +513,7 @@ inherited fmUchPlan: TfmUchPlan
                 end
                 object Label9: TLabel
                   Left = 5
-                  Top = 148
+                  Top = 161
                   Width = 163
                   Height = 13
                   Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1074#1080#1076#1072#1084' '#1079#1072#1085#1103#1090#1080#1081':'
@@ -500,6 +537,12 @@ inherited fmUchPlan: TfmUchPlan
                   Width = 151
                   Height = 13
                   Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1079#1072#1095#1077#1090#1085#1099#1093' '#1077#1076#1080#1085#1080#1094':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label33: TLabel
                   Left = 162
@@ -516,14 +559,20 @@ inherited fmUchPlan: TfmUchPlan
                 end
                 object Label34: TLabel
                   Left = 367
-                  Top = 36
+                  Top = 54
                   Width = 71
                   Height = 13
                   Caption = #1050#1086#1084#1087#1077#1090#1077#1085#1094#1080#1080':'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object Label35: TLabel
                   Left = 367
-                  Top = 56
+                  Top = 76
                   Width = 3
                   Height = 13
                   Caption = '-'
@@ -538,61 +587,49 @@ inherited fmUchPlan: TfmUchPlan
             end
           end
         end
-        object dbcbSpclz: TDBLookupComboboxEh
+        object dbcbFormEd: TDBLookupComboboxEh
           Left = 126
-          Top = 5
-          Width = 662
+          Top = 10
+          Width = 401
           Height = 19
-          Anchors = [akLeft, akTop, akRight]
           EditButtons = <>
           Flat = True
           TabOrder = 1
-          Visible = True
-          OnKeyValueChanged = dbcbSpclzKeyValueChanged
-        end
-        object dbcbFormEd: TDBLookupComboboxEh
-          Left = 126
-          Top = 30
-          Width = 283
-          Height = 19
-          EditButtons = <>
-          Flat = True
-          TabOrder = 2
           Visible = True
           OnKeyValueChanged = dbcbFormEdKeyValueChanged
         end
         object dbcbYear: TDBLookupComboboxEh
           Left = 126
-          Top = 56
+          Top = 45
           Width = 123
           Height = 19
           EditButtons = <>
           Flat = True
-          TabOrder = 3
+          TabOrder = 2
           Visible = True
           OnKeyValueChanged = dbcbYearKeyValueChanged
         end
         object dbcbCklDisc: TDBLookupComboboxEh
-          Left = 126
-          Top = 88
-          Width = 670
+          Left = 162
+          Top = 85
+          Width = 750
+          Height = 19
+          Anchors = [akLeft, akTop, akRight]
+          EditButtons = <>
+          Flat = True
+          TabOrder = 3
+          Visible = True
+          OnKeyValueChanged = dbcbCklDiscKeyValueChanged
+        end
+        object dbcbGrpDisc: TDBLookupComboboxEh
+          Left = 162
+          Top = 113
+          Width = 750
           Height = 19
           Anchors = [akLeft, akTop, akRight]
           EditButtons = <>
           Flat = True
           TabOrder = 4
-          Visible = True
-          OnKeyValueChanged = dbcbCklDiscKeyValueChanged
-        end
-        object dbcbGrpDisc: TDBLookupComboboxEh
-          Left = 126
-          Top = 113
-          Width = 670
-          Height = 19
-          Anchors = [akLeft, akTop, akRight]
-          EditButtons = <>
-          Flat = True
-          TabOrder = 5
           Visible = True
           OnKeyValueChanged = dbcbCklDiscKeyValueChanged
         end
@@ -602,7 +639,7 @@ inherited fmUchPlan: TfmUchPlan
           Width = 209
           Height = 65
           BevelInner = bvLowered
-          TabOrder = 6
+          TabOrder = 5
           Visible = False
           object Label27: TLabel
             Left = 8
@@ -642,8 +679,8 @@ inherited fmUchPlan: TfmUchPlan
           end
         end
         object cmbxSem: TDBComboBoxEh
-          Left = 127
-          Top = 167
+          Left = 162
+          Top = 165
           Width = 80
           Height = 19
           Hint = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
@@ -679,13 +716,13 @@ inherited fmUchPlan: TfmUchPlan
             '12')
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 8
+          TabOrder = 7
           Visible = True
           OnChange = dbcbCklDiscKeyValueChanged
         end
         object cmbxVidZan: TDBComboBoxEh
-          Left = 358
-          Top = 167
+          Left = 354
+          Top = 165
           Width = 279
           Height = 19
           Hint = #1042#1080#1076' '#1079#1072#1085#1103#1090#1080#1103', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
@@ -721,34 +758,44 @@ inherited fmUchPlan: TfmUchPlan
             '5')
           ParentShowHint = False
           ShowHint = True
-          TabOrder = 7
+          TabOrder = 6
           Visible = True
           OnChange = dbcbCklDiscKeyValueChanged
         end
         object cbBRS: TCheckBox
-          Left = 510
-          Top = 58
-          Width = 151
-          Height = 17
+          Left = 542
+          Top = 49
+          Width = 187
+          Height = 20
           Action = actBRS
-          TabOrder = 9
+          TabOrder = 8
           Visible = False
         end
         object dtpDateUtv: TDateTimePicker
-          Left = 369
-          Top = 54
+          Left = 399
+          Top = 46
           Width = 128
-          Height = 21
+          Height = 24
           Date = 0.508695752316271000
           Time = 0.508695752316271000
           Enabled = False
+          TabOrder = 9
+        end
+        object cbApproved: TCheckBox
+          Left = 542
+          Top = 14
+          Width = 395
+          Height = 17
+          Caption = #1059#1090#1074#1077#1088#1078#1076#1077#1085' ('#1079#1072#1087#1088#1077#1090' '#1085#1072' '#1088#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1085#1080#1077')'
           TabOrder = 10
+          Visible = False
+          OnMouseDown = cbApprovedMouseDown
         end
       end
       object dbcbPdgrpDisc: TDBLookupComboboxEh
-        Left = 126
+        Left = 163
         Top = 139
-        Width = 671
+        Width = 750
         Height = 19
         EditButtons = <>
         Flat = True
@@ -757,10 +804,10 @@ inherited fmUchPlan: TfmUchPlan
         OnKeyValueChanged = dbcbCklDiscKeyValueChanged
       end
     end
-    object Panel4: TPanel
+    object pnlTools: TPanel
       Left = 0
       Top = 0
-      Width = 805
+      Width = 956
       Height = 22
       Align = alTop
       AutoSize = True
@@ -769,7 +816,7 @@ inherited fmUchPlan: TfmUchPlan
       object ToolBar1: TToolBar
         Left = 0
         Top = 0
-        Width = 805
+        Width = 956
         Height = 22
         AutoSize = True
         Caption = 'ToolBar1'
@@ -862,6 +909,93 @@ inherited fmUchPlan: TfmUchPlan
         end
       end
     end
+    object pnlGroup: TPanel
+      Left = 0
+      Top = 22
+      Width = 956
+      Height = 30
+      Align = alTop
+      Color = clMoneyGreen
+      ParentBackground = False
+      TabOrder = 2
+      Visible = False
+      object lblGroup: TLabel
+        Left = 8
+        Top = 9
+        Width = 41
+        Height = 13
+        Caption = #1043#1088#1091#1087#1087#1072' :'
+      end
+      object lblProfile: TLabel
+        Left = 414
+        Top = 9
+        Width = 39
+        Height = 13
+        Caption = 'lblProfile'
+      end
+      object dbcbGroup: TDBLookupComboboxEh
+        Left = 55
+        Top = 6
+        Width = 324
+        Height = 19
+        EditButtons = <>
+        Flat = True
+        TabOrder = 0
+        Visible = True
+        OnKeyValueChanged = dbcbGroupKeyValueChanged
+      end
+      object ToolBar2: TToolBar
+        Left = 385
+        Top = 5
+        Width = 23
+        Height = 23
+        Align = alNone
+        AutoSize = True
+        ButtonHeight = 23
+        Caption = 'ToolBar2'
+        Images = frmMain.ImageList1
+        TabOrder = 1
+        object ToolButton12: TToolButton
+          Left = 0
+          Top = 0
+          Caption = 'ToolButton12'
+          ImageIndex = 34
+        end
+      end
+    end
+    object pnlSpclz: TPanel
+      Left = 0
+      Top = 52
+      Width = 956
+      Height = 30
+      Align = alTop
+      TabOrder = 3
+      Visible = False
+      DesignSize = (
+        956
+        30)
+      object lblSpclz: TLabel
+        Left = 83
+        Top = 7
+        Width = 36
+        Height = 13
+        Alignment = taRightJustify
+        Anchors = [akLeft, akTop, akRight]
+        Caption = 'lblSpclz'
+      end
+      object dbcbSpclz: TDBLookupComboboxEh
+        Left = 125
+        Top = 4
+        Width = 813
+        Height = 19
+        Anchors = [akLeft, akTop, akRight]
+        EditButtons = <>
+        Flat = True
+        TabOrder = 0
+        Visible = True
+        OnKeyValueChanged = dbcbSpclzKeyValueChanged
+      end
+    end
   end
   inherited pnlSave: TPanel
     Top = 535
@@ -883,8 +1017,8 @@ inherited fmUchPlan: TfmUchPlan
     end
   end
   object Panel9: TPanel
-    Left = 289
-    Top = 431
+    Left = 146
+    Top = 357
     Width = 337
     Height = 65
     BorderStyle = bsSingle
@@ -909,7 +1043,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1434,7 +1568,7 @@ inherited fmUchPlan: TfmUchPlan
     end
   end
   object dsDisc: TDataSource
-    DataSet = dm.aspGetDiscplines
+    DataSet = dm.aspGetDiscModel
     OnDataChange = dsDiscDataChange
     Left = 728
     Top = 408

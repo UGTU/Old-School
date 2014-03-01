@@ -1143,28 +1143,34 @@ end;
 procedure TfrmMain.actTreeRefreshActionExecute(Sender: TObject);
 var dbNode:TDbNodeObject;
 begin
-dbNode:=DBDekTreeView_test1.Selected.Data;
+  dbNode:=DBDekTreeView_test1.Selected.Data;
+  if dbNode is TDBNodeGroupObject then
+  begin
+    if ActShowAllStudent.Checked then
+    begin
+      TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAll;
+      ActShowStud.Caption:=ActShowAllStudent.Caption;
+    end else
+      if actShowAcademStudent.Checked then
+      begin
+        TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAcademOnly;
+        ActShowStud.Caption:=ActShowAcademStudent.Caption;
+      end else
+        if actShowOtchislStudent.Checked then
+        begin
+          TDBNodeGroupObject(dbNode).ShowStudents:=ssShowExiledOnly;
+          ActShowStud.Caption:=actShowOtchislStudent.Caption;
+        end
+        else
+        begin
+          TDBNodeGroupObject(dbNode).ShowStudents:=ssShowActualOnly;
+          ActShowStud.Caption:=actShowUnOtchislStudent.Caption;
+        end;
+  end;
 
-if dbNode is TDBNodeGroupObject then begin
-if ActShowAllStudent.Checked then begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAll;
-ActShowStud.Caption:=ActShowAllStudent.Caption;
-end else
-if actShowAcademStudent.Checked then  begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowAcademOnly;
-ActShowStud.Caption:=ActShowAcademStudent.Caption;
-end else
-if actShowOtchislStudent.Checked then  begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowExiledOnly;
-ActShowStud.Caption:=actShowOtchislStudent.Caption;
-end else begin
-TDBNodeGroupObject(dbNode).ShowStudents:=ssShowActualOnly;
-ActShowStud.Caption:=actShowUnOtchislStudent.Caption;
-end;
-end;
-
-if dbNode is TDBNodeAbitObject then begin
-if actFilterAllYear.Checked then begin
+  if dbNode is TDBNodeAbitObject then
+  begin
+    if actFilterAllYear.Checked then begin
 TDBNodeAbitObject(dbNode).ShowAllYears:=true;
 actYearFilter.Caption:=actFilterAllYear.Caption;
 end else
@@ -1273,9 +1279,9 @@ actFilterKaf.Caption:=actCurrentKaf.Caption;
 end;
 end;
 
-if dbNode<> nil then
-   DBDekTreeView_test1.RefreshNodeExecute(DBDekTreeView_test1.Selected);
-FFrame.RefreshFrame;
+  if dbNode<> nil then
+    DBDekTreeView_test1.RefreshNodeExecute(DBDekTreeView_test1.Selected);
+//  FFrame.RefreshFrame;
 end;
 
 procedure TfrmMain.DBDekTreeView_TEST1Collapsing(Sender: TObject;
@@ -1403,22 +1409,11 @@ begin
   (ActiveFrame as TfmSpec).actAddGroupExecute(nil) else
 
   begin
-    dm.adospGetUchPlnGroup.Active := false;
-  with dm.adospGetUchPlnGroup.Parameters do
-  begin
-    Clear;
-    AddParameter;
-    Items[0].Value := actAddGroup.Tag;
-  end;
-  dm.adospGetUchPlnGroup.ExecProc;
-  dm.adospGetUchPlnGroup.Active := true;
   frmGroupEdt:=TfrmGroupEdt.Create(self);
   try
-    frmGroupEdt.Tag:=actAddGroup.Tag;;
-    frmGroupEdt.bEdit := false;
-    frmGroupEdt.dbneYear.MaxValue := CurrentYear;
-    frmGroupEdt.Caption := 'Добавление группы';
-    frmGroupEdt.IsModified:= (frmGroupEdt.edtName.Text <> '') and (frmGroupEdt.dbneYear.Text <> '') and (frmGroupEdt.dblcbUchPln.KeyValue <> NULL);
+    frmGroupEdt.SpecFacIK := actAddGroup.Tag;
+    frmGroupEdt.WithSpec := false;
+    frmGroupEdt.Edit := false;
     frmGroupEdt.ShowModal;
   finally
     frmGroupEdt.Free;
@@ -1835,7 +1830,7 @@ var
   ik_grup, usrAnswer: Integer;
   node:ttreenode;
 begin
-  //showmessage('ok');
+
   if lastCancel then
   begin
     lastCancel := false;
@@ -1867,20 +1862,41 @@ begin
       end;
     LastSelectedNode := DBDekTreeView_TEST1.Selected;
     end;
-    node:=DBDekTreeView_TEST1.Selected.Parent;
 
-    DBDekTreeView_TEST1.Select(node);
-    DBDekTreeView_TEST1Change(sender,node);
-
-    if (FFrame is TfmSpec) then with (FFrame as TfmSpec) do
+    //проверим, есть ли у группы учебный план
+    if (TUchPlanController.Instance.getUchPlanForGroup(ik_grup)<>0) then
     begin
-    PageControl1.ActivePageIndex:=2;
-    fmUchPlan1.dbcbSpclz.KeyValue:=TUchPlanController.Instance.getGrupSpecializations(ik_grup);
-    fmUchPlan1.dbcbFormEd.KeyValue:=TUchPlanController.Instance.getGrupFormEd(ik_grup);
-    fmUchPlan1.dbcbYear.KeyValue:=TUchPlanController.Instance.getGrupYear(ik_grup);
-    alreadySpec:=true;
+      //тогда открываем учебный план
+      node:=DBDekTreeView_TEST1.Selected.Parent;
+      DBDekTreeView_TEST1.Select(node);
+      DBDekTreeView_TEST1Change(sender,node);
+      if (FFrame is TfmSpec) then with (FFrame as TfmSpec) do
+      begin
+        PageControl1.ActivePageIndex:=6;
+        fmUchPlan2.dbcbGroup.KeyValue := ik_grup;
+        alreadySpec:=true;
+      end;
+    end
+    else
+    begin
+      if MessageBox(Handle, PAnsiChar('Перейти к выбору учебного плана для группы?'),
+      'Для группы не назначен учебный план', MB_YESNO)=IDYES then
+      begin
+        frmGroupEdt:=TfrmGroupEdt.Create(self);
+        try
+          frmGroupEdt.ik := ik_grup;
+          frmGroupEdt.WithSpec := false;
+          frmGroupEdt.Edit := true;
+          frmGroupEdt.ShowModal;
+        finally
+          frmGroupEdt.Free;
+        end;
+      end;
+
     end;
-    end;
+
+
+  end;
 
 end;
 
@@ -2250,12 +2266,11 @@ end;
 
 procedure TfrmMain.DBDekTreeView_TEST1Click(Sender: TObject);
 begin
-if DBDekTreeView_TEST1.Selected.Expanded then
-actCollapseExpand.Caption:='Свернуть' else
-actCollapseExpand.Caption:='Развернуть';
+  if DBDekTreeView_TEST1.Selected.Expanded then
+    actCollapseExpand.Caption:='Свернуть'
+  else actCollapseExpand.Caption:='Развернуть';
 
-if pnlImage.Visible then pnlImage.Visible := false;
-
+  if pnlImage.Visible then pnlImage.Visible := false;
 end;
 
 procedure TfrmMain.cmbSearchChange(Sender: TObject);
@@ -2315,9 +2330,9 @@ end;
 
 procedure TfrmMain.actFindExecute(Sender: TObject);
 begin
-if dbcbeSearch.KeyValue=Null then exit;
-if not DBDekTreeView_TEST1.FindAndSelectByValue(dbcbeSearch.KeyValue) then
-showmessage('Не удалось найти данного студента!');
+  if dbcbeSearch.KeyValue=Null then exit;
+  if not DBDekTreeView_TEST1.FindAndSelectByValue(dbcbeSearch.KeyValue) then
+    showmessage('Не удалось найти данного студента!');
 end;
 
 procedure TfrmMain.actFindTeachExecute(Sender: TObject);
