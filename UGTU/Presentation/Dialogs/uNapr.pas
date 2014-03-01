@@ -365,7 +365,7 @@ begin
   Replace('#fac#',
     dmUspevaemost.adospSelNapr.FieldByName('Cshort_name_fac').AsString);
 
-  if dmUspevaemost.adospSelNapr.FieldByName('ik_fac').AsInteger=6 then
+  if dmUspevaemost.adospSelNapr.FieldByName('Ik_form_ed').AsInteger=2 then
     Range['k6','m6'].Clear
   else
     Range['n6','o6'].Clear;

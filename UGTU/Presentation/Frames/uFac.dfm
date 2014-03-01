@@ -13,7 +13,7 @@ inherited fmFacultet: TfmFacultet
       Top = 2
       Width = 759
       Height = 418
-      ActivePage = tsNapr
+      ActivePage = tsKontingent
       Align = alClient
       Images = frmMain.ImageList1
       Style = tsFlatButtons
@@ -22,6 +22,10 @@ inherited fmFacultet: TfmFacultet
       object TabSheet1: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 38
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DBGridEh1: TDBGridEh
           Left = 0
           Top = 0
@@ -210,6 +214,10 @@ inherited fmFacultet: TfmFacultet
       object tsItogi: TTabSheet
         Caption = #1054#1073#1097#1080#1077' '#1080#1090#1086#1075#1080' '#1089#1077#1089#1089#1080#1080
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -267,11 +275,11 @@ inherited fmFacultet: TfmFacultet
             Left = 193
             Top = 0
             Width = 145
-            Height = 21
+            Height = 22
             Hint = #1042#1080#1076' '#1089#1077#1084#1077#1089#1090#1088#1072
             Style = csDropDownList
             Anchors = [akTop, akRight]
-            ItemHeight = 13
+            ItemHeight = 0
             ParentShowHint = False
             ShowHint = True
             Sorted = True
@@ -753,7 +761,7 @@ inherited fmFacultet: TfmFacultet
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -922,7 +930,7 @@ inherited fmFacultet: TfmFacultet
     Left = 214
     Top = 152
     Bitmap = {
-      494C01010F001000100010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01010F001000140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1454,7 +1462,8 @@ inherited fmFacultet: TfmFacultet
       F003800000038000F003800000018000F003800100018000F003800300018000
       F003800700018000F003800700018000F0038007000180008003800700018001
       8003800F000180038003800F000180078007800F0001800F800F801F0001801F
-      80FF803F0001803F80FFFFFFFFFFFFFF}
+      80FF803F0001803F80FFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object ActionList1: TActionList
     Images = ilMain
