@@ -123,6 +123,8 @@ begin
 clear;
 addParameter;
 items[0].Value:=Hint;
+addParameter;
+items[1].Value:=(studobj.Parent as TDBNodeGroupObject).ik;
 end;
 dmUspevaemost.adospGetNomerNapr.Active:=true;
 //dmUspevaemost.adospGetNomerNapr.ExecProc;
@@ -155,6 +157,7 @@ clear;
 addParameter;
 items[0].Value:=studobj.StudGrupKey;
 addParameter;
+
 items[1].Value:=dbcbeNum.Text;
 end;
 dmUspevaemost.adospPredmStud.Active:=true;
