@@ -1428,6 +1428,7 @@ begin
     end;
     dm.qContentUchPlan.UpdateBatch;
 
+    //исключения по количеству недель
     tempDS.CommandText:= 'SELECT * FROM UchPlan_WeekCount_Exception WHERE ik_upContent in (SELECT ik_upContent FROM Content_UchPl WHERE ik_disc_uch_plan = ' + IntToStr(DiscInUchPlanIK) + ')';
     tempDS.Open;
     while not tempDS.Eof do tempDS.Delete;
@@ -1468,6 +1469,7 @@ begin
     tempDS.UpdateBatch();
     if tempDS.Active then tempDS.Close;
 
+    //структура компетенций
     tempDS.CommandText := 'select * from Struct_competence_sv_disc where ik_disc_uch_plan = '+IntToStr(DiscInUchPlanIK);
     tempDS.Open;
     tempDS.First;

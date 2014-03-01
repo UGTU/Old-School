@@ -166,7 +166,7 @@ implementation
 {$R *.dfm}
 
 uses uUchPlanEditControlVZ, uUchPlanEditAuditorVZ, uBaseFrame, uAddDiscCompetence, uAddDiscRelation,
-     ConstantRepository;
+     ConstantRepository, uDM;
 
 { TfrmUchPlanAddDisc }
 
@@ -268,6 +268,7 @@ end;
 function TfrmUchPlanAddDisc.DoApply: boolean;
 var
   DiscInUchPlanIK: integer;
+  tempProc: TADOStoredProc;
 begin
   if ((Label22.Tag < 0) or (fixRow.Count > 0)) then
   begin
@@ -301,6 +302,17 @@ begin
       dbcbGrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
       StrToInt(dbeGroupVibor.Value), Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
     end;
+
+  //автоматическая вставка БРС
+  tempProc:= TADOStoredProc.Create(nil);
+  try
+    tempProc.ProcedureName:= 'BRS_forDisc;1';
+    tempProc.Connection:= dm.DBConnect;
+    tempProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger, pdInput, 4, DiscInUchPlanIK);
+    tempProc.ExecProc;
+  finally
+    tempProc.Free;
+  end;
 
   if Self.IK < 0 then
   begin
