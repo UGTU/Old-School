@@ -332,6 +332,7 @@ end;
 
 procedure TNaprExcelReport.Execute;
 var  date: TDateTime;
+  str: string;
 begin
   inherited;
   NextStep(1,'Загрузка данных');
@@ -401,9 +402,11 @@ begin
   end;
 
   if dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger mod 2 = 1 then
-    Replace('#sem#',IntToStr(dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger div 2+1))
+    str:= IntToStr(dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger div 2+1)
   else
-    Replace('#sem#',IntToStr(dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger div 2));
+    str:= IntToStr(dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger div 2);
+  str:= str+ ' ('+IntToStr(dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger)+' сем)';
+  Replace('#sem#',str);
 
   Replace('#group#',dmUspevaemost.adospSelNapr.FieldByName('Cname_grup').AsString);
 
