@@ -388,8 +388,8 @@ end;
 
 procedure TfmUchPlan.ActionEditUchPlanExecute(Sender: TObject);
 begin
-  if not cbApproved.Checked then
-  begin
+ // if not cbApproved.Checked then       //Придумать другой механизм!!
+ // begin
 //LocalLog.AddEntry('Добавление/редактирование учебного плана');
   dsGetFgosBySpec.DataSet:=TFgosController.Instance.getFgosBySpec(fSpecIK);
   if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value=NULL and (VidGos=2))
@@ -424,7 +424,7 @@ begin
       frmUchPlanAddNew.Free;
     end;
   end;
-  end;
+ // end;
 end;
 
 procedure TfmUchPlan.ActionRemUchPlanExecute(Sender: TObject);
@@ -480,12 +480,12 @@ begin
 
 try
   frmUchPlSemLength.CallFrame:= self;
-  frmUchPlSemLength.IK:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
+  frmUchPlSemLength.IK:= FIKPlan;//dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
   frmUchPlSemLength.dsSem.DataSet:= dsSemLength.DataSet;
   frmUchPlSemLength.Read;
   if ((frmUchPlSemLength.ShowModal() = mrOk) or (frmUchPlSemLength.bbApply.Tag = 1)) then
   begin
-    fSemesterStr:= TUchPlanController.Instance.GetSemestersInStr(@dsSemLength.DataSet, dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger, 'ik_vid_zanyat');
+    fSemesterStr:= TUchPlanController.Instance.GetSemestersInStr(@dsSemLength.DataSet, FIKPlan, 'ik_vid_zanyat');
     dsDiscDataChange(Sender, nil);
   end;
   finally

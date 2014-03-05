@@ -73,6 +73,7 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     function SendSupportMail(subject:string;text:TStringList; fname:string):boolean;
     function GetLogForSend: string;
     function ApplicationName:string;
+    function GetUserGroups: TStringList;
 
     property ActiveFrame: TFmBase Read GetActiveFrame;
     property SupportMail:string read FSupportMail;
@@ -454,7 +455,7 @@ begin
     FExportLogToFile := Ini.ReadBool('reporting', 'ExportToFile', true);
 
     //временная строка, которую нужно убрать в билде 4.339
-    if (FServerName='db-srv1.ist.ugtu.net') then FServerName:='ugtudb.ugtu.net';
+   // if (FServerName='db-srv1.ist.ugtu.net') then FServerName:='ugtudb.ugtu.net';
     
 
     if ExceptionReportString='True' then
@@ -526,6 +527,15 @@ begin
 result:= TLogController.GetInstance.Text;
 end;
 
+
+function TApplicationController.GetUserGroups: TStringList;
+{var Container : IADsContainer;
+    NewObject : IADs;
+    User : IADsUser;
+    hr : HREsult;}
+begin
+
+end;
 
 procedure TApplicationController.SendDelayed;
 var i:integer;
