@@ -320,6 +320,7 @@ begin
   try
   frmUchPlanAddDisc.Tag:= 1;
   frmUchPlanAddDisc.IK:= -1;
+  frmUchPlanAddDisc.TypePlan := fTypePlan;
   frmUchPlanAddDisc.iUchPlan:= FIKPlan;//dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
   frmUchPlanAddDisc.VidGos:=VidGos;
   frmUchPlanAddDisc.SpecIK := fSpecIK;
@@ -349,6 +350,7 @@ begin
  // LocalLog.AddEntry('Редактирование дисциплины '+Trim(dsDisc.DataSet.FieldByName('cname_disc').AsString));
   try
   frmUchPlanAddDisc.IK:= dsDisc.DataSet.FieldByName('ik_disc_uch_plan').AsInteger;
+  frmUchPlanAddDisc.TypePlan := fTypePlan;
   frmUchPlanAddDisc.iUchPlan:= IKPlan;
   frmUchPlanAddDisc.VidGos:=VidGos;
   frmUchPlanAddDisc.SpecIK := fSpecIK;

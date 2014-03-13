@@ -456,7 +456,6 @@ begin
 
     //временная строка, которую нужно убрать в билде 4.339
    // if (FServerName='db-srv1.ist.ugtu.net') then FServerName:='ugtudb.ugtu.net';
-    
 
     if ExceptionReportString='True' then
     FSendExceptionReport:=ssSend

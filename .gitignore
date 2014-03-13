@@ -214,7 +214,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-<<<<<<< HEAD
-=======
 *.exe
->>>>>>> origin/Modify_Uch_plan
+*.dcu
