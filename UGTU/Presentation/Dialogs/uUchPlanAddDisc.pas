@@ -299,9 +299,10 @@ begin
   else                 //если сохранение прошло
     if TypePlan=key_ModelPlan {cbOtherUchPl.Checked} then  //если это общий план-модель
     begin       //аналогичное изменение дисциплины в более новых планах
+      //dbcbSpclz.KeyValue;
       TUchPlanController.Instance.ChangeDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue,
-      dbcbGrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
-      StrToInt(dbeGroupVibor.Value), Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
+      dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
+      StrToInt(dbeGroupVibor.Value), dbcbSpclz.KeyValue, Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
     end;
 
   //автоматическая вставка БРС
