@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 inherited fmGroup: TfmGroup
   Width = 695
   Height = 657
@@ -7982,4 +7982,3 @@ inherited fmGroup: TfmGroup
     end
   end
 end
->>>>>>> 9d82401f08ffe61538cdda3451cc63189d4c0fa9
