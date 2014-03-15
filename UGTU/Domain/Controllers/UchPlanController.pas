@@ -304,7 +304,7 @@ type
            CodeGOS - шифр дисциплины по ГОС
     }
      function ChangeDiscInUchPlan(UchPlanIK: integer; DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK,
-        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum: integer; CodeGOS: string; aCompetenceList: TStringList): Boolean;
+        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum, SpclzIK: integer; CodeGOS: string; aCompetenceList: TStringList): Boolean;
 
     {
         SaveSpecialization - сохраняет специализацию SpclzIK специальности SpecIK
@@ -335,11 +335,11 @@ type
     function getGrupYear(IK_grup: integer): Variant;
 
     procedure AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK,PodGroupIK,
-        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum: integer; CodeGOS: string);
+        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum, SpclzIK: integer; CodeGOS: string);
 
     procedure ReplaseDisc(ik_uch_plan: integer; var ik_disc_uch_plan_temp: integer;
     DiscInUchPlanIK: integer; CycleIK, GroupIK,  PodGroupIK,
-        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum: integer; CodeGOS: string);
+        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK: integer; CodeGOS: string);
 
   end;
   var
@@ -3199,7 +3199,7 @@ end;
 
 function TUchPlanController.ChangeDiscInUchPlan(UchPlanIK: integer; DiscInUchPlanIK: integer;
 CycleIK, GroupIK,PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour,
-GroupViborNum: integer; CodeGOS: string; aCompetenceList: TStringList): Boolean;
+GroupViborNum, SpclzIK: integer; CodeGOS: string; aCompetenceList: TStringList): Boolean;
 var
   DataSet: TADOStoredProc;
   ik_disc_uch_plan_temp, ik_uch_plan, year_uch_plan: integer;
@@ -3229,10 +3229,10 @@ begin
 
         if ik_disc_uch_plan_temp=0 then          //добавление
           AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK, PodGroupIK,
-                DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum, CodeGOS)
+                DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK, CodeGOS)
         else                                     //замена
           ReplaseDisc(ik_uch_plan, ik_disc_uch_plan_temp, DiscInUchPlanIK, CycleIK, GroupIK,
-          PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum, CodeGOS);
+          PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK, CodeGOS);
 
         except
           if MessageBox(MessageHandle, PAnsiChar('Не удалось внести изменения в учебный план '+ inttostr(year_uch_plan)+ ' года. Продолжить?'),
@@ -3250,7 +3250,7 @@ begin
 end;
 
 procedure TUchPlanController.AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK,PodGroupIK,
-        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum: integer; CodeGOS: string);
+        DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum, SpclzIK: integer; CodeGOS: string);
 var
   DataSet: TADOStoredProc;
   tempDS, tempDS_new: TADODataSet;
@@ -3259,8 +3259,30 @@ begin
 
   try
   dm.DBConnect.BeginTrans;
+  with dm.aspUpdateDiscInPlan do
+  begin
+      Connection := dm.DBConnect;
+      Parameters.ParamByName('@i_type').Value := 1;
+      Parameters.ParamByName('@ik_disc_uch_plan').Value :=  DiscInUchPlanIK;
+      Parameters.ParamByName('@ik_uch_plan').Value := ik_uch_plan;
+      Parameters.ParamByName('@ik_disc').Value := DiscIK;
+      Parameters.ParamByName('@ik_default_kaf').Value :=  KafedraIK;
+      Parameters.ParamByName('@iHour_gos').Value := GOSHour;
+      Parameters.ParamByName('@iIndivid').Value := IndividHour;
+      Parameters.ParamByName('@ik_ckl_disc').Value := CycleIK;
+      Parameters.ParamByName('@ik_grp_disc').Value := GroupIK;
+      Parameters.ParamByName('@Cname_ckl_disc_gos').Value := CodeGOS;
+      Parameters.ParamByName('@ik_pdgrp_disc').Value := PodGroupIK;
+      Parameters.ParamByName('@ViborGroup').Value := GroupViborNum;
+      Parameters.ParamByName('@ik_spclz').Value := SpclzIK;
+      try
+        ExecProc;
+        new_ik_disc_uch_plan := Parameters.ParamByName('@RETURN_VALUE').Value;
+      finally
 
-  DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan318', false);
+      end;
+  end;
+ { DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan', false);
   DataSet.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 1);
   DataSet.Parameters.CreateParameter('@ik_disc_uch_plan',ftInteger,pdInput, 0, DiscInUchPlanIK);
   DataSet.Parameters.CreateParameter('@ik_uch_plan',ftInteger,pdInput, 0, ik_uch_plan);
@@ -3273,13 +3295,30 @@ begin
   DataSet.Parameters.CreateParameter('@Cname_ckl_disc_gos',ftString, pdInput, 20, CodeGOS);
   DataSet.Parameters.CreateParameter('@ik_pgrp_disc',ftInteger,pdInput,0,PodGroupIK);
   DataSet.Parameters.CreateParameter('@ViborGroup',ftInteger, pdInput, 0, GroupViborNum);
-  try
-    DataSet.Open;
-    new_ik_disc_uch_plan:= DataSet.FieldByName('ReturnValue').AsInteger;
-  finally
-    DataSet.Close;
-    DataSet.Free;
-  end;
+  DataSet.Parameters.CreateParameter('@ik_spclz',ftInteger, pdInput, 0, SpclzIK);
+  DataSet.Parameters.CreateParameter('@source_disc_uch_plan',ftInteger,pdInput, 0, 0);
+  DataSet.Parameters.CreateParameter('@RETURN_VALUE',ftInteger, pdOutput, 0, 0);   }
+  {
+        DataSet.Parameters.Clear;
+  DataSet.ProcedureName:= 'UpdateDiscInUchPlan';
+  DataSet.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 1);
+  DataSet.Parameters.CreateParameter('@ik_disc_uch_plan',ftInteger,pdInput, 0, 0);
+  DataSet.Parameters.CreateParameter('@ik_uch_plan',ftInteger,pdInput, 0,0);
+  DataSet.Parameters.CreateParameter('@ik_disc',ftInteger,pdInput,0, 0);
+  DataSet.Parameters.CreateParameter('@ik_default_kaf',ftInteger,pdInput,0, 0);
+  DataSet.Parameters.CreateParameter('@iHour_gos',ftInteger,pdInput,0, 0);
+  DataSet.Parameters.CreateParameter('@iIndivid',ftInteger,pdInput,0, 0);
+  DataSet.Parameters.CreateParameter('@ik_ckl_disc',ftInteger,pdInput,0,0);
+  DataSet.Parameters.CreateParameter('@ik_grp_disc',ftInteger,pdInput,0,0);
+  DataSet.Parameters.CreateParameter('@Cname_ckl_disc_gos',ftString,pdInput, 20, '');
+  DataSet.Parameters.CreateParameter('@ik_pdgrp_disc',ftInteger,pdInput,0,0);
+  DataSet.Parameters.CreateParameter('@ViborGroup',ftInteger,pdInput,0,0);
+  DataSet.Parameters.CreateParameter('@source_disc_uch_plan',ftInteger,pdInput, 0, 0);
+  }
+ { try
+    //DataSet.ExecProc;
+    new_ik_disc_uch_plan:= DataSet.Parameters.ParamByName('@RETURN_VALUE').Value;   }
+
 
   dm.qContentUchPlan_temp.Close;
   dm.qContentUchPlan_temp.SQL.Clear;
@@ -3360,7 +3399,7 @@ begin
 end;
 
 procedure TUchPlanController.ReplaseDisc(ik_uch_plan: integer; var ik_disc_uch_plan_temp: integer;
-DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum: integer; CodeGOS: string);
+DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK: integer; CodeGOS: string);
 var
   DataSet: TADOStoredProc;
   tempDS, tempDS_new: TADODataSet;
@@ -3369,11 +3408,33 @@ var
   i, j: integer;
   vz_chek: boolean;
 begin
-  
+
   try
   dm.DBConnect.BeginTrans;
+   with dm.aspUpdateDiscInPlan do
+  begin
+      Connection := dm.DBConnect;
+      Parameters.ParamByName('@i_type').Value := 2;
+      Parameters.ParamByName('@ik_disc_uch_plan').Value :=  ik_disc_uch_plan_temp;
+      Parameters.ParamByName('@ik_uch_plan').Value := ik_uch_plan;
+      Parameters.ParamByName('@ik_disc').Value := DiscIK;
+      Parameters.ParamByName('@ik_default_kaf').Value :=  KafedraIK;
+      Parameters.ParamByName('@iHour_gos').Value := GOSHour;
+      Parameters.ParamByName('@iIndivid').Value := IndividHour;
+      Parameters.ParamByName('@ik_ckl_disc').Value := CycleIK;
+      Parameters.ParamByName('@ik_grp_disc').Value := GroupIK;
+      Parameters.ParamByName('@Cname_ckl_disc_gos').Value := CodeGOS;
+      Parameters.ParamByName('@ik_pdgrp_disc').Value := PodGroupIK;
+      Parameters.ParamByName('@ViborGroup').Value := GroupViborNum;
+      Parameters.ParamByName('@ik_spclz').Value := SpclzIK;
+      try
+        ExecProc;
+        ik_disc_uch_plan_temp := Parameters.ParamByName('@RETURN_VALUE').Value;
+      finally
 
-  DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan318', false);
+      end;
+  end;
+{  DataSet:= TGeneralController.Instance.GetNewADOStoredProc('UpdateDiscInUchPlan318', false);
   DataSet.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 2);
   DataSet.Parameters.CreateParameter('@ik_disc_uch_plan',ftInteger,pdInput, 0, ik_disc_uch_plan_temp);
   DataSet.Parameters.CreateParameter('@ik_uch_plan',ftInteger,pdInput, 0, ik_uch_plan);
@@ -3393,7 +3454,7 @@ begin
    finally
     DataSet.Close;
     DataSet.Free;
-   end;
+   end;           }
 
 
 

@@ -321,6 +321,11 @@ end;
 class function TAppVersion.GetInstance: TAppVersion;
 const
   instance : TAppVersion = nil;
+type
+  TVerInfo=packed record
+    Nevazhno: array[0..47] of byte; // ненужные нам 48 байт
+    Minor,Major,Build,Release: word; // а тут версия
+  end;
 var
 info: pointer;
 infosize: dword;
@@ -328,35 +333,45 @@ fileinfo: pvsfixedfileinfo;
 fileinfosize: dword;
 tmp: dword;
 filename: string;
+s:TResourceStream;
+v:TVerInfo;
 begin
 
   if instance = nil then
   begin
     instance := TAppVersion.Create;
-    filename := Application.ExeName;
+    //filename := Application.ExeName;
+   { filename := ParamStr(0);
    // get the size of the fileversioninformatioin
     infosize := getfileversioninfosize(pchar(filename), tmp);
+
   // if infosize = 0, then the file may not exist, or
   // it may not have file version information in it.
-    if infosize = 0 then
+    if infosize = 0 then  }
+    s:=TResourceStream.Create(HInstance,'#1',RT_VERSION); // достаём ресурс
+    if s.Size=0 then
       raise EApplicationException.create('Ошибка в программе!',Exception.create('can''t get file version information for '
       + filename));
       // allocate memory for the file version information
-    getmem(info, infosize);
+   { getmem(info, infosize);        }
     try
       // get the information
-      getfileversioninfo(pchar(filename), 0, infosize, info);
+     { getfileversioninfo(pchar(filename), 0, infosize, info);
       // query the information for the version
       verqueryvalue(info, '', pointer(fileinfo), fileinfosize);
       // now fill in the version information
       instance.FMajor := fileinfo.dwfileversionms shr 16;
       instance.FMinor := fileinfo.dwfileversionms and $ffff;
       instance.FRelease := fileinfo.dwfileversionls shr 16;
-      instance.FBuild := fileinfo.dwfileversionls and $ffff;
-     
+      instance.FBuild := fileinfo.dwfileversionls and $ffff;      }
+      s.Read(v,SizeOf(v));
+      instance.FMajor := v.Major;
+      instance.FMinor := v.Minor;
+      instance.FRelease := v.Release;
+      instance.FBuild := v.Build;
       //Result:= IntToStr(major) + '.' + IntToStr(minor) + '.' + IntToStr(rls) + '.' + IntToStr(build);
     finally
-      freemem(info, fileinfosize);
+    {  freemem(info, fileinfosize);         }
     end;
   end;
 

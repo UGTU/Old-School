@@ -150,6 +150,7 @@ type
     SpecIK: integer;
     SpclzIK: integer;
     GrupIK: integer;
+    TypePlan: integer;
     nameSpclz: string;  //именование Профиль/Программа/Специализация
     property iHour_gos: integer read fHourGos write SetHourGos;
     property iIndivid: integer read fIndividHour write SetIndividHour;
@@ -296,11 +297,12 @@ begin
     exit;
   end
   else                 //если сохранение прошло
-    if cbOtherUchPl.Checked then
+    if TypePlan=key_ModelPlan {cbOtherUchPl.Checked} then  //если это общий план-модель
     begin       //аналогичное изменение дисциплины в более новых планах
+      //dbcbSpclz.KeyValue;
       TUchPlanController.Instance.ChangeDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue,
-      dbcbGrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
-      StrToInt(dbeGroupVibor.Value), Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
+      dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
+      StrToInt(dbeGroupVibor.Value), dbcbSpclz.KeyValue, Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
     end;
 
   //автоматическая вставка БРС
