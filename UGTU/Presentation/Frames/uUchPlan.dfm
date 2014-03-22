@@ -1,12 +1,12 @@
 inherited fmUchPlan: TfmUchPlan
-  Width = 956
+  Width = 984
   Height = 669
   Font.Name = 'MS Sans Serif'
   ParentFont = False
-  ExplicitWidth = 956
+  ExplicitWidth = 984
   ExplicitHeight = 669
   inherited Panel1: TPanel
-    Width = 956
+    Width = 984
     Height = 669
     BevelInner = bvNone
     BevelOuter = bvNone
@@ -15,27 +15,29 @@ inherited fmUchPlan: TfmUchPlan
     object pnlAll: TPanel
       Left = 0
       Top = 82
-      Width = 956
+      Width = 984
       Height = 587
       Align = alClient
       BevelOuter = bvLowered
       Caption = 'pnlAll'
       TabOrder = 0
+      ExplicitWidth = 956
       object ScrollBox1: TScrollBox
         Left = 1
         Top = 1
-        Width = 954
+        Width = 982
         Height = 585
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 0
+        ExplicitWidth = 954
         DesignSize = (
-          954
+          982
           585)
         object Bevel1: TBevel
           Left = 0
           Top = 81
-          Width = 951
+          Width = 979
           Height = 7
           Anchors = [akLeft, akTop, akRight]
           Shape = bsTopLine
@@ -44,7 +46,7 @@ inherited fmUchPlan: TfmUchPlan
         object Bevel2: TBevel
           Left = 0
           Top = 160
-          Width = 951
+          Width = 979
           Height = 2
           Anchors = [akLeft, akTop, akRight]
           Shape = bsTopLine
@@ -74,7 +76,7 @@ inherited fmUchPlan: TfmUchPlan
         object Bevel6: TBevel
           Left = -2
           Top = 190
-          Width = 951
+          Width = 979
           Height = 2
           Anchors = [akLeft, akTop, akRight]
           Shape = bsTopLine
@@ -125,11 +127,12 @@ inherited fmUchPlan: TfmUchPlan
         object Panel2: TPanel
           Left = 0
           Top = 192
-          Width = 953
+          Width = 981
           Height = 391
           Anchors = [akLeft, akTop, akRight, akBottom]
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitWidth = 953
           object Splitter1: TSplitter
             Left = 450
             Top = 0
@@ -165,7 +168,7 @@ inherited fmUchPlan: TfmUchPlan
             end
             object dbgDisc: TDBGridEh
               Left = 5
-              Top = 28
+              Top = 25
               Width = 443
               Height = 363
               AllowedOperations = []
@@ -201,24 +204,26 @@ inherited fmUchPlan: TfmUchPlan
           object Panel6: TPanel
             Left = 453
             Top = 0
-            Width = 500
+            Width = 528
             Height = 391
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
             Visible = False
+            ExplicitWidth = 500
             DesignSize = (
-              500
+              528
               391)
             object ScrollBox2: TScrollBox
               Left = 1
               Top = 0
-              Width = 500
+              Width = 528
               Height = 391
               Anchors = [akLeft, akTop, akRight, akBottom]
               BorderStyle = bsNone
               TabOrder = 0
               OnResize = ScrollBox2Resize
+              ExplicitWidth = 500
               object sgDisc: TStringGrid
                 Left = 0
                 Top = 178
@@ -612,7 +617,7 @@ inherited fmUchPlan: TfmUchPlan
         object dbcbCklDisc: TDBLookupComboboxEh
           Left = 162
           Top = 85
-          Width = 750
+          Width = 778
           Height = 19
           Anchors = [akLeft, akTop, akRight]
           EditButtons = <>
@@ -620,11 +625,12 @@ inherited fmUchPlan: TfmUchPlan
           TabOrder = 3
           Visible = True
           OnKeyValueChanged = dbcbCklDiscKeyValueChanged
+          ExplicitWidth = 750
         end
         object dbcbGrpDisc: TDBLookupComboboxEh
           Left = 162
           Top = 113
-          Width = 750
+          Width = 778
           Height = 19
           Anchors = [akLeft, akTop, akRight]
           EditButtons = <>
@@ -632,6 +638,7 @@ inherited fmUchPlan: TfmUchPlan
           TabOrder = 4
           Visible = True
           OnKeyValueChanged = dbcbCklDiscKeyValueChanged
+          ExplicitWidth = 750
         end
         object Panel8: TPanel
           Left = 184
@@ -807,16 +814,17 @@ inherited fmUchPlan: TfmUchPlan
     object pnlTools: TPanel
       Left = 0
       Top = 0
-      Width = 956
+      Width = 984
       Height = 22
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitWidth = 956
       object ToolBar1: TToolBar
         Left = 0
         Top = 0
-        Width = 956
+        Width = 984
         Height = 22
         AutoSize = True
         Caption = 'ToolBar1'
@@ -912,13 +920,14 @@ inherited fmUchPlan: TfmUchPlan
     object pnlGroup: TPanel
       Left = 0
       Top = 22
-      Width = 956
+      Width = 984
       Height = 30
       Align = alTop
       Color = clMoneyGreen
       ParentBackground = False
       TabOrder = 2
       Visible = False
+      ExplicitWidth = 956
       object lblGroup: TLabel
         Left = 8
         Top = 9
@@ -966,27 +975,29 @@ inherited fmUchPlan: TfmUchPlan
     object pnlSpclz: TPanel
       Left = 0
       Top = 52
-      Width = 956
+      Width = 984
       Height = 30
       Align = alTop
       TabOrder = 3
       Visible = False
+      ExplicitWidth = 956
       DesignSize = (
-        956
+        984
         30)
       object lblSpclz: TLabel
         Left = 83
         Top = 7
-        Width = 36
+        Width = 64
         Height = 13
         Alignment = taRightJustify
         Anchors = [akLeft, akTop, akRight]
         Caption = 'lblSpclz'
+        ExplicitWidth = 36
       end
       object dbcbSpclz: TDBLookupComboboxEh
         Left = 125
         Top = 4
-        Width = 813
+        Width = 841
         Height = 19
         Anchors = [akLeft, akTop, akRight]
         EditButtons = <>
@@ -994,6 +1005,7 @@ inherited fmUchPlan: TfmUchPlan
         TabOrder = 0
         Visible = True
         OnKeyValueChanged = dbcbSpclzKeyValueChanged
+        ExplicitWidth = 813
       end
     end
   end
@@ -1043,7 +1055,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

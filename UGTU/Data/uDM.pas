@@ -543,6 +543,8 @@ type
     dsGetUchPlnGroup: TDataSource;
     aspAddRupGrup: TADOStoredProc;
     aspUpdateDiscInPlan: TADOStoredProc;
+    DelVedForContentDisc: TADOStoredProc;
+    Hard_DiscDel: TADOStoredProc;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

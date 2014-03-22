@@ -36,6 +36,7 @@ type
   private
     fVidZanyatIK: integer;
     fDefaultKafIK: integer;
+    DiscUPIK: integer;
   protected
     function DoApply:boolean; override;
     function DoCancel:boolean;override;
@@ -56,6 +57,7 @@ procedure TfrmEditControlVZ.Read(defaultKafIK, DiscInUchPlanIK, vidZanyatIK: int
 begin
   fDefaultKafIK:= defaultKafIK;
   fVidZanyatIK:= vidZanyatIK;
+  DiscUPIK := DiscInUchPlanIK;
   Caption:= Caption + vidZanyatName + '"';
   dbgContent.DataSource.DataSet:= TUchPlanController.Instance.LoadControlVZ(DiscInUchPlanIK, vidZanyatIK);
   if (fVidZanyatIK=33) then
@@ -77,7 +79,7 @@ end;
 function TfrmEditControlVZ.DoApply: boolean;
 begin
   if (dbgContent.DataSource.DataSet.State = dsInsert) or (dbgContent.DataSource.DataSet.State = dsEdit) then dbgContent.DataSource.DataSet.Post;
-  Result:= TUchPlanController.Instance.SaveControlVZ(fVidZanyatIK);
+  Result:= TUchPlanController.Instance.SaveControlVZ(DiscUPIK, fVidZanyatIK);
 end;
 
 function TfrmEditControlVZ.DoCancel: boolean;

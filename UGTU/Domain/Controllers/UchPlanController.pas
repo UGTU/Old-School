@@ -274,7 +274,7 @@ type
     {
         SaveControlVZ - сохран€ет информацию об форме контрол€ с ключом VidZanyatIK
     }
-    function SaveControlVZ(VidZanyatIK: integer): boolean;
+    function SaveControlVZ(aDiscUPIK,VidZanyatIK: integer): boolean;
 
     {
         SaveUchPlan - сохран€ет информацию об уч. плане с параметрами SpecIK, SpclzIK, FormEdIK, YearIK
@@ -556,9 +556,15 @@ begin
     myStoredProc.ExecProc;
     myStoredProc.Connection.CommitTrans;
   except
-    myStoredProc.Connection.RollbackTrans;
-    myStoredProc.Free;
-    raise;
+    if MessageDlg('Ѕудут удалены ведомости по данной дисциплине. ѕродолжить?',mtConfirmation,mbYesNoCancel,0) = mrYes then
+    begin
+      dm.Hard_DiscDel.Parameters.ParamByName('@ik_disc_uch_plan').Value := DiscInUchPlanIK;
+      dm.Hard_DiscDel.ExecProc;
+      myStoredProc.Connection.CommitTrans;
+    end
+    else myStoredProc.Connection.RollbackTrans;
+    //myStoredProc.Free;
+   // raise;
   end;
   myStoredProc.Free;
 end;
@@ -980,7 +986,7 @@ begin
   Result:= false;
   tempDS:= TGeneralController.Instance.GetNewADODataSet(false);
   try
-    tempDS.CommandText:= 'SELECT count(*) as vz_count FROM vid_zaniat WHERE (iK_vid_zanyat = ' + IntToStr(VidZanyatIK) + ') and (IkTypeZanyat in (1,2,4))';
+    tempDS.CommandText:= 'SELECT count(*) as vz_count FROM vid_zaniat WHERE (iK_vid_zanyat = ' + IntToStr(VidZanyatIK) + ') and (IkTypeZanyat in (1,2))';
     tempDS.Open;
     if tempDS.FieldByName('vz_count').AsInteger > 0 then
     begin
@@ -2019,21 +2025,24 @@ finally
 end;
 end;
 
-function TUchPlanController.SaveControlVZ(VidZanyatIK: integer): boolean;
+function TUchPlanController.SaveControlVZ(aDiscUPIK,VidZanyatIK: integer): boolean;
 var
   tempDS: TADODataSet;
-  IKList, TempIKList, ModuleIkList:TStringList;
-  i, n: integer;
+  IKList, TempIKList, ModuleIkList:TStringList;   //IKList - лист семестров
+  i, n: integer;                                  //ModuleIkList - лист модулей
   semKafList: TSemKafList;
+  canDel: boolean;
 begin
   IKList:= TStringList.Create;
   semKafList:= TSemKafList.Create;
   dm.adsContentVZ.DisableControls;
   ModuleIkList := TStringList.Create;
 try
+  canDel := false;
   dm.adsContentVZ.First;
   while (not dm.adsContentVZ.Eof) do
   begin
+    //проверки на полноту информации
     if (dm.adsContentVZ.FieldByName('tasks_count').Value = NULL) then
     begin
       Application.MessageBox('Ќеобходимо указать количество заданий дл€ всех записей. ≈сли данный вид зан€тий не подразумевает деление на несколько заданий, то укажите 1.','»зменение информации по виду зан€тий', MB_ICONERROR);
@@ -2044,13 +2053,15 @@ try
       Application.MessageBox('«начение в столбце " оличество заданий" не может быть равно 0. ≈сли данный вид зан€тий не подразумевает деление на несколько заданий, то укажите 1.','»зменение информации по виду зан€тий', MB_ICONERROR);
       exit;
     end;
+    //сбор данных по семестрам и модул€м в листы  (как стало)
     IKList.Add(dm.adsContentVZ.FieldByName('n_sem').AsString);
     if (dm.adsContentVZ.FieldByName('n_module').Value<>null)and(dm.adsContentVZ.FieldByName('n_module').AsString<>'') then
-    ModuleIKList.Add(dm.adsContentVZ.FieldByName('n_module').AsString) else
-    ModuleIKList.Add('null');
+        ModuleIKList.Add(dm.adsContentVZ.FieldByName('n_module').AsString)
+        else ModuleIKList.Add('null');
     dm.adsContentVZ.Next;
   end;
 
+  //проверка на повторы экзаменов и зачетов
   if (CheckForRepeat(vidZanyatIK, IKList)) then
   begin
       dm.adsContentVZ.EnableControls;
@@ -2060,6 +2071,7 @@ try
       exit;
   end;
 
+  //собрать данные по видам зан€тий с несколькими задани€ми
   vidZanyatTaskCountList.ClearListForVidZnayat(VidZanyatIK);
   dm.adsContentVZ.First;
   while (not dm.adsContentVZ.Eof) do
@@ -2072,7 +2084,8 @@ try
  // FreeAndNil(semKafList);
 
   TempIKList:= TStringList.Create;
-  dm.qContentUchPlan.First;      //прочитаем семестры которые есть в таблице по данному виду зан€тий
+  dm.qContentUchPlan.First;      //прочитаем семестры которые есть в таблице
+                                 //по данному виду зан€тий (как было)
   while (not dm.qContentUchPlan.Eof) do
   begin
     if (dm.qContentUchPlan.FieldByName('iK_vid_zanyat').AsInteger = vidZanyatIK) then
@@ -2080,24 +2093,27 @@ try
     dm.qContentUchPlan.Next;
   end;
 
+  //если семестры данного вида зан€тий не совпадают с теми, что были
   if (not IsListEqual(IKList, TempIKList)) then
   begin
+    //если еще остались хоть какие-то зан€ти€
     if (IKList.Count > 0) then
     begin
       i:= 0;
       while (I <= IKList.Count - 1) do
       begin
+        //если в обоих списках есть
         n:= TempIKList.IndexOf(IKList[i]);
         if n >= 0 then
         begin
+          //чистим совпадени€
           IKList.Delete(i);
           ModuleIKList.Delete(i);
-
           TempIKList.Delete(n);
         end
         else inc(i);
       end;
-      if TempIKList.Count > 0 then
+      if TempIKList.Count > 0 then    //начинаем править несовпадени€
       begin
         IKList.Sort;
         TempIKList.Sort;
@@ -2117,10 +2133,25 @@ try
             TempIKList.Delete(0);
           end;
         end;
-        if TempIKList.Count > 0 then
+        if TempIKList.Count > 0 then   //если были удалены какие-то виды и зан€ти€
           for I := 0 to TempIKList.Count - 1 do
             if dm.qContentUchPlan.Locate('iK_vid_zanyat; n_sem', VarArrayOf([vidZanyatIK, TempIKList[0]]), [loPartialKey]) then
-              dm.qContentUchPlan.Delete;
+            begin
+              try
+                dm.qContentUchPlan.Delete;
+              except
+                 if not canDel then
+                   if MessageDlg('Ѕудут удалены ведомости по данной дисциплине. ѕродолжить?',mtConfirmation,mbYesNoCancel,0) = mrYes then
+                      canDel := true;
+                 if canDel then with dm.DelVedForContentDisc do
+                 begin
+                   Parameters.ParamByName('@n_sem').Value := dm.qContentUchPlan.FieldByName('n_sem').AsInteger;
+                   Parameters.ParamByName('@ik_vid_zanyat').Value := dm.qContentUchPlan.FieldByName('iK_vid_zanyat').AsInteger;
+                   Parameters.ParamByName('@ik_disc_ucl_pl').Value := aDiscUPIK;
+                   ExecProc;
+                 end;
+              end;
+            end;
       end;
       if IKList.Count > 0 then
         for i:= 0 to IKList.Count-1 do

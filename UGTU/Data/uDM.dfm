@@ -3154,8 +3154,8 @@ object dm: Tdm
         Precision = 10
         Value = 0
       end>
-    Left = 152
-    Top = 544
+    Left = 248
+    Top = 528
   end
   object aspAddDefaultPlans: TADOStoredProc
     Connection = DBConnect
@@ -3566,92 +3566,157 @@ object dm: Tdm
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@i_type'
         Attributes = [paNullable]
         DataType = ftWord
         Precision = 3
+        Value = Null
       end
       item
         Name = '@ik_disc_uch_plan'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_uch_plan'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_default_kaf'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@iHour_gos'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@iIndivid'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_ckl_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_grp_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Cname_ckl_disc_gos'
         Attributes = [paNullable]
         DataType = ftString
         Size = 20
+        Value = Null
       end
       item
         Name = '@ik_pdgrp_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ViborGroup'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_spclz'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@source_disc_uch_plan'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 288
     Top = 696
+  end
+  object DelVedForContentDisc: TADOStoredProc
+    Connection = DBConnect
+    ProcedureName = 'DelVedomostForContentDisc;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@n_sem'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_disc_ucl_pl'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@ik_vid_zanyat'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 32
+    Top = 544
+  end
+  object Hard_DiscDel: TADOStoredProc
+    Connection = DBConnect
+    ProcedureName = 'Hard_DiscDel;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@ik_disc_uch_plan'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 120
+    Top = 544
   end
 end
