@@ -368,6 +368,8 @@ begin
     NextStep(1,'Формирование бланка');
   Replace('#fac#',
     dmUspevaemost.adospSelNapr.FieldByName('Cshort_name_fac').AsString);
+  Range['w12','w12'].Value2:= dmUspevaemost.adospSelNapr.FieldByName('cshort_vid_zanyat').AsString +' ('+
+  dmUspevaemost.adospSelNapr.FieldByName('SemHourCount').AsString+' ч.)';
 
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_form_ed').AsInteger=2 then
     Range['k6','m6'].Clear
