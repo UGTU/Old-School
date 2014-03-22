@@ -2783,7 +2783,7 @@ begin
      VidZanShortName:= 'Прак';
     end;
    end;
-   VedName:=VedName + dmUspevaemost.adospVedTop.FieldByName('cNumber_Ved').AsString;
+   VedName:=VedName + ' '+IntToStr(ikVed);
 
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Экспорт в Excel ведомости '+
           dmUspevaemost.adospVedTop.FieldByName('cName_disc').AsString+ ' '+VidZanShortName);
