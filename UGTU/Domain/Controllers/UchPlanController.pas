@@ -2203,7 +2203,7 @@ try
         end;
         if TempIKList.Count > 0 then   //если были удалены какие-то виды и занятия
           for I := 0 to TempIKList.Count - 1 do
-            if dm.qContentUchPlan.Locate('iK_vid_zanyat; n_sem', VarArrayOf([vidZanyatIK, TempIKList[0]]), [loPartialKey]) then
+            if dm.qContentUchPlan.Locate('iK_vid_zanyat; n_sem', VarArrayOf([vidZanyatIK, TempIKList[i]]), [loPartialKey]) then
             begin
               //если существуют ведомости для данного вида занятий
               if dm.qVedomostForContent.Locate('ik_upContent',dm.qContentUchPlan.FieldByName('ik_upContent').AsInteger,[loPartialKey]) then
