@@ -545,6 +545,7 @@ type
     aspUpdateDiscInPlan: TADOStoredProc;
     DelVedForContentDisc: TADOStoredProc;
     Hard_DiscDel: TADOStoredProc;
+    qVedomostForContent: TADOQuery;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

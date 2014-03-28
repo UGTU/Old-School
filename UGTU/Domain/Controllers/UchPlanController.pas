@@ -12,7 +12,7 @@ interface
 uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM, uDMUgtuStructure,
   Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj, ComCtrls, Math,
-  ConstantRepository;
+  ConstantRepository, DiscClasses;
 
 const FISCULTURA=10; //для особого учета зачетных единиц физической культуры
       FISCULTURA_CIKL = 19;  //для особого учета зачетных единиц физической культуры
@@ -26,7 +26,7 @@ type
   private
     FMessageHandle: HWND;
     function CheckSemesterString(sourceStr: string): boolean;
-    function CheckForRepeat(VidZanyatIK: integer; list: TStringList): boolean;
+    function CheckForRepeat(VidZanyatIK: integer; list:  TStringList{*TContentDiscUnits*}): boolean;
     function isListEqual(first:TStringList; second: TStringList):boolean;
     function isAuditorCorrect(value: string):boolean;
     function getStringListFromStr(sourceStr: string):TStringList;
@@ -426,7 +426,7 @@ var
   arColumns: array of TColumnInfo;
   weekCountExceptionList: TVidZanyatExceptionList;
   vidZanyatTaskCountList: TVidZanyatExceptionList;
-
+  vedomDelList: TStringList;
 
 
 const
@@ -438,6 +438,7 @@ const
 
 constructor TUchPlanController.Create;
 begin
+  
   inherited Create;
   raise Exception.CreateFmt('Доступ к классу %s можно получить только через поле Instance!', [ClassName]);
 end;
@@ -447,6 +448,7 @@ begin
   inherited Create;
   weekCountExceptionList:= TVidZanyatExceptionList.Create;
   vidZanyatTaskCountList:= TVidZanyatExceptionList.Create;
+  vedomDelList := TStringList.Create;
 end;
 
 class function TUchPlanController.AccessInstance(Request: Integer):
@@ -978,7 +980,7 @@ begin
   Result:= true;
 end;
 
-function TUchPlanController.CheckForRepeat(VidZanyatIK: integer; list: TStringList): boolean;
+function TUchPlanController.CheckForRepeat(VidZanyatIK: integer; list: TStringList{*TContentDiscUnits*}): boolean;
 var
   i, j, n:integer;
   tempDS: TADODataSet;
@@ -1118,16 +1120,25 @@ var
   semKafList: TSemKafList;
   n: integer;
 begin
+
+  vedomDelList.Clear;
+
   with dm do
   begin
     if qContentUchPlan.Active then qContentUchPlan.Close;
     if Assigned(weekCountExceptionList) then weekCountExceptionList.Clear;
     if Assigned(vidZanyatTaskCountList) then vidZanyatTaskCountList.Clear;
+    //грузим содержание дисциплины и ведомости по этому содержанию
     qContentUchPlan.Connection:= dm.DBConnect;
+    qVedomostForContent.Connection:= dm.DBConnect;
     qContentUchPlan.SQL.Clear;
+    qVedomostForContent.SQL.Clear;
     qContentUchPlan.SQL.Add('Select * From Content_UchPl Where ik_disc_uch_plan = ' + IntToStr(DiscInUchPlanIK));
+    qVedomostForContent.SQL.Add('Select * from Vedomost where ik_upContent in (Select ik_upContent From Content_UchPl Where ik_disc_uch_plan = ' + IntToStr(DiscInUchPlanIK)+')');
     qContentUchPlan.ExecSQL;
+    qVedomostForContent.ExecSQL;
     qContentUchPlan.Open;
+    qVedomostForContent.Open;
     tempDS:= TGeneralController.Instance.GetNewADODataSet(false);
     semKafList:= TSemKafList.Create;
     try
@@ -1425,6 +1436,7 @@ begin
       DiscInUchPlanIK := Parameters.ParamByName('@RETURN_VALUE').Value;
     end;
 
+    //если новая дисциплина, то необходимо проставить id новой дисциплины всем видам занятий
     dm.qContentUchPlan.First;
     while (not dm.qContentUchPlan.Eof) do
     begin
@@ -1432,6 +1444,15 @@ begin
       dm.qContentUchPlan.FieldByName('ik_disc_uch_plan').AsInteger:= DiscInUchPlanIK;
       dm.qContentUchPlan.Next;
     end;
+   // if  then
+  if vedomDelList.Count>0 then
+  for I := 0 to vedomDelList.Count - 1 do 
+    with dm.DelVedForContentDisc do
+    begin
+      Parameters.ParamByName('@ik_upContent').Value := StrToInt(vedomDelList[i]);
+      ExecProc; 
+    end;  
+      
     dm.qContentUchPlan.UpdateBatch;
 
     //исключения по количеству недель
@@ -2028,47 +2049,68 @@ end;
 function TUchPlanController.SaveControlVZ(aDiscUPIK,VidZanyatIK: integer): boolean;
 var
   tempDS: TADODataSet;
-  IKList, TempIKList, ModuleIkList:TStringList;   //IKList - лист семестров
-  i, n: integer;                                  //ModuleIkList - лист модулей
+  //*newContentList, oldContentList: TContentDiscUnits;
+  TempIKList,IKList, ModuleIkList:TStringList;   //IKList - лист семестров
+  i, n, n_module: integer;                                  //ModuleIkList - лист модулей
   semKafList: TSemKafList;
   canDel: boolean;
-begin
-  IKList:= TStringList.Create;
+begin  
+  //*newContentList := TContentDiscUnits.Create(aDiscUPIK);
+  //*oldContentList := TContentDiscUnits.Create(aDiscUPIK);
+  //newSemList:= TStringList.Create;   //семестры
+  IKList := TStringList.Create;
+  TempIKList := TStringList.Create;
+  
   semKafList:= TSemKafList.Create;
   dm.adsContentVZ.DisableControls;
-  ModuleIkList := TStringList.Create;
+  ModuleIkList := TStringList.Create;  //модули
+  
 try
   canDel := false;
   dm.adsContentVZ.First;
   while (not dm.adsContentVZ.Eof) do
+  with dm.adsContentVZ do
   begin
     //проверки на полноту информации
-    if (dm.adsContentVZ.FieldByName('tasks_count').Value = NULL) then
+    if (FieldByName('tasks_count').Value = NULL) then
     begin
       Application.MessageBox('Необходимо указать количество заданий для всех записей. Если данный вид занятий не подразумевает деление на несколько заданий, то укажите 1.','Изменение информации по виду занятий', MB_ICONERROR);
       exit;
     end;
-    if (dm.adsContentVZ.FieldByName('tasks_count').AsInteger = 0) then
+    if (FieldByName('tasks_count').AsInteger = 0) then
     begin
       Application.MessageBox('Значение в столбце "Количество заданий" не может быть равно 0. Если данный вид занятий не подразумевает деление на несколько заданий, то укажите 1.','Изменение информации по виду занятий', MB_ICONERROR);
       exit;
     end;
+    
     //сбор данных по семестрам и модулям в листы  (как стало)
+    if (FieldByName('n_module').Value<>null)and(FieldByName('n_module').AsString<>'') then
+        n_module := FieldByName('n_module').AsInteger else n_module := 0; 
+    //*newContentList.add(TContentDiscUnit.Create(FieldByName('n_sem').AsString, VidZanyatIK,
+    //*                     FieldByName('ik_upContent').AsInteger,n_module));
     IKList.Add(dm.adsContentVZ.FieldByName('n_sem').AsString);
-    if (dm.adsContentVZ.FieldByName('n_module').Value<>null)and(dm.adsContentVZ.FieldByName('n_module').AsString<>'') then
-        ModuleIKList.Add(dm.adsContentVZ.FieldByName('n_module').AsString)
+   // newContentIKList.Add(dm.adsContentVZ.FieldByName('ik_upContent').AsString);
+    
+      if (dm.adsContentVZ.FieldByName('n_module').Value<>null)and(dm.adsContentVZ.FieldByName('n_module').AsString<>'') then
+         ModuleIKList.Add(dm.adsContentVZ.FieldByName('n_module').AsString)
         else ModuleIKList.Add('null');
-    dm.adsContentVZ.Next;
+    Next;
   end;
 
   //проверка на повторы экзаменов и зачетов
-  if (CheckForRepeat(vidZanyatIK, IKList)) then
+  if (CheckForRepeat(vidZanyatIK, IKList{*newContentList*})) then
   begin
-      dm.adsContentVZ.EnableControls;
-      Result:= false;
-      FreeAndNil(IKList);
-      Application.MessageBox('Данный вид занятий не может проводиться дважды в одном семестре...','Изменение информации по виду занятий', MB_ICONERROR);
-      exit;
+    dm.adsContentVZ.EnableControls;
+    Result:= false;
+  //  FreeAndNil(newSemList);
+    FreeAndNil(IKList);
+    FreeAndNil(TempIKList);
+    FreeAndNil(semKafList);
+    
+    //*newContentList.Clear;
+    //*newContentList.Free;
+    Application.MessageBox('Данный вид занятий не может проводиться дважды в одном семестре...','Изменение информации по виду занятий', MB_ICONERROR);
+    exit;
   end;
 
   //собрать данные по видам занятий с несколькими заданиями
@@ -2076,24 +2118,49 @@ try
   dm.adsContentVZ.First;
   while (not dm.adsContentVZ.Eof) do
   begin
-  n:= semKafList.GetNextSemKafNumber(VidZanyatIK, dm.adsContentVZ.FieldByName('n_sem').AsInteger, dm.adsContentVZ.FieldByName('ik_kaf').AsInteger);
+    n:= semKafList.GetNextSemKafNumber(VidZanyatIK, dm.adsContentVZ.FieldByName('n_sem').AsInteger, dm.adsContentVZ.FieldByName('ik_kaf').AsInteger);
     if dm.adsContentVZ.FieldByName('tasks_count').AsInteger <> 1 then
       vidZanyatTaskCountList.AddTaskRecord(VidZanyatIK, dm.adsContentVZ.FieldByName('n_sem').AsInteger, dm.adsContentVZ.FieldByName('ik_kaf').AsInteger, n, dm.adsContentVZ.FieldByName('tasks_count').AsInteger);
     dm.adsContentVZ.Next;
   end;
  // FreeAndNil(semKafList);
 
-  TempIKList:= TStringList.Create;
+  //--TempIKList:= TStringList.Create;
   dm.qContentUchPlan.First;      //прочитаем семестры которые есть в таблице
                                  //по данному виду занятий (как было)
   while (not dm.qContentUchPlan.Eof) do
   begin
     if (dm.qContentUchPlan.FieldByName('iK_vid_zanyat').AsInteger = vidZanyatIK) then
-     TempIKList.Add(dm.qContentUchPlan.FieldByName('n_sem').AsString);
+    begin
+     //temp oldContentIKList.Add(dm.qContentUchPlan.FieldByName('n_sem').AsString);
+     TempIKList.Add(dm.qContentUchPlan.FieldByName('n_sem').AsString)
+    end;
     dm.qContentUchPlan.Next;
   end;
 
-  //если семестры данного вида занятий не совпадают с теми, что были
+  //редактирование уже существующих
+ {* n := 0;
+  repeat
+  if dm.qContentUchPlan.Locate('ik_upContent', newContentIKList[n], [loPartialKey]) then
+  begin
+
+    dm.qContentUchPlan.Edit;
+    dm.qContentUchPlan.FieldByName('iK_vid_zanyat').Value:= vidZanyatIK;
+    dm.qContentUchPlan.FieldByName('n_sem').Value:= newSemList[n];
+
+    dm.adsContentVZ.Locate('ik_upContent', newContentIKList[n], [loPartialKey]);
+
+    dm.qContentUchPlan.FieldByName('ik_kaf').Value:= dm.adsContentVZ.FieldByName('ik_kaf').Value;
+    dm.qContentUchPlan.FieldByName('n_module').Value:= dm.adsContentVZ.FieldByName('n_module').Value;
+    dm.qContentUchPlan.FieldByName('i_balls').Value:= dm.adsContentVZ.FieldByName('i_balls').Value;
+    dm.qContentUchPlan.Post;
+    oldContentIKList.Delete(oldContentIKList.IndexOf(newContentIKList[n]));
+    newContentIKList.Delete(n);
+    newSemList.Delete(n);
+  end else n:= n+1;
+  until n=newContentIKList.Count;    *}
+
+   //если семестры данного вида занятий не совпадают с теми, что были
   if (not IsListEqual(IKList, TempIKList)) then
   begin
     //если еще остались хоть какие-то занятия
@@ -2110,6 +2177,7 @@ try
           IKList.Delete(i);
           ModuleIKList.Delete(i);
           TempIKList.Delete(n);
+         // TempContentIKList.Delete(n);
         end
         else inc(i);
       end;
@@ -2137,20 +2205,21 @@ try
           for I := 0 to TempIKList.Count - 1 do
             if dm.qContentUchPlan.Locate('iK_vid_zanyat; n_sem', VarArrayOf([vidZanyatIK, TempIKList[0]]), [loPartialKey]) then
             begin
-              try
-                dm.qContentUchPlan.Delete;
-              except
-                 if not canDel then
-                   if MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',mtConfirmation,mbYesNoCancel,0) = mrYes then
-                      canDel := true;
-                 if canDel then with dm.DelVedForContentDisc do
-                 begin
-                   Parameters.ParamByName('@n_sem').Value := dm.qContentUchPlan.FieldByName('n_sem').AsInteger;
-                   Parameters.ParamByName('@ik_vid_zanyat').Value := dm.qContentUchPlan.FieldByName('iK_vid_zanyat').AsInteger;
-                   Parameters.ParamByName('@ik_disc_ucl_pl').Value := aDiscUPIK;
-                   ExecProc;
-                 end;
-              end;
+              //если существуют ведомости для данного вида занятий
+              if dm.qVedomostForContent.Locate('ik_upContent',dm.qContentUchPlan.FieldByName('ik_upContent').AsInteger,[loPartialKey]) then
+              begin
+                if canDel or (MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',mtConfirmation,mbYesNoCancel,0) = mrYes) then
+                begin
+                  canDel := true;
+                  vedomDelList.Add(dm.qContentUchPlan.FieldByName('ik_upContent').AsString);
+              //    with dm.DelVedForContentDisc do
+              //    begin
+              //      Parameters.ParamByName('@ik_upContent').Value := dm.qContentUchPlan.FieldByName('ik_upContent').AsInteger;
+              //      Open;
+              //    end;
+                 dm.qContentUchPlan.Delete;
+                end;
+              end else dm.qContentUchPlan.Delete;
             end;
       end;
       if IKList.Count > 0 then
@@ -2223,7 +2292,7 @@ try
   end;
 //  dm.adsContentVZ.EnableControls;
 
-  {dm.qContentUchPlan.First;
+ { dm.qContentUchPlan.First;
   while (not dm.qContentUchPlan.Eof) do
   begin
     if (dm.qContentUchPlan.FieldByName('iK_vid_zanyat').AsInteger = vidZanyatIK) then
@@ -2240,7 +2309,7 @@ try
     dm.adsContentVZ.Next;
   end;
   dm.adsContentVZ.EnableControls;
-  Result:= true;                     }
+  Result:= true;      }
 finally
   dm.adsContentVZ.EnableControls;
   if Assigned(IKList) then FreeAndNil(IKList);

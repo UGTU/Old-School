@@ -117,6 +117,7 @@
     </DCCReference>
     <DCCReference Include="Domain\Classes\ConstantRepository.pas" />
     <DCCReference Include="Domain\Classes\DateFormat.pas" />
+    <DCCReference Include="Domain\Classes\DiscClasses.pas" />
     <DCCReference Include="Domain\Classes\MethodWorkComboboxFilter.pas" />
     <DCCReference Include="Domain\Classes\uBRSBallCounter.pas" />
     <DCCReference Include="Domain\Common\RegularEx.pas" />

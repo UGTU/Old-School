@@ -188,6 +188,7 @@ begin
   sgDisc.Cells[1,0]:= 'Значение';
   sgDisc.Cells[2,0]:= 'Кафедра';
 
+
   isCellTextChange:= false;
   if fixRow <> nil then fixRow.Clear
   else fixRow:= TStringList.Create;
