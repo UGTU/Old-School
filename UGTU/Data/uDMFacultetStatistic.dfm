@@ -201,8 +201,8 @@ object dmFacultetStatistic: TdmFacultetStatistic
         Precision = 10
         Value = Null
       end>
-    Left = 231
-    Top = 40
+    Left = 239
+    Top = 24
     object adospSelKursItogiColik_grup: TIntegerField
       FieldName = 'ik_grup'
       Visible = False

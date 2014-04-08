@@ -3215,7 +3215,7 @@ begin
     tempStoredProc.First;  //FIO
     studNames:= '';
     flAreChanged:= false;
-    while not tempStoredProc.Eof do
+   { while not tempStoredProc.Eof do
     begin
       if (flAreChanged) then
         studNames:=studNames+', ';
@@ -3224,7 +3224,7 @@ begin
       tempStoredProc.Next;
     end;
     if (flAreChanged) then
-      MessageBox(Handle, 'Произошла ошибка при обращении к серверу.','ИС Деканат',MB_OK);
+      MessageBox(Handle, 'Произошла ошибка при обращении к серверу.','ИС Деканат',MB_OK);     }
     finally
       tempStoredProc.Free;
     end;

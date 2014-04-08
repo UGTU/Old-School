@@ -17,21 +17,21 @@ inherited frmGroupEdt: TfrmGroupEdt
   inherited Bevel1: TBevel
     Top = 49
     Width = 324
-    Height = 170
+    Height = 156
     ExplicitTop = 49
     ExplicitWidth = 324
     ExplicitHeight = 170
   end
   inherited Panel1: TPanel
-    Top = 275
+    Top = 272
     Width = 324
-    Height = 42
-    ExplicitTop = 275
+    Height = 45
+    ExplicitTop = 272
     ExplicitWidth = 324
-    ExplicitHeight = 42
+    ExplicitHeight = 45
     inherited bbOK: TBitBtn
       Left = 154
-      Top = 6
+      Top = 9
       Width = 77
       ExplicitLeft = 154
       ExplicitTop = 6
@@ -39,7 +39,7 @@ inherited frmGroupEdt: TfrmGroupEdt
     end
     inherited bbApply: TBitBtn
       Left = 6
-      Top = 9
+      Top = 12
       Width = 80
       TabOrder = 2
       Visible = False
@@ -49,7 +49,7 @@ inherited frmGroupEdt: TfrmGroupEdt
     end
     inherited bbCancel: TBitBtn
       Left = 235
-      Top = 6
+      Top = 9
       TabOrder = 1
       ExplicitLeft = 235
       ExplicitTop = 6
@@ -64,9 +64,10 @@ inherited frmGroupEdt: TfrmGroupEdt
     Left = 0
     Top = 49
     Width = 324
-    Height = 170
+    Height = 156
     Align = alClient
     TabOrder = 1
+    ExplicitHeight = 170
     object Label7: TLabel
       Left = 153
       Top = 47
@@ -136,6 +137,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1091#1095#1077#1073#1085#1086#1075#1086' '#1087#1083#1072#1085#1072' '#1089' '#1087#1077#1088#1077#1085#1086#1089#1086#1084' '#1086#1094#1077#1085#1086#1082
       Enabled = False
       TabOrder = 0
+      Visible = False
       OnClick = CheckBox1Click
     end
     object edtName: TDBEditEh
@@ -241,11 +243,12 @@ inherited frmGroupEdt: TfrmGroupEdt
   end
   object pnlProfile: TPanel [4]
     Left = 0
-    Top = 219
+    Top = 205
     Width = 324
-    Height = 56
+    Height = 67
     Align = alBottom
     TabOrder = 3
+    ExplicitTop = 199
     object Label8: TLabel
       Left = 16
       Top = 6

@@ -3302,7 +3302,9 @@ CycleIK, GroupIK,PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour,
 GroupViborNum, SpclzIK: integer; CodeGOS: string; aCompetenceList: TStringList): Boolean;
 var
   DataSet: TADOStoredProc;
-  ik_disc_uch_plan_temp, ik_uch_plan, year_uch_plan: integer;
+  i, ik_disc_uch_plan_temp, ik_uch_plan, year_uch_plan: integer;
+  grupError: TStringList;
+  msgstr: string;
 begin
   DataSet:= TGeneralController.Instance.GetNewADOStoredProc('Get_DiscUchPlan_YearUchPlan', false);
   if DiscInUchPlanIK < 0 then
@@ -3313,9 +3315,10 @@ begin
   else
   DataSet.Parameters.CreateParameter('@ik_disc_uch_plan',ftInteger,pdInput, 0, DiscInUchPlanIK);
   try
-    try
+    try   //DataSet.Open;
       DataSet.Open;
       DataSet.First;
+      grupError := TStringList.Create;
       while not DataSet.Eof do
       begin
         ik_uch_plan:= dataset.FieldByName('ik_uch_plan').AsInteger;
@@ -3326,21 +3329,28 @@ begin
           ik_disc_uch_plan_temp:=0;
 
         try
-
-        if ik_disc_uch_plan_temp=0 then          //добавление
-          AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK, PodGroupIK,
-                DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK, CodeGOS)
-        else                                     //замена
-          ReplaseDisc(ik_uch_plan, ik_disc_uch_plan_temp, DiscInUchPlanIK, CycleIK, GroupIK,
-          PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK, CodeGOS);
+          if ik_disc_uch_plan_temp=0 then          //добавление
+            AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK, PodGroupIK,
+                       DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK, CodeGOS)
+          else                                     //замена
+            ReplaseDisc(ik_uch_plan, ik_disc_uch_plan_temp, DiscInUchPlanIK, CycleIK, GroupIK,
+                        PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,SpclzIK, CodeGOS);
 
         except
-          if MessageBox(MessageHandle, PAnsiChar('Не удалось внести изменения в учебный план '+ inttostr(year_uch_plan)+ ' года. Продолжить?'),
-					        'ИС УГТУ', MB_YESNO)=IDNO then exit;
+           if grupError.Count>0 then grupError.Add(', ' + dataset.FieldByName('grup_comment').AsString)
+           else grupError.Add(dataset.FieldByName('grup_comment').AsString);
         end;
         DataSet.Next;
       end;
-    finally
+      if grupError.Count>0 then
+      begin
+        msgstr := '';
+        for i := 0 to grupError.Count - 1 do msgstr := msgstr + grupError[i];
+        ShowMessage('Не удалось распространить изменения на учебные планы следующих групп: ' + msgstr + '.');
+       {  if MessageBox(MessageHandle, PAnsiChar('Не удалось внести изменения в учебный план '+ inttostr(year_uch_plan)+ ' года. Продолжить?'),
+					        'ИС УГТУ', MB_YESNO)=IDNO then exit;}
+      end;
+    finally  //DataSet.Open;
       DataSet.Close;
       DataSet.Free;
     end;

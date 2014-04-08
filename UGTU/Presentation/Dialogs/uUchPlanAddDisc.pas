@@ -299,7 +299,7 @@ begin
   end
   else                 //если сохранение прошло
     if TypePlan=key_ModelPlan {cbOtherUchPl.Checked} then  //если это общий план-модель
-    begin       //аналогичное изменение дисциплины в более новых планах
+    begin       //аналогичное изменение дисциплины в планах-потомках
       //dbcbSpclz.KeyValue;
       TUchPlanController.Instance.ChangeDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue,
       dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
