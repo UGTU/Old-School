@@ -15,11 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 691
       Height = 620
-<<<<<<< HEAD
-      ActivePage = tsDiplom
-=======
       ActivePage = tsVed
->>>>>>> 46a20661ea5b3633024568dfe04a0c355130ebe1
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
