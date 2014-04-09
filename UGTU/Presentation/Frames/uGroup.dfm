@@ -15,7 +15,11 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 691
       Height = 620
+<<<<<<< HEAD
+      ActivePage = tsDiplom
+=======
       ActivePage = tsVed
+>>>>>>> 46a20661ea5b3633024568dfe04a0c355130ebe1
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -755,7 +759,7 @@ inherited fmGroup: TfmGroup
               Visible = True
             end
             object dbdteBRSExam: TDBDateTimeEditEh
-              Left = 158
+              Left = 159
               Top = 4
               Width = 79
               Height = 19
@@ -1201,8 +1205,8 @@ inherited fmGroup: TfmGroup
             OnChange = dbdteAttBeginChange
           end
           object nAtt: TDBComboBoxEh
-            Left = 227
-            Top = 9
+            Left = 231
+            Top = 10
             Width = 61
             Height = 19
             EditButtons = <>
