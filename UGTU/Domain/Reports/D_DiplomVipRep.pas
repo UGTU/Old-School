@@ -269,8 +269,9 @@ begin
     Replace('#АттГод#', dmDiplom.adospGetVipiscaForDiplomattYear.AsString);
     Replace('#DocumName#', dmDiplom.adospGetVipiscaForDiplomdocumName.AsString);
     Replace('#shifr#', dmDiplom.adospGetVipiscaForDiplomSh_spec.AsString);
+    Replace('#Квалиф#', dmDiplom.adospGetVipiscaForDiplom.FieldByName('Cname_qualif').AsString);
     {Replace('#ФИО#', dmDiplom.adospGetVipiscaForDiplomStudName.AsString);
-    Replace('#Квалиф#', dmDiplom.adospGetVipiscaForDiplom.FieldByName('Cname_qualif').AsString);  }
+      }
   end;
   str:= TGeneralController.Instance.GetFullDate(dmDiplom.adospGetVipiscaForDiplomDd_birth.AsDateTime)+' года';
   Replace('#ДатаРожд#', str);   //docum

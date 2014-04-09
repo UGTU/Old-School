@@ -188,6 +188,7 @@ begin
   sgDisc.Cells[1,0]:= 'Значение';
   sgDisc.Cells[2,0]:= 'Кафедра';
 
+
   isCellTextChange:= false;
   if fixRow <> nil then fixRow.Clear
   else fixRow:= TStringList.Create;
@@ -298,7 +299,7 @@ begin
   end
   else                 //если сохранение прошло
     if TypePlan=key_ModelPlan {cbOtherUchPl.Checked} then  //если это общий план-модель
-    begin       //аналогичное изменение дисциплины в более новых планах
+    begin       //аналогичное изменение дисциплины в планах-потомках
       //dbcbSpclz.KeyValue;
       TUchPlanController.Instance.ChangeDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue,
       dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,

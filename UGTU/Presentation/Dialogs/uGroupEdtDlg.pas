@@ -284,8 +284,8 @@ try
   end
   else
   begin
-    if (CheckBox1.Checked) then  //перенос оценок со старого уч. плана
-      TUchPlanController.Instance.UpdateUspev(ik, dblcbUchPln.KeyValue);
+   // if (CheckBox1.Checked) then  //перенос оценок со старого уч. плана
+    TUchPlanController.Instance.UpdateUspev(ik, FUchPlan);
 
     with dmGroupActions.adospAppendGrup.Parameters do
     begin

@@ -58,6 +58,7 @@ begin
   fDefaultKafIK:= defaultKafIK;
   fVidZanyatIK:= vidZanyatIK;
   DiscUPIK := DiscInUchPlanIK;
+
   Caption:= Caption + vidZanyatName + '"';
   dbgContent.DataSource.DataSet:= TUchPlanController.Instance.LoadControlVZ(DiscInUchPlanIK, vidZanyatIK);
   if (fVidZanyatIK=33) then

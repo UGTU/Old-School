@@ -344,7 +344,8 @@ uses
   EgeCheckService in 'ExternalServicesConsuming\EgeCheckService.pas',
   uXMLEGEReader in 'Domain\Controllers\uXMLEGEReader.pas',
   A_EGECertReport in 'Domain\Reports\A_EGECertReport.pas',
-  DateFormat in 'Domain\Classes\DateFormat.pas';
+  DateFormat in 'Domain\Classes\DateFormat.pas',
+  DiscClasses in 'Domain\Classes\DiscClasses.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

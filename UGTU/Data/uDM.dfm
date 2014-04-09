@@ -231,8 +231,8 @@ object dm: Tdm
   end
   object dsEdtPost: TDataSource
     DataSet = adospEdtPost
-    Left = 1052
-    Top = 420
+    Left = 1084
+    Top = 492
   end
   object adospEdtPost: TADOStoredProc
     Connection = DBConnect
@@ -302,8 +302,8 @@ object dm: Tdm
         Precision = 10
         Value = Null
       end>
-    Left = 1049
-    Top = 387
+    Left = 1089
+    Top = 443
   end
   object adospWriteVer: TADOStoredProc
     Connection = DBConnect
@@ -686,8 +686,8 @@ object dm: Tdm
     CommandText = 'Abit_Postup_view'
     CommandType = cmdTable
     Parameters = <>
-    Left = 1041
-    Top = 464
+    Left = 1009
+    Top = 544
     object adodsPostupViewRegNomer: TIntegerField
       Alignment = taLeftJustify
       DisplayLabel = #1053#1086#1084#1077#1088' '#1079#1072#1103#1074#1083#1077#1085#1080#1103
@@ -765,8 +765,8 @@ object dm: Tdm
   end
   object dsPostupView: TDataSource
     DataSet = adodsPostupView
-    Left = 1044
-    Top = 499
+    Left = 1084
+    Top = 555
   end
   object adotbltypeTema: TADOTable
     Connection = DBConnect
@@ -1468,8 +1468,8 @@ object dm: Tdm
   end
   object dsTypeKatZach: TDataSource
     DataSet = adodsTypeKatZach
-    Left = 968
-    Top = 418
+    Left = 976
+    Top = 490
   end
   object adodsTypeKatZach: TADODataSet
     Connection = DBConnect
@@ -1477,8 +1477,8 @@ object dm: Tdm
     CommandText = 'TypeKatZach'
     CommandType = cmdTable
     Parameters = <>
-    Left = 965
-    Top = 388
+    Left = 981
+    Top = 428
   end
   object adodsVidOtch: TADODataSet
     CursorType = ctStatic
@@ -2667,7 +2667,7 @@ object dm: Tdm
     Connection = DBConnect
     LockType = ltBatchOptimistic
     Parameters = <>
-    Left = 1048
+    Left = 960
     Top = 362
   end
   object aspAbitDisc: TADOStoredProc
@@ -2727,9 +2727,9 @@ object dm: Tdm
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 
-      'Select ik_kaf, n_sem, tasks_count, n_module, i_balls From Conten' +
-      't_UchPl LEFT JOIN Vid_zanyat_with_several_tasks vzst ON Content_' +
-      'UchPl.ik_upContent = vzst.ik_upContent'
+      'Select ik_upContent, ik_kaf, n_sem, tasks_count, n_module, i_bal' +
+      'ls From Content_UchPl LEFT JOIN Vid_zanyat_with_several_tasks vz' +
+      'st ON Content_UchPl.ik_upContent = vzst.ik_upContent'
     Parameters = <>
     Left = 977
     Top = 301
@@ -3512,13 +3512,13 @@ object dm: Tdm
     CursorType = ctStatic
     CommandText = 'select * from GetUchPlanForGroup'
     Parameters = <>
-    Left = 1032
-    Top = 584
+    Left = 1008
+    Top = 608
   end
   object dsGetUchPlnGroup: TDataSource
     DataSet = adsGetUchPlanGrup
-    Left = 1038
-    Top = 631
+    Left = 1054
+    Top = 655
   end
   object aspAddRupGrup: TADOStoredProc
     CursorType = ctStatic
@@ -3671,6 +3671,7 @@ object dm: Tdm
   end
   object DelVedForContentDisc: TADOStoredProc
     Connection = DBConnect
+    LockType = ltBatchOptimistic
     ProcedureName = 'DelVedomostForContentDisc;1'
     Parameters = <
       item
@@ -3680,25 +3681,13 @@ object dm: Tdm
         Precision = 10
       end
       item
-        Name = '@n_sem'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-      end
-      item
-        Name = '@ik_disc_ucl_pl'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-      end
-      item
-        Name = '@ik_vid_zanyat'
+        Name = '@ik_upContent'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
       end>
-    Left = 32
-    Top = 544
+    Left = 216
+    Top = 608
   end
   object Hard_DiscDel: TADOStoredProc
     Connection = DBConnect
@@ -3709,14 +3698,23 @@ object dm: Tdm
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_disc_uch_plan'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 120
     Top = 544
+  end
+  object qVedomostForContent: TADOQuery
+    Connection = DBConnect
+    LockType = ltBatchOptimistic
+    Parameters = <>
+    Left = 1072
+    Top = 360
   end
 end
