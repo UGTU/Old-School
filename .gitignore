@@ -216,3 +216,5 @@ pip-log.txt
 .mr.developer.cfg
 *.exe
 *.dcu
+/UGTU/Domain/Reports/*.dcu
+/UGTU/*.exe
