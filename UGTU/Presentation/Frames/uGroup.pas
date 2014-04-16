@@ -3224,7 +3224,10 @@ begin
       tempStoredProc.Next;
     end;
     if (flAreChanged) then
-      MessageBox(Handle, 'Произошла ошибка при обращении к серверу.','ИС Деканат',MB_OK);
+    begin
+      studNames:= 'Студенты '+studNames+' не были удалены из ведомости, потому что у них есть оценка. Если нужно их удалить, предварительно удалите оценки';
+      MessageBox(Handle, PAnsiChar(studNames),'ИС Деканат',MB_OK);
+    end;
     finally
       tempStoredProc.Free;
     end;
