@@ -2226,7 +2226,7 @@ var
 begin
   tempStoredProc:= TADOStoredProc.Create(nil);
   try
-    tempStoredProc.ProcedureName:= 'GetAllVedomostsForGrup;1';
+    tempStoredProc.ProcedureName:= 'GetAllVedomostsForGrupWithBRS;1';
     tempStoredProc.Connection:= dm.DBConnect;
     tempStoredProc.Parameters.CreateParameter('@ik_group', ftInteger, pdInput, 0, ikGrup);
     tempStoredProc.Parameters.CreateParameter('@n_sem', ftInteger, pdInput, 0, nSem);
