@@ -2252,7 +2252,22 @@ try
       while (not dm.qContentUchPlan.Eof) do
       begin
         if (dm.qContentUchPlan.FieldByName('iK_vid_zanyat').AsInteger = vidZanyatIK) then
-          dm.qContentUchPlan.Delete
+
+            if dm.qVedomostForContent.Locate('ik_upContent',dm.qContentUchPlan.FieldByName('ik_upContent').AsInteger,[loPartialKey]) then
+              begin
+                if canDel or (MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',mtConfirmation,mbYesNoCancel,0) = mrYes) then
+                begin
+                  canDel := true;
+                  vedomDelList.Add(dm.qContentUchPlan.FieldByName('ik_upContent').AsString);
+              //    with dm.DelVedForContentDisc do
+              //    begin
+              //      Parameters.ParamByName('@ik_upContent').Value := dm.qContentUchPlan.FieldByName('ik_upContent').AsInteger;
+              //      Open;
+              //    end;
+                 dm.qContentUchPlan.Delete;
+                end;
+              end else dm.qContentUchPlan.Delete
+
         else dm.qContentUchPlan.Next;
       end;
     end;
