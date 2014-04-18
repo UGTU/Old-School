@@ -1525,7 +1525,7 @@ begin
               CreateParameter('@Cosenca', ftInteger, pdInput, 0, dbgrdVed.Fields[7].Value)
             else
               CreateParameter('@Cosenca', ftInteger, pdInput, 0, -1);
-            CreateParameter('@cTema', ftString, pdInput, 500, '');
+            CreateParameter('@cTema', ftString, pdInput, 2000, '');
           end;
           dmUspevaemost.adospAppendUspev.ExecProc;
 
@@ -1537,7 +1537,7 @@ begin
 							CreateParameter('@flag', ftInteger, pdInput, 0, 1);
 							CreateParameter('@Ik_zach', ftInteger, pdInput, 0, dbgrdVed.Fields[5].Value);
 							CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
-							CreateParameter('@KPTheme', ftString, pdInput, 500, dbgrdVed.Fields[4].AsString);
+							CreateParameter('@KPTheme', ftString, pdInput, 2000, dbgrdVed.Fields[4].AsString);
 						end;
 						dmUspevaemost.adospAppendUspevKPTheme.ExecProc;
 					//end;

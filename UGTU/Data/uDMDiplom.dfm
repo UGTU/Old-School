@@ -61,8 +61,9 @@ object dmDiplom: TdmDiplom
       Size = 500
     end
     object adospDiplomListcTema: TStringField
+      DisplayWidth = 2000
       FieldName = 'cTema'
-      Size = 500
+      Size = 2000
     end
     object adospDiplomListPredprName: TStringField
       FieldKind = fkLookup

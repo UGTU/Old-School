@@ -892,9 +892,9 @@ object dmUspevaemost: TdmUspevaemost
       FieldName = 'Cosenca'
     end
     object adospSelVedGroupcTema: TStringField
-      DisplayWidth = 255
+      DisplayWidth = 2000
       FieldName = 'cTema'
-      Size = 500
+      Size = 2000
     end
     object adospSelVedGroupIsPassed: TBooleanField
       Alignment = taRightJustify
@@ -1229,8 +1229,9 @@ object dmUspevaemost: TdmUspevaemost
       FieldName = 'Cosenca'
     end
     object adodsNapravlcTema: TStringField
+      DisplayWidth = 2000
       FieldName = 'cTema'
-      Size = 100
+      Size = 2000
     end
     object adodsNapravlclastname: TStringField
       FieldName = 'clastname'
@@ -2353,7 +2354,7 @@ object dmUspevaemost: TdmUspevaemost
         Name = '@KPTheme'
         Attributes = [paNullable]
         DataType = ftString
-        Size = 500
+        Size = 8000
         Value = Null
       end>
     Left = 636

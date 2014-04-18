@@ -9,8 +9,8 @@ inherited frmGroupManager: TfrmGroupManager
   Constraints.MinWidth = 500
   OldCreateOrder = True
   OnShow = FormShow
-  ExplicitWidth = 604
-  ExplicitHeight = 476
+  ExplicitWidth = 612
+  ExplicitHeight = 481
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
