@@ -271,13 +271,8 @@ for i:=0 to (MovedList.Count-1) do begin
    dmGroupActions.aspGroupChange_withupdate.Parameters[1].Value:=cur.newGroup;
    dmGroupActions.aspGroupChange_withupdate.Parameters[2].Value:=cur.stud.RecordbookKey;
    dmGroupActions.aspGroupChange_withupdate.Parameters[3].Value:=dbcbeOrder.KeyValue;
-   try
-    dmGroupActions.aspGroupChange_withupdate.ExecProc;
-    Refreshlist;
-   except
-   showmessage('Перевод невозможен! Не все студенты были переведены!');
-   exit;
-   end;
+   dmGroupActions.aspGroupChange_withupdate.ExecProc;
+   Refreshlist;
 end;
 MovedList.Clear;
 Refreshlist;

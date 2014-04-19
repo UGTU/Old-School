@@ -1027,7 +1027,7 @@ end;
 procedure TfmGroup.RefreshView;
 begin
   TApplicationController.GetInstance.AddLogEntry('Обновление кадра');
-  try
+  //try
 
   //вкладка ведомости
   if pcMain.ActivePage = tsVed then
@@ -1113,8 +1113,8 @@ begin
     else dbgrdNapr.Columns[9].Visible := false;
   end;
 
-  except
-  end;
+  //except
+  //end;
 end;
 
 procedure TfmGroup.btnCancelVedClick(Sender: TObject);

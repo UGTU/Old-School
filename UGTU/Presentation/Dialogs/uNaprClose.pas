@@ -144,7 +144,7 @@ dmUspevaemost.adospAppendUspev.ExecProc;
 		CreateParameter('@flag', ftInteger, pdInput, 0, 1);
 		CreateParameter('@Ik_zach', ftInteger, pdInput, 0, Tag);
 		CreateParameter('@Ik_ved', ftInteger, pdInput, 0, dbcbeNapr.KeyValue);
-		CreateParameter('@KPTheme', ftString, pdInput, 500, eTema.Text);
+		CreateParameter('@KPTheme', ftString, pdInput, 2000, eTema.Text);
 	end;
 	dmUspevaemost.adospAppendUspevKPTheme.ExecProc;
 
