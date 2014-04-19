@@ -3547,6 +3547,13 @@ object dm: Tdm
         Value = Null
       end
       item
+        Name = '@vidgos'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
         Name = '@inserted_uch_plan'
         Attributes = [paNullable]
         DataType = ftInteger
@@ -3679,12 +3686,14 @@ object dm: Tdm
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_upContent'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 216
     Top = 608
