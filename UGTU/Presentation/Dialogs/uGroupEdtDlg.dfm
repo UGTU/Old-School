@@ -34,7 +34,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 9
       Width = 77
       ExplicitLeft = 154
-      ExplicitTop = 6
+      ExplicitTop = 9
       ExplicitWidth = 77
     end
     inherited bbApply: TBitBtn
@@ -44,7 +44,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       TabOrder = 2
       Visible = False
       ExplicitLeft = 6
-      ExplicitTop = 9
+      ExplicitTop = 12
       ExplicitWidth = 80
     end
     inherited bbCancel: TBitBtn
@@ -52,7 +52,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 9
       TabOrder = 1
       ExplicitLeft = 235
-      ExplicitTop = 6
+      ExplicitTop = 9
     end
     inherited bbSprav: TBitBtn
       Top = 40
@@ -67,7 +67,6 @@ inherited frmGroupEdt: TfrmGroupEdt
     Height = 156
     Align = alClient
     TabOrder = 1
-    ExplicitHeight = 170
     object Label7: TLabel
       Left = 153
       Top = 47
@@ -248,7 +247,6 @@ inherited frmGroupEdt: TfrmGroupEdt
     Height = 67
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 199
     object Label8: TLabel
       Left = 16
       Top = 6

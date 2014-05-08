@@ -263,17 +263,18 @@ begin
 try
   dm.DBConnect.BeginTrans;
   //создание учебного плана
-  if (VidGos>FGOS2)and((FUchPlan = 0) or (dblcbUchPln.KeyValue<>FParentUchPlan)) then
+  if ((FUchPlan = 0) or (dblcbUchPln.KeyValue<>FParentUchPlan)) then
     with dm.aspAddRupGrup do
     begin
       Connection := dm.DBConnect;
       Active := false;
       Parameters.ParamByName('@ik_main_plan').Value := dblcbUchPln.KeyValue;
       Parameters.ParamByName('@grup_comment').Value := edtName.Text;
+      Parameters.ParamByName('@vidgos').Value := VidGos;
       ExecProc;
       FUchPlan := Parameters.ParamByName('@inserted_uch_plan').Value;
     end;
-  if VidGos=FGOS2 then FUchPlan := dblcbUchPln.KeyValue;
+  //if VidGos=FGOS2 then FUchPlan := dblcbUchPln.KeyValue;
   
   if not bEdit then
   begin
