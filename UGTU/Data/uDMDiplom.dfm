@@ -144,6 +144,12 @@ object dmDiplom: TdmDiplom
         DataType = ftInteger
         Precision = 10
         Value = 8
+      end
+      item
+        Name = '@ik_CurGroup'
+        DataType = ftString
+        Size = 3
+        Value = '125'
       end>
     Left = 32
     Top = 179
@@ -156,6 +162,10 @@ object dmDiplom: TdmDiplom
     end
     object adospSelKPForVipiscacOsenca: TStringField
       FieldName = 'cOsenca'
+    end
+    object adospSelKPForVipiscadiscName: TStringField
+      FieldName = 'discName'
+      Size = 500
     end
   end
   object adospSelKRForVipisca: TADOStoredProc
@@ -386,6 +396,16 @@ object dmDiplom: TdmDiplom
     object adospGetVipiscaForDiplomSh_spec: TStringField
       FieldName = 'Sh_spec'
       Size = 10
+    end
+    object adospGetVipiscaForDiplomOcencaDiplom: TStringField
+      DisplayWidth = 50
+      FieldName = 'OcencaDiplom'
+      ReadOnly = True
+      Size = 50
+    end
+    object adospGetVipiscaForDiplomManagerSmallName: TStringField
+      FieldName = 'ManagerSmallName'
+      Size = 60
     end
   end
   object adospAppendDiplom: TADOStoredProc

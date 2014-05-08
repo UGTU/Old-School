@@ -88,6 +88,9 @@ type
     adospGetVipiscaForDiplomiPatronymic: TStringField;
     adospGetVipiscaForDiplomSh_spec: TStringField;
     adospSelKRForVipiscadiscName: TStringField;
+    adospGetVipiscaForDiplomOcencaDiplom: TStringField;
+    adospSelKPForVipiscadiscName: TStringField;
+    adospGetVipiscaForDiplomManagerSmallName: TStringField;
   private
     { Private declarations }
   public

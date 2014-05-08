@@ -2290,7 +2290,7 @@ inherited fmGroup: TfmGroup
           Top = 0
           Width = 683
           Height = 26
-          ButtonWidth = 24
+          ButtonWidth = 29
           Caption = 'ToolBar1'
           Images = ilMain
           ParentShowHint = False
@@ -2302,12 +2302,12 @@ inherited fmGroup: TfmGroup
             Action = actCreateDiploms
           end
           object ToolButton19: TToolButton
-            Left = 24
+            Left = 29
             Top = 0
             Action = actUpdateDiploms
           end
           object ToolButton18: TToolButton
-            Left = 48
+            Left = 58
             Top = 0
             Action = actPrintDipl
           end
@@ -2364,6 +2364,7 @@ inherited fmGroup: TfmGroup
               FieldName = 'VipNumber'
               Footers = <>
               Title.Caption = #1053#1086#1084#1077#1088' '#1074#1099#1087#1080#1089#1082#1080
+              Visible = False
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
@@ -2557,7 +2558,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2730,7 +2731,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3401,7 +3402,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
