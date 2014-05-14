@@ -253,7 +253,7 @@ begin
 end;
 
 procedure TDiplomVipExcelReport.SendToExcel;
-const maxDiscStr = 55;
+const maxDiscStr = 70;
   MaxKRCount = 6;
   MaxPractCount = 8;
 var
@@ -519,12 +519,10 @@ begin
   end;
   until (dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger <= 0);
 
-  SelectNextCellVert(cur, ActRange);
+  {SelectNextCellVert(cur, ActRange);
   str:=  'Практики';
-  SendStringToExcel(str, cur, ActRange);
-  SelectNextCellVert(cur, ActRange);
-  str:= 'в том числе:';
-  SendStringToExcel(str, cur, ActRange);
+  SendStringToExcel(str, cur, ActRange); }
+  
 
   SelectNextCellVert(cur, ActRange);
   //вывод практик  #Практики#
@@ -551,6 +549,12 @@ begin
     SelectNextCellHor(cur1,ActRange);
     str := dmDiplom.adospSelPractForVipisca.FieldByName('cOsenca').AsString;
     ActRange.Value := str;
+    if (dmDiplom.adospSelPractForVipisca.FieldByName('n_sem').AsInteger=0) then
+    begin
+      SelectNextCellVert(cur, ActRange);
+      str:= 'в том числе:';
+      SendStringToExcel(str, cur, ActRange);
+    end;
     dmDiplom.adospSelPractForVipisca.Next;
     SelectNextCellVert(cur, ActRange);
   end;
@@ -606,7 +610,6 @@ begin
 
   //Общее кол-во часов
   SelectNextCellVert(cur, ActRange);
-  ActRange.Value:=cur;
   SelectNextCellVert(cur, ActRange);
 
   repeat
@@ -616,12 +619,12 @@ begin
     begin
       str := dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
     end;
-    str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
+    //str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
     ActRange.Value := str;
 
     cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
-    if ({(ik_direction = 1) or }(ik_direction = 3)) then
+    if ((dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger<0) and (ik_direction = 3)) then
     begin
       str := FormatFloat('###.', dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsFloat/36.0)+' з.е.';
     end
@@ -633,11 +636,11 @@ begin
     str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
     ActRange.Value := str;
 
-    if (str1<>'') then
+    {if (str1<>'') then
     begin
       SelectNextCellVert(cur, ActRange);
       ActRange.Value := str1;    //записываем остаток строки
-    end;
+    end; }
 
     dmDiplom.adospSelUspevForVipisca.Next;
     inc(i);

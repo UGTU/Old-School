@@ -538,7 +538,7 @@ end;
 procedure TfmDiplomOtdKadr.dbgStudListCellClick(Column: TColumnEh);
 begin
 
-  if (Column.Field.FieldName='RegNumber') or (Column.Field.FieldName='Dd_dipl') then
+  if (Column.Field.FieldName='RegNumber') or (Column.Field.FieldName='Dd_dipl') or (Column.Field.FieldName='VipNumber') then
   begin
    dbgStudList.Options:= dbgStudList.Options-[dgRowSelect]+[dgEditing];
    editMode:=true;
