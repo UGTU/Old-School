@@ -81,10 +81,18 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           end
           item
             EditButtons = <>
+            FieldName = 'VipNumber'
+            Footers = <>
+            Title.Caption = #1053#1086#1084#1077#1088' '#1087#1088#1086#1090#1086#1082#1086#1083#1072
+            Width = 132
+            OnUpdateData = dbgStudListColumns1UpdateData
+          end
+          item
+            EditButtons = <>
             FieldName = 'Dd_dipl'
             Footers = <>
             MaxWidth = 300
-            Title.Caption = #1044#1072#1090#1072' '#1079#1072#1097#1080#1090#1099
+            Title.Caption = #1044#1072#1090#1072' '#1087#1088#1086#1090#1086#1082#1086#1083#1072
             Width = 90
             OnUpdateData = dbgStudListColumns2UpdateData
           end>
@@ -106,22 +114,22 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Action = actCreateDiploms
         end
         object ToolButton6: TToolButton
-          Left = 23
+          Left = 24
           Top = 0
           Action = actUpdateDiploms
         end
         object ToolButton3: TToolButton
-          Left = 46
+          Left = 48
           Top = 0
           Action = actPrintDipl
         end
         object ToolButton7: TToolButton
-          Left = 69
+          Left = 72
           Top = 0
           Action = actPrintOldDipl
         end
         object ToolButton1: TToolButton
-          Left = 92
+          Left = 96
           Top = 0
           Width = 8
           Caption = 'ToolButton1'
@@ -129,7 +137,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Style = tbsSeparator
         end
         object dbcmbxFac: TDBLookupComboboxEh
-          Left = 100
+          Left = 104
           Top = 0
           Width = 265
           Height = 22
@@ -145,7 +153,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxFacChange
         end
         object dbcmbxSpec: TDBLookupComboboxEh
-          Left = 365
+          Left = 369
           Top = 0
           Width = 300
           Height = 22
@@ -161,7 +169,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxSpecChange
         end
         object dbcmbxGroup: TDBLookupComboboxEh
-          Left = 665
+          Left = 669
           Top = 0
           Width = 98
           Height = 22

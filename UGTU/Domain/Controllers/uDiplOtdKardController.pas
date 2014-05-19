@@ -243,6 +243,17 @@ begin
     str:=SourceDataSet.FieldByName('RegNumber').AsString   ;
     E.Sheets[count].Range['t34'].Value:=str;
     //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
+
+    str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
+    iday:=DayOf(StrToDate(str));
+    imonth:=MonthOf(StrToDate(str));
+    iyear:=YearOf(StrToDate(str));
+
+    smonth := TGeneralController.Instance.GetMonthName(imonth);
+
+    str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
+
+    FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
   end
   else
   begin
@@ -255,18 +266,51 @@ begin
     if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) then
       FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
     str:=SourceDataSet.FieldByName('RegNumber').AsString   ;
-    //E.Sheets[count].Range['t34'].Value:=str;
+    E.Sheets[count].Range['t34'].Value:=str;
     FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
+
+
+    str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
+    iday:=DayOf(StrToDate(str));
+    imonth:=MonthOf(StrToDate(str));
+    iyear:=YearOf(StrToDate(str));
+
+    smonth := TGeneralController.Instance.GetMonthName(imonth);
+
+    str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
+
+    FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
+
   end
   else
   begin
-    FindRange := E.Cells.Replace(What := '#specname#',Replacement:='"'+tempStoredProc.FieldByName('Cname_spec').AsString+'"');
-    FindRange := E.Cells.Replace(What := '#surname#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('Clastname').AsString));
-    FindRange := E.Cells.Replace(What := '#name#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('FirstName').AsString));
-    FindRange := E.Cells.Replace(What := '#Patronymic#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('Patronymic').AsString));
+    FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
+    FindRange := E.Cells.Replace(What := '#surname#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iClastname').AsString));
+    FindRange := E.Cells.Replace(What := '#name#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iFirstName').AsString));
+    FindRange := E.Cells.Replace(What := '#Patronymic#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iPatronymic').AsString));
     //при замене теряются начальные нули, при вставке напрямую в ячейку все в порядке
     str:=SourceDataSet.FieldByName('RegNumber').AsString   ;
-    E.Sheets[count].Range['t48'].Value:=str;
+    //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
+    E.Sheets[count].Range['t40'].Value:=str;
+    FindRange := E.Cells.Replace(What := '#shifr#',Replacement:=tempStoredProc.FieldByName('Sh_spec').AsString);
+    E.Sheets[count].Range['AZ35'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
+    //E.Sheets[count].Range['t48'].Value:=str;
+
+    str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
+    imonth:=MonthOf(StrToDate(str));
+    smonth := TGeneralController.Instance.GetMonthName(imonth);
+    FindRange := E.Cells.Replace(What := '#месяц#',Replacement:=smonth);
+
+    iyear:=YearOf(StrToDate(str));
+    FindRange := E.Cells.Replace(What := '#год#',Replacement:=Copy(IntToStr(iyear),3,2));
+
+    iday:=DayOf(StrToDate(str));
+    str:=Inttostr(iDay);
+    if (iday < 10) then
+      str:= '0'+str;
+    E.Sheets[count].Range['BG35'].Value:=str;
+
+
   end;
   end;
 
@@ -281,16 +325,7 @@ begin
   //заносим данные
 
 
-  str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
-  iday:=DayOf(StrToDate(str));
-  imonth:=MonthOf(StrToDate(str));
-  iyear:=YearOf(StrToDate(str));
 
-  smonth := TGeneralController.Instance.GetMonthName(imonth);
-
-  str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
-
-  FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
 
 
 
@@ -301,14 +336,15 @@ begin
   ParseString(str, str2, strLength);
   FindRange := E.Cells.Replace(What := '#qualif#',Replacement:=str);
   FindRange := E.Cells.Replace(What := '#qualifPart2#',Replacement:=str2);
-  if tempStoredProc.FieldByName('ik_direction').AsInteger=2 then
+  FindRange := E.Cells.Replace(What := '#spec#',Replacement:='');
+  {if tempStoredProc.FieldByName('ik_direction').AsInteger=2 then
   begin
      FindRange := E.Cells.Replace(What := '#spec#',Replacement:='по специальности');
      if (str2<> '') then
        E.Sheets[1].Range['AW37:AW37'].Font.Size:=10.5;
   end
   else
-     FindRange := E.Cells.Replace(What := '#spec#',Replacement:='по направлению');
+     FindRange := E.Cells.Replace(What := '#spec#',Replacement:='по направлению');    }
 end;
 
 function TDiplOtdKardController.FilterGroupList(cmp: PDBLookupComboboxEh; ik_spec:Variant): boolean;

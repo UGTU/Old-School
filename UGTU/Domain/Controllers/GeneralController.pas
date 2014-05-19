@@ -368,7 +368,10 @@ function TGeneralController.GetMonthName(imonth:integer):string;
 function TGeneralController.GetFullDate(ddate:TDateTime):string;
   begin
    // date:= DateOf(ddate);
-    Result:=IntToStr(DayOf(ddate))+' '+GetMonthName(MonthOf(ddate))+' '+IntToStr(YearOf(ddate));
+   if (DayOf(ddate)<10) then
+      Result:='0'+IntToStr(DayOf(ddate))+' '+GetMonthName(MonthOf(ddate))+' '+IntToStr(YearOf(ddate))
+   else
+      Result:=IntToStr(DayOf(ddate))+' '+GetMonthName(MonthOf(ddate))+' '+IntToStr(YearOf(ddate));
   end;
 
 end.
