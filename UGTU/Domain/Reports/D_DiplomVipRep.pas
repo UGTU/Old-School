@@ -351,6 +351,10 @@ begin
     //Replace('#Поступ#', dmDiplom.adospGetVipiscaForDiplomyearPostup.AsString);
     //Replace('#ЗавОбуч#', dmDiplom.adospGetVipiscaForDiplomYearGrad.AsString);
     //Replace('#Форм#', dmDiplom.adospGetVipiscaForDiplomform.AsString);
+    if (dmDiplom.adospGetVipiscaForDiplomIsExcellent.AsBoolean) then
+      Replace('#СОтличием#', 'С ОТЛИЧИЕМ')
+    else
+      Replace('#СОтличием#', '');
     Replace('#Специальность#', dmDiplom.adospGetVipiscaForDiplomCname_spec.AsString);
     Replace('#Специализация#', dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString);
     {str := dmDiplom.adospGetVipiscaForDiplomcdiplom.AsString;

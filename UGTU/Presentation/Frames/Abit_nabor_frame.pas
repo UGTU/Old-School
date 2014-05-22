@@ -117,6 +117,9 @@ type
     procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
     procedure actPrintAbitExamsExecute(Sender: TObject);
     procedure actPrintExamStatisticExecute(Sender: TObject);
+    procedure dbgNaborDiscsColumns2DropDownBoxDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+      State: TGridDrawState);
   private
     function GetikFac: Integer;
     function GetikSpecfac: Integer;
@@ -477,8 +480,12 @@ function TfmAbitNabor.DoApply():boolean;
 begin
   if Modified then
   begin
+  try
     DMAbiturientNabor.adoqNaborDiscs.UpdateBatch();
     Modified:= false;
+  except
+
+  end;
   end;
 end;
 
@@ -514,10 +521,9 @@ begin
   if (MessageBox(Handle, '           Удалить запись?','ИС "УГТУ"',
           MB_YESNO) = IDYES) then
   begin
-      DMAbiturientNabor.adoqNaborDiscs.Edit;
+      //DMAbiturientNabor.adoqNaborDiscs.Edit;
       DMAbiturientNabor.adoqNaborDiscs.Delete;
       modified:=true;
-
   end;
 
 end;
@@ -587,8 +593,34 @@ begin
     try
       LoadDataFromQuery(DMAbiturientNabor.adoqNaborDiscs);  //грузим список наборов
       //Показываем ПАНЕЛЬ С СОХРАНЕНИЕМ И ОТКАТОМ ИЗМЕНЕНИЙ
-      //pnlSave.Visible:=true;
 
+      //настройка отображаемых столбцов
+    if FrameObject is TDBNodeRecruitObject then
+    begin
+      dbgNaborDiscs.Options:=dbgNaborDiscs.Options - [DBGridEh.dgEditing];
+      dbgNaborDiscs.Options:=dbgNaborDiscs.Options + [DBGridEh.dgRowSelect];
+      DBNavigator1.VisibleButtons:= DBNavigator1.VisibleButtons-[nbInsert];
+      pnlSave.Visible:=false;
+      ToolButton10.Visible:=false;
+    end;
+    if FrameObject is TDBNodeFacRecObject then
+    begin
+      dbgNaborDiscs.Columns[0].Visible := false;
+      dbgNaborDiscs.Options:=dbgNaborDiscs.Options - [DBGridEh.dgEditing];
+      dbgNaborDiscs.Options:=dbgNaborDiscs.Options + [DBGridEh.dgRowSelect];
+      DBNavigator1.VisibleButtons:= DBNavigator1.VisibleButtons-[nbInsert];
+      pnlSave.Visible:=false;
+    end;
+
+    if FrameObject is TDBNodeSpecRecObject then
+    begin
+      dbgNaborDiscs.Columns[0].Visible := false;
+      dbgNaborDiscs.Columns[1].Visible := false;
+      dbgNaborDiscs.Options:=dbgNaborDiscs.Options - [DBGridEh.dgRowSelect];
+      dbgNaborDiscs.Options:=dbgNaborDiscs.Options + [DBGridEh.dgEditing];
+      pnlSave.Visible:=true;
+    end;
+    ToolButton10.Visible:=pnlSave.Visible;
     except
     on E:Exception do
       raise EApplicationException.Create('Произошла ошибка при загрузке Вступительных экзаменов',E);
@@ -812,6 +844,16 @@ begin
   //DMAbiturientNabor.adospAbitGetPostupStatistika.Sort:='['+Column.Field.FieldName+']';
 end;
 
+procedure TfmAbitNabor.dbgNaborDiscsColumns2DropDownBoxDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  inherited;
+  Modified:= true;
+  DMAbiturientNabor.adoqNaborDiscs.Edit;
+  DMAbiturientNabor.adoqNaborDiscsNNrecord.Value:=(FrameObject as TDBNodeSpecRecObject).NNRecord;
+end;
+
 procedure TfmAbitNabor.dbgNaborDiscsColumns2UpdateData(Sender: TObject;
   var Text: string; var Value: Variant; var UseText, Handled: Boolean);
 begin
@@ -912,7 +954,10 @@ end;
 procedure TfmAbitNabor.actSaveMinBallsUpdate(Sender: TObject);
 begin
   inherited;
-  (Sender as TAction).Enabled:= Modified;
+  if FrameObject is TDBNodeSpecRecObject then
+    (Sender as TAction).Enabled:= Modified
+  else
+    (Sender as TAction).Enabled:= false;
 end;
 
 procedure TfmAbitNabor.actStatToExcelExecute(Sender: TObject);

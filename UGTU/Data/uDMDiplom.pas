@@ -91,6 +91,8 @@ type
     adospGetVipiscaForDiplomOcencaDiplom: TStringField;
     adospSelKPForVipiscadiscName: TStringField;
     adospGetVipiscaForDiplomManagerSmallName: TStringField;
+    adospGetVipiscaForDiplomIsExcellent: TBooleanField;
+    adospDiplomListIsExcellent: TBooleanField;
   private
     { Private declarations }
   public
