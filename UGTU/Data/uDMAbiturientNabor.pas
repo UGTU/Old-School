@@ -30,7 +30,6 @@ type
     adoqNaborDiscsik_spec: TIntegerField;
     adoqNaborDiscsNNyear: TIntegerField;
     adotAbitDisc: TADOTable;
-    adoqNaborDiscsname_disc: TStringField;
     adoqFac: TADOQuery;
     adoqFacIk_fac: TAutoIncField;
     adoqFacCname_fac: TStringField;
@@ -50,6 +49,7 @@ type
     adoqAbitExams: TADOQuery;
     adoqExamsErrors: TADOQuery;
     dsExamsErrors: TDataSource;
+    adoqNaborDiscsDiscName: TStringField;
   private
     { Private declarations }
   public

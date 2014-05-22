@@ -8,8 +8,8 @@ inherited fmGroup: TfmGroup
   inherited Panel1: TPanel
     Width = 703
     Height = 613
-    ExplicitWidth = 695
-    ExplicitHeight = 624
+    ExplicitWidth = 703
+    ExplicitHeight = 613
     object pcMain: TPageControl
       Left = 2
       Top = 2
@@ -21,19 +21,13 @@ inherited fmGroup: TfmGroup
       TabOrder = 0
       OnChange = pcMainChange
       OnChanging = pcMainChanging
-      ExplicitWidth = 691
-      ExplicitHeight = 620
       object tsStudents: TTabSheet
         Caption = #1057#1086#1089#1090#1072#1074' '#1075#1088#1091#1087#1087#1099
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgStudList: TDBGridEh
           Left = 0
           Top = 29
-          Width = 683
-          Height = 560
+          Width = 691
+          Height = 549
           Align = alClient
           AutoFitColWidths = True
           DataSource = DataSource1
@@ -57,7 +51,7 @@ inherited fmGroup: TfmGroup
         object ToolBar2: TToolBar
           Left = 0
           Top = 0
-          Width = 683
+          Width = 691
           Height = 29
           Images = frmMain.ImageList1
           TabOrder = 1
@@ -575,7 +569,6 @@ inherited fmGroup: TfmGroup
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          ExplicitWidth = 683
           object TBCreateAtt: TToolButton
             Left = 0
             Top = 0
@@ -697,7 +690,6 @@ inherited fmGroup: TfmGroup
             TabOrder = 1
             Visible = True
             OnChange = dbcmbxDiscChange
-            ExplicitWidth = 340
           end
           object cmbxNumber: TDBComboBoxEh
             Left = 161
@@ -761,7 +753,6 @@ inherited fmGroup: TfmGroup
               ShowHint = True
               TabOrder = 0
               Visible = True
-              ExplicitWidth = 340
             end
             object dbdteBRSExam: TDBDateTimeEditEh
               Left = 159
@@ -824,7 +815,6 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            ExplicitLeft = 365
           end
           object BtnSaveAtt: TBitBtn
             Left = 521
@@ -863,7 +853,6 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
-            ExplicitLeft = 513
           end
           object dbcbxCloseAtt: TDBCheckBoxEh
             Left = 0
@@ -1019,7 +1008,6 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            ExplicitLeft = 365
           end
           object bSaveAtt: TBitBtn
             Left = 521
@@ -1057,7 +1045,6 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
-            ExplicitLeft = 513
           end
           object cbAttClose: TDBCheckBoxEh
             Left = 0
@@ -1081,7 +1068,6 @@ inherited fmGroup: TfmGroup
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          ExplicitWidth = 683
           object ToolButton20: TToolButton
             Left = 0
             Top = 0
@@ -1171,7 +1157,6 @@ inherited fmGroup: TfmGroup
             TabOrder = 0
             Visible = True
             OnChange = dbcbeDiscChange
-            ExplicitWidth = 297
           end
           object dblcbPrepod: TDBLookupComboboxEh
             Left = 382
@@ -1188,7 +1173,6 @@ inherited fmGroup: TfmGroup
             TabOrder = 1
             Visible = True
             OnChange = dblcbPrepodChange
-            ExplicitWidth = 297
           end
           object dbdteAttEnd: TDBDateTimeEditEh
             Left = 227
@@ -1382,7 +1366,6 @@ inherited fmGroup: TfmGroup
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          ExplicitWidth = 683
           object ToolButton1: TToolButton
             Left = 0
             Top = 0
@@ -1519,7 +1502,6 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            ExplicitLeft = 372
           end
           object btnSaveVed: TBitBtn
             Left = 530
@@ -1558,7 +1540,6 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
-            ExplicitLeft = 522
           end
         end
         object Panel3: TPanel
@@ -1624,7 +1605,6 @@ inherited fmGroup: TfmGroup
             TabOrder = 0
             Visible = True
             OnChange = dbcmbxPrepodVedChange
-            ExplicitWidth = 319
           end
           object dbdteEx: TDBDateTimeEditEh
             Left = 588
@@ -1639,7 +1619,6 @@ inherited fmGroup: TfmGroup
             TabOrder = 1
             Visible = True
             OnChange = dbdteExChange
-            ExplicitLeft = 580
           end
           object dbeNum: TDBEditEh
             Left = 53
@@ -1669,7 +1648,6 @@ inherited fmGroup: TfmGroup
             TabOrder = 3
             Visible = True
             OnChange = dbcbVedChange
-            ExplicitWidth = 452
           end
           object cmbxSem: TDBComboBoxEh
             Left = 53
@@ -1763,7 +1741,6 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            ExplicitLeft = 405
           end
           object BitBtn2: TBitBtn
             Left = 561
@@ -1801,7 +1778,6 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
-            ExplicitLeft = 553
           end
         end
         object dbgrdNapr: TDBGridEh
@@ -1911,7 +1887,6 @@ inherited fmGroup: TfmGroup
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          ExplicitWidth = 683
           object ToolButton16: TToolButton
             Left = 0
             Top = 0
@@ -2016,22 +1991,17 @@ inherited fmGroup: TfmGroup
             TabOrder = 1
             Visible = True
             OnChange = dbcbNaprChange
-            ExplicitWidth = 483
           end
         end
       end
       object tshUspev: TTabSheet
         Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object sgUspev: TStringGrid
           Left = 0
           Top = 27
-          Width = 683
-          Height = 532
+          Width = 691
+          Height = 521
           Align = alClient
           BevelKind = bkFlat
           BiDiMode = bdRightToLeftNoAlign
@@ -2047,7 +2017,7 @@ inherited fmGroup: TfmGroup
         object ToolBar6: TToolBar
           Left = 0
           Top = 0
-          Width = 683
+          Width = 691
           Height = 27
           Images = ilMain
           ParentShowHint = False
@@ -2144,8 +2114,8 @@ inherited fmGroup: TfmGroup
         end
         object Panel9: TPanel
           Left = 0
-          Top = 559
-          Width = 683
+          Top = 548
+          Width = 691
           Height = 30
           Align = alBottom
           TabOrder = 3
@@ -2316,8 +2286,6 @@ inherited fmGroup: TfmGroup
       object tsDiplom: TTabSheet
         Caption = #1044#1080#1087#1083#1086#1084
         ImageIndex = 5
-        ExplicitWidth = 683
-        ExplicitHeight = 589
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
@@ -2329,19 +2297,18 @@ inherited fmGroup: TfmGroup
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          ExplicitWidth = 683
           object ToolButton17: TToolButton
             Left = 0
             Top = 0
             Action = actCreateDiploms
           end
           object ToolButton19: TToolButton
-            Left = 23
+            Left = 29
             Top = 0
             Action = actUpdateDiploms
           end
           object ToolButton18: TToolButton
-            Left = 46
+            Left = 58
             Top = 0
             Action = actPrintDipl
           end
@@ -2353,6 +2320,7 @@ inherited fmGroup: TfmGroup
           Height = 522
           Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
           Align = alClient
+          AutoFitColWidths = True
           DataSource = dmDiplom.dsDiplomList
           Flat = True
           FooterColor = clWindow
@@ -2450,6 +2418,15 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              Checkboxes = True
+              EditButtons = <>
+              FieldName = 'IsExcellent'
+              Footers = <>
+              Title.Caption = #1057' '#1086#1090#1083#1080#1095#1080#1077#1084
+              Width = 54
+              OnUpdateData = dbgDiplomColumns2UpdateData
+            end
+            item
               EditButtons = <>
               FieldName = 'TypeTemaName'
               Footers = <>
@@ -2465,8 +2442,6 @@ inherited fmGroup: TfmGroup
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
-          ExplicitTop = 559
-          ExplicitWidth = 683
           DesignSize = (
             691
             30)
@@ -2506,7 +2481,6 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            ExplicitLeft = 364
           end
           object btnSaveDiplom: TBitBtn
             Left = 521
@@ -2545,15 +2519,12 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
-            ExplicitLeft = 513
           end
         end
       end
       object tsAverageBalls: TTabSheet
         Caption = #1057#1088#1077#1076#1085#1080#1077' '#1073#1072#1083#1083#1099
         ImageIndex = 7
-        ExplicitWidth = 683
-        ExplicitHeight = 589
         inline fmAverageBallsGroup: TfmAverageBalls
           Left = 0
           Top = 0
@@ -2561,33 +2532,33 @@ inherited fmGroup: TfmGroup
           Height = 578
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 683
-          ExplicitHeight = 589
+          ExplicitWidth = 691
+          ExplicitHeight = 578
           inherited Panel1: TPanel
             Width = 691
             Height = 541
-            ExplicitWidth = 683
-            ExplicitHeight = 552
+            ExplicitWidth = 691
+            ExplicitHeight = 541
             inherited tbAcadem: TToolBar
-              Width = 679
-              ExplicitWidth = 679
+              Width = 687
+              ExplicitWidth = 687
             end
             inherited lvBalls: TListView
-              Width = 679
-              Height = 493
-              ExplicitWidth = 679
-              ExplicitHeight = 493
+              Width = 687
+              Height = 482
+              ExplicitWidth = 687
+              ExplicitHeight = 482
             end
             inherited pnlFilters: TPanel
-              Width = 679
-              ExplicitWidth = 679
+              Width = 687
+              ExplicitWidth = 687
             end
           end
           inherited pnlSave: TPanel
             Top = 541
             Width = 691
-            ExplicitTop = 552
-            ExplicitWidth = 683
+            ExplicitTop = 541
+            ExplicitWidth = 691
             inherited bbSave: TBitBtn
               Left = 514
               ExplicitLeft = 514
@@ -2599,7 +2570,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2747,19 +2718,19 @@ inherited fmGroup: TfmGroup
     Width = 703
     Height = 33
     Visible = False
-    ExplicitTop = 624
-    ExplicitWidth = 695
+    ExplicitTop = 613
+    ExplicitWidth = 703
     ExplicitHeight = 33
     inherited bbSave: TBitBtn
       Left = 536
       Top = 2
-      ExplicitLeft = 528
+      ExplicitLeft = 536
       ExplicitTop = 2
     end
     inherited bbUndo: TBitBtn
       Left = 210
       Top = 2
-      ExplicitLeft = 202
+      ExplicitLeft = 210
       ExplicitTop = 2
     end
   end
@@ -2772,7 +2743,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3443,7 +3414,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

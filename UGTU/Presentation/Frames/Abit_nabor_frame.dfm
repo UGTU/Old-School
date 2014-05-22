@@ -667,7 +667,7 @@ inherited fmAbitNabor: TfmAbitNabor
             Width = 153
             Height = 22
             DataSource = DMAbiturientNabor.dsNaborDiscs
-            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert]
             Align = alTop
             Flat = True
             Hints.Strings = (
@@ -689,7 +689,6 @@ inherited fmAbitNabor: TfmAbitNabor
             Left = 153
             Top = 0
             ImageIndex = 65
-            Visible = False
             OnClick = ToolButton10Click
           end
           object ToolButton11: TToolButton
@@ -711,7 +710,6 @@ inherited fmAbitNabor: TfmAbitNabor
           Width = 729
           Height = 365
           Align = alClient
-          AllowedOperations = []
           AutoFitColWidths = True
           DataSource = DMAbiturientNabor.dsNaborDiscs
           Flat = True
@@ -721,8 +719,7 @@ inherited fmAbitNabor: TfmAbitNabor
           FooterFont.Height = -11
           FooterFont.Name = 'Tahoma'
           FooterFont.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          ReadOnly = True
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           SortLocal = True
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
@@ -744,13 +741,17 @@ inherited fmAbitNabor: TfmAbitNabor
             end
             item
               EditButtons = <>
-              FieldName = #1089'name_disc'
+              FieldName = 'DiscName'
               Footers = <>
+              Title.Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
+              Width = 1500
+              OnDropDownBoxDrawColumnCell = dbgNaborDiscsColumns2DropDownBoxDrawColumnCell
             end
             item
               EditButtons = <>
               FieldName = 'Min_ball'
               Footers = <>
+              Width = 120
               OnUpdateData = dbgNaborDiscsColumns2UpdateData
             end>
         end
@@ -859,7 +860,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C0101030004004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -1010,7 +1011,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C0101020004004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1249,7 +1250,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D0030004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

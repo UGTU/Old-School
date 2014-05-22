@@ -95,6 +95,14 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             Title.Caption = #1044#1072#1090#1072' '#1087#1088#1086#1090#1086#1082#1086#1083#1072
             Width = 90
             OnUpdateData = dbgStudListColumns2UpdateData
+          end
+          item
+            Checkboxes = True
+            EditButtons = <>
+            FieldName = 'IsExcellent'
+            Footers = <>
+            Title.Caption = #1057' '#1086#1090#1083#1080#1095#1080#1077#1084
+            OnUpdateData = dbgStudListColumns1UpdateData
           end>
       end
       object ToolBar1: TToolBar

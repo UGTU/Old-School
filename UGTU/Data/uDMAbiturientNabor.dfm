@@ -155,11 +155,15 @@ object DMAbiturientNabor: TDMAbiturientNabor
       DisplayLabel = #1052#1080#1085'. '#1073#1072#1083#1083
       FieldName = 'Min_ball'
     end
-    object adoqNaborDiscsname_disc: TStringField
-      DisplayLabel = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
-      FieldName = #1089'name_disc'
-      FixedChar = True
-      Size = 50
+    object adoqNaborDiscsDiscName: TStringField
+      FieldKind = fkLookup
+      FieldName = 'DiscName'
+      LookupDataSet = adotAbitDisc
+      LookupKeyFields = 'ik_disc'
+      LookupResultField = #1089'name_disc'
+      KeyFields = 'ik_disc'
+      Size = 500
+      Lookup = True
     end
   end
   object dsNaborDiscs: TDataSource
