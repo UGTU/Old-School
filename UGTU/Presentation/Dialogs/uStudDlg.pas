@@ -695,13 +695,13 @@ end;
 
 procedure TftmStudent.sbAddDocClick(Sender: TObject);
 begin
- frmAddDocument:=TfrmAddDocument.Create(self);
+  frmAddDocument:=TfrmAddDocument.Create(self);
   frmAddDocument.StudDlg:=self;
-frmAddDocument.showModal;
-frmAddDocument.Free;
- if sgDocs.Cells[0,sgDocs.Row]='' then
-sbDelDoc.Enabled:=false else
-sbDelDoc.Enabled:=true;
+  frmAddDocument.showModal;
+  frmAddDocument.Free;
+  if sgDocs.Cells[0,sgDocs.Row]='' then
+    sbDelDoc.Enabled:=false else
+      sbDelDoc.Enabled:=true;
 end;
 
 procedure TftmStudent.sbAddLangClick(Sender: TObject);

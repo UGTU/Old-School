@@ -13,7 +13,7 @@ inherited fmSpec: TfmSpec
       Top = 2
       Width = 932
       Height = 706
-      ActivePage = tsWorkPlan
+      ActivePage = tsSpclz
       Align = alClient
       Images = frmMain.ImageList1
       Style = tsFlatButtons
@@ -385,30 +385,30 @@ inherited fmSpec: TfmSpec
                 end
                 inherited Panel2: TPanel
                   Width = 921
-                  Height = 389
+                  Height = 388
                   ExplicitWidth = 921
-                  ExplicitHeight = 389
+                  ExplicitHeight = 388
                   inherited Splitter1: TSplitter
-                    Height = 389
+                    Height = 388
                     ExplicitHeight = 389
                   end
                   inherited Panel5: TPanel
-                    Height = 389
-                    ExplicitHeight = 389
+                    Height = 388
+                    ExplicitHeight = 388
                     inherited dbgDisc: TDBGridEh
-                      Height = 361
+                      Height = 360
                     end
                   end
                   inherited Panel6: TPanel
                     Width = 468
-                    Height = 389
+                    Height = 388
                     ExplicitWidth = 468
-                    ExplicitHeight = 389
+                    ExplicitHeight = 388
                     inherited ScrollBox2: TScrollBox
                       Width = 468
-                      Height = 389
+                      Height = 388
                       ExplicitWidth = 468
-                      ExplicitHeight = 389
+                      ExplicitHeight = 388
                     end
                   end
                 end
@@ -464,6 +464,9 @@ inherited fmSpec: TfmSpec
               inherited ToolBar1: TToolBar
                 Width = 924
                 ExplicitWidth = 924
+                inherited ToolButton5: TToolButton
+                  ExplicitWidth = 38
+                end
               end
             end
             inherited pnlGroup: TPanel
@@ -518,7 +521,7 @@ inherited fmSpec: TfmSpec
           end
           inherited ImageList1: TImageList
             Bitmap = {
-              494C010108000C00480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010108000C004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003000000001002000000000000030
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -1019,7 +1022,7 @@ inherited fmSpec: TfmSpec
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C0101020004003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -1230,7 +1233,7 @@ inherited fmSpec: TfmSpec
           end
           inherited imgFgos: TImageList
             Bitmap = {
-              494C010149005100740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010149005100780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003001000001002000000000000030
               0100000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -3747,7 +3750,7 @@ inherited fmSpec: TfmSpec
           end
           inherited imgCmptnc: TImageList
             Bitmap = {
-              494C010103000400440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010103000400480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -4009,30 +4012,30 @@ inherited fmSpec: TfmSpec
                 end
                 inherited Panel2: TPanel
                   Width = 921
-                  Height = 389
+                  Height = 388
                   ExplicitWidth = 921
-                  ExplicitHeight = 389
+                  ExplicitHeight = 388
                   inherited Splitter1: TSplitter
-                    Height = 389
+                    Height = 388
                     ExplicitHeight = 389
                   end
                   inherited Panel5: TPanel
-                    Height = 389
-                    ExplicitHeight = 389
+                    Height = 388
+                    ExplicitHeight = 388
                     inherited dbgDisc: TDBGridEh
-                      Height = 361
+                      Height = 360
                     end
                   end
                   inherited Panel6: TPanel
                     Width = 468
-                    Height = 389
+                    Height = 388
                     ExplicitWidth = 468
-                    ExplicitHeight = 389
+                    ExplicitHeight = 388
                     inherited ScrollBox2: TScrollBox
                       Width = 468
-                      Height = 389
+                      Height = 388
                       ExplicitWidth = 468
-                      ExplicitHeight = 389
+                      ExplicitHeight = 388
                     end
                   end
                 end
@@ -4046,12 +4049,14 @@ inherited fmSpec: TfmSpec
                 end
                 inherited dbcbCklDisc: TDBLookupComboboxEh
                   Height = 22
+                  ExplicitWidth = 778
                   ExplicitHeight = 22
                 end
                 inherited dbcbGrpDisc: TDBLookupComboboxEh
                   Top = 112
                   Height = 22
                   ExplicitTop = 112
+                  ExplicitWidth = 778
                   ExplicitHeight = 22
                 end
                 inherited Panel8: TPanel
@@ -4095,6 +4100,9 @@ inherited fmSpec: TfmSpec
               inherited ToolBar1: TToolBar
                 Width = 924
                 ExplicitWidth = 924
+                inherited ToolButton5: TToolButton
+                  ExplicitWidth = 38
+                end
               end
             end
             inherited pnlGroup: TPanel
@@ -4160,7 +4168,7 @@ inherited fmSpec: TfmSpec
           end
           inherited ImageList1: TImageList
             Bitmap = {
-              494C010108000C00480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010108000C004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003000000001002000000000000030
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -4648,7 +4656,7 @@ inherited fmSpec: TfmSpec
     Left = 265
     Top = 221
     Bitmap = {
-      494C01010B000E00340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000E00380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000009B9C93FF363733FF2E2E2BFF2E2E
       2BFF32322FFF282823FF00000000363632FF2C2C2AFF30312DFF979794FF0000

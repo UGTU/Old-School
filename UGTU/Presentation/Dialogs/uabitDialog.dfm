@@ -65,8 +65,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     ExplicitWidth = 561
     ExplicitHeight = 621
     inherited TabSheet1: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 553
       ExplicitHeight = 593
       inherited PageControl2: TPageControl
@@ -75,8 +73,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
         ExplicitWidth = 553
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited Panel4: TPanel
@@ -440,8 +436,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet4: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited Panel3: TPanel
@@ -593,8 +587,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet5: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited Panel9: TPanel
@@ -611,8 +603,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet2: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited sbAddDoc: TSpeedButton
@@ -626,6 +616,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           inherited sgDocs: TStringGrid
             Height = 561
             ColCount = 5
+            ExplicitLeft = 1
+            ExplicitTop = 2
             ExplicitHeight = 561
             ColWidths = (
               119
@@ -640,7 +632,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -25,7 +25,6 @@ type
     dbcmbxFac: TDBLookupComboboxEh;
     Spec_Fac: TDBLookupComboboxEh;
     nnyear: TDBLookupComboboxEh;
-    Label7: TLabel;
     cbRussian: TCheckBox;
     Bevel3: TBevel;
     Bevel4: TBevel;

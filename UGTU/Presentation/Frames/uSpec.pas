@@ -355,11 +355,11 @@ begin
   begin
     dsSpclz.DataSet.Close;
     dsSpclz.DataSet.Open;
-    if VidGos=FGOS2 then
+   { if VidGos=FGOS2 then
     begin
       fmUchPlan1.dbcbSpclz.ListSource.DataSet.Close;
       fmUchPlan1.dbcbSpclz.ListSource.DataSet.Open;
-    end;
+    end;  }
   end;
 end;
 

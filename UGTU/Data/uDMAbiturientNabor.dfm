@@ -217,7 +217,7 @@ object DMAbiturientNabor: TDMAbiturientNabor
     SQL.Strings = (
       'select * from [dbo].[ABIT_GetSpecList]'
       '(2012,0)'
-      ''
+      'order by ik_spec desc'
       ''
       ''
       ''

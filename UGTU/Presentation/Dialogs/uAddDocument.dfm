@@ -4,7 +4,7 @@ inherited frmAddDocument: TfrmAddDocument
   ClientWidth = 279
   OnShow = FormShow
   ExplicitWidth = 285
-  ExplicitHeight = 266
+  ExplicitHeight = 263
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel

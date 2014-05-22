@@ -59,29 +59,27 @@ end;
 procedure TfrmAddDocument.actApplyExecute(Sender: TObject);
 var rowsc:integer;
 begin
+  with StudDlg.sgDocs do
+  begin
+    rowsc:=RowCount-1;
+    cells[0,rowsc]:=dbcbeKind.Text;
+    Cells[1,rowsc]:=eSer.Text;
+    Cells[2,rowsc]:=eNum.Text;
+    if not (dbdteGetDate.value=Null) then
+      if not (((DateToStr(dbdteGetDate.value))='  .  .    ')and(dbdteGetDate.value < Date)) then
+        Cells[3,rowsc]:=DateToStr(dbdteGetDate.value);
 
-with StudDlg.sgDocs do
-begin
-rowsc:=RowCount-1;
-cells[0,rowsc]:=dbcbeKind.Text;
-Cells[1,rowsc]:=eSer.Text;
-Cells[2,rowsc]:=eNum.Text;
-if not (dbdteGetDate.value=Null) then
-if not ((DateToStr(dbdteGetDate.value))='  .  .    ') then
-Cells[3,rowsc]:=DateToStr(dbdteGetDate.value);
+    cells[4,rowsc]:=eWho.Text;
+    RowCount:=RowCount+1;
+  end;
 
-cells[4,rowsc]:=eWho.Text;
-
-RowCount:=RowCount+1;
-end;
-with StudDlg.sgDocKeys do
-begin
-rowsc:=RowCount-1;
-
-if not (dbcbeKind.KeyValue=NULL) then
-Cells[1,rowsc]:=dbcbeKind.KeyValue;
-RowCount:=RowCount+1;
-end;
+  with StudDlg.sgDocKeys do
+  begin
+    rowsc:=RowCount-1;
+    if not (dbcbeKind.KeyValue=NULL) then
+      Cells[1,rowsc]:=dbcbeKind.KeyValue;
+    RowCount:=RowCount+1;
+  end;
 end;
 
 procedure TfrmAddDocument.actCheckFieldsUpdate(Sender: TObject);
@@ -163,8 +161,8 @@ end;
 
 procedure TfrmAddDocument.FormShow(Sender: TObject);
 begin
-dmStudentData.adodsDocType.Active:=true;
-
+  dmStudentData.adodsDocType.Active:=true;
+  dbdteGetDate.
 end;
 
 end.

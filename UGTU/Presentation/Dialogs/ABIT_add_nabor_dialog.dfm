@@ -9,7 +9,7 @@ inherited frmNewNabor: TfrmNewNabor
   OnCreate = FormCreate
   OnShow = FormShow
   ExplicitWidth = 633
-  ExplicitHeight = 230
+  ExplicitHeight = 231
   PixelsPerInch = 96
   TextHeight = 13
   object Bevel4: TBevel [0]
@@ -152,20 +152,7 @@ inherited frmNewNabor: TfrmNewNabor
     Font.Style = []
     ParentFont = False
   end
-  object Label7: TLabel [16]
-    Left = 310
-    Top = 108
-    Width = 4
-    Height = 13
-    Caption = '*'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-  end
-  object Label5: TLabel [17]
+  object Label5: TLabel [16]
     Left = 302
     Top = 83
     Width = 87
@@ -194,7 +181,7 @@ inherited frmNewNabor: TfrmNewNabor
       ExplicitLeft = 455
     end
   end
-  object dbcmbxFac: TDBLookupComboboxEh [19]
+  object dbcmbxFac: TDBLookupComboboxEh [18]
     Left = 102
     Top = 32
     Width = 521
@@ -209,7 +196,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = dbcmbxFacChange
   end
-  object Spec_Fac: TDBLookupComboboxEh [20]
+  object Spec_Fac: TDBLookupComboboxEh [19]
     Left = 102
     Top = 55
     Width = 521
@@ -224,7 +211,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object nnyear: TDBLookupComboboxEh [21]
+  object nnyear: TDBLookupComboboxEh [20]
     Left = 102
     Top = 7
     Width = 179
@@ -239,7 +226,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object cbRussian: TCheckBox [22]
+  object cbRussian: TCheckBox [21]
     Left = 287
     Top = 9
     Width = 154
@@ -248,7 +235,7 @@ inherited frmNewNabor: TfrmNewNabor
     TabOrder = 4
     OnClick = nnyearChange
   end
-  object begind: TDBNumberEditEh [23]
+  object begind: TDBNumberEditEh [22]
     Left = 78
     Top = 103
     Width = 195
@@ -261,7 +248,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object endd: TDBNumberEditEh [24]
+  object endd: TDBNumberEditEh [23]
     Left = 78
     Top = 127
     Width = 195
@@ -274,7 +261,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object mestBudjet: TDBNumberEditEh [25]
+  object mestBudjet: TDBNumberEditEh [24]
     Left = 375
     Top = 102
     Width = 241
@@ -287,7 +274,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object mestCKP: TDBNumberEditEh [26]
+  object mestCKP: TDBNumberEditEh [25]
     Left = 375
     Top = 127
     Width = 241
