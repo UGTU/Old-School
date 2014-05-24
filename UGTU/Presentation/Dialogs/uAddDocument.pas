@@ -162,7 +162,6 @@ end;
 procedure TfrmAddDocument.FormShow(Sender: TObject);
 begin
   dmStudentData.adodsDocType.Active:=true;
-  dbdteGetDate.
 end;
 
 end.
