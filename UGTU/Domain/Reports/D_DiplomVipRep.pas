@@ -298,8 +298,13 @@ begin
   end;
   str:= TGeneralController.Instance.GetFullDate(dmDiplom.adospGetVipiscaForDiplomDd_birth.AsDateTime)+' года';
   Replace('#ДатаРожд#', str);   //docum
-  str1:= dmDiplom.adospGetVipiscaForDiplomYearObuch.AsString;
-  if (dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger >4) then
+  
+  i:= dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger;
+  //для заочников уменьшаем кол-во лет обучения на 1 год
+  if (dmDiplom.adospGetVipiscaForDiplomIk_form_ed.AsInteger=2) then
+    dec(i);
+  str1:= IntToStr(i);
+  if (i >4) then
      str1:= str1 + ' лет'
   else
      str1:= str1 + ' года';
