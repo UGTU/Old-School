@@ -416,6 +416,9 @@ object dmDiplom: TdmDiplom
     object adospGetVipiscaForDiplomIsExcellent: TBooleanField
       FieldName = 'IsExcellent'
     end
+    object adospGetVipiscaForDiplomIk_form_ed: TIntegerField
+      FieldName = 'Ik_form_ed'
+    end
   end
   object adospAppendDiplom: TADOStoredProc
     Connection = dm.DBConnect

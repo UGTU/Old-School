@@ -93,6 +93,7 @@ type
     adospGetVipiscaForDiplomManagerSmallName: TStringField;
     adospGetVipiscaForDiplomIsExcellent: TBooleanField;
     adospDiplomListIsExcellent: TBooleanField;
+    adospGetVipiscaForDiplomIk_form_ed: TIntegerField;
   private
     { Private declarations }
   public
