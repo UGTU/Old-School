@@ -313,7 +313,7 @@ begin
   if not DoModified then
     exit;
   TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, YearOf(Date), false);
+    ik_spec, ik_fac, YearOf(Date), false);
   {case TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
     ik_spec, YearOf(Date)) of
     -2:
@@ -342,7 +342,7 @@ begin
   if not DoModified then
     exit;
   TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, YearOf(Date), true);
+    ik_spec, YearOf(Date), ik_fac, true);
 end;
 
 procedure TfmDiplomOtdKadr.actSaveDiplExecute(Sender: TObject);

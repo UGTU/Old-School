@@ -10,7 +10,7 @@ type
   PDBGrid = ^TDBGridEh;
   TDiplOtdKardController = class (TObject)
   private
-    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac: Integer):TADOStoredProc;
+    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac, ik_fac: Integer):TADOStoredProc;
     procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet);
   protected
     constructor CreateInstance;
@@ -52,7 +52,7 @@ type
   //SetSizes Установка размеров
   procedure SetSizes(sh1, sh2:Variant);
   //PrintAllDiploms печатает дипломы
-  function PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac,year:integer; OldBlank: boolean):integer;
+  function PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac, ik_fac,year:integer; OldBlank: boolean):integer;
   //делит строку str1 на 2, если это необходимо (макс. длина строки MaxStrLength)
   procedure ParseString(var str1,str2: string; MaxStrLength: integer);
 
@@ -231,7 +231,9 @@ begin
     E.Sheets[count].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].RowHeight:=
       E.Sheets[1].Range['A1:B1'].RowHeight;
   end;
-  if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 18) then
+
+
+  {if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 18) then
   begin
     FindRange := E.Cells.Replace(What := '#surname#',Replacement:=(SourceDataSet.FieldByName('iClastname').AsString));
     FindRange := E.Cells.Replace(What := '#name#',Replacement:=(SourceDataSet.FieldByName('iFirstName').AsString));
@@ -255,19 +257,25 @@ begin
 
     FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
   end
-  else
-  begin
+  else}
+  //begin
   if ((tempStoredProc.FieldByName('Ik_fac').AsInteger = 23) or
-      (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22)) then
+      (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) or
+      (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21)) then
   begin
     FindRange := E.Cells.Replace(What := '#surname#',Replacement:=(SourceDataSet.FieldByName('Clastname').AsString));
     FindRange := E.Cells.Replace(What := '#name#',Replacement:=(SourceDataSet.FieldByName('FirstName').AsString));
     FindRange := E.Cells.Replace(What := '#Patronymic#',Replacement:=(SourceDataSet.FieldByName('Patronymic').AsString));
-    if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) then
+    str:=SourceDataSet.FieldByName('RegNumber').AsString;
+    if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) or
+      (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21) then
+    begin
       FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
-    str:=SourceDataSet.FieldByName('RegNumber').AsString   ;
-    E.Sheets[count].Range['t34'].Value:=str;
-    FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
+      E.Sheets[count].Range['h18'].Value:=str;
+    end
+    else
+      E.Sheets[count].Range['AZ135'].Value:=str;
+    //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
 
 
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
@@ -312,7 +320,7 @@ begin
 
 
   end;
-  end;
+  //end;
 
   //проверка для однофамильцев
   fam:=E.Sheets[count-1].name;
@@ -427,7 +435,7 @@ begin
   end;
 end;
 
-function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac,year:integer; OldBlank: boolean):integer;
+function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac, ik_fac, year:integer; OldBlank: boolean):integer;
 var
   E, sheet: Variant;
   first, count :integer;
@@ -437,7 +445,7 @@ var
 begin
   Result:=0;
   TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт дипломов ');
-  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_spec_fac);
+  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_spec_fac, ik_fac);
   try
     E:= CreateOleObject('Excel.Application');
     try
@@ -567,7 +575,7 @@ begin
   SourceDataSet.Open;
 end;
 
-function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac: Integer):TADOStoredProc;
+function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac, ik_fac: Integer):TADOStoredProc;
 begin
   Result := TADOStoredProc.Create(nil);
   Result.Connection := dm.DBConnect;
@@ -575,6 +583,7 @@ begin
   Result.Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
   Result.Parameters.CreateParameter('@ik_spec_fac', ftInteger, pdInput, 4, ik_spec_fac);
   Result.Parameters.CreateParameter('@year', ftInteger, pdInput, 4, year);
+  Result.Parameters.CreateParameter('@ik_fac', ftInteger, pdInput, 4, ik_fac);
   Result.Open;
 end;
 

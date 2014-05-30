@@ -1,0 +1,795 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{ee8b8ab2-7b64-40c1-b52d-e1d55398f981}</ProjectGuid>
+    <MainSource>ugtu.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>ugtu.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UnitSearchPath>ShareAPG\</DCC_UnitSearchPath>
+    <DCC_ResourcePath>ShareAPG\</DCC_ResourcePath>
+    <DCC_ObjPath>ShareAPG\</DCC_ObjPath>
+    <DCC_IncludePath>ShareAPG\</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_UnitSearchPath>ShareAPG\;C:\Users\villain\Desktop\ugtu 2007\XReports\Common;Domain\Reports</DCC_UnitSearchPath>
+    <DCC_ResourcePath>ShareAPG\;C:\Users\villain\Desktop\ugtu 2007\XReports\Common;Domain\Reports</DCC_ResourcePath>
+    <DCC_ObjPath>ShareAPG\;C:\Users\villain\Desktop\ugtu 2007\XReports\Common;Domain\Reports</DCC_ObjPath>
+    <DCC_IncludePath>ShareAPG\;C:\Users\villain\Desktop\ugtu 2007\XReports\Common;Domain\Reports</DCC_IncludePath>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">True</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">4</VersionInfo><VersionInfo Name="Build">454</VersionInfo><VersionInfo Name="Debug">True</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName">УГТУ</VersionInfoKeys><VersionInfoKeys Name="FileDescription">Клиент ИС "УГТУ"</VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.4.454</VersionInfoKeys><VersionInfoKeys Name="InternalName">Клиент ИС УГТУ</VersionInfoKeys><VersionInfoKeys Name="LegalCopyright">УГТУ ИВЦ - ОРиСПО, 2006 - 2007</VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename">ugtu.exe</VersionInfoKeys><VersionInfoKeys Name="ProductName">ИС "УГТУ"</VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.3.307</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">ugtu.dpr</Source></Source></Delphi.Personality><ModelSupport>True</ModelSupport></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="ugtu.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="Data\uDM.pas">
+      <Form>dm</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMAbiturientAction.pas">
+      <Form>dmAbiturientAction</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMAbiturientNabor.pas">
+      <Form>DMAbiturientNabor</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMAbiturientOtchety.pas">
+      <Form>dmAbiturientOtchety</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMAbiturientRasp.pas">
+      <Form>DMAbiturientRasp</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMAbiturientZachisl.pas">
+      <Form>DMAbiturientZachisl</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMAdmin.pas">
+      <Form>DMAdmin</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMAdress.pas">
+      <Form>dmAdress</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMCauses.pas">
+      <Form>dmCauses</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMDiplom.pas">
+      <Form>dmDiplom</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMFacultetStatistic.pas">
+      <Form>dmFacultetStatistic</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMFgos.pas">
+      <Form>dmFgos</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMGroupActions.pas">
+      <Form>dmGroupActions</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMMethodWork.pas">
+      <Form>dmMethodWork</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMOtdKadrDiplom.pas">
+      <Form>dmOtdKadrDiplom</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMPrikaz.pas">
+      <Form>dmPrikaz</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMRecordBook.pas">
+      <Form>dmRecordBook</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMStudentActions.pas">
+      <Form>dmStudentActions</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMStudentData.pas">
+      <Form>dmStudentData</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMStudentSelectionProcs.pas">
+      <Form>dmStudentSelectionProcs</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMUchPlan.pas">
+      <Form>dmUchPlan</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMUgtuStructure.pas">
+      <Form>dmUgtuStructure</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uDMUspevaemost.pas">
+      <Form>dmUspevaemost</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uHOST.pas">
+      <Form>dmHOST</Form>
+    </DCCReference>
+    <DCCReference Include="Data\uQMDataModule.pas">
+      <Form>QMDataModule</Form>
+    </DCCReference>
+    <DCCReference Include="Domain\Classes\ConstantRepository.pas" />
+    <DCCReference Include="Domain\Classes\DateFormat.pas" />
+    <DCCReference Include="Domain\Classes\DiscClasses.pas" />
+    <DCCReference Include="Domain\Classes\MethodWorkComboboxFilter.pas" />
+    <DCCReference Include="Domain\Classes\uBRSBallCounter.pas" />
+    <DCCReference Include="Domain\Common\RegularEx.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientAbitProcs.PAS" />
+    <DCCReference Include="Domain\Controllers\AbiturientAbitTables.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientBaseProcs.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientBaseTables.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientBeforeZachislenieListProcs.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientExamProcs.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientFacade.PAS" />
+    <DCCReference Include="Domain\Controllers\AbiturientListsBeforeExamProcs.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientNaborProcs.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientOrderProcs.pas" />
+    <DCCReference Include="Domain\Controllers\AbiturientRaspisanieProcs.pas" />
+    <DCCReference Include="Domain\Controllers\ApplicationController.pas" />
+    <DCCReference Include="Domain\Controllers\CommonNagruzkaController.pas" />
+    <DCCReference Include="Domain\Controllers\FactNagruzkaController.pas" />
+    <DCCReference Include="Domain\Controllers\GeneralController.pas" />
+    <DCCReference Include="Domain\Controllers\HOST_ProjivayushieController.pas">
+      <Form>/,
+</Form>
+    </DCCReference>
+    <DCCReference Include="Domain\Controllers\HOST_ReportController.pas" />
+    <DCCReference Include="Domain\Controllers\HOST_ZayavlenieController.pas" />
+    <DCCReference Include="Domain\Controllers\MethodWorkController.pas" />
+    <DCCReference Include="Domain\Controllers\NagruzkaClasses.pas" />
+    <DCCReference Include="Domain\Controllers\NagruzkaController.pas" />
+    <DCCReference Include="Domain\Controllers\NagruzkaDirectory.pas" />
+    <DCCReference Include="Domain\Controllers\PlanNagruzkaController.pas" />
+    <DCCReference Include="Domain\Controllers\PreparationNagruzkaController.pas" />
+    <DCCReference Include="Domain\Controllers\SheduleAccountController.pas" />
+    <DCCReference Include="Domain\Controllers\SheduleClasses.pas" />
+    <DCCReference Include="Domain\Controllers\SheduleConstraintController.pas" />
+    <DCCReference Include="Domain\Controllers\SheduleController.pas" />
+    <DCCReference Include="Domain\Controllers\SheduleGrids.pas" />
+    <DCCReference Include="Domain\Controllers\SheduleMainController.pas" />
+    <DCCReference Include="Domain\Controllers\SheduleTestController.pas" />
+    <DCCReference Include="Domain\Controllers\StoHTMLHelp.pas" />
+    <DCCReference Include="Domain\Controllers\uAbitNaborController.pas" />
+    <DCCReference Include="Domain\Controllers\uAbitOtchetsController.pas" />
+    <DCCReference Include="Domain\Controllers\uAbitRaspisanieController.pas" />
+    <DCCReference Include="Domain\Controllers\uAbitZachislenieController.pas" />
+    <DCCReference Include="Domain\Controllers\uBlankRep.pas">
+      <Form>frmRepPreview</Form>
+    </DCCReference>
+    <DCCReference Include="Domain\Controllers\UchPlanController.pas" />
+    <DCCReference Include="Domain\Controllers\uDiplomController.pas" />
+    <DCCReference Include="Domain\Controllers\uDiplOtdKardController.pas" />
+    <DCCReference Include="Domain\Controllers\uFgosController.pas" />
+    <DCCReference Include="Domain\Controllers\uLocalLogController.pas" />
+    <DCCReference Include="Domain\Controllers\uMailer.pas" />
+    <DCCReference Include="Domain\Controllers\uQMController.pas" />
+    <DCCReference Include="Domain\Controllers\uRestoreConn.pas" />
+    <DCCReference Include="Domain\Controllers\uUspevGroupController.pas" />
+    <DCCReference Include="Domain\Controllers\uVisualDBObjectsForQM.pas" />
+    <DCCReference Include="Domain\Controllers\uWaitingController.pas" />
+    <DCCReference Include="Domain\Controllers\uXMLEGEReader.pas" />
+    <DCCReference Include="Domain\Controllers\uXMLErrorReader.pas">
+      <Form>/uMethodWorkAddWorkuMethodWorkAddWork in 'Presentation\Dialogs\uMethodWorkAddWork.pas' {frmMethodWorkAddWork</Form>
+    </DCCReference>
+    <DCCReference Include="Domain\Controllers\VersionController.pas" />
+    <DCCReference Include="Domain\Interfaces\CommonIntf.pas" />
+    <DCCReference Include="Domain\Interfaces\DefImpl\CommonIntfImpl.pas" />
+    <DCCReference Include="Domain\Interfaces\XIntf.pas" />
+    <DCCReference Include="Domain\Reports\AbitDinamica.pas" />
+    <DCCReference Include="Domain\Reports\AbitPredvSpisokZachisl.pas" />
+    <DCCReference Include="Domain\Reports\AbitVstupExams.pas" />
+    <DCCReference Include="Domain\Reports\AbitVstupExamStatistic.pas">
+      <Form>/,
+</Form>
+    </DCCReference>
+    <DCCReference Include="Domain\Reports\A_EGECertReport.pas" />
+    <DCCReference Include="Domain\Reports\Barcode.pas" />
+    <DCCReference Include="Domain\Reports\D_AcademReport.pas" />
+    <DCCReference Include="Domain\Reports\D_BRSAllModules.pas" />
+    <DCCReference Include="Domain\Reports\D_BRSExamVedomost.pas" />
+    <DCCReference Include="Domain\Reports\D_BRSRankAverageReport.pas" />
+    <DCCReference Include="Domain\Reports\D_BRSRankReport.pas" />
+    <DCCReference Include="Domain\Reports\D_DiplomVipRep.pas" />
+    <DCCReference Include="Domain\Reports\D_FacItogiRep.pas" />
+    <DCCReference Include="Domain\Reports\D_GroupListRep.pas" />
+    <DCCReference Include="Domain\Reports\D_GrupUspevForStipend.pas" />
+    <DCCReference Include="Domain\Reports\D_StudUspevRep.pas" />
+    <DCCReference Include="Domain\Reports\D_VedomostBRS.pas" />
+    <DCCReference Include="Domain\Reports\Fgos_Application12Report.pas" />
+    <DCCReference Include="Domain\Reports\Fgos_Application1Report.pas" />
+    <DCCReference Include="Domain\Reports\Fgos_Application2Report.pas" />
+    <DCCReference Include="Domain\Reports\Fgos_Application3Report.pas" />
+    <DCCReference Include="Domain\Reports\Fgos_Application4Report.pas" />
+    <DCCReference Include="Domain\Reports\Fgos_Application5Report.pas" />
+    <DCCReference Include="Domain\Reports\HOST_Kartochka.pas" />
+    <DCCReference Include="Domain\Reports\HOST_Order.pas" />
+    <DCCReference Include="Domain\Reports\HOST_PrikazNaZas.pas" />
+    <DCCReference Include="Domain\Reports\HOST_ZayavNaZas.pas" />
+    <DCCReference Include="Domain\Reports\MW_PrepodFactRep.pas" />
+    <DCCReference Include="Domain\Reports\MW_PrepodPlanEditionRep.pas" />
+    <DCCReference Include="Domain\Reports\MW_PrepodPlanRep.pas" />
+    <DCCReference Include="Domain\Reports\N_DepsSemester.pas" />
+    <DCCReference Include="Domain\Reports\N_FactDeps.pas" />
+    <DCCReference Include="Domain\Reports\N_FactPrepodsExecute.pas" />
+    <DCCReference Include="Domain\Reports\N_FullDepsSemester.pas" />
+    <DCCReference Include="Domain\Reports\N_PFODeps.pas" />
+    <DCCReference Include="Domain\Reports\N_PlanDepsCompare.pas" />
+    <DCCReference Include="Domain\Reports\N_PlanDepsSemesters.pas" />
+    <DCCReference Include="Domain\Reports\N_YearsCommonComparison.pas" />
+    <DCCReference Include="Domain\Reports\N_YearsComparison.pas" />
+    <DCCReference Include="Domain\Reports\N_YearsLectComparison.pas" />
+    <DCCReference Include="Domain\Reports\N_YearsStaffComparison.pas" />
+    <DCCReference Include="Domain\Reports\ReportDataSet.pas" />
+    <DCCReference Include="Domain\Reports\ReportsBase.pas" />
+    <DCCReference Include="Domain\Reports\ReportsBpl.pas" />
+    <DCCReference Include="Domain\Reports\ReportUI.pas" />
+    <DCCReference Include="Domain\Reports\RptColEd.pas" />
+    <DCCReference Include="ExternalServicesConsuming\EgeCheckService.pas" />
+    <DCCReference Include="Presentation\dialogs\ABIT_add_nabor_dialog.pas">
+      <Form>frmNewNabor</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\ABIT_add_raspkab_dialog.pas">
+      <Form>frmRaspkab</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\ABIT_add_rasp_dialog.pas">
+      <Form>frmDialRasp</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\ABIT_select_stat_ALL.pas">
+      <Form>frmBaseDialog1</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\ABIT_select_stat_year.pas">
+      <Form>frmBaseDialog2</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\ABIT_zhurnal.pas">
+      <Form>frmAbitZhurnal</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\DataProcessingSplashDialog.pas">
+      <Form>DataProcessingSplashDlg</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_AddNarush.pas">
+      <Form>AddNarush</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_AddRoom.pas">
+      <Form>AddRoom</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_AddZayav.pas">
+      <Form>AddZayav</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_NaznRoom.pas">
+      <Form>NaznRoom</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_ProdlProzh.pas">
+      <Form>frmProdlProzh</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_UkazPrikaz.pas">
+      <Form>PrikazOZas</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_UtvZayav.pas">
+      <Form>UtvZayav</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_Viselit.pas">
+      <Form>Viselit</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\HOST_ZamenaRoom.pas">
+      <Form>ZamenaRoom</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAbitConfirm.pas">
+      <Form>frmAbitConfirm</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uabitDialog.pas">
+      <Form>frmAbitCardDialog</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uAbitMove.pas">
+      <Form>frmAbitMove</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAbitReturn.pas">
+      <Form>frmAbitReturn</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uAcadem.pas">
+      <Form>frmAcademStud</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uAcademReturn.pas">
+      <Form>frmAcademReturn</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAddDiscCompetence.pas">
+      <Form>frmAddDiscCompetence</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAddDiscRelation.pas">
+      <Form>frmAddDiscRelation</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAddDiscStrCompetence.pas">
+      <Form>frmAddDiscStrCompetence</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAddDocument.pas">
+      <Form>frmAddDocument</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uAddExam.pas">
+      <Form>frmAddExamDialog</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAddress.pas">
+      <Form>frmAddress</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAddSpecAbit.pas">
+      <Form>frmAdditionalSpec</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uAppTweaks.pas">
+      <Form>frmAppTweaks</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uBaseDialog.pas">
+      <Form>frmBaseDialog</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uCertificateDialog.pas">
+      <Form>frmEGECertificateCheck</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uChangeKatZach.pas">
+      <Form>frmChangeKatZach</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uChangeLastName.pas">
+      <Form>frmChangeLastName</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uChangePassport.pas">
+      <Form>frmChangePassport</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uDipl.pas">
+      <Form>frmDiplom</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uDiplomStudSelect.pas">
+      <Form>Form1</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uEnterprisePick.pas">
+      <Form>frmEnterprisePick</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uErrorInfo.pas">
+      <Form>frmErrorInfo</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uExtendSession.pas">
+      <Form>frmExtendSession</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFgosAddCompetence.pas">
+      <Form>frmFgosAddCompetence</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFgosAddNew.pas">
+      <Form>frmFgosAddNew</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFgosAddStructCompetence.pas">
+      <Form>frmFgosAddStructCompetence</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFgosEditCompetence.pas">
+      <Form>frmFgosEditCompetence</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFgosException.pas">
+      <Form>frmFgosException</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFgosExceptionTable.pas">
+      <Form>frmFgosExceptionTable</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFgosSformyrCompetence.pas">
+      <Form>frmFgosSformyrCompetence</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uFindAbit.pas">
+      <Form>frmFindAbit</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uGroupEdtDlg.pas">
+      <Form>frmGroupEdt</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uJoinGroup.pas">
+      <Form>frmJoinGroup</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uLangDlg.pas">
+      <Form>ftmLangDialog</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uLevelUp.pas">
+      <Form>frmLevelUp</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uLogin.pas">
+      <Form>frmLogin</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddContentDiscOnGos.pas">
+      <Form>frmMethodWorkAddContentDiscOnGos</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddContentItemGos.pas">
+      <Form>frmMethodWorkAddContentItemGos</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddGos.pas">
+      <Form>frmMethodWorkAddGos</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddItemGos.pas">
+      <Form>frmBaseDialog3</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddNorm.pas">
+      <Form>frmMethodWorkAddNorm</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddPlan.pas">
+      <Form>frmMethodWorkAddPlan</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddPlanDep.pas">
+      <Form>frmMethodWorkAddPlanDep</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddWork.pas">
+      <Form>frmMethodWorkAddWork</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAddWorkInNorm.pas">
+      <Form>frmMethodWorkAddWorkInNorm</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkAutoPlan.pas">
+      <Form>frmMethodWorkAutoPlan</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkDateFilter.pas">
+      <Form>frmMethodWorkDateFilter</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkHyperLink.pas">
+      <Form>frmMethodWorkHyperLink</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uMethodWorkPlanCurrentMW.pas">
+      <Form>frmMethodWorkPlanCurrentMW</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaAddCalcUnit.pas">
+      <Form>frmNagruzkaAddCalcUnit</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uNagruzkaAddDiscToPlan.pas">
+      <Form>frmNagruzkaAddDiscToPlan</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uNagruzkaAddFact.pas">
+      <Form>frmNagruzkaAddFact</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaAdditionFactNagr.pas">
+      <Form>frmAdditionFactNagr</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uNagruzkaAddKaf.pas">
+      <Form>frmNagruzkaAddKaf</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaAddNorm.pas" />
+    <DCCReference Include="Presentation\dialogs\uNagruzkaAddPlan.pas">
+      <Form>frmNagruzkaAddPlan</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uNagruzkaAddPotok.pas">
+      <Form>frmAddPotok</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaAddPotokSemester.pas">
+      <Form>frmAddPotokSemester</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uNagruzkaAddPrep.pas">
+      <Form>frmNagruzkaAddPrep</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaCalcUnits.pas">
+      <Form>frmNagruzkaCalcUnits</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaCalcUnitsContingent.pas">
+      <Form>frmNagruzkaCalcUnitsContingent</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaConflictOnAvtoBuild.pas">
+      <Form>frmNagruzkaConflictOnAvtoBuild</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaDiscToTeacher.pas" />
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaDistributedDuty.pas">
+      <Form>frmNagruzkaDistributedDuty</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaDividePotok.pas">
+      <Form>frmDividePotok</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaEditPotokSemesterShemes.pas">
+      <Form>frmNagruzkaEditPotokSemShemes</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaEditPotokShemes.pas" />
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaFillFactNagrByCU.pas">
+      <Form>frmNagruzkaFillFactNagrByCU</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaFillFactNagrByVZ.pas">
+      <Form>frmNagruzkaFillFactNagrByVZ</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaFillTakeNagr.pas">
+      <Form>frmNagruzkaFillTakeNagr</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaKafedraMaster.pas">
+      <Form>frmNagruzkaKafedraMaster</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaPotokManager.pas">
+      <Form>frmNagruzkaPotokManager</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaSelectTeacher.pas">
+      <Form>frmNagruzkaSelectTeacher</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaSelTeacherForFactEdit.pas">
+      <Form>frmNagruzkaSelTeacherForFactEdit</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaSetNormException.pas">
+      <Form>frmNagruzkaSetNormException</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaSetVidZanyatTaskCount.pas">
+      <Form>frmNagruzkaSetVidZanyatTaskCount</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaShowCalculationScheme.pas">
+      <Form>frmNagruzkaShowCalculationScheme</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNagruzkaUchOtdelMaster.pas">
+      <Form>frmNagruzkaUchOtdelMaster</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uNapr.pas">
+      <Form>ftmNapr</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uNaprClose.pas">
+      <Form>ftmNaprclose</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uNaprRegisterDialog.pas">
+      <Form>frmNaprRegister</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uOtchislStud.pas">
+      <Form>frmOtchislStud</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uPerevStud.pas">
+      <Form>frmPerevStud</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uPostupdlg.pas">
+      <Form>frmPostupDlg</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uPrikDlg.pas">
+      <Form>ftmPrikaz</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uPrintNapr.pas">
+      <Form>frmPrintNaprDialog</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uQMAddEntity.pas">
+      <Form>frmQMAddEntity</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uQMAdminField.pas">
+      <Form>frmQMAdminField</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uQMAdminRelation.pas">
+      <Form>frmQMAdminRelation</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uQMAdminTable.pas">
+      <Form>frmQMAdminTable</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uQMView.pas">
+      <Form>frmQMView</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uQueryMaster.pas" />
+    <DCCReference Include="Presentation\dialogs\uRaports.pas">
+      <Form>frmRaporsDlg</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uRelativeDlg.pas">
+      <Form>ftmAddRelative</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uSelOrder.pas">
+      <Form>frmOrderPick</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uSheduleAddAudEventWithPrefetch.pas">
+      <Form>frmSheduleAddAudEventWithPrefetch</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uSheduleAddExaminationWithPrefetch.pas">
+      <Form>frmSheduleAddExaminationWithPrefetch</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uSheduleAddRooms.pas">
+      <Form>frmSheduleAddRooms</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uSheduleConflictLog.pas">
+      <Form>frmConflictEventLog</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uSheduleManageBookmarks.pas">
+      <Form>frmSheduleManageBookmarks</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uSheduleSetRoomConstraints.pas">
+      <Form>frmSheduleSetRoomConstraints</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uSpecAddSpclz.pas">
+      <Form>frmSpecAddSpclz</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uStudDlg.pas">
+      <Form>ftmStudent</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uStudInfo.pas">
+      <Form>frmStudInfo</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uUchPlanAddDisc.pas">
+      <Form>frmUchPlanAddDisc</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uUchPlanAddNew.pas">
+      <Form>frmUchPlanAddNew</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Dialogs\uUchPlanEditAuditorVZ.pas" />
+    <DCCReference Include="Presentation\Dialogs\uUchPlanEditControlVZ.pas" />
+    <DCCReference Include="Presentation\Dialogs\uUchPlanSemLength.pas" />
+    <DCCReference Include="Presentation\dialogs\uUniteGroups.pas">
+      <Form>frmGroupManager</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uVinEkz.pas">
+      <Form>frmVinEkz</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\dialogs\uVosstStud.pas">
+      <Form>frmStudVosst</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\ABIT_panel.pas">
+      <Form>FrmPanel</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\DetailsFrm.pas">
+      <Form>DetailsForm</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\NewClientVersionDetectedFrm.pas">
+      <Form>NewClientVersionDetectedForm</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uAbout.pas">
+      <Form>frmAbout</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uError.pas">
+      <Form>frmError</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uExaminationSheduleOnForm.pas">
+      <Form>ExaminationSheduleOnForm</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uLessonSheduleOnForm.pas">
+      <Form>LessonSheduleForm</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uNotError.pas">
+      <Form>frmNotError</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uSpravForm.pas">
+      <Form>frmSprav</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Forms\uWaitingForm.pas">
+      <Form>frmWaiting</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\Abit_nabor_frame.pas">
+      <Form>fmAbitNabor</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\ABIT_rasp_frame.pas">
+      <Form>fmAbitRasp</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\ABIT_year_frame.pas">
+      <Form>fmAbitYears</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\ABIT_zachislenie_frame.pas">
+      <Form>fmZach</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\HOST_Persona.pas">
+      <Form>fmHOSTPerson</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\HOST_Projivaysh.pas">
+      <Form>fmHOST_Projivaysh</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\HOST_Zaselenie.pas">
+      <Form>fmHOST_Zaselenie</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\HOST_ZasPersona.pas">
+      <Form>PersonForZas</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uAbitCard.pas">
+      <Form>fmAbitCard</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uAbitDinamica.pas">
+      <Form>fmABITDinamica</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uAcademFrame.pas">
+      <Form>fmAcadem</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uAverageBalls.pas">
+      <Form>fmAverageBalls</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uBaseFrame.pas">
+      <Form>fmBase</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uDiplomOtdKadr.pas">
+      <Form>fmDiplomOtdKadr</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uExaminationShedule.pas">
+      <Form>fmExaminationShedule</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uFac.pas">
+      <Form>fmFacultet</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uFgos.pas">
+      <Form>fmFgos</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uGroup.pas">
+      <Form>fmGroup</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uLessonShedule.pas">
+      <Form>fmLessonShedule</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uMethodWork.pas">
+      <Form>fmMethodWork</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uMethodWorkDep.pas">
+      <Form>fmMethodWorkDep</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uMethodWorkFac.pas">
+      <Form>fmMethodWorkFac</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uMethodWorkPrep.pas">
+      <Form>fmMethodWorkPrep</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uMethodWorkTreeView.pas">
+      <Form>fmMethodWorkTreeView</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uNagruzka.pas">
+      <Form>fmNagruzkaMain</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uNagruzkaDep.pas">
+      <Form>fmNagruzkaDep</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uNagruzkaFac.pas">
+      <Form>fmNagruzkaFac</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uNagruzkaPrepAllInfo.pas">
+      <Form>fmNagruzkaPrepAllInfo</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uNagruzkaSemester.pas">
+      <Form>fmNagruzkaSemester</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uPerson.pas">
+      <Form>fmPerson</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uPrik.pas">
+      <Form>fmPrik</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uShedule.pas">
+      <Form>fmShedule</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uSheduleDep.pas">
+      <Form>fmSheduleDep</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uSheduleFac.pas">
+      <Form>fmSheduleFac</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uSheduleSemester.pas">
+      <Form>fmSheduleSemester</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uSpec.pas">
+      <Form>fmSpec</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uSpravFram.pas">
+      <Form>fmSprav</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uStudent.pas">
+      <Form>fmStudent</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uUchPlan.pas">
+      <Form>fmUchPlan</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uUni.pas">
+      <Form>fmUni</Form>
+    </DCCReference>
+    <DCCReference Include="Presentation\Frames\uUserFrame.pas">
+      <Form>fmUsers</Form>
+    </DCCReference>
+    <DCCReference Include="Utils\Conditions.pas" />
+    <DCCReference Include="Utils\CorrectDatatypeChecks.pas" />
+    <DCCReference Include="Utils\ExceptionBase.pas" />
+    <DCCReference Include="Utils\Parser.pas" />
+    <DCCReference Include="Utils\ShareAPG\AppConst.pas" />
+    <DCCReference Include="Utils\ShareAPG\ClUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\CSB.pas" />
+    <DCCReference Include="Utils\ShareAPG\csdbg.pas" />
+    <DCCReference Include="Utils\ShareAPG\DbgUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\DBUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\DlgUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\EditsEx.pas" />
+    <DCCReference Include="Utils\ShareAPG\ExUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\FileCls.pas" />
+    <DCCReference Include="Utils\ShareAPG\FileUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\ggautil.pas" />
+    <DCCReference Include="Utils\ShareAPG\Iterators.PAS" />
+    <DCCReference Include="Utils\ShareAPG\MapFile.pas" />
+    <DCCReference Include="Utils\ShareAPG\OleUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\OsUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\PrnUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\QParser.pas" />
+    <DCCReference Include="Utils\ShareAPG\RegUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\SBS.pas" />
+    <DCCReference Include="Utils\ShareAPG\secutils.pas" />
+    <DCCReference Include="Utils\ShareAPG\StringUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\VarFileUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\VCLUtils.pas" />
+    <DCCReference Include="Utils\ShareAPG\win2000.pas" />
+    <None Include="ModelSupport_ugtu\default.txaPackage" />
+  </ItemGroup>
+</Project>
