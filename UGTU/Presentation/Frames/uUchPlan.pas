@@ -402,7 +402,7 @@ begin
       frmUchPlanAddNew:= TfrmUchPlanAddNew.CreateDialog(Application, Connection, nil);
       try
         try
-          frmUchPlanAddNew.IK:= dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
+          frmUchPlanAddNew.IK:= FIKPlan;//dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
         except
           frmUchPlanAddNew.IK:=0;
         end;
@@ -415,7 +415,7 @@ begin
         frmUchPlanAddNew.Read;
         if ((frmUchPlanAddNew.ShowModal() = mrOk) or (frmUchPlanAddNew.bbApply.Tag = 1)) then
         begin
-          TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
+          if fVidGos>FGOS2 then TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
           dbcbSpclz.ListSource.DataSet.Open;
           dbcbSpclz.KeyValue:= frmUchPlanAddNew.dbcbSpclz.KeyValue;
           dbcbFormEd.KeyValue:= frmUchPlanAddNew.dbcbFormEd.KeyValue;
