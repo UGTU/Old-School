@@ -255,7 +255,7 @@ begin
   SetVisualProperty;  //визуальные настройки
   //------------вынести кнопки на отдельные панели------------------------------
   ToolButton1.Visible := false;
-  ToolButton2.Visible := false;
+  //ToolButton2.Visible := false;
   ToolButton8.Visible := false;
   pnlGroup.Visible := true;
   dbcbFormEd.Enabled := false;
