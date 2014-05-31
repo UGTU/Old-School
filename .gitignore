@@ -218,3 +218,5 @@ pip-log.txt
 *.dcu
 /UGTU/Domain/Reports/*.dcu
 /UGTU/*.exe
+/ugtu.dproj
+/ugtu.res

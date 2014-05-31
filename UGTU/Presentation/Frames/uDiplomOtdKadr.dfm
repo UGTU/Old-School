@@ -32,6 +32,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     OnChanging = pcOtdKadrChanging
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
@@ -195,6 +199,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
@@ -313,6 +321,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0

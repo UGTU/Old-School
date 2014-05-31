@@ -1334,7 +1334,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 26
                 Width = 705
-                Height = 499
+                Height = 498
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -2089,6 +2089,10 @@ inherited fmStudent: TfmStudent
         object TabSheet9: TTabSheet
           Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -2180,6 +2184,10 @@ inherited fmStudent: TfmStudent
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
@@ -2265,7 +2273,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
