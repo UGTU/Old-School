@@ -410,9 +410,9 @@ end;
 procedure TfmGroup.Read;
 var ik:integer;
 begin
-dmStudentData.adodsSmallGroup.Active:=false;
-dmStudentData.adodsSmallGroup.CommandText:=DataSet.CommandText;
-dmStudentData.adodsSmallGroup.Active:=true;
+  dmStudentData.adodsSmallGroup.Active:=false;
+  dmStudentData.adodsSmallGroup.CommandText:=DataSet.CommandText;
+  dmStudentData.adodsSmallGroup.Active:=true;
   DataSource1.DataSet := dmStudentData.adodsSmallGroup;
   Modified := false;
   ik:= (Frameobject as TDBNodeGroupObject).UchPlanIK;

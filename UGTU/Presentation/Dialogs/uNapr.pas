@@ -236,6 +236,8 @@ if dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=6 then
 items[14].Value:='____________' else items[14].Value:=' ' ;
 if (dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=7)or(dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=17) then
 items[15].Value:='____________' else items[15].Value:=' ';
+AddParameter;
+items[16].Value:= dbcbeDisc.Value;
 end;
 
 //try

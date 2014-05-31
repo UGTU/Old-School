@@ -345,7 +345,12 @@ uses
   uXMLEGEReader in 'Domain\Controllers\uXMLEGEReader.pas',
   A_EGECertReport in 'Domain\Reports\A_EGECertReport.pas',
   DateFormat in 'Domain\Classes\DateFormat.pas',
-  DiscClasses in 'Domain\Classes\DiscClasses.pas';
+  DiscClasses in 'Domain\Classes\DiscClasses.pas',
+  MW_DepFactRep in 'Domain\Reports\MW_DepFactRep.pas',
+  MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
+  MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
+  D_AVGBalls in 'Domain\Reports\D_AVGBalls.pas',
+  D_VedomostBRSLast in 'Domain\Reports\D_VedomostBRSLast.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
