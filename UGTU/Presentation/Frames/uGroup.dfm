@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsAttBRS
+      ActivePage = tsDiplom
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -2357,9 +2357,9 @@ inherited fmGroup: TfmGroup
               FieldName = 'RegNumber'
               Footers = <>
               MaxWidth = 300
+              ReadOnly = True
               Title.Caption = #1056#1077#1075'. '#1085#1086#1084#1077#1088
               Width = 60
-              OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
               EditButtons = <>
@@ -2397,6 +2397,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'Dd_dipl'
               Footers = <>
+              ReadOnly = True
               Title.Caption = #1044#1072#1090#1072' '#1079#1072#1097#1080#1090#1099
               Width = 80
               OnUpdateData = dbgDiplomColumns2UpdateData
@@ -2422,6 +2423,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'IsExcellent'
               Footers = <>
+              ReadOnly = True
               Title.Caption = #1057' '#1086#1090#1083#1080#1095#1080#1077#1084
               Width = 54
               OnUpdateData = dbgDiplomColumns2UpdateData
@@ -2431,6 +2433,14 @@ inherited fmGroup: TfmGroup
               FieldName = 'TypeTemaName'
               Footers = <>
               Title.Caption = #1058#1080#1087' '#1090#1077#1084#1099
+              OnUpdateData = dbgDiplomColumns2UpdateData
+            end
+            item
+              EditButtons = <>
+              FieldName = 'OverVUZ'
+              Footers = <>
+              Title.Caption = #1048#1079' '#1076#1088#1091#1075#1086#1075#1086' '#1042#1059#1047#1072
+              Width = 66
               OnUpdateData = dbgDiplomColumns2UpdateData
             end>
         end
@@ -2570,7 +2580,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C0101020004009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2743,7 +2753,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C0101110040008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3414,7 +3424,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C0101050008008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

@@ -3,7 +3,6 @@ object dmDiplom: TdmDiplom
   Height = 358
   Width = 703
   object adospDiplomList: TADOStoredProc
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
@@ -101,6 +100,9 @@ object dmDiplom: TdmDiplom
     end
     object adospDiplomListIsExcellent: TBooleanField
       FieldName = 'IsExcellent'
+    end
+    object adospDiplomListOverVUZ: TBooleanField
+      FieldName = 'OverVUZ'
     end
   end
   object dsDiplomList: TDataSource
@@ -247,6 +249,7 @@ object dmDiplom: TdmDiplom
     Top = 179
   end
   object adospGetVipiscaForDiplom: TADOStoredProc
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'GetVipiscaForDiplom;1'
@@ -418,6 +421,12 @@ object dmDiplom: TdmDiplom
     end
     object adospGetVipiscaForDiplomIk_form_ed: TIntegerField
       FieldName = 'Ik_form_ed'
+    end
+    object adospGetVipiscaForDiplomik_direction: TIntegerField
+      FieldName = 'ik_direction'
+    end
+    object adospGetVipiscaForDiplomOverVUZ: TBooleanField
+      FieldName = 'OverVUZ'
     end
   end
   object adospAppendDiplom: TADOStoredProc
