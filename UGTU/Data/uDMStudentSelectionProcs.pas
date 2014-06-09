@@ -135,22 +135,22 @@ uses uMain;
 
 procedure TdmStudentSelectionProcs.aspSelFamilyNewRecord(DataSet: TDataSet);
 begin
-//frmMain.ActiveFrame.Modified:=true;
-Dataset.Fields[0].Value:=aspSelFamily.Parameters[0].Value;
+  //frmMain.ActiveFrame.Modified:=true;
+  Dataset.Fields[0].Value:=aspSelFamily.Parameters[0].Value;
 end;
 
 
 procedure TdmStudentSelectionProcs.aspSelLanguageNewRecord(DataSet: TDataSet);
 begin
-Dataset.Fields[2].Value:=aspSelLanguage.Parameters[0].Value;
-//frmMain.ActiveFrame.Modified:=true;
+  Dataset.Fields[2].Value:=aspSelLanguage.Parameters[0].Value;
+  //frmMain.ActiveFrame.Modified:=true;
 end;
 
 
 procedure TdmStudentSelectionProcs.dsDocumentsDataChange(Sender: TObject;
   Field: TField);
 begin
-//frmMain.ActiveFrame.Modified:=true;
+  //frmMain.ActiveFrame.Modified:=true;
 end;
 
 procedure TdmStudentSelectionProcs.dsFamilyDataChange(Sender: TObject;

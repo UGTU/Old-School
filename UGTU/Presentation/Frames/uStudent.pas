@@ -120,7 +120,6 @@ type
     ToolButton9: TToolButton;
     Label33: TLabel;
     Label46: TLabel;
-    Label48: TLabel;
     Label49: TLabel;
     Label50: TLabel;
     Label52: TLabel;
@@ -224,10 +223,11 @@ type
     procedure dbgeBallsTitleClick(Column: TColumnEh);
     procedure cbSemBRSChange(Sender: TObject);
     procedure cbModuleBRSChange(Sender: TObject);
+
   private
-  Fik:integer;
-  FLoaded: boolean;
-  Fobj: TDBNodeStudObject;
+    Fik:integer;
+    FLoaded: boolean;
+    Fobj: TDBNodeStudObject;
     procedure GetUspevStat(ik_zach:integer);
 
   protected
@@ -237,10 +237,10 @@ type
      procedure ExecuteError(Sender: TObject; E: Exception);
 
   public
-  property ik: Integer read Fik write Fik;
-  property Loaded: boolean write floaded;
-  procedure Read;
-  property obj:TDBNodeStudObject read Fobj write Fobj;
+    property ik: Integer read Fik write Fik;
+    property Loaded: boolean write floaded;
+    procedure Read;
+    property obj:TDBNodeStudObject read Fobj write Fobj;
   end;
 
 var
@@ -273,14 +273,16 @@ var
   //i:integer;
   ndGroup:TDBNodeGroupObject;
 begin
-if obj.ID<>ik then begin
-modified:=false;
-RefreshFrame;
-exit;
-end;
-
-if (eName.Text='')or(eFam.Text='')or(eNum.Text='      ')
-or(dbdteBirthDate.Text='  .  .    ')or(dbcbeCitizenship.Text='')or(dbcbeMedal.Text='') then
+  if obj.ID<>ik then      //проверка nCode
+  begin
+    modified:=false;
+    RefreshFrame;
+    exit;
+  end;
+  {должны быть заполнены имя, фамилия, дата рождения, номер зачетки,
+   гражданство, медаль?}
+  if (eName.Text='')or(eFam.Text='')or(eNum.Text='      ')
+  or(dbdteBirthDate.Text='  .  .    '){or(dbcbeCitizenship.Text='')or(dbcbeMedal.Text='')} then
 begin
   showmessage('Одно или несколько обязательных для ввода полей не заполнены!');
   Result:=true;
@@ -288,8 +290,9 @@ begin
 end;
   Result := true;
   try
-  with dmStudentSelectionProcs.aspSelLanguage do
-  begin
+   with dmStudentSelectionProcs.aspSelLanguage do
+ // if dbgeLang.DataSource.DataSet.RecordCount > 0 then
+ begin
     Edit;
     UpdateRecord;
     Post;
@@ -306,9 +309,9 @@ end;
     Open;
   end;
   except
-  end;
+  end;   
   try
-   with dmStudentSelectionProcs.aspSelDocuments do
+  with dmStudentSelectionProcs.aspSelDocuments do
   begin
     Edit;
     UpdateRecord;
@@ -326,20 +329,18 @@ end;
     CreateParameter('@firstn',ftString,pdInput,40,eName.Text);
 
     if not (eMid.Text='') then
-    CreateParameter('@otch',ftString,pdInput,40,eMid.Text)
-    else
-    CreateParameter('@otch',ftString,pdInput,40,null);
+      CreateParameter('@otch',ftString,pdInput,40,eMid.Text)
+      else CreateParameter('@otch',ftString,pdInput,40,null);
 
     if not (DateToStr(dbdteBirthDate.Value)='  .  .    ') then
       CreateParameter('@birth',ftDateTime,pdInput,0,dbdteBirthDate.Value)
-    else
-      CreateParameter('@birth',ftDateTime,pdInput,0,null);
+      else CreateParameter('@birth',ftDateTime,pdInput,0,null);
 
     CreateParameter('@placebirth',ftString,pdInput,300,eBirthPlace.Text);
+
     if cbInvalid.Checked then
       CreateParameter('@inval',ftBoolean,pdInput,0,1)
-    else
-      CreateParameter('@inval',ftBoolean,pdInput,0,0);
+      else CreateParameter('@inval',ftBoolean,pdInput,0,0);
     if cbChildren.Checked then
       CreateParameter('@deti',ftBoolean,pdInput,0,1)
     else
@@ -417,11 +418,12 @@ end;
     CreateParameter('@cObosnZach',ftInteger,pdInput,0,NULL);
     CreateParameter('@cObosnOtch',ftInteger,pdInput,0,NULL);
     CreateParameter('@StazYear',ftInteger,pdInput,0,eXpyear.Value);
-CreateParameter('@StazMonth',ftInteger,pdInput,0,eXpMonth.Value);
-CreateParameter('@cDolgnost',ftString,pdInput,150,eDuty.Text);
-if not(dbcbeEnterprise.KeyValue=-1) then
-CreateParameter('@ik_pred',ftInteger,pdInput,0,dbcbeEnterprise.KeyValue) else
-CreateParameter('@ik_pred',ftInteger,pdInput,0,NULL);
+    CreateParameter('@StazMonth',ftInteger,pdInput,0,eXpMonth.Value);
+    CreateParameter('@cDolgnost',ftString,pdInput,150,eDuty.Text);
+    if not(dbcbeEnterprise.KeyValue=-1) then
+      CreateParameter('@ik_pred',ftInteger,pdInput,0,dbcbeEnterprise.KeyValue)
+      else CreateParameter('@ik_pred',ftInteger,pdInput,0,NULL);
+    CreateParameter('@Ik_studGrup',ftInteger,pdInput,0,obj.StudGrupKey);
   end;
   dmStudentActions.aspAppendStudent.ExecProc;
   Modified:=false;

@@ -511,7 +511,7 @@ end;
 
 function TAbitZachislenieController.GetPrikazList(SourceDataSet: PDataSet): Variant;
 begin
-   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,'select Ik_prikaz, RTRIM(Nn_prikaz)+'' от ''+CONVERT(VARCHAR(10),Dd_prikaz,104) as NN_Date from dbo.Prikaz', 'Ik_prikaz', false, NULL)
+   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,'select Ik_prikaz, RTRIM(Nn_prikaz)+'' от ''+CONVERT(VARCHAR(10),Dd_prikaz,104) as NN_Date from dbo.Prikaz order by Dd_prikaz desc', 'Ik_prikaz', false, NULL)
 end;
 
 function TAbitZachislenieController.GetGrupList(SourceDataSet: PDataSet; ik_spec_fac, nnyear:integer): Variant;

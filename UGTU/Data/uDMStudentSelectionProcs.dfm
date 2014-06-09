@@ -24,7 +24,7 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
         Value = 0c
       end>
     Left = 75
-    Top = 20
+    Top = 12
     object aspSelLanguageIk_lang: TIntegerField
       FieldName = 'Ik_lang'
       Visible = False
@@ -159,7 +159,7 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
     DataSet = aspSelLanguage
     OnDataChange = dsLanguagesDataChange
     Left = 133
-    Top = 21
+    Top = 13
   end
   object dsFamily: TDataSource
     DataSet = aspSelFamily
@@ -295,8 +295,8 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
   end
   object dsLastnames: TDataSource
     DataSet = aspSelLastNames
-    Left = 131
-    Top = 178
+    Left = 155
+    Top = 186
   end
   object aspSelMoves: TADOStoredProc
     Connection = dm.DBConnect
