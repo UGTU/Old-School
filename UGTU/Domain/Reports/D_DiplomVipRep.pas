@@ -203,9 +203,9 @@ else
 begin
 
 if (wMod > 4) or (wMod = 0) or ((weekCount <20) and (weekCount > 10))then
-      str :=   dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString + ' недель'
+      str :=   str + ' недель'
     else
-      str :=   dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString +' недели'
+      str :=   str +' недели'
 end;
   result:= str;
 end;
