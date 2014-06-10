@@ -26,6 +26,7 @@ type
     adospQualificationCshort_spec: TStringField;
     adospQualificationSpecategory: TStringField;
     adospQualificationQualifShortName: TStringField;
+    adospQualificationSh_spec: TStringField;
   private
     { Private declarations }
   public

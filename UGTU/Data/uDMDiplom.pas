@@ -94,6 +94,9 @@ type
     adospGetVipiscaForDiplomIsExcellent: TBooleanField;
     adospDiplomListIsExcellent: TBooleanField;
     adospGetVipiscaForDiplomIk_form_ed: TIntegerField;
+    adospDiplomListOverVUZ: TBooleanField;
+    adospGetVipiscaForDiplomik_direction: TIntegerField;
+    adospGetVipiscaForDiplomOverVUZ: TBooleanField;
   private
     { Private declarations }
   public

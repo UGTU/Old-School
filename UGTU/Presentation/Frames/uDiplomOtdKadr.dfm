@@ -32,10 +32,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     OnChanging = pcOtdKadrChanging
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
@@ -199,10 +195,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
@@ -321,10 +313,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
@@ -357,17 +345,17 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             EditButtons = <>
             FieldName = 'Cname_spec'
             Footers = <>
-            ReadOnly = True
             Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
-            Width = 250
+            Width = 350
+            OnUpdateData = dbgQualifColumns1UpdateData
           end
           item
             EditButtons = <>
             FieldName = 'Cshort_spec'
             Footers = <>
-            ReadOnly = True
             Title.Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1086#1073#1091#1095'.'
             Width = 100
+            OnUpdateData = dbgQualifColumns1UpdateData
           end
           item
             EditButtons = <>
@@ -383,14 +371,22 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             FieldName = 'QualifShortName'
             Footers = <>
             Title.Caption = #1050#1088#1072#1090#1082#1086#1077' '#1085#1072#1079#1074' '#1082#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
-            Width = 150
+            Width = 50
           end
           item
             EditButtons = <>
             FieldName = 'Spec'#1057'ategory'
             Footers = <>
             Title.Caption = #1056#1072#1079#1088#1103#1076
-            Width = 100
+            Width = 50
+          end
+          item
+            EditButtons = <>
+            FieldName = 'Sh_spec'
+            Footers = <>
+            Title.Caption = #1064#1080#1092#1088
+            Width = 50
+            OnUpdateData = dbgQualifColumns1UpdateData
           end>
       end
     end

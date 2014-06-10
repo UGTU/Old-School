@@ -123,6 +123,10 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
       FieldName = 'QualifShortName'
       Size = 300
     end
+    object adospQualificationSh_spec: TStringField
+      FieldName = 'Sh_spec'
+      Size = 10
+    end
   end
   object dsQualification: TDataSource
     DataSet = adospQualification
