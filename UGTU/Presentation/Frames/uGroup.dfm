@@ -2350,7 +2350,7 @@ inherited fmGroup: TfmGroup
               FieldName = 'StudName'
               Footers = <>
               Title.Caption = #1060#1048#1054' '#1089#1090#1091#1076#1077#1085#1090#1072
-              Width = 110
+              Width = 80
             end
             item
               EditButtons = <>
@@ -2359,7 +2359,7 @@ inherited fmGroup: TfmGroup
               MaxWidth = 300
               ReadOnly = True
               Title.Caption = #1056#1077#1075'. '#1085#1086#1084#1077#1088
-              Width = 60
+              Width = 45
             end
             item
               EditButtons = <>
@@ -2374,7 +2374,7 @@ inherited fmGroup: TfmGroup
               FieldName = 'cTema'
               Footers = <>
               Title.Caption = #1058#1077#1084#1072' '#1076#1080#1087#1083#1086#1084#1072
-              Width = 150
+              Width = 180
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
@@ -2399,6 +2399,7 @@ inherited fmGroup: TfmGroup
               Footers = <>
               ReadOnly = True
               Title.Caption = #1044#1072#1090#1072' '#1079#1072#1097#1080#1090#1099
+              Visible = False
               Width = 80
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
@@ -2416,6 +2417,7 @@ inherited fmGroup: TfmGroup
               FieldName = 'PredprName'
               Footers = <>
               Title.Caption = #1055#1088#1077#1076#1087#1088#1080#1103#1090#1080#1077'-'#1079#1072#1082#1072#1079#1095#1080#1082
+              Visible = False
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
@@ -2426,13 +2428,13 @@ inherited fmGroup: TfmGroup
               ReadOnly = True
               Title.Caption = #1057' '#1086#1090#1083#1080#1095#1080#1077#1084
               Width = 54
-              OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
               EditButtons = <>
               FieldName = 'TypeTemaName'
               Footers = <>
               Title.Caption = #1058#1080#1087' '#1090#1077#1084#1099
+              Visible = False
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
@@ -2440,7 +2442,24 @@ inherited fmGroup: TfmGroup
               FieldName = 'OverVUZ'
               Footers = <>
               Title.Caption = #1048#1079' '#1076#1088#1091#1075#1086#1075#1086' '#1042#1059#1047#1072
+              Visible = False
               Width = 66
+              OnUpdateData = dbgDiplomColumns2UpdateData
+            end
+            item
+              EditButtons = <>
+              FieldName = 'OverVWeekCount'
+              Footers = <>
+              Title.Caption = #1050#1086#1083'-'#1074#1086' '#1085#1077#1076#1077#1083#1100
+              Width = 60
+              OnUpdateData = dbgDiplomColumns2UpdateData
+            end
+            item
+              EditButtons = <>
+              FieldName = 'OverVUZName'
+              Footers = <>
+              Title.Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1042#1059#1047#1072
+              Width = 100
               OnUpdateData = dbgDiplomColumns2UpdateData
             end>
         end
@@ -2580,7 +2599,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2753,7 +2772,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3424,7 +3443,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050008009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

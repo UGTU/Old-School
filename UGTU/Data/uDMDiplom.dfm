@@ -104,6 +104,13 @@ object dmDiplom: TdmDiplom
     object adospDiplomListOverVUZ: TBooleanField
       FieldName = 'OverVUZ'
     end
+    object adospDiplomListOverVWeekCount: TIntegerField
+      FieldName = 'OverVWeekCount'
+    end
+    object adospDiplomListOverVUZName: TStringField
+      FieldName = 'OverVUZName'
+      Size = 150
+    end
   end
   object dsDiplomList: TDataSource
     DataSet = adospDiplomList
@@ -111,7 +118,6 @@ object dmDiplom: TdmDiplom
     Top = 88
   end
   object adotPredpr: TADOTable
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'Predpr'
@@ -119,7 +125,6 @@ object dmDiplom: TdmDiplom
     Top = 24
   end
   object adotTypeTema: TADOTable
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
@@ -249,7 +254,6 @@ object dmDiplom: TdmDiplom
     Top = 179
   end
   object adospGetVipiscaForDiplom: TADOStoredProc
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'GetVipiscaForDiplom;1'
@@ -427,6 +431,17 @@ object dmDiplom: TdmDiplom
     end
     object adospGetVipiscaForDiplomOverVUZ: TBooleanField
       FieldName = 'OverVUZ'
+    end
+    object adospGetVipiscaForDiplomOverVWeekCount: TIntegerField
+      FieldName = 'OverVWeekCount'
+    end
+    object adospGetVipiscaForDiplomOverVUZName: TStringField
+      FieldName = 'OverVUZName'
+      Size = 150
+    end
+    object adospGetVipiscaForDiplomik_spec: TAutoIncField
+      FieldName = 'ik_spec'
+      ReadOnly = True
     end
   end
   object adospAppendDiplom: TADOStoredProc

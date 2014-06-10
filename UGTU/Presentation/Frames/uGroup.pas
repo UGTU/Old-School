@@ -1957,7 +1957,8 @@ procedure TfmGroup.dbgDiplomCellClick(Column: TColumnEh);
 begin
   inherited;
 
-  if (Column.Field.FieldName='StudName')  then
+  if (Column.Field.FieldName='StudName') or (Column.Field.FieldName='RegNumber')
+    or (Column.Field.FieldName='Dd_VidDipl') or (Column.Field.FieldName='IsExcellent') then
   begin
    dbgDiplom.Options:=dbgDiplom.Options+[dgRowSelect]-[dgEditing];
    editMode:=false;

@@ -97,6 +97,11 @@ type
     adospDiplomListOverVUZ: TBooleanField;
     adospGetVipiscaForDiplomik_direction: TIntegerField;
     adospGetVipiscaForDiplomOverVUZ: TBooleanField;
+    adospDiplomListOverVWeekCount: TIntegerField;
+    adospDiplomListOverVUZName: TStringField;
+    adospGetVipiscaForDiplomOverVWeekCount: TIntegerField;
+    adospGetVipiscaForDiplomOverVUZName: TStringField;
+    adospGetVipiscaForDiplomik_spec: TAutoIncField;
   private
     { Private declarations }
   public

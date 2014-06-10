@@ -65,7 +65,7 @@ var poss: integer;
 begin
   poss:= Pos(subStr, str);
   result:= poss;
-  while (poss>0) do
+  while (poss>0)  do
   begin
     str:= Copy(str,poss+1,Length(str)-(poss+1));
     poss:= Pos(subStr, str);
@@ -280,7 +280,7 @@ var
   ActRange: Variant;
   str, str1: String;   // строка, которую будем вставлять в нужное место в шаблоне
   cur, cur1: String;
-  i: Integer;
+  i, weekCount: Integer;
 begin
   //Name:= dmDiplom.adospGetVipiscaForDiplomStudName.AsString;
   ActivateWorksheet(MainpageNumber);
@@ -320,7 +320,7 @@ begin
   
   i:= dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger;
   //для заочников уменьшаем кол-во лет обучения на 1 год
-  if (dmDiplom.adospGetVipiscaForDiplomIk_form_ed.AsInteger=2) then
+  if (dmDiplom.adospGetVipiscaForDiplomIk_form_ed.AsInteger=2) and (dmDiplom.adospGetVipiscaForDiplomik_spec.AsInteger<>354460) then
     dec(i);
   str1:= IntToStr(i);
   if (i >4) then
@@ -380,7 +380,7 @@ begin
     else
       Replace('#СОтличием#', '');
     str:= dmDiplom.adospGetVipiscaForDiplomCname_spec.AsString;
-    str1:=StringFormat(str, 48);
+    str1:=StringFormat(str, 58);
     Replace('#Специальность#', str);
     Replace('#Специальность2#', str1);
     i:= 1;
@@ -389,14 +389,13 @@ begin
       if ((IsNapravl())) then
       begin
         str:= 'Направленность (профиль) образовательной программы: '+dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
-        str1:=StringFormat(str, 45);
-        Replace('#Доп'+IntToStr(i), str);
-        inc(i);
-        Replace('#Доп'+IntToStr(i), str1);
       end
       else
-        Replace('#Доп'+IntToStr(i), 'Специализация: '+dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString);
-      //
+        str:= 'Специализация: '+dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
+      str1:=StringFormat(str, 95);
+      Replace('#Доп'+IntToStr(i), str);
+      inc(i);
+      Replace('#Доп'+IntToStr(i), str1);
       inc(i);
     end;
 
@@ -409,12 +408,22 @@ begin
       Replace('#Доп'+IntToStr(i), 'Пройдено ускоренное обучение по образовательной программе.');
       inc(i);
   end;
-  if (dmDiplom.adospGetVipiscaForDiplomOverVUZ.AsBoolean) then
+  if (dmDiplom.adospGetVipiscaForDiplomOverVWeekCount.AsInteger>0) and
+     (dmDiplom.adospGetVipiscaForDiplomOverVUZName.AsString<>'') then
   begin
-     Replace('#Доп'+IntToStr(i),'Часть образовательной программы в объеме ___ недель освоена в____________.');
+     weekCount:= dmDiplom.adospGetVipiscaForDiplomOverVWeekCount.AsInteger;
+     if (weekCount mod 10=1) and (weekCount <> 11) then
+        str:= 'Часть образовательной программы в объеме '+IntToStr(weekCount)+' недели'
+     else
+        str:= 'Часть образовательной программы в объеме '+IntToStr(weekCount)+' недель';
+     str:= str+' освоена в '+dmDiplom.adospGetVipiscaForDiplomOverVUZName.AsString+'.';
+     str1:=StringFormat(str, 95);
+     Replace('#Доп'+IntToStr(i), str);
+     inc(i);
+     Replace('#Доп'+IntToStr(i), str1);
      inc(i);
   end;
-  while (i<4) do
+  while (i<6) do
   begin
     Replace('#Доп'+IntToStr(i),'');
     inc(i);
@@ -781,7 +790,7 @@ begin
     end
     else
     begin
-      CopyPos:= LastPos(' ',str);
+      CopyPos:= LastPos(' ',Copy(str, 1, strMaxLen));
     end;
       result:= Copy(str, CopyPos + 1, Length(str) - CopyPos);
       str:=Copy(str, 1, CopyPos);
