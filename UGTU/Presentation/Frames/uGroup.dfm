@@ -2450,7 +2450,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'OverVWeekCount'
               Footers = <>
-              Title.Caption = #1050#1086#1083'-'#1074#1086' '#1085#1077#1076#1077#1083#1100
+              Title.Caption = #1050#1086#1083'-'#1074#1086' '#1085#1077#1076#1077#1083#1100' '#1074' '#1076#1088'. '#1042#1059#1047#1077
               Width = 60
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
@@ -2458,7 +2458,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'OverVUZName'
               Footers = <>
-              Title.Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1042#1059#1047#1072
+              Title.Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1076#1088'. '#1042#1059#1047#1072
               Width = 100
               OnUpdateData = dbgDiplomColumns2UpdateData
             end>
