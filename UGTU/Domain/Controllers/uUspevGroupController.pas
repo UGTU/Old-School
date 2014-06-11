@@ -711,8 +711,8 @@ begin
     AddParameter;
     Items[4].Value := nom_ved;
   end;
-  dmUspevaemost.adospSelAtt.ExecProc;
-  dmUspevaemost.adospSelAtt.Active := true;
+  dmUspevaemost.adospSelAtt.Open;
+  //dmUspevaemost.adospSelAtt.Active := true;
 
   result :=true;
  except
