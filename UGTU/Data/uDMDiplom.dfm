@@ -241,14 +241,20 @@ object dmDiplom: TdmDiplom
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
-        Value = Null
+        Value = 0
       end
       item
         Name = '@ik_zach'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = 5540
+        Value = 21406
+      end
+      item
+        Name = '@ik_CurGroup'
+        DataType = ftString
+        Size = 4
+        Value = '1770'
       end>
     Left = 156
     Top = 179
@@ -441,6 +447,10 @@ object dmDiplom: TdmDiplom
     end
     object adospGetVipiscaForDiplomik_spec: TAutoIncField
       FieldName = 'ik_spec'
+      ReadOnly = True
+    end
+    object adospGetVipiscaForDiplomik_spec_fac: TAutoIncField
+      FieldName = 'ik_spec_fac'
       ReadOnly = True
     end
   end

@@ -44,7 +44,7 @@ uses
 
   //Печать выписки
   procedure ExecuteError(Sender: TObject; E: Exception);
-  procedure PrintDiplVip(ikZach, ikGroup:integer; StudName, ExcelPatternName: string; ik_direction, ik_fac: integer; NameInDatPadez: boolean);
+  function PrintDiplVip(ikZach, ikGroup:integer; StudName, ExcelPatternName: string; ik_direction, ik_fac: integer; NameInDatPadez: boolean): boolean;
 
 
 
@@ -165,7 +165,7 @@ begin
 end;
 
  //отменяет изменения в дипломах
-procedure TDiplomController.PrintDiplVip(ikZach, ikGroup:integer; StudName, ExcelPatternName: string; ik_direction, ik_fac: integer; NameInDatPadez: boolean);
+function TDiplomController.PrintDiplVip(ikZach, ikGroup:integer; StudName, ExcelPatternName: string; ik_direction, ik_fac: integer; NameInDatPadez: boolean): boolean;
 var
   Report:TDiplomVipExcelReport;
 begin
@@ -184,6 +184,8 @@ begin
     Report.ik_fac:= ik_fac;
     Report.NameInDatPadez:= NameInDatPadez;
     TWaitingController.GetInstance.Process(Report);
+    result:= Report.ikZach>0;
+    
     //Report.BuildReport;
 end;
 

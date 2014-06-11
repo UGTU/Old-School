@@ -102,6 +102,7 @@ type
     adospGetVipiscaForDiplomOverVWeekCount: TIntegerField;
     adospGetVipiscaForDiplomOverVUZName: TStringField;
     adospGetVipiscaForDiplomik_spec: TAutoIncField;
+    adospGetVipiscaForDiplomik_spec_fac: TAutoIncField;
   private
     { Private declarations }
   public
