@@ -494,6 +494,11 @@ begin
       end;
       	str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
 				ActRange.Value := str;
+				if (str1<>'') then
+				begin
+				  SelectNextCellVert(cur, ActRange);
+				  ActRange.Value := str1;    //записываем остаток строки
+				end;
 
 				cur1 := Selection.Address;
 
@@ -501,11 +506,6 @@ begin
 				str := dmDiplom.adospSelKPForVipiscacOsenca.AsString;
 				ActRange.Value := str;
 
-				if (str1<>'') then
-				begin
-				  SelectNextCellVert(cur, ActRange);
-				  ActRange.Value := str1;    //записываем остаток строки
-				end;
       dmDiplom.adospSelKPForVipisca.Next;
       SelectNextCellVert(cur, ActRange);
     end;
@@ -586,6 +586,12 @@ begin
     str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
     ActRange.Value := str;
 
+    if (str1<>'') then
+    begin
+      SelectNextCellVert(cur, ActRange);
+      ActRange.Value := str1;    //записываем остаток строки
+    end;
+
     cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
     if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
@@ -596,16 +602,9 @@ begin
       str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';
     ActRange.Value := str;
 
-
     SelectNextCellHor(cur1,ActRange);
     str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
     ActRange.Value := str;
-
-    if (str1<>'') then
-    begin
-      SelectNextCellVert(cur, ActRange);
-      ActRange.Value := str1;    //записываем остаток строки
-    end;
 
     dmDiplom.adospSelUspevForVipisca.Next;
     //inc(i);
@@ -631,8 +630,8 @@ begin
       //str :=  str+' '+ dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString;
       //str :=  str +' недель, '+ dmDiplom.adospSelPractForVipisca.FieldByName('cOsenca').AsString;
     end;
-    cur1 := Selection.Address;
     SendStringToExcel(str, cur, ActRange);
+    cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
     if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
     begin
@@ -701,8 +700,8 @@ begin
       else
         str := 'Итоговый госудаственный междисциплинарный экзамен по специальности'//'Итоговый государственный междисциплинарный экзамен';
     end;
-    cur1 := Selection.Address;
     SendStringToExcel(str, cur, ActRange);
+    cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
     str := 'x';
     ActRange.Value := str;
@@ -742,8 +741,8 @@ begin
     end;
     //str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
     //ActRange.Value := str;
-    cur1 := Selection.Address;
     SendStringToExcel(str, cur, ActRange);
+    cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
     if ((dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger<0) and ((ik_direction = 3)
       or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169))) then
