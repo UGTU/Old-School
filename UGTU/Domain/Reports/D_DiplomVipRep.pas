@@ -4,6 +4,18 @@
     Создано: 02.04.2009
     Последняя правка: 
     Автор: Вокуева Т.А.
+
+    ПРИМЕЧАНИЯ:
+    Если студент зачислялся с другого вуза и у него есть перезачеты, то надо
+    указывать, сколько недель он проучился в другом ВУЗе.
+    Для этого считать приблизительное число недель:
+    Кол-во недель=42 недели в году*кол-во лет обучения
+
+    Кол-во недель на итоговую аттестацию указывается в уч плане.
+    вид занятий - выпускная работа.
+    Считается кол-во недель с ГОС экзамена до защиты.
+
+    Для восстанавливающихся из филиала не надо указыват перезачеты и все остальное.
 *}
 unit D_DiplomVipRep;
   {#Author tanyav@ist.ugtu.net}
@@ -395,15 +407,19 @@ begin
       str1:=StringFormat(str, 95);
       Replace('#Доп'+IntToStr(i), str);
       inc(i);
-      Replace('#Доп'+IntToStr(i), str1);
-      inc(i);
+      if (str1<>'') then
+      begin
+        Replace('#Доп'+IntToStr(i), str1);
+        inc(i);
+      end;
     end;
 
 
     //строчки из доп сведений редактируем
     //так приходится делать из-за того, что ячейки объединенные
-  if (dmDiplom.adospGetVipiscaForDiplomik_direction.AsInteger = 2) and
-      (dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger < 5) then
+  if ((dmDiplom.adospGetVipiscaForDiplomik_direction.AsInteger = 2) and
+      (dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger < 5))
+      or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169) then
   begin
       Replace('#Доп'+IntToStr(i), 'Пройдено ускоренное обучение по образовательной программе.');
       inc(i);
@@ -478,6 +494,11 @@ begin
       end;
       	str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
 				ActRange.Value := str;
+				if (str1<>'') then
+				begin
+				  SelectNextCellVert(cur, ActRange);
+				  ActRange.Value := str1;    //записываем остаток строки
+				end;
 
 				cur1 := Selection.Address;
 
@@ -485,11 +506,6 @@ begin
 				str := dmDiplom.adospSelKPForVipiscacOsenca.AsString;
 				ActRange.Value := str;
 
-				if (str1<>'') then
-				begin
-				  SelectNextCellVert(cur, ActRange);
-				  ActRange.Value := str1;    //записываем остаток строки
-				end;
       dmDiplom.adospSelKPForVipisca.Next;
       SelectNextCellVert(cur, ActRange);
     end;
@@ -570,26 +586,25 @@ begin
     str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
     ActRange.Value := str;
 
-    cur1 := Selection.Address;
-    SelectNextCellHor(cur1,ActRange);
-    if ({(ik_direction = 1) or }(ik_direction = 3)) then
-    begin
-      str := FormatFloat('###.', dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsFloat/36.0)+' з.е.';
-    end
-    else
-      str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';
-    ActRange.Value := str;
-
-
-    SelectNextCellHor(cur1,ActRange);
-    str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
-    ActRange.Value := str;
-
     if (str1<>'') then
     begin
       SelectNextCellVert(cur, ActRange);
       ActRange.Value := str1;    //записываем остаток строки
     end;
+
+    cur1 := Selection.Address;
+    SelectNextCellHor(cur1,ActRange);
+    if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
+    begin
+      str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString+' з.е.';
+    end
+    else
+      str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';
+    ActRange.Value := str;
+
+    SelectNextCellHor(cur1,ActRange);
+    str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
+    ActRange.Value := str;
 
     dmDiplom.adospSelUspevForVipisca.Next;
     //inc(i);
@@ -615,10 +630,17 @@ begin
       //str :=  str+' '+ dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString;
       //str :=  str +' недель, '+ dmDiplom.adospSelPractForVipisca.FieldByName('cOsenca').AsString;
     end;
-    cur1 := Selection.Address;
     SendStringToExcel(str, cur, ActRange);
+    cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
-    str:= GetWeekCountName(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsInteger);
+    if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
+    begin
+      str := dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsString+' з.е.';
+    end
+    else
+    begin
+      str:= GetWeekCountName(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsInteger);
+    end;
     ActRange.Value := str;
 
     SelectNextCellHor(cur1,ActRange);
@@ -644,9 +666,19 @@ begin
   cur1 := Selection.Address;
   SelectNextCellHor(cur1,ActRange);
   if (dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger>0) then
-    str:= GetWeekCountName(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger)
+    if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
+    begin
+      str := dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsString+' з.е.';
+    end
+    else
+    begin
+      str:= GetWeekCountName(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger);
+    end
   else
+  begin
     str := 'x';
+    ikZach:= -1;
+  end;
   ActRange.Value := str;
   SelectNextCellHor(cur1,ActRange);
   str := 'x';
@@ -668,8 +700,8 @@ begin
       else
         str := 'Итоговый госудаственный междисциплинарный экзамен по специальности'//'Итоговый государственный междисциплинарный экзамен';
     end;
-    cur1 := Selection.Address;
     SendStringToExcel(str, cur, ActRange);
+    cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
     str := 'x';
     ActRange.Value := str;
@@ -709,12 +741,13 @@ begin
     end;
     //str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
     //ActRange.Value := str;
-    cur1 := Selection.Address;
     SendStringToExcel(str, cur, ActRange);
+    cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
-    if ((dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger<0) and (ik_direction = 3)) then
+    if ((dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger<0) and ((ik_direction = 3)
+      or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169))) then
     begin
-      str := FormatFloat('###.', dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsFloat/36.0)+' з.е.';
+      str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString+' з.е.';
     end
     else
       str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';

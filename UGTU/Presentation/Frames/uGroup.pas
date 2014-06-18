@@ -2509,6 +2509,7 @@ end;
 procedure TfmGroup.actPrintDiplExecute(Sender: TObject);
 var i:integer;
   cur:TStud;
+  AllRight: boolean;
 begin
   inherited;
   TApplicationController.GetInstance.AddLogEntry('Выбор печати дипломов');
@@ -2530,12 +2531,13 @@ begin
 
     dbgDiplom.DataSource.DataSet.DisableControls;
     //while not dbgDiplom.DataSource.DataSet.Eof do
+    AllRight:= true;
     for i := 0 to frmDiplomSelect.DiplomList.Count - 1 do
     begin
       cur:= frmDiplomSelect.DiplomList[i];
       if (dbgDiplom.DataSource.DataSet.Locate('ik_zach',cur.ikZach,[loPartialKey])) then
       begin
-        TDiplomController.Instance.PrintDiplVip(
+        AllRight:= TDiplomController.Instance.PrintDiplVip(
             dbgDiplom.DataSource.DataSet.FieldByName('ik_zach').Value, ik,
             dbgDiplom.DataSource.DataSet.FieldByName('StudName').AsString,
             dbgDiplom.DataSource.DataSet.FieldByName('ExcelPatternName').AsString,
@@ -2544,6 +2546,8 @@ begin
             dbgDiplom.DataSource.DataSet.FieldByName('DiplVklDatPadez').AsBoolean);
       end;
     end;
+    if (not AllRight) then
+      Application.MessageBox('В дипломе не указано кол-во недель за итоговую государственную аттестацию. Чтобы все было корректно, занесите эти данные в учебный план группы.', 'Подсистема "Деканат"', MB_ICONWARNING);
   finally
     dbgDiplom.DataSource.DataSet.EnableControls;
     frmDiplomSelect.Free;
