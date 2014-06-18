@@ -212,7 +212,7 @@ inherited fmZach: TfmZach
           Left = 0
           Top = 24
           Width = 841
-          Height = 483
+          Height = 448
           Hint = #1055#1088#1077#1076#1074#1072#1088#1080#1090#1077#1083#1100#1085#1099#1077' '#1089#1087#1080#1089#1082#1080' '#1085#1072' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1077
           Align = alClient
           AllowedOperations = []
@@ -295,6 +295,62 @@ inherited fmZach: TfmZach
               Footers = <>
               Title.Caption = #1057#1088#1077#1076'. '#1073#1072#1083#1083
             end>
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 472
+          Width = 841
+          Height = 35
+          Align = alBottom
+          TabOrder = 6
+          object Label2: TLabel
+            Left = 39
+            Top = 12
+            Width = 129
+            Height = 13
+            Caption = '- '#1076#1086#1089#1090#1091#1087#1085#1099' '#1082' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1102
+          end
+          object Label4: TLabel
+            Left = 203
+            Top = 12
+            Width = 245
+            Height = 13
+            Caption = '- '#1085#1077#1076#1086#1089#1090#1072#1090#1086#1095#1085#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074' ('#1087#1072#1089#1087#1086#1088#1090'/'#1072#1090#1090#1077#1089#1090#1072#1090')'
+          end
+          object Label5: TLabel
+            Left = 486
+            Top = 12
+            Width = 226
+            Height = 13
+            Caption = '- '#1085#1077' '#1074#1089#1077' '#1074#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1077' '#1080#1089#1087#1099#1090#1072#1085#1080#1103' '#1074#1074#1077#1076#1077#1085#1099
+          end
+          object Panel3: TPanel
+            Left = 10
+            Top = 6
+            Width = 23
+            Height = 23
+            Color = 8117693
+            ParentBackground = False
+            TabOrder = 0
+          end
+          object Panel5: TPanel
+            Left = 174
+            Top = 6
+            Width = 23
+            Height = 23
+            Color = clSkyBlue
+            ParentBackground = False
+            TabOrder = 1
+          end
+          object Panel6: TPanel
+            Left = 457
+            Top = 6
+            Width = 23
+            Height = 23
+            Color = 13027071
+            ParentBackground = False
+            TabOrder = 2
+          end
         end
       end
       object prikazpage: TTabSheet
@@ -747,7 +803,7 @@ inherited fmZach: TfmZach
     Left = 483
     Top = 80
     Bitmap = {
-      494C010104000900300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1022,7 +1078,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C010103000400300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828
