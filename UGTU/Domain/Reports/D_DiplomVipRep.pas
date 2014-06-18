@@ -284,7 +284,7 @@ begin
 end;
 
 procedure TDiplomVipExcelReport.SendToExcel;
-const maxDiscStr = 70;
+const maxDiscStr = 66;
   MaxKRCount = 6;
   MaxPractCount = 8;
 var
