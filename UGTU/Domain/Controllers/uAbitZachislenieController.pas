@@ -57,8 +57,12 @@ uses
 //GetProhBalls загружает проходные баллы в DataSet
     function GetProhBalls(SourceDataSet: PDataSet;
   nnyear, ik_fac, ik_spec_fac:integer): Variant;
-//IsAbit_minBall ѕровер€ет, набрал ли абитуриент минимум баллов по всем дисциплинам
-    function IsAbit_minBall(): boolean;
+//IsAbit_HaveAllExam ѕровер€ет, есть ли у абитуриента нужные экзамены
+    function IsAbit_HaveAllExam(): boolean;
+//IsAbit_HaveAllDocs провер€ет, есть ли у абитуриента все документы
+    function IsAbit_HaveAllDocs(): boolean;
+//IsAbit_CanBeZachisl провер€ет, можно ли перевести абитуриента в статус "зачислен"
+    function IsAbit_CanBeZachisl():boolean;
 //Abit_Get_Ball ¬озвращает проходной балл дл€ категории поступлени€ набора
     function Abit_Get_Ball(NNrecord, Category: integer): integer;
 //IsAbit_ProhodBall ѕровер€ет, набрал ли абитуриент проходной балл
@@ -324,11 +328,20 @@ begin
       Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet, 'select * from ABIT_MinBalls', 'ik_disc_nabor', false, NULL);
 end;
 
-function TAbitZachislenieController.IsAbit_minBall(): boolean;
+function TAbitZachislenieController.IsAbit_CanBeZachisl: boolean;
 begin
-   if FAbitListDataSetInstance.FieldByName('bit_NotMinim').Value=1 then
-      result:=false
-   else result:=true;
+  Result:=(IsAbit_HaveAllExam)and(IsAbit_HaveAllDocs);
+end;
+
+function TAbitZachislenieController.IsAbit_HaveAllDocs: boolean;
+begin
+  result := not((FAbitListDataSetInstance.FieldByName('ik_doc_edu').Value=null)
+    or(FAbitListDataSetInstance.FieldByName('ik_doc_ident').Value=null));
+end;
+
+function TAbitZachislenieController.IsAbit_HaveAllExam(): boolean;
+begin
+   result:=FAbitListDataSetInstance.FieldByName('notExam').Value=null;
 end;
 
 function TAbitZachislenieController.Abit_Get_Ball(NNrecord, Category: integer): integer;
@@ -350,16 +363,16 @@ end;
 
 function TAbitZachislenieController.IsAbit_ProhodBall(): boolean;
 begin
-   Result:=true;     //пока возвращаем всегда true
-   exit;
+  // Result:=true;     //пока возвращаем всегда true
+  // exit;
 
 
-   {if FAbitListDataSetInstance.FieldByName('SumBall').Value=Null then
+   if FAbitListDataSetInstance.FieldByName('SummBall').Value=Null then
       result:=false
    else
-      result:=(FAbitListDataSetInstance.FieldByName('SumBall').Value>=
+      result:=(FAbitListDataSetInstance.FieldByName('SummBall').Value>=
         Abit_Get_Ball(FAbitListDataSetInstance.FieldByName('NNRecord').Value,
-            FAbitListDataSetInstance.FieldByName('ik_kat_zach').Value)); }
+            FAbitListDataSetInstance.FieldByName('ik_kat_zach').Value)); 
 end;
 
 function TAbitZachislenieController.Abit_StateChange(nnAbit, state: integer): boolean;
@@ -382,7 +395,8 @@ end;
 
 procedure TAbitZachislenieController.Abit_Join(nnAbit: integer);
 begin
-  TApplicationController.GetInstance.AddLogEntry('«ачисление абитуриента '+
+
+   TApplicationController.GetInstance.AddLogEntry('«ачисление абитуриента '+
       FAbitListDataSetInstance.FieldByName('fio').AsString);
 
    if Abit_StateChange(nnAbit,6) then
@@ -1225,7 +1239,7 @@ begin
     //отмечаем всех проход€щих
         if flColor then
         begin
-          if (not IsAbit_minBall) then
+          if (not IsAbit_HaveAllExam) then
             E.Range['A'+IntToStr(ii)+':H'+IntToStr(ii)].Interior.Color:=$00C6C6fa   //$00C6C6FF
           else
           begin
@@ -1293,7 +1307,7 @@ begin
     for i:=1 to r-1 do
       begin
       if (FAbitListDataSetInstance.FieldbyName('ik_type_kat').value<>3)
-        and (IsAbit_minBall) then
+        and (IsAbit_HaveAllExam) then
         begin
         ii:=ii+1;
         TabGrid[ii,0]:=inttostr(ii);

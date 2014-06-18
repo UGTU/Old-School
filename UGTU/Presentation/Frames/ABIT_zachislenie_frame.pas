@@ -98,6 +98,13 @@ type
     actCancelMinBalls: TAction;
     actPrintExamStatistic: TAction;
     N7: TMenuItem;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label2: TLabel;
+    Panel5: TPanel;
+    Label4: TLabel;
+    Panel6: TPanel;
+    Label5: TLabel;
     //загружает списки абитуриентов
     procedure GetSpisokOfAbits();
     procedure prikazTitleClick(Column: TColumnEh);
@@ -513,10 +520,17 @@ begin
       exit;
    canvas:=(sender as TDBGridEh).Canvas;
 
+  //если у абитуриента не хватает документов, красим его в синий
+  if (not TAbitZachislenieController.Instance.IsAbit_HaveAllDocs) then
+  begin
+    SetColor(canvas,Rect,Column.Field,$00F0CAA6,clInfoText);   //$00C6C6FF
+    exit;
+  end;
+
   //если абитуриент не набрал минимума баллов по дисциплине, закрашиваем его
   //в красный цвет
 
-  if (not TAbitZachislenieController.Instance.IsAbit_minBall) then
+  if (not TAbitZachislenieController.Instance.IsAbit_HaveAllExam) then
   begin
     SetColor(canvas,Rect,Column.Field,$00C6C6FF,clInfoText);   //$00C6C6FF
     exit;
@@ -524,17 +538,17 @@ begin
   else
   begin
     //отмечаем всех проходящих
-    if  TAbitZachislenieController.Instance.IsAbit_ProhodBall then
-    begin
+  //  if  TAbitZachislenieController.Instance.IsAbit_ProhodBall then
+  //  begin
       SetColor(canvas,Rect,Column.Field,$007BDDBD,clInfoText); //$007BDD
       exit;
-    end
+  //  end
     //отмечаем всех непроходящих
-    else
-    begin
-      SetColor(canvas,Rect,Column.Field,$0063F5E3,clInfoText);  //$0063F5E3
-      exit;
-    end
+  //  else
+  //  begin
+  //    SetColor(canvas,Rect,Column.Field,$0063F5E3,clInfoText);  //$0063F5E3
+  //    exit;
+  //  end
   end;
 
 
@@ -557,8 +571,8 @@ begin
   for i := 0 to (dbgAbitsForZachisl.SelectedRows.Count-1) do
   begin
       dbgAbitsForZachisl.DataSource.DataSet.GotoBookmark(Pointer(dbgAbitsForZachisl.SelectedRows[i]));
-      TAbitZachislenieController.Instance.Abit_Join(dbgAbitsForZachisl.DataSource.DataSet.FieldValues['NN_abit']);
-
+      if TAbitZachislenieController.Instance.IsAbit_CanBeZachisl then
+        TAbitZachislenieController.Instance.Abit_Join(dbgAbitsForZachisl.DataSource.DataSet.FieldValues['NN_abit']);
   end;
   dbgAbitsForZachisl.DataSource.DataSet.Next;
 end;
@@ -580,8 +594,7 @@ end;
 
 procedure TfmZach.actAbitReturnExecuteUpdate(Sender: TObject);
 begin
-actAbitReturnExecute.Enabled:=(prikaz.RowCount>0);
-
+  actAbitReturnExecute.Enabled:=(prikaz.RowCount>0);
 end;
 
 procedure TfmZach.actAbitSpisokToExcelExecute(Sender: TObject);
@@ -783,7 +796,7 @@ end;
 procedure TfmZach.actExileAbitExecute(Sender: TObject);
 var i:integer;
 begin
-Modified:=false;
+  Modified:=false;
 
   if (MessageBox(Handle, 'Отказать абитуриенту(ам) в зачислении?','ИС "УГТУ"',
           MB_YESNO) = IDNO) then
@@ -827,10 +840,10 @@ procedure TfmZach.dbgBallsColumns3UpdateData(Sender: TObject; var Text: string;
   var Value: Variant; var UseText, Handled: Boolean);
 begin
   inherited;
+  
   Modified:= true;
-   bbProceed.enabled:=true;
-   bbUndo.enabled:=true;
-
+  bbProceed.enabled:=true;
+  bbUndo.enabled:=true;
 end;
 
 procedure TfmZach.dbgBallsTitleClick(Column: TColumnEh);
