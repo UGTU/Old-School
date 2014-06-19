@@ -649,6 +649,10 @@ object dmAbiturientAction: TdmAbiturientAction
       FieldName = 'IsNotFirstEducation'
       ReadOnly = True
     end
+    object adospPrintZayavlcEmail: TStringField
+      FieldName = 'cEmail'
+      Size = 50
+    end
   end
   object adospAbit_docsForZayavl: TADOStoredProc
     Connection = dm.DBConnect
@@ -1172,36 +1176,42 @@ object dmAbiturientAction: TdmAbiturientAction
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@cosenka'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@NN_abit'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@'#1089'name_disc'
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end
       item
         Name = '@ik_sdach'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@NNvedom'
         Attributes = [paNullable]
         DataType = ftString
         Size = 20
+        Value = Null
       end>
     Left = 358
     Top = 210

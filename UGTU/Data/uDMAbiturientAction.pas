@@ -95,6 +95,7 @@ type
     adospPrintZayavlIsNotFirstEducation: TBooleanField;
     aspDoubles: TADOStoredProc;
     aspAddExamByName: TADOStoredProc;
+    adospPrintZayavlcEmail: TStringField;
   private
     { Private declarations }
   public
