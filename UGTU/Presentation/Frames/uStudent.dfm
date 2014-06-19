@@ -152,6 +152,10 @@ inherited fmStudent: TfmStudent
         OnChange = PageControl1Change
         object TabSheet1: TTabSheet
           Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object PageControl2: TPageControl
             Left = 0
             Top = 0
@@ -692,6 +696,10 @@ inherited fmStudent: TfmStudent
             object TabSheet4: TTabSheet
               Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel3: TPanel
                 Left = 0
                 Top = 0
@@ -1039,6 +1047,10 @@ inherited fmStudent: TfmStudent
             object TabSheet5: TTabSheet
               Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Splitter1: TSplitter
                 Left = 0
                 Top = 25
@@ -1160,7 +1172,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 26
                 Width = 705
-                Height = 496
+                Height = 495
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1208,6 +1220,10 @@ inherited fmStudent: TfmStudent
             object TabSheet7: TTabSheet
               Caption = #1057#1086#1073#1099#1090#1080#1103
               ImageIndex = 4
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object gbExiled: TGroupBox
                 Left = 0
                 Top = 0
@@ -1448,6 +1464,10 @@ inherited fmStudent: TfmStudent
         object TabSheet2: TTabSheet
           Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object DBGridEh1: TDBGridEh
             Left = 0
             Top = 26
@@ -1642,6 +1662,10 @@ inherited fmStudent: TfmStudent
         object tsBRSBalls: TTabSheet
           Caption = #1041#1072#1083#1083#1099' '#1087#1086' '#1084#1086#1076#1091#1083#1103#1084
           ImageIndex = 4
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel10: TPanel
             Left = 0
             Top = 0
@@ -1833,6 +1857,10 @@ inherited fmStudent: TfmStudent
         object TabSheet9: TTabSheet
           Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -1924,6 +1952,10 @@ inherited fmStudent: TfmStudent
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
@@ -2009,7 +2041,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

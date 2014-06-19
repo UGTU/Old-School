@@ -560,9 +560,10 @@ begin
    newBookKey:= Abit_AppendRecordBook(1, code, -1, nzach);
    if newBookKey>0 then
    begin
+     // FAbitListDataSetInstance.GotoBookmark(Pointer(dbgAbitsForZachisl.SelectedRows[i]));
       FAbitListDataSetInstance.Locate('nCode',code,[]);
       FAbitListDataSetInstance.Edit;
-      FAbitListDataSetInstance.FieldByName('BookKey').Value:= newBookKey;
+      FAbitListDataSetInstance.FieldByName('ik_zach').Value:= newBookKey;    //BookKey
       FAbitListDataSetInstance.FieldByName('Nn_zach').Value:= nzach;
    end;
    result:= newBookKey;

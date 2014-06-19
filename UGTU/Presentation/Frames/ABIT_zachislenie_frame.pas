@@ -266,6 +266,10 @@ begin
 			DataSet.Fields[1].DisplayLabel:= 'Название';
 			DataSet.Fields[2].DisplayLabel := 'Короткое название';
 			DataSet.Fields[3].Visible := false;
+      DataSet.Fields[4].DisplayLabel := 'Зач. книжки (Начало)';
+      DataSet.Fields[5].DisplayLabel := 'Зач. книжки (Конец)';
+      DataSet.Fields[4].ReadOnly := false;
+      DataSet.Fields[5].ReadOnly := false;
 
       dbgAbitsForZachisl.FieldColumns['cshort_name_fac'].Visible:= true;
       dbgAbitsForZachisl.FieldColumns['cshort_name_fac'].Visible:= true;

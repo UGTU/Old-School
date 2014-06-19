@@ -62,19 +62,20 @@ uses udm,umain,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg, uSpravForm,
 
 function CheckFields:boolean;
 begin
-result:=true;
-with frmAbitCardDialog do
-begin
-if (eFam.Text='')
-or(eName.Text='')
-or(eNum.Text='')
-or(dbdteBirthDate.Text='  .  .    ')
-or(dbcbeSex.Text='')
-or(dbcbeSchool.Text='')
-or(dbcbeCitizenship.Text='')
-or(dbcbeMedal.Text='')
-then result:=false;
-end;
+  result:=true;
+  with frmAbitCardDialog do
+  begin
+    if (eFam.Text='')
+    or(eName.Text='')
+    or(eNum.Text='')
+    or(eEmail.Text='')
+    or(dbdteBirthDate.Text='  .  .    ')
+    or(dbcbeSex.Text='')
+    or(dbcbeSchool.Text='')
+    or(dbcbeCitizenship.Text='')
+    or(dbcbeMedal.Text='')
+    then result:=false;
+  end;
 end;
 
 {$R *.dfm}
