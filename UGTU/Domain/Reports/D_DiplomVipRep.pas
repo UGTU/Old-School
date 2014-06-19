@@ -284,7 +284,7 @@ begin
 end;
 
 procedure TDiplomVipExcelReport.SendToExcel;
-const maxDiscStr = 70;
+const maxDiscStr = 66;
   MaxKRCount = 6;
   MaxPractCount = 8;
 var
@@ -696,9 +696,9 @@ begin
   else
   begin
       if (IsNapravl()) then
-        str := 'Итоговый госудаственный междисциплинарный экзамен по направлению подготовки'
+        str := 'Итоговый государственный междисциплинарный экзамен по направлению подготовки'
       else
-        str := 'Итоговый госудаственный междисциплинарный экзамен по специальности'//'Итоговый государственный междисциплинарный экзамен';
+        str := 'Итоговый государственный междисциплинарный экзамен по специальности'//'Итоговый государственный междисциплинарный экзамен';
     end;
     SendStringToExcel(str, cur, ActRange);
     cur1 := Selection.Address;

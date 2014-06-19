@@ -2662,6 +2662,8 @@ begin
 	  FindRange := E.Cells.Replace(What := '#√од«#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavl.FieldByName('EducationLevelName').AsString;
 	  FindRange := E.Cells.Replace(What := '#educLevel#',Replacement:=str);
+    str := dmAbiturientAction.adospPrintZayavl.FieldByName('cEmail').AsString;
+	  FindRange := E.Cells.Replace(What := '#Ёлјдрес#',Replacement:=str);
 
 
 
