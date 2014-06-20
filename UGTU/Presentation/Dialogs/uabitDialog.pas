@@ -388,7 +388,7 @@ procedure TfrmAbitCardDialog.dbcbeSchoolPointChange(Sender: TObject);
 begin
 If not Floaded then exit;
 
-   if fupmoving then begin dbcbeSchoolRegion.KeyValue:=dmAdress.ADODSsChoolGorod.FieldByName('ik_raion').Value;
+  if fupmoving then begin dbcbeSchoolRegion.KeyValue:=dmAdress.ADODSsChoolGorod.FieldByName('ik_raion').Value;
    fupmoving:=false;
    end
    else

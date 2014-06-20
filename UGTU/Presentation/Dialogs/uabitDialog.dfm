@@ -65,8 +65,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     ExplicitWidth = 561
     ExplicitHeight = 621
     inherited TabSheet1: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
       ExplicitWidth = 553
       ExplicitHeight = 593
       inherited PageControl2: TPageControl
@@ -76,8 +74,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
         ExplicitWidth = 553
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited Panel4: TPanel
@@ -127,19 +123,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Top = 48
                 ExplicitLeft = 323
                 ExplicitTop = 48
-              end
-              object Label7: TLabel [18]
-                Left = 47
-                Top = 86
-                Width = 4
-                Height = 13
-                Caption = '*'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clRed
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
               end
               inherited dbdteBirthDate: TDBDateTimeEditEh
                 OnExit = dbdteBirthDateExit
@@ -338,6 +321,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                     Style = ebsPlusEh
                     OnClick = dbcbeSchoolEditButtons0Click
                   end>
+                ListSource = dmAdress.dsSchool
                 OnChange = dbcbeSchoolChange
                 ExplicitLeft = 13
                 ExplicitTop = 23
@@ -625,8 +609,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet2: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited sbAddDoc: TSpeedButton
@@ -654,7 +636,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
