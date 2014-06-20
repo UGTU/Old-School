@@ -22,6 +22,7 @@ type
     Label67: TLabel;
     Label69: TLabel;
     Label70: TLabel;
+    Label7: TLabel;
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -67,7 +68,7 @@ begin
   begin
     if (eFam.Text='')
     or(eName.Text='')
-    or(eNum.Text='')
+    //or(eNum.Text='')
     or(eEmail.Text='')
     or(dbdteBirthDate.Text='  .  .    ')
     or(dbcbeSex.Text='')
@@ -513,6 +514,7 @@ begin
   showmessage('Проверьте поле "Телефон"! Введите не более 20 символов');
   exit;
 end;
+
 //}
 
 end;
