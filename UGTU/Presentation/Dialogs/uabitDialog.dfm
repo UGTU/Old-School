@@ -438,6 +438,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet4: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited Panel3: TPanel
@@ -589,6 +591,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet5: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited Panel9: TPanel
