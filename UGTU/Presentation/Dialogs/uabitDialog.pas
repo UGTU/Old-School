@@ -285,16 +285,16 @@ end;
 
 procedure TfrmAbitCardDialog.actCheckFieldsExecute(Sender: TObject);
 begin
-if (efam<>nil) then
-if checkfields then
-begin
-bbOK.Enabled:=true;
-bbApply.Enabled:=true;
-end else
-begin
-bbOK.Enabled:=false;
-bbApply.Enabled:=false;
-end;
+  if (efam<>nil) then
+    if checkfields then
+    begin
+      bbOK.Enabled:=true;
+      bbApply.Enabled:=true;
+    end else
+    begin
+      bbOK.Enabled:=false;
+      bbApply.Enabled:=false;
+    end;
 end;
 
 procedure TfrmAbitCardDialog.dbcbeSchoolChange(Sender: TObject);
