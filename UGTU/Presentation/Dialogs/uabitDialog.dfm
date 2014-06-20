@@ -70,6 +70,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       inherited PageControl2: TPageControl
         Width = 553
         Height = 593
+        ActivePage = TabSheet3
         ExplicitWidth = 553
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
@@ -320,6 +321,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                     Style = ebsPlusEh
                     OnClick = dbcbeSchoolEditButtons0Click
                   end>
+                ListSource = dmAdress.dsSchool
                 OnChange = dbcbeSchoolChange
                 ExplicitLeft = 13
                 ExplicitTop = 23
@@ -616,8 +618,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           inherited sgDocs: TStringGrid
             Height = 561
             ColCount = 5
-            ExplicitLeft = 1
-            ExplicitTop = 2
             ExplicitHeight = 561
             ColWidths = (
               119
@@ -632,7 +632,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
