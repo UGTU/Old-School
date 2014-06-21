@@ -2660,12 +2660,13 @@ begin
 	  FindRange := E.Cells.Replace(What := '#ћес€ц«#',Replacement:=zayavlMonth);
 	  str := dmAbiturientAction.adospPrintZayavlZYear.AsString;
 	  FindRange := E.Cells.Replace(What := '#√од«#',Replacement:=str);
-	  str := dmAbiturientAction.adospPrintZayavl.FieldByName('EducationLevelName').AsString;
-	  FindRange := E.Cells.Replace(What := '#educLevel#',Replacement:=str);
     str := dmAbiturientAction.adospPrintZayavl.FieldByName('cEmail').AsString;
 	  FindRange := E.Cells.Replace(What := '#Ёлјдрес#',Replacement:=str);
 
-
+    if (dmAbiturientAction.adospPrintZayavl.FieldByName('currentIK_kat_zaved').AsInteger < 4) then
+      E.Range['O21:Z21'].VerticalAlignment:=xlVAlignDistributed;
+	  str := dmAbiturientAction.adospPrintZayavl.FieldByName('EducationLevelName').AsString;
+	  FindRange := E.Cells.Replace(What := '#educLevel#',Replacement:=str);
 
 	  //вывод экзаменов, которые будут сдаватьс€
 	  dmAbiturientOtchety.adoPrintExams.Filter:='cosenka<0';

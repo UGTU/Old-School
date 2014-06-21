@@ -630,7 +630,7 @@ object dmAbiturientAction: TdmAbiturientAction
     end
     object adospPrintZayavlEducationLevelName: TStringField
       FieldName = 'EducationLevelName'
-      Size = 50
+      Size = 500
     end
     object adospPrintZayavlIk_form_ed: TIntegerField
       FieldName = 'Ik_form_ed'
