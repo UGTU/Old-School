@@ -41,6 +41,10 @@ type
     procedure dbcbeEnterpriseChange(Sender: TObject);
     procedure bbSpravMouseEnter(Sender: TObject);
     procedure dbdteBirthDateExit(Sender: TObject);
+    procedure eEmailExit(Sender: TObject);
+    procedure eFamExit(Sender: TObject);
+    procedure eNameExit(Sender: TObject);
+    procedure sbAddDocClick(Sender: TObject);
   private
   floaded:boolean;
   fupmoving:boolean;
@@ -299,10 +303,10 @@ end;
 
 procedure TfrmAbitCardDialog.dbcbeSchoolChange(Sender: TObject);
 begin
-fupmoving:=true;
-dbcbeSchoolPoint.KeyValue:=dmAdress.adodsSchool.FieldByName('ik_gorod').Value;
-fupmoving:=false;
-actCheckFieldsExecute(sender);
+  fupmoving:=true;
+  dbcbeSchoolPoint.KeyValue:=dmAdress.adodsSchool.FieldByName('ik_gorod').Value;
+  fupmoving:=false;
+  actCheckFieldsExecute(sender);
 end;
 
 procedure TfrmAbitCardDialog.dbcbeSchoolCountryChange(Sender: TObject);
@@ -444,6 +448,7 @@ end;
 procedure TfrmAbitCardDialog.dbdteBirthDateExit(Sender: TObject);
 var doubles:integer;
 begin
+  actCheckFieldsExecute(sender);
 {if (eFam.Text<>'') and (eName.Text<>'') and (dbdteBirthDate.Text<>'  .  .    ') then
 
   with dmAbiturientAction.aspdoubles do
@@ -461,6 +466,24 @@ begin
  }
 end;
 
+procedure TfrmAbitCardDialog.eEmailExit(Sender: TObject);
+begin
+  inherited;
+  actCheckFieldsExecute(sender);
+end;
+
+procedure TfrmAbitCardDialog.eFamExit(Sender: TObject);
+begin
+  inherited;
+  actCheckFieldsExecute(sender);  
+end;
+
+procedure TfrmAbitCardDialog.eNameExit(Sender: TObject);
+begin
+  inherited;
+  actCheckFieldsExecute(sender);
+end;
+
 procedure TfrmAbitCardDialog.actSpravExecute(Sender: TObject);
 begin    
   frmSprav:=TfrmSprav.Create(self);
@@ -473,8 +496,8 @@ end;
 
 procedure TfrmAbitCardDialog.bbCancelClick(Sender: TObject);
 begin
-frmMain.ActiveFrame.Modified:=false;
-close;
+  frmMain.ActiveFrame.Modified:=false;
+  close;
 end;
 
 procedure TfrmAbitCardDialog.bbSpravMouseEnter(Sender: TObject);

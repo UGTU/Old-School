@@ -1097,12 +1097,12 @@ procedure TfmStudent.eNameExit(Sender: TObject);
 var s,sm:string;
 begin
   inherited;
- if eName.Text<>'' then begin
-s:=eName.Text;
-sm:=AnsiUpperCase(s);
-s[1]:=sm[1];
-eName.Text:=s;
- end;
+  if eName.Text<>'' then begin
+    s:=eName.Text;
+    sm:=AnsiUpperCase(s);
+    s[1]:=sm[1];
+    eName.Text:=s;
+  end;
 end;
 
 procedure TfmStudent.dbcbeSexChange(Sender: TObject);
