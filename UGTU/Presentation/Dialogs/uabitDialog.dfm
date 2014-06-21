@@ -70,7 +70,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       inherited PageControl2: TPageControl
         Width = 553
         Height = 593
-        ActivePage = TabSheet3
         ExplicitWidth = 553
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
@@ -101,7 +100,9 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label45: TLabel
                 Top = 5
+                Width = 13
                 ExplicitTop = 5
+                ExplicitWidth = 13
               end
               inherited Label46: TLabel
                 Top = 4
@@ -124,6 +125,19 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 ExplicitLeft = 323
                 ExplicitTop = 48
               end
+              object Label7: TLabel [18]
+                Left = 47
+                Top = 89
+                Width = 16
+                Height = 13
+                Caption = '*'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clRed
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+              end
               inherited dbdteBirthDate: TDBDateTimeEditEh
                 OnExit = dbdteBirthDateExit
                 EditFormat = 'DD/MM/YYYY'
@@ -136,6 +150,12 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited eMid: TDBEditEh
                 EditMask = ''
+              end
+              inherited eEmail: TDBEditEh
+                Left = 15
+                Top = 108
+                ExplicitLeft = 15
+                ExplicitTop = 108
               end
               inherited eCellphone: TDBEditEh
                 Left = 213
@@ -636,7 +656,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C0101050009002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
