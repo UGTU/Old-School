@@ -2571,15 +2571,15 @@ begin
 	  str := dmAbiturientAction.adospPrintZayavlANp_number.AsString;
 	  FindRange := E.Cells.Replace(What := '#Ќомерјт#',Replacement:=str);
 	  if dmAbiturientAction.adospPrintZayavlik_medal.AsInteger<>1 then
-		  E.Range['AE'+inttostr(7)+':AE'+inttostr(7)]:='R';
+		  E.Range['X'+inttostr(8)+':X'+inttostr(8)]:='R';
 
 	  if dmAbiturientAction.adospPrintZayavlLobchegit.AsBoolean then
-		 E.Range['T'+inttostr(14)+':T'+inttostr(14)]:='R'
+		 E.Range['T'+inttostr(15)+':T'+inttostr(15)]:='R'
 	  else
-		 E.Range['X'+inttostr(14)+':X'+inttostr(14)]:='R';
+		 E.Range['X'+inttostr(15)+':X'+inttostr(15)]:='R';
 
     if dmAbiturientAction.adospPrintZayavl.FieldByName('IsRussOlimpWinner').AsBoolean then
-		 E.Range['Y'+inttostr(8)+':Y'+inttostr(8)]:='R';
+		 E.Range['Y'+inttostr(9)+':Y'+inttostr(9)]:='R';
 
 
 	  if ((dmAbiturientAction.adospPrintZayavlAIk_vid_doc.AsInteger=6) or
@@ -2600,7 +2600,7 @@ begin
 	  dmStudentSelectionProcs.aspSelLanguage.First;
 	  str:='';
 	  if (dmStudentSelectionProcs.aspSelLanguage.Eof) then
-		E.Range['Y'+inttostr(11)+':Y'+inttostr(11)]:='R';
+		E.Range['Y'+inttostr(12)+':Y'+inttostr(12)]:='R';
 	  while not dmStudentSelectionProcs.aspSelLanguage.Eof do
 	  begin
 		  if dmStudentSelectionProcs.aspSelLanguageIk_lang.AsInteger>4 then
@@ -2612,22 +2612,22 @@ begin
       end;
 			case dmStudentSelectionProcs.aspSelLanguageIk_lang.AsInteger of
 			  0: //не изучал
-				 E.Range['Y'+inttostr(11)+':Y'+inttostr(11)]:='R';
+				 E.Range['Y'+inttostr(12)+':Y'+inttostr(12)]:='R';
 			  1: //английский
-				 E.Range['Q'+inttostr(10)+':Q'+inttostr(10)]:='R';
+				 E.Range['Q'+inttostr(11)+':Q'+inttostr(11)]:='R';
 			  2: //французский
-				 E.Range['AB'+inttostr(10)+':AB'+inttostr(10)]:='R';
+				 E.Range['AB'+inttostr(11)+':AB'+inttostr(11)]:='R';
 			  3: //немецкий
-				 E.Range['X'+inttostr(10)+':X'+inttostr(10)]:='R';
+				 E.Range['X'+inttostr(11)+':X'+inttostr(11)]:='R';
 			  4: //другой
-				 E.Range['P'+inttostr(11)+':P'+inttostr(11)]:='R';
+				 E.Range['P'+inttostr(12)+':P'+inttostr(12)]:='R';
 			end;
 			dmStudentSelectionProcs.aspSelLanguage.Next;
 	  end;
 
 	  FindRange := E.Cells.Replace(What := '#ƒругойяз#',Replacement:=str);
 	  if (str<>'') then
-		  E.Range['P'+inttostr(11)+':P'+inttostr(11)]:='R';
+		  E.Range['P'+inttostr(12)+':P'+inttostr(12)]:='R';
 
 	  str:=dmAbiturientAction.adospPrintZayavlCLgot.AsString;
 	  FindRange := E.Cells.Replace(What := '#Ћьготы#',Replacement:=str);
