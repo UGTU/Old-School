@@ -44,7 +44,7 @@ type
     procedure eEmailExit(Sender: TObject);
     procedure eFamExit(Sender: TObject);
     procedure eNameExit(Sender: TObject);
-    procedure sbAddDocClick(Sender: TObject);
+
   private
   floaded:boolean;
   fupmoving:boolean;

@@ -105,6 +105,9 @@ type
     Label4: TLabel;
     Panel6: TPanel;
     Label5: TLabel;
+    ToolBar3: TToolBar;
+    btnGivezachNumber: TToolButton;
+    actGiveZachNumber: TAction;
     //загружает списки абитуриентов
     procedure GetSpisokOfAbits();
     procedure prikazTitleClick(Column: TColumnEh);
@@ -153,6 +156,7 @@ type
     procedure actSaveMinBallsUpdate(Sender: TObject);
     procedure actPrintExamStatisticExecute(Sender: TObject);
     procedure ToolButton7Click(Sender: TObject);
+    procedure actGiveZachNumberExecute(Sender: TObject);
 
     protected
      procedure DoRefreshFrame();override;
@@ -670,6 +674,22 @@ begin
   actCancelZachisl.Enabled:= (Prikaz.RowCount>0);
 end;
 
+
+procedure TfmZach.actGiveZachNumberExecute(Sender: TObject);
+var proc: TADOStoredProc;
+begin
+  //выдать всем зачисленным абитуриентам номера зачетных книжек
+  proc := TADOStoredProc.Create(nil);
+  try
+    proc.ProcedureName:= 'ABIT_Set_Zach;1';
+    proc.Connection:= dm.DBConnect;
+    proc.Parameters.CreateParameter('@NNYear', ftInteger, pdInput, 4,year);
+    proc.ExecProc;
+  except
+
+  end;
+  proc.Free;
+end;
 
 procedure TfmZach.actPrintExamStatisticExecute(Sender: TObject);
 begin
