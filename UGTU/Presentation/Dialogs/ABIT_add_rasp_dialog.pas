@@ -73,7 +73,7 @@ function TfrmDialRasp.AddEditData():boolean;
 begin
 	 if id_rasp>0 then   //редактирование
    begin
-	    TAbitRaspisanieController.Instance.EditMeropr(MonCal.value,id_rasp,vidsd.value,Disc.value,TimeBegin.Value,TimeEnd.Value,Meropr.value);
+	    TAbitRaspisanieController.Instance.EditMeropr(MonCal.Text,id_rasp,vidsd.value,Disc.value,TimeBegin.Value,TimeEnd.Value,Meropr.value);
    end
 	 else
    begin
@@ -85,7 +85,7 @@ begin
       begin
         TApplicationController.GetInstance.AddLogEntry('ƒобавление меропри€ти€: '+Disc.Text+', '+vidsd.Text
             +', '+Meropr.Text+', '+MonCal.Text+' с '+TimeBegin.Text+' до '+TimeEnd.Text);
-	      TAbitRaspisanieController.Instance.AddNewMeropr(StrToDate(MonCal.Text),vidsd.value,Disc.value,TimeBegin.Value,TimeEnd.Value,Meropr.value);
+	      TAbitRaspisanieController.Instance.AddNewMeropr((MonCal.value),vidsd.value,Disc.value,TimeBegin.Value,TimeEnd.Value,Meropr.value);
       end;
    end;
 	 result:=true;

@@ -67,39 +67,20 @@ inherited frmPostupDlg: TfrmPostupDlg
     Font.Style = []
     ParentFont = False
     TabOrder = 1
+    ExplicitTop = -6
     DesignSize = (
       522
       241)
-    object Label1: TLabel
-      Left = 9
-      Top = 18
-      Width = 94
-      Height = 13
-      Caption = #1053#1086#1084#1077#1088' '#1079#1072#1103#1074#1083#1077#1085#1080#1103':'
-    end
-    object Label47: TLabel
-      Left = 103
-      Top = 18
-      Width = 4
-      Height = 13
-      Caption = '*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ParentFont = False
-    end
     object Label2: TLabel
-      Left = 168
-      Top = 59
+      Left = 12
+      Top = 15
       Width = 35
       Height = 13
       Caption = #1053#1072#1073#1086#1088':'
     end
     object Label5: TLabel
-      Left = 203
-      Top = 59
+      Left = 211
+      Top = -7
       Width = 4
       Height = 13
       Caption = '*'
@@ -111,15 +92,15 @@ inherited frmPostupDlg: TfrmPostupDlg
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 168
-      Top = 18
+      Left = 165
+      Top = 59
       Width = 123
       Height = 13
       Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103':'
     end
     object Label6: TLabel
-      Left = 291
-      Top = 18
+      Left = 288
+      Top = 55
       Width = 4
       Height = 13
       Caption = '*'
@@ -157,43 +138,44 @@ inherited frmPostupDlg: TfrmPostupDlg
       Height = 13
       Caption = #1057#1088#1077#1076#1085#1080#1081' '#1073#1072#1083#1083':'
     end
-    object eNum: TDBNumberEditEh
-      Left = 9
-      Top = 34
-      Width = 150
-      Height = 19
-      Alignment = taLeftJustify
-      EditButtons = <>
-      Flat = True
-      TabOrder = 0
-      Visible = True
-      OnChange = eNumChange
+    object Label1: TLabel
+      Left = 48
+      Top = 15
+      Width = 43
+      Height = 13
+      Caption = '*'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
     end
     object dbcbeRecruit: TDBLookupComboboxEh
-      Left = 168
-      Top = 74
-      Width = 346
+      Left = 9
+      Top = 34
+      Width = 505
       Height = 19
       EditButtons = <>
       Flat = True
       KeyField = 'NNrecord'
       ListField = 'Name'
       ListSource = dm.dsNabor
-      TabOrder = 3
+      TabOrder = 2
       Visible = True
       OnChange = dbcbeRecruitChange
     end
     object dbcbeCategory: TDBLookupComboboxEh
-      Left = 168
-      Top = 34
-      Width = 346
+      Left = 165
+      Top = 74
+      Width = 349
       Height = 19
       EditButtons = <>
       Flat = True
       KeyField = 'Ik_kat_zach'
       ListField = 'Cname_kat_zach'
       ListSource = dmStudentData.dsGetAbitCat
-      TabOrder = 1
+      TabOrder = 0
       Visible = True
       OnChange = eNumChange
     end
@@ -205,7 +187,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh
-      TabOrder = 2
+      TabOrder = 1
       Visible = True
       OnChange = eNumChange
     end
@@ -215,7 +197,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Width = 325
       Height = 17
       Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1077' '#1076#1077#1081#1089#1090#1074#1080#1090#1077#1083#1100#1085#1086' ('#1074#1089#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1099' '#1074' '#1086#1088#1080#1075#1080#1085#1072#1083#1077')'
-      TabOrder = 4
+      TabOrder = 3
       OnClick = cbRealClick
     end
     object cbIsMain: TCheckBox
@@ -224,7 +206,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Width = 325
       Height = 17
       Caption = #1071#1074#1083#1103#1077#1090#1089#1103' '#1087#1077#1088#1074#1080#1095#1085#1099#1084' ('#1083#1080#1095#1085#1086#1077' '#1076#1077#1083#1086' '#1085#1072' '#1101#1090#1086#1081' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100')'
-      TabOrder = 5
+      TabOrder = 4
       OnClick = cbIsMainClick
     end
     object eAvgBall: TDBNumberEditEh
@@ -238,7 +220,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Increment = 0.100000000000000000
       MaxValue = 5.000000000000000000
       MinValue = 2.000000000000000000
-      TabOrder = 6
+      TabOrder = 5
       Value = 0.000000000000000000
       Visible = True
       OnChange = eNumChange
@@ -250,7 +232,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Height = 35
       Anchors = [akLeft, akTop, akRight]
       Caption = #1055#1086#1083#1091#1095#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1089#1077#1088#1090#1080#1092#1080#1082#1072#1090#1072' '#1045#1043#1069
-      TabOrder = 7
+      TabOrder = 6
       OnClick = bGetCertDataClick
     end
   end

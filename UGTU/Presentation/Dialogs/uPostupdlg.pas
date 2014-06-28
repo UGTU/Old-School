@@ -43,9 +43,6 @@ type
     sbAddExam: TSpeedButton;
     sbDelExam: TSpeedButton;
     sgExams: TStringGrid;
-    eNum: TDBNumberEditEh;
-    Label1: TLabel;
-    Label47: TLabel;
     dbcbeRecruit: TDBLookupComboboxEh;
     Label2: TLabel;
     Label5: TLabel;
@@ -65,6 +62,7 @@ type
     eAvgBall: TDBNumberEditEh;
     Label8: TLabel;
     bGetCertData: TButton;
+    Label1: TLabel;
     procedure FormShow(Sender: TObject);
     procedure sbAddExamClick(Sender: TObject);
     procedure sgExamsClick(Sender: TObject);
@@ -115,8 +113,7 @@ begin
 result:=true;
 with frmPostupDlg do
 begin
-if (eNum.Text='')
-or(dbcbeRecruit.Text='')
+if (dbcbeRecruit.Text='')
 or(dbcbeCategory.Text='')
 or(dbdteList.Text='  .  .    ')
 or(AbitList=nil) then result:=false;
@@ -194,7 +191,6 @@ procedure TfrmPostupDlg.Sync;
 begin
 if (AbitList=nil) then exit;
 
-if (eNum.value<=0) then eNum.value:=AbitList.Num;
 if (dbcbeCategory.keyvalue<=0) then dbcbeCategory.keyvalue:=AbitList.CatNum;
 if (dbdteList.Value<=0) then dbdteList.Value:=AbitList.Date;
 if (dbcbeRecruit.keyvalue<=0) then dbcbeRecruit.KeyValue:=AbitList.RecruitNum;
@@ -215,12 +211,13 @@ var j:integer;
 begin
 commited:=false;
 if AbitList=nil then
-AbitList:=TAbitlist.Create;
+  AbitList:=TAbitlist.Create;
 AbitList.lAdditionalSpec:=TList.Create;
 AbitList.ldelAdditionalSpec:=TList.Create;
 AbitList.new:=true;
 ExamList:=Tlist.Create;
 deleteexamlist:=Tlist.Create;
+Text:= 'Заявление на поступление';
 
 if HostForm=nil then bGetCertData.Visible:=false;
 
@@ -287,7 +284,6 @@ ButtonsCheck;
 end;
 
 if AbitList.closed then begin
-eNum.Enabled:=false;
 dbcbeCategory.Enabled:=false;
 dbdteList.Enabled:=false;
 dbcbeRecruit.Enabled:=false;
@@ -300,7 +296,6 @@ cbReal.Enabled:=false;
 cbIsMain.Enabled:=false;
 end else
 begin
-eNum.Enabled:=true;
 dbcbeCategory.Enabled:=true;
 dbdteList.Enabled:=true;
 dbcbeRecruit.Enabled:=true;
@@ -331,9 +326,9 @@ begin
   end;
   Sync;
 end;
+if (AbitList.Num>0) then
 
-if (eNum.Enabled)and(eNum.Visible) then
-eNum.SetFocus;
+  Text:= 'Заявление на поступление '+IntToStr(AbitList.Num);
 end;
 
 procedure TfrmPostupDlg.sbAddExamClick(Sender: TObject);
@@ -536,10 +531,9 @@ if IsAdditional then exit;
 try
 if (not (dbcbeRecruit.Text=''))and(not (Tag=0)) then
 begin
-dmAbiturientAction.aspGetNewNum.Active:=false;
+{dmAbiturientAction.aspGetNewNum.Active:=false;
 dmAbiturientAction.aspGetNewNum.Parameters[1].Value:=dbcbeRecruit.KeyValue;
-dmAbiturientAction.aspGetNewNum.execproc;
-eNum.Value:=dmAbiturientAction.aspGetNewNum.Parameters[0].Value;
+dmAbiturientAction.aspGetNewNum.execproc;   }
 end;
 except
 on E:EOleException do
@@ -569,7 +563,6 @@ ex:TExam;
 spec:TAdditionalSpec;
 AddExProc:TADOStoredProc;
 begin
-AbitList.Num:=eNum.Value;
 AbitList.RecruitNum:=dbcbeRecruit.KeyValue;
 AbitList.Date:=dbdteList.Value;
 AbitList.CatNum:=dbcbeCategory.KeyValue;

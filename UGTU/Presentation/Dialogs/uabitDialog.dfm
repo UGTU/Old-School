@@ -65,6 +65,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     ExplicitWidth = 561
     ExplicitHeight = 621
     inherited TabSheet1: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 553
       ExplicitHeight = 593
       inherited PageControl2: TPageControl
@@ -73,6 +75,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
         ExplicitWidth = 553
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited Panel4: TPanel
@@ -100,9 +104,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label45: TLabel
                 Top = 5
-                Width = 13
                 ExplicitTop = 5
-                ExplicitWidth = 13
               end
               inherited Label46: TLabel
                 Top = 4
@@ -128,7 +130,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               object Label7: TLabel [18]
                 Left = 47
                 Top = 89
-                Width = 16
+                Width = 4
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
@@ -341,7 +343,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                     Style = ebsPlusEh
                     OnClick = dbcbeSchoolEditButtons0Click
                   end>
-                ListSource = dmAdress.dsSchool
                 OnChange = dbcbeSchoolChange
                 ExplicitLeft = 13
                 ExplicitTop = 23
@@ -629,6 +630,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet2: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 545
           ExplicitHeight = 561
           inherited sbAddDoc: TSpeedButton
@@ -656,7 +659,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

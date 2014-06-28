@@ -1,7 +1,7 @@
 object dmDiplom: TdmDiplom
   OldCreateOrder = False
-  Height = 358
-  Width = 703
+  Height = 333
+  Width = 534
   object adospDiplomList: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
@@ -541,8 +541,8 @@ object dmDiplom: TdmDiplom
         DataType = ftDateTime
         Value = Null
       end>
-    Left = 630
-    Top = 19
+    Left = 430
+    Top = 43
     object StringField20: TStringField
       FieldName = 'StudName'
       ReadOnly = True
@@ -597,8 +597,8 @@ object dmDiplom: TdmDiplom
   end
   object dsAppendDiplom: TDataSource
     DataSet = adospAppendDiplom
-    Left = 630
-    Top = 77
+    Left = 430
+    Top = 101
   end
   object adospSelPractForVipisca: TADOStoredProc
     Connection = dm.DBConnect

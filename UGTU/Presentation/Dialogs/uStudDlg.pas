@@ -58,7 +58,6 @@ type
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    dbcbeSchool: TDBLookupComboboxEh;
     dbcbeCat: TDBLookupComboboxEh;
     Panel6: TPanel;
     TabSheet4: TTabSheet;
@@ -84,6 +83,7 @@ type
     dbcbeSpecCount: TDBLookupComboboxEh;
     Panel10: TPanel;
     TabSheet5: TTabSheet;
+    dbcbeSchool: TDBLookupComboboxEh;
     Panel9: TPanel;
     Label38: TLabel;
     dbcbeFamState: TDBLookupComboboxEh;
