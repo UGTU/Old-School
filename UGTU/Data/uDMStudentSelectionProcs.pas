@@ -104,6 +104,7 @@ type
     aspSelLastNamesStringField3: TStringField;
     aspSelKatChanges: TADOStoredProc;
     dsSelKatChanges: TDataSource;
+    adsGetParamNeedness: TADODataSet;
     procedure aspSelLanguageNewRecord(DataSet: TDataSet);
     procedure aspSelFamilyNewRecord(DataSet: TDataSet);
    

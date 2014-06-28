@@ -175,19 +175,6 @@ inherited fmAbitCard: TfmAbitCard
                     Width = 3
                     Height = 13
                   end
-                  object Label10: TLabel [18]
-                    Left = 45
-                    Top = 89
-                    Width = 13
-                    Height = 13
-                    Caption = '*'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clRed
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
                   inherited dbcbeSex: TDBComboBoxEh
                     Left = 158
                     Width = 134
@@ -848,7 +835,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

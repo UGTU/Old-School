@@ -72,6 +72,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       inherited PageControl2: TPageControl
         Width = 553
         Height = 593
+        ActivePage = TabSheet3
         ExplicitWidth = 553
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
@@ -127,7 +128,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 ExplicitLeft = 323
                 ExplicitTop = 48
               end
-              object Label7: TLabel [18]
+              object lblNeedEmail: TLabel [18]
                 Left = 47
                 Top = 89
                 Width = 4
@@ -659,7 +660,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

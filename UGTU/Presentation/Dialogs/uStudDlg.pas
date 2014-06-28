@@ -461,7 +461,7 @@ procedure TftmStudent.eEmailExit(Sender: TObject);
 begin
   inherited;
   if eEmail.text='' then exit;
-  if (Ansipos('@',eEmail.text)=0)or(Ansipos('.',eEmail.text)=0) {or(Ansipos('@',eEmail.text)>Ansipos('.',eEmail.text))    }
+  if (Ansipos('@',eEmail.text)=0){or(Ansipos('.',eEmail.text)=0) or(Ansipos('@',eEmail.text)>Ansipos('.',eEmail.text))    }
   then begin
     showmessage('Неверный e-mail!');
     eEmail.text:='';
