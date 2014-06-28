@@ -701,4 +701,11 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
     Left = 292
     Top = 171
   end
+  object adsGetParamNeedness: TADODataSet
+    Connection = dm.DBConnect
+    CommandText = 'select * from ABIT_GetParamNeedness()'
+    Parameters = <>
+    Left = 512
+    Top = 136
+  end
 end

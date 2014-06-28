@@ -17,7 +17,6 @@ type
     Label61: TLabel;
     GroupBox5: TGroupBox;
     dbgeAdditionalSpec: TDBGridEh;
-    Label10: TLabel;
     procedure dbgeListsCellClick(Column: TColumnEh);
     procedure dbcbeSexChange(Sender: TObject);
     procedure eFamChange(Sender: TObject);
@@ -116,6 +115,7 @@ adodsZaved_Stud.Active:=true;
   adodsEnterprise.Active:=true;
   adodsRelative.Active:=true;
    end;
+
    with dmAdress do begin
    adodsStrana.Active:=false;
  adodsSignStrana.Active:=false;
@@ -304,7 +304,7 @@ RefreshFrame;
 exit;
 end;
 
-if (eName.Text='')or(eFam.Text='')or(eEmail.Text='')
+if (eName.Text='')or(eFam.Text='')
 or(dbdteBirthDate.Text='  .  .    ')or(dbcbeCitizenship.Text='')or(dbcbeMedal.Text='') then
 begin
   showmessage('Одно или несколько обязательных для ввода полей не заполнены!');

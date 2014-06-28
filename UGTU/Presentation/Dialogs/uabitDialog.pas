@@ -22,7 +22,7 @@ type
     Label67: TLabel;
     Label69: TLabel;
     Label70: TLabel;
-    Label7: TLabel;
+    lblNeedEmail: TLabel;
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -49,6 +49,7 @@ type
   floaded:boolean;
   fupmoving:boolean;
   spravhint: string;
+  fNeedEmail: boolean;
     { Private declarations }
   public
   HasAddSpec : boolean;
@@ -73,7 +74,7 @@ begin
     if (eFam.Text='')
     or(eName.Text='')
     //or(eNum.Text='')
-    or(eEmail.Text='')
+    or((eEmail.Text='')and(fNeedEmail))
     or(dbdteBirthDate.Text='  .  .    ')
     or(dbcbeSex.Text='')
     or(dbcbeSchool.Text='')
@@ -98,26 +99,25 @@ end;
 procedure TfrmAbitCardDialog.actApplyExecute(Sender: TObject);
 begin
 
-if not checkDataAbit then
-  exit;
+  if not checkDataAbit then
+    exit;
 
-try
-with dmAbiturientAction.adospInsertPredpr do
-begin
-Active:=false;
-Parameters[1].Value:=dbcbeEnterprise.Text;
-ExecProc;
-if (Parameters[0].value<>(-1)) then
-begin
-dmStudentData.adodsEnterprise.Active:=false;
-dmStudentData.adodsEnterprise.Active:=true;
-dbcbeEnterprise.KeyValue:=Parameters[0].Value;
-end;
-end;
+  try
+    with dmAbiturientAction.adospInsertPredpr do
+    begin
+      Active:=false;
+      Parameters[1].Value:=dbcbeEnterprise.Text;
+      ExecProc;
+      if (Parameters[0].value<>(-1)) then
+      begin
+        dmStudentData.adodsEnterprise.Active:=false;
+        dmStudentData.adodsEnterprise.Active:=true;
+        dbcbeEnterprise.KeyValue:=Parameters[0].Value;
+      end;
+    end;
+  finally
 
-finally
-
-end;
+  end;
 
 frmPostupDlg:=TfrmpostupDlg.create(self);
 frmPostupDlg.Tag:=self.Tag;
@@ -138,8 +138,10 @@ end;
 
 procedure TfrmAbitCardDialog.FormShow(Sender: TObject);
 begin
-floaded:=false;
- sgLang.Cells[0,0]:='язык';
+  floaded:=false;
+  dbcbeSchool.ListSource := dmAdress.dsSchool;
+
+  sgLang.Cells[0,0]:='язык';
   sgLang.Cells[1,0]:='—тепень владени€';
 
   sgRelatives.Cells[0,0]:='‘»ќ';
@@ -167,23 +169,34 @@ floaded:=false;
   AddressRecordList:= Tlist.Create;
 
 
-  with dmAdress do begin
+
+  with dmAdress do
+  begin
    adodsSchoolStrana.Active:=false;
    adodsSchoolRegion.Active:=false;
    adodsSchoolRaion.Active:=false;
    adodsSchoolGorod.Active:=false;
    adodsSchool.Active:=false;
 
-  adodsSchoolStrana.Active:=true;
+   adodsSchoolStrana.Active:=true;
    adodsSchoolStrana.Sort:='Cstrana';
-    adodsSchoolRegion.Active:=true;
-      adodsSchoolRegion.Sort:='Cregion';
-     adodsSchoolRaion.Active:=true;
-      adodsSchoolRaion.Sort:='Craion';
-     adodsSchoolGorod.Active:=true;
-      adodsSchoolGorod.Sort:='Cgorod';
-     adodsSchool.Active:=true;
-      adodsSchool.Sort:='Cname_zaved';
+   adodsSchoolRegion.Active:=true;
+   adodsSchoolRegion.Sort:='Cregion';
+   adodsSchoolRaion.Active:=true;
+   adodsSchoolRaion.Sort:='Craion';
+   adodsSchoolGorod.Active:=true;
+   adodsSchoolGorod.Sort:='Cgorod';
+   adodsSchool.Active:=true;
+   adodsSchool.Sort:='Cname_zaved';
+  end;
+
+  //считываем, какие параметры необходимы дл€ указанного направлени€
+  with dmStudentSelectionProcs.adsGetParamNeedness do
+  begin
+    Active:=true;
+    Locate('NNrecord',Self.Tag,[]);
+    fNeedEmail := (FieldByName('needEmail').Value = true);
+    Active := false;
   end;
 
   Pagecontrol2.ActivePageIndex:=0;
@@ -247,14 +260,15 @@ floaded:=false;
      adodsEnterprise.Active:=true;
      adodsEnterprise.Sort:='Cname_pred';
    end;
-   with dmCauses do begin
-
+   with dmCauses do
+   begin
      adodsExile.Active:=false;
      adodsJoinCause.Active:=false;
      adodsExile.Active:=true;
      adodsJoinCause.Active:=true;
-
    end;
+
+
 
      // ”становка параметров по умолчанию
 
@@ -274,6 +288,8 @@ floaded:=false;
 
       if dbcbeSchoolPoint.KeyValue<0 then dbcbeSchoolPoint.KeyValue:=504;
        dbcbeSchoolPointChange(Sender);
+
+      lblNeedEmail.Visible := fNeedEmail; 
 
       eFam.SetFocus;
 end;

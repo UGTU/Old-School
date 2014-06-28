@@ -128,7 +128,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 ExplicitLeft = 323
                 ExplicitTop = 48
               end
-              object Label7: TLabel [18]
+              object lblNeedEmail: TLabel [18]
                 Left = 47
                 Top = 89
                 Width = 4
@@ -344,7 +344,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                     Style = ebsPlusEh
                     OnClick = dbcbeSchoolEditButtons0Click
                   end>
-                ListSource = dmAdress.dsSchool
                 OnChange = dbcbeSchoolChange
                 ExplicitLeft = 13
                 ExplicitTop = 23
@@ -661,7 +660,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
