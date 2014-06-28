@@ -67,7 +67,6 @@ inherited frmPostupDlg: TfrmPostupDlg
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    ExplicitTop = -6
     DesignSize = (
       522
       241)
@@ -141,7 +140,7 @@ inherited frmPostupDlg: TfrmPostupDlg
     object Label1: TLabel
       Left = 48
       Top = 15
-      Width = 43
+      Width = 4
       Height = 13
       Caption = '*'
       Font.Charset = DEFAULT_CHARSET

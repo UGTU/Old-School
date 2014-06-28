@@ -328,7 +328,7 @@ begin
 end;
 if (AbitList.Num>0) then
 
-  Text:= 'Заявление на поступление '+IntToStr(AbitList.Num);
+  Text:= 'Заявление на поступление №'+IntToStr(AbitList.Num);
 end;
 
 procedure TfrmPostupDlg.sbAddExamClick(Sender: TObject);
