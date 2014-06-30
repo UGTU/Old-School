@@ -38,7 +38,7 @@ type
   //копирует мероприятие
   procedure CopyMeropr(id_raspOld:integer; mdate:Tdatetime;ik_sdach,ik_disc:OleVariant;TimeBegin,TimeEnd:Tdatetime;ik_typ_mer:OleVariant);
   //EditMeropr редактирование мероприятия
-  procedure EditMeropr(date:Tdatetime;id_rasp:integer;ik_sdach,ik_disc:OleVariant;TimeBegin,TimeEnd:Tdatetime;ik_typ_mer:OleVariant);
+  procedure EditMeropr(date:Variant;id_rasp:integer;ik_sdach,ik_disc:OleVariant;TimeBegin,TimeEnd:Tdatetime;ik_typ_mer:OleVariant);
 
   //********СПИСОК ЗАКРЕПЛЕННЫХ АУДИТОРИЙ*******
   //OpenRaspKab открывает список аудиторий
@@ -214,7 +214,7 @@ begin
 end;
 
 //редактирование мероприятия
-procedure TAbitRaspisanieController.EditMeropr(date:Tdatetime;id_rasp:integer;ik_sdach,ik_disc:OleVariant;TimeBegin,TimeEnd:Tdatetime;ik_typ_mer:OleVariant);
+procedure TAbitRaspisanieController.EditMeropr(date:Variant;id_rasp:integer;ik_sdach,ik_disc:OleVariant;TimeBegin,TimeEnd:Tdatetime;ik_typ_mer:OleVariant);
 var
   tempStoredProc: TADOStoredProc;
 begin
