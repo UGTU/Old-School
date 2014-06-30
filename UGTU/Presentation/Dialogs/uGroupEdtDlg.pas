@@ -81,7 +81,7 @@ procedure TfrmGroupEdt.FormShow(Sender: TObject);
 begin
   inherited;
 
-  if not WithSpec then SpecFacIK := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
+  //if not WithSpec then SpecFacIK := TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
  
   Panel3.Visible := (WithSpec);
   //подгружаем специальности
@@ -258,8 +258,7 @@ begin
 end;
 
 function TfrmGroupEdt.DoApply: boolean;
-var SpecFacIK: integer;
-    tempProc: TADOStoredProc;
+var   tempProc: TADOStoredProc;
 begin
 try
   dm.DBConnect.BeginTrans;
@@ -351,7 +350,7 @@ begin
   tempDS.Open;
 
   dbneYear.MaxValue := CurrentYear;
-  SpecFacIK := tempDS.FieldByName('ik_spec_fac').Value;
+  fSpecFacIK := tempDS.FieldByName('ik_spec_fac').Value;
   //заполняем интерфейсные элементы
   edtName.Text := tempDS.FieldByName('Cname_grup').Value;
   dbneYear.Value := tempDS.FieldByName('nYear_post').Value;
