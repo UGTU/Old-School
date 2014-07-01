@@ -89,26 +89,18 @@ inherited ftmStudent: TftmStudent
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object PageControl2: TPageControl
         Left = 0
         Top = 0
         Width = 558
         Height = 556
-        ActivePage = TabSheet2
+        ActivePage = TabSheet3
         Align = alClient
         Images = ilPages
         Style = tsFlatButtons
         TabOrder = 0
         object TabSheet3: TTabSheet
           Caption = #1054#1073#1097#1080#1077
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -120,14 +112,14 @@ inherited ftmStudent: TftmStudent
               Left = 1
               Top = 1
               Width = 548
-              Height = 143
+              Height = 161
               Align = alTop
               TabOrder = 0
               object Bevel2: TBevel
                 Left = 455
                 Top = 47
                 Width = 81
-                Height = 88
+                Height = 80
               end
               object Label44: TLabel
                 Left = 477
@@ -273,9 +265,9 @@ inherited ftmStudent: TftmStudent
               end
               object iPhoto: TImage
                 Left = 458
-                Top = 50
+                Top = 48
                 Width = 75
-                Height = 82
+                Height = 77
                 Cursor = crHandPoint
                 Stretch = True
                 OnClick = iPhotoClick
@@ -407,10 +399,19 @@ inherited ftmStudent: TftmStudent
                 TabOrder = 8
                 Visible = True
               end
+              object bShot: TButton
+                Left = 452
+                Top = 130
+                Width = 84
+                Height = 25
+                Caption = #1057#1085#1080#1084#1086#1082
+                TabOrder = 9
+                OnClick = bShotClick
+              end
             end
             object Panel8: TPanel
               Left = 1
-              Top = 144
+              Top = 162
               Width = 548
               Height = 223
               Align = alTop
@@ -732,7 +733,7 @@ inherited ftmStudent: TftmStudent
                 OnChange = actCheckFieldsExecute
               end
               object eYearFinished: TDBNumberEditEh
-                Left = 15
+                Left = 14
                 Top = 60
                 Width = 141
                 Height = 19
@@ -748,9 +749,9 @@ inherited ftmStudent: TftmStudent
             end
             object Panel6: TPanel
               Left = 1
-              Top = 367
+              Top = 385
               Width = 548
-              Height = 156
+              Height = 138
               Align = alClient
               TabOrder = 2
               object sbAddAddress: TSpeedButton
@@ -834,7 +835,7 @@ inherited ftmStudent: TftmStudent
                 Left = 12
                 Top = 24
                 Width = 492
-                Height = 116
+                Height = 97
                 ColCount = 6
                 DefaultRowHeight = 18
                 FixedCols = 0
@@ -857,10 +858,6 @@ inherited ftmStudent: TftmStudent
         object TabSheet4: TTabSheet
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -1237,10 +1234,6 @@ inherited ftmStudent: TftmStudent
         object TabSheet5: TTabSheet
           Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object sbAddRel: TSpeedButton
             Left = 524
             Top = 25
@@ -1383,10 +1376,6 @@ inherited ftmStudent: TftmStudent
         object TabSheet2: TTabSheet
           Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object sbAddDoc: TSpeedButton
             Left = 524
             Top = 0
@@ -1532,7 +1521,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

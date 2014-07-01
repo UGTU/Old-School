@@ -58,10 +58,7 @@ inherited fmAbitCard: TfmAbitCard
         Width = 565
         ExplicitWidth = 565
         inherited TabSheet1: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited PageControl2: TPageControl
             Width = 557
             ExplicitWidth = 557
@@ -214,9 +211,9 @@ inherited fmAbitCard: TfmAbitCard
                   end
                 end
                 inherited Panel6: TPanel
-                  Top = 359
+                  Top = 388
                   Width = 547
-                  Height = 195
+                  Height = 166
                   ExplicitTop = 359
                   ExplicitWidth = 547
                   ExplicitHeight = 195
@@ -389,17 +386,14 @@ inherited fmAbitCard: TfmAbitCard
                   end
                   inherited dbgeAddress: TDBGridEh
                     Width = 491
-                    Height = 153
+                    Height = 124
                     RowHeight = 0
                   end
                 end
               end
             end
             inherited TabSheet4: TTabSheet
-              ExplicitLeft = 4
-              ExplicitTop = 28
               ExplicitWidth = 549
-              ExplicitHeight = 555
               inherited Panel3: TPanel
                 Width = 549
                 ExplicitWidth = 549
@@ -525,10 +519,7 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet5: TTabSheet
-              ExplicitLeft = 4
-              ExplicitTop = 28
               ExplicitWidth = 549
-              ExplicitHeight = 555
               inherited Splitter1: TSplitter
                 Width = 549
                 ExplicitWidth = 551
@@ -561,10 +552,7 @@ inherited fmAbitCard: TfmAbitCard
             end
             inherited TabSheet7: TTabSheet
               TabVisible = False
-              ExplicitLeft = 4
-              ExplicitTop = 28
               ExplicitWidth = 549
-              ExplicitHeight = 555
               inherited gbExiled: TGroupBox
                 Width = 549
                 ExplicitWidth = 549
@@ -694,10 +682,7 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited TabSheet2: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited DBGridEh1: TDBGridEh
             Width = 557
           end
@@ -745,10 +730,7 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited tsBRSBalls: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited Panel10: TPanel
             Width = 557
             ExplicitWidth = 557
@@ -796,10 +778,7 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited TabSheet9: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited Panel12: TPanel
             Width = 557
             ExplicitWidth = 557
@@ -810,10 +789,7 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited tsUspevStat: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited dbgUspevStat: TDBGridEh
             Width = 557
           end
@@ -833,9 +809,12 @@ inherited fmAbitCard: TfmAbitCard
       ExplicitLeft = 218
     end
   end
+  inherited bShot: TButton
+    OnClick = bShotClick
+  end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060009001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

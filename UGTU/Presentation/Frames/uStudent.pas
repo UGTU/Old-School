@@ -181,6 +181,7 @@ type
     dbgeBalls: TDBGridEh;
     gbMoved: TGroupBox;
     DBGridEh4: TDBGridEh;
+    bShot: TButton;
 
    
     procedure BbSaveclick(Sender: TObject);
@@ -223,6 +224,7 @@ type
     procedure dbgeBallsTitleClick(Column: TColumnEh);
     procedure cbSemBRSChange(Sender: TObject);
     procedure cbModuleBRSChange(Sender: TObject);
+    procedure bShotClick(Sender: TObject);
 
   private
     Fik:integer;
@@ -250,7 +252,7 @@ var
 implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
-  uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost;
+  uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost, uPhotoBooth;
 
 {$R *.dfm}
 
@@ -1260,6 +1262,17 @@ begin
 
   bbSave.Enabled:=false;
   bbUndo.Enabled:=false;
+end;
+
+procedure TfmStudent.bShotClick(Sender: TObject);
+  var phbooth:TPhotoBooth;
+begin
+  phbooth:=TPhotoBooth.Create(eFam.text,ExtractFileDir(Application.ExeName),iPhoto);
+  phbooth.MakePhoto();
+  odPhoto.FileName:=phbooth.FileName;
+  Modified:=true;
+  bbSave.Enabled:=true;
+  bbUndo.Enabled:=true;
 end;
 
 procedure TfmStudent.btnPrintSmallUspevClick(Sender: TObject);

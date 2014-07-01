@@ -770,6 +770,7 @@
     <DCCReference Include="Utils\CorrectDatatypeChecks.pas" />
     <DCCReference Include="Utils\ExceptionBase.pas" />
     <DCCReference Include="Utils\Parser.pas" />
+    <DCCReference Include="Utils\ProcessUtils.pas" />
     <DCCReference Include="Utils\ShareAPG\AppConst.pas" />
     <DCCReference Include="Utils\ShareAPG\ClUtils.pas" />
     <DCCReference Include="Utils\ShareAPG\CSB.pas" />
@@ -795,5 +796,6 @@
     <DCCReference Include="Utils\ShareAPG\VarFileUtils.pas" />
     <DCCReference Include="Utils\ShareAPG\VCLUtils.pas" />
     <DCCReference Include="Utils\ShareAPG\win2000.pas" />
+    <DCCReference Include="Utils\uPhotoBooth.pas" />
   </ItemGroup>
 </Project>
