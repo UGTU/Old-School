@@ -1267,7 +1267,7 @@ end;
 procedure TfmStudent.bShotClick(Sender: TObject);
   var phbooth:TPhotoBooth;
 begin
-  phbooth:=TPhotoBooth.Create(eFam.text,ExtractFileDir(Application.ExeName),iPhoto);
+  phbooth:=TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
   phbooth.MakePhoto();
   odPhoto.FileName:=phbooth.FileName;
   Modified:=true;

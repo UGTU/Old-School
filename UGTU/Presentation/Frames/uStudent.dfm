@@ -604,6 +604,15 @@ inherited fmStudent: TfmStudent
                     Visible = True
                     OnChange = eFamChange
                   end
+                  object bShot: TButton
+                    Left = 448
+                    Top = 141
+                    Width = 84
+                    Height = 25
+                    Caption = #1057#1085#1080#1084#1086#1082
+                    TabOrder = 9
+                    OnClick = bShotClick
+                  end
                 end
                 object Panel6: TPanel
                   Left = 1
@@ -2007,15 +2016,6 @@ inherited fmStudent: TfmStudent
       Caption = #1054#1090#1084#1077#1085#1080#1090#1100
       ExplicitLeft = 387
     end
-  end
-  object bShot: TButton
-    Left = 459
-    Top = 224
-    Width = 84
-    Height = 25
-    Caption = #1057#1085#1080#1084#1086#1082
-    TabOrder = 3
-    OnClick = bShotClick
   end
   object ilPages: TImageList
     Left = 434
