@@ -350,7 +350,9 @@ uses
   MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
   MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   D_AVGBalls in 'Domain\Reports\D_AVGBalls.pas',
-  D_VedomostBRSLast in 'Domain\Reports\D_VedomostBRSLast.pas';
+  D_VedomostBRSLast in 'Domain\Reports\D_VedomostBRSLast.pas',
+  ProcessUtils in 'Utils\ProcessUtils.pas',
+  uPhotoBooth in 'Utils\uPhotoBooth.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

@@ -89,6 +89,7 @@ type
   ExamList:TList;
   DeleteExamList:Tlist;
   CurrentExam:TList;
+  fn,ln,pn,ps,pnum:string;
   procedure Sync;
   procedure ExamSync;
   procedure AdditionalSpecSync;
@@ -433,21 +434,23 @@ end;
 
 procedure TfrmPostupDlg.bGetCertDataClick(Sender: TObject);
 var CertD:TfrmEGECertificateCheck;
-fn,ln,pn,ps,pnum:string;
+//fn,ln,pn,ps,pnum:string;
 var i:integer;
 edesc:TExamDescription;
 e:TExam;
 begin
 
- if HostForm=nil then
+{ if HostForm=nil then
  begin
  showmessage('Ќевозможно проверить сертификат дл€ этого абитуриента, воспользуйтесь другим доступным способом');
  exit;
- end;
- with HostForm do begin
- ln:=eFam.Text;
- fn:=eName.Text;
- pn:=eMid.Text;
+ end; }
+ if HostForm <> nil then
+   with HostForm do
+   begin
+     ln:=eFam.Text;
+     fn:=eName.Text;
+     pn:=eMid.Text;
 
  ps:='';
  pnum:='';

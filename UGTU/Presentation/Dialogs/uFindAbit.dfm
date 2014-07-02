@@ -4,7 +4,7 @@ inherited frmFindAbit: TfrmFindAbit
   ClientWidth = 430
   OnShow = FormShow
   ExplicitWidth = 436
-  ExplicitHeight = 440
+  ExplicitHeight = 437
   PixelsPerInch = 96
   TextHeight = 13
   object Bevel3: TBevel [0]

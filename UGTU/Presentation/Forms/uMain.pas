@@ -2259,6 +2259,13 @@ begin
  frmpostupDlg.HasAddSpec:=TDBNodeAbitYearObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Parent.Data).HasAddSpec;
  frmpostupDlg.Tag:=0;
  frmPostupDlg.IkRecruit:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.Data).NNRecord;
+
+ {with fmAbitCard do
+ begin
+   frmPostupDlg.ln:=eFam.Text;
+   frmPostupDlg.fn:=eName.Text;
+   frmPostupDlg.pn:=eMid.Text;
+ end; }
  frmpostupDlg.ShowModal;
  frmpostupDlg.Free;
  ActiveFrame.RefreshFrame;

@@ -138,8 +138,8 @@ dmStudentData.aspFindAbit.active:=false;
 
 if IsOnline then
 begin
-rbNum.Caption := 'Найти по личному номеру';
-Label4.Caption := 'Личный номер';
+  rbNum.Caption := 'Найти по личному номеру';
+  Label4.Caption := 'Личный номер';
 end;
 
 

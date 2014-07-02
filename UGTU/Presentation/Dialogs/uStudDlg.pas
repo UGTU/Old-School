@@ -151,6 +151,7 @@ type
     Label2: TLabel;
     actAddAddress: TAction;
     actDelAddress: TAction;
+    bShot: TButton;
     procedure FormShow(Sender: TObject);
 
     procedure bbCancelClick(Sender: TObject);
@@ -189,6 +190,8 @@ type
       var CanSelect: Boolean);
     procedure actAddAddressExecute(Sender: TObject);
     procedure actDelAddressExecute(Sender: TObject);
+    procedure bShotClick(Sender: TObject);
+
    private
   Floaded:boolean;
   spravhint: string;
@@ -207,7 +210,7 @@ var
 implementation
   uses udm,umain, ADODB,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg,
   Math, uSpravForm, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
-  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress;
+  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, uPhotoBooth;
 {$R *.dfm}
 
 function CheckFields:boolean;
@@ -377,6 +380,16 @@ begin
   spravhint:=self.ActiveControl.Hint;
 end;
 
+
+
+procedure TftmStudent.bShotClick(Sender: TObject);
+  var phbooth:TPhotoBooth;
+begin
+  phbooth:=TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
+  phbooth.MakePhoto();
+  odPhoto.FileName:=phbooth.FileName;
+end;
+
 procedure TftmStudent.eFamExit(Sender: TObject);
 var s,sm:string;
 begin
@@ -441,19 +454,17 @@ begin
 end;
 
 procedure TftmStudent.iPhotoClick(Sender: TObject);
-
 begin
   inherited;
   if odPhoto.Execute then begin
     iphoto.Picture.LoadFromFile(odPhoto.FileName);
-  if (iphoto.Picture.Width>256)or(iphoto.Picture.Height>320) then
+  {if (iphoto.Picture.Width>256)or(iphoto.Picture.Height>320) then
   begin
     showmessage('Максимальный размер фото: 256*320!');
     iphoto.Picture:=nil;
-  end;
+  end;}
   end;
 end;
-                        
 
 
 procedure TftmStudent.eEmailExit(Sender: TObject);
