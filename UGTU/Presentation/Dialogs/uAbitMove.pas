@@ -10,28 +10,22 @@ uses
 type
   TfrmAbitMove = class(TfrmBaseDialog)
     GroupBox1: TGroupBox;
-    Label1: TLabel;
-    Label47: TLabel;
     Label2: TLabel;
     Label5: TLabel;
     Label3: TLabel;
     Label6: TLabel;
     Label4: TLabel;
     Label7: TLabel;
-    eNum: TDBNumberEditEh;
     dbcbeRecruit: TDBLookupComboboxEh;
     dbcbeCategory: TDBLookupComboboxEh;
     dbdteList: TDBDateTimeEditEh;
     GroupBox2: TGroupBox;
-    Label8: TLabel;
-    Label9: TLabel;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
     Label15: TLabel;
-    eNumNew: TDBNumberEditEh;
     dbcbeRecruitNew: TDBLookupComboboxEh;
     dbcbeCategoryNew: TDBLookupComboboxEh;
     dbdteListNew: TDBDateTimeEditEh;
@@ -47,6 +41,7 @@ type
 
 var
   frmAbitMove: TfrmAbitMove;
+  RegNumber: integer;
 
 implementation
 
@@ -58,7 +53,7 @@ begin
 result:=true;
 with frmAbitMove do
 begin
-if (eNum.Text='')
+if (RegNumber<1)
 or(dbcbeRecruit.Text='')
 or(dbcbeCategory.Text='')
  or(dbdteList.Text='  .  .    ') then result:=false;
@@ -90,7 +85,10 @@ if (dm.adodsPostupView.RecordCount>0) then begin
 dm.adodsPostupView.First;
 
 if dm.adodsPostupView.fieldvalues['RegNomer']<>Null then
-eNum.value:=dm.adodsPostupView.FieldValues['RegNomer'];
+begin
+RegNumber:=dm.adodsPostupView.FieldValues['RegNomer'];
+Text:= 'Перевод заявления абитуриента №'+IntToStr(RegNumber)+' на другую специальность';
+end;
 if dm.adodsPostupView.FieldValues['NNRecord']<>Null then
 dbcbeRecruit.keyvalue:=dm.adodsPostupView.FieldValues['NNRecord'];
 if dm.adodsPostupView.FieldValues['ik_kat_zach']<>Null then
@@ -99,7 +97,7 @@ if dm.adodsPostupView.FieldValues['dd_pod_zayav']<>Null then
 dbdteList.value:=dm.adodsPostupView.FieldValues['dd_pod_zayav'];
 
 //заполняем поля нового заявления
-eNumNew.Text:='0';
+
 if dm.adodsPostupView.FieldValues['ik_kat_zach']<>Null then
 dbcbeCategoryNew.keyvalue:=dm.adodsPostupView.FieldValues['ik_kat_zach'];
 dbdteListNew.value:=Date;
@@ -114,7 +112,7 @@ dmAbiturientAction.aspAbitMove.Active:=false;
       begin
         items[1].Value:=NNAbit;
         items[2].Value:=dbcbeRecruitNew.KeyValue;
-        items[3].Value:=eNumNew.Value;
+        items[3].Value:=RegNumber;
         items[4].Value:=dbcbeCategoryNew.KeyValue;
         items[5].Value:=dbdteListNew.Value;
 
