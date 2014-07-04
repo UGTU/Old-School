@@ -10,6 +10,7 @@ uses
 type
   TfrmAbitReturn = class(TfrmAbitMove)
     procedure actOKExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,7 +32,7 @@ begin
       begin
         items[1].Value:=NNAbit;
         items[2].Value:=dbcbeRecruitNew.KeyValue;
-        items[3].Value:=eNumNew.Value;
+        items[3].Value:=RegNumber;
         items[4].Value:=dbcbeCategoryNew.KeyValue;
         items[5].Value:=dbdteListNew.Value;
 
@@ -40,6 +41,15 @@ begin
       dmAbiturientAction.aspAbitReturn.ExecProc;
       close;
 
+end;
+
+procedure TfrmAbitReturn.FormShow(Sender: TObject);
+begin
+  inherited;
+  if RegNumber>0 then
+  begin
+    Text:= 'Восстановление заявления абитуриента №'+IntToStr(RegNumber);
+  end;
 end;
 
 end.

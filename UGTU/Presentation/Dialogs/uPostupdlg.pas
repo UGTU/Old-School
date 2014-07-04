@@ -737,7 +737,7 @@ try
     dmStudentActions.aspAddRelative.ExecProc;
   end;
 
-  for i:=0 to sgDocKeys.RowCount-2 do
+for i:=0 to sgDocKeys.RowCount-2 do
 begin
 with dmStudentActions.aspAddDoc.Parameters do
 begin

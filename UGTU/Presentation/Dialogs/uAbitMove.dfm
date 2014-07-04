@@ -8,7 +8,7 @@ inherited frmAbitMove: TfrmAbitMove
   OldCreateOrder = True
   OnShow = FormShow
   ExplicitWidth = 635
-  ExplicitHeight = 300
+  ExplicitHeight = 301
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -65,36 +65,16 @@ inherited frmAbitMove: TfrmAbitMove
     DesignSize = (
       629
       113)
-    object Label1: TLabel
-      Left = 9
-      Top = 17
-      Width = 91
-      Height = 13
-      Caption = #1053#1086#1084#1077#1088' '#1079#1072#1103#1074#1083#1077#1085#1080#1103
-    end
-    object Label47: TLabel
-      Left = 102
-      Top = 17
-      Width = 4
-      Height = 13
-      Caption = '*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ParentFont = False
-    end
     object Label2: TLabel
-      Left = 127
-      Top = 59
+      Left = 9
+      Top = 15
       Width = 32
       Height = 13
       Caption = #1053#1072#1073#1086#1088
     end
     object Label5: TLabel
-      Left = 161
-      Top = 59
+      Left = 43
+      Top = 15
       Width = 4
       Height = 13
       Caption = '*'
@@ -107,14 +87,14 @@ inherited frmAbitMove: TfrmAbitMove
     end
     object Label3: TLabel
       Left = 127
-      Top = 17
+      Top = 61
       Width = 115
       Height = 13
       Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
     end
     object Label6: TLabel
       Left = 245
-      Top = 17
+      Top = 61
       Width = 4
       Height = 13
       Caption = '*'
@@ -145,22 +125,10 @@ inherited frmAbitMove: TfrmAbitMove
       Font.Style = []
       ParentFont = False
     end
-    object eNum: TDBNumberEditEh
-      Left = 9
-      Top = 33
-      Width = 112
-      Height = 19
-      Alignment = taLeftJustify
-      Enabled = False
-      EditButtons = <>
-      Flat = True
-      TabOrder = 0
-      Visible = True
-    end
     object dbcbeRecruit: TDBLookupComboboxEh
-      Left = 127
-      Top = 77
-      Width = 495
+      Left = 9
+      Top = 34
+      Width = 613
       Height = 19
       Anchors = [akLeft, akTop, akRight]
       Enabled = False
@@ -169,12 +137,12 @@ inherited frmAbitMove: TfrmAbitMove
       KeyField = 'NNrecord'
       ListField = 'Name'
       ListSource = dm.dsNabor
-      TabOrder = 1
+      TabOrder = 0
       Visible = True
     end
     object dbcbeCategory: TDBLookupComboboxEh
       Left = 127
-      Top = 33
+      Top = 77
       Width = 495
       Height = 19
       Anchors = [akLeft, akTop, akRight]
@@ -184,7 +152,7 @@ inherited frmAbitMove: TfrmAbitMove
       KeyField = 'Ik_kat_zach'
       ListField = 'Cname_kat_zach'
       ListSource = dmStudentData.dsGetAbitCat
-      TabOrder = 2
+      TabOrder = 1
       Visible = True
     end
     object dbdteList: TDBDateTimeEditEh
@@ -196,7 +164,7 @@ inherited frmAbitMove: TfrmAbitMove
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh
-      TabOrder = 3
+      TabOrder = 2
       Visible = True
     end
   end
@@ -217,36 +185,16 @@ inherited frmAbitMove: TfrmAbitMove
     DesignSize = (
       629
       118)
-    object Label8: TLabel
-      Left = 9
-      Top = 18
-      Width = 91
-      Height = 13
-      Caption = #1053#1086#1084#1077#1088' '#1079#1072#1103#1074#1083#1077#1085#1080#1103
-    end
-    object Label9: TLabel
-      Left = 102
-      Top = 18
-      Width = 4
-      Height = 13
-      Caption = '*'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ParentFont = False
-    end
     object Label10: TLabel
-      Left = 127
-      Top = 59
+      Left = 9
+      Top = 16
       Width = 32
       Height = 13
       Caption = #1053#1072#1073#1086#1088
     end
     object Label11: TLabel
-      Left = 161
-      Top = 59
+      Left = 43
+      Top = 16
       Width = 4
       Height = 13
       Caption = '*'
@@ -259,14 +207,14 @@ inherited frmAbitMove: TfrmAbitMove
     end
     object Label12: TLabel
       Left = 127
-      Top = 18
+      Top = 59
       Width = 115
       Height = 13
       Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
     end
     object Label13: TLabel
       Left = 245
-      Top = 18
+      Top = 58
       Width = 4
       Height = 13
       Caption = '*'
@@ -297,21 +245,10 @@ inherited frmAbitMove: TfrmAbitMove
       Font.Style = []
       ParentFont = False
     end
-    object eNumNew: TDBNumberEditEh
+    object dbcbeRecruitNew: TDBLookupComboboxEh
       Left = 9
       Top = 34
-      Width = 112
-      Height = 19
-      Alignment = taLeftJustify
-      EditButtons = <>
-      Flat = True
-      TabOrder = 0
-      Visible = True
-    end
-    object dbcbeRecruitNew: TDBLookupComboboxEh
-      Left = 127
-      Top = 77
-      Width = 495
+      Width = 613
       Height = 19
       Anchors = [akLeft, akTop, akRight]
       EditButtons = <>
@@ -319,12 +256,12 @@ inherited frmAbitMove: TfrmAbitMove
       KeyField = 'NNrecord'
       ListField = 'Name'
       ListSource = dm.dsNabor
-      TabOrder = 1
+      TabOrder = 0
       Visible = True
     end
     object dbcbeCategoryNew: TDBLookupComboboxEh
       Left = 127
-      Top = 34
+      Top = 77
       Width = 495
       Height = 19
       Anchors = [akLeft, akTop, akRight]
@@ -333,7 +270,7 @@ inherited frmAbitMove: TfrmAbitMove
       KeyField = 'Ik_kat_zach'
       ListField = 'Cname_kat_zach'
       ListSource = dmStudentData.dsGetAbitCat
-      TabOrder = 2
+      TabOrder = 1
       Visible = True
     end
     object dbdteListNew: TDBDateTimeEditEh
@@ -344,7 +281,7 @@ inherited frmAbitMove: TfrmAbitMove
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh
-      TabOrder = 3
+      TabOrder = 2
       Visible = True
     end
   end
