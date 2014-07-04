@@ -43,6 +43,7 @@ type
   FLastName:string;
   FFirstName:string;
   FPatronName:string;
+  FOnlySelected: boolean;
 
   function GetAnalogicExam(edesc:TExamDescription; Marks:TList):TExamDescription;
 
@@ -53,6 +54,7 @@ type
   constructor Create(owner:TControl;passserie:string; passnum:string; lname, fname, pname:string);
   property Certificates: TList read FDescriptions;
   property ExportedExams: TList read FExams;
+  property OnlySelected: boolean read FOnlySelected;
     { Public declarations }
   end;
 
@@ -123,7 +125,7 @@ begin
 edesc:=FExams[i];
 
 sgExams.Cells[0,sgExams.Rowcount-1]:=edesc.Subject;
-sgExams.Cells[1,sgExams.Rowcount-1]:=floattostr(edesc.Mark);
+sgExams.Cells[1,sgExams.Rowcount-1]:=edesc.Mark;//floattostr(edesc.Mark)
 sgExams.Cells[2,sgExams.Rowcount-1]:=edesc.CertNumber;
 
 if edesc.IsAppealed then
@@ -139,7 +141,8 @@ end;
 procedure TfrmEGECertificateCheck.actOKExecute(Sender: TObject);
 begin
   inherited;
-Close;
+  FOnlySelected := false;
+  Close;
 end;
 
 procedure TfrmEGECertificateCheck.bbCancelClick(Sender: TObject);

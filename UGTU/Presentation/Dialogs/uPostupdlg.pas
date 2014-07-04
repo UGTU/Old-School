@@ -106,7 +106,8 @@ var
 implementation
 
 uses uAddExam, Math, uDM, jpeg, VarfileUtils, uDMStudentSelectionProcs, uDMStudentData,
-  uDMStudentActions, uDMAbiturientAction, uAddSpecAbit, ExceptionBase, uDMAdress, uXMLEGEReader;
+  uDMStudentActions, uDMAbiturientAction, uAddSpecAbit, ExceptionBase, uDMAdress, uXMLEGEReader,
+  GeneralController;
 {$R *.dfm}
 
 function CheckFields:boolean;
@@ -220,7 +221,12 @@ ExamList:=Tlist.Create;
 deleteexamlist:=Tlist.Create;
 Text:= 'Заявление на поступление';
 
-if HostForm=nil then bGetCertData.Visible:=false;
+//if HostForm=nil then
+//begin
+//   tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+//   tempDS.CommandText := 'select * from Person ' + IntToStr(IDpostup);
+  //bGetCertData.Visible:=false;
+//end;
 
 
 if HasAddSpec then GroupBox3.Visible:=true
@@ -240,13 +246,22 @@ dm.adodsPostupView.CommandText:='select * from Abit_Postup_View where ncode='''+
 dm.adodsPostupView.Active:=true;
 
 
-if (dm.adodsPostupView.RecordCount>0)and(not(IsAdditional)) then begin
-dm.adodsPostupView.First;
-if (dm.adodsPostupView.RecordCount>1) then //and(IkRecruit>0)
-while (dm.adodsPostupView.FieldByName('NN_Abit').Value<>IDpostup)and(not dm.adodsPostupView.Eof) do
-dm.adodsPostupView.Next;
 
-abitList:=FillAbitList(dm.adodsPostupView);
+//если вызываем окно редактирования
+if (dm.adodsPostupView.RecordCount>0)and(not(IsAdditional)) then
+begin
+  dm.adodsPostupView.First;
+
+  //для проверки ЕГЭ
+  ln:=dm.adodsPostupView.FieldByName('Clastname').Value;
+  fn:=dm.adodsPostupView.FieldByName('Cfirstname').Value;
+  pn:=dm.adodsPostupView.FieldByName('Cotch').Value;
+
+  if (dm.adodsPostupView.RecordCount>1) then //and(IkRecruit>0)
+    while (dm.adodsPostupView.FieldByName('NN_Abit').Value<>IDpostup)and(not dm.adodsPostupView.Eof) do
+      dm.adodsPostupView.Next;
+
+  abitList:=FillAbitList(dm.adodsPostupView);
 
 dm.adodsAbitExamView.Active:=false;
 dm.adodsAbitExamView.CommandType:=cmdText;
@@ -436,8 +451,9 @@ procedure TfrmPostupDlg.bGetCertDataClick(Sender: TObject);
 var CertD:TfrmEGECertificateCheck;
 //fn,ln,pn,ps,pnum:string;
 var i:integer;
-edesc:TExamDescription;
-e:TExam;
+    edesc:TExamDescription;
+    e:TExam;
+    docDS: TADODataSet;
 begin
 
 { if HostForm=nil then
@@ -445,6 +461,8 @@ begin
  showmessage('Невозможно проверить сертификат для этого абитуриента, воспользуйтесь другим доступным способом');
  exit;
  end; }
+
+ //если добавляем абитуриента
  if HostForm <> nil then
    with HostForm do
    begin
@@ -452,42 +470,57 @@ begin
      fn:=eName.Text;
      pn:=eMid.Text;
 
- ps:='';
- pnum:='';
- // ищем паспорт
- for i:=0 to sgDocKeys.RowCount-2 do
-   if sgDockeys.Cells[1,i]='4' then  //id Типа
+     ps:='';
+     pnum:='';
+    // ищем паспорт
+    for i:=0 to sgDocKeys.RowCount-2 do
+      if sgDockeys.Cells[1,i]='4' then  //id Типа
+      begin
+        ps:=sgDocs.Cells[1,i+1]; //серия
+        pnum:=sgDocs.Cells[2,i+1]//номер
+      end;
+   end else
+   //если редактируем
+   with dmStudentSelectionProcs.aspSelDocuments do
    begin
-   ps:=sgDocs.Cells[1,i+1]; //серия
-   pnum:=sgDocs.Cells[2,i+1]//номер
+      First;
+      for i:=0 to RecordCount-1 do
+      if FieldByName('Ik_vid_doc').AsInteger=4 then  //id Типа паспорт РФ
+      begin
+        ps:=FieldByName('Cd_seria').AsString; //серия
+        pnum:=FieldByName('Np_number').AsString;//номер
+        break;
+      end else Next;
    end;
- end;
 
  if (ps='')or(pnum='') then
  begin
- showmessage('Для того, чтобы проверить сертификат, необходимы паспортные данные абитуриента! Вы можете ввести их на вкладке "Документы" в форме добавления абитуриента');
- exit;
+   showmessage('Для того, чтобы проверить сертификат, необходимы паспортные данные абитуриента! Вы можете ввести их на вкладке "Документы" в форме добавления абитуриента');
+   exit;
  end;
 
-CertD:=TfrmEGECertificateCheck.Create(self,ps,pnum,ln,fn,pn);
-CertD.ShowModal;
-for i := 0 to CertD.ExportedExams.Count - 1 do
-begin
-  edesc:=CertD.ExportedExams[i];
-  e:=TExam.Create;
-  e.IkVidSdachi:=5;
-  e.VidSdachi:='ЕГЭ';
-  e.IkDisc:=-1;
-  e.Disc:=edesc.Subject;
-  e.Mark:=Round(edesc.Mark);
-  e.new:=true;
-  e.NVed:=edesc.CertNumber;
-
-  ExamList.Add(e);
-end;
-  Sync;
-
-
+ CertD:=TfrmEGECertificateCheck.Create(self,ps,pnum,ln,fn,pn);
+ CertD.ShowModal;
+ for i := 0 to CertD.ExportedExams.Count - 1 do
+ begin
+   edesc:=CertD.ExportedExams[i];
+   e:=TExam.Create;
+   e.IkVidSdachi:=5;
+   e.VidSdachi:='ЕГЭ';
+   e.IkDisc:=-1;
+   e.Disc:=edesc.Subject;
+   try
+     //пытаемся перевести в новый формат оценок ЕГЭ
+     e.Mark:=  StrToInt(copy(edesc.Mark,1,Pos(',',edesc.Mark)-1));//Round(StrToFloat(edesc.Mark));
+   except
+     //старый формат оценок ЕГЭ
+     e.Mark := Round(StrToFloat(edesc.Mark));
+   end;
+   e.new:=true;
+   e.NVed:=edesc.CertNumber;
+   ExamList.Add(e);
+ end;
+ Sync;
 end;
 
 procedure TfrmPostupDlg.ButtonsCheck;

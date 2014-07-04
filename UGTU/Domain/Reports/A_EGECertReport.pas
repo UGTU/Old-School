@@ -57,7 +57,7 @@ Range['D10','F18'].Clear;
 
       Range['A'+inttostr(TableBeg+i),'C'+inttostr(TableBeg+i)].NumberFormat := '@';
       Items[TableBeg+i,1] := mark.Subject;
-      Items[TableBeg+i,3] := floatToStr(mark.Mark);
+      Items[TableBeg+i,3] := mark.Mark;   //floatToStr(mark.Mark); 
       Range['A'+inttostr(TableBeg+i),'C'+inttostr(TableBeg+i)].Font.Size:=12;
       Range['A'+inttostr(TableBeg+i),'C'+inttostr(TableBeg+i)].Font.Name := 'Arial';
       Range['A'+inttostr(TableBeg+i),'C'+inttostr(TableBeg+i)].HorizontalAlignment:= xlCenter ;
