@@ -201,7 +201,6 @@ if obj.Photo<>nil then begin
    Parameters[0].Value:=obj.ID;
    ExecProc;
    Active:=true;
-
   end;
 
     with dmStudentSelectionProcs.aspGetPersonAddress do

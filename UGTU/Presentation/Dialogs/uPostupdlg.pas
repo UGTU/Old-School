@@ -525,17 +525,17 @@ end;
 
 procedure TfrmPostupDlg.ButtonsCheck;
 begin
-if checkfields then
-begin
-bbOK.Enabled:=true;
-bbApply.Enabled:=true;
-bbOKPrint.Enabled:=true;
-end else
-begin
-bbOK.Enabled:=false;
-bbApply.Enabled:=false;
-bbOKPrint.Enabled:=false;
-end;
+  if checkfields then
+  begin
+    bbOK.Enabled:=true;
+    bbApply.Enabled:=true;
+    bbOKPrint.Enabled:=true;
+  end else
+      begin
+        bbOK.Enabled:=false;
+        bbApply.Enabled:=false;
+        bbOKPrint.Enabled:=false;
+      end;
 end;
 
 procedure TfrmPostupDlg.cbIsMainClick(Sender: TObject);
@@ -595,14 +595,14 @@ end;
 
 procedure TfrmPostupDlg.actApplyExecute(Sender: TObject);
 var i,j:integer;
-ex:TExam;
-spec:TAdditionalSpec;
-AddExProc:TADOStoredProc;
+    ex:TExam;
+    spec:TAdditionalSpec;
+    AddExProc:TADOStoredProc;
 begin
-AbitList.RecruitNum:=dbcbeRecruit.KeyValue;
-AbitList.Date:=dbdteList.Value;
-AbitList.CatNum:=dbcbeCategory.KeyValue;
-AbitList.AvgBall:=eAvgBall.Value;
+  AbitList.RecruitNum:=dbcbeRecruit.KeyValue;
+  AbitList.Date:=dbdteList.Value;
+  AbitList.CatNum:=dbcbeCategory.KeyValue;
+  AbitList.AvgBall:=eAvgBall.Value;
 
 try
   dm.DBConnect.BeginTrans;
@@ -1064,7 +1064,7 @@ end;
 
 procedure TfrmPostupDlg.actOKExecute(Sender: TObject);
 begin
-actApplyExecute(sender);
+  actApplyExecute(sender);
 end;
 
 procedure TfrmPostupDlg.eNumChange(Sender: TObject);

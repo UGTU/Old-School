@@ -46,12 +46,24 @@ var
 
 implementation
 
-uses uMain;
+uses uMain,uDMStudentSelectionProcs;
 
 {$R *.dfm}
 
 procedure TfrmFindAbit.actApplyExecute(Sender: TObject);
 begin
+
+  //подгрузить документы абитуриента
+  with dmStudentSelectionProcs.aspSelDocuments do
+  begin
+    Active:=false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value:=dmStudentData.aspFindAbit.FieldByName('ncode').Value;;
+    ExecProc;
+    Active:=true;
+  end;
+
 frmPostupDlg:=TfrmpostupDlg.create(self);
 frmPostupDlg.Tag:=self.Tag;
 frmPostupDlg.Hint:=self.Hint;
