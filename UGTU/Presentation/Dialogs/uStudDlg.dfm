@@ -24,7 +24,7 @@ inherited ftmStudent: TftmStudent
     BevelOuter = bvSpace
     TabOrder = 1
     ExplicitTop = 584
-    ExplicitWidth = 566
+    ExplicitWidth = 574
     DesignSize = (
       574
       41)
@@ -53,7 +53,7 @@ inherited ftmStudent: TftmStudent
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
-      ExplicitLeft = 309
+      ExplicitLeft = 317
       ExplicitTop = 9
       ExplicitWidth = 80
     end
@@ -63,14 +63,14 @@ inherited ftmStudent: TftmStudent
       Enabled = False
       TabOrder = 0
       NumGlyphs = 2
-      ExplicitLeft = 474
+      ExplicitLeft = 482
       ExplicitTop = 9
     end
     inherited bbCancel: TBitBtn
       Left = 399
       Top = 9
       Kind = bkCancel
-      ExplicitLeft = 391
+      ExplicitLeft = 399
       ExplicitTop = 9
     end
     inherited bbSprav: TBitBtn
@@ -87,10 +87,8 @@ inherited ftmStudent: TftmStudent
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 566
     object TabSheet1: TTabSheet
       Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
-      ExplicitWidth = 558
       object PageControl2: TPageControl
         Left = 0
         Top = 0
@@ -101,10 +99,8 @@ inherited ftmStudent: TftmStudent
         Images = ilPages
         Style = tsFlatButtons
         TabOrder = 0
-        ExplicitWidth = 558
         object TabSheet3: TTabSheet
           Caption = #1054#1073#1097#1080#1077
-          ExplicitWidth = 550
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -112,7 +108,6 @@ inherited ftmStudent: TftmStudent
             Height = 524
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 550
             object Panel7: TPanel
               Left = 1
               Top = 1
@@ -120,7 +115,6 @@ inherited ftmStudent: TftmStudent
               Height = 161
               Align = alTop
               TabOrder = 0
-              ExplicitWidth = 548
               object Bevel2: TBevel
                 Left = 452
                 Top = 47
@@ -422,7 +416,6 @@ inherited ftmStudent: TftmStudent
               Height = 223
               Align = alTop
               TabOrder = 1
-              ExplicitWidth = 548
               object Label1: TLabel
                 Left = 161
                 Top = 5
@@ -761,7 +754,6 @@ inherited ftmStudent: TftmStudent
               Height = 138
               Align = alClient
               TabOrder = 2
-              ExplicitWidth = 548
               object sbAddAddress: TSpeedButton
                 Left = 510
                 Top = 23
@@ -866,7 +858,6 @@ inherited ftmStudent: TftmStudent
         object TabSheet4: TTabSheet
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
           ImageIndex = 1
-          ExplicitWidth = 550
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -874,7 +865,6 @@ inherited ftmStudent: TftmStudent
             Height = 524
             Align = alClient
             TabOrder = 0
-            ExplicitWidth = 550
             object Panel5: TPanel
               Left = 1
               Top = 1
@@ -882,7 +872,6 @@ inherited ftmStudent: TftmStudent
               Height = 108
               Align = alTop
               TabOrder = 0
-              ExplicitWidth = 548
               object Label27: TLabel
                 Left = 13
                 Top = 53
@@ -968,7 +957,6 @@ inherited ftmStudent: TftmStudent
               Height = 235
               Align = alTop
               TabOrder = 1
-              ExplicitWidth = 548
               object Label30: TLabel
                 Left = 13
                 Top = 101
@@ -1240,14 +1228,12 @@ inherited ftmStudent: TftmStudent
               Align = alClient
               TabOrder = 2
               Visible = False
-              ExplicitWidth = 548
             end
           end
         end
         object TabSheet5: TTabSheet
           Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
           ImageIndex = 2
-          ExplicitWidth = 550
           object sbAddRel: TSpeedButton
             Left = 524
             Top = 25
@@ -1327,7 +1313,6 @@ inherited ftmStudent: TftmStudent
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitWidth = 550
             object Label38: TLabel
               Left = 0
               Top = 4
@@ -1391,7 +1376,6 @@ inherited ftmStudent: TftmStudent
         object TabSheet2: TTabSheet
           Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
           ImageIndex = 3
-          ExplicitWidth = 550
           object sbAddDoc: TSpeedButton
             Left = 524
             Top = 0
@@ -1537,7 +1521,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
