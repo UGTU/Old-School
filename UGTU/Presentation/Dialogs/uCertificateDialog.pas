@@ -202,8 +202,13 @@ Memo1.Text:=res;
 FDescriptions:=reader.GetCertificateDescriptions;
 FCurrentDescriptionNumber:=0;
 
-DescrSync;
-ExamSync;
+if FDescriptions.Count=0 then
+    ShowMessage('По данному абитуриенту отсутствуют данные в ФИС ЕГЭ')
+else
+begin
+  DescrSync;
+  ExamSync;
+end;
 
 Cursor:=crDefault;
 end;
