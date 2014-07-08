@@ -216,6 +216,7 @@ type
     actCurrentKaf: TAction;
     pnlTree: TPanel;
     pnlImage: TPanel;
+    actGazpromStatement: TAction;
     procedure FormCreate(Sender: TObject);
     
     procedure DBDekTreeView_TEST1Change(Sender: TObject; Node: TTreeNode);
@@ -348,6 +349,7 @@ type
     procedure actKatChangeExecute(Sender: TObject);
     procedure actFilterKafExecute(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure actGazpromStatementExecute(Sender: TObject);
 
 
   private
@@ -2832,6 +2834,11 @@ begin
  DBDekTreeView_TEST1.Selected := DBDekTreeView_TEST1.Selected.Parent;
   actTreeRefreshAction.Execute;
   DBDekTreeView_TEST1.SelectNodeByNum(cur, false);
+end;
+
+procedure TfrmMain.actGazpromStatementExecute(Sender: TObject);
+begin
+  TAbitOtchetsController.Instance.GazpromBankStatementToWord(TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).NNAbit);
 end;
 
 procedure TfrmMain.actGroupChangeExecute(Sender: TObject);

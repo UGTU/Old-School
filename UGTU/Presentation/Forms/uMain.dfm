@@ -54,6 +54,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 931
     Height = 27
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -61,7 +62,7 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
+    Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -387,7 +388,6 @@ object frmMain: TfrmMain
       ColorMap.BtnSelectedColor = clBtnFace
       ColorMap.UnusedColor = clWhite
       Spacing = 0
-      ExplicitWidth = 132
     end
   end
   object MainMenu1: TMainMenu
@@ -514,6 +514,13 @@ object frmMain: TfrmMain
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1082#1072#1090#1077#1075#1086#1088#1080#1102' '#1086#1073#1091#1095#1077#1085#1080#1103
       ImageIndex = 58
       OnExecute = actKatChangeExecute
+    end
+    object actGazpromStatement: TAction
+      Category = 'catAbitActs'
+      Caption = #1042#1099#1076#1072#1090#1100' '#1079#1072#1103#1074#1083#1077#1085#1080#1077' '#1085#1072' '#1082#1072#1088#1090#1086#1095#1082#1091
+      Hint = #1042#1099#1076#1072#1090#1100' '#1079#1072#1103#1074#1083#1077#1085#1080#1077' '#1085#1072' '#1082#1072#1088#1090#1086#1095#1082#1091
+      ImageIndex = 60
+      OnExecute = actGazpromStatementExecute
     end
     object actPasspChg: TAction
       Category = 'catStudActs'
@@ -831,6 +838,7 @@ object frmMain: TfrmMain
     object actDocsRetrieve: TAction
       Category = 'catAbitActs'
       Caption = #1042#1077#1088#1085#1091#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090#1099
+      Hint = #1042#1077#1088#1085#1091#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090#1099
       ImageIndex = 57
       OnExecute = actDocsRetrieveExecute
     end
@@ -858,6 +866,7 @@ object frmMain: TfrmMain
     object actAbitMove: TAction
       Category = 'catAbitActs'
       Caption = #1055#1077#1088#1077#1074#1077#1089#1090#1080' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072
+      Hint = #1055#1077#1088#1077#1074#1077#1089#1090#1080' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072
       ImageIndex = 58
       OnExecute = actAbitMoveExecute
     end
@@ -951,6 +960,7 @@ object frmMain: TfrmMain
     object actAbitReturn: TAction
       Category = 'catAbitActs'
       Caption = #1042#1086#1089#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
+      Hint = #1042#1086#1089#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
       ImageIndex = 67
       OnExecute = actAbitReturnExecute
     end
@@ -986,7 +996,7 @@ object frmMain: TfrmMain
     Left = 311
     Top = 82
     Bitmap = {
-      494C01014A0068006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014A006800740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3505,7 +3515,7 @@ object frmMain: TfrmMain
     Left = 278
     Top = 82
     Bitmap = {
-      494C0101310049006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010131004900740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF

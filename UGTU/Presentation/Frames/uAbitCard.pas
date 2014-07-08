@@ -17,6 +17,7 @@ type
     Label61: TLabel;
     GroupBox5: TGroupBox;
     dbgeAdditionalSpec: TDBGridEh;
+    ToolButton15: TToolButton;
     procedure dbgeListsCellClick(Column: TColumnEh);
     procedure dbcbeSexChange(Sender: TObject);
     procedure eFamChange(Sender: TObject);
