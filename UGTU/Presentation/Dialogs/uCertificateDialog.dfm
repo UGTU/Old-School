@@ -1,5 +1,6 @@
 inherited frmEGECertificateCheck: TfrmEGECertificateCheck
   Cursor = crHourGlass
+  BorderIcons = [biMinimize, biMaximize]
   Caption = #1055#1088#1086#1089#1084#1086#1090#1088' '#1089#1077#1088#1090#1080#1092#1080#1082#1072#1090#1086#1074' '#1045#1043#1069
   ClientHeight = 524
   ClientWidth = 564
