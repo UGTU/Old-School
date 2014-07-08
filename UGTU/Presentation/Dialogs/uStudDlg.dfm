@@ -4,32 +4,32 @@ inherited ftmStudent: TftmStudent
   HelpKeyword = 'Add_stud.htm'
   Caption = #1055#1088#1072#1074#1082#1072' '#1083#1080#1095#1085#1099#1093' '#1076#1072#1085#1085#1099#1093' '#1089#1090#1091#1076#1077#1085#1090#1072
   ClientHeight = 625
-  ClientWidth = 566
+  ClientWidth = 574
   OldCreateOrder = True
   OnShow = FormShow
-  ExplicitWidth = 572
+  ExplicitWidth = 580
   ExplicitHeight = 654
   PixelsPerInch = 96
   TextHeight = 13
   GlassFrame.SheetOfGlass = True
   inherited Bevel1: TBevel
-    Width = 566
+    Width = 574
     Height = 584
     ExplicitWidth = 564
     ExplicitHeight = 543
   end
   inherited Panel1: TPanel
     Top = 584
-    Width = 566
+    Width = 574
     BevelOuter = bvSpace
     TabOrder = 1
     ExplicitTop = 584
     ExplicitWidth = 566
     DesignSize = (
-      566
+      574
       41)
     inherited bbOK: TBitBtn
-      Left = 309
+      Left = 317
       Top = 9
       Width = 80
       Default = True
@@ -58,7 +58,7 @@ inherited ftmStudent: TftmStudent
       ExplicitWidth = 80
     end
     inherited bbApply: TBitBtn
-      Left = 474
+      Left = 482
       Top = 9
       Enabled = False
       TabOrder = 0
@@ -67,7 +67,7 @@ inherited ftmStudent: TftmStudent
       ExplicitTop = 9
     end
     inherited bbCancel: TBitBtn
-      Left = 391
+      Left = 399
       Top = 9
       Kind = bkCancel
       ExplicitLeft = 391
@@ -82,43 +82,49 @@ inherited ftmStudent: TftmStudent
   object PageControl1: TPageControl [2]
     Left = 0
     Top = 0
-    Width = 566
+    Width = 574
     Height = 584
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 566
     object TabSheet1: TTabSheet
       Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
+      ExplicitWidth = 558
       object PageControl2: TPageControl
         Left = 0
         Top = 0
-        Width = 558
+        Width = 566
         Height = 556
         ActivePage = TabSheet3
         Align = alClient
         Images = ilPages
         Style = tsFlatButtons
         TabOrder = 0
+        ExplicitWidth = 558
         object TabSheet3: TTabSheet
           Caption = #1054#1073#1097#1080#1077
+          ExplicitWidth = 550
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 550
+            Width = 558
             Height = 524
             Align = alClient
             TabOrder = 0
+            ExplicitWidth = 550
             object Panel7: TPanel
               Left = 1
               Top = 1
-              Width = 548
+              Width = 556
               Height = 161
               Align = alTop
               TabOrder = 0
+              ExplicitWidth = 548
               object Bevel2: TBevel
-                Left = 455
+                Left = 452
                 Top = 47
-                Width = 81
+                Width = 93
                 Height = 80
               end
               object Label44: TLabel
@@ -264,9 +270,9 @@ inherited ftmStudent: TftmStudent
                 ParentFont = False
               end
               object iPhoto: TImage
-                Left = 458
+                Left = 452
                 Top = 48
-                Width = 75
+                Width = 93
                 Height = 77
                 Cursor = crHandPoint
                 Stretch = True
@@ -341,7 +347,7 @@ inherited ftmStudent: TftmStudent
               object eMid: TDBEditEh
                 Left = 323
                 Top = 23
-                Width = 213
+                Width = 222
                 Height = 19
                 Alignment = taLeftJustify
                 EditButtons = <>
@@ -402,7 +408,7 @@ inherited ftmStudent: TftmStudent
               object bShot: TButton
                 Left = 452
                 Top = 130
-                Width = 84
+                Width = 93
                 Height = 25
                 Caption = #1057#1085#1080#1084#1086#1082
                 TabOrder = 9
@@ -412,10 +418,11 @@ inherited ftmStudent: TftmStudent
             object Panel8: TPanel
               Left = 1
               Top = 162
-              Width = 548
+              Width = 556
               Height = 223
               Align = alTop
               TabOrder = 1
+              ExplicitWidth = 548
               object Label1: TLabel
                 Left = 161
                 Top = 5
@@ -750,10 +757,11 @@ inherited ftmStudent: TftmStudent
             object Panel6: TPanel
               Left = 1
               Top = 385
-              Width = 548
+              Width = 556
               Height = 138
               Align = alClient
               TabOrder = 2
+              ExplicitWidth = 548
               object sbAddAddress: TSpeedButton
                 Left = 510
                 Top = 23
@@ -858,20 +866,23 @@ inherited ftmStudent: TftmStudent
         object TabSheet4: TTabSheet
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
           ImageIndex = 1
+          ExplicitWidth = 550
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 550
+            Width = 558
             Height = 524
             Align = alClient
             TabOrder = 0
+            ExplicitWidth = 550
             object Panel5: TPanel
               Left = 1
               Top = 1
-              Width = 548
+              Width = 556
               Height = 108
               Align = alTop
               TabOrder = 0
+              ExplicitWidth = 548
               object Label27: TLabel
                 Left = 13
                 Top = 53
@@ -953,10 +964,11 @@ inherited ftmStudent: TftmStudent
             object Panel2: TPanel
               Left = 1
               Top = 109
-              Width = 548
+              Width = 556
               Height = 235
               Align = alTop
               TabOrder = 1
+              ExplicitWidth = 548
               object Label30: TLabel
                 Left = 13
                 Top = 101
@@ -1223,17 +1235,19 @@ inherited ftmStudent: TftmStudent
             object Panel10: TPanel
               Left = 1
               Top = 344
-              Width = 548
+              Width = 556
               Height = 179
               Align = alClient
               TabOrder = 2
               Visible = False
+              ExplicitWidth = 548
             end
           end
         end
         object TabSheet5: TTabSheet
           Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
           ImageIndex = 2
+          ExplicitWidth = 550
           object sbAddRel: TSpeedButton
             Left = 524
             Top = 25
@@ -1308,11 +1322,12 @@ inherited ftmStudent: TftmStudent
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 550
+            Width = 558
             Height = 25
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
+            ExplicitWidth = 550
             object Label38: TLabel
               Left = 0
               Top = 4
@@ -1376,6 +1391,7 @@ inherited ftmStudent: TftmStudent
         object TabSheet2: TTabSheet
           Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
           ImageIndex = 3
+          ExplicitWidth = 550
           object sbAddDoc: TSpeedButton
             Left = 524
             Top = 0
@@ -1521,7 +1537,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

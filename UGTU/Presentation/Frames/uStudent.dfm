@@ -180,7 +180,6 @@ inherited fmStudent: TfmStudent
                   Height = 177
                   Align = alTop
                   TabOrder = 2
-                  ExplicitTop = 144
                   object Label1: TLabel
                     Left = 160
                     Top = 44
@@ -339,8 +338,8 @@ inherited fmStudent: TfmStudent
                   object Bevel2: TBevel
                     Left = 448
                     Top = 47
-                    Width = 77
-                    Height = 88
+                    Width = 93
+                    Height = 77
                   end
                   object Label44: TLabel
                     Left = 471
@@ -471,10 +470,10 @@ inherited fmStudent: TfmStudent
                     ParentFont = False
                   end
                   object iPhoto: TImage
-                    Left = 453
-                    Top = 52
-                    Width = 67
-                    Height = 78
+                    Left = 448
+                    Top = 48
+                    Width = 93
+                    Height = 77
                     Cursor = crHandPoint
                     Stretch = True
                     OnClick = iPhotoClick
@@ -543,7 +542,7 @@ inherited fmStudent: TfmStudent
                   object eMid: TDBEditEh
                     Left = 299
                     Top = 23
-                    Width = 229
+                    Width = 242
                     Height = 19
                     EditButtons = <>
                     Flat = True
@@ -606,8 +605,8 @@ inherited fmStudent: TfmStudent
                   end
                   object bShot: TButton
                     Left = 448
-                    Top = 141
-                    Width = 84
+                    Top = 131
+                    Width = 93
                     Height = 25
                     Caption = #1057#1085#1080#1084#1086#1082
                     TabOrder = 9
@@ -621,8 +620,6 @@ inherited fmStudent: TfmStudent
                   Height = 204
                   Align = alClient
                   TabOrder = 0
-                  ExplicitTop = 321
-                  ExplicitHeight = 233
                   DesignSize = (
                     703
                     204)
@@ -1172,7 +1169,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 26
                 Width = 705
-                Height = 492
+                Height = 491
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -2021,7 +2018,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
