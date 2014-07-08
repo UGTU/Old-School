@@ -1,5 +1,6 @@
 inherited frmEGECertificateCheck: TfrmEGECertificateCheck
   Cursor = crHourGlass
+  BorderIcons = [biMinimize, biMaximize]
   Caption = #1055#1088#1086#1089#1084#1086#1090#1088' '#1089#1077#1088#1090#1080#1092#1080#1082#1072#1090#1086#1074' '#1045#1043#1069
   ClientHeight = 524
   ClientWidth = 564
@@ -36,16 +37,14 @@ inherited frmEGECertificateCheck: TfrmEGECertificateCheck
     ExplicitWidth = 564
     ExplicitHeight = 62
     inherited bbOK: TBitBtn
-      Left = 351
-      Top = 16
-      Width = 202
-      Height = 33
-      Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1101#1082#1079#1072#1084#1077#1085#1099' '#1074' '#1079#1072#1103#1074#1083#1077#1085#1080#1077
+      Left = 344
+      Top = 24
+      Width = 209
+      Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1101#1082#1079#1072#1084#1077#1085#1099' '#1074' '#1079#1072#1103#1074#1083#1077#1085#1080#1077' '
       ModalResult = 1
-      ExplicitLeft = 351
-      ExplicitTop = 16
-      ExplicitWidth = 202
-      ExplicitHeight = 33
+      ExplicitLeft = 344
+      ExplicitTop = 24
+      ExplicitWidth = 209
     end
     inherited bbApply: TBitBtn
       Left = -77
@@ -55,16 +54,14 @@ inherited frmEGECertificateCheck: TfrmEGECertificateCheck
       ExplicitTop = 21
     end
     inherited bbCancel: TBitBtn
-      Left = 234
-      Top = 16
-      Width = 111
-      Height = 33
+      Left = 268
+      Top = 24
+      Width = 70
       Caption = #1047#1072#1082#1088#1099#1090#1100
       ModalResult = 2
-      ExplicitLeft = 234
-      ExplicitTop = 16
-      ExplicitWidth = 111
-      ExplicitHeight = 33
+      ExplicitLeft = 268
+      ExplicitTop = 24
+      ExplicitWidth = 70
     end
     inherited bbSprav: TBitBtn
       Left = 0

@@ -762,6 +762,25 @@ object dm: Tdm
     object adodsPostupViewSchoolAverMark: TFloatField
       FieldName = 'SchoolAverMark'
     end
+    object adodsPostupViewClastname: TStringField
+      FieldName = 'Clastname'
+      Size = 30
+    end
+    object adodsPostupViewCfirstname: TStringField
+      FieldName = 'Cfirstname'
+      Size = 30
+    end
+    object adodsPostupViewCotch: TStringField
+      FieldName = 'Cotch'
+      Size = 30
+    end
+    object adodsPostupViewNNyear: TIntegerField
+      FieldName = 'NNyear'
+    end
+    object adodsPostupViewCname_form_ed: TStringField
+      FieldName = 'Cname_form_ed'
+      Size = 50
+    end
   end
   object dsPostupView: TDataSource
     DataSet = adodsPostupView

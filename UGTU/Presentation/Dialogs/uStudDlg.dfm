@@ -4,32 +4,32 @@ inherited ftmStudent: TftmStudent
   HelpKeyword = 'Add_stud.htm'
   Caption = #1055#1088#1072#1074#1082#1072' '#1083#1080#1095#1085#1099#1093' '#1076#1072#1085#1085#1099#1093' '#1089#1090#1091#1076#1077#1085#1090#1072
   ClientHeight = 625
-  ClientWidth = 566
+  ClientWidth = 574
   OldCreateOrder = True
   OnShow = FormShow
-  ExplicitWidth = 572
+  ExplicitWidth = 580
   ExplicitHeight = 654
   PixelsPerInch = 96
   TextHeight = 13
   GlassFrame.SheetOfGlass = True
   inherited Bevel1: TBevel
-    Width = 566
+    Width = 574
     Height = 584
     ExplicitWidth = 564
     ExplicitHeight = 543
   end
   inherited Panel1: TPanel
     Top = 584
-    Width = 566
+    Width = 574
     BevelOuter = bvSpace
     TabOrder = 1
     ExplicitTop = 584
-    ExplicitWidth = 566
+    ExplicitWidth = 574
     DesignSize = (
-      566
+      574
       41)
     inherited bbOK: TBitBtn
-      Left = 309
+      Left = 317
       Top = 9
       Width = 80
       Default = True
@@ -53,24 +53,24 @@ inherited ftmStudent: TftmStudent
         333A333333333333333338330000333333333333333333333333333333333333
         0000}
       NumGlyphs = 2
-      ExplicitLeft = 309
+      ExplicitLeft = 317
       ExplicitTop = 9
       ExplicitWidth = 80
     end
     inherited bbApply: TBitBtn
-      Left = 474
+      Left = 482
       Top = 9
       Enabled = False
       TabOrder = 0
       NumGlyphs = 2
-      ExplicitLeft = 474
+      ExplicitLeft = 482
       ExplicitTop = 9
     end
     inherited bbCancel: TBitBtn
-      Left = 391
+      Left = 399
       Top = 9
       Kind = bkCancel
-      ExplicitLeft = 391
+      ExplicitLeft = 399
       ExplicitTop = 9
     end
     inherited bbSprav: TBitBtn
@@ -82,7 +82,7 @@ inherited ftmStudent: TftmStudent
   object PageControl1: TPageControl [2]
     Left = 0
     Top = 0
-    Width = 566
+    Width = 574
     Height = 584
     ActivePage = TabSheet1
     Align = alClient
@@ -92,7 +92,7 @@ inherited ftmStudent: TftmStudent
       object PageControl2: TPageControl
         Left = 0
         Top = 0
-        Width = 558
+        Width = 566
         Height = 556
         ActivePage = TabSheet3
         Align = alClient
@@ -104,21 +104,21 @@ inherited ftmStudent: TftmStudent
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 550
+            Width = 558
             Height = 524
             Align = alClient
             TabOrder = 0
             object Panel7: TPanel
               Left = 1
               Top = 1
-              Width = 548
+              Width = 556
               Height = 161
               Align = alTop
               TabOrder = 0
               object Bevel2: TBevel
-                Left = 455
+                Left = 452
                 Top = 47
-                Width = 81
+                Width = 93
                 Height = 80
               end
               object Label44: TLabel
@@ -264,9 +264,9 @@ inherited ftmStudent: TftmStudent
                 ParentFont = False
               end
               object iPhoto: TImage
-                Left = 458
+                Left = 452
                 Top = 48
-                Width = 75
+                Width = 93
                 Height = 77
                 Cursor = crHandPoint
                 Stretch = True
@@ -341,7 +341,7 @@ inherited ftmStudent: TftmStudent
               object eMid: TDBEditEh
                 Left = 323
                 Top = 23
-                Width = 213
+                Width = 222
                 Height = 19
                 Alignment = taLeftJustify
                 EditButtons = <>
@@ -402,7 +402,7 @@ inherited ftmStudent: TftmStudent
               object bShot: TButton
                 Left = 452
                 Top = 130
-                Width = 84
+                Width = 93
                 Height = 25
                 Caption = #1057#1085#1080#1084#1086#1082
                 TabOrder = 9
@@ -412,7 +412,7 @@ inherited ftmStudent: TftmStudent
             object Panel8: TPanel
               Left = 1
               Top = 162
-              Width = 548
+              Width = 556
               Height = 223
               Align = alTop
               TabOrder = 1
@@ -750,7 +750,7 @@ inherited ftmStudent: TftmStudent
             object Panel6: TPanel
               Left = 1
               Top = 385
-              Width = 548
+              Width = 556
               Height = 138
               Align = alClient
               TabOrder = 2
@@ -861,14 +861,14 @@ inherited ftmStudent: TftmStudent
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 550
+            Width = 558
             Height = 524
             Align = alClient
             TabOrder = 0
             object Panel5: TPanel
               Left = 1
               Top = 1
-              Width = 548
+              Width = 556
               Height = 108
               Align = alTop
               TabOrder = 0
@@ -953,7 +953,7 @@ inherited ftmStudent: TftmStudent
             object Panel2: TPanel
               Left = 1
               Top = 109
-              Width = 548
+              Width = 556
               Height = 235
               Align = alTop
               TabOrder = 1
@@ -1223,7 +1223,7 @@ inherited ftmStudent: TftmStudent
             object Panel10: TPanel
               Left = 1
               Top = 344
-              Width = 548
+              Width = 556
               Height = 179
               Align = alClient
               TabOrder = 2
@@ -1308,7 +1308,7 @@ inherited ftmStudent: TftmStudent
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 550
+            Width = 558
             Height = 25
             Align = alTop
             BevelOuter = bvNone
@@ -1521,7 +1521,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -9,14 +9,14 @@ uses
   TExamDescription = class
   private
     FSubject:string;
-    FMark:real;
+    FMark:string;
     FIsAppealed:boolean;
     FCertNumber:string;
   public
     constructor Create(XMLNode:IXMLNode);
 
     property     Subject:string read FSubject;
-    property     Mark:real read FMark;
+    property     Mark:string read FMark;
     property     IsAppealed:boolean  read FIsAppealed;
     property     CertNumber:string read FCertNumber write FCertNumber;
   end;

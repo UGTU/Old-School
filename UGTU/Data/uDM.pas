@@ -546,6 +546,11 @@ type
     DelVedForContentDisc: TADOStoredProc;
     Hard_DiscDel: TADOStoredProc;
     qVedomostForContent: TADOQuery;
+    adodsPostupViewClastname: TStringField;
+    adodsPostupViewCfirstname: TStringField;
+    adodsPostupViewCotch: TStringField;
+    adodsPostupViewNNyear: TIntegerField;
+    adodsPostupViewCname_form_ed: TStringField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);
