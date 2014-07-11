@@ -616,6 +616,9 @@
     <DCCReference Include="Presentation\Forms\DetailsFrm.pas">
       <Form>DetailsForm</Form>
     </DCCReference>
+    <DCCReference Include="Presentation\Forms\ImageFullSizeShowFrm.pas">
+      <Form>ImageFullSizeShowForm</Form>
+    </DCCReference>
     <DCCReference Include="Presentation\Forms\NewClientVersionDetectedFrm.pas">
       <Form>NewClientVersionDetectedForm</Form>
     </DCCReference>

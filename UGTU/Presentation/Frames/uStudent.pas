@@ -225,6 +225,7 @@ type
     procedure cbSemBRSChange(Sender: TObject);
     procedure cbModuleBRSChange(Sender: TObject);
     procedure bShotClick(Sender: TObject);
+    procedure iPhotoMouseEnter(Sender: TObject);
 
   private
     Fik:integer;
@@ -252,7 +253,8 @@ var
 implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
-  uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost, uPhotoBooth;
+  uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost, uPhotoBooth,
+  ImageFullSizeShowFrm;
 
 {$R *.dfm}
 
@@ -1168,6 +1170,23 @@ iphoto.Picture.LoadFromFile(odPhoto.FileName);
     bbUndo.Enabled:=true;
   //end;
 end;
+end;
+
+procedure TfmStudent.iPhotoMouseEnter(Sender: TObject);
+var pt :TPoint;
+begin
+   if not Assigned(iphoto.Picture.Graphic) then Exit;
+
+   pt:=iphoto.ClientToScreen(Point(0,0));
+
+   ImageFullSizeShowForm.curControl := self.iPhoto;
+   ImageFullSizeShowForm.Height := iphoto.Picture.Graphic.Height;
+   ImageFullSizeShowForm.Width := iphoto.Picture.Graphic.Width;
+   ImageFullSizeShowForm.Top := pt.Y - (ImageFullSizeShowForm.Height div 2 - iphoto.Height div 2);
+   ImageFullSizeShowForm.Left := pt.X - (ImageFullSizeShowForm.Width div 2 - iphoto.Width div 2);
+
+   ImageFullSizeShowForm.Image := iphoto.Picture.Graphic;
+   ImageFullSizeShowForm.Show;
 end;
 
 procedure TfmStudent.cbModuleBRSChange(Sender: TObject);

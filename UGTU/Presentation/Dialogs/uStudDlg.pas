@@ -191,6 +191,7 @@ type
     procedure actAddAddressExecute(Sender: TObject);
     procedure actDelAddressExecute(Sender: TObject);
     procedure bShotClick(Sender: TObject);
+    procedure iPhotoMouseEnter(Sender: TObject);
 
    private
   Floaded:boolean;
@@ -210,7 +211,8 @@ var
 implementation
   uses udm,umain, ADODB,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg,
   Math, uSpravForm, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
-  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, uPhotoBooth;
+  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, uPhotoBooth,
+  ImageFullSizeShowFrm;
 {$R *.dfm}
 
 function CheckFields:boolean;
@@ -466,6 +468,23 @@ begin
   end;
 end;
 
+
+procedure TftmStudent.iPhotoMouseEnter(Sender: TObject);
+var pt :TPoint;
+begin
+   if not Assigned(iphoto.Picture.Graphic) then Exit;
+
+   pt:=iphoto.ClientToScreen(Point(0,0));
+
+   ImageFullSizeShowForm.curControl := self.iPhoto;
+   ImageFullSizeShowForm.Height := iphoto.Picture.Graphic.Height;
+   ImageFullSizeShowForm.Width := iphoto.Picture.Graphic.Width;
+   ImageFullSizeShowForm.Top := pt.Y - (ImageFullSizeShowForm.Height div 2 - iphoto.Height div 2);
+   ImageFullSizeShowForm.Left := pt.X - (ImageFullSizeShowForm.Width div 2 - iphoto.Width div 2);
+
+   ImageFullSizeShowForm.Image := iphoto.Picture.Graphic;
+   ImageFullSizeShowForm.Show;
+end;
 
 procedure TftmStudent.eEmailExit(Sender: TObject);
 //var s:string;
