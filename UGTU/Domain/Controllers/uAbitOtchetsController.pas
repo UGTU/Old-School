@@ -91,7 +91,10 @@ type
   //экспортируем данные в заявление
   procedure FillTheZayavl(E:OleVariant);
 
-
+  //загрузка данных для экспорта заявления на карточку карточки
+  function GetAbitDataForGazpromZayavl(NNAbit:integer):TADOStoredProc;
+  //Экспорт заявления на карточку в Газпром
+  procedure GazpromBankStatementToWord(NNAbit: integer);
   //экспорт отчета по предварительному зачислению
   procedure ExportPredvSpisok(NNyear:integer);
 
@@ -2405,6 +2408,82 @@ begin
 end;
 
 
+//открывает данные для экспорта заявления на карточку Газпрома
+function TAbitOtchetsController.GetAbitDataForGazpromZayavl(NNAbit:integer):TADOStoredProc;
+begin
+  Result := TADOStoredProc.Create(nil);
+  Result.Connection := dm.DBConnect;
+  Result.ProcedureName := 'ABIT_get_InfForGazpromZayavl;1';
+  Result.Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
+  Result.Parameters.CreateParameter('@NN_abit', ftInteger, pdInput, 4, NNAbit);
+  Result.Open;
+end;
+
+procedure TAbitOtchetsController.GazpromBankStatementToWord(NNAbit: integer);
+const MaxNameSymbol=19;
+var W, MyRange, table:variant;
+    LastName, str, FirstName:string;
+    SmInPoint:real;
+    i: integer;
+    DataForStatement: TADOStoredProc;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Экспорт в Word заявления на карточку Газпром.');
+  DataForStatement:= GetAbitDataForGazpromZayavl(NNAbit);
+	try
+	  W:=CreateOleObject('Word.Application');
+	  str := ExtractFilePath(Application.ExeName)+'reports\ZayavlKartaGazprom.dot';
+	  W.Documents.add(str);
+	  W.Visible:=false;
+	  TGeneralController.Instance.FindAndInsert(W,'#BirthDate#',DataForStatement.FieldByName('Dd_birth').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#FIO#',DataForStatement.FieldByName('FullStudName').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#Citizenship#',DataForStatement.FieldByName('c_grazd').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#BirthPlace#',DataForStatement.FieldByName('Cplacebirth').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#indexPr#',DataForStatement.FieldByName('cIndex_prop').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#AddressPr#',DataForStatement.FieldByName('PropAddress').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#IndexFc#',DataForStatement.FieldByName('cIndex_fact').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#AddressFc#',DataForStatement.FieldByName('FactAddress').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#FormEd#',DataForStatement.FieldByName('Cname_form_ed').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#TelNumber#',DataForStatement.FieldByName('ctelefon').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#SotTelNumber#',DataForStatement.FieldByName('cSotTel').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#eMail#',DataForStatement.FieldByName('cEmail').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#Passport#',DataForStatement.FieldByName('PCd_kem_vidan').AsString);
+    TGeneralController.Instance.FindAndInsert(W,'#Non#','Серия Номер Выдан');
+
+    LastName:= DataForStatement.FieldByName('TrLastName').AsString;
+    FirstName:= DataForStatement.FieldByName('TrFirstName').AsString;
+    str:= LastName;
+    if (length(LastName)<(MaxNameSymbol-1)) then
+    begin
+      if (length(LastName+' '+FirstName)<=MaxNameSymbol) then
+        str:= LastName+' '+FirstName
+      else
+        str:= LastName+' '+Copy(FirstName,1,1);
+    end;
+    for i := 19 downto  1 do
+    begin
+      if (length(str) < i) then
+        TGeneralController.Instance.FindAndInsert(W,'#'+IntToStr(i),'')
+      else
+        TGeneralController.Instance.FindAndInsert(W,'#'+IntToStr(i),str[i]);
+    end;
+    //TGeneralController.Instance.FindAndInsert(W,'#AddressFc#',DataForStatement.FieldByName('FullStudName').AsString);
+    if (DataForStatement.FieldByName('lSex').AsBoolean) then
+    begin
+      TGeneralController.Instance.FindAndInsert(W,'#M#','+');
+      TGeneralController.Instance.FindAndInsert(W,'#W#','');
+    end
+    else
+    begin
+      TGeneralController.Instance.FindAndInsert(W,'#W#','+');
+      TGeneralController.Instance.FindAndInsert(W,'#M#','');
+    end;
+    
+	  W.Visible:=true;
+  finally
+	  DataForStatement.Free;
+  end;
+
+end;
 
 
 //****************Экспорт заявления в Excel*******************

@@ -69,6 +69,9 @@ type
 
     function GetAltKeyState: boolean;
 
+    //Вывод приказов в Word
+//FindAndInsert заменяет в документе FindText на ReplacementText
+    function FindAndInsert(W:Variant; FindText, ReplacementText:string):boolean;
   end;
 
   const
@@ -120,6 +123,13 @@ begin
    else raise EApplicationException.Create('Ошибка в программе!',Exception.CreateFmt('Неизвестное значение параметра %d в методе AccessInstance контроллера GeneralController', [Request]));
   end;
   Result := FGeneralControllerInstance;
+end;
+
+function TGeneralController.FindAndInsert(W:Variant; FindText, ReplacementText:string):boolean;
+begin
+  W.Selection.Find.Text:=FindText;
+  W.Selection.Find.Replacement.Text:=ReplacementText;
+  result:=W.Selection.Find.Execute(Replace:=2);
 end;
 
 class function TGeneralController.Instance: TGeneralController;

@@ -145,9 +145,6 @@ uses
 //списки абитуриентов ЦКП и бюджет с положит. оценками
    function AbitsWithPolozhOcenkiToExcel(grid: PDBGrid):boolean;
 
-//Вывод приказов в Word
-//FindAndInsert заменяет в документе FindText на ReplacementText
-   function FindAndInsert(W:Variant; FindText, ReplacementText:string):boolean;
 
 //SpecPrikazToWord экспортирует в Word приказ на зачисление
 //сгруппированный по специальностям
@@ -947,12 +944,6 @@ begin
   end;
 end;
 
-function TAbitZachislenieController.FindAndInsert(W:Variant; FindText, ReplacementText:string):boolean;
-begin
-  W.Selection.Find.Text:=FindText;
-  W.Selection.Find.Replacement.Text:=ReplacementText;
-  result:=W.Selection.Find.Execute(Replace:=2);
-end;
 
 procedure TAbitZachislenieController.SpecPrikazToWord(grid: PDBGrid);
 var W, MyRange, table:variant;
@@ -977,9 +968,9 @@ begin
 	  str:=DateToStr(Date);
 	  str:=copy(str,1,length(str)-4);
 	  str:=str+IntToStr(year);
-	  FindAndInsert(W,'#Дата#',str);
+    TGeneralController.Instance.FindAndInsert(W,'#Дата#',str);
 	  str:=IntToStr(year);
-	  FindAndInsert(W,'#Год#',str);
+	  TGeneralController.Instance.FindAndInsert(W,'#Год#',str);
 
 
 	  //начинаем цикл по выведению зачисленных
@@ -1082,9 +1073,9 @@ begin
 	  str:=DateToStr(Date);
 	  str:=copy(str,1,length(str)-4);
 	  str:=str+IntToStr(year);
-	  FindAndInsert(W,'#Дата#',str);
+	  TGeneralController.Instance.FindAndInsert(W,'#Дата#',str);
 	  str:=IntToStr(year);
-	  FindAndInsert(W,'#Год#',str);
+	  TGeneralController.Instance.FindAndInsert(W,'#Год#',str);
 
 	  //начинаем цикл по выведению зачисленных в группы
 	  FAbitListDataSetInstance.First;
