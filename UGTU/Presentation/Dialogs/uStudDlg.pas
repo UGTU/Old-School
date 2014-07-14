@@ -212,7 +212,7 @@ implementation
   uses udm,umain, ADODB,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg,
   Math, uSpravForm, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
   uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, uPhotoBooth,
-  ImageFullSizeShowFrm;
+  ImageFullSizeShowFrm,ApplicationController;
 {$R *.dfm}
 
 function CheckFields:boolean;
@@ -387,8 +387,9 @@ end;
 procedure TftmStudent.bShotClick(Sender: TObject);
   var phbooth:TPhotoBooth;
 begin
-  phbooth:=TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
-  phbooth.MakePhoto();
+  phbooth:= TApplicationController.GetInstance.GetPhotoBooth(ExtractFileDir(Application.ExeName),iPhoto);
+  //TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
+  //phbooth.MakePhoto();
   odPhoto.FileName:=phbooth.FileName;
 end;
 
@@ -396,13 +397,14 @@ procedure TftmStudent.eFamExit(Sender: TObject);
 var s,sm:string;
 begin
   inherited;
- if eFam.Text<>'' then begin
-s:=eFam.Text;
-sm:=AnsiUpperCase(s);
-s:=AnsiLowerCase(s);
-s[1]:=sm[1];
-eFam.Text:=s;
- end;
+  if eFam.Text<>'' then
+  begin
+    s:=eFam.Text;
+    sm:=AnsiUpperCase(s);
+    s:=AnsiLowerCase(s);
+    s[1]:=sm[1];
+    eFam.Text:=s;
+  end;
 end;
 
 procedure TftmStudent.eNameExit(Sender: TObject);

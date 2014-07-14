@@ -1286,8 +1286,9 @@ end;
 procedure TfmStudent.bShotClick(Sender: TObject);
   var phbooth:TPhotoBooth;
 begin
-  phbooth:=TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
-  phbooth.MakePhoto();
+  //phbooth:=TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
+  //phbooth.MakePhoto();
+  phbooth := TApplicationController.GetInstance.GetPhotoBooth(ExtractFileDir(Application.ExeName),iPhoto);
   odPhoto.FileName:=phbooth.FileName;
   Modified:=true;
   bbSave.Enabled:=true;

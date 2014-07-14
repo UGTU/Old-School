@@ -32,7 +32,11 @@ public
 
 end;
 
+var pBooth: TPhotoBooth;
+
 implementation
+
+
 
 
 function GetMyDoc : string;
@@ -91,7 +95,6 @@ end;
 function TPhotoBooth.MakePhoto: TGraphic;
 begin
   FCurrentPath := GetPathForShot;
-
   FProcess := TProcessHelper.Create(Format('"%s" "%s" "%s"', [FWorkingDir+ccipath, FCurrentPath, FPhotographedName]));
   FProcess.OnProcessExit := OnProcessExit;
   FProcess.Start;
@@ -100,7 +103,7 @@ end;
 
 procedure TPhotoBooth.OnProcessExit(Sender: TObject; Code: DWORD);
 begin
-if FImgView<>nil then
+  if FImgView<>nil then
     FImgView.Picture.Assign(nil);
 
   if (Code = 0) then
@@ -112,7 +115,8 @@ if FImgView<>nil then
   end;
   FProcess.Free;
   FProcess := nil;
-  self.Free;
+  pBooth.Free;
+  pBooth := nil;
 end;
 
 end.
