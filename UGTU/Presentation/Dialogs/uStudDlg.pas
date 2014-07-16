@@ -193,9 +193,9 @@ type
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
 
-   private
-  Floaded:boolean;
-  spravhint: string;
+  private
+    Floaded:boolean;
+    spravhint: string;
 
     { Private declarations }
   public
@@ -211,7 +211,7 @@ var
 implementation
   uses udm,umain, ADODB,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg,
   Math, uSpravForm, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
-  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, uPhotoBooth,
+  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, 
   ImageFullSizeShowFrm,ApplicationController;
 {$R *.dfm}
 
@@ -385,12 +385,8 @@ end;
 
 
 procedure TftmStudent.bShotClick(Sender: TObject);
-  var phbooth:TPhotoBooth;
 begin
-  phbooth:= TApplicationController.GetInstance.GetPhotoBooth(ExtractFileDir(Application.ExeName),iPhoto);
-  //TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
-  //phbooth.MakePhoto();
-  odPhoto.FileName:=phbooth.FileName;
+  TApplicationController.GetInstance.GetPhotoBooth(ExtractFileDir(Application.ExeName),iPhoto);
 end;
 
 procedure TftmStudent.eFamExit(Sender: TObject);
@@ -512,6 +508,7 @@ end;
 procedure TftmStudent.actApplyExecute(Sender: TObject);
 var i,code:integer;
 //s:string;
+stream: TMemoryStream;
 begin
 with dmStudentActions.aspAppendStudent.Parameters do begin
 clear;
@@ -552,10 +549,20 @@ CreateParameter('@Sottel',ftString,pdInput,50,eCellphone.Text);
 CreateParameter('@telefon',ftString,pdInput,20,ePhone.text);
 CreateParameter('@Email',ftString,pdInput,50,eEmail.Text);
 
-if (iphoto.Picture.Graphic<>nil) and (odPhoto.FileName<>'') then
-  CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByFile(odPhoto.FileName))
-else
-  CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,NULL);
+    //сохранение фото
+    if (iphoto.Picture.Graphic<>nil) then
+    begin
+      if (odPhoto.FileName<>'') then
+        CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByFile(odPhoto.FileName))
+      else
+      begin
+        stream:=TMemoryStream.Create;
+        iPhoto.Picture.Graphic.SaveToStream(stream);
+        CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByStream(stream))
+      end;
+    end
+    else
+      CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,NULL);
 
 CreateParameter('@Pens',ftInteger,pdInput,0,Null);
 CreateParameter('@grazd',ftInteger,pdInput,0,dbcbeCitizenship.KeyValue);

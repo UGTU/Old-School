@@ -40,7 +40,6 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     FLastRunLog:string;
     FExportLogToFile:boolean;
     FExceptionParsers:TExceptionParserCollection;
-    //FPhotoBooth: TPhotoBooth;
 
     procedure WriteToIni(section:string;key:string;value:string);
     procedure EraseIniKey(section:string;key:string);
@@ -68,6 +67,9 @@ public
     procedure WriteAllParamToIni;
     procedure Terminate;
     procedure CheckDBStats(UA:string; Status:string);
+    
+    //включить камеру
+    procedure GetPhotoBooth(eName: string; img: TImage);
 
     function ParseException(E:Exception):Exception;
     function CreateDelayedSend(mes:TIdMessage):string;
@@ -78,8 +80,6 @@ public
     function ApplicationName:string;
     function GetUserGroups: TStringList;
 
-    //получить камеру
-    function GetPhotoBooth(eName: string; img: TImage): TPhotoBooth;
 
     property ActiveFrame: TFmBase Read GetActiveFrame;
     property SupportMail:string read FSupportMail;
@@ -102,7 +102,6 @@ public
     property LastRunLog: string read FLastRunLog;
     property IsApplicationCopy : boolean read FIsApplicationCopy;
     property LocalLog : ILogger read GetLogger implements ILogger;
-
   end;
 
 function GetProcessUserName(var UserName:WideString):HRESULT;stdcall;external'coreutdll.dll';
@@ -533,14 +532,13 @@ result:= TLogController.GetInstance.Text;
 end;
 
 
-function TApplicationController.GetPhotoBooth(eName: string; img: TImage): TPhotoBooth;
+procedure TApplicationController.GetPhotoBooth(eName: string; img: TImage);
 begin
   if not Assigned(pBooth) then
   begin
     pBooth := TPhotoBooth.Create('Enter - make photo, Esc - cancel',eName,img);
     pBooth.MakePhoto();
   end;
-  Result := pBooth;
 end;
 
 function TApplicationController.GetUserGroups: TStringList;
@@ -582,6 +580,7 @@ end;
 
 procedure TApplicationController.Terminate;
 begin
+  pBooth.Free;  
   Application.Terminate;
 end;
 
