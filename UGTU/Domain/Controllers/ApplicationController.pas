@@ -2,7 +2,8 @@ unit ApplicationController;
 {#Author sergdev@ist.ugtu.net}
 interface
 uses  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uBaseFrame, VersionController, DB, IniFiles, ShlObj,StdCtrls, comObj, ShellAPI, IdMessage, CommonIntf, CommonIntfImpl, ExceptionBase, ComCtrls;
+  Dialogs, uBaseFrame, VersionController, DB, IniFiles, ShlObj,StdCtrls, comObj, ShellAPI, IdMessage, CommonIntf, CommonIntfImpl, ExceptionBase, ComCtrls,
+  uPhotoBooth, ExtCtrls;
 
 const
    HEAP_ZERO_MEMORY = $00000008;
@@ -51,7 +52,8 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     constructor Create();
     procedure FinalizeSession;
 
-    public
+
+public
     class function GetInstance: TApplicationController;
 
     procedure InitAboutParameters;
@@ -65,6 +67,9 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     procedure WriteAllParamToIni;
     procedure Terminate;
     procedure CheckDBStats(UA:string; Status:string);
+    
+    //включить камеру
+    procedure GetPhotoBooth(eName: string; img: TImage);
 
     function ParseException(E:Exception):Exception;
     function CreateDelayedSend(mes:TIdMessage):string;
@@ -74,6 +79,7 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     function GetLogForSend: string;
     function ApplicationName:string;
     function GetUserGroups: TStringList;
+
 
     property ActiveFrame: TFmBase Read GetActiveFrame;
     property SupportMail:string read FSupportMail;
@@ -96,7 +102,6 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     property LastRunLog: string read FLastRunLog;
     property IsApplicationCopy : boolean read FIsApplicationCopy;
     property LocalLog : ILogger read GetLogger implements ILogger;
-
   end;
 
 function GetProcessUserName(var UserName:WideString):HRESULT;stdcall;external'coreutdll.dll';
@@ -527,6 +532,15 @@ result:= TLogController.GetInstance.Text;
 end;
 
 
+procedure TApplicationController.GetPhotoBooth(eName: string; img: TImage);
+begin
+  if not Assigned(pBooth) then
+  begin
+    pBooth := TPhotoBooth.Create('Enter - make photo, Esc - cancel',eName,img);
+    pBooth.MakePhoto();
+  end;
+end;
+
 function TApplicationController.GetUserGroups: TStringList;
 {var Container : IADsContainer;
     NewObject : IADs;
@@ -566,7 +580,8 @@ end;
 
 procedure TApplicationController.Terminate;
 begin
-Application.Terminate;
+  pBooth.Free;  
+  Application.Terminate;
 end;
 
 end.
