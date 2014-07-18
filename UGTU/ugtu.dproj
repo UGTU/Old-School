@@ -88,7 +88,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.4.478;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Build>478</VerInfo_Build>
-        <DCC_UnitSearchPath>Domain\DBTV;C:\Program Files (x86)\Embarcadero\RAD Studio\12.0\lib\УГТУ;C:\Program Files (x86)\Embarcadero\RAD Studio\12.0\lib;C:\Users\tvokueva\Documents\GitHub\Old-School\UGTU\Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5;C:\Users\tvokueva\Documents\GitHub\Old-School\UGTU\Domain\Graphics32\Packages</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>Domain\DBTV;Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5;Domain\Graphics32\Packages</DCC_UnitSearchPath>
     </PropertyGroup>
     <ProjectExtensions>
         <Borland.Personality>Delphi.Personality.12</Borland.Personality>
