@@ -390,7 +390,7 @@ end;
 
 procedure TApplicationController.Restart;
 begin
-ShellExecute(0, 'open', PAnsiChar(Application.ExeName), '', '', SW_SHOWNORMAL);
+ShellExecute(0, 'open', PWideChar(Application.ExeName), '', '', SW_SHOWNORMAL);
 FinalizeSession;
 Application.Terminate;
 ExitProcess($FF);

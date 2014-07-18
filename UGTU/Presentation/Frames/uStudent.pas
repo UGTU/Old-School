@@ -7,7 +7,9 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Buttons, ToolWin, ComCtrls, ExtCtrls,
   Grids, DBGridEh, Mask, DBCtrlsEh, ImgList, DBTVStudObj, DBLookupEh, db, DBCtrls,
   ExtDlgs, jpeg, VarfileUtils, ComObj, GridsEh, ActnList, Menus, dbtvSpecobj, dbtvFacobj,
-  ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController, uAddress;
+  ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController, uAddress,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  DBAxisGridsEh;
 
 type
   TfmStudent = class(TfmBase)
@@ -833,7 +835,7 @@ end;
 
 procedure TfmStudent.actDeleteAddressExecute(Sender: TObject);
 begin
-  if MessageBox(Handle, PAnsiChar('Вы действительно хотите удалить адрес?'), 'ИС УГТУ', MB_YESNO)=IDYES then
+  if MessageBox(Handle, PWideChar('Вы действительно хотите удалить адрес?'), 'ИС УГТУ', MB_YESNO)=IDYES then
   begin
   dmAdress.aspDelAddress.Parameters[1].value := dmStudentSelectionProcs.aspGetPersonAddress.FieldByName('ik_personAddress').Value;
   dmAdress.aspDelAddress.ExecProc;

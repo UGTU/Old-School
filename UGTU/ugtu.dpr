@@ -349,7 +349,8 @@ uses
   D_AVGBalls in 'Domain\Reports\D_AVGBalls.pas',
   D_VedomostBRSLast in 'Domain\Reports\D_VedomostBRSLast.pas',
   ProcessUtils in 'Utils\ProcessUtils.pas',
-  uPhotoBooth in 'Utils\uPhotoBooth.pas';
+  uPhotoBooth in 'Utils\uPhotoBooth.pas',
+  ImageFullSizeShowFrm in 'Presentation\Forms\ImageFullSizeShowFrm.pas' {ImageFullSizeShowForm};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -394,5 +395,6 @@ begin
   Application.CreateForm(TfmPerson, fmPerson);
   Application.CreateForm(TftmStudent, ftmStudent);
   Application.CreateForm(TdmHOST, dmHOST);
+  Application.CreateForm(TImageFullSizeShowForm, ImageFullSizeShowForm);
   Application.Run;
 end.

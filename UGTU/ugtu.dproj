@@ -970,6 +970,10 @@
         <DCCReference Include="Domain\Reports\D_VedomostBRSLast.pas"/>
         <DCCReference Include="Utils\ProcessUtils.pas"/>
         <DCCReference Include="Utils\uPhotoBooth.pas"/>
+        <DCCReference Include="Presentation\Forms\ImageFullSizeShowFrm.pas">
+            <Form>ImageFullSizeShowForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
