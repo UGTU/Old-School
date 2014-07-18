@@ -598,40 +598,41 @@ var i,j:integer;
     ex:TExam;
     spec:TAdditionalSpec;
     AddExProc:TADOStoredProc;
+    stream: TMemoryStream;
 begin
   AbitList.RecruitNum:=dbcbeRecruit.KeyValue;
   AbitList.Date:=dbdteList.Value;
   AbitList.CatNum:=dbcbeCategory.KeyValue;
   AbitList.AvgBall:=eAvgBall.Value;
 
-try
-  dm.DBConnect.BeginTrans;
-  if (HostForm<>nil) then
- begin
+  try
+    dm.DBConnect.BeginTrans;
+    if (HostForm<>nil) then
+    begin
+      with HostForm do
+      begin
+        dmAbiturientAction.aspAppendAbit.Parameters.clear;
+        dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@RETURN_VALUE',ftInteger,pdReturnValue,0,1);
+        dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@flag',ftInteger,pdInput,0,1);
+        dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@clastn',ftString,pdInput,40,eFam.Text);
+        dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@firstn',ftString,pdInput,40,eName.Text);
 
-  with HostForm do begin
-    dmAbiturientAction.aspAppendAbit.Parameters.clear;
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@RETURN_VALUE',ftInteger,pdReturnValue,0,1);
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@flag',ftInteger,pdInput,0,1);
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@clastn',ftString,pdInput,40,eFam.Text);
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@firstn',ftString,pdInput,40,eName.Text);
+        if not (eMid.Text='') then
+          dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@otch',ftString,pdInput,40,eMid.Text)
+        else
+          dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@otch',ftString,pdInput,40,null);
 
-    if not (eMid.Text='') then
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@otch',ftString,pdInput,40,eMid.Text)
-    else
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@otch',ftString,pdInput,40,null);
-
-    if not (DateToStr(dbdteBirthDate.Value)='  .  .    ') then
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@birth',ftDateTime,pdInput,0,dbdteBirthDate.Value)
-    else
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@birth',ftDateTime,pdInput,0,null);
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@placebirth',ftString,pdInput,300,eBirthPlace.Text);
-    if  cbInvalid.Checked then
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@inval',ftBoolean,pdInput,0,1) else
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@inval',ftBoolean,pdInput,0,0);
-    if  cbChildren.Checked then
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@deti',ftBoolean,pdInput,0,1)  else
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@deti',ftBoolean,pdInput,0,0);
+        if not (DateToStr(dbdteBirthDate.Value)='  .  .    ') then
+          dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@birth',ftDateTime,pdInput,0,dbdteBirthDate.Value)
+        else
+          dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@birth',ftDateTime,pdInput,0,null);
+        dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@placebirth',ftString,pdInput,300,eBirthPlace.Text);
+        if  cbInvalid.Checked then
+          dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@inval',ftBoolean,pdInput,0,1)
+          else dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@inval',ftBoolean,pdInput,0,0);
+        if  cbChildren.Checked then
+          dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@deti',ftBoolean,pdInput,0,1)
+          else dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@deti',ftBoolean,pdInput,0,0);
     if  cbJob.Checked then
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@rab',ftBoolean,pdInput,0,1) else
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@rab',ftBoolean,pdInput,0,0);
@@ -648,14 +649,24 @@ try
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@telefon',ftString,pdInput,20,ePhone.text);
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Email',ftString,pdInput,50,eEmail.Text);
 
-    if (iphoto.Picture.Graphic<>nil) and (odPhoto.FileName<>'') then
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByFile(odPhoto.FileName))
-    else
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,NULL);
+    //сохранение фото
+    if (iphoto.Picture.Graphic<>nil) then
+    begin
+      if (odPhoto.FileName<>'') then
+        dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByFile(odPhoto.FileName))
+      else
+      begin
+        stream:=TMemoryStream.Create;
+        iPhoto.Picture.Graphic.SaveToStream(stream);
+        dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByStream(stream))
+      end;
+    end
+    else dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,NULL);
 
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Pens',ftInteger,pdInput,0,Null);
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@grazd',ftInteger,pdInput,0,dbcbeCitizenship.KeyValue);
-    dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@podg',ftInteger,pdInput,0,dbcbePreparation.KeyValue);
+
+  dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Pens',ftInteger,pdInput,0,Null);
+  dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@grazd',ftInteger,pdInput,0,dbcbeCitizenship.KeyValue);
+  dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@podg',ftInteger,pdInput,0,dbcbePreparation.KeyValue);
 
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@nac',ftInteger,pdInput,0,Null);
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ob_rab',ftInteger,pdInput,0,dbcbeSocWork.KeyValue);
@@ -761,28 +772,29 @@ end;
 dmStudentActions.aspAddDoc.ExecProc;
 end;
 
-for i:=0 to AddressRecordList.Count-1 do
-begin
-with dmAdress.aspAddAddress.Parameters do
-begin
+if Assigned(AddressRecordList) then
+  for i:=0 to AddressRecordList.Count-1 do
+  begin
+    with dmAdress.aspAddAddress.Parameters do
+    begin
 
-Items[1].Value:=IDStudent;
-Items[2].Value:=TAddressRecord(AddressRecordList[i]).ikAddressType;
-Items[3].Value:=TAddressRecord(AddressRecordList[i]).Ik_street;
-Items[4].Value:=TAddressRecord(AddressRecordList[i]).Building;
-Items[5].Value:=TAddressRecord(AddressRecordList[i]).Struct;
-Items[6].Value:=TAddressRecord(AddressRecordList[i]).Flat;
-Items[7].Value:=TAddressRecord(AddressRecordList[i]).Index;
+      Items[1].Value:=IDStudent;
+      Items[2].Value:=TAddressRecord(AddressRecordList[i]).ikAddressType;
+      Items[3].Value:=TAddressRecord(AddressRecordList[i]).Ik_street;
+      Items[4].Value:=TAddressRecord(AddressRecordList[i]).Building;
+      Items[5].Value:=TAddressRecord(AddressRecordList[i]).Struct;
+      Items[6].Value:=TAddressRecord(AddressRecordList[i]).Flat;
+      Items[7].Value:=TAddressRecord(AddressRecordList[i]).Index;
 
-if TAddressRecord(AddressRecordList[i]).DateBegin<>'  .  .    ' then
- Items[8].Value:=StrToDate(TAddressRecord(AddressRecordList[i]).DateBegin)
- else Items[8].Value:=null;
- if TAddressRecord(AddressRecordList[i]).DateEnd<>'  .  .    ' then
- Items[9].Value:=StrToDate(TAddressRecord(AddressRecordList[i]).DateEnd)
- else Items[9].Value:=null;
-end;
-dmAdress.aspAddAddress.ExecProc;
-end;
+      if TAddressRecord(AddressRecordList[i]).DateBegin<>'  .  .    ' then
+        Items[8].Value:=StrToDate(TAddressRecord(AddressRecordList[i]).DateBegin)
+      else Items[8].Value:=null;
+      if TAddressRecord(AddressRecordList[i]).DateEnd<>'  .  .    ' then
+        Items[9].Value:=StrToDate(TAddressRecord(AddressRecordList[i]).DateEnd)
+      else Items[9].Value:=null;
+    end;
+    dmAdress.aspAddAddress.ExecProc;
+  end;
 
 
 end;
