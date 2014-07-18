@@ -14,7 +14,8 @@ uses
   uMethodWorkFac, DBTVMethodWorkdepobj, uMethodWorkDep, DBTVMethodWorkTeacherobj, uMethodWorkPrep,
   uShedule, uSheduleFac, uSheduleDep, DBTVFacScheduleobj, DBTVRootScheduleobj, DBTVDepScheduleobj, DBTVOKObj, uDiplomOtdKadr,
   DataProcessingSplashDialog, uAppTweaks, uLocalLogController, uAbitReturn, jpeg, VersionController, NewClientVersionDetectedFrm,
-  xmldom, XMLIntf, msxmldom, XMLDoc, uDMAbiturientNabor, ExceptionBase, CommonIntf,HOST_AddZayav, uChangeKatZach, uCertificateDialog;
+  xmldom, XMLIntf, msxmldom, XMLDoc, uDMAbiturientNabor, ExceptionBase, CommonIntf,HOST_AddZayav, uChangeKatZach, uCertificateDialog,
+  System.Actions;
 
 type
   TSearchPanelType = (sptStudent, sptPrepod, sptAbiturient, sptMethodWork, sptShedule, sptRIO, sptNone);
@@ -410,7 +411,7 @@ begin
   if Fframe<>nil then
     if (FFrame.Modified) then
     begin
-      usrAnswer := MessageBox(Handle, 'Сохранить изменения?', PAnsiChar(Application.Title), MB_YESNOCANCEL or MB_ICONQUESTION);
+      usrAnswer := MessageBox(Handle, 'Сохранить изменения?', PWideChar(Application.Title), MB_YESNOCANCEL or MB_ICONQUESTION);
       lastCancel := false;
       if usrAnswer=IDYES then
       begin
@@ -1381,7 +1382,7 @@ end;
 
 procedure TfrmMain.actDeleteStudentExecute(Sender: TObject);
 begin
-if MessageBox(Handle, PAnsiChar('Вы действительно хотите удалить студента?'), 'ИС УГТУ', MB_YESNO)=IDYES then
+if MessageBox(Handle, PWideChar('Вы действительно хотите удалить студента?'), 'ИС УГТУ', MB_YESNO)=IDYES then
   begin
   dmStudentActions.aspDelStud.Parameters.Clear;
   dmStudentActions.aspDelStud.Parameters.AddParameter;
@@ -1881,7 +1882,7 @@ begin
     end
     else
     begin
-      if MessageBox(Handle, PAnsiChar('Перейти к выбору учебного плана для группы?'),
+      if MessageBox(Handle, PWideChar('Перейти к выбору учебного плана для группы?'),
       'Для группы не назначен учебный план', MB_YESNO)=IDYES then
       begin
         frmGroupEdt:=TfrmGroupEdt.Create(self);
@@ -2391,7 +2392,7 @@ begin
     except
      ShowMessage('При получении новой версии клиента ИС УГТУ произошла ошибка!')
     end;
-    ShellExecute(Handle, nil, PAnsiChar(TApplicationController.GetInstance.IniDir+'setup.msi'), nil, nil, SW_RESTORE);
+    ShellExecute(Handle, nil, PWideChar(TApplicationController.GetInstance.IniDir+'setup.msi'), nil, nil, SW_RESTORE);
     TApplicationController.GetInstance.FinalizeApplication;
     Application.Terminate;
     end;

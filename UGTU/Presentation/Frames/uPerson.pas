@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, DBGridEh, DBCtrls,
   DBCtrlsEh, DBLookupEh, GridsEh, Mask, ComCtrls, ToolWin,DBTVHabitatsPersonObj,
-  ImgList,DBTVHostelRequestObj,DBTVHostelRootPersonobj;
+  ImgList,DBTVHostelRequestObj,DBTVHostelRootPersonobj, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh;
 
 type
   TfmPerson = class(TfmBase)
@@ -132,7 +133,7 @@ end;
 procedure TfmPerson.BTDelAdrClick(Sender: TObject);
 begin
   inherited;
- if MessageBox(Handle, PAnsiChar('Вы действительно хотите удалить адрес?'), 'ИС УГТУ', MB_YESNO)=IDYES then
+ if MessageBox(Handle, PWideChar('Вы действительно хотите удалить адрес?'), 'ИС УГТУ', MB_YESNO)=IDYES then
   begin
   dmAdress.aspDelAddress.Parameters[1].value := dmStudentSelectionProcs.aspGetPersonAddress.FieldByName('ik_personAddress').Value;
   dmAdress.aspDelAddress.ExecProc;

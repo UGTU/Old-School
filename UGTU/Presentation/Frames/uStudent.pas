@@ -7,7 +7,9 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Buttons, ToolWin, ComCtrls, ExtCtrls,
   Grids, DBGridEh, Mask, DBCtrlsEh, ImgList, DBTVStudObj, DBLookupEh, db, DBCtrls,
   ExtDlgs, jpeg, VarfileUtils, ComObj, GridsEh, ActnList, Menus, dbtvSpecobj, dbtvFacobj,
-  ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController, uAddress;
+  ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController, uAddress,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  DBAxisGridsEh;
 
 type
   TfmStudent = class(TfmBase)
@@ -183,8 +185,7 @@ type
     DBGridEh4: TDBGridEh;
     bShot: TButton;
 
-
-
+   
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
     procedure eMidExit(Sender: TObject);
@@ -226,7 +227,6 @@ type
     procedure cbSemBRSChange(Sender: TObject);
     procedure cbModuleBRSChange(Sender: TObject);
     procedure bShotClick(Sender: TObject);
-    procedure iPhotoMouseEnter(Sender: TObject);
 
   private
     Fik:integer;
@@ -254,8 +254,7 @@ var
 implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
-  uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
-  ImageFullSizeShowFrm;
+  uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost, uPhotoBooth;
 
 {$R *.dfm}
 
@@ -369,9 +368,7 @@ end;
     CreateParameter('@telefon',ftString,pdInput,20,ePhone.text);
     CreateParameter('@Email',ftString,pdInput,50,eEmail.Text);
 
-    //сохранение фото---------------------------------------------------------------------------------
     if (iphoto.Picture.Graphic<>nil) then
-    begin
       if (odPhoto.FileName<>'') then
         CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByFile(odPhoto.FileName))
       else
@@ -379,11 +376,9 @@ end;
         stream:=TMemoryStream.Create;
         iPhoto.Picture.Graphic.SaveToStream(stream);
         CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByStream(stream))
-      end;
-    end
+      end
     else
       CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,NULL);
-    //------------------------------------------------------------------------------------------------
 
     CreateParameter('@Pens',ftInteger,pdInput,0,Null);
     CreateParameter('@grazd',ftInteger,pdInput,0,dbcbeCitizenship.KeyValue);
@@ -452,8 +447,6 @@ procedure TfmStudent.DoRefreshFrame;
 begin
 if not (FrameObject is TDBNodeStudObject) then
 exit;
-
-//TApplicationController.GetInstance.Curre
 
 Floaded:=false;
 obj:=FrameObject as TDBNodeStudObject;
@@ -833,7 +826,7 @@ end;
 
 procedure TfmStudent.actDeleteAddressExecute(Sender: TObject);
 begin
-  if MessageBox(Handle, PAnsiChar('Вы действительно хотите удалить адрес?'), 'ИС УГТУ', MB_YESNO)=IDYES then
+  if MessageBox(Handle, PWideChar('Вы действительно хотите удалить адрес?'), 'ИС УГТУ', MB_YESNO)=IDYES then
   begin
   dmAdress.aspDelAddress.Parameters[1].value := dmStudentSelectionProcs.aspGetPersonAddress.FieldByName('ik_personAddress').Value;
   dmAdress.aspDelAddress.ExecProc;
@@ -1179,23 +1172,6 @@ iphoto.Picture.LoadFromFile(odPhoto.FileName);
 end;
 end;
 
-procedure TfmStudent.iPhotoMouseEnter(Sender: TObject);
-var pt :TPoint;
-begin
-   if not Assigned(iphoto.Picture.Graphic) then Exit;
-
-   pt:=iphoto.ClientToScreen(Point(0,0));
-
-   ImageFullSizeShowForm.curControl := self.iPhoto;
-   ImageFullSizeShowForm.Height := iphoto.Picture.Graphic.Height;
-   ImageFullSizeShowForm.Width := iphoto.Picture.Graphic.Width;
-   ImageFullSizeShowForm.Top := pt.Y - (ImageFullSizeShowForm.Height div 2 - iphoto.Height div 2);
-   ImageFullSizeShowForm.Left := pt.X - (ImageFullSizeShowForm.Width div 2 - iphoto.Width div 2);
-
-   ImageFullSizeShowForm.Image := iphoto.Picture.Graphic;
-   ImageFullSizeShowForm.Show;
-end;
-
 procedure TfmStudent.cbModuleBRSChange(Sender: TObject);
 begin
 sbRefreshClick(Sender);
@@ -1291,8 +1267,11 @@ begin
 end;
 
 procedure TfmStudent.bShotClick(Sender: TObject);
+  var phbooth:TPhotoBooth;
 begin
-  TApplicationController.GetInstance.GetPhotoBooth(ExtractFileDir(Application.ExeName),iPhoto);
+  phbooth:=TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
+  phbooth.MakePhoto();
+  odPhoto.FileName:=phbooth.FileName;
   Modified:=true;
   bbSave.Enabled:=true;
   bbUndo.Enabled:=true;

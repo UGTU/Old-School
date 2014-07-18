@@ -3362,7 +3362,7 @@ begin
         msgstr := '';
         for i := 0 to grupError.Count - 1 do msgstr := msgstr + grupError[i];
         ShowMessage('Не удалось распространить изменения на учебные планы следующих групп: ' + msgstr + '.');
-       {  if MessageBox(MessageHandle, PAnsiChar('Не удалось внести изменения в учебный план '+ inttostr(year_uch_plan)+ ' года. Продолжить?'),
+       {  if MessageBox(MessageHandle, PWideChar('Не удалось внести изменения в учебный план '+ inttostr(year_uch_plan)+ ' года. Продолжить?'),
 					        'ИС УГТУ', MB_YESNO)=IDNO then exit;}
       end;
     finally  //DataSet.Open;

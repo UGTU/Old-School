@@ -36,26 +36,24 @@ inherited fmAbitNabor: TfmAbitNabor
           AllowedOperations = []
           AutoFitColWidths = True
           DataSource = dsMain
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = dbgrdMainTitleClick
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object naborpage: TTabSheet
         Caption = #1054#1073#1097#1080#1077' '#1089#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1085#1072#1073#1086#1088#1077
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object nnyear: TDBText
           Left = 288
           Top = 72
@@ -221,29 +219,22 @@ inherited fmAbitNabor: TfmAbitNabor
           AllowedOperations = []
           AutoFitColWidths = True
           DataSource = DMAbiturientNabor.dsNaborList
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           ReadOnly = True
           ShowHint = True
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnDblClick = actEditNaborExecute
           OnKeyDown = naborKeyDown
           OnTitleClick = naborTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'fac'
               Footers = <>
@@ -251,6 +242,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 50
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SF'
               Footers = <>
@@ -258,24 +250,28 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 170
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'budj'
               Footers = <>
               Title.Caption = #1041#1102#1076#1078#1077#1090' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ckp'
               Footers = <>
               Title.Caption = #1062#1050#1055' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'kont'
               Footers = <>
               Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'lRussian'
               Footers = <>
@@ -284,17 +280,21 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 151
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'BeginDiapazon'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'EndDiapazon'
               Footers = <>
               Visible = False
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object statpage: TTabSheet
@@ -328,6 +328,7 @@ inherited fmAbitNabor: TfmAbitNabor
             Width = 121
             Height = 22
             Hint = #1060#1080#1083#1100#1090#1088' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1080
+            DynProps = <>
             EditButtons = <>
             Flat = True
             ParentShowHint = False
@@ -341,6 +342,7 @@ inherited fmAbitNabor: TfmAbitNabor
             Top = 0
             Width = 121
             Height = 22
+            DynProps = <>
             EditButtons = <>
             Flat = True
             ShowHint = True
@@ -400,7 +402,6 @@ inherited fmAbitNabor: TfmAbitNabor
           Top = 30
           Width = 49
           Height = 21
-          ItemHeight = 0
           TabOrder = 2
           Visible = False
         end
@@ -409,7 +410,6 @@ inherited fmAbitNabor: TfmAbitNabor
           Top = 32
           Width = 49
           Height = 21
-          ItemHeight = 0
           TabOrder = 3
           Text = 's_ik'
           Visible = False
@@ -419,7 +419,6 @@ inherited fmAbitNabor: TfmAbitNabor
           Top = 32
           Width = 49
           Height = 21
-          ItemHeight = 0
           TabOrder = 4
           Text = 'f_ik'
           Visible = False
@@ -433,25 +432,18 @@ inherited fmAbitNabor: TfmAbitNabor
           AllowedOperations = []
           AutoFitColWidths = True
           DataSource = DMAbiturientNabor.dsAbitGetPostupStatistika
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ReadOnly = True
           TabOrder = 5
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnTitleClick = dbgrdStatistikaTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'RegNomer'
               Footers = <>
@@ -459,6 +451,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 60
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'fio'
               Footers = <>
@@ -466,6 +459,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 250
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'dd_pod_zayav'
               Footers = <>
@@ -473,6 +467,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 70
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cshort_name_fac'
               Footers = <>
@@ -480,6 +475,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 60
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cname_spec'
               Footers = <>
@@ -487,6 +483,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 80
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'zach'
               Footers = <>
@@ -494,6 +491,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cmedal'
               Footers = <>
@@ -501,6 +499,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 80
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'post'
               Footers = <>
@@ -508,6 +507,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'sum_ball'
               Footers = <>
@@ -515,6 +515,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 60
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'sredBall'
               Footers = <>
@@ -522,6 +523,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 60
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'IsMain'
               Footers = <>
@@ -529,12 +531,15 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 60
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Realy_postup'
               Footers = <>
               Title.Caption = #1044#1077#1081#1089#1090#1074#1080#1090#1077#1083#1100#1085#1086
               Width = 80
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsNaborStatistik: TTabSheet
@@ -553,27 +558,20 @@ inherited fmAbitNabor: TfmAbitNabor
           AllowedOperations = []
           AutoFitColWidths = True
           DataSource = DMAbiturientNabor.dsAbitNaborStatistik
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ReadOnly = True
           RowHeight = 2
           RowLines = 1
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnTitleClick = dbgNaborStatistikTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CType_kat'
               Footers = <>
@@ -581,6 +579,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 140
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_kat_zach'
               Footers = <>
@@ -588,6 +587,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 152
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'allCount'
               Footers = <>
@@ -595,12 +595,14 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 124
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'mainCount'
               Footers = <>
               Title.Caption = #1050#1086#1083'-'#1074#1086' '#1087#1077#1088#1074#1080#1095#1085#1099#1093
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'realCount'
               Footers = <>
@@ -608,6 +610,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 124
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'currCount'
               Footers = <>
@@ -615,6 +618,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 121
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'zachCount'
               Footers = <>
@@ -622,6 +626,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 105
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'unzachCount'
               Footers = <>
@@ -630,6 +635,7 @@ inherited fmAbitNabor: TfmAbitNabor
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SredBall'
               Footers = <>
@@ -637,11 +643,14 @@ inherited fmAbitNabor: TfmAbitNabor
             end
             item
               Alignment = taRightJustify
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MinBall'
               Footers = <>
               Title.Caption = #1052#1080#1085' '#1073#1072#1083#1083
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar3: TToolBar
           Left = 0
@@ -661,6 +670,10 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsNaborDisc: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1074#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1093' '#1101#1082#1079#1072#1084#1077#1085#1086#1074
         ImageIndex = 4
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
@@ -723,34 +736,29 @@ inherited fmAbitNabor: TfmAbitNabor
           Align = alClient
           AutoFitColWidths = True
           DataSource = DMAbiturientNabor.dsNaborDiscs
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           SortLocal = True
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = dbgNaborDiscsTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cshort_name_fac'
               Footers = <>
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_spec'
               Footers = <>
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DiscName'
               Footers = <>
@@ -759,12 +767,15 @@ inherited fmAbitNabor: TfmAbitNabor
               OnDropDownBoxDrawColumnCell = dbgNaborDiscsColumns2DropDownBoxDrawColumnCell
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Min_ball'
               Footers = <>
               Width = 120
               OnUpdateData = dbgNaborDiscsColumns2UpdateData
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsExamsErrors: TTabSheet
@@ -783,33 +794,27 @@ inherited fmAbitNabor: TfmAbitNabor
           AllowedOperations = []
           AutoFitColWidths = True
           DataSource = DMAbiturientNabor.dsExamsErrors
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           ReadOnly = True
           RowHeight = 2
           RowLines = 1
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnTitleClick = dbgNaborStatistikTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ErrorName'
               Footers = <>
               Title.Caption = #1042#1080#1076' '#1086#1096#1080#1073#1082#1080
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_fac'
               Footers = <>
@@ -817,6 +822,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 74
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_spec'
               Footers = <>
@@ -824,6 +830,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 145
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cname_zach'
               Footers = <>
@@ -831,6 +838,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NameStud'
               Footers = <>
@@ -838,12 +846,15 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 252
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = #1089'name_disc'
               Footers = <>
               Title.Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
               Width = 96
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
     end
@@ -875,7 +886,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030004005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -1026,7 +1037,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020004005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1265,7 +1276,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D0030005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

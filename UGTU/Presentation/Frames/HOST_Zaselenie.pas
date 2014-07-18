@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, GridsEh, DBGridEh, ComCtrls,
-  ToolWin, ActnMan, ActnCtrls, ActnMenus, ImgList, ActnList;
+  ToolWin, ActnMan, ActnCtrls, ActnMenus, ImgList, ActnList, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmHOST_Zaselenie = class(TfmBase)
@@ -173,7 +174,7 @@ var i,idz: integer;
     RDate:tdatetime;
 begin
   TApplicationController.GetInstance.AddLogEntry('Отказ в заселении.');
-  if MessageBox(Handle, PAnsiChar('Вы действительно хотите отказать персонам в заселении?'), 'ИС УГТУ', MB_YESNO)=IDYES then
+  if MessageBox(Handle, PWideChar('Вы действительно хотите отказать персонам в заселении?'), 'ИС УГТУ', MB_YESNO)=IDYES then
   begin
     inherited;
     try

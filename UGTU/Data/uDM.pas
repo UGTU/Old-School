@@ -640,7 +640,7 @@ if dbConnect.Connected then showmessage('ВНИМАНИЕ! СОЕДИНЕНИЕ ОТКРЫТО!');
         DBConnect.Connected:=true;
       except
         raise EApplicationLoginFail.Create('Не удалось войти под именем ' + UserName, TApplicationController.GetInstance);
-        {MessageBox(0, PAnsiChar('Не удалось войти под именем ' + UserName), 'ИС "УГТУ" - Вход в систему невозможен', MB_ICONERROR);
+        {MessageBox(0, PWideChar('Не удалось войти под именем ' + UserName), 'ИС "УГТУ" - Вход в систему невозможен', MB_ICONERROR);
         TApplicationController.GetInstance.FinalizeApplication;
         Application.Terminate;
         ExitProcess($FF);}

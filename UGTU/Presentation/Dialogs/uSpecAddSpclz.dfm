@@ -126,6 +126,7 @@ inherited frmSpecAddSpclz: TfrmSpecAddSpclz
     Width = 212
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 0
@@ -138,6 +139,7 @@ inherited frmSpecAddSpclz: TfrmSpecAddSpclz
     Width = 429
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     MRUList.Limit = 150
@@ -151,6 +153,7 @@ inherited frmSpecAddSpclz: TfrmSpecAddSpclz
     Width = 212
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 1

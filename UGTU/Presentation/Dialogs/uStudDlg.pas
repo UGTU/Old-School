@@ -191,11 +191,10 @@ type
     procedure actAddAddressExecute(Sender: TObject);
     procedure actDelAddressExecute(Sender: TObject);
     procedure bShotClick(Sender: TObject);
-    procedure iPhotoMouseEnter(Sender: TObject);
 
-  private
-    Floaded:boolean;
-    spravhint: string;
+   private
+  Floaded:boolean;
+  spravhint: string;
 
     { Private declarations }
   public
@@ -211,8 +210,7 @@ var
 implementation
   uses udm,umain, ADODB,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg,
   Math, uSpravForm, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
-  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, 
-  ImageFullSizeShowFrm,ApplicationController;
+  uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, uPhotoBooth;
 {$R *.dfm}
 
 function CheckFields:boolean;
@@ -385,22 +383,24 @@ end;
 
 
 procedure TftmStudent.bShotClick(Sender: TObject);
+  var phbooth:TPhotoBooth;
 begin
-  TApplicationController.GetInstance.GetPhotoBooth(ExtractFileDir(Application.ExeName),iPhoto);
+  phbooth:=TPhotoBooth.Create('Enter - make photo, Esc - cancel',ExtractFileDir(Application.ExeName),iPhoto);
+  phbooth.MakePhoto();
+  odPhoto.FileName:=phbooth.FileName;
 end;
 
 procedure TftmStudent.eFamExit(Sender: TObject);
 var s,sm:string;
 begin
   inherited;
-  if eFam.Text<>'' then
-  begin
-    s:=eFam.Text;
-    sm:=AnsiUpperCase(s);
-    s:=AnsiLowerCase(s);
-    s[1]:=sm[1];
-    eFam.Text:=s;
-  end;
+ if eFam.Text<>'' then begin
+s:=eFam.Text;
+sm:=AnsiUpperCase(s);
+s:=AnsiLowerCase(s);
+s[1]:=sm[1];
+eFam.Text:=s;
+ end;
 end;
 
 procedure TftmStudent.eNameExit(Sender: TObject);
@@ -467,23 +467,6 @@ begin
 end;
 
 
-procedure TftmStudent.iPhotoMouseEnter(Sender: TObject);
-var pt :TPoint;
-begin
-   if not Assigned(iphoto.Picture.Graphic) then Exit;
-
-   pt:=iphoto.ClientToScreen(Point(0,0));
-
-   ImageFullSizeShowForm.curControl := self.iPhoto;
-   ImageFullSizeShowForm.Height := iphoto.Picture.Graphic.Height;
-   ImageFullSizeShowForm.Width := iphoto.Picture.Graphic.Width;
-   ImageFullSizeShowForm.Top := pt.Y - (ImageFullSizeShowForm.Height div 2 - iphoto.Height div 2);
-   ImageFullSizeShowForm.Left := pt.X - (ImageFullSizeShowForm.Width div 2 - iphoto.Width div 2);
-
-   ImageFullSizeShowForm.Image := iphoto.Picture.Graphic;
-   ImageFullSizeShowForm.Show;
-end;
-
 procedure TftmStudent.eEmailExit(Sender: TObject);
 //var s:string;
 begin
@@ -508,7 +491,6 @@ end;
 procedure TftmStudent.actApplyExecute(Sender: TObject);
 var i,code:integer;
 //s:string;
-stream: TMemoryStream;
 begin
 with dmStudentActions.aspAppendStudent.Parameters do begin
 clear;
@@ -549,20 +531,10 @@ CreateParameter('@Sottel',ftString,pdInput,50,eCellphone.Text);
 CreateParameter('@telefon',ftString,pdInput,20,ePhone.text);
 CreateParameter('@Email',ftString,pdInput,50,eEmail.Text);
 
-    //сохранение фото
-    if (iphoto.Picture.Graphic<>nil) then
-    begin
-      if (odPhoto.FileName<>'') then
-        CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByFile(odPhoto.FileName))
-      else
-      begin
-        stream:=TMemoryStream.Create;
-        iPhoto.Picture.Graphic.SaveToStream(stream);
-        CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByStream(stream))
-      end;
-    end
-    else
-      CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,NULL);
+if (iphoto.Picture.Graphic<>nil) and (odPhoto.FileName<>'') then
+  CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,CreateVariantByFile(odPhoto.FileName))
+else
+  CreateParameter('@Photo',ftVarBytes,pdInput,2147483647,NULL);
 
 CreateParameter('@Pens',ftInteger,pdInput,0,Null);
 CreateParameter('@grazd',ftInteger,pdInput,0,dbcbeCitizenship.KeyValue);

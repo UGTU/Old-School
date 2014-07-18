@@ -23,32 +23,36 @@ inherited fmABITDinamica: TfmABITDinamica
         Top = 1
         Width = 728
         Height = 498
-        BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         Legend.Alignment = laBottom
         Title.Text.Strings = (
           #1044#1080#1085#1072#1084#1080#1082#1072' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103' '#1087#1086' '#1087#1086#1083#1091)
+        BottomAxis.LabelsFormat.TextAlignment = taCenter
         BottomAxis.Title.Caption = #1043#1086#1076#1072
+        DepthAxis.LabelsFormat.TextAlignment = taCenter
+        DepthTopAxis.LabelsFormat.TextAlignment = taCenter
+        LeftAxis.LabelsFormat.TextAlignment = taCenter
         LeftAxis.Title.Caption = #1063#1080#1089#1083#1077#1085#1085#1086#1089#1090#1100
+        RightAxis.LabelsFormat.TextAlignment = taCenter
+        TopAxis.LabelsFormat.TextAlignment = taCenter
+        Zoom.Pen.Mode = pmNotXor
         Align = alClient
         TabOrder = 1
+        DefaultCanvas = 'TGDIPlusCanvas'
+        ColorPaletteIndex = 13
         object Series6: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 16744576
           Title = #1052#1091#1078#1095#1080#1085#1099
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series7: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 12615935
           Title = #1046#1077#1085#1097#1080#1085#1099
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
@@ -60,21 +64,29 @@ inherited fmABITDinamica: TfmABITDinamica
         Top = 224
         Width = 312
         Height = 272
-        BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         Legend.Visible = False
         Title.Text.Strings = (
           #1044#1080#1085#1072#1084#1080#1082#1072' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103' '#1089#1083#1091#1096#1072#1090#1077#1083#1077#1081' '#1060#1044#1055)
+        BottomAxis.LabelsFormat.TextAlignment = taCenter
+        DepthAxis.LabelsFormat.TextAlignment = taCenter
+        DepthTopAxis.LabelsFormat.TextAlignment = taCenter
+        LeftAxis.LabelsFormat.TextAlignment = taCenter
+        RightAxis.LabelsFormat.TextAlignment = taCenter
+        TopAxis.LabelsFormat.TextAlignment = taCenter
+        Zoom.Pen.Mode = pmNotXor
         Align = alCustom
         TabOrder = 2
+        DefaultCanvas = 'TGDIPlusCanvas'
         PrintMargins = (
           15
           14
           15
           14)
+        ColorPaletteIndex = 13
         object Series8: TLineSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
+          Brush.BackColor = clDefault
           Pointer.InflateMargins = True
           Pointer.Style = psRectangle
           Pointer.Visible = False
@@ -89,43 +101,45 @@ inherited fmABITDinamica: TfmABITDinamica
         Top = 1
         Width = 728
         Height = 498
-        BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         Legend.Alignment = laBottom
         Title.Text.Strings = (
           #1044#1080#1085#1072#1084#1080#1082#1072' '#1087#1086#1076#1090#1074#1077#1088#1076#1080#1074#1096#1080#1093' '#1089#1090#1072#1090#1091#1089' '#1084#1077#1076#1072#1083#1080#1089#1090#1086#1074)
+        BottomAxis.LabelsFormat.TextAlignment = taCenter
         BottomAxis.Title.Caption = #1043#1086#1076#1072
+        DepthAxis.LabelsFormat.TextAlignment = taCenter
+        DepthTopAxis.LabelsFormat.TextAlignment = taCenter
+        LeftAxis.LabelsFormat.TextAlignment = taCenter
         LeftAxis.Title.Caption = #1063#1080#1089#1083#1077#1085#1085#1086#1089#1090#1100
+        RightAxis.LabelsFormat.TextAlignment = taCenter
+        TopAxis.LabelsFormat.TextAlignment = taCenter
+        Zoom.Pen.Mode = pmNotXor
         Align = alClient
         TabOrder = 3
+        DefaultCanvas = 'TGDIPlusCanvas'
+        ColorPaletteIndex = 13
         object Series9: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 6184703
           Title = #1047#1072#1103#1074#1083#1077#1085#1086' '#1084#1077#1076#1072#1083#1080#1089#1090#1086#1074
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series10: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 8454143
           Title = #1055#1086#1076#1090#1074#1077#1088#1076#1080#1074#1096#1080#1077' '#1089#1090#1072#1090#1091#1089
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series13: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 8454016
           Title = #1047#1072#1095#1080#1089#1083#1077#1085#1086' '#1084#1077#1076#1072#1083#1080#1089#1090#1086#1074
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
@@ -137,16 +151,24 @@ inherited fmABITDinamica: TfmABITDinamica
         Top = 224
         Width = 312
         Height = 281
-        BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         Legend.Visible = False
         Title.Text.Strings = (
           #1050#1086#1085#1082#1091#1088#1089' '#1087#1086' '#1079#1072#1103#1074#1083#1077#1085#1080#1103#1084)
+        BottomAxis.LabelsFormat.TextAlignment = taCenter
+        DepthAxis.LabelsFormat.TextAlignment = taCenter
+        DepthTopAxis.LabelsFormat.TextAlignment = taCenter
+        LeftAxis.LabelsFormat.TextAlignment = taCenter
+        RightAxis.LabelsFormat.TextAlignment = taCenter
+        TopAxis.LabelsFormat.TextAlignment = taCenter
+        Zoom.Pen.Mode = pmNotXor
         Align = alCustom
         TabOrder = 4
+        DefaultCanvas = 'TGDIPlusCanvas'
+        ColorPaletteIndex = 13
         object Series11: TLineSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
+          Brush.BackColor = clDefault
           Pointer.InflateMargins = True
           Pointer.Style = psRectangle
           Pointer.Visible = False
@@ -161,16 +183,24 @@ inherited fmABITDinamica: TfmABITDinamica
         Top = 224
         Width = 312
         Height = 281
-        BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         Legend.Visible = False
         Title.Text.Strings = (
           #1044#1080#1085#1072#1084#1080#1082#1072' '#1085#1091#1078#1076#1072#1102#1097#1080#1093#1089#1103' '#1074' '#1086#1073#1097#1077#1078#1080#1090#1080#1080)
+        BottomAxis.LabelsFormat.TextAlignment = taCenter
+        DepthAxis.LabelsFormat.TextAlignment = taCenter
+        DepthTopAxis.LabelsFormat.TextAlignment = taCenter
+        LeftAxis.LabelsFormat.TextAlignment = taCenter
+        RightAxis.LabelsFormat.TextAlignment = taCenter
+        TopAxis.LabelsFormat.TextAlignment = taCenter
+        Zoom.Pen.Mode = pmNotXor
         Align = alCustom
         TabOrder = 5
+        DefaultCanvas = 'TGDIPlusCanvas'
+        ColorPaletteIndex = 13
         object Series12: TLineSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
+          Brush.BackColor = clDefault
           Pointer.InflateMargins = True
           Pointer.Style = psRectangle
           Pointer.Visible = False
@@ -185,88 +215,82 @@ inherited fmABITDinamica: TfmABITDinamica
         Top = 1
         Width = 728
         Height = 498
-        BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         LeftWall.Color = 16776946
         Legend.Alignment = laBottom
         Title.Text.Strings = (
           #1044#1080#1085#1072#1084#1080#1082#1072' '#1095#1080#1089#1083#1077#1085#1085#1086#1089#1090#1080' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074' '#1087#1086' '#1075#1086#1076#1072#1084)
+        BottomAxis.LabelsFormat.TextAlignment = taCenter
         BottomAxis.Title.Caption = #1043#1086#1076#1072
+        DepthAxis.LabelsFormat.TextAlignment = taCenter
+        DepthTopAxis.LabelsFormat.TextAlignment = taCenter
+        LeftAxis.LabelsFormat.TextAlignment = taCenter
         LeftAxis.Title.Caption = #1063#1080#1089#1083#1077#1085#1085#1086#1089#1090#1100
+        RightAxis.LabelsFormat.TextAlignment = taCenter
+        TopAxis.LabelsFormat.TextAlignment = taCenter
+        Zoom.Pen.Mode = pmNotXor
         Align = alClient
         TabOrder = 0
+        DefaultCanvas = 'TGDIPlusCanvas'
+        ColorPaletteIndex = 13
         object Series15: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 12615935
           Title = #1055#1086#1076#1072#1085#1086' '#1079#1072#1103#1074#1083#1077#1085#1080#1081
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series14: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 16744576
           Title = #1055#1086#1076#1072#1085#1086' '#1091#1085#1080#1082#1072#1083#1100#1085#1099#1093' '#1079#1072#1103#1074#1083#1077#1085#1080#1081
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series1: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 16698113
           Title = #1044#1077#1081#1089#1090#1074#1080#1090#1077#1083#1100#1085#1099#1093' '#1079#1072#1103#1074#1083#1077#1085#1080#1081
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series5: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 52736
           Title = #1042#1089#1077#1075#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1086
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series3: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 16727614
           Title = #1047#1072#1095#1080#1089#1083#1077#1085#1086' '#1085#1072' '#1082#1086#1085#1090#1088#1072#1082#1090
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series2: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 3947775
           Title = #1047#1072#1095#1080#1089#1083#1077#1085#1086' '#1085#1072' '#1062#1050#1055
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
           YValues.Order = loNone
         end
         object Series4: TBarSeries
-          Marks.Callout.Brush.Color = clBlack
           Marks.Visible = False
           SeriesColor = 5373951
           Title = #1047#1072#1095#1080#1089#1083#1077#1085#1086' '#1085#1072' '#1073#1102#1076#1078#1077#1090
-          Gradient.Direction = gdTopBottom
           XValues.Name = 'X'
           XValues.Order = loAscending
           YValues.Name = 'Bar'
@@ -359,6 +383,7 @@ inherited fmABITDinamica: TfmABITDinamica
       Top = 0
       Width = 86
       Height = 22
+      DynProps = <>
       DropDownBox.AutoDrop = True
       EditButtons = <>
       Flat = True
@@ -401,6 +426,7 @@ inherited fmABITDinamica: TfmABITDinamica
       Top = 0
       Width = 260
       Height = 22
+      DynProps = <>
       DropDownBox.AutoDrop = True
       EditButtons = <>
       Flat = True
@@ -421,7 +447,7 @@ inherited fmABITDinamica: TfmABITDinamica
     Left = 896
     Top = 40
     Bitmap = {
-      494C010103000400040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010103000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -557,6 +583,7 @@ inherited fmABITDinamica: TfmABITDinamica
       C00FDFCB8181000080079FC58181000000030002818900000001000981890000
       800087C499890000C000C70A99890000E000E81C99990000F000F000999F0000
       F801F800999F0000F801F910999F0000F801F8319FFF0000F807F9C39FFF0000
-      F807FA079FFF0000FC7FFC7FFFFF0000}
+      F807FA079FFF0000FC7FFC7FFFFF000000000000000000000000000000000000
+      000000000000}
   end
 end

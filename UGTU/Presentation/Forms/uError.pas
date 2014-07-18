@@ -70,7 +70,7 @@ end;
 procedure TfrmError.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 if (TApplicationController.GetInstance.SendExceptionReport=ssUndefined) then
-   if MessageBox(Handle, PAnsiChar('Вы хотите чтобы отчёты об ошибках по умолчанию отправлялись в техподдержку по почте?'), 'ИС УГТУ', MB_YESNO)=IDYES then
+   if MessageBox(Handle, PWideChar('Вы хотите чтобы отчёты об ошибках по умолчанию отправлялись в техподдержку по почте?'), 'ИС УГТУ', MB_YESNO)=IDYES then
    TApplicationController.GetInstance.WriteSendExceptionReportToIni(true)
    else
    TApplicationController.GetInstance.WriteSendExceptionReportToIni(false);
@@ -111,7 +111,7 @@ end;
 
 procedure TfrmError.lURLClick(Sender: TObject);
 begin
-  ShellExecute(handle, 'open', PANSIChar(lURL.Hint), '', '', SW_SHOWNORMAL);
+  ShellExecute(handle, 'open', PWideChar(lURL.Hint), '', '', SW_SHOWNORMAL);
 end;
 
 procedure TfrmError.lURLMouseEnter(Sender: TObject);

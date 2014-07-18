@@ -22,7 +22,6 @@ uses
   uPrikDlg in 'Presentation\dialogs\uPrikDlg.pas' {ftmPrikaz},
   uLangDlg in 'Presentation\dialogs\uLangDlg.pas' {ftmLangDialog},
   uRelativeDlg in 'Presentation\dialogs\uRelativeDlg.pas' {ftmAddRelative},
-  uBlankRep in 'Domain\Controllers\uBlankRep.pas' {frmRepPreview},
   uGroupEdtDlg in 'Presentation\dialogs\uGroupEdtDlg.pas' {frmGroupEdt},
   uPrik in 'Presentation\Frames\uPrik.pas' {fmPrik: TFrame},
   uAbout in 'Presentation\Forms\uAbout.pas' {frmAbout},
@@ -280,8 +279,7 @@ uses
   HOST_ZamenaRoom in 'Presentation\Dialogs\HOST_ZamenaRoom.pas' {ZamenaRoom},
   HOST_AddZayav in 'Presentation\Dialogs\HOST_AddZayav.pas' {AddZayav},
   HOST_Projivaysh in 'Presentation\Frames\HOST_Projivaysh.pas' {fmHOST_Projivaysh: TFrame},
-  HOST_ProjivayushieController in 'Domain\Controllers\HOST_ProjivayushieController.pas' {/,
-},
+  HOST_ProjivayushieController in 'Domain\Controllers\HOST_ProjivayushieController.pas' {/,},
   HOST_AddRoom in 'Presentation\Dialogs\HOST_AddRoom.pas' {AddRoom},
   HOST_PrikazNaZas in 'Domain\Reports\HOST_PrikazNaZas.pas',
   HOST_Viselit in 'Presentation\Dialogs\HOST_Viselit.pas' {Viselit},
@@ -312,8 +310,7 @@ uses
   uFindAbit in 'Presentation\Dialogs\uFindAbit.pas' {frmFindAbit},
   uNagruzkaCalcUnits in 'Presentation\Dialogs\uNagruzkaCalcUnits.pas' {frmNagruzkaCalcUnits},
   AbitVstupExams in 'Domain\Reports\AbitVstupExams.pas',
-  AbitVstupExamStatistic in 'Domain\Reports\AbitVstupExamStatistic.pas' {/,
-},
+  AbitVstupExamStatistic in 'Domain\Reports\AbitVstupExamStatistic.pas' {/,},
   uFgosController in 'Domain\Controllers\uFgosController.pas',
   uFgos in 'Presentation\Frames\uFgos.pas' {fmFgos: TFrame},
   uDMFgos in 'Data\uDMFgos.pas' {dmFgos: TDataModule},
@@ -352,8 +349,7 @@ uses
   D_AVGBalls in 'Domain\Reports\D_AVGBalls.pas',
   D_VedomostBRSLast in 'Domain\Reports\D_VedomostBRSLast.pas',
   ProcessUtils in 'Utils\ProcessUtils.pas',
-  uPhotoBooth in 'Utils\uPhotoBooth.pas',
-  ImageFullSizeShowFrm in 'Presentation\Forms\ImageFullSizeShowFrm.pas' {ImageFullSizeShowForm};
+  uPhotoBooth in 'Utils\uPhotoBooth.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -398,6 +394,5 @@ begin
   Application.CreateForm(TfmPerson, fmPerson);
   Application.CreateForm(TftmStudent, ftmStudent);
   Application.CreateForm(TdmHOST, dmHOST);
-  Application.CreateForm(TImageFullSizeShowForm, ImageFullSizeShowForm);
   Application.Run;
 end.

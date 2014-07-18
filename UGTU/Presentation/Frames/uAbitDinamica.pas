@@ -6,7 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, ComCtrls, StdCtrls, Buttons, ExtCtrls, ToolWin,
   Grids, DbUtilsEh, DBGridEh,ADODB, DB, DBCtrls, OleServer, WordXP, ExcelXP,
-  ImgList, Mask, DBCtrlsEh, Menus, TeEngine, Series, TeeProcs, Chart,
+  ImgList, Mask, DBCtrlsEh, Menus,
+  VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs,
+  VCLTee.Chart,
   DBLookupEh;
 type
   TfmABITDinamica = class(TfmBase)

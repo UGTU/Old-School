@@ -271,7 +271,6 @@ inherited ftmStudent: TftmStudent
                 Cursor = crHandPoint
                 Stretch = True
                 OnClick = iPhotoClick
-                OnMouseEnter = iPhotoMouseEnter
               end
               object Label8: TLabel
                 Left = 213
@@ -1522,7 +1521,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -152,6 +152,10 @@ inherited fmStudent: TfmStudent
         OnChange = PageControl1Change
         object TabSheet1: TTabSheet
           Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object PageControl2: TPageControl
             Left = 0
             Top = 0
@@ -166,6 +170,10 @@ inherited fmStudent: TfmStudent
             TabOrder = 0
             object TabSheet3: TTabSheet
               Caption = #1054#1073#1097#1080#1077
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -235,26 +243,21 @@ inherited fmStudent: TfmStudent
                     Height = 72
                     AutoFitColWidths = True
                     DataSource = dmStudentSelectionProcs.dsLanguages
+                    DynProps = <>
                     Flat = True
-                    FooterColor = clWindow
-                    FooterFont.Charset = DEFAULT_CHARSET
-                    FooterFont.Color = clWindowText
-                    FooterFont.Height = -11
-                    FooterFont.Name = 'Tahoma'
-                    FooterFont.Style = []
+                    FooterParams.Color = clWindow
+                    IndicatorOptions = []
                     Options = [dgEditing, dgTitles, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
                     TabOrder = 0
-                    TitleFont.Charset = DEFAULT_CHARSET
-                    TitleFont.Color = clWindowText
-                    TitleFont.Height = -11
-                    TitleFont.Name = 'Tahoma'
-                    TitleFont.Style = []
+                    object RowDetailData: TRowDetailPanelControlEh
+                    end
                   end
                   object dbcbeSchool: TDBLookupComboboxEh
                     Left = 13
                     Top = 19
                     Width = 515
                     Height = 19
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'ik_zaved'
@@ -269,6 +272,7 @@ inherited fmStudent: TfmStudent
                     Top = 100
                     Width = 141
                     Height = 19
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'Ik_kat_zach'
@@ -284,6 +288,7 @@ inherited fmStudent: TfmStudent
                     Width = 139
                     Height = 19
                     Alignment = taLeftJustify
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 3
@@ -318,6 +323,7 @@ inherited fmStudent: TfmStudent
                     Top = 141
                     Width = 141
                     Height = 19
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'Ik_prikaz'
@@ -477,7 +483,6 @@ inherited fmStudent: TfmStudent
                     Cursor = crHandPoint
                     Stretch = True
                     OnClick = iPhotoClick
-                    OnMouseEnter = iPhotoMouseEnter
                   end
                   object Label8: TLabel
                     Left = 158
@@ -491,6 +496,7 @@ inherited fmStudent: TfmStudent
                     Top = 64
                     Width = 136
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     Items.Strings = (
@@ -507,6 +513,7 @@ inherited fmStudent: TfmStudent
                     Top = 64
                     Width = 138
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     Kind = dtkDateEh
@@ -519,6 +526,7 @@ inherited fmStudent: TfmStudent
                     Top = 23
                     Width = 138
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 0
@@ -532,6 +540,7 @@ inherited fmStudent: TfmStudent
                     Top = 23
                     Width = 136
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 1
@@ -545,6 +554,7 @@ inherited fmStudent: TfmStudent
                     Top = 23
                     Width = 242
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 2
@@ -559,6 +569,7 @@ inherited fmStudent: TfmStudent
                     Width = 137
                     Height = 19
                     Alignment = taLeftJustify
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 6
@@ -571,6 +582,7 @@ inherited fmStudent: TfmStudent
                     Top = 64
                     Width = 143
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     MaxLength = 6
@@ -587,6 +599,7 @@ inherited fmStudent: TfmStudent
                     Top = 105
                     Width = 143
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 7
@@ -598,6 +611,7 @@ inherited fmStudent: TfmStudent
                     Top = 105
                     Width = 136
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 8
@@ -679,22 +693,16 @@ inherited fmStudent: TfmStudent
                     Height = 146
                     Anchors = [akLeft, akTop, akRight, akBottom]
                     DataSource = dmStudentSelectionProcs.dsGetPersonAddress
+                    DynProps = <>
                     Flat = True
-                    FooterColor = clWindow
-                    FooterFont.Charset = DEFAULT_CHARSET
-                    FooterFont.Color = clWindowText
-                    FooterFont.Height = -11
-                    FooterFont.Name = 'Tahoma'
-                    FooterFont.Style = []
+                    FooterParams.Color = clWindow
+                    IndicatorOptions = []
                     Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                     RowHeight = 18
                     TabOrder = 0
-                    TitleFont.Charset = DEFAULT_CHARSET
-                    TitleFont.Color = clWindowText
-                    TitleFont.Height = -11
-                    TitleFont.Name = 'Tahoma'
-                    TitleFont.Style = []
                     OnDblClick = actEditAddressExecute
+                    object RowDetailData: TRowDetailPanelControlEh
+                    end
                   end
                 end
               end
@@ -702,6 +710,10 @@ inherited fmStudent: TfmStudent
             object TabSheet4: TTabSheet
               Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel3: TPanel
                 Left = 0
                 Top = 0
@@ -749,6 +761,7 @@ inherited fmStudent: TfmStudent
                     Width = 509
                     Height = 19
                     Alignment = taLeftJustify
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'ik_grazd'
@@ -764,6 +777,7 @@ inherited fmStudent: TfmStudent
                     Width = 510
                     Height = 19
                     Alignment = taLeftJustify
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 1
@@ -910,6 +924,7 @@ inherited fmStudent: TfmStudent
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'Ik_podg'
@@ -925,6 +940,7 @@ inherited fmStudent: TfmStudent
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'Ik_ob_rab'
@@ -940,6 +956,7 @@ inherited fmStudent: TfmStudent
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'Ik_special_uchet'
@@ -955,6 +972,7 @@ inherited fmStudent: TfmStudent
                     Width = 157
                     Height = 19
                     Alignment = taLeftJustify
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'ik_medal'
@@ -970,6 +988,7 @@ inherited fmStudent: TfmStudent
                     Width = 331
                     Height = 19
                     Alignment = taLeftJustify
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'Ik_voen_zvanie'
@@ -998,6 +1017,7 @@ inherited fmStudent: TfmStudent
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 10
@@ -1010,6 +1030,7 @@ inherited fmStudent: TfmStudent
                     Width = 157
                     Height = 19
                     Alignment = taLeftJustify
+                    DataField = ''
                     EditButtons = <>
                     Flat = True
                     KeyField = 'Ik_pred'
@@ -1024,6 +1045,7 @@ inherited fmStudent: TfmStudent
                     Top = 202
                     Width = 45
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     MaxValue = 1000.000000000000000000
@@ -1036,6 +1058,7 @@ inherited fmStudent: TfmStudent
                     Top = 202
                     Width = 45
                     Height = 19
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     MaxValue = 11.000000000000000000
@@ -1049,6 +1072,10 @@ inherited fmStudent: TfmStudent
             object TabSheet5: TTabSheet
               Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Splitter1: TSplitter
                 Left = 0
                 Top = 25
@@ -1078,6 +1105,7 @@ inherited fmStudent: TfmStudent
                   Top = 1
                   Width = 157
                   Height = 19
+                  DataField = ''
                   EditButtons = <>
                   Flat = True
                   KeyField = 'ik_sem_pol'
@@ -1095,22 +1123,16 @@ inherited fmStudent: TfmStudent
                 Height = 403
                 Align = alClient
                 DataSource = dmStudentSelectionProcs.dsFamily
+                DynProps = <>
                 Flat = True
-                FooterColor = clWindow
-                FooterFont.Charset = DEFAULT_CHARSET
-                FooterFont.Color = clWindowText
-                FooterFont.Height = -11
-                FooterFont.Name = 'Tahoma'
-                FooterFont.Style = []
+                FooterParams.Color = clWindow
+                IndicatorOptions = []
                 Options = [dgEditing, dgTitles, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
                 RowHeight = 18
                 TabOrder = 1
-                TitleFont.Charset = DEFAULT_CHARSET
-                TitleFont.Color = clWindowText
-                TitleFont.Height = -11
-                TitleFont.Name = 'Tahoma'
-                TitleFont.Style = []
                 OnExit = dbgeFamExit
+                object RowDetailData: TRowDetailPanelControlEh
+                end
               end
               object dbgeChangeFam: TDBGridEh
                 Left = 0
@@ -1120,20 +1142,14 @@ inherited fmStudent: TfmStudent
                 Align = alBottom
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsLastnames
+                DynProps = <>
                 Flat = True
-                FooterColor = clWindow
-                FooterFont.Charset = DEFAULT_CHARSET
-                FooterFont.Color = clWindowText
-                FooterFont.Height = -11
-                FooterFont.Name = 'Tahoma'
-                FooterFont.Style = []
+                FooterParams.Color = clWindow
+                IndicatorOptions = []
                 Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                 TabOrder = 2
-                TitleFont.Charset = DEFAULT_CHARSET
-                TitleFont.Color = clWindowText
-                TitleFont.Height = -11
-                TitleFont.Name = 'Tahoma'
-                TitleFont.Style = []
+                object RowDetailData: TRowDetailPanelControlEh
+                end
               end
               object DBNavigator2: TDBNavigator
                 Left = 0
@@ -1163,6 +1179,10 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               DesignSize = (
                 705
                 555)
@@ -1170,26 +1190,20 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 26
                 Width = 705
-                Height = 486
+                Height = 490
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
+                DynProps = <>
                 Flat = True
-                FooterColor = clWindow
-                FooterFont.Charset = DEFAULT_CHARSET
-                FooterFont.Color = clWindowText
-                FooterFont.Height = -11
-                FooterFont.Name = 'Tahoma'
-                FooterFont.Style = []
+                FooterParams.Color = clWindow
+                IndicatorOptions = []
                 Options = [dgEditing, dgTitles, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
                 RowHeight = 18
                 TabOrder = 0
-                TitleFont.Charset = DEFAULT_CHARSET
-                TitleFont.Color = clWindowText
-                TitleFont.Height = -11
-                TitleFont.Name = 'Tahoma'
-                TitleFont.Style = []
                 OnExit = dbgeFamExit
+                object RowDetailData: TRowDetailPanelControlEh
+                end
               end
               object DBNavigator3: TDBNavigator
                 Left = 0
@@ -1218,6 +1232,10 @@ inherited fmStudent: TfmStudent
             object TabSheet7: TTabSheet
               Caption = #1057#1086#1073#1099#1090#1080#1103
               ImageIndex = 4
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object gbExiled: TGroupBox
                 Left = 0
                 Top = 0
@@ -1240,21 +1258,15 @@ inherited fmStudent: TfmStudent
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dmStudentSelectionProcs.dsExiles
+                  DynProps = <>
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   RowHeight = 18
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
               object gbAcadem: TGroupBox
@@ -1279,21 +1291,15 @@ inherited fmStudent: TfmStudent
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dmStudentSelectionProcs.dsAcadem
+                  DynProps = <>
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   RowHeight = 18
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
               object gbEntered: TGroupBox
@@ -1318,21 +1324,15 @@ inherited fmStudent: TfmStudent
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dmStudentSelectionProcs.dsVosst
+                  DynProps = <>
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   RowHeight = 18
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
               object gbProlongued: TGroupBox
@@ -1357,21 +1357,15 @@ inherited fmStudent: TfmStudent
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dmStudentSelectionProcs.dsExtendedSessions
+                  DynProps = <>
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   RowHeight = 18
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
               object gbCatChange: TGroupBox
@@ -1396,21 +1390,15 @@ inherited fmStudent: TfmStudent
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dmStudentSelectionProcs.dsSelKatChanges
+                  DynProps = <>
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   RowHeight = 18
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
               object gbMoved: TGroupBox
@@ -1435,21 +1423,15 @@ inherited fmStudent: TfmStudent
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dmStudentSelectionProcs.dsMoves
+                  DynProps = <>
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   RowHeight = 18
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
             end
@@ -1458,6 +1440,10 @@ inherited fmStudent: TfmStudent
         object TabSheet2: TTabSheet
           Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object DBGridEh1: TDBGridEh
             Left = 0
             Top = 26
@@ -1467,24 +1453,19 @@ inherited fmStudent: TfmStudent
             AllowedOperations = []
             AutoFitColWidths = True
             DataSource = dmUspevaemost.dsSelUspevForStud
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'Tahoma'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind, dghColumnResize, dghColumnMove]
             RowSizingAllowed = True
             SortLocal = True
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
             OnTitleClick = DBGridEh1TitleClick
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
           object Panel11: TPanel
             Left = 0
@@ -1611,6 +1592,7 @@ inherited fmStudent: TfmStudent
               Width = 82
               Height = 19
               Hint = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Items.Strings = (
@@ -1652,6 +1634,10 @@ inherited fmStudent: TfmStudent
         object tsBRSBalls: TTabSheet
           Caption = #1041#1072#1083#1083#1099' '#1087#1086' '#1084#1086#1076#1091#1083#1103#1084
           ImageIndex = 4
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel10: TPanel
             Left = 0
             Top = 0
@@ -1739,6 +1725,7 @@ inherited fmStudent: TfmStudent
               Width = 82
               Height = 19
               Hint = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Items.Strings = (
@@ -1782,6 +1769,7 @@ inherited fmStudent: TfmStudent
               Width = 82
               Height = 19
               Hint = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Items.Strings = (
@@ -1820,29 +1808,28 @@ inherited fmStudent: TfmStudent
             AllowedOperations = []
             AutoFitColWidths = True
             DataSource = dmUspevaemost.dsSelAllBRSBallsForStudent
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'Tahoma'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind, dghColumnResize, dghColumnMove]
             RowSizingAllowed = True
             SortLocal = True
             TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
             OnTitleClick = dbgeBallsTitleClick
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object TabSheet9: TTabSheet
           Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -1864,6 +1851,7 @@ inherited fmStudent: TfmStudent
               Width = 82
               Height = 19
               Hint = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Items.Strings = (
@@ -1910,30 +1898,29 @@ inherited fmStudent: TfmStudent
             AllowedOperations = []
             AutoFitColWidths = True
             DataSource = dmUspevaemost.dsGetAllNaprStud
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'Tahoma'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind, dghColumnResize, dghColumnMove]
             PopupMenu = ppmStudNapr
             RowSizingAllowed = True
             SortLocal = True
             TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
             OnTitleClick = dbgrNaprTitleClick
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
@@ -1942,27 +1929,21 @@ inherited fmStudent: TfmStudent
             Align = alClient
             AllowedOperations = []
             DataSource = dmUspevaemost.dsUspevStatForStud
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'Tahoma'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind]
+            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghDialogFind, dghColumnResize, dghColumnMove]
             ReadOnly = True
             RowSizingAllowed = True
             SortLocal = True
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
             OnTitleClick = dbgUspevStatTitleClick
             Columns = <
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'n_sem'
                 Footers = <>
@@ -1970,6 +1951,7 @@ inherited fmStudent: TfmStudent
                 Width = 80
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'ExamAVGOcenca'
                 Footers = <>
@@ -1977,6 +1959,7 @@ inherited fmStudent: TfmStudent
                 Width = 140
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'KPAVGOcenca'
                 Footers = <>
@@ -1984,12 +1967,15 @@ inherited fmStudent: TfmStudent
                 Width = 120
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'AVGOcenca'
                 Footers = <>
                 Title.Caption = #1048#1090#1086#1075#1086#1074#1099#1081' '#1089#1088'. '#1073#1072#1083#1083
                 Width = 137
               end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
       end
@@ -2019,7 +2005,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

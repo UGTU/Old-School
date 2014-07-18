@@ -20,7 +20,7 @@ uses Windows, ComObj, uError;
 procedure RaiseIntegrityErrorAndTerminate;
 begin
     MessageBox(0, 'Структура файлов системы нарушена! Попробуйте переустановить систему. Если ошибка появится снова - обратитесь в службу поддержки',
-    PANSIChar(Application.Title),MB_ICONSTOP);
+    PWideChar(Application.Title),MB_ICONSTOP);
     TApplicationController.GetInstance.FinalizeApplication;
     Application.Terminate;
 end;
@@ -217,7 +217,7 @@ try
   begin
    fsend:=TApplicationController.GetInstance.GetLogForSend;
    if TApplicationController.GetInstance.SendSupportMail('UGTU Exception: '+ErrorDescription.ErrorClass, Mail, fsend) then
-   DeleteFile(PANSIChar(fsend));
+   DeleteFile(PWideChar(fsend));
   end;
 
     logger.LogMessage('Mail dealt with');

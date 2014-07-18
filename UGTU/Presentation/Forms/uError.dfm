@@ -659,8 +659,8 @@ object frmError: TfrmError
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
     ModalResult = 1
-    TabOrder = 0
     NumGlyphs = 2
+    TabOrder = 0
   end
   object ErrorMemo: TRichEdit
     Left = 14
@@ -669,6 +669,12 @@ object frmError: TfrmError
     Height = 121
     Anchors = [akLeft, akTop, akBottom]
     Color = clBtnFace
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     ReadOnly = True
     TabOrder = 1
   end

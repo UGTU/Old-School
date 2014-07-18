@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseFrame, Menus, ActnList, Grids, DBGridEh, StdCtrls,
   ComCtrls, Buttons, DBCtrls, ToolWin, ExtCtrls, Mask, DBCtrlsEh,
   DBLookupEh, uDm, ADODB, DB, GridsEh, uQMDataModule, uQMAdminTable,
-  uQMAdminField, uQMAdminRelation, uDMAdmin;
+  uQMAdminField, uQMAdminRelation, uDMAdmin, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmUsers = class(TfmBase)
@@ -245,7 +246,7 @@ procedure TfmUsers.ChangeElement();
 begin
   if modified then
    begin
-      case (MessageBox(Handle, PAnsiChar('         Сохранить внесенные изменения?'), 'ИС Деканат', MB_YESNO)) of
+      case (MessageBox(Handle, PWideChar('         Сохранить внесенные изменения?'), 'ИС Деканат', MB_YESNO)) of
          IDYES:
             Apply;   //вызов сохранения
       end;

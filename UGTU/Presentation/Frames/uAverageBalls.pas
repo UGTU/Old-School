@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, udmUspevaemost, ComCtrls,
-  ToolWin, GridsEh, DBGridEh, ActnList, adodb, ImgList, Mask, DBCtrlsEh, math, DBTVgroupobj;
+  ToolWin, GridsEh, DBGridEh, ActnList, adodb, ImgList, Mask, DBCtrlsEh, math, DBTVgroupobj,
+  System.Actions;
 
 type
 

@@ -23,6 +23,10 @@ inherited fmGroup: TfmGroup
       OnChanging = pcMainChanging
       object tsStudents: TTabSheet
         Caption = #1057#1086#1089#1090#1072#1074' '#1075#1088#1091#1087#1087#1099
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgStudList: TDBGridEh
           Left = 0
           Top = 29
@@ -31,22 +35,16 @@ inherited fmGroup: TfmGroup
           Align = alClient
           AutoFitColWidths = True
           DataSource = DataSource1
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = dbgStudListDblClick
           OnTitleClick = dbgStudListTitleClick
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar2: TToolBar
           Left = 0
@@ -338,6 +336,10 @@ inherited fmGroup: TfmGroup
       object tsAttBRS: TTabSheet
         Caption = #1056#1091#1073#1077#1078#1085#1099#1081' '#1082#1086#1085#1090#1088#1086#1083#1100
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgrdBRSAtt: TDBGridEh
           Left = 0
           Top = 81
@@ -347,24 +349,17 @@ inherited fmGroup: TfmGroup
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
           DataSource = dmUspevaemost.dsSelAttBRSGroup
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           SortLocal = True
           TabOrder = 3
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnCellClick = dbgrdBRSAttCellClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -372,12 +367,14 @@ inherited fmGroup: TfmGroup
               Width = 156
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'KatZach'
               Footers = <>
@@ -385,6 +382,7 @@ inherited fmGroup: TfmGroup
               Width = 46
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'i_sumballs'
               Font.Charset = DEFAULT_CHARSET
@@ -397,6 +395,7 @@ inherited fmGroup: TfmGroup
               Width = 103
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ik_zach'
               Footers = <>
@@ -404,6 +403,7 @@ inherited fmGroup: TfmGroup
             end
             item
               Color = clCream
+              DynProps = <>
               EditButtons = <>
               FieldName = 'i_balls'
               Font.Charset = DEFAULT_CHARSET
@@ -417,6 +417,7 @@ inherited fmGroup: TfmGroup
             end
             item
               Color = clCream
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PropCount'
               Font.Charset = DEFAULT_CHARSET
@@ -428,6 +429,7 @@ inherited fmGroup: TfmGroup
             end
             item
               Color = clCream
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Uvag_propCount'
               Font.Charset = DEFAULT_CHARSET
@@ -438,6 +440,8 @@ inherited fmGroup: TfmGroup
               Footers = <>
               Width = 138
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object dbgrdBRSExam: TDBGridEh
           Left = 0
@@ -448,31 +452,24 @@ inherited fmGroup: TfmGroup
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
           DataSource = dmUspevaemost.dsSelBRSExamGroup
+          DynProps = <>
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           ParentFont = False
           SortLocal = True
           TabOrder = 4
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           Visible = False
           OnCellClick = dbgrdBRSAttCellClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -480,6 +477,7 @@ inherited fmGroup: TfmGroup
               Width = 156
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
@@ -487,6 +485,7 @@ inherited fmGroup: TfmGroup
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'KatZach'
               Footers = <>
@@ -494,6 +493,7 @@ inherited fmGroup: TfmGroup
               Width = 34
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'i_sumballs'
               Font.Charset = DEFAULT_CHARSET
@@ -507,6 +507,7 @@ inherited fmGroup: TfmGroup
               Width = 130
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ik_zach'
               Footers = <>
@@ -514,6 +515,7 @@ inherited fmGroup: TfmGroup
             end
             item
               Color = clCream
+              DynProps = <>
               EditButtons = <>
               FieldName = 'i_balls'
               Font.Charset = DEFAULT_CHARSET
@@ -527,6 +529,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgrdBRSExamColumns5UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'i_sumall'
               Footers = <>
@@ -535,6 +538,7 @@ inherited fmGroup: TfmGroup
             item
               Color = clCream
               DblClickNextVal = True
+              DynProps = <>
               EditButtons = <>
               FieldName = 'i_grade'
               Font.Charset = DEFAULT_CHARSET
@@ -558,6 +562,8 @@ inherited fmGroup: TfmGroup
               Width = 175
               OnUpdateData = dbgrdBRSExamColumns7UpdateData
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar3: TToolBar
           Left = 0
@@ -642,6 +648,7 @@ inherited fmGroup: TfmGroup
             Top = 2
             Width = 47
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Items.Strings = (
@@ -681,6 +688,7 @@ inherited fmGroup: TfmGroup
             Width = 348
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'Ik_ved'
@@ -696,6 +704,7 @@ inherited fmGroup: TfmGroup
             Top = 2
             Width = 79
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Items.Strings = (
@@ -745,6 +754,7 @@ inherited fmGroup: TfmGroup
               Width = 348
               Height = 19
               Anchors = [akLeft, akTop, akRight]
+              DataField = ''
               EditButtons = <>
               Flat = True
               KeyField = 'itab_n'
@@ -759,6 +769,7 @@ inherited fmGroup: TfmGroup
               Top = 4
               Width = 79
               Height = 19
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Kind = dtkDateEh
@@ -786,8 +797,6 @@ inherited fmGroup: TfmGroup
             Height = 25
             Anchors = [akTop, akRight]
             Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-            TabOrder = 0
-            OnClick = BtnCancelAttClick
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -815,6 +824,8 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+            TabOrder = 0
+            OnClick = BtnCancelAttClick
           end
           object BtnSaveAtt: TBitBtn
             Left = 521
@@ -824,7 +835,6 @@ inherited fmGroup: TfmGroup
             Action = actSaveBRS
             Anchors = [akTop, akRight]
             Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074#1077#1076#1086#1084#1086#1089#1090#1100
-            TabOrder = 1
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -853,6 +863,7 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
+            TabOrder = 1
           end
           object dbcbxCloseAtt: TDBCheckBoxEh
             Left = 0
@@ -860,10 +871,9 @@ inherited fmGroup: TfmGroup
             Width = 188
             Height = 17
             Caption = #1056#1091#1073#1077#1078#1085#1072#1103' '#1074#1077#1076#1086#1084#1086#1089#1090#1100' '#1079#1072#1082#1088#1099#1090#1072
+            DynProps = <>
             Flat = True
             TabOrder = 2
-            ValueChecked = 'True'
-            ValueUnchecked = 'False'
             Visible = False
             OnClick = dbcbxCloseAttClick
           end
@@ -881,23 +891,17 @@ inherited fmGroup: TfmGroup
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
           DataSource = dmUspevaemost.dsSelAttGroup
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          ImeMode = imDisable
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           SortLocal = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'nCode'
               Footers = <>
@@ -905,6 +909,7 @@ inherited fmGroup: TfmGroup
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -913,6 +918,7 @@ inherited fmGroup: TfmGroup
               Width = 154
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'KatZach'
               Footers = <>
@@ -922,6 +928,7 @@ inherited fmGroup: TfmGroup
               Width = 42
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
@@ -931,6 +938,7 @@ inherited fmGroup: TfmGroup
               Width = 58
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ik_zach'
               Footers = <>
@@ -940,6 +948,7 @@ inherited fmGroup: TfmGroup
             item
               AlwaysShowEditButton = True
               AutoFitColWidth = False
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cosenca'
               Footers = <>
@@ -947,6 +956,7 @@ inherited fmGroup: TfmGroup
               Width = 90
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Uvag_PropCount'
               Footers = <>
@@ -954,12 +964,15 @@ inherited fmGroup: TfmGroup
               Width = 107
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PropCount'
               Footers = <>
               Title.Caption = #1041#1077#1079' '#1091#1074#1072#1078'. '#1087#1088#1080#1095#1080#1085#1099
               Width = 107
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object Panel10: TPanel
           Left = 0
@@ -979,8 +992,6 @@ inherited fmGroup: TfmGroup
             Height = 25
             Anchors = [akTop, akRight]
             Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-            TabOrder = 0
-            OnClick = BtnCancelAttClick
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -1008,6 +1019,8 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+            TabOrder = 0
+            OnClick = BtnCancelAttClick
           end
           object bSaveAtt: TBitBtn
             Left = 521
@@ -1016,7 +1029,6 @@ inherited fmGroup: TfmGroup
             Height = 25
             Anchors = [akTop, akRight]
             Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1072#1090#1090#1077#1089#1090#1072#1094#1080#1102
-            TabOrder = 1
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -1045,6 +1057,7 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
+            TabOrder = 1
           end
           object cbAttClose: TDBCheckBoxEh
             Left = 0
@@ -1052,10 +1065,9 @@ inherited fmGroup: TfmGroup
             Width = 188
             Height = 17
             Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1100' '#1072#1090#1090#1077#1089#1090#1072#1094#1080#1080' '#1079#1072#1082#1088#1099#1090#1072
+            DynProps = <>
             Flat = True
             TabOrder = 2
-            ValueChecked = 'True'
-            ValueUnchecked = 'False'
             OnClick = cbAttCloseClick
           end
         end
@@ -1148,6 +1160,7 @@ inherited fmGroup: TfmGroup
             Width = 305
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'Ik_ved'
@@ -1164,6 +1177,7 @@ inherited fmGroup: TfmGroup
             Width = 305
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'itab_n'
@@ -1179,6 +1193,7 @@ inherited fmGroup: TfmGroup
             Top = 35
             Width = 61
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -1192,6 +1207,7 @@ inherited fmGroup: TfmGroup
             Top = 35
             Width = 68
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -1205,6 +1221,7 @@ inherited fmGroup: TfmGroup
             Top = 10
             Width = 61
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Items.Strings = (
@@ -1225,6 +1242,7 @@ inherited fmGroup: TfmGroup
             Top = 9
             Width = 68
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Items.Strings = (
@@ -1272,27 +1290,21 @@ inherited fmGroup: TfmGroup
           AllowedOperations = [alopUpdateEh]
           ColumnDefValues.ToolTips = True
           DataSource = dmUspevaemost.dsSelVedGroup
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          ImeMode = imDisable
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = pmVedomost
           SortLocal = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDrawColumnCell = dbgrdVedDrawColumnCell
           OnKeyPress = dbgrdVedKeyPress
           OnTitleClick = dbgrdVedTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'nCode'
               Footers = <>
@@ -1300,6 +1312,7 @@ inherited fmGroup: TfmGroup
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -1308,6 +1321,7 @@ inherited fmGroup: TfmGroup
               Width = 135
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'KatZach'
               Footers = <>
@@ -1316,6 +1330,7 @@ inherited fmGroup: TfmGroup
               Title.ToolTips = True
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
@@ -1324,6 +1339,7 @@ inherited fmGroup: TfmGroup
               Width = 58
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cTema'
               Footers = <>
@@ -1332,6 +1348,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgrdVedColumns4UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ik_zach'
               Footers = <>
@@ -1340,6 +1357,7 @@ inherited fmGroup: TfmGroup
             end
             item
               Checkboxes = False
+              DynProps = <>
               EditButtons = <>
               FieldName = 'dopusc'
               Footers = <>
@@ -1350,12 +1368,15 @@ inherited fmGroup: TfmGroup
             item
               AlwaysShowEditButton = True
               AutoFitColWidth = False
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cosenca'
               Footers = <>
               Title.Caption = #1054#1094#1077#1085#1082#1072
               OnUpdateData = dbgrdVedColumns7UpdateData
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar1: TToolBar
           Left = 0
@@ -1460,10 +1481,9 @@ inherited fmGroup: TfmGroup
             Width = 156
             Height = 17
             Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1100' '#1079#1072#1082#1088#1099#1090#1072
+            DynProps = <>
             Flat = True
             TabOrder = 0
-            ValueChecked = 'True'
-            ValueUnchecked = 'False'
             OnClick = dbcbxClosedClick
           end
           object btnCancelVed: TBitBtn
@@ -1473,8 +1493,6 @@ inherited fmGroup: TfmGroup
             Height = 25
             Anchors = [akTop, akRight]
             Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-            TabOrder = 1
-            OnClick = btnCancelVedClick
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -1502,6 +1520,8 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+            TabOrder = 1
+            OnClick = btnCancelVedClick
           end
           object btnSaveVed: TBitBtn
             Left = 530
@@ -1511,7 +1531,6 @@ inherited fmGroup: TfmGroup
             Action = actSaveVed
             Anchors = [akTop, akRight]
             Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074#1077#1076#1086#1084#1086#1089#1090#1100
-            TabOrder = 2
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -1540,6 +1559,7 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
+            TabOrder = 2
           end
         end
         object Panel3: TPanel
@@ -1596,6 +1616,7 @@ inherited fmGroup: TfmGroup
             Width = 327
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'itab_n'
@@ -1612,6 +1633,7 @@ inherited fmGroup: TfmGroup
             Width = 92
             Height = 19
             Anchors = [akTop, akRight]
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -1625,6 +1647,7 @@ inherited fmGroup: TfmGroup
             Top = 30
             Width = 68
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             MaxLength = 12
@@ -1639,6 +1662,7 @@ inherited fmGroup: TfmGroup
             Width = 460
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'Ik_ved'
@@ -1655,6 +1679,7 @@ inherited fmGroup: TfmGroup
             Width = 68
             Height = 19
             AutoSelect = False
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Items.Strings = (
@@ -1693,6 +1718,10 @@ inherited fmGroup: TfmGroup
       object tsNapr: TTabSheet
         Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
         ImageIndex = 3
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Panel6: TPanel
           Left = 0
           Top = 548
@@ -1712,8 +1741,6 @@ inherited fmGroup: TfmGroup
             Height = 25
             Anchors = [akTop, akRight]
             Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-            TabOrder = 0
-            OnClick = BtnCancelAttClick
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -1741,6 +1768,8 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+            TabOrder = 0
+            OnClick = BtnCancelAttClick
           end
           object BitBtn2: TBitBtn
             Left = 561
@@ -1749,7 +1778,6 @@ inherited fmGroup: TfmGroup
             Height = 25
             Anchors = [akTop, akRight]
             Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074#1077#1076#1086#1084#1086#1089#1090#1100
-            TabOrder = 1
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -1778,6 +1806,7 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
+            TabOrder = 1
           end
         end
         object dbgrdNapr: TDBGridEh
@@ -1789,26 +1818,19 @@ inherited fmGroup: TfmGroup
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
           DataSource = dmUspevaemost.dsGetAllVedNaprForDisc
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = ppmGroupNapr
           ReadOnly = True
           SortLocal = True
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = dbgrdNaprTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'lClose'
               Footers = <>
@@ -1816,6 +1838,7 @@ inherited fmGroup: TfmGroup
               Width = 51
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
@@ -1823,6 +1846,7 @@ inherited fmGroup: TfmGroup
               Width = 79
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -1830,6 +1854,7 @@ inherited fmGroup: TfmGroup
               Width = 131
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'dD_vydano'
               Footers = <>
@@ -1837,6 +1862,7 @@ inherited fmGroup: TfmGroup
               Width = 72
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cName_vid_exam'
               Footers = <>
@@ -1844,6 +1870,7 @@ inherited fmGroup: TfmGroup
               Width = 100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Dd_exam'
               Footers = <>
@@ -1851,18 +1878,21 @@ inherited fmGroup: TfmGroup
               Width = 82
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cosenca'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Otsenca'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Name_osenca'
               Footers = <>
@@ -1870,6 +1900,7 @@ inherited fmGroup: TfmGroup
               Width = 119
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ctema'
               Footers = <>
@@ -1877,6 +1908,8 @@ inherited fmGroup: TfmGroup
               Visible = False
               Width = 300
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar4: TToolBar
           Left = 0
@@ -1943,6 +1976,7 @@ inherited fmGroup: TfmGroup
             Top = 6
             Width = 68
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Items.Strings = (
@@ -1982,6 +2016,7 @@ inherited fmGroup: TfmGroup
             Width = 491
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'Name'
@@ -1997,6 +2032,10 @@ inherited fmGroup: TfmGroup
       object tshUspev: TTabSheet
         Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
         ImageIndex = 4
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object sgUspev: TStringGrid
           Left = 0
           Top = 27
@@ -2038,6 +2077,7 @@ inherited fmGroup: TfmGroup
             Top = 0
             Width = 68
             Height = 22
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Items.Strings = (
@@ -2286,6 +2326,10 @@ inherited fmGroup: TfmGroup
       object tsDiplom: TTabSheet
         Caption = #1044#1080#1087#1083#1086#1084
         ImageIndex = 5
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
@@ -2322,22 +2366,14 @@ inherited fmGroup: TfmGroup
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmDiplom.dsDiplomList
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnCellClick = dbgDiplomCellClick
           OnKeyPress = dbgDiplomKeyPress
           OnMouseDown = dbgDiplomMouseDown
@@ -2346,6 +2382,7 @@ inherited fmGroup: TfmGroup
           OnTitleClick = dbgDiplomTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -2353,6 +2390,7 @@ inherited fmGroup: TfmGroup
               Width = 80
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'RegNumber'
               Footers = <>
@@ -2362,6 +2400,7 @@ inherited fmGroup: TfmGroup
               Width = 45
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'VipNumber'
               Footers = <>
@@ -2370,6 +2409,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cTema'
               Footers = <>
@@ -2378,6 +2418,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cTeacher'
               Footers = <>
@@ -2386,6 +2427,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cosenca'
               Footers = <>
@@ -2394,6 +2436,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns5UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Dd_dipl'
               Footers = <>
@@ -2404,6 +2447,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Dd_VidDipl'
               Footers = <>
@@ -2413,6 +2457,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'PredprName'
               Footers = <>
@@ -2422,6 +2467,7 @@ inherited fmGroup: TfmGroup
             end
             item
               Checkboxes = True
+              DynProps = <>
               EditButtons = <>
               FieldName = 'IsExcellent'
               Footers = <>
@@ -2430,6 +2476,7 @@ inherited fmGroup: TfmGroup
               Width = 54
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'TypeTemaName'
               Footers = <>
@@ -2438,6 +2485,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'OverVUZ'
               Footers = <>
@@ -2447,6 +2495,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'OverVWeekCount'
               Footers = <>
@@ -2455,6 +2504,7 @@ inherited fmGroup: TfmGroup
               OnUpdateData = dbgDiplomColumns2UpdateData
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'OverVUZName'
               Footers = <>
@@ -2462,6 +2512,8 @@ inherited fmGroup: TfmGroup
               Width = 100
               OnUpdateData = dbgDiplomColumns2UpdateData
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object Panel8: TPanel
           Left = 0
@@ -2482,7 +2534,6 @@ inherited fmGroup: TfmGroup
             Action = actCancelDipl
             Anchors = [akTop, akRight]
             Caption = #1054#1090#1084#1077#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-            TabOrder = 0
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -2510,6 +2561,7 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+            TabOrder = 0
           end
           object btnSaveDiplom: TBitBtn
             Left = 521
@@ -2519,7 +2571,6 @@ inherited fmGroup: TfmGroup
             Action = actSaveDipl
             Anchors = [akTop, akRight]
             Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-            TabOrder = 1
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
               18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -2548,6 +2599,7 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
+            TabOrder = 1
           end
         end
       end
@@ -2599,7 +2651,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2772,7 +2824,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3443,7 +3495,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

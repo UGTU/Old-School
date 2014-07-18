@@ -1,19 +1,19 @@
 inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
-  Width = 741
-  Height = 507
+  Width = 451
+  Height = 305
   Align = alClient
   ExplicitWidth = 451
   ExplicitHeight = 304
   inherited Panel1: TPanel
-    Width = 741
-    Height = 470
+    Width = 451
+    Height = 268
     ExplicitWidth = 451
     ExplicitHeight = 267
     object PageZayavlenia: TPageControl
       Left = 2
       Top = 2
-      Width = 737
-      Height = 466
+      Width = 447
+      Height = 264
       ActivePage = TabSpisokZayav
       Align = alClient
       ParentShowHint = False
@@ -21,10 +21,13 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PageZayavleniaChange
-      ExplicitWidth = 447
       ExplicitHeight = 263
       object TabSpisokObj: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1086#1073#1097#1077#1078#1080#1090#1080#1081
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DBGridObj: TDBGridEh
           Left = 0
           Top = 0
@@ -33,34 +36,33 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmHOST.dsvHostel
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = [gioShowRowIndicatorEh]
           Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = DBGridObjTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NameHost'
               Footers = <>
               Title.Caption = #1053#1086#1084#1077#1088' '#1086#1073#1097#1077#1078#1080#1090#1080#1103
               Width = 351
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object TabSvedOKomn: TTabSheet
         Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1082#1086#1084#1085#1072#1090#1072#1093
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DBGridInfoRoom: TDBGridEh
           Left = 0
           Top = 0
@@ -69,23 +71,16 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmHOST.dsInfoRoom
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
           HorzScrollBar.Visible = False
+          IndicatorOptions = [gioShowRowIndicatorEh]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = DBGridInfoRoomTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'namehost'
               Footers = <>
@@ -93,6 +88,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 324
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'mest'
               Footers = <>
@@ -100,17 +96,24 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 178
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'svob'
               Footers = <>
               Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1074#1086#1073#1086#1076#1085#1099#1093' '#1084#1077#1089#1090
               Width = 189
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object TabSpisokZayav: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1079#1072#1103#1074#1086#1082
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DBGridSpisokZayav: TDBGridEh
           Left = 0
           Top = 24
@@ -119,25 +122,18 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmHOST.dsVkSpisokZayav
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = [gioShowRowIndicatorEh]
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           ReadOnly = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnTitleClick = DBGridSpisokZayavTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'FIO'
               Footers = <>
@@ -145,6 +141,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 173
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DataPodachi'
               Footers = <>
@@ -152,6 +149,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 78
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DataUtv'
               Footers = <>
@@ -159,6 +157,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 80
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NameStatusZayav'
               Footers = <>
@@ -166,6 +165,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 103
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'statusquo'
               Footers = <>
@@ -173,6 +173,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 69
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NumHostel'
               Footers = <>
@@ -180,6 +181,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 74
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'FlatNumber'
               Footers = <>
@@ -187,6 +189,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 56
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Linval'
               Footers = <>
@@ -194,12 +197,15 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 58
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'csem_pol'
               Footers = <>
               Title.Caption = #1057#1077#1084'. '#1087#1086#1083#1086#1078#1077#1085#1080#1077
               Width = 95
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar1: TToolBar
           Left = 0
@@ -244,7 +250,8 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
       object TabPredvSpisok: TTabSheet
         Caption = #1055#1088#1077#1076#1074#1072#1088#1080#1090#1077#1083#1100#1085#1099#1081' '#1089#1087#1080#1089#1086#1082
         ImageIndex = 3
-        ExplicitWidth = 439
+        ExplicitLeft = 0
+        ExplicitTop = 0
         ExplicitHeight = 232
         object ToolBar2: TToolBar
           Left = 0
@@ -293,24 +300,17 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmHOST.dsHOST_PredvSpisok
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = [gioShowRowIndicatorEh]
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnTitleClick = DBGridPredvSpisokTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'FIO'
               Footers = <>
@@ -318,6 +318,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 220
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'statusquo'
               Footers = <>
@@ -325,6 +326,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 124
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'csem_pol'
               Footers = <>
@@ -332,6 +334,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 144
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NumHostel'
               Footers = <>
@@ -339,17 +342,24 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 104
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'FlatNumber'
               Footers = <>
               Title.Caption = #8470' '#1082#1086#1084#1085#1072#1090#1099
               Width = 87
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object TabPrikaz: TTabSheet
         Caption = #1055#1088#1080#1082#1072#1079' '#1085#1072' '#1079#1072#1089#1077#1083#1077#1085#1080#1077
         ImageIndex = 4
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar3: TToolBar
           Left = 0
           Top = 0
@@ -385,24 +395,17 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmHOST.dsPrikazNaZas
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = [gioShowRowIndicatorEh]
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnTitleClick = DBGridPrikazTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NumHostel'
               Footers = <>
@@ -410,6 +413,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 106
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'FlatNumber'
               Footers = <>
@@ -417,6 +421,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 98
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'FIO'
               Footers = <>
@@ -424,6 +429,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 242
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'statusquo'
               Footers = <>
@@ -431,6 +437,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 145
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_grup'
               Footers = <>
@@ -438,19 +445,22 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
               Width = 114
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'CType_kat'
               Footers = <>
               Title.Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
               Width = 115
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
     end
   end
   inherited pnlSave: TPanel
-    Top = 470
-    Width = 741
+    Top = 268
+    Width = 451
     Visible = False
     ExplicitTop = 267
     ExplicitWidth = 451
@@ -485,7 +495,7 @@ inherited fmHOST_Zaselenie: TfmHOST_Zaselenie
     Left = 392
     Top = 176
     Bitmap = {
-      494C01014B0060005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014B006000600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

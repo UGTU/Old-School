@@ -21,6 +21,10 @@ inherited fmMethodWorkPrep: TfmMethodWorkPrep
       object TabSheet1: TTabSheet
         Caption = #1055#1083#1072#1085' '#1059#1052#1056' '#1087#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1103
         ImageIndex = 39
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -389,6 +393,7 @@ inherited fmMethodWorkPrep: TfmMethodWorkPrep
               Height = 21
               AlwaysShowBorder = True
               AutoSize = False
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 0
@@ -421,7 +426,7 @@ inherited fmMethodWorkPrep: TfmMethodWorkPrep
     Left = 575
     Top = 154
     Bitmap = {
-      494C01010A008C00180110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A008C001C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       00000000000000000000000000000000000000000000DE734A00CE734A00CE73
       4A00C66B4200C66B4200BD6B3900BD6B3900B5633900B5633900AD633900AD5A

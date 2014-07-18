@@ -48,7 +48,7 @@ for i := 0 to ErrorContent.Count - 1 do
   mErrorContent.Lines.Add(ErrorContent[i]);
 end;
 
-function SendMail(const DestName, DestAddress, Subject, Text: PChar):boolean;
+function SendMail(const DestName, DestAddress, Subject, Text: PAnsiChar):boolean;
 var
     MapiMessage: TMapiMessage;
     MapiRecipDesc: TMapiRecipDesc;
@@ -58,8 +58,8 @@ begin
     with MapiRecipDesc do
     begin
       ulRecipClass:= MAPI_TO;
-      lpszName:= PChar(DestName);
-      lpszAddress:= PChar(DestAddress);
+      lpszName:= PAnsiChar(DestName);
+      lpszAddress:= PAnsiChar(DestAddress);
       ulEIDSize:= 0;
       lpEntryID:= nil;
     end;

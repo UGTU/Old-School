@@ -8,7 +8,9 @@ uses
   ImgList, ToolWin, ActnList, Grids, DBGrids, DBGridEh, Menus, Mask,
   DBCtrlsEh, DBLookupEh, UchPlanController, GeneralController, GridsEh, DBTVSpecobj, udmUchPlan,
   uFgosController, Fgos_Application3Report, Fgos_Application5Report,
-  Fgos_Application12Report,uWaitingController, uAddDiscRelation, ConstantRepository;
+  Fgos_Application12Report,uWaitingController, uAddDiscRelation, ConstantRepository,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  DBAxisGridsEh;
 
 const FISCULTURA=10; //для особого учета зачетных единиц физической культуры
 

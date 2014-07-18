@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, DBGridEh, Mask, DBCtrlsEh,
   DBLookupEh, ComCtrls, ToolWin, uDiplOtdKardController, GridsEh,
   ADODB, DB, ActnList, DateUtils, uDMOtdKadrDiplom, DBCtrls, ApplicationController, ExceptionBase,
-  uDiplomController;
+  uDiplomController, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmDiplomOtdKadr = class(TfmBase)
@@ -269,7 +270,7 @@ begin
           tmpStr := 'Список клалификаций был изменен. Сохранить изменения?';
 
     end;
-    case MessageBox(Handle, PAnsiChar(tmpStr),'ИС "УГТУ"',
+    case MessageBox(Handle, PWideChar(tmpStr),'ИС "УГТУ"',
           MB_YESNOCANCEL)  of
      ID_YES:
         Apply;

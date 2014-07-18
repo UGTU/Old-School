@@ -1,14 +1,14 @@
 inherited fmSprav: TfmSprav
   Width = 451
-  Height = 304
+  Height = 305
   Align = alClient
   ExplicitWidth = 451
-  ExplicitHeight = 304
+  ExplicitHeight = 305
   inherited Panel1: TPanel
     Width = 451
-    Height = 267
+    Height = 268
     ExplicitWidth = 451
-    ExplicitHeight = 267
+    ExplicitHeight = 268
     object Label1: TLabel
       Left = 273
       Top = 2
@@ -20,27 +20,21 @@ inherited fmSprav: TfmSprav
       Left = 2
       Top = 33
       Width = 447
-      Height = 232
+      Height = 233
       Align = alClient
       AutoFitColWidths = True
       DataSource = dsSprav
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = [gioShowRowIndicatorEh]
       PopupMenu = pmMenu
       SortLocal = True
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       OnColExit = gSpravColExit
       OnKeyPress = gSpravKeyPress
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object ToolBar1: TToolBar
       Left = 2
@@ -115,11 +109,10 @@ inherited fmSprav: TfmSprav
         Left = 289
         Top = 0
         Width = 190
-        Height = 22
+        Height = 21
         Hint = #1042#1099#1073#1086#1088' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082#1072
         Style = csDropDownList
         Anchors = [akTop, akRight]
-        ItemHeight = 0
         Sorted = True
         TabOrder = 1
         OnChange = cbSpravChange
@@ -127,9 +120,9 @@ inherited fmSprav: TfmSprav
     end
   end
   inherited pnlSave: TPanel
-    Top = 267
+    Top = 268
     Width = 451
-    ExplicitTop = 267
+    ExplicitTop = 268
     ExplicitWidth = 451
     DesignSize = (
       451
@@ -160,10 +153,6 @@ inherited fmSprav: TfmSprav
       Action = aOpenSprav
       Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082#1080
       Default = True
-      ModalResult = 1
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 1
       Glyph.Data = {
         36040000424D3604000000000000360000002800000010000000100000000100
         20000000000000040000C40E0000C40E00000000000000000000000000000000
@@ -199,6 +188,10 @@ inherited fmSprav: TfmSprav
         E8FFE2F3F5FF6A8B9CFF00000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
+      ModalResult = 1
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
     end
     object BitBtn1: TBitBtn
       Left = 479
@@ -209,9 +202,9 @@ inherited fmSprav: TfmSprav
       Anchors = [akTop, akRight]
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '
       Default = True
+      Layout = blGlyphRight
       ModalResult = 1
       TabOrder = 3
-      Layout = blGlyphRight
     end
   end
   object dsSprav: TDataSource

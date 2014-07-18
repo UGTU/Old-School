@@ -33,7 +33,7 @@ inherited fmFgos: TfmFgos
       object Label2: TLabel
         Left = 12
         Top = 38
-        Width = 102
+        Width = 101
         Height = 13
         Caption = #1044#1072#1090#1072' '#1091#1090#1074#1077#1088#1078#1076#1077#1085#1080#1103':'
       end
@@ -61,6 +61,7 @@ inherited fmFgos: TfmFgos
         Top = 36
         Width = 193
         Height = 19
+        DynProps = <>
         EditButtons = <>
         Flat = True
         Kind = dtkDateEh
@@ -85,7 +86,7 @@ inherited fmFgos: TfmFgos
       object Label6: TLabel
         Left = 8
         Top = 6
-        Width = 210
+        Width = 208
         Height = 13
         Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1099#1081' '#1086#1073#1098#1105#1084' '#1091#1095#1077#1073#1085#1086#1081' '#1085#1072#1075#1088#1091#1079#1082#1080': '
       end
@@ -99,14 +100,14 @@ inherited fmFgos: TfmFgos
       object Label8: TLabel
         Left = 33
         Top = 38
-        Width = 179
+        Width = 177
         Height = 13
         Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1099#1081' '#1086#1073#1098#1105#1084' '#1072#1091#1076#1080#1090#1086#1088#1085#1099#1093':'
       end
       object Label9: TLabel
         Left = 32
         Top = 51
-        Width = 180
+        Width = 178
         Height = 13
         Caption = #1091#1095#1077#1073#1085#1099#1093' '#1079#1072#1085#1103#1090#1080#1081' ('#1095#1072#1089#1086#1074' '#1074' '#1085#1077#1076#1077#1083#1102')'
       end
@@ -191,7 +192,7 @@ inherited fmFgos: TfmFgos
       object Label11: TLabel
         Left = 308
         Top = 6
-        Width = 268
+        Width = 267
         Height = 13
         Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1086#1073#1098#1105#1084' '#1082#1072#1085#1080#1082#1091#1083#1103#1088#1085#1086#1075#1086' '#1074#1088#1077#1084#1077#1085#1080' '#1079#1072' '#1075#1086#1076':'
       end
@@ -205,7 +206,7 @@ inherited fmFgos: TfmFgos
       object Label13: TLabel
         Left = 303
         Top = 38
-        Width = 273
+        Width = 272
         Height = 13
         Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1099#1081' '#1086#1073#1098#1105#1084' '#1082#1072#1085#1080#1082#1091#1083#1103#1088#1085#1086#1075#1086' '#1074#1088#1077#1084#1077#1085#1080' '#1079#1072' '#1075#1086#1076':'
       end
@@ -219,7 +220,7 @@ inherited fmFgos: TfmFgos
       object Label22: TLabel
         Left = 385
         Top = 70
-        Width = 191
+        Width = 189
         Height = 13
         Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1086#1073#1098#1105#1084' '#1079#1080#1084#1085#1080#1093' '#1082#1072#1085#1080#1082#1091#1083':'
       end
@@ -254,6 +255,7 @@ inherited fmFgos: TfmFgos
         Width = 519
         Height = 19
         Anchors = [akLeft, akTop, akRight]
+        DataField = ''
         EditButtons = <>
         Flat = True
         TabOrder = 0
@@ -435,23 +437,17 @@ inherited fmFgos: TfmFgos
       Height = 303
       Align = alClient
       DataSource = dsGetCompetence
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      ImeMode = imDisable
+      IndicatorOptions = [gioShowRowIndicatorEh]
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 5
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       OnDblClick = actEditCmptncExecute
       Columns = <
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'ik_competence'
           Footers = <>
@@ -460,6 +456,7 @@ inherited fmFgos: TfmFgos
         end
         item
           Alignment = taCenter
+          DynProps = <>
           EditButtons = <>
           FieldName = 'short_Name'
           Footers = <>
@@ -468,6 +465,7 @@ inherited fmFgos: TfmFgos
           Width = 80
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'zhach_competence'
           Footers = <>
@@ -476,6 +474,8 @@ inherited fmFgos: TfmFgos
           Width = 900
           WordWrap = True
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
   end
   inherited pnlSave: TPanel
@@ -505,7 +505,7 @@ inherited fmFgos: TfmFgos
     Left = 495
     Top = 362
     Bitmap = {
-      494C010149005100400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010149005100440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3025,7 +3025,7 @@ inherited fmFgos: TfmFgos
     Left = 544
     Top = 352
     Bitmap = {
-      494C010103000400100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -4,8 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uBaseFrame, Buttons, TeEngine, Series, TeeProcs, Chart, ToolWin,
-  ComCtrls, StdCtrls, ExtCtrls,DateUtils, DBGridEh, Mask, DBCtrlsEh, DBLookupEh;
+  Dialogs, uBaseFrame, Buttons, ToolWin,
+  ComCtrls, StdCtrls, ExtCtrls,DateUtils, DBGridEh, Mask, DBCtrlsEh, DBLookupEh,
+  VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs,
+  VCLTee.Chart;
 
 type
   TfmAbitYears = class(TfmBase)

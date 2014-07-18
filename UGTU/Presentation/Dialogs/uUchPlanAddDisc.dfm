@@ -267,6 +267,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             Top = 22
             Width = 200
             Height = 21
+            DataField = ''
             EditButtons = <>
             ListSource = dsSpclz
             ParentShowHint = False
@@ -522,6 +523,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             Width = 41
             Height = 19
             AlwaysShowBorder = True
+            DynProps = <>
             EditButtons = <>
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -543,6 +545,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             Width = 41
             Height = 19
             AlwaysShowBorder = True
+            DynProps = <>
             EditButtons = <>
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -641,6 +644,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Width = 127
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 4
@@ -656,6 +660,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 0
@@ -669,6 +674,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 1
@@ -682,6 +688,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     DropDownBox.Options = [dlgColLinesEh, dlgAutoSortMarkingEh]
     EditButtons = <>
     Flat = True
@@ -696,6 +703,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     DropDownBox.Options = [dlgColLinesEh, dlgAutoSortMarkingEh]
     EditButtons = <>
     Flat = True
@@ -722,6 +730,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 8
@@ -747,6 +756,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 10
@@ -778,7 +788,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Left = 440
     Top = 560
     Bitmap = {
-      494C0101030004004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

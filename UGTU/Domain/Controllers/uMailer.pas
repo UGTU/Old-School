@@ -4,7 +4,7 @@ interface
 uses IdCustomTransparentProxy, IdSocks, IdTCPConnection, IdTCPClient,
   IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP, IdMessage,
   IdBaseComponent, IdComponent, IdIOHandler, IdIOHandlerSocket, IdAttachmentFile,
-  IdIOHandlerStack,IdEMailAddress, classes, IdGlobal, IdObjs, Dialogs, SysUtils;
+  IdIOHandlerStack,IdEMailAddress, classes, IdGlobal, Dialogs, SysUtils;
 
 type TMailer = class
   private
@@ -37,7 +37,7 @@ end;
 
 function TMailer.SendMail(Title:string;mail:TStringList;AttachedFile:string):boolean;
 var attach:TIdAttachmentFile;
-collection:TIdCollection;
+//collection:TIdCollection;
 fname:string;
 begin
   result:=false;
@@ -66,7 +66,7 @@ end;
 
 procedure TMailer.SendDelayedMail(fname: string);
 var attach:TIdAttachmentFile;
-collection:TIdCollection;
+//collection:TIdCollection;
 begin
   FIdMessage.LoadFromFile(fname);
   FIdMessage.Encoding:=meMime;

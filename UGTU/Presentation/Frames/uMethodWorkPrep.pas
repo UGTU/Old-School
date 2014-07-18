@@ -8,7 +8,7 @@ uses
   DBGridEh, ComCtrls, GridsEh, Mask, DBCtrlsEh,
   DBLookupEh, ToolWin, ActnList, ImgList, DBTVMethodWorkTeacherobj, DBTVMethodWorkdepobj,
   DBCtrls, ApplicationController, ExceptionBase, WinProcs, Grids, OleServer,
-  ExcelXP, ToolCtrlsEh, Menus, MethodWorkComboboxFilter;
+  ExcelXP, ToolCtrlsEh, Menus, MethodWorkComboboxFilter, System.Actions;
 
 const
   IID_IFilter : TGUID = '{FF82FCEB-F9F4-4F6F-A0A5-D5F9934DC29C}';

@@ -6,9 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, ComCtrls, StdCtrls, Buttons, ExtCtrls, ToolWin,
   Grids, DbUtilsEh, DBGridEh,ADODB, DB, DBCtrls, OleServer, WordXP, ExcelXP,
-  ImgList, Mask, DBCtrlsEh, Menus, TeeProcs, TeEngine, Chart, Series,
+  ImgList, Mask, DBCtrlsEh, Menus, //TeeProcs, TeEngine, Chart, Series,
   ActnList,ComObj, GridsEh, ApplicationController, ExceptionBase, DBGrids,
-  DBLookupEh;
+  DBLookupEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  System.Actions, DBAxisGridsEh;
 
 type
   TfmAbitNabor = class(TfmBase)
@@ -171,7 +172,8 @@ var
   fmAbitNabor: TfmAbitNabor;
 implementation
 
-uses   ToolCtrlsEh, AbiturientNaborProcs, AbiturientFacade,
+uses   //ToolCtrlsEh,
+AbiturientNaborProcs, AbiturientFacade,
   AbiturientBaseProcs, ABIT_add_nabor_dialog, AbiturientAbitProcs,
   AbiturientExamProcs,DBTVRecruitobj,DBTVFacRecobj,DBTVspecRecobj, uDM,
   uMain, uDMUgtuStructure, uAbitNaborController,uAbitOtchetsController,

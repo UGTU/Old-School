@@ -172,30 +172,24 @@ inherited fmUchPlan: TfmUchPlan
               Anchors = [akLeft, akTop, akRight, akBottom]
               AutoFitColWidths = True
               DataSource = dsDisc
+              DynProps = <>
               Flat = True
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'MS Sans Serif'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
               Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = PopupMenu1
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clGreen
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = []
-              TitleHeight = 20
+              TitleParams.RowHeight = 20
               OnDblClick = dbgDiscDblClick
               OnKeyDown = dbgDiscKeyDown
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
           end
           object Panel6: TPanel
@@ -592,6 +586,7 @@ inherited fmUchPlan: TfmUchPlan
           Top = 10
           Width = 401
           Height = 19
+          DataField = ''
           EditButtons = <>
           Flat = True
           TabOrder = 1
@@ -603,6 +598,7 @@ inherited fmUchPlan: TfmUchPlan
           Top = 45
           Width = 123
           Height = 19
+          DataField = ''
           EditButtons = <>
           Flat = True
           TabOrder = 2
@@ -615,6 +611,7 @@ inherited fmUchPlan: TfmUchPlan
           Width = 778
           Height = 19
           Anchors = [akLeft, akTop, akRight]
+          DataField = ''
           EditButtons = <>
           Flat = True
           TabOrder = 3
@@ -627,6 +624,7 @@ inherited fmUchPlan: TfmUchPlan
           Width = 778
           Height = 19
           Anchors = [akLeft, akTop, akRight]
+          DataField = ''
           EditButtons = <>
           Flat = True
           TabOrder = 4
@@ -672,6 +670,7 @@ inherited fmUchPlan: TfmUchPlan
             Top = 8
             Width = 137
             Height = 19
+            DataField = ''
             EditButtons = <>
             Flat = True
             TabOrder = 0
@@ -684,6 +683,7 @@ inherited fmUchPlan: TfmUchPlan
           Width = 80
           Height = 19
           Hint = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
+          DynProps = <>
           EditButtons = <>
           Flat = True
           Items.Strings = (
@@ -726,6 +726,7 @@ inherited fmUchPlan: TfmUchPlan
           Width = 279
           Height = 19
           Hint = #1042#1080#1076' '#1079#1072#1085#1103#1090#1080#1103', '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1087#1086' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1086#1090#1073#1088#1072#1078#1072#1077#1090#1089#1103
+          DynProps = <>
           EditButtons = <>
           Flat = True
           Items.Strings = (
@@ -797,6 +798,7 @@ inherited fmUchPlan: TfmUchPlan
         Top = 139
         Width = 750
         Height = 19
+        DataField = ''
         EditButtons = <>
         Flat = True
         TabOrder = 1
@@ -938,6 +940,7 @@ inherited fmUchPlan: TfmUchPlan
         Top = 6
         Width = 324
         Height = 19
+        DataField = ''
         EditButtons = <>
         Flat = True
         TabOrder = 0
@@ -989,6 +992,7 @@ inherited fmUchPlan: TfmUchPlan
         Width = 841
         Height = 19
         Anchors = [akLeft, akTop, akRight]
+        DataField = ''
         EditButtons = <>
         Flat = True
         TabOrder = 0
@@ -1043,7 +1047,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

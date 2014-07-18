@@ -60,7 +60,7 @@ procedure TfrmSprav.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    if fmSprav1.modified then
    begin
-      if (MessageBox(Handle, PAnsiChar('         Сохранить внесенные изменения?'), 'ИС "УГТУ"', MB_YESNO))=IDYES then
+      if (MessageBox(Handle, PWideChar('         Сохранить внесенные изменения?'), 'ИС "УГТУ"', MB_YESNO))=IDYES then
             fmSprav1.Apply   //вызов сохранения
       else fmSprav1.Cancel;
    end;

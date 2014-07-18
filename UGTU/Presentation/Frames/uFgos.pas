@@ -8,7 +8,8 @@ uses
   Mask, DBLookupEh, Buttons, ExtCtrls, ComCtrls, ToolWin, ImgList, ActnList,
   GeneralController, uFgosController, DBTVSpecobj, DB, uDMFgos, GridsEh,
   UchPlanController, ADODB, Menus,Fgos_Application1Report,Fgos_Application2Report,
-   Fgos_Application12Report, uWaitingController;
+   Fgos_Application12Report, uWaitingController, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmFgos = class(TfmBase)

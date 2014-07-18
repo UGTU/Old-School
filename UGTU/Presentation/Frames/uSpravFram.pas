@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, DBClient, Provider, DB, ADODB, Grids, DBGridEh,
   ExtCtrls, DBCtrls, StdCtrls, ImgList, ComCtrls, ToolWin, Buttons,
-  ActnList, Menus, GridsEh;
+  ActnList, Menus, GridsEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmSprav = class(TfmBase)
@@ -376,7 +377,7 @@ begin
    on E: Exception do
    begin
       str:='Выбранный справочник отсутствует в системе!' + #10#13 + 'Ошибка: ' + E.Message;
-      MessageBox(Handle, PAnsiChar(str),'ИС "УГТУ"',MB_OK);
+      MessageBox(Handle, PWideChar(str),'ИС "УГТУ"',MB_OK);
       cbSprav.ItemIndex:=1;
       ChangeSprav;
    end;
@@ -436,7 +437,7 @@ begin
 
 	   if modified then
 	   begin
-		  case (MessageBox(Handle, PAnsiChar('         Сохранить внесенные изменения?'), 'ИС "УГТУ"', MB_YESNOCANCEL)) of
+		  case (MessageBox(Handle, PWideChar('         Сохранить внесенные изменения?'), 'ИС "УГТУ"', MB_YESNOCANCEL)) of
 			 IDYES:
 				Apply;   //вызов сохранения
 			 IDCANCEL:
@@ -509,7 +510,7 @@ begin
 				 begin
 				   try
 					  str:='В поле '''+gSprav.Columns.Items[k].Title.Caption+''' не введено значение ! Операция отменена.';
-					  MessageBox(Handle, PAnsiChar(str),'ИС "УГТУ"',MB_OK);
+					  MessageBox(Handle, PWideChar(str),'ИС "УГТУ"',MB_OK);
 					  cdsSprav.Cancel;
 					  Abort;
 					  j:=j+1;
@@ -535,7 +536,7 @@ begin
 				  str:='Введенное в поле '''+gSprav.Columns.Items[k].Title.Caption+''' значение '''+gSprav.Fields[k].AsString+
 							   ''' отсутствует в справочнике '''+
 							   ZavTab[i].SpravName+'''! Операция отменена.';
-				  MessageBox(Handle, PAnsiChar(str),'ИС "УГТУ"',MB_OK);
+				  MessageBox(Handle, PWideChar(str),'ИС "УГТУ"',MB_OK);
 				   cdsSprav.Cancel;
 				   Abort;
 				end
@@ -623,7 +624,7 @@ begin
             str:='Введенное в поле '''+gSprav.Columns.Items[num].Title.Caption+''' значение '''+gSprav.Fields[num].AsString+
                            ''' отсутствует в справочнике '''+
                            ZavTab[i].SpravName+'''! Будет возвращено прежнее значение.';
-            MessageBox(Handle, PAnsiChar(str),'ИС "УГТУ"',MB_OK);
+            MessageBox(Handle, PWideChar(str),'ИС "УГТУ"',MB_OK);
             cdsSprav.Edit;
             if (tSprav.Locate(cdsSprav.Fields[0].FieldName,
                   cdsSprav.Fields[0].Value,[loCaseInsensitive]))

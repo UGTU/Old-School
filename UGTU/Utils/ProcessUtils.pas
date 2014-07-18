@@ -108,8 +108,8 @@ begin
   if (CreateProcess(nil, PChar(FCommandLine), nil, nil, false, 0, nil, nil, si, FProcessInfo)) then
   begin
     CloseHandle(FProcessInfo.hThread);
-    Assert(RegisterWaitForSingleObject(FWaitHandle, FProcessInfo.hProcess, WaitCallback,
-      Self, INFINITE, WT_EXECUTELONGFUNCTION or WT_EXECUTEONLYONCE));
+    //Assert(RegisterWaitForSingleObject(FWaitHandle, FProcessInfo.hProcess, WaitCallback,
+    //  Self, INFINITE, WT_EXECUTELONGFUNCTION or WT_EXECUTEONLYONCE));
   end;
 end;
 

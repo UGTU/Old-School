@@ -79,6 +79,12 @@ object frmMain: TfrmMain
     ColorMap.BtnSelectedColor = clBtnFace
     ColorMap.UnusedColor = clWhite
     Constraints.MinHeight = 26
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     Spacing = 1
   end
   object Panel1: TPanel
@@ -134,6 +140,7 @@ object frmMain: TfrmMain
       Top = 4
       Width = 118
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Items.Strings = (
@@ -149,6 +156,7 @@ object frmMain: TfrmMain
       Top = 4
       Width = 205
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'Ik_zach'
@@ -182,6 +190,7 @@ object frmMain: TfrmMain
       Top = 3
       Width = 118
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Items.Strings = (
@@ -199,6 +208,7 @@ object frmMain: TfrmMain
       Top = 3
       Width = 205
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'itab_n'
@@ -379,7 +389,7 @@ object frmMain: TfrmMain
     object ActionToolBar2: TActionToolBar
       Left = 0
       Top = 0
-      Width = 152
+      Width = 150
       Height = 26
       ActionManager = ActionManager1
       Align = alLeft
@@ -387,6 +397,12 @@ object frmMain: TfrmMain
       ColorMap.HighlightColor = clWhite
       ColorMap.BtnSelectedColor = clBtnFace
       ColorMap.UnusedColor = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Spacing = 0
     end
   end
@@ -996,7 +1012,7 @@ object frmMain: TfrmMain
     Left = 311
     Top = 82
     Bitmap = {
-      494C01014A006800740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014A0068007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3515,7 +3531,7 @@ object frmMain: TfrmMain
     Left = 278
     Top = 82
     Bitmap = {
-      494C010131004900740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101310049007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF

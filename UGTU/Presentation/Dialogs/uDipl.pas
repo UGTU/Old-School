@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh,
-  DBCtrlsEh, DBLookupEh, Mask;
+  DBCtrlsEh, DBLookupEh, Mask, System.Actions;
 
 type
   TfrmDiplom = class(TfrmBaseDialog)
@@ -56,7 +56,7 @@ var
 
 implementation
 
-uses uDM, uBlankRep, ComObj, DB, uDMStudentData, udmDiplom;
+uses uDM, ComObj, DB, uDMStudentData, udmDiplom;
 
 {$R *.dfm}
 function GetNextCellVert(cur: String): String;

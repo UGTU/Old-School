@@ -121,7 +121,7 @@ end;
 
 procedure TfrmAbout.lSiteClick(Sender: TObject);
 begin
-  ShellExecute(Handle, nil, PAnsiChar(TApplicationController.GetInstance.SupportSite), nil, nil, SW_RESTORE);
+  ShellExecute(Handle, nil, PWideChar(TApplicationController.GetInstance.SupportSite), nil, nil, SW_RESTORE);
 end;
 
 end.

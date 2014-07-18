@@ -30,24 +30,18 @@ inherited fmAcadem: TfmAcadem
       Align = alClient
       AutoFitColWidths = True
       DataSource = dmStudentData.dsAcadem
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       PopupMenu = ppmAcadem
       RowHeight = 16
       TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       OnDblClick = actEditAcademExecute
       OnTitleClick = dbgeAcademTitleClick
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
   end
   inherited pnlSave: TPanel

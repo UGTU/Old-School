@@ -25,15 +25,14 @@ private
 public
   constructor Create(PhotographedName:string; workingDir:string); overload;
   constructor Create(PhotographedName:string; workingDir:string; ImgView:TImage);overload;
+
   function MakePhoto:TGraphic;
+
+  property FileName: string read GetPathForShot;
 
 end;
 
-var pBooth: TPhotoBooth;
-
 implementation
-
-
 
 
 function GetMyDoc : string;
@@ -54,7 +53,6 @@ end;
 
 constructor TPhotoBooth.Create(PhotographedName: string; workingDir:string);
 begin
-
    if PhotographedName<>'' then
    FPhotographedName:=PhotographedName else
    FPhotographedName:=defname;
@@ -93,6 +91,7 @@ end;
 function TPhotoBooth.MakePhoto: TGraphic;
 begin
   FCurrentPath := GetPathForShot;
+
   FProcess := TProcessHelper.Create(Format('"%s" "%s" "%s"', [FWorkingDir+ccipath, FCurrentPath, FPhotographedName]));
   FProcess.OnProcessExit := OnProcessExit;
   FProcess.Start;
@@ -101,18 +100,19 @@ end;
 
 procedure TPhotoBooth.OnProcessExit(Sender: TObject; Code: DWORD);
 begin
+if FImgView<>nil then
+    FImgView.Picture.Assign(nil);
 
   if (Code = 0) then
   begin
     FCurrentImage := TJPEGImage.Create;
     FCurrentImage.LoadFromFile(FCurrentPath);
     if FImgView<>nil then
-      FImgView.Picture.Assign(FCurrentImage);
+    FImgView.Picture.Assign(FCurrentImage);
   end;
   FProcess.Free;
   FProcess := nil;
-  pBooth.Free;
-  pBooth := nil;
+  self.Free;
 end;
 
 end.

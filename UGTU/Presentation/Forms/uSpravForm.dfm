@@ -42,7 +42,6 @@ object frmSprav: TfrmSprav
       Anchors = [akTop, akRight]
       Caption = #1054#1090#1084#1077#1085#1072
       Default = True
-      TabOrder = 0
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
         18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -70,6 +69,7 @@ object frmSprav: TfrmSprav
         FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
         FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+      TabOrder = 0
     end
     object BitBtn1: TBitBtn
       Left = 413
@@ -80,7 +80,6 @@ object frmSprav: TfrmSprav
       Anchors = [akTop, akRight]
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '
       Default = True
-      TabOrder = 1
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
         18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -109,6 +108,7 @@ object frmSprav: TfrmSprav
         FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       Layout = blGlyphRight
+      TabOrder = 1
     end
   end
   object Panel1: TPanel
@@ -138,8 +138,6 @@ object frmSprav: TfrmSprav
         inherited gSprav: TDBGridEh
           Width = 578
           Height = 434
-          FooterFont.Name = 'MS Sans Serif'
-          TitleFont.Name = 'MS Sans Serif'
         end
         inherited ToolBar1: TToolBar
           Width = 578

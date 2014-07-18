@@ -22,6 +22,10 @@ inherited fmSpec: TfmSpec
       object tsGroups: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1075#1088#1091#1087#1087
         ImageIndex = 38
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object DBGridEh1: TDBGridEh
           Left = 0
           Top = 22
@@ -30,53 +34,52 @@ inherited fmSpec: TfmSpec
           Align = alClient
           AutoFitColWidths = True
           DataSource = DataSource1
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           SortLocal = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = DBGridEh1DblClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_grup'
               Footers = <>
               ToolTips = True
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Ik_grup'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'nYear_post'
               Footers = <>
               ToolTips = True
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DateCreate'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'DateExit'
               Footers = <>
               Visible = False
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar1: TToolBar
           Left = 0
@@ -130,6 +133,10 @@ inherited fmSpec: TfmSpec
       object tsSpclz: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1089#1087#1077#1094#1080#1072#1083#1080#1079#1072#1094#1080#1081
         ImageIndex = 19
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgSpclz: TDBGridEh
           Left = 0
           Top = 22
@@ -138,24 +145,17 @@ inherited fmSpec: TfmSpec
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsSpclz
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           SortLocal = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = dbgSpclzDblClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cName_spclz'
               Footers = <>
@@ -164,12 +164,14 @@ inherited fmSpec: TfmSpec
               Width = 80
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cName_spclz_short'
               Footers = <>
               Title.Caption = #1053#1072#1079#1074#1072#1085#1080#1077' ('#1089#1086#1082#1088#1072#1097#1077#1085#1085#1086#1077')'
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Csh_spclz'
               Footers = <>
@@ -177,17 +179,21 @@ inherited fmSpec: TfmSpec
               ToolTips = True
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'iK_spclz'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ik_spec'
               Footers = <>
               Visible = False
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar2: TToolBar
           Left = 0
@@ -230,6 +236,10 @@ inherited fmSpec: TfmSpec
         Font.Style = []
         ImageIndex = 39
         ParentFont = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         DesignSize = (
           924
           674)
@@ -385,7 +395,7 @@ inherited fmSpec: TfmSpec
                 end
                 inherited Panel2: TPanel
                   Width = 921
-                  Height = 388
+                  Height = 387
                   ExplicitWidth = 921
                   ExplicitHeight = 388
                   inherited Splitter1: TSplitter
@@ -521,7 +531,7 @@ inherited fmSpec: TfmSpec
           end
           inherited ImageList1: TImageList
             Bitmap = {
-              494C010108000C004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010108000C00500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003000000001002000000000000030
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -1022,7 +1032,7 @@ inherited fmSpec: TfmSpec
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -1166,6 +1176,8 @@ inherited fmSpec: TfmSpec
       object TabSheet2: TTabSheet
         Caption = #1060#1043#1054#1057
         ImageIndex = 5
+        ExplicitTop = 27
+        ExplicitHeight = 675
         inline fmFgos1: TfmFgos
           Left = 0
           Top = 0
@@ -1175,12 +1187,12 @@ inherited fmSpec: TfmSpec
           Constraints.MinWidth = 648
           TabOrder = 0
           ExplicitWidth = 924
-          ExplicitHeight = 674
+          ExplicitHeight = 675
           inherited Panel1: TPanel
             Width = 924
             Height = 637
             ExplicitWidth = 924
-            ExplicitHeight = 637
+            ExplicitHeight = 638
             inherited Panel2: TPanel
               Width = 920
               ExplicitWidth = 920
@@ -1233,7 +1245,7 @@ inherited fmSpec: TfmSpec
           end
           inherited imgFgos: TImageList
             Bitmap = {
-              494C010149005100780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C0101490051007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003001000001002000000000000030
               0100000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -3750,7 +3762,7 @@ inherited fmSpec: TfmSpec
           end
           inherited imgCmptnc: TImageList
             Bitmap = {
-              494C010103000400480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C0101030004004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -3894,6 +3906,10 @@ inherited fmSpec: TfmSpec
       object tsWorkPlan: TTabSheet
         Caption = #1056#1072#1073#1086#1095#1080#1077' '#1087#1083#1072#1085#1099' '#1075#1088#1091#1087#1087
         ImageIndex = 6
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         inline fmUchPlan2: TfmUchPlan
           Left = 0
           Top = 0
@@ -4012,7 +4028,7 @@ inherited fmSpec: TfmSpec
                 end
                 inherited Panel2: TPanel
                   Width = 921
-                  Height = 388
+                  Height = 387
                   ExplicitWidth = 921
                   ExplicitHeight = 388
                   inherited Splitter1: TSplitter
@@ -4049,14 +4065,12 @@ inherited fmSpec: TfmSpec
                 end
                 inherited dbcbCklDisc: TDBLookupComboboxEh
                   Height = 22
-                  ExplicitWidth = 778
                   ExplicitHeight = 22
                 end
                 inherited dbcbGrpDisc: TDBLookupComboboxEh
                   Top = 112
                   Height = 22
                   ExplicitTop = 112
-                  ExplicitWidth = 778
                   ExplicitHeight = 22
                 end
                 inherited Panel8: TPanel
@@ -4168,7 +4182,7 @@ inherited fmSpec: TfmSpec
           end
           inherited ImageList1: TImageList
             Bitmap = {
-              494C010108000C004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010108000C00500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003000000001002000000000000030
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -4656,7 +4670,7 @@ inherited fmSpec: TfmSpec
     Left = 265
     Top = 221
     Bitmap = {
-      494C01010B000E00380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010B000E003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000009B9C93FF363733FF2E2E2BFF2E2E
       2BFF32322FFF282823FF00000000363632FF2C2C2AFF30312DFF979794FF0000

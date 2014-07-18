@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, uDMStudentData, uWaitingController, Menus, ActnList, D_AcademReport,
-  GridsEh, DBGridEh, ComCtrls, ToolWin, DBTVFacObj, DBTVSpecObj, uMain, uAcadem, udmPrikaz, udmCauses, udmUGTUStructure;
+  GridsEh, DBGridEh, ComCtrls, ToolWin, DBTVFacObj, DBTVSpecObj, uMain, uAcadem, udmPrikaz, udmCauses, udmUGTUStructure,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  DBAxisGridsEh;
 
 type
   TfmAcadem = class(TfmBase)

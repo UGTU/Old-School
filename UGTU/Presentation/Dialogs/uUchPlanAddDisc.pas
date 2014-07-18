@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, Buttons, ExtCtrls, ADODB, DB, UchPlanController,
   Grids,uUchPlan, DBGrids, ActnList, AppEvnts, Mask, DBCtrlsEh, DBGridEh,
-  DBLookupEh, GeneralController, ImgList, ComCtrls, ToolWin;
+  DBLookupEh, GeneralController, ImgList, ComCtrls, ToolWin, System.Actions;
 
 type
   PEdit = ^TEdit;
@@ -690,7 +690,7 @@ begin
         for i := 0 to ds.RecordCount - 1 do
           msStr := msStr + ds.FieldByName('cName_spclz').AsString + #13;
         msStr := msStr + #13 + 'Вы хотите их объединить в одну дисциплину?';
-        isMerge := MessageBox(Handle, PAnsiChar(msStr), 'Объединение дисциплин',
+        isMerge := MessageBox(Handle, PWideChar(msStr), 'Объединение дисциплин',
                MB_YESNO) = IDYES;
       end;
 

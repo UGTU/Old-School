@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, GridsEh, Buttons, ComCtrls, ToolWin, StdCtrls,
   Mask, DBCtrlsEh, DBLookupEh, ActnList, ExtCtrls, MethodWorkController, GeneralController,
-  DB, DateUtils, ImgList, DBTables, ShellAPI, WordXP, ComObj;
+  DB, DateUtils, ImgList, DBTables, ShellAPI, WordXP, ComObj, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type
   TfrmMethodWorkAddPlan = class(TfrmBaseDialog)
@@ -260,7 +261,7 @@ begin
         StrPCopy(Buffer, frmMethodWorkHyperLink.dbeAdress.Text);
         fs.Write(Buffer[0], StrLen(Buffer)); }
 
-        (dbgFile.DataSource.DataSet.FieldByName('File') as TBlobField).Value:= frmMethodWorkHyperLink.dbeAdress.Text;
+        //(dbgFile.DataSource.DataSet.FieldByName('File') as TBlobField).Value:= frmMethodWorkHyperLink.dbeAdress.Text;
         //(dbgFile.DataSource.DataSet.FieldByName('File') as TBlobField).LoadFromStream(fs);
 
       finally

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, Mask,
-  DBCtrlsEh, ADODB, DB, UchPlanController;
+  DBCtrlsEh, ADODB, DB, UchPlanController, System.Actions;
 
 type
   TfrmSpecAddSpclz = class(TfrmBaseDialog)
@@ -45,7 +45,7 @@ begin
 end;
 
 function TfrmSpecAddSpclz.DoCancel: boolean;
-var msg1:PAnsiChar;
+var msg1:PWideChar;
 begin
      case(dirIK) of
         1:msg1:='Изменение профиля';

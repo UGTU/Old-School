@@ -8,7 +8,7 @@ inherited fmAbitYears: TfmAbitYears
     Width = 654
     Height = 443
     ExplicitWidth = 654
-    ExplicitHeight = 441
+    ExplicitHeight = 443
     object ToolBar1: TToolBar
       Left = 2
       Top = 2
@@ -137,6 +137,7 @@ inherited fmAbitYears: TfmAbitYears
         Top = 0
         Width = 194
         Height = 22
+        DataField = ''
         EditButtons = <>
         Flat = True
         KeyField = 'IDReport'
@@ -151,6 +152,7 @@ inherited fmAbitYears: TfmAbitYears
         Top = 0
         Width = 193
         Height = 22
+        DynProps = <>
         EditButtons = <>
         Flat = True
         Items.Strings = (
@@ -182,7 +184,6 @@ inherited fmAbitYears: TfmAbitYears
       Width = 650
       Height = 248
       Hint = #1053#1072' '#1087#1072#1085#1077#1083#1100
-      BackWall.Brush.Color = clWhite
       BackWall.Brush.Style = bsClear
       Legend.Alignment = laBottom
       Legend.Visible = False
@@ -191,31 +192,39 @@ inherited fmAbitYears: TfmAbitYears
       BottomAxis.DateTimeFormat = 'dd/mm/yyyy'
       BottomAxis.Increment = 1.000000000000000000
       BottomAxis.LabelsAngle = 90
+      BottomAxis.LabelsFormat.TextAlignment = taCenter
       BottomAxis.MinorTickCount = 2
+      DepthAxis.LabelsFormat.TextAlignment = taCenter
+      DepthTopAxis.LabelsFormat.TextAlignment = taCenter
       LeftAxis.Automatic = False
       LeftAxis.AutomaticMaximum = False
       LeftAxis.AutomaticMinimum = False
+      LeftAxis.LabelsFormat.TextAlignment = taCenter
       LeftAxis.LabelStyle = talValue
       LeftAxis.Maximum = 50.000000000000000000
       LeftAxis.Title.Caption = #1095#1080#1089#1083#1077#1085#1085#1086#1089#1090#1100' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
+      RightAxis.LabelsFormat.TextAlignment = taCenter
+      TopAxis.LabelsFormat.TextAlignment = taCenter
       View3D = False
+      Zoom.Pen.Mode = pmNotXor
       Align = alTop
-      Enabled = False
       ParentShowHint = False
+      Enabled = False
       ShowHint = True
       TabOrder = 1
       Anchors = [akLeft, akTop, akRight, akBottom]
-      ExplicitHeight = 246
+      DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
         18
         15
         18)
+      ColorPaletteIndex = 13
       object Series1: TLineSeries
-        Marks.Callout.Brush.Color = clBlack
         Marks.Visible = False
         SeriesColor = clBlue
         Title = #1055#1086#1076#1072#1085#1086' '#1079#1072#1103#1074#1083#1077#1085#1080#1081
+        Brush.BackColor = clDefault
         LinePen.Width = 2
         Pointer.InflateMargins = True
         Pointer.Style = psRectangle
@@ -227,9 +236,9 @@ inherited fmAbitYears: TfmAbitYears
         YValues.Order = loNone
       end
       object Series2: TLineSeries
-        Marks.Callout.Brush.Color = clBlack
         Marks.Visible = False
         Title = #1047#1072#1073#1088#1072#1083#1080' '#1076#1086#1082#1091#1084#1077#1085#1090#1099
+        Brush.BackColor = clDefault
         LinePen.Width = 2
         Pointer.InflateMargins = True
         Pointer.Style = psRectangle
@@ -240,9 +249,9 @@ inherited fmAbitYears: TfmAbitYears
         YValues.Order = loNone
       end
       object Series3: TLineSeries
-        Marks.Callout.Brush.Color = clBlack
         Marks.Visible = False
         Title = #1044#1077#1081#1089#1090#1074#1080#1090#1077#1083#1100#1085#1099#1093' '#1079#1072#1103#1074#1083#1077#1085#1080#1081
+        Brush.BackColor = clDefault
         LinePen.Width = 2
         Pointer.InflateMargins = True
         Pointer.Style = psRectangle
@@ -260,7 +269,6 @@ inherited fmAbitYears: TfmAbitYears
       Width = 650
       Height = 191
       Hint = #1053#1072' '#1087#1072#1085#1077#1083#1100
-      BackWall.Brush.Color = clWhite
       BackWall.Brush.Style = bsClear
       Legend.Alignment = laBottom
       Legend.Visible = False
@@ -271,27 +279,37 @@ inherited fmAbitYears: TfmAbitYears
       BottomAxis.Increment = 1.000000000000000000
       BottomAxis.Labels = False
       BottomAxis.LabelsAngle = 90
+      BottomAxis.LabelsFormat.Visible = False
+      BottomAxis.LabelsFormat.TextAlignment = taCenter
       BottomAxis.MinorTickCount = 2
+      DepthAxis.LabelsFormat.TextAlignment = taCenter
+      DepthTopAxis.LabelsFormat.TextAlignment = taCenter
+      LeftAxis.LabelsFormat.TextAlignment = taCenter
       LeftAxis.LabelStyle = talValue
       LeftAxis.Title.Caption = #1087#1088#1080#1088#1086#1089#1090' '#1095#1080#1089#1083#1077#1085#1085#1086#1089#1090#1080' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
+      RightAxis.LabelsFormat.TextAlignment = taCenter
+      TopAxis.LabelsFormat.TextAlignment = taCenter
       View3D = False
+      Zoom.Pen.Mode = pmNotXor
       Align = alBottom
       BevelOuter = bvNone
-      Enabled = False
       ParentShowHint = False
+      Enabled = False
       ShowHint = True
       TabOrder = 2
-      ExplicitTop = 248
+      ExplicitTop = 252
+      DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
         36
         15
         36)
+      ColorPaletteIndex = 13
       object LineSeries1: TLineSeries
-        Marks.Callout.Brush.Color = clBlack
         Marks.Visible = False
         SeriesColor = clBlue
         Title = #1055#1086#1076#1072#1085#1086' '#1079#1072#1103#1074#1083#1077#1085#1080#1081
+        Brush.BackColor = clDefault
         LinePen.Width = 2
         Pointer.InflateMargins = True
         Pointer.Style = psRectangle
@@ -303,9 +321,9 @@ inherited fmAbitYears: TfmAbitYears
         YValues.Order = loNone
       end
       object LineSeries2: TLineSeries
-        Marks.Callout.Brush.Color = clBlack
         Marks.Visible = False
         Title = #1047#1072#1073#1088#1072#1083#1080' '#1076#1086#1082#1091#1084#1077#1085#1090#1099
+        Brush.BackColor = clDefault
         LinePen.Width = 2
         Pointer.InflateMargins = True
         Pointer.Style = psRectangle
@@ -316,9 +334,9 @@ inherited fmAbitYears: TfmAbitYears
         YValues.Order = loNone
       end
       object LineSeries3: TLineSeries
-        Marks.Callout.Brush.Color = clBlack
         Marks.Visible = False
         Title = #1044#1077#1081#1089#1090#1074#1080#1090#1077#1083#1100#1085#1099#1093' '#1079#1072#1103#1074#1083#1077#1085#1080#1081
+        Brush.BackColor = clDefault
         LinePen.Width = 2
         Pointer.InflateMargins = True
         Pointer.Style = psRectangle
@@ -335,7 +353,7 @@ inherited fmAbitYears: TfmAbitYears
     Top = 443
     Width = 654
     Visible = False
-    ExplicitTop = 441
+    ExplicitTop = 443
     ExplicitWidth = 654
     inherited bbSave: TBitBtn
       Left = 485

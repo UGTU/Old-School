@@ -32,6 +32,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     OnChanging = pcOtdKadrChanging
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
@@ -40,22 +44,14 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
         Align = alClient
         AutoFitColWidths = True
+        DynProps = <>
         Flat = True
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'Tahoma'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
         OnCellClick = dbgStudListCellClick
         OnMouseDown = dbgStudListMouseDown
         OnMouseMove = dbgStudListMouseMove
@@ -63,6 +59,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         OnTitleClick = dbgStudListTitleClick
         Columns = <
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'StudName'
             Footers = <>
@@ -71,6 +68,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             Width = 195
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'RegNumber'
             Footers = <>
@@ -80,6 +78,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgStudListColumns1UpdateData
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'VipNumber'
             Footers = <>
@@ -88,6 +87,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgStudListColumns1UpdateData
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'Dd_dipl'
             Footers = <>
@@ -98,12 +98,15 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           end
           item
             Checkboxes = True
+            DynProps = <>
             EditButtons = <>
             FieldName = 'IsExcellent'
             Footers = <>
             Title.Caption = #1057' '#1086#1090#1083#1080#1095#1080#1077#1084
             OnUpdateData = dbgStudListColumns1UpdateData
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
       object ToolBar1: TToolBar
         Left = 0
@@ -150,6 +153,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Width = 265
           Height = 22
           Hint = #1092#1072#1082#1091#1083#1100#1090#1077#1090
+          DataField = ''
           EditButtons = <>
           Flat = True
           KeyField = 'Ik_fac'
@@ -166,6 +170,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Width = 300
           Height = 22
           Hint = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
+          DataField = ''
           EditButtons = <>
           Flat = True
           KeyField = 'ik_spec_fac'
@@ -182,6 +187,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Width = 98
           Height = 22
           Hint = #1043#1088#1091#1087#1087#1072
+          DataField = ''
           EditButtons = <>
           Flat = True
           ParentShowHint = False
@@ -195,6 +201,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
@@ -204,25 +214,18 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         Align = alClient
         AutoFitColWidths = True
         DataSource = dmOtdKadrDiplom.dsGakMember
+        DynProps = <>
         Flat = True
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'Tahoma'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
         OnKeyDown = dbgMemberGakKeyDown
         Columns = <
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'specName'
             Footers = <>
@@ -231,6 +234,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgMemberGakColumns0UpdateData
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'GakMemberName'
             Footers = <>
@@ -240,11 +244,14 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgMemberGakColumns0UpdateData
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'ik_year'
             Footers = <>
             Visible = False
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
       object ToolBar3: TToolBar
         Left = 0
@@ -300,6 +307,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Width = 155
           Height = 22
           Hint = #1043#1086#1076' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1100#1089#1090#1074#1072' '#1074' '#1043#1040#1050
+          DataField = ''
           EditButtons = <>
           Flat = True
           ParentShowHint = False
@@ -313,6 +321,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
@@ -322,26 +334,19 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         Align = alClient
         AutoFitColWidths = True
         DataSource = dmOtdKadrDiplom.dsQualification
+        DynProps = <>
         Flat = True
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'Tahoma'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
         OnKeyDown = dbgMemberGakKeyDown
         OnTitleClick = dbgQualifTitleClick
         Columns = <
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'Cname_spec'
             Footers = <>
@@ -350,6 +355,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgQualifColumns1UpdateData
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'Cshort_spec'
             Footers = <>
@@ -358,6 +364,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgQualifColumns1UpdateData
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'Cname_qualif'
             Footers = <>
@@ -367,6 +374,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgQualifColumns1UpdateData
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'QualifShortName'
             Footers = <>
@@ -374,6 +382,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             Width = 50
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'Spec'#1057'ategory'
             Footers = <>
@@ -381,6 +390,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             Width = 50
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'Sh_spec'
             Footers = <>
@@ -388,6 +398,8 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             Width = 50
             OnUpdateData = dbgQualifColumns1UpdateData
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
     end
   end

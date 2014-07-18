@@ -8,7 +8,9 @@ uses
   ADODB, Grids, DBGridEh, uMain, Mask, DBCtrlsEh, DBLookupEh, DateUtils,
   ImgList, ActnList, GridsEh, ComObj, uUspevGroupController, uDMStudentData,
   Menus, uNaprRegisterDialog, ReportsBase, uWaitingController,
-  ApplicationController, D_GrupUspevForStipend, uDMUchPlan, uAverageBalls, DBTVSpecObj;
+  ApplicationController, D_GrupUspevForStipend, uDMUchPlan, uAverageBalls, DBTVSpecObj,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  DBAxisGridsEh;
 
 type
   TfmGroup = class(TfmBase)
@@ -385,7 +387,7 @@ var
 
 implementation
 
-uses uDM, uBlankRep, DBTVgroupObj, DBTVFacObj, uStudInfo,
+uses uDM, DBTVgroupObj, DBTVFacObj, uStudInfo,
   uRaports, uGroupEdtDlg, uVinEkz, uDMGroupActions, uDMUspevaemost,
   uDMUgtuStructure, uNaprClose, uNapr,
   Conditions, CorrectDatatypeChecks, Parser, uDiplomController,
@@ -598,7 +600,7 @@ begin
                 ' семестра по '+
                 dmUspevaemost.adospGetAllAtt.FieldByName('cName_Disc').Value+
                 ' были изменены. Сохранить изменения?';
-    if MessageBox(Handle, PAnsiChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
+    if MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
     then
       btnSaveAtt.Click
     else
@@ -658,7 +660,7 @@ begin
                 ' семестра по '+
                 dmUspevaemost.adospGetAllAtt.FieldByName('cName_Disc').Value+
                 ' были изменены. Сохранить изменения?';
-    if MessageBox(Handle, PAnsiChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
+    if MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
     then
       btnSaveAtt.Click
     else
@@ -925,7 +927,7 @@ begin
                 ' семестра по '+
                 discName+
                 ' были изменены. Сохранить изменения?';
-    case MessageBox(Handle, PAnsiChar(tmpStr), 'ИС УГТУ', MB_YESNOCANCEL) of
+    case MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNOCANCEL) of
       IDYES:
          actSaveVedExecute(nil);
       IDNO:
@@ -1226,7 +1228,7 @@ begin
                 ' семестра по '+
                 dmUspevaemost.adospGetAllAtt.FieldByName('cName_Disc').Value+
                 ' были изменены. Сохранить изменения?';
-    if MessageBox(Handle, PAnsiChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
+    if MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
     then
       bSaveAtt.Click
     else
@@ -1290,7 +1292,7 @@ begin
                 ' семестра по '+
                 dmUspevaemost.adospGetAllAtt.FieldByName('cName_Disc').Value+
                 ' были изменены. Сохранить изменения?';
-    if MessageBox(Handle, PAnsiChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
+    if MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
     then
       btnSaveAtt.Click
     else
@@ -1390,7 +1392,7 @@ begin
                 ' семестра по '+
                 dmUspevaemost.adospGetAllAtt.FieldByName('cName_Disc').Value+
                 ' были изменены. Сохранить изменения?';
-    if MessageBox(Handle, PAnsiChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
+    if MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
     then
       bSaveAtt.Click
     else
@@ -1982,7 +1984,7 @@ begin
   if (length(Text)<MinRegNlen) and  (length(Text)<>0) then
   begin
     MessageStr:= 'Регистрационный номер диплома должен состоять минимум из '+IntToStr(MinRegNlen)+' цифр!';
-    Application.MessageBox(PAnsiChar(MessageStr), 'Подсистема "Деканат"', MB_ICONWARNING);
+    Application.MessageBox(PWideChar(MessageStr), 'Подсистема "Деканат"', MB_ICONWARNING);
     {else
       Text:= ''; }
     //Value:= null;
@@ -2751,7 +2753,7 @@ begin
       str:=TUspevGroupController.Instance.GetEnableVidZanyats(nSem, ik, ikVidZan);
       if str<>'' then
       begin   //можно создавать экзаменационные
-        MessageBox(Handle, PAnsiChar(str), 'ИС УГТУ', MB_OK);
+        MessageBox(Handle, PWideChar(str), 'ИС УГТУ', MB_OK);
       end;
       end;
   end;
@@ -3179,7 +3181,7 @@ begin
                 ' семестра по '+
                 dmUspevaemost.adospGetAllVeds4Group.FieldByName('cName_Disc').Value+
                 ' были изменены. Сохранить изменения?';
-    if MessageBox(Handle, PAnsiChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
+    if MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNO)=IDYES
     then
       btnSaveVed.Click
     else
@@ -3231,7 +3233,7 @@ begin
     if (flAreChanged) then
     begin
       studNames:= 'Студенты '+studNames+' не были удалены из ведомости, потому что у них есть оценка. Если нужно их удалить, предварительно удалите оценки';
-      MessageBox(Handle, PAnsiChar(studNames),'ИС Деканат',MB_OK);
+      MessageBox(Handle, PWideChar(studNames),'ИС Деканат',MB_OK);
     end;
     finally
       tempStoredProc.Free;

@@ -261,6 +261,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Height = 21
           AlwaysShowBorder = True
           AutoSize = False
+          DataField = ''
           EditButtons = <>
           Flat = True
           TabOrder = 0
@@ -274,6 +275,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Height = 46
           AlwaysShowBorder = True
           AutoSize = False
+          DataField = ''
           DropDownBox.AutoFitColWidths = False
           DropDownBox.ColumnDefValues.EndEllipsis = True
           DropDownBox.ColumnDefValues.Title.EndEllipsis = True
@@ -336,6 +338,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Height = 21
           AlwaysShowBorder = True
           AutoSize = False
+          DataField = ''
           EditButtons = <>
           Flat = True
           TabOrder = 4
@@ -349,6 +352,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Height = 21
           AlwaysShowBorder = True
           AutoSize = False
+          DataField = ''
           EditButtons = <>
           Flat = True
           TabOrder = 5
@@ -361,6 +365,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
         Width = 474
         Height = 46
         AutoSize = False
+        DynProps = <>
         EditButtons = <>
         MaxLength = 200
         TabOrder = 1
@@ -373,6 +378,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
         Top = 200
         Width = 237
         Height = 21
+        DynProps = <>
         EditButtons = <>
         TabOrder = 2
         Text = '1'
@@ -591,21 +597,15 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsState
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object dbcCurrentEd: TDBCheckBoxEh
@@ -614,9 +614,8 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
         Width = 97
         Height = 17
         Caption = #1048#1079#1076#1072#1077#1090#1089#1103
+        DynProps = <>
         TabOrder = 4
-        ValueChecked = 'True'
-        ValueUnchecked = 'False'
         OnClick = dbeNameEdChange
       end
       object dbcEd: TDBCheckBoxEh
@@ -625,10 +624,9 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
         Width = 97
         Height = 17
         Caption = #1048#1079#1076#1072#1077#1090#1089#1103
+        DynProps = <>
         Enabled = False
         TabOrder = 5
-        ValueChecked = 'True'
-        ValueUnchecked = 'False'
       end
       object Panel4: TPanel
         Left = 106
@@ -840,21 +838,15 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsUchPlan
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
     end
@@ -957,6 +949,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Top = 15
           Width = 474
           Height = 21
+          DynProps = <>
           EditButtons = <>
           MaxLength = 50
           TabOrder = 0
@@ -969,6 +962,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Width = 474
           Height = 46
           AutoSize = False
+          DynProps = <>
           EditButtons = <>
           MaxLength = 500
           TabOrder = 1
@@ -980,6 +974,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Top = 94
           Width = 474
           Height = 21
+          DynProps = <>
           EditButtons = <>
           MaxLength = 50
           TabOrder = 2
@@ -991,6 +986,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Top = 121
           Width = 474
           Height = 21
+          DynProps = <>
           EditButtons = <>
           TabOrder = 3
           Visible = True
@@ -1207,21 +1203,15 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
             Align = alClient
             AutoFitColWidths = True
             DataSource = dsCoautor
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
             Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object Panel13: TPanel
@@ -1262,21 +1252,15 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
             Align = alClient
             AutoFitColWidths = True
             DataSource = dsDiscEd
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
             Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
           object Panel14: TPanel
             Left = 480
@@ -1457,6 +1441,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Top = 347
           Width = 474
           Height = 21
+          DynProps = <>
           EditButtons = <>
           MaxLength = 15
           TabOrder = 6
@@ -1468,6 +1453,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Top = 319
           Width = 474
           Height = 21
+          DynProps = <>
           EditButtons = <>
           TabOrder = 7
           Visible = True
@@ -1521,44 +1507,40 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsFile
+          DynProps = <>
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           Font.Style = []
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = [gioShowRowIndicatorEh]
           ParentFont = False
           ParentShowHint = False
           ShowHint = False
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
           OnDblClick = dbgFileDblClick
           OnDrawColumnCell = dbgFileDrawColumnCell
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'NameFile'
               Footers = <>
               Width = 100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'TypeFile'
               Footers = <>
               ReadOnly = True
               Width = 20
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object Panel7: TPanel
           Left = 569
@@ -1799,7 +1781,7 @@ inherited frmMethodWorkAddPlan: TfrmMethodWorkAddPlan
     Left = 480
     Top = 344
     Bitmap = {
-      494C010101000400B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101000400BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

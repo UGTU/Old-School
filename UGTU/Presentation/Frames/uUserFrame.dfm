@@ -20,6 +20,10 @@ inherited fmUsers: TfmUsers
       OnChange = pcAdminChange
       object tsUsers: TTabSheet
         Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1080
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object gUser: TDBGridEh
           Left = 0
           Top = 31
@@ -28,21 +32,15 @@ inherited fmUsers: TfmUsers
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsElemUsers
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = [gioShowRowIndicatorEh]
           PopupMenu = pmMenu
           SortLocal = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar1: TToolBar
           Left = 0
@@ -109,6 +107,7 @@ inherited fmUsers: TfmUsers
             Width = 199
             Height = 22
             Hint = #1042#1099#1073#1086#1088' '#1087#1086#1076#1089#1080#1089#1090#1077#1084#1099
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'ik_element'
@@ -124,6 +123,10 @@ inherited fmUsers: TfmUsers
       object tsEvents: TTabSheet
         Caption = #1046#1091#1088#1085#1072#1083' '#1089#1086#1073#1099#1090#1080#1081
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object gEvent: TDBGridEh
           Left = 0
           Top = 25
@@ -132,22 +135,16 @@ inherited fmUsers: TfmUsers
           Align = alClient
           AutoFitColWidths = True
           DataSource = DMAdmin.dsEvent
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = [gioShowRowIndicatorEh]
           ReadOnly = True
           SortLocal = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = gEventTitleClick
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar2: TToolBar
           Left = 0
@@ -185,6 +182,7 @@ inherited fmUsers: TfmUsers
             Width = 74
             Height = 19
             Hint = #1053#1072#1095#1072#1083#1086' '#1087#1077#1088#1080#1086#1076#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072' '#1078#1091#1088#1085#1072#1083#1072
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -209,6 +207,7 @@ inherited fmUsers: TfmUsers
             Width = 80
             Height = 19
             Hint = #1050#1086#1085#1077#1094' '#1087#1077#1088#1080#1086#1076#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072' '#1078#1091#1088#1085#1072#1083#1072
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -223,6 +222,7 @@ inherited fmUsers: TfmUsers
             Width = 186
             Height = 19
             Hint = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1086#1073#1098#1077#1082#1090#1072#1084' '#1072#1091#1076#1080#1090#1072
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'ObjectID'
@@ -239,6 +239,7 @@ inherited fmUsers: TfmUsers
             Width = 186
             Height = 19
             Hint = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1074#1080#1076#1072#1084' '#1086#1087#1077#1088#1072#1094#1080#1080
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'OperationTypeID'
@@ -255,6 +256,7 @@ inherited fmUsers: TfmUsers
             Width = 186
             Height = 19
             Hint = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103#1084
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'UserName'
@@ -270,6 +272,10 @@ inherited fmUsers: TfmUsers
       object TabSheet1: TTabSheet
         Caption = #1052#1072#1089#1090#1077#1088' '#1079#1072#1087#1088#1086#1089#1086#1074
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object PageControl1: TPageControl
           Left = 0
           Top = 0
@@ -281,6 +287,10 @@ inherited fmUsers: TfmUsers
           TabOrder = 0
           object TabSheet2: TTabSheet
             Caption = #1057#1091#1097#1085#1086#1089#1090#1080
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             DesignSize = (
               815
               412)
@@ -426,29 +436,27 @@ inherited fmUsers: TfmUsers
               Height = 385
               Anchors = [akLeft, akTop, akRight, akBottom]
               DataSource = dsTables
+              DynProps = <>
               Flat = True
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'Tahoma'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              IndicatorOptions = [gioShowRowIndicatorEh]
               Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
               PopupMenu = ppmEntity
               ReadOnly = True
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -11
-              TitleFont.Name = 'Tahoma'
-              TitleFont.Style = []
               OnDblClick = actEditTableExecute
               OnTitleClick = dbgeEntityTitleClick
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
           end
           object TabSheet3: TTabSheet
             Caption = #1055#1086#1083#1103
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             DesignSize = (
               815
               412)
@@ -594,29 +602,27 @@ inherited fmUsers: TfmUsers
               Height = 380
               Anchors = [akLeft, akTop, akRight, akBottom]
               DataSource = dsFields
+              DynProps = <>
               Flat = True
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'Tahoma'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              IndicatorOptions = [gioShowRowIndicatorEh]
               Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
               PopupMenu = ppmFields
               ReadOnly = True
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -11
-              TitleFont.Name = 'Tahoma'
-              TitleFont.Style = []
               OnDblClick = actEditFieldExecute
               OnTitleClick = dbgeFieldsTitleClick
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
           end
           object TabSheet4: TTabSheet
             Caption = #1057#1074#1103#1079#1080
             ImageIndex = 2
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             DesignSize = (
               815
               412)
@@ -765,22 +771,16 @@ inherited fmUsers: TfmUsers
               Anchors = [akLeft, akTop, akRight, akBottom]
               AutoFitColWidths = True
               DataSource = dsRelations
+              DynProps = <>
               Flat = True
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'Tahoma'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              IndicatorOptions = [gioShowRowIndicatorEh]
               Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
               ReadOnly = True
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -11
-              TitleFont.Name = 'Tahoma'
-              TitleFont.Style = []
               OnTitleClick = dbgeRelationsTitleClick
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
           end
         end

@@ -17,7 +17,8 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Buttons, ToolWin, ComCtrls, ExtCtrls, DB,
   ADODB, Grids, DBGridEh, uUchPlan, ImgList, ActnList, DateUtils, UchPlanController,
   GridsEh, uAcademFrame, udmStudentData, udmUspevaemost, uAverageBalls, uFgos,
-  uFgosController, ConstantRepository;
+  uFgosController, ConstantRepository, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmSpec = class(TfmBase)
@@ -95,7 +96,7 @@ var
 implementation
 
 uses uDM, uGroupEdtDlg, uMain, DBTVgroupObj, DBTVSpecObj, DBTVFacObj,
-  ToolCtrlsEh, uSpecAddSpclz, uDMGroupActions, ApplicationController;
+  uSpecAddSpclz, uDMGroupActions, ApplicationController;
 
 {$R *.dfm}
 
@@ -378,7 +379,7 @@ end;
 procedure TfmSpec.actDelSpclzExecute(Sender: TObject);
 var
   tempStoredProc: TADOStoredProc;
-  msg1, msg2: PAnsiChar;
+  msg1, msg2: PWideChar;
 begin
   inherited;
    case(directionIK) of

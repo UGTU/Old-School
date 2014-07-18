@@ -165,7 +165,7 @@ begin
         // special parameters
       HH_GET_LAST_ERROR: ; // ignore
     else
-      FHtmlHelpFunction(FHelpManager.GetHandle, PChar(HelpFile), uCommand,
+      FHtmlHelpFunction(FHelpManager.GetHandle, PAnsiChar(HelpFile), uCommand,
         dwData);
     end;
   end;
