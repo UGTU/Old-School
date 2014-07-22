@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uStudent, DBGridEh, ExtDlgs, ImgList, StdCtrls, Buttons, ADODB,
   ExtCtrls, DBCtrlsEh, DBCtrls, Mask, DBLookupEh, Grids, ComCtrls, ToolWin,
-  GridsEh, ActnList, Menus, uDMAbiturientAction;
+  GridsEh, ActnList, Menus, uDMAbiturientAction, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmAbitCard = class(TfmStudent)

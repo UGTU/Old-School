@@ -152,10 +152,6 @@ inherited fmStudent: TfmStudent
         OnChange = PageControl1Change
         object TabSheet1: TTabSheet
           Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object PageControl2: TPageControl
             Left = 0
             Top = 0
@@ -170,10 +166,6 @@ inherited fmStudent: TfmStudent
             TabOrder = 0
             object TabSheet3: TTabSheet
               Caption = #1054#1073#1097#1080#1077
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -1191,7 +1183,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 26
                 Width = 705
-                Height = 485
+                Height = 483
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -2006,7 +1998,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C0101060009005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

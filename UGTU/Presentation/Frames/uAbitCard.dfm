@@ -38,26 +38,19 @@ inherited fmAbitCard: TfmAbitCard
     inherited ToolButton14: TToolButton
       Visible = False
     end
-    object ToolButton15: TToolButton [11]
-      Left = 253
-      Top = 0
-      Action = frmMain.actGazpromStatement
-    end
     inherited ToolButton1: TToolButton
-      Left = 276
       Action = frmMain.actListToExcel
-      ExplicitLeft = 276
     end
     inherited ToolButton11: TToolButton
-      Left = 299
       Action = frmMain.actPostupDlgShow
-      ExplicitLeft = 299
     end
     inherited ToolButton12: TToolButton
-      Left = 322
       Visible = False
-      ExplicitLeft = 322
-      ExplicitWidth = 38
+    end
+    object ToolButton15: TToolButton
+      Left = 337
+      Top = 0
+      Action = frmMain.actGazpromStatement
     end
   end
   inherited Panel1: TPanel
@@ -70,10 +63,7 @@ inherited fmAbitCard: TfmAbitCard
         Width = 565
         ExplicitWidth = 565
         inherited TabSheet1: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited PageControl2: TPageControl
             Width = 557
             ExplicitWidth = 557
@@ -387,6 +377,7 @@ inherited fmAbitCard: TfmAbitCard
                     Width = 512
                     Height = 19
                     Alignment = taLeftJustify
+                    DynProps = <>
                     EditButtons = <>
                     Flat = True
                     TabOrder = 14
@@ -422,7 +413,10 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet6: TTabSheet
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 549
+              ExplicitHeight = 0
               inherited dbgeDocuments: TDBGridEh
                 Left = 1
                 Top = 29
@@ -483,6 +477,10 @@ inherited fmAbitCard: TfmAbitCard
             object TabSheet8: TTabSheet
               Caption = #1055#1086#1089#1090#1091#1087#1083#1077#1085#1080#1077
               ImageIndex = 5
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object GroupBox2: TGroupBox
                 Left = 0
                 Top = 0
@@ -505,20 +503,14 @@ inherited fmAbitCard: TfmAbitCard
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dm.dsAbitExamView
+                  DynProps = <>
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
               object GroupBox5: TGroupBox
@@ -543,22 +535,16 @@ inherited fmAbitCard: TfmAbitCard
                   Align = alClient
                   AutoFitColWidths = True
                   DataSource = dmAbiturientAction.dsAbitOtherlSpec
+                  DynProps = <>
                   Enabled = False
                   Flat = True
-                  FooterColor = clWindow
-                  FooterFont.Charset = DEFAULT_CHARSET
-                  FooterFont.Color = clWindowText
-                  FooterFont.Height = -11
-                  FooterFont.Name = 'MS Sans Serif'
-                  FooterFont.Style = []
+                  FooterParams.Color = clWindow
+                  IndicatorOptions = []
                   Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                   TabOrder = 0
-                  TitleFont.Charset = DEFAULT_CHARSET
-                  TitleFont.Color = clWindowText
-                  TitleFont.Height = -11
-                  TitleFont.Name = 'MS Sans Serif'
-                  TitleFont.Style = []
                   OnCellClick = dbgeListsCellClick
+                  object RowDetailData: TRowDetailPanelControlEh
+                  end
                 end
               end
             end
@@ -633,7 +619,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900280010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

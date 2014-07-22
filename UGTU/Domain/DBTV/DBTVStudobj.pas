@@ -237,7 +237,7 @@ begin
   if adoDataSet.FieldValues['cdopsved']<>NULL then
     AddInform:=AdoDataSet.FieldValues['cdopsved'];
 
-  if (adoDataSet.FieldValues['Photo']<>NULL)and(adoDataSet.FieldValues['Photo']<>'') then
+  if (adoDataSet.FieldByName('Photo').AsBytes <> NULL)and(adoDataSet.FieldByName('Photo').AsString <> '') then
   begin
     Photo:=TMemoryStream.Create;
     (AdoDataSet.FieldbyName('Photo')as TBlobField).SaveToStream(Photo);

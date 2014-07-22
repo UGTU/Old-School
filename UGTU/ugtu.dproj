@@ -85,6 +85,7 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.4.478;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Build>478</VerInfo_Build>
@@ -974,6 +975,59 @@
             <Form>ImageFullSizeShowForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Domain\DBTV\DBDekTreeView_TEST.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTV.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVAbitobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVAbitYearObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVAdminObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVBusinessobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVDekanat.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVdepobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVDepScheduleObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVDictObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVFacDepobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVFacMethodWorkObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVFacobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVFacRecObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVFacScheduleobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVFacZachObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVgroupobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHabitatsFloorObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHabitatsHostObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHabitatsObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHabitatsPersonObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHabitatsRoomObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHostelRequestObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHostelRootobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVHostelRootPersonobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVInviteHostObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVInviteObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVMethodWorkdepobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVMethodWorkInNormobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVMethodWorkobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVMethodWorkTeacherobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVOKobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVPrikObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVRecruitobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVRIOObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVRIOPlanObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVRIOPrintOrderObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVRIOYearObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVRootobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVRootScheduleobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVScheduleObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVSemesterNagrObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVSemesterScheduleobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVSpecObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVSpecRecObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVSpecZachObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVStudAbitobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVStudobj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVTeacherObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVWorkTypeObj.pas"/>
+        <DCCReference Include="Domain\DBTV\DBTVZachobj.pas"/>
+        <DCCReference Include="Domain\DBTV\ShEvent.PAS"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

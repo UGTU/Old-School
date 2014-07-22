@@ -43,7 +43,7 @@ WT_EXECUTEONLYONCE = ULONG($00000008);
 type
   TWaitOrTimerCallback = procedure (Context: Pointer; Success: Boolean) stdcall;
 
-function RegisterWaitForSingleObject(out phNewWaitObject: THandle; hObject: THandle;
+function RegisterWaitForSingleObject(out phNewWaitObject: System.Cardinal; hObject: THandle;
 CallBack: TWaitOrTimerCallback; Context: Pointer; dwMilliseconds: ULONG;
 dwFlags: ULONG): BOOL; stdcall; external 'kernel32.dll' name 'RegisterWaitForSingleObject';
 function UnregisterWait(WaitHandle: THandle): BOOL; stdcall; external 'kernel32.dll' name 'UnregisterWait';{__checkReturn}
@@ -108,8 +108,8 @@ begin
   if (CreateProcess(nil, PChar(FCommandLine), nil, nil, false, 0, nil, nil, si, FProcessInfo)) then
   begin
     CloseHandle(FProcessInfo.hThread);
-    //Assert(RegisterWaitForSingleObject(FWaitHandle, FProcessInfo.hProcess, WaitCallback,
-    //  Self, INFINITE, WT_EXECUTELONGFUNCTION or WT_EXECUTEONLYONCE));
+    Assert(RegisterWaitForSingleObject(FWaitHandle, FProcessInfo.hProcess, WaitCallback,
+      Self, INFINITE, WT_EXECUTELONGFUNCTION or WT_EXECUTEONLYONCE));
   end;
 end;
 
