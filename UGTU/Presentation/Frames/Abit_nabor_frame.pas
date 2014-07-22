@@ -216,6 +216,8 @@ begin
     dbgrdMain.Columns[1].Title.Caption := 'Название';
     dbgrdMain.Columns[2].Title.Caption := 'Короткое название';
     dbgrdMain.Columns[3].Visible := false;
+    dbgrdMain.Columns[4].Visible := false;
+    dbgrdMain.Columns[5].Visible := false;
     frmMain.StatusBar1.Panels[1].Text:='Количество факультетов: ' + IntToStr(dsMain.DataSet.RecordCount);
     naborpage.TabVisible:=true;
   end;
@@ -229,8 +231,11 @@ begin
     dbgrdMain.Columns[2].Visible := false;
     dbgrdMain.Columns[3].Visible := false;
     dbgrdMain.Columns[4].Title.Caption := 'Номер';
+    dbgrdMain.Columns[4].Width := 30;
     dbgrdMain.Columns[5].Title.Caption := 'Название';
     dbgrdMain.Columns[6].Title.Caption := 'Короткое название';
+    dbgrdMain.Columns[6].Width := 57;
+    dbgrdMain.Columns[6].Alignment := taCenter;
     dbgrdMain.Columns[7].Visible := false;
     dbgrdMain.Columns[8].Visible := false;
     dbgrdMain.Columns[9].Visible := false;
@@ -238,6 +243,8 @@ begin
     dbgrdMain.Columns[11].Visible := false;
     dbgrdMain.Columns[12].Title.Caption := 'Форма обучения';
     dbgrdMain.Columns[13].Visible := false;
+    dbgrdMain.Columns[14].Visible := false;
+    dbgrdMain.Columns[15].Visible := false;
     frmMain.StatusBar1.Panels[0].Text:='Факультет: ' + TDBNodeFacRecObject(FrameObject).Name;
     frmMain.StatusBar1.Panels[1].Text:='Количество специальностей: ' + IntToStr(dsMain.DataSet.RecordCount);
     naborpage.TabVisible:=true;
