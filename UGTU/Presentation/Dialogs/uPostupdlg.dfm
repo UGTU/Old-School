@@ -155,6 +155,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Top = 34
       Width = 505
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'NNrecord'
@@ -169,6 +170,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Top = 74
       Width = 349
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'Ik_kat_zach'
@@ -183,6 +185,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Top = 74
       Width = 150
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh
@@ -214,6 +217,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Width = 150
       Height = 19
       Alignment = taLeftJustify
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Increment = 0.100000000000000000

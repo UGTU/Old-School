@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uStudDlg, DBGridEh, ExtDlgs, ImgList, ActnList, StdCtrls, Grids,
   DBCtrlsEh, DBLookupEh, Buttons, Mask, ExtCtrls, ComCtrls, adodb, jpeg, VarfileUtils,
-  DateUtils;
+  DateUtils, System.Actions;
 
 type
   TfrmAbitCardDialog = class(TftmStudent)

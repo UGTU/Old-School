@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, Buttons, ExtCtrls, Grids, DBGridEh,
   DBCtrlsEh, Mask, ComCtrls, ActnList, DBLookupEh, ImgList, DBCtrls,
-  ExtDlgs, Jpeg, VarfileUtils,uPrikdlg,ComObj, uError;
+  ExtDlgs, Jpeg, VarfileUtils,uPrikdlg,ComObj, uError, System.Actions;
 
 type
   TAddressRecord = class
@@ -760,11 +760,11 @@ begin
   inherited;
   ftmAddRelative:=TftmAddRelative.Create(self);
   ftmAddRelative.StudDlg:=self;
-ftmAddRelative.showModal;
-ftmAddRelative.Free;
- if sgRelatives.Cells[0,sgRelatives.Row]='' then
-sbDelRel.Enabled:=false else
-sbDelRel.Enabled:=true;
+  ftmAddRelative.showModal;
+  ftmAddRelative.Free;
+  if sgRelatives.Cells[0,sgRelatives.Row]='' then
+    sbDelRel.Enabled:=false else
+  sbDelRel.Enabled:=true;
 end;
 
 

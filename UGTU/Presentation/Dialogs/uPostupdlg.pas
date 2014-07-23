@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, Grids, DBGridEh, StdCtrls, ActnList, Buttons,
-  ExtCtrls, adodb, db, DBCtrlsEh, DBLookupEh, Mask, uAbitDialog, uStudDlg, uMain, uAbitOtchetsController, comObj, uCertificateDialog;
+  ExtCtrls, adodb, db, DBCtrlsEh, DBLookupEh, Mask, uAbitDialog, uStudDlg, uMain, uAbitOtchetsController, comObj, uCertificateDialog,
+  System.Actions;
 
   type TAbitList = class
   public
@@ -722,28 +723,18 @@ begin
 
     with dmStudentActions.aspAddRelative.Parameters do
     begin
-      clear;
-     AddParameter;
-      Items[0].Value:=1;
-     AddParameter;
-     Items[1].Value:=IDStudent;
-      AddParameter;
-     Items[2].Value:=strtoint(sgRelkeys.Cells[1,i]);
-     AddParameter;
-     Items[3].Value:=sgRelatives.Cells[4,i+1];
-      AddParameter;
-      Items[4].Value:=strtoint(sgRelkeys.Cells[2,i]);
-      AddParameter;
-      Items[5].Value:=sgRelatives.Cells[0,i+1];
-      AddParameter;
-      Items[6].Value:=sgRelatives.Cells[6,i+1];
-      AddParameter;
-      Items[7].Value:=sgRelatives.Cells[5,i+1];
-      AddParameter;
-      if sgRelatives.Cells[2,i+1]='' then Items[8].Value:=Null else
-        Items[8].Value:=ChangeMonthDayPlaces(StrtoDate(sgRelatives.Cells[2,i+1]));
-      AddParameter;
-      Items[9].Value:=sgRelatives.Cells[7,i+1];;
+      ParamByName('@flag').Value := 1;
+      ParamByName('@code').Value := IDStudent;
+      ParamByName('@memb').Value := strtoint(sgRelkeys.Cells[1,i]);
+      ParamByName('@post').Value := sgRelatives.Cells[4,i+1];
+      if sgRelkeys.Cells[2,i]<>'' then
+        ParamByName('@pred').Value := strtoint(sgRelkeys.Cells[2,i]) else ParamByName('@pred').Value := Null;
+      ParamByName('@fio').Value := sgRelatives.Cells[0,i+1];
+      ParamByName('@adres').Value := sgRelatives.Cells[6,i+1];
+      ParamByName('@tel').Value := sgRelatives.Cells[5,i+1];
+      if sgRelatives.Cells[2,i+1]='' then ParamByName('@birth').Value := Null else
+        ParamByName('@birth').Value := ChangeMonthDayPlaces(StrtoDate(sgRelatives.Cells[2,i+1]));
+      ParamByName('@rabTel').Value := sgRelatives.Cells[7,i+1];
     end;
     dmStudentActions.aspAddRelative.ExecProc;
   end;

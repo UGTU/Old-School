@@ -455,8 +455,6 @@ begin
 if not (FrameObject is TDBNodeStudObject) then
 exit;
 
-//TApplicationController.GetInstance.Curre
-
 Floaded:=false;
 obj:=FrameObject as TDBNodeStudObject;
 ik:=obj.ID;
