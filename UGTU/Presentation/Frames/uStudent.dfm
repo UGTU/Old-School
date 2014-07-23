@@ -703,10 +703,6 @@ inherited fmStudent: TfmStudent
             object TabSheet4: TTabSheet
               Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel3: TPanel
                 Left = 0
                 Top = 0
@@ -1168,10 +1164,6 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               DesignSize = (
                 705
                 555)
@@ -1221,10 +1213,6 @@ inherited fmStudent: TfmStudent
             object TabSheet7: TTabSheet
               Caption = #1057#1086#1073#1099#1090#1080#1103
               ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object gbExiled: TGroupBox
                 Left = 0
                 Top = 0
