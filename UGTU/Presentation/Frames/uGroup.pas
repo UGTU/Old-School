@@ -2488,7 +2488,8 @@ end;
 procedure TfmGroup.actPrintBRSRankAverageUpdate(Sender: TObject);
 begin
  if (IsBRS) then
-  actPrintBRSRankAverage.Enabled:=(cmbxNumber.Text <> '')and(cmbxSemAtt.Text<>'');
+  actPrintBRSRankAverage.Enabled:=(cmbxNumber.Text <> '')and(cmbxSemAtt.Text<>'')
+  and(cmbxNumber.Text<>'Экзамен');
 end;
 
 procedure TfmGroup.actPrintBRSRanksExecute(Sender: TObject);
