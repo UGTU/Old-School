@@ -129,6 +129,7 @@ inherited frmAddDocument: TfrmAddDocument
     Top = 30
     Width = 257
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_vid_doc'
@@ -143,6 +144,7 @@ inherited frmAddDocument: TfrmAddDocument
     Top = 74
     Width = 119
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 2
@@ -154,6 +156,7 @@ inherited frmAddDocument: TfrmAddDocument
     Top = 74
     Width = 132
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 3
@@ -165,6 +168,7 @@ inherited frmAddDocument: TfrmAddDocument
     Top = 164
     Width = 257
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 5
@@ -176,6 +180,7 @@ inherited frmAddDocument: TfrmAddDocument
     Top = 120
     Width = 257
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh

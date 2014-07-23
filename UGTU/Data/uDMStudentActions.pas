@@ -3,7 +3,7 @@ unit uDMStudentActions;
 interface
 
 uses
-  SysUtils, Classes, DB, ADODB;
+  SysUtils, Classes, DB, ADODB, uDM;
 
 type
   TdmStudentActions = class(TDataModule)

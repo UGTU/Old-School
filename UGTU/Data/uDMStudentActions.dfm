@@ -12,86 +12,74 @@ object dmStudentActions: TdmStudentActions
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
-        Value = Null
       end
       item
         Name = '@flag'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
       end
       item
         Name = '@code'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
       end
       item
         Name = '@memb'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
       end
       item
         Name = '@post'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
-        Value = Null
       end
       item
         Name = '@pred'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
       end
       item
         Name = '@fio'
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
-        Value = Null
       end
       item
         Name = '@adres'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
-        Value = Null
       end
       item
         Name = '@tel'
         Attributes = [paNullable]
         DataType = ftString
         Size = 15
-        Value = Null
       end
       item
         Name = '@birth'
         Attributes = [paNullable]
         DataType = ftDateTime
-        Value = Null
       end
       item
         Name = '@rabTel'
         Attributes = [paNullable]
         DataType = ftString
         Size = 15
-        Value = Null
       end
       item
         Name = '@old'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
       end>
-    Left = 140
-    Top = 32
+    Left = 124
+    Top = 24
     object IntegerField3: TIntegerField
       FieldName = 'Ik_lang'
       Visible = False
@@ -1330,36 +1318,42 @@ object dmStudentActions: TdmStudentActions
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@flag'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_prikaz'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_zach'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_pric'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_kat_new'
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end>
     Left = 252
     Top = 84

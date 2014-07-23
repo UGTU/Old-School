@@ -11,7 +11,7 @@ inherited ftmAddRelative: TftmAddRelative
   OldCreateOrder = True
   OnShow = FormShow
   ExplicitWidth = 355
-  ExplicitHeight = 294
+  ExplicitHeight = 291
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -113,8 +113,10 @@ inherited ftmAddRelative: TftmAddRelative
       Top = 10
       Width = 70
       Height = 23
+      Caption = #1054#1050
       Enabled = False
       TabOrder = 3
+      Visible = False
       ExplicitLeft = 117
       ExplicitTop = 10
       ExplicitWidth = 70
@@ -125,6 +127,7 @@ inherited ftmAddRelative: TftmAddRelative
       Top = 10
       Width = 76
       Height = 23
+      Caption = #1044#1086#1073#1072#1074#1080#1090#1100
       Enabled = False
       TabOrder = 2
       ExplicitLeft = 262
@@ -137,6 +140,7 @@ inherited ftmAddRelative: TftmAddRelative
       Top = 10
       Width = 73
       Height = 23
+      Caption = #1047#1072#1082#1088#1099#1090#1100
       TabOrder = 0
       ExplicitLeft = 188
       ExplicitTop = 10
@@ -158,6 +162,7 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 72
     Width = 157
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_memb_fam'
@@ -172,6 +177,7 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 113
     Width = 157
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_pred'
@@ -185,6 +191,7 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 28
     Width = 328
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 0
@@ -196,6 +203,7 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 113
     Width = 163
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 4
@@ -206,6 +214,7 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 72
     Width = 163
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -218,6 +227,7 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 188
     Width = 328
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 5
@@ -228,6 +238,7 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 151
     Width = 157
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 7
@@ -238,12 +249,16 @@ inherited ftmAddRelative: TftmAddRelative
     Top = 151
     Width = 163
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 8
     Visible = True
   end
   inherited actBaseDialog: TActionList
+    inherited actOK: TAction
+      OnUpdate = actOKUpdate
+    end
     object actCheckFields: TAction
       Caption = 'actCheckFields'
       OnExecute = actCheckFieldsExecute
