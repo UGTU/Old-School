@@ -90,14 +90,15 @@ begin
 end;
 
 constructor TXMLEGEReader.Create(XMLstring: WideString);
-var stream:TMemoryStream;
-US1,US2:string;
+{var stream:TMemoryStream;
+US1,US2:string;}
 begin
   try
   FXML := TXMLDocument.Create(nil);
+
   (FXML as IXMLDocument)._AddRef;
-
-
+  FXML.LoadFromXML(XMLstring);
+ {
   US1 := AnsiToUtf8(XMLstring);
 
   stream := TMemoryStream.Create;
@@ -107,9 +108,9 @@ begin
   stream.Read(PUTF8String(US2)^, stream.Size);
   stream.Position := 0;
 
-  FXML.LoadFromStream(stream);
+  FXML.LoadFromStream(stream);}
   except
-   FXML:=nil;
+    FXML:=nil;
   end;
 end;
 
