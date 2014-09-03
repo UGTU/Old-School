@@ -54,7 +54,7 @@ begin
   AdoDataset:= TAdoDataSet.Create(TreeView);
   AdoDataset.Connection:=Connection;
   AdoDataset.CommandType:=cmdText;
-  AdoDataset.CommandText:='select * from TREE_specialties where ik_fac='''+inttostr(IK)+''' order by CName_spec';
+  AdoDataset.CommandText:='select * from TREE_specialties where ik_fac='''+inttostr(IK)+''' order by Ik_form_ed, CName_spec';
   AdoDataset.Active:=true;
   if (AdoDataset.RecordCount=0) then
     Node.HasChildren:=false

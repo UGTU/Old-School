@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Grids, DBCtrlsEh, Mask, DBGridEh,
   ComCtrls, Buttons, ToolWin, DBCtrls, ExtCtrls, ImgList, DB, ActnList,
   ADODB,ComObj, DBLookupEh, Menus, OleServer, ExcelXP, GridsEh, ApplicationController,
-  ExceptionBase;
+  ExceptionBase, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  System.Actions, DBAxisGridsEh;
 
 type
   TfmZach = class(TfmBase)
