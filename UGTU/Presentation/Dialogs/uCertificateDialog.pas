@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, EgeCheckService,uXMLEGEReader,
-  Mask, DBCtrlsEh, Grids;
+  Mask, DBCtrlsEh, Grids, System.Actions;
 
 type
   TfrmEGECertificateCheck = class(TfrmBaseDialog)
@@ -187,30 +187,29 @@ end;
 
 procedure TfrmEGECertificateCheck.FormShow(Sender: TObject);
 var srv:IEgeCheckService;
-res:WideString;
-reader:TXMLEGEReader;
+    res:WideString;
+    reader:TXMLEGEReader;
 begin
-srv:=GetIEgeCheckService(True,'',nil);
+  srv:=GetIEgeCheckService(True,'',nil);
 
-res:=srv.SingleCheck(FLastName,FFirstName,FPatronName,FPassSerie,FPassNum,'','');
-//res:=srv.SingleCheck('Блинов','Данил','Константинович','8708','289020','','');
+  res:=srv.SingleCheck(FLastName,FFirstName,FPatronName,FPassSerie,FPassNum,'','');
 
-reader:= TXMLEGEReader.Create(res);
+  reader:= TXMLEGEReader.Create(res);
 
-Memo1.Text:=res;
+  Memo1.Text:=res;
 
-FDescriptions:=reader.GetCertificateDescriptions;
-FCurrentDescriptionNumber:=0;
+  FDescriptions:=reader.GetCertificateDescriptions;
+  FCurrentDescriptionNumber:=0;
 
-if FDescriptions.Count=0 then
+  if FDescriptions.Count=0 then
     ShowMessage('По данному абитуриенту отсутствуют данные в ФИС ЕГЭ')
-else
-begin
-  DescrSync;
-  ExamSync;
-end;
+  else
+  begin
+    DescrSync;
+    ExamSync;
+  end;
 
-Cursor:=crDefault;
+  Cursor:=crDefault;
 end;
 
 function TfrmEGECertificateCheck.GetAnalogicExam(edesc: TExamDescription;

@@ -220,19 +220,19 @@ inherited fmSprav: TfmSprav
   object tSpravList: TADOTable
     CacheSize = 15
     TableName = 'Sprav'
-    Left = 360
-    Top = 80
+    Left = 400
+    Top = 88
   end
   object dsSpravList: TDataSource
     DataSet = tSpravList
-    Left = 328
-    Top = 80
+    Left = 264
+    Top = 40
   end
   object prvSprav: TDataSetProvider
     DataSet = tSprav
     ResolveToDataSet = True
-    Left = 328
-    Top = 18
+    Left = 128
+    Top = 122
   end
   object cdsSprav: TClientDataSet
     Aggregates = <>
@@ -240,31 +240,31 @@ inherited fmSprav: TfmSprav
     ProviderName = 'prvSprav'
     BeforePost = cdsSpravBeforePost
     AfterScroll = cdsSpravAfterScroll
-    Left = 365
-    Top = 17
+    Left = 189
+    Top = 193
   end
   object dsDopSprav: TDataSource
-    Left = 328
-    Top = 112
+    Left = 288
+    Top = 136
   end
   object tDopSprav: TADOQuery
     Parameters = <>
-    Left = 360
-    Top = 112
+    Left = 400
+    Top = 144
   end
   object dsDopSprav2: TDataSource
     DataSet = tDopSprav2
-    Left = 328
-    Top = 144
+    Left = 280
+    Top = 176
   end
   object tDopSprav2: TADOQuery
     Parameters = <>
-    Left = 360
-    Top = 144
+    Left = 368
+    Top = 184
   end
   object pmMenu: TPopupMenu
-    Left = 240
-    Top = 64
+    Left = 144
+    Top = 40
     object N1: TMenuItem
       Action = aInsert
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100
@@ -350,7 +350,7 @@ inherited fmSprav: TfmSprav
       ''
       ''
       '')
-    Left = 296
-    Top = 112
+    Left = 224
+    Top = 120
   end
 end

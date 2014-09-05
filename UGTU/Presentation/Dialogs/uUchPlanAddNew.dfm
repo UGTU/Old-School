@@ -8,7 +8,7 @@ inherited frmUchPlanAddNew: TfrmUchPlanAddNew
   Constraints.MinWidth = 478
   OldCreateOrder = True
   ExplicitWidth = 524
-  ExplicitHeight = 314
+  ExplicitHeight = 311
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -215,6 +215,7 @@ inherited frmUchPlanAddNew: TfrmUchPlanAddNew
       Width = 345
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 0
@@ -227,6 +228,7 @@ inherited frmUchPlanAddNew: TfrmUchPlanAddNew
       Width = 345
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 1
@@ -239,6 +241,7 @@ inherited frmUchPlanAddNew: TfrmUchPlanAddNew
       Width = 117
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 2
@@ -263,6 +266,7 @@ inherited frmUchPlanAddNew: TfrmUchPlanAddNew
     Width = 352
     Height = 19
     AlwaysShowBorder = True
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 3
@@ -275,6 +279,7 @@ inherited frmUchPlanAddNew: TfrmUchPlanAddNew
     Width = 352
     Height = 19
     AlwaysShowBorder = True
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 4
@@ -287,6 +292,7 @@ inherited frmUchPlanAddNew: TfrmUchPlanAddNew
     Width = 117
     Height = 19
     AlwaysShowBorder = True
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 5

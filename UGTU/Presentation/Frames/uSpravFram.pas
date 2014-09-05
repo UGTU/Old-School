@@ -121,6 +121,7 @@ var
 constructor TfmSprav.CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);
 begin
   inherited;
+  try
   frmSprav:=nil;
   {btnSave.Caption:='';
   btnCansel.Caption:='';
@@ -147,6 +148,9 @@ begin
   end;
   cbSprav.ItemIndex:=0;
   ChangeSprav;
+  except
+     ShowMessage('CreateFrame');
+  end;
 end;
 
 
@@ -258,6 +262,7 @@ end;
 //роцедура загружает в PickList список значений
 procedure TfmSprav.LoadPickList (num:integer; Query: TADOQuery; FieldName: string);
 begin
+  try
    Query.First;
    gSprav.Columns.Items[num].PickList.Clear;
    while not  Query.Eof do
@@ -265,6 +270,9 @@ begin
       gSprav.Columns.Items[num].PickList.Add(Query.FieldByName(FieldName).AsString);
       Query.Next;
    end;
+  except
+     ShowMessage('LoadPickList');
+  end;
 end;
 
 //возвращает номер поля,
@@ -272,7 +280,8 @@ end;
 function TfmSprav.GetSortFieldNumber:integer;
 var  k:integer;
 begin
-    tSpravList.Locate('SpravName', cbSprav.Text,[loPartialKey]);
+    tSpravList.Seek(cbSprav.Text);
+    //.Locate('SpravName', cbSprav.Text,[loPartialKey]);
 	  tSprav.Open;
 	  //сортируем справочник по всем "видимым" полям
 	  if tSpravList.FieldByName('TabCount').AsString='' then
@@ -331,9 +340,13 @@ begin
   cdsSprav.Close;
   tSprav.Close;
   tSprav.SQL.Add('');
+
   tSprav.SQL.Strings[1]:=GetSortString;
+
   tSprav.Open;
+
   cdsSprav.Open;
+
 end;
 
 //очищает список ссылочных таблиц
@@ -360,7 +373,7 @@ var i,j,k:integer;
 begin
    try  //сортируем справочник
 	   tSpravList.Locate('SpravName', cbSprav.Text,[loPartialKey]);
-		  i:=-1;
+     i:=-1;
 	   if ((tSpravList.FieldByName('CTableVn').Value<>null) and
 		   (tSpravList.FieldByName('CPrKey').Value<>null)) then
 	   begin
@@ -371,6 +384,7 @@ begin
 				   tSpravList.FieldByName('CPrKey').AsString,
 				   tSpravList.FieldByName('TableVnName').AsString,
 				   i);
+
      end;
      SortSprav;
    except
@@ -434,7 +448,7 @@ end;
 //определяем название справочника и загружаем его содержимое
 procedure TfmSprav.ChangeSprav;
 begin
-
+   try
 	   if modified then
 	   begin
 		  case (MessageBox(Handle, PWideChar('         Сохранить внесенные изменения?'), 'ИС "УГТУ"', MB_YESNOCANCEL)) of
@@ -465,6 +479,9 @@ begin
 	   aSave.Enabled:=false;
 	   aCancel.Enabled:=false;
 	   frmMain.StatusBar1.Panels[2].Text:= 'Выбранный справочник: ' + cbSprav.Text;
+   except
+     ShowMessage('ChangeSprav');
+   end;
 
 end;
 

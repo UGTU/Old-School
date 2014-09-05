@@ -96,6 +96,7 @@ inherited frmEGECertificateCheck: TfrmEGECertificateCheck
     Width = 537
     Height = 19
     Alignment = taLeftJustify
+    DynProps = <>
     EditButtons = <>
     Enabled = False
     Flat = True
@@ -182,6 +183,7 @@ inherited frmEGECertificateCheck: TfrmEGECertificateCheck
       Width = 241
       Height = 19
       Alignment = taLeftJustify
+      DynProps = <>
       EditButtons = <>
       Enabled = False
       Flat = True
@@ -196,6 +198,7 @@ inherited frmEGECertificateCheck: TfrmEGECertificateCheck
       Width = 257
       Height = 19
       Alignment = taLeftJustify
+      DynProps = <>
       EditButtons = <>
       Enabled = False
       Flat = True
@@ -210,6 +213,7 @@ inherited frmEGECertificateCheck: TfrmEGECertificateCheck
       Width = 257
       Height = 19
       Alignment = taLeftJustify
+      DynProps = <>
       EditButtons = <>
       Enabled = False
       Flat = True
@@ -224,6 +228,7 @@ inherited frmEGECertificateCheck: TfrmEGECertificateCheck
       Width = 241
       Height = 19
       Alignment = taLeftJustify
+      DynProps = <>
       EditButtons = <>
       Enabled = False
       Flat = True

@@ -151,7 +151,7 @@ type
       getCurrentFormEd - загружает в SourceDataSet все формы обучения, для которых существует уч. план с параметрами SpecIK, SpclzIK
       если isShowFirst, то возвращает значение атрибута keyField первой записи, иначе возвращает NULL
     }
-    function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
+    function getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, VidGos: integer; isShowFirst: boolean): Variant;
 
     function getCurrentGroups(SourceDataSet: PDataSet; SpecFacIK: integer; isShowFirst, IsFilter: boolean): Variant;
     {
@@ -280,7 +280,7 @@ type
         SaveUchPlan - сохраняет информацию об уч. плане с параметрами SpecIK, SpclzIK, FormEdIK, YearIK
            OperationType - тип операции: 1 - вставка, 2 - обновление
     }
-    function SaveUchPlan(OperationType: byte; var UchPlanIK: integer; SpecIK, SpclzIK, FormEdIK, YearIK: integer; DateUtv: TDate): Boolean;
+    function SaveUchPlan(OperationType: byte; var UchPlanIK: integer; SpecIK, SpclzIK, FormEdIK, YearIK: integer; DateUtv: TDate; IsMain: boolean): Boolean;
 
     {
         SaveDiscInUchPlan - сохраняет дисциплину DiscIK в уч. плане UchPlanIK
@@ -614,7 +614,7 @@ begin
 end;
 
 function TUchPlanController.getCurrentFormEd(SourceDataSet: PDataSet; SpecIK, 
-        SpclzIK, VidGos: integer; isShowFirst: boolean): Variant;
+         VidGos: integer; isShowFirst: boolean): Variant;
 var tempQuery: string;
 begin
   tempQuery := 'Select * From Form_ed Where ik_form_ed in (Select ik_form_ed From Uch_pl Where ik_spec = ' + IntToStr(SpecIK);
@@ -770,7 +770,7 @@ begin
 end;
 
 function TUchPlanController.SaveUchPlan(OperationType: byte; var UchPlanIK: integer; SpecIK, SpclzIK, FormEdIK,
-        YearIK: integer; DateUtv: TDate): Boolean;
+        YearIK: integer; DateUtv: TDate; IsMain: boolean): Boolean;
 var
   DataSet: TCustomADODataSet;
 begin
@@ -779,11 +779,16 @@ begin
   (DataSet as TADOStoredProc).ProcedureName:= 'UpdateUchPlan';
   (DataSet as TADOStoredProc).Parameters.CreateParameter('@i_type', ftWord, pdInput,  0, OperationType);
   (DataSet as TADOStoredProc).Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput,  0, UchPlanIK);
+   if (IsMain)  then
+    (DataSet as TADOStoredProc).Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0, 1)
+    else (DataSet as TADOStoredProc).Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0, 0);
+
   (DataSet as TADOStoredProc).Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 0, SpecIK);
   (DataSet as TADOStoredProc).Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, SpclzIK);
   (DataSet as TADOStoredProc).Parameters.CreateParameter('@ik_form_ed', ftInteger, pdInput, 0, FormEdIK);
   (DataSet as TADOStoredProc).Parameters.CreateParameter('@ik_year_uch_pl', ftInteger, pdInput, 0, YearIK);
   (DataSet as TADOStoredProc).Parameters.CreateParameter('@date_utv', ftDate, pdInput, 0, DateUtv);
+
   try
     DataSet.Open;
     UchPlanIK:= DataSet.FieldByName('ReturnValue').AsInteger;
