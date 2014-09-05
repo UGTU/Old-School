@@ -232,7 +232,7 @@ begin
     dsDisc.DataSet := dm.aspGetDiscModel;
     SetVisualProperty;  //визуальные настройки
     cbApproved.Visible := true;
-    dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, 0, VidGos, true);
+    dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
     //if (dbcbYear.KeyValue = NULL) then dbcbFormEdKeyValueChanged(nil);
     
    { if (VidGos<>FGOS3) then
@@ -417,9 +417,13 @@ begin
         frmUchPlanAddNew.Read;
         if ((frmUchPlanAddNew.ShowModal() = mrOk) or (frmUchPlanAddNew.bbApply.Tag = 1)) then
         begin
-          if fVidGos>FGOS2 then TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
-          dbcbSpclz.ListSource.DataSet.Open;
-          dbcbSpclz.KeyValue:= frmUchPlanAddNew.dbcbSpclz.KeyValue;
+          if fVidGos>FGOS2 then TGeneralController.Instance.CloseLockupCB(@dbcbSpclz)
+          else
+          begin
+            dbcbSpclz.ListSource.DataSet.Open;
+            dbcbSpclz.KeyValue:= frmUchPlanAddNew.dbcbSpclz.KeyValue;
+          end;
+          TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
           dbcbFormEd.KeyValue:= frmUchPlanAddNew.dbcbFormEd.KeyValue;
           dbcbYear.KeyValue:= frmUchPlanAddNew.dbcbYear.KeyValue;
           dtpDateUtv.Date:= frmUchPlanAddNew.dtpDateUtv.Date;
@@ -443,7 +447,7 @@ begin
     TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
     dbcbSpclz.KeyValue:= TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true);
     if dbcbSpclz.KeyValue = NULL then
-      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, 0, VidGos, true);
+      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
     for i:= 0 to actList.ActionCount-1 do
     actList.Actions[i].OnUpdate(actList.Actions[i]);
    // LocalLog.AddEntry('План удалён');

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, Buttons, ExtCtrls, ADODB, ActnList, Mask,
   DBCtrlsEh, DBGridEh, DBLookupEh, UchPlanController, GeneralController,
-  ComCtrls;
+  ComCtrls, System.Actions;
 
 type
   TfrmUchPlanAddNew = class(TfrmBaseDialog)
@@ -70,7 +70,7 @@ implementation
 
 {$R *.dfm}
 
-uses uUchPlan, uDM, DB, uDMUchPlan ;
+uses uUchPlan, uDM, DB, uDMUchPlan,  ConstantRepository;
 
 { TfrmAddUchPlan }
 
@@ -91,7 +91,7 @@ begin
   dm.DBConnect.BeginTrans;
   if (VidGos=2) and dbcbSpclz.KeyValue = null
      then dbcbSpclz.KeyValue:=0;
-  if not TUchPlanController.Instance.SaveUchPlan(self.Tag, UchPlanIK, Label2.Tag, dbcbSpclz.KeyValue, dbcbFormEd.KeyValue, dbcbYear.KeyValue, dtpDateUtv.Date)
+  if not TUchPlanController.Instance.SaveUchPlan(self.Tag, UchPlanIK, Label2.Tag, dbcbSpclz.KeyValue, dbcbFormEd.KeyValue, dbcbYear.KeyValue, dtpDateUtv.Date, (VidGos > FGOS2))
   then
   begin
     Result:= false;
@@ -251,7 +251,7 @@ begin
   dbcbSpclzCopy.KeyValue:= TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclzCopy.ListSource.DataSet, Label2.Tag, true);
   if dbcbSpclzCopy.KeyValue = NULL then
   begin
-    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, 0, VidGos, true);
+    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, VidGos, true);
   end;
   isAlreadyLoad:= true;
 end;
@@ -266,7 +266,7 @@ begin
     splzIK:=0;
   end  else splzIK := dbcbSpclz.KeyValue;
   if Assigned(dbcbFormEdCopy.ListSource) then
-    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, splzIK, VidGos, true);
+    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, VidGos, true);
 end;
 
 procedure TfrmUchPlanAddNew.dbcbFormEdCopyKeyValueChanged(Sender: TObject);
