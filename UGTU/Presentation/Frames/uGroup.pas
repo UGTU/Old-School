@@ -1874,6 +1874,7 @@ begin
     Value := -1;
     Modified := true;
   end;
+  Handled := false;
   try
     //оставляем только первый символ
     Value:= String(Value)[1];
@@ -1937,14 +1938,13 @@ begin
     except
       Text:='';
     end;
-
-  dmUspevaemost.adospSelVedGroup.FieldByName('Cosenca').AsString:=
-        Text;
+  dbgrdVed.Columns[7].SetValueAsText(Text);
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Ввод оценки '+dmUspevaemost.adospSelVedGroup.FieldByName('StudName').AsString+Text);
     //if (dmUspevaemost.adospSelVedGroup.RecNo<
         //dmUspevaemost.adospSelVedGroup.RecordCount) then
+  //dmUspevaemost.adospSelVedGroup.Post;
   dmUspevaemost.adospSelVedGroup.Next;
-  Key:=' ';
+  //Key:=' ';
   //except
   //end;
 end;
