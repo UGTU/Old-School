@@ -98,7 +98,7 @@ uses
    function Abit_AppendRecordBook(flag, code, zach: integer; nzach:string): integer;
    //Abit_CreateRecordBook создает зачетку (номер зачетки)
 //и возвращает новый номер
-   function Abit_CreateRecordBook(code: integer; nzach:string): integer;
+   function Abit_CreateRecordBook(code: integer): integer;
 //Abit_ChangeRecordBook pедактирует зачетку (номер зачетки)
    function Abit_ChangeRecordBook(code, zach: integer; nzach:string): boolean;
 
@@ -542,7 +542,7 @@ begin
   tempStoredProc.Parameters.CreateParameter('@flag', ftInteger, pdInput, 4, flag);
   tempStoredProc.Parameters.CreateParameter('@nzach', ftString, pdInput, 6, nzach);
   tempStoredProc.Parameters.CreateParameter('@code', ftInteger, pdInput, 4, code);
-  tempStoredProc.Parameters.CreateParameter('@zach', ftInteger, pdInput, 4, zach);
+  tempStoredProc.Parameters.CreateParameter('@zach', ftInteger, pdInput, 4, nzach);
   try
     tempStoredProc.ExecProc;
     result:=tempStoredProc.Parameters.ParamByName('@RETURN_VALUE').Value;;
@@ -551,17 +551,17 @@ begin
   end;
 end;
 
-function TAbitZachislenieController.Abit_CreateRecordBook(code: integer; nzach:string): integer;
+function TAbitZachislenieController.Abit_CreateRecordBook(code: integer): integer;
 var newBookKey:integer;
 begin
-   newBookKey:= Abit_AppendRecordBook(1, code, -1, nzach);
+   newBookKey:= Abit_AppendRecordBook(1, code, -1,'');
    if newBookKey>0 then
    begin
      // FAbitListDataSetInstance.GotoBookmark(Pointer(dbgAbitsForZachisl.SelectedRows[i]));
       FAbitListDataSetInstance.Locate('nCode',code,[]);
       FAbitListDataSetInstance.Edit;
       FAbitListDataSetInstance.FieldByName('ik_zach').Value:= newBookKey;    //BookKey
-      FAbitListDataSetInstance.FieldByName('Nn_zach').Value:= nzach;
+      //FAbitListDataSetInstance.FieldByName('Nn_zach').Value:= nzach;
    end;
    result:= newBookKey;
 end;
@@ -694,7 +694,7 @@ end;
 
 function TAbitZachislenieController.Abit_JoinGroup(grid: PDBGrid): boolean;
 var i, spec, group, ik_zach: integer;
-  nzach, sort, groupName: string;
+   sort, groupName: string;
   //dataSet:TADODataSet;
 begin
 
@@ -743,14 +743,14 @@ begin
 	  if  frmJoinGroup.mrOk then
 	  begin
 
-		nzach:= frmJoinGroup.eNum.Text;
+		//nzach:= frmJoinGroup.eNum.Text;
 	//ѕровер€ем, чтобы введенного номера зачетки еще не было
-    if frmJoinGroup.eNum.Enabled then
+    {if frmJoinGroup.eNum.Enabled then
 		if Abit_IsOldZach(nzach) then
 		begin
 		  raise EApplicationException.Create('¬ы внесли уже используемый номер зачетки!');
 		  exit;
-		end;
+		end; }
 
 	   sort:= TADODataSet(FAbitListDataSetInstance).Sort;
 	   if grid.SelectedRows.Count>1 then
@@ -767,24 +767,24 @@ begin
 		  for i := 0 to grid.SelectedRows.Count-1 do
 		  begin
 	//ѕровер€ем, чтобы введенного номера зачетки еще не было
-        if frmJoinGroup.eNum.Enabled then
+       { if frmJoinGroup.eNum.Enabled then
 				if Abit_IsOldZach(nzach) then
 				begin
 				  dm.DBConnect.RollbackTrans;
 				  raise EApplicationException.Create('¬ы внесли уже используемый номер зачетки!');
 				  exit;
-				end;
+				end; }
 
 				FAbitListDataSetInstance.GotoBookmark(Pointer(grid.SelectedRows[I]));
 
         TApplicationController.GetInstance.AddLogEntry('«ачисление абитуриента в группу: '+
           FAbitListDataSetInstance.FieldByName('fio').AsString+', '+
-          groupName+', '+nzach);
+          groupName);
 
 			  //создаем новую зачетку (номер)
-        if frmJoinGroup.eNum.Enabled then
-				ik_zach:= Abit_CreateRecordBook(FAbitListDataSetInstance.FieldByName('nCode').Value, nzach)
-        else
+        {if frmJoinGroup.eNum.Enabled then
+				ik_zach:= Abit_CreateRecordBook(FAbitListDataSetInstance.FieldByName('nCode').Value)
+        else    }
         ik_zach:=FAbitListDataSetInstance.FieldByName('BookKey').Value;
 
 			  //зачисл€ем студента в группу
@@ -796,10 +796,10 @@ begin
 					groupName,'');
 
 				//наращиваем номер на 1
-				nZach:= IntToStr(StrToInt(nZach)+1);
+				//nZach:= IntToStr(StrToInt(nZach)+1);
 			  //наращиваем до 6 знаков в номере
-				while length(nZach)<6 do
-				  nZach:='0'+nZach;
+				{while length(nZach)<6 do
+				  nZach:='0'+nZach;    }
 
 		  end;
 	//сохран€ем изменени€

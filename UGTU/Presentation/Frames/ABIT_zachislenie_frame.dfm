@@ -29,20 +29,14 @@ inherited fmZach: TfmZach
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsList
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar3: TToolBar
           Left = 0
@@ -93,6 +87,7 @@ inherited fmZach: TfmZach
             Width = 152
             Height = 22
             Hint = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1082#1072#1090#1077#1075#1086#1088#1080#1080' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'ik_type_kat'
@@ -192,7 +187,6 @@ inherited fmZach: TfmZach
           Top = 208
           Width = 67
           Height = 21
-          ItemHeight = 13
           TabOrder = 1
           Visible = False
         end
@@ -201,7 +195,6 @@ inherited fmZach: TfmZach
           Top = 208
           Width = 49
           Height = 21
-          ItemHeight = 13
           TabOrder = 2
           Visible = False
         end
@@ -210,7 +203,6 @@ inherited fmZach: TfmZach
           Top = 209
           Width = 73
           Height = 21
-          ItemHeight = 13
           TabOrder = 3
           Visible = False
         end
@@ -219,6 +211,7 @@ inherited fmZach: TfmZach
           Top = 209
           Width = 64
           Height = 19
+          DynProps = <>
           EditButtons = <>
           Flat = True
           TabOrder = 4
@@ -233,29 +226,22 @@ inherited fmZach: TfmZach
           Align = alClient
           AllowedOperations = []
           AutoFitColWidths = True
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           ParentShowHint = False
           PopupMenu = PopupMenu2
           ReadOnly = True
           ShowHint = True
           TabOrder = 5
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = dbgAbitsForZachislDblClick
           OnDrawColumnCell = dbgAbitsForZachislDrawColumnCell
           OnTitleClick = dbgAbitsForZachislTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'fio'
               Footers = <>
@@ -263,42 +249,49 @@ inherited fmZach: TfmZach
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cshort_name_fac'
               Footers = <>
               Title.Caption = #1060#1072#1082#1091#1083#1100#1090#1077#1090
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cshort_spec'
               Footers = <>
               Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cname_zach'
               Footers = <>
               Title.Caption = #1057#1086#1089#1090#1086#1103#1085#1080#1077
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cname_kat_zach'
               Footers = <>
               Title.Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_lang'
               Footers = <>
               Title.Caption = #1048#1085'. '#1103#1079#1099#1082
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SummBall'
               Footers = <>
               Title.Caption = #1057#1091#1084#1084#1072' '#1073#1072#1083#1083#1086#1074
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MinBall'
               Footers = <>
@@ -306,11 +299,14 @@ inherited fmZach: TfmZach
               Width = 60
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SredBall'
               Footers = <>
               Title.Caption = #1057#1088#1077#1076'. '#1073#1072#1083#1083
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object Panel2: TPanel
           Left = 0
@@ -417,6 +413,7 @@ inherited fmZach: TfmZach
             Action = frmMain.actJoinGroup
             ParentShowHint = False
             ShowHint = True
+            OnClick = ToolButton7Click
           end
           object ToolButton10: TToolButton
             Left = 77
@@ -457,7 +454,6 @@ inherited fmZach: TfmZach
           Top = 33
           Width = 20
           Height = 21
-          ItemHeight = 13
           TabOrder = 1
           Visible = False
         end
@@ -466,7 +462,6 @@ inherited fmZach: TfmZach
           Top = 57
           Width = 20
           Height = 21
-          ItemHeight = 13
           TabOrder = 2
           Visible = False
         end
@@ -478,28 +473,21 @@ inherited fmZach: TfmZach
           Hint = #1044#1072#1085#1085#1099#1077' '#1087#1088#1080#1082#1072#1079#1072' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
           Align = alClient
           AutoFitColWidths = True
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
           ParentShowHint = False
           PopupMenu = PopupMenu1
           ReadOnly = True
           ShowHint = True
           TabOrder = 3
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = prikazDblClick
           OnTitleClick = prikazTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'fio'
               Footers = <>
@@ -507,6 +495,7 @@ inherited fmZach: TfmZach
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cshort_name_fac'
               Footers = <>
@@ -515,6 +504,7 @@ inherited fmZach: TfmZach
               Width = 62
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cshort_spec'
               Footers = <>
@@ -523,6 +513,7 @@ inherited fmZach: TfmZach
               Width = 83
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_kat_zach'
               Footers = <>
@@ -531,6 +522,7 @@ inherited fmZach: TfmZach
               Width = 121
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cname_zach'
               Footers = <>
@@ -539,6 +531,7 @@ inherited fmZach: TfmZach
               Width = 125
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_lang'
               Footers = <>
@@ -547,6 +540,7 @@ inherited fmZach: TfmZach
               Width = 72
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
@@ -554,6 +548,7 @@ inherited fmZach: TfmZach
               Width = 79
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_grup'
               Footers = <>
@@ -561,35 +556,42 @@ inherited fmZach: TfmZach
               Width = 50
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SummBall'
               Footers = <>
               Title.Caption = #1057#1091#1084#1084#1072' '#1073#1072#1083#1083#1086#1074
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'SredBall'
               Footers = <>
               Title.Caption = #1057#1088#1077#1076'. '#1073#1072#1083#1083
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MinBall'
               Footers = <>
               Title.Caption = #1052#1080#1085'. '#1073#1072#1083#1083
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'nCode'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'RegNomer'
               Footers = <>
               Visible = False
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsBalls: TTabSheet
@@ -603,25 +605,18 @@ inherited fmZach: TfmZach
           Hint = #1044#1072#1085#1085#1099#1077' '#1087#1088#1080#1082#1072#1079#1072' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
           Align = alClient
           AutoFitColWidths = True
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = dbgBallsTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cshort_name_fac'
               Footers = <>
@@ -631,6 +626,7 @@ inherited fmZach: TfmZach
               Width = 65
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_spec'
               Footers = <>
@@ -639,6 +635,7 @@ inherited fmZach: TfmZach
               Width = 250
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_kat_zach'
               Footers = <>
@@ -647,6 +644,7 @@ inherited fmZach: TfmZach
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = #1089'name_disc'
               Footers = <>
@@ -655,6 +653,7 @@ inherited fmZach: TfmZach
               Width = 150
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'MinBall'
               Footers = <>
@@ -662,6 +661,8 @@ inherited fmZach: TfmZach
               Width = 150
               OnUpdateData = dbgBallsColumns3UpdateData
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar5: TToolBar
           Left = 0
@@ -783,8 +784,6 @@ inherited fmZach: TfmZach
       Anchors = [akRight, akBottom]
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
       Default = True
-      ModalResult = 1
-      TabOrder = 2
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
         18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
@@ -813,13 +812,15 @@ inherited fmZach: TfmZach
         FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       Layout = blGlyphRight
+      ModalResult = 1
+      TabOrder = 2
     end
   end
   object ImageList1: TImageList
     Left = 483
     Top = 80
     Bitmap = {
-      494C010105004000480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105004000500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1094,7 +1095,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C010103000400480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828

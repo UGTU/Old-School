@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, ActnList, Buttons, ExtCtrls, uDm,
-  DBGridEh, DBCtrlsEh, Mask, DBLookupEh, Contnrs, ApplicationController, ExceptionBase;
+  DBGridEh, DBCtrlsEh, Mask, DBLookupEh, Contnrs, ApplicationController, ExceptionBase,
+  System.Actions;
 
 type
   TfrmJoinGroup = class(TfrmBaseDialog)

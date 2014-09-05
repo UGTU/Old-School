@@ -1871,6 +1871,7 @@ procedure TfmGroup.dbgrdVedColumns7UpdateData(Sender: TObject;
 begin
   if Text = '' then
   begin
+    exit;
     Value := -1;
     Modified := true;
   end;
@@ -1883,7 +1884,9 @@ begin
     Text:= '';
   end;
     TApplicationController.GetInstance.AddLogEntry('Ведомость. Ввод оценки '+dmUspevaemost.adospSelVedGroup.FieldByName('StudName').AsString+Text);
-end;
+
+    Modified := true;
+    end;
 
 
 
@@ -1930,23 +1933,18 @@ begin
           then
       exit;
 
-  //try
-    dmUspevaemost.adospSelVedGroup.Edit;
     try
       Text:= CheckOcenka(StrToInt(Key));
     except
       Text:='';
     end;
 
-  dmUspevaemost.adospSelVedGroup.FieldByName('Cosenca').AsString:=
-        Text;
+  dmUspevaemost.adospSelVedGroup.Edit;
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Ввод оценки '+dmUspevaemost.adospSelVedGroup.FieldByName('StudName').AsString+Text);
-    //if (dmUspevaemost.adospSelVedGroup.RecNo<
-        //dmUspevaemost.adospSelVedGroup.RecordCount) then
+
+  dbgrdVed.Columns[7].SetValueAsText(Text);
   dmUspevaemost.adospSelVedGroup.Next;
   Key:=' ';
-  //except
-  //end;
 end;
 
 procedure TfmGroup.dbgrdVedTitleClick(Column: TColumnEh);
