@@ -1944,7 +1944,7 @@ begin
         //dmUspevaemost.adospSelVedGroup.RecordCount) then
   //dmUspevaemost.adospSelVedGroup.Post;
   dmUspevaemost.adospSelVedGroup.Next;
-  //Key:=' ';
+  Key:=' ';
   //except
   //end;
 end;
