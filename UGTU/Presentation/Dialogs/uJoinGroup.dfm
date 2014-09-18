@@ -109,6 +109,7 @@ inherited frmJoinGroup: TfrmJoinGroup
     Width = 124
     Height = 13
     Caption = #1053#1086#1084#1077#1088' '#1079#1072#1095#1077#1090#1085#1086#1081' '#1082#1085#1080#1078#1082#1080
+    Visible = False
   end
   object Bevel2: TBevel [6]
     Left = 8
@@ -203,6 +204,7 @@ inherited frmJoinGroup: TfrmJoinGroup
     Top = 67
     Width = 257
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_prikaz'
@@ -215,6 +217,7 @@ inherited frmJoinGroup: TfrmJoinGroup
     Top = 106
     Width = 257
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_grup'
@@ -228,12 +231,13 @@ inherited frmJoinGroup: TfrmJoinGroup
     Top = 161
     Width = 255
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     MaxLength = 6
     TabOrder = 3
     Text = '      '
-    Visible = True
+    Visible = False
     OnChange = eNumChange
     EditMask = '000000; ; '
   end
@@ -242,6 +246,7 @@ inherited frmJoinGroup: TfrmJoinGroup
     Top = 24
     Width = 257
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_pric'
