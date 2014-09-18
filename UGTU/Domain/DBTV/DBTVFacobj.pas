@@ -54,7 +54,7 @@ begin
   AdoDataset:= TAdoDataSet.Create(TreeView);
   AdoDataset.Connection:=Connection;
   AdoDataset.CommandType:=cmdText;
-  AdoDataset.CommandText:='select * from TREE_specialties where ik_fac='''+inttostr(IK)+''' ORDER BY Ik_form_ed,sortorder,Cname_spec';    // order by Ik_form_ed, CName_spec
+  AdoDataset.CommandText:='select * from TREE_specialties where ik_fac='''+inttostr(IK)+''' ORDER BY spDateExit,Ik_form_ed,sortorder,Cname_spec';    // order by Ik_form_ed, CName_spec
   AdoDataset.Active:=true;
   if (AdoDataset.RecordCount=0) then
     Node.HasChildren:=false
@@ -67,7 +67,7 @@ var new:TTreeNode;
 DBnode:TDBNodeSpecObject;
 begin
 //Node.Text:=Node.Text;
-new:=TreeView.Items.AddChildFirst(Node,Caption+' ('+direct+')');
+new:=TreeView.Items.AddChildFirst(Node,Caption{+' ('+direct+')'});
 DBnode:=TDBNodeSpecObject.create(new,TreeView);
 DBNode.ik:=ik;
 DBNode.ShortName:=Sname;
@@ -100,9 +100,9 @@ for i:=0 to (AdoDataset.RecordCount-1) do
 begin
   if AdoDataset.FieldValues['Sh_spec']<>NULL then shSpec := AdoDataset.FieldValues['Sh_spec'] + ' - ' else shSpec := '';
 
-  nfe:=AdoDataset.FieldValues['CName_form_ed'];
+  {nfe:=AdoDataset.FieldValues['CName_form_ed'];
   if (AdoDataset.FieldValues['ik_form_ed']>1) then
-  lfe:='('+nfe[1]+') ' else
+  lfe:='('+nfe[1]+') ' else}
   lfe:='';
 
 AddChild(shSpec+lfe+AdoDataset.FieldValues['CName_spec'],AdoDataset.FieldValues['Cshort_spec'],AdoDataset.FieldValues['ik_spec_fac'],AdoDataset.FieldValues['nn_studyyears'],AdoDataset.FieldValues['cname_direction'], AdoDataset.FieldValues['ik_form_ed'], nfe);

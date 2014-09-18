@@ -198,6 +198,7 @@ inherited frmStudVosst: TfrmStudVosst
     Top = 26
     Width = 231
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_prikaz'
@@ -212,6 +213,7 @@ inherited frmStudVosst: TfrmStudVosst
     Top = 67
     Width = 266
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_pric'
@@ -226,6 +228,7 @@ inherited frmStudVosst: TfrmStudVosst
     Top = 146
     Width = 266
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_spec_fac'
@@ -240,6 +243,7 @@ inherited frmStudVosst: TfrmStudVosst
     Top = 104
     Width = 267
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_fac'
@@ -254,6 +258,7 @@ inherited frmStudVosst: TfrmStudVosst
     Top = 188
     Width = 266
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_grup'
