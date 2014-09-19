@@ -1,7 +1,7 @@
 object dmStudentActions: TdmStudentActions
   OldCreateOrder = False
-  Height = 378
-  Width = 543
+  Height = 352
+  Width = 357
   object aspAddRelative: TADOStoredProc
     Connection = dm.DBConnect
     LockType = ltBatchOptimistic
@@ -12,71 +12,83 @@ object dmStudentActions: TdmStudentActions
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@flag'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@code'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@memb'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@post'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
+        Value = Null
       end
       item
         Name = '@pred'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@fio'
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end
       item
         Name = '@adres'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
+        Value = Null
       end
       item
         Name = '@tel'
         Attributes = [paNullable]
         DataType = ftString
         Size = 15
+        Value = Null
       end
       item
         Name = '@birth'
         Attributes = [paNullable]
         DataType = ftDateTime
+        Value = Null
       end
       item
         Name = '@rabTel'
         Attributes = [paNullable]
         DataType = ftString
         Size = 15
+        Value = Null
       end
       item
         Name = '@old'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 124
     Top = 24
@@ -1036,7 +1048,7 @@ object dmStudentActions: TdmStudentActions
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
-        Value = Null
+        Value = -6
       end
       item
         Name = '@ncode'
@@ -1076,45 +1088,11 @@ object dmStudentActions: TdmStudentActions
         Name = '@cd_kem_vidan'
         Attributes = [paNullable]
         DataType = ftString
-        Size = 50
+        Size = 500
         Value = Null
       end>
     Left = 36
     Top = 288
-    object IntegerField7: TIntegerField
-      FieldName = 'Ik_lang'
-      Visible = False
-    end
-    object IntegerField8: TIntegerField
-      FieldName = 'Ik_step_vlad'
-      Visible = False
-    end
-    object BCDField4: TBCDField
-      FieldName = 'nCode'
-      Precision = 18
-      Size = 0
-    end
-    object StringField7: TStringField
-      DisplayLabel = #1048#1085#1086#1089#1090#1088#1072#1085#1085#1099#1081' '#1103#1079#1099#1082
-      FieldKind = fkLookup
-      FieldName = 'Lang'
-      LookupKeyFields = 'Ik_lang'
-      LookupResultField = 'Cname_lang'
-      KeyFields = 'Ik_lang'
-      LookupCache = True
-      Size = 50
-      Lookup = True
-    end
-    object StringField8: TStringField
-      DisplayLabel = #1057#1090#1077#1087#1077#1085#1100' '#1074#1083#1072#1076#1077#1085#1080#1103
-      FieldKind = fkLookup
-      FieldName = 'StepVl'
-      LookupKeyFields = 'Ik_step_vlad'
-      LookupResultField = 'Cname_step_vlad'
-      KeyFields = 'Ik_step_vlad'
-      Size = 50
-      Lookup = True
-    end
   end
   object aspExtendSession: TADOStoredProc
     Connection = dm.DBConnect
