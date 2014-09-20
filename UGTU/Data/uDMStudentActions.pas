@@ -33,11 +33,6 @@ type
     aspLevelUp: TADOStoredProc;
     aspJoinGrup: TADOStoredProc;
     aspAddDoc: TADOStoredProc;
-    IntegerField7: TIntegerField;
-    IntegerField8: TIntegerField;
-    BCDField4: TBCDField;
-    StringField7: TStringField;
-    StringField8: TStringField;
     aspExtendSession: TADOStoredProc;
     aspAppendStudGroupAcadem: TADOStoredProc;
     IntegerField9: TIntegerField;

@@ -239,7 +239,7 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
       DisplayLabel = #1050#1077#1084' '#1074#1099#1076#1072#1085
       FieldName = 'Cd_kem_vidan'
       OnChange = aspSelDocumentsdoc_typeChange
-      Size = 50
+      Size = 500
     end
   end
   object aspSelLastNames: TADOStoredProc
