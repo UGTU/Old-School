@@ -328,7 +328,8 @@ begin
          adotFilter2.Close;
          adotFilter2.Filter:='';
          adotFilter2.SQL.Clear;
-         adotFilter2.SQL.Add('SELECT ik_spec_fac, ik_fac, Spec_stud.ik_spec, Cname_spec FROM Spec_stud INNER JOIN Relation_spec_fac ON Relation_spec_fac.ik_spec=Spec_stud.ik_spec');
+         adotFilter2.SQL.Add('SELECT ik_spec_fac, ik_fac, Spec_stud.ik_spec, ''('' + Left(Cname_form_ed,1) + '') '' + FullName as Cname_spec FROM Spec_stud ' +
+         'INNER JOIN Relation_spec_fac ON Relation_spec_fac.ik_spec=Spec_stud.ik_spec inner join Form_ed on Form_ed.ik_form_ed = Relation_spec_fac.ik_form_ed');
          adotFilter2.Open;
          adotElemUsersfilter2.LookupKeyFields:='ik_spec_fac';
          adotElemUsersfilter2.LookupResultField:='Cname_spec';
