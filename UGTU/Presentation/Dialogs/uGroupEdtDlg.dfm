@@ -144,6 +144,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 24
       Width = 158
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       ParentShowHint = False
@@ -157,6 +158,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 24
       Width = 126
       Height = 19
+      DynProps = <>
       EditButton.Style = ebsUpDownEh
       EditButton.Visible = True
       EditButtons = <>
@@ -174,6 +176,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 102
       Width = 294
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'ik_uch_plan'
@@ -190,6 +193,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 62
       Width = 158
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh
@@ -202,6 +206,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 62
       Width = 126
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh
@@ -230,6 +235,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 21
       Width = 294
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       ParentShowHint = False
@@ -259,6 +265,7 @@ inherited frmGroupEdt: TfrmGroupEdt
       Top = 25
       Width = 294
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'ik_spclz'

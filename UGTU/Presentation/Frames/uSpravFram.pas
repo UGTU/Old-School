@@ -160,13 +160,14 @@ begin
   Result := true;
   //пересылаем данные на сервер
   try
-    cdsSprav.ApplyUpdates(-1);
+    cdsSprav.ApplyUpdates(-1);//(-1);
   except
     MessageBox(Handle, 'Данные некорректны. Сохранение отменено.','ИС "УГТУ"',MB_OK);
    end;
    modified:=false;
    aSave.Enabled:=false;
    aCancel.Enabled:=false;
+
 end;
 
 //отмена изменений
@@ -280,8 +281,8 @@ end;
 function TfmSprav.GetSortFieldNumber:integer;
 var  k:integer;
 begin
-    tSpravList.Seek(cbSprav.Text);
-    //.Locate('SpravName', cbSprav.Text,[loPartialKey]);
+    tSpravList.Locate('SpravName', cbSprav.Text,[loPartialKey]);//.Seek(cbSprav.Text);
+    //
 	  tSprav.Open;
 	  //сортируем справочник по всем "видимым" полям
 	  if tSpravList.FieldByName('TabCount').AsString='' then
@@ -340,8 +341,10 @@ begin
   cdsSprav.Close;
   tSprav.Close;
   tSprav.SQL.Add('');
-
-  tSprav.SQL.Strings[1]:=GetSortString;
+  if  tSprav.SQL.Text.IndexOf('ORDER') < 0  then
+ // if tSprav.SQL.Strings[2] = '' then
+       tSprav.SQL.Add(GetSortString);
+  //tSprav.SQL.Strings[1]:=GetSortString;
 
   tSprav.Open;
 
@@ -396,6 +399,7 @@ begin
       ChangeSprav;
    end;
    end;
+
    try
 	   cdsSprav.Fields[0].Visible:=false; //код невидим
 	   //если справочник - ссылающаяся таблица

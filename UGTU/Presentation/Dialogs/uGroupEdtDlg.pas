@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, DBCtrlsEh, Mask, ActnList, Buttons,
   ExtCtrls, DBGridEh, DBLookupEh, DateUtils, UchPlanController, GeneralController,
-  NagruzkaController,Grids, DBGrids, DB, ADODB;
+  NagruzkaController,Grids, DBGrids, DB, ADODB, System.Actions;
 
 type
   TfrmGroupEdt = class(TfrmBaseDialog)
@@ -263,7 +263,7 @@ begin
 try
   dm.DBConnect.BeginTrans;
   //создание учебного плана
-  if ((FUchPlan = 0) or (dblcbUchPln.KeyValue<>FParentUchPlan))and(VidGos>FGOS2) then
+  if ((FUchPlan = 0) or ((dblcbUchPln.KeyValue<>FParentUchPlan)and(VidGos>FGOS2))) then
     with dm.aspAddRupGrup do
     begin
       Connection := dm.DBConnect;
@@ -271,11 +271,13 @@ try
       Parameters.ParamByName('@ik_main_plan').Value := dblcbUchPln.KeyValue;
       Parameters.ParamByName('@grup_comment').Value := edtName.Text;
       Parameters.ParamByName('@vidgos').Value := VidGos;
+      Parameters.ParamByName('@ik_spec_fac').Value := SpecFacIK;
+      Parameters.ParamByName('@year').Value := dbneYear.Text;
       ExecProc;
       FUchPlan := Parameters.ParamByName('@inserted_uch_plan').Value;
     end;
-  if VidGos=FGOS2 then FUchPlan := dblcbUchPln.KeyValue;
-  
+  //if VidGos=FGOS2 then FUchPlan := dblcbUchPln.KeyValue;
+
   if not bEdit then
   begin
     with dmGroupActions.adospAppendGrup.Parameters do

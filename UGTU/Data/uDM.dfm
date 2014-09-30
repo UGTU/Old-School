@@ -10,7 +10,7 @@ object dm: Tdm
       'fo=False;User ID=developer;Initial Catalog=UGTU;Data Source=ugtu' +
       'db.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;Pack' +
       'et Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;' +
-      'Tag with column collation when possible=False;'
+      'Tag with column collation when possible=False'
     IsolationLevel = ilReadUncommitted
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'
@@ -3559,14 +3559,28 @@ object dm: Tdm
         Value = Null
       end
       item
-        Name = '@ik_main_plan'
+        Name = '@vidgos'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
         Value = Null
       end
       item
-        Name = '@vidgos'
+        Name = '@ik_spec_fac'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@year'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@ik_main_plan'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
