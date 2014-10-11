@@ -1565,14 +1565,7 @@ object dmUspevaemost: TdmUspevaemost
         Value = Null
       end
       item
-        Name = '@iK_disc'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = Null
-      end
-      item
-        Name = '@ik_vid_zanyat'
+        Name = '@ik_upContent'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10

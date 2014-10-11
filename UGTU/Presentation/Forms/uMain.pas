@@ -2886,10 +2886,10 @@ begin
   E.Sheets[1].Select;
 
   //   photo
-  if (dmStudentSelectionProcs.adolichnKartStud.Fields[1].Value <> Null) and (dmStudentSelectionProcs.adolichnKartStud.Fields[1].Value <> '') then
+ { if (dmStudentSelectionProcs.adolichnKartStud.Fields[1].Value <> Null) and (dmStudentSelectionProcs.adolichnKartStud.Fields[1].Value <> '') then
   begin
   //(dm.adolichnKartStud.Fields[1] as TBlobField)
-  end;
+  end;  }
 
   E.range['q4']:= dmStudentSelectionProcs.adolichnKartStud.Fields[2].asstring;
   E.range['o6']:= dmStudentSelectionProcs.adolichnKartStud.Fields[3].asstring;

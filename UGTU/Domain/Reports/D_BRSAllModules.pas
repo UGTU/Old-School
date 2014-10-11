@@ -19,13 +19,14 @@ type
        FDate:string;
        FNum:string;
        FIkDisc:integer;
+       FIKUP_Content: integer;
        FIkGroup:integer;
     protected
        procedure Execute;override;
        function GetTotalSteps:Integer;override;
     public
        constructor Create (AOwner : TComponent; dsVed : TAdoDataset);
-       constructor CreateFull (AOwner : TComponent; dsVed : TAdoDataset; fac,group,disc,exam, num, date:string;sem, IkDisc, IkGroup:integer);
+       constructor CreateFull (AOwner : TComponent; dsVed : TAdoDataset; fac,group,disc,exam, num, date:string;sem, IkDisc, IkGroup, ikContent:integer);
 
     end;
 
@@ -37,8 +38,8 @@ type
   FDataset := dsVed;
   end;
 
-  constructor TBRSAllModulesReport.CreateFull (AOwner : TComponent; dsVed : TAdoDataset; fac,group,disc,exam, num, date:string;sem, IkDisc, IkGroup:integer);
-  begin
+constructor TBRSAllModulesReport.CreateFull (AOwner : TComponent; dsVed : TAdoDataset; fac,group,disc,exam, num, date:string;sem, IkDisc, IkGroup, ikContent:integer);
+begin
   inherited Create(AOwner);
   FDataset := dsVed;
   FFaculty := fac;
@@ -50,7 +51,8 @@ type
   FNum:=num;
   FIkGroup:=ikgroup;
   FIkDisc:=ikdisc;
-  end;
+  FIKUP_Content := ikContent;
+end;
 
   procedure TBRSAllModulesReport.Execute;
   var
@@ -61,17 +63,18 @@ type
      exit;
 
     FDataset.Active:=false;
-    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',1)';
+    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FIKUP_Content)+','+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',1)';
     FDataset.Active:=true;
     FDataset.First;
     rc:=FDataset.RecordCount;
+    Logger.LogMessage('FDataset opned');
 
     NameDatasetNum:=1;
 
     FDataset.Active:=false;
-    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',2)';
+    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FIKUP_Content)+','+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',2)';
     FDataset.Active:=true;
-
+    Logger.LogMessage('FDataset activated');
     if rc<FDataset.RecordCount then
     begin
     rc:=FDataset.RecordCount;
@@ -79,15 +82,16 @@ type
     end;
 
     FDataset.Active:=false;
-    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',3)';
+    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FIKUP_Content)+','+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',3)';
     FDataset.Active:=true;
         FDataset.First;
 
+    Logger.LogMessage('FDataset goto first');
     if rc<FDataset.RecordCount then
     NameDatasetNum:=3;
 
     FDataset.Active:=false;
-    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+','+IntToStr(NameDatasetNum)+')';
+    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FIKUP_Content)+','+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+','+IntToStr(NameDatasetNum)+')';
     FDataset.Active:=true;
 
     if not FDataset.Active then
@@ -104,6 +108,8 @@ type
     Range['F12','J13'].Clear;
     Range['Q12','U13'].Copy(Range['F'+intToStr(TableBeg+2+FDataset.RecordCount-1),'J'+intToStr(TableBeg+3+FDataset.RecordCount-1)]);
     Range['Q12','U13'].Clear;
+
+    Logger.LogMessage('Range cleared');
 
     Items[4,4] := FFaculty;
     Items[5,4] := FGroup;
@@ -128,7 +134,7 @@ type
 
 
     FDataset.Active:=false;
-    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',1)';
+    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FIKUP_Content)+','+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',1)';
     FDataset.Active:=true;
     FDataset.First;
 
@@ -147,7 +153,7 @@ type
     end;
 
     FDataset.Active:=false;
-    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',2)';
+    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FIKUP_Content)+','+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',2)';
     FDataset.Active:=true;
     FDataset.First;
 
@@ -167,7 +173,7 @@ type
     end;
 
     FDataset.Active:=false;
-    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',3)';
+    FDataset.CommandText:='select * from dbo.GetBRSBallsForModule('+inttostr(FIKUP_Content)+','+inttostr(FikDisc)+','+inttostr(FikGroup)+','+inttostr(FSemester)+',3)';
     FDataset.Active:=true;
     FDataset.First;
 
