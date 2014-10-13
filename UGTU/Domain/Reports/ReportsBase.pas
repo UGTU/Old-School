@@ -537,6 +537,7 @@ begin
   if Variants.VarIsClear(FApplication) then
     FApplication := DoGetApplication;
   Result:=FApplication;
+  Logger.LogMessage('GetApplication Result = ' + VarToStr(Result));
 end;
 
 
@@ -770,9 +771,17 @@ end;
 function TExcelReportBase.GetExcelApplication: ExcelXP.ExcelApplication;
 var
   pDispatch:IDispatch;
+  hRes : HRESULT;
 begin
+  Logger.LogMessage('Try get IID__Application Excel interface...');
+//  if Application = nil then
+  //   Application := CreateOleObject('Excel.Application');
   pDispatch :=IDispatch(TVarData(Application).VDispatch);
-  pDispatch.QueryInterface(IID__Application, Result);
+  Logger.LogMessage(Format('pDispatch=%p', [Pointer(pDispatch)]));
+  Assert(pDispatch <> nil);
+  hRes := pDispatch.QueryInterface(IID__Application, Result);
+  Logger.LogMessage(Format('Query of IID_Application result is %x', [Longint(hRes)]));
+  OleCheck(hRes);
 end;
 
 function TExcelReportBase.GetName: string;

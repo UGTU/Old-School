@@ -61,6 +61,8 @@ uses
     function IsAbit_HaveAllExam(): boolean;
 //IsAbit_HaveAllDocs проверяет, есть ли у абитуриента все документы
     function IsAbit_HaveAllDocs(): boolean;
+//IsAbit_HaveZachN проверяет, есть ли у абитуриента номер зачетной книжки
+    function IsAbit_HaveZachN(): boolean;
 //IsAbit_CanBeZachisl проверяет, можно ли перевести абитуриента в статус "зачислен"
     function IsAbit_CanBeZachisl():boolean;
 //Abit_Get_Ball Возвращает проходной балл для категории поступления набора
@@ -327,7 +329,7 @@ end;
 
 function TAbitZachislenieController.IsAbit_CanBeZachisl: boolean;
 begin
-  Result:=(IsAbit_HaveAllExam)and(IsAbit_HaveAllDocs);
+  Result:=(IsAbit_HaveAllExam)and(IsAbit_HaveAllDocs)and(IsAbit_HaveZachN);
 end;
 
 function TAbitZachislenieController.IsAbit_HaveAllDocs: boolean;
@@ -339,6 +341,11 @@ end;
 function TAbitZachislenieController.IsAbit_HaveAllExam(): boolean;
 begin
    result:=FAbitListDataSetInstance.FieldByName('notExam').Value=null;
+end;
+
+function TAbitZachislenieController.IsAbit_HaveZachN: boolean;
+begin
+  result := not(FAbitListDataSetInstance.FieldByName('Nn_zach').Value=null);
 end;
 
 function TAbitZachislenieController.Abit_Get_Ball(NNrecord, Category: integer): integer;

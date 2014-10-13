@@ -56,7 +56,7 @@ uses
   function GetBRSExamVidZan(ik_grup, nSem:integer):integer;
 
 //функция проверяет наличие созданной ведомости для аттестации
-  function CheckAttsExist(ikGroup, nSem, nVed, ikVidZan, ikPredm: Integer; IsBrs:boolean): boolean;
+  function CheckAttsExist(ikGroup, nSem, nVed{, ikVidZan}, ikPredm: Integer; IsBrs:boolean): boolean;
 
    //функция проверяет наличие созданной ведомости для аттестации
   function CheckBRSExamExist(ik_grup, nSem, ikVidZan, ikPredm: Integer):boolean;
@@ -346,6 +346,8 @@ uses
 end;
 
 implementation
+uses CommonIntf, CommonIntfImpl;
+
  var
 //FAbitZachislenieControllerInstance - экземпляр контроллера
   FUspevGroupControllerInstance: TUspevGroupController = nil;
@@ -522,7 +524,7 @@ begin
 end;
 
 //функция проверяет наличие созданной ведомости для аттестации
-function TUspevGroupController.CheckAttsExist(ikGroup, nSem, nVed, ikVidZan, ikPredm: Integer; IsBrs:boolean): boolean;
+function TUspevGroupController.CheckAttsExist(ikGroup, nSem, nVed{, ikVidZan}, ikPredm: Integer; IsBrs:boolean): boolean;
 begin
 
   dmUspevaemost.adospSelAtt.Active := false;
@@ -539,16 +541,16 @@ begin
     Items[0].Value := nSem;
     AddParameter;
     // Дисциплина
-    Items[1].Value := ikPredm;
+    Items[1].Value := ikPredm;   //сюда передаем ik_upContent
     AddParameter;
     // Вид занятий
-    Items[2].Value := ikVidZan;
-    AddParameter;
+    //Items[2].Value := ikVidZan;
+    //AddParameter;
     // Группа
-    Items[3].Value := ikGroup;
+    Items[2].Value := ikGroup;
     AddParameter;
     // номер аттестации
-    Items[4].Value := nved;
+    Items[3].Value := nved;
   end;
   //dmUspevaemost.adospSelAtt.ExecProc;
   dmUspevaemost.adospSelAtt.Active := true;
@@ -591,19 +593,20 @@ end;
 //функция создает все ведомости аттестации
 function TUspevGroupController.CreateAllAtt(ik, nSem, numAtt:integer; IsBrs:boolean):boolean;
 begin
-result := false;
-    // получаем список дисциплин аттестации которые должны быть
-    TUspevGroupController.Instance.GetAttVidZan(ik, nSem, NumAtt, IsBRS);
+  result := false;
 
-    dmUspevaemost.adospGetAttVidZan.First;
+  // получаем список дисциплин аттестации которые должны быть
+  TUspevGroupController.Instance.GetAttVidZan(ik, nSem, NumAtt, IsBRS);
+
+  dmUspevaemost.adospGetAttVidZan.First;
 
   while not dmUspevaemost.adospGetAttVidZan.Eof do
   begin
     // пропускаем уже созданные дисциплины аттестации
 
     if TUspevGroupController.Instance.CheckAttsExist(ik, nSem, numAtt,
-                       dmUspevaemost.adospGetAttVidZan.Fields[0].Value,
-                       dmUspevaemost.adospGetAttVidZan.Fields[1].Value, IsBrs)
+                       dmUspevaemost.adospGetAttVidZan.Fields[3].Value,
+                      { dmUspevaemost.adospGetAttVidZan.Fields[1].Value,} IsBrs)
 
     then
     begin
@@ -612,13 +615,13 @@ result := false;
     end;
     with dmUspevaemost.adospAppVed.Parameters do
     begin
-      Items[1].Value := 1;                                   // создание аттестации
-      Items[2].Value := '';                                  // номер аттестации
-      Items[3].Value := ik;                                  // код группы
-      items[4].Value := dmUspevaemost.adospGetAttVidZan.Fields[0].Value;// вид занятий
-      items[5].Value := nSem;                                // номер семестра
-      items[6].Value := dmUspevaemost.adospGetAttVidZan.Fields[1].Value;// предмет
-      items[7].Value := Null;                                // препод
+      Items[1].Value := 1;                                                // создание аттестации
+      Items[2].Value := '';                                               // номер аттестации
+      Items[3].Value := ik;                                               // код группы
+      items[4].Value := dmUspevaemost.adospGetAttVidZan.Fields[0].Value;  // вид занятий
+      items[5].Value := nSem;                                             // номер семестра
+      items[6].Value := dmUspevaemost.adospGetAttVidZan.Fields[1].Value;  // предмет
+      items[7].Value := Null;                                             // преподаватель
       items[8].Value := numAtt;                              // номер аттестации в поле вид экзамена
       items[9].Value := Date;                                // дата выдачи
       items[10].Value := Date;                               // дата экзамена
@@ -700,16 +703,16 @@ begin
     Items[0].Value := nSem;
     // Дисциплина
     AddParameter;
-    Items[1].Value := ikPredm;
+    Items[1].Value := ikPredm;   //ik_upContent
     // Вид занятий
-    AddParameter;
-    Items[2].Value := ikVidZan;
+   // AddParameter;
+   // Items[2].Value := ikVidZan;
     // Группа
     AddParameter;
-    Items[3].Value := ik_grup;
+    Items[2].Value := ik_grup;
     //номер аттестации
     AddParameter;
-    Items[4].Value := nom_ved;
+    Items[3].Value := nom_ved;
   end;
   dmUspevaemost.adospSelAtt.Open;
   //dmUspevaemost.adospSelAtt.Active := true;
@@ -739,7 +742,7 @@ begin
     Items[2].Value := ikVidZan;
     // Группа
     AddParameter;
-    Items[3].Value := ik_grup;
+    Items[2].Value := ik_grup;
   end;
   dmUspevaemost.adospSelBRSExam.ExecProc;
   dmUspevaemost.adospSelBRSExam.Active := true;
@@ -3050,21 +3053,36 @@ procedure TUspevGroupController.PrintBRSVedomost(ikGrup, nSem, nAtt,
 var
   fac, group, disc:string;
   Report:TBRSAllModulesReport;
-  ikdisc:integer;
+  ikdisc, ikcontent:integer;
+  Log : ILogger;
 begin
+  Log := TNullLogger.GetInstance;   // TMemoLogger.GetInstance;
+
+  Assert(dmUgtuStructure <> nil);
+  Assert(dmUgtuStructure.adoqSpecFac <> nil);
   dmUgtuStructure.adoqSpecFac.Open;
   dmUgtuStructure.adoqSpecFac.Filter:='';
   if dmUgtuStructure.adoqSpecFac.Locate('ik_fac',ikfac,[loCaseInsensitive]) then
      fac:=dmUgtuStructure.adoqSpecFacCname_fac.AsString;
 
+    Log.LogMessage('dmUgtuStructure.adoqSpecFac opned and filtered');
+    Assert(dmUgtuStructure.adoqSelAllGroups <> nil);
   dmUgtuStructure.adoqSelAllGroups.Open;
   dmUgtuStructure.adoqSelAllGroups.Filter:='';
   if dmUgtuStructure.adoqSelAllGroups.Locate('ik_grup',ikgrup,[loCaseInsensitive]) then
      group:=dmUgtuStructure.adoqSelAllGroups.FieldByName('cname_grup').AsString;
 
+  Log.LogMessage('dmUgtuStructure.adoqSelAllGroups opned and filtered');
   ikdisc:=dmUspevaemost.adospGetAllAtt.FieldByName('ik_disc').Value;
+  ikcontent :=dmUspevaemost.adospGetAllAtt.FieldByName('ik_upContent').Value;
   disc:=dmUspevaemost.adospGetAllAtt.FieldByName('cname_disc').AsString;
-  Report := TBRSAllModulesReport.CreateFull(nil, dmUspevaemost.adsGetBRSVedomost, fac, group, disc, examiner, num, date, nSem, ikDisc, ikGrup);
+
+  Report := TBRSAllModulesReport.CreateFull(nil, dmUspevaemost.adsGetBRSVedomost, fac, group, disc, examiner, num, date, nSem, ikDisc, ikGrup, ikcontent);
+  Report.Logger := Log;
+  Log.LogMessage('Report created');
+  { str := ExtractFilePath(Application.ExeName)+'reports\BRSAllModules.xlt';
+			    Report.WorkBooks.Add(str);}
+
   Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\BRSAllModules.xlt';
 
   {Report := TBRSReport.CreateFull(nil, dmUspevaemost.adodsSelAttBRSGroup, fac, group, disc, examiner, num, date, nSem);
@@ -3072,6 +3090,7 @@ begin
   Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\VedomostBRS.xlt';}
   // Начать построение отчёта
   Report.BuildReport;
+  Log.LogMessage('Report builded');
   Report.Show;
   Report.Free;
 end;

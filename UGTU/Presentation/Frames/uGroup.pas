@@ -854,17 +854,17 @@ begin
       btnSaveAtt.Click;
 
   if IsBRS then
-  MaxBall:=dmUspevaemost.adospGetAllAtt.Fields[4].AsInteger;
+    MaxBall:=dmUspevaemost.adospGetAllAtt.Fields[5].AsInteger;
 
   ikVed := dbcmbxDisc.KeyValue;
-  ikPredm := dmUspevaemost.adospGetAllAtt.Fields[1].AsInteger;
+  ikPredm := dmUspevaemost.adospGetAllAtt.Fields[4].AsInteger;//dmUspevaemost.adospGetAllAtt.Fields[1].AsInteger;
   ikVidZan := dmUspevaemost.adospGetAllAtt.Fields[2].AsInteger;
   // чтение заголовка ведомости
 
   dmUspevaemost.adospSelAtt.Active:=false;
-  if IsBRS then dmUspevaemost.adospSelAtt.ProcedureName:='SelBRSAtt;1';
-  TUspevGroupController.Instance.SelAtt(cmbxSemAtt.ItemIndex+1, ikPredm, ikVidZan,
-                              ik, cmbxNumber.Value);
+  if IsBRS then
+     dmUspevaemost.adospSelAtt.ProcedureName:='SelBRSAtt;1';
+  TUspevGroupController.Instance.SelAtt(cmbxSemAtt.ItemIndex+1, ikPredm, ikVidZan, ik, cmbxNumber.Value);
 
   if dmUspevaemost.adospSelAtt.FieldByName('lClose').Value <> null then
     dbcbxCloseAtt.Checked := dmUspevaemost.adospSelAtt.FieldByName('lClose').Value;
