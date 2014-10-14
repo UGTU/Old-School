@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh, Mask,
-  DBCtrlsEh, DBLookupEh, ADODB;
+  DBCtrlsEh, DBLookupEh, ADODB, System.Actions;
 
 type
   TfrmSheduleAddRooms = class(TfrmBaseDialog)

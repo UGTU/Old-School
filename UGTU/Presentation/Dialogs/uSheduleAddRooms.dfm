@@ -314,6 +314,7 @@ inherited frmSheduleAddRooms: TfrmSheduleAddRooms
         Width = 116
         Height = 19
         AlwaysShowBorder = True
+        DataField = ''
         EditButtons = <>
         Flat = True
         TabOrder = 0

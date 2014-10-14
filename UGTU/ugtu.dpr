@@ -403,7 +403,8 @@ uses
   DBTVTeacherObj in 'Domain\DBTV\DBTVTeacherObj.pas',
   DBTVWorkTypeObj in 'Domain\DBTV\DBTVWorkTypeObj.pas',
   DBTVZachobj in 'Domain\DBTV\DBTVZachobj.pas',
-  ShEvent in 'Domain\DBTV\ShEvent.PAS';
+  ShEvent in 'Domain\DBTV\ShEvent.PAS',
+  CommandController in 'Domain\Classes\CommandController.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

@@ -17,13 +17,13 @@ object dm: Tdm
     AfterConnect = DBConnectAfterConnect
     OnExecuteComplete = DBConnectExecuteComplete
     OnWillExecute = DBConnectWillExecute
-    Left = 31
-    Top = 124
+    Left = 32
+    Top = 128
   end
   object dsSelVedEkz: TDataSource
     DataSet = adospWriteVer
-    Left = 402
-    Top = 55
+    Left = 400
+    Top = 56
   end
   object adospSelVedEkz: TADOStoredProc
     Connection = DBConnect
@@ -31,7 +31,7 @@ object dm: Tdm
     OnCalcFields = adospSelVedEkzCalcFields
     ProcedureName = 'SelVedForExam;1'
     Parameters = <>
-    Left = 401
+    Left = 400
     Top = 24
     object adospSelVedEkznCode: TIntegerField
       FieldName = 'nCode'
@@ -84,13 +84,13 @@ object dm: Tdm
     CommandText = 'Vid_exam'
     CommandType = cmdTable
     Parameters = <>
-    Left = 734
-    Top = 556
+    Left = 736
+    Top = 560
   end
   object dsVidExam: TDataSource
     DataSet = adodsVidExam
-    Left = 782
-    Top = 556
+    Left = 784
+    Top = 560
   end
   object adotFilter2: TADOTable
     CacheSize = 15
@@ -98,8 +98,8 @@ object dm: Tdm
     Filtered = True
     LockType = ltBatchOptimistic
     TableName = 'kafedra'
-    Left = 98
-    Top = 853
+    Left = 96
+    Top = 856
     object adotFilter2ik_kaf: TAutoIncField
       FieldName = 'ik_kaf'
       ReadOnly = True
@@ -124,16 +124,16 @@ object dm: Tdm
     CursorType = ctStatic
     CommandText = 'select * from sysusers'
     Parameters = <>
-    Left = 33
-    Top = 889
+    Left = 32
+    Top = 888
   end
   object adotFilter1: TADOTable
     CacheSize = 15
     Connection = DBConnect
     LockType = ltBatchOptimistic
     TableName = 'Fac'
-    Left = 98
-    Top = 901
+    Left = 96
+    Top = 904
   end
   object adotElemUsers: TADOTable
     CacheSize = 15
@@ -143,8 +143,8 @@ object dm: Tdm
     BeforePost = adotElemUsersBeforePost
     AfterScroll = adotElemUsersAfterScroll
     TableName = 'Relation_VisElem_User'
-    Left = 258
-    Top = 861
+    Left = 256
+    Top = 864
     object adotElemUsersik_Element: TIntegerField
       FieldName = 'ik_Element'
       Visible = False
@@ -202,37 +202,37 @@ object dm: Tdm
   end
   object dsElemUsers: TDataSource
     DataSet = adotElemUsers
-    Left = 257
-    Top = 918
+    Left = 256
+    Top = 920
   end
   object dsElement: TDataSource
     DataSet = adotElement
-    Left = 185
-    Top = 889
+    Left = 184
+    Top = 888
   end
   object adotElement: TADOTable
     CacheSize = 15
     Connection = DBConnect
     TableName = 'VisElements'
-    Left = 188
-    Top = 859
+    Left = 192
+    Top = 856
   end
   object dsSostZach: TDataSource
     DataSet = adotblSostZach
-    Left = 878
-    Top = 498
+    Left = 880
+    Top = 496
   end
   object adotblSostZach: TADOTable
     Connection = DBConnect
     CursorType = ctStatic
     TableName = 'ABIT_sost_zach'
-    Left = 876
-    Top = 467
+    Left = 880
+    Top = 464
   end
   object dsEdtPost: TDataSource
     DataSet = adospEdtPost
-    Left = 1084
-    Top = 492
+    Left = 1088
+    Top = 496
   end
   object adospEdtPost: TADOStoredProc
     Connection = DBConnect
@@ -302,8 +302,8 @@ object dm: Tdm
         Precision = 10
         Value = Null
       end>
-    Left = 1089
-    Top = 443
+    Left = 1088
+    Top = 440
   end
   object adospWriteVer: TADOStoredProc
     Connection = DBConnect
@@ -348,20 +348,20 @@ object dm: Tdm
         Value = Null
       end>
     Left = 328
-    Top = 858
+    Top = 856
   end
   object dsWriteVer: TDataSource
     DataSet = adospWriteVer
-    Left = 332
-    Top = 895
+    Left = 336
+    Top = 896
   end
   object adodsNabor: TADODataSet
     Connection = DBConnect
     CommandText = 'TREE_ABIT_Specialties'
     CommandType = cmdTable
     Parameters = <>
-    Left = 749
-    Top = 380
+    Left = 752
+    Top = 384
     object adodsNaborik_spec_fac: TIntegerField
       FieldName = 'ik_spec_fac'
     end
@@ -399,22 +399,22 @@ object dm: Tdm
   end
   object dsNabor: TDataSource
     DataSet = adodsNabor
-    Left = 747
-    Top = 411
+    Left = 744
+    Top = 408
   end
   object qContentUchPlan: TADOQuery
     Connection = DBConnect
     LockType = ltBatchOptimistic
     Parameters = <>
-    Left = 1066
-    Top = 302
+    Left = 1064
+    Top = 304
   end
   object adsSemester: TADODataSet
     Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'Select * From Semester Order By n_sem'
     Parameters = <>
-    Left = 745
+    Left = 744
     Top = 304
   end
   object aspGetDiscModel: TADOStoredProc
@@ -478,8 +478,8 @@ object dm: Tdm
         Size = 1
         Value = 0
       end>
-    Left = 649
-    Top = 293
+    Left = 648
+    Top = 296
     object aspGetDiscModelik_disc: TIntegerField
       FieldName = 'ik_disc'
       Visible = False
@@ -556,8 +556,8 @@ object dm: Tdm
     LockType = ltBatchOptimistic
     CommandText = 'Select * From vid_nagruzki'
     Parameters = <>
-    Left = 681
-    Top = 125
+    Left = 680
+    Top = 128
     object adsVidNagruzkiik_vid_nagruzki: TAutoIncField
       FieldName = 'ik_vid_nagruzki'
       ReadOnly = True
@@ -573,8 +573,8 @@ object dm: Tdm
     LockType = ltBatchOptimistic
     CommandText = 'Select * From vid_zaniat'
     Parameters = <>
-    Left = 681
-    Top = 173
+    Left = 680
+    Top = 176
     object adsVidZanyatiK_vid_zanyat: TAutoIncField
       FieldName = 'iK_vid_zanyat'
       ReadOnly = True
@@ -590,15 +590,15 @@ object dm: Tdm
   object dsAbitDisc: TDataSource
     DataSet = adodsAbitDisc
     Left = 640
-    Top = 509
+    Top = 512
   end
   object adodsAbitDisc: TADODataSet
     Connection = DBConnect
     CommandText = 'ABIT_Disc'
     CommandType = cmdTable
     Parameters = <>
-    Left = 642
-    Top = 462
+    Left = 640
+    Top = 464
     object adodsAbitDiscik_disc: TAutoIncField
       FieldName = 'ik_disc'
       ReadOnly = True
@@ -614,8 +614,8 @@ object dm: Tdm
     CommandText = 'ABIT_VidSdachi'
     CommandType = cmdTable
     Parameters = <>
-    Left = 857
-    Top = 382
+    Left = 856
+    Top = 384
     object adodsVidSdachiik_sdach: TAutoIncField
       FieldName = 'ik_sdach'
       ReadOnly = True
@@ -633,15 +633,15 @@ object dm: Tdm
   end
   object dsVidSdachi: TDataSource
     DataSet = adodsVidSdachi
-    Left = 855
-    Top = 413
+    Left = 856
+    Top = 416
   end
   object adodsRasp: TADODataSet
     Connection = DBConnect
     CommandText = 'ABIT_Raspisanie'
     CommandType = cmdTable
     Parameters = <>
-    Left = 1061
+    Left = 1064
     Top = 696
     object adodsRaspid_rasp: TAutoIncField
       FieldName = 'id_rasp'
@@ -677,8 +677,8 @@ object dm: Tdm
   end
   object dsRasp: TDataSource
     DataSet = adodsRasp
-    Left = 1058
-    Top = 747
+    Left = 1056
+    Top = 744
   end
   object adodsPostupView: TADODataSet
     Connection = DBConnect
@@ -686,7 +686,7 @@ object dm: Tdm
     CommandText = 'Abit_Postup_view'
     CommandType = cmdTable
     Parameters = <>
-    Left = 1009
+    Left = 1008
     Top = 544
     object adodsPostupViewRegNomer: TIntegerField
       Alignment = taLeftJustify
@@ -784,20 +784,20 @@ object dm: Tdm
   end
   object dsPostupView: TDataSource
     DataSet = adodsPostupView
-    Left = 1084
-    Top = 555
+    Left = 1088
+    Top = 552
   end
   object adotbltypeTema: TADOTable
     Connection = DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
-    Left = 42
-    Top = 237
+    Left = 40
+    Top = 240
   end
   object dstypeTema: TDataSource
     DataSet = adotbltypeTema
-    Left = 41
-    Top = 285
+    Left = 40
+    Top = 288
   end
   object adodsAbitExamView: TADODataSet
     Connection = DBConnect
@@ -806,7 +806,7 @@ object dm: Tdm
     CommandType = cmdTable
     Parameters = <>
     Left = 648
-    Top = 381
+    Top = 384
     object adodsAbitExamViewname_disc: TStringField
       DisplayLabel = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
       FieldName = #1089'name_disc'
@@ -859,7 +859,7 @@ object dm: Tdm
   object dsAbitExamView: TDataSource
     DataSet = adodsAbitExamView
     Left = 648
-    Top = 418
+    Top = 416
   end
   object adodsStudSearch: TADODataSet
     Connection = DBConnect
@@ -867,17 +867,17 @@ object dm: Tdm
     CommandText = 'select * from Tree_stud_search Order by nn_zach'
     Parameters = <>
     Left = 200
-    Top = 26
+    Top = 24
   end
   object dsStudSearch: TDataSource
     DataSet = adodsStudSearch
-    Left = 197
-    Top = 62
+    Left = 200
+    Top = 64
   end
   object dsMetodist: TDataSource
     DataSet = adospMetodists
-    Left = 749
-    Top = 660
+    Left = 752
+    Top = 664
   end
   object adospMetodists: TADOStoredProc
     Connection = DBConnect
@@ -885,7 +885,7 @@ object dm: Tdm
     ProcedureName = 'abit_SelMetodists;1'
     Parameters = <>
     Left = 752
-    Top = 629
+    Top = 632
     object adospMetodistsik_metodist: TAutoIncField
       FieldName = 'ik_metodist'
       ReadOnly = True
@@ -902,13 +902,13 @@ object dm: Tdm
     Parameters = <>
     SQL.Strings = (
       'select * from ABIT_filial')
-    Left = 741
-    Top = 469
+    Left = 744
+    Top = 472
   end
   object dsFilial: TDataSource
     DataSet = adoqFilial
-    Left = 741
-    Top = 500
+    Left = 744
+    Top = 504
   end
   object adoqYears: TADOQuery
     Connection = DBConnect
@@ -916,17 +916,17 @@ object dm: Tdm
     Parameters = <>
     SQL.Strings = (
       'select * from ABIT_Years')
-    Left = 813
-    Top = 469
+    Left = 816
+    Top = 472
   end
   object dsYears: TDataSource
     DataSet = adoqYears
-    Left = 813
-    Top = 500
+    Left = 816
+    Top = 504
   end
   object dsVer: TDataSource
-    Left = 382
-    Top = 885
+    Left = 384
+    Top = 888
   end
   object adospGetRasp: TADOStoredProc
     Connection = DBConnect
@@ -954,8 +954,8 @@ object dm: Tdm
         Precision = 10
         Value = 1
       end>
-    Left = 923
-    Top = 699
+    Left = 920
+    Top = 696
     object adospGetRaspdate_of: TDateTimeField
       FieldName = 'date_of'
       Visible = False
@@ -1009,8 +1009,8 @@ object dm: Tdm
   end
   object dsGetRasp: TDataSource
     DataSet = adospGetRasp
-    Left = 923
-    Top = 785
+    Left = 920
+    Top = 784
   end
   object adospAbitGetSpisok: TADOQuery
     Connection = DBConnect
@@ -1022,8 +1022,8 @@ object dm: Tdm
       ''
       ''
       'ORDER BY  StudName, ik_spec_fac, ik_fac')
-    Left = 633
-    Top = 637
+    Left = 632
+    Top = 640
     object adospAbitGetSpisokid_VstEx: TIntegerField
       FieldName = 'id_VstEx'
       Visible = False
@@ -1086,8 +1086,8 @@ object dm: Tdm
   end
   object dsAbitGetSpisok: TDataSource
     DataSet = adospAbitGetSpisok
-    Left = 627
-    Top = 689
+    Left = 624
+    Top = 688
   end
   object adospAbitGetRaspKab: TADOStoredProc
     Connection = DBConnect
@@ -1108,8 +1108,8 @@ object dm: Tdm
         Precision = 10
         Value = 404
       end>
-    Left = 750
-    Top = 702
+    Left = 752
+    Top = 704
     object adospAbitGetRaspKabik_room: TAutoIncField
       FieldName = 'ik_room'
       ReadOnly = True
@@ -1134,8 +1134,8 @@ object dm: Tdm
   end
   object dsAbitGetRaspKab: TDataSource
     DataSet = adospAbitGetRaspKab
-    Left = 750
-    Top = 774
+    Left = 752
+    Top = 776
   end
   object adospAbitNotBusyKab: TADOStoredProc
     Connection = DBConnect
@@ -1156,8 +1156,8 @@ object dm: Tdm
         Precision = 10
         Value = 404
       end>
-    Left = 991
-    Top = 698
+    Left = 992
+    Top = 696
     object adospAbitNotBusyKabik_room: TIntegerField
       FieldName = 'ik_room'
       ReadOnly = True
@@ -1182,8 +1182,8 @@ object dm: Tdm
   end
   object dsAbitNotBusyKab: TDataSource
     DataSet = adospAbitNotBusyKab
-    Left = 1002
-    Top = 801
+    Left = 1000
+    Top = 800
   end
   object adospAbitKabMetodists: TADOStoredProc
     Connection = DBConnect
@@ -1204,8 +1204,8 @@ object dm: Tdm
         Precision = 10
         Value = 61
       end>
-    Left = 842
-    Top = 698
+    Left = 840
+    Top = 696
     object adospAbitKabMetodistsid_rasp_kab: TIntegerField
       FieldName = 'id_rasp_kab'
       ReadOnly = True
@@ -1223,7 +1223,7 @@ object dm: Tdm
   object dsAbitKabMetodists: TDataSource
     DataSet = adospAbitKabMetodists
     Left = 840
-    Top = 762
+    Top = 760
   end
   object adospAbitUpdateKabMetodist: TADOStoredProc
     Connection = DBConnect
@@ -1251,8 +1251,8 @@ object dm: Tdm
         Precision = 10
         Value = Null
       end>
-    Left = 883
-    Top = 617
+    Left = 880
+    Top = 616
     object DateTimeField3: TDateTimeField
       FieldName = 'date_of'
       Visible = False
@@ -1306,15 +1306,15 @@ object dm: Tdm
   end
   object dsAbitUpdateKabMetodist: TDataSource
     DataSet = adospAbitUpdateKabMetodist
-    Left = 881
-    Top = 657
+    Left = 880
+    Top = 656
   end
   object adotEgeOtchet: TADOTable
     Connection = DBConnect
     CursorType = ctStatic
     TableName = 'EGE_view'
-    Left = 625
-    Top = 797
+    Left = 624
+    Top = 800
     object adotEgeOtchetRegNomer: TIntegerField
       FieldName = 'RegNomer'
     end
@@ -1394,8 +1394,8 @@ object dm: Tdm
       'select * from AbitGetAllStatisticForItogi'
       '(2007)'
       'ORDER BY Cname_fac, Cname_spec')
-    Left = 625
-    Top = 853
+    Left = 624
+    Top = 856
     object adoqAbitItogiCountIk_fac: TIntegerField
       FieldName = 'Ik_fac'
     end
@@ -1438,8 +1438,8 @@ object dm: Tdm
     Parameters = <>
     SQL.Strings = (
       'select * from dbo.GetSpecAbitPermissionsFromRelTable() ')
-    Left = 333
-    Top = 813
+    Left = 336
+    Top = 816
     object adoqAbitSpecPermisionsik_spec_fac: TIntegerField
       FieldName = 'ik_spec_fac'
     end
@@ -1478,7 +1478,7 @@ object dm: Tdm
         Precision = 10
         Value = Null
       end>
-    Left = 966
+    Left = 968
     Top = 928
     object adospAbitProhBallProhBall: TIntegerField
       FieldName = 'ProhBall'
@@ -1488,7 +1488,7 @@ object dm: Tdm
   object dsTypeKatZach: TDataSource
     DataSet = adodsTypeKatZach
     Left = 976
-    Top = 490
+    Top = 488
   end
   object adodsTypeKatZach: TADODataSet
     Connection = DBConnect
@@ -1496,8 +1496,8 @@ object dm: Tdm
     CommandText = 'TypeKatZach'
     CommandType = cmdTable
     Parameters = <>
-    Left = 981
-    Top = 428
+    Left = 984
+    Top = 432
   end
   object adodsVidOtch: TADODataSet
     CursorType = ctStatic
@@ -1507,11 +1507,11 @@ object dm: Tdm
       'tOtchetnost=1)'#13#10
     Parameters = <>
     Left = 280
-    Top = 393
+    Top = 392
   end
   object dsVidOtch: TDataSource
     DataSet = adodsVidOtch
-    Left = 281
+    Left = 280
     Top = 440
   end
   object adsDecomposeType: TADODataSet
@@ -1519,8 +1519,8 @@ object dm: Tdm
     CursorType = ctStatic
     CommandText = 'SELECT * FROM Shema_decompose'
     Parameters = <>
-    Left = 1057
-    Top = 15
+    Left = 1056
+    Top = 16
     object adsDecomposeTypeik_decompose_type: TWordField
       FieldName = 'ik_decompose_type'
       ReadOnly = True
@@ -1535,8 +1535,8 @@ object dm: Tdm
     CursorType = ctStatic
     CommandText = 'Select * From kafedra Order By cname_kaf'
     Parameters = <>
-    Left = 825
-    Top = 301
+    Left = 824
+    Top = 304
   end
   object adsTeacherTakeNagr: TADODataSet
     Connection = DBConnect
@@ -1589,7 +1589,7 @@ object dm: Tdm
     CommandType = cmdTable
     Parameters = <>
     Left = 72
-    Top = 12
+    Top = 16
   end
   object aspTakeFactNagr: TADOStoredProc
     Connection = DBConnect
@@ -1813,13 +1813,13 @@ object dm: Tdm
     CursorType = ctStatic
     CommandText = 'select * from TREE_TeachSearch order by itab_n'
     Parameters = <>
-    Left = 260
-    Top = 26
+    Left = 264
+    Top = 24
   end
   object dsTeachSearch: TDataSource
     DataSet = adodsTeachSearch
-    Left = 261
-    Top = 66
+    Left = 264
+    Top = 64
   end
   object adsNormOfTime: TADODataSet
     Connection = DBConnect
@@ -1827,8 +1827,8 @@ object dm: Tdm
     LockType = ltBatchOptimistic
     CommandText = 'Select * From Content_norma_of_time'
     Parameters = <>
-    Left = 681
-    Top = 68
+    Left = 680
+    Top = 72
     object adsNormOfTimeik_vid_zanyat: TIntegerField
       FieldName = 'ik_vid_zanyat'
       Visible = False
@@ -2098,8 +2098,8 @@ object dm: Tdm
   object tblVer: TADOTable
     Connection = DBConnect
     TableName = 'LastRegisteredVersion'
-    Left = 385
-    Top = 629
+    Left = 384
+    Top = 632
   end
   object adodsVer: TADODataSet
     Connection = DBConnect
@@ -2112,8 +2112,8 @@ object dm: Tdm
     CursorType = ctStatic
     CommandText = 'select * from AdditionalSpec'
     Parameters = <>
-    Left = 797
-    Top = 380
+    Left = 800
+    Top = 384
     object IntegerField1: TIntegerField
       FieldName = 'ik_spec_fac'
     end
@@ -2151,8 +2151,8 @@ object dm: Tdm
   end
   object dsAdditionalSpec: TDataSource
     DataSet = adodsAdditionalSpec
-    Left = 795
-    Top = 411
+    Left = 792
+    Top = 408
   end
   object adsNormOfTimeForPractice: TADODataSet
     Connection = DBConnect
@@ -2160,8 +2160,8 @@ object dm: Tdm
     LockType = ltBatchOptimistic
     CommandText = 'Select * From Content_norm_of_time_practice'
     Parameters = <>
-    Left = 577
-    Top = 36
+    Left = 576
+    Top = 40
     object adsNormOfTimeForPracticename_disc: TStringField
       DisplayLabel = #1055#1088#1072#1082#1090#1080#1082#1072'/'#1088#1072#1073#1086#1090#1072
       FieldKind = fkLookup
@@ -2313,8 +2313,8 @@ object dm: Tdm
         Precision = 10
         Value = 0
       end>
-    Left = 785
-    Top = 25
+    Left = 784
+    Top = 24
     object aspContentPlanNagrik_content_plan_nagr: TAutoIncField
       FieldName = 'ik_content_plan_nagr'
       ReadOnly = True
@@ -2627,8 +2627,8 @@ object dm: Tdm
       'ule, i_balls FROM Content_UchPl LEFT JOIN UchPlan_WeekCount_Exce' +
       'ption upwce ON  Content_UchPl.ik_upContent = upwce.ik_upContent'
     Parameters = <>
-    Left = 897
-    Top = 306
+    Left = 896
+    Top = 304
     object adsAuditorVZik_vid_zanyat: TIntegerField
       FieldName = 'ik_vid_zanyat'
       Visible = False
@@ -2687,7 +2687,7 @@ object dm: Tdm
     LockType = ltBatchOptimistic
     Parameters = <>
     Left = 960
-    Top = 362
+    Top = 360
   end
   object aspAbitDisc: TADOStoredProc
     Connection = DBConnect
@@ -2712,8 +2712,8 @@ object dm: Tdm
   end
   object dsAbitDiscipline: TDataSource
     DataSet = aspAbitDisc
-    Left = 507
-    Top = 521
+    Left = 504
+    Top = 520
   end
   object aspAbitExamType: TADOStoredProc
     Connection = DBConnect
@@ -2738,8 +2738,8 @@ object dm: Tdm
   end
   object dsAbitExamType: TDataSource
     DataSet = aspAbitExamType
-    Left = 403
-    Top = 521
+    Left = 400
+    Top = 520
   end
   object adsContentVZ: TADODataSet
     Connection = DBConnect
@@ -2750,8 +2750,8 @@ object dm: Tdm
       'ls From Content_UchPl LEFT JOIN Vid_zanyat_with_several_tasks vz' +
       'st ON Content_UchPl.ik_upContent = vzst.ik_upContent'
     Parameters = <>
-    Left = 977
-    Top = 301
+    Left = 976
+    Top = 304
     object adsContentVZsel_sem: TIntegerField
       DisplayLabel = #1053#1086#1084#1077#1088' '#1089#1077#1084#1077#1089#1090#1088#1072
       DisplayWidth = 20
@@ -2803,7 +2803,7 @@ object dm: Tdm
   object dsAbitAllExam: TDataSource
     DataSet = adodsAbitAllExam
     Left = 560
-    Top = 426
+    Top = 424
   end
   object adodsAbitAllExam: TADODataSet
     Connection = DBConnect
@@ -2812,7 +2812,7 @@ object dm: Tdm
     CommandType = cmdTable
     Parameters = <>
     Left = 560
-    Top = 381
+    Top = 384
     object StringField5: TStringField
       DisplayLabel = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
       FieldName = #1089'name_disc'
@@ -2870,7 +2870,7 @@ object dm: Tdm
       'ity'
     Parameters = <>
     Left = 16
-    Top = 60
+    Top = 64
   end
   object AdodsDBStatus: TADODataSet
     Connection = DBConnect
@@ -2878,7 +2878,7 @@ object dm: Tdm
     CommandText = 'select DATABASEPROPERTYEX('#39'UGTU'#39', '#39'Status'#39') as Status'
     Parameters = <>
     Left = 72
-    Top = 60
+    Top = 64
   end
   object adsFactNagr: TADODataSet
     Connection = DBConnect
@@ -3536,8 +3536,8 @@ object dm: Tdm
   end
   object dsGetUchPlnGroup: TDataSource
     DataSet = adsGetUchPlanGrup
-    Left = 1054
-    Top = 655
+    Left = 1056
+    Top = 656
   end
   object aspAddRupGrup: TADOStoredProc
     CursorType = ctStatic
