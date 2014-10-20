@@ -160,7 +160,8 @@ begin
   Result := true;
   //пересылаем данные на сервер
   try
-    cdsSprav.ApplyUpdates(-1);//(-1);
+    cdsSprav.UpdateRecord;
+    //cdsSprav.ApplyUpdates(-1);//(-1);
   except
     MessageBox(Handle, 'Данные некорректны. Сохранение отменено.','ИС "УГТУ"',MB_OK);
    end;

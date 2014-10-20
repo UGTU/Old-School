@@ -736,10 +736,10 @@ begin
     Items[0].Value := nSem;
     // Дисциплина
     AddParameter;
-    Items[1].Value := ikPredm;
+    Items[1].Value := ikPredm;     //@ik_upContent
     // Вид занятий
-    AddParameter;
-    Items[2].Value := ikVidZan;
+ //   AddParameter;
+  //  Items[2].Value := ikVidZan;
     // Группа
     AddParameter;
     Items[2].Value := ik_grup;
