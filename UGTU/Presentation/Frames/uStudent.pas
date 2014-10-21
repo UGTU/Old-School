@@ -958,6 +958,9 @@ begin
     FindRange := E.Cells.Replace(What := '#MonthZ#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
     FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
+
+    FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
+    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=tempStoredProc.FieldByName('DepPhoneNumber').AsString);
     FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
     year:= tempStoredProc.FieldByName('sprYear').Value-
            tempStoredProc.FieldByName('kurs').Value;
@@ -966,10 +969,6 @@ begin
 
     //FindRange := E.Cells.Replace(What := '#YearZach#',Replacement:=IntToStr(zachYear));
     FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=IntToStr(tempStoredProc.FieldByName('zachYear').Value+tempStoredProc.FieldByName('YearObuch').Value));
-    if tempStoredProc.FieldByName('ik_fac').Value<>6 then
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='очной')
-    else
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='заочной');
 
     //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
     E.DisplayAlerts:= true;
@@ -1043,17 +1042,16 @@ begin
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
-  FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
-   FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
+    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
+    FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
     FindRange := E.Cells.Replace(What := '#podgot#',Replacement:=tempStoredProc.FieldByName('Podgot').AsString);
+    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=tempStoredProc.FieldByName('DepPhoneNumber').AsString);
+    FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
     FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=
       IntToStr(tempStoredProc.FieldByName('zachYear').Value+
       tempStoredProc.FieldByName('YearObuch').Value));
 
-    if tempStoredProc.FieldByName('ik_fac').Value<>6 then
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='очной')
-    else
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='заочной');
+
     //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
     E.Visible := true;
     E.DisplayAlerts:= true; 
