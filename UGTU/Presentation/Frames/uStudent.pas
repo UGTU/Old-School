@@ -935,12 +935,12 @@ begin
     FindRange := E.Cells.Replace(What := '#fio#',Replacement:=tempStoredProc.FieldByName('FIO').AsString);
     //obj.y  .
     case tempStoredProc.FieldByName('kurs').Value of
-      1: str := 'первого';
-      2: str := 'второго';
-      3: str := 'третьего';
-      4: str := 'четвертого';
-      5: str := 'пятого';
-      6: str := 'шестого';
+      1: str := 'первом';
+      2: str := 'втором';
+      3: str := 'третьем';
+      4: str := 'четвертом';
+      5: str := 'пятом';
+      6: str := 'шестом';
     end;
     FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cshort_spec').AsString);
@@ -962,9 +962,9 @@ begin
     //FindRange := E.Cells.Replace(What := '#YearZach#',Replacement:=IntToStr(zachYear));
     FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=IntToStr(tempStoredProc.FieldByName('zachYear').Value+tempStoredProc.FieldByName('YearObuch').Value));
     if tempStoredProc.FieldByName('ik_fac').Value<>6 then
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='дневного отделения (очного)')
+      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='очной')
     else
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=' отделения (заочного)');
+      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=' заочной');
 
     //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
     E.DisplayAlerts:= true;
@@ -1019,12 +1019,12 @@ begin
     FindRange := E.Cells.Replace(What := '#fio#',Replacement:=tempStoredProc.FieldByName('FIO').AsString);
     //obj.y  .
     case tempStoredProc.FieldByName('kurs').Value of
-      1: str := 'первого';
-      2: str := 'второго';
-      3: str := 'третьего';
-      4: str := 'четвертого';
-      5: str := 'пятого';
-      6: str := 'шестого';
+      1: str := 'первом';
+      2: str := 'втором';
+      3: str := 'третьем';
+      4: str := 'четвертом';
+      5: str := 'пятом';
+      6: str := 'шестом';
     end;
     FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);

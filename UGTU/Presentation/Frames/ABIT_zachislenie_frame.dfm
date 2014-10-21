@@ -13,7 +13,7 @@ inherited fmZach: TfmZach
       Top = 2
       Width = 849
       Height = 550
-      ActivePage = prikazpage
+      ActivePage = predvpage
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0

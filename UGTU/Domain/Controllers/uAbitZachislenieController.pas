@@ -329,7 +329,7 @@ end;
 
 function TAbitZachislenieController.IsAbit_CanBeZachisl: boolean;
 begin
-  Result:=(IsAbit_HaveAllExam)and(IsAbit_HaveAllDocs)and(IsAbit_HaveZachN);
+  Result:=(IsAbit_HaveAllExam)and(IsAbit_HaveAllDocs){and(IsAbit_HaveZachN)};
 end;
 
 function TAbitZachislenieController.IsAbit_HaveAllDocs: boolean;
