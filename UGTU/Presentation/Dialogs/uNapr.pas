@@ -10,7 +10,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBCtrlsEh, StdCtrls, Mask, ActnList, Buttons,
   ExtCtrls, DBGridEh, DBLookupEh, DBTVStudObj, DBTVGroupObj, ComObj,
-  ReportsBase, Barcode, ReportUI, ComCtrls,uWaitingController;
+  ReportsBase, Barcode, ReportUI, ComCtrls,uWaitingController, System.Actions;
 
 type
   TftmNapr = class(TfrmBaseDialog)
@@ -341,9 +341,9 @@ begin
   dmUspevaemost.adospSelNapr.Active:=false;
 
   with dmUspevaemost.adospSelNapr.Parameters do begin
-  clear;
-  AddParameter;
-  items[0].Value:=Fik_ved;
+    clear;
+    AddParameter;
+    items[0].Value:=Fik_ved;
   end;
 
   dmUspevaemost.adospSelNapr.ExecProc;

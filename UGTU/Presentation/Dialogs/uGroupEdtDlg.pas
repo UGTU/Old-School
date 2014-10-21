@@ -55,7 +55,7 @@ type
     { Public declarations }
     IK,FacIK: Integer;
 
-    FParentUchPlan,FUchPlan: integer;
+    FParentUchPlan, FUchPlan: integer;
     WithSpec: boolean;
     VidGos: integer;
     property SpecFacIK: integer read fSpecFacIK write fSpecFacIK;
@@ -72,7 +72,7 @@ implementation
 
 uses uDM, DBTVgroupObj, DBTVSpecObj, DBTVFacObj, uGroup,
   uSpec,ABIT_zachislenie_frame, uDMGroupActions, uMain, uDMUgtuStructure,
-  ConstantRepository;
+  ConstantRepository, CommonIntf, CommonIntfImpl;
 
 {$R *.dfm}
 
@@ -259,22 +259,31 @@ end;
 
 function TfrmGroupEdt.DoApply: boolean;
 var   tempProc: TADOStoredProc;
+      Log : ILogger;
 begin
-try
+  try
+  Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance; //
   dm.DBConnect.BeginTrans;
   //создание учебного плана
   if ((FUchPlan = 0) or ((dblcbUchPln.KeyValue<>FParentUchPlan)and(VidGos>FGOS2))) then
     with dm.aspAddRupGrup do
     begin
+      Log.LogMessage('Need create a new plan');
       Connection := dm.DBConnect;
       Active := false;
       Parameters.ParamByName('@ik_main_plan').Value := dblcbUchPln.KeyValue;
+      Log.LogMessage('ik_main_plan');
       Parameters.ParamByName('@grup_comment').Value := edtName.Text;
       Parameters.ParamByName('@vidgos').Value := VidGos;
+      Log.LogMessage('VidGos');
       Parameters.ParamByName('@ik_spec_fac').Value := SpecFacIK;
+      Log.LogMessage('SpecFacIK');
       Parameters.ParamByName('@year').Value := dbneYear.Text;
+      Log.LogMessage('year');
       ExecProc;
+      Log.LogMessage('execproc: ' + VarToStr(Parameters.ParamByName('@inserted_uch_plan').Value));
       FUchPlan := Parameters.ParamByName('@inserted_uch_plan').Value;
+      Log.LogMessage('Plan is created = '+IntToStr(FUchPlan));
     end;
   //if VidGos=FGOS2 then FUchPlan := dblcbUchPln.KeyValue;
 
@@ -301,7 +310,9 @@ try
     //если идет добавление группы в ИС "Деканат"
     if not WithSpec then
     begin
+
       ParamByName('@ik_spec_fac').Value := fSpecFacIK;
+      Log.LogMessage('SpecFacIK='+IntToStr(fSpecFacIK));
     {  if frmMain.ActiveFrame is TfmGroup then
         ParamByName('@ik_spec_fac').Value:= TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik
       else if frmMain.ActiveFrame is TfmZach then
@@ -326,14 +337,18 @@ try
     else
       ParamByName('@DateExit').Value:= dbdteExit.value;
   end;
-dmGroupActions.adospAppendGrup.ExecProc;
+  Log.LogMessage('ready to create group');
+  dmGroupActions.adospAppendGrup.ExecProc;
+  Log.LogMessage('group is created');
 
-dm.DBConnect.CommitTrans;
+  dm.DBConnect.CommitTrans;
 except
-dm.DBConnect.RollbackTrans;
-raise;
+  ShowMessage('Добавить группу не удалось!');
+  dm.DBConnect.RollbackTrans;
+
 end;
-Result:= true;
+
+  Result:= true;
 end;
 
 function TfrmGroupEdt.DoCancel: boolean;

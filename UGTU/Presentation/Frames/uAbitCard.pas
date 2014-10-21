@@ -63,71 +63,74 @@ procedure TfmAbitCard.DoRefreshFrame;
   //ndGroup:TDBNodeGroupObject;
   var year:integer;
 begin
-tsUspevStat.Visible:=false;
+  tsUspevStat.Visible:=false;
 
-floaded:=false;
-   PageControl1.ActivePageIndex := 0;
+  floaded:=false;
+  PageControl1.ActivePageIndex := 0;
 
-   with dmStudentData do begin
+  with dmStudentData do
+  begin
+    adodsDocType.Active:=false;
+    adodsZaved_Stud.Active:=false;
+    adodsMedal.Active:=false;
+    adodsKatZach.Active:=false;
+    adodsMilSt.Active:=false;
 
-  adodsDocType.Active:=false;
-   adodsZaved_Stud.Active:=false;
-  adodsMedal.Active:=false;
-  adodsKatZach.Active:=false;
-  adodsMilSt.Active:=false;
+    adodsDocType.Active:=true;
+    adodsZaved_Stud.Active:=true;
+    adodsZaved_Stud.Sort:='[cName_zaved]';
+    adodsMedal.Active:=true;
+    adodsKatZach.Active:=true;
+    adodsMilSt.Active:=true;
 
-adodsDocType.Active:=true;
-adodsZaved_Stud.Active:=true;
- adodsZaved_Stud.Sort:='[cName_zaved]';
-  adodsMedal.Active:=true;
-  adodsKatZach.Active:=true;
-  adodsMilSt.Active:=true;
+    adodsNat.Active:=false;
+    adodsCitizen.Active:=false;
+    adodsCount.Active:=false;
+    adodsJob.Active:=false;
+    adodsPrep.Active:=false;
 
-  adodsNat.Active:=false;
-  adodsCitizen.Active:=false;
-  adodsCount.Active:=false;
-  adodsJob.Active:=false;
-   adodsPrep.Active:=false;
+    adodsSempol.Active:=false;
+    dmPrikaz.adodsPrikaz.Active:=false;
 
-     adodsSempol.Active:=false;
-     dmPrikaz.adodsPrikaz.Active:=false;
+    adodsNat.Active:=true;
+    adodsCitizen.Active:=true;
+    adodsCount.Active:=true;
+    adodsJob.Active:=true;
+    adodsPrep.Active:=true;
 
-  adodsNat.Active:=true;
-     adodsCitizen.Active:=true;
-     adodsCount.Active:=true;
-     adodsJob.Active:=true;
-     adodsPrep.Active:=true;
+    adodsSempol.Active:=true;
+    dmPrikaz.adodsPrikaz.Active:=true;
 
-     adodsSempol.Active:=true;
-     dmPrikaz.adodsPrikaz.Active:=true;
-
-     Modified:=false;
-     bbSave.Enabled:=false;
-     bbUndo.Enabled:=false;
+    Modified:=false;
+    bbSave.Enabled:=false;
+    bbUndo.Enabled:=false;
 
   //PageControl2.TabIndex:=0;
 
-  adodsLang.Active:=false;
-  adodsStepVlad.Active:=false;
-  adodsEnterprise.Active:=false;
-  adodsRelative.Active:=false;
+    adodsLang.Active:=false;
+    adodsStepVlad.Active:=false;
+    adodsEnterprise.Active:=false;
+    adodsRelative.Active:=false;
 
-  adodsLang.Active:=true;
-  adodsStepVlad.Active:=true;
-  adodsEnterprise.Active:=true;
-  adodsRelative.Active:=true;
-   end;
+    adodsLang.Active:=true;
+    adodsStepVlad.Active:=true;
+    adodsEnterprise.Active:=true;
+    adodsRelative.Active:=true;
+  end;
 
-   with dmAdress do begin
-   adodsStrana.Active:=false;
- adodsSignStrana.Active:=false;
- adodsStrana.Active:=true;
- adodsSignStrana.Active:=true;
-   end;
-   with dmCauses do begin
+  with dmAdress do
+  begin
+    adodsStrana.Active:=false;
+    adodsSignStrana.Active:=false;
+    adodsStrana.Active:=true;
+    adodsSignStrana.Active:=true;
+  end;
+
+  with dmCauses do
+  begin
     adodsExile.Active:=false;
-     adodsExile.Active:=true;
-   end;
+    adodsExile.Active:=true;
+  end;
 
   obj:=FrameObject as TDBNodeAbitStudObject;
   ik:=obj.id;
@@ -150,7 +153,7 @@ adodsZaved_Stud.Active:=true;
   dbdteBirthDate.Value:=obj.BirthDate;
 
   if obj.Sex then  dbcbeSex.Text:='Мужской' else
-  dbcbeSex.Text:='Женский';
+    dbcbeSex.Text:='Женский';
 
   dbcbeSchool.Text:=obj.Finished;
   dbcbeCat.Text:=obj.Category;
@@ -164,12 +167,14 @@ adodsZaved_Stud.Active:=true;
   dbcbeMilitaryState.keyValue:=obj.MilitaryStateKey;
   dbcbeEnterprise.Value:=obj.EnterpriseID;
   eDuty.text:=obj.Duty;
-  if obj.xpYears<>0 then
-  eXpYear.Value:=obj.xpYears;
-   if obj.xpMonths<>0 then
-  eXpMonth.Value:=obj.xpMonths;
 
-if obj.Photo<>nil then begin
+  if obj.xpYears<>0 then
+    eXpYear.Value:=obj.xpYears;
+  if obj.xpMonths<>0 then
+    eXpMonth.Value:=obj.xpMonths;
+
+  if obj.Photo<>nil then
+  begin
     obj.photo.Position:=0;
     //iPhoto.Picture.Graphic:=TBitmap.Create;
     iPhoto.Picture.Graphic:=TJPEGImage.Create;
@@ -197,15 +202,15 @@ if obj.Photo<>nil then begin
 
   with dmStudentSelectionProcs.aspSelDocuments do
   begin
-  Active:=false;
-   Parameters.Clear;
-   Parameters.AddParameter;
-   Parameters[0].Value:=obj.ID;
-   ExecProc;
-   Active:=true;
+    Active:=false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value:=obj.ID;
+    ExecProc;
+    Active:=true;
   end;
 
-    with dmStudentSelectionProcs.aspGetPersonAddress do
+  with dmStudentSelectionProcs.aspGetPersonAddress do
   begin
     Active:=false;
     Parameters.Clear;

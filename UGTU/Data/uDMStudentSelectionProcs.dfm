@@ -203,6 +203,7 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
     end
     object aspSelDocumentsdoc_type: TStringField
       DisplayLabel = #1042#1080#1076' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+      DisplayWidth = 150
       FieldKind = fkLookup
       FieldName = 'doc_type'
       LookupDataSet = dmStudentData.adodsDocType
@@ -219,18 +220,21 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
     end
     object aspSelDocumentsCd_seria: TStringField
       DisplayLabel = #1057#1077#1088#1080#1103
+      DisplayWidth = 20
       FieldName = 'Cd_seria'
       OnChange = aspSelDocumentsdoc_typeChange
       Size = 10
     end
     object aspSelDocumentsNp_number: TStringField
       DisplayLabel = #1053#1086#1084#1077#1088
+      DisplayWidth = 30
       FieldName = 'Np_number'
       OnChange = aspSelDocumentsdoc_typeChange
       Size = 15
     end
     object aspSelDocumentsDd_vidan: TDateTimeField
       DisplayLabel = #1044#1072#1090#1072' '#1074#1099#1076#1072#1095#1080
+      DisplayWidth = 35
       FieldName = 'Dd_vidan'
       OnChange = aspSelDocumentsdoc_typeChange
       EditMask = '!99/99/0000;1;_'

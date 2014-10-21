@@ -174,6 +174,7 @@ inherited ftmNapr: TftmNapr
     Top = 138
     Width = 121
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -186,6 +187,7 @@ inherited ftmNapr: TftmNapr
     Top = 138
     Width = 120
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -199,6 +201,7 @@ inherited ftmNapr: TftmNapr
     Width = 120
     Height = 19
     Alignment = taLeftJustify
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 3
@@ -210,6 +213,7 @@ inherited ftmNapr: TftmNapr
     Top = 21
     Width = 121
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_vid_exam'
@@ -224,6 +228,7 @@ inherited ftmNapr: TftmNapr
     Top = 99
     Width = 245
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_ved'
@@ -238,6 +243,7 @@ inherited ftmNapr: TftmNapr
     Top = 60
     Width = 245
     Height = 19
+    DynProps = <>
     EditButton.Style = ebsUpDownEh
     EditButton.Visible = True
     EditButtons = <>
