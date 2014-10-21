@@ -899,7 +899,7 @@ end;
 
 procedure TfmStudent.actPrintPensSpravExecute(Sender: TObject);
 var E: Variant;
-    str:string;
+    str, year_post:string;
     year:integer;
     FindRange: Variant;
     tempStoredProc: TADOStoredProc;
@@ -917,6 +917,7 @@ begin
     tempStoredProc.Parameters.CreateParameter('@ik_zach', ftInteger, pdInput, 4, obj.StudGrupKey);
     tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
     tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
+    tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
     tempStoredProc.Open;
     tempStoredProc.First;  //FIO
   except
@@ -942,9 +943,11 @@ begin
       5: str := 'пятом';
       6: str := 'шестом';
     end;
+    year_post:=tempStoredProc.FieldByName('zachYear').AsString ;
     FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cshort_spec').AsString);
-    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac').AsString);
+    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cshort_spec').AsString+'-'+year_post[3]+year_post[4]);
+    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
+    FindRange := E.Cells.Replace(What := '#birth_y#',Replacement:=tempStoredProc.FieldByName('studBirthYear').AsString);
     FindRange := E.Cells.Replace(What := '#Date#',Replacement:=tempStoredProc.FieldByName('sprDate').AsString);
     str:=GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
@@ -954,6 +957,8 @@ begin
     str:=GetMonthR(tempStoredProc.FieldByName('zachMonth').Value);
     FindRange := E.Cells.Replace(What := '#MonthZ#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
+    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
+    FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
     year:= tempStoredProc.FieldByName('sprYear').Value-
            tempStoredProc.FieldByName('kurs').Value;
     if tempStoredProc.FieldByName('sprMonth').Value>8 then
@@ -962,9 +967,9 @@ begin
     //FindRange := E.Cells.Replace(What := '#YearZach#',Replacement:=IntToStr(zachYear));
     FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=IntToStr(tempStoredProc.FieldByName('zachYear').Value+tempStoredProc.FieldByName('YearObuch').Value));
     if tempStoredProc.FieldByName('ik_fac').Value<>6 then
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='дневного отделения (очного)')
+      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='очной')
     else
-      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=' отделения (заочного)');
+      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='заочной');
 
     //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
     E.DisplayAlerts:= true;
@@ -998,6 +1003,7 @@ begin
     tempStoredProc.Parameters.CreateParameter('@ik_zach', ftInteger, pdInput, 4, obj.StudGrupKey);
     tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
     tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
+     tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
     tempStoredProc.Open;
     tempStoredProc.First;  //FIO
   except
@@ -1026,18 +1032,27 @@ begin
       5: str := 'пятом';
       6: str := 'шестом';
     end;
+
+
     FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
-    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac').AsString);
+    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
     FindRange := E.Cells.Replace(What := '#Date#',Replacement:=tempStoredProc.FieldByName('sprDate').AsString);
     str:= GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
+  FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
+   FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
     FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=
       IntToStr(tempStoredProc.FieldByName('zachYear').Value+
       tempStoredProc.FieldByName('YearObuch').Value));
+
+    if tempStoredProc.FieldByName('ik_fac').Value<>6 then
+      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='очной')
+    else
+      FindRange := E.Cells.Replace(What := '#otdel#',Replacement:='заочной');
     //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
     E.Visible := true;
     E.DisplayAlerts:= true; 
