@@ -13,7 +13,7 @@ type
   public
     function Refresh: boolean; virtual;
     procedure Save; virtual;
-
+  // function
     constructor Create; virtual;
   end;
 
