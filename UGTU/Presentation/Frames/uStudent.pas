@@ -960,7 +960,7 @@ begin
     FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
 
     FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
-    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=tempStoredProc.FieldByName('DepPhoneNumber').AsString);
+    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
     FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
     year:= tempStoredProc.FieldByName('sprYear').Value-
            tempStoredProc.FieldByName('kurs').Value;
@@ -1045,7 +1045,7 @@ begin
     FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
     FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
     FindRange := E.Cells.Replace(What := '#podgot#',Replacement:=tempStoredProc.FieldByName('Podgot').AsString);
-    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=tempStoredProc.FieldByName('DepPhoneNumber').AsString);
+    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:= ', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
     FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
     FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=
       IntToStr(tempStoredProc.FieldByName('zachYear').Value+
