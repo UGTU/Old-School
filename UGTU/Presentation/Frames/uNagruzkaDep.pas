@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseFrame, ComCtrls, StdCtrls, Buttons, ExtCtrls, Grids,
   ActnList, ImgList, DBGridEh, ToolWin, DB, ADODB, NagruzkaController,
   Menus, DBLookupEh, uUchPlan, Mask, DBCtrlsEh, GeneralController, UchPlanController,
-  GridsEh;
+  GridsEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  System.Actions, DBAxisGridsEh;
 
 type
   PPanel = ^TPanel;
