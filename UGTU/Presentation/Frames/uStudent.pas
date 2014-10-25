@@ -1031,8 +1031,6 @@ begin
       5: str := 'пятом';
       6: str := 'шестом';
     end;
-
-
     FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
     FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
