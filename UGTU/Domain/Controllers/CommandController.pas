@@ -30,7 +30,6 @@ type
     property Semester: integer write SetSemester;
     function Execute: boolean;    overload;
     constructor Create(aIkGroup: integer); overload;
-
   end;
 
 implementation
