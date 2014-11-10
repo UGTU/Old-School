@@ -3429,7 +3429,7 @@ begin
       if MessageBox(Handle, 'Не создано ни одной аттестации. Создать их сейчас?',
                   'ИС УГТУ', MB_YESNO)=IDYES then
         // если согласились - создаём...
-        TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem, nom_ved, IsBRS)
+        haveAtt:= TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem, nom_ved, IsBRS)
       else
         haveAtt := false; // отмечаем отсутствие аттестаций флагом
     end;
