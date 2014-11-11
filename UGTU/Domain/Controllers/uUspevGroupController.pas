@@ -349,7 +349,7 @@ uses
 end;
 
 implementation
-uses CommonIntf, CommonIntfImpl;
+uses CommonIntf, CommonIntfImpl, BRSVedom2014;
 
  var
 //FAbitZachislenieControllerInstance - экземпл€р контроллера
@@ -2713,7 +2713,7 @@ var E:Variant;
 //			    VedList.First;
 //			    while not VedList.Eof do
 //			    begin      //печать и настройка текущей ведомости
-			      DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
+ //			      DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
 //				        ikSpec, withOsenca);
 //            VedList.Next;
 //			    end;
