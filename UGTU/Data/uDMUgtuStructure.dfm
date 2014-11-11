@@ -21,8 +21,8 @@ object dmUgtuStructure: TdmUgtuStructure
   end
   object dsFaculty: TDataSource
     DataSet = adodsFaculty
-    Left = 151
-    Top = 166
+    Left = 415
+    Top = 294
   end
   object adodsSpec: TADODataSet
     Connection = dm.DBConnect
@@ -42,8 +42,8 @@ object dmUgtuStructure: TdmUgtuStructure
     CursorType = ctStatic
     CommandText = 'select * from Tree_groups'
     Parameters = <>
-    Left = 15
-    Top = 14
+    Left = 447
+    Top = 126
   end
   object dsGroups: TDataSource
     DataSet = adodsGroups
@@ -165,7 +165,7 @@ object dmUgtuStructure: TdmUgtuStructure
     CursorType = ctStatic
     CommandText = 'select * from Tree_groups'
     Parameters = <>
-    Left = 169
+    Left = 401
     Top = 15
   end
   object dsGroupsofSpec: TDataSource
@@ -200,8 +200,8 @@ object dmUgtuStructure: TdmUgtuStructure
   end
   object dsqSpec: TDataSource
     DataSet = adoqSpec
-    Left = 259
-    Top = 55
+    Left = 299
+    Top = 95
   end
   object adodsFacultyAll: TADODataSet
     Connection = dm.DBConnect
@@ -210,13 +210,13 @@ object dmUgtuStructure: TdmUgtuStructure
       'select * from fac where ik_fac<>5 and ik_fac<>9 and (ik_fac<14 o' +
       'r ik_fac>17) order by 2'
     Parameters = <>
-    Left = 25
-    Top = 250
+    Left = 33
+    Top = 202
   end
   object dsFacultyAll: TDataSource
     DataSet = adodsFacultyAll
     Left = 23
-    Top = 286
+    Top = 326
   end
   object dsSpecForNagr: TDataSource
     DataSet = adospSpecForNagr
@@ -264,26 +264,26 @@ object dmUgtuStructure: TdmUgtuStructure
     CursorType = ctStatic
     ProcedureName = 'SelectSpclzForNagr;1'
     Parameters = <>
-    Left = 154
-    Top = 248
+    Left = 178
+    Top = 264
   end
   object dsSpclzForNagr: TDataSource
     DataSet = adospSpclzForNagr
-    Left = 154
-    Top = 294
+    Left = 146
+    Top = 358
   end
   object adospFormEdForNagr: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'SelectFormEdForNagr;1'
     Parameters = <>
-    Left = 226
-    Top = 248
+    Left = 250
+    Top = 224
   end
   object dsFormEdForNagr: TDataSource
     DataSet = adospFormEdForNagr
-    Left = 226
-    Top = 294
+    Left = 218
+    Top = 334
   end
   object dsYearUPForNagr: TDataSource
     DataSet = dsYearForUchPlan
@@ -336,7 +336,7 @@ object dmUgtuStructure: TdmUgtuStructure
         Precision = 10
         Value = Null
       end>
-    Left = 312
+    Left = 336
     Top = 240
   end
   object adsSpecFac: TADODataSet

@@ -2,7 +2,9 @@ unit D_AVGBalls;
    {#Author sergdev@ist.ugtu.net}
 interface
 uses
-Classes, dialogs ,SysUtils, ExcelXP, Barcode, Contnrs, XIntf, CommonIntf, ReportsBase, db, adodb, ExtCtrls, udmUspevaemost, ComCtrls, uAverageBalls;
+Classes, dialogs ,SysUtils, ExcelXP, Barcode, Contnrs,
+XIntf, CommonIntf, ReportsBase, db, adodb, ExtCtrls,
+ udmUspevaemost, ComCtrls, uAverageBalls;
 
 const TableBeg = 2;
 

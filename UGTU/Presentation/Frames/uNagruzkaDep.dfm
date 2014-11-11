@@ -318,6 +318,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Height = 21
             AlwaysShowBorder = True
             Anchors = [akTop, akRight]
+            DynProps = <>
             EditButtons = <>
             Font.Charset = RUSSIAN_CHARSET
             Font.Color = clSilver
@@ -340,6 +341,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Height = 19
             AlwaysShowBorder = True
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             TabOrder = 2
@@ -354,6 +356,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
           Height = 577
           Align = alClient
           TabOrder = 2
+          ExplicitHeight = 578
           object dbNagrCommit: TDBGridEh
             Left = 1
             Top = 1
@@ -362,20 +365,19 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Align = alClient
             DataSource = dsNagrCommit
             DragMode = dmAutomatic
+            DynProps = <>
             Flat = True
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
+            ImeMode = imDisable
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind]
+            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind, dghColumnResize, dghColumnMove]
             ParentFont = False
             ParentShowHint = False
             ReadOnly = True
@@ -383,25 +385,21 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             RowLines = 1
             ShowHint = True
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clBlack
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            TitleHeight = 15
-            UseMultiTitle = True
-            OnCellMouseClick = dbNagrCommitCellMouseClick
+            TitleParams.MultiTitle = True
+            TitleParams.RowHeight = 15
             OnDblClick = dbNagrCommitDblClick
             OnDrawColumnCell = dbNagrCommitDrawColumnCell
             OnDrawDataCell = dbNagrCommitDrawDataCell
             Columns = <
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'ik_spec'
                 Footers = <>
                 Visible = False
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cName_disc'
                 Footers = <>
@@ -409,6 +407,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 350
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'Cname_grup'
                 Footers = <>
@@ -416,6 +415,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 200
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'nPotoks'
                 Footers = <>
@@ -424,30 +424,35 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 100
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cName_spec'
                 Footers = <>
                 Visible = False
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'course'
                 Footers = <>
                 Title.Caption = #1050#1091#1088#1089
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'Ik_grup'
                 Footers = <>
                 Visible = False
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'ik_disc_uch_plan'
                 Footers = <>
                 Visible = False
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'rasch'
                 Footers = <>
@@ -455,35 +460,42 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 300
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'n_full'
                 Footers = <>
                 Visible = False
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'subgroup_count'
                 Footers = <>
                 Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1099
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'budget_count'
                 Footers = <>
                 Title.Caption = #1041#1102#1076#1078#1077#1090
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'contract_count'
                 Footers = <>
                 Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'ik_disc'
                 Footers = <>
                 Visible = False
               end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object Panel5: TPanel
@@ -776,6 +788,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Height = 19
             AlwaysShowBorder = True
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             TabOrder = 0
@@ -790,38 +803,32 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             AllowedOperations = []
             Anchors = [akLeft, akTop, akRight, akBottom]
             AutoFitColWidths = True
+            DynProps = <>
             Flat = True
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            GridLineParams.VertEmptySpaceStyle = dessNonEh
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind]
+            OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind, dghColumnResize, dghColumnMove]
             ParentFont = False
             PopupMenu = PopupMenu9
             RowHeight = 2
             RowLines = 1
             TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clBlack
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            TitleHeight = 15
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
+            TitleParams.RowHeight = 15
             OnDblClick = dbgVidZanyatPlanDblClick
             OnDrawColumnCell = dbgVidZanyatPlanDrawColumnCell
             OnDrawDataCell = dbgVidZanyatPlanDrawDataCell
             OnKeyDown = dbgVidZanyatPlanKeyDown
             Columns = <
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cName_disc'
                 Footers = <>
@@ -829,6 +836,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 80
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cName_potok'
                 Footers = <>
@@ -836,6 +844,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 20
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'plan_hour'
                 Footers = <>
@@ -843,12 +852,15 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 30
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'busy_hour'
                 Footers = <>
                 Title.Caption = #1056#1072#1089#1087#1088#1077#1076#1077#1083#1077#1085#1086' '#1095#1072#1089#1086#1074
                 Width = 30
               end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
           object Panel6: TPanel
             Left = 1
@@ -963,10 +975,6 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
       object tsUchPlan: TTabSheet
         Caption = #1059#1095#1077#1073#1085#1099#1077' '#1087#1083#1072#1085#1099
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         inline fmUchPlan: TfmUchPlan
           Left = 0
           Top = 52
@@ -991,156 +999,35 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             inherited pnlAll: TPanel
               Width = 808
               Height = 506
+              ExplicitWidth = 808
+              ExplicitHeight = 506
               inherited ScrollBox1: TScrollBox
                 Width = 806
                 Height = 504
-                inherited Label16: TLabel
-                  Width = 89
-                  Height = 13
-                  ExplicitWidth = 89
-                  ExplicitHeight = 13
-                end
-                inherited Label2: TLabel
-                  Width = 82
-                  Height = 13
-                  ExplicitWidth = 82
-                  ExplicitHeight = 13
-                end
-                inherited Label3: TLabel
-                  Width = 86
-                  Height = 13
-                  ExplicitWidth = 86
-                  ExplicitHeight = 13
-                end
-                inherited Label4: TLabel
-                  Width = 95
-                  Height = 13
-                  ExplicitWidth = 95
-                  ExplicitHeight = 13
-                end
-                inherited Label29: TLabel
-                  Width = 47
-                  Height = 13
-                  ExplicitWidth = 47
-                  ExplicitHeight = 13
-                end
-                inherited Label30: TLabel
-                  Width = 56
-                  Height = 13
-                  ExplicitWidth = 56
-                  ExplicitHeight = 13
-                end
-                inherited Label31: TLabel
-                  Width = 66
-                  Height = 13
-                  ExplicitWidth = 66
-                  ExplicitHeight = 13
-                end
-                inherited Label36: TLabel
-                  Width = 101
-                  Height = 13
-                  ExplicitWidth = 101
-                  ExplicitHeight = 13
-                end
-                inherited Label37: TLabel
-                  Width = 114
-                  Height = 13
-                  ExplicitWidth = 114
-                  ExplicitHeight = 13
-                end
+                ExplicitWidth = 806
+                ExplicitHeight = 504
                 inherited Panel2: TPanel
                   Height = 385
-                end
-                inherited dbcbFormEd: TDBLookupComboboxEh
-                  Height = 19
-                  ExplicitHeight = 19
-                end
-                inherited dbcbYear: TDBLookupComboboxEh
-                  Height = 19
-                  ExplicitHeight = 19
-                end
-                inherited dbcbCklDisc: TDBLookupComboboxEh
-                  Height = 19
-                  ExplicitHeight = 19
-                end
-                inherited dbcbGrpDisc: TDBLookupComboboxEh
-                  Height = 19
-                  ExplicitHeight = 19
-                end
-                inherited Panel8: TPanel
-                  inherited Label27: TLabel
-                    Width = 48
-                    Height = 13
-                    ExplicitWidth = 48
-                    ExplicitHeight = 13
-                  end
-                  inherited dbcbKaf: TDBLookupComboboxEh
-                    Height = 19
-                    ExplicitHeight = 19
-                  end
-                end
-                inherited cmbxSem: TDBComboBoxEh
-                  Height = 19
-                  ExplicitHeight = 19
-                end
-                inherited cmbxVidZan: TDBComboBoxEh
-                  Height = 19
-                  ExplicitHeight = 19
+                  ExplicitHeight = 385
                 end
                 inherited dtpDateUtv: TDateTimePicker
                   Height = 21
                   ExplicitHeight = 21
                 end
               end
-              inherited dbcbPdgrpDisc: TDBLookupComboboxEh
-                Height = 19
-                ExplicitHeight = 19
-              end
             end
             inherited pnlTools: TPanel
               Width = 808
-              inherited ToolBar1: TToolBar
-                inherited ToolButton5: TToolButton
-                  ExplicitWidth = 23
-                end
-              end
-            end
-            inherited pnlSpclzGrup: TPanel
-              Width = 808
-              inherited lblSpclzGroup: TLabel
-                Height = 13
-                ExplicitHeight = 13
-              end
-              inherited dbcbSpclz: TDBLookupComboboxEh
-                Height = 19
-                ExplicitHeight = 19
-              end
+              ExplicitWidth = 808
             end
             inherited pnlGroup: TPanel
               Width = 808
-              inherited lblGroup: TLabel
-                Width = 41
-                Height = 13
-                ExplicitWidth = 41
-                ExplicitHeight = 13
-              end
-              inherited dbcbGroup: TDBLookupComboboxEh
-                Height = 19
-                ExplicitHeight = 19
-              end
-            end
-          end
-          inherited Panel9: TPanel
-            inherited Label28: TLabel
-              Width = 166
-              Height = 13
-              ExplicitWidth = 166
-              ExplicitHeight = 13
+              ExplicitWidth = 808
             end
           end
           inherited ImageList1: TImageList
             Bitmap = {
-              494C010108000C00740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010108000C00780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000003000000001002000000000000030
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -1577,6 +1464,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Width = 691
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             DropDownBox.Rows = 20
             EditButtons = <>
             Flat = True
@@ -1593,6 +1481,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Width = 691
             Height = 19
             Anchors = [akLeft, akTop, akRight]
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'ik_spec'
@@ -1628,23 +1517,16 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Align = alClient
             AutoFitColWidths = True
             DataSource = dsContentForDiscVC
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = RUSSIAN_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
-            TitleFont.Charset = RUSSIAN_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
             Columns = <
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'n_sem'
                 Footers = <>
@@ -1652,6 +1534,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 81
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cshort_name_kaf'
                 Footers = <>
@@ -1659,6 +1542,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 117
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'tasks_count'
                 Footers = <>
@@ -1666,6 +1550,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 79
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'n_module'
                 Footers = <>
@@ -1673,11 +1558,14 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 62
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'i_balls'
                 Footers = <>
                 Title.Caption = #1052#1072#1082#1089#1080#1084#1091#1084' '#1073#1072#1083#1086#1074
               end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object PContentForDiscAZ: TPanel
@@ -1696,23 +1584,16 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Align = alClient
             AutoFitColWidths = True
             DataSource = dsContentForDiscAZ
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = RUSSIAN_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
-            TitleFont.Charset = RUSSIAN_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
             Columns = <
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cName_vid_zanyat'
                 Footers = <>
@@ -1720,12 +1601,14 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 170
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cshort_name_kaf'
                 Footers = <>
                 Title.Caption = #1050#1072#1092#1077#1076#1088#1072
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'i_hour_per_week'
                 Footers = <>
@@ -1733,12 +1616,15 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
                 Width = 70
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'week_count'
                 Footers = <>
                 Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1085#1077#1076#1077#1083#1100
                 Width = 72
               end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
       end
@@ -1757,31 +1643,26 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsPlanNormTime
+          DynProps = <>
           Flat = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           Font.Style = []
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          GridLineParams.VertEmptySpaceStyle = dessNonEh
+          IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind]
+          OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind, dghColumnResize, dghColumnMove]
           ParentFont = False
           RowHeight = 2
           RowLines = 1
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clBlack
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          TitleHeight = 15
-          UseMultiTitle = True
+          TitleParams.MultiTitle = True
+          TitleParams.RowHeight = 15
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object Panel10: TPanel
           Left = 0
@@ -2062,15 +1943,15 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
     object Label12: TLabel
       Left = 15
       Top = 8
-      Width = 71
-      Height = 16
+      Width = 61
+      Height = 13
       Caption = #1058#1080#1087' '#1086#1090#1095#1077#1090#1072':'
     end
     object Label13: TLabel
       Left = 3
       Top = 36
-      Width = 86
-      Height = 16
+      Width = 72
+      Height = 13
       Caption = #1058#1080#1087' '#1086#1073#1091#1095#1077#1085#1080#1103':'
     end
     object Bevel4: TBevel
@@ -2104,6 +1985,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
       Top = 5
       Width = 119
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Items.Strings = (
@@ -2120,6 +2002,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
       Top = 33
       Width = 119
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Items.Strings = (
@@ -2422,7 +2305,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
     Left = 612
     Top = 125
     Bitmap = {
-      494C0101210022006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010121002200700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009000000001002000000000000090
       00000000000000000000000000000000000000000002000000100000001C0000
       002800000034000000400000004A000000560000005A00000058000000680000
@@ -3716,7 +3599,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
     Left = 576
     Top = 96
     Bitmap = {
-      494C0101070009006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000900700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4011,7 +3894,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
     Left = 576
     Top = 128
     Bitmap = {
-      494C0101060009006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       00000000000000000000000000000000000000000000FCFCFB00ECEDEB00CACD
       C600ADB7A20096A9820096AC7A0090A37500A6AB9E00F3F3F300000000000000
