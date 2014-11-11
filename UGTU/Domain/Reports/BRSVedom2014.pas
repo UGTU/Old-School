@@ -8,9 +8,10 @@ XIntf, CommonIntf, ReportsBase, db, adodb, ExtCtrls,
 type
     TBRS2014VedomostReport = class(TExcelReportBase)
     private
-       FDataset:TADODataset;
-       FListView:TListView;
-       ikGrup, nSem, ikVed, ikFac, ikSpec: integer;
+//       FDataset:TADODataset;
+//       FListView:TListView;
+        ikVed: integer;
+      ikGrup, nSem,  ikFac, ikSpec: integer;
        tempStoredProc: TADOStoredProc;
     protected
        procedure Execute;override;
@@ -18,6 +19,29 @@ type
     public
        constructor Create (_ikGrup, _nSem, _ikVed, _ikFac,
 _ikSpec: integer; _tempStoredProc: TADOStoredProc);
+
+    end;
+type
+    TVedomost = class
+    private
+    Institute, spec, disc, prepod, ekz_prep,zav_kaf, dir_inst: string;
+    date_zach, date_ekz: TDateTime;
+    otl,hor,ud, neud,nedop:integer;
+
+    protected
+
+    public
+
+    end;
+type
+    VedomostItem = class
+    private
+    FIO: string;
+    zach,balls:integer;
+    protected
+
+    public
+
 
     end;
 implementation
@@ -48,4 +72,9 @@ begin
   Result:=1;
 end;
 
+
+//function CreateReport:TVedomost;
+//begin
+//
+//end;
 end.

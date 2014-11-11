@@ -899,8 +899,8 @@ end;
 
 procedure TfmStudent.actPrintPensSpravExecute(Sender: TObject);
 var E: Variant;
-    str, year_post:string;
-    year:integer;
+    str, year_post,dop,dir_inst,copystr1,copystr2:string;
+    year,posit:integer;
     FindRange: Variant;
     tempStoredProc: TADOStoredProc;
 begin
@@ -953,11 +953,18 @@ begin
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
     FindRange := E.Cells.Replace(What := '#PrNum#',Replacement:=dmStudentData.adodsPrikaz.FieldByName('Nn_prikaz').AsString);
-    FindRange := E.Cells.Replace(What := '#DateZ#',Replacement:=tempStoredProc.FieldByName('zachDate').AsString);
+    dop:=tempStoredProc.FieldByName('zachDate').AsString;
+    if (dop.Length=1) then  dop:='0'+dop;
+    FindRange := E.Cells.Replace(What := '#DateZ#',Replacement:=dop);
     str:=GetMonthR(tempStoredProc.FieldByName('zachMonth').Value);
     FindRange := E.Cells.Replace(What := '#MonthZ#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
-    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
+    dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
+    posit:=Pos(' ', dir_inst);
+    copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
+    copystr2:=Copy(dir_inst,1,posit-1);
+    copystr1:=copystr1+' '+copystr2;
+    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=copystr1);
 
     FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
     FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
@@ -985,7 +992,8 @@ end;
 
 procedure TfmStudent.actPrintSpravExecute(Sender: TObject);
 var E: Variant;
-    str:string;
+    str,dir_inst,copystr1,copystr2:string;
+    posit:integer;
     FindRange: Variant;
     tempStoredProc: TADOStoredProc;
 begin
@@ -1040,6 +1048,12 @@ begin
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
+     dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
+    posit:=Pos(' ', dir_inst);
+    copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
+    copystr2:=Copy(dir_inst,1,posit-1);
+    copystr1:=copystr1+' '+copystr2;
+    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=copystr1);
     FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
     FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
     FindRange := E.Cells.Replace(What := '#podgot#',Replacement:=tempStoredProc.FieldByName('Podgot').AsString);
