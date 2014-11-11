@@ -100,21 +100,15 @@ inherited frmUchPlSemLength: TfrmUchPlSemLength
       Align = alClient
       AutoFitColWidths = True
       DataSource = dsSem
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object Panel2: TPanel
       Left = 251

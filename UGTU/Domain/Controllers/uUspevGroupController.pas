@@ -3089,7 +3089,7 @@ var
   ikdisc, ikcontent:integer;
   Log : ILogger;
 begin
-  Log := TNullLogger.GetInstance;   // TMemoLogger.GetInstance;
+  Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance; //
 
   Assert(dmUgtuStructure <> nil);
   Assert(dmUgtuStructure.adoqSpecFac <> nil);

@@ -233,8 +233,8 @@ end;
 
 procedure TMemoLogger.ClearMemo(Sender:TObject; var Action:TCloseAction);
 begin
-FMemo.Lines.Add('-------------');
-FNumber:=1;
+  FMemo.Lines.Add('-------------');
+  FNumber:=1;
 end;
 
 constructor TMemoLogger.Create;

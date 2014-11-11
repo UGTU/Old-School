@@ -25,7 +25,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
       Width = 816
       Height = 677
       HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\Add_NagrDep.htm'
-      ActivePage = tsPrepods
+      ActivePage = tsPotok
       Align = alClient
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -41,10 +41,6 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\FrameDep.htm'
         Caption = #1057#1087#1080#1089#1086#1082' '#1087#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1077#1081
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -117,10 +113,6 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\Add_Thread.htm'
         Caption = #1055#1083#1072#1085#1080#1088#1086#1074#1072#1085#1080#1077' '#1085#1072#1075#1088#1091#1079#1082#1080
         ImageIndex = 7
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Splitter1: TSplitter
           Left = 247
           Top = 68
@@ -315,7 +307,7 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             Left = 604
             Top = -1
             Width = 203
-            Height = 21
+            Height = 19
             AlwaysShowBorder = True
             Anchors = [akTop, akRight]
             DynProps = <>
@@ -356,7 +348,6 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
           Height = 577
           Align = alClient
           TabOrder = 2
-          ExplicitHeight = 578
           object dbNagrCommit: TDBGridEh
             Left = 1
             Top = 1
@@ -998,17 +989,35 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             ExplicitHeight = 593
             inherited pnlAll: TPanel
               Width = 808
-              Height = 506
+              Height = 511
               ExplicitWidth = 808
-              ExplicitHeight = 506
+              ExplicitHeight = 511
               inherited ScrollBox1: TScrollBox
                 Width = 806
-                Height = 504
+                Height = 509
                 ExplicitWidth = 806
-                ExplicitHeight = 504
+                ExplicitHeight = 509
                 inherited Panel2: TPanel
-                  Height = 385
-                  ExplicitHeight = 385
+                  Height = 390
+                  ExplicitHeight = 390
+                  inherited Splitter1: TSplitter
+                    Height = 390
+                  end
+                  inherited Panel5: TPanel
+                    Height = 390
+                    ExplicitHeight = 390
+                    inherited dbgDisc: TDBGridEh
+                      Height = 362
+                    end
+                  end
+                  inherited Panel6: TPanel
+                    Height = 390
+                    ExplicitHeight = 390
+                    inherited ScrollBox2: TScrollBox
+                      Height = 390
+                      ExplicitHeight = 390
+                    end
+                  end
                 end
                 inherited dtpDateUtv: TDateTimePicker
                   Height = 21
@@ -1019,10 +1028,25 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
             inherited pnlTools: TPanel
               Width = 808
               ExplicitWidth = 808
+              inherited ToolBar1: TToolBar
+                Width = 808
+                ExplicitWidth = 808
+              end
             end
             inherited pnlGroup: TPanel
               Width = 808
               ExplicitWidth = 808
+            end
+            inherited pnlSpclz: TPanel
+              Width = 808
+              ExplicitWidth = 808
+              inherited lblSpclz: TLabel
+                Width = -140
+              end
+              inherited dbcbSpclz: TDBLookupComboboxEh
+                Width = 665
+                ExplicitWidth = 665
+              end
             end
           end
           inherited ImageList1: TImageList
@@ -1631,10 +1655,6 @@ inherited fmNagruzkaDep: TfmNagruzkaDep
       object TabSheet1: TTabSheet
         Caption = #1053#1086#1088#1084#1099' '#1074#1088#1077#1084#1077#1085#1080
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgNormTime: TDBGridEh
           Left = 0
           Top = 0

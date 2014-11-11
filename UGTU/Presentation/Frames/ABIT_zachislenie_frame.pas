@@ -202,7 +202,7 @@ uses
   AbiturientOrderProcs,DBTVZachobj,DBTVFacZachobj,DBTVSpecZachobj, uDM,
   uJoinGroup, uDMPrikaz, uDMAbiturientZachisl,uMain,
   uAbitZachislenieController, GeneralController, uAbitOtchetsController,
-  AbitPredvSpisokZachisl, ReportsBase, uWaitingController;
+  AbitPredvSpisokZachisl, ReportsBase, uWaitingController, CommonIntf, CommonIntfImpl;
 
 {$R *.dfm}
 
@@ -251,16 +251,25 @@ begin
 end;
 
 procedure TfmZach.DoRefreshFrame;
+var Log: ILogger;
 begin
   try
+     Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance;  //
+
 		 Modified:=false;
 
 		 //загружаем типы категорий поступления
 		 //в фильтр предварительных списков
 		 TGeneralController.Instance.InitializeLockupCB(@cbKatZachisl, 'ik_type_kat', 'CType_kat');
 		 TAbitZachislenieController.Instance.GetTypeKatZach(@cbKatZachisl.ListSource.DataSet);
+
+     Log.LogMessage('GetTypeKatZach');
+
 		 dbgAbitsForZachisl.DataSource:=nil;
 		 self.DataSet := nil;
+
+     Log.LogMessage('nil');
+
 		 if FrameObject is TDBNodeZachObject then
 		 begin
 			PageControl1.Pages[0].Caption := 'Факультеты';
@@ -276,8 +285,11 @@ begin
       DataSet.Fields[4].ReadOnly := false;
       DataSet.Fields[5].ReadOnly := false;
 
+      Log.LogMessage('DataSet.Fields');
+
       dbgAbitsForZachisl.FieldColumns['cshort_name_fac'].Visible:= true;
       dbgAbitsForZachisl.FieldColumns['cshort_name_fac'].Visible:= true;
+      Log.LogMessage('dbgAbitsForZachisl');
 		 end;
 
 		 //если факультет
@@ -330,26 +342,32 @@ begin
       dbgAbitsForZachisl.FieldColumns['Cshort_spec'].Visible:= true;
 		 end;
 
+     Log.LogMessage('Closer to Spec');
 		 //если специальность
 		 if FrameObject is TDBNodeSpecZachObject then
 		 begin
 		  spisokAll.TabVisible:=false;
 		  pnlSave.Visible:=true;
 		  predvpage.Show;
+      Log.LogMessage('predvpage.Show');
 		  PageControl1Change(nil);
+      Log.LogMessage('PageControl1Change');
 
       dbgAbitsForZachisl.FieldColumns['cshort_name_fac'].Visible:= false;
       dbgAbitsForZachisl.FieldColumns['Cshort_spec'].Visible:= false;
+     Log.LogMessage('dbgAbitsForZachisl');
 		 end
 		 else
 		   spisokall.Show;
 		 cbKatZachisl.Value:=null;
 
+      Log.LogMessage('Ready To Prikaz');
      prikaz.FieldColumns['cshort_name_fac'].Visible:=
         dbgAbitsForZachisl.FieldColumns['cshort_name_fac'].Visible;
      prikaz.FieldColumns['Cshort_spec'].Visible:=
         dbgAbitsForZachisl.FieldColumns['Cshort_spec'].Visible;
 
+     Log.LogMessage('Ready To dbgBalls');
      dbgBalls.FieldColumns['Cshort_name_fac'].Visible:=
         dbgAbitsForZachisl.FieldColumns['cshort_name_fac'].Visible;
      dbgBalls.FieldColumns['Cname_spec'].Visible:=
@@ -391,12 +409,15 @@ end;
 
 procedure TfmZach.PageControl1Change(Sender: TObject);
 //var filter: string;
+var Log: ILogger;
 begin
+
+ Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance;  //
  pnlSave.Visible:=false;
  //bbUndo.Visible:=false;
  //bbProceed.Visible:=false;
 
-
+ Log.LogMessage('spisokAll.Visible');
  if spisokAll.Visible=true then
  begin
    TApplicationController.GetInstance.AddLogEntry('Переход на вкладку Список факультетов-специальностей.');
@@ -406,6 +427,7 @@ begin
  //вкладка проходные баллы
  if tsBalls.Visible=true then
  begin
+    Log.LogMessage('tsBalls.Visible=true');
     TApplicationController.GetInstance.AddLogEntry('Переход на вкладку Проходные баллы');
 
     Modified:=false;
@@ -413,21 +435,27 @@ begin
  //если DataSource еще не создан, создаем
    if dbgBalls.DataSource=nil then
    begin
+      Log.LogMessage('dbgBalls.DataSource=nil');
       dbgBalls.DataSource:= TDataSource.Create(nil);
       dbgBalls.DataSource.DataSet:= TADODataSet.Create(nil);
       TADODataSet(dbgBalls.DataSource.DataSet).LockType:=ltBatchOptimistic;
       //и загружаем данные в DataSet
 
+      Log.LogMessage('Ready to GetProhBalls');
       TAbitZachislenieController.Instance.GetProhBalls(@dbgBalls.DataSource.DataSet,
          year, idFac, idSpecFac);
+     Log.LogMessage('Did GetProhBalls');
       DBNavigator1.DataSource:= dbgBalls.DataSource;
       
    end;
    //обновляем данные в DataSource
+   Log.LogMessage('обновляем данные');
    dbgBalls.DataSource.DataSet.Close;
    dbgBalls.DataSource.DataSet.Open;
+   Log.LogMessage('Open');
    dbgBalls.DataSource.DataSet.FieldByName('MinBall').Alignment:= taLeftJustify;
 
+   Log.LogMessage('ready to Sort');
    TADODataSet(dbgBalls.DataSource.DataSet).Sort:=
       'Cshort_name_fac, Cname_spec, Cname_kat_zach, сname_disc';
 
@@ -437,6 +465,7 @@ begin
    pnlSave.Visible:=true;
 end;
 
+   Log.LogMessage('not balls');
 //на вкладке предварительные списки
    if predvpage.Visible=true then
    begin //если еще не загружен, загружаем список абитуриентов
