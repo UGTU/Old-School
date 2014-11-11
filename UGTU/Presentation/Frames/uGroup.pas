@@ -833,6 +833,7 @@ var
   ikFac: integer;
   ikSpecFac: integer;
   ikSpec: integer;
+  Report : TReportBase;
 begin
 
   ikSpecFac:=TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.Selected.Parent.Data).ik;
@@ -840,7 +841,11 @@ begin
   ikFac:=TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.Selected.Parent.Parent.Data).ik;
   //генерируем бланк текущей ведомости
   TUspevGroupController.Instance.printBlankVedomost(ik, cmbxSem.ItemIndex+1, ikVed, ikFac, ikSpec, DMUspevaemost.adospGetAllVeds4Group);
-end;
+  Report:=TUspevGroupController.Instance.BuildVedomost2014(ik, cmbxSem.ItemIndex+1, ikVed, ikFac,
+     ikSpec, DMUspevaemost.adospGetAllVeds4Group);
+  TWaitingController.GetInstance.Process(Report);
+
+  end;
 
 procedure TfmGroup.AttestRefresh();
 begin

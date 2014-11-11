@@ -404,7 +404,8 @@ uses
   DBTVWorkTypeObj in 'Domain\DBTV\DBTVWorkTypeObj.pas',
   DBTVZachobj in 'Domain\DBTV\DBTVZachobj.pas',
   ShEvent in 'Domain\DBTV\ShEvent.PAS',
-  CommandController in 'Domain\Controllers\CommandController.pas';
+  CommandController in 'Domain\Controllers\CommandController.pas',
+  BRSVedom2014 in 'Domain\Reports\BRSVedom2014.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

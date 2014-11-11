@@ -322,8 +322,11 @@ uses
   procedure printBlankVedomostKP(ikGrup, nSem, ikVed, ikFac, ikSpec: integer; E:Variant; HasDopusk:boolean);
   }
   //printBlankVedomost генерирует бланк ведомости (без оценок)
-  procedure printBlankVedomost(ikGrup, nSem, ikVed, ikFac, ikSpec: integer; tempStoredProc: TADOStoredProc);
+  procedure printBlankVedomost(ikGrup, nSem, ikVed, ikFac, ikSpec: integer;
+   tempStoredProc: TADOStoredProc);
 
+  function BuildVedomost2014(ikGrup, nSem, ikVed, ikFac, ikSpec: integer;
+   tempStoredProc: TADOStoredProc): TReportBase;
   //printAllBlankVedomost генерирует все бланки ведомостей семестра (без оценок)
   procedure printAllBlankVedomost(ikGrup, nSem, ikFac, ikSpec: integer);
 
@@ -346,7 +349,7 @@ uses
 end;
 
 implementation
-uses CommonIntf, CommonIntfImpl;
+uses CommonIntf, CommonIntfImpl, BRSVedom2014;
 
  var
 //FAbitZachislenieControllerInstance - экземпляр контроллера
@@ -1391,6 +1394,14 @@ begin
 end;
 
 
+function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
+  ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;
+begin
+  Result := TBRS2014VedomostReport.Create(ikGrup, nSem, ikVed, ikFac,
+  ikSpec, tempStoredProc);
+  Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt';
+end;
+
 //проверяет, можно ли обновить список созданных ведомости
 function TUspevGroupController.CanUpdateVedsList(nSem, ik_group: integer): boolean;
 begin
@@ -2211,6 +2222,7 @@ procedure TUspevGroupController.printAllVedomost(ikGrup, nSem, ikFac, ikSpec: in
 var
   VedList: TADOStoredProc;
 begin
+
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Экспорт в Excel всех ведомостей');
 
   VedList:= GetAllVedomosts(ikGrup, nSem);
@@ -2673,59 +2685,65 @@ begin
 end;
 
 
-procedure TUspevGroupController.printVedomost(VedList:TADOStoredProc;ikGrup, nSem, ikFac, ikSpec: integer; withOsenca:boolean);
+
+procedure TUspevGroupController.printVedomost(VedList:TADOStoredProc;ikGrup,
+nSem, ikFac, ikSpec: integer; withOsenca:boolean);
 var E:Variant;
   str:string;
-begin
-
-  if VedList=nil then
   begin
-    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
-    exit;
-  end;
 
-  try
-	  if VedList.Active then
-	  begin
-		  E := CreateOleObject('Excel.Application');
-		  try
-		    try
-			    str := ExtractFilePath(Application.ExeName)+'reports\UspevVedomost.XLT';
-			    E.WorkBooks.Add(str);
-			    E.Visible := false;
-			    E.DisplayAlerts:=false;
-			    VedList.First;
-			    while not VedList.Eof do
-			    begin      //печать и настройка текущей ведомости
+
+
+//  if VedList=nil then
+//  begin
+//    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
+//    exit;
+//  end;
+//
+//  try
+//	  if VedList.Active then
+//	  begin
+//		  E := CreateOleObject('Excel.Application');
+//		  try
+//		    try
+//			    str := ExtractFilePath(Application.ExeName)+'reports\UspevVedomost.XLT';
+//			    E.WorkBooks.Add(str);
+//			    E.Visible := false;
+//			    E.DisplayAlerts:=false;
+//			    VedList.First;
+//			    while not VedList.Eof do
+//			    begin      //печать и настройка текущей ведомости
 			      DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
-				        ikSpec, withOsenca);
-            VedList.Next;
-			    end;
-			    E.Sheets[1].Delete;
-			    E.Sheets[1].Delete;
-			    E.DisplayAlerts:=true;
-			    E.Visible := true;
-		    except
-			    E.Quit;
-			    raise ;
-		    end;
-
-		  finally
-		    E:= UnAssigned;
-		  end;
-    end;
-  finally
-    VedList.Free;
-  end;
+//				        ikSpec, withOsenca);
+//            VedList.Next;
+//			    end;
+//			    E.Sheets[1].Delete;
+//			    E.Sheets[1].Delete;
+//			    E.DisplayAlerts:=true;
+//			    E.Visible := true;
+//		    except
+//			    E.Quit;
+//			    raise ;
+//		    end;
+//
+//		  finally
+//		    E:= UnAssigned;
+//		  end;
+//    end;
+//  finally
+//    VedList.Free;
+//  end;
 end;
 
 
 
 //Экспорт ведомости
 procedure TUspevGroupController.DoPrintVedomost(E:Variant;ikGrup, nSem, ikVed, ikFac, ikSpec: integer; withOsenca:boolean);
-const firstStr:integer=10; //первая строчка в шаблоне ведомости, содержащая шапку таблицы
+const
+firstStr:integer=10; //первая строчка в шаблоне ведомости, содержащая шапку таблицы
       firstStrKP:integer=6; //первая строчка в шаблоне ведомости, содержащая шапку таблицы тем КП
 var count:integer;
+  tempDS: TADODataSet;
   mainSheet:integer;  //номер копируемого листа
   next:integer;  //номер текущего листа
   i: Integer;
@@ -2748,44 +2766,46 @@ begin
 
   //определяем вид ведомости пока в зависимости от кода вида занятия
   //TVedType = (exam,zach,KP,KR);
-  case dmUspevaemost.adospSelVed.FieldByName('ik_Vid_zanyat').AsInteger of
-    6:   //экзамен
-    begin
-     VedType:= exam;
-     VedName:= 'Экзаменациoнная ведомость №';
-     VidZanShortName:= 'Экз';
-    end;
-    56:  // гос экзамен
-    begin
-     VedType:= exam;
-     VedName:= 'Ведомость на государственный экзамен №';
-     VidZanShortName:= 'ГосЭкз';
-    end;
-    7:  //зачет
-    begin
-     VedType:= zach;
-     VedName:= 'Зачетная ведомость №';
-     VidZanShortName:= 'Зач';
-    end;
-    8:  //
-    begin
-     VedType:= KP;
-     VedName:= 'Ведомость на курсовой проект №';
-     VidZanShortName:= 'КП';
-    end;
-    9:  //
-    begin
-     VedType:= KR;
-     VedName:=  'Ведомость на курсовую работу №';
-     VidZanShortName:= 'КР';
-    end;
-    27:  //практика
-    begin
-     VedType:= zach;
-     VedName:= 'Ведомость на практику №';
-     VidZanShortName:= 'Прак';
-    end;
-   end;
+//  case dmUspevaemost.adospSelVed.FieldByName('ik_Vid_zanyat').AsInteger of
+//    6:   //экзамен
+//    begin
+//     VedType:= exam;
+//     VedName:= 'Экзаменациoнная ведомость №';
+//     VidZanShortName:= 'Экз';
+//    end;
+//    56:  // гос экзамен
+//    begin
+//     VedType:= exam;
+//     VedName:= 'Ведомость на государственный экзамен №';
+//     VidZanShortName:= 'ГосЭкз';
+//    end;
+//    7:  //зачет
+//    begin
+//     VedType:= zach;
+//     VedName:= 'Зачетная ведомость №';
+//     VidZanShortName:= 'Зач';
+//    end;
+//    8:  //
+//    begin
+//     VedType:= KP;
+//     VedName:= 'Ведомость на курсовой проект №';
+//     VidZanShortName:= 'КП';
+//    end;
+//    9:  //
+//    begin
+//     VedType:= KR;
+//     VedName:=  'Ведомость на курсовую работу №';
+//     VidZanShortName:= 'КР';
+//    end;
+//    27:  //практика
+//    begin
+//     VedType:= zach;
+//     VedName:= 'Ведомость на практику №';
+//     VidZanShortName:= 'Прак';
+//    end;
+ // end;
+
+
    VedName:=VedName + ' '+IntToStr(ikVed);
 
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Экспорт в Excel ведомости '+
@@ -2888,6 +2908,19 @@ begin
   VedList.Filtered:= true;
   PrintVedomost(VedList,ikGrup,nSem,ikFac, ikSpec, false);
 end;
+
+// procedure TUspevGroupController.printBlankVedomost(ikGrup, nSem, ikVed, ikFac, ikSpec: integer; tempStoredProc: TADOStoredProc);
+//var
+//  VedList: TADOStoredProc;
+//begin
+//  TApplicationController.GetInstance.AddLogEntry('Ведомость. Экспорт в Excel бланка ведомости');
+//  VedList:= GetAllVedomosts(ikGrup, nSem);
+//
+//  //применяем фильтр, чтобы выводить только 1 ведомость
+//  VedList.Filter:= 'Ik_ved='+IntToStr(ikVed);
+//  VedList.Filtered:= true;
+//  PrintVedomost(VedList,ikGrup,nSem,ikFac, ikSpec, false);
+//end;
 
 //генерирует все бланки ведомостей (без оценок)
 procedure TUspevGroupController.printAllBlankVedomost(ikGrup, nSem, ikFac, ikSpec: integer);
