@@ -349,7 +349,7 @@ uses
 end;
 
 implementation
-uses CommonIntf, CommonIntfImpl, BRSVedom2014;
+uses CommonIntf, CommonIntfImpl;
 
  var
 //FAbitZachislenieControllerInstance - экземпл€р контроллера
