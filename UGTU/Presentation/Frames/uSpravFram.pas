@@ -160,21 +160,21 @@ begin
   Result := true;
   //пересылаем данные на сервер
   try
-    cdsSprav.UpdateRecord;
-    //cdsSprav.ApplyUpdates(-1);//(-1);
+    //cdsSprav.UpdateRecord;
+    cdsSprav.ApplyUpdates(-1);//(-1);
   except
     MessageBox(Handle, 'Данные некорректны. Сохранение отменено.','ИС "УГТУ"',MB_OK);
-   end;
-   modified:=false;
-   aSave.Enabled:=false;
-   aCancel.Enabled:=false;
+  end;
+  modified:=false;
+  aSave.Enabled:=false;
+  aCancel.Enabled:=false;
 
 end;
 
 //отмена изменений
 procedure TfmSprav.DoCancel;
 begin
-      //отменяем все изменения и загружаем данные заново
+   //отменяем все изменения и загружаем данные заново
    cdsSprav.Data:=prvSprav.Data;
    Modified:=false;
    aSave.Enabled:=false;

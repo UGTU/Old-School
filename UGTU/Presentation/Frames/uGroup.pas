@@ -1154,7 +1154,7 @@ begin
   MaxBall:=dmUspevaemost.adospGetAllBRSExam.Fields[4].AsInteger;
 
   ikVed := dbcmbxDisc.KeyValue;
-  ikPredm := dmUspevaemost.adospGetAllBRSExam.Fields[1].AsInteger;
+  ikPredm := dmUspevaemost.adospGetAllBRSExam.Fields[5].AsInteger;    //ik_upContent
   ikVidZan := dmUspevaemost.adospGetAllBRSExam.Fields[2].AsInteger;
   // чтение заголовка ведомости
 
@@ -3429,7 +3429,7 @@ begin
       if MessageBox(Handle, 'Не создано ни одной аттестации. Создать их сейчас?',
                   'ИС УГТУ', MB_YESNO)=IDYES then
         // если согласились - создаём...
-        TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem, nom_ved, IsBRS)
+        haveAtt:= TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem, nom_ved, IsBRS)
       else
         haveAtt := false; // отмечаем отсутствие аттестаций флагом
     end;

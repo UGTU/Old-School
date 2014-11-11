@@ -78,7 +78,7 @@ begin
     Caption:='Изменить группу';
     dbcbeCause.Enabled:=false;
     dbcbeOrder.Enabled:=false;
-//При редактировании нескольких абитуриентов номер зачетки неизменяем
+    //При редактировании нескольких абитуриентов номер зачетки неизменяем
     if AbitCount>1 then
     begin
       Label3.Visible:=false;
@@ -127,7 +127,7 @@ procedure TfrmJoinGroup.actOKExecute(Sender: TObject);
 begin
 //Проверяем, чтобы такого номера зачетки еще не было в базе
   if True then
-  
+
   if (not EditMode)and (not HasZachMode) and (TAbitZachislenieController.Instance.Abit_IsOldZach(eNum.Text)) then
   begin
     raise EApplicationException.Create('Вы внесли уже используемый номер зачетки!');
@@ -136,7 +136,7 @@ begin
   isModified:= false;
   mrOk:= true;
   self.Close;
-end;                  
+end;
 
 procedure TfrmJoinGroup.actOKUpdate(Sender: TObject);
 begin
@@ -152,7 +152,7 @@ begin
 end;
 
 destructor TfrmJoinGroup.Destroy;
-begin 
+begin
   inherited;
 end;
 
