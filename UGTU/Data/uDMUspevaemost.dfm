@@ -2159,7 +2159,30 @@ object dmUspevaemost: TdmUspevaemost
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'SetAttributesVedomost;1'
-    Parameters = <>
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@Ik_ved'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@Dd_exam'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+      end
+      item
+        Name = '@itab_n'
+        Attributes = [paNullable]
+        DataType = ftString
+        Precision = 50
+      end>
     Left = 704
     Top = 705
   end

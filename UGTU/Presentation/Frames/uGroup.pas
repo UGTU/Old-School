@@ -1175,7 +1175,7 @@ begin
     Active:=true;
   end;
 
-   dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
+  dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
 
   if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime<>null then
     dbdteBRSExam.Value:=dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime;
