@@ -2165,23 +2165,27 @@ object dmUspevaemost: TdmUspevaemost
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Ik_ved'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = '@Dd_exam'
         Attributes = [paNullable]
         DataType = ftDateTime
+        Value = Null
       end
       item
         Name = '@itab_n'
         Attributes = [paNullable]
         DataType = ftString
         Precision = 50
+        Value = Null
       end>
     Left = 704
     Top = 705
@@ -2275,8 +2279,8 @@ object dmUspevaemost: TdmUspevaemost
         Precision = 10
         Value = Null
       end>
-    Left = 558
-    Top = 779
+    Left = 542
+    Top = 771
   end
   object dsGetAllBRSExam: TDataSource
     DataSet = adospGetAllBRSExam

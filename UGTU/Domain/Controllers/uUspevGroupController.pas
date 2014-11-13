@@ -580,10 +580,10 @@ begin
     Items[1].Value := ikPredm;
     AddParameter;
     // Вид занятий
-    Items[2].Value := ikVidZan;
-    AddParameter;
+    //Items[2].Value := ikVidZan;
+    //AddParameter;
     // Группа
-    Items[3].Value := ik_grup;
+    Items[2].Value := ik_grup;
   end;
   //dmUspevaemost.adospSelAtt.ExecProc;
   dmUspevaemost.adospSelBRSExam.Active := true;
@@ -660,7 +660,7 @@ begin
 
     if TUspevGroupController.Instance.CheckBRSExamExist(ik_grup, nSem,
                        dmUspevaemost.adospGetBRSExamVidZan.Fields[0].Value,
-                       dmUspevaemost.adospGetBRSExamVidZan.Fields[1].Value)
+                       dmUspevaemost.adospGetBRSExamVidZan.Fields[3].Value)
 
     then
     begin
