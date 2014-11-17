@@ -2694,45 +2694,45 @@ var E:Variant;
 
 
 
-//  if VedList=nil then
-//  begin
-//    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
-//    exit;
-//  end;
-//
-//  try
-//	  if VedList.Active then
-//	  begin
-//		  E := CreateOleObject('Excel.Application');
-//		  try
-//		    try
-//			    str := ExtractFilePath(Application.ExeName)+'reports\UspevVedomost.XLT';
-//			    E.WorkBooks.Add(str);
-//			    E.Visible := false;
-//			    E.DisplayAlerts:=false;
-//			    VedList.First;
-//			    while not VedList.Eof do
-//			    begin      //печать и настройка текущей ведомости
-			 //    DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
-//				        ikSpec, withOsenca);
-//            VedList.Next;
-//			    end;
-//			    E.Sheets[1].Delete;
-//			    E.Sheets[1].Delete;
-//			    E.DisplayAlerts:=true;
-//			    E.Visible := true;
-//		    except
-//			    E.Quit;
-//			    raise ;
-//		    end;
-//
-//		  finally
-//		    E:= UnAssigned;
-//		  end;
-//    end;
-//  finally
-//    VedList.Free;
-//  end;
+  if VedList=nil then
+  begin
+    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
+    exit;
+  end;
+
+  try
+	  if VedList.Active then
+	  begin
+		  E := CreateOleObject('Excel.Application');
+		  try
+		    try
+			    str := ExtractFilePath(Application.ExeName)+'reports\UspevVedomost.XLT';
+			    E.WorkBooks.Add(str);
+			    E.Visible := false;
+			    E.DisplayAlerts:=false;
+			    VedList.First;
+			    while not VedList.Eof do
+			    begin      //печать и настройка текущей ведомости
+		        DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
+				        ikSpec, withOsenca);
+            VedList.Next;
+			    end;
+			    E.Sheets[1].Delete;
+			    E.Sheets[1].Delete;
+			    E.DisplayAlerts:=true;
+			    E.Visible := true;
+		    except
+			    E.Quit;
+			    raise ;
+		    end;
+
+		  finally
+		    E:= UnAssigned;
+		  end;
+    end;
+  finally
+    VedList.Free;
+  end;
 end;
 
 

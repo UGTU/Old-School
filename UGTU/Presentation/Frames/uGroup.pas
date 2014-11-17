@@ -841,9 +841,11 @@ begin
   ikFac:=TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.Selected.Parent.Parent.Data).ik;
   //генерируем бланк текущей ведомости
   TUspevGroupController.Instance.printBlankVedomost(ik, cmbxSem.ItemIndex+1, ikVed, ikFac, ikSpec, DMUspevaemost.adospGetAllVeds4Group);
-  Report:=TUspevGroupController.Instance.BuildVedomost2014(ik, cmbxSem.ItemIndex+1, ikVed, ikFac,
-     ikSpec, DMUspevaemost.adospGetAllVeds4Group);
-  TWaitingController.GetInstance.Process(Report);
+
+  //
+  //Report:=TUspevGroupController.Instance.BuildVedomost2014(ik, cmbxSem.ItemIndex+1, ikVed, ikFac,
+  //   ikSpec, DMUspevaemost.adospGetAllVeds4Group);
+  //TWaitingController.GetInstance.Process(Report);
 
   end;
 
@@ -898,8 +900,9 @@ begin
   or (cmbxNumber.Text ='')
   then
     Exit;
+    //test code
 
-    if cmbxNumber.Text='Ёкзамен' then
+    if cmbxNumber.Text='Ёкзамен' then   // TestBranch
     BRSExamRefresh
     else
     AttestRefresh;
