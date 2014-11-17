@@ -899,10 +899,9 @@ begin
   if (dbcmbxDisc.KeyValue = Null) or (dbcmbxDisc.Text = '')
   or (cmbxNumber.Text ='')
   then
-    Exit;
-    //будет управление преподавател€ми
+    Exit;    //будет управление преподавател€ми
 
-    if cmbxNumber.Text='Ёкзамен' then   // TestBranch
+    if cmbxNumber.Text='Ёкзамен' then   // PrepodBranch update
     BRSExamRefresh
     else
     AttestRefresh;
