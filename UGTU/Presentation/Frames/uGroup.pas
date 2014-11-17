@@ -900,7 +900,7 @@ begin
   or (cmbxNumber.Text ='')
   then
     Exit;
-    //test code
+    //будет управление преподавател€ми
 
     if cmbxNumber.Text='Ёкзамен' then   // TestBranch
     BRSExamRefresh
@@ -1183,6 +1183,7 @@ begin
     Active:=true;
   end;
 
+  //искать в ImportTeachers
   dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
 
   if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime<>null then
