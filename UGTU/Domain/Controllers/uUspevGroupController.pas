@@ -76,9 +76,9 @@ uses
 //сохраняет результаты аттестации и пропуски
   function SaveAtt(ikVed: integer; dbgrdAtt: PDBGrid):boolean;
 
-  function SaveBRSAtt(ikVed:integer; dbgrdBRSAtt: TDBGridEh; i_tab:integer; date:TDateTime):boolean;
+  function SaveBRSAtt(ikVed:integer; dbgrdBRSAtt: TDBGridEh; i_tab:string; date:TDateTime):boolean;
 
-  function SaveBRSExam(ikVed: integer; dbgrdBRSExam: TDBGridEh; i_tab:integer; date:TDateTime): boolean;
+  function SaveBRSExam(ikVed: integer; dbgrdBRSExam: TDBGridEh; i_tab:string; date:TDateTime): boolean;
 
 //закрывает все предметы выбранной аттестации
   function CloseAllAtt(ik_grup, nSem, numAtt:integer):boolean;
@@ -87,7 +87,7 @@ uses
   function SaveDateAllAtt(ik_grup, nSem, numAtt:integer; dateAtt: TDateTime):boolean;
 
 //закрытие аттестации
-  function CloseAtt(ikVed, itab_n : integer; lclose : boolean):boolean;
+  function CloseAtt(ikVed: integer; itab_n: string; lclose : boolean):boolean;
 
 
 
@@ -793,10 +793,10 @@ result:=true;
 end;
 
 function TUspevGroupController.SaveBRSAtt(ikVed: integer;
-  dbgrdBRSAtt: TDBGridEh; i_tab:integer; date:TDateTime): boolean;
+  dbgrdBRSAtt: TDBGridEh; i_tab:string; date:TDateTime): boolean;
 begin
 
-result:=false;
+  result:=false;
 
   with dmUspevaemost.aspSetAttributesVedomost do begin
         Parameters.Clear;
@@ -838,10 +838,10 @@ result:=true;
 end;
 
 function TUspevGroupController.SaveBRSExam(ikVed: integer;
-  dbgrdBRSExam: TDBGridEh; i_tab:integer; date:TDateTime): boolean;
+  dbgrdBRSExam: TDBGridEh; i_tab:string; date:TDateTime): boolean;
 begin
 
-result:=false;
+  result:=false;
 
   with dmUspevaemost.aspSetAttributesVedomost do begin
         Parameters.Clear;
@@ -931,7 +931,7 @@ end;
 
 end;
 
-function TUspevGroupController.CloseAtt(ikVed, itab_n: integer; lclose: boolean): boolean;
+function TUspevGroupController.CloseAtt(ikVed: integer; itab_n: string; lclose: boolean): boolean;
 var tempStoredProc: TADOStoredProc;
 begin
 result:=true;
@@ -941,7 +941,7 @@ try
   tempStoredProc.ProcedureName:= 'Dek_CloseAtt;1';
   tempStoredProc.Connection:= dm.DBConnect;
   tempStoredProc.Parameters.CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
-  tempStoredProc.Parameters.CreateParameter('@Itab_n', ftInteger, pdInput, 0, itab_n);
+  tempStoredProc.Parameters.CreateParameter('@Itab_n', ftString, pdInput, 50, itab_n);
   tempStoredProc.Parameters.CreateParameter('@lclose', ftBoolean, pdInput, 0, lclose);
 
   tempStoredProc.ExecProc;

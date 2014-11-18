@@ -885,7 +885,8 @@ begin
     Active:=true;
   end;
 
-   dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsInteger;
+  dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsString;
+  // dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsInteger;
 
   if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime<>null then
     dbdteBRSExam.Value:=dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime;
@@ -1183,7 +1184,8 @@ begin
   end;
 
   //искать в ImportTeachers
-  dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
+  dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsString;
+  //dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
 
   if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime<>null then
     dbdteBRSExam.Value:=dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime;
