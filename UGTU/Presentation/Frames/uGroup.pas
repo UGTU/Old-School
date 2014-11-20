@@ -898,7 +898,7 @@ begin
   inherited;
 
   if (dbcmbxDisc.KeyValue = Null) or (dbcmbxDisc.Text = '')
-  or (cmbxNumber.Text ='')
+    or (cmbxNumber.Text ='')
   then
     Exit;    //будет управление преподавателями
 

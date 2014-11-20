@@ -1579,7 +1579,7 @@ begin
       CreateParameter('@ik_vid_zanyat', ftInteger, pdInput, 0, ikVidZan);
       CreateParameter('@n_sem', ftInteger, pdInput, 0, nSem);
       CreateParameter('@ik_disc', ftInteger, pdInput, 0, ikPredm);
-      CreateParameter('@Itab_n', ftInteger, pdInput, 0, ikPrepod);
+      CreateParameter('@Itab_n', ftString, pdInput, 50, ikPrepod);
       CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, ikVidExam);
       CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, DateExam);
       CreateParameter('@dD_vydano', ftDateTime, pdInput, 0, Date);
