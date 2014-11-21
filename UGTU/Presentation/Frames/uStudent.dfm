@@ -144,7 +144,7 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 721
         Height = 615
-        ActivePage = TabSheet2
+        ActivePage = TabSheet9
         Align = alClient
         Constraints.MinWidth = 557
         MultiLine = True
