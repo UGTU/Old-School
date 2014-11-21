@@ -298,8 +298,8 @@ object dmUspevaemost: TdmUspevaemost
       item
         Name = '@Itab_n'
         Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
+        DataType = ftString
+        Size = 50
         Value = Null
       end
       item
@@ -353,7 +353,7 @@ object dmUspevaemost: TdmUspevaemost
         Precision = 10
         Value = Null
       end>
-    Left = 401
+    Left = 377
     Top = 381
   end
   object dsSelVed: TDataSource
@@ -2184,7 +2184,7 @@ object dmUspevaemost: TdmUspevaemost
         Name = '@itab_n'
         Attributes = [paNullable]
         DataType = ftString
-        Precision = 50
+        Size = 50
         Value = Null
       end>
     Left = 704
