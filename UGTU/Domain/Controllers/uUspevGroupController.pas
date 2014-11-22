@@ -2705,7 +2705,6 @@ var E:Variant;
 
 
 
-<<<<<<< HEAD
 //  if VedList=nil then
 //  begin
 //    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
@@ -2745,7 +2744,7 @@ var E:Variant;
 //  finally
 //    VedList.Free;
 //  end;
-=======
+
   if VedList=nil then
   begin
     raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
@@ -2785,7 +2784,7 @@ var E:Variant;
   finally
     VedList.Free;
   end;
->>>>>>> Release-1.0.4.441
+// Release-1.0.4.441
 end;
 
 
