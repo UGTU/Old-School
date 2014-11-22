@@ -405,7 +405,10 @@ uses
   DBTVZachobj in 'Domain\DBTV\DBTVZachobj.pas',
   ShEvent in 'Domain\DBTV\ShEvent.PAS',
   CommandController in 'Domain\Controllers\CommandController.pas',
-  BRSVedom2014 in 'Domain\Reports\BRSVedom2014.pas';
+  BRSVedom2014 in 'Domain\Reports\BRSVedom2014.pas',
+  Vedomost2014 in 'Domain\Classes\Vedomost2014.pas',
+  VedomostItem2014 in 'Domain\Classes\VedomostItem2014.pas',
+  Assemly_Report2014 in 'Domain\Classes\Assemly_Report2014.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

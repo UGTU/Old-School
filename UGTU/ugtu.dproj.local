@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.703,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\TVedomost.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.489,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.466,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\Assemly_Report2014.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.692,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.752,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.547,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.182,E:\Projects\GitHub\Old-School\UGTU\Domain\Classes\Command.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.660,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\VedomostItem2014.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.110,E:\GitHub\Old-School\UGTU\Domain\Classes\TVedomost.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\Vedomost2014.pas</Transaction>
   </Transactions>
 </BorlandProject>

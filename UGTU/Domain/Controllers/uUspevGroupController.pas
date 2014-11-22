@@ -14,7 +14,7 @@ uses
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, uDMUspevaemost, ComCtrls, DateUtils,
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
-  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport;
+  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014;
  type
   PDBGrid = ^TDBGridEh;
   TVedType = (exam,zach,KP,KR);
@@ -1396,10 +1396,21 @@ end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
   ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;
+  var report:TAssemly_Report;
+  var result_report:TVedomost;
 begin
   Result := TBRS2014VedomostReport.Create(ikGrup, nSem, ikVed, ikFac,
   ikSpec, tempStoredProc);
+   report:= TAssemly_Report.Create(ikVed);
+   result_report:=report.AddReport();
+   if (result_report.Is_brs) then
+   begin
   Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt';
+   end
+  else
+  begin
+  Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
+  end;
 end;
 
 //проверяет, можно ли обновить список созданных ведомости
@@ -2713,7 +2724,7 @@ var E:Variant;
 //			    VedList.First;
 //			    while not VedList.Eof do
 //			    begin      //печать и настройка текущей ведомости
-			 //    DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
+			//     DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
 //				        ikSpec, withOsenca);
 //            VedList.Next;
 //			    end;

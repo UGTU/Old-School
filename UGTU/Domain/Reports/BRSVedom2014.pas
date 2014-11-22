@@ -10,7 +10,7 @@ type
     private
 //       FDataset:TADODataset;
 //       FListView:TListView;
-        ikVed: integer;
+      ikVed: integer;
       ikGrup, nSem,  ikFac, ikSpec: integer;
        tempStoredProc: TADOStoredProc;
     protected
@@ -19,28 +19,6 @@ type
     public
        constructor Create (_ikGrup, _nSem, _ikVed, _ikFac,
 _ikSpec: integer; _tempStoredProc: TADOStoredProc);
-
-    end;
-type
-    TVedomost = class
-    private
-    Institute, spec, disc, prepod, ekz_prep,zav_kaf, dir_inst: string;
-    date_zach, date_ekz: TDateTime;
-    otl,hor,ud, neud,nedop:integer;
-
-    protected
-
-    public
-
-    end;
-type
-    VedomostItem = class
-    private
-    FIO: string;
-    zach,balls:integer;
-    protected
-
-    public
 
 
     end;
@@ -63,7 +41,7 @@ end;
 procedure TBRS2014VedomostReport.Execute;
 begin
   inherited;
-  Replace('#institut#','bjkhjhkjhkjhkjh');
+  //Replace('#institut#','bjkhjhkjhkjhkjh');
   NextStep(1, 'Выгружаем отчёт');
 end;
 
@@ -71,10 +49,4 @@ function TBRS2014VedomostReport.GetTotalSteps: Integer;
 begin
   Result:=1;
 end;
-
-
-//function CreateReport:TVedomost;
-//begin
-//
-//end;
 end.
