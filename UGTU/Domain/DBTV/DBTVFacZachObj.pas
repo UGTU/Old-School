@@ -78,14 +78,20 @@ end;
 
 function TDBNodeFacZachObject.DoAddChildNodes: Boolean;
 var i:integer;
+nfe, lfe:string;
 begin
 Node.DeleteChildren;
 
 AdoDataset.Last;
 for i:=0 to (AdoDataset.RecordCount-1) do
 begin
-AddChild(AdoDataset.FieldValues['CName_spec'],AdoDataset.FieldValues['Cshort_spec'],AdoDataset.FieldValues['ik_spec_fac'],AdoDataset.FieldValues['NNRecord'],AdoDataset.FieldValues['cname_direction']);
-AdoDataset.Prior;
+  nfe:=AdoDataset.FieldValues['CName_form_ed'];
+  if (AdoDataset.FieldValues['ik_form_ed']>1) then
+  lfe:='('+nfe[1]+') ' else
+  lfe:='';
+
+  AddChild(lfe+AdoDataset.FieldValues['CName_spec'],AdoDataset.FieldValues['Cshort_spec'],AdoDataset.FieldValues['ik_spec_fac'],AdoDataset.FieldValues['NNRecord'],AdoDataset.FieldValues['cname_direction']);
+  AdoDataset.Prior;
 end;
 Result:=true;
 end;
