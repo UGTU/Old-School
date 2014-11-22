@@ -76,9 +76,9 @@ uses
 //сохраняет результаты аттестации и пропуски
   function SaveAtt(ikVed: integer; dbgrdAtt: PDBGrid):boolean;
 
-  function SaveBRSAtt(ikVed:integer; dbgrdBRSAtt: TDBGridEh; i_tab:integer; date:TDateTime):boolean;
+  function SaveBRSAtt(ikVed:integer; dbgrdBRSAtt: TDBGridEh; i_tab:string; date:TDateTime):boolean;
 
-  function SaveBRSExam(ikVed: integer; dbgrdBRSExam: TDBGridEh; i_tab:integer; date:TDateTime): boolean;
+  function SaveBRSExam(ikVed: integer; dbgrdBRSExam: TDBGridEh; i_tab:string; date:TDateTime): boolean;
 
 //закрывает все предметы выбранной аттестации
   function CloseAllAtt(ik_grup, nSem, numAtt:integer):boolean;
@@ -87,7 +87,7 @@ uses
   function SaveDateAllAtt(ik_grup, nSem, numAtt:integer; dateAtt: TDateTime):boolean;
 
 //закрытие аттестации
-  function CloseAtt(ikVed, itab_n : integer; lclose : boolean):boolean;
+  function CloseAtt(ikVed: integer; itab_n: string; lclose : boolean):boolean;
 
 
 
@@ -580,10 +580,10 @@ begin
     Items[1].Value := ikPredm;
     AddParameter;
     // Вид занятий
-    Items[2].Value := ikVidZan;
-    AddParameter;
+    //Items[2].Value := ikVidZan;
+    //AddParameter;
     // Группа
-    Items[3].Value := ik_grup;
+    Items[2].Value := ik_grup;
   end;
   //dmUspevaemost.adospSelAtt.ExecProc;
   dmUspevaemost.adospSelBRSExam.Active := true;
@@ -660,7 +660,7 @@ begin
 
     if TUspevGroupController.Instance.CheckBRSExamExist(ik_grup, nSem,
                        dmUspevaemost.adospGetBRSExamVidZan.Fields[0].Value,
-                       dmUspevaemost.adospGetBRSExamVidZan.Fields[1].Value)
+                       dmUspevaemost.adospGetBRSExamVidZan.Fields[3].Value)
 
     then
     begin
@@ -793,10 +793,10 @@ result:=true;
 end;
 
 function TUspevGroupController.SaveBRSAtt(ikVed: integer;
-  dbgrdBRSAtt: TDBGridEh; i_tab:integer; date:TDateTime): boolean;
+  dbgrdBRSAtt: TDBGridEh; i_tab:string; date:TDateTime): boolean;
 begin
 
-result:=false;
+  result:=false;
 
   with dmUspevaemost.aspSetAttributesVedomost do begin
         Parameters.Clear;
@@ -838,10 +838,10 @@ result:=true;
 end;
 
 function TUspevGroupController.SaveBRSExam(ikVed: integer;
-  dbgrdBRSExam: TDBGridEh; i_tab:integer; date:TDateTime): boolean;
+  dbgrdBRSExam: TDBGridEh; i_tab:string; date:TDateTime): boolean;
 begin
 
-result:=false;
+  result:=false;
 
   with dmUspevaemost.aspSetAttributesVedomost do begin
         Parameters.Clear;
@@ -931,7 +931,7 @@ end;
 
 end;
 
-function TUspevGroupController.CloseAtt(ikVed, itab_n: integer; lclose: boolean): boolean;
+function TUspevGroupController.CloseAtt(ikVed: integer; itab_n: string; lclose: boolean): boolean;
 var tempStoredProc: TADOStoredProc;
 begin
 result:=true;
@@ -941,7 +941,7 @@ try
   tempStoredProc.ProcedureName:= 'Dek_CloseAtt;1';
   tempStoredProc.Connection:= dm.DBConnect;
   tempStoredProc.Parameters.CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
-  tempStoredProc.Parameters.CreateParameter('@Itab_n', ftInteger, pdInput, 0, itab_n);
+  tempStoredProc.Parameters.CreateParameter('@Itab_n', ftString, pdInput, 50, itab_n);
   tempStoredProc.Parameters.CreateParameter('@lclose', ftBoolean, pdInput, 0, lclose);
 
   tempStoredProc.ExecProc;
@@ -1590,7 +1590,7 @@ begin
       CreateParameter('@ik_vid_zanyat', ftInteger, pdInput, 0, ikVidZan);
       CreateParameter('@n_sem', ftInteger, pdInput, 0, nSem);
       CreateParameter('@ik_disc', ftInteger, pdInput, 0, ikPredm);
-      CreateParameter('@Itab_n', ftInteger, pdInput, 0, ikPrepod);
+      CreateParameter('@Itab_n', ftString, pdInput, 50, ikPrepod);
       CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, ikVidExam);
       CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, DateExam);
       CreateParameter('@dD_vydano', ftDateTime, pdInput, 0, Date);
@@ -2705,6 +2705,7 @@ var E:Variant;
 
 
 
+<<<<<<< HEAD
 //  if VedList=nil then
 //  begin
 //    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
@@ -2744,6 +2745,47 @@ var E:Variant;
 //  finally
 //    VedList.Free;
 //  end;
+=======
+  if VedList=nil then
+  begin
+    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
+    exit;
+  end;
+
+  try
+	  if VedList.Active then
+	  begin
+		  E := CreateOleObject('Excel.Application');
+		  try
+		    try
+			    str := ExtractFilePath(Application.ExeName)+'reports\UspevVedomost.XLT';
+			    E.WorkBooks.Add(str);
+			    E.Visible := false;
+			    E.DisplayAlerts:=false;
+			    VedList.First;
+			    while not VedList.Eof do
+			    begin      //печать и настройка текущей ведомости
+		        DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
+				        ikSpec, withOsenca);
+            VedList.Next;
+			    end;
+			    E.Sheets[1].Delete;
+			    E.Sheets[1].Delete;
+			    E.DisplayAlerts:=true;
+			    E.Visible := true;
+		    except
+			    E.Quit;
+			    raise ;
+		    end;
+
+		  finally
+		    E:= UnAssigned;
+		  end;
+    end;
+  finally
+    VedList.Free;
+  end;
+>>>>>>> Release-1.0.4.441
 end;
 
 

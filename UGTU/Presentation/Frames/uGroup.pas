@@ -840,11 +840,20 @@ begin
   ikSpec:= TUspevGroupController.Instance.getSpecFromSpecFac(ikSpecFac);
   ikFac:=TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.Selected.Parent.Parent.Data).ik;
   //генерируем бланк текущей ведомости
+<<<<<<< HEAD
  // TUspevGroupController.Instance.printBlankVedomost(ik, cmbxSem.ItemIndex+1, ikVed, ikFac, ikSpec, DMUspevaemost.adospGetAllVeds4Group);
   Report:=TUspevGroupController.Instance.BuildVedomost2014(ik, cmbxSem.ItemIndex+1, ikVed, ikFac,
      ikSpec, DMUspevaemost.adospGetAllVeds4Group);
 
   TWaitingController.GetInstance.Process(Report);
+=======
+  TUspevGroupController.Instance.printBlankVedomost(ik, cmbxSem.ItemIndex+1, ikVed, ikFac, ikSpec, DMUspevaemost.adospGetAllVeds4Group);
+
+  //
+  //Report:=TUspevGroupController.Instance.BuildVedomost2014(ik, cmbxSem.ItemIndex+1, ikVed, ikFac,
+  //   ikSpec, DMUspevaemost.adospGetAllVeds4Group);
+  //TWaitingController.GetInstance.Process(Report);
+>>>>>>> Release-1.0.4.441
 
   end;
 
@@ -884,7 +893,8 @@ begin
     Active:=true;
   end;
 
-   dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsInteger;
+  dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsString;
+  // dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsInteger;
 
   if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime<>null then
     dbdteBRSExam.Value:=dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime;
@@ -896,11 +906,11 @@ begin
   inherited;
 
   if (dbcmbxDisc.KeyValue = Null) or (dbcmbxDisc.Text = '')
-  or (cmbxNumber.Text ='')
+    or (cmbxNumber.Text ='')
   then
-    Exit;
+    Exit;    //будет управление преподавател€ми
 
-    if cmbxNumber.Text='Ёкзамен' then
+    if cmbxNumber.Text='Ёкзамен' then   // PrepodBranch update
     BRSExamRefresh
     else
     AttestRefresh;
@@ -1181,7 +1191,9 @@ begin
     Active:=true;
   end;
 
-  dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
+  //искать в ImportTeachers
+  dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsString;
+  //dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
 
   if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime<>null then
     dbdteBRSExam.Value:=dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime;
