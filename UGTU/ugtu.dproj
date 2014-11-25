@@ -141,7 +141,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
-                <Platform value="Android">True</Platform>
+                <Platform value="Android" ActiveMobileDevice="emulator-5554">True</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>
             </Platforms>
@@ -1033,6 +1033,7 @@
         <DCCReference Include="Domain\DBTV\ShEvent.PAS"/>
         <DCCReference Include="Domain\Controllers\CommandController.pas"/>
         <DCCReference Include="Domain\Reports\BRSVedom2014.pas"/>
+        <DCCReference Include="Domain\Classes\GrupClass.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

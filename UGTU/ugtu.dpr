@@ -405,7 +405,8 @@ uses
   DBTVZachobj in 'Domain\DBTV\DBTVZachobj.pas',
   ShEvent in 'Domain\DBTV\ShEvent.PAS',
   CommandController in 'Domain\Controllers\CommandController.pas',
-  BRSVedom2014 in 'Domain\Reports\BRSVedom2014.pas';
+  BRSVedom2014 in 'Domain\Reports\BRSVedom2014.pas',
+  GrupClass in 'Domain\Classes\GrupClass.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
