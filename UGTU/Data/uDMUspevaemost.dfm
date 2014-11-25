@@ -819,8 +819,8 @@ object dmUspevaemost: TdmUspevaemost
       item
         Name = '@itab_n'
         Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
+        DataType = ftString
+        Size = 50
         Value = Null
       end>
     Left = 581
@@ -1267,8 +1267,9 @@ object dmUspevaemost: TdmUspevaemost
     object adodsNapravlDd_exam: TDateTimeField
       FieldName = 'Dd_exam'
     end
-    object adodsNapravlItab_n: TIntegerField
+    object adodsNapravlItab_n: TStringField
       FieldName = 'Itab_n'
+      Size = 50
     end
   end
   object dsNapravl: TDataSource
