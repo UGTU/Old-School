@@ -13,13 +13,13 @@ interface
 
 uses
   TestFramework, Windows, Forms, Dialogs, Controls, Classes,
-  SysUtils, Variants, Graphics, Messages, uLocalLogController;
+  SysUtils, Variants, Graphics, Messages;
 type
   // Test methods for class TLogController
   
   TestTLogController = class(TTestCase)
   strict private
-    FLogController: TLogController;
+
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -31,21 +31,19 @@ implementation
 
 procedure TestTLogController.SetUp;
 begin
-  FLogController := TLogController.Create;
+
 end;
 
 procedure TestTLogController.TearDown;
 begin
-  FLogController.Free;
-  FLogController := nil;
+
 end;
 
 procedure TestTLogController.TestAddEntryToFile;
-var
-  str: string;
+
 begin
   // TODO: Setup method call parameters
-  FLogController.AddEntry(str);
+
   // TODO: Validate method results
 end;
 

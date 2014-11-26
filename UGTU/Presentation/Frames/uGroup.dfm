@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsNapr
+      ActivePage = tsVed
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -1392,6 +1392,7 @@ inherited fmGroup: TfmGroup
             Action = actPrntAllBlnk
             ParentShowHint = False
             ShowHint = True
+            Visible = False
           end
           object ToolButton3: TToolButton
             Left = 46
@@ -1399,6 +1400,7 @@ inherited fmGroup: TfmGroup
             Action = actPrntAllNotes
             ParentShowHint = False
             ShowHint = True
+            Visible = False
           end
           object ToolButton4: TToolButton
             Left = 69
@@ -1413,6 +1415,7 @@ inherited fmGroup: TfmGroup
             Action = actPrntNotes
             ParentShowHint = False
             ShowHint = True
+            Visible = False
           end
           object ToolButton6: TToolButton
             Left = 115
@@ -1666,8 +1669,8 @@ inherited fmGroup: TfmGroup
             OnChange = dbcbVedChange
           end
           object cmbxSem: TDBComboBoxEh
-            Left = 53
-            Top = 3
+            Left = 57
+            Top = 5
             Width = 68
             Height = 19
             AutoSelect = False
@@ -2631,7 +2634,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400D40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2804,8 +2807,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-
-      494C010111004000D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000E00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3476,8 +3478,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-
-      494C010105000800D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800E00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

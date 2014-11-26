@@ -49,7 +49,7 @@ begin
    sp_studs.Open; sp_studs.First;
 
 
-  Result:=  TVedomost.Create(sp_shapka.FieldByName('Cname_fac').AsString,
+  Result:=  TVedomost.Create(sp_shapka.FieldByName('Cshort_name_fac').AsString,
   sp_shapka.FieldByName('Cname_grup').AsString,
   sp_shapka.FieldByName('Cname_spec').AsString,
   sp_shapka.FieldByName('cName_disc').AsString,
@@ -62,16 +62,18 @@ begin
    sp_shapka.FieldByName('IsBRSPlan').AsBoolean);
    sp_studs.first;
 
-
+   //  stud_list:= TList.Create();
   While not sp_studs.Eof do
   begin
-   stud_list:= Result.Student;
+
   ved:=TVedomostItem.Create(sp_studs.FieldByName('ik_zach').AsInteger,sp_studs.FieldByName('Cfirstname').AsString,
   sp_studs.FieldByName('Clastname').AsString,sp_studs.FieldByName('Cotch').AsString,sp_studs.FieldByName('balls_modul').AsInteger);
-  stud_list.Add(ved);
-  Result.Student:=stud_list;
+ // stud_list.Add(ved);
+   sp_studs.Next;
   //Result.Student.Add(ved);
+   Result.Students.Add(ved);
     end;
+   //  Result.Student:=stud_list;
   finally
         sp_shapka.Free;
   end;

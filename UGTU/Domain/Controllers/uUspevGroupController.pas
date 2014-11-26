@@ -1397,12 +1397,13 @@ end;
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
   ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;
   var report:TAssemly_Report;
-  var result_report:TVedomost;
+   result_report:TVedomost;
+  FindRange: Variant;
 begin
-  Result := TBRS2014VedomostReport.Create(ikGrup, nSem, ikVed, ikFac,
-  ikSpec, tempStoredProc);
+
    report:= TAssemly_Report.Create(ikVed);
    result_report:=report.AddReport();
+    Result := TBRS2014VedomostReport.Create(result_report);
    if (result_report.Is_brs) then
    begin
   Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt';
@@ -1411,6 +1412,8 @@ begin
   begin
   Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
   end;
+
+
 end;
 
 //проверяет, можно ли обновить список созданных ведомости
@@ -2506,6 +2509,7 @@ begin
 
   E.Sheets[mainSheet].Range['B1:H'+IntToStr(firstStr)].Copy;
   E.Sheets[next].Range['B1'].Insert;
+
 
 
   if (E.Sheets.Count>next) then

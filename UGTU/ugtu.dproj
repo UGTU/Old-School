@@ -146,6 +146,9 @@
                 <Platform value="Win64">False</Platform>
             </Platforms>
             <ModelSupport>False</ModelSupport>
+            <UnitTesting>
+                <TestProjectName>E:\GitHub\Old-School\UGTU\Test\Ugtu.dproj</TestProjectName>
+            </UnitTesting>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

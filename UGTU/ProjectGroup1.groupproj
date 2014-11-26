@@ -1,40 +1,39 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ProjectGuid>{042640f9-384d-480f-bbd8-1313c462742d}</ProjectGuid>
-  </PropertyGroup>
-  <ItemGroup />
-  <ItemGroup />
-  <ProjectExtensions>
-    <Borland.Personality>Default.Personality</Borland.Personality>
-    <Borland.ProjectType />
-    <BorlandProject>
-  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
-  </ProjectExtensions>
-  <Target Name="ugtu">
-    <MSBuild Projects="ugtu.dproj" Targets="" />
-  </Target>
-  <Target Name="ugtu:Clean">
-    <MSBuild Projects="ugtu.dproj" Targets="Clean" />
-  </Target>
-  <Target Name="ugtu:Make">
-    <MSBuild Projects="ugtu.dproj" Targets="Make" />
-  </Target>
-  <Target Name="XReportPackage">
-    <MSBuild Projects="..\XReports\XReportPackage.dproj" Targets="" />
-  </Target>
-  <Target Name="XReportPackage:Clean">
-    <MSBuild Projects="..\XReports\XReportPackage.dproj" Targets="Clean" />
-  </Target>
-  <Target Name="XReportPackage:Make">
-    <MSBuild Projects="..\XReports\XReportPackage.dproj" Targets="Make" />
-  </Target>
-  <Target Name="Build">
-    <CallTarget Targets="ugtu;XReportPackage" />
-  </Target>
-  <Target Name="Clean">
-    <CallTarget Targets="ugtu:Clean;XReportPackage:Clean" />
-  </Target>
-  <Target Name="Make">
-    <CallTarget Targets="ugtu:Make;XReportPackage:Make" />
-  </Target>
+    <PropertyGroup>
+        <ProjectGuid>{E6F1B69F-580A-46C1-89AF-ABFA47C0F8CF}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ugtu.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\Ugtu.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ugtu">
+        <MSBuild Projects="Test\Ugtu.dproj"/>
+    </Target>
+    <Target Name="ugtu:Clean">
+        <MSBuild Projects="Test\Ugtu.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ugtu:Make">
+        <MSBuild Projects="Test\Ugtu.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ugtu;Ugtu"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ugtu:Clean;Ugtu:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ugtu:Make;Ugtu:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
