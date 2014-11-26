@@ -188,66 +188,68 @@ end;
 
 procedure TftmNapr.actApplyExecute(Sender: TObject);
 begin
-TApplicationController.GetInstance.AddLogEntry('Направление. Сохранение направления по '+dmUspevaemost.adospPredmStud.FieldValues['NaprName']);
-dmUspevaemost.aspNapr.Active:=false;
+  TApplicationController.GetInstance.AddLogEntry('Направление. Сохранение направления по '+dmUspevaemost.adospPredmStud.FieldValues['NaprName']);
+  dmUspevaemost.aspNapr.Active:=false;
 
-with dmUspevaemost.aspNapr.Parameters do begin
-clear;
-AddParameter;
-items[0].Value:=dbcbeNum.value;
-AddParameter;
-items[1].Value:=dmUspevaemost.adospPredmStud.FieldValues['iK_disc'];
-AddParameter;
-items[2].Value:=dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat'];
-AddParameter;
-items[3].Value:=4432;
-AddParameter;
-items[4].Value:=studObj.RecordbookKey;
-AddParameter;
-items[5].Value:=dbdteOut.Value;
-AddParameter;
-items[6].Value:=dbdteTo.Value;
-AddParameter;
-items[7].Value:=dbcbeVidExam.KeyValue;
-AddParameter;
-if eNum.Text='' then items[8].Value:='' else
-items[8].Value:=eNum.Value;
-AddParameter;
-AddParameter;
-if Hint='6' then begin
-items[9].Value:=' ';
-items[10].Value:='____________'end else begin
-items[10].Value:=' ';
-items[9].Value:='____________'
-end;
-AddParameter;
-if dbcbeVidExam.KeyValue=1 then
-items[11].Value:='____________' else items[11].Value:=' ';
-AddParameter;
-if dbcbeVidExam.KeyValue=2 then
-items[12].Value:='____________' else items[12].Value:=' ';
-AddParameter;
-if dbcbeVidExam.KeyValue=3 then
-items[13].Value:='____________' else items[13].Value:=' ';
+  with dmUspevaemost.aspNapr.Parameters do
+  begin
+    clear;
+    AddParameter;
+    items[0].Value:=dbcbeNum.value;
+    AddParameter;
+    items[1].Value:=dmUspevaemost.adospPredmStud.FieldValues['iK_disc'];
+    AddParameter;
+    items[2].Value:=dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat'];
+    //AddParameter;
+    //items[3].Value:=null;
+    AddParameter;
+    items[3].Value:=studObj.RecordbookKey;
+    AddParameter;
+    items[4].Value:=dbdteOut.Value;
+    AddParameter;
+    items[5].Value:=dbdteTo.Value;
+    AddParameter;
+    items[6].Value:=dbcbeVidExam.KeyValue;
+    AddParameter;
+    if eNum.Text='' then items[7].Value:='' else
+      items[7].Value:=eNum.Value;
+    AddParameter;
+    AddParameter;
+    if Hint='6' then
+    begin
+      items[8].Value:=' ';
+      items[9].Value:='____________'end else begin
+      items[9].Value:=' ';
+      items[8].Value:='____________'
+    end;
+    AddParameter;
+    if dbcbeVidExam.KeyValue=1 then
+      items[10].Value:='____________' else items[10].Value:=' ';
+    AddParameter;
+    if dbcbeVidExam.KeyValue=2 then
+      items[11].Value:='____________' else items[11].Value:=' ';
+    AddParameter;
+    if dbcbeVidExam.KeyValue=3 then
+      items[12].Value:='____________' else items[12].Value:=' ';
 
-AddParameter;
-AddParameter;
-if dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=6 then
-items[14].Value:='____________' else items[14].Value:=' ' ;
-if (dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=7)or(dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=17) then
-items[15].Value:='____________' else items[15].Value:=' ';
-AddParameter;
-items[16].Value:= dbcbeDisc.Value;
-end;
+    AddParameter;
+    AddParameter;
+    if dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=6 then
+      items[13].Value:='____________' else items[13].Value:=' ' ;
+    if (dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=7)or(dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat']=17) then
+      items[14].Value:='____________' else items[14].Value:=' ';
+    AddParameter;
+    items[15].Value:= dbcbeDisc.Value;
+  end;
 
 //try
 
-dmUspevaemost.aspNapr.Active:=true;
+  dmUspevaemost.aspNapr.Active:=true;
 {except
 showmessage('Невозможно выдать направление!');
 exit;
 end;}
-TApplicationController.GetInstance.AddLogEntry('Направление. Направление сохранено');
+  TApplicationController.GetInstance.AddLogEntry('Направление. Направление сохранено');
 
 //frmRepPreview.RvProject2.ExecuteReport('Report1');
 if cbPrintExcel.Checked then

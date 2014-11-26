@@ -153,6 +153,7 @@ inherited ftmNaprclose: TftmNaprclose
     Top = 21
     Width = 374
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_ved'
@@ -167,6 +168,7 @@ inherited ftmNaprclose: TftmNaprclose
     Top = 103
     Width = 170
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Cosenca'
@@ -181,6 +183,7 @@ inherited ftmNaprclose: TftmNaprclose
     Top = 106
     Width = 203
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -193,6 +196,7 @@ inherited ftmNaprclose: TftmNaprclose
     Top = 64
     Width = 374
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'itab_n'
@@ -206,6 +210,7 @@ inherited ftmNaprclose: TftmNaprclose
     Top = 144
     Width = 374
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 5
