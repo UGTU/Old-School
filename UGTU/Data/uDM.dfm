@@ -10,7 +10,7 @@ object dm: Tdm
       'fo=False;User ID=developer;Initial Catalog=UGTU;Data Source=ugtu' +
       'db.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;Pack' +
       'et Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;' +
-      'Tag with column collation when possible=False'
+      'Tag with column collation when possible=False;'
     IsolationLevel = ilReadUncommitted
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'

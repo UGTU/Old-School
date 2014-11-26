@@ -199,7 +199,6 @@ type
     dsPrepodVedFromUchPlan: TDataSource;
     adodsSelAttBRSGroupPropCount: TIntegerField;
     adodsNapravlDd_exam: TDateTimeField;
-    adodsNapravlItab_n: TIntegerField;
     adsGetBRSVedomost: TADODataSet;
     adospSaveDateAllAtt: TADOStoredProc;
     adodsSelAttGroupUvag_PropCount: TIntegerField;
@@ -256,6 +255,7 @@ type
     adospGetAllVedNaprForGrupiK_vid_zanyat: TIntegerField;
     adospGetAllVedNaprForGrupcName_disc: TStringField;
     adospVedTopiHour_gos: TIntegerField;
+    adodsNapravlItab_n: TStringField;
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);
     procedure adospSelVedKPCalcFields(DataSet: TDataSet);
     procedure adodsSelBRSExamGroupCalcFields(DataSet: TDataSet);
