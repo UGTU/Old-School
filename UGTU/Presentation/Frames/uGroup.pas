@@ -3410,7 +3410,7 @@ begin
   ik_grup:=TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
   haveAtt := false;
 
-    // получаем список предметов дл€ аттестации, которые должны быть
+    // получаем список предметов дл€ аттестации, которые должны быть GetAttestVidZanyat
     kolAtt:=TUspevGroupController.Instance.GetAttVidZan(ik, nSem, nom_ved, IsBRS);
     dmUspevaemost.adospGetAttVidZan.First;
 
@@ -3420,8 +3420,8 @@ begin
     dmUspevaemost.adospGetAllAtt.Active := false;
     Exit;
   end;
-  // выборка всех —”ў≈—“¬”ёў»’ аттестаций
 
+  // выборка всех —”ў≈—“¬”ёў»’ ведомостей (процедура GetAllAttestForBRSGrup/GetAllAttestForGrup)
   kol_rec:=TUspevGroupController.Instance.GetAllAtt(ik_grup, nsem, nom_ved, IsBRS);
 
   // проверка, созданы ли все аттестации по учебному плану дл€ этого семестра

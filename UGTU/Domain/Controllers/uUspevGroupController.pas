@@ -438,7 +438,7 @@ end;
 //функция выбирает все созданные предметы аттестации и возвращает их количество
   function TUspevGroupController.GetAllAtt(ik_grup, nsem, nomer_att:integer; IsBRS:boolean):integer;
 begin
-result:=0;
+  result:=0;
   dmUspevaemost.adospGetAllAtt.Active := false;
 
   if IsBRS then dmUspevaemost.adospGetAllAtt.ProcedureName := 'GetAllAttestForBRSGrup'
@@ -598,24 +598,22 @@ function TUspevGroupController.CreateAllAtt(ik, nSem, numAtt:integer; IsBrs:bool
 begin
   result := false;
 
-  // получаем список дисциплин аттестации которые должны быть
+  // получаем список дисциплин аттестации которые должны быть (процедура: GetAttestVidZanyat)
   TUspevGroupController.Instance.GetAttVidZan(ik, nSem, NumAtt, IsBRS);
 
   dmUspevaemost.adospGetAttVidZan.First;
-
   while not dmUspevaemost.adospGetAttVidZan.Eof do
   begin
-    // пропускаем уже созданные дисциплины аттестации
-
+    // пропускаем уже созданные дисциплины аттестации (SelBRSAtt/SelAtt)
     if TUspevGroupController.Instance.CheckAttsExist(ik, nSem, numAtt,
                        dmUspevaemost.adospGetAttVidZan.Fields[3].Value,
                       { dmUspevaemost.adospGetAttVidZan.Fields[1].Value,} IsBrs)
-
     then
     begin
       dmUspevaemost.adospGetAttVidZan.Next;
       Continue;
     end;
+    //
     with dmUspevaemost.adospAppVed.Parameters do
     begin
       Items[1].Value := 1;                                                // создание аттестации
@@ -625,7 +623,7 @@ begin
       items[5].Value := nSem;                                             // номер семестра
       items[6].Value := dmUspevaemost.adospGetAttVidZan.Fields[1].Value;  // предмет
       items[7].Value := Null;                                             // преподаватель
-      items[8].Value := numAtt;                              // номер аттестации в поле вид экзамена
+      items[8].Value := numAtt;                                         // номер аттестации в поле вид экзамена
       items[9].Value := Date;                                // дата выдачи
       items[10].Value := Date;                               // дата экзамена
       items[11].Value := 0;                                  // открытая аттестации
