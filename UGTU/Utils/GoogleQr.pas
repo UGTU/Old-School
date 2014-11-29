@@ -12,6 +12,8 @@ implementation
 
 { TGoogleQr }
 
+//как использовать:
+//Image1.Picture.Assign(TGoogleQr.GetQr(Edit1.Text));
 class function TGoogleQr.GetQr(Info: String; width, height: Integer): TGraphic;
 var
   http:TIdHTTP;
