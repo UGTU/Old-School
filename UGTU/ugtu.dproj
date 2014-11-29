@@ -89,8 +89,8 @@
         <VerInfo_Release>1</VerInfo_Release>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.503;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>503</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.506;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>506</VerInfo_Build>
         <DCC_UnitSearchPath>Domain\DBTV;Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5;Domain\Graphics32\Packages</DCC_UnitSearchPath>
     </PropertyGroup>
     <ProjectExtensions>
@@ -146,6 +146,9 @@
                 <Platform value="Win64">False</Platform>
             </Platforms>
             <ModelSupport>False</ModelSupport>
+            <UnitTesting>
+                <TestProjectName>E:\GitHub\Old-School\UGTU\Test\Ugtu.dproj</TestProjectName>
+            </UnitTesting>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
@@ -1033,7 +1036,10 @@
         <DCCReference Include="Domain\DBTV\ShEvent.PAS"/>
         <DCCReference Include="Domain\Controllers\CommandController.pas"/>
         <DCCReference Include="Domain\Reports\BRSVedom2014.pas"/>
-        <DCCReference Include="Domain\Classes\GrupClass.pas"/>
+        <DCCReference Include="Domain\Classes\Vedomost2014.pas"/>
+        <DCCReference Include="Domain\Classes\VedomostItem2014.pas"/>
+        <DCCReference Include="Domain\Classes\Assemly_Report2014.pas"/>
+        <DCCReference Include="Utils\GoogleQr.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

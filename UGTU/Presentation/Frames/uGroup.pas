@@ -840,12 +840,13 @@ begin
   ikSpec:= TUspevGroupController.Instance.getSpecFromSpecFac(ikSpecFac);
   ikFac:=TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.Selected.Parent.Parent.Data).ik;
   //генерируем бланк текущей ведомости
-  TUspevGroupController.Instance.printBlankVedomost(ik, cmbxSem.ItemIndex+1, ikVed, ikFac, ikSpec, DMUspevaemost.adospGetAllVeds4Group);
 
-  //
-  //Report:=TUspevGroupController.Instance.BuildVedomost2014(ik, cmbxSem.ItemIndex+1, ikVed, ikFac,
-  //   ikSpec, DMUspevaemost.adospGetAllVeds4Group);
-  //TWaitingController.GetInstance.Process(Report);
+ // TUspevGroupController.Instance.printBlankVedomost(ik, cmbxSem.ItemIndex+1, ikVed, ikFac, ikSpec, DMUspevaemost.adospGetAllVeds4Group);
+  Report:=TUspevGroupController.Instance.BuildVedomost2014(ik, cmbxSem.ItemIndex+1, ikVed, ikFac,
+     ikSpec, DMUspevaemost.adospGetAllVeds4Group);
+
+  TWaitingController.GetInstance.Process(Report);
+
 
   end;
 
@@ -3410,7 +3411,7 @@ begin
   ik_grup:=TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
   haveAtt := false;
 
-    // получаем список предметов дл€ аттестации, которые должны быть
+    // получаем список предметов дл€ аттестации, которые должны быть GetAttestVidZanyat
     kolAtt:=TUspevGroupController.Instance.GetAttVidZan(ik, nSem, nom_ved, IsBRS);
     dmUspevaemost.adospGetAttVidZan.First;
 
@@ -3420,8 +3421,8 @@ begin
     dmUspevaemost.adospGetAllAtt.Active := false;
     Exit;
   end;
-  // выборка всех —”ў≈—“¬”ёў»’ аттестаций
 
+  // выборка всех —”ў≈—“¬”ёў»’ ведомостей (процедура GetAllAttestForBRSGrup/GetAllAttestForGrup)
   kol_rec:=TUspevGroupController.Instance.GetAllAtt(ik_grup, nsem, nom_ved, IsBRS);
 
   // проверка, созданы ли все аттестации по учебному плану дл€ этого семестра

@@ -144,7 +144,7 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 721
         Height = 615
-        ActivePage = TabSheet9
+        ActivePage = TabSheet1
         Align = alClient
         Constraints.MinWidth = 557
         MultiLine = True
@@ -157,7 +157,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 713
             Height = 587
-            ActivePage = TabSheet6
+            ActivePage = TabSheet3
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -1171,7 +1171,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 479
+                Height = 477
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1793,7 +1793,7 @@ inherited fmStudent: TfmStudent
           end
         end
         object TabSheet9: TTabSheet
-          Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
+          Caption = #1047#1072#1082#1088#1099#1090#1099#1077' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
           object Panel12: TPanel
             Left = 0
@@ -1966,7 +1966,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060009007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2299,7 +2299,7 @@ inherited fmStudent: TfmStudent
     end
   end
   object ppmSpravToExcel: TPopupMenu
-    Left = 351
+    Left = 375
     Top = 138
     object MenuItem1: TMenuItem
       Action = actPrintSprav

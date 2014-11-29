@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, DBCtrlsEh, StdCtrls, Mask, DBLookupEh,
-  ActnList, Buttons, ExtCtrls, ApplicationController, comObj, ExceptionBase, ADODB;
+  ActnList, Buttons, ExtCtrls, ApplicationController, comObj, ExceptionBase, ADODB,
+  System.Actions;
 
 type
   TftmNaprclose = class(TfrmBaseDialog)
@@ -96,7 +97,7 @@ begin
   else
     dbdteExam.Value:=dmUspevaemost.adodsNapravl.FieldByName('dd_exam').AsDateTime;
 
-  dbcbeEx.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('itab_n').AsInteger;
+  dbcbeEx.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('itab_n').AsString;
   dbcbeMark.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('cosenca').AsInteger;
   eTema.Text:= dmUspevaemost.adodsNapravl.FieldByName('ctema').AsString;
 end;

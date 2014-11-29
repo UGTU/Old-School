@@ -14,7 +14,7 @@ uses
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, uDMUspevaemost, ComCtrls, DateUtils,
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
-  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport;
+  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014;
  type
   PDBGrid = ^TDBGridEh;
   TVedType = (exam,zach,KP,KR);
@@ -438,7 +438,7 @@ end;
 //функция выбирает все созданные предметы аттестации и возвращает их количество
   function TUspevGroupController.GetAllAtt(ik_grup, nsem, nomer_att:integer; IsBRS:boolean):integer;
 begin
-result:=0;
+  result:=0;
   dmUspevaemost.adospGetAllAtt.Active := false;
 
   if IsBRS then dmUspevaemost.adospGetAllAtt.ProcedureName := 'GetAllAttestForBRSGrup'
@@ -598,24 +598,22 @@ function TUspevGroupController.CreateAllAtt(ik, nSem, numAtt:integer; IsBrs:bool
 begin
   result := false;
 
-  // получаем список дисциплин аттестации которые должны быть
+  // получаем список дисциплин аттестации которые должны быть (процедура: GetAttestVidZanyat)
   TUspevGroupController.Instance.GetAttVidZan(ik, nSem, NumAtt, IsBRS);
 
   dmUspevaemost.adospGetAttVidZan.First;
-
   while not dmUspevaemost.adospGetAttVidZan.Eof do
   begin
-    // пропускаем уже созданные дисциплины аттестации
-
+    // пропускаем уже созданные дисциплины аттестации (SelBRSAtt/SelAtt)
     if TUspevGroupController.Instance.CheckAttsExist(ik, nSem, numAtt,
                        dmUspevaemost.adospGetAttVidZan.Fields[3].Value,
                       { dmUspevaemost.adospGetAttVidZan.Fields[1].Value,} IsBrs)
-
     then
     begin
       dmUspevaemost.adospGetAttVidZan.Next;
       Continue;
     end;
+    //
     with dmUspevaemost.adospAppVed.Parameters do
     begin
       Items[1].Value := 1;                                                // создание аттестации
@@ -625,7 +623,7 @@ begin
       items[5].Value := nSem;                                             // номер семестра
       items[6].Value := dmUspevaemost.adospGetAttVidZan.Fields[1].Value;  // предмет
       items[7].Value := Null;                                             // преподаватель
-      items[8].Value := numAtt;                              // номер аттестации в поле вид экзамена
+      items[8].Value := numAtt;                                         // номер аттестации в поле вид экзамена
       items[9].Value := Date;                                // дата выдачи
       items[10].Value := Date;                               // дата экзамена
       items[11].Value := 0;                                  // открытая аттестации
@@ -1396,10 +1394,24 @@ end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
   ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;
+  var report:TAssemly_Report;
+   result_report:TVedomost;
+  FindRange: Variant;
 begin
-  Result := TBRS2014VedomostReport.Create(ikGrup, nSem, ikVed, ikFac,
-  ikSpec, tempStoredProc);
+
+   report:= TAssemly_Report.Create(ikVed);
+   result_report:=report.AddReport();
+    Result := TBRS2014VedomostReport.Create(result_report);
+   if (result_report.Is_brs) then
+   begin
   Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt';
+   end
+  else
+  begin
+  Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
+  end;
+
+
 end;
 
 //проверяет, можно ли обновить список созданных ведомости
@@ -2497,6 +2509,7 @@ begin
   E.Sheets[next].Range['B1'].Insert;
 
 
+
   if (E.Sheets.Count>next) then
     prevSheetName:= E.Sheets[next+1].name
   else
@@ -2694,6 +2707,46 @@ var E:Variant;
 
 
 
+//  if VedList=nil then
+//  begin
+//    raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
+//    exit;
+//  end;
+//
+//  try
+//	  if VedList.Active then
+//	  begin
+//		  E := CreateOleObject('Excel.Application');
+//		  try
+//		    try
+//			    str := ExtractFilePath(Application.ExeName)+'reports\UspevVedomost.XLT';
+//			    E.WorkBooks.Add(str);
+//			    E.Visible := false;
+//			    E.DisplayAlerts:=false;
+//			    VedList.First;
+//			    while not VedList.Eof do
+//			    begin      //печать и настройка текущей ведомости
+			//     DoPrintVedomost(E, ikGrup,nSem,VedList.FieldByName('Ik_ved').AsInteger, ikFac,
+//				        ikSpec, withOsenca);
+//            VedList.Next;
+//			    end;
+//			    E.Sheets[1].Delete;
+//			    E.Sheets[1].Delete;
+//			    E.DisplayAlerts:=true;
+//			    E.Visible := true;
+//		    except
+//			    E.Quit;
+//			    raise ;
+//		    end;
+//
+//		  finally
+//		    E:= UnAssigned;
+//		  end;
+//    end;
+//  finally
+//    VedList.Free;
+//  end;
+
   if VedList=nil then
   begin
     raise EApplicationException.Create('Произошла ошибка при загрузке списка созданных ведомостей.');
@@ -2733,6 +2786,7 @@ var E:Variant;
   finally
     VedList.Free;
   end;
+// Release-1.0.4.441
 end;
 
 
