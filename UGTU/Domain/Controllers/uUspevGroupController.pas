@@ -436,7 +436,7 @@ begin
 end;
 
 //функция выбирает все созданные предметы аттестации и возвращает их количество
-  function TUspevGroupController.GetAllAtt(ik_grup, nsem, nomer_att:integer; IsBRS:boolean):integer;
+function TUspevGroupController.GetAllAtt(ik_grup, nsem, nomer_att:integer; IsBRS:boolean):integer;
 begin
   result:=0;
   dmUspevaemost.adospGetAllAtt.Active := false;

@@ -12,7 +12,7 @@ interface
 uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM, uDMUgtuStructure,
   Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj, ComCtrls, Math,
-  ConstantRepository, DiscClasses;
+  ConstantRepository, DiscClasses, CommandController;
 
 const FISCULTURA=10; //для особого учета зачетных единиц физической культуры
       FISCULTURA_CIKL = 19;  //для особого учета зачетных единиц физической культуры
@@ -25,6 +25,7 @@ type
   TUchPlanController = class (TObject)
   private
     FMessageHandle: HWND;
+    FGroupController: TGroupController;
     function CheckSemesterString(sourceStr: string): boolean;
     function CheckForRepeat(VidZanyatIK: integer; list:  TStringList{*TContentDiscUnits*}): boolean;
     function isListEqual(first:TStringList; second: TStringList):boolean;
@@ -593,6 +594,8 @@ destructor TUchPlanController.Destroy;
 begin
   if Assigned(weekCountExceptionList) then FreeAndNil(weekCountExceptionList);
   if Assigned(vidZanyatTaskCountList) then FreeAndNil(vidZanyatTaskCountList);
+  if Assigned(FGroupController) then FreeAndNil(FGroupController);
+
 end;
 
 function TUchPlanController.getAllFormEd(SourceDataSet: PDataSet; isShowFirst:
@@ -919,15 +922,10 @@ end;
 
 function TUchPlanController.getUchPlanForGroup(aIK_group: integer): Integer;
 begin
-  with dm.adsGroups do
-  begin
-    Close;
-    Open;
-    Filter := 'ik_grup=' + IntToStr(aIK_group);
-    Filtered := True;
-    Result := FieldByName('Ik_uch_plan').AsInteger;
-    if Result = NULL then Result := 0;
-  end;
+  if not Assigned(FGroupController) then
+    FGroupController := TGroupController.Create;
+  FGroupController.Group := aIK_group;
+  Result := FGroupController.UchPlan;
 end;
 
 function TUchPlanController.getUchPlanSpecializations(SourceDataSet: PDataSet;

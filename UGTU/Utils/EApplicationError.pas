@@ -3,6 +3,8 @@ unit eApplicationError;
 // Обёртка для исключения - для того, чтобы отображать нужный текст в
 // ошибке, а старый сохранять
 
+interface
+
 type EApplicationException = class(Exception)
   private
   FException:Exception;
@@ -11,7 +13,7 @@ type EApplicationException = class(Exception)
   function ToString:string;
 end;
 
-interface
+
 
 implementation
 

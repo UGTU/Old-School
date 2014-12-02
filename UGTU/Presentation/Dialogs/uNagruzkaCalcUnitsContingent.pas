@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, ImgList, GridsEh,
   DBGridEh, ComCtrls, ToolWin, NagruzkaClasses, NagruzkaController, DB, ADODB, Mask, DBCtrlsEh,
-  DBLookupEh;
+  DBLookupEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  DBAxisGridsEh, System.Actions;
 
 type
   TfrmNagruzkaCalcUnitsContingent = class(TfrmBaseDialog)
@@ -315,7 +316,7 @@ begin
   TNagruzkaController.Preparation.GetAllShemasOfPotok(@dbcbAnotherShema.ListSource.DataSet, PotokIK);
   dbcbAnotherShema.ListSource.DataSet.Locate('ik_decompose_type', 2, [loPartialKey]);
   dbcbAnotherShema.KeyValue:= dbcbAnotherShema.ListSource.DataSet.FieldByName('ik_shema_of_potok').Value;
-  
+
   Label2.Caption:= tempPSYC.YearName;
   dsSpecContingent.DataSet:= specContingent;
   dsCurrentGroupContingent.DataSet:= factGroupContingent;

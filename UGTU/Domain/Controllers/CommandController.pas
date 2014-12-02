@@ -2,10 +2,10 @@ unit CommandController;
 
 interface
 
-uses  Db, Data.Win.ADODB, SysUtils;
+uses  Db, Data.Win.ADODB, SysUtils,System.Variants;
 
 type
-  TBaseCommandController = class
+  TBaseSelectController = class
   private
     FDataSet: TADODataSet;
   protected
@@ -14,80 +14,139 @@ type
     function Refresh: boolean; virtual;
     procedure Save; virtual;
   // function
-    constructor Create; virtual;
+    constructor Create(source: string); //source - источник данных в БД (можно с инструкцией where)
+    destructor Destroy;
   end;
 
-  TVedomostController = class(TBaseCommandController)
+  TBaseCommandController = class
+  private
+    FStoredProc: TADOStoredProc;
+  protected
+    procedure Refresh;
+  public
+    constructor Create(ProcName: string);
+    destructor Destroy;
+  end;
+
+//-----------------наследники---------------------------------------------------------------------------------
+
+  TGroupController = class(TBaseSelectController)
   private
     FikGroup: integer;
-    FSemester: integer;
-    function GetVedomosty: TADODataSet;
     procedure SetGroup(const Value: integer);
-    procedure SetSemester(const Value: integer);
+    function GetUchPlan: integer;
   public
-    property Vedomosty: TADODataSet read GetVedomosty;
     property Group: integer write SetGroup;
-    property Semester: integer write SetSemester;
-    function Execute: boolean;    overload;
-    constructor Create(aIkGroup: integer); overload;
+    property UchPlan: integer read GetUchPlan;
+    constructor Create; overload;
   end;
+
+  TBRSVedomostController = class(TBaseCommandController)
+  public
+    constructor Create(ik_grup, nsem, nomer_att: integer); overload;
+  end;
+
+  TnoBRSVedomostController = class(TBaseCommandController)
+  public
+  end;
+
 
 implementation
 
-uses uDMUspevaemost;
+uses {uDMUspevaemost,}GeneralController;
 
 
 
-{ TBaseCommandController }
+{ TBaseSelectController }
 
-constructor TBaseCommandController.Create;
+constructor TBaseSelectController.Create(source: string);
+begin
+  FDataSet := TGeneralController.Instance.GetNewADODataSet(false);
+  FDataSet.CommandText := 'select * from '+source;
+  FDataSet.Open;
+end;
+
+destructor TBaseSelectController.Destroy;
+begin
+  FDataSet.Close;
+  FDataSet.Free;
+end;
+
+function TBaseSelectController.Refresh: boolean;
+begin
+  FDataSet.Close;
+  FDataSet.Open;
+end;
+
+procedure TBaseSelectController.Save;
 begin
 
 end;
 
-function TBaseCommandController.Refresh: boolean;
-begin
-
-end;
-
-procedure TBaseCommandController.Save;
-begin
-
-end;
-
-procedure TBaseCommandController.SetFilter(aFilter: string);
+procedure TBaseSelectController.SetFilter(aFilter: string);
 begin
   FDataSet.Filtered := false;
   FDataSet.Filter := aFilter;
   FDataSet.Filtered := true;
 end;
 
-{ TVedomostController }
 
-constructor TVedomostController.Create(aIkGroup: integer);
+
+{ TGroupController }
+
+constructor TGroupController.Create;
 begin
- // FDataSet :=
+  inherited Create('Grup');
+
 end;
 
-function TVedomostController.Execute: boolean;
+function TGroupController.GetUchPlan: integer;
 begin
-
+  Result := FDataSet.FieldByName('Ik_uch_plan').AsInteger;
+  if Result = NULL then Result := 0;
 end;
 
-function TVedomostController.GetVedomosty: TADODataSet;
+procedure TGroupController.SetGroup(const Value: integer);
 begin
-   Result := FDataSet;
+  SetFilter('ik_grup='+IntToStr(Value));
 end;
 
-procedure TVedomostController.SetGroup(const Value: integer);
+{ TBaseCommandController }
+
+constructor TBaseCommandController.Create(ProcName: string);
 begin
-  FikGroup := Value;
+  FStoredProc := TGeneralController.Instance.GetNewADOStoredProc(ProcName,false);
+end;
+
+destructor TBaseCommandController.Destroy;
+begin
+  FStoredProc.Active := False;
+  FStoredProc.Free;
+end;
+
+procedure TBaseCommandController.Refresh;
+begin
+  FStoredProc.Active := false;
+  FStoredProc.ExecProc;
+  FStoredProc.Active := true;
+end;
+
+{ TBRSVedomostController }
+
+constructor TBRSVedomostController.Create(ik_grup, nsem, nomer_att: integer);
+begin
+  inherited Create('GetAllAttestForBRSGrup');
+  with FStoredProc.Parameters do
+  begin
+    Clear;
+    AddParameter;
+    Items[0].Value := ik_grup;
+    AddParameter;
+    Items[1].Value := nsem;
+    AddParameter;
+    Items[2].Value := nomer_att;
+  end;
   Refresh;
-end;
-
-procedure TVedomostController.SetSemester(const Value: integer);
-begin
-  SetFilter('n_sem='+IntToStr(Value));
 end;
 
 end.

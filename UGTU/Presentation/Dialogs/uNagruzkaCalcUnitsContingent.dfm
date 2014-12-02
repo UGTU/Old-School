@@ -219,24 +219,17 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       AllowedOperations = [alopUpdateEh]
       AutoFitColWidths = True
       DataSource = dsCalcUnitsContent
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 1
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
       OnMouseMove = Panel8MouseMove
       Columns = <
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cName_calc_unit'
           Footers = <>
@@ -244,6 +237,7 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
           Width = 227
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'budget_count'
           Footers = <>
@@ -251,12 +245,15 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
           Width = 65
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'contract_count'
           Footers = <>
           Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090
           Width = 71
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object Panel3: TPanel
       Left = 7
@@ -342,28 +339,21 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       object dbgSpecContingent: TDBGridEh
         Left = 0
         Top = 24
-        Width = 377
-        Height = 144
+        Width = 375
+        Height = 142
         Anchors = [akLeft, akTop, akRight, akBottom]
         AutoFitColWidths = True
         DataSource = dsSpecContingent
+        DynProps = <>
         Flat = True
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'MS Sans Serif'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        UseMultiTitle = True
+        TitleParams.MultiTitle = True
         Columns = <
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'full_name'
             Footers = <>
@@ -371,6 +361,7 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
             Width = 94
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'group_count'
             Footers = <>
@@ -378,12 +369,14 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
             Width = 45
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'subgroup_count'
             Footers = <>
             Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'budget_count'
             Footers = <>
@@ -391,12 +384,15 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
             Width = 78
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'contract_count'
             Footers = <>
             Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090
             Width = 82
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
     end
     object Panel10: TPanel
@@ -512,28 +508,21 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       object DBGridEh1: TDBGridEh
         Left = 0
         Top = 24
-        Width = 329
-        Height = 145
+        Width = 327
+        Height = 143
         Anchors = [akLeft, akTop, akRight, akBottom]
         AutoFitColWidths = True
         DataSource = dsCurrentGroupContingent
+        DynProps = <>
         Flat = True
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'MS Sans Serif'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        UseMultiTitle = True
+        TitleParams.MultiTitle = True
         Columns = <
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'cName_grup'
             Footers = <>
@@ -541,6 +530,7 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
             Width = 134
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'budget_count'
             Footers = <>
@@ -548,12 +538,15 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
             Width = 78
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'contract_count'
             Footers = <>
             Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090
             Width = 82
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
     end
   end
@@ -581,15 +574,16 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
     end
     object Label21: TLabel
       Left = 1
-      Top = 178
+      Top = 176
       Width = 36
       Height = 13
       Anchors = [akLeft, akBottom]
       Caption = #1048#1090#1086#1075#1086': '
+      ExplicitTop = 178
     end
     object Label22: TLabel
       Left = 42
-      Top = 178
+      Top = 176
       Width = 42
       Height = 13
       Anchors = [akLeft, akBottom]
@@ -600,10 +594,11 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+      ExplicitTop = 178
     end
     object Label23: TLabel
       Left = 90
-      Top = 178
+      Top = 176
       Width = 6
       Height = 13
       Anchors = [akLeft, akBottom]
@@ -614,10 +609,11 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+      ExplicitTop = 178
     end
     object Label24: TLabel
       Left = 166
-      Top = 178
+      Top = 176
       Width = 49
       Height = 13
       Anchors = [akLeft, akBottom]
@@ -628,10 +624,11 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+      ExplicitTop = 178
     end
     object Label25: TLabel
       Left = 221
-      Top = 178
+      Top = 176
       Width = 6
       Height = 13
       Anchors = [akLeft, akBottom]
@@ -642,6 +639,7 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+      ExplicitTop = 178
     end
     object Label26: TLabel
       Left = 0
@@ -653,28 +651,21 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
     object DBGridEh3: TDBGridEh
       Left = 0
       Top = 47
-      Width = 339
-      Height = 123
+      Width = 337
+      Height = 121
       Anchors = [akLeft, akTop, akRight, akBottom]
       AutoFitColWidths = True
       DataSource = dsAnotherCalcUnitContingent
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
       Columns = <
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cName_calc_unit'
           Footers = <>
@@ -682,6 +673,7 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
           Width = 159
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'budget_count'
           Footers = <>
@@ -689,12 +681,15 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
           Width = 78
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'contract_count'
           Footers = <>
           Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090
           Width = 82
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object dbcbAnotherShema: TDBLookupComboboxEh
       Left = 86
@@ -702,6 +697,7 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
       Width = 251
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 1
@@ -793,28 +789,21 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
     object DBGridEh4: TDBGridEh
       Left = 0
       Top = 24
-      Width = 334
-      Height = 145
+      Width = 332
+      Height = 143
       Anchors = [akLeft, akTop, akRight, akBottom]
       AutoFitColWidths = True
       DataSource = dsSepGroupPlanContingent
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
       Columns = <
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cName_grup'
           Footers = <>
@@ -822,12 +811,14 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
           Width = 94
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'subgroup_count'
           Footers = <>
           Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'budget_count'
           Footers = <>
@@ -835,12 +826,15 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
           Width = 78
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'contract_count'
           Footers = <>
           Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090
           Width = 82
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
   end
   inherited actBaseDialog: TActionList
@@ -855,7 +849,7 @@ inherited frmNagruzkaCalcUnitsContingent: TfrmNagruzkaCalcUnitsContingent
     Left = 432
     Top = 80
     Bitmap = {
-      494C010103000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000009792
       8F0097928F0097928F0097928F0097928F0097928F0097928F0097928F009792

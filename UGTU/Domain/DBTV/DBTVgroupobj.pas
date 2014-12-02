@@ -38,7 +38,7 @@ Dialogs,
   protected
     function DoAddChildNodes: Boolean; override;
   public
-  constructor Create(Node:TTreeNode; TreeView:TTreeView); override;
+    constructor Create(Node:TTreeNode; TreeView:TTreeView); override;
     function SetADODataset(Conn:TAdoConnection):TAdodataset;
     procedure AddChild(Caption:string;ik:integer);
     property Name: string read FName write FName;
