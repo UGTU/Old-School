@@ -994,7 +994,7 @@ end;
 
 procedure TfmStudent.actPrintSpravExecute(Sender: TObject);
 var E: Variant;
-    str,dir_inst,copystr1,copystr2:string;
+    str,dir_inst,copystr1,copystr2,dop:string;
     posit:integer;
     FindRange: Variant;
     tempStoredProc: TADOStoredProc;
