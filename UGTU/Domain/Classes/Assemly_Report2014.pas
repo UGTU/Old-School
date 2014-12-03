@@ -49,7 +49,7 @@ begin
    sp_studs.Open; sp_studs.First;
 
 
-  Result:=  TVedomost.Create(sp_shapka.FieldByName('Cshort_name_fac').AsString,
+  Result:=  TVedomost.Create(sp_shapka.FieldByName('Cname_fac_small').AsString,
   sp_shapka.FieldByName('Cname_grup').AsString,
   sp_shapka.FieldByName('Cname_spec').AsString,
   sp_shapka.FieldByName('cName_disc').AsString,
