@@ -25,11 +25,13 @@ implementation
 
 uses ApplicationController;
 
+var
+  instance : TMailer = nil;
+
 { TMailer }
 
 class function TMailer.GetInstance: TMailer;
-const
-  instance : TMailer = nil;
+
 begin
   if instance = nil then instance := TMailer.Create;
   Result := instance;

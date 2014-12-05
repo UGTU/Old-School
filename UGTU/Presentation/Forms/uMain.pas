@@ -396,6 +396,9 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka, uNagruzk
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj,HOST_Projivaysh,DBTVHabitatsPersonObj,
   uPerson;
 
+var
+   FInternalPanel8:TDataProcessingSplashDlg = nil;
+
 {$R *.dfm}
 
 
@@ -2971,8 +2974,7 @@ begin
 end;
 
 function TfrmMain.GetPanel8: TDataProcessingSplashDlg;
-const
-   FInternalPanel8:TDataProcessingSplashDlg = nil;
+
 begin
    if not Assigned(FInternalPanel8) then
    begin

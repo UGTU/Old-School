@@ -109,6 +109,8 @@ function GetProcessUserName(var UserName:WideString):HRESULT;stdcall;external'co
 implementation
   uses uMain, uLocalLogController, uMailer, uDM;
 
+var
+  instance : TApplicationController = nil;
 
 
 function ConvertSid(Sid: PSID; pszSidText: PChar; var dwBufferLen: DWORD): BOOL;
@@ -502,8 +504,7 @@ result:=frmMain.ActiveFrame;
 end;
 
 class function TApplicationController.GetInstance: TApplicationController;
-const
-  instance : TApplicationController = nil;
+
 begin
   if instance = nil then
     instance := TApplicationController.Create;

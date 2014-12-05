@@ -242,7 +242,6 @@
         <DCCReference Include="..\Presentation\dialogs\uAcademReturn.pas">
             <Form>frmAcademReturn</Form>
         </DCCReference>
-        <DCCReference Include="..\Domain\Controllers\AbiturientFacade.PAS"/>
         <DCCReference Include="..\Presentation\dialogs\ABIT_add_nabor_dialog.pas">
             <Form>frmNewNabor</Form>
         </DCCReference>
@@ -973,6 +972,44 @@
         <DCCReference Include="..\Domain\Classes\VedomostItem2014.pas"/>
         <DCCReference Include="..\Domain\Classes\Assemly_Report2014.pas"/>
         <DCCReference Include="..\Utils\GoogleQr.pas"/>
+        <DCCReference Include="..\Domain\Controllers\AbiturientFacade.PAS"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Backends.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Backends_Generic.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Backends_LCL_Carbon.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Backends_LCL_CustomDrawn.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Backends_LCL_Gtk.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Backends_LCL_Win.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Backends_VCL.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Bindings.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Blend.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Containers.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_DrawingEx.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Dsgn_Bitmap.pas">
+            <Form>PictureEditorForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Dsgn_Color.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Dsgn_Misc.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_ExtImage.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Filters.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Geometry.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Image.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Layers.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_LowLevel.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Math.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_MicroTiles.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_OrdinalMaps.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Polygons.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_RangeBars.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Rasterizers.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Reg.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_RepaintOpt.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Resamplers.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_System.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_Transforms.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_VectorMaps.pas"/>
+        <DCCReference Include="..\Domain\Graphics32\GR32_XPThemes.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

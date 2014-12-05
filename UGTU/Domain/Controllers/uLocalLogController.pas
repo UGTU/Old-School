@@ -28,6 +28,9 @@ uses  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   end;
 implementation
 
+var
+  instance : TLogController = nil;
+
 { TLogController }
 
 procedure TLogController.AddEntry(str: string);
@@ -107,8 +110,7 @@ begin
 end;
 
 class function TLogController.GetInstance: TLogController;
-const
-  instance : TLogController = nil;
+
 begin
   if instance = nil then instance := TLogController.Create;
   Result := instance;

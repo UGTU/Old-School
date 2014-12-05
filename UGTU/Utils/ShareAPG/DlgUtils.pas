@@ -30,6 +30,7 @@ implementation
 
 var
   pMalloc:IMalloc = nil;
+  LastPIDL:PITEMIDLIST = nil;
 
 function BrowseCallBack(Wnd: HWND; uMsg: UINT; lParam, lpData: LPARAM): Integer
         stdcall;
@@ -44,8 +45,6 @@ end;
 
 function ShBrowseForFolderObject(hWnd:THandle; Title:String; Flags:Cardinal;
         Root:PITEMIDLIST):String;
-const
-  LastPIDL:PITEMIDLIST = nil;
 var
   bi:TBrowseInfo;
   pil:PITEMIDLIST;

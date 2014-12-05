@@ -33,6 +33,7 @@ implementation
 uses
   ComObj;
 
+var FInstance: TAbiturientFacade = nil;
 
 {
 ****************************** TAbiturientFacade *******************************
@@ -61,8 +62,8 @@ end;
 
 class function TAbiturientFacade.AccessInstance(Request: Integer): 
         TAbiturientFacade;
-  
-  const FInstance: TAbiturientFacade = nil;
+
+
   
 begin
   case Request of

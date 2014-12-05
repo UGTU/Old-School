@@ -127,6 +127,12 @@ uses SysUtils, Dialogs,Wininet, shlobj, ShellAPI, DBCtrls,ComObj, uDm,
 Variants, Classes, ComCtrls, AdoDB, DB, Windows, Forms, ApplicationController, ExceptionBase;
 
 
+
+var
+  NullVersioninstance : TNullVersion = nil;
+  VersionControllerInstance : TVersionController = nil;
+  AppVersionInstance : TAppVersion = nil;
+
 { TNullVersion }
 
 constructor TNullVersion.Create;
@@ -150,15 +156,14 @@ begin
 end;
 
 class function TNullVersion.GetInstance: TNullVersion;
-const
-  instance : TNullVersion = nil;
-begin
-  if instance = nil then
-    instance := TNullVersion.Create
-  else
-    instance._AddRef;
 
-  Result := instance;
+begin
+  if NullVersioninstance = nil then
+    NullVersioninstance := TNullVersion.Create
+  else
+    NullVersioninstance._AddRef;
+
+  Result := NullVersioninstance;
 end;
 
 function TNullVersion.GetMajorVersion: Integer;
@@ -269,11 +274,9 @@ begin
 end;
 
 class function TVersionController.GetInstance: TVersionController;
-const
-  instance : TVersionController = nil;
 begin
-  if instance = nil then instance := TVersionController.Create;
-  Result := instance;
+  if VersionControllerInstance = nil then VersionControllerInstance := TVersionController.Create;
+  Result := VersionControllerInstance;
 end;
 
 function TVersionController.GetServerVersion: IVersion;
@@ -319,8 +322,6 @@ begin
 end;
 
 class function TAppVersion.GetInstance: TAppVersion;
-const
-  instance : TAppVersion = nil;
 type
   TVerInfo=packed record
     Nevazhno: array[0..47] of byte; // ненужные нам 48 байт
@@ -337,9 +338,9 @@ s:TResourceStream;
 v:TVerInfo;
 begin
 
-  if instance = nil then
+  if AppVersionInstance = nil then
   begin
-    instance := TAppVersion.Create;
+    AppVersionInstance := TAppVersion.Create;
     //filename := Application.ExeName;
    { filename := ParamStr(0);
    // get the size of the fileversioninformatioin
@@ -365,19 +366,19 @@ begin
       instance.FRelease := fileinfo.dwfileversionls shr 16;
       instance.FBuild := fileinfo.dwfileversionls and $ffff;      }
       s.Read(v,SizeOf(v));
-      instance.FMajor := v.Major;
-      instance.FMinor := v.Minor;
-      instance.FRelease := v.Release;
-      instance.FBuild := v.Build;
+      AppVersionInstance.FMajor := v.Major;
+      AppVersionInstance.FMinor := v.Minor;
+      AppVersionInstance.FRelease := v.Release;
+      AppVersionInstance.FBuild := v.Build;
       //Result:= IntToStr(major) + '.' + IntToStr(minor) + '.' + IntToStr(rls) + '.' + IntToStr(build);
     finally
     {  freemem(info, fileinfosize);         }
     end;
   end;
 
-  instance._AddRef;
+  AppVersionInstance._AddRef;
   //else
-  result:=instance;
+  result:=AppVersionInstance;
 
 
 end;
