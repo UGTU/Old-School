@@ -616,6 +616,9 @@ implementation
 uses
   uLogin, Controls, Forms, Windows, Dialogs, uDMAbiturientOtchety, ApplicationController, VersionController;
 
+var
+  ds : TADODataSet = nil;
+
 {$R *.dfm}
 
 
@@ -693,8 +696,6 @@ Logger.LogMessage('Выполняется запрос: '+CommandText);
 end;
 
 function Tdm.GetMethodWorkDataSet: TADODataSet;
-const
-  ds : TADODataSet = nil;
 begin
   if (not Assigned(ds)) then
   begin
@@ -708,8 +709,8 @@ begin
 end;
 
 function Tdm.GetMethodWorkInNormDataSet: TADODataSet;
-const
-  ds : TADODataSet = nil;
+{const
+  ds : TADODataSet = nil;}
 begin
   if (not Assigned(ds)) then
   begin
