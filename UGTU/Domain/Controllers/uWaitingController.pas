@@ -26,7 +26,7 @@ const
   instance : TWaitingController = nil;
 begin
   if instance = nil then
-    instance := TWaitingController.Create;
+    instance.Create;
   Result := instance;
 end;
 

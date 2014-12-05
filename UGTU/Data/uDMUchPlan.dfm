@@ -1,11 +1,11 @@
 object dmUchPlan: TdmUchPlan
   OldCreateOrder = False
-  Height = 148
-  Width = 409
+  Height = 344
+  Width = 636
   object dsUchPlan: TDataSource
     DataSet = adodsUchPlan
     Left = 41
-    Top = 60
+    Top = 4
   end
   object adodsUchPlan: TADODataSet
     Connection = dm.DBConnect
@@ -13,14 +13,14 @@ object dmUchPlan: TdmUchPlan
     LockType = ltBatchOptimistic
     CommandText = 'select * from UchPl'
     Parameters = <>
-    Left = 39
-    Top = 15
+    Left = 367
+    Top = 175
   end
   object qCanRemoveBRS: TADOQuery
     Connection = dm.DBConnect
     Parameters = <>
-    Left = 120
-    Top = 16
+    Left = 40
+    Top = 64
   end
   object aspSetBRS: TADOStoredProc
     Connection = dm.DBConnect
@@ -46,8 +46,8 @@ object dmUchPlan: TdmUchPlan
         DataType = ftBoolean
         Value = Null
       end>
-    Left = 120
-    Top = 64
+    Left = 40
+    Top = 120
   end
   object adsGetHours: TADODataSet
     Connection = dm.DBConnect
@@ -55,8 +55,8 @@ object dmUchPlan: TdmUchPlan
     LockType = ltBatchOptimistic
     CommandText = 'select GetHoursForDisc()'
     Parameters = <>
-    Left = 207
-    Top = 15
+    Left = 151
+    Top = 175
   end
   object ADOQContentForDiscVC: TADODataSet
     Connection = dm.DBConnect
@@ -72,8 +72,8 @@ object dmUchPlan: TdmUchPlan
       'k_kaf'#13#10'Where ((ik_disc_uch_plan = 34352) '#13#10'and (ik_vid_zanyat = ' +
       '7))'
     Parameters = <>
-    Left = 207
-    Top = 71
+    Left = 39
+    Top = 175
   end
   object ADOQContentForDiscAZ: TADODataSet
     Connection = dm.DBConnect
@@ -93,7 +93,7 @@ object dmUchPlan: TdmUchPlan
       '.ik_vid_zanyat in (3,4,5)) '#13#10'and (ik_disc_uch_plan = 34352) '#13#10'an' +
       'd (n_sem = 2)'
     Parameters = <>
-    Left = 303
-    Top = 71
+    Left = 255
+    Top = 175
   end
 end
