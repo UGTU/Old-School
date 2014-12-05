@@ -256,7 +256,8 @@ begin
   //для проверки ЕГЭ
   ln:=dm.adodsPostupView.FieldByName('Clastname').Value;
   fn:=dm.adodsPostupView.FieldByName('Cfirstname').Value;
-  pn:=dm.adodsPostupView.FieldByName('Cotch').Value;
+  if (dm.adodsPostupView.FieldByName('Cotch').Value <> NULL) then
+    pn:=dm.adodsPostupView.FieldByName('Cotch').Value;
 
   if (dm.adodsPostupView.RecordCount>1) then //and(IkRecruit>0)
     while (dm.adodsPostupView.FieldByName('NN_Abit').Value<>IDpostup)and(not dm.adodsPostupView.Eof) do
