@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions/>
-  <Default.Personality>
-    <Projects ActiveProject="E:\Projects\GitHub\Old-School\UGTU\Test\WellugtuTests.dproj"/>
-  </Default.Personality>
+	<Transactions/>
+	<Default.Personality>
+		<Projects ActiveProject="E:\Projects\GitHub\Old-School\UGTU\ugtu.dproj"/>
+	</Default.Personality>
 </BorlandProject>
