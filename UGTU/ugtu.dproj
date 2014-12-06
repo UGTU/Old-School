@@ -147,7 +147,7 @@
             </Platforms>
             <ModelSupport>False</ModelSupport>
             <UnitTesting>
-                <TestProjectName>E:\Projects\GitHub\Old-School\UGTU\Test\WellugtuTests.dproj</TestProjectName>
+                <TestProjectName>E:\Projects\GitHub\Old-School\UGTU\Test\ugtuTests.dproj</TestProjectName>
             </UnitTesting>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>

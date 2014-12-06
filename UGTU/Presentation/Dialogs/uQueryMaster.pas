@@ -6,7 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, GR32_Image, GR32,
   GR32_Layers, GR32_Polygons,uQMController,uVisualDBObjectsForQM, uQMDatamodule, DBGridEh, DB,
-  Mask, DBCtrlsEh, DBLookupEh, Menus, Spin, GridsEh, ComCtrls, ImgList;
+  Mask, DBCtrlsEh, DBLookupEh, Menus, Spin, GridsEh, ComCtrls, ImgList,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh,
+  System.Actions;
 
  type TSmallNodeObject = class
   public

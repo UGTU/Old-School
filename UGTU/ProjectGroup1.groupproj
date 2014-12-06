@@ -6,6 +6,9 @@
         <Projects Include="ugtu.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="Test\ugtuTests.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -23,14 +26,23 @@
     <Target Name="ugtu:Make">
         <MSBuild Projects="ugtu.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ugtuTests">
+        <MSBuild Projects="Test\ugtuTests.dproj"/>
+    </Target>
+    <Target Name="ugtuTests:Clean">
+        <MSBuild Projects="Test\ugtuTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ugtuTests:Make">
+        <MSBuild Projects="Test\ugtuTests.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ugtu"/>
+        <CallTarget Targets="ugtu;ugtuTests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ugtu:Clean"/>
+        <CallTarget Targets="ugtu:Clean;ugtuTests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ugtu:Make"/>
+        <CallTarget Targets="ugtu:Make;ugtuTests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
