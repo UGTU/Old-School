@@ -586,6 +586,7 @@ type
 
   private
     { Private declarations }
+    FDBConnect: TADOConnection;
     procedure MethodWorkNewRecordHandler(DataSet: TDataSet);
     function GetMethodWorkDataSet : TADODataSet;
     function GetMethodWorkInNormDataSet : TADODataSet;
@@ -594,6 +595,7 @@ type
     FDBSubscriberList : TInterfaceList;
     property MethodWorkDataSet : TADODataSet read GetMethodWorkDataSet;
     property MethodWorkInNormDataSet : TADODataSet read GetMethodWorkInNormDataSet;
+    constructor Create; override;
     //ServerName: string;
     //DBName: string;
     //LoginName: string;
@@ -1113,6 +1115,12 @@ begin
         else Result := CurHours;
   tempDS.Close;
   tempDS.Free;
+end;
+
+constructor Tdm.Create;
+begin
+  inherited;
+  FDBConnect := TA
 end;
 
 procedure Tdm.AddSubscriber(Subscriber: IDBActionSubscriber);

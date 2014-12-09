@@ -436,9 +436,5 @@ uses
 
 begin
   DUnitTestRunner.RunRegisteredTests;
-  Application.CreateForm(Tdm, dm);
-  dm.DBConnect.ConnectionString:= 'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;User ID=developer;'
-                                 +'Initial Catalog=KIM_TEST;Data Source=ugtudb.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;'
-                                 +'Packet Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;Tag with column collation when possible=False;';
 end.
 

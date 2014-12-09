@@ -3,7 +3,7 @@ unit ApplicationController;
 interface
 uses  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, VersionController, DB, IniFiles, ShlObj,StdCtrls, comObj, ShellAPI, IdMessage, CommonIntf, CommonIntfImpl, ExceptionBase, ComCtrls,
-  uPhotoBooth, ExtCtrls;
+  uPhotoBooth, ExtCtrls,Data.Win.ADODB;
 
 const
    HEAP_ZERO_MEMORY = $00000008;
@@ -40,6 +40,7 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     FLastRunLog:string;
     FExportLogToFile:boolean;
     FExceptionParsers:TExceptionParserCollection;
+    FTestConnect: TADOConnection;  //Работаем с соединением
 
     procedure WriteToIni(section:string;key:string;value:string);
     procedure EraseIniKey(section:string;key:string);
@@ -434,6 +435,12 @@ var
 begin
   FProgramName:= 'ИС "УГТУ" ' + TVersionController.GetInstance.CurrentVersion.VersionString;
 
+  FTestConnect := TADOConnection.Create(Self);
+  FTestConnect.ConnectionString := 'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;User ID=developer;'+
+                               'Initial Catalog=UGTU;Data Source=ugtudb.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;'+
+                               'Packet Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;Tag with column collation when possible=False;';
+
+
   SetLength(CurrUser, 512);
   GetProcessUserName(CurrUser);
   l:=TLabel.Create(nil);
@@ -581,7 +588,8 @@ end;
 
 procedure TApplicationController.Terminate;
 begin
-  pBooth.Free;  
+  pBooth.Free;
+  FTestConnect.Free;
   Application.Terminate;
 end;
 
