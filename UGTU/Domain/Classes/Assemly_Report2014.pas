@@ -13,6 +13,7 @@ type
     public
        constructor Create (_ikVed:integer);
         function AddReport():TVedomost;
+        destructor Destroy;override;
 
     end;
 implementation
@@ -49,7 +50,7 @@ begin
    sp_studs.Open; sp_studs.First;
 
 
-  Result:=  TVedomost.Create(sp_shapka.FieldByName('Cshort_name_fac').AsString,
+  Result:=  TVedomost.Create(sp_shapka.FieldByName('Cname_fac_small').AsString,
   sp_shapka.FieldByName('Cname_grup').AsString,
   sp_shapka.FieldByName('Cname_spec').AsString,
   sp_shapka.FieldByName('cName_disc').AsString,
@@ -76,8 +77,16 @@ begin
    //  Result.Student:=stud_list;
   finally
         sp_shapka.Free;
-  end;
+
+        ved.Free;
+
 
   end;
 
+  end;
+  destructor TAssemly_Report.Destroy;
+begin
+
+  inherited;
+end;
 end.

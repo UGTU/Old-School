@@ -105,7 +105,10 @@ end;
 procedure TftmNapr.dbdteOutChange(Sender: TObject);
 begin
 enumChange(sender);
-dbdteto.Value:=dbdteOut.Value+2;
+if (( DayOfWeek(dbdteOut.Value)=2)or ( DayOfWeek(dbdteOut.Value)=3)) then
+dbdteto.Value:=dbdteOut.Value+4
+else dbdteto.Value:=dbdteOut.Value+5;
+//dbdteto.Value:=dbdteOut.Value+2;
 end;
 
 procedure TftmNapr.FormShow(Sender: TObject);
@@ -394,21 +397,21 @@ Replace('#v_z#','КР(П)');
 
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=1 then
   begin
-   Replace('#vid_napr#','первичный');
+   Replace('#vid_napr#','первичное');
 //    Range['V8','W8'].Clear;
 //    Range['V10','W10'].Clear;
   end;
     NextStep(1,'Формирование бланка');
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=2 then
   begin
-    Replace('#vid_napr#','повторное');
+    Replace('#vid_napr#','первичное на комиссию');
 //    Range['V6','W6'].Clear;
 //    Range['V10','W10'].Clear;
   end;
 
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=3 then
   begin
-    Replace('#vid_napr#','комиссия');
+    Replace('#vid_napr#','вторичное на комиссию');
 //    Range['V6','W6'].Clear;
 //    Range['V8','W8'].Clear;
   end;
