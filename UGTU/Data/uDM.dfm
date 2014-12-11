@@ -3,30 +3,12 @@ object dm: Tdm
   OnCreate = DataModuleCreate
   Height = 1002
   Width = 1149
-  object DBConnect: TADOConnection
-    CommandTimeout = 300
-    ConnectionString = 
-      'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
-      'fo=False;User ID=developer;Initial Catalog=UGTU;Data Source=ugtu' +
-      'db.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;Pack' +
-      'et Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;' +
-      'Tag with column collation when possible=False;'
-    IsolationLevel = ilReadUncommitted
-    LoginPrompt = False
-    Provider = 'SQLOLEDB.1'
-    AfterConnect = DBConnectAfterConnect
-    OnExecuteComplete = DBConnectExecuteComplete
-    OnWillExecute = DBConnectWillExecute
-    Left = 32
-    Top = 128
-  end
   object dsSelVedEkz: TDataSource
     DataSet = adospWriteVer
     Left = 400
     Top = 56
   end
   object adospSelVedEkz: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     OnCalcFields = adospSelVedEkzCalcFields
     ProcedureName = 'SelVedForExam;1'
@@ -79,7 +61,6 @@ object dm: Tdm
     end
   end
   object adodsVidExam: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'Vid_exam'
     CommandType = cmdTable
@@ -94,7 +75,6 @@ object dm: Tdm
   end
   object adotFilter2: TADOTable
     CacheSize = 15
-    Connection = DBConnect
     Filtered = True
     LockType = ltBatchOptimistic
     TableName = 'kafedra'
@@ -120,7 +100,6 @@ object dm: Tdm
     end
   end
   object adodsUsers: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from sysusers'
     Parameters = <>
@@ -129,7 +108,6 @@ object dm: Tdm
   end
   object adotFilter1: TADOTable
     CacheSize = 15
-    Connection = DBConnect
     LockType = ltBatchOptimistic
     TableName = 'Fac'
     Left = 96
@@ -137,7 +115,6 @@ object dm: Tdm
   end
   object adotElemUsers: TADOTable
     CacheSize = 15
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     BeforePost = adotElemUsersBeforePost
@@ -212,7 +189,6 @@ object dm: Tdm
   end
   object adotElement: TADOTable
     CacheSize = 15
-    Connection = DBConnect
     TableName = 'VisElements'
     Left = 192
     Top = 856
@@ -223,7 +199,6 @@ object dm: Tdm
     Top = 496
   end
   object adotblSostZach: TADOTable
-    Connection = DBConnect
     CursorType = ctStatic
     TableName = 'ABIT_sost_zach'
     Left = 880
@@ -235,7 +210,6 @@ object dm: Tdm
     Top = 496
   end
   object adospEdtPost: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     OnCalcFields = adospSelVedEkzCalcFields
     ProcedureName = 'ABIT_edit_postup;1'
@@ -306,7 +280,6 @@ object dm: Tdm
     Top = 440
   end
   object adospWriteVer: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     OnCalcFields = adospSelVedEkzCalcFields
@@ -356,7 +329,6 @@ object dm: Tdm
     Top = 896
   end
   object adodsNabor: TADODataSet
-    Connection = DBConnect
     CommandText = 'TREE_ABIT_Specialties'
     CommandType = cmdTable
     Parameters = <>
@@ -403,14 +375,12 @@ object dm: Tdm
     Top = 408
   end
   object qContentUchPlan: TADOQuery
-    Connection = DBConnect
     LockType = ltBatchOptimistic
     Parameters = <>
     Left = 1064
     Top = 304
   end
   object adsSemester: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'Select * From Semester Order By n_sem'
     Parameters = <>
@@ -418,7 +388,6 @@ object dm: Tdm
     Top = 304
   end
   object aspGetDiscModel: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'GetDisciplines_4filters;1'
@@ -551,7 +520,6 @@ object dm: Tdm
     end
   end
   object adsVidNagruzki: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'Select * From vid_nagruzki'
@@ -568,7 +536,6 @@ object dm: Tdm
     end
   end
   object adsVidZanyat: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'Select * From vid_zaniat'
@@ -593,7 +560,6 @@ object dm: Tdm
     Top = 512
   end
   object adodsAbitDisc: TADODataSet
-    Connection = DBConnect
     CommandText = 'ABIT_Disc'
     CommandType = cmdTable
     Parameters = <>
@@ -610,7 +576,6 @@ object dm: Tdm
     end
   end
   object adodsVidSdachi: TADODataSet
-    Connection = DBConnect
     CommandText = 'ABIT_VidSdachi'
     CommandType = cmdTable
     Parameters = <>
@@ -637,7 +602,6 @@ object dm: Tdm
     Top = 416
   end
   object adodsRasp: TADODataSet
-    Connection = DBConnect
     CommandText = 'ABIT_Raspisanie'
     CommandType = cmdTable
     Parameters = <>
@@ -681,7 +645,6 @@ object dm: Tdm
     Top = 744
   end
   object adodsPostupView: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'Abit_Postup_view'
     CommandType = cmdTable
@@ -788,7 +751,6 @@ object dm: Tdm
     Top = 552
   end
   object adotbltypeTema: TADOTable
-    Connection = DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
     Left = 40
@@ -800,7 +762,6 @@ object dm: Tdm
     Top = 288
   end
   object adodsAbitExamView: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'ABit_Exam_View'
     CommandType = cmdTable
@@ -862,7 +823,6 @@ object dm: Tdm
     Top = 416
   end
   object adodsStudSearch: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from Tree_stud_search Order by nn_zach'
     Parameters = <>
@@ -880,7 +840,6 @@ object dm: Tdm
     Top = 664
   end
   object adospMetodists: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     ProcedureName = 'abit_SelMetodists;1'
     Parameters = <>
@@ -897,7 +856,6 @@ object dm: Tdm
     end
   end
   object adoqFilial: TADOQuery
-    Connection = DBConnect
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -911,7 +869,6 @@ object dm: Tdm
     Top = 504
   end
   object adoqYears: TADOQuery
-    Connection = DBConnect
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -929,7 +886,6 @@ object dm: Tdm
     Top = 888
   end
   object adospGetRasp: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     AfterScroll = adospGetRaspAfterScroll
     ProcedureName = 'ABIT_Get_Raspisanie_AllInfo;1'
@@ -1013,7 +969,6 @@ object dm: Tdm
     Top = 784
   end
   object adospAbitGetSpisok: TADOQuery
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     Parameters = <>
@@ -1090,7 +1045,6 @@ object dm: Tdm
     Top = 688
   end
   object adospAbitGetRaspKab: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     ProcedureName = 'ABIT_get_raspkab;1'
     Parameters = <
@@ -1138,7 +1092,6 @@ object dm: Tdm
     Top = 776
   end
   object adospAbitNotBusyKab: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     ProcedureName = 'ABIT_get_kab_isnotbusy;1'
     Parameters = <
@@ -1186,7 +1139,6 @@ object dm: Tdm
     Top = 800
   end
   object adospAbitKabMetodists: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     ProcedureName = 'ABIT_Get_Rasp_kab_FIOMetodist;1'
     Parameters = <
@@ -1226,7 +1178,6 @@ object dm: Tdm
     Top = 760
   end
   object adospAbitUpdateKabMetodist: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     ProcedureName = 'ABIT_add_metodist_rassadka;1'
     Parameters = <
@@ -1310,7 +1261,6 @@ object dm: Tdm
     Top = 656
   end
   object adotEgeOtchet: TADOTable
-    Connection = DBConnect
     CursorType = ctStatic
     TableName = 'EGE_view'
     Left = 624
@@ -1387,7 +1337,6 @@ object dm: Tdm
     end
   end
   object adoqAbitItogiCount: TADOQuery
-    Connection = DBConnect
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -1433,7 +1382,6 @@ object dm: Tdm
     end
   end
   object adoqAbitSpecPermisions: TADOQuery
-    Connection = DBConnect
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
@@ -1445,7 +1393,6 @@ object dm: Tdm
     end
   end
   object adospAbitProhBall: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'ABIT_Get_ProhBallForZachislenie;1'
@@ -1491,7 +1438,6 @@ object dm: Tdm
     Top = 488
   end
   object adodsTypeKatZach: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'TypeKatZach'
     CommandType = cmdTable
@@ -1515,7 +1461,6 @@ object dm: Tdm
     Top = 440
   end
   object adsDecomposeType: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'SELECT * FROM Shema_decompose'
     Parameters = <>
@@ -1531,7 +1476,6 @@ object dm: Tdm
     end
   end
   object adsKafedra: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'Select * From kafedra Order By cname_kaf'
     Parameters = <>
@@ -1539,7 +1483,6 @@ object dm: Tdm
     Top = 304
   end
   object adsTeacherTakeNagr: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 
@@ -1583,7 +1526,6 @@ object dm: Tdm
     end
   end
   object adodsAbout: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'AboutParameters'
     CommandType = cmdTable
@@ -1592,7 +1534,6 @@ object dm: Tdm
     Top = 16
   end
   object aspTakeFactNagr: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'GetTakeFactNagr;1'
@@ -1699,7 +1640,6 @@ object dm: Tdm
     end
   end
   object aspTakeFactVZNagr: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'GetTakeFactNagr;1'
@@ -1809,7 +1749,6 @@ object dm: Tdm
     end
   end
   object adodsTeachSearch: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from TREE_TeachSearch order by itab_n'
     Parameters = <>
@@ -1822,7 +1761,6 @@ object dm: Tdm
     Top = 64
   end
   object adsNormOfTime: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'Select * From Content_norma_of_time'
@@ -1916,7 +1854,6 @@ object dm: Tdm
     end
   end
   object adsAllPlanNagr: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'SELECT * FROM temp_GetAllPlanNagr(0)'
@@ -1972,7 +1909,6 @@ object dm: Tdm
     end
   end
   object adsSpecialities: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 
       'Select ik_spec_fac, (Cshort_spec + '#39' ('#1092#1072#1082#1091#1083#1100#1090#1077#1090': '#39' + Cshort_name' +
@@ -1993,7 +1929,6 @@ object dm: Tdm
     end
   end
   object adsSemLengthExceptions: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'SELECT * FROM Semester_length_exception'
@@ -2051,7 +1986,6 @@ object dm: Tdm
     end
   end
   object adsWorkTypes: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'SELECT * FROM PrepodWorkType'
     Parameters = <>
@@ -2066,7 +2000,6 @@ object dm: Tdm
     end
   end
   object adsDefenceFund: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'SELECT * FROM Defence_fund'
     Parameters = <>
@@ -2081,7 +2014,6 @@ object dm: Tdm
     end
   end
   object adsCapacity: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'SELECT * FROM PrepodCapacity'
     Parameters = <>
@@ -2096,19 +2028,16 @@ object dm: Tdm
     end
   end
   object tblVer: TADOTable
-    Connection = DBConnect
     TableName = 'LastRegisteredVersion'
     Left = 384
     Top = 632
   end
   object adodsVer: TADODataSet
-    Connection = DBConnect
     Parameters = <>
     Left = 384
     Top = 840
   end
   object adodsAdditionalSpec: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from AdditionalSpec'
     Parameters = <>
@@ -2155,7 +2084,6 @@ object dm: Tdm
     Top = 408
   end
   object adsNormOfTimeForPractice: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'Select * From Content_norm_of_time_practice'
@@ -2245,7 +2173,6 @@ object dm: Tdm
     end
   end
   object adsPracticeListForNormOfTime: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 
       'SELECT * FROM discpln WHERE ik_type_disc in (SELECT ik_type_disc' +
@@ -2264,7 +2191,6 @@ object dm: Tdm
     end
   end
   object adsPracticeNormType: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'SELECT * FROM Practice_norm_type'
     Parameters = <>
@@ -2279,7 +2205,6 @@ object dm: Tdm
     end
   end
   object aspContentPlanNagr: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     OnCalcFields = aspContentPlanNagrCalcFields
@@ -2415,7 +2340,6 @@ object dm: Tdm
     end
   end
   object adsPotokShemasInfo: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'SELECT * FROM GetPotokShemaInfo(0, 0, 0, 0)'
     Parameters = <>
@@ -2444,7 +2368,6 @@ object dm: Tdm
     end
   end
   object aspPotokShemes: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     ProcedureName = 'GetNeedPotokShemes'
     Parameters = <
@@ -2484,7 +2407,6 @@ object dm: Tdm
     end
   end
   object adsTeachersWorkTypes: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'SELECT * FROM Relation_kafedra_prep'
@@ -2560,7 +2482,6 @@ object dm: Tdm
     end
   end
   object adsPlanContingentOfSepGroups: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'SELECT * FROM Plan_contingent_of_sep_groups'
@@ -2603,7 +2524,6 @@ object dm: Tdm
     end
   end
   object adsSepGroups: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'SELECT ik_grup, cName_grup FROM Grup'
     Parameters = <>
@@ -2619,7 +2539,6 @@ object dm: Tdm
     end
   end
   object adsAuditorVZ: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 
@@ -2683,14 +2602,12 @@ object dm: Tdm
     end
   end
   object qContentUchPlan_temp: TADOQuery
-    Connection = DBConnect
     LockType = ltBatchOptimistic
     Parameters = <>
     Left = 960
     Top = 360
   end
   object aspAbitDisc: TADOStoredProc
-    Connection = DBConnect
     ProcedureName = 'ABIT_Get_disc_abit;1'
     Parameters = <
       item
@@ -2716,7 +2633,6 @@ object dm: Tdm
     Top = 520
   end
   object aspAbitExamType: TADOStoredProc
-    Connection = DBConnect
     ProcedureName = 'ABIT_Get_sdacha_abit;1'
     Parameters = <
       item
@@ -2742,7 +2658,6 @@ object dm: Tdm
     Top = 520
   end
   object adsContentVZ: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 
@@ -2806,7 +2721,6 @@ object dm: Tdm
     Top = 424
   end
   object adodsAbitAllExam: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'ABit_AllExamView'
     CommandType = cmdTable
@@ -2863,7 +2777,6 @@ object dm: Tdm
     end
   end
   object AdodsDBUpdateAbility: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 
       'select DATABASEPROPERTYEX('#39'UGTU'#39', '#39'Updateability'#39') as UpdateAbil' +
@@ -2873,7 +2786,6 @@ object dm: Tdm
     Top = 64
   end
   object AdodsDBStatus: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select DATABASEPROPERTYEX('#39'UGTU'#39', '#39'Status'#39') as Status'
     Parameters = <>
@@ -2881,7 +2793,6 @@ object dm: Tdm
     Top = 64
   end
   object adsFactNagr: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     Parameters = <>
@@ -2974,7 +2885,6 @@ object dm: Tdm
     end
   end
   object adsAdditionReason: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     CommandText = 'select * from Addition_nagr_reason'
@@ -2991,7 +2901,6 @@ object dm: Tdm
     end
   end
   object adsNagrCommit: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from GetPotentialForKafForPotoks(1176)'
     Parameters = <>
@@ -3060,7 +2969,6 @@ object dm: Tdm
     Top = 488
   end
   object aspAdditionFactNagr: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'GetContentAdditionNagr;1'
@@ -3154,7 +3062,6 @@ object dm: Tdm
     end
   end
   object aspDefaultPotoks: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'Nagr_AddDefaultPotoks;1'
@@ -3177,7 +3084,6 @@ object dm: Tdm
     Top = 528
   end
   object aspAddDefaultPlans: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'Nagr_AddDefaultPlans;1'
@@ -3207,7 +3113,6 @@ object dm: Tdm
     Top = 408
   end
   object dsAllTimeNorm: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from AllNormTime(19)'
     Parameters = <>
@@ -3222,7 +3127,6 @@ object dm: Tdm
     end
   end
   object aspPlanNormTime: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'PlanNormTime'
@@ -3286,7 +3190,6 @@ object dm: Tdm
     end
   end
   object aspDeleteOldNagr: TADOStoredProc
-    Connection = DBConnect
     ProcedureName = 'Nagr_DeleteOldNagr;1'
     Parameters = <
       item
@@ -3335,7 +3238,6 @@ object dm: Tdm
     Top = 192
   end
   object aspDeletePotokSemestr: TADOStoredProc
-    Connection = DBConnect
     ProcedureName = 'Nagr_DeletePotokSemestr;1'
     Parameters = <
       item
@@ -3356,7 +3258,6 @@ object dm: Tdm
     Top = 328
   end
   object adsProfile: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from GetProfileEduBranches'
     Parameters = <
@@ -3375,14 +3276,12 @@ object dm: Tdm
     Top = 400
   end
   object adsGroups: TADODataSet
-    Connection = DBConnect
     CommandText = 'select * from Grup'
     Parameters = <>
     Left = 32
     Top = 656
   end
   object aspGetDiscWork: TADOStoredProc
-    Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'GetDisciplines_4filters;1'
@@ -3527,7 +3426,6 @@ object dm: Tdm
     end
   end
   object adsGetUchPlanGrup: TADODataSet
-    Connection = DBConnect
     CursorType = ctStatic
     CommandText = 'select * from GetUchPlanForGroup'
     Parameters = <>
@@ -3598,7 +3496,6 @@ object dm: Tdm
     Top = 696
   end
   object aspUpdateDiscInPlan: TADOStoredProc
-    Connection = DBConnect
     ProcedureName = 'UpdateDiscInUchPlan;1'
     Parameters = <
       item
@@ -3710,7 +3607,6 @@ object dm: Tdm
     Top = 696
   end
   object DelVedForContentDisc: TADOStoredProc
-    Connection = DBConnect
     LockType = ltBatchOptimistic
     ProcedureName = 'DelVedomostForContentDisc;1'
     Parameters = <
@@ -3732,7 +3628,6 @@ object dm: Tdm
     Top = 608
   end
   object Hard_DiscDel: TADOStoredProc
-    Connection = DBConnect
     ProcedureName = 'Hard_DiscDel;1'
     Parameters = <
       item
@@ -3753,7 +3648,6 @@ object dm: Tdm
     Top = 544
   end
   object qVedomostForContent: TADOQuery
-    Connection = DBConnect
     LockType = ltBatchOptimistic
     Parameters = <>
     Left = 1072

@@ -435,6 +435,7 @@ uses
 {$R *.RES}
 
 begin
+ // TApplicationController.GetInstance;
   DUnitTestRunner.RunRegisteredTests;
 end.
 

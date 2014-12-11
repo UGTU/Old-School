@@ -141,7 +141,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Platforms>
-                <Platform value="Android" ActiveMobileDevice="emulator-5554">True</Platform>
+                <Platform value="Android">True</Platform>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>
             </Platforms>

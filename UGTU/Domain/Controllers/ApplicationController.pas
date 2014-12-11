@@ -40,7 +40,7 @@ TApplicationController = class (TInterfacedObject, ILogger, IApplicationControll
     FLastRunLog:string;
     FExportLogToFile:boolean;
     FExceptionParsers:TExceptionParserCollection;
-    FTestConnect: TADOConnection;  //Работаем с соединением
+    FDBConnect: TADOConnection;  //Работаем с соединением
 
     procedure WriteToIni(section:string;key:string;value:string);
     procedure EraseIniKey(section:string;key:string);
@@ -103,6 +103,7 @@ public
     property LastRunLog: string read FLastRunLog;
     property IsApplicationCopy : boolean read FIsApplicationCopy;
     property LocalLog : ILogger read GetLogger implements ILogger;
+    property DBConnect: TADOConnection read FDBConnect;
   end;
 
 function GetProcessUserName(var UserName:WideString):HRESULT;stdcall;external'coreutdll.dll';
@@ -435,8 +436,8 @@ var
 begin
   FProgramName:= 'ИС "УГТУ" ' + TVersionController.GetInstance.CurrentVersion.VersionString;
 
-  FTestConnect := TADOConnection.Create(Self);
-  FTestConnect.ConnectionString := 'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;User ID=developer;'+
+  FDBConnect := TADOConnection.Create(nil);
+  FDBConnect.ConnectionString := 'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;User ID=developer;'+
                                'Initial Catalog=UGTU;Data Source=ugtudb.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;'+
                                'Packet Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;Tag with column collation when possible=False;';
 
@@ -589,7 +590,7 @@ end;
 procedure TApplicationController.Terminate;
 begin
   pBooth.Free;
-  FTestConnect.Free;
+  FDBConnect.Free;
   Application.Terminate;
 end;
 
