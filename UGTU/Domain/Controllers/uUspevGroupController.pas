@@ -1394,18 +1394,24 @@ end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
   ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;
-var report:TAssemly_Report;
-    result_report:TVedomost;
-    FindRange: Variant;
+  var report:TAssemly_Report;
+   result_report:TVedomost;
+  FindRange: Variant;
 begin
 
-  report:= TAssemly_Report.Create(ikVed);
-  result_report:=report.AddReport();
-  Result := TBRS2014VedomostReport.Create(result_report);
-  if (result_report.Is_brs) then Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt'
-    else Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
+   report:= TAssemly_Report.Create(ikVed);
+   result_report:=report.AddReport();
+    Result := TBRS2014VedomostReport.Create(result_report);
+   if (result_report.Is_brs) then
+   begin
+  Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt';
+   end
+  else
+  begin
+  Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
+  end;
+  report.Free;
 
- // report.Free;
 end;
 
 //проверяет, можно ли обновить список созданных ведомости

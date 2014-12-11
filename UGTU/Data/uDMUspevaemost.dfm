@@ -493,7 +493,7 @@ object dmUspevaemost: TdmUspevaemost
         Value = Null
       end>
     Left = 550
-    Top = 157
+    Top = 133
   end
   object dsNapr: TDataSource
     DataSet = aspNapr

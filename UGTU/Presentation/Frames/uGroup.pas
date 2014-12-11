@@ -847,9 +847,9 @@ begin
 
   TWaitingController.GetInstance.Process(Report);
 
-  Report.Free;
+ Report.Free;
 
-end;
+  end;
 
 procedure TfmGroup.AttestRefresh();
 begin
