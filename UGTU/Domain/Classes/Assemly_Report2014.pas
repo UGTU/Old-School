@@ -78,7 +78,7 @@ begin
   finally
         sp_shapka.Free;
 
-        ved.Free;
+      //  ved.Free;
 
 
   end;
