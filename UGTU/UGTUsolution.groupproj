@@ -1,40 +1,60 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ProjectGuid>{595f4b79-1ff4-4939-9513-7752da7216df}</ProjectGuid>
-  </PropertyGroup>
-  <ItemGroup />
-  <ItemGroup />
-  <ProjectExtensions>
-    <Borland.Personality>Default.Personality</Borland.Personality>
-    <Borland.ProjectType />
-    <BorlandProject>
-  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
-  </ProjectExtensions>
-  <Target Name="ugtuTests">
-    <MSBuild Projects="ugtuTests.dproj" Targets="" />
-  </Target>
-  <Target Name="ugtuTests:Clean">
-    <MSBuild Projects="ugtuTests.dproj" Targets="Clean" />
-  </Target>
-  <Target Name="ugtuTests:Make">
-    <MSBuild Projects="ugtuTests.dproj" Targets="Make" />
-  </Target>
-  <Target Name="ugtu">
-    <MSBuild Projects="ugtu.dproj" Targets="" />
-  </Target>
-  <Target Name="ugtu:Clean">
-    <MSBuild Projects="ugtu.dproj" Targets="Clean" />
-  </Target>
-  <Target Name="ugtu:Make">
-    <MSBuild Projects="ugtu.dproj" Targets="Make" />
-  </Target>
-  <Target Name="Build">
-    <CallTarget Targets="ugtuTests;ugtu" />
-  </Target>
-  <Target Name="Clean">
-    <CallTarget Targets="ugtuTests:Clean;ugtu:Clean" />
-  </Target>
-  <Target Name="Make">
-    <CallTarget Targets="ugtuTests:Make;ugtu:Make" />
-  </Target>
+    <PropertyGroup>
+        <ProjectGuid>{595f4b79-1ff4-4939-9513-7752da7216df}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ugtuTests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ugtu.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ReportsBaseTests\ReportBaseTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ugtuTests">
+        <MSBuild Projects="ugtuTests.dproj"/>
+    </Target>
+    <Target Name="ugtuTests:Clean">
+        <MSBuild Projects="ugtuTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ugtuTests:Make">
+        <MSBuild Projects="ugtuTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ugtu">
+        <MSBuild Projects="ugtu.dproj"/>
+    </Target>
+    <Target Name="ugtu:Clean">
+        <MSBuild Projects="ugtu.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ugtu:Make">
+        <MSBuild Projects="ugtu.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ReportBaseTests">
+        <MSBuild Projects="ReportsBaseTests\ReportBaseTests.dproj"/>
+    </Target>
+    <Target Name="ReportBaseTests:Clean">
+        <MSBuild Projects="ReportsBaseTests\ReportBaseTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ReportBaseTests:Make">
+        <MSBuild Projects="ReportsBaseTests\ReportBaseTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ugtuTests;ugtu;ReportBaseTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ugtuTests:Clean;ugtu:Clean;ReportBaseTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ugtuTests:Make;ugtu:Make;ReportBaseTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
