@@ -437,10 +437,21 @@ begin
   FProgramName:= '»— "”√“”" ' + TVersionController.GetInstance.CurrentVersion.VersionString;
 
   FDBConnect := TADOConnection.Create(nil);
-  FDBConnect.ConnectionString := 'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;User ID=developer;'+
-                               'Initial Catalog=UGTU;Data Source=ugtudb.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;'+
-                               'Packet Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;Tag with column collation when possible=False;';
-
+  with FDBConnect do
+  begin
+    FDBConnect.ConnectionString := 'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
+        'fo=False;User ID=developer;Initial Catalog=UGTU;Data Source=ugtu' +
+        'db.ugtu.net;Use Procedure for Prepare=1;Auto Translate=True;Pack' +
+        'et Size=4096;Workstation ID=LAB-6;Use Encryption for Data=False;' +
+        'Tag with column collation when possible=False;';
+    CommandTimeout := 300;
+    IsolationLevel := ilReadUncommitted;
+    LoginPrompt := False;
+    Provider := 'SQLOLEDB.1';
+    //AfterConnect := InitAboutParameters;
+    //OnExecuteComplete = DBConnectExecuteComplete;
+    //OnWillExecute = DBConnectWillExecute;
+  end;
 
   SetLength(CurrUser, 512);
   GetProcessUserName(CurrUser);

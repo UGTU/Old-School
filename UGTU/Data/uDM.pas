@@ -21,6 +21,7 @@ type
   end;
 
   Tdm = class(TDataModule, IDBActionPublisher)
+    DBConnect: TADOConnection;
     dsSelVedEkz: TDataSource;
     adospSelVedEkz: TADOStoredProc;
     adodsVidExam: TADODataSet;
@@ -585,16 +586,15 @@ type
 
   private
     { Private declarations }
+    FDBConnect: TADOConnection;
     procedure MethodWorkNewRecordHandler(DataSet: TDataSet);
     function GetMethodWorkDataSet : TADODataSet;
     function GetMethodWorkInNormDataSet : TADODataSet;
     function CalcZaniatHour(aVidSZan: string; PlanStud,CurStud: integer; PlanHours, CurHours: double): double;
-    function GetDBConnect: TADOConnection;
   public
     FDBSubscriberList : TInterfaceList;
     property MethodWorkDataSet : TADODataSet read GetMethodWorkDataSet;
     property MethodWorkInNormDataSet : TADODataSet read GetMethodWorkInNormDataSet;
-    property DBConnect: TADOConnection read GetDBConnect;
     //ServerName: string;
     //DBName: string;
     //LoginName: string;
@@ -691,11 +691,6 @@ var Logger:ILogger;
 begin
 Logger:=TNullLogger.GetInstance;
 Logger.LogMessage('Выполняется запрос: '+CommandText);
-end;
-
-function Tdm.GetDBConnect: TADOConnection;
-begin
-  Result := TApplicationController.GetInstance.DBConnect;
 end;
 
 function Tdm.GetMethodWorkDataSet: TADODataSet;

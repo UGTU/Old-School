@@ -1410,7 +1410,7 @@ begin
   begin
   Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
   end;
-
+  report.Free;
 
 end;
 

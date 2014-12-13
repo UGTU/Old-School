@@ -15,7 +15,7 @@ type
     procedure Save; virtual;
   // function
     constructor Create(source: string); //source - источник данных в БД (можно с инструкцией where)
-    destructor Destroy;
+    destructor Destroy; virtual;
   end;
 
   TBaseCommandController = class
@@ -30,16 +30,36 @@ type
 
 //-----------------наследники---------------------------------------------------------------------------------
 
+  TUchPlanController = class(TBaseSelectController)
+  private
+    FYear: integer;
+    FGroup: integer;
+    procedure SetGroup(const Value: integer);
+    procedure SetYear(const Value: integer);
+    function GetUchPlan: integer;
+  public
+    constructor Create; overload;
+    property Group: integer write SetGroup;
+    property Year: integer write SetYear;
+    property UchPlan: integer read GetUchPlan;
+  end;
+
   TGroupController = class(TBaseSelectController)
   private
     FikGroup: integer;
+    FUchPlans: TUchPlanController;
     procedure SetGroup(const Value: integer);
-    function GetUchPlan: integer;
   public
+    function GetCurrentUchPlan: integer;                      //текущий план
+    function UchPlanByYear(_year: integer):  integer;         //план на конкретный год
     property Group: integer write SetGroup;
-    property UchPlan: integer read GetUchPlan;
+    property UchPlan: integer read GetCurrentUchPlan;
+
     constructor Create; overload;
+    destructor Destroy; override;
   end;
+
+
 
   TBRSVedomostController = class(TBaseCommandController)
   public
@@ -53,7 +73,7 @@ type
 
 implementation
 
-uses {uDMUspevaemost,}GeneralController;
+uses {uDMUspevaemost,}GeneralController,DateUtils;
 
 
 
@@ -97,18 +117,32 @@ end;
 constructor TGroupController.Create;
 begin
   inherited Create('Grup');
-
+  FUchPlans := TUchPlanController.Create;
 end;
 
-function TGroupController.GetUchPlan: integer;
+destructor TGroupController.Destroy;
 begin
-  Result := FDataSet.FieldByName('Ik_uch_plan').AsInteger;
-  if Result = NULL then Result := 0;
+  FUchPlans.Free;
+  inherited;
+end;
+
+function TGroupController.GetCurrentUchPlan: integer;
+begin
+  Result := UchPlanByYear(YearOf(Now));  //берем текущий год
 end;
 
 procedure TGroupController.SetGroup(const Value: integer);
 begin
   SetFilter('ik_grup='+IntToStr(Value));
+  FikGroup := Value;
+  FUchPlans.Group := Value;
+end;
+
+function TGroupController.UchPlanByYear(_year: integer): integer;
+begin
+  FUchPlans.Year := _year;
+  Result := FUchPlans.UchPlan;
+  if Result = NULL then Result := 0;
 end;
 
 { TBaseCommandController }
@@ -147,6 +181,33 @@ begin
     Items[2].Value := nomer_att;
   end;
   Refresh;
+end;
+
+{ TUchPlanController }
+
+constructor TUchPlanController.Create;
+begin
+  inherited Create('UchPlanGrup');
+end;
+
+function TUchPlanController.GetUchPlan: integer;
+begin
+  Result := FDataSet.FieldByName('Ik_uch_plan').AsInteger;
+end;
+
+procedure TUchPlanController.SetGroup(const Value: integer);
+begin
+  FGroup := Value;
+  SetFilter('ik_grup='+IntToStr(Value));
+end;
+
+procedure TUchPlanController.SetYear(const Value: integer);
+var str: string;
+begin
+  str := 'year_value = ' + IntToStr(Value);
+  if FGroup<>0 then
+     str := 'ik_grup = ' + IntToStr(FGroup) + ' and ' + str;
+  SetFilter(str);
 end;
 
 end.

@@ -200,10 +200,6 @@
             <Form>fmNagruzkaFac</Form>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\Presentation\Frames\uNagruzkaDep.pas">
-            <Form>fmNagruzkaDep</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="..\Presentation\dialogs\uNagruzkaAddPrep.pas">
             <Form>frmNagruzkaAddPrep</Form>
         </DCCReference>
@@ -988,6 +984,11 @@
             <Form>DBGridEhRes</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Presentation\Frames\uNagruzkaDep.pas">
+            <Form>fmNagruzkaDep</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

@@ -144,7 +144,7 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 721
         Height = 615
-        ActivePage = TabSheet1
+        ActivePage = tsUspevStat
         Align = alClient
         Constraints.MinWidth = 557
         MultiLine = True
@@ -1171,7 +1171,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 477
+                Height = 475
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1966,7 +1966,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C0101060009007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

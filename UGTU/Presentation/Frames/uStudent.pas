@@ -943,12 +943,14 @@ begin
       5: str := 'пятом';
       6: str := 'шестом';
     end;
-    year_post:=tempStoredProc.FieldByName('zachYear').AsString ;
+  //  year_post:=tempStoredProc.FieldByName('zachYear').AsString ;
     FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cshort_spec').AsString+'-'+year_post[3]+year_post[4]);
+    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_grup').AsString);
     FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
     FindRange := E.Cells.Replace(What := '#birth_y#',Replacement:=tempStoredProc.FieldByName('studBirthYear').AsString);
-    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=tempStoredProc.FieldByName('sprDate').AsString);
+    dop:=tempStoredProc.FieldByName('sprDate').AsString;
+    if (dop.Length=1) then  dop:='0'+dop;
+    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=dop);
     str:=GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
@@ -992,7 +994,7 @@ end;
 
 procedure TfmStudent.actPrintSpravExecute(Sender: TObject);
 var E: Variant;
-    str,dir_inst,copystr1,copystr2:string;
+    str,dir_inst,copystr1,copystr2,dop:string;
     posit:integer;
     FindRange: Variant;
     tempStoredProc: TADOStoredProc;
@@ -1042,9 +1044,11 @@ begin
     FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
     FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
-    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=tempStoredProc.FieldByName('sprDate').AsString);
-    str:= GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);
-    FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
+    dop:=tempStoredProc.FieldByName('sprDate').AsString;
+    if (dop.Length=1) then  dop:='0'+dop;
+    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=dop);
+
+    str:= GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);;
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);

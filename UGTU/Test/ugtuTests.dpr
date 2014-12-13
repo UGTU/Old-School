@@ -54,7 +54,6 @@ uses
   uNagruzkaAddPotok in '..\Presentation\dialogs\uNagruzkaAddPotok.pas' {frmAddPotok},
   uNagruzka in '..\Presentation\Frames\uNagruzka.pas' {fmNagruzkaMain: TFrame},
   uNagruzkaFac in '..\Presentation\Frames\uNagruzkaFac.pas' {fmNagruzkaFac: TFrame},
-  uNagruzkaDep in '..\Presentation\Frames\uNagruzkaDep.pas' {fmNagruzkaDep: TFrame},
   uNagruzkaAddPrep in '..\Presentation\dialogs\uNagruzkaAddPrep.pas' {frmNagruzkaAddPrep},
   uStudInfo in '..\Presentation\dialogs\uStudInfo.pas' {frmStudInfo},
   uNagruzkaAddKaf in '..\Presentation\dialogs\uNagruzkaAddKaf.pas' {frmNagruzkaAddKaf},
@@ -430,7 +429,8 @@ uses
   DBGridEh in '..\Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5\DBGridEh.pas',
   DBGridEhFindDlgs in '..\Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5\DBGridEhFindDlgs.pas' {DBGridEhFindDlg},
   DBGridEhSimpleFilterDlg in '..\Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5\DBGridEhSimpleFilterDlg.pas' {DBGridEhSimpleFilterDialog},
-  DBGridEhToolCtrls in '..\Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5\DBGridEhToolCtrls.pas' {DBGridEhRes: TDataModule};
+  DBGridEhToolCtrls in '..\Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5\DBGridEhToolCtrls.pas' {DBGridEhRes: TDataModule},
+  uNagruzkaDep in '..\Presentation\Frames\uNagruzkaDep.pas' {fmNagruzkaDep: TFrame};
 
 {$R *.RES}
 
