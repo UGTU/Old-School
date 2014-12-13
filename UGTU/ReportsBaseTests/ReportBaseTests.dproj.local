@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.880,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Interfaces\DefImpl\CommonIntfImpl.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.000,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.328,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Utils\ExceptionBase.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.887,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Interfaces\XIntf.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.730,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\VK.png</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.200,C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\Unit1.pas=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\ExcelReportTests.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.156,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Reports\ReportsBase.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.900,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Reports\Barcode.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.987,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Common\RegularEx.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.571,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.817,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Interfaces\CommonIntf.pas</Transaction>
-    <Transaction>2014.12.11 14:43:02.497,C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\VK.png=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.987,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Common\RegularEx.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.887,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Interfaces\XIntf.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.200,C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\ExcelReportTests.pas=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.497,C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\VK.png=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.880,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Interfaces\DefImpl\CommonIntfImpl.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.328,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Utils\ExceptionBase.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.900,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Reports\Barcode.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.571,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.000,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\ReportsBaseTests\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.156,=C:\Users\fmarakasov\Documents\GitHub\Old-School\UGTU\Domain\Reports\ReportsBase.pas</Transaction>
   </Transactions>
 </BorlandProject>
