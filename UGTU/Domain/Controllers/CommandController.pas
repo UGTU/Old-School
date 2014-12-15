@@ -13,6 +13,7 @@ type
   public
     function Refresh: boolean; virtual;
     procedure Save; virtual;
+    procedure Reload(new_source: string);
   // function
     constructor Create(source: string); //source - источник данных в БД (можно с инструкцией where)
     destructor Destroy; virtual;
@@ -61,12 +62,13 @@ type
 
 
 
-  TBRSVedomostController = class(TBaseCommandController)
+  TVedomostController = class(TBaseSelectController)
   public
-    constructor Create(ik_grup, nsem, nomer_att: integer); overload;
+    constructor Create(ik_grup, n_sem: integer); overload;
+    procedure Reload(ik_grup, n_sem: integer);
   end;
 
-  TnoBRSVedomostController = class(TBaseCommandController)
+  TBRSVedomostController = class(TBaseSelectController)
   public
   end;
 
@@ -82,8 +84,7 @@ uses {uDMUspevaemost,}GeneralController,DateUtils;
 constructor TBaseSelectController.Create(source: string);
 begin
   FDataSet := TGeneralController.Instance.GetNewADODataSet(false);
-  FDataSet.CommandText := 'select * from '+source;
-  FDataSet.Open;
+  Reload(source);
 end;
 
 destructor TBaseSelectController.Destroy;
@@ -95,6 +96,13 @@ end;
 function TBaseSelectController.Refresh: boolean;
 begin
   FDataSet.Close;
+  FDataSet.Open;
+end;
+
+procedure TBaseSelectController.Reload(new_source: string);
+begin
+  FDataSet.Close;
+  FDataSet.CommandText := 'select * from '+new_source;
   FDataSet.Open;
 end;
 
@@ -165,22 +173,17 @@ begin
   FStoredProc.Active := true;
 end;
 
-{ TBRSVedomostController }
+{ TVedomostController }
 
-constructor TBRSVedomostController.Create(ik_grup, nsem, nomer_att: integer);
+constructor TVedomostController.Create(ik_grup, n_sem: integer);
 begin
-  inherited Create('GetAllAttestForBRSGrup');
-  with FStoredProc.Parameters do
-  begin
-    Clear;
-    AddParameter;
-    Items[0].Value := ik_grup;
-    AddParameter;
-    Items[1].Value := nsem;
-    AddParameter;
-    Items[2].Value := nomer_att;
-  end;
-  Refresh;
+  inherited Create('UspevGetVidZanyatForVedomost('+ IntToStr(n_sem) + ',' + IntToStr(ik_grup) +')');
+
+end;
+
+procedure TVedomostController.Reload(ik_grup, n_sem: integer);
+begin
+  (Self as TBaseSelectController).Reload();
 end;
 
 { TUchPlanController }

@@ -14,11 +14,14 @@ uses
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, uDMUspevaemost, ComCtrls, DateUtils,
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
-  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014;
+  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014,
+  CommandController;
  type
   PDBGrid = ^TDBGridEh;
   TVedType = (exam,zach,KP,KR);
   TUspevGroupController = class (TObject)
+  private
+    FVedomostController: TVedomostController;
   protected
     constructor CreateInstance;
  //AccessInstance предоставл€ет доступ к экземпл€ру контроллера
@@ -1469,6 +1472,10 @@ end;
 function TUspevGroupController.GetListOfVeds(nSem, ik_group, fac_ik: integer; var havePredms: boolean): boolean;
 begin
     result:= false;
+    if not Assigned(FVedomostController) then
+       FVedomostController := TVedomostController.Create(ik_group, nSem);
+
+
     //загружаем список всех видов зан€тий со всей необх инфой
     GetAllVidZanyats(nSem, ik_group);
     //провер€ем, есть ли вообще какие-то предметы в уч плане
