@@ -204,7 +204,7 @@ unit ReportsBase;
 
 interface
 uses
-  Classes, SysUtils, ExcelXP, Barcode, Contnrs, XIntf, CommonIntf;
+  Classes, SysUtils, ExcelXP, Barcode, Contnrs, XIntf, CommonIntf, Graphics;
 type
   // Исключение при установке шага в построении отчёта
   EProgress = class(Exception);
@@ -435,6 +435,8 @@ type
     // построчно, без учёта регистра, без учёта форматирования
     procedure Replace(textToReplace:string; replaceWith:string);
 
+    procedure InsertGraphics(Graphics: TGraphic; fileExtenstion:string; Row, Col, Width, Height : Integer);
+
 
     procedure Quit;override;
   end;
@@ -455,7 +457,7 @@ type
 
 implementation
 uses
-  Windows, ComObj, Variants, CommonIntfImpl;
+  Windows, ComObj, Variants, CommonIntfImpl, System.IOUtils;
 { TReportBase }
 
 procedure TReportBase.BuildReport;
@@ -979,6 +981,27 @@ begin
     v:=Sheet.OLEObjects(ObjName,0);
   except
     Result:=false;
+  end;
+end;
+
+procedure TExcelReportBase.InsertGraphics(Graphics: TGraphic; fileExtenstion:string; Row, Col, Width, Height : Integer);
+var
+  ImagePath:string;
+  tmpFileName:string;
+  sheet : OleVariant;
+  Pic : OleVariant;
+begin
+  tmpFileName := TPath.GetTempFileName + fileExtenstion;
+  Graphics.SaveToFile(tmpFileName);
+  try
+    sheet := ActiveSheet;
+    pic := sheet.Pictures.Insert(tmpFileName);
+    pic.Left := Items[Row,Col].Left;
+    pic.Top := Items[Row,Col].Top;
+    pic.Width := Width;
+    pic.Height := Height;
+  finally
+    TFile.Delete(tmpFileName);
   end;
 end;
 

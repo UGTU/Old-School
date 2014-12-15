@@ -613,7 +613,7 @@ begin
       dmUspevaemost.adospGetAttVidZan.Next;
       Continue;
     end;
-    //
+    //процедура AppendVedomost
     with dmUspevaemost.adospAppVed.Parameters do
     begin
       Items[1].Value := 1;                                                // создание аттестации

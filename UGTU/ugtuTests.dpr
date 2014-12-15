@@ -534,7 +534,8 @@ uses
   uAcademFrame in 'Presentation\Frames\uAcademFrame.pas' {fmAcadem: TFrame},
   uAddDiscCompetence in 'Presentation\Dialogs\uAddDiscCompetence.pas' {frmAddDiscCompetence},
   uAddDiscRelation in 'Presentation\Dialogs\uAddDiscRelation.pas' {frmAddDiscRelation},
-  uAddDiscStrCompetence in 'Presentation\Dialogs\uAddDiscStrCompetence.pas' {frmAddDiscStrCompetence};
+  uAddDiscStrCompetence in 'Presentation\Dialogs\uAddDiscStrCompetence.pas' {frmAddDiscStrCompetence},
+  ExcelReportTests in 'ReportsBaseTests\ExcelReportTests.pas';
 
 {$R *.RES}
 {$R XML_Res.RES}
