@@ -44,22 +44,22 @@ begin
   Replace('#grup#',FReport.grup);
     Replace('#sem#',inttostr(FReport.num_s));
   Replace('#disc#',FReport.disc);
-  if (FReport.ik_vid_zan=6) then
-      begin
-       Replace('#date_ekz#',DateTimeToStr(FReport.date));
-       Replace('#date_zach#','');
-  end
-  else
- if (FReport.ik_vid_zan=7) then
-      begin
-       Replace('#date_ekz#','');
-       Replace('#date_zach#',DateTimeToStr(FReport.date));
-     end
-      else
-      begin
+//  if (FReport.ik_vid_zan=6) then
+//      begin
+//       Replace('#date_ekz#',DateTimeToStr(FReport.date));
+//       Replace('#date_zach#','');
+//  end
+//  else
+// if (FReport.ik_vid_zan=7) then
+//      begin
+//       Replace('#date_ekz#','');
+//       Replace('#date_zach#',DateTimeToStr(FReport.date));
+//     end
+//      else
+//      begin
       Replace('#date_zach#','');
       Replace('#date_ekz#','');
-      end;
+  //    end;
     dir_inst:=FReport.dir_inst;
     posit:=Pos(' ', dir_inst);
     copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
