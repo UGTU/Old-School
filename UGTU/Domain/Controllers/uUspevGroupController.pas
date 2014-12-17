@@ -613,7 +613,7 @@ begin
       dmUspevaemost.adospGetAttVidZan.Next;
       Continue;
     end;
-    //
+    //процедура AppendVedomost
     with dmUspevaemost.adospAppVed.Parameters do
     begin
       Items[1].Value := 1;                                                // создание аттестации
@@ -1292,8 +1292,8 @@ end;
 
 function TUspevGroupController.CanCreateVnostVed: boolean;
 begin
-  result:= false;
-  if (dmUspevaemost.adospGetAllVidZanyat.Active) then
+  result:= true;
+{  if (dmUspevaemost.adospGetAllVidZanyat.Active) then
   begin
     dmUspevaemost.adospGetAllVidZanyat.First;
     while (not dmUspevaemost.adospGetAllVidZanyat.Eof) do
@@ -1310,7 +1310,8 @@ begin
       end;
       dmUspevaemost.adospGetAllVidZanyat.Next;
     end;
-  end;
+  end;     }
+
 end;
 
 

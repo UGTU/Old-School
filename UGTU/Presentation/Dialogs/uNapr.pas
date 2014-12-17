@@ -267,8 +267,8 @@ end;
 
 procedure TftmNapr.actOKExecute(Sender: TObject);
 begin
-actApplyExecute(Sender);
-close;
+  actApplyExecute(Sender);
+  close;
 
 end;
 

@@ -155,6 +155,7 @@ inherited ftmNapr: TftmNapr
       Left = 179
       Width = 76
       Enabled = False
+      Visible = False
       ExplicitLeft = 179
       ExplicitWidth = 76
     end
