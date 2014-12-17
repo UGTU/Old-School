@@ -61,7 +61,6 @@ type
     adospSelVedKPNumber: TIntegerField;
     dsGetAllPredms: TDataSource;
     adospGetAllPredms: TADOStoredProc;
-    dsGetAllVeds4Group: TDataSource;
     adospGetAllVeds4Group: TADOStoredProc;
     dsSelVedBottom: TDataSource;
     adospSelVedBottom: TADOStoredProc;

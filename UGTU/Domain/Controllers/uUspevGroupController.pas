@@ -22,12 +22,15 @@ uses
   TUspevGroupController = class (TObject)
   private
     FVedomostController: TVedomostController;
+    function GetVedomostController: TVedomostController;
   protected
     constructor CreateInstance;
  //AccessInstance предоставляет доступ к экземпляру контроллера
     class function AccessInstance(Request: Integer):
        TUspevGroupController;
     constructor Create;
+    destructor Destroy; override;
+
   public
 
   //Instance - возвращает экзепляр данного контроллера
@@ -92,7 +95,7 @@ uses
 //закрытие аттестации
   function CloseAtt(ikVed: integer; itab_n: string; lclose : boolean):boolean;
 
-
+  function GetVedomSet: TADODataSet;
 
 
 
@@ -185,9 +188,9 @@ uses
   procedure SetFilterForVidZanyats(CreateEnable, IsCreated, IsDependent: boolean);
 
   //GetListOfVeds Загружает список уже созданных ведомостей при смене семестра,
-//создает недостающие по уч. плану
-//возвращает истина, если в уч. плане есть дисциплины
-  function GetListOfVeds(nSem, ik_group, fac_ik: integer; var havePredms: boolean): boolean;
+  //создает недостающие по уч. плану
+  //возвращает количество созданных ведомостей
+  function GetListOfVeds(nSem, ik_group, fac_ik: integer; var countPredms: integer): integer;
 
   //GetVedsHeader читает заголовок ведомости
   procedure GetVedsHeader(ikVed: integer);
@@ -236,9 +239,6 @@ uses
     ik_group,ik_upContent: integer):boolean;
   //Удаление ведомости
   procedure DelVed(ik_ved: variant);
-
-
-
 
   ///////////Экспорт в Excel аттестации///////////
   procedure PrintAttestation(ikGrup, nSem, nAtt, ikFac: integer; date: string);
@@ -347,7 +347,8 @@ uses
   //getSpecFromSpecFac возвращает IK специальности
   function getSpecFromSpecFac(SpecFacIK: integer): Integer;
 
-
+  //******************Контроллеры (Kim Spark)*****************************************
+  property VedomostController: TVedomostController read GetVedomostController;
                              
 end;
 
@@ -363,11 +364,13 @@ uses CommonIntf, CommonIntfImpl, BRSVedom2014;
 constructor TUspevGroupController.CreateInstance;
 begin
   inherited Create;
+  FVedomostController := TVedomostController.Create;
 end;
 
 constructor TUspevGroupController.Create;
 begin
   inherited Create;
+
   raise Exception.CreateFmt('Доступ к классу %s можно получить только через поле Instance!', [ClassName]);
 end;
 
@@ -378,9 +381,13 @@ begin
   case Request of
     0 : ;
     1 : if not Assigned(FUspevGroupControllerInstance) then
+    begin
       FUspevGroupControllerInstance:= CreateInstance;
+
+    end;
     2 : if FUspevGroupControllerInstance <> nil then
           begin
+
             FUspevGroupControllerInstance.Free;
             FUspevGroupControllerInstance:= nil;
           end;
@@ -395,6 +402,7 @@ end;
 
 class procedure TUspevGroupController.ReleaseInstance;
 begin
+
    AccessInstance(2);
 end;
 
@@ -1258,7 +1266,9 @@ procedure TUspevGroupController.CreateVeds(nSem, ik_group: integer);
 begin
   TApplicationController.GetInstance.AddLogEntry('Создание ведомостей');
 
-  try
+  FVedomostController.Reload(ik_group,nSem);
+  FVedomostController.CreateAllVed;
+ { try
     GetAllVidZanyats(nSem, ik_group);
     //если не созданы независимые ведомости
 	  if CanCreateIndependVeds(nSem, ik_group) then
@@ -1290,7 +1300,9 @@ begin
   except
   on E:Exception do
     raise EApplicationException.Create('Произошла ошибка при создании ведомостей!', E);
-  end;
+  end; }
+  GetAllVeds(nSem, ik_group);
+  GetAllVidZanyats(nSem, ik_group);
 end;
 
 function TUspevGroupController.CanCreateVnostVed: boolean;
@@ -1469,15 +1481,26 @@ end;
 //Загружает список уже созданных ведомостей при смене семестра,
 //создает недостающие по уч. плану
 //возвращает истина, если в уч. плане есть дисциплины
-function TUspevGroupController.GetListOfVeds(nSem, ik_group, fac_ik: integer; var havePredms: boolean): boolean;
+function TUspevGroupController.GetListOfVeds(nSem, ik_group, fac_ik: integer; var countPredms: integer): integer;
 begin
-    result:= false;
-    if not Assigned(FVedomostController) then
-       FVedomostController := TVedomostController.Create(ik_group, nSem);
+
+    with FVedomostController do
+    begin
+      Reload(ik_group, nSem);           //загружаем данные по данному семестру и группе
+      countPredms := ContentCount;      //считаем, сколько вообще есть видов сдачи
+      Result := VedomCount;             //сколько по ним создано ведомостей
+
+
+      if (Result>0)and(countPredms > Result) then   //если ведомости созданы, но не все
+      begin
+        CreateAllVed;         //создаем оставшиеся ведомости
+        Result := VedomCount; //чисто теоретически теперь Result = countPredms
+      end;
+    end;
 
 
     //загружаем список всех видов занятий со всей необх инфой
-    GetAllVidZanyats(nSem, ik_group);
+   { GetAllVidZanyats(nSem, ik_group);
     //проверяем, есть ли вообще какие-то предметы в уч плане
     HavePredms:= ArePredmsInUchPlan(nSem, ik_group);
     // выборка всех СУЩЕСТВУЮЩИХ ведомостей
@@ -1496,9 +1519,9 @@ begin
         //снова загружаем список всех видов занятий со всей необх инфой
         GetAllVidZanyats(nSem, ik_group);
       end;
-    end;
-
-    result:=true;
+    end;    }
+    //GetAllVeds(nSem, ik_group);
+    //GetAllVidZanyats(nSem, ik_group);
 end;
 
 // читает заголовка ведомости
@@ -1808,6 +1831,13 @@ begin
   finally
     tempStoredProc.Free;
   end;
+end;
+
+destructor TUspevGroupController.Destroy;
+begin
+  FVedomostController.Free;
+
+  inherited;
 end;
 
 procedure IncExcelCell(var CellNumber: string);
@@ -2295,6 +2325,13 @@ begin
 end;
 
 //Выборка результаты ведомости (кол-ва 3,4,5)
+
+
+function TUspevGroupController.GetVedomostController: TVedomostController;
+begin
+
+end;
+
 procedure TUspevGroupController.GetVedomsBottom(ik_ved, iK_vid_zanyat: integer);
 begin
 	  dmUspevaemost.adospSelVedBottom.Close;
@@ -2305,6 +2342,11 @@ begin
       CreateParameter('@ik_ved', ftInteger, pdInput, 0, ik_ved);
 	  end;
 	  dmUspevaemost.adospSelVedBottom.Open;
+end;
+
+function TUspevGroupController.GetVedomSet: TADODataSet;
+begin
+  Result := FVedomostController.DataSet;
 end;
 
 //Выбирает cодержимое ведомости с допусками

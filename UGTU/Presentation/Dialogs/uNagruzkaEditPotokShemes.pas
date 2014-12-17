@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh, ADODB, Contnrs,
   DB, DBLookupEh, DBCtrlsEh, Mask, Grids, NagruzkaController, NagruzkaClasses, GeneralController,
-  DBGrids, GridsEh, ImgList, ComCtrls, ToolWin;
+  DBGrids, GridsEh, ImgList, ComCtrls, ToolWin, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type           
 

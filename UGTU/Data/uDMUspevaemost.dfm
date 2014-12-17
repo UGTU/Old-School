@@ -690,11 +690,6 @@ object dmUspevaemost: TdmUspevaemost
     Left = 285
     Top = 267
   end
-  object dsGetAllVeds4Group: TDataSource
-    DataSet = adospGetAllVeds4Group
-    Left = 468
-    Top = 438
-  end
   object adospGetAllVeds4Group: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic

@@ -22,6 +22,10 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
       object tsPlan: TTabSheet
         Caption = #1055#1083#1072#1085' '#1059#1052#1056' '#1082#1072#1092#1077#1076#1088#1099
         ImageIndex = 39
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         DesignSize = (
           918
           415)
@@ -155,6 +159,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               Height = 21
               AlwaysShowBorder = True
               AutoSize = False
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 0
@@ -407,7 +412,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
           object Label43: TLabel
             Left = 206
             Top = 14
-            Width = 80
+            Width = 79
             Height = 13
             Caption = #1058#1080#1087' '#1076#1086#1082#1091#1084#1077#1085#1090#1072':'
           end
@@ -421,7 +426,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
           object Label42: TLabel
             Left = 9
             Top = 15
-            Width = 102
+            Width = 101
             Height = 13
             Caption = #1044#1072#1090#1072' '#1091#1090#1074#1077#1088#1078#1076#1077#1085#1080#1103':'
           end
@@ -434,6 +439,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             AutoSize = False
             BorderStyle = bsNone
             Color = clBtnFace
+            DataField = ''
             Enabled = False
             EditButton.Visible = False
             EditButtons = <>
@@ -456,6 +462,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             AutoSize = False
             BorderStyle = bsNone
             Color = clBtnFace
+            DynProps = <>
             Enabled = False
             EditButton.Visible = False
             EditButtons = <>
@@ -478,6 +485,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             AlwaysShowBorder = True
             BorderStyle = bsNone
             Color = clBtnFace
+            DynProps = <>
             EditButtons = <>
             Enabled = False
             Font.Charset = DEFAULT_CHARSET
@@ -494,6 +502,10 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
       object tsPrepods: TTabSheet
         Caption = #1050#1086#1085#1090#1088#1086#1083#1100' '#1074#1099#1087#1086#1083#1085#1077#1085#1080#1103
         ImageIndex = 67
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -534,6 +546,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Height = 21
             AlwaysShowBorder = True
             AutoSize = False
+            DataField = ''
             EditButtons = <>
             Flat = True
             TabOrder = 0
@@ -558,28 +571,22 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Align = alClient
             AutoFitColWidths = True
             DataSource = DSPrep
+            DynProps = <>
             Flat = True
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
             Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clBlack
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            TitleHeight = 15
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
+            TitleParams.RowHeight = 15
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object Panel21: TPanel
@@ -823,6 +830,10 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
       object TabSheet3: TTabSheet
         Caption = #1055#1083#1072#1085' '#1080#1079#1076#1072#1085#1080#1103' '#1082#1072#1092#1077#1076#1088#1099
         ImageIndex = 23
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar4: TToolBar
           Left = 0
           Top = 0
@@ -875,31 +886,25 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Anchors = [akLeft, akTop, akRight, akBottom]
             AutoFitColWidths = True
             DataSource = dsPlanEdDep
+            DynProps = <>
             Flat = True
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             RowHeight = 5
             RowLines = 2
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clBlack
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            TitleHeight = 15
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
+            TitleParams.RowHeight = 15
             OnTitleClick = dbgPlanDepTitleClick
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
           object dbcbPlanEd: TDBLookupComboboxEh
             Left = 88
@@ -908,6 +913,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Height = 21
             AlwaysShowBorder = True
             AutoSize = False
+            DataField = ''
             EditButtons = <>
             Flat = True
             TabOrder = 1
@@ -930,6 +936,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Height = 21
             AlwaysShowBorder = True
             AutoSize = False
+            DataField = ''
             Enabled = False
             EditButtons = <>
             Flat = True
@@ -1051,6 +1058,10 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
       object TabSheet5: TTabSheet
         Caption = #1060#1072#1082#1090' '#1059#1052#1056' '#1082#1072#1092#1077#1076#1088#1099
         ImageIndex = 6
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar7: TToolBar
           Left = 0
           Top = 0
@@ -1210,32 +1221,26 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Anchors = [akLeft, akTop, akRight, akBottom]
             AutoFitColWidths = True
             DataSource = dsFactDep
+            DynProps = <>
             Flat = True
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
             Font.Name = 'MS Sans Serif'
             Font.Style = []
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             RowHeight = 5
             RowLines = 2
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clBlack
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            TitleHeight = 15
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
+            TitleParams.RowHeight = 15
             OnDrawColumnCell = dbgFactDrawColumnCell
             OnTitleClick = dbgPlanDepTitleClick
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
           object chbFact: TCheckBox
             Left = 88
@@ -1253,6 +1258,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Height = 21
             AlwaysShowBorder = True
             AutoSize = False
+            DataField = ''
             Enabled = False
             EditButtons = <>
             Flat = True
@@ -1267,6 +1273,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Height = 21
             AlwaysShowBorder = True
             AutoSize = False
+            DataField = ''
             Enabled = False
             EditButtons = <>
             Flat = True
@@ -1407,6 +1414,10 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
       object TabSheet1: TTabSheet
         Caption = #1054#1073#1077#1089#1087#1077#1095#1077#1085#1080#1077' '#1079#1072#1085#1103#1090#1080#1081
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
@@ -1460,6 +1471,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               AlwaysShowBorder = True
               AutoSize = False
               Anchors = [akLeft, akTop, akRight]
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 0
@@ -1482,28 +1494,22 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               Align = alClient
               AutoFitColWidths = True
               DataSource = DSWarrant
+              DynProps = <>
               Flat = True
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'MS Sans Serif'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
               Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clBlack
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = []
-              TitleHeight = 15
-              UseMultiTitle = True
+              TitleParams.MultiTitle = True
+              TitleParams.RowHeight = 15
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
             object Panel18: TPanel
               Left = 875
@@ -1687,6 +1693,10 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
         Caption = #1043#1054#1057' '#1085#1072' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1087#1086#1076#1075#1086#1090#1086#1074#1082#1080
         ImageIndex = 70
         TabVisible = False
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar6: TToolBar
           Left = 0
           Top = 0
@@ -1789,7 +1799,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               object Label6: TLabel
                 Left = 69
                 Top = 14
-                Width = 35
+                Width = 34
                 Height = 13
                 Caption = #1055#1091#1085#1082#1090':'
               end
@@ -1800,6 +1810,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
                 Height = 21
                 AlwaysShowBorder = True
                 AutoSize = False
+                DataField = ''
                 EditButtons = <>
                 Flat = True
                 TabOrder = 0
@@ -1875,7 +1886,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               object Label7: TLabel
                 Left = 25
                 Top = 86
-                Width = 79
+                Width = 78
                 Height = 13
                 Caption = #1064#1080#1092#1088' '#1087#1086' '#1043#1054#1057#1091':'
               end
@@ -1896,7 +1907,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               object Label12: TLabel
                 Left = 7
                 Top = 37
-                Width = 97
+                Width = 96
                 Height = 13
                 Caption = #1043#1088#1091#1087#1087#1072' '#1076#1080#1089#1094#1080#1087#1083#1080#1085':'
               end
@@ -1919,6 +1930,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
                 Height = 21
                 AlwaysShowBorder = True
                 AutoSize = False
+                DataField = ''
                 EditButtons = <>
                 Flat = True
                 TabOrder = 0
@@ -1932,6 +1944,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
                 Height = 21
                 AlwaysShowBorder = True
                 AutoSize = False
+                DataField = ''
                 EditButtons = <>
                 Flat = True
                 TabOrder = 1
@@ -1945,6 +1958,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
                 Height = 21
                 AlwaysShowBorder = True
                 AutoSize = False
+                DataField = ''
                 EditButtons = <>
                 Flat = True
                 TabOrder = 2
@@ -1981,6 +1995,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               Height = 21
               AlwaysShowBorder = True
               AutoSize = False
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 0
@@ -1994,6 +2009,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               Height = 21
               AlwaysShowBorder = True
               AutoSize = False
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 1
@@ -2033,7 +2049,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
     Left = 444
     Top = 285
     Bitmap = {
-      494C01011A001C00540010001000FFFFFF00FF10FFFFFFFFFFFFFFFF424D3600
+      494C01011A001C00580010001000FFFFFF00FF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       000000000000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -3092,7 +3108,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
     Left = 615
     Top = 186
     Bitmap = {
-      494C010109000C00540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000C00580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       00000000000000000000000000000000000000000000DE734A00CE734A00CE73
       4A00C66B4200C66B4200BD6B3900BD6B3900B5633900B5633900AD633900AD5A

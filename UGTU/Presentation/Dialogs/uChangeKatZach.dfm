@@ -11,6 +11,7 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     Width = 405
     Height = 114
     ExplicitTop = 2
+    ExplicitWidth = 405
     ExplicitHeight = 227
   end
   object Label2: TLabel [1]
@@ -107,7 +108,7 @@ inherited frmChangeKatZach: TfrmChangeKatZach
   object Label3: TLabel [7]
     Left = 101
     Top = 56
-    Width = 9
+    Width = 4
     Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
@@ -120,6 +121,8 @@ inherited frmChangeKatZach: TfrmChangeKatZach
   inherited Panel1: TPanel
     Top = 114
     Width = 405
+    ExplicitTop = 114
+    ExplicitWidth = 405
     inherited bbOK: TBitBtn
       Left = 229
       Top = 6
@@ -129,6 +132,7 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     inherited bbApply: TBitBtn
       Left = 316
       Visible = False
+      ExplicitLeft = 316
     end
     inherited bbCancel: TBitBtn
       Left = 313
@@ -142,6 +146,7 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     Top = 30
     Width = 225
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_pric'
@@ -156,6 +161,7 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     Top = 30
     Width = 120
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_prikaz'
@@ -170,6 +176,7 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     Top = 75
     Width = 381
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_kat_zach'

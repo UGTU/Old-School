@@ -13,7 +13,7 @@ type
   public
     function Refresh: boolean; virtual;
     procedure Save; virtual;
-    procedure Reload(new_source: string);
+    procedure Reload(new_source: string); virtual;
   // function
     constructor Create(source: string); //source - источник данных в БД (можно с инструкцией where)
     destructor Destroy; virtual;
@@ -63,9 +63,21 @@ type
 
 
   TVedomostController = class(TBaseSelectController)
+  private
+    FIK_Grup: integer;
+    FN_sem: integer;
+    function GetContentCount: integer;
+    function IsAllVedDone: boolean;
+    function GetVedomCount: integer;
   public
-    constructor Create(ik_grup, n_sem: integer); overload;
-    procedure Reload(ik_grup, n_sem: integer);
+    constructor Create; overload;
+    procedure Reload(ik_grup, n_sem: integer); overload;
+    procedure CreateAllVed;
+
+    property ContentCount: integer read GetContentCount;
+    property VedomCount: integer read GetVedomCount;
+    property AllVedDone: boolean read IsAllVedDone;
+    property DataSet: TADODataSet read FDataSet;
   end;
 
   TBRSVedomostController = class(TBaseSelectController)
@@ -75,7 +87,7 @@ type
 
 implementation
 
-uses {uDMUspevaemost,}GeneralController,DateUtils;
+uses {uDMUspevaemost,}GeneralController,DateUtils,uDM;
 
 
 
@@ -175,15 +187,84 @@ end;
 
 { TVedomostController }
 
-constructor TVedomostController.Create(ik_grup, n_sem: integer);
+constructor TVedomostController.Create;
 begin
-  inherited Create('UspevGetVidZanyatForVedomost('+ IntToStr(n_sem) + ',' + IntToStr(ik_grup) +')');
+  inherited Create('UspevGetVidZanyatForVedomost('+ IntToStr(0) + ',' + IntToStr(0) +')');
+end;
 
+procedure TVedomostController.CreateAllVed;
+var FStoredProc: TADOStoredProc;
+    i: integer;
+begin
+
+  FStoredProc := TGeneralController.Instance.GetNewADOStoredProc('UspevInsertVedomost',false);
+  FStoredProc.Connection:= dm.DBConnect;
+  with FStoredProc.Parameters do
+  begin
+    Clear;
+    CreateParameter('@cNumber_ved', ftString, pdInput, 12, '');
+		CreateParameter('@Ik_grup', ftInteger, pdInput, 0, FIK_Grup);
+    CreateParameter('@ik_upContent', ftInteger, pdInput, 0, 0);
+    try
+		   FDataSet.First;
+       for I := 0 to FDataSet.RecordCount-1 do
+       begin
+         if FDataSet.FieldByName('ik_ved').Value=NULL then
+         begin
+           ParamByName('@ik_upContent').Value := FDataSet.FieldByName('ik_upContent').AsInteger;
+           FStoredProc.ExecProc;
+			   end;
+         FDataSet.Next;
+       end;
+    finally
+		  FStoredProc.Free;
+    end;
+  end;
+  Refresh;
+end;
+
+function TVedomostController.GetContentCount: integer;
+begin
+  Result := FDataSet.RecordCount;
+end;
+
+function TVedomostController.GetVedomCount: integer;
+var i: integer;
+begin
+  Result :=0;
+  if FDataSet.RecordCount >0 then
+  begin
+    FDataSet.First;
+    for I := 0 to FDataSet.RecordCount-1 do
+    begin
+      if FDataSet.FieldByName('ik_ved').Value<>NULL then
+        Result := Result + 1;
+      FDataSet.Next;
+    end;
+  end;
+      
+end;
+
+function TVedomostController.IsAllVedDone: boolean;
+var i: integer;
+begin
+  Result := true;
+  for I := 0 to FDataSet.RecordCount-1 do
+  begin
+    if FDataSet.FieldByName('ik_ved').Value = NULL then
+    begin
+      Result := false;
+      break;
+    end;
+    FDataSet.Next;
+  end;
 end;
 
 procedure TVedomostController.Reload(ik_grup, n_sem: integer);
 begin
-  (Self as TBaseSelectController).Reload();
+  inherited Reload('UspevGetVidZanyatForVedomost('+ IntToStr(n_sem) + ',' + IntToStr(ik_grup) +')');
+  FIK_Grup := ik_grup;
+  FN_sem := n_sem;
 end;
 
 { TUchPlanController }

@@ -292,31 +292,26 @@ inherited frmNagruzkaEditPotokShemes: TfrmNagruzkaEditPotokShemes
         Align = alLeft
         AutoFitColWidths = True
         DataSource = dsCalcUnits
+        DynProps = <>
         Flat = True
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'MS Sans Serif'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        UseMultiTitle = True
+        TitleParams.MultiTitle = True
         OnDblClick = dbgCalcUnitsDblClick
         OnKeyDown = dbgCalcUnitsKeyDown
         Columns = <
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'cName_calc_unit'
             Footers = <>
             Title.Caption = #1053#1072#1079#1074#1072#1085#1080#1077
             Width = 106
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
       object Panel9: TPanel
         Left = 530
@@ -400,6 +395,7 @@ inherited frmNagruzkaEditPotokShemes: TfrmNagruzkaEditPotokShemes
       Width = 43
       Height = 19
       AlwaysShowBorder = True
+      DynProps = <>
       EditButtons = <>
       Flat = True
       TabOrder = 1
@@ -413,6 +409,7 @@ inherited frmNagruzkaEditPotokShemes: TfrmNagruzkaEditPotokShemes
       Width = 462
       Height = 19
       AlwaysShowBorder = True
+      DynProps = <>
       EditButtons = <>
       Flat = True
       TabOrder = 2
@@ -425,6 +422,7 @@ inherited frmNagruzkaEditPotokShemes: TfrmNagruzkaEditPotokShemes
       Width = 462
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 3
@@ -491,7 +489,7 @@ inherited frmNagruzkaEditPotokShemes: TfrmNagruzkaEditPotokShemes
     Left = 424
     Top = 64
     Bitmap = {
-      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
