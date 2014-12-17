@@ -608,19 +608,10 @@ begin
   end;
   // Выборка дисциплин в этом семестре из учебного плана
   dbcmbxDisc.KeyValue := -1;
-  //cmbxDate.ItemIndex := -1;
   dmUspevaemost.adodsSelAttGroup.Active := false;
   dmUspevaemost.adodsSelAttBRSGroup.Active := false;
   dmUspevaemost.adodsSelBRSExamGroup.Active := false;
 
-  {with dmUspevaemost.adospPrepodVed do
-  begin
-  Active:=false;
-  Parameters[1].Value:=Ik;
-  Parameters[2].Value:=Null;
-  Parameters[3].Value:=strtoint(cmbxNumber.text);
-  Active:=true;
-  end;}
 
   actPrintBlankAtt.Enabled := false;
   actPrintAtt.Enabled := false;
@@ -628,12 +619,12 @@ begin
 
   if cmbxNumber.Text='Экзамен' then
   begin
-  dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllBRSExam;
-  CheckBRSExamExist;
+    dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllBRSExam;
+    CheckBRSExamExist;
   end
   else
-  if cmbxNumber.Text='Зачет' then
-  begin
+    if cmbxNumber.Text='Зачет' then
+    begin
 
   end else
   begin
@@ -847,9 +838,9 @@ begin
 
   TWaitingController.GetInstance.Process(Report);
 
-  Report.Free;
+ Report.Free;
 
-end;
+  end;
 
 procedure TfmGroup.AttestRefresh();
 begin

@@ -81,6 +81,8 @@ object dm: Tdm
   object adodsVidExam: TADODataSet
     Connection = DBConnect
     CursorType = ctStatic
+    Filter = 'ik_vid_exam<>0'
+    Filtered = True
     CommandText = 'Vid_exam'
     CommandType = cmdTable
     Parameters = <>

@@ -105,7 +105,10 @@ end;
 procedure TftmNapr.dbdteOutChange(Sender: TObject);
 begin
 enumChange(sender);
-dbdteto.Value:=dbdteOut.Value+2;
+if (( DayOfWeek(dbdteOut.Value)=2)or ( DayOfWeek(dbdteOut.Value)=3)) then
+dbdteto.Value:=dbdteOut.Value+4
+else dbdteto.Value:=dbdteOut.Value+5;
+//dbdteto.Value:=dbdteOut.Value+2;
 end;
 
 procedure TftmNapr.FormShow(Sender: TObject);
@@ -264,8 +267,8 @@ end;
 
 procedure TftmNapr.actOKExecute(Sender: TObject);
 begin
-actApplyExecute(Sender);
-close;
+  actApplyExecute(Sender);
+  close;
 
 end;
 
@@ -290,9 +293,9 @@ begin
     Report.FreeOnComplete := true;
     //Report.OnExecuteError := ExecuteError;
     if EmptyNapr then
-      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\emptynapr.XLT'
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr_pust.XLT'
     else
-      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\napr.XLT';
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr.XLT';
     TNaprExcelReport(Report).ik_ved:= ik_ved;
 
     TWaitingController.GetInstance.Process(Report);
@@ -359,53 +362,68 @@ begin
   Replace('#Num#', dmUspevaemost.adospSelNapr.FieldByName('cNumber_ved').AsString);
 
   if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger=6 then
-    Range['p13','p13'].Clear;
+//    Range['p13','p13'].Clear;
+begin
+Replace('#vid_zanyat#','экзамена');
+Replace('#v_z#','экзамена');
+end;
 
   if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger=7 then
-    Range['l13','n13'].Clear;
-
+//    Range['l13','n13'].Clear;
+begin
+Replace('#vid_zanyat#','зачета');
+Replace('#v_z#','зачета');
+end ;
   if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger>7 then
   begin
-    Range['p13','p13'].Clear;
-    Range['l13','n13'].Clear;
+//    Range['p13','p13'].Clear;
+//    Range['l13','n13'].Clear;
+Replace('#vid_zanyat#','курсовой работы(проекта)');
+Replace('#v_z#','КР(П)');
   end;
+
     NextStep(1,'Формирование бланка');
-  Replace('#fac#',
-    dmUspevaemost.adospSelNapr.FieldByName('Cshort_name_fac').AsString);
-  Range['w12','w12'].Value2:= dmUspevaemost.adospSelNapr.FieldByName('cshort_vid_zanyat').AsString +' ('+
-  dmUspevaemost.adospSelNapr.FieldByName('SemHourCount').AsString+' ч.)';
+  Replace('#fac#',dmUspevaemost.adospSelNapr.FieldByName('Cshort_name_fac').AsString);
+  Replace('#dir_ins#',dmUspevaemost.adospSelNapr.FieldByName('dir_name').AsString);
+//  Range['w12','w12'].Value2:= dmUspevaemost.adospSelNapr.FieldByName('cshort_vid_zanyat').AsString +' ('+
+//  dmUspevaemost.adospSelNapr.FieldByName('SemHourCount').AsString+' ч.)';
 
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_form_ed').AsInteger=2 then
-    Range['k6','m6'].Clear
+//    Range['k6','m6'].Clear
+ Replace('#f_obuch#','заочная')
   else
-    Range['n6','o6'].Clear;
+   Replace('#f_obuch#','очная');
+//    Range['n6','o6'].Clear;
 
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=1 then
   begin
-    Range['V8','W8'].Clear;
-    Range['V10','W10'].Clear;
+   Replace('#vid_napr#','первичное');
+//    Range['V8','W8'].Clear;
+//    Range['V10','W10'].Clear;
   end;
     NextStep(1,'Формирование бланка');
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=2 then
   begin
-    Range['V6','W6'].Clear;
-    Range['V10','W10'].Clear;
+    Replace('#vid_napr#','первичное на комиссию');
+//    Range['V6','W6'].Clear;
+//    Range['V10','W10'].Clear;
   end;
 
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=3 then
   begin
-    Range['V6','W6'].Clear;
-    Range['V8','W8'].Clear;
+    Replace('#vid_napr#','вторичное на комиссию');
+//    Range['V6','W6'].Clear;
+//    Range['V8','W8'].Clear;
   end;
 
-    NextStep(1,'Формирование бланка');
-
-  if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=0 then
-  begin
-    Range['V6','W6'].Clear;
-    Range['V8','W8'].Clear;
-    Range['V10','W10'].Clear;
-  end;
+   NextStep(1,'Формирование бланка');
+//
+//  if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger=0 then
+//  begin
+//    Range['V6','W6'].Clear;
+//    Range['V8','W8'].Clear;
+//    Range['V10','W10'].Clear;
+//  end;
 
   if dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger mod 2 = 1 then
     str:= IntToStr(dmUspevaemost.adospSelNapr.FieldByName('n_sem').AsInteger div 2+1)
@@ -420,17 +438,16 @@ begin
 
   Replace('#StudName#',dmUspevaemost.adospSelNapr.FieldByName('NameStud').AsString);
 
-  //Replace('#zach#',dmUspevaemost.adospSelNapr.FieldByName('Nn_zach').AsString);
-  Range['J20','J20'].Value2:=dmUspevaemost.adospSelNapr.FieldByName('Nn_zach').AsString;
-  Replace('#dateVid#',
-    dmUspevaemost.adospSelNapr.FieldByName('dD_vydano').AsString);
+  Replace('#zach#',dmUspevaemost.adospSelNapr.FieldByName('Nn_zach').AsString);
+//  Range['J20','J20'].Value2:=dmUspevaemost.adospSelNapr.FieldByName('Nn_zach').AsString;
+  Replace('#dateVid#',dmUspevaemost.adospSelNapr.FieldByName('dD_vydano').AsString);
 
       NextStep(1,'Формирование бланка');
 
   if dmUspevaemost.adospSelNapr.FieldByName('dD_vydano').AsString <>'' then
   begin
     date:= StrToDate(dmUspevaemost.adospSelNapr.FieldByName('dD_vydano').AsString);
-    date:=date+2;
+    date:=date+4;
     Replace('#dateEnd#',DateToStr(date));
   end
   else

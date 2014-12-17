@@ -3,20 +3,21 @@ inherited ftmNapr: TftmNapr
   Top = 535
   HelpKeyword = 'Given_naprav_stud.htm'
   Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
-  ClientHeight = 231
+  ClientHeight = 283
   ClientWidth = 261
   OldCreateOrder = True
   OnClose = FormClose
   OnShow = FormShow
   ExplicitWidth = 267
-  ExplicitHeight = 260
+  ExplicitHeight = 312
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
     Width = 261
-    Height = 190
+    Height = 242
+    ExplicitTop = 2
     ExplicitWidth = 261
-    ExplicitHeight = 167
+    ExplicitHeight = 242
   end
   object Label1: TLabel [1]
     Left = 10
@@ -33,8 +34,8 @@ inherited ftmNapr: TftmNapr
     Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1100':'
   end
   object Label4: TLabel [3]
-    Left = 134
-    Top = 5
+    Left = 8
+    Top = 124
     Width = 47
     Height = 13
     Caption = #1055#1086#1088#1103#1076#1086#1082':'
@@ -47,22 +48,22 @@ inherited ftmNapr: TftmNapr
     Caption = #1053#1086#1084#1077#1088' '
   end
   object Label7: TLabel [5]
-    Left = 10
-    Top = 122
+    Left = 8
+    Top = 167
     Width = 69
     Height = 13
     Caption = #1044#1072#1090#1072' '#1074#1099#1076#1072#1095#1080':'
   end
   object Label9: TLabel [6]
     Left = 134
-    Top = 122
+    Top = 167
     Width = 97
     Height = 13
     Caption = #1044#1077#1081#1089#1090#1074#1080#1090#1077#1083#1100#1085#1086' '#1076#1086':'
   end
   object Label10: TLabel [7]
-    Left = 80
-    Top = 122
+    Left = 83
+    Top = 167
     Width = 4
     Height = 13
     Caption = '*'
@@ -74,8 +75,8 @@ inherited ftmNapr: TftmNapr
     ParentFont = False
   end
   object Label11: TLabel [8]
-    Left = 232
-    Top = 122
+    Left = 237
+    Top = 167
     Width = 4
     Height = 13
     Caption = '*'
@@ -113,8 +114,8 @@ inherited ftmNapr: TftmNapr
     ParentFont = False
   end
   object Label15: TLabel [11]
-    Left = 181
-    Top = 5
+    Left = 61
+    Top = 123
     Width = 4
     Height = 13
     Caption = '*'
@@ -139,9 +140,9 @@ inherited ftmNapr: TftmNapr
     ParentFont = False
   end
   inherited Panel1: TPanel
-    Top = 190
+    Top = 242
     Width = 261
-    ExplicitTop = 190
+    ExplicitTop = 242
     ExplicitWidth = 261
     inherited bbOK: TBitBtn
       Left = 23
@@ -154,6 +155,7 @@ inherited ftmNapr: TftmNapr
       Left = 179
       Width = 76
       Enabled = False
+      Visible = False
       ExplicitLeft = 179
       ExplicitWidth = 76
     end
@@ -170,8 +172,8 @@ inherited ftmNapr: TftmNapr
     end
   end
   object dbdteOut: TDBDateTimeEditEh [14]
-    Left = 10
-    Top = 138
+    Left = 8
+    Top = 186
     Width = 121
     Height = 19
     DynProps = <>
@@ -183,8 +185,8 @@ inherited ftmNapr: TftmNapr
     OnChange = dbdteOutChange
   end
   object dbdteTo: TDBDateTimeEditEh [15]
-    Left = 135
-    Top = 138
+    Left = 133
+    Top = 186
     Width = 120
     Height = 19
     DynProps = <>
@@ -198,7 +200,7 @@ inherited ftmNapr: TftmNapr
   object eNum: TDBNumberEditEh [16]
     Left = 10
     Top = 21
-    Width = 120
+    Width = 243
     Height = 19
     Alignment = taLeftJustify
     DynProps = <>
@@ -209,9 +211,9 @@ inherited ftmNapr: TftmNapr
     OnChange = eNumChange
   end
   object dbcbeVidExam: TDBLookupComboboxEh [17]
-    Left = 134
-    Top = 21
-    Width = 121
+    Left = 8
+    Top = 142
+    Width = 245
     Height = 19
     DataField = ''
     EditButtons = <>
@@ -256,8 +258,8 @@ inherited ftmNapr: TftmNapr
     OnChange = dbcbeNumChange
   end
   object cbPrintExcel: TCheckBox [20]
-    Left = 10
-    Top = 163
+    Left = 8
+    Top = 211
     Width = 100
     Height = 17
     Caption = #1042#1099#1074#1086#1076' '#1074' Excel'
@@ -266,11 +268,15 @@ inherited ftmNapr: TftmNapr
   end
   object cbBlankNapr: TCheckBox [21]
     Left = 134
-    Top = 163
+    Top = 211
     Width = 119
     Height = 17
     Caption = #1053#1072' '#1075#1086#1090#1086#1074#1099#1081' '#1073#1083#1072#1085#1082
     Enabled = False
     TabOrder = 8
+  end
+  inherited actBaseDialog: TActionList
+    Left = 217
+    Top = 120
   end
 end
