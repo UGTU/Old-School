@@ -426,18 +426,10 @@ begin
   dmUchPlan.adodsUchPlan.CommandText :=
     'select * from Uch_pl where (ik_uch_plan = ' + inttostr(ik) + ')';
   dmUchPlan.adodsUchPlan.open;
-  { if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
-    FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
-    else FIsBRS :=false;
 
-    if FIsBRS then
-    tsAtt.Caption := 'Рубежный контроль'
-    else tsAtt.Caption := 'Аттестация';
-  }
-  //TGeneralController.Instance.InitializeLockupCB(@dbcbVed, 'ik_vid', 'Content_name');
+  //Взять ведомости группы
   dsVed.DataSet := TUspevGroupController.Instance.GetVedomSet;
-  dbcbVed.KeyField := 'ik_ved';
-  dbcbVed.ListField := 'Content_name';
+
 end;
 
 procedure TfmGroup.dbgStudListDblClick(Sender: TObject);
@@ -1028,7 +1020,6 @@ begin
 
     // если ведомости еще не создавались
     if (countVed = 0)
-    // and(TUspevGroupController.Instance.CanCreateIndependVeds(nSem, ik))
       and (MessageBox(Handle,
       'Не создано ни одной ведомости. Создать их сейчас?', 'ИС УГТУ', MB_YESNO)
       = IDYES) then
@@ -1036,19 +1027,6 @@ begin
       TUspevGroupController.Instance.CreateVeds(nSem, ik);
 
   SetVedEnabled;
-
-  { //если не все ведомости зачетной недели созданы
-    //но уже созданы экзаменационные, спрашиваем пользователя
-    //(то есть если после создания экз. ведомостей изменили уч. план)
-    if (not AllZachsCreated) and EkzCreated then
-    begin
-    if MessageBox(Handle, 'Уже сгенерированы экзаменационные ведомости, но еще не все ведомости зачетной недели созданы (согласно учебного плана). Генерировать недостающие ведомости сейчас?',
-    'ИС УГТУ', MB_YESNO)=IDYES then
-    // если согласились - создаём...
-    TUspevGroupController.Instance.DoCreateVeds(nSem, ik, false)
-    else
-    actCreateAllVeds.Enabled :=true;
-    end; }
 
 end;
 
@@ -1067,11 +1045,11 @@ begin
     dmUspevaemost.adospSelVedGroup.open;
     // настраиваем отображение столбцов
     dbgrdVed.Columns[0].Visible := false; // код студента
-    dbgrdVed.Columns[1].Visible := true; // имя
-    dbgrdVed.Columns[2].Visible := true; // кат зачисления
-    dbgrdVed.Columns[3].Visible := true; // номер зачетки
+    dbgrdVed.Columns[1].Visible := true;  // имя
+    dbgrdVed.Columns[2].Visible := true;  // кат зачисления
+    dbgrdVed.Columns[3].Visible := true;  // номер зачетки
     dbgrdVed.Columns[5].Visible := false; // код зачетки
-    dbgrdVed.Columns[7].Visible := true; // оценка
+    dbgrdVed.Columns[7].Visible := true;  // оценка
 
     // назначаем ширину столбцов
     dbgrdVed.Columns[1].Width := 120;
@@ -1083,7 +1061,7 @@ begin
     dbgrdVed.Columns[7].Width := 75;
 
     // отображать допуски (если ведомость зависимая)
-    if dmUspevaemost.adospSelVed.FieldByName('HasDopusk').AsBoolean then
+   { if dmUspevaemost.adospSelVed.FieldByName('HasDopusk').AsBoolean then
     begin
       dbgrdVed.Columns[6].Visible := true;
       dbgrdVed.Columns[6].Width := 75;
@@ -1092,7 +1070,7 @@ begin
     begin
       dbgrdVed.Columns[6].Visible := false;
       dbgrdVed.Columns[6].Width := 0;
-    end;
+    end;     }
 
     // отображать тему (если ведомость для КП или КР)
     if dmUspevaemost.adospSelVed.FieldByName('HasTema').AsBoolean then
@@ -1390,31 +1368,26 @@ end;
 procedure TfmGroup.LoadVedHeader();
 begin
   ikVed := dbcbVed.KeyValue;
-  ikPredm := d//dmUspevaemost.adospGetAllVeds4Group.Fields[2].AsInteger;
-  ikVidZan := //dmUspevaemost.adospGetAllVeds4Group.Fields[3].AsInteger;
-  discName := //dmUspevaemost.adospGetAllVeds4Group.FieldByName
-    ('cName_Disc').AsString;
+  //ikPredm := //dmUspevaemost.adospGetAllVeds4Group.Fields[2].AsInteger;
+  //ikVidZan := //dmUspevaemost.adospGetAllVeds4Group.Fields[3].AsInteger;
+  //discName := //dmUspevaemost.adospGetAllVeds4Group.FieldByName
+  //  ('cName_Disc').AsString;
   // читаем заголовoк ведомости
-  TUspevGroupController.Instance.GetVedsHeader(ikVed);
+  //TUspevGroupController.Instance.GetVedsHeader(ikVed);
 
+  with dbcbVed.ListSource.DataSet do
+  begin
   // записываем считанные данные
-  dbcmbxPrepodVed.KeyValue := dmUspevaemost.adospSelVed.FieldByName
-    ('itab_n').Value;
-  if dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value <> Null then
-    dbdteEx.Value := dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value;
-  if (dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value <> Null) and
-    (dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value <>
-    '            ') then
-    dbeNum.Text := dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value
-  else // lVnosn
-    dbeNum.Text := '';
-  dbcbxClosed.Checked := dmUspevaemost.adospSelVed.FieldByName('lClose')
-    .AsBoolean;
-  // Делаем признак выносного экзамена видимым
-  if dmUspevaemost.adospSelVed.FieldByName('lVnosn').AsBoolean then
-    lVinost.Visible := true
-  else
-    lVinost.Visible := false;
+    dbcmbxPrepodVed.KeyValue := FieldByName('itab_n').Value;
+    if FieldByName('Dd_exam').Value <> Null then
+      dbdteEx.Value := FieldByName('Dd_exam').Value;
+    if (FieldByName('cNumber_ved').Value <> Null) and (FieldByName('cNumber_ved').Value <> '            ') then
+      dbeNum.Text := FieldByName('cNumber_ved').Value
+      else dbeNum.Text := '';
+
+    dbcbxClosed.Checked := FieldByName('lClose').AsBoolean;
+  end;
+
   SetVedEnabled;
 end;
 

@@ -1259,50 +1259,19 @@ begin
 	  end;
 end;
 
-
 //Создает все ведомости
-//(при этом определяет зачетной или экзаменационной недели)
 procedure TUspevGroupController.CreateVeds(nSem, ik_group: integer);
 begin
   TApplicationController.GetInstance.AddLogEntry('Создание ведомостей');
 
   FVedomostController.Reload(ik_group,nSem);
-  FVedomostController.CreateAllVed;
- { try
-    GetAllVidZanyats(nSem, ik_group);
-    //если не созданы независимые ведомости
-	  if CanCreateIndependVeds(nSem, ik_group) then
-		  CreateIndependVeds(nSem, ik_group)
-	  else
-		if (dmUspevaemost.adospGetAllVidZanyat.Active) then
-		begin
-		  dmUspevaemost.adospGetAllVidZanyat.First;
-		  while (not dmUspevaemost.adospGetAllVidZanyat.Eof) do
-		  begin
-			//если есть хотя бы 1 вид занятий, по которому
-			//еще не созданы ведомости, но это можно сделать,
-			//и этот вид занятий зависит от других
-			if (not dmUspevaemost.adospGetAllVidZanyat.FieldByName('IsCreated').AsBoolean) and
-			 (dmUspevaemost.adospGetAllVidZanyat.FieldByName('CreateEnable').AsBoolean) and
-			 (dmUspevaemost.adospGetAllVidZanyat.FieldByName('IsDependent').AsBoolean)  then
-			begin
-			  CreateDependVeds(nSem, ik_group, dmUspevaemost.adospGetAllVidZanyat.FieldByName('ik_vid_zanyat').AsInteger);
-			end;
-			dmUspevaemost.adospGetAllVidZanyat.Next;
-		  end;
-		end
-    else
-      exit;
-    // выборка всех СУЩЕСТВУЮЩИХ ведомостей
-    GetAllVeds(nSem, ik_group);
-    //загружаем (обновляем) список всех видов занятий со всей необх инфой
-    GetAllVidZanyats(nSem, ik_group);
+  try
+    FVedomostController.CreateAllVed;
   except
-  on E:Exception do
-    raise EApplicationException.Create('Произошла ошибка при создании ведомостей!', E);
-  end; }
-  GetAllVeds(nSem, ik_group);
-  GetAllVidZanyats(nSem, ik_group);
+    on E:Exception do
+      raise EApplicationException.Create('Произошла ошибка при создании ведомостей!', E);
+  end;
+
 end;
 
 function TUspevGroupController.CanCreateVnostVed: boolean;

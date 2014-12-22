@@ -60,8 +60,6 @@ type
     destructor Destroy; override;
   end;
 
-
-
   TVedomostController = class(TBaseSelectController)
   private
     FIK_Grup: integer;

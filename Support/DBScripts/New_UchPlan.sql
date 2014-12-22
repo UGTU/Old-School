@@ -160,13 +160,125 @@ END
 GO
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-EXEC sp_rename 'Grup', 'Class';
+ALTER FUNCTION [dbo].[UspevGetVidZanyatForVedomost]
+(
+	@n_sem int, 
+	@Ik_grup int
+)
+RETURNS @Result TABLE
+(
+	ik_vid_zanyat		int NOT NULL,
+	cName_vid_zanyat	VARCHAR(50) NULL,
+	Content_name		varchar(500),
+	ik_upContent		int,
+	ik_ved				int,
+	lClose				bit,
+	Itab_n				varchar(50),
+	Dd_exam				datetime,
+	cNumber_ved			varchar(50)
 
-create VIEW [dbo].[Grup]
+	--CreateEnable		bit not null,	--можно ли создать
+	--IsCreated			bit not null,	--создан
+	--IsDependent			bit  null		--зависит от др. видов зан€тий
+ )
 AS
-SELECT     dbo.Class.Ik_grup,ik_spec_fac,Cname_grup,nYear_post,DateCreate,DateExit,ik_spclz,ik_uch_plan
-FROM       dbo.Class inner join 
-					  dbo.Grup_UchPlan on Grup_UchPlan.ik_grup = dbo.Class.Ik_grup
-					  Where ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = year(GetDate()))
+BEGIN
+
+insert INTO @Result(ik_vid_zanyat, cName_vid_zanyat, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, cNumber_ved)
+SELECT DISTINCT vid_zaniat.ik_vid_zanyat, vid_zaniat.cName_vid_zanyat, discpln.cName_disc + ', ' + cName_vid_zanyat,
+				Content_UchPl.ik_upContent, Vedomost.Ik_ved, Vedomost.lClose, Itab_n, Dd_exam, cNumber_ved
+FROM Grup 
+	inner join Grup_UchPlan on Grup_UchPlan.ik_grup = Grup.Ik_grup
+	inner join sv_disc on sv_disc.ik_uch_plan = Grup_UchPlan.ik_uch_plan
+	inner join  discpln on discpln.iK_disc = sv_disc.ik_disc
+	inner join Content_UchPl on Content_UchPl.ik_disc_uch_plan=sv_disc.ik_disc_uch_plan
+	inner join dbo.vid_zaniat on Content_UchPl.ik_vid_zanyat=vid_zaniat.ik_vid_zanyat
+	inner join dbo.TypeZanyat on TypeZanyat.ikTypeZanyat=vid_zaniat.ikTypeZanyat
+	inner join Year_uch_pl on Grup_UchPlan.ik_year = Year_uch_pl.ik_year_uch_pl
+	left join Vedomost on Vedomost.ik_upContent = Content_UchPl.ik_upContent and Vedomost.Ik_grup = Grup.Ik_grup
+WHERE	Content_UchPl.n_sem=@n_sem AND 
+
+	Grup.Ik_grup=@Ik_grup AND 
+	(TypeZanyat.bitOtchetnost=1) AND
+	(sv_disc.iK_spclz IS NULL OR sv_disc.iK_spclz=Grup.ik_spclz OR Grup.ik_spclz IS NULL) 
+	and year_value = Grup.nYear_post + cast((@n_sem-1)*0.5 as int)  --это определение учебного года на основании семестра
+	and ((Vedomost.lPriznak_napr is null)or(Vedomost.lPriznak_napr=0))
+
+/*DECLARE @ik_vid_zanyat		INT
+DECLARE @cName_vid_zanyat	VARCHAR(50) 
+DECLARE @ik_uch_plan		INT
+DECLARE @ik_upContent       INT
+
+--¬џЅ»–ј≈ћ ¬—≈ виды зан€тий, по которым должны создаватьс€ ведомости
+--и которые есть в учебном плане
+DECLARE VidZanyatCursor CURSOR LOCAL FAST_FORWARD READ_ONLY FOR 
+SELECT DISTINCT vid_zaniat.ik_vid_zanyat, vid_zaniat.cName_vid_zanyat, Grup_UchPlan.ik_uch_plan,Content_UchPl.ik_upContent
+FROM 
+dbo.Content_UchPl, dbo.sv_disc, dbo.Grup, dbo.vid_zaniat, dbo.TypeZanyat,Grup_UchPlan,Year_uch_pl	
+WHERE 
+	Content_UchPl.ik_disc_uch_plan=sv_disc.ik_disc_uch_plan AND
+	Content_UchPl.n_sem=@n_sem AND 
+	Content_UchPl.ik_vid_zanyat=vid_zaniat.ik_vid_zanyat AND 
+	TypeZanyat.ikTypeZanyat=vid_zaniat.ikTypeZanyat AND
+	Grup_UchPlan.ik_grup = Grup.Ik_grup AND
+	Grup_UchPlan.ik_uch_plan=sv_disc.ik_uch_plan AND
+	Grup.Ik_grup=@Ik_grup AND 
+	Grup_UchPlan.ik_year = Year_uch_pl.ik_year_uch_pl AND
+	TypeZanyat.bitOtchetnost=1 AND
+	(sv_disc.iK_spclz IS NULL OR sv_disc.iK_spclz=Grup.ik_spclz OR Grup.ik_spclz IS NULL) 
+	AND n_module IS NULL AND i_balls IS NULL
+	and year_value = Grup.nYear_post + cast((@n_sem-1)*0.5 as int)  --это определение учебного года на основании семестра
+OPEN VidZanyatCursor
+
+FETCH NEXT FROM VidZanyatCursor INTO @ik_vid_zanyat, @cName_vid_zanyat, @ik_uch_plan,@ik_upContent
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+
+ 
+	--провер€ем созданы ли ведомости (в этом случае считаем,что их можно создать не провер€€
+	IF EXISTS(SELECT 'TRUE' FROM dbo.Vedomost, dbo.Content_UchPl, sv_disc, grup 
+				WHERE Content_UchPl.n_sem=@n_sem AND Content_UchPl.ik_vid_zanyat=@ik_vid_zanyat AND
+						Vedomost.Ik_grup=@Ik_grup AND 
+						Vedomost.lPriznak_napr=0 AND --не направление 
+						Vedomost.lVnosn=0 AND --не выносной
+						 --Content_UchPl.n_module is NULL
+						--AND Content_UchPl.i_balls IS NULL AND
+						Vedomost.ik_upContent=Content_UchPl.ik_upContent
+						and Content_UchPl.ik_disc_uch_plan=sv_disc.ik_disc_uch_plan
+						and sv_disc.ik_uch_plan=@ik_uch_plan
+						and grup.ik_grup=@Ik_grup)
+	BEGIN
+		INSERT INTO @Result(ik_vid_zanyat, cName_vid_zanyat, CreateEnable, IsCreated, IsDependent)
+		SELECT @ik_vid_zanyat, @cName_vid_zanyat,1,1, 0
+	END
+
+	ELSE
+	BEGIN
+
+		INSERT INTO @Result(ik_vid_zanyat, cName_vid_zanyat, CreateEnable, IsCreated, IsDependent)
+		SELECT @ik_vid_zanyat, @cName_vid_zanyat,1,
+			--dbo.UspevCanCreateVedForVidZanyat(@n_sem, @Ik_grup, @ik_vid_zanyat), --ѕ–ќ¬≈–я≈ћ, „“ќ все ведомости по тем видам зан€тий, которые согласно правилам должны быть закрыты, чтобы создать данные ведомости, —ќ«ƒјЌџ » «ј –џ“џ
+			0, 0
+	END
+
+	FETCH NEXT FROM VidZanyatCursor INTO @ik_vid_zanyat, @cName_vid_zanyat, @ik_uch_plan,@ik_upContent
+
+END*/
+
+--ѕ–ќ¬≈–я≈ћ, я¬Ћя≈“—я Ћ» ¬»ƒ «јЌя“»… "«ј¬»—»ћџћ" - т.е. ƒЋя —ќ«ƒјЌ»я ¬≈ƒќћќ—“≈… ƒ.Ѕ. 
+--—ќ«ƒјЌџ » «ј –џ“џ ¬≈ƒќћќ—“» ƒ–. ¬»ƒќ¬ «яЌя“»…
+--и чтобы эти виды зан€тий были в уч. плане текущего семестра
+/*UPDATE 	@Result 
+	SET IsDependent=1
+	from  dbo.Grup, dbo.Relation_spec_fac, dbo.UspevRuleContent, @Result as result
+	WHERE  Grup.ik_spec_fac=Relation_spec_fac.ik_spec_fac AND Grup.Ik_grup=@Ik_grup AND
+			Relation_spec_fac.ik_rule=UspevRuleContent.ik_rule AND 
+			UspevRuleContent.ik_dependVid_zanyat=result.ik_vid_zanyat
+			AND UspevRuleContent.ik_Vid_zanyat in (select ik_Vid_zanyat from @Result)*/
+return 
+end
 
 GO
+
+
