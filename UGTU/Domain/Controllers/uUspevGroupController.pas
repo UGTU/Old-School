@@ -196,17 +196,16 @@ uses
   procedure GetVedsHeader(ikVed: integer);
 
 
-  //GetVedsHeader читает данные (оценки) ведомости           
-  function SelectVed(ikVed: integer):Variant;
+  //GetVedsHeader читает данные (оценки) ведомости
+  function SelectVed(ikVed: integer): TADODataSet;
 
   //ApplyUspev Сохраняет данные ведомости (оценки)
   procedure ApplyUspev(ikVed, ikVidZan: integer; dbgrdVed: PDBGrid);
 
 
   //ApplyVed Сохраняет данные ведомости (шапку)
-  procedure ApplyVed(VedNum:string; flag, ik_group,
-  ikVidZan, nSem, ikPredm, ikVidExam: integer;
-  bitClose, bitNapr, bitVnost: boolean; ikPrepod, ikVed, ik_upContent:Variant; DateExam: TDateTime);
+  procedure ApplyVed(VedNum:string; ikVidExam: integer; bitClose, bitNapr:
+                     boolean; ikPrepod: Variant; DateExam: TDateTime);
 
   //OpenVed Открывает ведомость
   function OpenVed(ikVed: integer):boolean;
@@ -1102,9 +1101,11 @@ end;
 //(то есть закрыта она или нет)
 function TUspevGroupController.GetVedChangeEnabled():boolean;
 begin
-  result:= false;
+  Result := FVedomostController.IsOpened;
+
+  {result:= false;
   if dmUspevaemost.adospSelVed.Active then
-    result:= not dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean;
+    result:= not dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean; }
 end;
 
 
@@ -1509,17 +1510,19 @@ begin
 end;
 
 // читает данные (оценки) ведомости
-function TUspevGroupController.SelectVed(ikVed: integer):Variant;
+function TUspevGroupController.SelectVed(ikVed: integer): TADODataSet;
 begin
   try
-    Result:= TGeneralController.Instance.getDataSetValues(@dmUspevaemost.adospSelVedGroup, 'select * from GetSmallVedForGrup('+IntToStr(ikVed)+')', 'ik_zach', false, NULL);
+    //Result:= TGeneralController.Instance.getDataSetValues(@dmUspevaemost.adospSelVedGroup, 'select * from GetSmallVedForGrup('+IntToStr(ikVed)+')', 'ik_zach', false, NULL);
+    FVedomostController.Vedomost := ikVed;
+    Result := FVedomostController.UspevDataSet;
   except
-  on E:Exception do
-  begin
-    raise EApplicationException.Create('Произошла ошибка при загрузке ведомости.',E);
-    Result:= null;
-    exit;
-  end;
+    on E:Exception do
+    begin
+      raise EApplicationException.Create('Произошла ошибка при загрузке ведомости.',E);
+      Result := nil;
+      exit;
+    end;
   end;
 end;
 
@@ -1528,8 +1531,9 @@ procedure TUspevGroupController.ApplyUspev(ikVed, ikVidZan: integer; dbgrdVed: P
 var
   FindRange: Variant;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Сохранение оценок и тем курсовых.');
-  dmUspevaemost.adospSelVedGroup.DisableControls;
+  //TApplicationController.GetInstance.AddLogEntry('Сохранение оценок и тем курсовых.');
+  //FVedomostController.Save;
+  {dmUspevaemost.adospSelVedGroup.DisableControls;
   try
     dmUspevaemost.adospSelVedGroup.First;
 		while not dmUspevaemost.adospSelVedGroup.Eof do
@@ -1572,16 +1576,18 @@ begin
 		end;
   finally
     dmUspevaemost.adospSelVedGroup.EnableControls;
-  end;
+  end;}
 end;
 
 //Сохраняет данные ведомости (шапку)
-procedure TUspevGroupController.ApplyVed(VedNum:string; flag, ik_group,
-  ikVidZan, nSem, ikPredm, ikVidExam: integer;
-  bitClose, bitNapr, bitVnost: boolean; ikPrepod, ikVed, ik_upContent:Variant; DateExam: TDateTime);
+procedure TUspevGroupController.ApplyVed(VedNum:string; ikVidExam: integer;
+  bitClose, bitNapr: boolean; ikPrepod: Variant; DateExam: TDateTime);
 begin
   TApplicationController.GetInstance.AddLogEntry('Сохрание данных ведомости');
-	  with dmUspevaemost.adospAppVed.Parameters do
+
+  FVedomostController.Save(ikVidExam,VedNum,ikPrepod,DateExam,bitClose,bitNapr);
+
+	{  with dmUspevaemost.adospAppVed.Parameters do
 	  begin
       Clear;
       CreateParameter('@flag', ftInteger, pdInput, 0, flag);
@@ -1600,7 +1606,7 @@ begin
       CreateParameter('@lVnosn', ftBoolean, pdInput, 0, bitVnost);    // выносной экз
       CreateParameter('@ik_upContent', ftInteger, pdInput, 0, ik_upContent);
 	  end;
-	  dmUspevaemost.adospAppVed.ExecProc;
+	  dmUspevaemost.adospAppVed.ExecProc;             }
 end;
 
 //Открывает ведомость

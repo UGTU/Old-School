@@ -175,7 +175,8 @@ RETURNS @Result TABLE
 	lClose				bit,
 	Itab_n				varchar(50),
 	Dd_exam				datetime,
-	cNumber_ved			varchar(50)
+	cNumber_ved			varchar(50),
+	HasTema				bit
 
 	--CreateEnable		bit not null,	--можно ли создать
 	--IsCreated			bit not null,	--создан
@@ -184,9 +185,9 @@ RETURNS @Result TABLE
 AS
 BEGIN
 
-insert INTO @Result(ik_vid_zanyat, cName_vid_zanyat, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, cNumber_ved)
+insert INTO @Result(ik_vid_zanyat, cName_vid_zanyat, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, cNumber_ved, HasTema)
 SELECT DISTINCT vid_zaniat.ik_vid_zanyat, vid_zaniat.cName_vid_zanyat, discpln.cName_disc + ', ' + cName_vid_zanyat,
-				Content_UchPl.ik_upContent, Vedomost.Ik_ved, Vedomost.lClose, Itab_n, Dd_exam, cNumber_ved
+				Content_UchPl.ik_upContent, Vedomost.Ik_ved, Vedomost.lClose, Itab_n, Dd_exam, cNumber_ved, lTema
 FROM Grup 
 	inner join Grup_UchPlan on Grup_UchPlan.ik_grup = Grup.Ik_grup
 	inner join sv_disc on sv_disc.ik_uch_plan = Grup_UchPlan.ik_uch_plan
@@ -281,4 +282,31 @@ end
 
 GO
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+alter PROCEDURE [dbo].[AppendVedomost]
+@flag INT, 
+@Ik_ved INT,						--код ведомости		
+@cNumber_ved varchar(12) = NULL,	--номер (обозначение) ведомости
+@Itab_n varchar(50) = NULL,			--код препода
+@Ik_vid_exam INT = NULL,			--вид экзамена (первичный, вторичный)
+@Dd_exam DATETIME = NULL,			--дата экзамена
+@lClose BIT=0,
+@lPriznak_napr BIT = NULL			--признак направления
 
+AS
+  IF @flag=-1  --удаление ведомости
+  BEGIN
+	DELETE FROM Vedomost
+	WHERE Ik_ved = @Ik_ved
+  END
+
+  IF @flag=0  --редактирование ведомости
+  BEGIN
+		UPDATE Vedomost 
+		SET cNumber_ved = @cNumber_ved, Itab_n = @Itab_n, Ik_vid_exam = @Ik_vid_exam, 
+			Dd_exam = @Dd_exam, lPriznak_napr = @lPriznak_napr, lClose = @lClose
+		WHERE Ik_ved = @Ik_ved
+  END
+
+
+GO

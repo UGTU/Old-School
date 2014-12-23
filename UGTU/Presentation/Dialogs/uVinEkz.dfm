@@ -49,6 +49,7 @@ inherited frmVinEkz: TfrmVinEkz
     Width = 299
     Height = 19
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_disc'

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, StdCtrls, Mask, DBCtrlsEh, DBLookupEh,
-  ActnList, Buttons, ExtCtrls, uUspevGroupController;
+  ActnList, Buttons, ExtCtrls, uUspevGroupController, System.Actions;
 
 type
   TfrmVinEkz = class(TfrmBaseDialog)
@@ -55,7 +55,7 @@ end;
 
 function TfrmVinEkz.DoApply: Boolean;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Создание выносной ведомости '+dbcbExamList.Text);
+ { TApplicationController.GetInstance.AddLogEntry('Создание выносной ведомости '+dbcbExamList.Text);
   //создаем выносную ведомость
   try
 
@@ -67,7 +67,7 @@ begin
     MessageBox(Handle, 'При создании ведомости произошла ошибка.','ИС "УГТУ"',
           MB_OK) ;
 
-  end;
+  end;       }
 end;
 
 function TfrmVinEkz.DoCancel: Boolean;

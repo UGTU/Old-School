@@ -205,6 +205,7 @@ type
     ToolButton26: TToolButton;
     actRefreshVedStuds: TAction;
     dsVed: TDataSource;
+    dsUspev: TDataSource;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -427,7 +428,7 @@ begin
     'select * from Uch_pl where (ik_uch_plan = ' + inttostr(ik) + ')';
   dmUchPlan.adodsUchPlan.open;
 
-  //Взять ведомости группы
+  // Взять ведомости группы
   dsVed.DataSet := TUspevGroupController.Instance.GetVedomSet;
 
 end;
@@ -1019,10 +1020,9 @@ begin
   else // и в уч плане есть предметы
 
     // если ведомости еще не создавались
-    if (countVed = 0)
-      and (MessageBox(Handle,
-      'Не создано ни одной ведомости. Создать их сейчас?', 'ИС УГТУ', MB_YESNO)
-      = IDYES) then
+    if (countVed = 0) and
+      (MessageBox(Handle, 'Не создано ни одной ведомости. Создать их сейчас?',
+      'ИС УГТУ', MB_YESNO) = IDYES) then
       // если согласились создавать - создаём...
       TUspevGroupController.Instance.CreateVeds(nSem, ik);
 
@@ -1038,42 +1038,30 @@ begin
   // вкладка ведомости
   if pcMain.ActivePage = tsVed then
   begin
-    // вывод имеющихся оценок
-    TUspevGroupController.Instance.SelectVed(ikVed);
+    // загрузка имеющихся оценок
+    dsUspev.DataSet := TUspevGroupController.Instance.SelectVed(ikVed);
 
-    dmUspevaemost.adospSelVedGroup.close;
-    dmUspevaemost.adospSelVedGroup.open;
+    // dmUspevaemost.adospSelVedGroup.close;
+    // dmUspevaemost.adospSelVedGroup.open;
     // настраиваем отображение столбцов
     dbgrdVed.Columns[0].Visible := false; // код студента
-    dbgrdVed.Columns[1].Visible := true;  // имя
-    dbgrdVed.Columns[2].Visible := true;  // кат зачисления
-    dbgrdVed.Columns[3].Visible := true;  // номер зачетки
+    dbgrdVed.Columns[1].Visible := true; // имя
+    dbgrdVed.Columns[2].Visible := true; // кат зачисления
+    dbgrdVed.Columns[3].Visible := true; // номер зачетки
+
     dbgrdVed.Columns[5].Visible := false; // код зачетки
-    dbgrdVed.Columns[7].Visible := true;  // оценка
+    dbgrdVed.Columns[6].Visible := false; // допуск
+    dbgrdVed.Columns[7].Visible := true; // оценка
 
     // назначаем ширину столбцов
     dbgrdVed.Columns[1].Width := 120;
     dbgrdVed.Columns[2].Width := 20;
     dbgrdVed.Columns[3].Width := 75;
-    // dbgrdVed.Columns[4].Width := 400;
     dbgrdVed.Columns[5].Width := 0;
-    // dbgrdVed.Columns[6].Width := 0;
     dbgrdVed.Columns[7].Width := 75;
 
-    // отображать допуски (если ведомость зависимая)
-   { if dmUspevaemost.adospSelVed.FieldByName('HasDopusk').AsBoolean then
-    begin
-      dbgrdVed.Columns[6].Visible := true;
-      dbgrdVed.Columns[6].Width := 75;
-    end
-    else
-    begin
-      dbgrdVed.Columns[6].Visible := false;
-      dbgrdVed.Columns[6].Width := 0;
-    end;     }
-
     // отображать тему (если ведомость для КП или КР)
-    if dmUspevaemost.adospSelVed.FieldByName('HasTema').AsBoolean then
+    if dsVed.DataSet.FieldByName('HasTema').AsBoolean then
     begin
       dbgrdVed.Columns[4].Visible := true;
       dbgrdVed.Columns[4].Width := 400;
@@ -1368,22 +1356,24 @@ end;
 procedure TfmGroup.LoadVedHeader();
 begin
   ikVed := dbcbVed.KeyValue;
-  //ikPredm := //dmUspevaemost.adospGetAllVeds4Group.Fields[2].AsInteger;
-  //ikVidZan := //dmUspevaemost.adospGetAllVeds4Group.Fields[3].AsInteger;
-  //discName := //dmUspevaemost.adospGetAllVeds4Group.FieldByName
-  //  ('cName_Disc').AsString;
+  // ikPredm := //dmUspevaemost.adospGetAllVeds4Group.Fields[2].AsInteger;
+  // ikVidZan := //dmUspevaemost.adospGetAllVeds4Group.Fields[3].AsInteger;
+  // discName := //dmUspevaemost.adospGetAllVeds4Group.FieldByName
+  // ('cName_Disc').AsString;
   // читаем заголовoк ведомости
-  //TUspevGroupController.Instance.GetVedsHeader(ikVed);
+  // TUspevGroupController.Instance.GetVedsHeader(ikVed);
 
   with dbcbVed.ListSource.DataSet do
   begin
-  // записываем считанные данные
+    // записываем считанные данные
     dbcmbxPrepodVed.KeyValue := FieldByName('itab_n').Value;
     if FieldByName('Dd_exam').Value <> Null then
       dbdteEx.Value := FieldByName('Dd_exam').Value;
-    if (FieldByName('cNumber_ved').Value <> Null) and (FieldByName('cNumber_ved').Value <> '            ') then
+    if (FieldByName('cNumber_ved').Value <> Null) and
+      (FieldByName('cNumber_ved').Value <> '            ') then
       dbeNum.Text := FieldByName('cNumber_ved').Value
-      else dbeNum.Text := '';
+    else
+      dbeNum.Text := '';
 
     dbcbxClosed.Checked := FieldByName('lClose').AsBoolean;
   end;
@@ -1446,8 +1436,8 @@ begin
   btnSaveVed.Enabled := flEnabled;
   btnCancelVed.Enabled := flEnabled;
   // возможность открыть/закрыть ведомость
-  flClosedEnabled := TUspevGroupController.Instance.GetVedChangeOpenEnabled;
-  dbcbxClosed.Enabled := flClosedEnabled;
+  // flClosedEnabled := TUspevGroupController.Instance.GetVedChangeOpenEnabled;
+  // dbcbxClosed.Enabled := flClosedEnabled;
 
 end;
 
@@ -1494,9 +1484,10 @@ end;
 
 procedure TfmGroup.dbcbVedChange(Sender: TObject);
 begin
-  inherited;
+  // inherited;
   { if dbcbVed.KeyValue= ikVed then  //перехода не было
     exit; }
+
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Выбор ведомости ' +
     dbcbVed.Text);
 
@@ -1512,8 +1503,8 @@ begin
   if dbcbVed.Text = '' then
   begin
     // dmUspevaemost.adospGetAllVeds4Group.Close;
-    dmUspevaemost.adospSelVed.close;
-    dmUspevaemost.adospSelVedGroup.close;
+    // dmUspevaemost.adospSelVed.close;
+    // dmUspevaemost.adospSelVedGroup.close;
     dbcmbxPrepodVed.Value := Null;
     dbdteEx.Value := Null;
     SetVedEnabled;
@@ -1776,7 +1767,7 @@ begin
           'ИС УГТУ', MB_YESNO) = IDYES then // dialog
         begin
           if not TUspevGroupController.Instance.OpenVed(ikVed) then
-          // openVedAtt
+            // openVedAtt
             MessageBox(Handle, 'При открытии ведомости произошла ошибка.',
               'ИС УГТУ', MB_OK)
         end
@@ -1885,13 +1876,13 @@ end;
 
 function TfmGroup.CheckOcenka(Value: Integer): string;
 begin
-  if (dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean) then
+  if (dsVed.DataSet.FieldByName('lClose').AsBoolean) then
     MessageBox(Handle, 'Нельзя редактировать закрытую ведомость!',
       'ИС УГТУ', MB_OK);
 
   if (dbgrdVed.Fields[1].Value = Null) or (dbgrdVed.Fields[1].Text = '') or
-    (not dmUspevaemost.adospSelVedGroup.FieldByName('dopusc').AsBoolean) or
-    (dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean) then
+    (not dsUspev.DataSet.FieldByName('dopusc').AsBoolean) or
+    (dsVed.DataSet.FieldByName('lClose').AsBoolean) then
   begin
     result := '';
     Exit;
@@ -1929,7 +1920,7 @@ begin
     Text := '';
   end;
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Ввод оценки ' +
-    dmUspevaemost.adospSelVedGroup.FieldByName('StudName').AsString + Text);
+    dsUspev.DataSet.FieldByName('StudName').AsString + Text);
 end;
 
 procedure TfmGroup.dbgrdVedDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -1939,14 +1930,14 @@ var
   // medalBall:integer;
 begin
 
-  if dbgrdVed.DataSource.DataSet.FieldByName('ik_zach').AsInteger = Null then
+  if dsUspev.DataSet.FieldByName('ik_zach').AsInteger = Null then
     Exit;
   if (gdSelected in State) and (dbgrdVed.Focused) then
     Exit;
   canvas := (Sender as TDBGridEh).canvas;
 
   // если студент сдал отчетность, закрашиваем в зеленный цвет
-  if (dmUspevaemost.adospSelVedGroup.FieldByName('IsPassed').AsBoolean) then
+  if (dsUspev.DataSet.FieldByName('IsPassed').AsBoolean) then
   begin
     SetColor(canvas, Rect, Column.Field.DisplayText, $007BDDBD, clInfoText);
     // $00C6C6FF
@@ -1970,35 +1961,39 @@ begin
   mark := ['0' .. '9'];
   if not(Key in mark) then
     Exit;
-  if (not dmUspevaemost.adospSelVed.Active) or
-    (not dmUspevaemost.adospSelVedGroup.Active) or
-    (dmUspevaemost.adospSelVedGroup.RecNo >=
-    dmUspevaemost.adospSelVedGroup.RecordCount) or
+  if (not dsVed.DataSet.Active) or
+    (not dsUspev.DataSet.Active) or
+    (dsUspev.DataSet.RecNo >=
+    dsUspev.DataSet.RecordCount) or
     (dbgrdVed.SelectedField.FieldName <> 'Cosenca') then
     Exit;
 
   // try
-  dmUspevaemost.adospSelVedGroup.Edit;
+  dsUspev.DataSet.Edit;
   try
     Text := CheckOcenka(StrToInt(Key));
   except
     Text := '';
   end;
+
+ // dbgrdVed.Columns[7]. := Text;
   dbgrdVed.Columns[7].SetValueAsText(Text);
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Ввод оценки ' +
-    dmUspevaemost.adospSelVedGroup.FieldByName('StudName').AsString + Text);
+    dsUspev.DataSet.FieldByName('StudName').AsString + Text);
   // if (dmUspevaemost.adospSelVedGroup.RecNo<
   // dmUspevaemost.adospSelVedGroup.RecordCount) then
   // dmUspevaemost.adospSelVedGroup.Post;
-  dmUspevaemost.adospSelVedGroup.Next;
+  dsUspev.DataSet.Next;
   Key := ' ';
+  Modified := true;
   // except
   // end;
 end;
 
 procedure TfmGroup.dbgrdVedTitleClick(Column: TColumnEh);
 begin
-  dmUspevaemost.adospSelVedGroup.Sort := Column.Field.DisplayName;
+  //dmUspevaemost.adospSelVedGroup.Sort := Column.Field.DisplayName;
+  (dsUspev.DataSet as TADODataSet).Sort := Column.Field.DisplayName;
 end;
 
 procedure TfmGroup.dbgDiplomCellClick(Column: TColumnEh);
@@ -2800,9 +2795,9 @@ begin
   if pcMain.ActivePage = tsVed then
   begin
     // если ведомость закрыта, все изменения отменить
-    if not dmUspevaemost.adospSelVed.Active then
+    if not dsVed.DataSet.Active then
       Exit;
-    if dmUspevaemost.adospSelVed.FieldByName('lClose').Value = true then
+    if dsVed.DataSet.FieldByName('lClose').Value = true then
     begin
       MessageBox(Handle,
         'Невозможно сохранить ведомость, так как она уже закрыта.',
@@ -2827,49 +2822,15 @@ begin
       Exit;
     end;
 
+    //СОХРАНЕНИЕ ВЕДОМОСТИ И ЕЕ УСПЕВАЕМОСТИ
     TApplicationController.GetInstance.AddLogEntry('Сохранение ведомости ' +
       dbcbVed.Text);
-    // начинаем транзакцию - сохранение оценок и заголовка ведомости
-    dmUspevaemost.adospCheckVedClose.Connection.BeginTrans;
-    try
-      try
-        Modified := false;
-        // Сохраняем оценки ведомости
-        TUspevGroupController.Instance.ApplyUspev(ikVed, ikVidZan, @dbgrdVed);
-        // сохраняем заголовок ведомости
-        TUspevGroupController.Instance.ApplyVed(dbeNum.Text, 0,
-          TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik,
-          ikVidZan, nSem, ikPredm, 0, dbcbxClosed.Checked, false, false,
-          dbcmbxPrepodVed.KeyValue, ikVed,
-          dmUspevaemost.adospGetAllVeds4Group.FieldByName('ik_upContent').Value,
-          StrToDate(dbdteEx.Text));
-        // завершаем транзакцию, если все нормально
-        dmUspevaemost.adospCheckVedClose.Connection.CommitTrans;
-      except
-        TApplicationController.GetInstance.AddLogEntry
-          ('Ошибка при сохранении ведомости');
-        dmUspevaemost.adospCheckVedClose.Connection.RollbackTrans;
-        raise;
-      end;
-    finally
-      // обновляем ведомость в любом случае
-      dbcbVedChange(nil);
-      // загружаем список всех видов занятий со всей необх инфой
-      TUspevGroupController.Instance.GetAllVidZanyats(nSem, ik);
+    TUspevGroupController.Instance.ApplyVed(dbeNum.Text, 0, dbcbxClosed.Checked, false,
+          dbcmbxPrepodVed.KeyValue, StrToDate(dbdteEx.Text));
 
-    end;
-
-    // если  ведомость закрыта, проверяем, может можно создать
-    // ведомости для зависимых видов занятий
-    if dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean then
-    begin
-      str := TUspevGroupController.Instance.GetEnableVidZanyats(nSem, ik,
-        ikVidZan);
-      if str <> '' then
-      begin // можно создавать экзаменационные
-        MessageBox(Handle, PWideChar(str), 'ИС УГТУ', MB_OK);
-      end;
-    end;
+   // dbcbVedChange(nil);
+    // загружаем список всех видов занятий со всей необх инфой
+   // TUspevGroupController.Instance.GetAllVidZanyats(nSem, ik);
   end;
 
   // закладка "рубежные испытания"
