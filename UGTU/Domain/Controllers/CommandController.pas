@@ -26,6 +26,7 @@ type
     constructor Create(source: string);
     // source - источник данных в БД (можно с инструкцией where)
     destructor Destroy; virtual;
+    property DataSet: TADODataSet read FDataSet;
   end;
 
 
@@ -121,8 +122,28 @@ type
     property Vedomost: integer write SetVedomost;
     property IsOpened: boolean read GetIsOpened;
 
-    property DataSet: TADODataSet read FDataSet;
+
     property UspevDataSet: TADODataSet read GetUspevDataSet;
+  end;
+
+  TContentNapravController = class(TBaseSelectController)
+  public
+    constructor Create;
+    procedure Reload(ik_studGrup: integer); overload;
+  end;
+
+  TNapravController = class(TBaseSelectController)
+  private
+    FStud: integer;
+    FSemester: integer;
+    FContentNapr: TContentNapravController;
+    procedure SetSemester(const Value: integer);
+  public
+    constructor Create;
+    procedure Reload(ik_studGrup: integer); overload;
+
+    property Semester: integer write SetSemester;
+
   end;
 
   TBRSVedomostController = class(TBaseSelectController)
@@ -535,6 +556,35 @@ begin
     ParamByName('@lPriznak_napr').Value := bitNapr;
     FStor.ExecProc;
   end;
+end;
+
+{ TNapravController }
+
+constructor TNapravController.Create;
+begin
+  inherited Create('GetNapravlInfo(' + IntToStr(0) + ')');
+  FContentNapr := TContentNapravController.Create;
+end;
+
+procedure TNapravController.Reload(ik_studGrup: integer);
+begin
+  inherited Reload('GetNapravlInfo(' + IntToStr(ik_studGrup) + ')');
+  FStud := ik_studGrup;
+  FContentNapr.Reload(ik_studGrup);
+end;
+
+procedure TNapravController.SetSemester(const Value: integer);
+var filter: string;
+begin
+  SetFilter('n_sem='+IntToStr(Value));
+  FSemester := Value;
+end;
+
+{ TContentNapravController }
+
+constructor TContentNapravController.Create;
+begin
+  inherited Create('GetStudNaprav(' + IntToStr(0) + ')');
 end;
 
 end.

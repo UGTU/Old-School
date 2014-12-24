@@ -87,7 +87,8 @@ FROM         dbo.Grup INNER JOIN
                       dbo.Relation_spec_fac ON dbo.Grup.ik_spec_fac = dbo.Relation_spec_fac.ik_spec_fac INNER JOIN
                       dbo.Spec_stud ON dbo.Relation_spec_fac.ik_spec = dbo.Spec_stud.ik_spec inner join 
 					  dbo.Grup_UchPlan on Grup_UchPlan.ik_grup = dbo.Grup.Ik_grup
-					  Where ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = year(GetDate()))
+					  Where (ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = year(GetDate())))
+					  or ((dbo.Grup.DateExit<GetDate())and(ik_year =(select ik_year_uch_pl from Year_uch_pl where year_value = year(dbo.Grup.DateExit)-1)))
 
 ORDER BY dbo.Grup.nYear_post
 
@@ -310,3 +311,96 @@ AS
 
 
 GO
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+create FUNCTION [dbo].[GetNapravlInfo]
+(
+	@ik_studGrup int
+)
+RETURNS @Result TABLE
+(
+	n_sem				int NOT NULL,
+	Content_name		varchar(500),
+	ik_upContent		int,
+	ik_ved				int,
+	lClose				bit,
+	Itab_n				varchar(50),
+	Dd_exam				datetime,
+	dD_vydano			datetime,
+	cNumber_ved			varchar(50)
+ )
+AS
+BEGIN
+  insert INTO @Result(n_sem, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved)
+  SELECT n_sem, discpln.cName_disc + ', ' + vid_zaniat.cName_vid_zanyat, Content_UchPl.ik_upContent, Vedomost.Ik_ved,
+		 lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved
+  from StudGrup 
+  inner join Grup on Grup.Ik_grup = StudGrup.Ik_grup
+  inner join Grup_UchPlan on Grup.Ik_grup = Grup_UchPlan.Ik_grup
+  inner join Year_uch_pl on Year_uch_pl.ik_year_uch_pl = Grup_UchPlan.ik_year
+  inner join sv_disc on Grup_UchPlan.ik_uch_plan = sv_disc.ik_uch_plan
+  inner join discpln on sv_disc.ik_disc = discpln.iK_disc
+  inner join Content_UchPl on sv_disc.ik_disc_uch_plan = Content_UchPl.ik_disc_uch_plan
+  inner join vid_zaniat on Content_UchPl.ik_vid_zanyat = vid_zaniat.iK_vid_zanyat
+  inner join dbo.TypeZanyat on TypeZanyat.ikTypeZanyat=vid_zaniat.ikTypeZanyat
+  left join Vedomost on Vedomost.ik_upContent = Content_UchPl.ik_upContent and Vedomost.Ik_grup = Grup.Ik_grup
+  left join Uspev on Uspev.Ik_ved = Vedomost.Ik_ved and Uspev.Ik_zach = StudGrup.Ik_zach
+  Where Ik_studGrup = @ik_studGrup and year_value=year(GetDate())
+  and TypeZanyat.bitOtchetnost=1
+  and ((Vedomost.Ik_ved is null) or ((Vedomost.lPriznak_napr=0)and(Vedomost.lClose = 1)and((Uspev.Cosenca<>1)and(Uspev.Cosenca<=2)))) --íåò âåäîìîñòè èëè îöåíêè
+
+return 
+end
+
+GO
+
+--ÂÛÄÀÒÜ ÏÐÀÂÀ ÍÀ ÔÓÍÊÖÈÞ
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+create FUNCTION [dbo].[GetStudNaprav]
+(
+	@ik_studGrup int
+)
+RETURNS @Result TABLE
+(
+	n_sem				int NOT NULL,
+	Content_name		varchar(500),
+	ik_upContent		int,
+	ik_ved				int,
+	lClose				bit,
+	Itab_n				varchar(50),
+	Dd_exam				datetime,
+	dD_vydano			datetime,
+	cNumber_ved			varchar(50),
+	KPTheme				varchar(2000)
+ )
+AS
+BEGIN
+  insert INTO @Result(n_sem, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme)
+  SELECT n_sem, discpln.cName_disc + ', ' + vid_zaniat.cName_vid_zanyat, Content_UchPl.ik_upContent, Vedomost.Ik_ved,
+		 lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme
+  from StudGrup 
+  inner join Grup on Grup.Ik_grup = StudGrup.Ik_grup
+  inner join Grup_UchPlan on Grup.Ik_grup = Grup_UchPlan.Ik_grup
+  inner join Year_uch_pl on Year_uch_pl.ik_year_uch_pl = Grup_UchPlan.ik_year
+  inner join sv_disc on Grup_UchPlan.ik_uch_plan = sv_disc.ik_uch_plan
+  inner join discpln on sv_disc.ik_disc = discpln.iK_disc
+  inner join Content_UchPl on sv_disc.ik_disc_uch_plan = Content_UchPl.ik_disc_uch_plan
+  inner join vid_zaniat on Content_UchPl.ik_vid_zanyat = vid_zaniat.iK_vid_zanyat
+  inner join dbo.TypeZanyat on TypeZanyat.ikTypeZanyat=vid_zaniat.ikTypeZanyat
+  inner join Vedomost on Vedomost.ik_upContent = Content_UchPl.ik_upContent and Vedomost.Ik_grup = Grup.Ik_grup
+  inner join Uspev on Uspev.Ik_ved = Vedomost.Ik_ved and Uspev.Ik_zach = StudGrup.Ik_zach
+  left join UspevDocument on UspevDocument.ik_upContent = Content_UchPl.ik_upContent and UspevDocument.ik_zach = StudGrup.Ik_zach
+  left join UspevKPTheme on UspevKPTheme.idUspevDocs = UspevDocument.idUspevDocs
+  Where Ik_studGrup = @ik_studGrup and year_value=year(GetDate())
+  and TypeZanyat.bitOtchetnost=1 and lPriznak_napr=1
+
+return 
+end
+
+GO
+
+--ÂÛÄÀÒÜ ÏÐÀÂÀ ÍÀ ÔÓÍÊÖÈÞ
+
+--------------------------------------------------------------------------------------------------------------------------------------------

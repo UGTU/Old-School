@@ -111,7 +111,6 @@ type
     StringField30: TStringField;
     StringField31: TStringField;
     dsUpdateDopusk: TDataSource;
-    dsPredmStud: TDataSource;
     adodsNapravl: TADODataSet;
     adodsNapravlIk_ved: TAutoIncField;
     adodsNapravlCosenca: TIntegerField;

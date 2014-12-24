@@ -4,19 +4,19 @@ inherited ftmNapr: TftmNapr
   HelpKeyword = 'Given_naprav_stud.htm'
   Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
   ClientHeight = 283
-  ClientWidth = 261
+  ClientWidth = 587
   OldCreateOrder = True
   OnClose = FormClose
   OnShow = FormShow
-  ExplicitWidth = 267
+  ExplicitWidth = 593
   ExplicitHeight = 312
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Width = 261
+    Width = 587
     Height = 242
     ExplicitTop = 2
-    ExplicitWidth = 261
+    ExplicitWidth = 587
     ExplicitHeight = 242
   end
   object Label1: TLabel [1]
@@ -139,27 +139,55 @@ inherited ftmNapr: TftmNapr
     Font.Style = []
     ParentFont = False
   end
+  object Label3: TLabel [13]
+    Left = 279
+    Top = 80
+    Width = 275
+    Height = 13
+    Caption = #1057#1087#1080#1089#1086#1082' '#1074#1099#1076#1072#1085#1085#1099#1093' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1081' '#1087#1086' '#1076#1072#1085#1085#1086#1081' '#1074#1077#1076#1086#1084#1086#1089#1090#1080':'
+  end
+  object Label6: TLabel [14]
+    Left = 279
+    Top = 7
+    Width = 233
+    Height = 13
+    Caption = #1042#1085#1080#1084#1072#1085#1080#1077'! '#1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1084#1086#1078#1077#1090' '#1073#1099#1090#1100' '#1074#1099#1076#1072#1085#1086':'
+  end
+  object Label8: TLabel [15]
+    Left = 296
+    Top = 26
+    Width = 214
+    Height = 13
+    Caption = '- '#1077#1089#1083#1080' '#1074#1077#1076#1086#1084#1086#1089#1090#1100' '#1074#1086#1086#1073#1097#1077' '#1085#1077' '#1089#1086#1079#1076#1072#1074#1072#1083#1072#1089#1100
+  end
+  object Label13: TLabel [16]
+    Left = 296
+    Top = 45
+    Width = 258
+    Height = 13
+    Caption = '- '#1077#1089#1083#1080' '#1074#1077#1076#1086#1084#1086#1089#1090#1100' '#1079#1072#1082#1088#1099#1090#1072' '#1080' '#1086#1094#1077#1085#1082#1080' '#1091' '#1089#1090#1091#1076#1077#1085#1090#1072' '#1085#1077#1090
+  end
   inherited Panel1: TPanel
     Top = 242
-    Width = 261
+    Width = 587
     ExplicitTop = 242
     ExplicitWidth = 261
     inherited bbOK: TBitBtn
-      Left = 23
+      Left = 349
       Width = 76
       Enabled = False
       ExplicitLeft = 23
       ExplicitWidth = 76
     end
     inherited bbApply: TBitBtn
-      Left = 179
+      Left = 505
       Width = 76
       Enabled = False
       ExplicitLeft = 179
       ExplicitWidth = 76
     end
     inherited bbCancel: TBitBtn
-      Left = 101
+      Left = 427
       Width = 76
       ExplicitLeft = 101
       ExplicitWidth = 76
@@ -170,7 +198,7 @@ inherited ftmNapr: TftmNapr
       ExplicitTop = -8
     end
   end
-  object dbdteOut: TDBDateTimeEditEh [14]
+  object dbdteOut: TDBDateTimeEditEh [18]
     Left = 8
     Top = 186
     Width = 121
@@ -183,7 +211,7 @@ inherited ftmNapr: TftmNapr
     Visible = True
     OnChange = dbdteOutChange
   end
-  object dbdteTo: TDBDateTimeEditEh [15]
+  object dbdteTo: TDBDateTimeEditEh [19]
     Left = 133
     Top = 186
     Width = 120
@@ -196,7 +224,7 @@ inherited ftmNapr: TftmNapr
     Visible = True
     OnChange = eNumChange
   end
-  object eNum: TDBNumberEditEh [16]
+  object eNum: TDBNumberEditEh [20]
     Left = 10
     Top = 21
     Width = 243
@@ -209,7 +237,7 @@ inherited ftmNapr: TftmNapr
     Visible = True
     OnChange = eNumChange
   end
-  object dbcbeVidExam: TDBLookupComboboxEh [17]
+  object dbcbeVidExam: TDBLookupComboboxEh [21]
     Left = 8
     Top = 142
     Width = 245
@@ -224,7 +252,7 @@ inherited ftmNapr: TftmNapr
     Visible = True
     OnChange = eNumChange
   end
-  object dbcbeDisc: TDBLookupComboboxEh [18]
+  object dbcbeDisc: TDBLookupComboboxEh [22]
     Left = 10
     Top = 99
     Width = 245
@@ -234,12 +262,12 @@ inherited ftmNapr: TftmNapr
     Flat = True
     KeyField = 'Ik_ved'
     ListField = 'NaprName'
-    ListSource = dmUspevaemost.dsPredmStud
+    ListSource = dsPredmStud
     TabOrder = 5
     Visible = True
     OnChange = eNumChange
   end
-  object dbcbeNum: TDBNumberEditEh [19]
+  object dbcbeNum: TDBNumberEditEh [23]
     Left = 10
     Top = 60
     Width = 245
@@ -256,7 +284,7 @@ inherited ftmNapr: TftmNapr
     Visible = True
     OnChange = dbcbeNumChange
   end
-  object cbPrintExcel: TCheckBox [20]
+  object cbPrintExcel: TCheckBox [24]
     Left = 8
     Top = 211
     Width = 100
@@ -265,7 +293,7 @@ inherited ftmNapr: TftmNapr
     TabOrder = 7
     OnClick = cbPrintExcelClick
   end
-  object cbBlankNapr: TCheckBox [21]
+  object cbBlankNapr: TCheckBox [25]
     Left = 134
     Top = 211
     Width = 119
@@ -274,8 +302,64 @@ inherited ftmNapr: TftmNapr
     Enabled = False
     TabOrder = 8
   end
+  object dbgrdNapr: TDBGridEh [26]
+    Left = 279
+    Top = 99
+    Width = 300
+    Height = 137
+    AllowedOperations = [alopUpdateEh, alopAppendEh]
+    ColumnDefValues.ToolTips = True
+    DataSource = dsNapr
+    DynProps = <>
+    Flat = True
+    FooterParams.Color = clWindow
+    IndicatorOptions = []
+    Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    ReadOnly = True
+    SortLocal = True
+    TabOrder = 9
+    Columns = <
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'lClose'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #1047#1072#1082#1088#1099#1090#1086
+        Width = 60
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'dD_vydano'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #1044#1072#1090#1072' '#1074#1099#1076#1072#1095#1080
+        Width = 85
+      end
+      item
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'cName_vid_exam'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #1042#1080#1076' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
+        Width = 150
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
   inherited actBaseDialog: TActionList
     Left = 217
     Top = 120
+  end
+  object dsPredmStud: TDataSource
+    Left = 158
+    Top = 231
+  end
+  object dsNapr: TDataSource
+    Left = 222
+    Top = 231
   end
 end

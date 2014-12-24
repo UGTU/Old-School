@@ -1204,11 +1204,6 @@ object dmUspevaemost: TdmUspevaemost
     Left = 458
     Top = 197
   end
-  object dsPredmStud: TDataSource
-    DataSet = adospPredmStud
-    Left = 294
-    Top = 447
-  end
   object adodsNapravl: TADODataSet
     Connection = dm.DBConnect
     CursorType = ctStatic

@@ -16,12 +16,14 @@ uses
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
   D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014,
   CommandController;
- type
+
+type
   PDBGrid = ^TDBGridEh;
   TVedType = (exam,zach,KP,KR);
   TUspevGroupController = class (TObject)
   private
     FVedomostController: TVedomostController;
+    FNapravController: TNapravController;
     function GetVedomostController: TVedomostController;
   protected
     constructor CreateInstance;
@@ -260,6 +262,10 @@ uses
        ///////////Экспорт в Excel итоговой ведомости БРС///////////
   procedure PrintBRSLastVedomost(ikGrup, nSem, ikFac, ikDisc: integer; datezach, dateexam, examiner, disc: string);
 
+  //***********НАПРАВЛЕНИЯ*********************************************************************************************
+  function GetContentDS(StudIK: integer): TADODataSet;
+  function GetNapravDS(StudIK: integer): TADODataSet;
+
 
   //**********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
   //Возвращает следующее слово из строки,
@@ -364,6 +370,7 @@ constructor TUspevGroupController.CreateInstance;
 begin
   inherited Create;
   FVedomostController := TVedomostController.Create;
+  FNapravController := TNapravController.Create;
 end;
 
 constructor TUspevGroupController.Create;
@@ -387,8 +394,9 @@ begin
     2 : if FUspevGroupControllerInstance <> nil then
           begin
 
-            FUspevGroupControllerInstance.Free;
-            FUspevGroupControllerInstance:= nil;
+            FreeAndNil(FUspevGroupControllerInstance);
+          //  FUspevGroupControllerInstance.Free;
+          //  FUspevGroupControllerInstance:= nil;
           end;
     else raise EApplicationException.Create('Ошибка в программе!',Exception.CreateFmt('Произошла ошибка в контроллере Успеваемости', [Request]));
   end;  Result := FUspevGroupControllerInstance;
@@ -1673,6 +1681,12 @@ begin
 end;
 
 //Выбирает все дисциплины, кот-е есть в уч. плане (для вида занятий)
+function TUspevGroupController.GetContentDS(StudIK: integer): TADODataSet;
+begin
+  FNapravController.Reload(StudIK);
+  Result := FNapravController.DataSet;
+end;
+
 function TUspevGroupController.GetContrlVidZanForRaport(ik_group, nSem: integer):boolean;
 begin
   try
@@ -1810,7 +1824,8 @@ end;
 
 destructor TUspevGroupController.Destroy;
 begin
-  FVedomostController.Free;
+  FreeAndNil(FVedomostController);
+  FreeAndNil(FNapravController);
 
   inherited;
 end;
@@ -2465,6 +2480,11 @@ begin
   end;
 
 
+end;
+
+function TUspevGroupController.GetNapravDS(StudIK: integer): TADODataSet;
+begin
+  FNapravController
 end;
 
 function TUspevGroupController.GetNextSubStr(var str:string):string;
