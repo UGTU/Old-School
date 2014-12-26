@@ -263,8 +263,17 @@ type
   procedure PrintBRSLastVedomost(ikGrup, nSem, ikFac, ikDisc: integer; datezach, dateexam, examiner, disc: string);
 
   //***********НАПРАВЛЕНИЯ*********************************************************************************************
+  //взять DataSet с ведомостями, по которым можно дать направления для текущего студента
   function GetContentDS(StudIK: integer): TADODataSet;
-  function GetNapravDS(StudIK: integer): TADODataSet;
+
+  //взять DataSet с направлениями студента
+  function GetNapravDS: TADODataSet;
+
+  //установить фильтр направлений по ведомостям
+  procedure SetContentNaprav(ContentIK: integer);
+
+  //установить семестр для выдачи направлений
+  procedure SetNapravSemester(nsem: integer);
 
 
   //**********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
@@ -1189,6 +1198,11 @@ begin
 end;
 
 // фильтрует виды занятий
+procedure TUspevGroupController.SetContentNaprav(ContentIK: integer);
+begin
+  FNapravController.ContentIK := ContentIK;
+end;
+
 procedure TUspevGroupController.SetFilterForVidZanyats(CreateEnable, IsCreated, IsDependent: boolean);
 begin
   dmUspevaemost.adospGetAllVidZanyat.Close;
@@ -1198,6 +1212,11 @@ begin
   dmUspevaemost.adospGetAllVidZanyat.Open;
 end;
 
+
+procedure TUspevGroupController.SetNapravSemester(nsem: integer);
+begin
+  FNapravController.Semester := nsem;
+end;
 
 //Обновляет список студентов во всех открытых ведомостях
 //группы в указанном семестре
@@ -2482,9 +2501,9 @@ begin
 
 end;
 
-function TUspevGroupController.GetNapravDS(StudIK: integer): TADODataSet;
+function TUspevGroupController.GetNapravDS: TADODataSet;
 begin
-  FNapravController
+  result := FNapravController.NaprDS;
 end;
 
 function TUspevGroupController.GetNextSubStr(var str:string):string;

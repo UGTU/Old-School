@@ -48,10 +48,16 @@ type
     procedure DoIt(Ik_zach, Cosenca: integer);
   end;
 
-  TAppendUspevKPThemeCommand = class(TBaseADOCommand) // редактирование темы КП/КР
+  TAppendUspevKPThemeCommand = class(TBaseADOCommand)
+  // редактирование темы КП/КР
   public
     constructor Create(FVedom: integer); overload;
     procedure DoIt(Ik_zach: integer; KPTheme: string);
+  end;
+
+  TNapravlCommand = class(TBaseADOCommand)
+    constructor Create(FVedom: integer); overload;
+    procedure Close;
   end;
 
   // селекторы
@@ -122,14 +128,18 @@ type
     property Vedomost: integer write SetVedomost;
     property IsOpened: boolean read GetIsOpened;
 
-
     property UspevDataSet: TADODataSet read GetUspevDataSet;
   end;
 
   TContentNapravController = class(TBaseSelectController)
+  private
+    procedure setContent(const Value: integer);
   public
-    constructor Create;
+    constructor Create; overload;
     procedure Reload(ik_studGrup: integer); overload;
+
+
+    property ContentIK: integer write setContent;
   end;
 
   TNapravController = class(TBaseSelectController)
@@ -138,11 +148,15 @@ type
     FSemester: integer;
     FContentNapr: TContentNapravController;
     procedure SetSemester(const Value: integer);
+    function GetNaprDS: TADODataSet;
+    procedure setContent(const Value: integer);
   public
     constructor Create;
     procedure Reload(ik_studGrup: integer); overload;
 
     property Semester: integer write SetSemester;
+    property ContentIK: integer write setContent;
+    property NaprDS: TADODataSet read GetNaprDS;
 
   end;
 
@@ -338,8 +352,6 @@ procedure TVedomostController.Save(ikVidExam: integer; VedNum, ikPrepod: string;
 var
   FVedCommand: TVedCommand;
 begin
-
-  //TBaseADOCommand.Create('AppendUspev');
 
   FDataSet.Connection.BeginTrans;
   try
@@ -566,6 +578,11 @@ begin
   FContentNapr := TContentNapravController.Create;
 end;
 
+function TNapravController.GetNaprDS: TADODataSet;
+begin
+  Result := FContentNapr.DataSet;
+end;
+
 procedure TNapravController.Reload(ik_studGrup: integer);
 begin
   inherited Reload('GetNapravlInfo(' + IntToStr(ik_studGrup) + ')');
@@ -573,10 +590,17 @@ begin
   FContentNapr.Reload(ik_studGrup);
 end;
 
-procedure TNapravController.SetSemester(const Value: integer);
-var filter: string;
+procedure TNapravController.setContent(const Value: integer);
 begin
-  SetFilter('n_sem='+IntToStr(Value));
+  FDataSet.Locate('ik_upContent', Value, []);
+  FContentNapr.ContentIK := Value;
+end;
+
+procedure TNapravController.SetSemester(const Value: integer);
+var
+  Filter: string;
+begin
+  SetFilter('n_sem=' + IntToStr(Value));
   FSemester := Value;
 end;
 
@@ -585,6 +609,41 @@ end;
 constructor TContentNapravController.Create;
 begin
   inherited Create('GetStudNaprav(' + IntToStr(0) + ')');
+end;
+
+procedure TContentNapravController.Reload(ik_studGrup: integer);
+begin
+  inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ')');
+end;
+
+procedure TContentNapravController.setContent(const Value: integer);
+begin
+  SetFilter('ik_upContent=' + IntToStr(Value));
+  FDataSet.Active := (Value > 0);
+end;
+
+{ TNapravlCommand }
+
+procedure TNapravlCommand.Close;
+begin
+
+end;
+
+constructor TNapravlCommand.Create(FVedom: integer);
+begin
+  inherited Create('Dek_CloseNapr');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@flag', ftInteger, pdInput, 0, 0);
+    CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
+    CreateParameter('@cNumber_ved', ftString, pdInput, 12, '');
+    CreateParameter('@Itab_n', ftString, pdInput, 50, '');
+    CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, 0);
+    CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, Date);
+    CreateParameter('@lClose', ftBoolean, pdInput, 0, 0);
+    CreateParameter('@lPriznak_napr', ftBoolean, pdInput, 0, 0);
+  end;
 end;
 
 end.

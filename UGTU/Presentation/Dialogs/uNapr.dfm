@@ -4,16 +4,16 @@ inherited ftmNapr: TftmNapr
   HelpKeyword = 'Given_naprav_stud.htm'
   Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
   ClientHeight = 283
-  ClientWidth = 587
+  ClientWidth = 673
   OldCreateOrder = True
   OnClose = FormClose
   OnShow = FormShow
-  ExplicitWidth = 593
+  ExplicitWidth = 679
   ExplicitHeight = 312
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Width = 587
+    Width = 673
     Height = 242
     ExplicitTop = 2
     ExplicitWidth = 587
@@ -149,9 +149,15 @@ inherited ftmNapr: TftmNapr
   object Label6: TLabel [14]
     Left = 279
     Top = 7
-    Width = 233
+    Width = 274
     Height = 13
     Caption = #1042#1085#1080#1084#1072#1085#1080#1077'! '#1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1084#1086#1078#1077#1090' '#1073#1099#1090#1100' '#1074#1099#1076#1072#1085#1086':'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object Label8: TLabel [15]
     Left = 296
@@ -169,27 +175,27 @@ inherited ftmNapr: TftmNapr
   end
   inherited Panel1: TPanel
     Top = 242
-    Width = 587
+    Width = 673
     ExplicitTop = 242
-    ExplicitWidth = 261
+    ExplicitWidth = 587
     inherited bbOK: TBitBtn
-      Left = 349
+      Left = 435
       Width = 76
       Enabled = False
-      ExplicitLeft = 23
+      ExplicitLeft = 349
       ExplicitWidth = 76
     end
     inherited bbApply: TBitBtn
-      Left = 505
+      Left = 591
       Width = 76
       Enabled = False
-      ExplicitLeft = 179
+      ExplicitLeft = 505
       ExplicitWidth = 76
     end
     inherited bbCancel: TBitBtn
-      Left = 427
+      Left = 513
       Width = 76
-      ExplicitLeft = 101
+      ExplicitLeft = 427
       ExplicitWidth = 76
     end
     inherited bbSprav: TBitBtn
@@ -260,16 +266,16 @@ inherited ftmNapr: TftmNapr
     DataField = ''
     EditButtons = <>
     Flat = True
-    KeyField = 'Ik_ved'
-    ListField = 'NaprName'
+    KeyField = 'ik_upContent'
+    ListField = 'Content_name'
     ListSource = dsPredmStud
     TabOrder = 5
     Visible = True
-    OnChange = eNumChange
+    OnChange = dbcbeDiscChange
   end
   object dbcbeNum: TDBNumberEditEh [23]
-    Left = 10
-    Top = 60
+    Left = 8
+    Top = 61
     Width = 245
     Height = 19
     DynProps = <>
@@ -305,16 +311,23 @@ inherited ftmNapr: TftmNapr
   object dbgrdNapr: TDBGridEh [26]
     Left = 279
     Top = 99
-    Width = 300
-    Height = 137
+    Width = 386
+    Height = 129
     AllowedOperations = [alopUpdateEh, alopAppendEh]
     ColumnDefValues.ToolTips = True
     DataSource = dsNapr
     DynProps = <>
     Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
     FooterParams.Color = clWindow
     IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+    ParentFont = False
+    PopupMenu = ppmNaprGrid
     ReadOnly = True
     SortLocal = True
     TabOrder = 9
@@ -324,12 +337,18 @@ inherited ftmNapr: TftmNapr
         DynProps = <>
         EditButtons = <>
         FieldName = 'lClose'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
         Footers = <>
         Title.Alignment = taCenter
-        Title.Caption = #1047#1072#1082#1088#1099#1090#1086
+        Title.Caption = #1057#1090#1072#1090#1091#1089
         Width = 60
       end
       item
+        Alignment = taCenter
         DynProps = <>
         EditButtons = <>
         FieldName = 'dD_vydano'
@@ -339,6 +358,7 @@ inherited ftmNapr: TftmNapr
         Width = 85
       end
       item
+        Alignment = taCenter
         DynProps = <>
         EditButtons = <>
         FieldName = 'cName_vid_exam'
@@ -346,6 +366,16 @@ inherited ftmNapr: TftmNapr
         Title.Alignment = taCenter
         Title.Caption = #1042#1080#1076' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
         Width = 150
+      end
+      item
+        Alignment = taCenter
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Cosenca'
+        Footers = <>
+        Title.Alignment = taCenter
+        Title.Caption = #1054#1094#1077#1085#1082#1072
+        Width = 85
       end>
     object RowDetailData: TRowDetailPanelControlEh
     end
@@ -361,5 +391,20 @@ inherited ftmNapr: TftmNapr
   object dsNapr: TDataSource
     Left = 222
     Top = 231
+  end
+  object ppmNaprGrid: TPopupMenu
+    Left = 624
+    Top = 52
+    object actClose: TMenuItem
+      Caption = #1047#1072#1082#1088#1099#1090#1100
+      Hint = #1047#1072#1082#1088#1099#1090#1100' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1089' '#1074#1099#1089#1090#1072#1074#1083#1077#1085#1080#1077#1084' '#1086#1094#1077#1085#1082#1080
+      OnClick = actCloseClick
+    end
+    object N93: TMenuItem
+      Caption = '-'
+    end
+    object actAnnul: TMenuItem
+      Caption = #1040#1085#1085#1091#1083#1080#1088#1086#1074#1072#1090#1100
+    end
   end
 end

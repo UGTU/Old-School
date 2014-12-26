@@ -9,7 +9,7 @@ uses
   ExtCtrls, DBGridEh, DBLookupEh, DBTVStudObj, DBTVGroupObj, ComObj,
   ReportsBase, Barcode, ReportUI, ComCtrls, uWaitingController, System.Actions,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, GridsEh,
-  DBAxisGridsEh, Data.DB;
+  DBAxisGridsEh, Data.DB, Vcl.Menus;
 
 type
   TftmNapr = class(TfrmBaseDialog)
@@ -40,6 +40,10 @@ type
     Label13: TLabel;
     dsPredmStud: TDataSource;
     dsNapr: TDataSource;
+    ppmNaprGrid: TPopupMenu;
+    actClose: TMenuItem;
+    N93: TMenuItem;
+    actAnnul: TMenuItem;
     procedure dbdteOutChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure dbcbeNumChange(Sender: TObject);
@@ -51,6 +55,9 @@ type
     procedure ProgressBarReportControl1Complete(Sender: TObject);
     procedure WindowReportControlCollection1ProgressMessage(Sender: TObject;
       Step: Integer; StepNote: string; var Msg: string);
+    procedure dbcbeDiscChange(Sender: TObject);
+    procedure N92Click(Sender: TObject);
+    procedure actCloseClick(Sender: TObject);
   private
     procedure ExecuteError(Sender: TObject; E: Exception);
     procedure LoadVedForNapr();
@@ -128,7 +135,7 @@ begin
 
   // проверка номера направления
   // выдает последний номер за вчерашнее число
- { dmUspevaemost.adospGetNomerNapr.Active := false;
+  dmUspevaemost.adospGetNomerNapr.Active := false;
   with dmUspevaemost.adospGetNomerNapr.Parameters do
   begin
     clear;
@@ -146,10 +153,10 @@ begin
       eNum.Text := inttostr(dmUspevaemost.adospGetNomerNapr.Fields[0]
         .AsInteger + 1)
     else
-      eNum.Text := '1';        }
+      eNum.Text := '1';
 
   dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(studobj.StudGrupKey);
-  dsNapr.DataSet :=
+  dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
 
   LoadVedForNapr;
   // dm.adodsVidOtch.Active:=true;
@@ -158,12 +165,18 @@ begin
 end;
 
 procedure TftmNapr.LoadVedForNapr;
+var cont: integer;
 begin
-  TApplicationController.GetInstance.AddLogEntry
+  if (dbcbeDisc.KeyValue = NULL) then cont := 0
+    else cont:= dbcbeDisc.KeyValue;
+  TUspevGroupController.Instance.SetContentNaprav(cont);
+
+
+ { TApplicationController.GetInstance.AddLogEntry
     ('Направление. Загрузка списка ведомостей для выдачи направления за ' +
     dbcbeNum.Text + ' семестр.');
 
-  {dmUspevaemost.adospPredmStud.Active := false;
+  dmUspevaemost.adospPredmStud.Active := false;
   if (dbcbeNum.Text <> '') then
   begin
     with dmUspevaemost.adospPredmStud.Parameters do
@@ -178,11 +191,30 @@ begin
   end;               }
 end;
 
+
+procedure TftmNapr.N92Click(Sender: TObject);
+var vedIK: integer;
+begin
+  if dbgrdNapr.SelectedRows.Count>0 then
+  begin
+    vedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
+    TUspevGroupController.Instance.CloseNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
+  end
+  else ShowMessage('Выберите направление, которое необходимо удалить');
+end;
+
+procedure TftmNapr.dbcbeDiscChange(Sender: TObject);
+begin
+  LoadVedForNapr;
+  eNumChange(Sender);
+end;
+
 procedure TftmNapr.dbcbeNumChange(Sender: TObject);
 begin
   // if studobj=nil then exit;
-  eNumChange(Sender);
+  TUspevGroupController.Instance.SetNapravSemester(StrToInt(dbcbeNum.Text));
   LoadVedForNapr;
+  eNumChange(Sender);
 end;
 
 procedure TftmNapr.eNumChange(Sender: TObject);
@@ -295,6 +327,14 @@ end;
 procedure TftmNapr.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   ftmNapr.FreeOnRelease;
+end;
+
+procedure TftmNapr.actCloseClick(Sender: TObject);
+begin
+  if dbgrdNapr.SelectedRows>0 then
+  begin
+    TUspevGroupController.Instance.CloseNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
+  end;
 end;
 
 procedure TftmNapr.actOKExecute(Sender: TObject);
