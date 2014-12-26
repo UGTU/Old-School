@@ -983,6 +983,15 @@ begin
   Result:= false;
   TApplicationController.GetInstance.AddLogEntry('Закрытие направления');
   try
+    FNapravController.CloseNapr(ikVed);
+  except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при закрытии направления.',E);
+        exit;
+      end;
+  end;
+  {try
     tempStoredProc:= TADOStoredProc.Create(nil);
     tempStoredProc.ProcedureName:= 'Dek_CloseNapr;1';
     tempStoredProc.Connection:= dm.DBConnect;
@@ -991,7 +1000,7 @@ begin
     Result:= true;
   finally
     tempStoredProc.Free;
-  end;
+  end;         }
     //if tempStoredProc<>nil then
     //  tempStoredProc.Free;
 end;

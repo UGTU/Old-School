@@ -1,11 +1,13 @@
 unit uNaprClose;
-   {#Author sergdev@ist.ugtu.net}
+
+{ #Author sergdev@ist.ugtu.net }
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, DBCtrlsEh, StdCtrls, Mask, DBLookupEh,
-  ActnList, Buttons, ExtCtrls, ApplicationController, comObj, ExceptionBase, ADODB,
+  ActnList, Buttons, ExtCtrls, ApplicationController, comObj, ExceptionBase,
+  ADODB,
   System.Actions;
 
 type
@@ -30,10 +32,11 @@ type
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
   private
-    FCloseNapr:boolean;
+    FCloseNapr: boolean;
+    FVedIK: integer;
   public
     procedure LoadNapr;
-    property CloseNapr:boolean read FCloseNapr write FCloseNapr;
+    property CloseNapr: boolean read FCloseNapr write FCloseNapr;
   end;
 
 var
@@ -43,156 +46,157 @@ implementation
 
 uses uDm, uDMUspevaemost, db;
 {$R *.dfm}
-function ChangeMonthDayPlaces(date:TDateTime):string;
-var s1:string;
+
+function ChangeMonthDayPlaces(date: TDateTime): string;
+var
+  s1: string;
 begin
-result:=DatetoStr(date);
-s1:=result;
-result[1]:=s1[4];
-result[2]:=s1[5];
-result[4]:=s1[1];
-result[5]:=s1[2];
+  result := DatetoStr(date);
+  s1 := result;
+  result[1] := s1[4];
+  result[2] := s1[5];
+  result[4] := s1[1];
+  result[5] := s1[2];
 end;
 
-function CheckFields:boolean;
+function CheckFields: boolean;
 begin
-result:=true;
-with ftmNaprclose do
-begin
-if (dbcbeNapr.Text='') 
-or(dbcbeMark.Text='')
-or(dbcbeEx.Text='')
-or(dbdteExam.Text='')
-then result:=false
+  result := true;
+  with ftmNaprclose do
+  begin
+    if (dbcbeNapr.Text = '') or (dbcbeMark.Text = '') or (dbcbeEx.Text = '') or
+      (dbdteExam.Text = '') then
+      result := false
+  end;
 end;
-end;
-
 
 procedure TftmNaprclose.FormShow(Sender: TObject);
 begin
-try
-dmUspevaemost.adodsNapravl.Active:=false;
-dmUspevaemost.adodsNapravl.CommandText:='select * from Napr_View where ik_zach='''+inttostr(Tag)+'''';
-dmUspevaemost.adodsNapravl.Active:=true;
-dmUspevaemost.adodsmark.Active:=true;
-if not CloseNapr then dbdteExam.Value:=Date;
-finally
+  try
+    dmUspevaemost.adodsNapravl.Active := false;
+    dmUspevaemost.adodsNapravl.CommandText :=
+      'select * from Napr_View where ik_zach=''' + inttostr(Tag) + '''';
+    dmUspevaemost.adodsNapravl.Active := true;
+    dmUspevaemost.adodsmark.Active := true;
+    if not CloseNapr then
+      dbdteExam.Value := date;
+  finally
 
-end;
-try
-dmUspevaemost.adospPrepodVed.Active:=false;
-dmUspevaemost.adospPrepodVed.Active:=true;
-finally
+  end;
+  try
+    dmUspevaemost.adospPrepodVed.Active := false;
+    dmUspevaemost.adospPrepodVed.Active := true;
+  finally
 
-end;
+  end;
 end;
 
 procedure TftmNaprclose.LoadNapr;
 begin
-  dmUspevaemost.adodsNapravl.Locate('ik_ved',dbcbeNapr.KeyValue, [loPartialKey]);
-
+  dmUspevaemost.adodsNapravl.Locate('ik_ved', dbcbeNapr.KeyValue,
+    [loPartialKey]);
 
   if dmUspevaemost.adodsNapravl.FieldByName('dd_exam').AsDateTime = 0 then
-    dbdteExam.Value:=date
+    dbdteExam.Value := date
   else
-    dbdteExam.Value:=dmUspevaemost.adodsNapravl.FieldByName('dd_exam').AsDateTime;
+    dbdteExam.Value := dmUspevaemost.adodsNapravl.FieldByName('dd_exam')
+      .AsDateTime;
 
-  dbcbeEx.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('itab_n').AsString;
-  dbcbeMark.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('cosenca').AsInteger;
-  eTema.Text:= dmUspevaemost.adodsNapravl.FieldByName('ctema').AsString;
+  dbcbeEx.KeyValue := dmUspevaemost.adodsNapravl.FieldByName('itab_n').AsString;
+  dbcbeMark.KeyValue := dmUspevaemost.adodsNapravl.FieldByName('cosenca')
+    .AsInteger;
+  eTema.Text := dmUspevaemost.adodsNapravl.FieldByName('ctema').AsString;
 end;
 
 procedure TftmNaprclose.dbcbeNaprChange(Sender: TObject);
 begin
-if checkFields then
-begin
-bbOk.Enabled:=true;
-bbApply.Enabled:=true;
-end else
-begin
-bbOk.Enabled:=false;
-bbApply.Enabled:=false;
-end;
+  if CheckFields then
+  begin
+    bbOk.Enabled := true;
+    bbApply.Enabled := true;
+  end
+  else
+  begin
+    bbOk.Enabled := false;
+    bbApply.Enabled := false;
+  end;
 
 end;
 
 procedure TftmNaprclose.actApplyExecute(Sender: TObject);
 begin
 
+  dm.DBConnect.BeginTrans;
 
-dm.DBConnect.BeginTrans;
+  try
+    with dmUspevaemost.adospAppendUspev.Parameters do
+    begin
+      clear;
+      AddParameter;
+      items[0].Value := 0;
+      AddParameter;
+      items[1].Value := dbcbeNapr.KeyValue;
+      AddParameter;
+      items[2].Value := Tag;
+      AddParameter;
+      items[3].Value := dbcbeMark.KeyValue;
+      AddParameter;
+      items[4].Value := '';
+    end;
+    dmUspevaemost.adospAppendUspev.ExecProc;
 
-try
-with dmUspevaemost.adospAppendUspev.Parameters do
-begin
- clear;
- AddParameter;
- items[0].Value:=0;
- AddParameter;
- items[1].Value:=dbcbeNapr.KeyValue;
- AddParameter;
- items[2].Value:=Tag;
- AddParameter;
- items[3].Value:=dbcbeMark.KeyValue;
- AddParameter;
- items[4].Value:='';
-end;
-dmUspevaemost.adospAppendUspev.ExecProc;
+    with dmUspevaemost.adospAppendUspevKPTheme.Parameters do
+    begin
+      clear;
+      CreateParameter('@flag', ftInteger, pdInput, 0, 1);
+      CreateParameter('@Ik_zach', ftInteger, pdInput, 0, Tag);
+      CreateParameter('@Ik_ved', ftInteger, pdInput, 0, dbcbeNapr.KeyValue);
+      CreateParameter('@KPTheme', ftString, pdInput, 2000, eTema.Text);
+    end;
+    dmUspevaemost.adospAppendUspevKPTheme.ExecProc;
 
-	with dmUspevaemost.adospAppendUspevKPTheme.Parameters do
-	begin
-		Clear;
-		CreateParameter('@flag', ftInteger, pdInput, 0, 1);
-		CreateParameter('@Ik_zach', ftInteger, pdInput, 0, Tag);
-		CreateParameter('@Ik_ved', ftInteger, pdInput, 0, dbcbeNapr.KeyValue);
-		CreateParameter('@KPTheme', ftString, pdInput, 2000, eTema.Text);
-	end;
-	dmUspevaemost.adospAppendUspevKPTheme.ExecProc;
+    with dmUspevaemost.adospCloseNapr.Parameters do
+    begin
+      clear;
+      AddParameter;
+      items[0].Value := dbcbeNapr.KeyValue;
+      AddParameter;
+      items[1].Value := (dbdteExam.Value);
+      AddParameter;
+      items[2].Value := dbcbeEx.KeyValue;
+    end;
 
+    dmUspevaemost.adospCloseNapr.ExecProc;
+    dm.DBConnect.CommitTrans;
 
+  except
+    on E: EOleException do
+    begin
+      dm.DBConnect.RollbackTrans;
+      raise EApplicationException.Create
+        ('Невозможно сохранить оценку и закрыть направление! Возможно, оценка по этой дисциплине уже существует.',
+        EOleException.Create(E.Message, E.ErrorCode, '', '', 0));
+    end;
+    on E: Exception do
+    begin
+      dm.DBConnect.RollbackTrans;
+      raise EApplicationException.Create('Невозможно сохранить оценку!',
+        Exception.Create(E.Message));
+    end;
 
-with dmUspevaemost.adospCloseNapr.Parameters do
-begin
- clear;
- AddParameter;
- items[0].Value:=dbcbeNapr.KeyValue;
- AddParameter;
- items[1].Value:=(dbdteExam.Value);
- AddParameter;
- items[2].Value:=dbcbeEx.KeyValue;
-end;
+  end;
 
-
- dmUspevaemost.adospCloseNapr.ExecProc;
- dm.DBConnect.CommitTrans;
-
-except
- on E:EOleException do
- begin
-   dm.DBConnect.RollbackTrans;
-   raise EApplicationException.Create('Невозможно сохранить оценку и закрыть направление! Возможно, оценка по этой дисциплине уже существует.',EOleException.Create(E.Message, E.ErrorCode,'','',0));
- end;
- on E:Exception do
- begin
-   dm.DBConnect.RollbackTrans;
-   raise EApplicationException.Create('Невозможно сохранить оценку!',Exception.Create(E.Message));
- end;
-
-end;
-
-
-dmUspevaemost.adodsNapravl.Active:=false;
-dmUspevaemost.adospPrepodVed.Parameters.clear;
-dmUspevaemost.adospPrepodVed.ExecProc;
-dmUspevaemost.adodsNapravl.Active:=true;
+  dmUspevaemost.adodsNapravl.Active := false;
+  dmUspevaemost.adospPrepodVed.Parameters.clear;
+  dmUspevaemost.adospPrepodVed.ExecProc;
+  dmUspevaemost.adodsNapravl.Active := true;
 
 end;
 
 procedure TftmNaprclose.actOKExecute(Sender: TObject);
 begin
-actApplyExecute(Sender);
-close;
+  actApplyExecute(Sender);
+  close;
 end;
-
 
 end.

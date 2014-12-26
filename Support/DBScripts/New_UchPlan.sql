@@ -358,7 +358,7 @@ GO
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-create FUNCTION [dbo].[GetStudNaprav]
+alter FUNCTION [dbo].[GetStudNaprav]
 (
 	@ik_studGrup int
 )
@@ -368,18 +368,20 @@ RETURNS @Result TABLE
 	Content_name		varchar(500),
 	ik_upContent		int,
 	ik_ved				int,
-	lClose				bit,
+	lClose				varchar(20),
 	Itab_n				varchar(50),
 	Dd_exam				datetime,
 	dD_vydano			datetime,
 	cNumber_ved			varchar(50),
-	KPTheme				varchar(2000)
+	KPTheme				varchar(2000),
+	cName_vid_exam		varchar(12),
+	Cosenca				varchar(20)
  )
 AS
 BEGIN
-  insert INTO @Result(n_sem, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme)
+  insert INTO @Result(n_sem, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme,cName_vid_exam,Cosenca)
   SELECT n_sem, discpln.cName_disc + ', ' + vid_zaniat.cName_vid_zanyat, Content_UchPl.ik_upContent, Vedomost.Ik_ved,
-		 lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme
+		 cast(lClose as varchar(20)), Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme, cName_vid_exam,cast(Cosenca as varchar(20))
   from StudGrup 
   inner join Grup on Grup.Ik_grup = StudGrup.Ik_grup
   inner join Grup_UchPlan on Grup.Ik_grup = Grup_UchPlan.Ik_grup
@@ -390,11 +392,19 @@ BEGIN
   inner join vid_zaniat on Content_UchPl.ik_vid_zanyat = vid_zaniat.iK_vid_zanyat
   inner join dbo.TypeZanyat on TypeZanyat.ikTypeZanyat=vid_zaniat.ikTypeZanyat
   inner join Vedomost on Vedomost.ik_upContent = Content_UchPl.ik_upContent and Vedomost.Ik_grup = Grup.Ik_grup
+  inner join Vid_exam on Vid_exam.ik_vid_exam = Vedomost.ik_vid_exam
   inner join Uspev on Uspev.Ik_ved = Vedomost.Ik_ved and Uspev.Ik_zach = StudGrup.Ik_zach
   left join UspevDocument on UspevDocument.ik_upContent = Content_UchPl.ik_upContent and UspevDocument.ik_zach = StudGrup.Ik_zach
   left join UspevKPTheme on UspevKPTheme.idUspevDocs = UspevDocument.idUspevDocs
   Where Ik_studGrup = @ik_studGrup and year_value=year(GetDate())
   and TypeZanyat.bitOtchetnost=1 and lPriznak_napr=1
+
+  update @Result set Cosenca = NULL where Cosenca=-1
+  update @Result set Cosenca = 'зачтено' where Cosenca=1
+
+  update @Result set lClose = 'открыто' where lClose = '0'
+  update @Result set lClose = 'закрыто' where lClose = '1'
+  update @Result set lClose = 'аннулир.' where lClose is null
 
 return 
 end

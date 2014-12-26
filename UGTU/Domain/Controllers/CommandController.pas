@@ -55,7 +55,7 @@ type
     procedure DoIt(Ik_zach: integer; KPTheme: string);
   end;
 
-  TNapravlCommand = class(TBaseADOCommand)
+  TNapravlCloseCommand = class(TBaseADOCommand)
     constructor Create(FVedom: integer); overload;
     procedure Close;
   end;
@@ -153,6 +153,7 @@ type
   public
     constructor Create;
     procedure Reload(ik_studGrup: integer); overload;
+    procedure CloseNapr(VedIK: integer);
 
     property Semester: integer write SetSemester;
     property ContentIK: integer write setContent;
@@ -572,6 +573,16 @@ end;
 
 { TNapravController }
 
+procedure TNapravController.CloseNapr(VedIK: integer);
+var FNapravlCloseCommand: TNapravlCloseCommand;
+begin
+  FNapravlCloseCommand := TNapravlCloseCommand.Create(VedIK);
+  FNapravlCloseCommand.Close;
+  FNapravlCloseCommand.Free;
+
+  FContentNapr.Refresh;
+end;
+
 constructor TNapravController.Create;
 begin
   inherited Create('GetNapravlInfo(' + IntToStr(0) + ')');
@@ -622,27 +633,20 @@ begin
   FDataSet.Active := (Value > 0);
 end;
 
-{ TNapravlCommand }
+{ TNapravlCloseCommand }
 
-procedure TNapravlCommand.Close;
+procedure TNapravlCloseCommand.Close;
 begin
-
+  FStor.ExecProc;
 end;
 
-constructor TNapravlCommand.Create(FVedom: integer);
+constructor TNapravlCloseCommand.Create(FVedom: integer);
 begin
   inherited Create('Dek_CloseNapr');
   with FStor.Parameters do
   begin
     Clear;
-    CreateParameter('@flag', ftInteger, pdInput, 0, 0);
-    CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
-    CreateParameter('@cNumber_ved', ftString, pdInput, 12, '');
-    CreateParameter('@Itab_n', ftString, pdInput, 50, '');
-    CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, 0);
-    CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, Date);
-    CreateParameter('@lClose', ftBoolean, pdInput, 0, 0);
-    CreateParameter('@lPriznak_napr', ftBoolean, pdInput, 0, 0);
+    CreateParameter('@Ik_ved', ftInteger, pdInput, 0, FVedom);
   end;
 end;
 

@@ -89,7 +89,7 @@ var
 implementation
 
 uses udm, uStudDlg, uMain, uDMUspevaemost, uDMUgtuStructure,
-  ApplicationController, uUspevGroupController;
+  ApplicationController, uUspevGroupController, uNaprClose;
 {$R *.dfm}
 
 function ChangeMonthDayPlaces(date: TDateTime): string;
@@ -331,10 +331,11 @@ end;
 
 procedure TftmNapr.actCloseClick(Sender: TObject);
 begin
-  if dbgrdNapr.SelectedRows>0 then
-  begin
-    TUspevGroupController.Instance.CloseNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
-  end;
+  ftmNaprClose := TftmNaprClose.Create(self);
+  ftmNaprClose.Tag := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
+    .RecordbookKey;
+  ftmNaprClose.ShowModal;
+  ftmNaprClose.Free;
 end;
 
 procedure TftmNapr.actOKExecute(Sender: TObject);
