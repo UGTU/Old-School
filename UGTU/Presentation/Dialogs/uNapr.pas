@@ -291,13 +291,32 @@ begin
     TApplicationController.GetInstance.AddLogEntry('Направление. Печать направления за ');
     Report := TReportBase.CreateReport(TNaprExcelReport);
     Report.FreeOnComplete := true;
+      dmUspevaemost.adospSelNapr.Active:=false;
+
+  with dmUspevaemost.adospSelNapr.Parameters do begin
+    clear;
+    AddParameter;
+    items[0].Value:=ik_ved;
+  end;
+  dmUspevaemost.adospSelNapr.ExecProc;
+  dmUspevaemost.adospSelNapr.Open;
+  if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger<>1 then
+  begin
+      if EmptyNapr then
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr_pust_с.XLT'
+    else
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr_с.XLT';
+    TNaprExcelReport(Report).ik_ved:= ik_ved;
+  end
+    else
+    begin
     //Report.OnExecuteError := ExecuteError;
     if EmptyNapr then
       Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr_pust.XLT'
     else
       Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr.XLT';
     TNaprExcelReport(Report).ik_ved:= ik_ved;
-
+    end;
     TWaitingController.GetInstance.Process(Report);
 
 end;
@@ -374,12 +393,20 @@ begin
 Replace('#vid_zanyat#','зачета');
 Replace('#v_z#','зачета');
 end ;
-  if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger>7 then
+  if (dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger>7)
+  and (dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger<10) then
   begin
 //    Range['p13','p13'].Clear;
 //    Range['l13','n13'].Clear;
 Replace('#vid_zanyat#','курсовой работы(проекта)');
 Replace('#v_z#','КР(П)');
+  end;
+   if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger=27 then
+  begin
+//    Range['p13','p13'].Clear;
+//    Range['l13','n13'].Clear;
+Replace('#vid_zanyat#','практики');
+Replace('#v_z#','практики');
   end;
 
     NextStep(1,'Формирование бланка');
