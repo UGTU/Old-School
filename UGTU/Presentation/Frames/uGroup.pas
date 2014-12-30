@@ -2962,20 +2962,20 @@ begin
   end;
 
   ftmNaprClose := TftmNaprClose.Create(self);
-  ftmNaprClose.Tag := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
+  ftmNaprClose.StudZachIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
     ['ik_zach'];
-  ftmNaprClose.CloseNapr := true;
+  //ftmNaprClose.CloseNapr := true;
   ftmNaprClose.FormShow(Sender);
-  ftmNaprClose.dbcbeNapr.KeyValue := ik_ved;
-  ftmNaprClose.dbcbeNapr.Enabled := false;
-  ftmNaprClose.LoadNapr;
-  if ftmNaprClose.showmodal = mrCancel then
+  ftmNaprClose.VedIK := ik_ved;
+  ftmNaprClose.Showmodal;
+  //ftmNaprClose.LoadNapr;
+ { if ftmNaprClose.showmodal = mrCancel then
     if not TUspevGroupController.Instance.CloseNapr(ik_ved) then
     begin
       MessageBox(Handle, 'При закрытии ведомости произошла ошибка.',
         'ИС УГТУ', MB_OK);
       Exit;
-    end;
+    end;     }
   ftmNaprClose.Free;
 
   dmUspevaemost.adospGetAllVedNaprForDisc.Active := false;

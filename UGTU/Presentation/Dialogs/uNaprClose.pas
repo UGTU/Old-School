@@ -8,7 +8,7 @@ uses
   Dialogs, uBaseDialog, DBGridEh, DBCtrlsEh, StdCtrls, Mask, DBLookupEh,
   ActnList, Buttons, ExtCtrls, ApplicationController, comObj, ExceptionBase,
   ADODB,
-  System.Actions;
+  System.Actions, Data.DB;
 
 type
   TftmNaprclose = class(TfrmBaseDialog)
@@ -27,6 +27,7 @@ type
     Label8: TLabel;
     eTema: TDBEditEh;
     Label9: TLabel;
+    dsNapr: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure dbcbeNaprChange(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
@@ -34,9 +35,18 @@ type
   private
     FCloseNapr: boolean;
     FVedIK: integer;
+    FStudZachIK: integer;
+    procedure SetStudZachIK(const Value: integer);
+    procedure SetVed(const Value: integer);
+  protected
+    procedure ActionChange(Sender: TObject; CheckDefaults: Boolean); override;
   public
+
+
     procedure LoadNapr;
     property CloseNapr: boolean read FCloseNapr write FCloseNapr;
+    property StudZachIK: integer write SetStudZachIK;
+    property VedIK: integer write SetVed;
   end;
 
 var
@@ -44,7 +54,7 @@ var
 
 implementation
 
-uses uDm, uDMUspevaemost, db;
+uses uDm, uDMUspevaemost, db, uUspevGroupController;
 {$R *.dfm}
 
 function ChangeMonthDayPlaces(date: TDateTime): string;
@@ -72,14 +82,16 @@ end;
 
 procedure TftmNaprclose.FormShow(Sender: TObject);
 begin
+    dsNapr.DataSet := TUspevGroupController.Instance.GetContentDS(FStudZachIK);
+    if FVedIK<>0 then dbcbeNapr.KeyValue := FVedIK;  //если во фрейм было передано конкретное направление
+
   try
-    dmUspevaemost.adodsNapravl.Active := false;
+    {dmUspevaemost.adodsNapravl.Active := false;
     dmUspevaemost.adodsNapravl.CommandText :=
       'select * from Napr_View where ik_zach=''' + inttostr(Tag) + '''';
-    dmUspevaemost.adodsNapravl.Active := true;
+    dmUspevaemost.adodsNapravl.Active := true;}
     dmUspevaemost.adodsmark.Active := true;
-    if not CloseNapr then
-      dbdteExam.Value := date;
+    dbdteExam.Value := date;
   finally
 
   end;
@@ -93,7 +105,7 @@ end;
 
 procedure TftmNaprclose.LoadNapr;
 begin
-  dmUspevaemost.adodsNapravl.Locate('ik_ved', dbcbeNapr.KeyValue,
+  {dmUspevaemost.adodsNapravl.Locate('ik_ved', dbcbeNapr.KeyValue,
     [loPartialKey]);
 
   if dmUspevaemost.adodsNapravl.FieldByName('dd_exam').AsDateTime = 0 then
@@ -105,7 +117,19 @@ begin
   dbcbeEx.KeyValue := dmUspevaemost.adodsNapravl.FieldByName('itab_n').AsString;
   dbcbeMark.KeyValue := dmUspevaemost.adodsNapravl.FieldByName('cosenca')
     .AsInteger;
-  eTema.Text := dmUspevaemost.adodsNapravl.FieldByName('ctema').AsString;
+  eTema.Text := dmUspevaemost.adodsNapravl.FieldByName('ctema').AsString;}
+end;
+
+procedure TftmNaprclose.SetStudZachIK(const Value: integer);
+begin
+  SetStudZachIK := Value;
+end;
+
+procedure TftmNaprclose.SetVed(const Value: integer);
+begin
+  FVedIK := Value;
+  dbcbeNapr.KeyValue := FVedIK;
+  dbcbeNapr.Enabled := false;
 end;
 
 procedure TftmNaprclose.dbcbeNaprChange(Sender: TObject);
@@ -128,6 +152,8 @@ begin
 
   dm.DBConnect.BeginTrans;
 
+  TUspevGroupController.Instance.Close
+
   try
     with dmUspevaemost.adospAppendUspev.Parameters do
     begin
@@ -137,7 +163,7 @@ begin
       AddParameter;
       items[1].Value := dbcbeNapr.KeyValue;
       AddParameter;
-      items[2].Value := Tag;
+      items[2].Value := FStudZachIK;
       AddParameter;
       items[3].Value := dbcbeMark.KeyValue;
       AddParameter;
@@ -149,7 +175,7 @@ begin
     begin
       clear;
       CreateParameter('@flag', ftInteger, pdInput, 0, 1);
-      CreateParameter('@Ik_zach', ftInteger, pdInput, 0, Tag);
+      CreateParameter('@Ik_zach', ftInteger, pdInput, 0, FStudZachIK);
       CreateParameter('@Ik_ved', ftInteger, pdInput, 0, dbcbeNapr.KeyValue);
       CreateParameter('@KPTheme', ftString, pdInput, 2000, eTema.Text);
     end;
@@ -190,6 +216,12 @@ begin
   dmUspevaemost.adospPrepodVed.Parameters.clear;
   dmUspevaemost.adospPrepodVed.ExecProc;
   dmUspevaemost.adodsNapravl.Active := true;
+
+end;
+
+procedure TftmNaprclose.ActionChange(Sender: TObject; CheckDefaults: Boolean);
+begin
+  inherited;
 
 end;
 

@@ -57,7 +57,7 @@ type
 
   TNapravlCloseCommand = class(TBaseADOCommand)
     constructor Create(FVedom: integer); overload;
-    procedure Close;
+    procedure Close(dat: TDateTime; tab_n: string);
   end;
 
   // селекторы
@@ -137,7 +137,7 @@ type
   public
     constructor Create; overload;
     procedure Reload(ik_studGrup: integer); overload;
-
+  //  procedure CloseNapr();
 
     property ContentIK: integer write setContent;
   end;
@@ -577,7 +577,7 @@ procedure TNapravController.CloseNapr(VedIK: integer);
 var FNapravlCloseCommand: TNapravlCloseCommand;
 begin
   FNapravlCloseCommand := TNapravlCloseCommand.Create(VedIK);
-  FNapravlCloseCommand.Close;
+ // FNapravlCloseCommand.Close();
   FNapravlCloseCommand.Free;
 
   FContentNapr.Refresh;
@@ -635,18 +635,25 @@ end;
 
 { TNapravlCloseCommand }
 
-procedure TNapravlCloseCommand.Close;
+procedure TNapravlCloseCommand.Close(dat: TDateTime; tab_n: string);
 begin
+  with FStor.Parameters do
+  begin
+     ParamByName('@Dd_exam').Value := dat;
+     ParamByName('@itab_n').Value := tab_n;
+  end;
   FStor.ExecProc;
 end;
 
 constructor TNapravlCloseCommand.Create(FVedom: integer);
 begin
-  inherited Create('Dek_CloseNapr');
+  inherited Create('CloseVedomost');
   with FStor.Parameters do
   begin
     Clear;
     CreateParameter('@Ik_ved', ftInteger, pdInput, 0, FVedom);
+    CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, Date);
+    CreateParameter('@itab_n', ftString, pdInput, 0, '');
   end;
 end;
 

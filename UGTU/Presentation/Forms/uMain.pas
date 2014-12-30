@@ -1792,7 +1792,7 @@ end;
 procedure TfrmMain.actNaprCloseExecute(Sender: TObject);
 begin
   ftmNaprClose := TftmNaprClose.Create(self);
-  ftmNaprClose.Tag := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
+  ftmNaprClose.StudZachIK := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
     .RecordbookKey;
   ftmNaprClose.ShowModal;
   ftmNaprClose.Free;

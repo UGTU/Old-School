@@ -158,7 +158,7 @@ inherited ftmNaprclose: TftmNaprclose
     Flat = True
     KeyField = 'Ik_ved'
     ListField = 'OutColumn'
-    ListSource = dmUspevaemost.dsNapravl
+    ListSource = dsNapr
     TabOrder = 1
     Visible = True
     OnChange = dbcbeNaprChange
@@ -215,5 +215,8 @@ inherited ftmNaprclose: TftmNaprclose
     Flat = True
     TabOrder = 5
     Visible = True
+  end
+  object dsNapr: TDataSource
+    Left = 304
   end
 end

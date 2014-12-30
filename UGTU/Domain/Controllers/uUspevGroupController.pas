@@ -275,6 +275,8 @@ type
   //установить семестр для выдачи направлений
   procedure SetNapravSemester(nsem: integer);
 
+ // procedure CloseNapr(ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);
+
 
   //**********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
   //Возвращает следующее слово из строки,
@@ -974,6 +976,13 @@ try
 except
   result:=false;
 end;
+end;
+
+procedure TUspevGroupController.CloseNapr(ik_ved, cosenca: integer; ntab,
+  KPTema: string; date_exam: TDateTime);
+begin
+  //
+
 end;
 
 //CloseVed закрывает ведомость
