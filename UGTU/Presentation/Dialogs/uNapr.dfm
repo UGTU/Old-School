@@ -177,25 +177,25 @@ inherited ftmNapr: TftmNapr
     Top = 242
     Width = 673
     ExplicitTop = 242
-    ExplicitWidth = 587
+    ExplicitWidth = 673
     inherited bbOK: TBitBtn
       Left = 435
       Width = 76
       Enabled = False
-      ExplicitLeft = 349
+      ExplicitLeft = 435
       ExplicitWidth = 76
     end
     inherited bbApply: TBitBtn
       Left = 591
       Width = 76
       Enabled = False
-      ExplicitLeft = 505
+      ExplicitLeft = 591
       ExplicitWidth = 76
     end
     inherited bbCancel: TBitBtn
       Left = 513
       Width = 76
-      ExplicitLeft = 427
+      ExplicitLeft = 513
       ExplicitWidth = 76
     end
     inherited bbSprav: TBitBtn
@@ -337,11 +337,6 @@ inherited ftmNapr: TftmNapr
         DynProps = <>
         EditButtons = <>
         FieldName = 'lClose'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
         Footers = <>
         Title.Alignment = taCenter
         Title.Caption = #1057#1090#1072#1090#1091#1089

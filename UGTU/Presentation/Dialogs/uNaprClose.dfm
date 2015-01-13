@@ -157,7 +157,7 @@ inherited ftmNaprclose: TftmNaprclose
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_ved'
-    ListField = 'OutColumn'
+    ListField = 'Content_name'
     ListSource = dsNapr
     TabOrder = 1
     Visible = True

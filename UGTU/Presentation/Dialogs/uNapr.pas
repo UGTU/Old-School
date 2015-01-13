@@ -147,18 +147,20 @@ begin
   dmUspevaemost.adospGetNomerNapr.Active := true;
   // dmUspevaemost.adospGetNomerNapr.ExecProc;
 
-  if dmUspevaemost.adospGetNomerNapr.RecordCount <> 0 then
+  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(studobj.StudGrupKey);
+  dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
 
+
+  if dmUspevaemost.adospGetNomerNapr.RecordCount <> 0 then
     if dmUspevaemost.adospGetNomerNapr.Fields[0].AsString <> '' then
       eNum.Text := inttostr(dmUspevaemost.adospGetNomerNapr.Fields[0]
         .AsInteger + 1)
     else
       eNum.Text := '1';
 
-  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(studobj.StudGrupKey);
-  dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
 
-  LoadVedForNapr;
+
+  //LoadVedForNapr;
   // dm.adodsVidOtch.Active:=true;
   dm.adodsVidExam.Active := true;
 
@@ -198,7 +200,7 @@ begin
   if dbgrdNapr.SelectedRows.Count>0 then
   begin
     vedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
-    TUspevGroupController.Instance.CloseNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
+    //TUspevGroupController.Instance.CloseNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
   end
   else ShowMessage('¬ыберите направление, которое необходимо удалить');
 end;
@@ -332,8 +334,8 @@ end;
 procedure TftmNapr.actCloseClick(Sender: TObject);
 begin
   ftmNaprClose := TftmNaprClose.Create(self);
-  ftmNaprClose.Tag := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
-    .RecordbookKey;
+  //ftmNaprClose.StudZachIK := Tag; //в Tag записан номер зачетки
+  ftmNaprClose.VedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
   ftmNaprClose.ShowModal;
   ftmNaprClose.Free;
 end;

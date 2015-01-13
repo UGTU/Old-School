@@ -213,7 +213,7 @@ type
   function OpenVed(ikVed: integer):boolean;
 
   //CloseVed закрывает ведомость
-  function CloseNapr(ikVed: integer):boolean;
+  procedure CloseNapr(ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);      //ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime
 
   //UpdateDopuskForVed Обновляет допуски в ведомости (шапку)
   function UpdateDopuskForVed(ikVed : integer):boolean;
@@ -274,8 +274,6 @@ type
 
   //установить семестр для выдачи направлений
   procedure SetNapravSemester(nsem: integer);
-
- // procedure CloseNapr(ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);
 
 
   //**********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
@@ -978,15 +976,14 @@ except
 end;
 end;
 
-procedure TUspevGroupController.CloseNapr(ik_ved, cosenca: integer; ntab,
-  KPTema: string; date_exam: TDateTime);
+procedure TUspevGroupController.CloseNapr(ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);   //ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime
 begin
-  //
-
+  TApplicationController.GetInstance.AddLogEntry('Закрытие направления');
+  FNapravController.CloseNapr(ik_ved, cosenca, ntab, KPTema, date_exam);
 end;
 
 //CloseVed закрывает ведомость
-function TUspevGroupController.CloseNapr(ikVed: integer): boolean;
+{function TUspevGroupController.CloseNapr(ikVed: integer): boolean;
 var tempStoredProc: TADOStoredProc;
 begin
   Result:= false;
@@ -1000,7 +997,7 @@ begin
         exit;
       end;
   end;
-  {try
+  try
     tempStoredProc:= TADOStoredProc.Create(nil);
     tempStoredProc.ProcedureName:= 'Dek_CloseNapr;1';
     tempStoredProc.Connection:= dm.DBConnect;
@@ -1009,10 +1006,10 @@ begin
     Result:= true;
   finally
     tempStoredProc.Free;
-  end;         }
+  end;
     //if tempStoredProc<>nil then
     //  tempStoredProc.Free;
-end;
+end;          }
 
 
 //***************ВКЛАДКА ВЕДОМОСТИ**************************
@@ -1721,7 +1718,7 @@ end;
 function TUspevGroupController.GetContentDS(StudIK: integer): TADODataSet;
 begin
   FNapravController.Reload(StudIK);
-  Result := FNapravController.DataSet;
+  Result := FNapravController.ContentDS;
 end;
 
 function TUspevGroupController.GetContrlVidZanForRaport(ik_group, nSem: integer):boolean;
@@ -2521,7 +2518,7 @@ end;
 
 function TUspevGroupController.GetNapravDS: TADODataSet;
 begin
-  result := FNapravController.NaprDS;
+  result := FNapravController.DataSet;
 end;
 
 function TUspevGroupController.GetNextSubStr(var str:string):string;

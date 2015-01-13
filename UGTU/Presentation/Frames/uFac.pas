@@ -324,7 +324,7 @@ begin
   ftmNaprclose.dbcbeNapr.Enabled:=false;
   ftmNaprclose.LoadNapr;
   if ftmNaprclose.showmodal = mrCancel then
-    if not TUspevGroupController.Instance.CloseNapr(ik_Ved) then
+   // if not TUspevGroupController.Instance.CloseNapr(ik_Ved) then
     begin
     MessageBox(Handle, 'При редактировании направления произошла ошибка.', 'ИС УГТУ', MB_OK);
     exit;

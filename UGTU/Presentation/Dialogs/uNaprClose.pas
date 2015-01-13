@@ -38,8 +38,6 @@ type
     FStudZachIK: integer;
     procedure SetStudZachIK(const Value: integer);
     procedure SetVed(const Value: integer);
-  protected
-    procedure ActionChange(Sender: TObject; CheckDefaults: Boolean); override;
   public
 
 
@@ -54,7 +52,7 @@ var
 
 implementation
 
-uses uDm, uDMUspevaemost, db, uUspevGroupController;
+uses uDm, uDMUspevaemost, uUspevGroupController;
 {$R *.dfm}
 
 function ChangeMonthDayPlaces(date: TDateTime): string;
@@ -82,7 +80,7 @@ end;
 
 procedure TftmNaprclose.FormShow(Sender: TObject);
 begin
-    dsNapr.DataSet := TUspevGroupController.Instance.GetContentDS(FStudZachIK);
+    dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
     if FVedIK<>0 then dbcbeNapr.KeyValue := FVedIK;  //если во фрейм было передано конкретное направление
 
   try
@@ -122,7 +120,7 @@ end;
 
 procedure TftmNaprclose.SetStudZachIK(const Value: integer);
 begin
-  SetStudZachIK := Value;
+  FStudZachIK := Value;
 end;
 
 procedure TftmNaprclose.SetVed(const Value: integer);
@@ -152,7 +150,9 @@ begin
 
   dm.DBConnect.BeginTrans;
 
-  TUspevGroupController.Instance.Close
+  TUspevGroupController.Instance.CloseNapr(FVedIK, dbcbeMark.KeyValue,
+  dbdteExam.Value, eTema.Text, dbdteExam.Value);
+
 
   try
     with dmUspevaemost.adospAppendUspev.Parameters do
@@ -216,12 +216,6 @@ begin
   dmUspevaemost.adospPrepodVed.Parameters.clear;
   dmUspevaemost.adospPrepodVed.ExecProc;
   dmUspevaemost.adodsNapravl.Active := true;
-
-end;
-
-procedure TftmNaprclose.ActionChange(Sender: TObject; CheckDefaults: Boolean);
-begin
-  inherited;
 
 end;
 
