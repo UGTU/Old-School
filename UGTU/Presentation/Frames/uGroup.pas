@@ -339,6 +339,7 @@ type
     ikPredm: Integer;
     discName:string;
     FMaxBall:integer;
+    FIsBRS: boolean;
     function DoIsModified(flag: boolean):boolean;
     function DoIsModifiedDiploms:boolean;
 
@@ -391,7 +392,7 @@ uses uDM, DBTVgroupObj, DBTVFacObj, uStudInfo,
   uRaports, uGroupEdtDlg, uVinEkz, uDMGroupActions, uDMUspevaemost,
   uDMUgtuStructure, uNaprClose, uNapr,
   Conditions, CorrectDatatypeChecks, Parser, uDiplomController,
-  uDMDiplom, uDiplomStudSelect;
+  uDMDiplom, uDiplomStudSelect, ConstantRepository;
 
 {$R *.dfm}
 
@@ -421,6 +422,7 @@ begin
   dmUchPlan.adodsUchPlan.close;
   dmUchPlan.adodsUchPlan.CommandText := 'select * from Uch_pl where (ik_uch_plan = '+inttostr(ik)+')';
   dmUchPlan.adodsUchPlan.open;
+  FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value);
   {if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
   FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
   else FIsBRS :=false;
@@ -1046,7 +1048,8 @@ begin
     dbgrdVed.Columns[2].Visible := true;  //кат зачисления
     dbgrdVed.Columns[3].Visible := true;  //номер зачетки
     dbgrdVed.Columns[5].Visible := false; //код зачетки
-    dbgrdVed.Columns[7].Visible := true;  //оценка
+    dbgrdVed.Columns[7].Visible := (ikVidZan = vid_exam)and(FIsBRS); //только, если экзамен БРС
+    dbgrdVed.Columns[8].Visible := true;  //оценка
 
     //назначаем ширину столбцов
     dbgrdVed.Columns[1].Width := 120;
@@ -1361,6 +1364,7 @@ begin
   ikPredm := dmUspevaemost.adospGetAllVeds4Group.Fields[2].AsInteger;
   ikVidZan := dmUspevaemost.adospGetAllVeds4Group.Fields[3].AsInteger;
   discName:= dmUspevaemost.adospGetAllVeds4Group.FieldByName('cName_Disc').AsString;
+
   // читаем заголовoк ведомости
   TUspevGroupController.Instance.GetVedsHeader(ikVed);
 
@@ -1923,14 +1927,18 @@ procedure TfmGroup.dbgrdVedKeyPress(Sender: TObject; var Key: Char);
 var Text:string;
     mark: set of char;
 begin
-  mark:= ['0'..'9'] ;
+  mark:= ['0'..'9'];
   if not(Key in mark) then
      exit;
+  if not(Key in mark) then
+     exit;
+
   if (not dmUspevaemost.adospSelVed.Active) or
     (not dmUspevaemost.adospSelVedGroup.Active) or
     (dmUspevaemost.adospSelVedGroup.RecNo>=
         dmUspevaemost.adospSelVedGroup.RecordCount) or
-        (dbgrdVed.SelectedField.FieldName<>'Cosenca')
+        (dbgrdVed.SelectedField.FieldName<>'Cosenca')or
+        (dbgrdVed.SelectedField.FieldName<>'i_balls')
           then
       exit;
 
@@ -1941,7 +1949,8 @@ begin
     except
       Text:='';
     end;
-  dbgrdVed.Columns[7].SetValueAsText(Text);
+ if (dbgrdVed.SelectedField.FieldName='Cosenca') then dbgrdVed.Columns[8].SetValueAsText(Text);
+ if (dbgrdVed.SelectedField.FieldName='i_balls') then dbgrdVed.Columns[7].SetValueAsText(Text);
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Ввод оценки '+dmUspevaemost.adospSelVedGroup.FieldByName('StudName').AsString+Text);
     //if (dmUspevaemost.adospSelVedGroup.RecNo<
         //dmUspevaemost.adospSelVedGroup.RecordCount) then

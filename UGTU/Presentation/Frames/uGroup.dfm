@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsNapr
+      ActivePage = tsVed
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -1312,6 +1312,7 @@ inherited fmGroup: TfmGroup
               Width = 135
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'KatZach'
@@ -1357,6 +1358,17 @@ inherited fmGroup: TfmGroup
               Width = 80
             end
             item
+              Alignment = taCenter
+              AlwaysShowEditButton = True
+              AutoFitColWidth = False
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'i_balls'
+              Footers = <>
+              Title.Caption = #1041#1072#1083#1083#1099
+            end
+            item
+              Alignment = taCenter
               AlwaysShowEditButton = True
               AutoFitColWidth = False
               DynProps = <>
@@ -2633,7 +2645,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004000C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400140110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2806,7 +2818,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3477,7 +3489,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800100110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

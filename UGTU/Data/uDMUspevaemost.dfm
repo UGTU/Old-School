@@ -578,6 +578,13 @@ object dmUspevaemost: TdmUspevaemost
         DataType = ftString
         Size = 500
         Value = Null
+      end
+      item
+        Name = '@i_balls'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
       end>
     Left = 208
     Top = 264
@@ -899,6 +906,9 @@ object dmUspevaemost: TdmUspevaemost
     object adospSelVedGroupIsPassed: TBooleanField
       Alignment = taRightJustify
       FieldName = 'IsPassed'
+    end
+    object adospSelVedGroupi_balls: TIntegerField
+      FieldName = 'i_balls'
     end
   end
   object dsGetDopuskForVedom: TDataSource

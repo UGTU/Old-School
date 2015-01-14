@@ -1548,11 +1548,12 @@ begin
             CreateParameter('@flag', ftInteger, pdInput, 0, 0);
             CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
             CreateParameter('@Ik_zach', ftInteger, pdInput, 0, dbgrdVed.Fields[5].Value);
-            if (dbgrdVed.Fields[7].Value <> Null) then
-              CreateParameter('@Cosenca', ftInteger, pdInput, 0, dbgrdVed.Fields[7].Value)
+            if (dbgrdVed.Fields[8].Value <> Null) then
+              CreateParameter('@Cosenca', ftInteger, pdInput, 0, dbgrdVed.Fields[8].Value)
             else
               CreateParameter('@Cosenca', ftInteger, pdInput, 0, -1);
             CreateParameter('@cTema', ftString, pdInput, 2000, '');
+            CreateParameter('@i_balls', ftInteger, pdInput, 0, dbgrdVed.Fields[7].Value)
           end;
           dmUspevaemost.adospAppendUspev.ExecProc;
 
