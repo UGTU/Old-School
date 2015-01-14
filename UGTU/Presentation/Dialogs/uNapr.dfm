@@ -189,7 +189,8 @@ inherited ftmNapr: TftmNapr
       Left = 591
       Width = 76
       Enabled = False
-      ExplicitLeft = 591
+      Visible = False
+      ExplicitLeft = 179
       ExplicitWidth = 76
     end
     inherited bbCancel: TBitBtn

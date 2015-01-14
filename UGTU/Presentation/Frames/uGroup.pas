@@ -341,10 +341,11 @@ type
     ikVed: Integer;
     ikVidZan: Integer;
     ikPredm: Integer;
-    discName: string;
-    FMaxBall: Integer;
-    function DoIsModified(flag: Boolean): Boolean;
-    function DoIsModifiedDiploms: Boolean;
+    discName:string;
+    FMaxBall:integer;
+    FIsBRS: boolean;
+    function DoIsModified(flag: boolean):boolean;
+    function DoIsModifiedDiploms:boolean;
 
     procedure LoadVedHeader();
     function CheckOcenka(Value: Integer): string;
@@ -396,7 +397,7 @@ uses uDM, DBTVgroupObj, DBTVFacObj, uStudInfo,
   uRaports, uGroupEdtDlg, uVinEkz, uDMGroupActions, uDMUspevaemost,
   uDMUgtuStructure, uNaprClose, uNapr,
   Conditions, CorrectDatatypeChecks, Parser, uDiplomController,
-  uDMDiplom, uDiplomStudSelect, GeneralController;
+  uDMDiplom, uDiplomStudSelect, ConstantRepository;
 
 {$R *.dfm}
 { TfmGroup }
@@ -427,6 +428,10 @@ begin
   dmUchPlan.adodsUchPlan.CommandText :=
     'select * from Uch_pl where (ik_uch_plan = ' + inttostr(ik) + ')';
   dmUchPlan.adodsUchPlan.open;
+  FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value);
+  {if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
+  FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
+  else FIsBRS :=false;
 
   // Взять ведомости группы
   dsVed.DataSet := TUspevGroupController.Instance.GetVedomSet;
@@ -1041,13 +1046,16 @@ begin
     // загрузка имеющихся оценок
     dsUspev.DataSet := TUspevGroupController.Instance.SelectVed(ikVed);
 
-    // dmUspevaemost.adospSelVedGroup.close;
-    // dmUspevaemost.adospSelVedGroup.open;
-    // настраиваем отображение столбцов
-    dbgrdVed.Columns[0].Visible := false; // код студента
-    dbgrdVed.Columns[1].Visible := true; // имя
-    dbgrdVed.Columns[2].Visible := true; // кат зачисления
-    dbgrdVed.Columns[3].Visible := true; // номер зачетки
+    dmUspevaemost.adospSelVedGroup.Close;
+    dmUspevaemost.adospSelVedGroup.Open;
+    //настраиваем отображение столбцов
+    dbgrdVed.Columns[0].Visible := false;  //код студента
+    dbgrdVed.Columns[1].Visible := true;   //имя
+    dbgrdVed.Columns[2].Visible := true;  //кат зачисления
+    dbgrdVed.Columns[3].Visible := true;  //номер зачетки
+    dbgrdVed.Columns[5].Visible := false; //код зачетки
+    dbgrdVed.Columns[7].Visible := (ikVidZan = vid_exam)and(FIsBRS); //только, если экзамен БРС
+    dbgrdVed.Columns[8].Visible := true;  //оценка
 
     dbgrdVed.Columns[5].Visible := false; // код зачетки
     dbgrdVed.Columns[6].Visible := false; // допуск
@@ -1360,6 +1368,7 @@ begin
   // ikVidZan := //dmUspevaemost.adospGetAllVeds4Group.Fields[3].AsInteger;
   // discName := //dmUspevaemost.adospGetAllVeds4Group.FieldByName
   // ('cName_Disc').AsString;
+
   // читаем заголовoк ведомости
   // TUspevGroupController.Instance.GetVedsHeader(ikVed);
 
@@ -1958,15 +1967,19 @@ var
   Text: string;
   mark: set of Char;
 begin
-  mark := ['0' .. '9'];
+  mark:= ['0'..'9'];
   if not(Key in mark) then
-    Exit;
-  if (not dsVed.DataSet.Active) or
-    (not dsUspev.DataSet.Active) or
-    (dsUspev.DataSet.RecNo >=
-    dsUspev.DataSet.RecordCount) or
-    (dbgrdVed.SelectedField.FieldName <> 'Cosenca') then
-    Exit;
+     exit;
+  if not(Key in mark) then
+     exit;
+
+  if (not dmUspevaemost.adospSelVed.Active) or
+    (not dmUspevaemost.adospSelVedGroup.Active) or
+    (dmUspevaemost.adospSelVedGroup.RecNo>=
+        dmUspevaemost.adospSelVedGroup.RecordCount) or
+       (dbgrdVed.SelectedField.FieldName<>'Cosenca')
+          then
+      exit;
 
   // try
   dsUspev.DataSet.Edit;
@@ -1977,7 +1990,8 @@ begin
   end;
 
  // dbgrdVed.Columns[7]. := Text;
-  dbgrdVed.Columns[7].SetValueAsText(Text);
+ if (dbgrdVed.SelectedField.FieldName='Cosenca') then dbgrdVed.Columns[8].SetValueAsText(Text);
+ if (dbgrdVed.SelectedField.FieldName='i_balls') then dbgrdVed.Columns[7].SetValueAsText(Text);
   TApplicationController.GetInstance.AddLogEntry('Ведомость. Ввод оценки ' +
     dsUspev.DataSet.FieldByName('StudName').AsString + Text);
   // if (dmUspevaemost.adospSelVedGroup.RecNo<

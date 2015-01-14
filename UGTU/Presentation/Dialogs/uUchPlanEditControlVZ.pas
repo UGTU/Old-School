@@ -67,7 +67,11 @@ begin
   Caption := Caption + vidZanyatName + '"';
   dbgContent.DataSource.DataSet := TUchPlanController.Instance.LoadControlVZ
     (DiscInUchPlanIK, vidZanyatIK);
-  if (fVidZanyatIK = 33) then
+
+  dbgContent.DataSource.DataSet.FieldByName('n_module').Visible := (fVidZanyatIK = 33);
+  dbgContent.DataSource.DataSet.FieldByName('i_balls').Visible := (fVidZanyatIK = 33);
+
+  {if (fVidZanyatIK = 33) then
   begin
     dbgContent.DataSource.DataSet.FieldByName('n_module').Visible := true;
     dbgContent.DataSource.DataSet.FieldByName('i_balls').Visible := true;
@@ -79,7 +83,7 @@ begin
       dbgContent.DataSource.DataSet.FieldByName('i_balls').Visible := true
     else
       dbgContent.DataSource.DataSet.FieldByName('i_balls').Visible := false;
-  end;
+  end;     }
 
   IsModified := false;
 end;

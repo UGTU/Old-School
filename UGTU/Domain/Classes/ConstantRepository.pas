@@ -11,6 +11,7 @@ const
   FGOS2 = 1;
   key_WorkPlan = 2;
   key_ModelPlan = 1;
+  vid_exam = 6;
 
 implementation
 

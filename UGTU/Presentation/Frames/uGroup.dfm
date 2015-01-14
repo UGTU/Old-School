@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsNapr
+      ActivePage = tsVed
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -1320,6 +1320,7 @@ inherited fmGroup: TfmGroup
               Width = 135
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'KatZach'
@@ -1365,6 +1366,17 @@ inherited fmGroup: TfmGroup
               Width = 80
             end
             item
+              Alignment = taCenter
+              AlwaysShowEditButton = True
+              AutoFitColWidth = False
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'i_balls'
+              Footers = <>
+              Title.Caption = #1041#1072#1083#1083#1099
+            end
+            item
+              Alignment = taCenter
               AlwaysShowEditButton = True
               AutoFitColWidth = False
               DynProps = <>
