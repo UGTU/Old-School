@@ -1937,8 +1937,7 @@ begin
     (not dmUspevaemost.adospSelVedGroup.Active) or
     (dmUspevaemost.adospSelVedGroup.RecNo>=
         dmUspevaemost.adospSelVedGroup.RecordCount) or
-        (dbgrdVed.SelectedField.FieldName<>'Cosenca')or
-        (dbgrdVed.SelectedField.FieldName<>'i_balls')
+       (dbgrdVed.SelectedField.FieldName<>'Cosenca')
           then
       exit;
 
