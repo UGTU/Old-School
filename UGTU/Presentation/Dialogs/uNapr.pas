@@ -361,6 +361,7 @@ end;
 procedure TftmNapr.PrintNapr(ik_ved: Integer; EmptyNapr: boolean);
 var
   Report: TReportBase;
+begin
     TApplicationController.GetInstance.AddLogEntry('Направление. Печать направления за ');
     Report := TReportBase.CreateReport(TNaprExcelReport);
     Report.FreeOnComplete := true;
@@ -601,3 +602,4 @@ Replace('#v_z#','практики');
 
 end;
 
+end.

@@ -431,7 +431,7 @@ begin
   FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value);
   {if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
   FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
-  else FIsBRS :=false;
+  else FIsBRS :=false;                                            }
 
   // Взять ведомости группы
   dsVed.DataSet := TUspevGroupController.Instance.GetVedomSet;
