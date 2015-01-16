@@ -2743,9 +2743,9 @@ end;
 procedure TfmGroup.actPrntNotesUpdate(Sender: TObject);
 begin
   // закладка ведомость
-  if (cmbxSem.Value > 0) and (pcMain.ActivePage = tsVed) and
+  if (cmbxSem.Value > 0) and (pcMain.ActivePage = tsVed) {and
     (dmUspevaemost.adospSelVed.Active) and
-    (dmUspevaemost.adospSelVedGroup.Active) then
+    (dmUspevaemost.adospSelVedGroup.Active)} then
     (Sender as TAction).Enabled := true
   else
     (Sender as TAction).Enabled := false;
