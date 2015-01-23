@@ -1746,11 +1746,14 @@ begin
     .FoundYear;
   ftmNapr := TftmNapr.Create(self);
 
-  ftmNapr.Tag := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
-    .RecordbookKey;
-  ftmNapr.Hint :=
-    inttostr(TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.Parent.
-    Parent.data).ik);
+  ftmNapr.StudGrupKey := TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject).StudGrupKey;
+  ftmNapr.ZachIK := TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject).ik;
+  {TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
+    .RecordbookKey;      }
+
+  ftmNapr.FacIK :=
+    TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.Parent.
+    Parent.data).ik;
   ftmNapr.studobj := TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject);
 
   if MonthOf(Date) > 8 then

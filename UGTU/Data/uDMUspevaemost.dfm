@@ -586,8 +586,8 @@ object dmUspevaemost: TdmUspevaemost
         Precision = 10
         Value = Null
       end>
-    Left = 208
-    Top = 264
+    Left = 216
+    Top = 248
   end
   object dsSelVedKP: TDataSource
     DataSet = adospSelVedKP

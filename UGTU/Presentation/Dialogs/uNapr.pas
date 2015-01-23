@@ -59,6 +59,11 @@ type
     procedure N92Click(Sender: TObject);
     procedure actCloseClick(Sender: TObject);
   private
+    FZachIK: integer;
+    FGrupIK: integer;
+    FFacIK: integer;
+    FStudGrupKey: integer;
+
     procedure ExecuteError(Sender: TObject; E: Exception);
     procedure LoadVedForNapr();
 
@@ -66,7 +71,10 @@ type
   public
     studobj: TDBNodeStudObject; { Public declarations }
     procedure PrintNapr(ik_ved: Integer; EmptyNapr: boolean);
-
+    property  ZachIK: integer write FZachIK;
+    property StudGrupKey: integer write FStudGrupKey;
+    property  GrupIK: integer write FGrupIK;
+    property FacIK: integer write FFacIK;
   end;
 
   TNaprExcelReport = class(TExcelReportBase)
@@ -140,14 +148,14 @@ begin
   begin
     clear;
     addParameter;
-    items[0].value := Hint;
+    items[0].value := FFacIK;
     addParameter;
     items[1].value := (studobj.Parent as TDBNodeGroupObject).ik;
   end;
   dmUspevaemost.adospGetNomerNapr.Active := true;
   // dmUspevaemost.adospGetNomerNapr.ExecProc;
 
-  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(studobj.StudGrupKey);
+  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(FStudGrupKey);
   dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
 
 
@@ -239,7 +247,12 @@ procedure TftmNapr.actApplyExecute(Sender: TObject);
 begin
   TApplicationController.GetInstance.AddLogEntry
     ('Направление. Сохранение направления по ' +
-    dmUspevaemost.adospPredmStud.FieldValues['NaprName']);
+    dbcbeDisc.Text + ' для студента ' + IntToStr(FZachIK));
+
+  TUspevGroupController.Instance.AddNapr(dbcbeVidExam.KeyValue, StrToDateTime(dbdteOut.Text),
+      StrToDateTime(dbdteTo.Text), eNum.Text, dbcbeVidExam.Text);
+
+  { dmUspevaemost.adospPredmStud.FieldValues['NaprName']);
   dmUspevaemost.aspNapr.Active := false;
 
   with dmUspevaemost.aspNapr.Parameters do
@@ -307,12 +320,12 @@ begin
       items[14].value := ' ';
     addParameter;
     items[15].value := dbcbeDisc.value;
-  end;
+  end;     }
 
   // try
 
-  dmUspevaemost.aspNapr.Active := true;
-  { except
+ { dmUspevaemost.aspNapr.Active := true;
+   except
     showmessage('Невозможно выдать направление!');
     exit;
     end; }
@@ -342,7 +355,7 @@ end;
 
 procedure TftmNapr.actOKExecute(Sender: TObject);
 begin
-  close;
+
   close;
 
 end;

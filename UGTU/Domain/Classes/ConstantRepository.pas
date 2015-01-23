@@ -12,6 +12,11 @@ const
   key_WorkPlan = 2;
   key_ModelPlan = 1;
   vid_exam = 6;
+  //ErrorCode
+    NoError = 0;
+    ExistError = 1;
+    FailError = 2;
+    StatusError = 3;
 
 implementation
 

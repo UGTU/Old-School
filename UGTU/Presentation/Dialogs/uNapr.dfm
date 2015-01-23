@@ -182,20 +182,22 @@ inherited ftmNapr: TftmNapr
       Left = 435
       Width = 76
       Enabled = False
+      Visible = False
       ExplicitLeft = 435
       ExplicitWidth = 76
     end
     inherited bbApply: TBitBtn
       Left = 591
       Width = 76
+      Caption = #1042#1099#1076#1072#1090#1100
       Enabled = False
-      Visible = False
-      ExplicitLeft = 179
+      ExplicitLeft = 591
       ExplicitWidth = 76
     end
     inherited bbCancel: TBitBtn
       Left = 513
       Width = 76
+      Caption = #1047#1072#1082#1088#1099#1090#1100
       ExplicitLeft = 513
       ExplicitWidth = 76
     end
@@ -337,7 +339,7 @@ inherited ftmNapr: TftmNapr
         Alignment = taCenter
         DynProps = <>
         EditButtons = <>
-        FieldName = 'lClose'
+        FieldName = 'Condition'
         Footers = <>
         Title.Alignment = taCenter
         Title.Caption = #1057#1090#1072#1090#1091#1089
@@ -379,6 +381,9 @@ inherited ftmNapr: TftmNapr
   inherited actBaseDialog: TActionList
     Left = 217
     Top = 120
+    inherited actOK: TAction
+      OnUpdate = actOKUpdate
+    end
   end
   object dsPredmStud: TDataSource
     Left = 158

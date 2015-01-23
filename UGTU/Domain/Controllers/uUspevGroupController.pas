@@ -264,7 +264,7 @@ type
 
   //***********НАПРАВЛЕНИЯ*********************************************************************************************
   //взять DataSet с ведомостями, по которым можно дать направления для текущего студента
-  function GetContentDS(StudIK: integer): TADODataSet;
+  function GetContentDS(StudIK, ZachIK: integer): TADODataSet;
 
   //взять DataSet с направлениями студента
   function GetNapravDS: TADODataSet;
@@ -275,6 +275,7 @@ type
   //установить семестр для выдачи направлений
   procedure SetNapravSemester(nsem: integer);
 
+  procedure AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum, VidName: string);
 
   //**********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
   //Возвращает следующее слово из строки,
@@ -1717,7 +1718,7 @@ begin
 end;
 
 //Выбирает все дисциплины, кот-е есть в уч. плане (для вида занятий)
-function TUspevGroupController.GetContentDS(StudIK: integer): TADODataSet;
+function TUspevGroupController.GetContentDS(StudIK, ZachIK: integer): TADODataSet;
 begin
   FNapravController.Reload(StudIK);
   Result := FNapravController.ContentDS;
@@ -2571,6 +2572,14 @@ begin
 end;
 
 //настройка следующего листа (для КП - двух следующих)
+procedure TUspevGroupController.AddNapr(VidExID: integer; dateIn,
+  dateOut: TDateTime; NaprNum, VidName: string);
+begin
+  case FNapravController.AddNapr(VidExID, dateIn, dateOut, NaprNum) of
+    1: ShowMessage('Вид направления "'+VidName+'" на студента уже выдавался');
+  end;
+end;
+
 procedure TUspevGroupController.AddPageVedomost(var mainSheet, next:integer;firstStr:integer; E:Variant; HasTema:boolean; VidZanShortName: string);
 var
   prevSheetName: string;    //название предыдущей страницы Excel

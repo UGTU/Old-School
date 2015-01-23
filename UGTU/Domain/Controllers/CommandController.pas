@@ -32,11 +32,13 @@ type
 
   // -----------------наследники---------------------------------------------------------------------------------
 
-  // команды (процедуры)
+  // команды (процедуры) работы с ведомостями
   TVedCommand = class(TBaseADOCommand)
   public
     constructor Create(FVedom: integer); overload;
 
+   { procedure Insert(ikVidExam: integer; DateIn, DateOut: TDateTime; VedNum: string;
+                     bitNapr: boolean);       }
     procedure Update(ikVidExam: integer; VedNum, ikPrepod: string;
       DateExam: TDateTime; bitClose, bitNapr: boolean);
     procedure Delete;
@@ -55,7 +57,17 @@ type
     procedure DoIt(Ik_zach: integer; KPTheme: string);
   end;
 
-  // селекторы
+  TNaprCommand = class(TBaseADOCommand)
+  public
+    constructor Create(FVedom: integer); overload;
+    procedure Add(ik_contentUP, ik_studGrup, VidEx: integer; StartDate,
+                  EndDate: TDateTime; cNumber_napr: string);
+    procedure Close(cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);
+    procedure Annul;
+  end;
+
+
+  // ------------------------------------ СЕЛЕКТОРЫ-----------------------------
   TUspevController = class(TBaseSelectController)
   private
     FVedomost: integer;
@@ -63,7 +75,6 @@ type
   public
     constructor Create;
     procedure Save;
-
     property Vedomost: integer write SetVedomost;
     property DataSet: TADODataSet read FDataSet;
 
@@ -135,19 +146,21 @@ type
   ведомость закрыта или вообще не создавалась}
   TContentNapravController = class(TBaseSelectController)
   private
-
+    FContentIK: integer;
     procedure setContent(const Value: integer);
   public
     constructor Create; overload;
     procedure Reload(ik_studGrup: integer); overload;
 
-    property ContentIK: integer write setContent;
+    property ContentIK: integer read FContentIK write setContent;
   end;
 
   {управление направлениями студента}
   TNapravController = class(TBaseSelectController)
   private
-    FStud: integer;
+    FStudGrup: integer; //ik_StudGrup
+    FZach: integer;
+    FGrup: integer;
     FSemester: integer;
 
     FContentNapr: TContentNapravController;   //набор предметов для создания направлений
@@ -157,7 +170,9 @@ type
   public
     constructor Create;
     procedure Reload(ik_studGrup: integer); overload;
-    procedure CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);
+    function CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
+    function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum: string): integer;
+    function Annul(VedIK: integer): integer;
 
     property ContentIK: integer write setContent;
     property ContentDS: TADODataSet read GetContentDS;
@@ -167,7 +182,8 @@ type
 
 implementation
 
-uses {uDMUspevaemost,} GeneralController, DateUtils, uDM, ExceptionBase;
+uses GeneralController, DateUtils, uDM, ExceptionBase,
+      ConstantRepository;
 
 { TBaseSelectController }
 
@@ -555,6 +571,22 @@ begin
   end;
 end;
 
+{procedure TVedCommand.Insert(ikVidExam: integer; DateIn, DateOut: TDateTime;
+  VedNum: string; bitNapr: boolean);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@flag').Value := 1; // редактирование
+    ParamByName('@cNumber_ved').Value := VedNum;
+    ParamByName('@Itab_n').Value := ikPrepod;
+    ParamByName('@Ik_vid_exam').Value := ikVidExam;
+    ParamByName('@Dd_exam').Value := DateExam;
+    ParamByName('@lClose').Value := bitClose;
+    ParamByName('@lPriznak_napr').Value := bitNapr;
+    FStor.ExecProc;
+  end;
+end;}
+
 procedure TVedCommand.Update(ikVidExam: integer; VedNum, ikPrepod: string;
   DateExam: TDateTime; bitClose, bitNapr: boolean);
 begin
@@ -573,14 +605,61 @@ end;
 
 { TNapravController }
 
-procedure TNapravController.CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);
+function TNapravController.AddNapr(VidExID: integer; dateIn,
+  dateOut: TDateTime; NaprNum: string): integer;
+var NaprCommand: TNaprCommand;
 begin
+  try
+    NaprCommand := TNaprCommand.Create(0);
+    NaprCommand.Add(FContentNapr.ContentIK, FStudGrup, VidExID, dateIn, dateOut, NaprNum);
+    Result := NoError;
+  except
+    Result := FailError;
+  end;
+  NaprCommand.Free;
+  Refresh;
+end;
 
+function TNapravController.Annul(VedIK: integer): integer;
+var NaprCommand: TNaprCommand;
+begin
+  try
+    NaprCommand := TNaprCommand.Create(VedIK);
+    NaprCommand.Annul;
+    Result := NoError;
+  except
+    Result := FailError;
+  end;
+  NaprCommand.Free;
+end;
+
+function TNapravController.CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
+var //NaprCommand: TNaprCommand;
+  FVedCommand: TVedCommand;
+  FAppendUspevCommand: TAppendUspevCommand;
+  FAppendUspevKPThemeCommand: TAppendUspevKPThemeCommand;
+begin
+  DataSet.Locate('Ik_ved', VedIK, []);
+  if (DataSet.FieldByName('lClose').Value = NULL) then  //если направление уже аннулировано
+  begin
+    Result := StatusError;
+    exit;
+  end;
+  try
+    FVedCommand := TVedCommand.Create(VedIK);
+    FAppendUspevCommand.DoIt();
+    //NaprCommand := TNaprCommand.Create(VedIK);
+    //NaprCommand.Close(cosenca, ntab, KPTema, date_exam);
+    Result := NoError;
+  except
+    Result := FailError;
+  end;
+  //NaprCommand.Free;
 end;
 
 constructor TNapravController.Create;
 begin
-  inherited Create('GetNapravlInfo(' + IntToStr(0) + ')');
+  inherited Create('GetStudNaprav(' + IntToStr(0) + ')');
   FContentNapr := TContentNapravController.Create;
 end;
 
@@ -589,10 +668,11 @@ begin
   result := FContentNapr.DataSet;
 end;
 
-procedure TNapravController.Reload(ik_studGrup: integer);
+procedure TNapravController.Reload(ik_studGrup, ik_zach: integer);
 begin
   inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ')');
-  FStud := ik_studGrup;
+  FStudGrup := ik_studGrup;
+  FZ
   FContentNapr.Reload(ik_studGrup);
 end;
 
@@ -616,7 +696,7 @@ end;
 
 constructor TContentNapravController.Create;
 begin
-  inherited Create('GetStudNaprav(' + IntToStr(0) + ')');
+  inherited Create('GetNapravlInfo(' + IntToStr(0) + ')');
 end;
 
 procedure TContentNapravController.Reload(ik_studGrup: integer);
@@ -626,7 +706,69 @@ end;
 
 procedure TContentNapravController.setContent(const Value: integer);
 begin
+  FContentIK := Value;
   FDataSet.Locate('ik_upContent', Value, []);
+end;
+
+{ TNaprCommand }
+
+procedure TNaprCommand.Add(ik_contentUP, ik_studGrup, VidEx: integer;
+  StartDate, EndDate: TDateTime; cNumber_napr: string);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@flag').Value := 0; // добавить направление
+    ParamByName('@ik_upContent').Value := ik_contentUP;
+    ParamByName('@ik_studGrup').Value := ik_studGrup;
+    ParamByName('@Ik_vid_exam').Value := VidEx;
+    ParamByName('@StartDate').Value := StartDate;
+    ParamByName('@EndDate').Value := EndDate;
+    ParamByName('@cNumber_napr').Value := cNumber_napr;
+    FStor.ExecProc;
+  end;
+end;
+
+procedure TNaprCommand.Annul;
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@flag').Value := -1; // аннулировать направление
+    FStor.ExecProc;
+  end;
+end;
+
+procedure TNaprCommand.Close(cosenca: integer; ntab, KPTema: string;
+  date_exam: TDateTime);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@flag').Value := 1; // закрыть направление
+    ParamByName('@Itab_n').Value := ntab;
+    ParamByName('@KPTema').Value := KPTema;
+    ParamByName('@EndDate').Value := date_exam;
+    FStor.ExecProc;
+  end;
+end;
+
+constructor TNaprCommand.Create(FVedom: integer);
+begin
+  inherited Create('AppendNapravl');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@flag', ftInteger, pdInput, 0, 0);
+    CreateParameter('@ik_upContent', ftInteger, pdInput, 0, 0);
+    CreateParameter('@ik_studGrup', ftInteger, pdInput, 0, 0);
+    CreateParameter('@StartDate', ftDateTime, pdInput, 0, Date);
+    CreateParameter('@EndDate', ftDateTime, pdInput, 0, Date);
+    CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, 0);
+    CreateParameter('@cNumber_napr', ftString, pdInput, 12, '');
+    CreateParameter('@ik_ved', ftInteger, pdInput, 0, FVedom);
+    CreateParameter('@cosenca', ftInteger, pdInput, 0, 0);
+    CreateParameter('@Itab_n', ftString, pdInput, 50, '');
+    CreateParameter('@KPTema', ftString, pdInput, 2000, '');
+  end;
+
 end;
 
 end.

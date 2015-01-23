@@ -291,8 +291,9 @@ alter PROCEDURE [dbo].[AppendVedomost]
 @Itab_n varchar(50) = NULL,			--код препода
 @Ik_vid_exam INT = NULL,			--вид экзамена (первичный, вторичный)
 @Dd_exam DATETIME = NULL,			--дата экзамена
-@lClose BIT=0,
-@lPriznak_napr BIT = NULL			--признак направления
+@Dd_vyd DATETIME = NULL,			--дата выдачи
+@lClose BIT=0,						--признак закрытия
+@lPriznak_napr BIT = NULL			--признак направления		
 
 AS
   IF @flag=-1  --удаление ведомости
@@ -368,20 +369,22 @@ RETURNS @Result TABLE
 	Content_name		varchar(500),
 	ik_upContent		int,
 	ik_ved				int,
-	lClose				varchar(20),
+	lClose				bit,
+	condition			varchar(20),
 	Itab_n				varchar(50),
 	Dd_exam				datetime,
 	dD_vydano			datetime,
 	cNumber_ved			varchar(50),
 	KPTheme				varchar(2000),
+	Ik_vid_exam			int,
 	cName_vid_exam		varchar(12),
 	Cosenca				varchar(20)
  )
 AS
 BEGIN
-  insert INTO @Result(n_sem, Content_name, ik_upContent, ik_ved, lClose, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme,cName_vid_exam,Cosenca)
-  SELECT n_sem, discpln.cName_disc + ', ' + vid_zaniat.cName_vid_zanyat, Content_UchPl.ik_upContent, Vedomost.Ik_ved,
-		 cast(lClose as varchar(20)), Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme, cName_vid_exam,cast(Cosenca as varchar(20))
+  insert INTO @Result(n_sem, Content_name, ik_upContent, ik_ved, lClose,condition, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme,Ik_vid_exam,cName_vid_exam,Cosenca)
+  SELECT n_sem, discpln.cName_disc + ', ' + vid_zaniat.cName_vid_zanyat, Content_UchPl.ik_upContent, Vedomost.Ik_ved,lClose,
+		 cast(lClose as varchar(20)), Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme, Vedomost.Ik_vid_exam, cName_vid_exam,cast(Cosenca as varchar(20))
   from StudGrup 
   inner join Grup on Grup.Ik_grup = StudGrup.Ik_grup
   inner join Grup_UchPlan on Grup.Ik_grup = Grup_UchPlan.Ik_grup
@@ -402,9 +405,9 @@ BEGIN
   update @Result set Cosenca = NULL where Cosenca=-1
   update @Result set Cosenca = 'зачтено' where Cosenca=1
 
-  update @Result set lClose = 'открыто' where lClose = '0'
-  update @Result set lClose = 'закрыто' where lClose = '1'
-  update @Result set lClose = 'аннулир.' where lClose is null
+  update @Result set condition = 'открыто' where condition = '0'
+  update @Result set condition = 'закрыто' where condition = '1'
+  update @Result set condition = 'аннулир.' where condition is null
 
 return 
 end
@@ -414,3 +417,63 @@ GO
 --ВЫДАТЬ ПРАВА НА ФУНКЦИЮ
 
 --------------------------------------------------------------------------------------------------------------------------------------------
+
+ALTER PROCEDURE [dbo].[AppendNapravl]
+	@flag			int, --0 - добавить, 1 - закрыть -1 - аннулировать
+	@ik_upContent	int = NULL,
+	@ik_studGrup	int = NULL,		
+	@StartDate		DATETIME = NULL,		
+	@EndDate		DATETIME = NULL,			
+	@Ik_vid_exam	INT = NULL,			
+	@cNumber_napr	VARCHAR(12)=NULL,
+	@ik_ved			int = NULL,
+	@cosenca		int = NULL,
+	@ntab			VARCHAR(50) = NULL,			
+	@KPTema			VARCHAR(2000) = NULL
+			
+AS
+BEGIN
+
+	IF @StartDate IS NULL
+	  SET @StartDate=GETDATE()
+
+	declare @Ik_grup int
+	declare @ik_zach int
+	select @Ik_grup = Ik_grup, @ik_zach = Ik_zach from StudGrup where Ik_studGrup=@ik_studGrup
+
+	If @flag = 0  --если создаем направление
+	begin
+		BEGIN TRAN
+
+		--добавляем направление
+			INSERT INTO Vedomost(cNumber_ved, Ik_grup, Itab_n, Ik_vid_exam, 
+					ik_upContent, Dd_exam, dD_vydano, lPriznak_napr, lClose)
+			VALUES (@cNumber_napr, @Ik_grup, NULL, @Ik_vid_exam, 
+					@ik_upContent, NULL, @StartDate, 1, 0)  --7  8
+			SET @Ik_ved=@@IDENTITY
+			IF @Ik_ved IS NOT NULL
+			BEGIN
+		--добавляем соответствующие данные в успеваемость 
+				INSERT INTO uspev(Ik_ved, Ik_zach, Cosenca)
+				VALUES(@Ik_ved, @Ik_zach,-1)
+			END
+			ELSE
+			BEGIN
+				RAISERROR('При создании направление произошла ошибка. Операция отменена.',16,1)
+				ROLLBACK TRAN
+			END
+		COMMIT TRAN
+	end
+
+	If @flag = -1
+	begin
+	  update Vedomost set lClose = null where Ik_ved=@ik_ved
+	end
+
+
+END
+--  ON 
+--exec AppendDocs 1,
+
+
+GO
