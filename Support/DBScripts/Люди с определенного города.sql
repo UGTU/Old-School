@@ -1,22 +1,24 @@
 --студе
-select FIO,Cname_fac,Cname_spec,Course,pr.Cstrana + ', ' + pr.Cregion +
+select c_grazd,FIO,Cname_grup,Cname_form_ed,Cname_fac,Cname_spec,Course,pr.Cstrana + ', ' + pr.Cregion +
 	   ', ' + pr.Cgorod + ', ' + pr.CStreet+', '+pr.BuildingNumber+' - '+pr.FlatNumber,
 		fac.Cstrana + ', ' + fac.Cregion + ', ' + fac.Cgorod + ', ' + fac.CStreet+', '+fac.BuildingNumber+' - '+fac.FlatNumber, 
 vrem.Cstrana + ', ' + vrem.Cregion + ', ' + vrem.Cgorod + ', ' + vrem.CStreet+', '+vrem.BuildingNumber+' - '+vrem.FlatNumber,ctelefon,cSotTel
 from
 (
 
-(Select distinct Person.nCode,Fac.Cname_fac,Spec_stud.Cname_spec, cast((year(GETDATE())-Grup.nYear_post+1) as varchar(2)) + ' ' + 'курс' as Course,
-				 Cshort_name_fac,Grup.Cname_grup,Clastname +' '+Cfirstname +' '+ Cotch fio, cast(Person.Dd_birth AS DATE) Dd_birth, Person.ctelefon,Person.cSotTel
+(Select distinct Person.Ik_grazd,c_grazd,Person.nCode,Fac.Cname_fac,Spec_stud.Cname_spec,Form_ed.Cname_form_ed, cast((year(GETDATE())-Grup.nYear_post+1) as varchar(2)) + ' ' + 'курс' as Course,
+				 Cshort_name_fac,Grup.Cname_grup,Clastname +' '+Cfirstname +' '+ isnull(Cotch,'') fio, cast(Person.Dd_birth AS DATE) Dd_birth, Person.ctelefon,Person.cSotTel
 from Person inner join Zach on Zach.nCode = Person.nCode
 inner join StudGrup on Zach.Ik_zach = StudGrup.Ik_zach
 inner join Grup on StudGrup.Ik_grup = Grup.Ik_grup
 inner join dbo.Relation_spec_fac on Grup.ik_spec_fac = dbo.Relation_spec_fac.ik_spec_fac
 inner join Spec_stud on Relation_spec_fac.ik_spec = Spec_stud.ik_spec
 inner join Fac on Relation_spec_fac.ik_fac = Fac.Ik_fac
+inner join Form_ed on Form_ed.Ik_form_ed = Relation_spec_fac.Ik_form_ed
+inner join grazd on grazd.ik_grazd = Person.Ik_grazd
 where  StudGrup.Ik_prikazOtch is null --не отчислен из группы
-and (year(Grup.DateExit)>year(GETDATE()))
---and Fac.Ik_fac in (6)						--заочники
+and Grup.DateExit>GETDATE()
+and Fac.Ik_fac not in (15,17) order by c_grazd	 					--заочники 
 ) Allstud
 
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana,Raion.Ik_raion, Region.Ik_region
@@ -49,8 +51,9 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 		   and dbo.Raion.Ik_region = dbo.Region.Ik_region
 		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana) vrem
 on Allstud.nCode = vrem.nCode)
-where (pr.Ik_raion in (45))--or(fac.Ik_raion in (45))or(vrem.Ik_raion in (45))
-order by FIO
+--where (pr.Ik_raion in (45))or((fac.Ik_raion in (45))and(pr.Ik_raion is null))--or(vrem.Ik_raion in (45))
+where (pr.Ik_strana<>2)or(fac.Ik_strana <> 2)or(Ik_grazd<>2) --(pr.Ik_strana=3430)or(fac.Ik_strana = 3430)-- 
+order by c_grazd --pr.Cstrana,fac.Cstrana
 -------------------------------------------------------------------------------------------------------------------------------------
 --абитуриенты
 select FIO,Cname_fac,Cname_spec,'1 курс',pr.Cstrana + ', ' + pr.Cregion +

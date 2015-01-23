@@ -426,7 +426,9 @@ begin
   dmUchPlan.adodsUchPlan.CommandText :=
     'select * from Uch_pl where (ik_uch_plan = ' + inttostr(ik) + ')';
   dmUchPlan.adodsUchPlan.open;
-  FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value);
+  if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value<>NULL) then
+     FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
+     else FIsBRS := false;
   { if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
     FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
     else FIsBRS :=false;
