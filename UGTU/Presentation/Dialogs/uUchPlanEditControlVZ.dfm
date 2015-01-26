@@ -101,21 +101,15 @@ inherited frmEditControlVZ: TfrmEditControlVZ
       AllowedOperations = [alopInsertEh, alopUpdateEh, alopDeleteEh]
       AutoFitColWidths = True
       DataSource = DataSource1
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object Panel3: TPanel
       Left = 483
@@ -203,7 +197,7 @@ inherited frmEditControlVZ: TfrmEditControlVZ
     Left = 288
     Top = 112
     Bitmap = {
-      494C0101020004000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

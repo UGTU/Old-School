@@ -1,5 +1,5 @@
 
-select * from Person where Clastname='Артеев'
+select * from Person where Clastname='Полий'
 
 select * from ABIT_postup where nCode=68098
 
@@ -9,13 +9,13 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (41440)
+select * from Zach where ncode in (69199)
 select * from Zach where Ik_zach in (14369)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (22245)
+and ik_zach in (29157)
 
 select * from StudGrup where ik_pricZach=13
 

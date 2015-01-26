@@ -3,9 +3,9 @@ unit uChangeKatZach;
 interface
 
 uses
-   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh,
-  DBCtrlsEh, Mask, DBLookupEh, uDm, dbtvStudObj, uDmStudentData;
+  DBCtrlsEh, Mask, DBLookupEh, uDm, dbtvStudObj, uDmStudentData, System.Actions;
 
 type
   TfrmChangeKatZach = class(TfrmBaseDialog)
@@ -28,7 +28,7 @@ type
   private
     { Private declarations }
   public
-  student:TDBNodeStudObject;
+    student: TDBNodeStudObject;
     { Public declarations }
   end;
 
@@ -40,74 +40,75 @@ implementation
 uses uDMCauses, uDMStudentActions, uDMPrikaz, uMain;
 {$R *.dfm}
 
-function CheckFields:boolean;
+function CheckFields: boolean;
 begin
-result:=true;
-with frmChangeKatZach do
-begin
-if (dbcbeNumPrik.Text='')
-or(dbcbeCause.Text='')
-or(dbcbeNewKat.Text='')
-then result:=false
-end;
+  result := true;
+  with frmChangeKatZach do
+  begin
+    if (dbcbeNumPrik.Text = '') or (dbcbeCause.Text = '') or
+      (dbcbeNewKat.Text = '') then
+      result := false
+  end;
 end;
 
 procedure TfrmChangeKatZach.actApplyExecute(Sender: TObject);
 begin
-dmStudentActions.aspChangeKatZach.Active:=false;
+  dmStudentActions.aspChangeKatZach.Active := false;
 
-with dmStudentActions.aspChangeKatZach.Parameters do begin
-items[1].Value:=0;
-items[2].Value:=dbcbeNumPrik.KeyValue;
-items[3].Value:=student.RecordbookKey;
-items[4].Value:=dbcbeCause.KeyValue;
-items[5].Value:=dbcbeNewKat.KeyValue;
-end;
+  with dmStudentActions.aspChangeKatZach.Parameters do
+  begin
+    items[1].Value := 0;
+    items[2].Value := dbcbeNumPrik.KeyValue;
+    items[3].Value := student.RecordbookKey;
+    items[4].Value := dbcbeCause.KeyValue;
+    items[5].Value := dbcbeNewKat.KeyValue;
+  end;
 
-try
-dmStudentActions.aspChangeKatZach.ExecProc;
-except
-showmessage('Неверно заданы параметры!');
-end;
-bbOk.Enabled:=false;
-bbApply.Enabled:=false;
+  try
+    dmStudentActions.aspChangeKatZach.ExecProc;
+  except
+    showmessage('Неверно заданы параметры!');
+  end;
+  bbOk.Enabled := false;
+  bbApply.Enabled := false;
 end;
 
 procedure TfrmChangeKatZach.actOKExecute(Sender: TObject);
 begin
-actApplyExecute(sender);
-close;
+  actApplyExecute(Sender);
+  close;
 end;
 
 procedure TfrmChangeKatZach.bbCancelClick(Sender: TObject);
 begin
-   close;
+  close;
 end;
 
 procedure TfrmChangeKatZach.dbcbeCauseChange(Sender: TObject);
 begin
 
-if CheckFields then begin
-bbOk.Enabled:=true;
-bbApply.Enabled:=true;
-end else
-begin
-bbOk.Enabled:=false;
-bbApply.Enabled:=false;
+  if CheckFields then
+  begin
+    bbOk.Enabled := true;
+    bbApply.Enabled := true;
+  end
+  else
+  begin
+    bbOk.Enabled := false;
+    bbApply.Enabled := false;
+  end;
 end;
-end;
-
 
 procedure TfrmChangeKatZach.FormShow(Sender: TObject);
 begin
-dmPrikaz.adodsPrikaz.Active:=true;
-dmCauses.adodsKatZachCause.Active:=true;
-dbcbeCause.KeyValue:=146;
+  dmPrikaz.adodsPrikaz.Active := true;
+  dmCauses.adodsKatZachCause.Active := true;
+  dbcbeCause.KeyValue := 146;
 end;
 
 procedure TfrmChangeKatZach.SpeedButton2Click(Sender: TObject);
 begin
-frmMain.actAddPrikaz.execute;
+  frmMain.actAddPrikaz.execute;
 end;
 
 end.
