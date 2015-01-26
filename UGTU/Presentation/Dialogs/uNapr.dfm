@@ -406,6 +406,7 @@ inherited ftmNapr: TftmNapr
     end
     object actAnnul: TMenuItem
       Caption = #1040#1085#1085#1091#1083#1080#1088#1086#1074#1072#1090#1100
+      OnClick = actAnnulClick
     end
   end
 end

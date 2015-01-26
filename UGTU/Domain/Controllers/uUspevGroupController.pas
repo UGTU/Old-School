@@ -277,6 +277,8 @@ type
 
   procedure AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum, VidName: string);
 
+  procedure AnnulNapr(VedIK: integer);
+
   //**********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
   //Возвращает следующее слово из строки,
   //при этом укорачивая строку на это слово и разделитель
@@ -368,7 +370,7 @@ type
 end;
 
 implementation
-uses CommonIntf, CommonIntfImpl, BRSVedom2014;
+uses CommonIntf, CommonIntfImpl, BRSVedom2014, ConstantRepository;
 
  var
 //FAbitZachislenieControllerInstance - экземпляр контроллера
@@ -980,38 +982,10 @@ end;
 procedure TUspevGroupController.CloseNapr(ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);   //ik_ved, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime
 begin
   TApplicationController.GetInstance.AddLogEntry('Закрытие направления');
-  FNapravController.CloseNapr(ik_ved, cosenca, ntab, KPTema, date_exam);
+  case FNapravController.CloseNapr(ik_ved, cosenca, ntab, KPTema, date_exam) of
+    StatusError: ShowMessage('Нельзя закрыть направление с данным статусом');
+  end;
 end;
-
-//CloseVed закрывает ведомость
-{function TUspevGroupController.CloseNapr(ikVed: integer): boolean;
-var tempStoredProc: TADOStoredProc;
-begin
-  Result:= false;
-  TApplicationController.GetInstance.AddLogEntry('Закрытие направления');
-  try
-    FNapravController.CloseNapr(ikVed);
-  except
-    on E:Exception do
-      begin
-        raise EApplicationException.Create('Произошла ошибка при закрытии направления.',E);
-        exit;
-      end;
-  end;
-  try
-    tempStoredProc:= TADOStoredProc.Create(nil);
-    tempStoredProc.ProcedureName:= 'Dek_CloseNapr;1';
-    tempStoredProc.Connection:= dm.DBConnect;
-    tempStoredProc.Parameters.CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
-    tempStoredProc.ExecProc;
-    Result:= true;
-  finally
-    tempStoredProc.Free;
-  end;
-    //if tempStoredProc<>nil then
-    //  tempStoredProc.Free;
-end;          }
-
 
 //***************ВКЛАДКА ВЕДОМОСТИ**************************
 //выбирает преподавателей для ведомости
@@ -1720,7 +1694,7 @@ end;
 //Выбирает все дисциплины, кот-е есть в уч. плане (для вида занятий)
 function TUspevGroupController.GetContentDS(StudIK, ZachIK: integer): TADODataSet;
 begin
-  FNapravController.Reload(StudIK);
+  FNapravController.Reload(StudIK, ZachIK);
   Result := FNapravController.ContentDS;
 end;
 
@@ -2575,6 +2549,7 @@ end;
 procedure TUspevGroupController.AddNapr(VidExID: integer; dateIn,
   dateOut: TDateTime; NaprNum, VidName: string);
 begin
+  TApplicationController.GetInstance.AddLogEntry('Добавление направления');
   case FNapravController.AddNapr(VidExID, dateIn, dateOut, NaprNum) of
     1: ShowMessage('Вид направления "'+VidName+'" на студента уже выдавался');
   end;
@@ -2615,6 +2590,14 @@ begin
 	  E.Sheets[mainSheet].Range['B21:E26'].Copy;
 	  E.Sheets[next+1].Range['B1'].Insert;
     E.Sheets[next+1].name:='Приложение'+currentSheetName;
+  end;
+end;
+
+procedure TUspevGroupController.AnnulNapr(VedIK: integer);
+begin
+  TApplicationController.GetInstance.AddLogEntry('Аннулирование направления');
+  case FNapravController.Annul(VedIK) of
+    StatusError: ShowMessage('Невозможно аннулировать закрытое направление');
   end;
 end;
 

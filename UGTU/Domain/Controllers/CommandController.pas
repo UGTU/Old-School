@@ -169,7 +169,7 @@ type
     procedure SetSemester(const Value: integer);
   public
     constructor Create;
-    procedure Reload(ik_studGrup: integer); overload;
+    procedure Reload(ik_studGrup, ik_zach: integer); overload;
     function CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
     function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum: string): integer;
     function Annul(VedIK: integer): integer;
@@ -626,6 +626,7 @@ begin
   try
     NaprCommand := TNaprCommand.Create(VedIK);
     NaprCommand.Annul;
+    Refresh;
     Result := NoError;
   except
     Result := FailError;
@@ -634,7 +635,7 @@ begin
 end;
 
 function TNapravController.CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
-var //NaprCommand: TNaprCommand;
+var
   FVedCommand: TVedCommand;
   FAppendUspevCommand: TAppendUspevCommand;
   FAppendUspevKPThemeCommand: TAppendUspevKPThemeCommand;
@@ -645,16 +646,36 @@ begin
     Result := StatusError;
     exit;
   end;
+
+  with DataSet do
   try
+    Connection.BeginTrans;
     FVedCommand := TVedCommand.Create(VedIK);
-    FAppendUspevCommand.DoIt();
-    //NaprCommand := TNaprCommand.Create(VedIK);
-    //NaprCommand.Close(cosenca, ntab, KPTema, date_exam);
+    FAppendUspevCommand := TAppendUspevCommand.Create(VedIK);
+    FAppendUspevKPThemeCommand := TAppendUspevKPThemeCommand.Create(VedIK);
+
+    FAppendUspevCommand.DoIt(FZach, cosenca);                                               //сохраняем оценку
+    if KPTema<>'' then FAppendUspevKPThemeCommand.DoIt(FZach,KPTema);                       //сохраняем тему
+    FVedCommand.Update(FieldByName('ik_vid_exam').Value, FieldByName('cNumber_ved').Value,  //закрываем направление
+    ntab, date_exam, True, True);
+
+    Connection.CommitTrans;
+    Refresh;
     Result := NoError;
   except
-    Result := FailError;
+    on E: Exception do
+    begin
+      Connection.RollbackTrans;
+      Result := FailError;
+      raise EApplicationException.Create
+        ('Произошла ошибка при закрыти направления.', E);
+      exit;
+    end;
+
   end;
-  //NaprCommand.Free;
+  FVedCommand.Free;
+  FAppendUspevCommand.Free;
+  FAppendUspevKPThemeCommand.Free;
 end;
 
 constructor TNapravController.Create;
@@ -672,7 +693,7 @@ procedure TNapravController.Reload(ik_studGrup, ik_zach: integer);
 begin
   inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ')');
   FStudGrup := ik_studGrup;
-  FZ
+  FZach := ik_zach;
   FContentNapr.Reload(ik_studGrup);
 end;
 

@@ -148,12 +148,10 @@ end;
 procedure TftmNaprclose.actApplyExecute(Sender: TObject);
 begin
 
-  dm.DBConnect.BeginTrans;
-
   TUspevGroupController.Instance.CloseNapr(FVedIK, dbcbeMark.KeyValue,
-  dbdteExam.Value, eTema.Text, dbdteExam.Value);
+  dbcbeEx.KeyValue, eTema.Text, dbdteExam.Value);
 
-
+ {
   try
     with dmUspevaemost.adospAppendUspev.Parameters do
     begin
@@ -215,7 +213,7 @@ begin
   dmUspevaemost.adodsNapravl.Active := false;
   dmUspevaemost.adospPrepodVed.Parameters.clear;
   dmUspevaemost.adospPrepodVed.ExecProc;
-  dmUspevaemost.adodsNapravl.Active := true;
+  dmUspevaemost.adodsNapravl.Active := true;      }
 
 end;
 

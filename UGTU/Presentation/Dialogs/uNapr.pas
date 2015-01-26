@@ -58,6 +58,7 @@ type
     procedure dbcbeDiscChange(Sender: TObject);
     procedure N92Click(Sender: TObject);
     procedure actCloseClick(Sender: TObject);
+    procedure actAnnulClick(Sender: TObject);
   private
     FZachIK: integer;
     FGrupIK: integer;
@@ -155,7 +156,7 @@ begin
   dmUspevaemost.adospGetNomerNapr.Active := true;
   // dmUspevaemost.adospGetNomerNapr.ExecProc;
 
-  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(FStudGrupKey);
+  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(FStudGrupKey, FZachIK);
   dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
 
 
@@ -241,6 +242,16 @@ begin
     bbApply.Enabled := false;
   end;
 
+  actClose.Enabled := Assigned(dsNapr.DataSet)and(dsNapr.DataSet.Active)and(dsNapr.DataSet.RecordCount>0);
+  actAnnul.Enabled := Assigned(dsNapr.DataSet)and(dsNapr.DataSet.Active)and(dsNapr.DataSet.RecordCount>0);
+end;
+
+procedure TftmNapr.actAnnulClick(Sender: TObject);
+begin
+  if dsNapr.DataSet.FieldByName('lClose').Value=False then
+  begin
+    TUspevGroupController.Instance.AnnulNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
+  end else ShowMessage('Невозможно аннулировать уже закрытое или аннулированное направление');
 end;
 
 procedure TftmNapr.actApplyExecute(Sender: TObject);
@@ -251,6 +262,8 @@ begin
 
   TUspevGroupController.Instance.AddNapr(dbcbeVidExam.KeyValue, StrToDateTime(dbdteOut.Text),
       StrToDateTime(dbdteTo.Text), eNum.Text, dbcbeVidExam.Text);
+
+  eNumChange(Sender);
 
   { dmUspevaemost.adospPredmStud.FieldValues['NaprName']);
   dmUspevaemost.aspNapr.Active := false;
@@ -346,19 +359,19 @@ end;
 
 procedure TftmNapr.actCloseClick(Sender: TObject);
 begin
-  ftmNaprClose := TftmNaprClose.Create(self);
-  //ftmNaprClose.StudZachIK := Tag; //в Tag записан номер зачетки
-  ftmNaprClose.VedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
-  ftmNaprClose.ShowModal;
-  ftmNaprClose.Free;
+  if dsNapr.DataSet.FieldByName('lClose').Value=False then
+  begin
+    ftmNaprClose := TftmNaprClose.Create(self);
+    ftmNaprClose.VedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
+    ftmNaprClose.ShowModal;
+    ftmNaprClose.Free;
+  end else ShowMessage('Невозможно закрыть уже закрытое или аннулированное направление');
 end;
 
 procedure TftmNapr.actOKExecute(Sender: TObject);
 begin
-
   close;
-
-end;
+end;
 
 procedure TftmNapr.cbPrintExcelClick(Sender: TObject);
 begin
