@@ -60,8 +60,8 @@ type
   TNaprCommand = class(TBaseADOCommand)
   public
     constructor Create(FVedom: integer); overload;
-    procedure Add(ik_contentUP, ik_studGrup, VidEx: integer; StartDate,
-                  EndDate: TDateTime; cNumber_napr: string);
+    function Add(ik_contentUP, ik_studGrup, VidEx: integer; StartDate,
+                  EndDate: TDateTime; cNumber_napr: string): integer;
     procedure Close(cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);
     procedure Annul;
   end;
@@ -171,7 +171,7 @@ type
     constructor Create;
     procedure Reload(ik_studGrup, ik_zach: integer); overload;
     function CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
-    function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum: string): integer;
+    function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum: string; var VedIK: integer): integer;
     function Annul(VedIK: integer): integer;
 
     property ContentIK: integer write setContent;
@@ -606,12 +606,12 @@ end;
 { TNapravController }
 
 function TNapravController.AddNapr(VidExID: integer; dateIn,
-  dateOut: TDateTime; NaprNum: string): integer;
+  dateOut: TDateTime; NaprNum: string; var VedIK: integer): integer;
 var NaprCommand: TNaprCommand;
 begin
   try
     NaprCommand := TNaprCommand.Create(0);
-    NaprCommand.Add(FContentNapr.ContentIK, FStudGrup, VidExID, dateIn, dateOut, NaprNum);
+    VedIK := NaprCommand.Add(FContentNapr.ContentIK, FStudGrup, VidExID, dateIn, dateOut, NaprNum);
     Result := NoError;
   except
     Result := FailError;
@@ -660,7 +660,7 @@ begin
     ntab, date_exam, True, True);
 
     Connection.CommitTrans;
-    Refresh;
+
     Result := NoError;
   except
     on E: Exception do
@@ -671,11 +671,12 @@ begin
         ('Произошла ошибка при закрыти направления.', E);
       exit;
     end;
-
   end;
+
   FVedCommand.Free;
   FAppendUspevCommand.Free;
   FAppendUspevKPThemeCommand.Free;
+  Refresh;
 end;
 
 constructor TNapravController.Create;
@@ -733,8 +734,8 @@ end;
 
 { TNaprCommand }
 
-procedure TNaprCommand.Add(ik_contentUP, ik_studGrup, VidEx: integer;
-  StartDate, EndDate: TDateTime; cNumber_napr: string);
+function TNaprCommand.Add(ik_contentUP, ik_studGrup, VidEx: integer;
+  StartDate, EndDate: TDateTime; cNumber_napr: string): integer;
 begin
   with FStor.Parameters do
   begin
@@ -745,7 +746,8 @@ begin
     ParamByName('@StartDate').Value := StartDate;
     ParamByName('@EndDate').Value := EndDate;
     ParamByName('@cNumber_napr').Value := cNumber_napr;
-    FStor.ExecProc;
+    FStor.Active := true;
+    Result := ParamByName('@ik_ved').Value;
   end;
 end;
 
@@ -773,10 +775,11 @@ end;
 
 constructor TNaprCommand.Create(FVedom: integer);
 begin
-  inherited Create('AppendNapravl');
+  inherited Create('AppendNapravl;1');
   with FStor.Parameters do
   begin
     Clear;
+    CreateParameter('@RETURN_VALUE',ftInteger,pdReturnValue,0,1);
     CreateParameter('@flag', ftInteger, pdInput, 0, 0);
     CreateParameter('@ik_upContent', ftInteger, pdInput, 0, 0);
     CreateParameter('@ik_studGrup', ftInteger, pdInput, 0, 0);
@@ -788,6 +791,7 @@ begin
     CreateParameter('@cosenca', ftInteger, pdInput, 0, 0);
     CreateParameter('@Itab_n', ftString, pdInput, 50, '');
     CreateParameter('@KPTema', ftString, pdInput, 2000, '');
+    //CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 0, 1);
   end;
 
 end;

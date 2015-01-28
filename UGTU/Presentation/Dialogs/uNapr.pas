@@ -255,12 +255,13 @@ begin
 end;
 
 procedure TftmNapr.actApplyExecute(Sender: TObject);
+var VedIK: integer;
 begin
   TApplicationController.GetInstance.AddLogEntry
     ('Направление. Сохранение направления по ' +
     dbcbeDisc.Text + ' для студента ' + IntToStr(FZachIK));
 
-  TUspevGroupController.Instance.AddNapr(dbcbeVidExam.KeyValue, StrToDateTime(dbdteOut.Text),
+  VedIK := TUspevGroupController.Instance.AddNapr(dbcbeVidExam.KeyValue, StrToDateTime(dbdteOut.Text),
       StrToDateTime(dbdteTo.Text), eNum.Text, dbcbeVidExam.Text);
 
   eNumChange(Sender);
@@ -347,7 +348,7 @@ begin
 
   // frmRepPreview.RvProject2.ExecuteReport('Report1');
   if cbPrintExcel.Checked then
-    PrintNapr(dmUspevaemost.aspNapr.FieldByName('ik_ved').AsInteger,
+    PrintNapr({dmUspevaemost.aspNapr.FieldByName('ik_ved').AsInteger}VedIK,
       cbBlankNapr.Checked);
 
 end;

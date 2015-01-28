@@ -275,7 +275,7 @@ type
   //установить семестр для выдачи направлений
   procedure SetNapravSemester(nsem: integer);
 
-  procedure AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum, VidName: string);
+  function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum, VidName: string): integer;
 
   procedure AnnulNapr(VedIK: integer);
 
@@ -2546,13 +2546,20 @@ begin
 end;
 
 //настройка следующего листа (для КП - двух следующих)
-procedure TUspevGroupController.AddNapr(VidExID: integer; dateIn,
-  dateOut: TDateTime; NaprNum, VidName: string);
+function TUspevGroupController.AddNapr(VidExID: integer; dateIn,
+  dateOut: TDateTime; NaprNum, VidName: string): integer;
+var vedIK: integer;
 begin
   TApplicationController.GetInstance.AddLogEntry('Добавление направления');
-  case FNapravController.AddNapr(VidExID, dateIn, dateOut, NaprNum) of
-    1: ShowMessage('Вид направления "'+VidName+'" на студента уже выдавался');
+  case FNapravController.AddNapr(VidExID, dateIn, dateOut, NaprNum, vedIK) of
+    1:
+    begin
+      ShowMessage('Вид направления "'+VidName+'" на студента уже выдавался');
+      Result :=0;
+    end;
+    else Result := vedIK;
   end;
+
 end;
 
 procedure TUspevGroupController.AddPageVedomost(var mainSheet, next:integer;firstStr:integer; E:Variant; HasTema:boolean; VidZanShortName: string);
