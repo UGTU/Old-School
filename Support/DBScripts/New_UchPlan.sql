@@ -463,13 +463,15 @@ BEGIN
 				ROLLBACK TRAN
 			END
 		COMMIT TRAN
+		return @Ik_ved
 	end
 
 	If @flag = -1
 	begin
 	  update Vedomost set lClose = null where Ik_ved=@ik_ved
 	end
-
+	
+	
 
 END
 --  ON 
