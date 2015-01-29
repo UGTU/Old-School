@@ -1,5 +1,5 @@
 unit uNapr;
-
+
 { #Author sergdev@ist.ugtu.net }
 interface
 
@@ -60,10 +60,10 @@ type
     procedure actCloseClick(Sender: TObject);
     procedure actAnnulClick(Sender: TObject);
   private
-    FZachIK: integer;
-    FGrupIK: integer;
-    FFacIK: integer;
-    FStudGrupKey: integer;
+    FZachIK: Integer;
+    FGrupIK: Integer;
+    FFacIK: Integer;
+    FStudGrupKey: Integer;
 
     procedure ExecuteError(Sender: TObject; E: Exception);
     procedure LoadVedForNapr();
@@ -72,10 +72,10 @@ type
   public
     studobj: TDBNodeStudObject; { Public declarations }
     procedure PrintNapr(ik_ved: Integer; EmptyNapr: boolean);
-    property  ZachIK: integer write FZachIK;
-    property StudGrupKey: integer write FStudGrupKey;
-    property  GrupIK: integer write FGrupIK;
-    property FacIK: integer write FFacIK;
+    property ZachIK: Integer write FZachIK;
+    property StudGrupKey: Integer write FStudGrupKey;
+    property GrupIK: Integer write FGrupIK;
+    property FacIK: Integer write FFacIK;
   end;
 
   TNaprExcelReport = class(TExcelReportBase)
@@ -156,9 +156,9 @@ begin
   dmUspevaemost.adospGetNomerNapr.Active := true;
   // dmUspevaemost.adospGetNomerNapr.ExecProc;
 
-  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS(FStudGrupKey, FZachIK);
+  dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS
+    (FStudGrupKey, FZachIK);
   dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
-
 
   if dmUspevaemost.adospGetNomerNapr.RecordCount <> 0 then
     if dmUspevaemost.adospGetNomerNapr.Fields[0].AsString <> '' then
@@ -167,51 +167,52 @@ begin
     else
       eNum.Text := '1';
 
-
-
-  //LoadVedForNapr;
+  // LoadVedForNapr;
   // dm.adodsVidOtch.Active:=true;
   dm.adodsVidExam.Active := true;
 
 end;
 
 procedure TftmNapr.LoadVedForNapr;
-var cont: integer;
+var
+  cont: Integer;
 begin
-  if (dbcbeDisc.KeyValue = NULL) then cont := 0
-    else cont:= dbcbeDisc.KeyValue;
+  if (dbcbeDisc.KeyValue = NULL) then
+    cont := 0
+  else
+    cont := dbcbeDisc.KeyValue;
   TUspevGroupController.Instance.SetContentNaprav(cont);
 
-
- { TApplicationController.GetInstance.AddLogEntry
+  { TApplicationController.GetInstance.AddLogEntry
     ('Направление. Загрузка списка ведомостей для выдачи направления за ' +
     dbcbeNum.Text + ' семестр.');
 
-  dmUspevaemost.adospPredmStud.Active := false;
-  if (dbcbeNum.Text <> '') then
-  begin
+    dmUspevaemost.adospPredmStud.Active := false;
+    if (dbcbeNum.Text <> '') then
+    begin
     with dmUspevaemost.adospPredmStud.Parameters do
     begin
-      clear;
-      addParameter;
-      items[0].value := studobj.StudGrupKey;
-      addParameter;
-      items[1].value := dbcbeNum.Text;
+    clear;
+    addParameter;
+    items[0].value := studobj.StudGrupKey;
+    addParameter;
+    items[1].value := dbcbeNum.Text;
     end;
     dmUspevaemost.adospPredmStud.Active := true;
-  end;               }
+    end; }
 end;
 
-
 procedure TftmNapr.N92Click(Sender: TObject);
-var vedIK: integer;
+var
+  vedIK: Integer;
 begin
-  if dbgrdNapr.SelectedRows.Count>0 then
+  if dbgrdNapr.SelectedRows.Count > 0 then
   begin
     vedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
-    //TUspevGroupController.Instance.CloseNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
+    // TUspevGroupController.Instance.CloseNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
   end
-  else ShowMessage('Выберите направление, которое необходимо удалить');
+  else
+    ShowMessage('Выберите направление, которое необходимо удалить');
 end;
 
 procedure TftmNapr.dbcbeDiscChange(Sender: TObject);
@@ -242,35 +243,43 @@ begin
     bbApply.Enabled := false;
   end;
 
-  actClose.Enabled := Assigned(dsNapr.DataSet)and(dsNapr.DataSet.Active)and(dsNapr.DataSet.RecordCount>0);
-  actAnnul.Enabled := Assigned(dsNapr.DataSet)and(dsNapr.DataSet.Active)and(dsNapr.DataSet.RecordCount>0);
+  actClose.Enabled := Assigned(dsNapr.DataSet) and (dsNapr.DataSet.Active) and
+    (dsNapr.DataSet.RecordCount > 0);
+  actAnnul.Enabled := Assigned(dsNapr.DataSet) and (dsNapr.DataSet.Active) and
+    (dsNapr.DataSet.RecordCount > 0);
 end;
 
 procedure TftmNapr.actAnnulClick(Sender: TObject);
 begin
-  if dsNapr.DataSet.FieldByName('lClose').Value=False then
+  if dsNapr.DataSet.FieldByName('lClose').value = false then
   begin
-    TUspevGroupController.Instance.AnnulNapr(dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
-  end else ShowMessage('Невозможно аннулировать уже закрытое или аннулированное направление');
+    TUspevGroupController.Instance.AnnulNapr
+      (dsNapr.DataSet.FieldByName('ik_ved').AsInteger);
+  end
+  else
+    ShowMessage
+      ('Невозможно аннулировать уже закрытое или аннулированное направление');
 end;
 
 procedure TftmNapr.actApplyExecute(Sender: TObject);
-var VedIK: integer;
+var
+  vedIK: Integer;
 begin
   TApplicationController.GetInstance.AddLogEntry
-    ('Направление. Сохранение направления по ' +
-    dbcbeDisc.Text + ' для студента ' + IntToStr(FZachIK));
+    ('Направление. Сохранение направления по ' + dbcbeDisc.Text +
+    ' для студента ' + inttostr(FZachIK));
 
-  VedIK := TUspevGroupController.Instance.AddNapr(dbcbeVidExam.KeyValue, StrToDateTime(dbdteOut.Text),
-      StrToDateTime(dbdteTo.Text), eNum.Text, dbcbeVidExam.Text);
+  vedIK := TUspevGroupController.Instance.AddNapr(dbcbeVidExam.KeyValue,
+    StrToDateTime(dbdteOut.Text), StrToDateTime(dbdteTo.Text), eNum.Text,
+    dbcbeVidExam.Text);
 
   eNumChange(Sender);
 
   { dmUspevaemost.adospPredmStud.FieldValues['NaprName']);
-  dmUspevaemost.aspNapr.Active := false;
+    dmUspevaemost.aspNapr.Active := false;
 
-  with dmUspevaemost.aspNapr.Parameters do
-  begin
+    with dmUspevaemost.aspNapr.Parameters do
+    begin
     clear;
     addParameter;
     items[0].value := dbcbeNum.value;
@@ -290,56 +299,56 @@ begin
     items[6].value := dbcbeVidExam.KeyValue;
     addParameter;
     if eNum.Text = '' then
-      items[7].value := ''
+    items[7].value := ''
     else
-      items[7].value := eNum.value;
+    items[7].value := eNum.value;
     addParameter;
     addParameter;
     if Hint = '6' then
     begin
-      items[8].value := ' ';
-      items[9].value := '____________'
+    items[8].value := ' ';
+    items[9].value := '____________'
     end
     else
     begin
-      items[9].value := ' ';
-      items[8].value := '____________'
+    items[9].value := ' ';
+    items[8].value := '____________'
     end;
     addParameter;
     if dbcbeVidExam.KeyValue = 1 then
-      items[10].value := '____________'
+    items[10].value := '____________'
     else
-      items[10].value := ' ';
+    items[10].value := ' ';
     addParameter;
     if dbcbeVidExam.KeyValue = 2 then
-      items[11].value := '____________'
+    items[11].value := '____________'
     else
-      items[11].value := ' ';
+    items[11].value := ' ';
     addParameter;
     if dbcbeVidExam.KeyValue = 3 then
-      items[12].value := '____________'
+    items[12].value := '____________'
     else
-      items[12].value := ' ';
+    items[12].value := ' ';
 
     addParameter;
     addParameter;
     if dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat'] = 6 then
-      items[13].value := '____________'
+    items[13].value := '____________'
     else
-      items[13].value := ' ';
+    items[13].value := ' ';
     if (dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat'] = 7) or
-      (dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat'] = 17) then
-      items[14].value := '____________'
+    (dmUspevaemost.adospPredmStud.FieldValues['ik_vid_zanyat'] = 17) then
+    items[14].value := '____________'
     else
-      items[14].value := ' ';
+    items[14].value := ' ';
     addParameter;
     items[15].value := dbcbeDisc.value;
-  end;     }
+    end; }
 
   // try
 
- { dmUspevaemost.aspNapr.Active := true;
-   except
+  { dmUspevaemost.aspNapr.Active := true;
+    except
     showmessage('Невозможно выдать направление!');
     exit;
     end; }
@@ -348,7 +357,7 @@ begin
 
   // frmRepPreview.RvProject2.ExecuteReport('Report1');
   if cbPrintExcel.Checked then
-    PrintNapr({dmUspevaemost.aspNapr.FieldByName('ik_ved').AsInteger}VedIK,
+    PrintNapr( { dmUspevaemost.aspNapr.FieldByName('ik_ved').AsInteger } vedIK,
       cbBlankNapr.Checked);
 
 end;
@@ -360,19 +369,23 @@ end;
 
 procedure TftmNapr.actCloseClick(Sender: TObject);
 begin
-  if dsNapr.DataSet.FieldByName('lClose').Value=False then
+  if dsNapr.DataSet.FieldByName('lClose').value = false then
   begin
     ftmNaprClose := TftmNaprClose.Create(self);
-    ftmNaprClose.VedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
+    ftmNaprClose.vedIK := dsNapr.DataSet.FieldByName('ik_ved').AsInteger;
     ftmNaprClose.ShowModal;
     ftmNaprClose.Free;
-  end else ShowMessage('Невозможно закрыть уже закрытое или аннулированное направление');
+  end
+  else
+    ShowMessage
+      ('Невозможно закрыть уже закрытое или аннулированное направление');
 end;
 
 procedure TftmNapr.actOKExecute(Sender: TObject);
 begin
   close;
-end;
+
+end;
 
 procedure TftmNapr.cbPrintExcelClick(Sender: TObject);
 begin
@@ -389,35 +402,40 @@ procedure TftmNapr.PrintNapr(ik_ved: Integer; EmptyNapr: boolean);
 var
   Report: TReportBase;
 begin
-    TApplicationController.GetInstance.AddLogEntry('Направление. Печать направления за ');
-    Report := TReportBase.CreateReport(TNaprExcelReport);
-    Report.FreeOnComplete := true;
-      dmUspevaemost.adospSelNapr.Active:=false;
+  TApplicationController.GetInstance.AddLogEntry
+    ('Направление. Печать направления за ');
+  Report := TReportBase.CreateReport(TNaprExcelReport);
+  Report.FreeOnComplete := true;
+  { dmUspevaemost.adospSelNapr.Active:=false;
 
-  with dmUspevaemost.adospSelNapr.Parameters do begin
+    with dmUspevaemost.adospSelNapr.Parameters do begin
     clear;
     AddParameter;
     items[0].Value:=ik_ved;
-  end;
-  dmUspevaemost.adospSelNapr.ExecProc;
-  dmUspevaemost.adospSelNapr.Open;
-  if dmUspevaemost.adospSelNapr.FieldByName('Ik_vid_exam').AsInteger<>1 then
-  begin
-      if EmptyNapr then
-      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr_pust_с.XLT'
-    else
-      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr_с.XLT';
-    TNaprExcelReport(Report).ik_ved:= ik_ved;
-  end
-    else
-    begin
-    //Report.OnExecuteError := ExecuteError;
-    if EmptyNapr then
-      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr_pust.XLT'
-    else
-      Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\new_napr.XLT';
-    TNaprExcelReport(Report).ik_ved:= ik_ved;
     end;
+    dmUspevaemost.adospSelNapr.ExecProc;
+    dmUspevaemost.adospSelNapr.Open; }
+  if dsNapr.DataSet.FieldByName('Ik_vid_exam').AsInteger <> 1 then
+  begin
+    if EmptyNapr then
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName) +
+        'reports\new_napr_pust_с.XLT'
+    else
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName) +
+        'reports\new_napr_с.XLT';
+    TNaprExcelReport(Report).ik_ved := ik_ved;
+  end
+  else
+  begin
+    // Report.OnExecuteError := ExecuteError;
+    if EmptyNapr then
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName) +
+        'reports\new_napr_pust.XLT'
+    else
+      Report.ReportTemplate := ExtractFilePath(Application.ExeName) +
+        'reports\new_napr.XLT';
+    TNaprExcelReport(Report).ik_ved := ik_ved;
+  end;
 
   TWaitingController.GetInstance.Process(Report);
 
@@ -490,25 +508,27 @@ begin
     Replace('#vid_zanyat#', 'экзамена');
     Replace('#v_z#', 'экзамена');
   end;
-  if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger=7 then
-//    Range['l13','n13'].Clear;
-begin
-Replace('#vid_zanyat#','зачета');
-Replace('#v_z#','зачета');
-end ;
-  if (dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger>7)
-  and (dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger<10) then
+  if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger = 7 then
   // Range['l13','n13'].Clear;
   begin
     Replace('#vid_zanyat#', 'зачета');
     Replace('#v_z#', 'зачета');
-   if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger=27 then
-  begin
-//    Range['p13','p13'].Clear;
-//    Range['l13','n13'].Clear;
-Replace('#vid_zanyat#','практики');
-Replace('#v_z#','практики');
   end;
+  if (dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger > 7) and
+    (dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger < 10)
+  then
+  // Range['l13','n13'].Clear;
+  begin
+    Replace('#vid_zanyat#', 'зачета');
+    Replace('#v_z#', 'зачета');
+    if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger = 27
+    then
+    begin
+      // Range['p13','p13'].Clear;
+      // Range['l13','n13'].Clear;
+      Replace('#vid_zanyat#', 'практики');
+      Replace('#v_z#', 'практики');
+    end;
   end;
 
   NextStep(1, 'Формирование бланка');
@@ -630,3 +650,4 @@ Replace('#v_z#','практики');
 end;
 
 end.
+

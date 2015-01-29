@@ -90,6 +90,10 @@ inherited ftmStudent: TftmStudent
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object PageControl2: TPageControl
         Left = 0
         Top = 0
@@ -102,6 +106,10 @@ inherited ftmStudent: TftmStudent
         TabOrder = 0
         object TabSheet3: TTabSheet
           Caption = #1054#1073#1097#1080#1077
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -874,6 +882,10 @@ inherited ftmStudent: TftmStudent
         object TabSheet4: TTabSheet
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -1262,6 +1274,10 @@ inherited ftmStudent: TftmStudent
         object TabSheet5: TTabSheet
           Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object sbAddRel: TSpeedButton
             Left = 524
             Top = 25
@@ -1405,6 +1421,10 @@ inherited ftmStudent: TftmStudent
         object TabSheet2: TTabSheet
           Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object sbAddDoc: TSpeedButton
             Left = 524
             Top = 0
@@ -1550,7 +1570,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C0101050009003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -618,6 +618,7 @@ begin
   end;
   NaprCommand.Free;
   Refresh;
+  DataSet.Locate('Ik_ved', VedIK, []);
 end;
 
 function TNapravController.Annul(VedIK: integer): integer;
@@ -746,8 +747,8 @@ begin
     ParamByName('@StartDate').Value := StartDate;
     ParamByName('@EndDate').Value := EndDate;
     ParamByName('@cNumber_napr').Value := cNumber_napr;
-    FStor.Active := true;
-    Result := ParamByName('@ik_ved').Value;
+    FStor.ExecProc;
+    Result := ParamByName('@RETURN_VALUE').Value;
   end;
 end;
 
