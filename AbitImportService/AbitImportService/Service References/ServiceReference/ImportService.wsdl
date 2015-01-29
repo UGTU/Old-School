@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ImportService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://10.0.3.1:8080/import/ImportService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.0.3.1:8080/import/ImportService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IImportService_GetDictionariesList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionariesList" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetDictionariesList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionariesListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetDictionaryDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionaryDetails" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetDictionaryDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDictionaryDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetInstitutionInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitutionInfo" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetInstitutionInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitutionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetInstitutionPartOfInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitutionPartOfInfo" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetInstitutionPartOfInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInstitutionPartOfInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoImport_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoImport" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoImport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoImportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoImportApplicationSingle_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoImportApplicationSingle" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoImportApplicationSingle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoImportApplicationSingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetImportResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetImportResult" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetImportResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetImportResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoValidate_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoValidate" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoValidate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoDelete" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetDeleteResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeleteResult" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetDeleteResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeleteResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoCheckApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoCheckApplication" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoCheckApplication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoCheckApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoCheckApplicationSingle_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoCheckApplicationSingle" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_DoCheckApplicationSingle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoCheckApplicationSingleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestImport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestImport" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestImport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestImportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestRemove_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestRemove" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestRemove_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestRemoveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestDictionariesList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestDictionariesList" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestDictionariesList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestDictionariesListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestDictionaryDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestDictionaryDetails" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestDictionaryDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestDictionaryDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestCheckApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestCheckApplication" />
+  </wsdl:message>
+  <wsdl:message name="IImportService_GetTestCheckApplication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestCheckApplicationResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IImportService">
+    <wsdl:operation name="GetDictionariesList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetDictionariesList" message="tns:IImportService_GetDictionariesList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetDictionariesListResponse" message="tns:IImportService_GetDictionariesList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDictionaryDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetDictionaryDetails" message="tns:IImportService_GetDictionaryDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetDictionaryDetailsResponse" message="tns:IImportService_GetDictionaryDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitutionInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetInstitutionInfo" message="tns:IImportService_GetInstitutionInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetInstitutionInfoResponse" message="tns:IImportService_GetInstitutionInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitutionPartOfInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetInstitutionPartOfInfo" message="tns:IImportService_GetInstitutionPartOfInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetInstitutionPartOfInfoResponse" message="tns:IImportService_GetInstitutionPartOfInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoImport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/DoImport" message="tns:IImportService_DoImport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/DoImportResponse" message="tns:IImportService_DoImport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoImportApplicationSingle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/DoImportApplicationSingle" message="tns:IImportService_DoImportApplicationSingle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/DoImportApplicationSingleResponse" message="tns:IImportService_DoImportApplicationSingle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetImportResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetImportResult" message="tns:IImportService_GetImportResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetImportResultResponse" message="tns:IImportService_GetImportResult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoValidate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/DoValidate" message="tns:IImportService_DoValidate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/DoValidateResponse" message="tns:IImportService_DoValidate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/DoDelete" message="tns:IImportService_DoDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/DoDeleteResponse" message="tns:IImportService_DoDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeleteResult">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetDeleteResult" message="tns:IImportService_GetDeleteResult_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetDeleteResultResponse" message="tns:IImportService_GetDeleteResult_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoCheckApplication">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/DoCheckApplication" message="tns:IImportService_DoCheckApplication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/DoCheckApplicationResponse" message="tns:IImportService_DoCheckApplication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DoCheckApplicationSingle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/DoCheckApplicationSingle" message="tns:IImportService_DoCheckApplicationSingle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/DoCheckApplicationSingleResponse" message="tns:IImportService_DoCheckApplicationSingle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestImport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetTestImport" message="tns:IImportService_GetTestImport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetTestImportResponse" message="tns:IImportService_GetTestImport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestRemove">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetTestRemove" message="tns:IImportService_GetTestRemove_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetTestRemoveResponse" message="tns:IImportService_GetTestRemove_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestDictionariesList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetTestDictionariesList" message="tns:IImportService_GetTestDictionariesList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetTestDictionariesListResponse" message="tns:IImportService_GetTestDictionariesList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestDictionaryDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetTestDictionaryDetails" message="tns:IImportService_GetTestDictionaryDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetTestDictionaryDetailsResponse" message="tns:IImportService_GetTestDictionaryDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestCheckApplication">
+      <wsdl:input wsaw:Action="http://tempuri.org/IImportService/GetTestCheckApplication" message="tns:IImportService_GetTestCheckApplication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IImportService/GetTestCheckApplicationResponse" message="tns:IImportService_GetTestCheckApplication_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:service name="ImportService" />
+</wsdl:definitions>
