@@ -2968,12 +2968,6 @@ begin
     Exit;
   end;
 
-  if not TUspevGroupController.Instance.OpenVed(ik_ved) then
-  begin
-    MessageBox(Handle, 'При открытии ведомости произошла ошибка.',
-      'ИС УГТУ', MB_OK);
-    Exit;
-  end;
 
   ftmNaprClose := TftmNaprClose.Create(self);
   ftmNaprClose.StudZachIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues

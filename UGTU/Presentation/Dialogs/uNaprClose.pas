@@ -36,6 +36,7 @@ type
     FCloseNapr: boolean;
     FVedIK: integer;
     FStudZachIK: integer;
+    FIsClosed: boolean;
     procedure SetStudZachIK(const Value: integer);
     procedure SetVed(const Value: integer);
   public
@@ -45,6 +46,7 @@ type
     property CloseNapr: boolean read FCloseNapr write FCloseNapr;
     property StudZachIK: integer write SetStudZachIK;
     property VedIK: integer write SetVed;
+    property IsClosed: boolean write FIsClosed;
   end;
 
 var
@@ -147,6 +149,15 @@ end;
 
 procedure TftmNaprclose.actApplyExecute(Sender: TObject);
 begin
+
+  if FIsClosed then
+    if not TUspevGroupController.Instance.OpenVed(ik_ved) then
+    begin
+      MessageBox(Handle, 'При открытии ведомости произошла ошибка.',
+        'ИС УГТУ', MB_OK);
+      Exit;
+  end;
+
 
   TUspevGroupController.Instance.CloseNapr(FVedIK, dbcbeMark.KeyValue,
   dbcbeEx.KeyValue, eTema.Text, dbdteExam.Value);
