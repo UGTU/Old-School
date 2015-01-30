@@ -406,7 +406,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka,
   uNagruzkaSemester, ApplicationController, uAbitConfirm, udmCauses,
   DBTVInviteObj,
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj, HOST_Projivaysh,
-  DBTVHabitatsPersonObj,
+  DBTVHabitatsPersonObj,  uUspevGroupController,
   uPerson;
 
 var
@@ -1795,6 +1795,7 @@ end;
 procedure TfrmMain.actNaprCloseExecute(Sender: TObject);
 begin
   ftmNaprClose := TftmNaprClose.Create(self);
+
   ftmNaprClose.StudZachIK := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
     .RecordbookKey;
   ftmNaprClose.ShowModal;

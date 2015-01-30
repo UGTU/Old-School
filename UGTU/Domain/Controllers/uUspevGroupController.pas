@@ -279,6 +279,8 @@ type
 
   procedure AnnulNapr(VedIK: integer);
 
+  procedure SelectOpenedNapr(StudGrupIk, ZachIK: integer);
+
   //**********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
   //Возвращает следующее слово из строки,
   //при этом укорачивая строку на это слово и разделитель
@@ -463,6 +465,12 @@ begin
       dmUspevaemost.adodsSelBRSExamGroup.Active := false;
       dmUspevaemost.adodsSelBRSExamGroup.CommandText := 'select * from GetSmallBRSExamForGrup('+IntToStr(ikVed)+')';
       dmUspevaemost.adodsSelBRSExamGroup.Active := true;
+end;
+
+procedure TUspevGroupController.SelectOpenedNapr(StudGrupIk, ZachIK: integer);
+begin
+  FNapravController.Reload(StudGrupIk, ZachIK);
+  FNapravController.LoadOpenedNapr;
 end;
 
 //функция выбирает все созданные предметы аттестации и возвращает их количество

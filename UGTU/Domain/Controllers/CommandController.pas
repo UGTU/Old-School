@@ -170,6 +170,7 @@ type
   public
     constructor Create;
     procedure Reload(ik_studGrup, ik_zach: integer); overload;
+    procedure LoadOpenedNapr;
     function CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
     function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum: string; var VedIK: integer): integer;
     function Annul(VedIK: integer): integer;

@@ -82,14 +82,16 @@ end;
 
 procedure TftmNaprclose.FormShow(Sender: TObject);
 begin
-    dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
-    if FVedIK<>0 then dbcbeNapr.KeyValue := FVedIK;  //если во фрейм было передано конкретное направление
-
-  try
+  dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
+  if FVedIK<>0 then dbcbeNapr.KeyValue := FVedIK  //если во фрейм было передано конкретное направление
+  else
+  begin
     {dmUspevaemost.adodsNapravl.Active := false;
     dmUspevaemost.adodsNapravl.CommandText :=
-      'select * from Napr_View where ik_zach=''' + inttostr(Tag) + '''';
+      'select * from Napr_View where ik_zach=''' + inttostr(FStudZachIK) + '''';
     dmUspevaemost.adodsNapravl.Active := true;}
+  end;
+  try
     dmUspevaemost.adodsmark.Active := true;
     dbdteExam.Value := date;
   finally
@@ -123,6 +125,7 @@ end;
 procedure TftmNaprclose.SetStudZachIK(const Value: integer);
 begin
   FStudZachIK := Value;
+  TUspevGroupController.Instance.SelectOpenedNapr();
 end;
 
 procedure TftmNaprclose.SetVed(const Value: integer);
@@ -151,7 +154,7 @@ procedure TftmNaprclose.actApplyExecute(Sender: TObject);
 begin
 
   if FIsClosed then
-    if not TUspevGroupController.Instance.OpenVed(ik_ved) then
+    if not TUspevGroupController.Instance.OpenVed(FVedIK) then
     begin
       MessageBox(Handle, 'При открытии ведомости произошла ошибка.',
         'ИС УГТУ', MB_OK);
