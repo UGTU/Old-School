@@ -1,0 +1,2175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetUGTUFaculties">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUGTUFacultiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTUFacultiesResult" type="tns:ArrayOfFacInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFacInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FacInfo" nillable="true" type="tns:FacInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FacInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUGTUSpecialties">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUGTUSpecialtiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTUSpecialtiesResult" type="tns:ArrayOfSpecInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSpecInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SpecInfo" nillable="true" type="tns:SpecInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SpecInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFacultySpecialties">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="facID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacultySpecialtiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacultySpecialtiesResult" type="tns:ArrayOfSpecInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacultyRecruitments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="facID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetFacultyRecruitmentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFacultyRecruitmentsResult" type="tns:ArrayOfRecruitInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRecruitInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RecruitInfo" nillable="true" type="tns:RecruitInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RecruitInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCitizenships">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCitizenshipsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCitizenshipsResult" type="tns:ArrayOfCitizenshipInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCitizenshipInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CitizenshipInfo" nillable="true" type="tns:CitizenshipInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CitizenshipInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCountries">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCountriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountriesResult" type="tns:ArrayOfCountryInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCountryInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CountryInfo" nillable="true" type="tns:CountryInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CountryInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRegions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ikStrana" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRegionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRegionsResult" type="tns:ArrayOfRegionInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRegionInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RegionInfo" nillable="true" type="tns:RegionInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RegionInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCounties">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ikRegion" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountiesResult" type="tns:ArrayOfCountyInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCountyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CountyInfo" nillable="true" type="tns:CountyInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CountyInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetTowns">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ikCounty" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTownsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTownsResult" type="tns:ArrayOfTownInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTownInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TownInfo" nillable="true" type="tns:TownInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TownInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetStreets">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ikTown" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStreetsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStreetsResult" type="tns:ArrayOfStreetInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfStreetInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StreetInfo" nillable="true" type="tns:StreetInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StreetInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSchools">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ikTown" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSchoolsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSchoolsResult" type="tns:ArrayOfSchoolInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSchoolInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SchoolInfo" nillable="true" type="tns:SchoolInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SchoolInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSpecCounts">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetSpecCountsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSpecCountsResult" type="tns:ArrayOfSCountInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSCountInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SCountInfo" nillable="true" type="tns:SCountInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SCountInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetLanguages">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetLanguagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLanguagesResult" type="tns:ArrayOfLangInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLangInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LangInfo" nillable="true" type="tns:LangInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LangInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMasteries">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMasteriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMasteriesResult" type="tns:ArrayOfMastInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMastInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MastInfo" nillable="true" type="tns:MastInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MastInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPreps">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetPrepsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrepsResult" type="tns:ArrayOfPrepInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfPrepInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PrepInfo" nillable="true" type="tns:PrepInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PrepInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMedalTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMedalTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMedalTypesResult" type="tns:ArrayOfMedalInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMedalInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MedalInfo" nillable="true" type="tns:MedalInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MedalInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrganizations">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetOrganizationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrganizationsResult" type="tns:ArrayOfOrgInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfOrgInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrgInfo" nillable="true" type="tns:OrgInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrgInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetMilStates">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMilStatesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMilStatesResult" type="tns:ArrayOfMilInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMilInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MilInfo" nillable="true" type="tns:MilInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MilInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDocTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDocTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocTypesResult" type="tns:ArrayOfDocTypeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDocTypeInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DocTypeInfo" nillable="true" type="tns:DocTypeInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocTypeInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEducationalDocTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEducationalDocTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEducationalDocTypesResult" type="tns:ArrayOfDocTypeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIdentityDocTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetIdentityDocTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIdentityDocTypesResult" type="tns:ArrayOfDocTypeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEntranceTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEntranceTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEntranceTypesResult" type="tns:ArrayOfEntTypeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEntTypeInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntTypeInfo" nillable="true" type="tns:EntTypeInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntTypeInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetFamStates">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetFamStatesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetFamStatesResult" type="tns:ArrayOfFamStateInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFamStateInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FamStateInfo" nillable="true" type="tns:FamStateInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FamStateInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetExamTypes">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetExamTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExamTypesResult" type="tns:ArrayOfExamTypeInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfExamTypeInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExamTypeInfo" nillable="true" type="tns:ExamTypeInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ExamTypeInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetExamDisciplines">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetExamDisciplinesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetExamDisciplinesResult" type="tns:ArrayOfExamDiscInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfExamDiscInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExamDiscInfo" nillable="true" type="tns:ExamDiscInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ExamDiscInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="IsValid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NBook" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsValidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsValidResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAbitPersonalData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MiddleName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Birth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="BirthPlace" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsPhysChallenged" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="HasKids" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="HasJob" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsMale" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="NeedsRoom" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="MedalKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MilStateKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="eMail" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CitizenshipKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrepKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CommunityJobKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FamStateKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SpecCountKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SchoolKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="GraduateYear" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FactIndex" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FactStreetKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FactBuilding" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FactFlat" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SignIndex" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SignStreetKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SignBuilding" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SignFlat" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AdditionalInfo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ServiceRecYears" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ServiceRecMonths" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Duty" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrganizationKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Benefits" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAbitPersonalDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddAbitPersonalDataResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditAbitPersonalData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MiddleName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Birth" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="BirthPlace" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsPhysChallenged" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="HasKids" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="HasJob" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="IsMale" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="NeedsRoom" nillable="true" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="MedalKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MilStateKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="eMail" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CitizenshipKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PrepKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CommunityJobKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FamStateKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SpecCountKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="SchoolKey" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="GraduateYear" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FactIndex" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FactStreetKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="FactBuilding" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FactFlat" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SignIndex" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SignStreetKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SignBuilding" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SignFlat" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AdditionalInfo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ServiceRecYears" nillable="true" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ServiceRecMonths" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Duty" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrganizationKey" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Benefits" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditAbitPersonalDataResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddAbitDoc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocTypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Serie" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GivenBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Given" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAbitDocResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EditAbitDoc">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DocTypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Serie" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GivenBy" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Given" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditAbitDocResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddAbitLang">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="LangID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MasteryID" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAbitLangResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="EditAbitLang">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="LangID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="MasteryID" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditAbitLangResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAbitData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAbitDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAbitDataResult" type="tns:AbitInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AbitInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="IDDocument" type="tns:DocInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="EdDocument" type="tns:DocInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="SignAddress" type="tns:AddressInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="FactAddress" type="tns:AddressInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="BaseLang" type="tns:LangKnowledgeInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Langs" type="tns:ArrayOfLangKnowledgeInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MidName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Birth" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="BirthPlace" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPhysChallenged" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasKids" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasJob" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsMale" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="NeedsRoom" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="MedalKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MilStateKey" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="eMail" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CitizenshipKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PrepKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommunityJobKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FamStateKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SpecCountKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SchoolKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="GraduateYear" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FactIndex" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FactStreetKey" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FactBuilding" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FactFlat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SignIndex" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SignStreetKey" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="SignBuilding" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SignFlat" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AdditionalInfo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ServiceRecYears" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ServiceRecMonths" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Duty" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrganizationKey" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Benefits" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocTypeKey" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocTypeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Serie" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Given" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="GivenBy" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AddressInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="StreetKey" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Building" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Struct" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PostIndex" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="FlatNum" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LangKnowledgeInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LangID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LangName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MasteryID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MasteryName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLangKnowledgeInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LangKnowledgeInfo" nillable="true" type="tns:LangKnowledgeInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddAbitAppl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RecruitID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CatID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isMain" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAbitApplResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddAbitApplResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditAbitAppl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AppID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="RecruitID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="CatID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="isMain" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EditAbitApplResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddAbitExam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AppID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="DiscID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExTypeID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="VedNum" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Ball" nillable="true" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAbitExamResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddAbitExamResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelAbitExam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExamID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DelAbitExamResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllAppData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllAppDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllAppDataResult" type="tns:ArrayOfAppInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAppInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AppInfo" nillable="true" type="tns:AppInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AppInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Exams" type="tns:ArrayOfExamInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RegNumber" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumRecord" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CatEntryKey" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CatEntryName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CatEntryTypeKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EntryStateKey" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntryStateName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppOnlineDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppReturnDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="AppEntryDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsPrimary" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsReal" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfExamInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ExamInfo" nillable="true" type="tns:ExamInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ExamInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiscKey" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExamTypeKey" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="RoomKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Balls" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocNum" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAppData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AppKey" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAppDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAppDataResult" type="tns:AppInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventsData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ncode" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventsDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEventsDataResult" type="tns:ArrayOfEventInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEventInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventInfo" nillable="true" type="tns:EventInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DiscKey" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DiscName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExamTypeKey" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SitKey" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Begins" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ends" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="RoomKey" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoomName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EventTypeName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetApplicationStatistic">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IDApp" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetApplicationStatisticResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetApplicationStatisticResult" type="tns:EnterInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EnterInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Application" type="tns:AppInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvgBall" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PassBall" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetUGTUFacultiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTUFaculties" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUFacultiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTUFacultiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUSpecialtiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTUSpecialties" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUSpecialtiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTUSpecialtiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacultySpecialtiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacultySpecialties" />
+  </wsdl:message>
+  <wsdl:message name="GetFacultySpecialtiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacultySpecialtiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFacultyRecruitmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFacultyRecruitments" />
+  </wsdl:message>
+  <wsdl:message name="GetFacultyRecruitmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFacultyRecruitmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCitizenshipsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCitizenships" />
+  </wsdl:message>
+  <wsdl:message name="GetCitizenshipsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCitizenshipsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountries" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRegions" />
+  </wsdl:message>
+  <wsdl:message name="GetRegionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRegionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCounties" />
+  </wsdl:message>
+  <wsdl:message name="GetCountiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTownsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTowns" />
+  </wsdl:message>
+  <wsdl:message name="GetTownsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTownsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStreetsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStreets" />
+  </wsdl:message>
+  <wsdl:message name="GetStreetsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStreetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSchoolsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSchools" />
+  </wsdl:message>
+  <wsdl:message name="GetSchoolsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSchoolsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSpecCountsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSpecCounts" />
+  </wsdl:message>
+  <wsdl:message name="GetSpecCountsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSpecCountsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLanguagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLanguages" />
+  </wsdl:message>
+  <wsdl:message name="GetLanguagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLanguagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMasteriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMasteries" />
+  </wsdl:message>
+  <wsdl:message name="GetMasteriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMasteriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrepsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPreps" />
+  </wsdl:message>
+  <wsdl:message name="GetPrepsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrepsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMedalTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMedalTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetMedalTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMedalTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrganizations" />
+  </wsdl:message>
+  <wsdl:message name="GetOrganizationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrganizationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMilStatesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMilStates" />
+  </wsdl:message>
+  <wsdl:message name="GetMilStatesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMilStatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetDocTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEducationalDocTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEducationalDocTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetEducationalDocTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEducationalDocTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIdentityDocTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIdentityDocTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetIdentityDocTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIdentityDocTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEntranceTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEntranceTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetEntranceTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEntranceTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetFamStatesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetFamStates" />
+  </wsdl:message>
+  <wsdl:message name="GetFamStatesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetFamStatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExamTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExamTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetExamTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExamTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetExamDisciplinesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetExamDisciplines" />
+  </wsdl:message>
+  <wsdl:message name="GetExamDisciplinesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetExamDisciplinesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IsValidSoapIn">
+    <wsdl:part name="parameters" element="tns:IsValid" />
+  </wsdl:message>
+  <wsdl:message name="IsValidSoapOut">
+    <wsdl:part name="parameters" element="tns:IsValidResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitPersonalDataSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAbitPersonalData" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitPersonalDataSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAbitPersonalDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitPersonalDataSoapIn">
+    <wsdl:part name="parameters" element="tns:EditAbitPersonalData" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitPersonalDataSoapOut">
+    <wsdl:part name="parameters" element="tns:EditAbitPersonalDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitDocSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAbitDoc" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitDocSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAbitDocResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitDocSoapIn">
+    <wsdl:part name="parameters" element="tns:EditAbitDoc" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitDocSoapOut">
+    <wsdl:part name="parameters" element="tns:EditAbitDocResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitLangSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAbitLang" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitLangSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAbitLangResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitLangSoapIn">
+    <wsdl:part name="parameters" element="tns:EditAbitLang" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitLangSoapOut">
+    <wsdl:part name="parameters" element="tns:EditAbitLangResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAbitDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAbitData" />
+  </wsdl:message>
+  <wsdl:message name="GetAbitDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAbitDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitApplSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAbitAppl" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitApplSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAbitApplResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitApplSoapIn">
+    <wsdl:part name="parameters" element="tns:EditAbitAppl" />
+  </wsdl:message>
+  <wsdl:message name="EditAbitApplSoapOut">
+    <wsdl:part name="parameters" element="tns:EditAbitApplResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitExamSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAbitExam" />
+  </wsdl:message>
+  <wsdl:message name="AddAbitExamSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAbitExamResponse" />
+  </wsdl:message>
+  <wsdl:message name="DelAbitExamSoapIn">
+    <wsdl:part name="parameters" element="tns:DelAbitExam" />
+  </wsdl:message>
+  <wsdl:message name="DelAbitExamSoapOut">
+    <wsdl:part name="parameters" element="tns:DelAbitExamResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAppDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllAppData" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAppDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllAppDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAppDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAppData" />
+  </wsdl:message>
+  <wsdl:message name="GetAppDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAppDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsDataSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEventsData" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsDataSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventsDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationStatisticSoapIn">
+    <wsdl:part name="parameters" element="tns:GetApplicationStatistic" />
+  </wsdl:message>
+  <wsdl:message name="GetApplicationStatisticSoapOut">
+    <wsdl:part name="parameters" element="tns:GetApplicationStatisticResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AbitServiceSoap">
+    <wsdl:operation name="GetUGTUFaculties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию факультетов университета</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTUFacultiesSoapIn" />
+      <wsdl:output message="tns:GetUGTUFacultiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUSpecialties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию специальностей университета</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTUSpecialtiesSoapIn" />
+      <wsdl:output message="tns:GetUGTUSpecialtiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacultySpecialties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию специальностей факультета</wsdl:documentation>
+      <wsdl:input message="tns:GetFacultySpecialtiesSoapIn" />
+      <wsdl:output message="tns:GetFacultySpecialtiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFacultyRecruitments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию наборов факультета для текущего года</wsdl:documentation>
+      <wsdl:input message="tns:GetFacultyRecruitmentsSoapIn" />
+      <wsdl:output message="tns:GetFacultyRecruitmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenships">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию гражданств</wsdl:documentation>
+      <wsdl:input message="tns:GetCitizenshipsSoapIn" />
+      <wsdl:output message="tns:GetCitizenshipsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию стран</wsdl:documentation>
+      <wsdl:input message="tns:GetCountriesSoapIn" />
+      <wsdl:output message="tns:GetCountriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegions">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию регионов страны</wsdl:documentation>
+      <wsdl:input message="tns:GetRegionsSoapIn" />
+      <wsdl:output message="tns:GetRegionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCounties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию районов региона</wsdl:documentation>
+      <wsdl:input message="tns:GetCountiesSoapIn" />
+      <wsdl:output message="tns:GetCountiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTowns">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию городов района</wsdl:documentation>
+      <wsdl:input message="tns:GetTownsSoapIn" />
+      <wsdl:output message="tns:GetTownsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStreets">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию улиц города</wsdl:documentation>
+      <wsdl:input message="tns:GetStreetsSoapIn" />
+      <wsdl:output message="tns:GetStreetsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSchools">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию учебных заведений города</wsdl:documentation>
+      <wsdl:input message="tns:GetSchoolsSoapIn" />
+      <wsdl:output message="tns:GetSchoolsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecCounts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию видов специального учета</wsdl:documentation>
+      <wsdl:input message="tns:GetSpecCountsSoapIn" />
+      <wsdl:output message="tns:GetSpecCountsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLanguages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию иностранных языков</wsdl:documentation>
+      <wsdl:input message="tns:GetLanguagesSoapIn" />
+      <wsdl:output message="tns:GetLanguagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMasteries">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию степеней владения</wsdl:documentation>
+      <wsdl:input message="tns:GetMasteriesSoapIn" />
+      <wsdl:output message="tns:GetMasteriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPreps">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию видов довузовской подготовки</wsdl:documentation>
+      <wsdl:input message="tns:GetPrepsSoapIn" />
+      <wsdl:output message="tns:GetPrepsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMedalTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию видов медалей</wsdl:documentation>
+      <wsdl:input message="tns:GetMedalTypesSoapIn" />
+      <wsdl:output message="tns:GetMedalTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizations">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию предприятий</wsdl:documentation>
+      <wsdl:input message="tns:GetOrganizationsSoapIn" />
+      <wsdl:output message="tns:GetOrganizationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMilStates">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию военных званий</wsdl:documentation>
+      <wsdl:input message="tns:GetMilStatesSoapIn" />
+      <wsdl:output message="tns:GetMilStatesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию видов документов</wsdl:documentation>
+      <wsdl:input message="tns:GetDocTypesSoapIn" />
+      <wsdl:output message="tns:GetDocTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationalDocTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию видов документов об образовании</wsdl:documentation>
+      <wsdl:input message="tns:GetEducationalDocTypesSoapIn" />
+      <wsdl:output message="tns:GetEducationalDocTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIdentityDocTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию видов документов, устанавливающих личность</wsdl:documentation>
+      <wsdl:input message="tns:GetIdentityDocTypesSoapIn" />
+      <wsdl:output message="tns:GetIdentityDocTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntranceTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию категорий поступления</wsdl:documentation>
+      <wsdl:input message="tns:GetEntranceTypesSoapIn" />
+      <wsdl:output message="tns:GetEntranceTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFamStates">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию семейных положений</wsdl:documentation>
+      <wsdl:input message="tns:GetFamStatesSoapIn" />
+      <wsdl:output message="tns:GetFamStatesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExamTypes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию видов сдачи вступительного экзамена</wsdl:documentation>
+      <wsdl:input message="tns:GetExamTypesSoapIn" />
+      <wsdl:output message="tns:GetExamTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetExamDisciplines">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию дисциплин для вступительного экзамена</wsdl:documentation>
+      <wsdl:input message="tns:GetExamDisciplinesSoapIn" />
+      <wsdl:output message="tns:GetExamDisciplinesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValid">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Проверяет, есть ли в базе личные данные студента с заданным номером зачетной книжки и номером паспорта</wsdl:documentation>
+      <wsdl:input message="tns:IsValidSoapIn" />
+      <wsdl:output message="tns:IsValidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitPersonalData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Добавляет в сиcтему набор личных данных и возвращает личный номер абитуриента</wsdl:documentation>
+      <wsdl:input message="tns:AddAbitPersonalDataSoapIn" />
+      <wsdl:output message="tns:AddAbitPersonalDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitPersonalData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Редактирует набор личных данных абитуриента по личному номеру</wsdl:documentation>
+      <wsdl:input message="tns:EditAbitPersonalDataSoapIn" />
+      <wsdl:output message="tns:EditAbitPersonalDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitDoc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Добавляет в сиcтему документ, связанный с указанным абитуриентом</wsdl:documentation>
+      <wsdl:input message="tns:AddAbitDocSoapIn" />
+      <wsdl:output message="tns:AddAbitDocSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitDoc">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Редактирует документ, связанный с указанным абитуриентом</wsdl:documentation>
+      <wsdl:input message="tns:EditAbitDocSoapIn" />
+      <wsdl:output message="tns:EditAbitDocSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitLang">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Добавляет в сиcтему иноcтранный язык, связанный с указанным абитуриентом</wsdl:documentation>
+      <wsdl:input message="tns:AddAbitLangSoapIn" />
+      <wsdl:output message="tns:AddAbitLangSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitLang">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Редактирует иноcтранный язык, связанный с указанным абитуриентом</wsdl:documentation>
+      <wsdl:input message="tns:EditAbitLangSoapIn" />
+      <wsdl:output message="tns:EditAbitLangSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAbitData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Возвращает набор личных данных абитуриента, включая адреса, язык и документы</wsdl:documentation>
+      <wsdl:input message="tns:GetAbitDataSoapIn" />
+      <wsdl:output message="tns:GetAbitDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitAppl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Добавляет в сиcтему заявление абитуриента, возвращает ключ заявления</wsdl:documentation>
+      <wsdl:input message="tns:AddAbitApplSoapIn" />
+      <wsdl:output message="tns:AddAbitApplSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitAppl">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Редактирует заявление абитуриента</wsdl:documentation>
+      <wsdl:input message="tns:EditAbitApplSoapIn" />
+      <wsdl:output message="tns:EditAbitApplSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Добавляет экзамен к заявлению абитуриента, возвращает ID экзамена</wsdl:documentation>
+      <wsdl:input message="tns:AddAbitExamSoapIn" />
+      <wsdl:output message="tns:AddAbitExamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DelAbitExam">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Удаляет экзамен из заявления абитуриента</wsdl:documentation>
+      <wsdl:input message="tns:DelAbitExamSoapIn" />
+      <wsdl:output message="tns:DelAbitExamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAppData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Возвращает данные всех заявлений абитуриента</wsdl:documentation>
+      <wsdl:input message="tns:GetAllAppDataSoapIn" />
+      <wsdl:output message="tns:GetAllAppDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAppData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Возвращает данные заявления абитуриента</wsdl:documentation>
+      <wsdl:input message="tns:GetAppDataSoapIn" />
+      <wsdl:output message="tns:GetAppDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Возвращает предстоящие абитуриенту экзамены</wsdl:documentation>
+      <wsdl:input message="tns:GetEventsDataSoapIn" />
+      <wsdl:output message="tns:GetEventsDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationStatistic">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Возвращает статистику поступления</wsdl:documentation>
+      <wsdl:input message="tns:GetApplicationStatisticSoapIn" />
+      <wsdl:output message="tns:GetApplicationStatisticSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AbitServiceSoap" type="tns:AbitServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUGTUFaculties">
+      <soap:operation soapAction="http://tempuri.org/GetUGTUFaculties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUSpecialties">
+      <soap:operation soapAction="http://tempuri.org/GetUGTUSpecialties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacultySpecialties">
+      <soap:operation soapAction="http://tempuri.org/GetFacultySpecialties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacultyRecruitments">
+      <soap:operation soapAction="http://tempuri.org/GetFacultyRecruitments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenships">
+      <soap:operation soapAction="http://tempuri.org/GetCitizenships" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <soap:operation soapAction="http://tempuri.org/GetCountries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegions">
+      <soap:operation soapAction="http://tempuri.org/GetRegions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounties">
+      <soap:operation soapAction="http://tempuri.org/GetCounties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTowns">
+      <soap:operation soapAction="http://tempuri.org/GetTowns" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStreets">
+      <soap:operation soapAction="http://tempuri.org/GetStreets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchools">
+      <soap:operation soapAction="http://tempuri.org/GetSchools" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecCounts">
+      <soap:operation soapAction="http://tempuri.org/GetSpecCounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLanguages">
+      <soap:operation soapAction="http://tempuri.org/GetLanguages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasteries">
+      <soap:operation soapAction="http://tempuri.org/GetMasteries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreps">
+      <soap:operation soapAction="http://tempuri.org/GetPreps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMedalTypes">
+      <soap:operation soapAction="http://tempuri.org/GetMedalTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizations">
+      <soap:operation soapAction="http://tempuri.org/GetOrganizations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMilStates">
+      <soap:operation soapAction="http://tempuri.org/GetMilStates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTypes">
+      <soap:operation soapAction="http://tempuri.org/GetDocTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationalDocTypes">
+      <soap:operation soapAction="http://tempuri.org/GetEducationalDocTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdentityDocTypes">
+      <soap:operation soapAction="http://tempuri.org/GetIdentityDocTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntranceTypes">
+      <soap:operation soapAction="http://tempuri.org/GetEntranceTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFamStates">
+      <soap:operation soapAction="http://tempuri.org/GetFamStates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExamTypes">
+      <soap:operation soapAction="http://tempuri.org/GetExamTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExamDisciplines">
+      <soap:operation soapAction="http://tempuri.org/GetExamDisciplines" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValid">
+      <soap:operation soapAction="http://tempuri.org/IsValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitPersonalData">
+      <soap:operation soapAction="http://tempuri.org/AddAbitPersonalData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitPersonalData">
+      <soap:operation soapAction="http://tempuri.org/EditAbitPersonalData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitDoc">
+      <soap:operation soapAction="http://tempuri.org/AddAbitDoc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitDoc">
+      <soap:operation soapAction="http://tempuri.org/EditAbitDoc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitLang">
+      <soap:operation soapAction="http://tempuri.org/AddAbitLang" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitLang">
+      <soap:operation soapAction="http://tempuri.org/EditAbitLang" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAbitData">
+      <soap:operation soapAction="http://tempuri.org/GetAbitData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitAppl">
+      <soap:operation soapAction="http://tempuri.org/AddAbitAppl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitAppl">
+      <soap:operation soapAction="http://tempuri.org/EditAbitAppl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitExam">
+      <soap:operation soapAction="http://tempuri.org/AddAbitExam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelAbitExam">
+      <soap:operation soapAction="http://tempuri.org/DelAbitExam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAppData">
+      <soap:operation soapAction="http://tempuri.org/GetAllAppData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppData">
+      <soap:operation soapAction="http://tempuri.org/GetAppData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsData">
+      <soap:operation soapAction="http://tempuri.org/GetEventsData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationStatistic">
+      <soap:operation soapAction="http://tempuri.org/GetApplicationStatistic" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AbitServiceSoap12" type="tns:AbitServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUGTUFaculties">
+      <soap12:operation soapAction="http://tempuri.org/GetUGTUFaculties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUSpecialties">
+      <soap12:operation soapAction="http://tempuri.org/GetUGTUSpecialties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacultySpecialties">
+      <soap12:operation soapAction="http://tempuri.org/GetFacultySpecialties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFacultyRecruitments">
+      <soap12:operation soapAction="http://tempuri.org/GetFacultyRecruitments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCitizenships">
+      <soap12:operation soapAction="http://tempuri.org/GetCitizenships" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <soap12:operation soapAction="http://tempuri.org/GetCountries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegions">
+      <soap12:operation soapAction="http://tempuri.org/GetRegions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCounties">
+      <soap12:operation soapAction="http://tempuri.org/GetCounties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTowns">
+      <soap12:operation soapAction="http://tempuri.org/GetTowns" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStreets">
+      <soap12:operation soapAction="http://tempuri.org/GetStreets" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchools">
+      <soap12:operation soapAction="http://tempuri.org/GetSchools" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSpecCounts">
+      <soap12:operation soapAction="http://tempuri.org/GetSpecCounts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLanguages">
+      <soap12:operation soapAction="http://tempuri.org/GetLanguages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMasteries">
+      <soap12:operation soapAction="http://tempuri.org/GetMasteries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreps">
+      <soap12:operation soapAction="http://tempuri.org/GetPreps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMedalTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetMedalTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizations">
+      <soap12:operation soapAction="http://tempuri.org/GetOrganizations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMilStates">
+      <soap12:operation soapAction="http://tempuri.org/GetMilStates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetDocTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEducationalDocTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetEducationalDocTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdentityDocTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetIdentityDocTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntranceTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetEntranceTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFamStates">
+      <soap12:operation soapAction="http://tempuri.org/GetFamStates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExamTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetExamTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetExamDisciplines">
+      <soap12:operation soapAction="http://tempuri.org/GetExamDisciplines" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValid">
+      <soap12:operation soapAction="http://tempuri.org/IsValid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitPersonalData">
+      <soap12:operation soapAction="http://tempuri.org/AddAbitPersonalData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitPersonalData">
+      <soap12:operation soapAction="http://tempuri.org/EditAbitPersonalData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitDoc">
+      <soap12:operation soapAction="http://tempuri.org/AddAbitDoc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitDoc">
+      <soap12:operation soapAction="http://tempuri.org/EditAbitDoc" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitLang">
+      <soap12:operation soapAction="http://tempuri.org/AddAbitLang" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitLang">
+      <soap12:operation soapAction="http://tempuri.org/EditAbitLang" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAbitData">
+      <soap12:operation soapAction="http://tempuri.org/GetAbitData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitAppl">
+      <soap12:operation soapAction="http://tempuri.org/AddAbitAppl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditAbitAppl">
+      <soap12:operation soapAction="http://tempuri.org/EditAbitAppl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAbitExam">
+      <soap12:operation soapAction="http://tempuri.org/AddAbitExam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelAbitExam">
+      <soap12:operation soapAction="http://tempuri.org/DelAbitExam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAppData">
+      <soap12:operation soapAction="http://tempuri.org/GetAllAppData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAppData">
+      <soap12:operation soapAction="http://tempuri.org/GetAppData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsData">
+      <soap12:operation soapAction="http://tempuri.org/GetEventsData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationStatistic">
+      <soap12:operation soapAction="http://tempuri.org/GetApplicationStatistic" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AbitService">
+    <wsdl:port name="AbitServiceSoap" binding="tns:AbitServiceSoap">
+      <soap:address location="http://abitsvc.ugtu.net/AbitService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AbitServiceSoap12" binding="tns:AbitServiceSoap12">
+      <soap12:address location="http://abitsvc.ugtu.net/AbitService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
