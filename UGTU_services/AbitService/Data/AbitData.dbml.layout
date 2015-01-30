@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AbitData">
+  <DataContextMoniker Name="/AbitDataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="121d7ae0-4867-4914-a27a-59ab46df35fc" absoluteBounds="5, 2.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/AbitDataDataContext/ABIT_Report" />
+      <nestedChildShapes>
+        <elementListCompartment Id="00a75d2e-99a2-4766-abe8-d290b108039c" absoluteBounds="5.015, 2.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 20.875, 15.625" name="DataClasses1">
+  <DataContextMoniker Name="/AbitDataContext" />
+  <nestedChildShapes>
+    <classShape Id="a72b880b-0761-4c23-b7f0-e83e1a223c91" absoluteBounds="0.5, 0.5, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/AbitDataContext/Fac" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4e02653f-fee1-46b6-9fe3-92be5712d68d" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d7c89eaf-f09d-4859-bd70-17a8aef50894" absoluteBounds="5.375, 0.5, 2, 2.4109318033854166">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_Diapazon_spec_fac" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d754f634-cb65-46b9-bfa8-6ca4a5ccd53c" absoluteBounds="5.3900000000000006, 0.96, 1.9700000000000002, 1.8509318033854165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f2fa7b1e-ea2e-4712-977d-964acddaebd3" absoluteBounds="0.5, 2.25, 2, 2.4109318033854166">
+      <DataClassMoniker Name="/AbitDataContext/Spec_stud" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2854fd3f-cee6-4ca3-bf10-8b3ec433eca6" absoluteBounds="0.515, 2.71, 1.9700000000000002, 1.8509318033854165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="554500f6-81af-44d2-8be1-28c41003680b" absoluteBounds="3.125, 0.5, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AbitDataContext/Relation_spec_fac" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9ff5cf6e-07b8-4b8b-91d5-6cc57fd57a42" absoluteBounds="3.14, 0.96, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 1.45894490559896); (5.375 : 1.45894490559896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Relation_spec_fac/Relation_spec_fac_ABIT_Diapazon_spec_fac" />
+      <nodes>
+        <classShapeMoniker Id="554500f6-81af-44d2-8be1-28c41003680b" />
+        <classShapeMoniker Id="d7c89eaf-f09d-4859-bd70-17a8aef50894" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 1.29459757486979); (3.125 : 1.29459757486979)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Fac/Fac_Relation_spec_fac" />
+      <nodes>
+        <classShapeMoniker Id="a72b880b-0761-4c23-b7f0-e83e1a223c91" />
+        <classShapeMoniker Id="554500f6-81af-44d2-8be1-28c41003680b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.5 : 2.25); (1.5 : 2.15169514973958); (2.5625 : 2.15169514973958); (2.5625 : 1.88749569303385); (3.125 : 1.88749569303385)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Spec_stud/Spec_stud_Relation_spec_fac" />
+      <nodes>
+        <classShapeMoniker Id="f2fa7b1e-ea2e-4712-977d-964acddaebd3" />
+        <classShapeMoniker Id="554500f6-81af-44d2-8be1-28c41003680b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e365e532-6148-4abc-ae3c-f9cf2dc219f6" absoluteBounds="11.25, 3.375, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/grazd" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a4b0c084-3ae0-488d-aceb-3cbb37eac303" absoluteBounds="11.265, 3.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4cbb0f47-8e38-491a-930f-de468c19aad0" absoluteBounds="3.25, 11, 2, 1.75354248046875">
+      <DataClassMoniker Name="/AbitDataContext/Address" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0da6adfc-6d9c-4c44-94bf-7973449b2d23" absoluteBounds="3.265, 11.46, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="95efb254-4002-4d74-8f41-ebc6695cd2a9" absoluteBounds="0.625, 11.375, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/AbitDataContext/Street" />
+      <nestedChildShapes>
+        <elementListCompartment Id="54801152-3ea3-41de-9ba8-fc4e16a07139" absoluteBounds="0.64000000000000012, 11.835, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.625 : 12.0642712402344); (3.25 : 12.0642712402344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Street/Street_Address" />
+      <nodes>
+        <classShapeMoniker Id="95efb254-4002-4d74-8f41-ebc6695cd2a9" />
+        <classShapeMoniker Id="4cbb0f47-8e38-491a-930f-de468c19aad0" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="3a7a7997-b86a-4d32-b370-1df66e735f45" absoluteBounds="0.625, 5.125, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/Strana" />
+      <nestedChildShapes>
+        <elementListCompartment Id="60d23249-3ee8-4c61-a7cb-ed9ef94c47df" absoluteBounds="0.64000000000000012, 5.585, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="798f7c29-7eb3-4bf1-9f7c-957af88d9053" absoluteBounds="0.625, 6.625, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/Region" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1d73313f-e351-48de-bd87-9c4f4058165b" absoluteBounds="0.64000000000000012, 7.085, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.625 : 6.38550048828125); (1.625 : 6.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Strana/Strana_Region" />
+      <nodes>
+        <classShapeMoniker Id="3a7a7997-b86a-4d32-b370-1df66e735f45" />
+        <classShapeMoniker Id="798f7c29-7eb3-4bf1-9f7c-957af88d9053" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="79aa8a83-d72e-4fe8-81fc-73f965e42f0a" absoluteBounds="0.625, 8.125, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/Raion" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bb9bccdb-f4e7-4c58-aeaa-7b97ceafd96f" absoluteBounds="0.63999999999999968, 8.585, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.34375 : 7.88550048828125); (1.34375 : 8.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Region/Region_Raion" />
+      <nodes>
+        <classShapeMoniker Id="798f7c29-7eb3-4bf1-9f7c-957af88d9053" />
+        <classShapeMoniker Id="79aa8a83-d72e-4fe8-81fc-73f965e42f0a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="99dc9393-12cd-4c45-b448-b3672feba8a5" absoluteBounds="0.625, 9.625, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/AbitDataContext/Gorod" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1c0d5797-9772-4d76-afa0-fb9fb0e85d48" absoluteBounds="0.64000000000000012, 10.085, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.46875 : 11.2141951497396); (1.46875 : 11.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Gorod/Gorod_Street" />
+      <nodes>
+        <classShapeMoniker Id="99dc9393-12cd-4c45-b448-b3672feba8a5" />
+        <classShapeMoniker Id="95efb254-4002-4d74-8f41-ebc6695cd2a9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.34375 : 9.38550048828125); (1.34375 : 9.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Raion/Raion_Gorod" />
+      <nodes>
+        <classShapeMoniker Id="79aa8a83-d72e-4fe8-81fc-73f965e42f0a" />
+        <classShapeMoniker Id="99dc9393-12cd-4c45-b448-b3672feba8a5" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="0155009e-34c5-4561-8f18-f169e5ab0fba" absoluteBounds="3.25, 7.625, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/AbitDataContext/Zaved_stud" />
+      <nestedChildShapes>
+        <elementListCompartment Id="57210fc5-11da-494a-9e3a-627ff9c7ff36" absoluteBounds="3.265, 8.085, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.625 : 9.625); (3.25 : 9.04984781901042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Gorod/Gorod_Zaved_stud" />
+      <nodes>
+        <classShapeMoniker Id="99dc9393-12cd-4c45-b448-b3672feba8a5" />
+        <classShapeMoniker Id="0155009e-34c5-4561-8f18-f169e5ab0fba" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="6f0f3470-0f7a-46d0-a07c-f4b5d803000c" absoluteBounds="3.25, 6.125, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/Vid_ob_rab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0c2e42d0-2084-4d46-9f9a-acfb630ee6ba" absoluteBounds="3.265, 6.5850000000000009, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="09e66b6f-3b00-4bc9-b288-80a0573a98b7" absoluteBounds="3.25, 4.875, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/Abit_podg" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a605933d-d5c8-4f76-9b59-b86b9955abc4" absoluteBounds="3.265, 5.335, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dd81d04f-7982-43eb-9304-08ce44b65993" absoluteBounds="3.875, 3.5, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/medal_abit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e5c03236-0dd5-4d4e-9994-dc4cff9fc863" absoluteBounds="3.89, 3.96, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e1f9aeb8-001f-439a-81d0-ec0d25a93dd6" absoluteBounds="3.25, 9.375, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/Special_uchet" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8c333118-ff97-42de-952d-b3c2469286a9" absoluteBounds="3.2649999999999997, 9.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c464338a-8258-4922-aa57-9284ac289f1b" absoluteBounds="5.625, 8.375, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/Predpr" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f11bd96f-1a0d-4474-ab22-22ccddace1db" absoluteBounds="5.64, 8.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3e950b93-efef-4ff5-b4fc-668c3dc52593" absoluteBounds="10, 10.25, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/AbitDataContext/document" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8cab2ada-edf0-499d-abe7-1cfb3b658cd0" absoluteBounds="10.015, 10.71, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a19423b2-d8b0-40a1-94c3-1ced1e9ed85f" absoluteBounds="10, 8, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AbitDataContext/Doc_stud" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d313e695-5240-4b86-9994-5dbe0dc42dce" absoluteBounds="10.015, 8.46, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11 : 10.25); (11 : 9.91788981119792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/document/document_Doc_stud" />
+      <nodes>
+        <classShapeMoniker Id="3e950b93-efef-4ff5-b4fc-668c3dc52593" />
+        <classShapeMoniker Id="a19423b2-d8b0-40a1-94c3-1ced1e9ed85f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" absoluteBounds="9, 3.25, 2, 4.3830997721354166">
+      <DataClassMoniker Name="/AbitDataContext/Person" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bf9b68c8-9ed6-4ce1-a073-daa1dffca0fe" absoluteBounds="9.015, 3.71, 1.9700000000000002, 3.823099772135417" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.5 : 7.63309977213542); (10.5 : 8)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Person/Person_Doc_stud" />
+      <nodes>
+        <classShapeMoniker Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" />
+        <classShapeMoniker Id="a19423b2-d8b0-40a1-94c3-1ced1e9ed85f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.25 : 3.92307657877604); (11 : 3.92307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/grazd/grazd_Person" />
+      <nodes>
+        <classShapeMoniker Id="e365e532-6148-4abc-ae3c-f9cf2dc219f6" />
+        <classShapeMoniker Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="aa014102-bda2-4e30-9489-86045b90a0a0" absoluteBounds="6.25, 4.25, 2, 3.3970157877604166">
+      <DataClassMoniker Name="/AbitDataContext/Student" />
+      <nestedChildShapes>
+        <elementListCompartment Id="afa328bf-40e3-4f1c-9b2f-848a8cd16d99" absoluteBounds="6.265, 4.71, 1.9700000000000002, 2.8370157877604165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.25 : 5.42307657877604); (6.25 : 5.42307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Abit_podg/Abit_podg_Student" />
+      <nodes>
+        <classShapeMoniker Id="09e66b6f-3b00-4bc9-b288-80a0573a98b7" />
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.875 : 4.42307657877604); (6.25 : 4.42307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/medal_abit/medal_abit_Student" />
+      <nodes>
+        <classShapeMoniker Id="dd81d04f-7982-43eb-9304-08ce44b65993" />
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.9375 : 8.375); (6.9375 : 7.64701578776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Predpr/Predpr_Student" />
+      <nodes>
+        <classShapeMoniker Id="c464338a-8258-4922-aa57-9284ac289f1b" />
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.25 : 9.375); (5.25 : 9.25209219473658); (5.1484375 : 9.25209219473658); (5.50260416666667 : 9.00084219473658); (5.50260416666667 : 7.55444496696764); (5.79166666666667 : 7.55444496696764 : JumpStart); (5.95833333333333 : 7.55444496696764 : JumpEnd); (6.25 : 7.55444496696764)]" manuallyRouted="true" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Special_uchet/Special_uchet_Student" />
+      <nodes>
+        <classShapeMoniker Id="e1f9aeb8-001f-439a-81d0-ec0d25a93dd6" />
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.25 : 6.67307657877604); (6.25 : 6.67307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Vid_ob_rab/Vid_ob_rab_Student" />
+      <nodes>
+        <classShapeMoniker Id="6f0f3470-0f7a-46d0-a07c-f4b5d803000c" />
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.25 : 7.625); (5.875 : 7); (5.875 : 8.02201578776042); (6.12857443490112 : 7.7684413528593 : JumpStart); (6.24642556509888 : 7.65059022266154 : JumpEnd); (6.25 : 7.64701578776042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Zaved_stud/Zaved_stud_Student" />
+      <nodes>
+        <classShapeMoniker Id="0155009e-34c5-4561-8f18-f169e5ab0fba" />
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9 : 5.94154988606771); (8.25 : 5.94154988606771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Person/Person_Student" />
+      <nodes>
+        <classShapeMoniker Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" />
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2d934b0f-abc3-4415-bb6b-85fb63afb68e" absoluteBounds="11.375, 4.625, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/Voen_zvanie" />
+      <nestedChildShapes>
+        <elementListCompartment Id="929c913f-e2d4-4d69-b0f4-08fb4f0def4e" absoluteBounds="11.39, 5.0850000000000009, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.375 : 5.17307657877604); (11.2708333333333 : 5.17307657877604 : JumpStart); (11.1041666666667 : 5.17307657877604 : JumpEnd); (11 : 5.17307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Voen_zvanie/Voen_zvanie_Person" />
+      <nodes>
+        <classShapeMoniker Id="2d934b0f-abc3-4415-bb6b-85fb63afb68e" />
+        <classShapeMoniker Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9b07a051-5cac-4a47-8ec4-410089bd9f69" absoluteBounds="11.375, 5.875, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/sem_pol" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c881512e-72fb-4085-a630-a5a0b333a84e" absoluteBounds="11.39, 6.3350000000000009, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.375 : 6.42307657877604); (11.2708333333333 : 6.42307657877604 : JumpStart); (11.1041666666667 : 6.42307657877604 : JumpEnd); (11 : 6.42307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/sem_pol/sem_pol_Person" />
+      <nodes>
+        <classShapeMoniker Id="9b07a051-5cac-4a47-8ec4-410089bd9f69" />
+        <classShapeMoniker Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="87f694a3-7369-4f59-a9b9-c23398ed32ed" absoluteBounds="10.625, 1.375, 2, 1.75354248046875">
+      <DataClassMoniker Name="/AbitDataContext/Kat_zach" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0162fe05-5358-4ee4-a563-3c42e7d305c8" absoluteBounds="10.64, 1.8350000000000009, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0841f4ca-cd85-42ff-9fa2-c1cb99345e41" absoluteBounds="3.125, 2.5, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/AbitDataContext/Direction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e7cd37a0-180c-4073-9d76-0cf169433140" absoluteBounds="3.14, 2.96, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.125 : 3.21242390950521); (2.5 : 3.21242390950521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Direction/Direction_Spec_stud" />
+      <nodes>
+        <classShapeMoniker Id="0841f4ca-cd85-42ff-9fa2-c1cb99345e41" />
+        <classShapeMoniker Id="f2fa7b1e-ea2e-4712-977d-964acddaebd3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="34ab8eb7-50c5-414e-ae1e-ad8c80f2c261" absoluteBounds="7.75, 10.25, 2, 1.75354248046875">
+      <DataClassMoniker Name="/AbitDataContext/Lang" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c8ab443d-5b52-4dab-a349-a5c0a807ef47" absoluteBounds="7.765, 10.71, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2dc46855-fb29-47fd-8bb4-8b9246af3557" absoluteBounds="7.75, 8.375, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/Lang_stud" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1fbe5d19-ef74-4d33-8430-73c92dd7729c" absoluteBounds="7.7650000000000006, 8.835, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.09375 : 10.25); (9.09375 : 9.63550048828125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Lang/Lang_Lang_stud" />
+      <nodes>
+        <classShapeMoniker Id="34ab8eb7-50c5-414e-ae1e-ad8c80f2c261" />
+        <classShapeMoniker Id="2dc46855-fb29-47fd-8bb4-8b9246af3557" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.375 : 7.63309977213542); (9.375 : 8.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Person/Person_Lang_stud" />
+      <nodes>
+        <classShapeMoniker Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" />
+        <classShapeMoniker Id="2dc46855-fb29-47fd-8bb4-8b9246af3557" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="32cd26b0-6339-4b93-b03c-d5636d301982" absoluteBounds="5.5, 10.375, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/Step_vlad" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eab98eb6-6a1f-4a4f-93e5-0eb29aba3824" absoluteBounds="5.515, 10.835, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.5 : 10.375); (7.75 : 9.63550048828125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Step_vlad/Step_vlad_Lang_stud" />
+      <nodes>
+        <classShapeMoniker Id="32cd26b0-6339-4b93-b03c-d5636d301982" />
+        <classShapeMoniker Id="2dc46855-fb29-47fd-8bb4-8b9246af3557" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="eda3e43c-1bad-41c0-a808-d8c31e0adc7a" absoluteBounds="13.25, 0.5, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_Vstup_exam" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b0f1b323-1ebc-4e01-8890-5856cc4c11a7" absoluteBounds="13.265, 0.96, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5c6afea4-7d2f-4d7e-84c6-066a55c89e4c" absoluteBounds="16.125, 0.5, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_VidSdachi" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8df24bfa-e3b7-415f-a5f9-01e18ef13e94" absoluteBounds="16.14, 0.96, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(16.125 : 1.15625); (15.25 : 1.15625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_VidSdachi/ABIT_VidSdachi_ABIT_Vstup_exam" />
+      <nodes>
+        <classShapeMoniker Id="5c6afea4-7d2f-4d7e-84c6-066a55c89e4c" />
+        <classShapeMoniker Id="eda3e43c-1bad-41c0-a808-d8c31e0adc7a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="685cc40f-2d89-460a-944d-7bd22e29fca5" absoluteBounds="14.125, 2.75, 1.375, 1.4248478190104168">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_Disc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4d61a96e-bc48-43f1-9c4e-45392deec560" absoluteBounds="14.14, 3.21, 1.3450000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(14.125 : 3.60425048828125); (13.9583333333333 : 3.60425048828125 : JumpStart); (13.7916666666667 : 3.60425048828125 : JumpEnd); (13.5 : 3.60425048828125); (13.5 : 2.41788981119792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_Disc/ABIT_Disc_ABIT_Vstup_exam" />
+      <nodes>
+        <classShapeMoniker Id="685cc40f-2d89-460a-944d-7bd22e29fca5" />
+        <classShapeMoniker Id="eda3e43c-1bad-41c0-a808-d8c31e0adc7a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="60e50b37-f524-4898-8755-edffe4442fca" absoluteBounds="6, 12.375, 2, 1.75354248046875">
+      <DataClassMoniker Name="/AbitDataContext/PersonAddress" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f4e1a467-201f-4d66-9756-7604d0fd5c1a" absoluteBounds="6.015, 12.835, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.25 : 12.5642712402344); (6 : 12.5642712402344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Address/Address_PersonAddress" />
+      <nodes>
+        <classShapeMoniker Id="4cbb0f47-8e38-491a-930f-de468c19aad0" />
+        <classShapeMoniker Id="60e50b37-f524-4898-8755-edffe4442fca" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.875 : 7.63309977213542); (9.875 : 13.2517712402344); (8 : 13.2517712402344)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Person/Person_PersonAddress" />
+      <nodes>
+        <classShapeMoniker Id="2a3f762c-f05b-4f3d-95b1-6d7087ff3a22" />
+        <classShapeMoniker Id="60e50b37-f524-4898-8755-edffe4442fca" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bc7ff10f-9b11-4c67-9f1b-0e490aef1c4f" absoluteBounds="8.125, 0.5, 2, 2.73962646484375">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_postup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="db28358f-7f5a-4b76-bb29-34817e8a2beb" absoluteBounds="8.14, 0.96, 1.9700000000000002, 2.17962646484375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(10.125 : 0.5); (10.5 : 0.125); (12.8764742998548 : 0.125); (13.2514742998548 : 0.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_postup/ABIT_postup_ABIT_Vstup_exam" />
+      <nodes>
+        <classShapeMoniker Id="bc7ff10f-9b11-4c67-9f1b-0e490aef1c4f" />
+        <classShapeMoniker Id="eda3e43c-1bad-41c0-a808-d8c31e0adc7a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.375 : 1.70546590169271); (8.125 : 1.70546590169271)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_Diapazon_spec_fac/ABIT_Diapazon_spec_fac_ABIT_postup" />
+      <nodes>
+        <classShapeMoniker Id="d7c89eaf-f09d-4859-bd70-17a8aef50894" />
+        <classShapeMoniker Id="bc7ff10f-9b11-4c67-9f1b-0e490aef1c4f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(10.625 : 2.600771484375); (10.125 : 2.600771484375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Kat_zach/Kat_zach_ABIT_postup" />
+      <nodes>
+        <classShapeMoniker Id="87f694a3-7369-4f59-a9b9-c23398ed32ed" />
+        <classShapeMoniker Id="bc7ff10f-9b11-4c67-9f1b-0e490aef1c4f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.7499975 : 4.25); (7.7499975 : 3.10652913411458); (8.125 : 3.10652913411458)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Student/Student_ABIT_postup" />
+      <nodes>
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+        <classShapeMoniker Id="bc7ff10f-9b11-4c67-9f1b-0e490aef1c4f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="1bd32f21-8d2e-4150-826c-d7abcd04d46f" absoluteBounds="11.25, 0.5, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_sost_zach" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6f430a3d-e42a-485e-b3a3-bd804830dccd" absoluteBounds="11.265, 0.96, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.25 : 0.9375025); (10.125 : 0.9375025)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_sost_zach/ABIT_sost_zach_ABIT_postup" />
+      <nodes>
+        <classShapeMoniker Id="1bd32f21-8d2e-4150-826c-d7abcd04d46f" />
+        <classShapeMoniker Id="bc7ff10f-9b11-4c67-9f1b-0e490aef1c4f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ed6d5aa3-0ee9-4225-b9c6-4a1ccec47cb1" absoluteBounds="18.625, 2.875, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_Meropriatie" />
+      <nestedChildShapes>
+        <elementListCompartment Id="642ef23f-d08f-48fa-92fa-70a4b7eaed91" absoluteBounds="18.64, 3.335, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c44c4194-edea-4c4b-8257-50441aa0bb27" absoluteBounds="16.125, 2.25, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_Raspisanie" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6631929-3cda-4c7d-a802-6cedb7b41444" absoluteBounds="16.14, 2.71, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(15.5 : 3.44369428620515); (16.125 : 3.44369428620515)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_Disc/ABIT_Disc_ABIT_Raspisanie" />
+      <nodes>
+        <classShapeMoniker Id="685cc40f-2d89-460a-944d-7bd22e29fca5" />
+        <classShapeMoniker Id="c44c4194-edea-4c4b-8257-50441aa0bb27" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(18.625 : 3.42307657877604); (18.125 : 3.42307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_Meropriatie/ABIT_Meropriatie_ABIT_Raspisanie" />
+      <nodes>
+        <classShapeMoniker Id="ed6d5aa3-0ee9-4225-b9c6-4a1ccec47cb1" />
+        <classShapeMoniker Id="c44c4194-edea-4c4b-8257-50441aa0bb27" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(17.125 : 1.92484781901042); (17.125 : 2.25)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_VidSdachi/ABIT_VidSdachi_ABIT_Raspisanie" />
+      <nodes>
+        <classShapeMoniker Id="5c6afea4-7d2f-4d7e-84c6-066a55c89e4c" />
+        <classShapeMoniker Id="c44c4194-edea-4c4b-8257-50441aa0bb27" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="127df4f9-5a1b-404c-ae11-d64762492b4c" absoluteBounds="13.75, 4.5, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_Rassadka" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3ef17936-04ad-4a02-a86b-d4516cd996af" absoluteBounds="13.765, 4.96, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(13.75 : 4.53125); (13.46875 : 4.53125); (13.46875 : 2.41788981119792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_Rassadka/ABIT_Rassadka_ABIT_Vstup_exam" />
+      <nodes>
+        <classShapeMoniker Id="127df4f9-5a1b-404c-ae11-d64762492b4c" />
+        <classShapeMoniker Id="eda3e43c-1bad-41c0-a808-d8c31e0adc7a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(16.125 : 3.97873541485822); (15.933 : 3.97873541485822); (15.933 : 4.308); (14.859377 : 4.308); (14.859377 : 4.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_Raspisanie/ABIT_Raspisanie_ABIT_Rassadka" />
+      <nodes>
+        <classShapeMoniker Id="c44c4194-edea-4c4b-8257-50441aa0bb27" />
+        <classShapeMoniker Id="127df4f9-5a1b-404c-ae11-d64762492b4c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="959df78f-1d55-4f75-baf4-49c7ac3a9fc2" absoluteBounds="16.25, 4.5, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/AbitDataContext/Room" />
+      <nestedChildShapes>
+        <elementListCompartment Id="968a721e-55bc-44ea-844f-d182344ceff1" absoluteBounds="16.265, 4.96, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(16.25 : 5.13025024414063); (16.1435833333333 : 5.13025024414063 : JumpStart); (15.9769166666667 : 5.13025024414063 : JumpEnd); (15.75 : 5.13025024414063)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Room/Room_ABIT_Rassadka" />
+      <nodes>
+        <classShapeMoniker Id="959df78f-1d55-4f75-baf4-49c7ac3a9fc2" />
+        <classShapeMoniker Id="127df4f9-5a1b-404c-ae11-d64762492b4c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="d8d1b705-1604-4a9e-bafb-b7178a7f9940" absoluteBounds="14.875, 6.375, 2, 2.4109318033854166">
+      <DataClassMoniker Name="/AbitDataContext/StudGrup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ca480ce6-3c10-4943-b9e7-9c4706e2203c" absoluteBounds="14.89, 6.835, 1.9700000000000002, 1.8509318033854165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.625 : 2.21188448632812); (13 : 2.21188448632812); (13 : 3.22115315755208); (13.3854166666667 : 3.22115315755208 : JumpStart); (13.5520833333333 : 3.22115315755208 : JumpEnd); (13.875 : 3.22115315755208); (13.875 : 4.375); (16.06025 : 4.375); (16.06025 : 6.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Kat_zach/Kat_zach_StudGrup" />
+      <nodes>
+        <classShapeMoniker Id="87f694a3-7369-4f59-a9b9-c23398ed32ed" />
+        <classShapeMoniker Id="d8d1b705-1604-4a9e-bafb-b7178a7f9940" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="889e3faa-677a-452d-b5c2-bc93a05155ba" absoluteBounds="17.5, 7, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/Zach" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c8f3c355-b7ea-448d-8be7-a07ac1e38253" absoluteBounds="17.515, 7.46, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(17.5 : 7.63025024414063); (17.2083333333333 : 7.63025024414063 : JumpStart); (17.0416666666667 : 7.63025024414063 : JumpEnd); (16.875 : 7.63025024414063)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Zach/Zach_StudGrup" />
+      <nodes>
+        <classShapeMoniker Id="889e3faa-677a-452d-b5c2-bc93a05155ba" />
+        <classShapeMoniker Id="d8d1b705-1604-4a9e-bafb-b7178a7f9940" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.29817457692308 : 7.64701578776042); (7.29817457692308 : 7.88309977213542); (9.29166666666667 : 7.88309977213542 : JumpStart); (9.45833333333333 : 7.88309977213542 : JumpEnd); (9.75 : 7.88309977213542); (9.75 : 7.75); (10.4166666666667 : 7.75 : JumpStart); (10.5833333333333 : 7.75 : JumpEnd); (14.625 : 7.75); (14.625 : 9.03593180338542); (17.125 : 9.03593180338542); (17.125 : 7.28387312207031); (17.5 : 7.28387312207031)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Student/Student_Zach" />
+      <nodes>
+        <classShapeMoniker Id="aa014102-bda2-4e30-9489-86045b90a0a0" />
+        <classShapeMoniker Id="889e3faa-677a-452d-b5c2-bc93a05155ba" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c36e22c0-c166-4394-bad4-5702e56824fa" absoluteBounds="13.75, 1.875, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AbitDataContext/TypeKatZach" />
+      <nestedChildShapes>
+        <elementListCompartment Id="01a83bbc-8877-4994-850f-af7161ba3451" absoluteBounds="13.765, 2.335, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(13.75 : 2.725771484375); (12.625 : 2.725771484375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/TypeKatZach/TypeKatZach_Kat_zach" />
+      <nodes>
+        <classShapeMoniker Id="c36e22c0-c166-4394-bad4-5702e56824fa" />
+        <classShapeMoniker Id="87f694a3-7369-4f59-a9b9-c23398ed32ed" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="345b8b78-3419-44e5-921c-7bf8d214ea3f" absoluteBounds="1, 13.5, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AbitDataContext/AbitAverageBall" />
+      <nestedChildShapes>
+        <elementListCompartment Id="86d62d67-34c2-40ff-9b85-83a87ba02a85" absoluteBounds="1.0150000000000001, 13.96, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bdbb4681-95f7-4daf-8138-f2683b5631de" absoluteBounds="3.5, 13.875, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AbitDataContext/ABIT_proh_ball" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9967825e-7186-48eb-b487-3f659bc2c8b2" absoluteBounds="3.5150000000000006, 14.335, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.6250005 : 2.91093180338542); (6.6250005 : 4.1875); (6.1875 : 4.1875); (6.1875 : 8.3125); (5.4375 : 8.3125); (5.4375 : 13.8125); (5.5625 : 13.8125); (5.5625 : 14.5052502441406); (5.5 : 14.5052502441406)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/ABIT_Diapazon_spec_fac/ABIT_Diapazon_spec_fac_ABIT_proh_ball" />
+      <nodes>
+        <classShapeMoniker Id="d7c89eaf-f09d-4859-bd70-17a8aef50894" />
+        <classShapeMoniker Id="bdbb4681-95f7-4daf-8138-f2683b5631de" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.8125005 : 3.12854248046875); (11.8125005 : 3.3125); (11.1875 : 3.3125); (11.1875 : 7.8125); (9.9375 : 7.8125); (9.9375 : 14.8516273662109); (5.5 : 14.8516273662109)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Kat_zach/Kat_zach_ABIT_proh_ball" />
+      <nodes>
+        <classShapeMoniker Id="87f694a3-7369-4f59-a9b9-c23398ed32ed" />
+        <classShapeMoniker Id="bdbb4681-95f7-4daf-8138-f2683b5631de" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="d0133bf9-6de1-4537-a973-10269736f187" absoluteBounds="6.375, 9.625, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AbitDataContext/Grup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ddfd74ec-bc36-4f3c-869e-9c9dec81d3c6" absoluteBounds="6.39, 10.085, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.375 : 10.083944905599); (9.01041666666667 : 10.083944905599 : JumpStart); (9.17708333333333 : 10.083944905599 : JumpEnd); (9.85416666666667 : 10.083944905599 : JumpStart); (10.0208333333333 : 10.083944905599 : JumpEnd); (10.9166666666667 : 10.083944905599 : JumpStart); (11.0833333333333 : 10.083944905599 : JumpEnd); (15.875 : 10.083944905599); (15.875 : 8.78593180338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Grup/Grup_StudGrup" />
+      <nodes>
+        <classShapeMoniker Id="d0133bf9-6de1-4537-a973-10269736f187" />
+        <classShapeMoniker Id="d8d1b705-1604-4a9e-bafb-b7178a7f9940" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.125 : 1.45894490559896); (5.3125 : 1.45894490559896); (5.3125 : 2.97343180338542); (7.375 : 2.97343180338542); (7.375 : 4.1875); (8.3125 : 4.1875); (8.3125 : 8.3125); (7.6875 : 8.3125); (7.6875 : 9.53125); (7.0624995 : 9.53125); (7.0624995 : 9.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AbitDataContext/Relation_spec_fac/Relation_spec_fac_Grup" />
+      <nodes>
+        <classShapeMoniker Id="554500f6-81af-44d2-8be1-28c41003680b" />
+        <classShapeMoniker Id="d0133bf9-6de1-4537-a973-10269736f187" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UGTU" Class="ServicesDataContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ugtudb.ugtu.net;Initial Catalog=UGTU;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="UGTUConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Person" Member="Persons">
+    <Type Name="Person">
+      <Column Name="nCode" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Clastname" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Cfirstname" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Cotch" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Dd_birth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cplacebirth" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="Linval" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Ldeti" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Lrab" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="lSex" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Lobchegit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="cSotTel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ctelefon" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Photo" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Ik_grazd" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ik_nac" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_sem_pol" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cInn" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cStrax" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ik_voen_zvanie" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Person_Doc_stud" Member="Doc_studs" ThisKey="nCode" OtherKey="nCode" Type="Doc_stud" />
+      <Association Name="Person_Student" Member="Student" ThisKey="nCode" OtherKey="nCode" Type="Student" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Zach" Member="Zaches">
+    <Type Name="Zach">
+      <Column Name="Ik_zach" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nn_zach" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="nCode" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Association Name="Zach_StudGrup" Member="StudGrups" ThisKey="Ik_zach" OtherKey="Ik_zach" Type="StudGrup" />
+      <Association Name="Zach_Prikaz_Stud" Member="Prikaz_Studs" ThisKey="Ik_zach" OtherKey="ik_zach" Type="Prikaz_Stud" />
+      <Association Name="Zach_Diplom" Member="Diplom" ThisKey="Ik_zach" OtherKey="Ik_zach" Type="Diplom" Cardinality="One" />
+      <Association Name="Student_Zach" Member="Student" ThisKey="nCode" OtherKey="nCode" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StudGrup" Member="StudGrups">
+    <Type Name="StudGrup">
+      <Column Name="Ik_grup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ik_zach" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_kat_zach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_prikazZach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ik_pricZach" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cObosnZach" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Ik_prikazOtch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ik_pricOtch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cObosnOtch" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Ik_studGrup" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="StudGrup_StudGrupAcadem" Member="StudGrupAcadems" ThisKey="Ik_studGrup" OtherKey="ik_studGrupNew" Type="StudGrupAcadem" />
+      <Association Name="StudGrup_StudGrupAcadem1" Member="StudGrupAcadem" ThisKey="Ik_studGrup" OtherKey="ik_studGrup" Type="StudGrupAcadem" Cardinality="One" />
+      <Association Name="Zach_StudGrup" Member="Zach" ThisKey="Ik_zach" OtherKey="Ik_zach" Type="Zach" IsForeignKey="true" />
+      <Association Name="Grup_StudGrup" Member="Grup" ThisKey="Ik_grup" OtherKey="Ik_grup" Type="Grup" IsForeignKey="true" />
+      <Association Name="Prikaz_StudGrup" Member="Prikaz" ThisKey="Ik_prikazZach" OtherKey="Ik_prikaz" Type="Prikaz" IsForeignKey="true" />
+      <Association Name="Prikaz_StudGrup1" Member="Prikaz1" ThisKey="Ik_prikazOtch" OtherKey="Ik_prikaz" Type="Prikaz" IsForeignKey="true" />
+      <Association Name="Pricina_StudGrup" Member="Pricina" ThisKey="ik_pricOtch" OtherKey="Ik_pric" Type="Pricina" IsForeignKey="true" />
+      <Association Name="Pricina_StudGrup1" Member="Pricina1" ThisKey="ik_pricZach" OtherKey="Ik_pric" Type="Pricina" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Doc_stud" Member="Doc_studs">
+    <Type Name="Doc_stud">
+      <Column Name="Ik_doc" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Dd_vidan" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cd_kem_vidan" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Ik_vid_doc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Np_number" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Cd_seria" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="nCode" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Association Name="Person_Doc_stud" Member="Person" ThisKey="nCode" OtherKey="nCode" Type="Person" IsForeignKey="true" />
+      <Association Name="document_Doc_stud" Member="document" ThisKey="Ik_vid_doc" OtherKey="ik_vid_doc" Type="document" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.documents" Member="documents">
+    <Type Name="document">
+      <Column Name="ik_vid_doc" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cvid_doc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsIdentity" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsEducational" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="document_Doc_stud" Member="Doc_studs" ThisKey="ik_vid_doc" OtherKey="Ik_vid_doc" Type="Doc_stud" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Spec_stud" Member="Spec_studs">
+    <Type Name="Spec_stud">
+      <Column Name="ik_spec" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cname_spec" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Cshort_spec" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Sh_spec" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="ik_direction" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_vip_dep" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dDate_spec" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nN_prikaz" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="spDateExit" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cname_qualif" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Spec_stud_Relation_spec_fac" Member="Relation_spec_facs" ThisKey="ik_spec" OtherKey="ik_spec" Type="Relation_spec_fac" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Relation_spec_fac" Member="Relation_spec_facs">
+    <Type Name="Relation_spec_fac">
+      <Column Name="ik_spec_fac" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ik_spec" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_fac" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="YearObuch" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ik_rule" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_form_ed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ik_kat_zaved" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Relation_spec_fac_Grup" Member="Grups" ThisKey="ik_spec_fac" OtherKey="ik_spec_fac" Type="Grup" />
+      <Association Name="Relation_spec_fac_Semester_length_exception" Member="Semester_length_exceptions" ThisKey="ik_spec_fac" OtherKey="ik_spec_fac" Type="Semester_length_exception" />
+      <Association Name="Spec_stud_Relation_spec_fac" Member="Spec_stud" ThisKey="ik_spec" OtherKey="ik_spec" Type="Spec_stud" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Grup" Member="Grups">
+    <Type Name="Grup">
+      <Column Name="Ik_grup" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ik_spec_fac" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Cname_grup" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Ik_uch_plan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nYear_post" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateCreate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateExit" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Grup_StudGrup" Member="StudGrups" ThisKey="Ik_grup" OtherKey="Ik_grup" Type="StudGrup" />
+      <Association Name="Relation_spec_fac_Grup" Member="Relation_spec_fac" ThisKey="ik_spec_fac" OtherKey="ik_spec_fac" Type="Relation_spec_fac" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Year_uch_pl" Member="Year_uch_pls">
+    <Type Name="Year_uch_pl">
+      <Column Name="ik_year_uch_pl" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="year_value" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Year_uch_pl_Shedule" Member="Shedules" ThisKey="ik_year_uch_pl" OtherKey="ik_year" Type="Shedule" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shedule" Member="Shedules">
+    <Type Name="Shedule">
+      <Column Name="ik_shedule" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ik_year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ik_sem_type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="d_sem_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_sem_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_work_time_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_work_time_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Shedule_Semester_length_exception" Member="Semester_length_exceptions" ThisKey="ik_shedule" OtherKey="ik_shedule" Type="Semester_length_exception" />
+      <Association Name="Year_uch_pl_Shedule" Member="Year_uch_pl" ThisKey="ik_year" OtherKey="ik_year_uch_pl" Type="Year_uch_pl" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Semester_length_exception" Member="Semester_length_exceptions">
+    <Type Name="Semester_length_exception">
+      <Column Name="ik_shedule" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ik_spec_fac" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="course_number" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="d_sem_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_sem_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_work_time_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="d_work_time_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Relation_spec_fac_Semester_length_exception" Member="Relation_spec_fac" ThisKey="ik_spec_fac" OtherKey="ik_spec_fac" Type="Relation_spec_fac" IsForeignKey="true" />
+      <Association Name="Shedule_Semester_length_exception" Member="Shedule" ThisKey="ik_shedule" OtherKey="ik_shedule" Type="Shedule" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prikaz_Stud" Member="Prikaz_Studs">
+    <Type Name="Prikaz_Stud">
+      <Column Name="ikPrikStud" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ik_prikaz" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_zach" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_pric" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastProp" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cObosn" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="Zach_Prikaz_Stud" Member="Zach" ThisKey="ik_zach" OtherKey="Ik_zach" Type="Zach" IsForeignKey="true" />
+      <Association Name="Prikaz_Prikaz_Stud" Member="Prikaz" ThisKey="ik_prikaz" OtherKey="Ik_prikaz" Type="Prikaz" IsForeignKey="true" />
+      <Association Name="Pricina_Prikaz_Stud" Member="Pricina" ThisKey="ik_pric" OtherKey="Ik_pric" Type="Pricina" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prikaz" Member="Prikazs">
+    <Type Name="Prikaz">
+      <Column Name="Ik_prikaz" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nn_prikaz" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ik_typePrikaz" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Dd_prikaz" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Dd_prikazVst" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NamePrikaz" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="Prikaz_StudGrup" Member="StudGrups" ThisKey="Ik_prikaz" OtherKey="Ik_prikazZach" Type="StudGrup" />
+      <Association Name="Prikaz_StudGrup1" Member="StudGrups1" ThisKey="Ik_prikaz" OtherKey="Ik_prikazOtch" Type="StudGrup" />
+      <Association Name="Prikaz_Prikaz_Stud" Member="Prikaz_Studs" ThisKey="Ik_prikaz" OtherKey="ik_prikaz" Type="Prikaz_Stud" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pricina" Member="Pricinas">
+    <Type Name="Pricina">
+      <Column Name="Ik_pric" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cname_pric" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ikTypePric" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShortCname_pric" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Pricina_StudGrup" Member="StudGrups" ThisKey="Ik_pric" OtherKey="ik_pricOtch" Type="StudGrup" />
+      <Association Name="Pricina_StudGrup1" Member="StudGrups1" ThisKey="Ik_pric" OtherKey="ik_pricZach" Type="StudGrup" />
+      <Association Name="Pricina_Prikaz_Stud" Member="Prikaz_Studs" ThisKey="Ik_pric" OtherKey="ik_pric" Type="Prikaz_Stud" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Diplom" Member="Diploms">
+    <Type Name="Diplom">
+      <Column Name="Ik_zach" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RegNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="VipNumber" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="cTema" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cTeacher" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="ik_pred" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ik_typeTema" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cosenca" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dd_dipl" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Dd_VidDipl" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Zach_Diplom" Member="Zach" ThisKey="Ik_zach" OtherKey="Ik_zach" Type="Zach" IsForeignKey="true" />
+      <Association Name="typeTema_Diplom" Member="typeTema" ThisKey="ik_typeTema" OtherKey="ik_typeTema" Type="typeTema" IsForeignKey="true" />
+      <Association Name="Predpr_Diplom" Member="Predpr" ThisKey="ik_pred" OtherKey="Ik_pred" Type="Predpr" IsForeignKey="true" />
+      <Association Name="Osenca_Diplom" Member="Osenca" ThisKey="Cosenca" OtherKey="Cosenca" Type="Osenca" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.typeTema" Member="typeTemas">
+    <Type Name="typeTema">
+      <Column Name="ik_typeTema" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cTypeTema" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="typeTema_Diplom" Member="Diploms" ThisKey="ik_typeTema" OtherKey="ik_typeTema" Type="Diplom" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Predpr" Member="Predprs">
+    <Type Name="Predpr">
+      <Column Name="Ik_pred" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cname_pred" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="Predpr_Diplom" Member="Diploms" ThisKey="Ik_pred" OtherKey="ik_pred" Type="Diplom" />
+      <Association Name="Predpr_Student" Member="Students" ThisKey="Ik_pred" OtherKey="ik_pred" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Osenca" Member="Osencas">
+    <Type Name="Osenca">
+      <Column Name="Cosenca" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name_osenca" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="Osenca_Diplom" Member="Diploms" ThisKey="Cosenca" OtherKey="Cosenca" Type="Diplom" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SheduleExamForSiteUGTU" Member="SheduleExamForSiteUGTUs">
+    <Type Name="SheduleExamForSiteUGTU">
+      <Column Name="dt_time_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ik_grup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_shedule" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_vid_nagruzki" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_vid_zanyat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ik_disc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Student" Member="Students">
+    <Type Name="Student">
+      <Column Name="nCode" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nn_abit" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ik_medal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ik_vid_pens" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_podg" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_ob_rab" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_special_uchet" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ik_zaved" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ngodokon" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Cdopsved" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="ik_pred" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cDolgnost" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StazYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StazMonth" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cLgot" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="cOsnovan" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Student_Zach" Member="Zaches" ThisKey="nCode" OtherKey="nCode" Type="Zach" />
+      <Association Name="Predpr_Student" Member="Predpr" ThisKey="ik_pred" OtherKey="Ik_pred" Type="Predpr" IsForeignKey="true" />
+      <Association Name="Person_Student" Member="Person" ThisKey="nCode" OtherKey="nCode" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UspevView" Member="UspevViews">
+    <Type Name="UspevView">
+      <Column Name="Nn_zach" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Name_osenca" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Dd_exam" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cName_vid_zanyat" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cName_disc" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="n_sem" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Ik_grup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="planDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="iK_disc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="iK_vid_zanyat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bitExam" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="bitZach" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="lVibor" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ViborGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.StudGrupAcadem" Member="StudGrupAcadems">
+    <Type Name="StudGrupAcadem">
+      <Column Name="ik_studGrup" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dateBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dateOutput" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ik_studGrupNew" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsFreeAttendance" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="StudGrup_StudGrupAcadem" Member="StudGrup" ThisKey="ik_studGrupNew" OtherKey="Ik_studGrup" Type="StudGrup" IsForeignKey="true" />
+      <Association Name="StudGrup_StudGrupAcadem1" Member="StudGrup1" ThisKey="ik_studGrup" OtherKey="Ik_studGrup" Type="StudGrup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AttestView" Member="AttestViews">
+    <Type Name="AttestView">
+      <Column Name="Nn_zach" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="Cosenca" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cName_disc" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="n_sem" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Ik_grup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AttestNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PropCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Uvag_PropCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="lClose" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="maxBall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

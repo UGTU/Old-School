@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.ist.ugtu.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.ist.ugtu.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Сервис для предоставления расписания аудиторных занятий и экзаменов в УГТУ в формате iCalendar.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.ist.ugtu.net/">
+      <s:element name="GetUGTUFaculties">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUGTUFacultiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTUFacultiesResult" type="tns:ArrayOfFacInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfFacInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FacInfo" nillable="true" type="tns:FacInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FacInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllUGTUSpecialties">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllUGTUSpecialtiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllUGTUSpecialtiesResult" type="tns:ArrayOfSpecInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSpecInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SpecInfo" nillable="true" type="tns:SpecInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SpecInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllUGTUDepartments">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllUGTUDepartmentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllUGTUDepartmentsResult" type="tns:ArrayOfDepInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDepInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DepInfo" nillable="true" type="tns:DepInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DepInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUGTUSpecialties">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="facID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUGTUSpecialtiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTUSpecialtiesResult" type="tns:ArrayOfSpecInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUGTUDepartments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="facID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUGTUDepartmentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTUDepartmentsResult" type="tns:ArrayOfDepInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUGTUGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SpecId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUGTUGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTUGroupsResult" type="tns:ArrayOfGroupInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfGroupInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GroupInfo" nillable="true" type="tns:GroupInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GroupInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUGTUTeachers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DepId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUGTUTeachersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTUTeachersResult" type="tns:ArrayOfTeacherInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTeacherInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TeacherInfo" nillable="true" type="tns:TeacherInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TeacherInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TabNum" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Duty" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUGTULesson">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LessonNum" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUGTULessonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUGTULessonResult" type="tns:LessonInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LessonInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Begins" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ends" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllUGTULessons">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllUGTULessonsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllUGTULessonsResult" type="tns:ArrayOfLessonInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLessonInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LessonInfo" nillable="true" type="tns:LessonInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEventsForGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="groupId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEventsForGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEventsForGroupResult" type="tns:ArrayOfEventInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEventInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EventInfo" nillable="true" type="tns:EventInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EventInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Pattern" type="tns:RepeatPatternInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Begin" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="End" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Discipline" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Room" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Teacher" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsMoved" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PatternID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RepeatPatternInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Type" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Frequency" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RepeatMask" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCalendarStringForGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GroupID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCalendarStringForGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCalendarStringForGroupResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetUGTUFacultiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTUFaculties" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUFacultiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTUFacultiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllUGTUSpecialtiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllUGTUSpecialties" />
+  </wsdl:message>
+  <wsdl:message name="GetAllUGTUSpecialtiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllUGTUSpecialtiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllUGTUDepartmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllUGTUDepartments" />
+  </wsdl:message>
+  <wsdl:message name="GetAllUGTUDepartmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllUGTUDepartmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUSpecialtiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTUSpecialties" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUSpecialtiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTUSpecialtiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUDepartmentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTUDepartments" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUDepartmentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTUDepartmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTUGroups" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTUGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUTeachersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTUTeachers" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTUTeachersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTUTeachersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTULessonSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUGTULesson" />
+  </wsdl:message>
+  <wsdl:message name="GetUGTULessonSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUGTULessonResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllUGTULessonsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllUGTULessons" />
+  </wsdl:message>
+  <wsdl:message name="GetAllUGTULessonsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllUGTULessonsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsForGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEventsForGroup" />
+  </wsdl:message>
+  <wsdl:message name="GetEventsForGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEventsForGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCalendarStringForGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCalendarStringForGroup" />
+  </wsdl:message>
+  <wsdl:message name="GetCalendarStringForGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCalendarStringForGroupResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Сервис_x0020_предоставления_x0020_расписанияSoap">
+    <wsdl:operation name="GetUGTUFaculties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию факультетов университета</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTUFacultiesSoapIn" />
+      <wsdl:output message="tns:GetUGTUFacultiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTUSpecialties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию специальностей университета</wsdl:documentation>
+      <wsdl:input message="tns:GetAllUGTUSpecialtiesSoapIn" />
+      <wsdl:output message="tns:GetAllUGTUSpecialtiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTUDepartments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию кафедр университета</wsdl:documentation>
+      <wsdl:input message="tns:GetAllUGTUDepartmentsSoapIn" />
+      <wsdl:output message="tns:GetAllUGTUDepartmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUSpecialties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию специальностей факультета</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTUSpecialtiesSoapIn" />
+      <wsdl:output message="tns:GetUGTUSpecialtiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUDepartments">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию кафедр факультета</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTUDepartmentsSoapIn" />
+      <wsdl:output message="tns:GetUGTUDepartmentsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию групп специальности</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTUGroupsSoapIn" />
+      <wsdl:output message="tns:GetUGTUGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUTeachers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает коллекцию преподавателей кафедры</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTUTeachersSoapIn" />
+      <wsdl:output message="tns:GetUGTUTeachersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTULesson">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает время проведения пары по номеру</wsdl:documentation>
+      <wsdl:input message="tns:GetUGTULessonSoapIn" />
+      <wsdl:output message="tns:GetUGTULessonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTULessons">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает время проведения занятий</wsdl:documentation>
+      <wsdl:input message="tns:GetAllUGTULessonsSoapIn" />
+      <wsdl:output message="tns:GetAllUGTULessonsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForGroup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает набор событий для группы</wsdl:documentation>
+      <wsdl:input message="tns:GetEventsForGroupSoapIn" />
+      <wsdl:output message="tns:GetEventsForGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCalendarStringForGroup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Получает строку формата iCalendar расписания заданной группы</wsdl:documentation>
+      <wsdl:input message="tns:GetCalendarStringForGroupSoapIn" />
+      <wsdl:output message="tns:GetCalendarStringForGroupSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Сервис_x0020_предоставления_x0020_расписанияSoap" type="tns:Сервис_x0020_предоставления_x0020_расписанияSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUGTUFaculties">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetUGTUFaculties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTUSpecialties">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetAllUGTUSpecialties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTUDepartments">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetAllUGTUDepartments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUSpecialties">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetUGTUSpecialties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUDepartments">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetUGTUDepartments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUGroups">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetUGTUGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUTeachers">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetUGTUTeachers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTULesson">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetUGTULesson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTULessons">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetAllUGTULessons" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForGroup">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetEventsForGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCalendarStringForGroup">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetCalendarStringForGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Сервис_x0020_предоставления_x0020_расписанияSoap12" type="tns:Сервис_x0020_предоставления_x0020_расписанияSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetUGTUFaculties">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetUGTUFaculties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTUSpecialties">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetAllUGTUSpecialties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTUDepartments">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetAllUGTUDepartments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUSpecialties">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetUGTUSpecialties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUDepartments">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetUGTUDepartments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUGroups">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetUGTUGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTUTeachers">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetUGTUTeachers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUGTULesson">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetUGTULesson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUGTULessons">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetAllUGTULessons" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsForGroup">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetEventsForGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCalendarStringForGroup">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetCalendarStringForGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Сервис_x0020_предоставления_x0020_расписания">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Сервис для предоставления расписания аудиторных занятий и экзаменов в УГТУ в формате iCalendar.</wsdl:documentation>
+    <wsdl:port name="Сервис_x0020_предоставления_x0020_расписанияSoap" binding="tns:Сервис_x0020_предоставления_x0020_расписанияSoap">
+      <soap:address location="http://localhost:1216/ScheduleService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Сервис_x0020_предоставления_x0020_расписанияSoap12" binding="tns:Сервис_x0020_предоставления_x0020_расписанияSoap12">
+      <soap12:address location="http://localhost:1216/ScheduleService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
