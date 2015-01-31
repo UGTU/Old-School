@@ -378,7 +378,7 @@ begin
   //begin
   //end;
   NextStep(2,'Формирование бланка');
-  Replace('#Num#', dmUspevaemost.adospSelNapr.FieldByName('cNumber_ved').AsString);
+ // Replace('#Num#', dmUspevaemost.adospSelNapr.FieldByName('cNumber_ved').AsString);
 
   if dmUspevaemost.adospSelNapr.FieldByName('ik_vid_zanyat').AsInteger=6 then
 //    Range['p13','p13'].Clear;
@@ -411,10 +411,10 @@ Replace('#v_z#','практики');
 
     NextStep(1,'Формирование бланка');
   Replace('#fac#',dmUspevaemost.adospSelNapr.FieldByName('Cshort_name_fac').AsString);
-  Replace('#dir_ins#',dmUspevaemost.adospSelNapr.FieldByName('dir_name').AsString);
+//  Replace('#dir_ins#',dmUspevaemost.adospSelNapr.FieldByName('dir_name').AsString);
 //  Range['w12','w12'].Value2:= dmUspevaemost.adospSelNapr.FieldByName('cshort_vid_zanyat').AsString +' ('+
 //  dmUspevaemost.adospSelNapr.FieldByName('SemHourCount').AsString+' ч.)';
-
+    Replace('#dir_ins#','');
   if dmUspevaemost.adospSelNapr.FieldByName('Ik_form_ed').AsInteger=2 then
 //    Range['k6','m6'].Clear
  Replace('#f_obuch#','заочная')
@@ -474,10 +474,10 @@ Replace('#v_z#','практики');
   if dmUspevaemost.adospSelNapr.FieldByName('dD_vydano').AsString <>'' then
   begin
     date:= StrToDate(dmUspevaemost.adospSelNapr.FieldByName('dD_vydano').AsString);
-    date:=date+4;
-    Replace('#dateEnd#',DateToStr(date));
-  end
-  else
+//    date:=date+4;
+//    Replace('#dateEnd#',DateToStr(date));
+  end ;
+//  else
     Replace('#dateEnd#','');
 
       NextStep(1,'Формирование бланка');

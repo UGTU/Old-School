@@ -59,7 +59,8 @@ begin
             0,
             sp_shapka.FieldByName('iK_vid_zanyat').AsInteger,
             sp_shapka.FieldByName('nYear_post').AsInteger,
-            sp_shapka.FieldByName('IsBRSPlan').AsBoolean);
+            sp_shapka.FieldByName('IsBRSPlan').AsBoolean,
+            sp_shapka.FieldByName('Cname_form_ed').AsString);
             sp_studs.first;
 
     While not sp_studs.Eof do
