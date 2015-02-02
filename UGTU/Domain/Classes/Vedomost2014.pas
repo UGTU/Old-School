@@ -11,7 +11,7 @@ uses
 type
   TVedomost = class
   private
-    FInstitute, Fgrup, Fspec, Fdisc, Fprepod, Fekz_prep, Fdir_inst: string;
+    FInstitute, Fgrup, Fspec, Fdisc, Fprepod, Fekz_prep, Fdir_inst,Ff_obuch: string;
     Fnum_s, Fik_vid_zan, Fn_ved, Fyear_post: integer;
     Fdate: TDateTime;
     FStudent: TObjectList<TVedomostItem>;
@@ -31,12 +31,13 @@ type
     property year_post: integer read Fyear_post;
     property date: TDateTime read Fdate;
     property Is_brs: boolean read FIs_brs;
+    property f_obuch: string read Ff_obuch;
 
   protected
   public
     constructor Create(_Institute, _grup, _spec, _disc: string; _num_s: integer;
       _dir_inst: string; _date: TDateTime;
-      _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean);
+      _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean; _f_obuch: string);
 
     destructor Destroy;override;
     property Students: TObjectList<TVedomostItem> read FStudent;
@@ -46,7 +47,7 @@ implementation
 
 constructor TVedomost.Create(_Institute, _grup, _spec, _disc: string;
   _num_s: integer; _dir_inst: string; _date: TDateTime;
-  _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean);
+  _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean; _f_obuch:string);
 begin
 
   FInstitute := _Institute;
@@ -61,7 +62,9 @@ begin
   Fdate := _date;
   Fyear_post := _year_post;
   FIs_brs := _Is_brs;
+  Ff_obuch:=_f_obuch;
   FStudent := TObjectList<TVedomostItem>.Create;
+
 end;
 
 destructor TVedomost.Destroy;

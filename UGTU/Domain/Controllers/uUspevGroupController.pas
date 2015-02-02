@@ -1412,15 +1412,22 @@ begin
 
    report:= TAssemly_Report.Create(ikVed);
    result_report:=report.AddReport();
-    Result := TBRS2014VedomostReport.Create(result_report);
-   if (result_report.Is_brs) then
-   begin
-  Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt';
-   end
-  else
-  begin
-  Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
-  end;
+   Result := TBRS2014VedomostReport.Create(result_report);
+   if (result_report.ik_vid_zan<>GOS_EXAM)  then
+      begin
+      if (result_report.Is_brs) then
+          begin
+          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_with_BRS.xlt';
+          end
+      else
+          begin
+          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Vedomost_No_BRS.xlt';
+          end;
+      end
+    else
+      begin
+      Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\GOS_ekz.xlt';
+      end;
   report.Free;
 
 end;

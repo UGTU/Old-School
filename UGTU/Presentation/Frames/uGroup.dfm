@@ -1365,7 +1365,9 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'i_balls'
               Footers = <>
-              Title.Caption = #1041#1072#1083#1083#1099
+              Title.Alignment = taCenter
+              Title.Caption = #1042#1089#1077#1075#1086' '#1073#1072#1083#1083#1086#1074
+              Width = 70
             end
             item
               Alignment = taCenter
@@ -1375,6 +1377,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'Cosenca'
               Footers = <>
+              Title.Alignment = taCenter
               Title.Caption = #1054#1094#1077#1085#1082#1072
               OnUpdateData = dbgrdVedColumns7UpdateData
             end>

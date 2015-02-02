@@ -341,11 +341,11 @@ type
     ikVed: Integer;
     ikVidZan: Integer;
     ikPredm: Integer;
-    discName:string;
-    FMaxBall:integer;
-    FIsBRS: boolean;
-    function DoIsModified(flag: boolean):boolean;
-    function DoIsModifiedDiploms:boolean;
+    discName: string;
+    FMaxBall: Integer;
+    FIsBRS: Boolean;
+    function DoIsModified(flag: Boolean): Boolean;
+    function DoIsModifiedDiploms: Boolean;
 
     procedure LoadVedHeader();
     function CheckOcenka(Value: Integer): string;
@@ -1046,16 +1046,17 @@ begin
     // загрузка имеющихся оценок
     dsUspev.DataSet := TUspevGroupController.Instance.SelectVed(ikVed);
 
-    dmUspevaemost.adospSelVedGroup.Close;
-    dmUspevaemost.adospSelVedGroup.Open;
-    //настраиваем отображение столбцов
-    dbgrdVed.Columns[0].Visible := false;  //код студента
-    dbgrdVed.Columns[1].Visible := true;   //имя
-    dbgrdVed.Columns[2].Visible := true;  //кат зачисления
-    dbgrdVed.Columns[3].Visible := true;  //номер зачетки
-    dbgrdVed.Columns[5].Visible := false; //код зачетки
-    dbgrdVed.Columns[7].Visible := (ikVidZan = vid_exam)and(FIsBRS); //только, если экзамен БРС
-    dbgrdVed.Columns[8].Visible := true;  //оценка
+    dmUspevaemost.adospSelVedGroup.close;
+    dmUspevaemost.adospSelVedGroup.open;
+    // настраиваем отображение столбцов
+    dbgrdVed.Columns[0].Visible := false; // код студента
+    dbgrdVed.Columns[1].Visible := true; // имя
+    dbgrdVed.Columns[2].Visible := true; // кат зачисления
+    dbgrdVed.Columns[3].Visible := true; // номер зачетки
+    dbgrdVed.Columns[5].Visible := false; // код зачетки
+    dbgrdVed.Columns[7].Visible := (ikVidZan = vid_exam) and (FIsBRS);
+    // только, если экзамен БРС
+    dbgrdVed.Columns[8].Visible := true; // оценка
 
     dbgrdVed.Columns[5].Visible := false; // код зачетки
     dbgrdVed.Columns[6].Visible := false; // допуск
@@ -1070,6 +1071,18 @@ begin
 
     // отображать тему (если ведомость для КП или КР)
     if dsVed.DataSet.FieldByName('HasTema').AsBoolean then
+    begin
+      dbgrdVed.Columns[6].Visible := true;
+      dbgrdVed.Columns[6].Width := 75;
+    end
+    else
+    begin
+      dbgrdVed.Columns[6].Visible := false;
+      dbgrdVed.Columns[6].Width := 0;
+    end;
+
+    // отображать тему (если ведомость для КП или КР)
+    if dmUspevaemost.adospSelVed.FieldByName('HasTema').AsBoolean then
     begin
       dbgrdVed.Columns[4].Visible := true;
       dbgrdVed.Columns[4].Width := 400;
@@ -1967,19 +1980,18 @@ var
   Text: string;
   mark: set of Char;
 begin
-  mark:= ['0'..'9'];
+  mark := ['0' .. '9'];
   if not(Key in mark) then
-     exit;
+    Exit;
   if not(Key in mark) then
-     exit;
+    Exit;
 
   if (not dmUspevaemost.adospSelVed.Active) or
     (not dmUspevaemost.adospSelVedGroup.Active) or
-    (dmUspevaemost.adospSelVedGroup.RecNo>=
-        dmUspevaemost.adospSelVedGroup.RecordCount) or
-       (dbgrdVed.SelectedField.FieldName<>'Cosenca')
-          then
-      exit;
+    (dmUspevaemost.adospSelVedGroup.RecNo >=
+    dmUspevaemost.adospSelVedGroup.RecordCount) or
+    (dbgrdVed.SelectedField.FieldName <> 'Cosenca') then
+    Exit;
 
   // try
   dsUspev.DataSet.Edit;

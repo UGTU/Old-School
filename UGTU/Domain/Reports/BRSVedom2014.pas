@@ -22,6 +22,8 @@ type
 
 implementation
 
+uses ConstantRepository;
+
 { TBRS2014Report }
 
 constructor TBRS2014VedomostReport.Create(Report: TVedomost);
@@ -30,38 +32,34 @@ begin
 end;
 
 procedure TBRS2014VedomostReport.Execute();
-const
-  first_str = 15;
 var
   I: Integer;
   num: Integer;
   Rng: Variant;
+  first_str: Integer;
   dir_inst, copystr1, copystr2, fio: string;
   posit: Integer;
-  // var report:TAssemly_Report;
-  // result_report:TVedomost;
 begin
   inherited;
   Replace('#institut#', FReport.Institute);
   Replace('#grup#', FReport.grup);
-  Replace('#sem#', inttostr(FReport.num_s));
-  Replace('#disc#', FReport.disc);
-
-  if (FReport.ik_vid_zan = 6) then
+  if (FReport.ik_vid_zan <> GOS_EXAM) then
   begin
-    Replace('#date_ekz#', DateTimeToStr(FReport.date));
+    first_str := 15;
+    Replace('#sem#', inttostr(FReport.num_s));
+    Replace('#disc#', FReport.disc);
     Replace('#date_zach#', '');
-  end
-  else if (FReport.ik_vid_zan = 7) then
-  begin
-    Replace('#date_ekz#', '');
-    Replace('#date_zach#', DateTimeToStr(FReport.date));
+    Replace('#ekz_prep#', '');
   end
   else
   begin
-    Replace('#date_zach#', '');
-    Replace('#date_ekz#', '');
+    first_str := 16;
+    Replace('#f_ob#', FReport.f_obuch);
+    Replace('#spec#', FReport.spec);
+    Replace('#NAME_GOS#', AnsiUpperCase(FReport.disc));
   end;
+
+  Replace('#date_ekz#', '');
   dir_inst := FReport.dir_inst;
   posit := Pos(' ', dir_inst);
   copystr1 := Copy(dir_inst, posit + 1, Length(dir_inst));
@@ -69,43 +67,40 @@ begin
   copystr1 := copystr1 + ' ' + copystr2;
   Replace('#dir_inst#', FReport.dir_inst);
 
-  Replace('#ekz_prep#', '');
-
   num := 0;
   for I := first_str to first_str + FReport.Students.Count - 1 do
   begin
     if FReport.Students[num] <> Nil then
     begin
 
-      // GetRange(Cells[1,1],  Cells[1,10]).Insert;
-      // Range['A1','A1'].Insert();
-      // ActiveSheet.Rows.Item[2,2].Insert(xlDown, xlFormatFromLeftOrAbove);
-
-      // ActiveSheet.Rows.Item[2,2].Select;
-      // Selection.Insert(xlDown, xlFormatFromLeftOrAbove);
-
-      // ActiveSheet.Rows('A'+1).Insert();
-      // Rng.Select;
-      // ActiveSheet.Rows[I].Select;
-      // Selection.Insert(Shift :=I);
-      // Range[Cells[I,1], Cells[I,10]].Select;
-      // Selection.Borders.LineStyle:=1;
       Items[I, 1] := num + 1;
       fio := FReport.Students[num].LastName;
       copystr1 := Copy(FReport.Students[num].FirstName, 1, 1);
       copystr2 := Copy(FReport.Students[num].Otch, 1, 1);
       Items[I, 2] := fio + ' ' + copystr1 + '.' + copystr2 + '.';
-
-      if (FReport.Is_brs) then
+      if (FReport.ik_vid_zan <> GOS_EXAM) then
       begin
-        Items[I, 6] := inttostr(FReport.Students[num].balls);
+        if (FReport.Is_brs) then
+        begin
+          Items[I, 6] := inttostr(FReport.Students[num].balls);
+        end;
       end;
+
       if I <> first_str + FReport.Students.Count - 1 then
       begin
-        if FReport.Is_brs then
+        if (FReport.Is_brs) or (FReport.ik_vid_zan = GOS_EXAM) then
         begin
           Range['A' + inttostr(I + 1), 'J' + inttostr(I + 1)
             ].Insert(xlDown, xlFormatFromLeftOrAbove);
+          if (FReport.ik_vid_zan = GOS_EXAM) then
+          begin
+            Range['B' + inttostr(I + 1), 'D' + inttostr(I + 1)].Select;
+            Selection.MergeCells := True;
+            Range['E' + inttostr(I + 1), 'G' + inttostr(I + 1)].Select;
+            Selection.MergeCells := True;
+            Range['H' + inttostr(I + 1), 'J' + inttostr(I + 1)].Select;
+            Selection.MergeCells := True;
+          end;
           Range['A' + inttostr(I + 1), 'J' + inttostr(I + 1)].Select;
           Selection.Borders.LineStyle := 1;
         end
@@ -114,6 +109,7 @@ begin
           Range['A' + inttostr(I + 1), 'I' + inttostr(I + 1)
             ].Insert(xlDown, xlFormatFromLeftOrAbove);
           Range['A' + inttostr(I + 1), 'I' + inttostr(I + 1)].Select;
+
           Selection.Borders.LineStyle := 1;
         end;
 
@@ -122,9 +118,6 @@ begin
     inc(num);
 
   end;
-  // Cells[
-
-  // NextStep(1, 'Выгружаем отчёт');
 end;
 
 function TBRS2014VedomostReport.GetTotalSteps: Integer;
