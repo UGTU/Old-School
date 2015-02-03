@@ -383,7 +383,7 @@ RETURNS @Result TABLE
 	cNumber_ved			varchar(50),
 	KPTheme				varchar(2000),
 	Ik_vid_exam			int,
-	cName_vid_exam		varchar(12),
+	cName_vid_exam		varchar(40),
 	Cosenca				varchar(20)
  )
 AS

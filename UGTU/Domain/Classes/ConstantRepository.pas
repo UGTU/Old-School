@@ -13,11 +13,12 @@ const
   key_ModelPlan = 1;
   vid_exam = 6;
   GOS_EXAM = 56;
+
   //ErrorCode
-    NoError = 0;
-    ExistError = 1;
-    FailError = 2;
-    StatusError = 3;
+  NoError = 0;
+  ExistError = 1;
+  FailError = 2;
+  StatusError = 3;
 
 implementation
 
