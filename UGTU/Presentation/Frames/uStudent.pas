@@ -960,7 +960,7 @@ begin
     FindRange := E.Cells.Replace(What := '#DateZ#',Replacement:=dop);
     str:=GetMonthR(tempStoredProc.FieldByName('zachMonth').Value);
     FindRange := E.Cells.Replace(What := '#MonthZ#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
+    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('YearPricZach').AsString);
     dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
     posit:=Pos(' ', dir_inst);
     copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
@@ -1051,7 +1051,7 @@ begin
     str:= GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);;
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
-    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('zachYear').AsString);
+    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('YearPricZach').AsString);
      dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
     posit:=Pos(' ', dir_inst);
     copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
