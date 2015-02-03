@@ -349,7 +349,7 @@ uses
 end;
 
 implementation
-uses CommonIntf, CommonIntfImpl, BRSVedom2014;
+uses CommonIntf, CommonIntfImpl, BRSVedom2014, ConstantRepository;
 
  var
 //FAbitZachislenieControllerInstance - экземпл€р контроллера
@@ -1403,7 +1403,7 @@ begin
    report:= TAssemly_Report.Create(ikVed);
    result_report:=report.AddReport();
    Result := TBRS2014VedomostReport.Create(result_report);
-   if (result_report.ik_vid_zan<>56)  then
+   if (result_report.ik_vid_zan<>GOS_EXAM)  then
       begin
       if (result_report.Is_brs) then
           begin

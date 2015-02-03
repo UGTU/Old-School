@@ -319,4 +319,22 @@
       <Column Name="maxBall" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.StudInfo" Member="StudInfos">
+    <Type Name="StudInfo">
+      <Column Name="nCode" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Clastname" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Cfirstname" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Cotch" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Course" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cname_grup" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Cname_form_ed" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CType_kat" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ctelefon" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cSotTel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cname_fac" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Cname_spec" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="ManagerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="PrikazOtch" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

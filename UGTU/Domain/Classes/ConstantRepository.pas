@@ -12,6 +12,7 @@ const
   key_WorkPlan = 2;
   key_ModelPlan = 1;
   vid_exam = 6;
+  GOS_EXAM = 56;
 
 implementation
 

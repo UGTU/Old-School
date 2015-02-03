@@ -88,7 +88,45 @@ namespace StudentProgress
             }
         }
 
+        /// <summary>
+        /// Получение подробных сведений о студенте 
+        /// </summary>
+        /// <param name="NCode">Код студента в БД</param>
+        /// <returns>Информацию о студенте в DTO</returns>
+        [WebMethod]
+        public StudentFullInfoDTO GetStudentFullInfo(int NCode)
+        {
+            using (DataLayer.ServicesDataContextDataContext ctx = new DataLayer.ServicesDataContextDataContext("Data Source=ugtudb.ugtu.net;Initial Catalog=UGTU;Integrated Security=True"))
+            {
+                // Выбор студента по коду
 
+                StudInfo s = ctx.StudInfos.SingleOrDefault(x => (x.nCode == NCode));
+
+                // Создание  DTO и заполнение его сведениями о студенте
+                return s != null
+                    ? new StudentFullInfoDTO()
+                    {
+                        FirstName = s.Cfirstname,
+                        LastName = s.Clastname,
+                        Patronymic = s.Cotch,
+                        Grade = s.Course,
+                        DeanFullName = s.ManagerName,
+                        FacName = s.Cname_fac,
+
+                        HomePhone = s.ctelefon,
+                        MobilePhone = s.cSotTel,
+                        Specialty = s.Cname_spec,
+                        TeachBasis = s.CType_kat,
+                        TeachForm = s.Cname_form_ed,
+                        GroupName = s.Cname_grup,
+                        DateOut = s.PrikazOtch
+                    }
+                    : null;
+                
+
+
+            }
+        }
 
         /// <summary>
         /// Получение статуса студента на текущий момент
