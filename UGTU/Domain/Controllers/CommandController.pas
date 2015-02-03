@@ -692,6 +692,11 @@ begin
   result := FContentNapr.DataSet;
 end;
 
+procedure TNapravController.LoadOpenedNapr;
+begin
+  //
+end;
+
 procedure TNapravController.Reload(ik_studGrup, ik_zach: integer);
 begin
   inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ')');

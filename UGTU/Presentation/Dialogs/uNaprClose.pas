@@ -125,7 +125,7 @@ end;
 procedure TftmNaprclose.SetStudZachIK(const Value: integer);
 begin
   FStudZachIK := Value;
-  TUspevGroupController.Instance.SelectOpenedNapr();
+ // TUspevGroupController.Instance.SelectOpenedNapr();
 end;
 
 procedure TftmNaprclose.SetVed(const Value: integer);

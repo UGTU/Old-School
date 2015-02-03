@@ -14,23 +14,28 @@ GO
 ALTER TABLE [dbo].[Grup_UchPlan]  WITH CHECK ADD  CONSTRAINT [FK_Grup_UchPlan_Grup] FOREIGN KEY([ik_grup])
 REFERENCES [dbo].[Grup] ([Ik_grup])
 GO
-
 ALTER TABLE [dbo].[Grup_UchPlan] CHECK CONSTRAINT [FK_Grup_UchPlan_Grup]
 GO
-
 ALTER TABLE [dbo].[Grup_UchPlan]  WITH CHECK ADD  CONSTRAINT [FK_Grup_UchPlan_Uch_pl] FOREIGN KEY([ik_uch_plan])
 REFERENCES [dbo].[Uch_pl] ([ik_uch_plan])
 GO
-
 ALTER TABLE [dbo].[Grup_UchPlan] CHECK CONSTRAINT [FK_Grup_UchPlan_Uch_pl]
 GO
-
 ALTER TABLE [dbo].[Grup_UchPlan]  WITH CHECK ADD  CONSTRAINT [FK_Grup_UchPlan_Year_uch_pl] FOREIGN KEY([ik_year])
 REFERENCES [dbo].[Year_uch_pl] ([ik_year_uch_pl])
 GO
-
 ALTER TABLE [dbo].[Grup_UchPlan] CHECK CONSTRAINT [FK_Grup_UchPlan_Year_uch_pl]
 GO
+
+
+create VIEW [dbo].[UchPlanGrup]
+AS
+SELECT    ik_grup,  ik_uch_plan, ik_year, ik_grup_uchplan, year_value
+FROM       dbo.Grup_UchPlan inner join Year_uch_pl on Grup_UchPlan.ik_year = dbo.Year_uch_pl.ik_year_uch_pl
+GO
+
+--ДАТЬ ПРАВА!!!
+
 
 insert into Year_uch_pl(year_value)
 values(2015)
@@ -75,6 +80,7 @@ DEALLOCATE cur1
 
 --------------------------------------------------
 --удаление индекса IX_Grup_Ik_uch_plan
+
 alter table grup drop FK_Grup_Uch_pl
 alter table grup drop column ik_uch_plan
 --------------------------------------------------
@@ -87,8 +93,8 @@ FROM         dbo.Grup INNER JOIN
                       dbo.Relation_spec_fac ON dbo.Grup.ik_spec_fac = dbo.Relation_spec_fac.ik_spec_fac INNER JOIN
                       dbo.Spec_stud ON dbo.Relation_spec_fac.ik_spec = dbo.Spec_stud.ik_spec inner join 
 					  dbo.Grup_UchPlan on Grup_UchPlan.ik_grup = dbo.Grup.Ik_grup
-					  Where (ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = year(GetDate())))
-					  or ((dbo.Grup.DateExit<GetDate())and(ik_year =(select ik_year_uch_pl from Year_uch_pl where year_value = year(dbo.Grup.DateExit)-1)))
+					  Where ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = iif(MONTH(GetDate())>8,year(GetDate()),year(GetDate())-1))
+					 -- or ((dbo.Grup.DateExit<GetDate())and(ik_year =(select ik_year_uch_pl from Year_uch_pl where year_value = year(dbo.Grup.DateExit)-1)))
 
 ORDER BY dbo.Grup.nYear_post
 
@@ -359,7 +365,7 @@ GO
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
-alter FUNCTION [dbo].[GetStudNaprav]
+create FUNCTION [dbo].[GetStudNaprav]
 (
 	@ik_studGrup int
 )
@@ -482,3 +488,40 @@ GO
 
 -----------------------------------------------------------------------------------------------------------------------------------
 alter table Vedomost alter column lClose bit null
+
+ALTER PROCEDURE [dbo].[GetVedShapka]
+@ik_ved INT
+AS
+SELECT f.Cname_fac_small, _grup.Cname_grup, edBranch.Cname_spec,dics.cName_disc, C_up.n_sem, IDMD.ManagerSmallName, _vedomost.Dd_exam, _vedomost.cNumber_ved, vid_z.iK_vid_zanyat, 
+	   _grup.nYear_post,UP.IsBRSPlan, Cname_form_ed, year_value
+FROM  Grup _grup inner join Vedomost _vedomost
+ON _grup.Ik_grup=_vedomost.Ik_grup
+inner join Grup_UchPlan 
+on _grup.Ik_grup = Grup_UchPlan.Ik_grup
+inner join  Uch_pl UP
+ON UP.ik_uch_plan=Grup_UchPlan.Ik_uch_plan
+inner join Year_uch_pl
+on Year_uch_pl.ik_year_uch_pl = Grup_UchPlan.ik_year
+inner join EducationBranch edBranch
+ON edBranch.ik_spec=UP.ik_spec
+inner join Relation_spec_fac RSF
+ON RSF.ik_spec_fac=_grup.ik_spec_fac
+inner join Form_ed
+on RSF.Ik_form_ed = Form_ed.Ik_form_ed
+inner join fac f
+ON f.Ik_fac=RSF.ik_fac
+inner join Content_UchPl C_up
+ON C_up.ik_upContent=_vedomost.ik_upContent
+inner join sv_disc svd
+ON svd.ik_disc_uch_plan=C_up.ik_disc_uch_plan
+inner join discpln dics
+ON dics.iK_disc=svd.ik_disc
+inner join IMPORT.DepartmentMainData IDMD
+ON IDMD.DepartmentGUID=f.DepartmentGUID		
+inner join vid_zaniat vid_z		 
+ON vid_z.iK_vid_zanyat=C_up.ik_vid_zanyat
+Where (_vedomost.Ik_ved=@ik_ved)
+and year_value = _grup.nYear_post + cast((C_up.n_sem-1)/2 as numeric(1,0))										 
+/*inner join IMPORT_KafTeachers IMP2
+ON _vedomost.Itab_n=IMP2.Itab_n*/
+GO

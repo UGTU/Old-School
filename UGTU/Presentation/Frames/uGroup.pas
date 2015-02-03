@@ -857,8 +857,7 @@ begin
 
   // TUspevGroupController.Instance.printBlankVedomost(ik, cmbxSem.ItemIndex+1, ikVed, ikFac, ikSpec, DMUspevaemost.adospGetAllVeds4Group);
   Report := TUspevGroupController.Instance.BuildVedomost2014(ik,
-    cmbxSem.ItemIndex + 1, ikVed, ikFac, ikSpec,
-    dmUspevaemost.adospGetAllVeds4Group);
+    cmbxSem.ItemIndex + 1, ikVed, ikFac, ikSpec);
 
   TWaitingController.GetInstance.Process(Report);
 
@@ -1072,18 +1071,6 @@ begin
     // отображать тему (если ведомость для КП или КР)
     if dsVed.DataSet.FieldByName('HasTema').AsBoolean then
     begin
-      dbgrdVed.Columns[6].Visible := true;
-      dbgrdVed.Columns[6].Width := 75;
-    end
-    else
-    begin
-      dbgrdVed.Columns[6].Visible := false;
-      dbgrdVed.Columns[6].Width := 0;
-    end;
-
-    // отображать тему (если ведомость для КП или КР)
-    if dmUspevaemost.adospSelVed.FieldByName('HasTema').AsBoolean then
-    begin
       dbgrdVed.Columns[4].Visible := true;
       dbgrdVed.Columns[4].Width := 400;
     end
@@ -1092,6 +1079,18 @@ begin
       dbgrdVed.Columns[4].Visible := false;
       dbgrdVed.Columns[4].Width := 0;
     end;
+
+    // отображать тему (если ведомость для КП или КР)
+  {  if dmUspevaemost.adospSelVed.FieldByName('HasTema').AsBoolean then
+    begin
+      dbgrdVed.Columns[4].Visible := true;
+      dbgrdVed.Columns[4].Width := 400;
+    end
+    else
+    begin
+      dbgrdVed.Columns[4].Visible := false;
+      dbgrdVed.Columns[4].Width := 0;
+    end;      }
 
   end;
 

@@ -347,8 +347,7 @@ type
   procedure printBlankVedomost(ikGrup, nSem, ikVed, ikFac, ikSpec: integer;
    tempStoredProc: TADOStoredProc);
 
-  function BuildVedomost2014(ikGrup, nSem, ikVed, ikFac, ikSpec: integer;
-   tempStoredProc: TADOStoredProc): TReportBase;
+  function BuildVedomost2014(ikGrup, nSem, ikVed, ikFac, ikSpec: integer): TReportBase;
   //printAllBlankVedomost генерирует все бланки ведомостей семестра (без оценок)
   procedure printAllBlankVedomost(ikGrup, nSem, ikFac, ikSpec: integer);
 
@@ -1404,7 +1403,7 @@ end;
 
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
-  ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;
+  ikSpec: integer): TReportBase;
   var report:TAssemly_Report;
    result_report:TVedomost;
   FindRange: Variant;

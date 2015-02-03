@@ -1,6 +1,6 @@
 --select * from [dbo].[StudInfoWithCourse](21107)
 
-alter view [dbo].[StudInfo]
+create view [dbo].[StudInfo]
 
 AS
 
