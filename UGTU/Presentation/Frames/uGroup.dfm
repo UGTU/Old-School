@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsVed
+      ActivePage = tsNapr
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -1364,6 +1364,11 @@ inherited fmGroup: TfmGroup
               DynProps = <>
               EditButtons = <>
               FieldName = 'i_balls'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
               Footers = <>
               Title.Alignment = taCenter
               Title.Caption = #1042#1089#1077#1075#1086' '#1073#1072#1083#1083#1086#1074
