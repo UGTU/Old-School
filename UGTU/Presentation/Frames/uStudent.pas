@@ -900,31 +900,39 @@ end;
 procedure TfmStudent.actPrintPensSpravExecute(Sender: TObject);
 var E: Variant;
     str, year_post,dop,dir_inst,copystr1,copystr2:string;
-    year,posit:integer;
+    year, posit, i, first_step:integer;
     FindRange: Variant;
     tempStoredProc: TADOStoredProc;
+    histDS: TADODataSet;
 begin
-  //вызываем процедуру, переводящую ФИО в дат. падеж
-  //и возвращающую иную нуную инфу
-    tempStoredProc:= TADOStoredProc.Create(nil);
+  //вызываем процедуру, возвращающую ФИО в дат. падеж и иную нужную инфу
+  tempStoredProc:= TADOStoredProc.Create(nil);
+  histDS := TADODataSet.Create(nil);
   try
    try
     tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
     tempStoredProc.Connection:= dm.DBConnect;
-    tempStoredProc.Parameters.CreateParameter('@Clastname', ftString, pdInput, 50, obj.LastName);
-    tempStoredProc.Parameters.CreateParameter('@Cfirstname', ftString, pdInput, 50, obj.FirstName);
-    tempStoredProc.Parameters.CreateParameter('@Cotch', ftString, pdInput, 50, obj.MiddleName);
-    tempStoredProc.Parameters.CreateParameter('@ik_zach', ftInteger, pdInput, 4, obj.StudGrupKey);
-    tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
-    tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
-    tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
+    tempStoredProc.Parameters.CreateParameter('@Ik_studGrup', ftInteger, pdInput, 4, obj.StudGrupKey);
     tempStoredProc.Open;
     tempStoredProc.First;  //FIO
   except
     tempStoredProc.Free;
-    MessageBox(Handle, 'Произошла ошибка при обращении к серверу.','ИС Деканат',MB_OK);
+    MessageBox(Handle, 'Произошла ошибка при получении информации по студенту.','ИС Деканат',MB_OK);
     exit;
   end;
+
+  //возвращаем историю движения студента
+  try
+    histDS.CommandText:= 'select * from StudHistory('+IntToStr(obj.StudGrupKey)+')';
+    histDS.Connection:= dm.DBConnect;
+    histDS.Open;
+    histDS.First;
+  except
+    histDS.Free;
+    MessageBox(Handle, 'Произошла ошибка при получении истории движения студента.','ИС Деканат',MB_OK);
+    exit;
+  end;
+
   try
   //экспорт в Excel
     E := CreateOleObject('Excel.Application');
@@ -954,6 +962,7 @@ begin
     str:=GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
+
     FindRange := E.Cells.Replace(What := '#PrNum#',Replacement:=dmStudentData.adodsPrikaz.FieldByName('Nn_prikaz').AsString);
     dop:=tempStoredProc.FieldByName('zachDate').AsString;
     if (dop.Length=1) then  dop:='0'+dop;
@@ -961,6 +970,13 @@ begin
     str:=GetMonthR(tempStoredProc.FieldByName('zachMonth').Value);
     FindRange := E.Cells.Replace(What := '#MonthZ#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('YearPricZach').AsString);
+
+   { first_step := 18;
+    for i := first_step to first_step + histDS.RecordCount - 1 do
+    begin
+      E.ActiveSheet.Range['F' + inttostr(I + 1), 'N' + inttostr(I + 1)].Insert(xlDown, xlFormatFromLeftOrAbove);
+    end;
+}
     dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
     posit:=Pos(' ', dir_inst);
     copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
@@ -971,13 +987,14 @@ begin
     FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
     FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
     FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
+
     year:= tempStoredProc.FieldByName('sprYear').Value-
            tempStoredProc.FieldByName('kurs').Value;
     if tempStoredProc.FieldByName('sprMonth').Value>8 then
        year:= year-1;
 
     //FindRange := E.Cells.Replace(What := '#YearZach#',Replacement:=IntToStr(zachYear));
-    FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=IntToStr(tempStoredProc.FieldByName('zachYear').Value+tempStoredProc.FieldByName('YearObuch').Value));
+    FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=IntToStr(tempStoredProc.FieldByName('YearGrupEnd').Value));
 
     //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
     E.DisplayAlerts:= true;
@@ -1006,13 +1023,13 @@ begin
    try
     tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
     tempStoredProc.Connection:= dm.DBConnect;
-    tempStoredProc.Parameters.CreateParameter('@Clastname', ftString, pdInput, 50, obj.LastName);
-    tempStoredProc.Parameters.CreateParameter('@Cfirstname', ftString, pdInput, 50, obj.FirstName);
-    tempStoredProc.Parameters.CreateParameter('@Cotch', ftString, pdInput, 50, obj.MiddleName);
-    tempStoredProc.Parameters.CreateParameter('@ik_zach', ftInteger, pdInput, 4, obj.StudGrupKey);
-    tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
-    tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
-     tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
+    //tempStoredProc.Parameters.CreateParameter('@Clastname', ftString, pdInput, 50, obj.LastName);
+    //tempStoredProc.Parameters.CreateParameter('@Cfirstname', ftString, pdInput, 50, obj.FirstName);
+    //tempStoredProc.Parameters.CreateParameter('@Cotch', ftString, pdInput, 50, obj.MiddleName);
+    tempStoredProc.Parameters.CreateParameter('@Ik_studGrup', ftInteger, pdInput, 4, obj.StudGrupKey);
+    //tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
+    //tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
+    //tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
     tempStoredProc.Open;
     tempStoredProc.First;  //FIO
   except
@@ -1064,8 +1081,7 @@ begin
     FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:= ', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
     FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
     FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=
-      IntToStr(tempStoredProc.FieldByName('zachYear').Value+
-      tempStoredProc.FieldByName('YearObuch').Value));
+      IntToStr(tempStoredProc.FieldByName('YearGrupEnd').Value));
 
 
     //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
