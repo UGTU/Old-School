@@ -409,7 +409,8 @@ uses
   Vedomost2014 in 'Domain\Classes\Vedomost2014.pas',
   VedomostItem2014 in 'Domain\Classes\VedomostItem2014.pas',
   Assemly_Report2014 in 'Domain\Classes\Assemly_Report2014.pas',
-  GoogleQr in 'Utils\GoogleQr.pas';
+  GoogleQr in 'Utils\GoogleQr.pas',
+  Spravka in 'Domain\Reports\Spravka.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

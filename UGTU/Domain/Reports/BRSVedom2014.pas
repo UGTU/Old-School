@@ -17,7 +17,6 @@ type
   public
     property Report: TVedomost read FReport;
     constructor Create(Report: TVedomost);
-
   end;
 
 implementation
