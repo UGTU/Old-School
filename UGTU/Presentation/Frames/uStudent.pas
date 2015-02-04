@@ -922,7 +922,7 @@ begin
   end;
 
   //возвращаем историю движения студента
-  try
+  {try
     histDS.CommandText:= 'select * from StudHistory('+IntToStr(obj.StudGrupKey)+')';
     histDS.Connection:= dm.DBConnect;
     histDS.Open;
@@ -931,7 +931,7 @@ begin
     histDS.Free;
     MessageBox(Handle, 'Произошла ошибка при получении истории движения студента.','ИС Деканат',MB_OK);
     exit;
-  end;
+  end; }
 
   try
   //экспорт в Excel
