@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2015.02.04 11:33:35.479,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>2015.02.04 11:34:24.708,E:\Projects\GitHub\Old-School\UGTU\Domain\Reports\Spravka.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.479,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.708,E:\Projects\GitHub\Old-School\UGTU\Domain\Reports\Spravka.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>
