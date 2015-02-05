@@ -55,7 +55,7 @@ begin
     first_str := 16;
     Replace('#f_ob#', FReport.f_obuch);
     Replace('#spec#', FReport.spec);
-    Replace('#NAME_GOS#', AnsiUpperCase(FReport.disc));
+    //Replace('#NAME_GOS#', AnsiUpperCase(FReport.disc));
   end;
 
   Replace('#date_ekz#', '');
