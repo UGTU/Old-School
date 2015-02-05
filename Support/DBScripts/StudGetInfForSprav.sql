@@ -28,17 +28,26 @@ SET @Date=GETDATE()
 			inner join Prikaz on ik_zac_first = Prikaz.Ik_prikaz
 			WHERE  [Ik_studGrup]=@Ik_studGrup
 
-create function StudHistory(@Ik_studGrup INT)
+--select * from StudHistory(42062)
+alter function StudHistory(@Ik_studGrup INT)
 RETURNS @Result TABLE
 (
-	Dd_prikazVst	datetime,
+	Dd_prikazVst	date,
 	Nn_prikaz		varchar(20),
 	Cname_pric		varchar(50)
 )
 AS
 BEGIN
-	
-
+	insert into @Result(Dd_prikazVst, Nn_prikaz, Cname_pric)
+		select cast(Dd_prikazVst as date), Nn_prikaz, Cname_pric
+		from StudGrup inner join Prikaz on StudGrup.Ik_prikazZach = Prikaz.Ik_prikaz
+					  inner join Pricina on StudGrup.ik_pricZach = Pricina.Ik_pric
+		where ik_zach in (select ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup)
+		union
+		select cast(Dd_prikazVst as date), Nn_prikaz, Cname_pric
+		from StudGrup inner join Prikaz on StudGrup.Ik_prikazOtch = Prikaz.Ik_prikaz
+					  inner join Pricina on StudGrup.ik_pricOtch = Pricina.Ik_pric
+		where ik_zach in (select ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup)
 RETURN
 END
 

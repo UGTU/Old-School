@@ -291,15 +291,15 @@ GO
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 alter PROCEDURE [dbo].[AppendVedomost]
-@flag INT, 
-@Ik_ved INT,						--код ведомости		
-@cNumber_ved varchar(12) = NULL,	--номер (обозначение) ведомости
-@Itab_n varchar(50) = NULL,			--код препода
-@Ik_vid_exam INT = NULL,			--вид экзамена (первичный, вторичный)
-@Dd_exam DATETIME = NULL,			--дата экзамена
-@Dd_vyd DATETIME = NULL,			--дата выдачи
-@lClose BIT=0,						--признак закрытия
-@lPriznak_napr BIT = NULL			--признак направления		
+	@flag INT, 
+	@Ik_ved INT,						--код ведомости		
+	@cNumber_ved varchar(12) = NULL,	--номер (обозначение) ведомости
+	@Itab_n varchar(50) = NULL,			--код препода
+	@Ik_vid_exam INT = NULL,			--вид экзамена (первичный, вторичный)
+	@Dd_exam DATETIME = NULL,			--дата экзамена
+	@Dd_vyd DATETIME = NULL,			--дата выдачи
+	@lClose BIT=0,						--признак закрытия
+	@lPriznak_napr BIT = NULL			--признак направления		
 
 AS
   IF @flag=-1  --удаление ведомости
@@ -315,7 +315,6 @@ AS
 			Dd_exam = @Dd_exam, lPriznak_napr = @lPriznak_napr, lClose = @lClose
 		WHERE Ik_ved = @Ik_ved
   END
-
 
 GO
 

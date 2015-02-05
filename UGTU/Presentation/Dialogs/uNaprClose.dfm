@@ -28,7 +28,7 @@ inherited ftmNaprclose: TftmNaprclose
   end
   object Label2: TLabel [2]
     Left = 13
-    Top = 87
+    Top = 93
     Width = 41
     Height = 13
     Caption = #1054#1094#1077#1085#1082#1072':'
@@ -41,15 +41,15 @@ inherited ftmNaprclose: TftmNaprclose
     Caption = #1044#1072#1090#1072' '#1089#1076#1072#1095#1080':'
   end
   object Label4: TLabel [4]
-    Left = 13
-    Top = 47
+    Left = 14
+    Top = 51
     Width = 71
     Height = 13
     Caption = #1069#1082#1079#1072#1084#1077#1085#1072#1090#1086#1088':'
   end
   object Label13: TLabel [5]
     Left = 85
-    Top = 47
+    Top = 51
     Width = 4
     Height = 13
     Caption = '*'
@@ -75,7 +75,7 @@ inherited ftmNaprclose: TftmNaprclose
   end
   object Label6: TLabel [7]
     Left = 55
-    Top = 87
+    Top = 90
     Width = 4
     Height = 13
     Caption = '*'
@@ -106,19 +106,6 @@ inherited ftmNaprclose: TftmNaprclose
     Height = 13
     Caption = #1058#1077#1084#1072':'
   end
-  object Label9: TLabel [10]
-    Left = 44
-    Top = 128
-    Width = 4
-    Height = 13
-    Caption = '*'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clRed
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-  end
   inherited Panel1: TPanel
     Top = 176
     Width = 395
@@ -148,7 +135,7 @@ inherited ftmNaprclose: TftmNaprclose
       Visible = False
     end
   end
-  object dbcbeNapr: TDBLookupComboboxEh [12]
+  object dbcbeNapr: TDBLookupComboboxEh [11]
     Left = 13
     Top = 21
     Width = 374
@@ -163,10 +150,10 @@ inherited ftmNaprclose: TftmNaprclose
     Visible = True
     OnChange = dbcbeNaprChange
   end
-  object dbcbeMark: TDBLookupComboboxEh [13]
-    Left = 8
-    Top = 103
-    Width = 170
+  object dbcbeMark: TDBLookupComboboxEh [12]
+    Left = 13
+    Top = 106
+    Width = 167
     Height = 19
     DataField = ''
     EditButtons = <>
@@ -178,7 +165,7 @@ inherited ftmNaprclose: TftmNaprclose
     Visible = True
     OnChange = dbcbeNaprChange
   end
-  object dbdteExam: TDBDateTimeEditEh [14]
+  object dbdteExam: TDBDateTimeEditEh [13]
     Left = 184
     Top = 106
     Width = 203
@@ -191,9 +178,9 @@ inherited ftmNaprclose: TftmNaprclose
     Visible = True
     OnChange = dbcbeNaprChange
   end
-  object dbcbeEx: TDBLookupComboboxEh [15]
+  object dbcbeEx: TDBLookupComboboxEh [14]
     Left = 13
-    Top = 64
+    Top = 65
     Width = 374
     Height = 19
     DataField = ''
@@ -205,7 +192,7 @@ inherited ftmNaprclose: TftmNaprclose
     TabOrder = 4
     Visible = True
   end
-  object eTema: TDBEditEh [16]
+  object eTema: TDBEditEh [15]
     Left = 13
     Top = 144
     Width = 374
@@ -217,6 +204,7 @@ inherited ftmNaprclose: TftmNaprclose
     Visible = True
   end
   object dsNapr: TDataSource
-    Left = 304
+    Left = 296
+    Top = 8
   end
 end

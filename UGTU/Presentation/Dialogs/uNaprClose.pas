@@ -26,7 +26,6 @@ type
     Label7: TLabel;
     Label8: TLabel;
     eTema: TDBEditEh;
-    Label9: TLabel;
     dsNapr: TDataSource;
     procedure FormShow(Sender: TObject);
     procedure dbcbeNaprChange(Sender: TObject);
