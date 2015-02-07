@@ -903,11 +903,9 @@ var E: Variant;
     year, posit, i, first_step:integer;
     FindRange: Variant;
     tempStoredProc: TADOStoredProc;
-    histDS: TADODataSet;
 begin
   //вызываем процедуру, возвращающую ФИО в дат. падеж и иную нужную инфу
   tempStoredProc:= TADOStoredProc.Create(nil);
-  histDS := TADODataSet.Create(nil);
   try
    try
     tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
@@ -920,18 +918,6 @@ begin
     MessageBox(Handle, 'Произошла ошибка при получении информации по студенту.','ИС Деканат',MB_OK);
     exit;
   end;
-
-  //возвращаем историю движения студента
-  {try
-    histDS.CommandText:= 'select * from StudHistory('+IntToStr(obj.StudGrupKey)+')';
-    histDS.Connection:= dm.DBConnect;
-    histDS.Open;
-    histDS.First;
-  except
-    histDS.Free;
-    MessageBox(Handle, 'Произошла ошибка при получении истории движения студента.','ИС Деканат',MB_OK);
-    exit;
-  end; }
 
   try
   //экспорт в Excel
@@ -963,7 +949,7 @@ begin
     FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
     FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
 
-    FindRange := E.Cells.Replace(What := '#PrNum#',Replacement:=dmStudentData.adodsPrikaz.FieldByName('Nn_prikaz').AsString);
+    FindRange := E.Cells.Replace(What := '#PrNum#',Replacement:=tempStoredProc.FieldByName('Nn_prikaz').AsString);
     dop:=tempStoredProc.FieldByName('zachDate').AsString;
     if (dop.Length=1) then  dop:='0'+dop;
     FindRange := E.Cells.Replace(What := '#DateZ#',Replacement:=dop);
@@ -1017,19 +1003,13 @@ var E: Variant;
     tempStoredProc: TADOStoredProc;
 begin
   //вызываем процедуру, переводящую ФИО в дат. падеж
-  //и возвращающую иную нуную инфу
+  //и возвращающую иную нужную инфу
   try
     tempStoredProc:= TADOStoredProc.Create(nil);
    try
     tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
     tempStoredProc.Connection:= dm.DBConnect;
-    //tempStoredProc.Parameters.CreateParameter('@Clastname', ftString, pdInput, 50, obj.LastName);
-    //tempStoredProc.Parameters.CreateParameter('@Cfirstname', ftString, pdInput, 50, obj.FirstName);
-    //tempStoredProc.Parameters.CreateParameter('@Cotch', ftString, pdInput, 50, obj.MiddleName);
     tempStoredProc.Parameters.CreateParameter('@Ik_studGrup', ftInteger, pdInput, 4, obj.StudGrupKey);
-    //tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
-    //tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
-    //tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
     tempStoredProc.Open;
     tempStoredProc.First;  //FIO
   except
