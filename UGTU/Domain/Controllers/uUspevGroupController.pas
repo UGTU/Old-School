@@ -3181,16 +3181,16 @@ begin
   dmUgtuStructure.adoqSpecFac.Open;
   dmUgtuStructure.adoqSpecFac.Filter:='';
   if dmUgtuStructure.adoqSpecFac.Locate('ik_fac',ikfac,[loCaseInsensitive]) then
-     fac:=dmUgtuStructure.adoqSpecFacCname_fac.AsString;
+     fac:=dmUgtuStructure.adoqSpecFacCshort_name_fac.AsString;
 
-    Log.LogMessage('dmUgtuStructure.adoqSpecFac opned and filtered');
+    Log.LogMessage('dmUgtuStructure.adoqSpecFac opened and filtered');
     Assert(dmUgtuStructure.adoqSelAllGroups <> nil);
   dmUgtuStructure.adoqSelAllGroups.Open;
   dmUgtuStructure.adoqSelAllGroups.Filter:='';
   if dmUgtuStructure.adoqSelAllGroups.Locate('ik_grup',ikgrup,[loCaseInsensitive]) then
      group:=dmUgtuStructure.adoqSelAllGroups.FieldByName('cname_grup').AsString;
 
-  Log.LogMessage('dmUgtuStructure.adoqSelAllGroups opned and filtered');
+  Log.LogMessage('dmUgtuStructure.adoqSelAllGroups opened and filtered');
   ikdisc:=dmUspevaemost.adospGetAllAtt.FieldByName('ik_disc').Value;
   ikcontent :=dmUspevaemost.adospGetAllAtt.FieldByName('ik_upContent').Value;
   disc:=dmUspevaemost.adospGetAllAtt.FieldByName('cname_disc').AsString;
