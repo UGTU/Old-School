@@ -9,7 +9,7 @@ uses
   ExtDlgs, jpeg, VarfileUtils, ComObj, GridsEh, ActnList, Menus, dbtvSpecobj, dbtvFacobj,
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController, uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh;
+  DBAxisGridsEh,uUspevGroupController;
 
 type
   TfmStudent = class(TfmBase)
@@ -898,203 +898,217 @@ begin
 end;
 
 procedure TfmStudent.actPrintPensSpravExecute(Sender: TObject);
-var E: Variant;
-    str, year_post,dop,dir_inst,copystr1,copystr2:string;
-    year, posit, i, first_step:integer;
-    FindRange: Variant;
-    tempStoredProc: TADOStoredProc;
-    histDS: TADODataSet;
+var //E: Variant;
+//    str,dir_inst,copystr1,copystr2,dop:string;
+//    posit:integer;
+//    FindRange: Variant;
+//    tempStoredProc: TADOStoredProc;
+     Report: TReportBase;
 begin
-  //вызываем процедуру, возвращающую ФИО в дат. падеж и иную нужную инфу
-  tempStoredProc:= TADOStoredProc.Create(nil);
-  histDS := TADODataSet.Create(nil);
-  try
-   try
-    tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
-    tempStoredProc.Connection:= dm.DBConnect;
-    tempStoredProc.Parameters.CreateParameter('@Ik_studGrup', ftInteger, pdInput, 4, obj.StudGrupKey);
-    tempStoredProc.Open;
-    tempStoredProc.First;  //FIO
-  except
-    tempStoredProc.Free;
-    MessageBox(Handle, 'Произошла ошибка при получении информации по студенту.','ИС Деканат',MB_OK);
-    exit;
-  end;
-
-  //возвращаем историю движения студента
-  try
-    histDS.CommandText:= 'select * from StudHistory('+IntToStr(obj.StudGrupKey)+')';
-    histDS.Connection:= dm.DBConnect;
-    histDS.Open;
-    histDS.First;
-  except
-    histDS.Free;
-    MessageBox(Handle, 'Произошла ошибка при получении истории движения студента.','ИС Деканат',MB_OK);
-    exit;
-  end;
-
-  try
-  //экспорт в Excel
-    E := CreateOleObject('Excel.Application');
-    E.Visible := false;
-    E.DisplayAlerts:= false;
-    str := ExtractFilePath(Application.ExeName)+'reports\SprvPens.XLT';
-    E.WorkBooks.Add(str);
-    E.Sheets[1].Select;
-    FindRange := E.Cells.Replace(What := '#fio#',Replacement:=tempStoredProc.FieldByName('FIO').AsString);
-    //obj.y  .
-    case tempStoredProc.FieldByName('kurs').Value of
-      1: str := 'первом';
-      2: str := 'втором';
-      3: str := 'третьем';
-      4: str := 'четвертом';
-      5: str := 'пятом';
-      6: str := 'шестом';
-    end;
-  //  year_post:=tempStoredProc.FieldByName('zachYear').AsString ;
-    FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_grup').AsString);
-    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
-    FindRange := E.Cells.Replace(What := '#birth_y#',Replacement:=tempStoredProc.FieldByName('studBirthYear').AsString);
-    dop:=tempStoredProc.FieldByName('sprDate').AsString;
-    if (dop.Length=1) then  dop:='0'+dop;
-    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=dop);
-    str:=GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);
-    FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
-
-    FindRange := E.Cells.Replace(What := '#PrNum#',Replacement:=dmStudentData.adodsPrikaz.FieldByName('Nn_prikaz').AsString);
-    dop:=tempStoredProc.FieldByName('zachDate').AsString;
-    if (dop.Length=1) then  dop:='0'+dop;
-    FindRange := E.Cells.Replace(What := '#DateZ#',Replacement:=dop);
-    str:=GetMonthR(tempStoredProc.FieldByName('zachMonth').Value);
-    FindRange := E.Cells.Replace(What := '#MonthZ#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('YearPricZach').AsString);
-
-   { first_step := 18;
-    for i := first_step to first_step + histDS.RecordCount - 1 do
-    begin
-      E.ActiveSheet.Range['F' + inttostr(I + 1), 'N' + inttostr(I + 1)].Insert(xlDown, xlFormatFromLeftOrAbove);
-    end;
-}
-    dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
-    posit:=Pos(' ', dir_inst);
-    copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
-    copystr2:=Copy(dir_inst,1,posit-1);
-    copystr1:=copystr1+' '+copystr2;
-    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=copystr1);
-
-    FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
-    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
-    FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
-
-    year:= tempStoredProc.FieldByName('sprYear').Value-
-           tempStoredProc.FieldByName('kurs').Value;
-    if tempStoredProc.FieldByName('sprMonth').Value>8 then
-       year:= year-1;
-
-    //FindRange := E.Cells.Replace(What := '#YearZach#',Replacement:=IntToStr(zachYear));
-    FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=IntToStr(tempStoredProc.FieldByName('YearGrupEnd').Value));
-
-    //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
-    E.DisplayAlerts:= true;
-    E.Visible := true;
-  except
-    E.Quit;
-    E:= UnAssigned;
-    MessageBox(Handle, 'Произошла ошибка при экспорте данных в Excel.','ИС Деканат',MB_OK);
-  end;
-  finally
-    tempStoredProc.Free;
-  end;
+  Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey,1);
+  TWaitingController.GetInstance.Process(Report);
+  Report.Free;
+//var E: Variant;
+//    str, year_post,dop,dir_inst,copystr1,copystr2:string;
+//    year, posit, i, first_step:integer;
+//    FindRange: Variant;
+//    tempStoredProc: TADOStoredProc;
+//    histDS: TADODataSet;
+//begin
+//  //вызываем процедуру, возвращающую ФИО в дат. падеж и иную нужную инфу
+//  tempStoredProc:= TADOStoredProc.Create(nil);
+//  histDS := TADODataSet.Create(nil);
+//  try
+//   try
+//    tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
+//    tempStoredProc.Connection:= dm.DBConnect;
+//    tempStoredProc.Parameters.CreateParameter('@Ik_studGrup', ftInteger, pdInput, 4, obj.StudGrupKey);
+//    tempStoredProc.Open;
+//    tempStoredProc.First;  //FIO
+//  except
+//    tempStoredProc.Free;
+//    MessageBox(Handle, 'Произошла ошибка при получении информации по студенту.','ИС Деканат',MB_OK);
+//    exit;
+//  end;
+//
+//  //возвращаем историю движения студента
+//  try
+//    histDS.CommandText:= 'select * from StudHistory('+IntToStr(obj.StudGrupKey)+')';
+//    histDS.Connection:= dm.DBConnect;
+//    histDS.Open;
+//    histDS.First;
+//  except
+//    histDS.Free;
+//    MessageBox(Handle, 'Произошла ошибка при получении истории движения студента.','ИС Деканат',MB_OK);
+//    exit;
+//  end;
+//
+//  try
+//  //экспорт в Excel
+//    E := CreateOleObject('Excel.Application');
+//    E.Visible := false;
+//    E.DisplayAlerts:= false;
+//    str := ExtractFilePath(Application.ExeName)+'reports\SprvPens.XLT';
+//    E.WorkBooks.Add(str);
+//    E.Sheets[1].Select;
+//    FindRange := E.Cells.Replace(What := '#fio#',Replacement:=tempStoredProc.FieldByName('FIO').AsString);
+//    //obj.y  .
+//    case tempStoredProc.FieldByName('kurs').Value of
+//      1: str := 'первом';
+//      2: str := 'втором';
+//      3: str := 'третьем';
+//      4: str := 'четвертом';
+//      5: str := 'пятом';
+//      6: str := 'шестом';
+//    end;
+//  //  year_post:=tempStoredProc.FieldByName('zachYear').AsString ;
+//    FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
+//    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_grup').AsString);
+//    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
+//    FindRange := E.Cells.Replace(What := '#birth_y#',Replacement:=tempStoredProc.FieldByName('studBirthYear').AsString);
+//    dop:=tempStoredProc.FieldByName('sprDate').AsString;
+//    if (dop.Length=1) then  dop:='0'+dop;
+//    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=dop);
+//    str:=GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);
+//    FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
+//    FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
+//
+//    FindRange := E.Cells.Replace(What := '#PrNum#',Replacement:=dmStudentData.adodsPrikaz.FieldByName('Nn_prikaz').AsString);
+//    dop:=tempStoredProc.FieldByName('zachDate').AsString;
+//    if (dop.Length=1) then  dop:='0'+dop;
+//    FindRange := E.Cells.Replace(What := '#DateZ#',Replacement:=dop);
+//    str:=GetMonthR(tempStoredProc.FieldByName('zachMonth').Value);
+//    FindRange := E.Cells.Replace(What := '#MonthZ#',Replacement:=str);
+//    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('YearPricZach').AsString);
+//
+//   { first_step := 18;
+//    for i := first_step to first_step + histDS.RecordCount - 1 do
+//    begin
+//      E.ActiveSheet.Range['F' + inttostr(I + 1), 'N' + inttostr(I + 1)].Insert(xlDown, xlFormatFromLeftOrAbove);
+//    end;
+//}
+//    dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
+//    posit:=Pos(' ', dir_inst);
+//    copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
+//    copystr2:=Copy(dir_inst,1,posit-1);
+//    copystr1:=copystr1+' '+copystr2;
+//    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=copystr1);
+//
+//    FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
+//    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:=', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
+//    FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
+//
+//    year:= tempStoredProc.FieldByName('sprYear').Value-
+//           tempStoredProc.FieldByName('kurs').Value;
+//    if tempStoredProc.FieldByName('sprMonth').Value>8 then
+//       year:= year-1;
+//
+//    //FindRange := E.Cells.Replace(What := '#YearZach#',Replacement:=IntToStr(zachYear));
+//    FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=IntToStr(tempStoredProc.FieldByName('YearGrupEnd').Value));
+//
+//    //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
+//    E.DisplayAlerts:= true;
+//    E.Visible := true;
+//  except
+//    E.Quit;
+//    E:= UnAssigned;
+//    MessageBox(Handle, 'Произошла ошибка при экспорте данных в Excel.','ИС Деканат',MB_OK);
+//  end;
+//  finally
+//    tempStoredProc.Free;
+//  end;
 end;
 
 procedure TfmStudent.actPrintSpravExecute(Sender: TObject);
-var E: Variant;
-    str,dir_inst,copystr1,copystr2,dop:string;
-    posit:integer;
-    FindRange: Variant;
-    tempStoredProc: TADOStoredProc;
+var //E: Variant;
+//    str,dir_inst,copystr1,copystr2,dop:string;
+//    posit:integer;
+//    FindRange: Variant;
+//    tempStoredProc: TADOStoredProc;
+     Report: TReportBase;
 begin
+  Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey,0);
+  TWaitingController.GetInstance.Process(Report);
+  Report.Free;
   //вызываем процедуру, переводящую ФИО в дат. падеж
-  //и возвращающую иную нуную инфу
-  try
-    tempStoredProc:= TADOStoredProc.Create(nil);
-   try
-    tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
-    tempStoredProc.Connection:= dm.DBConnect;
-    //tempStoredProc.Parameters.CreateParameter('@Clastname', ftString, pdInput, 50, obj.LastName);
-    //tempStoredProc.Parameters.CreateParameter('@Cfirstname', ftString, pdInput, 50, obj.FirstName);
-    //tempStoredProc.Parameters.CreateParameter('@Cotch', ftString, pdInput, 50, obj.MiddleName);
-    tempStoredProc.Parameters.CreateParameter('@Ik_studGrup', ftInteger, pdInput, 4, obj.StudGrupKey);
-    //tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
-    //tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
-    //tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
-    tempStoredProc.Open;
-    tempStoredProc.First;  //FIO
-  except
-    tempStoredProc.Free;
-    MessageBox(Handle, 'Произошла ошибка при обращении к серверу.','ИС Деканат',MB_OK);
-    exit;
-  end;
-
-  //экспорт в Excel
-  try
-    E := CreateOleObject('Excel.Application');
-    E.Visible := false;
-    E.DisplayAlerts:= false;
-    str := ExtractFilePath(Application.ExeName)+'reports\Sprv.XLT';
-    E.WorkBooks.Add(str);
-    E.Sheets[1].Select;
-    FindRange := E.Cells.Replace(What := '#place#',Replacement:='По месту требования');
-
-    FindRange := E.Cells.Replace(What := '#fio#',Replacement:=tempStoredProc.FieldByName('FIO').AsString);
-    //obj.y  .
-    case tempStoredProc.FieldByName('kurs').Value of
-      1: str := 'первом';
-      2: str := 'втором';
-      3: str := 'третьем';
-      4: str := 'четвертом';
-      5: str := 'пятом';
-      6: str := 'шестом';
-    end;
-    FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
-    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
-    dop:=tempStoredProc.FieldByName('sprDate').AsString;
-    if (dop.Length=1) then  dop:='0'+dop;
-    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=dop);
-
-    str:= GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);;
-    FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
-    FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
-    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('YearPricZach').AsString);
-     dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
-    posit:=Pos(' ', dir_inst);
-    copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
-    copystr2:=Copy(dir_inst,1,posit-1);
-    copystr1:=copystr1+' '+copystr2;
-    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=copystr1);
-    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
-    FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
-    FindRange := E.Cells.Replace(What := '#podgot#',Replacement:=tempStoredProc.FieldByName('Podgot').AsString);
-    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:= ', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
-    FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
-    FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=
-      IntToStr(tempStoredProc.FieldByName('YearGrupEnd').Value));
-
-
-    //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
-    E.Visible := true;
-    E.DisplayAlerts:= true; 
-  except
-    E.Quit;
-    E:= UnAssigned;
-    MessageBox(Handle, 'Произошла ошибка при экспорте данных в Excel.','ИС Деканат',MB_OK);
-  end;
-  finally
-   tempStoredProc.Free;
-  end;
+//  //и возвращающую иную нуную инфу
+//  try
+//    tempStoredProc:= TADOStoredProc.Create(nil);
+//   try
+//    tempStoredProc.ProcedureName:= 'StudGetInfForSprav;1';
+//    tempStoredProc.Connection:= dm.DBConnect;
+//    //tempStoredProc.Parameters.CreateParameter('@Clastname', ftString, pdInput, 50, obj.LastName);
+//    //tempStoredProc.Parameters.CreateParameter('@Cfirstname', ftString, pdInput, 50, obj.FirstName);
+//    //tempStoredProc.Parameters.CreateParameter('@Cotch', ftString, pdInput, 50, obj.MiddleName);
+//    tempStoredProc.Parameters.CreateParameter('@Ik_studGrup', ftInteger, pdInput, 4, obj.StudGrupKey);
+//    //tempStoredProc.Parameters.CreateParameter('@DateZach', ftDateTime, pdInput, 8, dmStudentData.adodsPrikaz.FieldByName('Dd_prikaz').Value);
+//    //tempStoredProc.Parameters.CreateParameter('@Date', ftDateTime, pdInput, 8, Date);
+//    //tempStoredProc.Parameters.CreateParameter('@DateBirth', ftDateTime, pdInput, 8, obj.BirthDate);
+//    tempStoredProc.Open;
+//    tempStoredProc.First;  //FIO
+//  except
+//    tempStoredProc.Free;
+//    MessageBox(Handle, 'Произошла ошибка при обращении к серверу.','ИС Деканат',MB_OK);
+//    exit;
+//  end;
+//
+//  //экспорт в Excel
+//  try
+//    E := CreateOleObject('Excel.Application');
+//    E.Visible := false;
+//    E.DisplayAlerts:= false;
+//    str := ExtractFilePath(Application.ExeName)+'reports\Sprv.XLT';
+//    E.WorkBooks.Add(str);
+//    E.Sheets[1].Select;
+//    FindRange := E.Cells.Replace(What := '#place#',Replacement:='По месту требования');
+//
+//    FindRange := E.Cells.Replace(What := '#fio#',Replacement:=tempStoredProc.FieldByName('FIO').AsString);
+//    //obj.y  .
+//    case tempStoredProc.FieldByName('kurs').Value of
+//      1: str := 'первом';
+//      2: str := 'втором';
+//      3: str := 'третьем';
+//      4: str := 'четвертом';
+//      5: str := 'пятом';
+//      6: str := 'шестом';
+//    end;
+//    FindRange := E.Cells.Replace(What := '#kurs#',Replacement:=str);
+//    FindRange := E.Cells.Replace(What := '#spec#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
+//    FindRange := E.Cells.Replace(What := '#fac#',Replacement:=tempStoredProc.FieldByName('Cname_fac_rod_pad').AsString);
+//    dop:=tempStoredProc.FieldByName('sprDate').AsString;
+//    if (dop.Length=1) then  dop:='0'+dop;
+//    FindRange := E.Cells.Replace(What := '#Date#',Replacement:=dop);
+//
+//    str:= GetMonthR(tempStoredProc.FieldByName('sprMonth').Value);;
+//    FindRange := E.Cells.Replace(What := '#Month#',Replacement:=str);
+//    FindRange := E.Cells.Replace(What := '#Year#',Replacement:=tempStoredProc.FieldByName('sprYear').AsString);
+//    FindRange := E.Cells.Replace(What := '#YearZ#',Replacement:=tempStoredProc.FieldByName('YearPricZach').AsString);
+//     dir_inst:=tempStoredProc.FieldByName('ManagerSmallName').AsString;
+//    posit:=Pos(' ', dir_inst);
+//    copystr1:=Copy(dir_inst,posit+1,Length(dir_inst));
+//    copystr2:=Copy(dir_inst,1,posit-1);
+//    copystr1:=copystr1+' '+copystr2;
+//    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=copystr1);
+//    FindRange := E.Cells.Replace(What := '#dir_inst#',Replacement:=tempStoredProc.FieldByName('ManagerSmallName').AsString);
+//    FindRange := E.Cells.Replace(What := '#dep_ind#',Replacement:=tempStoredProc.FieldByName('Dep_Index').AsString);
+//    FindRange := E.Cells.Replace(What := '#podgot#',Replacement:=tempStoredProc.FieldByName('Podgot').AsString);
+//    FindRange := E.Cells.Replace(What := '#phone_inst#',Replacement:= ', ' + tempStoredProc.FieldByName('DepPhoneNumber').AsString);
+//    FindRange := E.Cells.Replace(What := '#otdel#',Replacement:=tempStoredProc.FieldByName('Cname_form_pril').AsString);
+//    FindRange := E.Cells.Replace(What := '#YearOtch#',Replacement:=
+//      IntToStr(tempStoredProc.FieldByName('YearGrupEnd').Value));
+//
+//
+//    //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
+//    E.Visible := true;
+//    E.DisplayAlerts:= true;
+//  except
+//    E.Quit;
+//    E:= UnAssigned;
+//    MessageBox(Handle, 'Произошла ошибка при экспорте данных в Excel.','ИС Деканат',MB_OK);
+//  end;
+//  finally
+//   tempStoredProc.Free;
+//  end;
 end;
 
 procedure TfmStudent.actPropToFactExecute(Sender: TObject);
