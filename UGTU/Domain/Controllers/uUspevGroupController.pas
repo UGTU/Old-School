@@ -14,6 +14,9 @@ uses
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, uDMUspevaemost, ComCtrls, DateUtils,
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
+  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,
+  Vedomost2014,Assemly_Report2014,Spravka,SpravkaReport2014,Spravka2014;
+ type
   D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014,
   CommandController;
 
@@ -364,6 +367,8 @@ type
 //***************Дополнительные**************************
   //getSpecFromSpecFac возвращает IK специальности
   function getSpecFromSpecFac(SpecFacIK: integer): Integer;
+  //экспорт справок
+  function BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
 
   //******************Контроллеры (Kim Spark)*****************************************
   property VedomostController: TVedomostController read GetVedomostController;
@@ -826,6 +831,8 @@ result:=false;
 result:=true;
 
 end;
+
+
 
 function TUspevGroupController.SaveBRSAtt(ikVed: integer;
   dbgrdBRSAtt: TDBGridEh; i_tab:string; date:TDateTime): boolean;
@@ -1400,7 +1407,26 @@ begin
   else
     result:=false;
 end;
+ function TUspevGroupController.BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
+   var report:TSpravka_Report;
+   result_report:TSpravka;
+  FindRange: Variant;
+ begin
+   report:= TSpravka_Report.Create(_ikStudGrup, _type_spr);
+   result_report:=report.AddReport();
+   Result := SpravkaReport.Create(result_report);
 
+      if (_type_spr=1) then
+          begin
+          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\SprvPens.xlt';
+          end
+      else
+          begin
+          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Sprv.xlt';
+          end;
+
+  report.Free;
+ end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
   ikSpec: integer): TReportBase;
@@ -3243,16 +3269,16 @@ begin
   dmUgtuStructure.adoqSpecFac.Open;
   dmUgtuStructure.adoqSpecFac.Filter:='';
   if dmUgtuStructure.adoqSpecFac.Locate('ik_fac',ikfac,[loCaseInsensitive]) then
-     fac:=dmUgtuStructure.adoqSpecFacCname_fac.AsString;
+     fac:=dmUgtuStructure.adoqSpecFacCshort_name_fac.AsString;
 
-    Log.LogMessage('dmUgtuStructure.adoqSpecFac opned and filtered');
+    Log.LogMessage('dmUgtuStructure.adoqSpecFac opened and filtered');
     Assert(dmUgtuStructure.adoqSelAllGroups <> nil);
   dmUgtuStructure.adoqSelAllGroups.Open;
   dmUgtuStructure.adoqSelAllGroups.Filter:='';
   if dmUgtuStructure.adoqSelAllGroups.Locate('ik_grup',ikgrup,[loCaseInsensitive]) then
      group:=dmUgtuStructure.adoqSelAllGroups.FieldByName('cname_grup').AsString;
 
-  Log.LogMessage('dmUgtuStructure.adoqSelAllGroups opned and filtered');
+  Log.LogMessage('dmUgtuStructure.adoqSelAllGroups opened and filtered');
   ikdisc:=dmUspevaemost.adospGetAllAtt.FieldByName('ik_disc').Value;
   ikcontent :=dmUspevaemost.adospGetAllAtt.FieldByName('ik_upContent').Value;
   disc:=dmUspevaemost.adospGetAllAtt.FieldByName('cname_disc').AsString;

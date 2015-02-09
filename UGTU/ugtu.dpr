@@ -410,7 +410,10 @@ uses
   VedomostItem2014 in 'Domain\Classes\VedomostItem2014.pas',
   Assemly_Report2014 in 'Domain\Classes\Assemly_Report2014.pas',
   GoogleQr in 'Utils\GoogleQr.pas',
-  Spravka in 'Domain\Reports\Spravka.pas';
+  Spravka in 'Domain\Reports\Spravka.pas',
+  SpravkaHistory2014 in 'Domain\Classes\SpravkaHistory2014.pas',
+  Spravka2014 in 'Domain\Classes\Spravka2014.pas',
+  SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

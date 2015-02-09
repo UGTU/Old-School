@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsNapr
+      ActivePage = tsAttBRS
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
