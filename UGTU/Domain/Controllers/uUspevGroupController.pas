@@ -14,7 +14,8 @@ uses
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, uDMUspevaemost, ComCtrls, DateUtils,
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
-  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014;
+  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,
+  Vedomost2014,Assemly_Report2014,Spravka,SpravkaReport2014,Spravka2014;
  type
   PDBGrid = ^TDBGridEh;
   TVedType = (exam,zach,KP,KR);
@@ -343,9 +344,9 @@ uses
 //***************Дополнительные**************************
   //getSpecFromSpecFac возвращает IK специальности
   function getSpecFromSpecFac(SpecFacIK: integer): Integer;
+  //экспорт справок
+  function BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
 
-
-                             
 end;
 
 implementation
@@ -789,6 +790,8 @@ result:=false;
 result:=true;
 
 end;
+
+
 
 function TUspevGroupController.SaveBRSAtt(ikVed: integer;
   dbgrdBRSAtt: TDBGridEh; i_tab:string; date:TDateTime): boolean;
@@ -1391,7 +1394,26 @@ begin
   else
     result:=false;
 end;
+ function TUspevGroupController.BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
+   var report:TSpravka_Report;
+   result_report:TSpravka;
+  FindRange: Variant;
+ begin
+   report:= TSpravka_Report.Create(_ikStudGrup, _type_spr);
+   result_report:=report.AddReport();
+   Result := SpravkaReport.Create(result_report);
 
+      if (_type_spr=1) then
+          begin
+          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\SprvPens.xlt';
+          end
+      else
+          begin
+          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Sprv.xlt';
+          end;
+
+  report.Free;
+ end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
   ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;

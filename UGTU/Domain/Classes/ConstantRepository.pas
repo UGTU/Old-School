@@ -14,6 +14,45 @@ const
   vid_exam = 6;
   GOS_EXAM = 56;
 
+  //служебные функции
+  function GetMonthR(month:integer): string;
+  function GetKursP(kurs:integer): string;
+
 implementation
+
+function GetMonthR(month:integer):string;
+var str:string;
+begin
+    case month of
+      1: str := '€нвар€';
+      2: str := 'феврал€';
+      3: str := 'марта';
+      4: str := 'апрел€';
+      5: str := 'ма€';
+      6: str := 'июн€';
+      7: str := 'июл€';
+      8: str := 'августа';
+      9: str := 'сент€бр€';
+      10: str := 'окт€бр€';
+      11: str := 'но€бр€';
+      12: str := 'декабр€';
+    end;
+    result:= str;
+end;
+
+function GetKursP(kurs: integer): string;
+var str:string;
+begin
+  case (kurs) of
+      1: str := 'первом';
+      2: str := 'втором';
+      3: str := 'третьем';
+      4: str := 'четвертом';
+      5: str := 'п€том';
+      6: str := 'шестом';
+  end;
+  result:= str;
+end;
+
 
 end.
