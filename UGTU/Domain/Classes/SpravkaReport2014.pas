@@ -1,4 +1,5 @@
 unit SpravkaReport2014;
+
 interface
 
 uses
@@ -9,11 +10,11 @@ uses
 type
   TSpravka_Report = class
   private
-    ikStudGrup,type_spr: integer;
+    ikStudGrup, type_spr: integer;
   protected
 
   public
-    constructor Create(_ikStudGrup,_type_spr: integer);
+    constructor Create(_ikStudGrup, _type_spr: integer);
     function AddReport(): TSpravka;
     destructor Destroy; override;
 
@@ -26,7 +27,7 @@ implementation
 constructor TSpravka_Report.Create(_ikStudGrup, _type_spr: integer);
 begin
   ikStudGrup := _ikStudGrup;
-  type_spr:=_type_spr;
+  type_spr := _type_spr;
 end;
 
 function TSpravka_Report.AddReport(): TSpravka;
@@ -46,34 +47,31 @@ begin
     sp_spr.Open;
     sp_spr.First;
 
-    sp_history.CommandText:= 'select * from StudHistory('+self.ikStudGrup.ToString()+')';
-    sp_history.Connection:= dm.DBConnect;
+    sp_history.CommandText := 'select * from StudHistory(' +
+      self.ikStudGrup.ToString() + ')';
+    sp_history.Connection := dm.DBConnect;
     sp_history.Open;
     sp_history.First;
 
-
-    Result := TSpravka.Create(sp_spr.FieldByName('FIO')
-      .AsString, sp_spr.FieldByName('Podgot').AsString,
-      sp_spr.FieldByName('Cname_spec').AsString,
-      sp_spr.FieldByName('Cshort_spec').AsString,
+    Result := TSpravka.Create(sp_spr.FieldByName('FIO').AsString,
+      sp_spr.FieldByName('Podgot').AsString, sp_spr.FieldByName('Cname_spec')
+      .AsString, sp_spr.FieldByName('Cshort_spec').AsString,
       sp_spr.FieldByName('ManagerSmallName').AsString,
       sp_spr.FieldByName('Cname_form_pril').AsString,
       sp_spr.FieldByName('Cname_fac_rod_pad').AsString,
       sp_spr.FieldByName('DepPhoneNumber').AsString,
-      sp_spr.FieldByName('YearPricZach').AsString,
-      sp_spr.FieldByName('kurs').AsInteger,self.type_spr,
-      sp_spr.FieldByName('YearGrupEnd').AsString,
-      sp_spr.FieldByName('sprDate').AsString,
-      sp_spr.FieldByName('sprMonth').AsString,
-      sp_spr.FieldByName('sprYear').AsString,
+      sp_spr.FieldByName('YearPricZach').AsString, sp_spr.FieldByName('kurs')
+      .AsInteger, self.type_spr, sp_spr.FieldByName('YearGrupEnd').AsString,
+      sp_spr.FieldByName('sprDate').AsString, sp_spr.FieldByName('sprMonth')
+      .AsString, sp_spr.FieldByName('sprYear').AsString,
       sp_spr.FieldByName('studBirthYear').AsString,
       sp_spr.FieldByName('Dep_Index').AsString);
     sp_spr.First;
 
     While not sp_history.Eof do
     begin
-      spr_h := TSpravkaHistory.Create(sp_history.FieldByName('Nn_prikaz').AsString,
-        sp_history.FieldByName('Cname_pric').AsString,
+      spr_h := TSpravkaHistory.Create(sp_history.FieldByName('Nn_prikaz')
+        .AsString, sp_history.FieldByName('Cname_pric').AsString,
         sp_history.FieldByName('daypric').AsString,
         sp_history.FieldByName('monthpric').AsString,
         sp_history.FieldByName('yearpric').AsString);
@@ -87,9 +85,11 @@ begin
   end;
 
 end;
+
 destructor TSpravka_Report.Destroy;
 begin
 
   inherited;
 end;
+
 end.

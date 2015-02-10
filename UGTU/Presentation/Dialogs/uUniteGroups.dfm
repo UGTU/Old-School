@@ -166,6 +166,7 @@ inherited frmGroupManager: TfrmGroupManager
     Width = 225
     Height = 19
     Anchors = [akTop, akRight]
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_grup'
@@ -195,6 +196,7 @@ inherited frmGroupManager: TfrmGroupManager
     Width = 300
     Height = 19
     Anchors = [akLeft, akRight, akBottom]
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_prikaz'

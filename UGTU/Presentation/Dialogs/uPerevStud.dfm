@@ -9,7 +9,7 @@ inherited frmPerevStud: TfrmPerevStud
   Position = poDesigned
   OnShow = FormShow
   ExplicitWidth = 579
-  ExplicitHeight = 342
+  ExplicitHeight = 339
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -247,6 +247,7 @@ inherited frmPerevStud: TfrmPerevStud
     Top = 31
     Width = 238
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_prikaz'
@@ -261,6 +262,7 @@ inherited frmPerevStud: TfrmPerevStud
     Top = 74
     Width = 270
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_pric'
@@ -275,6 +277,7 @@ inherited frmPerevStud: TfrmPerevStud
     Top = 197
     Width = 270
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_spec_fac'
@@ -289,6 +292,7 @@ inherited frmPerevStud: TfrmPerevStud
     Top = 238
     Width = 270
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_grup'
@@ -303,6 +307,7 @@ inherited frmPerevStud: TfrmPerevStud
     Top = 155
     Width = 270
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_fac'
@@ -317,6 +322,7 @@ inherited frmPerevStud: TfrmPerevStud
     Top = 115
     Width = 270
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_pric'
