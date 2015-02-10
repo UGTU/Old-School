@@ -524,3 +524,43 @@ and year_value = _grup.nYear_post + cast((C_up.n_sem-1)/2 as numeric(1,0))
 /*inner join IMPORT_KafTeachers IMP2
 ON _vedomost.Itab_n=IMP2.Itab_n*/
 GO
+------------------------------------------------------------------------------------------
+ALTER PROCEDURE [dbo].[GetAllVedNaprForGrup]
+	@ik_group	int,
+	@n_sem	int
+as
+	SELECT cName_disc+', '+cName_vid_zanyat Name, cnt.ik_upContent, cName_disc, cnt.ik_Vid_Zanyat FROM
+	(SELECT ik_upContent, ik_disc, ik_vid_zanyat FROM dbo.Content_UchPl cup
+      INNER JOIN dbo.sv_disc sd ON cup.ik_disc_uch_plan = sd.ik_disc_uch_plan
+	    Where ((ik_uch_plan = (Select ik_uch_plan From Grup Where ik_grup = @ik_group)) and (n_sem = @n_sem)) 
+           and cup.ik_upContent in (SELECT ik_upContent 
+			 FROM dbo.Vedomost WHERE ik_grup=@ik_group and lPriznak_napr = 1)) cnt	    
+	    INNER JOIN 
+	 (SELECT iK_disc, cName_disc FROM dbo.discpln) d
+	 ON d.iK_disc=cnt.iK_disc
+	    INNER JOIN 
+	 (SELECT iK_vid_zanyat, cName_vid_zanyat FROM dbo.vid_zaniat where ik_vid_zanyat<>33) vz
+	 ON vz.iK_vid_zanyat=cnt.iK_vid_zanyat
+GO
+------------------------------------------------------------------------------------------------------
+ALTER PROCEDURE [dbo].[GetAllVedNaprForDisc] 
+	@ik_group	int,
+	@ik_upContent int
+as
+    SELECT v.ik_ved, u.ik_zach, StudName, Nn_zach, cName_vid_exam, u.cosenca, Otsenca, Name_osenca, lClose,
+		   KPTheme as ctema, dD_vydano, Dd_exam, Itab_n 
+    From dbo.GetGrupStud(@ik_group) as s 	
+	INNER JOIN Uspev u ON u.ik_zach=s.ik_zach
+	INNER JOIN (SELECT Ik_ved, lClose, Ik_grup, Ik_vid_exam, ik_upContent, dD_vydano, Dd_exam,Itab_n  FROM Vedomost
+		 where lPriznak_napr = 1) v ON v.Ik_ved=u.Ik_ved
+	INNER JOIN Content_UchPl cup ON v.ik_upContent=cup.ik_upContent 
+	INNER JOIN dbo.sv_disc sd ON cup.ik_disc_uch_plan = sd.ik_disc_uch_plan
+	INNER JOIN Vid_exam ve ON v.ik_vid_exam=ve.ik_vid_exam
+	INNER JOIN (SELECT Cosenca, CONVERT(VARCHAR(1),Cosenca)+' ('
+		+RTRIM(ShortName)+')' as Otsenca, Name_osenca FROM Osenca) o ON u.Cosenca=o.Cosenca
+	left join dbo.UspevDocument on u.ik_zach=UspevDocument.ik_zach AND v.ik_upContent=UspevDocument.ik_upContent
+	left join dbo.UspevKPTheme on UspevDocument.idUspevDocs=UspevKPTheme.idUspevDocs	
+	Where (ik_grup = @ik_group) and (cup.ik_upContent = @ik_upContent)
+order by StudName
+GO
+----------------------------------------------------------------------------------------------------------------------------

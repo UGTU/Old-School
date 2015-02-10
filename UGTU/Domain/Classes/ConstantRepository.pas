@@ -13,16 +13,16 @@ const
   key_ModelPlan = 1;
   vid_exam = 6;
   GOS_EXAM = 56;
-
-  //служебные функции
-  function GetMonthR(month:integer): string;
-  function GetKursP(kurs:integer): string;
-
   //ErrorCode
   NoError = 0;
   ExistError = 1;
   FailError = 2;
   StatusError = 3;
+
+  //служебные функции
+  function GetMonthR(month:integer): string;
+  function GetKursP(kurs:integer): string;
+
 
 implementation
 

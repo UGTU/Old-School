@@ -36,16 +36,21 @@ type
     FVedIK: integer;
     FStudZachIK: integer;
     FIsClosed: boolean;
+    FMark: integer;
+    FKPTema: string;
+    FTeacher: string;
     procedure SetStudZachIK(const Value: integer);
     procedure SetVed(const Value: integer);
   public
 
 
     procedure LoadNapr;
-    property CloseNapr: boolean read FCloseNapr write FCloseNapr;
     property StudZachIK: integer write SetStudZachIK;
     property VedIK: integer write SetVed;
     property IsClosed: boolean write FIsClosed;
+    property Mark: integer write FMark;
+    property Teacher: string write FTeacher;
+    property KPTema: string write FKPTema;
   end;
 
 var
@@ -82,26 +87,34 @@ end;
 procedure TftmNaprclose.FormShow(Sender: TObject);
 begin
   dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
-  if FVedIK<>0 then dbcbeNapr.KeyValue := FVedIK  //если во фрейм было передано конкретное направление
-  else
-  begin
-    {dmUspevaemost.adodsNapravl.Active := false;
-    dmUspevaemost.adodsNapravl.CommandText :=
-      'select * from Napr_View where ik_zach=''' + inttostr(FStudZachIK) + '''';
-    dmUspevaemost.adodsNapravl.Active := true;}
-  end;
+  if FVedIK<>0 then dbcbeNapr.KeyValue := FVedIK;  //если во фрейм было передано конкретное направление
+
   try
     dmUspevaemost.adodsmark.Active := true;
     dbdteExam.Value := date;
-  finally
+    dbcbeMark.KeyValue := FMark;
 
+  except
+    on E: EOleException do
+    begin
+      raise EApplicationException.Create
+        ('Невозможно загрузить список оценок.',
+        EOleException.Create(E.Message, E.ErrorCode, '', '', 0));
+    end;
   end;
   try
     dmUspevaemost.adospPrepodVed.Active := false;
     dmUspevaemost.adospPrepodVed.Active := true;
-  finally
-
+    if FTeacher<>'' then dbcbeEx.KeyValue := FTeacher;  //если уже был установлен преподаватель
+  except
+    on E: EOleException do
+    begin
+      raise EApplicationException.Create
+        ('Невозможно загрузить список преподавателей.',
+        EOleException.Create(E.Message, E.ErrorCode, '', '', 0));
+    end;
   end;
+  eTema.Text := FKPTema;
 end;
 
 procedure TftmNaprclose.LoadNapr;

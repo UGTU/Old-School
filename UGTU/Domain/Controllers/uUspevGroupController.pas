@@ -15,9 +15,7 @@ uses
   ExcelXP, ComObj, DBGrids, uDMUspevaemost, ComCtrls, DateUtils,
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
   D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,
-  Vedomost2014,Assemly_Report2014,Spravka,SpravkaReport2014,Spravka2014;
- type
-  D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,Vedomost2014,Assemly_Report2014,
+  Vedomost2014,Assemly_Report2014,Spravka,SpravkaReport2014,Spravka2014,
   CommandController;
 
 type
@@ -1685,8 +1683,6 @@ begin
   finally
     tempStoredProc.Free;
   end;
-    //if tempStoredProc<>nil then
-    //  tempStoredProc.Free;
 end;
 
 //Обновляет допуски в ведомости (шапку)
@@ -2535,6 +2531,7 @@ end;
 
 function TUspevGroupController.GetNapravDS: TADODataSet;
 begin
+
   result := FNapravController.DataSet;
 end;
 

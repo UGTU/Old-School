@@ -318,7 +318,7 @@ begin
 
   ftmNaprClose:=TftmNaprClose.Create(self);
   ftmNaprClose.Tag:=dmUspevaemost.adospGetAllNaprForFac.FieldValues['ik_zach'];
-  ftmNaprClose.CloseNapr:=true;
+  //ftmNaprClose.CloseNapr:=true;
   ftmNaprclose.FormShow(Sender);
   ftmNaprclose.dbcbeNapr.KeyValue:=ik_ved;
   ftmNaprclose.dbcbeNapr.Enabled:=false;

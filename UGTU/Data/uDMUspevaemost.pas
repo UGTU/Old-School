@@ -249,12 +249,12 @@ type
     adospPredmStudcName_disc: TStringField;
     adospGetAllVedNaprForGrup: TADOStoredProc;
     adospGetAllVedNaprForGrupName: TStringField;
-    adospGetAllVedNaprForGrupiK_disc: TAutoIncField;
-    adospGetAllVedNaprForGrupiK_vid_zanyat: TIntegerField;
     adospGetAllVedNaprForGrupcName_disc: TStringField;
     adospVedTopiHour_gos: TIntegerField;
     adodsNapravlItab_n: TStringField;
     adospSelVedGroupi_balls: TIntegerField;
+    adospGetAllVedNaprForGrupik_upContent: TIntegerField;
+    adospGetAllVedNaprForGrupik_Vid_Zanyat: TIntegerField;
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);
     procedure adospSelVedKPCalcFields(DataSet: TDataSet);
     procedure adodsSelBRSExamGroupCalcFields(DataSet: TDataSet);

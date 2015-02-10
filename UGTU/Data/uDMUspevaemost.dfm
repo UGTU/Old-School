@@ -1518,25 +1518,11 @@ object dmUspevaemost: TdmUspevaemost
         Value = 438
       end
       item
-        Name = '@n_sem'
+        Name = '@ik_upContent'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = 6
-      end
-      item
-        Name = '@ik_disc'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = 3
-      end
-      item
-        Name = '@iK_vid_zanyat'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = 7
+        Value = 0
       end>
     Left = 293
     Top = 623
@@ -2634,16 +2620,15 @@ object dmUspevaemost: TdmUspevaemost
       ReadOnly = True
       Size = 552
     end
-    object adospGetAllVedNaprForGrupiK_disc: TAutoIncField
-      FieldName = 'iK_disc'
-      ReadOnly = True
-    end
-    object adospGetAllVedNaprForGrupiK_vid_zanyat: TIntegerField
-      FieldName = 'iK_vid_zanyat'
-    end
     object adospGetAllVedNaprForGrupcName_disc: TStringField
       FieldName = 'cName_disc'
       Size = 500
+    end
+    object adospGetAllVedNaprForGrupik_upContent: TIntegerField
+      FieldName = 'ik_upContent'
+    end
+    object adospGetAllVedNaprForGrupik_Vid_Zanyat: TIntegerField
+      FieldName = 'ik_Vid_Zanyat'
     end
   end
 end

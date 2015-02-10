@@ -11,11 +11,12 @@ select * from Doc_stud where nCode = 15966
 
 select * from Zach where ncode in (69199)
 select * from Zach where Ik_zach in (14369)
+select * from Zach where Nn_zach='121358'
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (29157)
+and ik_zach in (19914,27577)
 
 select * from StudGrup where ik_pricZach=13
 

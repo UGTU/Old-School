@@ -1338,17 +1338,9 @@ procedure TfmGroup.dbcbNaprChange(Sender: TObject);
 begin
   inherited;
 
-  // actCloseNapr.Enabled := false;
-  // actPrintNapr.Enabled := false;
-
   if (dbcbNapr.KeyValue = Null) or (dbcbNapr.Text = '') then
     Exit;
 
-  ikPredm := dmUspevaemost.adospGetAllVedNaprForGrup.FieldValues['ik_disc'];
-  ikVidZan := dmUspevaemost.adospGetAllVedNaprForGrup.FieldValues
-    ['ik_Vid_Zanyat'];
-
-  // dmUspevaemost.adospGetAllVedNaprForDisc.Fields.Clear;
   dmUspevaemost.adospGetAllVedNaprForDisc.Active := false;
   with dmUspevaemost.adospGetAllVedNaprForDisc.Parameters do
   begin
@@ -1356,18 +1348,13 @@ begin
     // Группа
     AddParameter;
     Items[0].Value := ik;
-    // Номер семестра
+    // ik_upContent
     AddParameter;
-    Items[1].Value := cmbxSemNapr.ItemIndex + 1;
-    // Дисциплина
-    AddParameter;
-    Items[2].Value := ikPredm;
-    // Вид занятий
-    AddParameter;
-    Items[3].Value := ikVidZan;
+    Items[1].Value := dmUspevaemost.adospGetAllVedNaprForGrup.FieldValues['ik_upContent'];
   end;
   dmUspevaemost.adospGetAllVedNaprForDisc.ExecProc;
   dmUspevaemost.adospGetAllVedNaprForDisc.Active := true;
+  TUspevGroupController.Instance.SetContentNaprav(dmUspevaemost.adospGetAllVedNaprForGrup.FieldValues['ik_upContent']);
 
   dbgrdNapr.Refresh;
   RefreshView;
@@ -2468,14 +2455,14 @@ begin
   end;
 
   ftmNaprClose := TftmNaprClose.Create(self);
-  ftmNaprClose.CloseNapr := false;
-  ftmNaprClose.Tag := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
+  ftmNaprClose.StudZachIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
     ['ik_zach'];
-  ftmNaprClose.FormShow(Sender);
-  ftmNaprClose.dbcbeNapr.KeyValue := ik_ved;
+  ftmNaprClose.VedIK := ik_ved;
   ftmNaprClose.dbcbeNapr.Enabled := false;
-  ftmNaprClose.LoadNapr;
-  ftmNaprClose.showmodal;
+  ftmNaprClose.FormShow(Sender);
+
+  //ftmNaprClose.LoadNapr;
+  //ftmNaprClose.showmodal;
   ftmNaprClose.Free;
 
   dmUspevaemost.adospGetAllVedNaprForDisc.Active := false;
@@ -2984,8 +2971,12 @@ begin
   ftmNaprClose.StudZachIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
     ['ik_zach'];
   //ftmNaprClose.CloseNapr := true;
-  ftmNaprClose.FormShow(Sender);
   ftmNaprClose.VedIK := ik_ved;
+  ftmNaprclose.Mark := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['cosenca'];
+  ftmNaprclose.Teacher := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['Itab_n'];
+
+  //ftmNaprClose.FormShow(Sender);
+
   ftmNaprClose.Showmodal;
   //ftmNaprClose.LoadNapr;
  { if ftmNaprClose.showmodal = mrCancel then

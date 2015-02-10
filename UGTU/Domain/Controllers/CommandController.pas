@@ -37,8 +37,6 @@ type
   public
     constructor Create(FVedom: integer); overload;
 
-   { procedure Insert(ikVidExam: integer; DateIn, DateOut: TDateTime; VedNum: string;
-                     bitNapr: boolean);       }
     procedure Update(ikVidExam: integer; VedNum, ikPrepod: string;
       DateExam: TDateTime; bitClose, bitNapr: boolean);
     procedure Delete;
@@ -558,6 +556,7 @@ begin
     CreateParameter('@Itab_n', ftString, pdInput, 50, '');
     CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, 0);
     CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, Date);
+    CreateParameter('@Dd_vyd', ftDateTime, pdInput, 0, Date);
     CreateParameter('@lClose', ftBoolean, pdInput, 0, 0);
     CreateParameter('@lPriznak_napr', ftBoolean, pdInput, 0, 0);
   end;
@@ -571,22 +570,6 @@ begin
     FStor.ExecProc;
   end;
 end;
-
-{procedure TVedCommand.Insert(ikVidExam: integer; DateIn, DateOut: TDateTime;
-  VedNum: string; bitNapr: boolean);
-begin
-  with FStor.Parameters do
-  begin
-    ParamByName('@flag').Value := 1; // редактирование
-    ParamByName('@cNumber_ved').Value := VedNum;
-    ParamByName('@Itab_n').Value := ikPrepod;
-    ParamByName('@Ik_vid_exam').Value := ikVidExam;
-    ParamByName('@Dd_exam').Value := DateExam;
-    ParamByName('@lClose').Value := bitClose;
-    ParamByName('@lPriznak_napr').Value := bitNapr;
-    FStor.ExecProc;
-  end;
-end;}
 
 procedure TVedCommand.Update(ikVidExam: integer; VedNum, ikPrepod: string;
   DateExam: TDateTime; bitClose, bitNapr: boolean);
@@ -798,7 +781,6 @@ begin
     CreateParameter('@cosenca', ftInteger, pdInput, 0, 0);
     CreateParameter('@Itab_n', ftString, pdInput, 50, '');
     CreateParameter('@KPTema', ftString, pdInput, 2000, '');
-    //CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 0, 1);
   end;
 
 end;
