@@ -1,20 +1,20 @@
 inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
-  Width = 772
-  ExplicitWidth = 772
+  Width = 858
+  ExplicitWidth = 858
   inherited Panel1: TPanel
-    Width = 772
+    Width = 858
     ExplicitWidth = 772
   end
   inherited pnlSave: TPanel
-    Width = 772
+    Width = 858
     ExplicitWidth = 772
     inherited bbSave: TBitBtn
-      Left = 603
+      Left = 689
       Action = actSaveDipl
       ExplicitLeft = 603
     end
     inherited bbUndo: TBitBtn
-      Left = 435
+      Left = 521
       Action = actCancelDiplUpd
       ExplicitLeft = 435
     end
@@ -22,7 +22,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
   object pcOtdKadr: TPageControl
     Left = 0
     Top = 0
-    Width = 772
+    Width = 858
     Height = 474
     ActivePage = tshDiplom
     Align = alClient
@@ -30,16 +30,14 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     TabOrder = 2
     OnChange = pcOtdKadrChange
     OnChanging = pcOtdKadrChanging
+    ExplicitWidth = 772
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 764
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
-        Width = 764
+        Width = 850
         Height = 412
         Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
         Align = alClient
@@ -97,6 +95,24 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             OnUpdateData = dbgStudListColumns2UpdateData
           end
           item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DiplSeries'
+            Footers = <>
+            Title.Caption = #1057#1077#1088#1080#1103' '#1076#1080#1087#1083#1086#1084#1072
+            Width = 110
+            OnUpdateData = dbgStudListColumns1UpdateData
+          end
+          item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'DiplNumber'
+            Footers = <>
+            Title.Caption = #1053#1086#1084#1077#1088' '#1076#1080#1087#1083#1086#1084#1072
+            Width = 110
+            OnUpdateData = dbgStudListColumns1UpdateData
+          end
+          item
             Checkboxes = True
             DynProps = <>
             EditButtons = <>
@@ -111,7 +127,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       object ToolBar1: TToolBar
         Left = 0
         Top = 0
-        Width = 764
+        Width = 850
         Height = 31
         ButtonWidth = 24
         Caption = 'ToolBar1'
@@ -119,6 +135,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
+        ExplicitWidth = 764
         object ToolButton2: TToolButton
           Left = 0
           Top = 0
@@ -201,14 +218,11 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 764
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
-        Width = 764
+        Width = 850
         Height = 412
         Hint = #1057#1087#1080#1089#1086#1082' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1077#1081' '#1043#1040#1050
         Align = alClient
@@ -256,7 +270,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       object ToolBar3: TToolBar
         Left = 0
         Top = 0
-        Width = 764
+        Width = 850
         Height = 31
         ButtonWidth = 32
         Caption = 'ToolBar1'
@@ -264,6 +278,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
+        ExplicitWidth = 764
         object DBNavigator1: TDBNavigator
           Left = 0
           Top = 0
@@ -294,15 +309,8 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Top = 0
           Action = actDelGakMember
         end
-        object ToolButton4: TToolButton
-          Left = 217
-          Top = 0
-          Width = 8
-          Caption = 'ToolButton4'
-          Style = tbsSeparator
-        end
         object dbcmbxYear: TDBLookupComboboxEh
-          Left = 225
+          Left = 217
           Top = 0
           Width = 155
           Height = 22
@@ -316,19 +324,23 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Visible = True
           OnChange = dbcmbxYearChange
         end
+        object ToolButton4: TToolButton
+          Left = 372
+          Top = 0
+          Width = 8
+          Caption = 'ToolButton4'
+          Style = tbsSeparator
+        end
       end
     end
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 764
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
-        Width = 764
+        Width = 850
         Height = 443
         Hint = #1044#1072#1085#1085#1099#1077' '#1086' '#1082#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
         Align = alClient
