@@ -66,6 +66,8 @@ type
 
 
   // ------------------------------------ СЕЛЕКТОРЫ-----------------------------
+  TStudentCo
+
   TUspevController = class(TBaseSelectController)
   private
     FVedomost: integer;
@@ -75,7 +77,6 @@ type
     procedure Save;
     property Vedomost: integer write SetVedomost;
     property DataSet: TADODataSet read FDataSet;
-
   end;
 
   {управление планами}
