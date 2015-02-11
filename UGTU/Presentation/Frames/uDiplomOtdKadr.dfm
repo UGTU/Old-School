@@ -1,20 +1,24 @@
 inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
-  Width = 858
-  ExplicitWidth = 858
+  Width = 871
+  Height = 524
+  ExplicitWidth = 871
+  ExplicitHeight = 524
   inherited Panel1: TPanel
-    Width = 858
+    Width = 871
+    Height = 487
     ExplicitWidth = 772
   end
   inherited pnlSave: TPanel
-    Width = 858
+    Top = 487
+    Width = 871
     ExplicitWidth = 772
     inherited bbSave: TBitBtn
-      Left = 689
+      Left = 702
       Action = actSaveDipl
       ExplicitLeft = 603
     end
     inherited bbUndo: TBitBtn
-      Left = 521
+      Left = 534
       Action = actCancelDiplUpd
       ExplicitLeft = 435
     end
@@ -22,8 +26,8 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
   object pcOtdKadr: TPageControl
     Left = 0
     Top = 0
-    Width = 858
-    Height = 474
+    Width = 871
+    Height = 487
     ActivePage = tshDiplom
     Align = alClient
     Style = tsFlatButtons
@@ -31,14 +35,16 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     OnChange = pcOtdKadrChange
     OnChanging = pcOtdKadrChanging
     ExplicitWidth = 772
+    ExplicitHeight = 474
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
       ExplicitWidth = 764
+      ExplicitHeight = 443
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
-        Width = 850
-        Height = 412
+        Width = 863
+        Height = 425
         Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
         Align = alClient
         AutoFitColWidths = True
@@ -127,7 +133,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       object ToolBar1: TToolBar
         Left = 0
         Top = 0
-        Width = 850
+        Width = 863
         Height = 31
         ButtonWidth = 24
         Caption = 'ToolBar1'
@@ -219,11 +225,12 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
       ExplicitWidth = 764
+      ExplicitHeight = 443
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
-        Width = 850
-        Height = 412
+        Width = 863
+        Height = 425
         Hint = #1057#1087#1080#1089#1086#1082' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1077#1081' '#1043#1040#1050
         Align = alClient
         AutoFitColWidths = True
@@ -270,7 +277,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       object ToolBar3: TToolBar
         Left = 0
         Top = 0
-        Width = 850
+        Width = 863
         Height = 31
         ButtonWidth = 32
         Caption = 'ToolBar1'
@@ -337,11 +344,12 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
       ExplicitWidth = 764
+      ExplicitHeight = 443
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
-        Width = 850
-        Height = 443
+        Width = 863
+        Height = 456
         Hint = #1044#1072#1085#1085#1099#1077' '#1086' '#1082#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
         Align = alClient
         AutoFitColWidths = True
