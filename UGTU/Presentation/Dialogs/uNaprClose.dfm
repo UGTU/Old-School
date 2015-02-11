@@ -164,9 +164,9 @@ inherited ftmNaprclose: TftmNaprclose
     OnChange = dbcbeNaprChange
   end
   object dbcbeMark: TDBLookupComboboxEh [13]
-    Left = 8
+    Left = 13
     Top = 103
-    Width = 170
+    Width = 165
     Height = 19
     DataField = ''
     EditButtons = <>
