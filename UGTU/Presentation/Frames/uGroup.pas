@@ -2966,11 +2966,9 @@ begin
     Exit;
   end;
 
-
   ftmNaprClose := TftmNaprClose.Create(self);
   ftmNaprClose.StudZachIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
     ['ik_zach'];
-  //ftmNaprClose.CloseNapr := true;
   ftmNaprClose.VedIK := ik_ved;
   ftmNaprclose.Mark := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['cosenca'];
   ftmNaprclose.Teacher := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['Itab_n'];
