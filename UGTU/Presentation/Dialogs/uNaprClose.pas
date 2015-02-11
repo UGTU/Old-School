@@ -72,7 +72,7 @@ procedure TftmNaprclose.FormShow(Sender: TObject);
 begin
 try
 dmUspevaemost.adodsNapravl.Active:=false;
-dmUspevaemost.adodsNapravl.CommandText:='select * from Napr_View where ik_zach='''+inttostr(Tag)+'''';
+dmUspevaemost.adodsNapravl.CommandText:='select * from Napr_View where ik_zach='''+inttostr(Tag)+''''+' order by Outcolumn';
 dmUspevaemost.adodsNapravl.Active:=true;
 dmUspevaemost.adodsmark.Active:=true;
 if not CloseNapr then dbdteExam.Value:=Date;
