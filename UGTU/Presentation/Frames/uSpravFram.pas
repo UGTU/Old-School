@@ -377,6 +377,13 @@ var i,j,k:integer;
 begin
    try  //сортируем справочник
 	   tSpravList.Locate('SpravName', cbSprav.Text,[loPartialKey]);
+
+     tSprav.SQL.Clear;
+	   tSprav.SQL.Add('SELECT * FROM '+tSpravList.FieldByName('cSprav').AsString);
+	   keyCol:=0;
+	   tabkeyCol:=0;
+	   tSprav.Open;
+
      i:=-1;
 	   if ((tSpravList.FieldByName('CTableVn').Value<>null) and
 		   (tSpravList.FieldByName('CPrKey').Value<>null)) then
@@ -472,11 +479,7 @@ begin
 	   Connection.Open;
 	   tSpravList.Open;
 	   tSpravList.Locate('SpravName',cbSprav.text,[loPartialKey]);
-	   tSprav.SQL.Clear;
-	   tSprav.SQL.Add('SELECT * FROM '+tSpravList.FieldByName('cSprav').AsString);
-	   keyCol:=0;
-	   tabkeyCol:=0;
-	   tSprav.Open;
+
 	   if (frmSprav<>nil) then
 		  frmSprav.predSprav:=cbSprav.text;
 	   DoList;

@@ -1422,9 +1422,13 @@ begin
   DataSet.Close;
   case discTypeIK of
     1:
+    begin
+      if semestrStr='' then semestrStr := 'iK_vid_zanyat=-1';
+
       (DataSet as TADODataSet).CommandText :=
         'SELECT * FROM Uch_plan_columns WHERE (ik_type_disc = 1) and (((i_type_column IN (3, 4, 5, 6)) or ((i_type_column = 11) and ('
         + semestrStr + ')))) ORDER BY ik_column';
+    end
   else
     (DataSet as TADODataSet).CommandText :=
       'SELECT * FROM Uch_plan_columns WHERE ik_type_disc = ' +
