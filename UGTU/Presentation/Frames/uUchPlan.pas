@@ -233,15 +233,7 @@ begin
     SetVisualProperty;  //визуальные настройки
     cbApproved.Visible := true;
     dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
-    //if (dbcbYear.KeyValue = NULL) then dbcbFormEdKeyValueChanged(nil);
-    
-   { if (VidGos<>FGOS3) then
-      dbcbSpclz.KeyValue:= TUchPlanController.Instance.getUchPlanSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true)
-    else }
-   //если нет требуемого фгоса, то не грузим профили
- { if ((VidGos<>FGOS3)or(dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value<>NULL)) then
-    if dbcbSpclz.KeyValue = NULL then
-  }
+
   if not IsSetPlan then
     frmMain.StatusBar1.Panels[1].Text:= 'Учебный план: <не выбран>';
 end;
@@ -266,39 +258,22 @@ begin
   //----------------------------------------------------------------------------
 
   if (VidGos<>FGOS3) then
-  begin
     TUchPlanController.Instance.getAllSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, false);
 
-    //dbcbSpclz.KeyValue:= TUchPlanController.Instance.getUchPlanSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true)
-  end;
   TUchPlanController.Instance.getAllYears(@dbcbYear.ListSource.DataSet, false);
   TUchPlanController.Instance.getAllFormEd(@dbcbFormEd.ListSource.DataSet, false);
 
-
-  //dbcbGroup.KeyValue:=
   TUchPlanController.Instance.getCurrentGroups(@dbcbGroup.ListSource.DataSet, fSpecFacIK, false,false);
   dbcbGroup.ListSource.DataSet.Filter := 'isCurrent	= 1';
   dbcbGroup.ListSource.DataSet.Filtered := true;
 
- { if fGroupIK<>0 then SetGroupUchPlan(fGroupIK)
-  else }dbcbGroup.KeyValue := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
- // fGroupIK := dbcbGroup.KeyValue;
+  dbcbGroup.KeyValue := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
 
-  //если нет требуемого фгоса, то не грузим профили
-  // dsGetFgosBySpec.DataSet:=TFgosController.Instance.getFgosBySpec(fSpecIK);
-
-
-
-  {if ((VidGos<>FGOS3)or(dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value<>NULL)) then
-    if dbcbSpclz.KeyValue = NULL then    
-    else
-      dbcbFormEd.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEd.ListSource.DataSet, fSpecIK, 0, VidGos, true);
-      }
 end;
 
 procedure TfmUchPlan.ActionRemUchPlanUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= ({(dbcbSpclz.KeyValue <> NULL) and} (dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL));
+  (Sender as TAction).Enabled:= ((dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL));
 end;
 
 procedure TfmUchPlan.ActionRemDiscUpdate(Sender: TObject);
@@ -323,7 +298,7 @@ begin
   frmUchPlanAddDisc.Tag:= 1;
   frmUchPlanAddDisc.IK:= -1;
   frmUchPlanAddDisc.TypePlan := fTypePlan;
-  frmUchPlanAddDisc.iUchPlan:= FIKPlan;//dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
+  frmUchPlanAddDisc.iUchPlan:= FIKPlan;
   frmUchPlanAddDisc.VidGos:=VidGos;
   frmUchPlanAddDisc.SpecIK := fSpecIK;
   frmUchPlanAddDisc.nameSpclz := nameSpclz;
@@ -536,7 +511,7 @@ end;
 
 procedure TfmUchPlan.SetDiscType(discType: Integer);
 begin
-  if (discType = 2) or (discType = 3)or(discType = 12) then
+  if (discType = typeGosExam) or (discType = typeDiplom)or(discType = typeNIR)or(discType = typeGosExam) then
   begin
     Label12.Caption:= 'Количество недель:';
     Label17.Left:= 112;
@@ -971,7 +946,9 @@ begin
   TGeneralController.Instance.ReleaseLockupCB(@dbcbCklDisc);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbYear);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbFormEd);
-  if VidGos>FGOS2 then TGeneralController.Instance.ReleaseLockupCB(@dbcbSpclz);
+
+ { if VidGos<>FGOS3 then
+    TGeneralController.Instance.ReleaseLockupCB(@dbcbSpclz);}
   TGeneralController.Instance.ReleaseLockupCB(@dbcbKaf);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbPdgrpDisc);
   TGeneralController.Instance.ReleaseLockupCB(@dbcbGroup);

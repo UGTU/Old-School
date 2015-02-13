@@ -181,7 +181,7 @@ procedure TGeneralController.ReleaseLockupCB(cmp: PDBLookupComboboxEh);
 begin
   if (cmp^ <> nil) then
   begin
-    cmp^.KeyValue:= NULL;
+    //cmp^.KeyValue:= NULL;
     if (cmp^.ListSource <> nil) then
     begin
       if cmp^.ListSource.DataSet <> nil then

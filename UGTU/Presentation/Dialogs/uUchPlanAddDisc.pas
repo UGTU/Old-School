@@ -921,7 +921,7 @@ end;
 
 procedure TfrmUchPlanAddDisc.SetDiscType(discType: integer);
 begin
-  if (discType = 2) or (discType = 3)or(discType = 12) then
+  if (discType = typeGosExam) or (discType = typeDiplom)or(discType = typeNIR)or(discType = typeGosExam) then
   begin
     Label7.Caption:= 'Количество недель:';
     //Label7.Left:= Edit5.Left - 108;

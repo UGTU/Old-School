@@ -59,12 +59,12 @@
     <File Path="Domain\Classes\DateFormat.pas"/>
     <File Path="Domain\Classes\DiscClasses.pas"/>
     <File Path="Domain\Classes\MethodWorkComboboxFilter.pas"/>
+    <File Path="Domain\Classes\Spravka2014.pas"/>
+    <File Path="Domain\Classes\SpravkaHistory2014.pas"/>
+    <File Path="Domain\Classes\SpravkaReport2014.pas"/>
     <File Path="Domain\Classes\uBRSBallCounter.pas"/>
     <File Path="Domain\Classes\Vedomost2014.pas"/>
     <File Path="Domain\Classes\VedomostItem2014.pas"/>
-    <File Path="Domain\Classes\SpravkaHistory2014.pas"/>
-    <File Path="Domain\Classes\Spravka2014.pas"/>
-    <File Path="Domain\Classes\SpravkaReport2014.pas"/>
     <File Path="Domain\Common"/>
     <File Path="Domain\Common\RegularEx.pas"/>
     <File Path="Domain\Controllers"/>

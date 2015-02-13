@@ -14,6 +14,12 @@ const
   vid_exam = 6;
   GOS_EXAM = 56;
 
+  //типы дисциплин
+  typeGosExam = 5;
+  typePract = 2;
+  typeDiplom = 3;
+  typeNIR = 12;
+
   //служебные функции
   function GetMonthR(month:integer): string;
   function GetKursP(kurs:integer): string;
