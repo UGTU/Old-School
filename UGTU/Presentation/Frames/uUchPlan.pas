@@ -55,7 +55,7 @@ type
     Bevel4: TBevel;
     Bevel5: TBevel;
     Label10: TLabel;
-    Label11: TLabel;
+    lblShifr: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label14: TLabel;
@@ -111,7 +111,7 @@ type
     cbBRS: TCheckBox;
     actBRS: TAction;
     Label32: TLabel;
-    Label33: TLabel;
+    lblZachEd: TLabel;
     dsDiscZE: TDataSource;
     dsDiscExceptionZE: TDataSource;
     dsGetFgosBySpec: TDataSource;
@@ -193,13 +193,14 @@ type
     fTypePlan: Integer;
     IsSetPlan: boolean;
     fGroupDataSet: TADODataSet;
-    procedure SetDiscType(discType: Integer);
+    procedure SetDiscTypeVisual(discType: Integer; showName: string);
 
     procedure GetSemesters();
     procedure SetGroupUchPlan(const aGroupIK: Integer);
     procedure SetUchPlan(const aUchPlan: Integer);
     procedure SetUchPlanProperties(const aUchPlan: Integer);
     procedure SetVisualProperty;
+    function GetTimeByType(aEdIzm, aHours: integer): string;
   public
 
     nameSpclz: string; // именование Профиль/Программа/Специализация
@@ -221,7 +222,7 @@ var
 implementation
 
 uses uUchPlanSemLength, uUchPlanAddNew, uUchPlanAddDisc, uMain, uDMFgos,
-  DateFormat, uDM;
+  DateFormat, uDM, ExceptionBase;
 
 {$R *.dfm}
 
@@ -275,10 +276,8 @@ begin
   dbcbGroup.ListSource.DataSet.Filter := 'isCurrent	= 1';
   dbcbGroup.ListSource.DataSet.Filtered := true;
 
-  if Group <> dbcbGroup.ListSource.DataSet.FieldByName('ik_grup')
-    .AsInteger then
-       Group := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup')
-    .AsInteger;
+  if Group <> dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger then
+    Group := dbcbGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
 
 end;
 
@@ -361,8 +360,8 @@ begin
       frmUchPlanAddDisc.Read(fSemesterStr);
       frmUchPlanAddDisc.Edit6.Text :=
         Trim(dsDisc.DataSet.FieldByName('cname_ckl_disc1').AsString);
-      frmUchPlanAddDisc.iHour_gos := dsDisc.DataSet.FieldByName('iHour_gos')
-        .AsInteger;
+      frmUchPlanAddDisc.edtHoursGos.Text := GetTimeByType(dsDisc.DataSet.FieldByName('ik_ed_izm').AsInteger,
+                      dsDisc.DataSet.FieldByName('iHour_gos').AsInteger);
       frmUchPlanAddDisc.iIndivid := dsDisc.DataSet.FieldByName('iIndivid')
         .AsInteger;
       frmUchPlanAddDisc.dbcbDisc.KeyValue := dsDisc.DataSet.FieldByName
@@ -560,31 +559,23 @@ begin
     sgDisc.Height := 87;
 end;
 
-procedure TfmUchPlan.SetDiscType(discType: Integer);
+procedure TfmUchPlan.SetDiscTypeVisual(discType: Integer; showName: string);
 begin
-  if (discType = typeGosExam) or (discType = typeDiplom) or (discType = typeNIR)
-    or (discType = typeGosExam) then
-  begin
-    Label12.Caption := 'Количество недель:';
-    Label17.Left := 112;
-  end
-  else
-  begin
-    Label12.Caption := 'Общее количество часов:';
-    Label17.Left := 142;
-  end;
-  Label13.Enabled := discType = 1;
-  Label18.Enabled := discType = 1;
-  Label14.Enabled := discType = 1;
-  Label15.Enabled := discType = 1;
-  Label21.Enabled := discType = 1;
-  Label22.Enabled := discType = 1;
-  Label25.Enabled := discType = 1;
-  Label26.Enabled := discType = 1;
-  Label19.Enabled := discType = 1;
-  Label23.Enabled := discType = 1;
-  Label24.Enabled := discType = 1;
-  Label20.Enabled := discType = 1;
+  Label12.Caption := 'Количество ' + showName + ' :';
+  Label17.Left := 112;
+
+  Label13.Enabled := discType = typeTypicalDisc;
+  Label18.Enabled := discType = typeTypicalDisc;
+  Label14.Enabled := discType = typeTypicalDisc;
+  Label15.Enabled := discType = typeTypicalDisc;
+  Label21.Enabled := discType = typeTypicalDisc;
+  Label22.Enabled := discType = typeTypicalDisc;
+  Label25.Enabled := discType = typeTypicalDisc;
+  Label26.Enabled := discType = typeTypicalDisc;
+  Label19.Enabled := discType = typeTypicalDisc;
+  Label23.Enabled := discType = typeTypicalDisc;
+  Label24.Enabled := discType = typeTypicalDisc;
+  Label20.Enabled := discType = typeTypicalDisc;
 end;
 
 procedure TfmUchPlan.SetGroupUchPlan(const aGroupIK: Integer);
@@ -616,42 +607,42 @@ var
   newDate: TDateFormat;
 begin
 
-    FIKPlan := aUchPlan;
-    IsSetPlan := true;
-    { if (dsSemLength.DataSet <> nil) then
-      begin
-      if dsSemLength.DataSet.Active then dsSemLength.DataSet.Close;
-      tempDS:= dsSemLength.DataSet;
-      dsSemLength.DataSet:= nil;
-      tempDS.Free;         // здесь все ОК, т.к. гребаный Delphi по-тупому работает с указателями
-      end; }
-
-    tempDS := TGeneralController.Instance.GetNewADODataSet(true);
-    tempDS.CommandText := 'Select * from GetUchPlanProperties(' +
-      IntToStr(aUchPlan) + ')';
-    tempDS.Open;
-
-    VidGos := tempDS.FieldByName('VidGos').AsInteger;
-    if VidGos < FGOS3 then
+  FIKPlan := aUchPlan;
+  IsSetPlan := true;
+  { if (dsSemLength.DataSet <> nil) then
     begin
-      dbcbSpclz.KeyValue := tempDS.FieldByName('ik_spclz').AsInteger;
-      frmMain.StatusBar1.Panels[1].Text := frmMain.StatusBar1.Panels[1].Text +
-        tempDS.FieldByName('cName_spclz_short').AsString + ', ';
-    end;
-    dbcbFormEd.KeyValue := tempDS.FieldByName('ik_form_ed').AsInteger;
-    if aUchPlan <> 0 then
-      dtpDateUtv.Date := vDateFormat.DecodeDate
-        (tempDS.FieldByName('date_utv').AsString)
-    else
-      dtpDateUtv.Date := Now;
-    dbcbYear.KeyValue := tempDS.FieldByName('ik_year').AsInteger;
-    cbApproved.Checked := tempDS.FieldByName('IsChecked').AsBoolean;
-    tempDS.Close;
-    tempDS.Free;
+    if dsSemLength.DataSet.Active then dsSemLength.DataSet.Close;
+    tempDS:= dsSemLength.DataSet;
+    dsSemLength.DataSet:= nil;
+    tempDS.Free;         // здесь все ОК, т.к. гребаный Delphi по-тупому работает с указателями
+    end; }
 
-    SetUchPlanProperties(FIKPlan);
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDS.CommandText := 'Select * from GetUchPlanProperties(' +
+    IntToStr(aUchPlan) + ')';
+  tempDS.Open;
 
-    IsSetPlan := false;
+  VidGos := tempDS.FieldByName('VidGos').AsInteger;
+  if VidGos < FGOS3 then
+  begin
+    dbcbSpclz.KeyValue := tempDS.FieldByName('ik_spclz').AsInteger;
+    frmMain.StatusBar1.Panels[1].Text := frmMain.StatusBar1.Panels[1].Text +
+      tempDS.FieldByName('cName_spclz_short').AsString + ', ';
+  end;
+  dbcbFormEd.KeyValue := tempDS.FieldByName('ik_form_ed').AsInteger;
+  if aUchPlan <> 0 then
+    dtpDateUtv.Date := vDateFormat.DecodeDate
+      (tempDS.FieldByName('date_utv').AsString)
+  else
+    dtpDateUtv.Date := Now;
+  dbcbYear.KeyValue := tempDS.FieldByName('ik_year').AsInteger;
+  cbApproved.Checked := tempDS.FieldByName('IsChecked').AsBoolean;
+  tempDS.Close;
+  tempDS.Free;
+
+  SetUchPlanProperties(FIKPlan);
+
+  IsSetPlan := false;
 
 end;
 
@@ -721,7 +712,7 @@ begin
 
   pnlSpclz.Visible := (VidGos = FGOS2);
   // видны ли зачетные единицы
-  Label33.Visible := (VidGos = FGOS3);
+  lblZachEd.Visible := (VidGos = FGOS3);
   Label32.Visible := (VidGos = FGOS3);
   // видны ли компетенции
   Label34.Visible := (VidGos = FGOS3);
@@ -777,12 +768,7 @@ begin
 end;
 
 procedure TfmUchPlan.dbcbGroupKeyValueChanged(Sender: TObject);
-
 begin
-  {if (Sender as TDBLookupComboboxEh).KeyValue <> NULL then
-  begin
-    Group := (Sender as TDBLookupComboboxEh).KeyValue;
-  end; }
   Group := (Sender as TDBLookupComboboxEh).KeyValue;
 end;
 
@@ -841,132 +827,109 @@ end;
 
 procedure TfmUchPlan.dsDiscDataChange(Sender: TObject; Field: TField);
 var
-  i, lect, lab, pract: Integer;
+  i, lect, lab, pract, kol_rec: Integer;
+  lTypeDisc, lGosID, lHour_gos, lDiscUP, lDiscIK, lZnachZE, lIndiv,
+    lEdIK: Integer;
+  lShowEd: string;
   slColumnKafedra, slColumnValues: TStringList;
 begin
-  if (self.Connection <> nil) then
-    if dsDisc.DataSet <> nil then
-      if dsDisc.DataSet.Active then
-        if (dsDisc.DataSet.RecordCount > 0) then
+  try
+    kol_rec := dsDisc.DataSet.RecordCount;
+    Panel6.Visible := true;
+    ScrollBox2Resize(nil);
+
+    // загруженные данные по дисциплине
+    lTypeDisc := dsDisc.DataSet.FieldByName('ik_type_disc').AsInteger;
+    lHour_gos := IfNull(dsDisc.DataSet.FieldByName('iHour_gos').Value, 0);
+    lDiscUP := dsDisc.DataSet.FieldByName('ik_disc_uch_plan').AsInteger; // дисциплина учебного плана
+    lDiscIK := dsDisc.DataSet.FieldByName('ik_disc').AsInteger; // дисциплина
+    lGosID := IfNull(dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value, 0);
+    lIndiv := dsDisc.DataSet.FieldByName('iIndivid').AsInteger;
+    lEdIK := dsDisc.DataSet.FieldByName('ik_ed_izm').AsInteger;
+    lShowEd := dsDisc.DataSet.FieldByName('ShowToUser').AsString;
+
+    if lTypeDisc <> fCurrentDiscType then
+    begin
+      fCurrentDiscType := lTypeDisc;
+      GetSemesters();
+    end;
+
+    lblShifr.Caption := IfNull(dsDisc.DataSet.FieldByName('cname_ckl_disc1').Value, '<не указано>');
+    Label17.Caption := GetTimeByType(lEdIK, lHour_gos);
+    TGeneralController.Instance.SetCaptionDots(@Label10,       //если длинная дисциплина, то сократить название
+      dsDisc.DataSet.FieldByName('cName_disc').AsString, 100);
+
+    slColumnKafedra := TStringList.Create;
+    slColumnValues := TStringList.Create;
+    try
+      TUchPlanController.Instance.getColumnsValues  // выгрузить content дисциплины
+        (lDiscUP, lect, lab, pract, slColumnValues, @slColumnKafedra, false);
+
+      // вывод зачетных единиц (физ-ра: 1 ЗЕ = 200 часов) для ФГОС 3 поколения
+      if (VidGos = FGOS3) and (lGosID <> 0) then
+      begin
+        Label35.Caption := TUchPlanController.Instance.GetCompetences(lDiscUP);  // вывести компетенции
+
+        if (lHour_gos = 0) then lblZachEd.Caption := '0'
+        else
         begin
-          Panel6.Visible := true;
-          ScrollBox2Resize(nil);
-          if dsDisc.DataSet.FieldByName('ik_type_disc').AsInteger <> fCurrentDiscType
-          then
-          begin
-            fCurrentDiscType := dsDisc.DataSet.FieldByName('ik_type_disc')
-              .AsInteger;
-            GetSemesters();
-          end;
+          dsDiscZE.DataSet := TUchPlanController.Instance.getDiscZE(lGosID);    // получить значение З.Е.
+          lZnachZE := dsDiscZE.DataSet.FieldByName('znach_ZE').AsInteger;
 
-          if (dsDisc.DataSet.FieldByName('cname_ckl_disc1').Value <> NULL) then
-            Label11.Caption := dsDisc.DataSet.FieldByName
-              ('cname_ckl_disc1').AsString
+          if lDiscIK = FISCULTURA then lblZachEd.Caption := IntToStr(FISCULTURA_ZE)
           else
-            Label11.Caption := '<не указано>';
-          TGeneralController.Instance.SetCaptionDots(@Label10,
-            dsDisc.DataSet.FieldByName('cName_disc').AsString, 100);
-
-          slColumnKafedra := TStringList.Create;
-          slColumnValues := TStringList.Create;
-          try
-            TUchPlanController.Instance.getColumnsValues
-              (dsDisc.DataSet.FieldByName('ik_disc_uch_plan').AsInteger, lect,
-              lab, pract, slColumnValues, @slColumnKafedra, false);
-            if (dsDisc.DataSet.FieldByName('iHour_gos').Value <> NULL) then
-              Label17.Caption := dsDisc.DataSet.FieldByName
-                ('iHour_gos').AsString
-            else
-              Label17.Caption := '0';
-
-            // вывод зачетных единиц (физ-ра: 1 ЗЕ = 200 часов) для ФГОС 3 поколения
-
-            if (flagFgos) and (dsGetFgosBySpec.DataSet.FieldByName('IDGos')
-              .Value <> NULL) then
-            begin
-              if (dsDisc.DataSet.FieldByName('iHour_gos').Value <> NULL) then
-              begin
-
-                dsDiscZE.DataSet := TUchPlanController.Instance.getDiscZE
-                  (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value);
-                dsDiscExceptionZE.DataSet :=
-                  TUchPlanController.Instance.getDiscExceptionsZE
-                  (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value,
-                  dsDisc.DataSet.FieldByName('ik_disc').Value);
-                if (dsDiscExceptionZE.DataSet.RecordCount = 0) then
-                  if dsDisc.DataSet.FieldByName('ik_disc').AsInteger = FISCULTURA
-                  then
-                    Label33.Caption := '2'
-                  else
-                  begin
-                    if (dsDisc.DataSet.FieldByName('ik_type_disc')
-                      .AsInteger = 2) or
-                      (dsDisc.DataSet.FieldByName('ik_type_disc').AsInteger = 3)
-                      or (dsDisc.DataSet.FieldByName('ik_type_disc')
-                      .AsInteger = 12) then
-                      Label33.Caption :=
-                        IntToStr(round(dsDisc.DataSet.FieldByName('iHour_gos')
-                        .AsInteger * 1.5))
-                    else
-                      Label33.Caption :=
-                        IntToStr(round(dsDisc.DataSet.FieldByName('iHour_gos')
-                        .AsInteger / dsDiscZE.DataSet.FieldByName('znach_ZE')
-                        .AsInteger))
-                  end
-                else
-                  Label33.Caption :=
-                    IntToStr(round(dsDisc.DataSet.FieldByName('iHour_gos')
-                    .AsInteger / dsDiscExceptionZE.DataSet.FieldByName
-                    ('znach_ZE').AsInteger))
-              end
-              else
-                Label33.Caption := '0';
-            end
-            else
-            begin
-              Label33.Visible := false;
-              Label32.Visible := false;
-            end;
-            // end
-            if VidGos = 2 then
-            begin
-              Label35.Caption := TUchPlanController.Instance.GetCompetences
-                (dsDisc.DataSet.FieldByName('ik_disc_uch_plan').AsInteger);
-            end;
-
-            if fCurrentDiscType = 1 then
-            begin
-              Label18.Caption := IntToStr(lect);
-              Label21.Caption := IntToStr(lab);
-              Label22.Caption := IntToStr(pract);
-              Label26.Caption := IntToStr(pract + lab + lect);
-              Label23.Caption := IntToStr(dsDisc.DataSet.FieldByName('iIndivid')
-                .AsInteger);
-              Label24.Caption :=
-                IntToStr(dsDisc.DataSet.FieldByName('iHour_gos').AsInteger -
-                (pract + lab + lect) - dsDisc.DataSet.FieldByName('iIndivid')
-                .AsInteger);
-            end
-            else
-            begin
-              Label18.Caption := '-';
-              Label21.Caption := '-';
-              Label22.Caption := '-';
-              Label26.Caption := '-';
-              Label23.Caption := '-';
-              Label24.Caption := '-';
-            end;
-            for i := 0 to slColumnValues.Count - 1 do
-            begin
-              sgDisc.Cells[1, i + 1] := slColumnValues[i];
-              sgDisc.Cells[2, i + 1] := slColumnKafedra[i];
-            end;
-            SetDiscType(dsDisc.DataSet.FieldByName('ik_type_disc').AsInteger);
-          finally
-            slColumnValues.Free;
-            slColumnKafedra.Free;
-          end;
+            if lEdIK = Days then lblZachEd.Caption := IntToStr(round(lHour_gos / 6 * 1.5))
+              else lblZachEd.Caption := IntToStr(round(lHour_gos / lZnachZE));
         end;
+      end
+      else
+      begin
+        lblZachEd.Visible := false;
+        Label32.Visible := false;
+      end;
+
+      if fCurrentDiscType = typeTypicalDisc then
+      begin
+        Label18.Caption := IntToStr(lect);
+        Label21.Caption := IntToStr(lab);
+        Label22.Caption := IntToStr(pract);
+        Label26.Caption := IntToStr(pract + lab + lect);
+        Label23.Caption := IntToStr(lIndiv);
+        Label24.Caption := IntToStr(lHour_gos - (pract + lab + lect) - lIndiv);
+      end
+      else
+      begin
+        Label18.Caption := '-';
+        Label21.Caption := '-';
+        Label22.Caption := '-';
+        Label26.Caption := '-';
+        Label23.Caption := '-';
+        Label24.Caption := '-';
+      end;
+
+      //вывод содержания дисциплины
+      for i := 0 to slColumnValues.Count - 1 do
+      begin
+        sgDisc.Cells[1, i + 1] := slColumnValues[i];
+        sgDisc.Cells[2, i + 1] := slColumnKafedra[i];
+      end;
+      SetDiscTypeVisual(fCurrentDiscType, lShowEd);
+
+    except  //если загрузить содержание дисциплины не удалось
+      on E: Exception do
+      begin
+        raise EApplicationException.Create
+          ('Произошла ошибка при выборе данных о дисциплине.',
+          Exception.Create(E.Message));
+        exit;
+      end;
+    end;
+
+    slColumnValues.Free;
+    slColumnKafedra.Free;
+  except
+    exit;
+  end;
 end;
 
 procedure TfmUchPlan.dbgDiscKeyDown(Sender: TObject; var Key: Word;
@@ -1001,6 +964,26 @@ begin
     finally
       if Assigned(tempStr) then
         tempStr.Free;
+    end;
+  end;
+end;
+
+function TfmUchPlan.GetTimeByType(aEdIzm, aHours: integer): string;
+var str: string;
+begin
+  case aEdIzm of
+    Hours: Result := IntToStr(aHours);
+    Days: //в днях
+    begin
+      str := '';
+      if aHours>KolDaysInWeek then
+         str := IntToStr(aHours div KolDaysInWeek);
+      if (aHours mod KolDaysInWeek)>0 then
+      begin
+        if str<>'' then str := str + ' ';
+        str := str + IntToStr(aHours mod KolDaysInWeek) + '/'+IntToStr(KolDaysInWeek);
+      end;
+      Result := str;
     end;
   end;
 end;

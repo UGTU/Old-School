@@ -551,6 +551,14 @@ object dm: Tdm
       DisplayWidth = 40
       FieldName = 'cName_spclz_short'
     end
+    object aspGetDiscModelShowToUser: TStringField
+      FieldName = 'ShowToUser'
+      Visible = False
+    end
+    object aspGetDiscModelik_ed_izm: TIntegerField
+      FieldName = 'ik_ed_izm'
+      Visible = False
+    end
   end
   object adsVidNagruzki: TADODataSet
     Connection = DBConnect
@@ -3525,6 +3533,14 @@ object dm: Tdm
     end
     object aspGetDiscWorkik_spclz: TIntegerField
       FieldName = 'ik_spclz'
+      Visible = False
+    end
+    object aspGetDiscWorkik_ed_izm: TIntegerField
+      FieldName = 'ik_ed_izm'
+      Visible = False
+    end
+    object aspGetDiscWorkShowToUser: TStringField
+      FieldName = 'ShowToUser'
       Visible = False
     end
   end

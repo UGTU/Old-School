@@ -271,7 +271,7 @@ inherited fmUchPlan: TfmUchPlan
                   ShowHint = True
                   OnMouseMove = Label10MouseMove
                 end
-                object Label11: TLabel
+                object lblShifr: TLabel
                   Left = 82
                   Top = 60
                   Width = 3
@@ -538,7 +538,7 @@ inherited fmUchPlan: TfmUchPlan
                   Font.Style = []
                   ParentFont = False
                 end
-                object Label33: TLabel
+                object lblZachEd: TLabel
                   Left = 162
                   Top = 116
                   Width = 6
@@ -620,7 +620,7 @@ inherited fmUchPlan: TfmUchPlan
         end
         object dbcbGrpDisc: TDBLookupComboboxEh
           Left = 162
-          Top = 113
+          Top = 112
           Width = 778
           Height = 19
           Anchors = [akLeft, akTop, akRight]
@@ -1047,7 +1047,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

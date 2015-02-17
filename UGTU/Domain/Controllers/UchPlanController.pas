@@ -993,7 +993,7 @@ function TUchPlanController.getAllDisciplines(SourceDataSet: PDataSet;
   isShowFirst: boolean): Variant;
 begin
   Result := TGeneralController.Instance.getDataSetValues(SourceDataSet,
-    'Select discpln.iK_disc, RTRIM(discpln.cName_disc) as name_disc, discpln.ik_type_disc From discpln Order By cName_disc',
+    'Select * From AllDisciplines order By name_disc',
     'iK_disc', isShowFirst, NULL);
 end;
 
@@ -1703,8 +1703,8 @@ begin
       Parameters.ParamByName('@ik_pdgrp_disc').value := PodGroupIK;
       Parameters.ParamByName('@ViborGroup').value := GroupViborNum;
       if SpclzIK = 0 then
-        Parameters.ParamByName('@ik_spclz').value := NULL;
-      Parameters.ParamByName('@ik_spclz').value := SpclzIK;
+        Parameters.ParamByName('@ik_spclz').value := NULL
+      else Parameters.ParamByName('@ik_spclz').value := SpclzIK;
       ExecProc;
       DiscInUchPlanIK := Parameters.ParamByName('@RETURN_VALUE').value;
     end;

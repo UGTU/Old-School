@@ -56,7 +56,7 @@ type
     Bevel3: TBevel;
     Bevel6: TBevel;
     Bevel7: TBevel;
-    Edit5: TDBEditEh;
+    edtHoursGos: TDBEditEh;
     Edit7: TDBEditEh;
     Label11: TLabel;
     Label15: TLabel;
@@ -79,8 +79,8 @@ type
     procedure sgDiscDblClick(Sender: TObject);
     procedure sgDiscSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure Edit5Exit(Sender: TObject);
-    procedure Edit5KeyPress(Sender: TObject; var Key: Char);
+    procedure edtHoursGosExit(Sender: TObject);
+    procedure edtHoursGosKeyPress(Sender: TObject; var Key: Char);
     procedure sgDiscKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure sgDiscMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -95,7 +95,7 @@ type
     procedure actSpravExecute(Sender: TObject);
     procedure dbcbGrpDiscKeyValueChanged(Sender: TObject);
     procedure Edit7Exit(Sender: TObject);
-    procedure Edit5Enter(Sender: TObject);
+    procedure edtHoursGosEnter(Sender: TObject);
     procedure Edit7Enter(Sender: TObject);
     procedure Edit7KeyPress(Sender: TObject; var Key: Char);
     procedure Edit7KeyDown(Sender: TObject; var Key: Word;
@@ -117,7 +117,7 @@ type
     fixRow: TStringList;
     fCurrentDiscType: integer;
     fSemesterStr: string;
-    fHourGos: integer;
+    fHour: integer;
     fIndividHour: integer;
     isHourGosMod: boolean;
     isIndividMod: boolean;
@@ -126,10 +126,11 @@ type
     fDiscRelationList: TStringList;
     namedisc: string;
     isMerge: bool;
+    fEdIzm: integer;
     procedure FillColumnValues;
     procedure SetDiscType(discType: integer);
     procedure CalcSRS;
-    procedure SetHourGos(const Value: integer);
+   // procedure SetHourGos(const Value: integer);
     procedure SetIndividHour(const Value: integer);
     procedure LoadCompetence;
     procedure LoadRelation;
@@ -137,6 +138,8 @@ type
     procedure SetStrCmptncList (const Value: TStringList);
     procedure SetDiscRelationList (const Value: TStringList);
     procedure CheckSimilarDiscipline;
+    function GetTimeByEdIzm(aHours: string; aEdIzm: integer): integer;
+
     property CompetenceList: TStringList read fCompetenceList write SetCompetenceList;
     property StrCmptncList: TStringList read fStrCmptncList write SetStrCmptncList;
     property DiscRelationList: TStringList read fDiscRelationList write SetDiscRelationList;
@@ -152,7 +155,7 @@ type
     GrupIK: integer;
     TypePlan: integer;
     nameSpclz: string;  //именование Профиль/Программа/Специализация
-    property iHour_gos: integer read fHourGos write SetHourGos;
+   // property iHour_gos: integer read fHourGos write SetHourGos;
     property iIndivid: integer read fIndividHour write SetIndividHour;
 
     procedure Read(SemesterStr: string);
@@ -177,7 +180,7 @@ var
   tempStr: string;
 
 begin
-  iHour_gos:= 0;
+  //fHour:= 0;
   iIndivid:= 0;
   curRow:= -1;
   curCol:= -1;
@@ -191,11 +194,7 @@ begin
 
   isCellTextChange:= false;
   if fixRow <> nil then fixRow.Clear
-  else fixRow:= TStringList.Create;
-
-{  sgDisc.RowCount:= (CallFrame as TfmUchPlan).sgDisc.RowCount;
-  for i:= 1  to sgDisc.RowCount-1 do
-    sgDisc.Cells[0, i]:= (CallFrame as TfmUchPlan).sgDisc.Cells[0, i];}
+    else fixRow:= TStringList.Create;
 
   fCompetenceList := TStringList.Create;
   fStrCmptncList:=  TStringList.Create;
@@ -246,8 +245,8 @@ begin
   TUchPlanController.Instance.LoadUchPlanContent(self.IK);
 
   //видны ли компетенции
-  lblCompetence.Visible := (VidGos = 2);
-  ToolBar1.Visible := (VidGos = 2);
+  lblCompetence.Visible := (VidGos = FGOS3);
+  ToolBar1.Visible := (VidGos = FGOS3);
   IsModified:= false;
 end;
 
@@ -278,7 +277,7 @@ begin
     Result:= false;
     exit;
   end;
-  iHour_gos:= StrToInt(Edit5.Text);
+  fHour := GetTimeByEdIzm(edtHoursGos.Text, fEdIzm);
   iIndivid:= StrToInt(Edit7.Text);
   DiscInUchPlanIK:= self.IK;
 
@@ -291,7 +290,7 @@ begin
   //if dbcbSpclz.KeyValue = Null then SpclzIK := 0 else SpclzIK := dbcbSpclz.KeyValue;
   
   if not TUchPlanController.Instance.SaveDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue, dbcbGrpDisc.KeyValue,
-  dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, SpclzIK, iHour_gos, iIndivid,
+  dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, SpclzIK, fHour, iIndivid,
   StrToInt(dbeGroupVibor.Value), Edit6.Text,fStrCmptncList,fDiscRelationList) then //передаю не компетенции, а структуру
   begin
     Result:= false;
@@ -302,7 +301,7 @@ begin
     begin       //аналогичное изменение дисциплины в планах-потомках
       //dbcbSpclz.KeyValue;
       TUchPlanController.Instance.ChangeDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue,
-      dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, iHour_gos, iIndivid,
+      dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, fHour, iIndivid,
       StrToInt(dbeGroupVibor.Value), dbcbSpclz.KeyValue, Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
     end;
 
@@ -320,7 +319,7 @@ begin
   if Self.IK < 0 then
   begin
     iIndivid:= 0;
-    iHour_gos:= 0;
+    fHour := 0;
   end;
   TUchPlanController.Instance.LoadUchPlanContent(self.IK);
   FillColumnValues;
@@ -474,19 +473,19 @@ begin
     end;
 end;
 
-procedure TfrmUchPlanAddDisc.Edit5Exit(Sender: TObject);
+procedure TfrmUchPlanAddDisc.edtHoursGosExit(Sender: TObject);
 begin
   if (isHourGosMod) then
   begin
-    if (Length(Edit5.Text) = 0) then Edit5.Text:= '0';
-    iHour_gos:= StrToInt(Edit5.Text);
+    if (Length(edtHoursGos.Text) = 0) then edtHoursGos.Text:= '0';
+   // fHour:= GetTimeByEdIzm(edtHoursGos.Text, fEdIzm);
   end;
   (Sender as TDBEditEh).Color:= clWindow;
 end;
 
-procedure TfrmUchPlanAddDisc.Edit5KeyPress(Sender: TObject; var Key: Char);
+procedure TfrmUchPlanAddDisc.edtHoursGosKeyPress(Sender: TObject; var Key: Char);
 const
-  allow:set of char = ['1','2','3','4','5','6','7','8','9','0', Chr(VK_BACK)];
+  allow:set of char = ['1','2','3','4','5','6','7','8','9','0', ' ', '/', ',' , '.', Chr(VK_BACK)];
 begin
   if (not (Key in allow)) then
   begin
@@ -635,15 +634,15 @@ end;
 
 procedure TfrmUchPlanAddDisc.actSpravUpdate(Sender: TObject);
 begin
-  Edit5.Enabled:= (dbcbCklDisc.KeyValue <> NULL) and (dbcbGrpDisc.KeyValue <> NULL) and (dbcbDisc.KeyValue <> NULL);
-  Edit7.Enabled:= Edit5.Enabled and Label20.Enabled;
+  edtHoursGos.Enabled:= (dbcbCklDisc.KeyValue <> NULL) and (dbcbGrpDisc.KeyValue <> NULL) and (dbcbDisc.KeyValue <> NULL);
+  Edit7.Enabled:= edtHoursGos.Enabled and Label20.Enabled;
 end;
 
 procedure TfrmUchPlanAddDisc.CalcSRS;
 begin
-  if fCurrentDiscType = 1 then
+  if fCurrentDiscType = typeTypicalDisc then
   begin
-    Label22.Tag:= iHour_gos - (Label23.Tag + Label24.Tag + Label25.Tag) - iIndivid;
+    Label22.Tag:= StrToInt(edtHoursGos.Text) - (Label23.Tag + Label24.Tag + Label25.Tag) - iIndivid;
     Label22.Caption:= IntToStr(Label22.Tag);
     if Label22.Tag < 0 then Label22.Font.Color:= clRed
     else Label22.Font.Color:= clBlack;
@@ -704,15 +703,17 @@ var
 begin
   if dbcbDisc.KeyValue <> NULL then
   begin
+    fEdIzm := dbcbDisc.ListSource.DataSet.FieldByName('ik_ed_izm').AsInteger;
     if (dbcbDisc.ListSource.DataSet.FieldByName('ik_type_disc').AsInteger <> fCurrentDiscType) then
     begin
       try
         fCurrentDiscType:= dbcbDisc.ListSource.DataSet.FieldByName('ik_type_disc').AsInteger;
+        if fCurrentDiscType = typeTypicalDisc then CalcSRS;
         tempStr:= TUchPlanController.Instance.getColumnsNames(fSemesterStr, fCurrentDiscType);
         sgDisc.RowCount:= tempStr.Count + 1;
         for i:= 0 to tempStr.Count - 1 do
           sgDisc.Cells[0, i + 1]:= tempStr[i];
-        SetDiscType(dbcbDisc.ListSource.DataSet.FieldByName('ik_type_disc').AsInteger);
+        SetDiscType(fCurrentDiscType);
         FillColumnValues;
       finally
         if Assigned(tempStr) then tempStr.Free;        
@@ -773,7 +774,7 @@ begin
   (Sender as TDBEditEh).Color:= clWindow;
 end;
 
-procedure TfrmUchPlanAddDisc.Edit5Enter(Sender: TObject);
+procedure TfrmUchPlanAddDisc.edtHoursGosEnter(Sender: TObject);
 begin
   inherited;
   (Sender as TDBEditEh).Color:= clAqua;
@@ -852,6 +853,45 @@ end;
 
 
 
+function TfrmUchPlanAddDisc.GetTimeByEdIzm(aHours: string;
+  aEdIzm: integer): integer;
+var vPosSpace, vPosComma, vPosDot, vPosLine: integer;   //обрабатывает только пробелы, точки и запятые
+    vTime, vPos: integer;
+    str: string;
+begin
+  vPosSpace := Pos(' ',aHours);
+  vPosComma := Pos(',', aHours);
+  vPosDot := Pos('.', aHours);
+  vPosLine := Pos('/', aHours);
+
+  case aEdIzm of
+    Hours: Result := round(StrToFloat(aHours));
+    Days: //в днях
+    begin
+      if (vPosComma=0) and (vPosDot=0) and (vPosLine = 0) then
+         Result := StrToInt(aHours)*KolDaysInWeek
+      else
+      begin
+        vPos :=0;
+        if vPosComma<>0 then vPos := vPosComma;
+        if vPosDot<>0 then vPos := vPosDot;
+        if vPosSpace<>0 then vPos := vPosSpace;
+
+        if vPos<>0 then
+          vTime := StrToInt(copy(aHours,1,vPos-1))*KolDaysInWeek //целая часть
+          else vTime:= 0;
+
+        if vPosLine=0 then  //если в десятичных
+          vTime := vTime + round(StrToFloat('0.'+copy(aHours,vPos+1,length(aHours)-vPos))*KolDaysInWeek)
+          else //если в дробях
+            vTime := vTime + round(StrToInt(copy(aHours,vPos+1,1))*(KolDaysInWeek/StrToInt(copy(aHours,vPosLine+1,1))));
+
+        Result := vTime;
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmUchPlanAddDisc.LoadCompetence;
 var tempDS: TADODataSet;
 begin
@@ -921,7 +961,7 @@ end;
 
 procedure TfrmUchPlanAddDisc.SetDiscType(discType: integer);
 begin
-  if (discType = typeGosExam) or (discType = typeDiplom)or(discType = typeNIR)or(discType = typeGosExam) then
+ { if (discType = typeGosExam) or (discType = typeDiplom)or(discType = typeNIR)or(discType = typeGosExam) then
   begin
     Label7.Caption:= 'Количество недель:';
     //Label7.Left:= Edit5.Left - 108;
@@ -930,27 +970,29 @@ begin
   begin
     Label7.Caption:= 'Общее количество часов:';
     //Label7.Left:= Edit5.Left - 140;
-  end;
-  Edit7.Enabled:= discType = 1;
-  Label19.Enabled:= discType = 1;
-  Label20.Enabled:= discType = 1;
-  Label22.Enabled:= discType = 1;
-  Label11.Enabled:= discType = 1;
-  Label15.Enabled:= discType = 1;
-  Label18.Enabled:= discType = 1;
-  Label23.Enabled:= discType = 1;
-  Label24.Enabled:= discType = 1;
-  Label25.Enabled:= discType = 1;
-  Label26.Enabled:= discType = 1;
-  Label27.Enabled:= discType = 1;
+  end;       }
+  Label7.Caption:= dbcbDisc.ListSource.DataSet.FieldByName('ShowToUser').AsString;
+
+  Edit7.Enabled:= discType = typeTypicalDisc;
+  Label19.Enabled:= discType = typeTypicalDisc;
+  Label20.Enabled:= discType = typeTypicalDisc;
+  Label22.Enabled:= discType = typeTypicalDisc;
+  Label11.Enabled:= discType = typeTypicalDisc;
+  Label15.Enabled:= discType = typeTypicalDisc;
+  Label18.Enabled:= discType = typeTypicalDisc;
+  Label23.Enabled:= discType = typeTypicalDisc;
+  Label24.Enabled:= discType = typeTypicalDisc;
+  Label25.Enabled:= discType = typeTypicalDisc;
+  Label26.Enabled:= discType = typeTypicalDisc;
+  Label27.Enabled:= discType = typeTypicalDisc;
 end;
 
-procedure TfrmUchPlanAddDisc.SetHourGos(const Value: integer);
+{procedure TfrmUchPlanAddDisc.SetHourGos(const Value: integer);
 begin
   fHourGos := Value;
   Edit5.Text:= IntToStr(Value);
-  if fCurrentDiscType = 1 then CalcSRS;
-end;
+
+end;         }
 
 procedure TfrmUchPlanAddDisc.SetIndividHour(const Value: integer);
 begin
