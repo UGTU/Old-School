@@ -2,6 +2,8 @@ unit ConstantRepository;
 
 interface
 
+uses System.Variants;
+
 //Правила именования констант:
 //если константа является ключом, то пишем префикс "key_"
 const
@@ -13,18 +15,42 @@ const
   key_ModelPlan = 1;
   vid_exam = 6;
   GOS_EXAM = 56;
+  FISCULTURA_ZE = 2;
   //ErrorCode
   NoError = 0;
   ExistError = 1;
   FailError = 2;
   StatusError = 3;
 
-  //служебные функции
-  function GetMonthR(month:integer): string;
-  function GetKursP(kurs:integer): string;
 
+  //типы дисциплин
+  typeTypicalDisc = 1;
+  typeGosExam = 5;
+  typePract = 2;
+  typeDiplom = 3;
+  typeNIR = 12;
+
+  //единицы измерения
+  Hours = 1;
+  Days = 2;
+  KolDaysInWeek = 6;
+
+  //служебные функции
+  function IfNull(const Value, Default: OleVariant): OleVariant;
+
+  function GetMonthR(month:integer): string;    //получить месяц в род.п. по номеру
+  function GetKursP(kurs: integer): string;     //получить номер курса в предл. п. по номеру
 
 implementation
+
+function IfNull(const Value, Default: OleVariant): OleVariant;
+begin
+  if Value = NULL then
+    Result := Default
+  else
+    Result := Value;
+end;
+
 
 function GetMonthR(month:integer):string;
 var str:string;

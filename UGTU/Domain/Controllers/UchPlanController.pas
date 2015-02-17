@@ -996,7 +996,7 @@ function TUchPlanController.getAllDisciplines(SourceDataSet: PDataSet;
   isShowFirst: boolean): Variant;
 begin
   Result := TGeneralController.Instance.getDataSetValues(SourceDataSet,
-    'Select discpln.iK_disc, RTRIM(discpln.cName_disc) as name_disc, discpln.ik_type_disc From discpln Order By cName_disc',
+    'Select * From AllDisciplines order By name_disc',
     'iK_disc', isShowFirst, NULL);
 end;
 
@@ -1419,9 +1419,13 @@ begin
   DataSet.Close;
   case discTypeIK of
     1:
+    begin
+      if semestrStr='' then semestrStr := 'iK_vid_zanyat=-1';
+
       (DataSet as TADODataSet).CommandText :=
         'SELECT * FROM Uch_plan_columns WHERE (ik_type_disc = 1) and (((i_type_column IN (3, 4, 5, 6)) or ((i_type_column = 11) and ('
         + semestrStr + ')))) ORDER BY ik_column';
+    end
   else
     (DataSet as TADODataSet).CommandText :=
       'SELECT * FROM Uch_plan_columns WHERE ik_type_disc = ' +
@@ -1696,8 +1700,8 @@ begin
       Parameters.ParamByName('@ik_pdgrp_disc').value := PodGroupIK;
       Parameters.ParamByName('@ViborGroup').value := GroupViborNum;
       if SpclzIK = 0 then
-        Parameters.ParamByName('@ik_spclz').value := NULL;
-      Parameters.ParamByName('@ik_spclz').value := SpclzIK;
+        Parameters.ParamByName('@ik_spclz').value := NULL
+      else Parameters.ParamByName('@ik_spclz').value := SpclzIK;
       ExecProc;
       DiscInUchPlanIK := Parameters.ParamByName('@RETURN_VALUE').value;
     end;

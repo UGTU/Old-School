@@ -517,7 +517,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             ParentFont = False
             WordWrap = True
           end
-          object Edit5: TDBEditEh
+          object edtHoursGos: TDBEditEh
             Left = 194
             Top = 17
             Width = 41
@@ -535,9 +535,9 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             TabOrder = 0
             Text = '0'
             Visible = True
-            OnEnter = Edit5Enter
-            OnExit = Edit5Exit
-            OnKeyPress = Edit5KeyPress
+            OnEnter = edtHoursGosEnter
+            OnExit = edtHoursGosExit
+            OnKeyPress = edtHoursGosKeyPress
           end
           object Edit7: TDBEditEh
             Left = 194
@@ -629,8 +629,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         OnKeyDown = sgDiscKeyDown
         OnMouseMove = sgDiscMouseMove
         OnSelectCell = sgDiscSelectCell
-        ExplicitLeft = -3
-        ExplicitTop = -2
         ColWidths = (
           113
           87
@@ -737,7 +735,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Visible = True
     OnEnter = Edit6Enter
     OnExit = Edit6Exit
-    OnKeyPress = Edit5KeyPress
+    OnKeyPress = edtHoursGosKeyPress
   end
   object cbOtherUchPl: TCheckBox [24]
     Left = 5
@@ -788,7 +786,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Left = 440
     Top = 560
     Bitmap = {
-      494C010103000400500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030004005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

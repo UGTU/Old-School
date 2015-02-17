@@ -551,6 +551,10 @@ type
     adodsPostupViewCotch: TStringField;
     adodsPostupViewNNyear: TIntegerField;
     adodsPostupViewCname_form_ed: TStringField;
+    aspGetDiscWorkik_ed_izm: TIntegerField;
+    aspGetDiscWorkShowToUser: TStringField;
+    aspGetDiscModelShowToUser: TStringField;
+    aspGetDiscModelik_ed_izm: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

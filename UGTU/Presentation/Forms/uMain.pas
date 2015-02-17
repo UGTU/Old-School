@@ -2198,17 +2198,16 @@ begin
 
     // проверим, есть ли у группы учебный план
     if (TUchPlanController.Instance.getUchPlanForGroup(ik_grup) <> 0) then
-    begin
-      // тогда открываем учебный план
-      Node := DBDekTreeView_TEST1.Selected.Parent;
-      DBDekTreeView_TEST1.Select(Node);
-      DBDekTreeView_TEST1Change(Sender, Node);
-      if (FFrame is TfmSpec) then
-        with (FFrame as TfmSpec) do
-        begin
-          PageControl1.ActivePageIndex := 6;
-          fmUchPlan2.dbcbGroup.KeyValue := ik_grup;
-          alreadySpec := true;
+      //тогда открываем учебный план
+      node:=DBDekTreeView_TEST1.Selected.Parent;
+      DBDekTreeView_TEST1.Select(node);
+      DBDekTreeView_TEST1Change(sender,node);
+      if (FFrame is TfmSpec) then with (FFrame as TfmSpec) do
+      begin
+        PageControl1.ActivePageIndex:=6;
+        fmUchPlan2.Group := ik_grup;
+        alreadySpec:=true;
+      end;
         end;
     end
     else
@@ -3504,4 +3503,3 @@ begin
       end;
 
 
-end.

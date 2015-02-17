@@ -408,7 +408,7 @@ object frmMain: TfrmMain
   end
   object MainMenu1: TMainMenu
     Images = ImageList1
-    Left = 247
+    Left = 207
     Top = 82
     object miFile: TMenuItem
       Caption = #1060#1072#1081#1083
@@ -516,8 +516,8 @@ object frmMain: TfrmMain
     Images = ImageList1
     OnExecute = alMainActionsExecute
     OnUpdate = alMainActionsUpdate
-    Left = 279
-    Top = 118
+    Left = 287
+    Top = 142
     object actFamChg: TAction
       Category = 'catStudActs'
       Caption = #1057#1084#1077#1085#1080#1090#1100' '#1092#1072#1084#1080#1083#1080#1102'...'
@@ -1014,7 +1014,7 @@ object frmMain: TfrmMain
     Left = 311
     Top = 82
     Bitmap = {
-      494C01014A0068008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014A006800900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3530,10 +3530,10 @@ object frmMain: TfrmMain
       000000000000}
   end
   object TreeIcons: TImageList
-    Left = 278
+    Left = 262
     Top = 82
     Bitmap = {
-      494C0101310049008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010131004900900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF
@@ -5259,8 +5259,8 @@ object frmMain: TfrmMain
   object ppmTree: TPopupMenu
     Images = ImageList1
     OnPopup = ppmTreePopup
-    Left = 221
-    Top = 117
+    Left = 253
+    Top = 141
   end
   object ActionManager1: TActionManager
     ActionBars = <
