@@ -15,7 +15,7 @@ uses
   uShedule, uSheduleFac, uSheduleDep, DBTVFacScheduleobj, DBTVRootScheduleobj, DBTVDepScheduleobj, DBTVOKObj, uDiplomOtdKadr,
   DataProcessingSplashDialog, uAppTweaks, uLocalLogController, uAbitReturn, jpeg, VersionController, NewClientVersionDetectedFrm,
   xmldom, XMLIntf, msxmldom, XMLDoc, uDMAbiturientNabor, ExceptionBase, CommonIntf,HOST_AddZayav, uChangeKatZach, uCertificateDialog,
-  System.Actions;
+  System.Actions,uMagaizneSpr,DBTVSprObj;
 
 type
   TSearchPanelType = (sptStudent, sptPrepod, sptAbiturient, sptMethodWork, sptShedule, sptRIO, sptNone);
@@ -714,7 +714,17 @@ actFilterKaf.Visible:=false;
     TApplicationController.GetInstance.AddLogEntry('Кадр "Администрирование". Состояние: '+StatusBar1.Panels.Items[0].Text+'/'+StatusBar1.Panels.Items[1].Text+'/'+StatusBar1.Panels.Items[2].Text);
     SetCurrentSearchPanel(sptNone);
   end;
-
+//------------Журнал справок
+    if (dbNode is TDBNodeSprObject) then
+  begin
+    Caption:= TApplicationController.GetInstance.ProgramName + ' - [Журнал справок]';
+    Frame:=TfmSpr;
+    FFrame.RefreshFrame;
+    Comment('Журнал справок', 'Выбранный элемент: '); //+ (FFrame as TfmSpr).dbcbElement.Text);
+    TApplicationController.GetInstance.AddLogEntry('Кадр "Журнал справок". Состояние: '+StatusBar1.Panels.Items[0].Text+'/'+StatusBar1.Panels.Items[1].Text+'/'+StatusBar1.Panels.Items[2].Text);
+    SetCurrentSearchPanel(sptNone);
+  end;
+  //------------
   if (dbNode is TDBNodeRecruitObject) then
   begin
   CurrentTopic:='A_Nabor_frame.htm';
