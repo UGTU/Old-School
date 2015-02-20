@@ -272,7 +272,8 @@ end;
  frmMain.actDocsRetrieve.Enabled:=true;
  end;
 
- if (TDBNodeAbitStudObject(FrameObject).OnlyReading) then
+
+if (TDBNodeAbitStudObject(FrameObject).OnlyReading) then
 begin
 TabSheet1.Caption:='Личные данные (только просмотр)';
 Toolbutton1.Enabled:=false;

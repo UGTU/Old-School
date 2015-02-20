@@ -416,7 +416,10 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet6: TTabSheet
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 549
+              ExplicitHeight = 0
               inherited dbgeDocuments: TDBGridEh
                 Left = 1
                 Width = 546
@@ -476,6 +479,10 @@ inherited fmAbitCard: TfmAbitCard
             object TabSheet8: TTabSheet
               Caption = #1055#1086#1089#1090#1091#1087#1083#1077#1085#1080#1077
               ImageIndex = 5
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object GroupBox2: TGroupBox
                 Left = 0
                 Top = 0
@@ -614,7 +621,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
