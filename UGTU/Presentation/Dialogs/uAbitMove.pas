@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh,
-  DBCtrlsEh, DBLookupEh, Mask, adodb, ApplicationController, ExceptionBase;
+  DBCtrlsEh, DBLookupEh, Mask, adodb, ApplicationController, ExceptionBase,
+  System.Actions;
 
 type
   TfrmAbitMove = class(TfrmBaseDialog)
