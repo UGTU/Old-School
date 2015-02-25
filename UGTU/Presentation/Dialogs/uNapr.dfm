@@ -197,7 +197,7 @@ inherited ftmNapr: TftmNapr
     inherited bbCancel: TBitBtn
       Left = 513
       Width = 76
-      Caption = #1047#1072#1082#1088#1099#1090#1100
+      Caption = #1042#1099#1093#1086#1076
       ExplicitLeft = 513
       ExplicitWidth = 76
     end

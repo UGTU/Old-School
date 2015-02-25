@@ -388,7 +388,7 @@ RETURNS @Result TABLE
 AS
 BEGIN
   insert INTO @Result(n_sem, Content_name, ik_upContent, ik_ved, lClose,condition, Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme,Ik_vid_exam,cName_vid_exam,Cosenca)
-  SELECT n_sem, discpln.cName_disc + ', ' + vid_zaniat.cName_vid_zanyat, Content_UchPl.ik_upContent, Vedomost.Ik_ved,lClose,
+  SELECT n_sem, cast(n_sem as varchar(2)) + ' сем, ' + vid_zaniat.cshort_vid_zanyat + ', ' + discpln.cName_disc, Content_UchPl.ik_upContent, Vedomost.Ik_ved,lClose,
 		 cast(lClose as varchar(20)), Itab_n, Dd_exam, dD_vydano, cNumber_ved, KPTheme, Vedomost.Ik_vid_exam, cName_vid_exam,cast(Cosenca as varchar(20))
   from StudGrup 
   inner join Grup on Grup.Ik_grup = StudGrup.Ik_grup
@@ -547,7 +547,7 @@ ALTER PROCEDURE [dbo].[GetAllVedNaprForDisc]
 	@ik_group	int,
 	@ik_upContent int
 as
-    SELECT v.ik_ved, u.ik_zach, StudName, Nn_zach, cName_vid_exam, u.cosenca, Otsenca, Name_osenca, lClose,
+    SELECT v.ik_ved, u.ik_zach, Ik_studGrup, StudName, Nn_zach, cName_vid_exam, u.cosenca, Otsenca, Name_osenca, lClose,
 		   KPTheme as ctema, dD_vydano, Dd_exam, Itab_n 
     From dbo.GetGrupStud(@ik_group) as s 	
 	INNER JOIN Uspev u ON u.ik_zach=s.ik_zach
@@ -564,3 +564,193 @@ as
 order by StudName
 GO
 ----------------------------------------------------------------------------------------------------------------------------
+ALTER   PROCEDURE [dbo].[AppendUspev]
+@flag INT,
+@Ik_ved INT,
+@Ik_studGrup INT,
+@Cosenca INT,
+@ctema varchar(2000),
+@i_balls INT = NULL
+AS
+declare @Ik_zach int
+select @Ik_zach = ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup
+
+IF @flag=1
+  BEGIN
+	INSERT INTO Uspev(Ik_ved, Ik_zach, Cosenca, i_balls)
+	VALUES (@Ik_ved, @Ik_zach, @Cosenca, @i_balls)
+
+  END
+
+--ћожем изменить только оценку и тему
+IF @flag=0
+  BEGIN
+	UPDATE Uspev
+		SET Cosenca = @Cosenca, i_balls = @i_balls
+		WHERE Ik_ved = @Ik_ved AND Ik_zach = @Ik_zach
+
+  END
+
+IF @flag=-1
+  BEGIN
+	DELETE FROM Uspev
+	WHERE Ik_ved = @Ik_ved AND Ik_zach = @Ik_zach
+  END
+
+
+GO
+----------------------------------------------------------------------------------------------------
+ALTER       PROCEDURE [dbo].[AppendUspevKPTheme]
+@flag INT, 
+@ik_studGrup INT, 				--код зачетки
+@ik_ved INT,
+@KPTheme varchar(max)
+AS
+DECLARE @ik_upContent INT
+DECLARE @ik_zach INT
+
+SELECT @ik_upContent=ik_upContent FROM Vedomost
+WHERE ik_ved=@ik_ved
+
+select @ik_zach = ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup
+
+--выбираем код соответствующего документа
+DECLARE @idUspevDocs INT
+SELECT @idUspevDocs=idUspevDocs FROM dbo.UspevDocument 
+	WHERE ik_zach=@ik_zach and ik_upContent=@ik_upContent
+
+IF (@flag=1) and (@idUspevDocs is null) and (@KPTheme<>'')
+BEGIN
+
+	BEGIN TRANSACTION;
+
+	BEGIN TRY
+		 INSERT INTO dbo.UspevDocument(ik_zach, ik_upContent)
+		 VALUES(@ik_zach, @ik_upContent)
+		 
+		 select	@idUspevDocs=@@identity
+		 
+		 INSERT INTO dbo.UspevKPTheme(idUspevDocs,KPTheme)
+		 VALUES(@idUspevDocs,@KPTheme)	
+
+
+	END TRY
+	BEGIN CATCH
+
+		IF @@TRANCOUNT > 0
+			ROLLBACK TRANSACTION;
+			
+		return -1
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		COMMIT TRANSACTION;
+END
+else
+IF (@flag=1) and (@idUspevDocs is not null)
+BEGIN
+ UPDATE dbo.UspevKPTheme
+ SET KPTheme=@KPTheme
+ WHERE idUspevDocs=@idUspevDocs
+END
+
+IF @flag=-1
+BEGIN
+	BEGIN TRANSACTION;
+
+	BEGIN TRY
+		 DELETE FROM dbo.UspevKPTheme
+			WHERE idUspevDocs=@idUspevDocs
+		 
+		 DELETE FROM dbo.UspevDocument
+			WHERE idUspevDocs=@idUspevDocs
+
+	END TRY
+	BEGIN CATCH
+
+		IF @@TRANCOUNT > 0
+			ROLLBACK TRANSACTION;
+			
+		return -1
+	END CATCH;
+
+	IF @@TRANCOUNT > 0
+		COMMIT TRANSACTION;
+
+END
+	RETURN @idUspevDocs
+GO
+------------------------------------------------------------------------------------------------------------------------------
+--select * from [GetGrupStud](438)
+
+--выбирает студентов группы и выставл€ет дл€ них соответствующую категорию зачислени€
+ALTER    FUNCTION [dbo].[GetGrupStud](@ik_grup int)
+RETURNS @Result TABLE
+   (
+    nCode					INT   NOT NULL,
+    StudName				VARCHAR(200) NOT NULL,
+	Ik_studGrup				INT NOT NULL,
+    ik_zach					INT NOT NULL,
+    Nn_zach 				varchar(6) NOT NULL,
+    ik_kat_zach				INT NOT NULL,	
+    KatZach					VARCHAR(2) NOT NULL
+   ) 
+
+AS
+BEGIN
+ INSERT INTO @Result(nCode, StudName, ik_zach, Ik_studGrup, Nn_zach, ik_kat_zach, KatZach)
+ SELECT s.nCode,
+	StudName,
+	z.ik_zach,
+	Ik_studGrup,
+	Nn_zach,
+	ik_kat_zach,
+	KatZach
+	FROM
+	--отбираем только контрактников
+	(SELECT Ik_studGrup,ik_zach, StudGrup.ik_kat_zach,
+	 'д' as KatZach FROM StudGrup inner join Kat_zach on StudGrup.ik_kat_zach = Kat_zach.Ik_kat_zach
+	  WHERE  Ik_grup = @Ik_grup and Ik_prikazOtch is NULL
+		 AND ik_type_kat = 3 
+	UNION 
+	--отбираем только не контрактников
+	SELECT Ik_studGrup,ik_zach, StudGrup.ik_kat_zach,
+	 ' ' as KatZach
+	FROM StudGrup inner join Kat_zach on StudGrup.ik_kat_zach = Kat_zach.Ik_kat_zach 
+	  WHERE  Ik_grup = @Ik_grup and Ik_prikazOtch is NULL
+		 AND ik_type_kat != 3) as sg
+ INNER JOIN Zach z ON sg.ik_zach=z.ik_zach
+ INNER JOIN 
+	(SELECT nCode,
+	 	StudName
+		FROM Stud) s ON s.nCode=z.nCode	
+  RETURN
+END
+GO
+-------------------------------------------------------------------------------------------------------------------------------------------
+ALTER FUNCTION [dbo].[UspevGetAllUspevReports]
+(
+	@Ik_grup int
+)
+RETURNS  TABLE
+AS
+RETURN (SELECT DISTINCT sv_disc.ik_disc_uch_plan, Content_UchPl.ik_upContent, 
+	Content_UchPl.ik_vid_zanyat, Content_UchPl.n_module, Content_UchPl.ik_kaf,
+	Content_UchPl.n_sem, Content_UchPl.i_balls, sv_disc.iHour_gos, sv_disc.ik_disc
+FROM 
+dbo.Relation_spec_fac 
+INNER JOIN dbo.Grup ON Relation_spec_fac.ik_spec_fac=Grup.ik_spec_fac
+inner join Grup_UchPlan on Grup.Ik_grup = Grup_UchPlan.ik_grup
+inner join Year_uch_pl on Grup_UchPlan.ik_year = Year_uch_pl.ik_year_uch_pl
+INNER JOIN dbo.sv_disc ON Grup_UchPlan.ik_uch_plan=sv_disc.ik_uch_plan
+INNER JOIN dbo.Content_UchPl ON Content_UchPl.ik_disc_uch_plan=sv_disc.ik_disc_uch_plan and dbo.Content_UchPl.n_sem >  (year_value - dbo.Grup.nYear_post)*2
+																						and dbo.Content_UchPl.n_sem <  (year_value - dbo.Grup.nYear_post)*2 + 2
+INNER JOIN dbo.vid_zaniat ON Content_UchPl.ik_vid_zanyat=vid_zaniat.ik_vid_zanyat
+INNER JOIN dbo.TypeZanyat ON TypeZanyat.ikTypeZanyat=vid_zaniat.ikTypeZanyat
+	
+WHERE Grup.Ik_grup=@Ik_grup AND 
+	TypeZanyat.bitOtchetnost=1 AND
+	((sv_disc.iK_spclz IS NULL OR sv_disc.iK_spclz=Grup.ik_spclz)  OR Relation_spec_fac.VidGos<>2)
+)
+
+GO

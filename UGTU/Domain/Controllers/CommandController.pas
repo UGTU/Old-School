@@ -45,14 +45,14 @@ type
   TAppendUspevCommand = class(TBaseADOCommand) // редактирование успеваемости
   public
     constructor Create(FVedom: integer);
-    procedure DoIt(Ik_zach, Cosenca: integer);
+    procedure DoIt(StudGrupIK, Cosenca: integer);
   end;
 
   TAppendUspevKPThemeCommand = class(TBaseADOCommand)
   // редактирование темы КП/КР
   public
     constructor Create(FVedom: integer); overload;
-    procedure DoIt(Ik_zach: integer; KPTheme: string);
+    procedure DoIt(StudGrupIK: integer; KPTheme: string);
   end;
 
   TNaprCommand = class(TBaseADOCommand)
@@ -66,7 +66,9 @@ type
 
 
   // ------------------------------------ СЕЛЕКТОРЫ-----------------------------
-  TStudentCo
+  TStudentController = class(TBaseSelectController)
+
+  end;
 
   TUspevController = class(TBaseSelectController)
   private
@@ -157,8 +159,7 @@ type
   {управление направлениями студента}
   TNapravController = class(TBaseSelectController)
   private
-    FStudGrup: integer; //ik_StudGrup
-    FZach: integer;
+    FStudGrupIK: integer; //ik_StudGrup
     FGrup: integer;
     FSemester: integer;
 
@@ -168,7 +169,7 @@ type
     procedure SetSemester(const Value: integer);
   public
     constructor Create;
-    procedure Reload(ik_studGrup, ik_zach: integer); overload;
+    procedure Reload(ik_studGrup: integer); overload;
     procedure LoadOpenedNapr;
     function CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
     function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum: string; var VedIK: integer): integer;
@@ -494,11 +495,11 @@ end;
 
 { TAppendUspevCommand }
 
-procedure TAppendUspevCommand.DoIt(Ik_zach, Cosenca: integer);
+procedure TAppendUspevCommand.DoIt(StudGrupIK, Cosenca: integer);
 begin
   with FStor.Parameters do
   begin
-    ParamByName('@Ik_zach').Value := Ik_zach;
+    ParamByName('@Ik_studGrup').Value := StudGrupIK;
     ParamByName('@Cosenca').Value := Cosenca;
   end;
   FStor.ExecProc;
@@ -512,7 +513,7 @@ begin
     Clear;
     CreateParameter('@flag', ftInteger, pdInput, 0, 0);
     CreateParameter('@Ik_ved', ftInteger, pdInput, 0, FVedom);
-    CreateParameter('@Ik_zach', ftInteger, pdInput, 0, 0);
+    CreateParameter('@Ik_studGrup', ftInteger, pdInput, 0, 0);
     CreateParameter('@Cosenca', ftInteger, pdInput, 0, 0);
     CreateParameter('@cTema', ftString, pdInput, 2000, '');
   end;
@@ -527,17 +528,17 @@ begin
   begin
     Clear;
     CreateParameter('@flag', ftInteger, pdInput, 0, 1);
-    CreateParameter('@Ik_zach', ftInteger, pdInput, 0, 0);
+    CreateParameter('@Ik_studGrup', ftInteger, pdInput, 0, 0);
     CreateParameter('@Ik_ved', ftInteger, pdInput, 0, FVedom);
     CreateParameter('@KPTheme', ftString, pdInput, 2000, '');
   end;
 end;
 
-procedure TAppendUspevKPThemeCommand.DoIt(Ik_zach: integer; KPTheme: string);
+procedure TAppendUspevKPThemeCommand.DoIt(StudGrupIK: integer; KPTheme: string);
 begin
   with FStor.Parameters do
   begin
-    ParamByName('@Ik_zach').Value := Ik_zach;
+    ParamByName('@Ik_studGrup').Value := StudGrupIK;
     ParamByName('@KPTheme').Value := KPTheme;
     FStor.ExecProc;
   end;
@@ -596,7 +597,7 @@ var NaprCommand: TNaprCommand;
 begin
   try
     NaprCommand := TNaprCommand.Create(0);
-    VedIK := NaprCommand.Add(FContentNapr.ContentIK, FStudGrup, VidExID, dateIn, dateOut, NaprNum);
+    VedIK := NaprCommand.Add(FContentNapr.ContentIK, FStudGrupIK, VidExID, dateIn, dateOut, NaprNum);
     Result := NoError;
   except
     Result := FailError;
@@ -640,8 +641,8 @@ begin
     FAppendUspevCommand := TAppendUspevCommand.Create(VedIK);
     FAppendUspevKPThemeCommand := TAppendUspevKPThemeCommand.Create(VedIK);
 
-    FAppendUspevCommand.DoIt(FZach, cosenca);                                               //сохраняем оценку
-    if KPTema<>'' then FAppendUspevKPThemeCommand.DoIt(FZach,KPTema);                       //сохраняем тему
+    FAppendUspevCommand.DoIt(FStudGrupIK, cosenca);                                         //сохраняем оценку
+    if KPTema<>'' then FAppendUspevKPThemeCommand.DoIt(FStudGrupIK,KPTema);                 //сохраняем тему
     FVedCommand.Update(FieldByName('ik_vid_exam').Value, FieldByName('cNumber_ved').Value,  //закрываем направление
     ntab, date_exam, True, True);
 
@@ -678,14 +679,14 @@ end;
 
 procedure TNapravController.LoadOpenedNapr;
 begin
-  //
+  SetFilter('lClose = 0');
 end;
 
-procedure TNapravController.Reload(ik_studGrup, ik_zach: integer);
+procedure TNapravController.Reload(ik_studGrup: integer);
 begin
-  inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ')');
-  FStudGrup := ik_studGrup;
-  FZach := ik_zach;
+  inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ') order by n_sem');
+  FStudGrupIK := ik_studGrup;
+  //FZach := ik_zach;
   FContentNapr.Reload(ik_studGrup);
 end;
 

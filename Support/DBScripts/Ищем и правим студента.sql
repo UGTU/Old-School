@@ -1,13 +1,20 @@
 
-select * from Person where Clastname='Полий'
+select * from Person where Clastname='Корсакова'
 
-select * from ABIT_postup where nCode=68098
+select * from ABIT_postup where nCode=68481
+select * from ABIT_Vstup_exam where NN_abit = 27536
 
-select * from ABIT_Diapazon_spec_fac where NNrecord=750 
+select * from ABIT_Diapazon_spec_fac, Relation_spec_fac, EducationBranch, fac 
+where ABIT_Diapazon_spec_fac.ik_spec_fac = Relation_spec_fac.ik_spec_fac
+and Relation_spec_fac.ik_fac = fac.Ik_fac
+and Relation_spec_fac.ik_spec = EducationBranch.ik_spec
+and NNrecord=716 
+
+
 select * from Relation_spec_fac where ik_spec_fac = 274
 select * from Spec_stud where ik_spec=354607
 
-select * from Doc_stud where nCode = 15966
+select * from Doc_stud where nCode = 68148
 
 select * from Zach where ncode in (69199)
 select * from Zach where Ik_zach in (14369)
@@ -16,7 +23,8 @@ select * from Zach where Nn_zach='121358'
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (19914,27577)
+--and ik_zach in (19914,27577)
+and Ik_studGrup = 29204
 
 select * from StudGrup where ik_pricZach=13
 

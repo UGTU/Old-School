@@ -284,7 +284,7 @@ type
 
 
     // взять DataSet с ведомостями, по которым можно дать направления для текущего студента
-    function GetContentDS(StudIK, ZachIK: Integer): TADODataSet;
+    function GetContentDS(StudIK: Integer): TADODataSet;
 
     // взять DataSet с направлениями студента
     function GetNapravDS: TADODataSet;
@@ -300,7 +300,7 @@ type
 
     procedure AnnulNapr(VedIK: Integer);
 
-    procedure SelectOpenedNapr(StudGrupIk, ZachIK: Integer);
+    procedure SelectOpenedNapr(StudGrupIk: Integer);
 
     // **********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
     // Возвращает следующее слово из строки,
@@ -503,9 +503,9 @@ begin
   dmUspevaemost.adodsSelBRSExamGroup.Active := true;
 end;
 
-procedure TUspevGroupController.SelectOpenedNapr(StudGrupIk, ZachIK: Integer);
+procedure TUspevGroupController.SelectOpenedNapr(StudGrupIk: Integer);
 begin
-  FNapravController.Reload(StudGrupIk, ZachIK);
+  FNapravController.Reload(StudGrupIk);
   FNapravController.LoadOpenedNapr;
 end;
 
@@ -1827,10 +1827,10 @@ begin
 end;
 
 // Выбирает все дисциплины, кот-е есть в уч. плане (для вида занятий)
-function TUspevGroupController.GetContentDS(StudIK, ZachIK: Integer)
+function TUspevGroupController.GetContentDS(StudIK: Integer)
   : TADODataSet;
 begin
-  FNapravController.Reload(StudIK, ZachIK);
+  FNapravController.Reload(StudIK);
   Result := FNapravController.ContentDS;
 end;
 

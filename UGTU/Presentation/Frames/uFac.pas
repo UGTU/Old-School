@@ -310,19 +310,17 @@ begin
     MessageBox(Handle, 'При открытии ведомости произошла ошибка.', 'ИС УГТУ', MB_OK);
     exit;
     end;   }
-   if not TUspevGroupController.Instance.OpenVed(ik_Ved) then
+ {  if not TUspevGroupController.Instance.OpenVed(ik_Ved) then
     begin
     MessageBox(Handle, 'При открытии ведомости произошла ошибка.', 'ИС УГТУ', MB_OK);
     exit;
-    end;
+    end;}
 
   ftmNaprClose:=TftmNaprClose.Create(self);
-  ftmNaprClose.Tag:=dmUspevaemost.adospGetAllNaprForFac.FieldValues['ik_zach'];
-  //ftmNaprClose.CloseNapr:=true;
+  ftmNaprClose.StudGrupIK:=dmUspevaemost.adospGetAllNaprForFac.FieldValues['ik_studGrup'];
   ftmNaprclose.FormShow(Sender);
-  ftmNaprclose.dbcbeNapr.KeyValue:=ik_ved;
+  ftmNaprclose.VedIK := ik_ved;
   ftmNaprclose.dbcbeNapr.Enabled:=false;
-  ftmNaprclose.LoadNapr;
   if ftmNaprclose.showmodal = mrCancel then
    // if not TUspevGroupController.Instance.CloseNapr(ik_Ved) then
     begin

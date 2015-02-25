@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsVed
+      ActivePage = tshUspev
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -2655,7 +2655,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400380110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2828,7 +2828,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040003C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3499,7 +3499,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050008003C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
@@ -3772,8 +3772,8 @@ inherited fmGroup: TfmGroup
   end
   object ActionList1: TActionList
     Images = ilMain
-    Left = 145
-    Top = 153
+    Left = 121
+    Top = 129
     object actCreateAllVeds: TAction
       Category = 'vedomost'
       Enabled = False
@@ -4036,6 +4036,12 @@ inherited fmGroup: TfmGroup
       OnExecute = actRefreshVedStudsExecute
       OnUpdate = actRefreshVedStudsUpdate
     end
+    object actAnnulNapr: TAction
+      Category = 'Napr'
+      Caption = 'actAnnulNapr'
+      ImageIndex = 10
+      OnExecute = actAnnulNaprExecute
+    end
   end
   object pmVedomost: TPopupMenu
     Images = ilMain
@@ -4048,8 +4054,8 @@ inherited fmGroup: TfmGroup
   end
   object ppmGroupNapr: TPopupMenu
     Images = ilMain
-    Left = 208
-    Top = 184
+    Left = 264
+    Top = 144
     object N2: TMenuItem
       Action = actPrintEmptyNapr
     end
@@ -4062,10 +4068,14 @@ inherited fmGroup: TfmGroup
     object N5: TMenuItem
       Action = actDelNapr
     end
+    object N8: TMenuItem
+      Caption = #1040#1085#1085#1091#1083#1080#1088#1086#1074#1072#1090#1100' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
+      OnClick = actAnnulNaprExecute
+    end
   end
   object pmUspevOtchet: TPopupMenu
     Images = ilMain
-    Left = 240
+    Left = 288
     Top = 184
     object Excel1: TMenuItem
       Action = actUspevToExcel

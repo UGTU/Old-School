@@ -32,20 +32,16 @@ type
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
   private
-    FCloseNapr: boolean;
     FVedIK: integer;
-    FStudZachIK: integer;
+    FStudGrupIK: integer;
     FIsClosed: boolean;
     FMark: integer;
     FKPTema: string;
     FTeacher: string;
-    procedure SetStudZachIK(const Value: integer);
+    procedure SetStudGrupIK(const Value: integer);
     procedure SetVed(const Value: integer);
   public
-
-
-    procedure LoadNapr;
-    property StudZachIK: integer write SetStudZachIK;
+    property StudGrupIK: integer write SetStudGrupIK;
     property VedIK: integer write SetVed;
     property IsClosed: boolean write FIsClosed;
     property Mark: integer write FMark;
@@ -58,7 +54,7 @@ var
 
 implementation
 
-uses uDm, uDMUspevaemost, uUspevGroupController;
+uses uDm, uDMUspevaemost, uUspevGroupController,ConstantRepository;
 {$R *.dfm}
 
 function ChangeMonthDayPlaces(date: TDateTime): string;
@@ -117,27 +113,9 @@ begin
   eTema.Text := FKPTema;
 end;
 
-procedure TftmNaprclose.LoadNapr;
+procedure TftmNaprclose.SetStudGrupIK(const Value: integer);
 begin
-  {dmUspevaemost.adodsNapravl.Locate('ik_ved', dbcbeNapr.KeyValue,
-    [loPartialKey]);
-
-  if dmUspevaemost.adodsNapravl.FieldByName('dd_exam').AsDateTime = 0 then
-    dbdteExam.Value := date
-  else
-    dbdteExam.Value := dmUspevaemost.adodsNapravl.FieldByName('dd_exam')
-      .AsDateTime;
-
-  dbcbeEx.KeyValue := dmUspevaemost.adodsNapravl.FieldByName('itab_n').AsString;
-  dbcbeMark.KeyValue := dmUspevaemost.adodsNapravl.FieldByName('cosenca')
-    .AsInteger;
-  eTema.Text := dmUspevaemost.adodsNapravl.FieldByName('ctema').AsString;}
-end;
-
-procedure TftmNaprclose.SetStudZachIK(const Value: integer);
-begin
-  FStudZachIK := Value;
- // TUspevGroupController.Instance.SelectOpenedNapr();
+  TUspevGroupController.Instance.SelectOpenedNapr(Value);
 end;
 
 procedure TftmNaprclose.SetVed(const Value: integer);
@@ -149,6 +127,7 @@ end;
 
 procedure TftmNaprclose.dbcbeNaprChange(Sender: TObject);
 begin
+  FVedIK := IfNull(dbcbeNapr.KeyValue,0);
   if CheckFields then
   begin
     bbOk.Enabled := true;
@@ -173,73 +152,8 @@ begin
       Exit;
   end;
 
-
   TUspevGroupController.Instance.CloseNapr(FVedIK, dbcbeMark.KeyValue,
   dbcbeEx.KeyValue, eTema.Text, dbdteExam.Value);
-
- {
-  try
-    with dmUspevaemost.adospAppendUspev.Parameters do
-    begin
-      clear;
-      AddParameter;
-      items[0].Value := 0;
-      AddParameter;
-      items[1].Value := dbcbeNapr.KeyValue;
-      AddParameter;
-      items[2].Value := FStudZachIK;
-      AddParameter;
-      items[3].Value := dbcbeMark.KeyValue;
-      AddParameter;
-      items[4].Value := '';
-    end;
-    dmUspevaemost.adospAppendUspev.ExecProc;
-
-    with dmUspevaemost.adospAppendUspevKPTheme.Parameters do
-    begin
-      clear;
-      CreateParameter('@flag', ftInteger, pdInput, 0, 1);
-      CreateParameter('@Ik_zach', ftInteger, pdInput, 0, FStudZachIK);
-      CreateParameter('@Ik_ved', ftInteger, pdInput, 0, dbcbeNapr.KeyValue);
-      CreateParameter('@KPTheme', ftString, pdInput, 2000, eTema.Text);
-    end;
-    dmUspevaemost.adospAppendUspevKPTheme.ExecProc;
-
-    with dmUspevaemost.adospCloseNapr.Parameters do
-    begin
-      clear;
-      AddParameter;
-      items[0].Value := dbcbeNapr.KeyValue;
-      AddParameter;
-      items[1].Value := (dbdteExam.Value);
-      AddParameter;
-      items[2].Value := dbcbeEx.KeyValue;
-    end;
-
-    dmUspevaemost.adospCloseNapr.ExecProc;
-    dm.DBConnect.CommitTrans;
-
-  except
-    on E: EOleException do
-    begin
-      dm.DBConnect.RollbackTrans;
-      raise EApplicationException.Create
-        ('Невозможно сохранить оценку и закрыть направление! Возможно, оценка по этой дисциплине уже существует.',
-        EOleException.Create(E.Message, E.ErrorCode, '', '', 0));
-    end;
-    on E: Exception do
-    begin
-      dm.DBConnect.RollbackTrans;
-      raise EApplicationException.Create('Невозможно сохранить оценку!',
-        Exception.Create(E.Message));
-    end;
-
-  end;
-
-  dmUspevaemost.adodsNapravl.Active := false;
-  dmUspevaemost.adospPrepodVed.Parameters.clear;
-  dmUspevaemost.adospPrepodVed.ExecProc;
-  dmUspevaemost.adodsNapravl.Active := true;      }
 
 end;
 
@@ -249,3 +163,4 @@ begin
   close;
 end;
 
+End.

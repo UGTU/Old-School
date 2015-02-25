@@ -157,7 +157,7 @@ begin
   // dmUspevaemost.adospGetNomerNapr.ExecProc;
 
   dsPredmStud.DataSet := TUspevGroupController.Instance.GetContentDS
-    (FStudGrupKey, FZachIK);
+    (FStudGrupKey);
   dsNapr.DataSet := TUspevGroupController.Instance.GetNapravDS;
 
   if dmUspevaemost.adospGetNomerNapr.RecordCount <> 0 then

@@ -286,9 +286,9 @@ inherited fmUchPlan: TfmUchPlan
                 object Label12: TLabel
                   Left = 5
                   Top = 96
-                  Width = 131
+                  Width = 65
                   Height = 13
-                  Caption = #1054#1073#1097#1077#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1095#1072#1089#1086#1074':'
+                  Caption = #1042#1089#1077#1075#1086' '#1095#1072#1089#1086#1074':'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -12
@@ -336,7 +336,7 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object Label17: TLabel
-                  Left = 162
+                  Left = 82
                   Top = 96
                   Width = 6
                   Height = 13
@@ -539,7 +539,7 @@ inherited fmUchPlan: TfmUchPlan
                   ParentFont = False
                 end
                 object lblZachEd: TLabel
-                  Left = 162
+                  Left = 167
                   Top = 116
                   Width = 6
                   Height = 13
@@ -1047,7 +1047,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

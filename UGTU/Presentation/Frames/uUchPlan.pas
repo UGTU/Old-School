@@ -561,8 +561,8 @@ end;
 
 procedure TfmUchPlan.SetDiscTypeVisual(discType: Integer; showName: string);
 begin
-  Label12.Caption := 'Количество ' + showName + ' :';
-  Label17.Left := 112;
+  Label12.Caption := 'Всего ' + showName + ' :';
+  //Label17.Left := 117;
 
   Label13.Enabled := discType = typeTypicalDisc;
   Label18.Enabled := discType = typeTypicalDisc;

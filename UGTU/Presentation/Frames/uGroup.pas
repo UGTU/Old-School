@@ -206,6 +206,8 @@ type
     actRefreshVedStuds: TAction;
     dsVed: TDataSource;
     dsUspev: TDataSource;
+    N8: TMenuItem;
+    actAnnulNapr: TAction;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -332,6 +334,7 @@ type
       var Value: Variant; var UseText, Handled: Boolean);
     procedure actRefreshVedStudsUpdate(Sender: TObject);
     procedure actRefreshVedStudsExecute(Sender: TObject);
+    procedure actAnnulNaprExecute(Sender: TObject);
   private
     { Private declarations }
     Fik: Integer;
@@ -2432,6 +2435,20 @@ begin
     ikFac, ikSpec);
 end;
 
+procedure TfmGroup.actAnnulNaprExecute(Sender: TObject);
+begin
+  if dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['lClose'] = False then
+  begin
+    TUspevGroupController.Instance.AnnulNapr
+      (dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['ik_ved']);
+  end
+  else
+    ShowMessage
+      ('Невозможно аннулировать уже закрытое или аннулированное направление');
+  dmUspevaemost.adospGetAllVedNaprForDisc.Active := False;
+  dmUspevaemost.adospGetAllVedNaprForDisc.Active := True;
+end;
+
 procedure TfmGroup.actCancelDiplExecute(Sender: TObject);
 begin
   inherited;
@@ -2455,14 +2472,14 @@ begin
   end;
 
   ftmNaprClose := TftmNaprClose.Create(self);
-  ftmNaprClose.StudZachIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
-    ['ik_zach'];
+  ftmNaprClose.StudGrupIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
+    ['ik_studGrup'];
   ftmNaprClose.VedIK := ik_ved;
   ftmNaprClose.dbcbeNapr.Enabled := false;
-  ftmNaprClose.FormShow(Sender);
+  //ftmNaprClose.FormShow(Sender);
 
   //ftmNaprClose.LoadNapr;
-  //ftmNaprClose.showmodal;
+  ftmNaprClose.showmodal;
   ftmNaprClose.Free;
 
   dmUspevaemost.adospGetAllVedNaprForDisc.Active := false;
@@ -2967,7 +2984,7 @@ begin
   end;
 
   ftmNaprClose := TftmNaprClose.Create(self);
-  ftmNaprClose.StudZachIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
+  ftmNaprClose.StudGrupIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
     ['ik_zach'];
   ftmNaprClose.VedIK := ik_ved;
   ftmNaprclose.Mark := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['cosenca'];

@@ -1795,9 +1795,7 @@ end;
 procedure TfrmMain.actNaprCloseExecute(Sender: TObject);
 begin
   ftmNaprClose := TftmNaprClose.Create(self);
-
-  ftmNaprClose.StudZachIK := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data)
-    .RecordbookKey;
+  ftmNaprClose.StudGrupIK := TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data).StudGrupKey;
   ftmNaprClose.ShowModal;
   ftmNaprClose.Free;
 end;
@@ -1814,7 +1812,6 @@ begin
     Node.Collapse(true)
   else
     Node.Expand(false);
-
 end;
 
 procedure TfrmMain.N37Click(Sender: TObject);
@@ -2198,6 +2195,7 @@ begin
 
     // проверим, есть ли у группы учебный план
     if (TUchPlanController.Instance.getUchPlanForGroup(ik_grup) <> 0) then
+    begin
       //тогда открываем учебный план
       node:=DBDekTreeView_TEST1.Selected.Parent;
       DBDekTreeView_TEST1.Select(node);
@@ -2208,7 +2206,7 @@ begin
         fmUchPlan2.Group := ik_grup;
         alreadySpec:=true;
       end;
-        end;
+
     end
     else
     begin
@@ -3502,4 +3500,4 @@ begin
           .Node.Parent.data).ik);
       end;
 
-
+End.
