@@ -1044,11 +1044,6 @@
         <DCCReference Include="Domain\Classes\SpravkaHistory2014.pas"/>
         <DCCReference Include="Domain\Classes\Spravka2014.pas"/>
         <DCCReference Include="Domain\Classes\SpravkaReport2014.pas"/>
-        <DCCReference Include="Presentation\Frames\uMagaizneSprcop.pas">
-            <Form>fmSpr1</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
         <DCCReference Include="Domain\DBTV\DBTVSprObj.pas"/>
         <DCCReference Include="Presentation\Frames\uMagaizneSpr.pas">
             <Form>fmSpr</Form>

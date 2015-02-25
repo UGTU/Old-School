@@ -51,12 +51,15 @@ inherited fmSpr: TfmSpr
         Height = 17
         Caption = #1042#1089#1077
         TabOrder = 0
+        OnClick = rbAllDocClick
       end
       object cbSpec: TComboBox
         Left = 126
         Top = 36
         Width = 263
         Height = 21
+        ParentShowHint = False
+        ShowHint = False
         TabOrder = 1
       end
       object cbGroup: TComboBox
@@ -145,6 +148,7 @@ inherited fmSpr: TfmSpr
         Height = 17
         Caption = #1054#1090#1089#1086#1088#1090#1080#1088#1086#1074#1072#1090#1100
         TabOrder = 6
+        OnClick = rbSortClick
       end
     end
     object pcDocuments: TPageControl
@@ -155,30 +159,105 @@ inherited fmSpr: TfmSpr
       ActivePage = TabSheet1
       Align = alTop
       TabOrder = 1
-      ExplicitLeft = 4
-      ExplicitTop = 130
       object TabSheet1: TTabSheet
         Caption = #1055#1086' '#1084#1077#1089#1090#1091' '#1090#1088#1077#1073#1086#1074#1072#1085#1080#1103
+        object DBGridEh1: TDBGridEh
+          Left = 0
+          Top = 0
+          Width = 689
+          Height = 409
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          TabOrder = 0
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
+        object DBGridEh6: TDBGridEh
+          Left = 2
+          Top = 3
+          Width = 689
+          Height = 409
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          TabOrder = 1
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
       end
       object tsPF: TTabSheet
         Caption = #1055#1060
         ImageIndex = 1
+        object DBGridEh2: TDBGridEh
+          Left = 2
+          Top = 3
+          Width = 689
+          Height = 409
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          TabOrder = 0
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
       end
       object tsStatement: TTabSheet
         Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1077' ('#1072#1082#1072#1076#1077#1084' '#1089#1087#1088')'
         ImageIndex = 2
+        object DBGridEh3: TDBGridEh
+          Left = 2
+          Top = 3
+          Width = 689
+          Height = 409
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          TabOrder = 0
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
       end
       object tsTranscriptOfRecords: TTabSheet
         Caption = #1040#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1072#1103' '#1089#1087#1088#1072#1074#1082#1072
         ImageIndex = 3
+        object DBGridEh4: TDBGridEh
+          Left = 2
+          Top = 3
+          Width = 689
+          Height = 409
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          TabOrder = 0
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
       end
       object tsSprChallenge: TTabSheet
         Caption = #1057#1087#1088#1072#1074#1082#1072'-'#1074#1099#1079#1086#1074
         ImageIndex = 4
+        object DBGridEh5: TDBGridEh
+          Left = 2
+          Top = 3
+          Width = 689
+          Height = 409
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          TabOrder = 0
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
       end
       object TabSheet6: TTabSheet
         Caption = #1059#1074#1077#1076#1086#1084#1083#1077#1085#1080#1077' '#1087#1086' '#1085#1077#1091#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1080
         ImageIndex = 5
+        object DBGridEh7: TDBGridEh
+          Left = 2
+          Top = 3
+          Width = 689
+          Height = 409
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          TabOrder = 0
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
       end
     end
   end

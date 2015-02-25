@@ -414,7 +414,6 @@ uses
   SpravkaHistory2014 in 'Domain\Classes\SpravkaHistory2014.pas',
   Spravka2014 in 'Domain\Classes\Spravka2014.pas',
   SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas',
-  uMagaizneSprcop in 'Presentation\Frames\uMagaizneSprcop.pas' {fmSpr1: TFrame},
   DBTVSprObj in 'Domain\DBTV\DBTVSprObj.pas',
   uMagaizneSpr in 'Presentation\Frames\uMagaizneSpr.pas' {fmSpr: TFrame};
 
