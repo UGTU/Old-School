@@ -2261,7 +2261,7 @@ if MessageBox(Handle, 'Вы уверены, что хотите удалить заявление абитуриента?','И
 then begin
   dmAbiturientAction.aspAbitDelPostup.Active:=false;
   dmAbiturientAction.aspAbitDelPostup.Parameters.Clear;
-  dmAbiturientAction.aspAbitDelPostup.Parameters.CreateParameter('@NN_abit',ftinteger,pdInput,0,
+  dmAbiturientAction.aspAbitDelPostup.Parameters.CreateParameter('@NN_abit',ftinteger,pdInput,4,
     TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).NNAbit);
 try
   dmAbiturientAction.aspAbitDelPostup.ExecProc;
