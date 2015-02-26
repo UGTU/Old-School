@@ -7,7 +7,7 @@ inherited frmAddExamDialog: TfrmAddExamDialog
   OldCreateOrder = True
   OnShow = FormShow
   ExplicitWidth = 274
-  ExplicitHeight = 265
+  ExplicitHeight = 262
   PixelsPerInch = 96
   TextHeight = 13
   object Label5: TLabel [0]
@@ -131,6 +131,7 @@ inherited frmAddExamDialog: TfrmAddExamDialog
     Top = 28
     Width = 238
     Height = 19
+    DataField = ''
     DropDownBox.Rows = 20
     EditButtons = <>
     Flat = True
@@ -146,6 +147,7 @@ inherited frmAddExamDialog: TfrmAddExamDialog
     Top = 73
     Width = 238
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_sdach'
@@ -160,6 +162,7 @@ inherited frmAddExamDialog: TfrmAddExamDialog
     Top = 115
     Width = 238
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 3
@@ -171,6 +174,7 @@ inherited frmAddExamDialog: TfrmAddExamDialog
     Width = 238
     Height = 19
     Alignment = taLeftJustify
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 4

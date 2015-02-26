@@ -1,21 +1,21 @@
 inherited fmGroup: TfmGroup
-  Width = 692
+  Width = 703
   Height = 646
   ParentShowHint = False
   ShowHint = True
-  ExplicitWidth = 692
+  ExplicitWidth = 703
   ExplicitHeight = 646
   inherited Panel1: TPanel
-    Width = 692
+    Width = 703
     Height = 613
-    ExplicitWidth = 692
+    ExplicitWidth = 703
     ExplicitHeight = 613
     object pcMain: TPageControl
       Left = 2
       Top = 2
-      Width = 688
+      Width = 699
       Height = 609
-      ActivePage = tsAtt
+      ActivePage = tsVed
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -26,7 +26,7 @@ inherited fmGroup: TfmGroup
         object dbgStudList: TDBGridEh
           Left = 0
           Top = 29
-          Width = 680
+          Width = 691
           Height = 549
           Align = alClient
           AutoFitColWidths = True
@@ -45,7 +45,7 @@ inherited fmGroup: TfmGroup
         object ToolBar2: TToolBar
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 29
           Images = frmMain.ImageList1
           TabOrder = 1
@@ -335,7 +335,7 @@ inherited fmGroup: TfmGroup
         object dbgrdBRSAtt: TDBGridEh
           Left = 0
           Top = 81
-          Width = 680
+          Width = 691
           Height = 467
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
@@ -438,7 +438,7 @@ inherited fmGroup: TfmGroup
         object dbgrdBRSExam: TDBGridEh
           Left = 0
           Top = 81
-          Width = 680
+          Width = 691
           Height = 467
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
@@ -560,7 +560,7 @@ inherited fmGroup: TfmGroup
         object ToolBar3: TToolBar
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 27
           ButtonWidth = 29
           Images = ilMain
@@ -605,13 +605,13 @@ inherited fmGroup: TfmGroup
         object Panel4: TPanel
           Left = 0
           Top = 27
-          Width = 680
+          Width = 691
           Height = 54
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            680
+            691
             54)
           object Label9: TLabel
             Left = 8
@@ -677,7 +677,7 @@ inherited fmGroup: TfmGroup
           object dbcmbxDisc: TDBLookupComboboxEh
             Left = 337
             Top = 4
-            Width = 337
+            Width = 348
             Height = 19
             Anchors = [akLeft, akTop, akRight]
             DataField = ''
@@ -716,13 +716,13 @@ inherited fmGroup: TfmGroup
           object pnlBRS: TPanel
             Left = 3
             Top = 25
-            Width = 718
+            Width = 729
             Height = 32
             Anchors = [akLeft, akTop, akRight]
             BevelOuter = bvNone
             TabOrder = 3
             DesignSize = (
-              718
+              729
               32)
             object Label16: TLabel
               Left = 244
@@ -742,7 +742,7 @@ inherited fmGroup: TfmGroup
             object dbcbeExaminer: TDBLookupComboboxEh
               Left = 334
               Top = 4
-              Width = 337
+              Width = 348
               Height = 19
               Anchors = [akLeft, akTop, akRight]
               DataField = ''
@@ -773,16 +773,16 @@ inherited fmGroup: TfmGroup
         object Panel5: TPanel
           Left = 0
           Top = 548
-          Width = 680
+          Width = 691
           Height = 30
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            680
+            691
             30)
           object BtnCancelAtt: TBitBtn
-            Left = 362
+            Left = 373
             Top = 5
             Width = 143
             Height = 25
@@ -819,7 +819,7 @@ inherited fmGroup: TfmGroup
             OnClick = BtnCancelAttClick
           end
           object BtnSaveAtt: TBitBtn
-            Left = 510
+            Left = 521
             Top = 5
             Width = 159
             Height = 25
@@ -876,7 +876,7 @@ inherited fmGroup: TfmGroup
         object dbgeAtt: TDBGridEh
           Left = 0
           Top = 84
-          Width = 680
+          Width = 691
           Height = 464
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
@@ -968,16 +968,16 @@ inherited fmGroup: TfmGroup
         object Panel10: TPanel
           Left = 0
           Top = 548
-          Width = 680
+          Width = 691
           Height = 30
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            680
+            691
             30)
           object bCancelAtt: TBitBtn
-            Left = 362
+            Left = 373
             Top = 5
             Width = 143
             Height = 25
@@ -1014,7 +1014,7 @@ inherited fmGroup: TfmGroup
             OnClick = BtnCancelAttClick
           end
           object bSaveAtt: TBitBtn
-            Left = 510
+            Left = 521
             Top = 5
             Width = 159
             Height = 25
@@ -1065,7 +1065,7 @@ inherited fmGroup: TfmGroup
         object ToolBar7: TToolBar
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 22
           Images = ilMain
           ParentShowHint = False
@@ -1095,13 +1095,13 @@ inherited fmGroup: TfmGroup
         object pAttTop: TPanel
           Left = 0
           Top = 22
-          Width = 680
+          Width = 691
           Height = 62
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 3
           DesignSize = (
-            680
+            691
             62)
           object Label19: TLabel
             Left = 149
@@ -1148,7 +1148,7 @@ inherited fmGroup: TfmGroup
           object dbcbeDisc: TDBLookupComboboxEh
             Left = 382
             Top = 9
-            Width = 294
+            Width = 305
             Height = 19
             Anchors = [akLeft, akTop, akRight]
             DataField = ''
@@ -1165,7 +1165,7 @@ inherited fmGroup: TfmGroup
           object dblcbPrepod: TDBLookupComboboxEh
             Left = 382
             Top = 35
-            Width = 294
+            Width = 305
             Height = 19
             Anchors = [akLeft, akTop, akRight]
             DataField = ''
@@ -1275,7 +1275,7 @@ inherited fmGroup: TfmGroup
         object dbgrdVed: TDBGridEh
           Left = 0
           Top = 84
-          Width = 680
+          Width = 691
           Height = 464
           Align = alClient
           AllowedOperations = [alopUpdateEh]
@@ -1387,7 +1387,7 @@ inherited fmGroup: TfmGroup
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 29
           Images = ilMain
           ParentShowHint = False
@@ -1469,13 +1469,13 @@ inherited fmGroup: TfmGroup
         object Panel2: TPanel
           Left = 0
           Top = 548
-          Width = 680
+          Width = 691
           Height = 30
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            680
+            691
             30)
           object lVinost: TLabel
             Left = 192
@@ -1496,7 +1496,7 @@ inherited fmGroup: TfmGroup
             OnClick = dbcbxClosedClick
           end
           object btnCancelVed: TBitBtn
-            Left = 369
+            Left = 380
             Top = 5
             Width = 143
             Height = 25
@@ -1533,7 +1533,7 @@ inherited fmGroup: TfmGroup
             OnClick = btnCancelVedClick
           end
           object btnSaveVed: TBitBtn
-            Left = 519
+            Left = 530
             Top = 5
             Width = 159
             Height = 25
@@ -1574,13 +1574,13 @@ inherited fmGroup: TfmGroup
         object Panel3: TPanel
           Left = 0
           Top = 29
-          Width = 680
+          Width = 691
           Height = 55
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 3
           DesignSize = (
-            680
+            691
             55)
           object Label1: TLabel
             Left = 150
@@ -1604,7 +1604,7 @@ inherited fmGroup: TfmGroup
             Caption = #1055#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1100':'
           end
           object Label5: TLabel
-            Left = 544
+            Left = 555
             Top = 33
             Width = 30
             Height = 13
@@ -1622,7 +1622,7 @@ inherited fmGroup: TfmGroup
           object dbcmbxPrepodVed: TDBLookupComboboxEh
             Left = 221
             Top = 30
-            Width = 316
+            Width = 327
             Height = 19
             Anchors = [akLeft, akTop, akRight]
             DataField = ''
@@ -1637,7 +1637,7 @@ inherited fmGroup: TfmGroup
             OnChange = dbcmbxPrepodVedChange
           end
           object dbdteEx: TDBDateTimeEditEh
-            Left = 577
+            Left = 588
             Top = 30
             Width = 92
             Height = 19
@@ -1668,7 +1668,7 @@ inherited fmGroup: TfmGroup
           object dbcbVed: TDBLookupComboboxEh
             Left = 221
             Top = 5
-            Width = 449
+            Width = 460
             Height = 19
             Anchors = [akLeft, akTop, akRight]
             DataField = ''
@@ -1730,17 +1730,17 @@ inherited fmGroup: TfmGroup
         object Panel6: TPanel
           Left = 0
           Top = 548
-          Width = 680
+          Width = 691
           Height = 30
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 0
           Visible = False
           DesignSize = (
-            680
+            691
             30)
           object BitBtn1: TBitBtn
-            Left = 402
+            Left = 413
             Top = 5
             Width = 143
             Height = 25
@@ -1777,7 +1777,7 @@ inherited fmGroup: TfmGroup
             OnClick = BtnCancelAttClick
           end
           object BitBtn2: TBitBtn
-            Left = 550
+            Left = 561
             Top = 5
             Width = 159
             Height = 25
@@ -1817,7 +1817,7 @@ inherited fmGroup: TfmGroup
         object dbgrdNapr: TDBGridEh
           Left = 0
           Top = 57
-          Width = 680
+          Width = 691
           Height = 491
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
@@ -1919,7 +1919,7 @@ inherited fmGroup: TfmGroup
         object ToolBar4: TToolBar
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 27
           Images = ilMain
           ParentShowHint = False
@@ -1954,13 +1954,13 @@ inherited fmGroup: TfmGroup
         object Panel7: TPanel
           Left = 0
           Top = 27
-          Width = 680
+          Width = 691
           Height = 30
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 3
           DesignSize = (
-            680
+            691
             30)
           object Label7: TLabel
             Left = 5
@@ -2018,7 +2018,7 @@ inherited fmGroup: TfmGroup
           object dbcbNapr: TDBLookupComboboxEh
             Left = 194
             Top = 5
-            Width = 480
+            Width = 491
             Height = 19
             Anchors = [akLeft, akTop, akRight]
             DataField = ''
@@ -2040,7 +2040,7 @@ inherited fmGroup: TfmGroup
         object sgUspev: TStringGrid
           Left = 0
           Top = 27
-          Width = 680
+          Width = 691
           Height = 521
           Align = alClient
           BevelKind = bkFlat
@@ -2057,7 +2057,7 @@ inherited fmGroup: TfmGroup
         object ToolBar6: TToolBar
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 27
           Images = ilMain
           ParentShowHint = False
@@ -2156,7 +2156,7 @@ inherited fmGroup: TfmGroup
         object Panel9: TPanel
           Left = 0
           Top = 548
-          Width = 680
+          Width = 691
           Height = 30
           Align = alBottom
           TabOrder = 3
@@ -2330,7 +2330,7 @@ inherited fmGroup: TfmGroup
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 26
           ButtonWidth = 29
           Caption = 'ToolBar1'
@@ -2357,7 +2357,7 @@ inherited fmGroup: TfmGroup
         object dbgDiplom: TDBGridEh
           Left = 0
           Top = 26
-          Width = 680
+          Width = 691
           Height = 522
           Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
           Align = alClient
@@ -2515,16 +2515,16 @@ inherited fmGroup: TfmGroup
         object Panel8: TPanel
           Left = 0
           Top = 548
-          Width = 680
+          Width = 691
           Height = 30
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            680
+            691
             30)
           object btnCancelDiplom: TBitBtn
-            Left = 361
+            Left = 372
             Top = 5
             Width = 143
             Height = 25
@@ -2561,7 +2561,7 @@ inherited fmGroup: TfmGroup
             TabOrder = 0
           end
           object btnSaveDiplom: TBitBtn
-            Left = 510
+            Left = 521
             Top = 5
             Width = 159
             Height = 25
@@ -2606,49 +2606,49 @@ inherited fmGroup: TfmGroup
         inline fmAverageBallsGroup: TfmAverageBalls
           Left = 0
           Top = 0
-          Width = 680
+          Width = 691
           Height = 578
           Align = alClient
           TabOrder = 0
-          ExplicitWidth = 680
+          ExplicitWidth = 691
           ExplicitHeight = 578
           inherited Panel1: TPanel
-            Width = 680
+            Width = 691
             Height = 541
-            ExplicitWidth = 680
+            ExplicitWidth = 691
             ExplicitHeight = 541
             inherited tbAcadem: TToolBar
-              Width = 676
-              ExplicitWidth = 676
+              Width = 687
+              ExplicitWidth = 687
             end
             inherited lvBalls: TListView
-              Width = 676
+              Width = 687
               Height = 482
-              ExplicitWidth = 676
+              ExplicitWidth = 687
               ExplicitHeight = 482
             end
             inherited pnlFilters: TPanel
-              Width = 676
-              ExplicitWidth = 676
+              Width = 687
+              ExplicitWidth = 687
             end
           end
           inherited pnlSave: TPanel
             Top = 541
-            Width = 680
+            Width = 691
             ExplicitTop = 541
-            ExplicitWidth = 680
+            ExplicitWidth = 691
             inherited bbSave: TBitBtn
-              Left = 503
-              ExplicitLeft = 503
+              Left = 514
+              ExplicitLeft = 514
             end
             inherited bbUndo: TBitBtn
-              Left = 335
-              ExplicitLeft = 335
+              Left = 346
+              ExplicitLeft = 346
             end
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400440110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400380110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2793,25 +2793,22 @@ inherited fmGroup: TfmGroup
   end
   inherited pnlSave: TPanel
     Top = 613
-    Width = 692
+    Width = 703
     Height = 33
     Visible = False
     ExplicitTop = 613
-    ExplicitWidth = 692
+    ExplicitWidth = 703
     ExplicitHeight = 33
-    DesignSize = (
-      692
-      33)
     inherited bbSave: TBitBtn
-      Left = 525
+      Left = 536
       Top = 2
-      ExplicitLeft = 525
+      ExplicitLeft = 536
       ExplicitTop = 2
     end
     inherited bbUndo: TBitBtn
-      Left = 199
+      Left = 210
       Top = 2
-      ExplicitLeft = 199
+      ExplicitLeft = 210
       ExplicitTop = 2
     end
   end
@@ -2824,7 +2821,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3495,7 +3492,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

@@ -218,6 +218,7 @@ type
     pnlTree: TPanel;
     pnlImage: TPanel;
     actGazpromStatement: TAction;
+    actPostupDelete: TAction;
     procedure FormCreate(Sender: TObject);
     
     procedure DBDekTreeView_TEST1Change(Sender: TObject; Node: TTreeNode);
@@ -351,6 +352,7 @@ type
     procedure actFilterKafExecute(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure actGazpromStatementExecute(Sender: TObject);
+    procedure actPostupDeleteExecute(Sender: TObject);
 
 
   private
@@ -1886,7 +1888,7 @@ begin
       if (FFrame is TfmSpec) then with (FFrame as TfmSpec) do
       begin
         PageControl1.ActivePageIndex:=6;
-        fmUchPlan2.dbcbGroup.KeyValue := ik_grup;
+        fmUchPlan2.Group := ik_grup;
         alreadySpec:=true;
       end;
     end
@@ -2144,7 +2146,7 @@ end;
 
 procedure TfrmMain.actDocsRetrieveExecute(Sender: TObject);
 begin
-if MessageBox(Handle, 'После этой операции вы больше не сможете редактировать заявление студента! Вы уверены, что хотите провести операцию?','ИС "УГТУ"',
+if MessageBox(Handle, 'Вы уверены, что хотите провести операцию?','ИС "УГТУ"',
           MB_YESNO) = IDYES
 then begin
 
@@ -2152,11 +2154,11 @@ then begin
 dm.adodsPostupView.CommandType:=cmdText;
 dm.adodsPostupView.CommandText:='select * from Abit_Postup_View where ncode='''+
 inttostr(TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject).id)+'''';
-dm.adodsPostupView.Active:=true;  
+dm.adodsPostupView.Active:=true;
   dm.adodsPostupView.First;
 while (not dm.adodsPostupView.FieldValues['ik_zach']<3)and(not dm.adodsPostupView.Eof) do
   dm.adodsPostupView.Next;  }
- 
+
 
 if (not TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).onlyReading) then begin
   dmAbiturientAction.aspDocsRetrieve.Active:=false;
@@ -2167,7 +2169,7 @@ if (not TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).onlyReading) th
 try
   dmAbiturientAction.aspDocsRetrieve.ExecProc;
 except
-  MessageBox(Handle, 'Произошла ошибка при удалении записи.','ИС "УГТУ"',
+  MessageBox(Handle, 'Произошла ошибка при возврате документов абитуриента.','ИС "УГТУ"',
           MB_OK);
 end;
   DBDekTreeView_TEST1.RefreshNodeExecute(DBDekTreeView_TEST1.Selected);
@@ -2259,6 +2261,30 @@ yearnode:=TDBNodeAbitYearObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Paren
 frmAbitConfirm.HasAddSpec:=yearnode.HasAddSpec;
 frmAbitConfirm.ShowModal;
 frmAbitConfirm.Free;
+
+end;
+
+procedure TfrmMain.actPostupDeleteExecute(Sender: TObject);
+begin
+if MessageBox(Handle, 'Вы уверены, что хотите удалить заявление абитуриента?','ИС "УГТУ"',
+          MB_YESNO) = IDYES
+then begin
+  dmAbiturientAction.aspAbitDelPostup.Active:=false;
+  dmAbiturientAction.aspAbitDelPostup.Parameters.Clear;
+  dmAbiturientAction.aspAbitDelPostup.Parameters.CreateParameter('@NN_abit',ftinteger,pdInput,4,
+    TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).NNAbit);
+try
+  dmAbiturientAction.aspAbitDelPostup.ExecProc;
+except
+  MessageBox(Handle, 'Произошла ошибка при удалении заявления.','ИС "УГТУ"',
+          MB_OK);
+  //actTreeRefreshAction.Execute;
+
+
+end;
+  DBDekTreeView_TEST1.Selected := DBDekTreeView_TEST1.Selected.Parent;
+  DBDekTreeView_TEST1.RefreshNodeExecute(DBDekTreeView_TEST1.Selected);
+end;
 
 end;
 

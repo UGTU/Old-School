@@ -123,25 +123,25 @@ inherited ftmNaprclose: TftmNaprclose
     Top = 176
     Width = 395
     ExplicitTop = 176
-    ExplicitWidth = 336
+    ExplicitWidth = 395
     inherited bbOK: TBitBtn
       Left = 137
       Top = 6
       Enabled = False
-      ExplicitLeft = 78
+      ExplicitLeft = 137
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
       Left = 303
       Top = 6
       Enabled = False
-      ExplicitLeft = 244
+      ExplicitLeft = 303
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
       Left = 220
       Top = 6
-      ExplicitLeft = 161
+      ExplicitLeft = 220
       ExplicitTop = 6
     end
     inherited bbSprav: TBitBtn
@@ -164,9 +164,9 @@ inherited ftmNaprclose: TftmNaprclose
     OnChange = dbcbeNaprChange
   end
   object dbcbeMark: TDBLookupComboboxEh [13]
-    Left = 8
+    Left = 13
     Top = 103
-    Width = 170
+    Width = 165
     Height = 19
     DataField = ''
     EditButtons = <>

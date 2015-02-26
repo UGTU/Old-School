@@ -131,6 +131,7 @@ inherited frmAbitMove: TfrmAbitMove
       Width = 613
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       Enabled = False
       EditButtons = <>
       Flat = True
@@ -146,6 +147,7 @@ inherited frmAbitMove: TfrmAbitMove
       Width = 495
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       Enabled = False
       EditButtons = <>
       Flat = True
@@ -160,6 +162,7 @@ inherited frmAbitMove: TfrmAbitMove
       Top = 77
       Width = 112
       Height = 19
+      DynProps = <>
       Enabled = False
       EditButtons = <>
       Flat = True
@@ -251,6 +254,7 @@ inherited frmAbitMove: TfrmAbitMove
       Width = 613
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'NNrecord'
@@ -265,6 +269,7 @@ inherited frmAbitMove: TfrmAbitMove
       Width = 495
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'Ik_kat_zach'
@@ -278,6 +283,7 @@ inherited frmAbitMove: TfrmAbitMove
       Top = 77
       Width = 112
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh

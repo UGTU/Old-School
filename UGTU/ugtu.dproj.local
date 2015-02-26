@@ -167,7 +167,6 @@
     <File Path="Domain\DBTV\DBTVSpecObj.pas"/>
     <File Path="Domain\DBTV\DBTVSpecRecObj.pas"/>
     <File Path="Domain\DBTV\DBTVSpecZachObj.pas"/>
-    <File Path="Domain\DBTV\DBTVSprObj.pas"/>
     <File Path="Domain\DBTV\DBTVStudAbitobj.pas"/>
     <File Path="Domain\DBTV\DBTVStudobj.pas"/>
     <File Path="Domain\DBTV\DBTVTeacherObj.pas"/>
@@ -596,8 +595,6 @@
     <File Path="Presentation\Frames\uUni.dfm"/>
     <File Path="Presentation\Frames\uUserFrame.pas"/>
     <File Path="Presentation\Frames\uUserFrame.dfm"/>
-    <File Path="Presentation\Frames\uMagaizneSpr.pas"/>
-    <File Path="Presentation\Frames\uMagaizneSpr.dfm"/>
     <File Path="Utils"/>
     <File Path="Utils\ShareAPG"/>
     <File Path="Utils\ShareAPG\AppConst.pas"/>
@@ -634,25 +631,14 @@
     <File Path="Utils\uPhotoBooth.pas"/>
   </ProjectSortOrder>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.257,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.533,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\uMagaizneSpr.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.422,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.548,E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSpr.dfm=E:\GitHub\Old-School\UGTU\Presentation\Frames\MagaineSpr.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.533,E:\GitHub\Old-School\UGTU\Unit1.dfm=E:\GitHub\Old-School\UGTU\uMagaizneSpr.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.367,E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSpr.dfm=E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSprcop.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.329,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.179,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.364,E:\GitHub\Old-School\UGTU\uMagaizneSpr.pas=E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSpr.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.355,E:\GitHub\Old-School\UGTU\Presentation\Frames\MagaineSpr.dfm=E:\GitHub\Old-School\UGTU\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.548,E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSpr.pas=E:\GitHub\Old-School\UGTU\Presentation\Frames\MagaineSpr.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.306,E:\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSprObj.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.367,E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSpr.pas=E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSprcop.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.298,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.076,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\Spravka2014.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.366,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaReport2014.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.355,E:\GitHub\Old-School\UGTU\Presentation\Frames\MagaineSpr.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.364,E:\GitHub\Old-School\UGTU\uMagaizneSpr.dfm=E:\GitHub\Old-School\UGTU\Presentation\Frames\uMagaizneSpr.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.076,E:\GitHub\Old-School\UGTU\Domain\Classes\Spravka2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.257,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.394,E:\Projects\GitHub\Old-School\UGTU\Unit1.pas=E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.489,E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.816,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.366,E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaReport2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

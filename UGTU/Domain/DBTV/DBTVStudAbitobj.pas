@@ -174,9 +174,10 @@ MilitaryState:=AdoDataSet.FieldValues['cvoen_zvanie'];
 if (AdoDataSet.FieldValues['ik_zach']<>NULL) then
 RecruitState := AdoDataSet.FieldValues['ik_zach'];
 
-if (AdoDataSet.FieldValues['ik_zach']<>NULL) then
-if (AdoDataSet.FieldValues['ik_zach']=3)or(AdoDataSet.FieldValues['ik_zach']=2) then
-onlyReading:=true else
+//сейчас все абитуриенты могут редактироваться
+//if (AdoDataSet.FieldValues['ik_zach']<>NULL) then
+//if (AdoDataSet.FieldValues['ik_zach']=3)or(AdoDataSet.FieldValues['ik_zach']=2) then
+//onlyReading:=true else
 onlyReading:=false;
 
 SignAdress:=adr;
