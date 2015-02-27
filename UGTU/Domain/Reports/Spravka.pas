@@ -74,7 +74,7 @@ begin
     begin
       Items[first_str, 5] := '№ Приказа';
       Items[first_str, 7] := 'Дата';
-      Items[first_str, 11] := 'Тип приказа';
+      Items[first_str, 12] := 'Тип приказа';
     end;
 
 
