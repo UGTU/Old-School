@@ -1363,8 +1363,8 @@ object dmUspevaemost: TdmUspevaemost
         Precision = 10
         Value = Null
       end>
-    Left = 383
-    Top = 507
+    Left = 375
+    Top = 499
   end
   object dsGetAttVidZan: TDataSource
     DataSet = adospGetAttVidZan

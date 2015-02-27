@@ -219,6 +219,7 @@ type
     pnlImage: TPanel;
     actGazpromStatement: TAction;
     actPostupDelete: TAction;
+    actChangePlanFromOtherGroup: TAction;
     procedure FormCreate(Sender: TObject);
     
     procedure DBDekTreeView_TEST1Change(Sender: TObject; Node: TTreeNode);
@@ -353,6 +354,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure actGazpromStatementExecute(Sender: TObject);
     procedure actPostupDeleteExecute(Sender: TObject);
+    procedure actChangePlanFromOtherGroupExecute(Sender: TObject);
 
 
   private
@@ -395,7 +397,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka, uNagruzk
   uDMAbiturientZachisl, uAbitZachislenieController, uNagruzkaPrepAllInfo,
   uSheduleSemester, uAbitOtchetsController,udmUspevaemost, SheduleController,
   uNagruzkaSemester, ApplicationController,uAbitConfirm, udmCauses, DBTVInviteObj,
-  HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj,HOST_Projivaysh,DBTVHabitatsPersonObj,
+  HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj,HOST_Projivaysh,DBTVHabitatsPersonObj, uChangePlanFromGrup,
   uPerson;
 
 {$R *.dfm}
@@ -2261,7 +2263,7 @@ if MessageBox(Handle, 'Вы уверены, что хотите удалить заявление абитуриента?','И
 then begin
   dmAbiturientAction.aspAbitDelPostup.Active:=false;
   dmAbiturientAction.aspAbitDelPostup.Parameters.Clear;
-  dmAbiturientAction.aspAbitDelPostup.Parameters.CreateParameter('@NN_abit',ftinteger,pdInput,4,
+  dmAbiturientAction.aspAbitDelPostup.Parameters.CreateParameter('@NN_abit',ftinteger,pdInput,0,
     TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).NNAbit);
 try
   dmAbiturientAction.aspAbitDelPostup.ExecProc;
@@ -2879,6 +2881,14 @@ end;
 procedure TfrmMain.actCurrentReturnExecute(Sender: TObject);
 begin
   (ACtiveFrame as TfmZach).actAbitReturnExecuteExecute(Sender);
+end;
+
+procedure TfrmMain.actChangePlanFromOtherGroupExecute(Sender: TObject);
+begin
+  //
+  frmChangeGrupPlan := TfrmChangeGrupPlan.Create(Self);
+  frmChangeGrupPlan.GrupIK := ((DBDekTreeView_TEST1.SelectedObject)as TDBNodeGroupObject).ik;
+  frmChangeGrupPlan.ShowModal;
 end;
 
 procedure TfrmMain.actChangeSemFilterExecute(Sender: TObject);
