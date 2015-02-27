@@ -1,15 +1,25 @@
-unit uMagaizneSpr;
+unit uMagaizneDoc;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,uBaseFrame, Vcl.ComCtrls, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
-  DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh , uBaseFrame;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uBaseFrame, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  GridsEh, DBAxisGridsEh, DBGridEh, Vcl.ComCtrls;
 
 type
-  TfmSpr = class(TfmBase)
+  TfmDoc = class(TfmBase)
+    pcDocuments: TPageControl;
+    TabSheet1: TTabSheet;
+    tsPF: TTabSheet;
+    DBGridEh2: TDBGridEh;
+    tsStatement: TTabSheet;
+    DBGridEh3: TDBGridEh;
+    tsTranscriptOfRecords: TTabSheet;
+    DBGridEh4: TDBGridEh;
+    tsSprChallenge: TTabSheet;
+    DBGridEh5: TDBGridEh;
     Panel2: TPanel;
     lSpec: TLabel;
     lGroup: TLabel;
@@ -21,19 +31,10 @@ type
     cbStud: TComboBox;
     cbStatus: TComboBox;
     bbPrint: TBitBtn;
-    pcDocuments: TPageControl;
-    TabSheet1: TTabSheet;
-    tsPF: TTabSheet;
-    tsStatement: TTabSheet;
-    tsTranscriptOfRecords: TTabSheet;
-    tsSprChallenge: TTabSheet;
-    TabSheet6: TTabSheet;
     rbSort: TRadioButton;
     DBGridEh1: TDBGridEh;
-    DBGridEh2: TDBGridEh;
-    DBGridEh3: TDBGridEh;
-    DBGridEh4: TDBGridEh;
-    DBGridEh5: TDBGridEh;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
     DBGridEh6: TDBGridEh;
     DBGridEh7: TDBGridEh;
     procedure rbAllDocClick(Sender: TObject);
@@ -45,13 +46,13 @@ type
   end;
 
 var
-  fmSpr: TfmSpr;
+  fmDoc: TfmDoc;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfmSpr.rbAllDocClick(Sender: TObject);
+procedure TfmDoc.rbAllDocClick(Sender: TObject);
 begin
   inherited;
 //  cbSpec.Style.csDropDownList:=true;
@@ -60,7 +61,7 @@ begin
 //  cbStatus.Style.csDropDownList:=true;
 end;
 
-procedure TfmSpr.rbSortClick(Sender: TObject);
+procedure TfmDoc.rbSortClick(Sender: TObject);
 begin
   inherited;
 //  cbSpec.Style.csDropDownList:=false;

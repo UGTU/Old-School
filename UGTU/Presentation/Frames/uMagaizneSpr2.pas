@@ -1,4 +1,4 @@
-unit uMagaizneSpr;
+unit uMagaizneSpr2;
 
 interface
 
@@ -9,7 +9,7 @@ uses
   DynVarsEh, GridsEh, DBAxisGridsEh, DBGridEh , uBaseFrame;
 
 type
-  TfmSpr = class(TfmBase)
+  TfmSpr2 = class(TfmBase)
     Panel2: TPanel;
     lSpec: TLabel;
     lGroup: TLabel;
@@ -45,13 +45,13 @@ type
   end;
 
 var
-  fmSpr: TfmSpr;
+  fmSpr2: TfmSpr2;
 
 implementation
 
 {$R *.dfm}
 
-procedure TfmSpr.rbAllDocClick(Sender: TObject);
+procedure TfmSpr2.rbAllDocClick(Sender: TObject);
 begin
   inherited;
 //  cbSpec.Style.csDropDownList:=true;
@@ -60,7 +60,7 @@ begin
 //  cbStatus.Style.csDropDownList:=true;
 end;
 
-procedure TfmSpr.rbSortClick(Sender: TObject);
+procedure TfmSpr2.rbSortClick(Sender: TObject);
 begin
   inherited;
 //  cbSpec.Style.csDropDownList:=false;
