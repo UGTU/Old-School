@@ -93,9 +93,9 @@ begin
                   copystr1 := Copy(datebegin, 9, 10)+' '+str+' '+Copy(datebegin, 0, 4);
 
                   dateend := FReport.Historyes[num].datevh;
-                  posit := Pos('-', datebegin);
+                  posit := Pos('-', dateend);
                   str := GetMonthR(StrToInt(Copy(dateend, posit+1, 2)));
-                  copystr2 := Copy(datebegin, 9, 10)+' '+str+' '+Copy(dateend, 0, 4);
+                  copystr2 := Copy(dateend, 9, 10)+' '+str+' '+Copy(dateend, 0, 4);
                   Items[I, 7] := copystr1+' - ' + copystr2;
 
                 end
