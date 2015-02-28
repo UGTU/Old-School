@@ -54,6 +54,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 931
     Height = 27
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -61,7 +62,7 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
+    Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -5878,7 +5879,7 @@ object frmMain: TfrmMain
     end
   end
   object ppmDepNagr: TPopupMenu
-    Left = 472
+    Left = 448
     Top = 60
     object N91: TMenuItem
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100'...'
@@ -5899,8 +5900,8 @@ object frmMain: TfrmMain
     end
   end
   object ppmPrepNagr: TPopupMenu
-    Left = 551
-    Top = 124
+    Left = 479
+    Top = 60
     object N88: TMenuItem
       Action = actEditPrep
     end
