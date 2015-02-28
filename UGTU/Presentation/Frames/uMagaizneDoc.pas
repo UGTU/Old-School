@@ -59,20 +59,20 @@ implementation
 procedure TfmDoc.rbAllDocClick(Sender: TObject);
 begin
   inherited;
-//  cbSpec.Style.csDropDownList:=true;
-//  cbStud.Style.csDropDownList:=true;
-//  cbGroup.Style.csDropDownList:=true;
-//  cbStatus.Style.csDropDownList:=true;
+  dbcmbSpec.Enabled:=False;
+  dbcmbStud.Enabled:=False;
+  dbcmbGroup.Enabled:=False;
+  dbcmbStatus.Enabled:=False;
 end;
 
 procedure TfmDoc.rbSortClick(Sender: TObject);
 begin
   inherited;
   DMUgtuStructure.adodsSpec.Active := true;
-//  cbSpec.Style.csDropDownList:=false;
-//  cbStud.Style.csDropDownList:=false;
-//  cbGroup.Style.csDropDownList:=false;
-//  cbStatus.Style.csDropDownList:=false;
+  dbcmbSpec.Enabled:=true;
+  dbcmbStud.Enabled:=true;
+  dbcmbGroup.Enabled:=true;
+  dbcmbStatus.Enabled:=true;
 end;
 
 end.

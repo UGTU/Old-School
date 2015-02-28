@@ -135,7 +135,6 @@ inherited fmDoc: TfmDoc
       Height = 127
       Align = alTop
       TabOrder = 1
-      ExplicitTop = -4
       object lSpec: TLabel
         Left = 30
         Top = 44
@@ -170,7 +169,9 @@ inherited fmDoc: TfmDoc
         Width = 49
         Height = 17
         Caption = #1042#1089#1077
+        Checked = True
         TabOrder = 0
+        TabStop = True
         OnClick = rbAllDocClick
       end
       object bbPrint: TBitBtn
