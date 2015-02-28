@@ -54,6 +54,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 931
     Height = 27
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -61,7 +62,7 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
+    Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -515,7 +516,7 @@ object frmMain: TfrmMain
     Images = ImageList1
     OnExecute = alMainActionsExecute
     OnUpdate = alMainActionsUpdate
-    Left = 287
+    Left = 311
     Top = 142
     object actFamChg: TAction
       Category = 'catStudActs'
@@ -792,6 +793,12 @@ object frmMain: TfrmMain
       ImageIndex = 68
       OnExecute = actLevelUpExecute
     end
+    object actChangePlanFromOtherGroup: TAction
+      Category = 'catGroupAct'
+      Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1091#1095'. '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091
+      ImageIndex = 19
+      OnExecute = actChangePlanFromOtherGroupExecute
+    end
     object actAddDepPlan: TAction
       Category = 'catNagruzkaDep'
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1087#1083#1072#1085' '#1091#1095#1077#1073#1085#1086#1081' '#1085#1072#1075#1088#1091#1079#1082#1080'...'
@@ -1015,18 +1022,12 @@ object frmMain: TfrmMain
       ImageIndex = 36
       OnExecute = actPostupDeleteExecute
     end
-    object actChangePlanFromOtherGroup: TAction
-      Category = 'catGroupAct'
-      Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1091#1095'. '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091
-      ImageIndex = 19
-      OnExecute = actChangePlanFromOtherGroupExecute
-    end
   end
   object ImageList1: TImageList
     Left = 311
     Top = 82
     Bitmap = {
-      494C01014A006800980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014A0068009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3545,7 +3546,7 @@ object frmMain: TfrmMain
     Left = 262
     Top = 82
     Bitmap = {
-      494C010131004900980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101310049009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF
