@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uBaseFrame, Vcl.StdCtrls, Vcl.Buttons,
   Vcl.ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
-  GridsEh, DBAxisGridsEh, DBGridEh, Vcl.ComCtrls;
+  GridsEh, DBAxisGridsEh, DBGridEh, Vcl.ComCtrls,uDMUgtuStructure, Vcl.DBLookup,
+  Vcl.Mask, DBCtrlsEh, DBLookupEh;
 
 type
   TfmDoc = class(TfmBase)
@@ -26,10 +27,6 @@ type
     lStud: TLabel;
     lStatus: TLabel;
     rbAllDoc: TRadioButton;
-    cbSpec: TComboBox;
-    cbGroup: TComboBox;
-    cbStud: TComboBox;
-    cbStatus: TComboBox;
     bbPrint: TBitBtn;
     rbSort: TRadioButton;
     DBGridEh1: TDBGridEh;
@@ -37,8 +34,13 @@ type
     TabSheet3: TTabSheet;
     DBGridEh6: TDBGridEh;
     DBGridEh7: TDBGridEh;
+    dbcmbSpec: TDBLookupComboboxEh;
+    dbcmbStud: TDBLookupComboboxEh;
+    dbcmbGroup: TDBLookupComboboxEh;
+    dbcmbStatus: TDBLookupComboboxEh;
     procedure rbAllDocClick(Sender: TObject);
     procedure rbSortClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -52,6 +54,8 @@ implementation
 
 {$R *.dfm}
 
+
+
 procedure TfmDoc.rbAllDocClick(Sender: TObject);
 begin
   inherited;
@@ -64,6 +68,7 @@ end;
 procedure TfmDoc.rbSortClick(Sender: TObject);
 begin
   inherited;
+  DMUgtuStructure.adodsSpec.Active := true;
 //  cbSpec.Style.csDropDownList:=false;
 //  cbStud.Style.csDropDownList:=false;
 //  cbGroup.Style.csDropDownList:=false;
