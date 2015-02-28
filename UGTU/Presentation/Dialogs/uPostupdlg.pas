@@ -1001,9 +1001,7 @@ if Dataset.FieldValues['SchoolAverMark']<>Null then
 AbitList.AvgBall:=Dataset.FieldValues['SchoolAverMark'];
 if Dataset.FieldValues['IsMain']<>Null then
 AbitList.IsMain:=Dataset.FieldValues['IsMain'];
-if (Dataset.FieldValues['ik_type_zach']<>1)and(Dataset.FieldValues['ik_type_zach']<>8) then
-AbitList.closed:=true else
-AbitList.closed:=false;
+AbitList.closed:=onlyreading;
 
 AbitList.lAdditionalSpec:=TList.create;
 AbitList.lDelAdditionalSpec:=TList.create;

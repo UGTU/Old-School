@@ -226,6 +226,8 @@ type
     actCurrentKaf: TAction;
     pnlTree: TPanel;
     pnlImage: TPanel;
+    actPostupDelete: TAction;
+    actChangePlanFromOtherGroup: TAction;
     actGazpromStatement: TAction;
     procedure FormCreate(Sender: TObject);
 
@@ -357,6 +359,8 @@ type
     procedure actKatChangeExecute(Sender: TObject);
     procedure actFilterKafExecute(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure actPostupDeleteExecute(Sender: TObject);
+    procedure actChangePlanFromOtherGroupExecute(Sender: TObject);
     procedure actGazpromStatementExecute(Sender: TObject);
 
   private
@@ -2486,37 +2490,34 @@ begin
 end;
 
 procedure TfrmMain.actDocsRetrieveExecute(Sender: TObject);
-begin
-  if MessageBox(Handle,
-    'После этой операции вы больше не сможете редактировать заявление студента! Вы уверены, что хотите провести операцию?',
-    'ИС "УГТУ"', MB_YESNO) = IDYES then
+if MessageBox(Handle, 'Вы уверены, что хотите провести операцию?','ИС "УГТУ"',
+          MB_YESNO) = IDYES
+then begin
   begin
-
-    { dm.adodsPostupView.Active:=false;
-      dm.adodsPostupView.CommandType:=cmdText;
-      dm.adodsPostupView.CommandText:='select * from Abit_Postup_View where ncode='''+
-      inttostr(TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject).id)+'''';
-      dm.adodsPostupView.Active:=true;
-      dm.adodsPostupView.First;
-      while (not dm.adodsPostupView.FieldValues['ik_zach']<3)and(not dm.adodsPostupView.Eof) do
+{dm.adodsPostupView.Active:=false;
+dm.adodsPostupView.CommandType:=cmdText;
+dm.adodsPostupView.CommandText:='select * from Abit_Postup_View where ncode='''+
+inttostr(TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject).id)+'''';
+dm.adodsPostupView.Active:=true;
+  dm.adodsPostupView.First;
+while (not dm.adodsPostupView.FieldValues['ik_zach']<3)and(not dm.adodsPostupView.Eof) do
+  dm.adodsPostupView.Next;  }
       dm.adodsPostupView.Next; }
 
-    if (not TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.data).onlyReading)
-    then
-    begin
-      dmAbiturientAction.aspDocsRetrieve.Active := false;
-      dmAbiturientAction.aspDocsRetrieve.Parameters.Clear;
-      dmAbiturientAction.aspDocsRetrieve.Parameters.AddParameter;
-      dmAbiturientAction.aspDocsRetrieve.Parameters[0].Value :=
-        TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.data).NNAbit;
-      // dm.adodsPostupView.FieldValues['NN_abit'];
-      try
-        dmAbiturientAction.aspDocsRetrieve.ExecProc;
-      except
-        MessageBox(Handle, 'Произошла ошибка при удалении записи.',
-          'ИС "УГТУ"', MB_OK);
-      end;
-      DBDekTreeView_TEST1.RefreshNodeExecute(DBDekTreeView_TEST1.Selected);
+if (not TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).onlyReading) then begin
+  dmAbiturientAction.aspDocsRetrieve.Active:=false;
+  dmAbiturientAction.aspDocsRetrieve.Parameters.Clear;
+  dmAbiturientAction.aspDocsRetrieve.Parameters.AddParameter;
+  dmAbiturientAction.aspDocsRetrieve.Parameters[0].Value:=
+    TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).NNAbit;//dm.adodsPostupView.FieldValues['NN_abit'];
+try
+  dmAbiturientAction.aspDocsRetrieve.ExecProc;
+except
+  MessageBox(Handle, 'Произошла ошибка при возврате документов абитуриента.','ИС "УГТУ"',
+          MB_OK);
+end;
+  DBDekTreeView_TEST1.RefreshNodeExecute(DBDekTreeView_TEST1.Selected);
+end;
     end;
 
   end;
@@ -2619,6 +2620,30 @@ begin
   frmAbitConfirm.Free;
 
 end;
+procedure TfrmMain.actPostupDeleteExecute(Sender: TObject);
+begin
+if MessageBox(Handle, 'Вы уверены, что хотите удалить заявление абитуриента?','ИС "УГТУ"',
+          MB_YESNO) = IDYES
+then begin
+  dmAbiturientAction.aspAbitDelPostup.Active:=false;
+  dmAbiturientAction.aspAbitDelPostup.Parameters.Clear;
+  dmAbiturientAction.aspAbitDelPostup.Parameters.CreateParameter('@NN_abit',ftinteger,pdInput,0,
+    TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).NNAbit);
+try
+  dmAbiturientAction.aspAbitDelPostup.ExecProc;
+except
+  MessageBox(Handle, 'Произошла ошибка при удалении заявления.','ИС "УГТУ"',
+          MB_OK);
+  //actTreeRefreshAction.Execute;
+
+
+end;
+  DBDekTreeView_TEST1.Selected := DBDekTreeView_TEST1.Selected.Parent;
+  DBDekTreeView_TEST1.RefreshNodeExecute(DBDekTreeView_TEST1.Selected);
+end;
+
+end;
+
 
 procedure TfrmMain.actPostupDlgShowExecute(Sender: TObject);
 begin
@@ -3352,10 +3377,20 @@ begin
               [5].AsString;
             E.range['o9'] := dmStudentSelectionProcs.adolichnKartStud.Fields
               [6].AsString;
+procedure TfrmMain.actChangePlanFromOtherGroupExecute(Sender: TObject);
+begin
+  //
+  frmChangeGrupPlan := TfrmChangeGrupPlan.Create(Self);
+  frmChangeGrupPlan.GrupIK := ((DBDekTreeView_TEST1.SelectedObject)as TDBNodeGroupObject).ik;
+  frmChangeGrupPlan.ShowModal;
+end;
 
-            if dmStudentSelectionProcs.adolichnKartStud.Fields[7].AsBoolean then
-              E.range['n11'] := 'Мужской'
-            else
+procedure TfrmMain.actChangeSemFilterExecute(Sender: TObject);
+begin
+ if actCurrentSem.Checked then
+    ActAllSem.Checked := true
+  else
+    actCurrentSem.Checked := true;
               E.range['n11'] := 'Женский';
 
             E.range['n12'] := dmStudentSelectionProcs.adolichnKartStud.Fields
@@ -3500,4 +3535,3 @@ begin
           .Node.Parent.data).ik);
       end;
 
-End.

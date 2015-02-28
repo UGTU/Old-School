@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uBaseDialog, StdCtrls, ActnList, Buttons, ExtCtrls,uAbitDialog, uFindAbit;
+  Dialogs, uBaseDialog, StdCtrls, ActnList, Buttons, ExtCtrls,uAbitDialog, uFindAbit,
+  System.Actions;
 
 type
   TfrmAbitConfirm = class(TfrmBaseDialog)

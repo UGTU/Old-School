@@ -3,7 +3,7 @@ inherited frmAbitConfirm: TfrmAbitConfirm
   ClientHeight = 222
   ClientWidth = 385
   ExplicitWidth = 391
-  ExplicitHeight = 254
+  ExplicitHeight = 251
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -34,29 +34,29 @@ inherited frmAbitConfirm: TfrmAbitConfirm
     Top = 103
     Width = 385
     Height = 119
-    ExplicitTop = 109
+    ExplicitTop = 103
     ExplicitWidth = 385
     ExplicitHeight = 119
     inherited bbOK: TBitBtn
       Left = 168
       Top = 68
       Visible = False
-      ExplicitLeft = 194
-      ExplicitTop = -10
+      ExplicitLeft = 168
+      ExplicitTop = 68
     end
     inherited bbApply: TBitBtn
       Left = 166
       Top = 68
       Visible = False
-      ExplicitLeft = 192
-      ExplicitTop = -10
+      ExplicitLeft = 166
+      ExplicitTop = 68
     end
     inherited bbCancel: TBitBtn
       Left = 168
       Top = 68
       Visible = False
-      ExplicitLeft = 194
-      ExplicitTop = -10
+      ExplicitLeft = 168
+      ExplicitTop = 68
     end
     inherited bbSprav: TBitBtn
       Left = 214

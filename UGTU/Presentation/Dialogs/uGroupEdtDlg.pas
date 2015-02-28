@@ -310,14 +310,8 @@ begin
     //если идет добавление группы в ИС "Деканат"
     if not WithSpec then
     begin
-
       ParamByName('@ik_spec_fac').Value := fSpecFacIK;
       Log.LogMessage('SpecFacIK='+IntToStr(fSpecFacIK));
-    {  if frmMain.ActiveFrame is TfmGroup then
-        ParamByName('@ik_spec_fac').Value:= TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik
-      else if frmMain.ActiveFrame is TfmZach then
-        ParamByName('@ik_spec_fac').Value:= Tag else
-        ParamByName('@ik_spec_fac').Value:= TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;}
     end
     else ParamByName('@ik_spec_fac').Value:= dbcbSpec.KeyValue;
 

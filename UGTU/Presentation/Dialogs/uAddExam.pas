@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh,
-  DBCtrlsEh, Mask, DBLookupEh, uDm;
+  DBCtrlsEh, Mask, DBLookupEh, uDm, System.Actions;
 
 type
   TfrmAddExamDialog = class(TfrmBaseDialog)

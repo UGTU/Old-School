@@ -282,30 +282,40 @@ begin
     frmMain.actDocsRetrieve.Enabled := true;
   end;
 
-  if (TDBNodeAbitStudObject(FrameObject).OnlyReading) then
-  begin
-    TabSheet1.Caption := 'Личные данные (только просмотр)';
-    Toolbutton1.Enabled := false;
-    TabSheet3.Enabled := false;
-    TabSheet5.Enabled := false;
-    TabSheet4.Enabled := false;
-    TabSheet6.Enabled := false;
-    TabSheet7.Enabled := false;
-    TabSheet8.Enabled := false;
-    frmMain.actAbitMove.Enabled := false;
-    frmMain.actDocsRetrieve.Enabled := false;
-  end
-  else
-  begin
-    Toolbutton1.Enabled := true;
-    TabSheet1.Caption := 'Личные данные';
-    TabSheet3.Enabled := true;
-    TabSheet5.Enabled := true;
-    TabSheet4.Enabled := true;
-    TabSheet6.Enabled := true;
-    TabSheet7.Enabled := true;
-    TabSheet8.Enabled := true;
-  end;
+ if ((obj as TDBNodeAbitStudObject).RecruitState=5)or((obj as TDBNodeAbitStudObject).RecruitState=6) then
+ begin
+ frmMain.actAbitMove.Enabled:=false;
+ frmMain.actDocsRetrieve.Enabled:=false;
+ end
+ else
+ begin
+ frmMain.actAbitMove.Enabled:=true;
+ frmMain.actDocsRetrieve.Enabled:=true;
+ end;
+
+
+if (TDBNodeAbitStudObject(FrameObject).OnlyReading) then
+begin
+TabSheet1.Caption:='Личные данные (только просмотр)';
+Toolbutton1.Enabled:=false;
+TabSheet3.Enabled:=false;
+TabSheet5.Enabled:=false;
+TabSheet4.Enabled:=false;
+TabSheet6.Enabled:=false;
+TabSheet7.Enabled:=false;
+TabSheet8.Enabled:=false;
+frmMain.actAbitMove.Enabled:=false;
+frmMain.actDocsRetrieve.Enabled:=false;
+end else
+begin
+Toolbutton1.Enabled:=true;
+TabSheet1.Caption:='Личные данные';
+TabSheet3.Enabled:=true;
+TabSheet5.Enabled:=true;
+TabSheet4.Enabled:=true;
+TabSheet6.Enabled:=true;
+TabSheet7.Enabled:=true;
+TabSheet8.Enabled:=true;
 end;
 
 function TfmAbitCard.DoApply: boolean;
