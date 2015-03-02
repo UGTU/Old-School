@@ -1459,13 +1459,14 @@ end;
 procedure TfrmMain.actNaprExecute(Sender: TObject);
 var Fyear:integer;
 begin
-Fyear:=TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.data).FoundYear;
-ftmNapr:=TftmNapr.Create(self);
+  Fyear:=TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.data).FoundYear;
+  ftmNapr:=TftmNapr.Create(self);
 
 
-ftmNapr.Tag:=TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data).RecordbookKey;
-ftmNapr.Hint:=inttostr(TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Data).ik);
-ftmNapr.studobj:=TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject);
+  //ftmNapr.Tag:=TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data).RecordbookKey;
+  ftmNapr.StudGrupKey:= TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data).StudGrupKey;
+  //TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Data).ik;
+  ftmNapr.studobj:=TDBNodeStudObject(DBDekTreeView_TEST1.SelectedObject);
 
 if MonthOf(Date)>8 then
 ftmNapr.dbcbeNum.Text:=inttostr(1+(CurrentYear-Fyear)*2) else
@@ -1505,10 +1506,10 @@ end;
 
 procedure TfrmMain.actNaprCloseExecute(Sender: TObject);
 begin
-ftmNaprClose:=TftmNaprClose.Create(self);
-ftmNaprClose.Tag:=TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data).RecordbookKey;
-ftmNaprclose.showmodal;
-ftmNaprclose.Free;
+  ftmNaprClose:=TftmNaprClose.Create(self);
+  ftmNaprClose.StudGrupIK:=TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data).StudGrupKey;
+  ftmNaprclose.showmodal;
+  ftmNaprclose.Free;
 end;
 
 procedure TfrmMain.actFilterAllExecute(Sender: TObject);

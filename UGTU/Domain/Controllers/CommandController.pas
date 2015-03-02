@@ -686,7 +686,6 @@ procedure TNapravController.Reload(ik_studGrup: integer);
 begin
   inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ') order by n_sem');
   FStudGrupIK := ik_studGrup;
-  //FZach := ik_zach;
   FContentNapr.Reload(ik_studGrup);
 end;
 
