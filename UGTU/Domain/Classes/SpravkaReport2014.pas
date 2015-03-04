@@ -74,6 +74,7 @@ begin
     begin
     if (sp_history.FieldByName('ikTypePric').AsInteger=4) then
     begin
+        sp_academ.Close;
         sp_academ.CommandText := 'select * from StudHistoryAcadem ('+''''+
         sp_history.FieldByName('Nn_prikaz').AsString+''''+','+sp_spr.FieldByName('Ik_zach').AsString+')';
         sp_academ.Connection := dm.DBConnect;
@@ -87,7 +88,7 @@ begin
         sp_history.FieldByName('ikTypePric').AsInteger,
         sp_academ.FieldByName('dateBegin').AsString,
         sp_academ.FieldByName('dateEnd').AsString);
-        sp_academ.Free;
+
     end
     else
     spr_h := TSpravkaHistory.Create(sp_history.FieldByName('Nn_prikaz')
@@ -102,6 +103,7 @@ begin
     end;
 
   finally
+    sp_academ.Free;
     sp_spr.Free;
     sp_history.Free;
   end;
