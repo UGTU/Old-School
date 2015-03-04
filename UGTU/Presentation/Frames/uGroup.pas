@@ -610,9 +610,6 @@ procedure TfmGroup.cmbxNumberChange(Sender: TObject);
 var
   tmpStr: string;
 begin
-  // inherited;
-  if (cmbxNumber.Text = '') then
-    Exit;
 
   if Modified then
   begin
@@ -634,20 +631,9 @@ begin
   actPrintAtt.Enabled := false;
   Modified := false;
 
-  if cmbxNumber.Text = 'Экзамен' then
-  begin
-    dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllBRSExam;
-    CheckBRSExamExist;
-  end
-  else if cmbxNumber.Text = 'Зачет' then
-  begin
 
-  end
-  else
-  begin
-    dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllAtt;
-    CheckAttExist;
-  end;
+  dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllAtt;
+  CheckAttExist;
 
   dmUspevaemost.aspPrepodVedFromUchPlan.Active := false;
   dmUspevaemost.adospSelAtt.Active := false;
@@ -2474,6 +2460,7 @@ begin
   ftmNaprClose := TftmNaprClose.Create(self);
   ftmNaprClose.StudGrupIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
     ['ik_studGrup'];
+  ftmNaprClose.IsClosed := False;
   ftmNaprClose.VedIK := ik_ved;
   ftmNaprClose.dbcbeNapr.Enabled := false;
   //ftmNaprClose.FormShow(Sender);
@@ -2972,10 +2959,8 @@ begin
 end;
 
 procedure TfmGroup.actEditNaprExecute(Sender: TObject);
-var
-  ik_ved: Integer;
+var ik_ved: Integer;
 begin
-
   try
     ik_ved := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['ik_ved'];
   except
@@ -2984,23 +2969,14 @@ begin
   end;
 
   ftmNaprClose := TftmNaprClose.Create(self);
+  ftmNaprClose.IsClosed := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['lClose'];
   ftmNaprClose.StudGrupIK := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues
-    ['ik_zach'];
+    ['ik_studGrup'];
   ftmNaprClose.VedIK := ik_ved;
   ftmNaprclose.Mark := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['cosenca'];
   ftmNaprclose.Teacher := dmUspevaemost.adospGetAllVedNaprForDisc.FieldValues['Itab_n'];
 
-  //ftmNaprClose.FormShow(Sender);
-
   ftmNaprClose.Showmodal;
-  //ftmNaprClose.LoadNapr;
- { if ftmNaprClose.showmodal = mrCancel then
-    if not TUspevGroupController.Instance.CloseNapr(ik_ved) then
-    begin
-      MessageBox(Handle, 'При закрытии ведомости произошла ошибка.',
-        'ИС УГТУ', MB_OK);
-      Exit;
-    end;     }
   ftmNaprClose.Free;
 
   dmUspevaemost.adospGetAllVedNaprForDisc.Active := false;
@@ -3014,8 +2990,6 @@ var
   r: Integer;
 begin
   inherited;
-  // dm.adospGetUchPlnGroup.Active := false;
-
   frmGroupEdt := TfrmGroupEdt.Create(self);
   frmGroupEdt.ik := TDBNodeGroupObject
     (frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
@@ -3056,7 +3030,6 @@ end;
 procedure TfmGroup.actCreateAttExecute(Sender: TObject);
 var
   ik_grup: Integer;
-  // nSem: Integer;
   numAtt: Integer;
 begin
   inherited;

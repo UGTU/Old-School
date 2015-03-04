@@ -754,3 +754,47 @@ WHERE Grup.Ik_grup=@Ik_grup AND
 )
 
 GO
+-----------------------------------------------------------------------------------------------------------------------------------------------
+ALTER                       PROCEDURE [dbo].[UspevInsertVedomost]
+@cNumber_ved varchar(12),			--номер (обозначение) ведомости
+@Ik_grup INT,						--код группы
+@ik_upContent INT,					--код дисциплины
+@dD_vydano DATETIME,   				--дата выдачи
+@Itab_n varchar(50) = NULL,			--код препода
+@Ik_vid_exam INT=0,					--вид экзамена (первичный, вторичный)
+@Dd_exam DATETIME = NULL,			--дата экзамена
+@lClose BIT=0,
+@lVnosn BIT=0						--бит выносного экзамена		
+AS
+BEGIN
+  DECLARE @Ik_ved INT 		--код ведомости (для вставки успеваемости)
+
+  BEGIN TRAN
+	begin
+	--добавляем ведомость
+		INSERT INTO Vedomost(cNumber_ved, Ik_grup, Itab_n, Ik_vid_exam, 
+				ik_upContent, Dd_exam, dD_vydano, lPriznak_napr, lClose, lVnosn)
+		VALUES (@cNumber_ved, @Ik_grup, @Itab_n, @Ik_vid_exam, 
+				@ik_upContent, @Dd_exam, @dD_vydano, 0, @lClose, @lVnosn)
+		SET @Ik_ved=@@IDENTITY
+
+	--если ведомость создана
+	--добавляем соответствующие данные в успеваемость 
+	--ВМЕСТО ОЦЕНОК выставляем допуски - -1 для допущенных, -2 - для недопущенных
+	  IF @Ik_ved IS NOT NULL
+	  BEGIN
+		INSERT INTO dbo.Uspev(Ik_ved, Ik_zach, Cosenca)
+		SELECT @Ik_ved, ik_zach, dopusc
+			FROM dbo.[UspevGetGrupDopusc](@Ik_grup, @ik_upContent,@lVnosn)
+	  END
+
+	ELSE	--ВЕДОМОСТЬ НЕ СОЗДАНА
+	BEGIN
+		RAISERROR('При создании ведомости произошла ошибка. Операция отменена.',16,1)
+		ROLLBACK TRAN
+	END
+	END
+	COMMIT TRAN
+END
+SET QUOTED_IDENTIFIER ON
+GO

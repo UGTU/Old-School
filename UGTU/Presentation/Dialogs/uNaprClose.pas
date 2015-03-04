@@ -115,7 +115,7 @@ end;
 
 procedure TftmNaprclose.SetStudGrupIK(const Value: integer);
 begin
-  TUspevGroupController.Instance.SelectOpenedNapr(Value);
+  TUspevGroupController.Instance.SelectNapr(Value,(not FIsClosed));
 end;
 
 procedure TftmNaprclose.SetVed(const Value: integer);

@@ -300,7 +300,7 @@ type
 
     procedure AnnulNapr(VedIK: Integer);
 
-    procedure SelectOpenedNapr(StudGrupIk: Integer);
+    procedure SelectNapr(StudGrupIk: Integer; isOpened: boolean);
 
     // **********ЭКСПОРТ В EXCEL ВЕДОМОСТЕЙ************
     // Возвращает следующее слово из строки,
@@ -503,10 +503,10 @@ begin
   dmUspevaemost.adodsSelBRSExamGroup.Active := true;
 end;
 
-procedure TUspevGroupController.SelectOpenedNapr(StudGrupIk: Integer);
+procedure TUspevGroupController.SelectNapr(StudGrupIk: Integer; isOpened: boolean);
 begin
   FNapravController.Reload(StudGrupIk);
-  FNapravController.LoadOpenedNapr;
+  if isOpened then FNapravController.LoadOpenedNapr;
 end;
 
 // функция выбирает все созданные предметы аттестации и возвращает их количество
@@ -1618,29 +1618,6 @@ begin
     end;
   end;
 
-  // загружаем список всех видов занятий со всей необх инфой
-  { GetAllVidZanyats(nSem, ik_group);
-    //проверяем, есть ли вообще какие-то предметы в уч плане
-    HavePredms:= ArePredmsInUchPlan(nSem, ik_group);
-    // выборка всех СУЩЕСТВУЮЩИХ ведомостей
-    GetAllVeds(nSem, ik_group);
-    if HavePredms then
-    begin
-    //если хотя бы одна ведомость была создана, обновляем их
-    if (dmUspevaemost.adospGetAllVeds4Group.RecordCount>0) then
-    begin
-    //сразу обновляем списки студентов в ведомостях
-    //UpdateVedsContent(nSem, ik_group);
-    //создаем все недостающие ведомости
-    UpdateVedsList(nSem, ik_group);
-    // выборка всех СУЩЕСТВУЮЩИХ ведомостей
-    GetAllVeds(nSem, ik_group);
-    //снова загружаем список всех видов занятий со всей необх инфой
-    GetAllVidZanyats(nSem, ik_group);
-    end;
-    end; }
-  // GetAllVeds(nSem, ik_group);
-  // GetAllVidZanyats(nSem, ik_group);
 end;
 
 // читает заголовка ведомости

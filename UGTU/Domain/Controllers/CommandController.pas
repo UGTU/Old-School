@@ -33,13 +33,18 @@ type
   // -----------------наследники---------------------------------------------------------------------------------
 
   // команды (процедуры) работы с ведомостями
-  TVedCommand = class(TBaseADOCommand)
+  TUpdateVedCommand = class(TBaseADOCommand)      //редактирует или удаляет ведомость
   public
     constructor Create(FVedom: integer); overload;
-
     procedure Update(ikVidExam: integer; VedNum, ikPrepod: string;
       DateExam: TDateTime; bitClose, bitNapr: boolean);
     procedure Delete;
+  end;
+
+  TAddVedUspevCommand = class(TBaseADOCommand) //добавляет ведомость вместе с успеваемостью
+  public
+    constructor Create(aGrupIK: integer);
+    procedure DoIt(ContentIK: integer);
   end;
 
   TAppendUspevCommand = class(TBaseADOCommand) // редактирование успеваемости
@@ -129,18 +134,22 @@ type
   public
     constructor Create; overload;
     destructor Destroy; override;
-    procedure Reload(ik_grup, n_sem: integer); overload;
-    procedure CreateAllVed;
-    procedure Save(ikVidExam: integer; VedNum, ikPrepod: string;
+    procedure Reload(ik_grup, n_sem: integer); overload;          //загрузить виды отчетности, которые должны быть
+    procedure CreateAllVed;                                       //создать все ведомости, которые еще не созданы для текущей группы в семестре
+    procedure Save(ikVidExam: integer; VedNum, ikPrepod: string;  //сохранить текущую ведомость
       DateExam: TDateTime; bitClose, bitNapr: boolean);
 
-    property ContentCount: integer read GetContentCount;
-    property VedomCount: integer read GetVedomCount;
-    property AllVedDone: boolean read IsAllVedDone;
-    property Vedomost: integer write SetVedomost;
-    property IsOpened: boolean read GetIsOpened;
+    property ContentCount: integer read GetContentCount;          //сколько видов отчетности должно быть
+    property VedomCount: integer read GetVedomCount;              //сколько создано ведомостей
+    property AllVedDone: boolean read IsAllVedDone;               //признак: все ли ведомости созданы
+    property Vedomost: integer write SetVedomost;                 //установить текущую ведомость
+    property IsOpened: boolean read GetIsOpened;                  //признак: открыта ли ведомость
+    property UspevDataSet: TADODataSet read GetUspevDataSet;      //DataSet с успеваемостью для текущей ведомости
+  end;
 
-    property UspevDataSet: TADODataSet read GetUspevDataSet;
+  TBRSVedomostController = class(TBaseSelectController)
+  public
+    constructor Create; overload;
   end;
 
   {управление дисциплинами, по которым требуются направления
@@ -270,35 +279,21 @@ end;
 
 procedure TVedomostController.CreateAllVed;
 var
-  FStoredProc: TADOStoredProc;
+  FAddVedUspevCommand: TAddVedUspevCommand;
   i: integer;
 begin
-
-  FStoredProc := TGeneralController.Instance.GetNewADOStoredProc
-    ('UspevInsertVedomost', false);
-  FStoredProc.Connection := dm.DBConnect;
-  with FStoredProc.Parameters do
-  begin
-    Clear;
-    CreateParameter('@cNumber_ved', ftString, pdInput, 12, '');
-    CreateParameter('@Ik_grup', ftInteger, pdInput, 0, FIK_Grup);
-    CreateParameter('@ik_upContent', ftInteger, pdInput, 0, 0);
-    try
+   FAddVedUspevCommand := TAddVedUspevCommand.Create(FIK_Grup);
+   try
       FDataSet.First;
       for i := 0 to FDataSet.RecordCount - 1 do
       begin
         if FDataSet.FieldByName('ik_ved').Value = NULL then
-        begin
-          ParamByName('@ik_upContent').Value :=
-            FDataSet.FieldByName('ik_upContent').AsInteger;
-          FStoredProc.ExecProc;
-        end;
+          FAddVedUspevCommand.DoIt(FDataSet.FieldByName('ik_upContent').AsInteger);
         FDataSet.Next;
       end;
     finally
-      FStoredProc.Free;
+      FAddVedUspevCommand.Free;
     end;
-  end;
   Refresh;
 end;
 
@@ -368,14 +363,14 @@ end;
 procedure TVedomostController.Save(ikVidExam: integer; VedNum, ikPrepod: string;
   DateExam: TDateTime; bitClose, bitNapr: boolean);
 var
-  FVedCommand: TVedCommand;
+  FVedCommand: TUpdateVedCommand;
 begin
 
   FDataSet.Connection.BeginTrans;
   try
     FUspevController.Save;
 
-    FVedCommand := TVedCommand.Create(FDataSet.FieldByName('ik_ved').AsInteger);
+    FVedCommand := TUpdateVedCommand.Create(FDataSet.FieldByName('ik_ved').AsInteger);
     FVedCommand.Update(ikVidExam, VedNum, ikPrepod, DateExam, bitClose,
       bitNapr);
     FDataSet.Connection.CommitTrans;
@@ -546,7 +541,7 @@ end;
 
 { TVedCommand }
 
-constructor TVedCommand.Create(FVedom: integer);
+constructor TUpdateVedCommand.Create(FVedom: integer);
 begin
   inherited Create('AppendVedomost');
   with FStor.Parameters do
@@ -564,7 +559,7 @@ begin
   end;
 end;
 
-procedure TVedCommand.Delete;
+procedure TUpdateVedCommand.Delete;
 begin
   with FStor.Parameters do
   begin
@@ -573,7 +568,7 @@ begin
   end;
 end;
 
-procedure TVedCommand.Update(ikVidExam: integer; VedNum, ikPrepod: string;
+procedure TUpdateVedCommand.Update(ikVidExam: integer; VedNum, ikPrepod: string;
   DateExam: TDateTime; bitClose, bitNapr: boolean);
 begin
   with FStor.Parameters do
@@ -623,7 +618,7 @@ end;
 
 function TNapravController.CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
 var
-  FVedCommand: TVedCommand;
+  FVedCommand: TUpdateVedCommand;
   FAppendUspevCommand: TAppendUspevCommand;
   FAppendUspevKPThemeCommand: TAppendUspevKPThemeCommand;
 begin
@@ -637,7 +632,7 @@ begin
   with DataSet do
   try
     Connection.BeginTrans;
-    FVedCommand := TVedCommand.Create(VedIK);
+    FVedCommand := TUpdateVedCommand.Create(VedIK);
     FAppendUspevCommand := TAppendUspevCommand.Create(VedIK);
     FAppendUspevKPThemeCommand := TAppendUspevKPThemeCommand.Create(VedIK);
 
@@ -784,6 +779,39 @@ begin
     CreateParameter('@KPTema', ftString, pdInput, 2000, '');
   end;
 
+end;
+
+{ TAddVedUspevCommand }
+
+constructor TAddVedUspevCommand.Create(aGrupIK: integer);
+begin
+  inherited Create('UspevInsertVedomost');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@cNumber_ved', ftString, pdInput, 12, '');
+    CreateParameter('@Ik_grup', ftInteger, pdInput, 0, aGrupIK);
+    CreateParameter('@ik_upContent', ftInteger, pdInput, 0, 0);
+    CreateParameter('@dD_vydano', ftDateTime, pdInput, 0, Now);
+  end;
+end;
+
+procedure TAddVedUspevCommand.DoIt(ContentIK: integer);
+begin
+  with FStor.Parameters do
+  begin
+   ParamByName('@ik_upContent').Value := ContentIK;
+   FStor.ExecProc;
+  end;
+end;
+
+{ TBRSVedomostController }
+
+constructor TBRSVedomostController.Create;
+begin
+  inherited Create('GetAttestVidZanyat(' + IntToStr(0) + ',' +
+    IntToStr(0) + ')');
+ // FUspevController := TUspevController.Create;
 end;
 
 end.

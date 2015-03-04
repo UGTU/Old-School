@@ -318,6 +318,7 @@ begin
 
   ftmNaprClose:=TftmNaprClose.Create(self);
   ftmNaprClose.StudGrupIK:=dmUspevaemost.adospGetAllNaprForFac.FieldValues['ik_studGrup'];
+  ftmNaprClose.IsClosed := dmUspevaemost.adospGetAllNaprForFac.FieldValues['lClose'];
   ftmNaprclose.FormShow(Sender);
   ftmNaprclose.VedIK := ik_ved;
   ftmNaprclose.dbcbeNapr.Enabled:=false;

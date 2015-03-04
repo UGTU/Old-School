@@ -1,5 +1,5 @@
 
-select * from Person where Clastname='Корсакова'
+select * from Person where Clastname='Пимкина'
 
 select * from ABIT_postup where nCode=68481
 select * from ABIT_Vstup_exam where NN_abit = 27536
@@ -16,15 +16,15 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 68148
 
-select * from Zach where ncode in (69199)
+select * from Zach where ncode in (17167,30376,30910,32372)
 select * from Zach where Ik_zach in (14369)
 select * from Zach where Nn_zach='121358'
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
---and ik_zach in (19914,27577)
-and Ik_studGrup = 29204
+and ik_zach in (15886,18627)
+--and Ik_studGrup = 29204
 
 select * from StudGrup where ik_pricZach=13
 

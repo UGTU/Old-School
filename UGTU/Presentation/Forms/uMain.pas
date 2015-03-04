@@ -1507,6 +1507,7 @@ end;
 procedure TfrmMain.actNaprCloseExecute(Sender: TObject);
 begin
   ftmNaprClose:=TftmNaprClose.Create(self);
+  ftmNaprClose.IsClosed := False;
   ftmNaprClose.StudGrupIK:=TDBNodeStudObject(DBDekTreeView_TEST1.Selected.data).StudGrupKey;
   ftmNaprclose.showmodal;
   ftmNaprclose.Free;
