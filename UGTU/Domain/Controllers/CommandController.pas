@@ -136,6 +136,7 @@ type
     destructor Destroy; override;
     procedure Reload(ik_grup, n_sem: integer); overload;          //загрузить виды отчетности, которые должны быть
     procedure CreateAllVed;                                       //создать все ведомости, которые еще не созданы дл€ текущей группы в семестре
+    procedure DelVed(ik_ved: integer);
     procedure Save(ikVidExam: integer; VedNum, ikPrepod: string;  //сохранить текущую ведомость
       DateExam: TDateTime; bitClose, bitNapr: boolean);
 
@@ -148,8 +149,22 @@ type
   end;
 
   TBRSVedomostController = class(TBaseSelectController)
+  private
+    FIK_Grup: integer;
+    FN_sem: integer;
+    FN_mod: integer;
+    function GetBRSCount: integer;
+    function GetCreatedCount: integer;
+    procedure SetBRSVedomost(const Value: integer);
   public
     constructor Create; overload;
+    procedure Reload(ik_grup, n_sem, n_module: integer); overload;
+    procedure CreateAllBRS;
+    procedure DelVed(ik_ved: integer);
+
+    property BRSVedomost: integer write SetBRSVedomost;
+    property Count: integer read GetBRSCount;
+    property CreatedCount: integer read GetCreatedCount;
   end;
 
   {управление дисциплинами, по которым требуютс€ направлени€
@@ -294,6 +309,26 @@ begin
     finally
       FAddVedUspevCommand.Free;
     end;
+  Refresh;
+end;
+
+procedure TVedomostController.DelVed(ik_ved: integer);
+var
+  FVedCommand: TUpdateVedCommand;
+begin
+  try
+    FVedCommand := TUpdateVedCommand.Create(ik_ved);
+    FVedCommand.Delete;
+  except
+    on E: Exception do
+    begin
+      FDataSet.Connection.RollbackTrans;
+      raise EApplicationException.Create
+        ('ѕроизошла ошибка при удалении ведомости.', E);
+      exit;
+    end;
+  end;
+  FVedCommand.Free;
   Refresh;
 end;
 
@@ -809,9 +844,82 @@ end;
 
 constructor TBRSVedomostController.Create;
 begin
-  inherited Create('GetAttestVidZanyat(' + IntToStr(0) + ',' +
-    IntToStr(0) + ')');
+  inherited Create('GetBRSVidZanyat(' + IntToStr(0) + ',' +
+    IntToStr(0) + ',' + IntToStr(0) + ')');
  // FUspevController := TUspevController.Create;
+end;
+
+procedure TBRSVedomostController.CreateAllBRS;
+var  FAddVedUspevCommand: TAddVedUspevCommand;
+     i: integer;
+begin
+   FAddVedUspevCommand := TAddVedUspevCommand.Create(FIK_Grup);
+   try
+      FDataSet.First;
+      for i := 0 to FDataSet.RecordCount - 1 do
+      begin
+        if FDataSet.FieldByName('ik_ved').Value = NULL then
+          FAddVedUspevCommand.DoIt(FDataSet.FieldByName('ik_upContent').AsInteger);
+        FDataSet.Next;
+      end;
+    finally
+      FAddVedUspevCommand.Free;
+    end;
+  Refresh;
+end;
+
+procedure TBRSVedomostController.DelVed(ik_ved: integer);
+var
+  FVedCommand: TUpdateVedCommand;
+begin
+  try
+    FVedCommand := TUpdateVedCommand.Create(ik_ved);
+    FVedCommand.Delete;
+  except
+    on E: Exception do
+    begin
+      raise EApplicationException.Create
+        ('ѕроизошла ошибка при удалении ведомости.', E);
+      exit;
+    end;
+  end;
+  FVedCommand.Free;
+  Refresh;
+end;
+
+function TBRSVedomostController.GetBRSCount: integer;
+begin
+  Result := FDataSet.RecordCount;
+end;
+
+function TBRSVedomostController.GetCreatedCount: integer;
+var i: integer;
+begin
+  Result := 0;
+  if FDataSet.RecordCount > 0 then
+  begin
+    FDataSet.First;
+    for i := 0 to FDataSet.RecordCount - 1 do
+    begin
+      if FDataSet.FieldByName('ik_ved').Value <> NULL then
+        Result := Result + 1;
+      FDataSet.Next;
+    end;
+  end;
+end;
+
+procedure TBRSVedomostController.Reload(ik_grup, n_sem, n_module: integer);
+begin
+    inherited Reload('GetBRSVidZanyat(' + IntToStr(ik_grup) + ',' +
+    IntToStr(n_sem) + ',' + IntToStr(n_module) + ')');
+    FIK_Grup := ik_grup;
+    FN_sem := n_sem;
+    FN_mod := n_module;
+end;
+
+procedure TBRSVedomostController.SetBRSVedomost(const Value: integer);
+begin
+  FDataSet.Locate('ik_ved', Value, []);
 end;
 
 end.

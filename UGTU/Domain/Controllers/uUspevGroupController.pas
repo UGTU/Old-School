@@ -29,6 +29,7 @@ type
   TUspevGroupController = class(TObject)
   private
     FVedomostController: TVedomostController;
+    FBRSVedomostController: TBRSVedomostController;
     FNapravController: TNapravController;
     function GetVedomostController: TVedomostController;
     procedure SetActiveStudent(const StudGrupIK: integer);
@@ -56,15 +57,13 @@ type
     procedure SelectBRSExam(ikVed: Integer);
 
     // функция выбирает все созданные предметы аттестации и возвращает их количество
-    function GetAllAtt(ik_grup, nsem, nomer_att: Integer;
-      IsBRS: boolean): Integer;
+    function GetCreatedBRS(ik_grup, nsem, nomer_att: Integer): Integer;
 
     // функция выбирает все созданные предметы экзаменов БРС и возвращает их количество
     function GetAllBRSExam(ik_grup, nsem: Integer): Integer;
 
     // функция выбирает все предметы аттестации из учебного плана и возвращает их количество
-    function GetAttVidZan(ik_grup, nsem, nmodule: Integer;
-      IsBRS: boolean): Integer;
+    function GetBRSCount(ik_grup, nsem, nmodule: Integer): Integer;
     function GetBRSExamVidZan(ik_grup, nsem: Integer): Integer;
 
     // функция проверяет наличие созданной ведомости для аттестации
@@ -76,7 +75,7 @@ type
       ikPredm: Integer): boolean;
 
     // функция создает все ведомости аттестации
-    function CreateAllAtt(ik, nsem, numAtt: Integer; IsBRS: boolean): boolean;
+    function CreateAllBRS(ik_group, nsem, numMod: Integer): boolean;
 
     // функция создает все ведомости экзаменов БРС
     function CreateAllBRSExam(ik_grup, nsem: Integer): boolean;
@@ -107,7 +106,10 @@ type
     // закрытие аттестации
     function CloseAtt(ikVed: Integer; itab_n: string; lclose: boolean): boolean;
 
+    //DataSet с ведомостями
     function GetVedomSet: TADODataSet;
+
+    function GetBRSVedomSet: TADODataSet;
 
     // ***************ВКЛАДКА ВЕДОМОСТИ**************************
     // SelPrepodsForVedom выбирает прподавателей для ведомости
@@ -285,7 +287,6 @@ type
 
     // взять DataSet с ведомостями, по которым можно дать направления для текущего студента
     function GetContentDS(StudIK: Integer): TADODataSet;
-
     // взять DataSet с направлениями студента
     function GetNapravDS: TADODataSet;
 
@@ -411,6 +412,7 @@ constructor TUspevGroupController.CreateInstance;
 begin
   inherited Create;
   FVedomostController := TVedomostController.Create;
+  FBRSVedomostController := TBRSVedomostController.Create;
   FNapravController := TNapravController.Create;
 end;
 
@@ -509,12 +511,12 @@ begin
   if isOpened then FNapravController.LoadOpenedNapr;
 end;
 
-// функция выбирает все созданные предметы аттестации и возвращает их количество
-function TUspevGroupController.GetAllAtt(ik_grup, nsem, nomer_att: Integer;
-  IsBRS: boolean): Integer;
+// функция выбирает все созданные предметы БРС и возвращает их количество
+function TUspevGroupController.GetCreatedBRS(ik_grup, nsem, nomer_att: Integer): Integer;
 begin
-  Result := 0;
-  dmUspevaemost.adospGetAllAtt.Active := false;
+  FBRSVedomostController.Reload(ik_grup, nsem, nomer_att);
+  Result := FBRSVedomostController.CreatedCount;
+ { dmUspevaemost.adospGetAllAtt.Active := false;
 
   if IsBRS then
     dmUspevaemost.adospGetAllAtt.ProcedureName := 'GetAllAttestForBRSGrup'
@@ -533,7 +535,7 @@ begin
   end;
   dmUspevaemost.adospGetAllAtt.ExecProc;
   dmUspevaemost.adospGetAllAtt.Active := true;
-  Result := dmUspevaemost.adospGetAllAtt.RecordCount;
+  Result := dmUspevaemost.adospGetAllAtt.RecordCount;  }
 end;
 
 function TUspevGroupController.GetAllBRSExam(ik_grup, nsem: Integer): Integer;
@@ -554,11 +556,17 @@ begin
   Result := dmUspevaemost.adospGetAllBRSExam.RecordCount;
 end;
 
-// функция выбирает все предметы аттестации из учебного плана и возвращает их количество
-function TUspevGroupController.GetAttVidZan(ik_grup, nsem, nmodule: Integer;
-  IsBRS: boolean): Integer;
+// функция выбирает все предметы БРС из учебного плана и возвращает их количество
+function TUspevGroupController.GetBRSCount(ik_grup, nsem, nmodule: Integer): Integer;
 begin
   try
+    with FBRSVedomostController do
+    begin
+      Reload(ik_grup, nsem, nmodule);
+      Result := Count;
+    end;
+
+ { try
     dmUspevaemost.adospGetAttVidZan.Active := false;
     with dmUspevaemost.adospGetAttVidZan.Parameters do
     begin
@@ -576,7 +584,7 @@ begin
     end;
     dmUspevaemost.adospGetAttVidZan.ExecProc;
     dmUspevaemost.adospGetAttVidZan.Active := true;
-    Result := dmUspevaemost.adospGetAttVidZan.RecordCount;
+    Result := dmUspevaemost.adospGetAttVidZan.RecordCount;    }
   except
     Result := 0;
     Raise;
@@ -602,6 +610,11 @@ begin
     Result := 0;
     Raise;
   end;
+end;
+
+function TUspevGroupController.GetBRSVedomSet: TADODataSet;
+begin
+  Result := FBRSVedomostController.DataSet;
 end;
 
 // функция проверяет наличие созданной ведомости для аттестации
@@ -672,12 +685,22 @@ begin
     Result := true;
 end;
 
-// функция создает все ведомости аттестации
-function TUspevGroupController.CreateAllAtt(ik, nsem, numAtt: Integer;
-  IsBRS: boolean): boolean;
+// функция создает все ведомости БРС
+function TUspevGroupController.CreateAllBRS(ik_group, nsem, numMod: Integer): boolean;
 begin
   Result := false;
+  TApplicationController.GetInstance.AddLogEntry('Создание БРС-ведомостей');
 
+  FBRSVedomostController.Reload(ik_group, nsem, numMod);
+  try
+    FBRSVedomostController.CreateAllBRS;
+  except
+    on E: Exception do
+      raise EApplicationException.Create
+        ('Произошла ошибка при создании ведомостей!', E);
+  end;
+  Result := (FBRSVedomostController.CreatedCount<>0);
+  {
   // получаем список дисциплин аттестации которые должны быть (процедура: GetAttestVidZanyat)
   TUspevGroupController.Instance.GetAttVidZan(ik, nsem, numAtt, IsBRS);
 
@@ -687,7 +710,7 @@ begin
     // пропускаем уже созданные дисциплины аттестации (SelBRSAtt/SelAtt)
     if TUspevGroupController.Instance.CheckAttsExist(ik, nsem, numAtt,
       dmUspevaemost.adospGetAttVidZan.Fields[3].Value,
-      { dmUspevaemost.adospGetAttVidZan.Fields[1].Value, } IsBRS) then
+      { dmUspevaemost.adospGetAttVidZan.Fields[1].Value, } {IsBRS) then
     begin
       dmUspevaemost.adospGetAttVidZan.next;
       Continue;
@@ -719,7 +742,7 @@ begin
     except
     end;
     dmUspevaemost.adospGetAttVidZan.next;
-  end;
+  end;                 }
   Result := true;
 
 end;
@@ -1936,8 +1959,9 @@ var
   tempStoredProc: TADOStoredProc;
 begin
   TApplicationController.GetInstance.AddLogEntry('Удаление ведомости');
+  FVedomostController.DelVed(ik_ved);
 
-  tempStoredProc := TADOStoredProc.Create(nil);
+ { tempStoredProc := TADOStoredProc.Create(nil);
   try
     tempStoredProc.ProcedureName := 'DelVed;1';
     tempStoredProc.Connection := dm.DBConnect;
@@ -1949,12 +1973,13 @@ begin
     tempStoredProc.ExecProc;
   finally
     tempStoredProc.Free;
-  end;
+  end;           }
 end;
 
 destructor TUspevGroupController.Destroy;
 begin
   FreeAndNil(FVedomostController);
+  FreeAndNil(FBRSVedomostController);
   FreeAndNil(FNapravController);
 
   inherited;

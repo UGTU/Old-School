@@ -166,7 +166,7 @@ END
 
 GO
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+--select * from UspevGetVidZanyatForVedomost()
 ALTER FUNCTION [dbo].[UspevGetVidZanyatForVedomost]
 (
 	@n_sem int, 
@@ -798,3 +798,63 @@ BEGIN
 END
 SET QUOTED_IDENTIFIER ON
 GO
+--------------------------------------------------------------------------------------------------------------------------
+alter function [dbo].[GetBRSVidZanyat](
+	@ik_group	int,
+	@n_sem	int,
+	@nmodule int = 0)
+RETURNS @Result TABLE
+(
+	ik_vid_zanyat		int,
+	ik_disc				int,
+	cName_disc			varchar(500),
+	ik_upContent		int,
+	ik_ved				int
+ )
+AS
+BEGIN
+
+IF (@nmodule=0)
+BEGIN
+  insert into @Result(ik_vid_zanyat,ik_disc,cName_disc,ik_upContent,ik_ved)
+	Select distinct ik_vid_zanyat, d.ik_disc, cName_disc, cont.ik_upContent,Ik_ved From
+	dbo.Content_UchPl cont
+	INNER JOIN 
+	dbo.sv_disc svd
+	 ON cont.ik_disc_uch_plan = svd.ik_disc_uch_plan 
+	INNER JOIN dbo.discpln d ON svd.ik_disc = d.ik_disc
+	inner join Grup_UchPlan on svd.ik_uch_plan =Grup_UchPlan.ik_uch_plan
+	inner join Year_uch_pl on Grup_UchPlan.ik_year = Year_uch_pl.ik_year_uch_pl
+	INNER JOIN dbo.Grup ON Grup_UchPlan.ik_grup = Grup.Ik_grup AND Grup.ik_grup = @ik_group 
+	left join dbo.Vedomost on dbo.Vedomost.ik_upContent = cont.ik_upContent
+					   --and ((Grup.ik_spclz = svd.iK_spclz)or(svd.iK_spclz is null))
+	WHERE (n_sem = @n_sem)
+		 and (ik_vid_zanyat = 33) and (i_balls is not null)
+		 and year_value = Grup.nYear_post + cast((@n_sem-1)*0.5 as int)  --это определение учебного года на основании семестра
+		 AND (svd.iK_spclz IS NULL OR svd.iK_spclz=Grup.ik_spclz) 
+END ELSE
+BEGIN
+  insert into @Result(ik_vid_zanyat,ik_disc,cName_disc,ik_upContent,ik_ved)
+    Select distinct ik_vid_zanyat, d.ik_disc, cName_disc, cont.ik_upContent,Ik_ved From
+	dbo.Content_UchPl cont
+	INNER JOIN 
+	dbo.sv_disc svd
+	 ON cont.ik_disc_uch_plan = svd.ik_disc_uch_plan 
+	INNER JOIN dbo.discpln d ON svd.ik_disc = d.ik_disc
+	inner join Grup_UchPlan on svd.ik_uch_plan =Grup_UchPlan.ik_uch_plan
+	inner join Year_uch_pl on Grup_UchPlan.ik_year = Year_uch_pl.ik_year_uch_pl
+	INNER JOIN dbo.Grup ON Grup_UchPlan.ik_grup = Grup.Ik_grup AND Grup.ik_grup = @ik_group 
+					   --and ((Grup.ik_spclz = svd.iK_spclz)or(svd.iK_spclz is null))
+	left join dbo.Vedomost on dbo.Vedomost.ik_upContent = cont.ik_upContent
+	WHERE (n_sem = @n_sem)
+		 and (ik_vid_zanyat = 33 ) 
+		 and (n_module = @nmodule)
+		 and year_value = Grup.nYear_post + cast((@n_sem-1)*0.5 as int)  --это определение учебного года на основании семестра
+		 and (svd.iK_spclz IS NULL OR svd.iK_spclz=Grup.ik_spclz) 
+END
+RETURN	
+END
+GO
+
+--ДАТЬ ПРАВА НА ФУНКЦИЮ!!!
+-----------------------------------------------------------------------------------------------------------------------

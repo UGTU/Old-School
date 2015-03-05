@@ -208,6 +208,7 @@ type
     dsUspev: TDataSource;
     N8: TMenuItem;
     actAnnulNapr: TAction;
+    dsBRSVed: TDataSource;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -432,13 +433,10 @@ begin
     'select * from Uch_pl where (ik_uch_plan = ' + inttostr(ik) + ')';
   dmUchPlan.adodsUchPlan.open;
   FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value);
-  {if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
-  FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
-  else FIsBRS :=false;                                            }
 
-  // Взять ведомости группы
+  // Взять все ведомости группы
   dsVed.DataSet := TUspevGroupController.Instance.GetVedomSet;
-
+  dsBRSVed.DataSet := TUspevGroupController.Instance.GetBRSVedomSet;
 end;
 
 procedure TfmGroup.dbgStudListDblClick(Sender: TObject);
@@ -614,7 +612,7 @@ begin
   if Modified then
   begin
     tmpStr := 'Данные аттестации для ' + inttostr(nSem) + ' семестра по ' +
-      dmUspevaemost.adospGetAllAtt.FieldByName('cName_Disc').Value +
+      dsBRSVed.DataSet.FieldByName('cName_Disc').Value +
       ' были изменены. Сохранить изменения?';
     if MessageBox(Handle, PWideChar(tmpStr), 'ИС УГТУ', MB_YESNO) = IDYES then
       BtnSaveAtt.Click
@@ -623,20 +621,20 @@ begin
   end;
   // Выборка дисциплин в этом семестре из учебного плана
   dbcmbxDisc.KeyValue := -1;
-  dmUspevaemost.adodsSelAttGroup.Active := false;
-  dmUspevaemost.adodsSelAttBRSGroup.Active := false;
-  dmUspevaemost.adodsSelBRSExamGroup.Active := false;
+  //dmUspevaemost.adodsSelAttGroup.Active := false;
+  //dmUspevaemost.adodsSelAttBRSGroup.Active := false;
+  //dmUspevaemost.adodsSelBRSExamGroup.Active := false;
 
   actPrintBlankAtt.Enabled := false;
   actPrintAtt.Enabled := false;
   Modified := false;
 
 
-  dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllAtt;
+ // dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllAtt;
   CheckAttExist;
 
-  dmUspevaemost.aspPrepodVedFromUchPlan.Active := false;
-  dmUspevaemost.adospSelAtt.Active := false;
+  //dmUspevaemost.aspPrepodVedFromUchPlan.Active := false;
+  //dmUspevaemost.adospSelAtt.Active := false;
   dbcbxCloseAtt.Checked := false;
   dbdteBRSExam.Value := Today;
 
@@ -675,11 +673,7 @@ end;
 procedure TfmGroup.cmbxSemChange(Sender: TObject);
 begin
   inherited;
-  // if cmbxSem.Text='' then cmbxSem.ItemIndex := 0;
 
-  // если номер семестра прежний, просто выходим
-  { if nSem=(cmbxSem.ItemIndex+1) then
-    exit; }
   // проверяем модификацию открытой ведомости
   // если выбрана отмена перехода, возвращаемся к прежнему семестру
   if not DoIsModified(false) then
@@ -911,10 +905,11 @@ begin
     (cmbxNumber.Text = '') then
     Exit; // будет управление преподавателями
 
-  if cmbxNumber.Text = 'Экзамен' then // PrepodBranch update
+  {if cmbxNumber.Text = 'Экзамен' then // PrepodBranch update
     BRSExamRefresh
-  else
-    AttestRefresh;
+  else }
+
+  AttestRefresh;
 
   RefreshView;
   Modified := false;
@@ -3019,10 +3014,10 @@ begin
   nSem := dbcbeSemAtt.ItemIndex + 1;
   numAtt := nAtt.Value;
 
-  haveAtt := TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem,
-    numAtt, IsBRS);
+  haveAtt := TUspevGroupController.Instance.CreateAllBRS(ik_grup, nSem,
+    numAtt);
   actCreateAttest.Enabled := false;
-  TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, numAtt, IsBRS);
+  //TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, numAtt, IsBRS);
 
   RefreshView;
 end;
@@ -3038,12 +3033,12 @@ begin
   nSem := cmbxSemAtt.ItemIndex + 1;
   numAtt := cmbxNumber.Value;
 
-  haveAtt := TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem,
-    numAtt, IsBRS);
+  haveAtt := TUspevGroupController.Instance.CreateAllBRS(ik_grup, nSem,
+    numAtt);
 
   actCreateAtt.Enabled := false;
 
-  TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, numAtt, IsBRS);
+  //TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, numAtt, IsBRS);
 
   RefreshView;
 end;
@@ -3082,7 +3077,7 @@ begin
     dmUspevaemost.adospGetAllAtt.open;
     dmUspevaemost.adospGetAllAtt.First;
     // обновляем список всех видов занятий со всей необх инфой
-    TUspevGroupController.Instance.GetAllAtt(ik, nSem, cmbxNumber.Value, IsBRS);
+    //TUspevGroupController.Instance.GetAllAtt(ik, nSem, cmbxNumber.Value, IsBRS);
   end;
 end;
 
@@ -3155,13 +3150,13 @@ begin
     TUspevGroupController.Instance.DelVed(ikVed);
     Modified := false;
     // все переоткрываем
-    dbcbVed.Value := Null;
+  {  dbcbVed.Value := Null;
     dmUspevaemost.adospSelVedGroup.close;
     dmUspevaemost.adospGetAllVeds4Group.close;
     dmUspevaemost.adospGetAllVeds4Group.open;
     dmUspevaemost.adospGetAllVeds4Group.First;
     // обновляем список всех видов занятий со всей необх инфой
-    TUspevGroupController.Instance.GetAllVidZanyats(nSem, ik);
+    TUspevGroupController.Instance.GetAllVidZanyats(nSem, ik);  }
   end;
 end;
 
@@ -3502,7 +3497,6 @@ procedure TfmGroup.CheckAttExist;
 var
   ik_grup, nSem, nom_ved, nmodule: Integer;
   kolAtt, kol_rec: Integer;
-  // dateAtt: TDate;
 begin
 
   if (cmbxNumber.Value = Null) or (cmbxNumber.Text = '') then
@@ -3514,33 +3508,29 @@ begin
   ik_grup := TDBNodeGroupObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;
   haveAtt := false;
 
-  // получаем список предметов для аттестации, которые должны быть GetAttestVidZanyat
-  kolAtt := TUspevGroupController.Instance.GetAttVidZan(ik, nSem,
-    nom_ved, IsBRS);
-  dmUspevaemost.adospGetAttVidZan.First;
+  // получаем список предметов для БРС, которые должны быть
+  kolAtt := TUspevGroupController.Instance.GetBRSCount(ik, nSem, nom_ved);
 
   if kolAtt = 0 then
   begin
-    MessageBox(Handle, 'В учебном плане нет ни одной аттестации!',
+    MessageBox(Handle, 'В учебном плане нет ни одной аттестации БРС!',
       'ИС УГТУ', MB_OK);
     dmUspevaemost.adospGetAllAtt.Active := false;
     Exit;
   end;
 
-  // выборка всех СУЩЕСТВУЮЩИХ ведомостей (процедура GetAllAttestForBRSGrup/GetAllAttestForGrup)
-  kol_rec := TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem,
-    nom_ved, IsBRS);
+  // выборка всех СУЩЕСТВУЮЩИХ БРС
+  kol_rec := TUspevGroupController.Instance.GetCreatedBRS(ik_grup, nSem, nom_ved);
 
-  // проверка, созданы ли все аттестации по учебному плану для этого семестра
-  if kolAtt > kol_rec // dmUspevaemost.adospGetAllAtt.RecordCount
+  // проверка, созданы ли все БРС по учебному плану для этого семестра
+  if kolAtt > kol_rec
   then
   begin
-    // если часть аттестаций не создана, но есть созданные
-    if dmUspevaemost.adospGetAllAtt.RecordCount <> 0 then
+    // если часть БРС не создана, но есть созданные
+    if kol_rec <> 0 then
     begin
       // создаём все недостающие аттестации
-      haveAtt := TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem,
-        nom_ved, IsBRS);
+      haveAtt := TUspevGroupController.Instance.CreateAllBRS(ik_grup, nSem, nom_ved);
     end
     else // если не создана ни одна аттестации
     begin
@@ -3548,8 +3538,8 @@ begin
         'Не создано ни одной аттестации. Создать их сейчас?', 'ИС УГТУ',
         MB_YESNO) = IDYES then
         // если согласились - создаём...
-        haveAtt := TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem,
-          nom_ved, IsBRS)
+        haveAtt := TUspevGroupController.Instance.CreateAllBRS(ik_grup, nSem,
+          nom_ved)
       else
         haveAtt := false; // отмечаем отсутствие аттестаций флагом
     end;
@@ -3561,9 +3551,9 @@ begin
   end;
 
   // if haveAtt then cmbxDate.ItemIndex:=0;
-  TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, nom_ved, IsBRS);
+  //TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, nom_ved, IsBRS);
 
-  actCreateAtt.Enabled := not haveAtt;
+  //actCreateAtt.Enabled := not haveAtt;
   actPrintBlankAtt.Enabled := haveAtt;
   actPrintAtt.Enabled := haveAtt;
 end;
@@ -3646,8 +3636,8 @@ begin
   haveAtt := false;
 
   // получаем список предметов для аттестации, которые должны быть
-  kolAtt := TUspevGroupController.Instance.GetAttVidZan(ik, nSem,
-    nom_ved, IsBRS);
+  kolAtt := TUspevGroupController.Instance.GetBRSCount(ik, nSem,
+    nom_ved);
   dmUspevaemost.adospGetAttVidZan.First;
 
   if kolAtt = 0 then
@@ -3659,19 +3649,19 @@ begin
   end;
   // выборка всех СУЩЕСТВУЮЩИХ аттестаций
 
-  kol_rec := TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem,
-    nom_ved, IsBRS);
+  kol_rec := TUspevGroupController.Instance.GetCreatedBRS(ik_grup, nSem,
+    nom_ved);
 
   // проверка, созданы ли все аттестации по учебному плану для этого семестра
   if kolAtt > kol_rec // dmUspevaemost.adospGetAllAtt.RecordCount
   then
   begin
     // если часть аттестаций не создана, но есть созданные
-    if dmUspevaemost.adospGetAllAtt.RecordCount <> 0 then
+    if kol_rec <> 0 then
     begin
       // создаём все недостающие аттестации
-      haveAtt := TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem,
-        nom_ved, IsBRS);
+      haveAtt := TUspevGroupController.Instance.CreateAllBRS(ik_grup, nSem,
+        nom_ved);
     end
     else // если не создана ни одна аттестации
     begin
@@ -3679,8 +3669,8 @@ begin
         'Не создано ни одной аттестации? Создать их сейчас?', 'ИС УГТУ',
         MB_YESNO) = IDYES then
         // если согласились - создаём...
-        TUspevGroupController.Instance.CreateAllAtt(ik_grup, nSem,
-          nom_ved, IsBRS)
+        TUspevGroupController.Instance.CreateAllBRS(ik_grup, nSem,
+          nom_ved)
       else
         haveAtt := false; // отмечаем отсутствие аттестаций флагом
     end;
@@ -3692,7 +3682,7 @@ begin
   end;
 
   // if haveAtt then cmbxDate.ItemIndex:=0;
-  TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, nom_ved, IsBRS);
+ // TUspevGroupController.Instance.GetAllAtt(ik_grup, nSem, nom_ved, IsBRS);
 
   actCreateAttest.Enabled := not haveAtt;
   actPrintBlankAtt.Enabled := haveAtt;
