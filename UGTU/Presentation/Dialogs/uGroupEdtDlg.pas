@@ -72,7 +72,7 @@ implementation
 
 uses uDM, DBTVgroupObj, DBTVSpecObj, DBTVFacObj, uGroup,
   uSpec,ABIT_zachislenie_frame, uDMGroupActions, uMain, uDMUgtuStructure,
-  ConstantRepository, CommonIntf, CommonIntfImpl;
+  ConstantRepository, CommonIntf, CommonIntfImpl, ExceptionBase;
 
 {$R *.dfm}
 
@@ -337,9 +337,13 @@ begin
 
   dm.DBConnect.CommitTrans;
 except
-  ShowMessage('Добавить группу не удалось!');
-  dm.DBConnect.RollbackTrans;
-
+  on E:Exception do
+       begin
+         raise EApplicationException.Create('Произошла ошибка при добавление группы.',E);
+         dm.DBConnect.RollbackTrans;
+         exit;
+       end;
+  
 end;
 
   Result:= true;
