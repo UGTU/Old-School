@@ -28,7 +28,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
         ExplicitHeight = 0
         DesignSize = (
           918
-          415)
+          416)
         object ToolBar3: TToolBar
           Left = 0
           Top = 0
@@ -81,10 +81,11 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
           Left = 0
           Top = 22
           Width = 918
-          Height = 393
+          Height = 394
           Align = alClient
           BevelOuter = bvLowered
           TabOrder = 1
+          ExplicitHeight = 393
           object Panel15: TPanel
             Left = 1
             Top = 59
@@ -861,7 +862,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
           TabOrder = 1
           DesignSize = (
             918
-            393)
+            394)
           object Label3: TLabel
             Left = 21
             Top = 12
@@ -881,7 +882,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Left = 4
             Top = 75
             Width = 909
-            Height = 274
+            Height = 275
             AllowedOperations = []
             Anchors = [akLeft, akTop, akRight, akBottom]
             AutoFitColWidths = True
@@ -946,12 +947,13 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
           end
           object Panel14: TPanel
             Left = 1
-            Top = 347
+            Top = 348
             Width = 916
             Height = 45
             Align = alBottom
             BevelOuter = bvLowered
             TabOrder = 4
+            ExplicitTop = 347
             object Label32: TLabel
               Left = 7
               Top = 8
@@ -1089,7 +1091,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
           TabOrder = 1
           DesignSize = (
             918
-            393)
+            394)
           object Label17: TLabel
             Left = 9
             Top = 67
@@ -1216,7 +1218,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Left = 4
             Top = 91
             Width = 909
-            Height = 258
+            Height = 259
             AllowedOperations = []
             Anchors = [akLeft, akTop, akRight, akBottom]
             AutoFitColWidths = True
@@ -1292,12 +1294,13 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
           end
           object Panel3: TPanel
             Left = 1
-            Top = 347
+            Top = 348
             Width = 916
             Height = 45
             Align = alBottom
             BevelOuter = bvLowered
             TabOrder = 5
+            ExplicitTop = 347
             object Label14: TLabel
               Left = 7
               Top = 8
@@ -1483,9 +1486,10 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
             Left = 1
             Top = 42
             Width = 916
-            Height = 350
+            Height = 351
             Align = alClient
             TabOrder = 1
+            ExplicitHeight = 350
             object dbgVidZanyat: TDBGridEh
               Left = 1
               Top = 1
@@ -1524,7 +1528,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
               TabOrder = 1
               DesignSize = (
                 40
-                346)
+                347)
               object SpeedButton1: TSpeedButton
                 Left = 9
                 Top = 28
@@ -2049,7 +2053,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
     Left = 444
     Top = 285
     Bitmap = {
-      494C01011A001C00580010001000FFFFFF00FF10FFFFFFFFFFFFFFFF424D3600
+      494C01011A001C005C0010001000FFFFFF00FF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       000000000000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
@@ -3108,7 +3112,7 @@ inherited fmMethodWorkDep: TfmMethodWorkDep
     Left = 615
     Top = 186
     Bitmap = {
-      494C010109000C00580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010109000C005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       00000000000000000000000000000000000000000000DE734A00CE734A00CE73
       4A00C66B4200C66B4200BD6B3900BD6B3900B5633900B5633900AD633900AD5A

@@ -89,13 +89,15 @@ begin
                   datebegin := FReport.Historyes[num].datevih;
                   posit := Pos('-', datebegin);
                   dop:= Copy(datebegin, posit+1, 2);
-                  str := GetMonthR(StrToInt(Copy(datebegin, posit+1, 2)));
+                  if datebegin <> '' then str := GetMonthR(StrToInt(Copy(datebegin, posit+1, 2)))
+                    else str := '';
                   copystr1 := Copy(datebegin, 9, 10)+' '+str+' '+Copy(datebegin, 0, 4);
 
                   dateend := FReport.Historyes[num].datevh;
-                  posit := Pos('-', datebegin);
-                  str := GetMonthR(StrToInt(Copy(dateend, posit+1, 2)));
-                  copystr2 := Copy(datebegin, 9, 10)+' '+str+' '+Copy(datebegin, 0, 4);
+                  posit := Pos('-', dateend);
+                  if dateend <> '' then str := GetMonthR(StrToInt(Copy(dateend, posit+1, 2)))
+                    else str := '';
+                  copystr2 := Copy(dateend, 9, 10)+' '+str+' '+Copy(dateend, 0, 4);
                   Items[I, 7] := copystr1+' - ' + copystr2;
 
                 end

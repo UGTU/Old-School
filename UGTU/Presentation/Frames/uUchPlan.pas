@@ -976,7 +976,7 @@ begin
     Days: //в днях
     begin
       str := '';
-      if aHours>KolDaysInWeek then
+      if aHours>=KolDaysInWeek then
          str := IntToStr(aHours div KolDaysInWeek);
       if (aHours mod KolDaysInWeek)>0 then
       begin

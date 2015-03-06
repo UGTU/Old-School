@@ -322,7 +322,7 @@ var
   fmMethodWorkDep: TfmMethodWorkDep;
 
 implementation
-uses  uMain, uMethodWorkAddPlanDep, uMethodWorkPlanCurrentMW, uMethodWorkDateFilter,
+uses uMain, uMethodWorkAddPlanDep, uMethodWorkPlanCurrentMW, uMethodWorkDateFilter,
      uMethodWorkAddGos, uMethodWorkAddContentItemGos, uMethodWorkAddContentDiscOnGos,
      ReportsBase, uWaitingForm, MW_DepPlanRep, MW_DepPlanEditionRep, MW_DepFactRep;
 {$R *.dfm}
@@ -2010,3 +2010,4 @@ if (dbcbYearGos.KeyValue <> NULL) then
 end;
 
 end.
+
