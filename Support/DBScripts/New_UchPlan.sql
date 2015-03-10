@@ -784,8 +784,11 @@ BEGIN
 	  IF @Ik_ved IS NOT NULL
 	  BEGIN
 		INSERT INTO dbo.Uspev(Ik_ved, Ik_zach, Cosenca)
-		SELECT @Ik_ved, ik_zach, dopusc
-			FROM dbo.[UspevGetGrupDopusc](@Ik_grup, @ik_upContent,@lVnosn)
+		SELECT @Ik_ved, ik_zach, -1
+		FROM dbo.StudGrup WHERE Ik_grup=@Ik_grup AND Ik_prikazOtch IS NULL
+		--отсеиваем тех, кто в акдемке
+		AND ((NOT (Ik_prikazZach IS NULL AND ik_pricZach IN (SELECT ik_pric FROM dbo.Pricina WHERE ikTypePric=3)))
+							or (ik_studGrup in (select ik_studGrupNew from dbo.StudGrupAcadem where IsFreeAttendance=1)))
 	  END
 
 	ELSE	--ВЕДОМОСТЬ НЕ СОЗДАНА
@@ -809,15 +812,18 @@ RETURNS @Result TABLE
 	ik_disc				int,
 	cName_disc			varchar(500),
 	ik_upContent		int,
-	ik_ved				int
+	max_balls			int,
+	ik_ved				int, 
+	itab_n				varchar(50),
+	Dd_exam				datetime
  )
 AS
 BEGIN
 
 IF (@nmodule=0)
 BEGIN
-  insert into @Result(ik_vid_zanyat,ik_disc,cName_disc,ik_upContent,ik_ved)
-	Select distinct ik_vid_zanyat, d.ik_disc, cName_disc, cont.ik_upContent,Ik_ved From
+  insert into @Result(ik_vid_zanyat,ik_disc,cName_disc,ik_upContent,max_balls,ik_ved,itab_n,Dd_exam)
+	Select distinct ik_vid_zanyat, d.ik_disc, cName_disc, cont.ik_upContent,i_balls, Ik_ved,itab_n,Dd_exam From
 	dbo.Content_UchPl cont
 	INNER JOIN 
 	dbo.sv_disc svd
@@ -834,8 +840,8 @@ BEGIN
 		 AND (svd.iK_spclz IS NULL OR svd.iK_spclz=Grup.ik_spclz) 
 END ELSE
 BEGIN
-  insert into @Result(ik_vid_zanyat,ik_disc,cName_disc,ik_upContent,ik_ved)
-    Select distinct ik_vid_zanyat, d.ik_disc, cName_disc, cont.ik_upContent,Ik_ved From
+  insert into @Result(ik_vid_zanyat,ik_disc,cName_disc,ik_upContent,max_balls,ik_ved,itab_n,Dd_exam)
+    Select distinct ik_vid_zanyat, d.ik_disc, cName_disc, cont.ik_upContent, i_balls, Ik_ved,itab_n,Dd_exam From
 	dbo.Content_UchPl cont
 	INNER JOIN 
 	dbo.sv_disc svd

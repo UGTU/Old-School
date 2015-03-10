@@ -209,6 +209,7 @@ type
     N8: TMenuItem;
     actAnnulNapr: TAction;
     dsBRSVed: TDataSource;
+    dsBRSBalls: TDataSource;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -859,9 +860,12 @@ begin
       MB_YESNO) = IDYES then
       BtnSaveAtt.Click;
 
-  if IsBRS then
-    MaxBall := dmUspevaemost.adospGetAllAtt.Fields[5].AsInteger;
+  dbcbeExaminer.KeyValue := dsBRSVed.DataSet.FieldByName('itab_n').AsString;
+  if dsBRSVed.DataSet.FieldByName('Dd_exam').AsDateTime <> Null then
+    dbdteBRSExam.Value := dsBRSVed.DataSet.FieldByName('Dd_exam').AsDateTime;
 
+  {
+  MaxBall := dsBRSVed.DataSet.FieldByName('max_balls').AsInteger;
   ikVed := dbcmbxDisc.KeyValue;
   ikPredm := dmUspevaemost.adospGetAllAtt.Fields[4].AsInteger;
   // dmUspevaemost.adospGetAllAtt.Fields[1].AsInteger;
@@ -893,7 +897,7 @@ begin
 
   if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> Null then
     dbdteBRSExam.Value := dmUspevaemost.adospSelAtt.FieldByName('Dd_exam')
-      .AsDateTime;
+      .AsDateTime;    }
 
 end;
 
@@ -905,12 +909,9 @@ begin
     (cmbxNumber.Text = '') then
     Exit; // будет управление преподавател€ми
 
-  {if cmbxNumber.Text = 'Ёкзамен' then // PrepodBranch update
-    BRSExamRefresh
-  else }
+  ikVed := dsBRSVed.DataSet.FieldByName('ik_ved').AsInteger;
 
   AttestRefresh;
-
   RefreshView;
   Modified := false;
 end;
@@ -1081,25 +1082,25 @@ begin
   if (pcMain.ActivePage = tsAttBRS) or (pcMain.ActivePage = tsAtt) then
   begin
 
-    if (cmbxNumber.Text = 'Ёкзамен') and (pcMain.ActivePage = tsAttBRS) then
+    {if (cmbxNumber.Text = 'Ёкзамен') and (pcMain.ActivePage = tsAttBRS) then
     begin
       dbgrdBRSAtt.Visible := false;
       dbgrdBRSExam.Visible := true;
       TUspevGroupController.Instance.SelectBRSExam(ikVed);
     end
     else
-    begin
+    begin   }
       dbgrdBRSAtt.Visible := true;
       dbgrdBRSExam.Visible := false;
-      TUspevGroupController.Instance.SelectAtt(ikVed, IsBRS);
-    end;
-    if IsBRS then
-    begin
-      dbgrdBRSAtt.Refresh;
+      dsBRSBalls.DataSet := TUspevGroupController.Instance.SelectBRS(ikVed);
+    //end;
+   { if IsBRS then
+    begin  }
+    {  dbgrdBRSAtt.Refresh;
       dbgrdBRSExam.Refresh;
     end
     else
-      dbgeAtt.Refresh;
+      dbgeAtt.Refresh;}
 
   end;
 
@@ -3069,13 +3070,13 @@ begin
     MB_YESNO) = IDYES then
   begin
     // удаление дисциплины
-    TUspevGroupController.Instance.DelVed(ikVed);
+    TUspevGroupController.Instance.DelVed(ikVed, True);
     // все переоткрываем
-    dbcmbxDisc.Value := Null;
-    dmUspevaemost.adodsSelAttGroup.close;
-    dmUspevaemost.adospGetAllAtt.close;
-    dmUspevaemost.adospGetAllAtt.open;
-    dmUspevaemost.adospGetAllAtt.First;
+    //dbcmbxDisc.Value := Null;
+    //dmUspevaemost.adodsSelAttGroup.close;
+    //dmUspevaemost.adospGetAllAtt.close;
+    //dmUspevaemost.adospGetAllAtt.open;
+   // dmUspevaemost.adospGetAllAtt.First;
     // обновл€ем список всех видов зан€тий со всей необх инфой
     //TUspevGroupController.Instance.GetAllAtt(ik, nSem, cmbxNumber.Value, IsBRS);
   end;
@@ -3124,7 +3125,7 @@ begin
   begin
     // удаление ведомости
     TUspevGroupController.Instance.DelVed
-      (dmUspevaemost.adospGetAllVedNaprForDisc.FieldByName('ik_ved').Value);
+      (dmUspevaemost.adospGetAllVedNaprForDisc.FieldByName('ik_ved').Value, False);
     // все переоткрываем
     dmUspevaemost.adospGetAllVedNaprForDisc.close;
     dmUspevaemost.adospGetAllVedNaprForDisc.open;
@@ -3147,7 +3148,7 @@ begin
     MB_YESNO) = IDYES then
   begin
     // удаление ведомости
-    TUspevGroupController.Instance.DelVed(ikVed);
+    TUspevGroupController.Instance.DelVed(ikVed, False);
     Modified := false;
     // все переоткрываем
   {  dbcbVed.Value := Null;

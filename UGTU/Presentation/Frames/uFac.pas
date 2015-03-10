@@ -280,7 +280,7 @@ begin
 					  'ИС УГТУ', MB_YESNO)=IDYES then
   begin
   //удаление ведомости
-    TUspevGroupController.Instance.DelVed(dmUspevaemost.adospGetAllNaprForFac.FieldByName('ik_ved').Value);
+    TUspevGroupController.Instance.DelVed(dmUspevaemost.adospGetAllNaprForFac.FieldByName('ik_ved').Value,False);
   //все переоткрываем
     OpenNaprList;
   end;

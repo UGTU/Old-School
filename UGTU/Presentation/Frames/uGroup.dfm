@@ -443,7 +443,7 @@ inherited fmGroup: TfmGroup
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
-          DataSource = dmUspevaemost.dsSelBRSExamGroup
+          DataSource = dsBRSBalls
           DynProps = <>
           Flat = True
           Font.Charset = DEFAULT_CHARSET
@@ -692,8 +692,8 @@ inherited fmGroup: TfmGroup
             OnChange = dbcmbxDiscChange
           end
           object cmbxNumber: TDBComboBoxEh
-            Left = 161
-            Top = 2
+            Left = 160
+            Top = 0
             Width = 79
             Height = 19
             DynProps = <>
@@ -2655,7 +2655,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400500110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2828,7 +2828,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000480110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3499,7 +3499,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800480110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050008004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
@@ -4097,15 +4097,19 @@ inherited fmGroup: TfmGroup
     end
   end
   object dsVed: TDataSource
-    Left = 390
+    Left = 382
     Top = 29
   end
   object dsUspev: TDataSource
-    Left = 434
-    Top = 32
+    Left = 426
+    Top = 24
   end
   object dsBRSVed: TDataSource
-    Left = 474
-    Top = 32
+    Left = 490
+    Top = 24
+  end
+  object dsBRSBalls: TDataSource
+    Left = 562
+    Top = 24
   end
 end

@@ -51,7 +51,7 @@ type
 
     // **********************АТТЕСТАЦИЯ**************************
     // процедура выбирает все данные для одного из предметов аттестации
-    procedure SelectAtt(ikVed: Integer; IsBRS: boolean);
+    function SelectBRS(ikVed: Integer): TADODataSet;
 
     // процедура выбирает все данные для одного из предметов с экзаменом БРС
     procedure SelectBRSExam(ikVed: Integer);
@@ -254,7 +254,7 @@ type
     function DoRaports(lv1, lv2, lvDop, lvNDop: TListView;
       ik_group, ik_upContent: Integer): boolean;
     // Удаление ведомости
-    procedure DelVed(ik_ved: variant);
+    procedure DelVed(ik_ved: variant; isBRS: boolean);
 
     /// ////////Экспорт в Excel аттестации///////////
     procedure PrintAttestation(ikGrup, nsem, nAtt, ikFac: Integer;
@@ -479,9 +479,12 @@ end;
 
 // ***********************АТТЕСТАЦИЯ*************************
 // процедура выбирает все данные для одного из предметов аттестации
-procedure TUspevGroupController.SelectAtt(ikVed: Integer; IsBRS: boolean);
+function TUspevGroupController.SelectBRS(ikVed: Integer): TADODataSet;
 begin
-  if not IsBRS then
+
+  FBRSVedomostController.BRSVedomost := ikVed;
+  Result := FBRSVedomostController.BallsDataSet;
+  {if not IsBRS then
   begin
     dmUspevaemost.adodsSelAttGroup.Active := false;
     dmUspevaemost.adodsSelAttGroup.CommandText :=
@@ -494,7 +497,7 @@ begin
     dmUspevaemost.adodsSelAttBRSGroup.CommandText :=
       'select * from GetSmallBRSAttForGrup(' + IntToStr(ikVed) + ')';
     dmUspevaemost.adodsSelAttBRSGroup.Active := true;
-  end;
+  end;     }
 end;
 
 procedure TUspevGroupController.SelectBRSExam(ikVed: Integer);
@@ -1954,12 +1957,13 @@ begin
 end;
 
 // Удаление ведомости
-procedure TUspevGroupController.DelVed(ik_ved: variant);
+procedure TUspevGroupController.DelVed(ik_ved: variant; isBRS: boolean);
 var
   tempStoredProc: TADOStoredProc;
 begin
   TApplicationController.GetInstance.AddLogEntry('Удаление ведомости');
-  FVedomostController.DelVed(ik_ved);
+  if isBRS then FBRSVedomostController.DelVed(ik_ved)
+    else FVedomostController.DelVed(ik_ved);
 
  { tempStoredProc := TADOStoredProc.Create(nil);
   try

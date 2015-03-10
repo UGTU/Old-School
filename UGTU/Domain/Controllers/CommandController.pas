@@ -86,6 +86,17 @@ type
     property DataSet: TADODataSet read FDataSet;
   end;
 
+  TBRSUspevController = class(TBaseSelectController)
+  private
+    FBRSVedomost: integer;
+    procedure SetBRSVedomost(const Value: integer);
+  public
+    constructor Create;
+    procedure Save;
+    property BRSVedomost: integer write SetBRSVedomost;
+    property DataSet: TADODataSet read FDataSet;
+  end;
+
   {управление планами}
   TUchPlanController = class(TBaseSelectController)
   private
@@ -153,11 +164,15 @@ type
     FIK_Grup: integer;
     FN_sem: integer;
     FN_mod: integer;
+    FBRSUspevController: TBRSUspevController; //успеваемость из ведомости
+
     function GetBRSCount: integer;
     function GetCreatedCount: integer;
     procedure SetBRSVedomost(const Value: integer);
+    function GetBallsDataSet: TADODataSet;
   public
     constructor Create; overload;
+    destructor Destroy; override;
     procedure Reload(ik_grup, n_sem, n_module: integer); overload;
     procedure CreateAllBRS;
     procedure DelVed(ik_ved: integer);
@@ -165,6 +180,7 @@ type
     property BRSVedomost: integer write SetBRSVedomost;
     property Count: integer read GetBRSCount;
     property CreatedCount: integer read GetCreatedCount;
+    property BallsDataSet: TADODataSet read GetBallsDataSet;
   end;
 
   {управление дисциплинами, по которым требуются направления
@@ -322,7 +338,6 @@ begin
   except
     on E: Exception do
     begin
-      FDataSet.Connection.RollbackTrans;
       raise EApplicationException.Create
         ('Произошла ошибка при удалении ведомости.', E);
       exit;
@@ -846,7 +861,7 @@ constructor TBRSVedomostController.Create;
 begin
   inherited Create('GetBRSVidZanyat(' + IntToStr(0) + ',' +
     IntToStr(0) + ',' + IntToStr(0) + ')');
- // FUspevController := TUspevController.Create;
+  FBRSUspevController := TBRSUspevController.Create;
 end;
 
 procedure TBRSVedomostController.CreateAllBRS;
@@ -887,6 +902,17 @@ begin
   Refresh;
 end;
 
+destructor TBRSVedomostController.Destroy;
+begin
+  FBRSUspevController.Free;
+  inherited;
+end;
+
+function TBRSVedomostController.GetBallsDataSet: TADODataSet;
+begin
+  Result := FBRSUspevController.DataSet;
+end;
+
 function TBRSVedomostController.GetBRSCount: integer;
 begin
   Result := FDataSet.RecordCount;
@@ -919,7 +945,26 @@ end;
 
 procedure TBRSVedomostController.SetBRSVedomost(const Value: integer);
 begin
+  FBRSUspevController.BRSVedomost := Value;
   FDataSet.Locate('ik_ved', Value, []);
+end;
+
+{ TBRSUspevController }
+
+constructor TBRSUspevController.Create;
+begin
+  inherited Create('GetSmallBRSAttForGrup(' + IntToStr(0) + ')');
+end;
+
+procedure TBRSUspevController.Save;
+begin
+
+end;
+
+procedure TBRSUspevController.SetBRSVedomost(const Value: integer);
+begin
+  inherited Reload('GetSmallBRSAttForGrup(' + IntToStr(Value) + ')');
+  FBRSVedomost := Value;
 end;
 
 end.
