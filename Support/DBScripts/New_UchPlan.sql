@@ -304,8 +304,7 @@ alter PROCEDURE [dbo].[AppendVedomost]
 AS
   IF @flag=-1  --удаление ведомости
   BEGIN
-	DELETE FROM Vedomost
-	WHERE Ik_ved = @Ik_ved
+    exec DelVed @ik_ved = @Ik_ved
   END
 
   IF @flag=0  --редактирование ведомости
