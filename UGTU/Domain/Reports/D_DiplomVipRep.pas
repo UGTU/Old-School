@@ -325,9 +325,9 @@ begin
      str1:= str1 + ' года';
   i:= dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsInteger;
   if ((i > 0) and (i<5)) then
-    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+'мес€ца';
+    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+' мес€ца';
   if (i>4) then
-    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+'мес€цев';
+    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+' мес€цев';
   Replace('#Ћет#', str1);
 
 
@@ -623,7 +623,7 @@ begin
     end
     else
     begin
-      str:= GetWeekCountName(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsInteger);
+      str:= GetWeekCountNameFromDays(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsInteger);
     end;
     ActRange.Value := str;
 
@@ -656,7 +656,7 @@ begin
     end
     else
     begin
-      str:= GetWeekCountName(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger);
+      str:= GetWeekCountNameFromDays(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger);
     end
   else
   begin
