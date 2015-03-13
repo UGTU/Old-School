@@ -208,6 +208,7 @@ begin
 end;
 
 //процедура настройки свойств таблицы
+//загрузка данных о связанных (ссылочных) таблицах
 procedure TfmSprav.DoColKey(tbl:string; key:string; name:string;var count:integer);
 var i:integer;
     stt,stk:string;
@@ -249,6 +250,7 @@ begin
 
 end;
 
+//Загрузка ссылочной таблицы
 procedure TfmSprav.OpenDopSprav(Query: TADOQuery;TabName: string);
 begin
    Query.Close;
@@ -261,13 +263,13 @@ begin
 
 end;
 
-//роцедура загружает в PickList список значений
+//процедура загружает в PickList список значений
 procedure TfmSprav.LoadPickList (num:integer; Query: TADOQuery; FieldName: string);
 begin
   try
    Query.First;
    gSprav.Columns.Items[num].PickList.Clear;
-   while not  Query.Eof do
+   while not Query.Eof do
    begin
       gSprav.Columns.Items[num].PickList.Add(Query.FieldByName(FieldName).AsString);
       Query.Next;
@@ -370,12 +372,12 @@ begin
   end;
 end;
 
-//процедура настройки свойств таблицы
+//процедура настройки свойств таблицы - для загрузки ссылочных таблиц
 procedure TfmSprav.DoList;
 var i,j,k:integer;
   str:string;
 begin
-   try  //сортируем справочник
+   try  //сортируем справочник   и загружаем список ссылочных таблиц
 	   tSpravList.Locate('SpravName', cbSprav.Text,[loPartialKey]);
 
      tSprav.SQL.Clear;
@@ -408,6 +410,7 @@ begin
    end;
    end;
 
+   //настройка свойств справочника
    try
 	   cdsSprav.Fields[0].Visible:=false; //код невидим
 	   //если справочник - ссылающаяся таблица

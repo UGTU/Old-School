@@ -23,7 +23,8 @@ unit D_DiplomVipRep;
 interface
 uses
   Classes, SysUtils, ExcelXP, Barcode, Contnrs, ReportsBase, DB, ADODB, uDMDiplom,
-    Variants, GeneralController, ApplicationController, ExceptionBase, uDiplOtdKardController;
+    Variants, GeneralController, ApplicationController, ExceptionBase, uDiplOtdKardController,
+    ConstantRepository;
 
 type
    TDiplomVipExcelReport = class(TExcelReportBase)
@@ -50,7 +51,6 @@ type
     procedure LoadData;
     procedure SendExamRowToExcel(Disc, HourCount, Mark: string; var cur: String;
         var ActRange: Variant);
-    function GetWeekCountName(weekCount:integer) : string;
   protected
     procedure Execute;override;
   public
@@ -204,23 +204,7 @@ begin
   Result := bstr+IntToStr(num);
 end;
 
-function TDiplomVipExcelReport.GetWeekCountName(weekCount: integer): string;
-var str: string; wMod: integer;
-begin
-str:= IntToStr(weekCount);
-wMod:= weekCount mod 10;
-if ((wMod =1) and (weekCount<>11)) then
-  str:= str+' неделя'
-else
-begin
 
-if (wMod > 4) or (wMod = 0) or ((weekCount <20) and (weekCount > 10))then
-      str :=   str + ' недель'
-    else
-      str :=   str +' недели'
-end;
-  result:= str;
-end;
 
 function TDiplomVipExcelReport.GetNextCellHor(cur: String): String;
 var

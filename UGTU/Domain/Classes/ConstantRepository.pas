@@ -2,7 +2,7 @@ unit ConstantRepository;
 
 interface
 
-uses System.Variants;
+uses System.Variants, System.SysUtils;
 
 //Правила именования констант:
 //если константа является ключом, то пишем префикс "key_"
@@ -35,7 +35,8 @@ const
 
   function GetMonthR(month:integer): string;    //получить месяц в род.п. по номеру
   function GetKursP(kurs: integer): string;     //получить номер курса в предл. п. по номеру
-
+  function GetTimeByType(aEdIzm, aHours: integer): string; //получить
+  function GetWeekCountName(weekCount: integer): string; //получить кол-во недель в виде строки
 implementation
 
 function IfNull(const Value, Default: OleVariant): OleVariant;
@@ -81,5 +82,42 @@ begin
   result:= str;
 end;
 
+function GetTimeByType(aEdIzm, aHours: integer): string;
+var str: string;
+begin
+  case aEdIzm of
+    Hours: Result := IntToStr(aHours);
+    Days: //в днях
+    begin
+      str := '';
+      if aHours>KolDaysInWeek then
+         str := IntToStr(aHours div KolDaysInWeek);
+      if (aHours mod KolDaysInWeek)>0 then
+      begin
+        if str<>'' then str := str + ' ';
+        str := str + IntToStr(aHours mod KolDaysInWeek) + '/'+IntToStr(KolDaysInWeek);
+      end;
+      Result := str;
+    end;
+  end;
+end;
+
+function GetWeekCountName(weekCount: integer): string;
+var str: string; wMod: integer;
+begin
+str:= IntToStr(weekCount);
+wMod:= weekCount mod 10;
+if ((wMod =1) and (weekCount<>11)) then
+  str:= str+' неделя'
+else
+begin
+
+if (wMod > 4) or (wMod = 0) or ((weekCount <20) and (weekCount > 10))then
+      str :=   str + ' недель'
+    else
+      str :=   str +' недели'
+end;
+  result:= str;
+end;
 
 end.

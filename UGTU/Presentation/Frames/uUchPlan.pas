@@ -200,7 +200,7 @@ type
     procedure SetUchPlan(const aUchPlan: Integer);
     procedure SetUchPlanProperties(const aUchPlan: Integer);
     procedure SetVisualProperty;
-    function GetTimeByType(aEdIzm, aHours: integer): string;
+
   public
 
     nameSpclz: string; // именование Профиль/Программа/Специализация
@@ -968,25 +968,7 @@ begin
   end;
 end;
 
-function TfmUchPlan.GetTimeByType(aEdIzm, aHours: integer): string;
-var str: string;
-begin
-  case aEdIzm of
-    Hours: Result := IntToStr(aHours);
-    Days: //в днях
-    begin
-      str := '';
-      if aHours>KolDaysInWeek then
-         str := IntToStr(aHours div KolDaysInWeek);
-      if (aHours mod KolDaysInWeek)>0 then
-      begin
-        if str<>'' then str := str + ' ';
-        str := str + IntToStr(aHours mod KolDaysInWeek) + '/'+IntToStr(KolDaysInWeek);
-      end;
-      Result := str;
-    end;
-  end;
-end;
+
 
 procedure TfmUchPlan.SpeedButton2Click(Sender: TObject);
 begin

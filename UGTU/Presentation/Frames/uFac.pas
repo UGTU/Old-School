@@ -8,7 +8,8 @@ uses
   ADODB, Grids, DBGridEh, ComObj, DateUtils, Mask, DBCtrlsEh, 
   Spin, GridsEh, DBLookupEh, ActnList, ImgList, D_FacItogiRep,
   ReportsBase, ReportUI, uWaitingform, Menus, ApplicationController, ExceptionBase, uWaitingController, udmStudentData, D_AcademReport,
-  uAcademFrame, uAverageBalls, DBTVGroupObj;
+  uAcademFrame, uAverageBalls, DBTVGroupObj, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmFacultet = class(TfmBase)

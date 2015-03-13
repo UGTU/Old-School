@@ -13,7 +13,7 @@ inherited fmFacultet: TfmFacultet
       Top = 2
       Width = 759
       Height = 418
-      ActivePage = tsKontingent
+      ActivePage = tsDaily
       Align = alClient
       Images = frmMain.ImageList1
       Style = tsFlatButtons
@@ -22,10 +22,6 @@ inherited fmFacultet: TfmFacultet
       object TabSheet1: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 38
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object DBGridEh1: TDBGridEh
           Left = 0
           Top = 0
@@ -34,28 +30,23 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = DataSource1
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
           RowHeight = 16
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = DBGridEh1DblClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_spec'
               Footers = <>
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsKontingent: TTabSheet
@@ -122,20 +113,14 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmFacultetStatistic.dsSmallKont
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 3
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar2: TToolBar
           Left = 0
@@ -203,6 +188,7 @@ inherited fmFacultet: TfmFacultet
             Top = 0
             Width = 80
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -214,10 +200,6 @@ inherited fmFacultet: TfmFacultet
       object tsItogi: TTabSheet
         Caption = #1054#1073#1097#1080#1077' '#1080#1090#1086#1075#1080' '#1089#1077#1089#1089#1080#1080
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -279,7 +261,6 @@ inherited fmFacultet: TfmFacultet
             Hint = #1042#1080#1076' '#1089#1077#1084#1077#1089#1090#1088#1072
             Style = csDropDownList
             Anchors = [akTop, akRight]
-            ItemHeight = 0
             ParentShowHint = False
             ShowHint = True
             Sorted = True
@@ -319,20 +300,14 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmFacultetStatistic.dsSelKursItogiCol
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object Panel2: TPanel
           Left = 148
@@ -371,20 +346,14 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmFacultetStatistic.dsSelDaysItogi
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar4: TToolBar
           Left = 0
@@ -445,6 +414,7 @@ inherited fmFacultet: TfmFacultet
             Top = 0
             Width = 80
             Height = 19
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -538,6 +508,7 @@ inherited fmFacultet: TfmFacultet
               Width = 74
               Height = 19
               Hint = #1053#1072#1095#1072#1083#1086' '#1087#1077#1088#1080#1086#1076#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072' '#1078#1091#1088#1085#1072#1083#1072
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Kind = dtkDateEh
@@ -553,6 +524,7 @@ inherited fmFacultet: TfmFacultet
               Width = 80
               Height = 19
               Hint = #1050#1086#1085#1077#1094' '#1087#1077#1088#1080#1086#1076#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072' '#1078#1091#1088#1085#1072#1083#1072
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Kind = dtkDateEh
@@ -574,26 +546,19 @@ inherited fmFacultet: TfmFacultet
           AutoFitColWidths = True
           ColumnDefValues.ToolTips = True
           DataSource = dmUspevaemost.dsGetAllNaprForFac
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = ppmFacNapr
           ReadOnly = True
           SortLocal = True
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = dbgrdNaprTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cNumber_ved'
               Footers = <>
@@ -601,6 +566,7 @@ inherited fmFacultet: TfmFacultet
               Width = 53
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'lClose'
               Footers = <>
@@ -608,6 +574,7 @@ inherited fmFacultet: TfmFacultet
               Width = 51
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -615,6 +582,7 @@ inherited fmFacultet: TfmFacultet
               Width = 131
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
@@ -622,6 +590,7 @@ inherited fmFacultet: TfmFacultet
               Width = 68
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cName_disc'
               Footers = <>
@@ -629,12 +598,14 @@ inherited fmFacultet: TfmFacultet
               Width = 144
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Name_osenca'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cName_vid_exam'
               Footers = <>
@@ -642,6 +613,7 @@ inherited fmFacultet: TfmFacultet
               Width = 100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'dD_vydano'
               Footers = <>
@@ -649,6 +621,7 @@ inherited fmFacultet: TfmFacultet
               Width = 72
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Dd_exam'
               Footers = <>
@@ -656,6 +629,7 @@ inherited fmFacultet: TfmFacultet
               Width = 82
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ctema'
               Footers = <>
@@ -664,11 +638,14 @@ inherited fmFacultet: TfmFacultet
               Width = 300
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'UserName'
               Footers = <>
               Title.Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsAcadem: TTabSheet
@@ -761,7 +738,7 @@ inherited fmFacultet: TfmFacultet
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C0101020004001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -930,7 +907,7 @@ inherited fmFacultet: TfmFacultet
     Left = 214
     Top = 152
     Bitmap = {
-      494C01010F001000140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F001000180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
