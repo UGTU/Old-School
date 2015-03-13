@@ -72,7 +72,7 @@ implementation
 
 uses uDM, DBTVgroupObj, DBTVSpecObj, DBTVFacObj, uGroup,
   uSpec,ABIT_zachislenie_frame, uDMGroupActions, uMain, uDMUgtuStructure,
-  ConstantRepository, CommonIntf, CommonIntfImpl;
+  ConstantRepository, CommonIntf, CommonIntfImpl, ExceptionBase;
 
 {$R *.dfm}
 
@@ -310,14 +310,8 @@ begin
     //если идет добавление группы в ИС "Деканат"
     if not WithSpec then
     begin
-
       ParamByName('@ik_spec_fac').Value := fSpecFacIK;
       Log.LogMessage('SpecFacIK='+IntToStr(fSpecFacIK));
-    {  if frmMain.ActiveFrame is TfmGroup then
-        ParamByName('@ik_spec_fac').Value:= TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik
-      else if frmMain.ActiveFrame is TfmZach then
-        ParamByName('@ik_spec_fac').Value:= Tag else
-        ParamByName('@ik_spec_fac').Value:= TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;}
     end
     else ParamByName('@ik_spec_fac').Value:= dbcbSpec.KeyValue;
 
@@ -343,9 +337,13 @@ begin
 
   dm.DBConnect.CommitTrans;
 except
-  ShowMessage('Добавить группу не удалось!');
-  dm.DBConnect.RollbackTrans;
-
+  on E:Exception do
+       begin
+         raise EApplicationException.Create('Произошла ошибка при добавление группы.',E);
+         dm.DBConnect.RollbackTrans;
+         exit;
+       end;
+  
 end;
 
   Result:= true;
