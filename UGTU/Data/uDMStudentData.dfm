@@ -497,7 +497,7 @@ object dmStudentData: TdmStudentData
     CursorType = ctStatic
     CommandText = 'select * from AcademStud'
     Parameters = <>
-    Left = 432
+    Left = 456
     Top = 312
     object adodsAcademStudName: TStringField
       DisplayLabel = #1060#1048#1054' '#1089#1090#1091#1076#1077#1085#1090#1072

@@ -414,7 +414,8 @@ uses
   SpravkaHistory2014 in 'Domain\Classes\SpravkaHistory2014.pas',
   Spravka2014 in 'Domain\Classes\Spravka2014.pas',
   SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas',
-  uMagaizneDoc in 'Presentation\Frames\uMagaizneDoc.pas' {fmDoc: TFrame};
+  uMagaizneDoc in 'Presentation\Frames\uMagaizneDoc.pas' {fmDoc: TFrame},
+  uDMDocuments in 'Data\uDMDocuments.pas' {dmDocs: TDataModule};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -460,5 +461,6 @@ begin
   Application.CreateForm(TftmStudent, ftmStudent);
   Application.CreateForm(TdmHOST, dmHOST);
   Application.CreateForm(TImageFullSizeShowForm, ImageFullSizeShowForm);
+  Application.CreateForm(TdmDocs, dmDocs);
   Application.Run;
 end.
