@@ -13,7 +13,7 @@ inherited fmFacultet: TfmFacultet
       Top = 2
       Width = 759
       Height = 418
-      ActivePage = tsKontingent
+      ActivePage = tsDaily
       Align = alClient
       Images = frmMain.ImageList1
       Style = tsFlatButtons
@@ -22,10 +22,6 @@ inherited fmFacultet: TfmFacultet
       object TabSheet1: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 38
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object DBGridEh1: TDBGridEh
           Left = 0
           Top = 0
@@ -208,10 +204,6 @@ inherited fmFacultet: TfmFacultet
       object tsItogi: TTabSheet
         Caption = #1054#1073#1097#1080#1077' '#1080#1090#1086#1075#1080' '#1089#1077#1089#1089#1080#1080
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0

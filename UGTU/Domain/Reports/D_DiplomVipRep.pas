@@ -23,7 +23,8 @@ unit D_DiplomVipRep;
 interface
 uses
   Classes, SysUtils, ExcelXP, Barcode, Contnrs, ReportsBase, DB, ADODB, uDMDiplom,
-    Variants, GeneralController, ApplicationController, ExceptionBase, uDiplOtdKardController;
+    Variants, GeneralController, ApplicationController, ExceptionBase, uDiplOtdKardController,
+    ConstantRepository;
 
 type
    TDiplomVipExcelReport = class(TExcelReportBase)
@@ -50,7 +51,6 @@ type
     procedure LoadData;
     procedure SendExamRowToExcel(Disc, HourCount, Mark: string; var cur: String;
         var ActRange: Variant);
-    function GetWeekCountName(weekCount:integer) : string;
   protected
     procedure Execute;override;
   public
@@ -204,23 +204,7 @@ begin
   Result := bstr+IntToStr(num);
 end;
 
-function TDiplomVipExcelReport.GetWeekCountName(weekCount: integer): string;
-var str: string; wMod: integer;
-begin
-str:= IntToStr(weekCount);
-wMod:= weekCount mod 10;
-if ((wMod =1) and (weekCount<>11)) then
-  str:= str+' недел€'
-else
-begin
 
-if (wMod > 4) or (wMod = 0) or ((weekCount <20) and (weekCount > 10))then
-      str :=   str + ' недель'
-    else
-      str :=   str +' недели'
-end;
-  result:= str;
-end;
 
 function TDiplomVipExcelReport.GetNextCellHor(cur: String): String;
 var
@@ -341,9 +325,9 @@ begin
      str1:= str1 + ' года';
   i:= dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsInteger;
   if ((i > 0) and (i<5)) then
-    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+'мес€ца';
+    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+' мес€ца';
   if (i>4) then
-    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+'мес€цев';
+    str1:= str1 +' '+ dmDiplom.adospGetVipiscaForDiplomMonthObuch.AsString+' мес€цев';
   Replace('#Ћет#', str1);
 
 
@@ -639,7 +623,7 @@ begin
     end
     else
     begin
-      str:= GetWeekCountName(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsInteger);
+      str:= GetWeekCountNameFromDays(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsInteger);
     end;
     ActRange.Value := str;
 
@@ -672,7 +656,7 @@ begin
     end
     else
     begin
-      str:= GetWeekCountName(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger);
+      str:= GetWeekCountNameFromDays(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger);
     end
   else
   begin

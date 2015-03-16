@@ -1,12 +1,12 @@
 inherited fmSprav: TfmSprav
   Width = 451
-  Height = 305
+  Height = 354
   Align = alClient
   ExplicitWidth = 451
   ExplicitHeight = 305
   inherited Panel1: TPanel
     Width = 451
-    Height = 268
+    Height = 317
     ExplicitWidth = 451
     ExplicitHeight = 268
     object Label1: TLabel
@@ -20,7 +20,7 @@ inherited fmSprav: TfmSprav
       Left = 2
       Top = 33
       Width = 447
-      Height = 233
+      Height = 282
       Align = alClient
       AutoFitColWidths = True
       DataSource = dsSprav
@@ -31,6 +31,7 @@ inherited fmSprav: TfmSprav
       PopupMenu = pmMenu
       SortLocal = True
       TabOrder = 0
+      TitleParams.SecondColor = clWindow
       OnColExit = gSpravColExit
       OnKeyPress = gSpravKeyPress
       object RowDetailData: TRowDetailPanelControlEh
@@ -120,7 +121,7 @@ inherited fmSprav: TfmSprav
     end
   end
   inherited pnlSave: TPanel
-    Top = 268
+    Top = 317
     Width = 451
     ExplicitTop = 268
     ExplicitWidth = 451
