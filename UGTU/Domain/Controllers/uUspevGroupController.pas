@@ -90,8 +90,7 @@ type
     // сохраняет результаты аттестации и пропуски
     function SaveAtt(ikVed: Integer; dbgrdAtt: PDBGrid): boolean;
 
-    function SaveBRSAtt(ikVed: Integer; dbgrdBRSAtt: TDBGridEh; i_tab: string;
-      date: TDateTime): boolean;
+    function SaveBRSAtt(i_tab: string; date: TDateTime): boolean;
 
     function SaveBRSExam(ikVed: Integer; dbgrdBRSExam: TDBGridEh; i_tab: string;
       date: TDateTime): boolean;
@@ -112,10 +111,6 @@ type
     function GetBRSVedomSet: TADODataSet;
 
     // ***************ВКЛАДКА ВЕДОМОСТИ**************************
-    // SelPrepodsForVedom выбирает прподавателей для ведомости
-    function SelPrepodsForVedom(ik_grup, iK_vid_zanyat, n_sem: variant)
-      : boolean;
-
     // GetNSem вычисляет № текущего семестра (по году создания группы)
     function GetNSem(FoundYear: Integer): Integer;
 
@@ -253,8 +248,12 @@ type
     // согласно переданных списков
     function DoRaports(lv1, lv2, lvDop, lvNDop: TListView;
       ik_group, ik_upContent: Integer): boolean;
+
     // Удаление ведомости
-    procedure DelVed(ik_ved: variant; isBRS: boolean);
+    procedure DelVed(ik_ved: integer);
+
+    //Удаление БРС-ведомости
+    procedure DelBRSVed(ik_ved: integer);
 
     /// ////////Экспорт в Excel аттестации///////////
     procedure PrintAttestation(ikGrup, nsem, nAtt, ikFac: Integer;
@@ -617,7 +616,7 @@ end;
 
 function TUspevGroupController.GetBRSVedomSet: TADODataSet;
 begin
-  Result := FBRSVedomostController.DataSet;
+  Result := FBRSVedomostController.VedsDataSet;
 end;
 
 // функция проверяет наличие созданной ведомости для аттестации
@@ -907,13 +906,13 @@ begin
 
 end;
 
-function TUspevGroupController.SaveBRSAtt(ikVed: Integer;
-  dbgrdBRSAtt: TDBGridEh; i_tab: string; date: TDateTime): boolean;
+function TUspevGroupController.SaveBRSAtt(i_tab: string; date: TDateTime): boolean;
 begin
 
   Result := false;
+  FBRSVedomostController.Save(i_tab, date);
 
-  with dmUspevaemost.aspSetAttributesVedomost do
+  {with dmUspevaemost.aspSetAttributesVedomost do
   begin
     Parameters.Clear;
     Parameters.AddParameter;
@@ -948,7 +947,7 @@ begin
     end;
     dmUspevaemost.adodsSelAttBRSGroup.next;
   end;
-  dmUspevaemost.adodsSelAttBRSGroup.First;
+  dmUspevaemost.adodsSelAttBRSGroup.First;         }
 
   Result := true;
 
@@ -1088,26 +1087,6 @@ begin
 end;
 
 // ***************ВКЛАДКА ВЕДОМОСТИ**************************
-// выбирает преподавателей для ведомости
-function TUspevGroupController.SelPrepodsForVedom(ik_grup, iK_vid_zanyat,
-  n_sem: variant): boolean;
-begin
-  try
-    dmUspevaemost.adospPrepodVed.Close;
-    with dmUspevaemost.adospPrepodVed.Parameters do
-    begin
-      Clear;
-      CreateParameter('@Ik_grup', ftInteger, pdInput, 0, ik_grup);
-      CreateParameter('@iK_vid_zanyat', ftInteger, pdInput, 0, iK_vid_zanyat);
-      CreateParameter('@n_sem', ftInteger, pdInput, 0, n_sem);
-    end;
-    dmUspevaemost.adospPrepodVed.Open;
-    Result := true;
-  except
-    Result := false;
-  end;
-end;
-
 // вычисляет № текущего семестра (по году создания группы)
 function TUspevGroupController.GetNSem(FoundYear: Integer): Integer;
 var
@@ -1784,6 +1763,7 @@ begin
   finally
     tempStoredProc.Free;
   end;
+  FVedomostController.Refresh;
 end;
 
 // Обновляет допуски в ведомости (шапку)
@@ -1957,14 +1937,18 @@ begin
 end;
 
 // Удаление ведомости
-procedure TUspevGroupController.DelVed(ik_ved: variant; isBRS: boolean);
+procedure TUspevGroupController.DelBRSVed(ik_ved: integer);
+begin
+  TApplicationController.GetInstance.AddLogEntry('Удаление БРС ведомости');
+  FBRSVedomostController.DelVed(ik_ved);
+end;
+
+procedure TUspevGroupController.DelVed(ik_ved: integer);
 var
   tempStoredProc: TADOStoredProc;
 begin
   TApplicationController.GetInstance.AddLogEntry('Удаление ведомости');
-  if isBRS then FBRSVedomostController.DelVed(ik_ved)
-    else FVedomostController.DelVed(ik_ved);
-
+  FVedomostController.DelVed(ik_ved);
  { tempStoredProc := TADOStoredProc.Create(nil);
   try
     tempStoredProc.ProcedureName := 'DelVed;1';
@@ -2517,7 +2501,7 @@ end;
 
 function TUspevGroupController.GetVedomSet: TADODataSet;
 begin
-  Result := FVedomostController.DataSet;
+  Result := FVedomostController.VedDataSet;
 end;
 
 // Выбирает cодержимое ведомости с допусками

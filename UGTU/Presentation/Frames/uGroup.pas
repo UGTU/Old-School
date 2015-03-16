@@ -33,7 +33,6 @@ type
     dbdteEx: TDBDateTimeEditEh;
     dbeNum: TDBEditEh;
     Label6: TLabel;
-    dbcbxClosed: TDBCheckBoxEh;
     dbcbVed: TDBLookupComboboxEh;
     ilMain: TImageList;
     ilDisabled: TImageList;
@@ -210,6 +209,7 @@ type
     actAnnulNapr: TAction;
     dsBRSVed: TDataSource;
     dsBRSBalls: TDataSource;
+    dbcbxClosed: TCheckBox;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -368,8 +368,8 @@ type
     procedure SetVedEnabled;
     procedure LoadDiploms;
 
-    procedure AttestRefresh;
-    procedure BRSExamRefresh;
+    procedure BRSRefresh;
+    //procedure BRSExamRefresh;
   protected
     procedure DoCancel; override;
     procedure DoCreate; override;
@@ -402,7 +402,7 @@ uses uDM, DBTVgroupObj, DBTVFacObj, uStudInfo,
   uRaports, uGroupEdtDlg, uVinEkz, uDMGroupActions, uDMUspevaemost,
   uDMUgtuStructure, uNaprClose, uNapr,
   Conditions, CorrectDatatypeChecks, Parser, uDiplomController,
-  uDMDiplom, uDiplomStudSelect, ConstantRepository;
+  uDMDiplom, uDiplomStudSelect, ConstantRepository, ExceptionBase;
 
 {$R *.dfm}
 { TfmGroup }
@@ -429,11 +429,20 @@ begin
   DataSource1.DataSet := dmStudentData.adodsSmallGroup;
   Modified := false;
   ik := (Frameobject as TDBNodeGroupObject).UchPlanIK;
-  dmUchPlan.adodsUchPlan.close;
+  dmUchPlan.adodsUchPlan.Close;
   dmUchPlan.adodsUchPlan.CommandText :=
     'select * from Uch_pl where (ik_uch_plan = ' + inttostr(ik) + ')';
   dmUchPlan.adodsUchPlan.open;
   FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value);
+
+  try
+    dmUspevaemost.adospPrepodVed.Open;
+    dmUspevaemost.aspPrepodVedFromUchPlan.Open;
+  except
+    on E: Exception do
+      raise EApplicationException.Create
+        ('Произошла ошибка при загрузке преподавателей.', E);
+  end;
 
   // Взять все ведомости группы
   dsVed.DataSet := TUspevGroupController.Instance.GetVedomSet;
@@ -495,7 +504,7 @@ begin
   dbgrdBRSAtt.Refresh;
 
   dmUspevaemost.adospGetAllVeds4Group.close;
-  dmUspevaemost.adospPrepodVed.close;
+//  dmUspevaemost.adospPrepodVed.close;
   dmUspevaemost.adospSelVedGroup.close;
 end;
 
@@ -620,8 +629,11 @@ begin
     else
       Modified := false;
   end;
-  // Выборка дисциплин в этом семестре из учебного плана
+
+  //чистим контроллы
   dbcmbxDisc.KeyValue := -1;
+  dbcbeExaminer.KeyValue := -1;
+  dbdteBRSExam.Value := Now;
   //dmUspevaemost.adodsSelAttGroup.Active := false;
   //dmUspevaemost.adodsSelAttBRSGroup.Active := false;
   //dmUspevaemost.adodsSelBRSExamGroup.Active := false;
@@ -633,6 +645,8 @@ begin
 
  // dbcmbxDisc.ListSource := dmUspevaemost.dsGetAllAtt;
   CheckAttExist;
+  if Assigned(dsBRSBalls.DataSet) then
+    dsBRSBalls.DataSet.Active := false;
 
   //dmUspevaemost.aspPrepodVedFromUchPlan.Active := false;
   //dmUspevaemost.adospSelAtt.Active := false;
@@ -660,15 +674,15 @@ begin
   end;
   // Выборка дисциплин в этом семестре из учебного плана
   dbcmbxDisc.KeyValue := -1;
-  dbcmbxDisc.ListSource.DataSet.Active := false;
+ // dbcmbxDisc.ListSource.DataSet.Active := false;
   cmbxNumber.ItemIndex := -1;
-  dmUspevaemost.adodsSelAttGroup.Active := false;
+//  dmUspevaemost.adodsSelAttGroup.Active := false;
   actCreateAtt.Enabled := false;
   actPrintBlankAtt.Enabled := false;
   actPrintAtt.Enabled := false;
   Modified := false;
   nSem := cmbxSemAtt.ItemIndex + 1;
-  // CheckAttExist;
+  CheckAttExist;
 end;
 
 procedure TfmGroup.cmbxSemChange(Sender: TObject);
@@ -849,7 +863,7 @@ begin
 
 end;
 
-procedure TfmGroup.AttestRefresh();
+procedure TfmGroup.BRSRefresh();
 begin
   actPrintBlankAtt.Enabled := haveAtt;
   actPrintAtt.Enabled := haveAtt;
@@ -860,13 +874,12 @@ begin
       MB_YESNO) = IDYES then
       BtnSaveAtt.Click;
 
-  dbcbeExaminer.KeyValue := dsBRSVed.DataSet.FieldByName('itab_n').AsString;
-  if dsBRSVed.DataSet.FieldByName('Dd_exam').AsDateTime <> Null then
-    dbdteBRSExam.Value := dsBRSVed.DataSet.FieldByName('Dd_exam').AsDateTime;
+  dbcbeExaminer.KeyValue := dsBRSVed.DataSet.FieldByName('itab_n').Value;
+  dbdteBRSExam.Value := IfNull(dsBRSVed.DataSet.FieldByName('Dd_exam').AsDateTime,Now);
 
-  {
   MaxBall := dsBRSVed.DataSet.FieldByName('max_balls').AsInteger;
-  ikVed := dbcmbxDisc.KeyValue;
+
+  {ikVed := dbcmbxDisc.KeyValue;
   ikPredm := dmUspevaemost.adospGetAllAtt.Fields[4].AsInteger;
   // dmUspevaemost.adospGetAllAtt.Fields[1].AsInteger;
   ikVidZan := dmUspevaemost.adospGetAllAtt.Fields[2].AsInteger;
@@ -911,7 +924,7 @@ begin
 
   ikVed := dsBRSVed.DataSet.FieldByName('ik_ved').AsInteger;
 
-  AttestRefresh;
+  BRSRefresh;
   RefreshView;
   Modified := false;
 end;
@@ -1030,8 +1043,9 @@ begin
     // загрузка имеющихся оценок
     dsUspev.DataSet := TUspevGroupController.Instance.SelectVed(ikVed);
 
-    dmUspevaemost.adospSelVedGroup.close;
-    dmUspevaemost.adospSelVedGroup.open;
+
+    //dmUspevaemost.adospSelVedGroup.close;
+    //dmUspevaemost.adospSelVedGroup.open;
     // настраиваем отображение столбцов
     dbgrdVed.Columns[0].Visible := false; // код студента
     dbgrdVed.Columns[1].Visible := true; // имя
@@ -1044,7 +1058,6 @@ begin
 
     dbgrdVed.Columns[5].Visible := false; // код зачетки
     dbgrdVed.Columns[6].Visible := false; // допуск
-    dbgrdVed.Columns[7].Visible := true; // оценка
 
     // назначаем ширину столбцов
     dbgrdVed.Columns[1].Width := 120;
@@ -1139,7 +1152,7 @@ begin
   dbgStudList.DataSource.DataSet.Filtered := true;
 end;
 
-procedure TfmGroup.BRSExamRefresh;
+{procedure TfmGroup.BRSExamRefresh;
 begin
   actPrintBlankAtt.Enabled := haveAtt;
   actPrintAtt.Enabled := haveAtt;
@@ -1185,7 +1198,7 @@ begin
     dbdteBRSExam.Value := dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam')
       .AsDateTime;
 
-end;
+end;    }
 
 procedure TfmGroup.BtnCancelAttClick(Sender: TObject);
 begin
@@ -1348,6 +1361,7 @@ end;
 procedure TfmGroup.LoadVedHeader();
 begin
   ikVed := dbcbVed.KeyValue;
+
   // ikPredm := //dmUspevaemost.adospGetAllVeds4Group.Fields[2].AsInteger;
   // ikVidZan := //dmUspevaemost.adospGetAllVeds4Group.Fields[3].AsInteger;
   // discName := //dmUspevaemost.adospGetAllVeds4Group.FieldByName
@@ -1358,6 +1372,7 @@ begin
 
   with dbcbVed.ListSource.DataSet do
   begin
+    ikVidZan := FieldByName('ik_Vid_Zanyat').Value;
     // записываем считанные данные
     dbcmbxPrepodVed.KeyValue := FieldByName('itab_n').Value;
     if FieldByName('Dd_exam').Value <> Null then
@@ -1367,8 +1382,7 @@ begin
       dbeNum.Text := FieldByName('cNumber_ved').Value
     else
       dbeNum.Text := '';
-
-    dbcbxClosed.Checked := FieldByName('lClose').AsBoolean;
+    dbcbxClosed.Checked := FieldByName('lClose').Value;
   end;
 
   SetVedEnabled;
@@ -1487,7 +1501,7 @@ begin
   // проверяем на модификацию вкладки
   // if not dbcbVed.KeyValue= ikVed then  //перехода не было
   if not DoIsModified(false) then // выбрана отмена перехода
-    if dmUspevaemost.adospGetAllVeds4Group.Locate('Ik_ved', ikVed, []) then
+    if dsVed.DataSet.Locate('Ik_ved', ikVed, []) then
     begin
       dbcbVed.KeyValue := ikVed;
       Exit;
@@ -1544,21 +1558,14 @@ begin
   if pcMain.ActivePage = tsVed then
   begin
     TApplicationController.GetInstance.AddLogEntry('Переход на ведомости');
-    if (dmUspevaemost.adospSelVedGroup.Active and (ikVed = dbcbVed.KeyValue)) or
+   { if (dmUspevaemost.adospSelVedGroup.Active and (ikVed = dbcbVed.KeyValue)) or
       ((cmbxSem.ItemIndex = nSem - 1) and (nSem <> 0) and
       (not dmUspevaemost.adospSelVedGroup.Active)) then
-      Exit;
+      Exit;}
 
-    lVinost.Visible := false;
-    // выбираем преподавателей
-    if not TUspevGroupController.Instance.SelPrepodsForVedom(Null, Null, Null)
-    then
-    begin
-      MessageBox(Handle, 'Произошла ошибка при выборе преподавателей.',
-        'ИС УГТУ', MB_OK);
-    end;
+   // lVinost.Visible := false;
 
-    dmUspevaemost.adospSelVedGroup.Active := false;
+   // dmUspevaemost.adospSelVedGroup.Active := false;
     // вывод списка студентов
     dbgrdVed.Columns[0].Visible := false;
     dbgrdVed.Columns[1].Title.Caption := 'Фамилия, инициалы';
@@ -1726,8 +1733,8 @@ end;
 procedure TfmGroup.pmVedomostPopup(Sender: TObject);
 begin
 
-  if ((dmUspevaemost.adospSelVedGroup.FieldByName('Cosenca').AsInteger > 2) or
-    (dmUspevaemost.adospSelVedGroup.FieldByName('Cosenca').AsInteger = 1)) then
+  if ((dsUspev.DataSet.FieldByName('Cosenca').AsInteger > 2) or
+    (dsUspev.DataSet.FieldByName('Cosenca').AsInteger = 1)) then
     actNaprRegister.Enabled := false
   else
     actNaprRegister.Enabled := true;
@@ -1807,12 +1814,11 @@ begin
 
   // если ведомость была закрыта, не меняем ничего,
   // а спрашиваем пользователя
-  if (not dmUspevaemost.adospSelVed.Active) or
-    (not dmUspevaemost.adospGetAllVeds4Group.Active) or
-    (not dmUspevaemost.adospSelVedGroup.Active) then
+  if (not Assigned(dsVed.DataSet)) or
+    (not Assigned(dsUspev.DataSet)) then
     Exit;
 
-  if (dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean) and
+  if (dsVed.DataSet.FieldByName('lClose').AsBoolean) and
     not dbcbxClosed.Checked then
   begin
     if MessageBox(Handle, 'Вы действительно хoтите открыть эту ведомость?',
@@ -1820,9 +1826,9 @@ begin
     begin
       // если да, открываем ведомость ...
       TUspevGroupController.Instance.OpenVed(ikVed);
-      TUspevGroupController.Instance.GetAllVidZanyats(nSem, ik);
+      {TUspevGroupController.Instance.GetAllVidZanyats(nSem, ik);
       dmUspevaemost.adospSelVed.close;
-      dmUspevaemost.adospSelVed.open;
+      dmUspevaemost.adospSelVed.open;    }
     end
     else
     begin
@@ -1874,7 +1880,7 @@ begin
       'ИС УГТУ', MB_OK);
 
   if (dbgrdVed.Fields[1].Value = Null) or (dbgrdVed.Fields[1].Text = '') or
-    (not dsUspev.DataSet.FieldByName('dopusc').AsBoolean) or
+    {(not dsUspev.DataSet.FieldByName('dopusc').AsBoolean) or   }
     (dsVed.DataSet.FieldByName('lClose').AsBoolean) then
   begin
     result := '';
@@ -1952,15 +1958,14 @@ var
   mark: set of Char;
 begin
   mark := ['0' .. '9'];
-  if not(Key in mark) then
-    Exit;
+
   if not(Key in mark) then
     Exit;
 
-  if (not dmUspevaemost.adospSelVed.Active) or
-    (not dmUspevaemost.adospSelVedGroup.Active) or
-    (dmUspevaemost.adospSelVedGroup.RecNo >=
-    dmUspevaemost.adospSelVedGroup.RecordCount) or
+  if (not dsVed.DataSet.Active) or
+    (not dsUspev.DataSet.Active) or
+    (dsUspev.DataSet.RecNo >=
+    dsUspev.DataSet.RecordCount) or
     (dbgrdVed.SelectedField.FieldName <> 'Cosenca') then
     Exit;
 
@@ -2854,27 +2859,26 @@ begin
     if dbcmbxDisc.Text = '' then
       Exit;
 
-    dmUspevaemost.adospCheckVedClose.Connection.BeginTrans;
-    try
-      dbgrdBRSAtt.DataSource.DataSet.DisableControls;
-      if cmbxNumber.Text = 'Экзамен' then
+  //  dmUspevaemost.adospCheckVedClose.Connection.BeginTrans;
+    //try
+    //  dbgrdBRSAtt.DataSource.DataSet.DisableControls;
+    { if cmbxNumber.Text = 'Экзамен' then
         TUspevGroupController.Instance.SaveBRSExam(ikVed, dbgrdBRSExam,
           dbcbeExaminer.KeyValue, dbdteBRSExam.Value)
-      else if haveAtt then
-        TUspevGroupController.Instance.SaveBRSAtt(ikVed, dbgrdBRSAtt,
-          dbcbeExaminer.KeyValue, dbdteBRSExam.Value);
+      else if haveAtt then}
+      TUspevGroupController.Instance.SaveBRSAtt(ifnull(dbcbeExaminer.KeyValue,''), dbdteBRSExam.Value);
 
-      TUspevGroupController.Instance.CloseAtt(ikVed, dbcbeExaminer.KeyValue,
-        dbcbxCloseAtt.Checked);
-      dmUspevaemost.adospCheckVedClose.Connection.CommitTrans;
-      dbgrdBRSAtt.DataSource.DataSet.EnableControls;
-    except
+    {  TUspevGroupController.Instance.CloseAtt(ikVed, dbcbeExaminer.KeyValue,
+        dbcbxCloseAtt.Checked);}
+     // dmUspevaemost.adospCheckVedClose.Connection.CommitTrans;
+     // dbgrdBRSAtt.DataSource.DataSet.EnableControls;
+   { except
       TApplicationController.GetInstance.AddLogEntry
         ('Ошибка при сохранении ведомости БРС');
-      dmUspevaemost.adospCheckVedClose.Connection.RollbackTrans;
-      dbgrdBRSAtt.DataSource.DataSet.EnableControls;
+      //dmUspevaemost.adospCheckVedClose.Connection.RollbackTrans;
+      //dbgrdBRSAtt.DataSource.DataSet.EnableControls;
       raise;
-    end;
+    end;     }
 
     Modified := false;
     dbcmbxDiscChange(nil);
@@ -3070,7 +3074,10 @@ begin
     MB_YESNO) = IDYES then
   begin
     // удаление дисциплины
-    TUspevGroupController.Instance.DelVed(ikVed, True);
+    TUspevGroupController.Instance.DelBRSVed(ikVed);
+    dbcmbxDisc.KeyValue := -1;
+    dbcbeExaminer.KeyValue := -1;
+    dbdteBRSExam.Value := Now;
     // все переоткрываем
     //dbcmbxDisc.Value := Null;
     //dmUspevaemost.adodsSelAttGroup.close;
@@ -3125,7 +3132,7 @@ begin
   begin
     // удаление ведомости
     TUspevGroupController.Instance.DelVed
-      (dmUspevaemost.adospGetAllVedNaprForDisc.FieldByName('ik_ved').Value, False);
+      (dmUspevaemost.adospGetAllVedNaprForDisc.FieldByName('ik_ved').Value);
     // все переоткрываем
     dmUspevaemost.adospGetAllVedNaprForDisc.close;
     dmUspevaemost.adospGetAllVedNaprForDisc.open;
@@ -3148,7 +3155,7 @@ begin
     MB_YESNO) = IDYES then
   begin
     // удаление ведомости
-    TUspevGroupController.Instance.DelVed(ikVed, False);
+    TUspevGroupController.Instance.DelVed(ikVed);
     Modified := false;
     // все переоткрываем
   {  dbcbVed.Value := Null;
@@ -3163,13 +3170,8 @@ end;
 
 procedure TfmGroup.actDelVedUpdate(Sender: TObject);
 begin
-  if (dmUspevaemost.adospSelVed.Active) and
-    (dmUspevaemost.adospSelVedGroup.Active) then
     (Sender as TAction).Enabled :=
-      (not dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean)
-  else
-    (Sender as TAction).Enabled := false;
-
+      (not dsVed.DataSet.FieldByName('lClose').AsBoolean)
 end;
 
 procedure TfmGroup.actMkVinExecute(Sender: TObject);
@@ -3516,7 +3518,7 @@ begin
   begin
     MessageBox(Handle, 'В учебном плане нет ни одной аттестации БРС!',
       'ИС УГТУ', MB_OK);
-    dmUspevaemost.adospGetAllAtt.Active := false;
+  //  dmUspevaemost.adospGetAllAtt.Active := false;
     Exit;
   end;
 

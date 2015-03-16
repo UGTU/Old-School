@@ -191,6 +191,7 @@ inherited ftmNaprclose: TftmNaprclose
     ListSource = dmUspevaemost.dsPrepodVed
     TabOrder = 4
     Visible = True
+    OnChange = dbcbeExChange
   end
   object eTema: TDBEditEh [15]
     Left = 13

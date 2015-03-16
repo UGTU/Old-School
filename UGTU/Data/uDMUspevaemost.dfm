@@ -133,44 +133,8 @@ object dmUspevaemost: TdmUspevaemost
   end
   object dsPrepodVed: TDataSource
     DataSet = adospPrepodVed
-    Left = 214
+    Left = 230
     Top = 199
-  end
-  object adospPrepodVed: TADOStoredProc
-    Connection = dm.DBConnect
-    CursorType = ctStatic
-    ProcedureName = 'SelPrepodForVedom;1'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-        Value = Null
-      end
-      item
-        Name = '@Ik_grup'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = Null
-      end
-      item
-        Name = '@iK_vid_zanyat'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = Null
-      end
-      item
-        Name = '@n_sem'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = Null
-      end>
-    Left = 216
-    Top = 153
   end
   object dsVedTop: TDataSource
     DataSet = adospVedTop
@@ -366,8 +330,8 @@ object dmUspevaemost: TdmUspevaemost
     CursorType = ctStatic
     ProcedureName = 'UspevSelVed;1'
     Parameters = <>
-    Left = 294
-    Top = 151
+    Left = 302
+    Top = 143
   end
   object aspNapr: TADOStoredProc
     Connection = dm.DBConnect
@@ -614,8 +578,8 @@ object dmUspevaemost: TdmUspevaemost
         Precision = 10
         Value = Null
       end>
-    Left = 216
-    Top = 40
+    Left = 152
+    Top = 24
     object adospSelVedKPnCode: TIntegerField
       FieldName = 'nCode'
     end
@@ -830,8 +794,8 @@ object dmUspevaemost: TdmUspevaemost
   end
   object dsSelUspevForStud: TDataSource
     DataSet = adospSelUspevForStud
-    Left = 130
-    Top = 86
+    Left = 42
+    Top = 94
   end
   object adospSelUspevForStud: TADOStoredProc
     Connection = dm.DBConnect
@@ -860,8 +824,8 @@ object dmUspevaemost: TdmUspevaemost
         Precision = 10
         Value = Null
       end>
-    Left = 130
-    Top = 40
+    Left = 50
+    Top = 24
   end
   object adospSelVedGroup: TADODataSet
     Connection = dm.DBConnect
@@ -2063,27 +2027,6 @@ object dmUspevaemost: TdmUspevaemost
         Direction = pdReturnValue
         Precision = 10
         Value = 0
-      end
-      item
-        Name = '@Ik_grup'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = Null
-      end
-      item
-        Name = '@iK_vid_zanyat'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = Null
-      end
-      item
-        Name = '@n_sem'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Value = Null
       end>
     Left = 560
     Top = 705
@@ -2630,5 +2573,19 @@ object dmUspevaemost: TdmUspevaemost
     object adospGetAllVedNaprForGrupik_Vid_Zanyat: TIntegerField
       FieldName = 'ik_Vid_Zanyat'
     end
+  end
+  object adospPrepodVed: TADOStoredProc
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    ProcedureName = 'SelPrepodForVedom;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end>
+    Left = 224
+    Top = 145
   end
 end

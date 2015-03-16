@@ -129,7 +129,7 @@ BEGIN
   inner join Grup_UchPlan on Grup_UchPlan.ik_grup = Grup.Ik_grup
   left join spclz on Grup.ik_spclz = spclz.iK_spclz
   where Grup.ik_spec_fac = @ik_spec_fac 
-  and ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = YEAR(GetDate()))
+  and ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value =iif(MONTH(GetDate())>8,year(GetDate()),year(GetDate())-1))
  
  update @Result set isCurrent = 1 
  where DateExit > GetDate() 
@@ -159,7 +159,7 @@ BEGIN
 	select Grup.Ik_grup, ik_spec_fac, Cname_grup, Grup_UchPlan.Ik_uch_plan, nYear_post, DateCreate, DateExit, Grup.ik_spclz, spclz.cName_spclz, id_parent
 	from Grup inner join Grup_UchPlan on Grup_UchPlan.ik_grup = Grup.Ik_grup left join spclz on Grup.ik_spclz = spclz.iK_spclz 
 	left join Uch_pl on Grup_UchPlan.Ik_uch_plan=Uch_pl.ik_uch_plan where Grup.Ik_grup = @ik_grup
-	and Grup_UchPlan.ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = YEAR(GetDate()))
+	and Grup_UchPlan.ik_year = (select ik_year_uch_pl from Year_uch_pl where year_value = iif(MONTH(GetDate())>8,year(GetDate()),year(GetDate())-1))
   RETURN
 END
 
@@ -350,7 +350,8 @@ BEGIN
   inner join dbo.TypeZanyat on TypeZanyat.ikTypeZanyat=vid_zaniat.ikTypeZanyat
   left join Vedomost on Vedomost.ik_upContent = Content_UchPl.ik_upContent and Vedomost.Ik_grup = Grup.Ik_grup
   left join Uspev on Uspev.Ik_ved = Vedomost.Ik_ved and Uspev.Ik_zach = StudGrup.Ik_zach
-  Where Ik_studGrup = @ik_studGrup and year_value=year(GetDate())
+  Where Ik_studGrup = @ik_studGrup 
+  and year_value=Grup.nYear_post + cast((Content_UchPl.n_sem-1)*0.5 as int)
   and TypeZanyat.bitOtchetnost=1
   and ((Vedomost.Ik_ved is null) or ((Vedomost.lPriznak_napr=0)and(Vedomost.lClose = 1)and((Uspev.Cosenca<>1)and(Uspev.Cosenca<=2)))) --нет ведомости или оценки
 
@@ -403,7 +404,8 @@ BEGIN
   inner join Uspev on Uspev.Ik_ved = Vedomost.Ik_ved and Uspev.Ik_zach = StudGrup.Ik_zach
   left join UspevDocument on UspevDocument.ik_upContent = Content_UchPl.ik_upContent and UspevDocument.ik_zach = StudGrup.Ik_zach
   left join UspevKPTheme on UspevKPTheme.idUspevDocs = UspevDocument.idUspevDocs
-  Where Ik_studGrup = @ik_studGrup and year_value=year(GetDate())
+  Where Ik_studGrup = @ik_studGrup 
+  and year_value=Grup.nYear_post + cast((Content_UchPl.n_sem-1)*0.5 as int)
   and TypeZanyat.bitOtchetnost=1 and lPriznak_napr=1
 
   update @Result set Cosenca = NULL where Cosenca=-1
@@ -569,10 +571,11 @@ ALTER   PROCEDURE [dbo].[AppendUspev]
 @Ik_studGrup INT,
 @Cosenca INT,
 @ctema varchar(2000),
+@Ik_zach int = NULL,
 @i_balls INT = NULL
 AS
-declare @Ik_zach int
-select @Ik_zach = ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup
+if (@Ik_zach is NULL)or(@Ik_zach = 0)
+  select @Ik_zach = ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup
 
 IF @flag=1
   BEGIN
@@ -774,7 +777,7 @@ BEGIN
 		INSERT INTO Vedomost(cNumber_ved, Ik_grup, Itab_n, Ik_vid_exam, 
 				ik_upContent, Dd_exam, dD_vydano, lPriznak_napr, lClose, lVnosn)
 		VALUES (@cNumber_ved, @Ik_grup, @Itab_n, @Ik_vid_exam, 
-				@ik_upContent, @Dd_exam, @dD_vydano, 0, @lClose, @lVnosn)
+				@ik_upContent, GETDATE(), @dD_vydano, 0, @lClose, @lVnosn)
 		SET @Ik_ved=@@IDENTITY
 
 	--если ведомость создана
@@ -863,3 +866,44 @@ GO
 
 --ДАТЬ ПРАВА НА ФУНКЦИЮ!!!
 -----------------------------------------------------------------------------------------------------------------------
+ALTER     PROCEDURE [dbo].[SelPrepodForVedom]
+AS
+  select distinct itab_n,[LastName] + ' ' + [FirstName] + ' ' + isnull([Otch],'') + 
+  ' (таб. № ' + CONVERT(nvarchar, isnull(itab_n,'отсутствует')) + ')' as NamePrepod
+  from Import.KafTeachers where isPPS=1
+  ORDER BY NamePrepod
+GO
+----------------------------------------------------------------------------------------------------------------------
+ALTER PROCEDURE [dbo].[AppendRezBRSAtt]
+@flag INT,
+@Ik_ved INT,
+@Ik_studGrup INT,
+@i_balls INT,
+@PropCount INT = NULL,
+@PropUvajCount INT = NULL
+AS
+
+declare @Ik_zach int
+select @Ik_zach = Ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup
+
+IF @flag=1
+  BEGIN
+	INSERT INTO Uspev(Ik_ved, Ik_zach, i_balls, PropCount, Uvag_PropCount)
+	VALUES (@Ik_ved, @Ik_zach, @i_balls, @PropCount, @PropUvajCount)
+  END
+
+--Можем изменить только оценку и количество пропусков
+IF @flag=0
+  BEGIN
+	UPDATE Uspev
+		SET i_balls = @i_balls, PropCount = @PropCount, Uvag_PropCount = @PropUvajCount
+	WHERE Ik_ved = @Ik_ved AND Ik_zach = @Ik_zach
+  END
+
+IF @flag=-1
+  BEGIN
+	DELETE FROM Uspev
+	WHERE Ik_ved = @Ik_ved AND Ik_zach = @Ik_zach
+  END
+GO
+------------------------------------------------------------------------------------------------------------------

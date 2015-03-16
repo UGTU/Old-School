@@ -27,7 +27,6 @@ type
     adospPredmGroupiK_disc: TAutoIncField;
     adospPredmGroupiK_vid_zanyat: TIntegerField;
     dsPrepodVed: TDataSource;
-    adospPrepodVed: TADOStoredProc;
     dsVedTop: TDataSource;
     adospVedTop: TADOStoredProc;
     adospVedTopCname_fac: TStringField;
@@ -255,6 +254,7 @@ type
     adospSelVedGroupi_balls: TIntegerField;
     adospGetAllVedNaprForGrupik_upContent: TIntegerField;
     adospGetAllVedNaprForGrupik_Vid_Zanyat: TIntegerField;
+    adospPrepodVed: TADOStoredProc;
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);
     procedure adospSelVedKPCalcFields(DataSet: TDataSet);
     procedure adodsSelBRSExamGroupCalcFields(DataSet: TDataSet);

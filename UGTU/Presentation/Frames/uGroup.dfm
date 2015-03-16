@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsAttBRS
+      ActivePage = tsVed
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -340,7 +340,7 @@ inherited fmGroup: TfmGroup
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
-          DataSource = dmUspevaemost.dsSelAttBRSGroup
+          DataSource = dsBRSBalls
           DynProps = <>
           Flat = True
           FooterParams.Color = clWindow
@@ -356,6 +356,7 @@ inherited fmGroup: TfmGroup
               FieldName = 'StudName'
               Footers = <>
               ReadOnly = True
+              Title.Caption = #1060#1072#1084#1080#1083#1080#1103' '#1080' '#1080#1085#1080#1094#1080#1072#1083#1099
               Width = 156
             end
             item
@@ -371,6 +372,7 @@ inherited fmGroup: TfmGroup
               FieldName = 'KatZach'
               Footers = <>
               ReadOnly = True
+              Title.Caption = #1050#1072#1090'.'
               Width = 46
             end
             item
@@ -384,6 +386,7 @@ inherited fmGroup: TfmGroup
               Font.Style = []
               Footers = <>
               ReadOnly = True
+              Title.Caption = #1055#1086#1083#1091#1095#1077#1085#1086' '#1088#1072#1085#1077#1077
               Width = 103
             end
             item
@@ -404,7 +407,8 @@ inherited fmGroup: TfmGroup
               Font.Name = 'Tahoma'
               Font.Style = [fsBold]
               Footers = <>
-              Width = 107
+              Title.Caption = #1058#1077#1082#1091#1097#1072#1103' '#1089#1091#1084#1084#1072' '#1073#1072#1083#1083#1086#1074
+              Width = 130
               OnUpdateData = dbgrdBRSAttColumns4UpdateData
             end
             item
@@ -418,6 +422,7 @@ inherited fmGroup: TfmGroup
               Font.Name = 'Tahoma'
               Font.Style = [fsBold]
               Footers = <>
+              Title.Caption = #1055#1088#1086#1087#1091#1089#1082#1080
             end
             item
               Color = clCream
@@ -430,6 +435,7 @@ inherited fmGroup: TfmGroup
               Font.Name = 'Tahoma'
               Font.Style = [fsBold]
               Footers = <>
+              Title.Caption = #1059#1074#1072#1078#1080#1090#1077#1083#1100#1085#1099#1077' '#1087#1088#1086#1087#1091#1089#1082#1080
               Width = 138
             end>
           object RowDetailData: TRowDetailPanelControlEh
@@ -1287,7 +1293,6 @@ inherited fmGroup: TfmGroup
           ImeMode = imDisable
           IndicatorOptions = []
           Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = pmVedomost
           SortLocal = True
           TabOrder = 0
           OnDrawColumnCell = dbgrdVedDrawColumnCell
@@ -1490,17 +1495,7 @@ inherited fmGroup: TfmGroup
             Width = 92
             Height = 13
             Caption = #1042#1099#1085#1086#1089#1085#1086#1081' '#1101#1082#1079#1072#1084#1077#1085
-          end
-          object dbcbxClosed: TDBCheckBoxEh
-            Left = 0
-            Top = 6
-            Width = 156
-            Height = 17
-            Caption = #1042#1077#1076#1086#1084#1086#1089#1090#1100' '#1079#1072#1082#1088#1099#1090#1072
-            DynProps = <>
-            Flat = True
-            TabOrder = 0
-            OnClick = dbcbxClosedClick
+            Visible = False
           end
           object btnCancelVed: TBitBtn
             Left = 380
@@ -1536,7 +1531,7 @@ inherited fmGroup: TfmGroup
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            TabOrder = 1
+            TabOrder = 0
             OnClick = btnCancelVedClick
           end
           object btnSaveVed: TBitBtn
@@ -1575,7 +1570,16 @@ inherited fmGroup: TfmGroup
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
             Layout = blGlyphRight
+            TabOrder = 1
+          end
+          object dbcbxClosed: TCheckBox
+            Left = 10
+            Top = 6
+            Width = 128
+            Height = 17
+            Caption = #1047#1072#1082#1088#1099#1090#1100' '#1074#1077#1076#1086#1084#1086#1089#1090#1100
             TabOrder = 2
+            OnClick = dbcbxClosedClick
           end
         end
         object Panel3: TPanel
@@ -1646,7 +1650,7 @@ inherited fmGroup: TfmGroup
           object dbdteEx: TDBDateTimeEditEh
             Left = 588
             Top = 30
-            Width = 92
+            Width = 93
             Height = 19
             Anchors = [akTop, akRight]
             DynProps = <>
@@ -1659,7 +1663,7 @@ inherited fmGroup: TfmGroup
             OnChange = dbdteExChange
           end
           object dbeNum: TDBEditEh
-            Left = 53
+            Left = 57
             Top = 30
             Width = 68
             Height = 19
@@ -1691,7 +1695,7 @@ inherited fmGroup: TfmGroup
           end
           object cmbxSem: TDBComboBoxEh
             Left = 57
-            Top = 5
+            Top = 6
             Width = 68
             Height = 19
             AutoSelect = False
@@ -2655,7 +2659,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400500110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C0101020004005C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2828,7 +2832,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C0101110040004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000580110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3499,7 +3503,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C0101050008004C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800580110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
@@ -4010,8 +4014,7 @@ inherited fmGroup: TfmGroup
     object actCreateAttest: TAction
       Category = 'Att'
       Caption = 'actCreateAttest'
-      Enabled = False
-      Hint = #1057#1086#1079#1076#1072#1090#1100' '#1072#1090#1090#1077#1089#1090#1072#1094#1080#1102
+      Hint = #1057#1086#1079#1076#1072#1090#1100' '#1074#1089#1077' '#1041#1056#1057
       ImageIndex = 0
       OnExecute = actCreateAttestExecute
     end
@@ -4046,8 +4049,8 @@ inherited fmGroup: TfmGroup
   object pmVedomost: TPopupMenu
     Images = ilMain
     OnPopup = pmVedomostPopup
-    Left = 176
-    Top = 184
+    Left = 208
+    Top = 192
     object N1: TMenuItem
       Action = actNaprRegister
     end

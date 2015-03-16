@@ -31,6 +31,7 @@ type
     procedure dbcbeNaprChange(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
+    procedure dbcbeExChange(Sender: TObject);
   private
     FVedIK: integer;
     FStudGrupIK: integer;
@@ -40,6 +41,7 @@ type
     FTeacher: string;
     procedure SetStudGrupIK(const Value: integer);
     procedure SetVed(const Value: integer);
+    procedure SetApplyAbility;
   public
     property StudGrupIK: integer write SetStudGrupIK;
     property VedIK: integer write SetVed;
@@ -125,9 +127,8 @@ begin
   dbcbeNapr.Enabled := false;
 end;
 
-procedure TftmNaprclose.dbcbeNaprChange(Sender: TObject);
+procedure TftmNaprclose.SetApplyAbility;
 begin
-  FVedIK := IfNull(dbcbeNapr.KeyValue,0);
   if CheckFields then
   begin
     bbOk.Enabled := true;
@@ -138,7 +139,17 @@ begin
     bbOk.Enabled := false;
     bbApply.Enabled := false;
   end;
+end;
 
+procedure TftmNaprclose.dbcbeExChange(Sender: TObject);
+begin
+  SetApplyAbility;
+end;
+
+procedure TftmNaprclose.dbcbeNaprChange(Sender: TObject);
+begin
+  FVedIK := IfNull(dbcbeNapr.KeyValue,0);
+  SetApplyAbility;
 end;
 
 procedure TftmNaprclose.actApplyExecute(Sender: TObject);

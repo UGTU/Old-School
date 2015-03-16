@@ -33,7 +33,8 @@ type
   // -----------------наследники---------------------------------------------------------------------------------
 
   // команды (процедуры) работы с ведомостями
-  TUpdateVedCommand = class(TBaseADOCommand)      //редактирует или удаляет ведомость
+  TUpdateVedCommand = class(TBaseADOCommand)
+    // редактирует или удаляет ведомость
   public
     constructor Create(FVedom: integer); overload;
     procedure Update(ikVidExam: integer; VedNum, ikPrepod: string;
@@ -41,7 +42,8 @@ type
     procedure Delete;
   end;
 
-  TAddVedUspevCommand = class(TBaseADOCommand) //добавляет ведомость вместе с успеваемостью
+  TAddVedUspevCommand = class(TBaseADOCommand)
+    // добавляет ведомость вместе с успеваемостью
   public
     constructor Create(aGrupIK: integer);
     procedure DoIt(ContentIK: integer);
@@ -50,25 +52,32 @@ type
   TAppendUspevCommand = class(TBaseADOCommand) // редактирование успеваемости
   public
     constructor Create(FVedom: integer);
-    procedure DoIt(StudGrupIK, Cosenca: integer);
+    procedure DoIt(StudGrupIK, ZachIK, Cosenca, Balls: integer);
+  end;
+
+  TAppendBRSUspevCommand = class(TBaseADOCommand)
+    // редактирование БРС-успеваемости
+  public
+    constructor Create(FVedom: integer);
+    procedure Update(StudGrupIK, iBall, PropCount, PropUvajCount: integer);
   end;
 
   TAppendUspevKPThemeCommand = class(TBaseADOCommand)
-  // редактирование темы КП/КР
+    // редактирование темы КП/КР
   public
     constructor Create(FVedom: integer); overload;
-    procedure DoIt(StudGrupIK: integer; KPTheme: string);
+    procedure DoIt(StudGrupIK, ZachIK: integer; KPTheme: string);
   end;
 
   TNaprCommand = class(TBaseADOCommand)
   public
     constructor Create(FVedom: integer); overload;
-    function Add(ik_contentUP, ik_studGrup, VidEx: integer; StartDate,
-                  EndDate: TDateTime; cNumber_napr: string): integer;
-    procedure Close(cosenca: integer; ntab, KPTema: string; date_exam: TDateTime);
+    function Add(ik_contentUP, ik_studGrup, VidEx: integer;
+      StartDate, EndDate: TDateTime; cNumber_napr: string): integer;
+    procedure Close(Cosenca: integer; ntab, KPTema: string;
+      date_exam: TDateTime);
     procedure Annul;
   end;
-
 
   // ------------------------------------ СЕЛЕКТОРЫ-----------------------------
   TStudentController = class(TBaseSelectController)
@@ -97,7 +106,7 @@ type
     property DataSet: TADODataSet read FDataSet;
   end;
 
-  {управление планами}
+  { управление планами }
   TUchPlanController = class(TBaseSelectController)
   private
     FYear: integer;
@@ -112,7 +121,7 @@ type
     property UchPlan: integer read GetUchPlan;
   end;
 
-  {управление группами: получить уч. план (текущий или за конкретный год)}
+  { управление группами: получить уч. план (текущий или за конкретный год) }
   TGroupController = class(TBaseSelectController)
   private
     FikGroup: integer;
@@ -134,7 +143,7 @@ type
   private
     FIK_Grup: integer;
     FN_sem: integer;
-    FUspevController: TUspevController; //успеваемость из ведомости
+    FUspevController: TUspevController; // успеваемость из ведомости
 
     function GetContentCount: integer;
     function IsAllVedDone: boolean;
@@ -142,21 +151,33 @@ type
     procedure SetVedomost(const Value: integer);
     function GetUspevDataSet: TADODataSet;
     function GetIsOpened: boolean;
+    function GetVedDataSet: TADODataSet;
   public
     constructor Create; overload;
     destructor Destroy; override;
-    procedure Reload(ik_grup, n_sem: integer); overload;          //загрузить виды отчетности, которые должны быть
-    procedure CreateAllVed;                                       //создать все ведомости, которые еще не созданы для текущей группы в семестре
+    procedure Reload(ik_grup, n_sem: integer); overload;
+    // загрузить виды отчетности, которые должны быть
+    procedure CreateAllVed;
+    // создать все ведомости, которые еще не созданы для текущей группы в семестре
     procedure DelVed(ik_ved: integer);
-    procedure Save(ikVidExam: integer; VedNum, ikPrepod: string;  //сохранить текущую ведомость
+    procedure Save(ikVidExam: integer; VedNum, ikPrepod: string;
+      // сохранить текущую ведомость
       DateExam: TDateTime; bitClose, bitNapr: boolean);
 
-    property ContentCount: integer read GetContentCount;          //сколько видов отчетности должно быть
-    property VedomCount: integer read GetVedomCount;              //сколько создано ведомостей
-    property AllVedDone: boolean read IsAllVedDone;               //признак: все ли ведомости созданы
-    property Vedomost: integer write SetVedomost;                 //установить текущую ведомость
-    property IsOpened: boolean read GetIsOpened;                  //признак: открыта ли ведомость
-    property UspevDataSet: TADODataSet read GetUspevDataSet;      //DataSet с успеваемостью для текущей ведомости
+    property ContentCount: integer read GetContentCount;
+    // сколько видов отчетности должно быть
+    property VedomCount: integer read GetVedomCount;
+    // сколько создано ведомостей
+    property AllVedDone: boolean read IsAllVedDone;
+    // признак: все ли ведомости созданы
+    property Vedomost: integer write SetVedomost;
+    // установить текущую ведомость
+    property IsOpened: boolean read GetIsOpened;
+    // признак: открыта ли ведомость
+    property VedDataSet: TADODataSet read GetVedDataSet;
+    // взять DataSet с ведомостями
+    property UspevDataSet: TADODataSet read GetUspevDataSet;
+    // DataSet с успеваемостью для текущей ведомости
   end;
 
   TBRSVedomostController = class(TBaseSelectController)
@@ -164,27 +185,31 @@ type
     FIK_Grup: integer;
     FN_sem: integer;
     FN_mod: integer;
-    FBRSUspevController: TBRSUspevController; //успеваемость из ведомости
+    FBRSUspevController: TBRSUspevController; // успеваемость из ведомости
 
     function GetBRSCount: integer;
     function GetCreatedCount: integer;
     procedure SetBRSVedomost(const Value: integer);
     function GetBallsDataSet: TADODataSet;
+    function GetVedDataSet: TADODataSet;
   public
     constructor Create; overload;
     destructor Destroy; override;
     procedure Reload(ik_grup, n_sem, n_module: integer); overload;
     procedure CreateAllBRS;
     procedure DelVed(ik_ved: integer);
+    procedure Save(ikPrepod: string; // сохранить текущую ведомость
+      DateExam: TDateTime);
 
     property BRSVedomost: integer write SetBRSVedomost;
     property Count: integer read GetBRSCount;
     property CreatedCount: integer read GetCreatedCount;
+    property VedsDataSet: TADODataSet read GetVedDataSet;
     property BallsDataSet: TADODataSet read GetBallsDataSet;
   end;
 
-  {управление дисциплинами, по которым требуются направления
-  ведомость закрыта или вообще не создавалась}
+  { управление дисциплинами, по которым требуются направления
+    ведомость закрыта или вообще не создавалась }
   TContentNapravController = class(TBaseSelectController)
   private
     FContentIK: integer;
@@ -196,14 +221,15 @@ type
     property ContentIK: integer read FContentIK write setContent;
   end;
 
-  {управление направлениями студента}
+  { управление направлениями студента }
   TNapravController = class(TBaseSelectController)
   private
-    FStudGrupIK: integer; //ik_StudGrup
+    FStudGrupIK: integer; // ik_StudGrup
     FGrup: integer;
     FSemester: integer;
 
-    FContentNapr: TContentNapravController;   //набор предметов для создания направлений
+    FContentNapr: TContentNapravController;
+    // набор предметов для создания направлений
     procedure setContent(const Value: integer);
     function GetContentDS: TADODataSet;
     procedure SetSemester(const Value: integer);
@@ -211,8 +237,10 @@ type
     constructor Create;
     procedure Reload(ik_studGrup: integer); overload;
     procedure LoadOpenedNapr;
-    function CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
-    function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime; NaprNum: string; var VedIK: integer): integer;
+    function CloseNapr(VedIK, Cosenca: integer; ntab, KPTema: string;
+      date_exam: TDateTime): integer;
+    function AddNapr(VidExID: integer; dateIn, dateOut: TDateTime;
+      NaprNum: string; var VedIK: integer): integer;
     function Annul(VedIK: integer): integer;
 
     property ContentIK: integer write setContent;
@@ -220,11 +248,10 @@ type
     property Semester: integer write SetSemester;
   end;
 
-
 implementation
 
 uses GeneralController, DateUtils, uDM, ExceptionBase,
-      ConstantRepository;
+  ConstantRepository;
 
 { TBaseSelectController }
 
@@ -313,18 +340,21 @@ var
   FAddVedUspevCommand: TAddVedUspevCommand;
   i: integer;
 begin
-   FAddVedUspevCommand := TAddVedUspevCommand.Create(FIK_Grup);
-   try
-      FDataSet.First;
-      for i := 0 to FDataSet.RecordCount - 1 do
-      begin
-        if FDataSet.FieldByName('ik_ved').Value = NULL then
-          FAddVedUspevCommand.DoIt(FDataSet.FieldByName('ik_upContent').AsInteger);
-        FDataSet.Next;
-      end;
-    finally
-      FAddVedUspevCommand.Free;
+  FDataSet.Filtered := false;
+  FAddVedUspevCommand := TAddVedUspevCommand.Create(FIK_Grup);
+  try
+    FDataSet.First;
+    for i := 0 to FDataSet.RecordCount - 1 do
+    begin
+      if FDataSet.FieldByName('ik_ved').Value = NULL then
+        FAddVedUspevCommand.DoIt(FDataSet.FieldByName('ik_upContent')
+          .AsInteger);
+      FDataSet.Next;
     end;
+  finally
+    FAddVedUspevCommand.Free;
+  end;
+  FDataSet.Filtered := true;
   Refresh;
 end;
 
@@ -355,7 +385,9 @@ end;
 
 function TVedomostController.GetContentCount: integer;
 begin
+  FDataSet.Filtered := false;
   Result := FDataSet.RecordCount;
+  FDataSet.Filtered := true;
 end;
 
 function TVedomostController.GetIsOpened: boolean;
@@ -366,6 +398,12 @@ end;
 function TVedomostController.GetUspevDataSet: TADODataSet;
 begin
   Result := FUspevController.DataSet;
+end;
+
+function TVedomostController.GetVedDataSet: TADODataSet;
+begin
+  SetFilter('ik_ved<>NULL');
+  Result := DataSet;
 end;
 
 function TVedomostController.GetVedomCount: integer;
@@ -420,7 +458,8 @@ begin
   try
     FUspevController.Save;
 
-    FVedCommand := TUpdateVedCommand.Create(FDataSet.FieldByName('ik_ved').AsInteger);
+    FVedCommand := TUpdateVedCommand.Create(FDataSet.FieldByName('ik_ved')
+      .AsInteger);
     FVedCommand.Update(ikVidExam, VedNum, ikPrepod, DateExam, bitClose,
       bitNapr);
     FDataSet.Connection.CommitTrans;
@@ -484,7 +523,7 @@ procedure TUspevController.Save;
 var
   FAppendUspev: TAppendUspevCommand;
   FAppendUspevKPThemeCommand: TAppendUspevKPThemeCommand;
-  i, cos: integer;
+  i, cos, bal: integer;
 begin
   // вносим успеваемость
   FAppendUspev := TAppendUspevCommand.Create(FVedomost);
@@ -492,11 +531,10 @@ begin
     FDataSet.First;
     for i := 0 to FDataSet.RecordCount - 1 do
     begin
-      if (FDataSet.FieldByName('Cosenca').Value <> NULL) then
-        cos := FDataSet.FieldByName('Cosenca').AsInteger
-      else
-        cos := -1;
-      FAppendUspev.DoIt(FDataSet.FieldByName('Ik_zach').AsInteger, cos);
+      cos := IfNull(FDataSet.FieldByName('Cosenca').Value,-1);
+      bal := IfNull(FDataSet.FieldByName('i_balls').Value,0);
+      FAppendUspev.DoIt(0, FDataSet.FieldByName('Ik_zach').AsInteger,  cos, bal);
+
       FDataSet.Next;
     end;
   finally
@@ -509,7 +547,7 @@ begin
     FDataSet.First;
     for i := 0 to FDataSet.RecordCount - 1 do
     begin
-      FAppendUspevKPThemeCommand.DoIt(FDataSet.FieldByName('Ik_zach').AsInteger,
+      FAppendUspevKPThemeCommand.DoIt(0,FDataSet.FieldByName('Ik_zach').AsInteger,
         FDataSet.FieldByName('cTema').AsString);
       FDataSet.Next;
     end;
@@ -540,12 +578,16 @@ end;
 
 { TAppendUspevCommand }
 
-procedure TAppendUspevCommand.DoIt(StudGrupIK, Cosenca: integer);
+procedure TAppendUspevCommand.DoIt(StudGrupIK, ZachIK, Cosenca, Balls: integer);
 begin
   with FStor.Parameters do
   begin
     ParamByName('@Ik_studGrup').Value := StudGrupIK;
+    ParamByName('@Ik_zach').Value := ZachIK;
     ParamByName('@Cosenca').Value := Cosenca;
+    if Cosenca>0 then
+      ParamByName('@i_balls').Value := Balls
+      else ParamByName('@i_balls').Value := NULL;
   end;
   FStor.ExecProc;
 end;
@@ -561,6 +603,8 @@ begin
     CreateParameter('@Ik_studGrup', ftInteger, pdInput, 0, 0);
     CreateParameter('@Cosenca', ftInteger, pdInput, 0, 0);
     CreateParameter('@cTema', ftString, pdInput, 2000, '');
+    CreateParameter('@Ik_zach', ftInteger, pdInput, 0, 0);
+    CreateParameter('@i_balls', ftInteger, pdInput, 0, 0);
   end;
 end;
 
@@ -574,16 +618,18 @@ begin
     Clear;
     CreateParameter('@flag', ftInteger, pdInput, 0, 1);
     CreateParameter('@Ik_studGrup', ftInteger, pdInput, 0, 0);
+    CreateParameter('@Ik_zach', ftInteger, pdInput, 0, 0);
     CreateParameter('@Ik_ved', ftInteger, pdInput, 0, FVedom);
     CreateParameter('@KPTheme', ftString, pdInput, 2000, '');
   end;
 end;
 
-procedure TAppendUspevKPThemeCommand.DoIt(StudGrupIK: integer; KPTheme: string);
+procedure TAppendUspevKPThemeCommand.DoIt(StudGrupIK, ZachIK: integer; KPTheme: string);
 begin
   with FStor.Parameters do
   begin
     ParamByName('@Ik_studGrup').Value := StudGrupIK;
+    ParamByName('@Ik_zach').Value := ZachIK;
     ParamByName('@KPTheme').Value := KPTheme;
     FStor.ExecProc;
   end;
@@ -636,13 +682,15 @@ end;
 
 { TNapravController }
 
-function TNapravController.AddNapr(VidExID: integer; dateIn,
-  dateOut: TDateTime; NaprNum: string; var VedIK: integer): integer;
-var NaprCommand: TNaprCommand;
+function TNapravController.AddNapr(VidExID: integer; dateIn, dateOut: TDateTime;
+  NaprNum: string; var VedIK: integer): integer;
+var
+  NaprCommand: TNaprCommand;
 begin
   try
     NaprCommand := TNaprCommand.Create(0);
-    VedIK := NaprCommand.Add(FContentNapr.ContentIK, FStudGrupIK, VidExID, dateIn, dateOut, NaprNum);
+    VedIK := NaprCommand.Add(FContentNapr.ContentIK, FStudGrupIK, VidExID,
+      dateIn, dateOut, NaprNum);
     Result := NoError;
   except
     Result := FailError;
@@ -653,7 +701,8 @@ begin
 end;
 
 function TNapravController.Annul(VedIK: integer): integer;
-var NaprCommand: TNaprCommand;
+var
+  NaprCommand: TNaprCommand;
 begin
   try
     NaprCommand := TNaprCommand.Create(VedIK);
@@ -666,44 +715,48 @@ begin
   NaprCommand.Free;
 end;
 
-function TNapravController.CloseNapr(VedIK, cosenca: integer; ntab, KPTema: string; date_exam: TDateTime): integer;
+function TNapravController.CloseNapr(VedIK, Cosenca: integer;
+  ntab, KPTema: string; date_exam: TDateTime): integer;
 var
   FVedCommand: TUpdateVedCommand;
   FAppendUspevCommand: TAppendUspevCommand;
   FAppendUspevKPThemeCommand: TAppendUspevKPThemeCommand;
 begin
   DataSet.Locate('Ik_ved', VedIK, []);
-  if (DataSet.FieldByName('lClose').Value = NULL) then  //если направление уже аннулировано
+  if (DataSet.FieldByName('lClose').Value = NULL) then
+  // если направление уже аннулировано
   begin
     Result := StatusError;
     exit;
   end;
 
   with DataSet do
-  try
-    Connection.BeginTrans;
-    FVedCommand := TUpdateVedCommand.Create(VedIK);
-    FAppendUspevCommand := TAppendUspevCommand.Create(VedIK);
-    FAppendUspevKPThemeCommand := TAppendUspevKPThemeCommand.Create(VedIK);
+    try
+      Connection.BeginTrans;
+      FVedCommand := TUpdateVedCommand.Create(VedIK);
+      FAppendUspevCommand := TAppendUspevCommand.Create(VedIK);
+      FAppendUspevKPThemeCommand := TAppendUspevKPThemeCommand.Create(VedIK);
 
-    FAppendUspevCommand.DoIt(FStudGrupIK, cosenca);                                         //сохраняем оценку
-    if KPTema<>'' then FAppendUspevKPThemeCommand.DoIt(FStudGrupIK,KPTema);                 //сохраняем тему
-    FVedCommand.Update(FieldByName('ik_vid_exam').Value, FieldByName('cNumber_ved').Value,  //закрываем направление
-    ntab, date_exam, True, True);
+      FAppendUspevCommand.DoIt(FStudGrupIK, 0, Cosenca, 0); // сохраняем оценку
+      if KPTema <> '' then
+        FAppendUspevKPThemeCommand.DoIt(FStudGrupIK,0, KPTema); // сохраняем тему
+      FVedCommand.Update(FieldByName('ik_vid_exam').Value,
+        FieldByName('cNumber_ved').Value, // закрываем направление
+        ntab, date_exam, true, true);
 
-    Connection.CommitTrans;
+      Connection.CommitTrans;
 
-    Result := NoError;
-  except
-    on E: Exception do
-    begin
-      Connection.RollbackTrans;
-      Result := FailError;
-      raise EApplicationException.Create
-        ('Произошла ошибка при закрыти направления.', E);
-      exit;
+      Result := NoError;
+    except
+      on E: Exception do
+      begin
+        Connection.RollbackTrans;
+        Result := FailError;
+        raise EApplicationException.Create
+          ('Произошла ошибка при закрыти направления.', E);
+        exit;
+      end;
     end;
-  end;
 
   FVedCommand.Free;
   FAppendUspevCommand.Free;
@@ -719,7 +772,7 @@ end;
 
 function TNapravController.GetContentDS: TADODataSet;
 begin
-  result := FContentNapr.DataSet;
+  Result := FContentNapr.DataSet;
 end;
 
 procedure TNapravController.LoadOpenedNapr;
@@ -729,7 +782,8 @@ end;
 
 procedure TNapravController.Reload(ik_studGrup: integer);
 begin
-  inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) + ') order by n_sem');
+  inherited Reload('GetStudNaprav(' + IntToStr(ik_studGrup) +
+    ') order by n_sem');
   FStudGrupIK := ik_studGrup;
   FContentNapr.Reload(ik_studGrup);
 end;
@@ -796,7 +850,7 @@ begin
   end;
 end;
 
-procedure TNaprCommand.Close(cosenca: integer; ntab, KPTema: string;
+procedure TNaprCommand.Close(Cosenca: integer; ntab, KPTema: string;
   date_exam: TDateTime);
 begin
   with FStor.Parameters do
@@ -815,7 +869,7 @@ begin
   with FStor.Parameters do
   begin
     Clear;
-    CreateParameter('@RETURN_VALUE',ftInteger,pdReturnValue,0,1);
+    CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 0, 1);
     CreateParameter('@flag', ftInteger, pdInput, 0, 0);
     CreateParameter('@ik_upContent', ftInteger, pdInput, 0, 0);
     CreateParameter('@ik_studGrup', ftInteger, pdInput, 0, 0);
@@ -850,8 +904,8 @@ procedure TAddVedUspevCommand.DoIt(ContentIK: integer);
 begin
   with FStor.Parameters do
   begin
-   ParamByName('@ik_upContent').Value := ContentIK;
-   FStor.ExecProc;
+    ParamByName('@ik_upContent').Value := ContentIK;
+    FStor.ExecProc;
   end;
 end;
 
@@ -859,27 +913,32 @@ end;
 
 constructor TBRSVedomostController.Create;
 begin
-  inherited Create('GetBRSVidZanyat(' + IntToStr(0) + ',' +
-    IntToStr(0) + ',' + IntToStr(0) + ')');
+  inherited Create('GetBRSVidZanyat(' + IntToStr(0) + ',' + IntToStr(0) + ',' +
+    IntToStr(0) + ')');
   FBRSUspevController := TBRSUspevController.Create;
 end;
 
 procedure TBRSVedomostController.CreateAllBRS;
-var  FAddVedUspevCommand: TAddVedUspevCommand;
-     i: integer;
+var
+  FAddVedUspevCommand: TAddVedUspevCommand;
+  i: integer;
+
 begin
-   FAddVedUspevCommand := TAddVedUspevCommand.Create(FIK_Grup);
-   try
-      FDataSet.First;
-      for i := 0 to FDataSet.RecordCount - 1 do
-      begin
-        if FDataSet.FieldByName('ik_ved').Value = NULL then
-          FAddVedUspevCommand.DoIt(FDataSet.FieldByName('ik_upContent').AsInteger);
-        FDataSet.Next;
-      end;
-    finally
-      FAddVedUspevCommand.Free;
+  FDataSet.Filtered := false;
+  FAddVedUspevCommand := TAddVedUspevCommand.Create(FIK_Grup);
+  try
+    FDataSet.First;
+    for i := 0 to FDataSet.RecordCount - 1 do
+    begin
+      if FDataSet.FieldByName('ik_ved').Value = NULL then
+        FAddVedUspevCommand.DoIt(FDataSet.FieldByName('ik_upContent')
+          .AsInteger);
+      FDataSet.Next;
     end;
+  finally
+    FAddVedUspevCommand.Free;
+  end;
+  FDataSet.Filtered := true;
   Refresh;
 end;
 
@@ -915,11 +974,14 @@ end;
 
 function TBRSVedomostController.GetBRSCount: integer;
 begin
+  DataSet.Filtered := false;
   Result := FDataSet.RecordCount;
+  DataSet.Filtered := true;
 end;
 
 function TBRSVedomostController.GetCreatedCount: integer;
-var i: integer;
+var
+  i: integer;
 begin
   Result := 0;
   if FDataSet.RecordCount > 0 then
@@ -934,13 +996,46 @@ begin
   end;
 end;
 
+function TBRSVedomostController.GetVedDataSet: TADODataSet;
+begin
+  SetFilter('ik_ved<>NULL');
+  Result := DataSet;
+end;
+
 procedure TBRSVedomostController.Reload(ik_grup, n_sem, n_module: integer);
 begin
-    inherited Reload('GetBRSVidZanyat(' + IntToStr(ik_grup) + ',' +
+  inherited Reload('GetBRSVidZanyat(' + IntToStr(ik_grup) + ',' +
     IntToStr(n_sem) + ',' + IntToStr(n_module) + ')');
-    FIK_Grup := ik_grup;
-    FN_sem := n_sem;
-    FN_mod := n_module;
+  FIK_Grup := ik_grup;
+  FN_sem := n_sem;
+  FN_mod := n_module;
+end;
+
+procedure TBRSVedomostController.Save(ikPrepod: string; DateExam: TDateTime);
+var
+  FVedCommand: TUpdateVedCommand;
+begin
+  FDataSet.Connection.BeginTrans;
+  try
+    FBRSUspevController.Save;
+
+    FVedCommand := TUpdateVedCommand.Create(FDataSet.FieldByName('ik_ved')
+      .AsInteger);
+    FVedCommand.Update(0, '', ikPrepod, DateExam, false, false);
+    FDataSet.Connection.CommitTrans;
+
+  except
+    on E: Exception do
+    begin
+      FDataSet.Connection.RollbackTrans;
+      raise EApplicationException.Create
+        ('Произошла ошибка при сохранении ведомости БРС.', E);
+      exit;
+    end;
+  end;
+
+  FVedCommand.Free;
+  Refresh;
 end;
 
 procedure TBRSVedomostController.SetBRSVedomost(const Value: integer);
@@ -957,14 +1052,62 @@ begin
 end;
 
 procedure TBRSUspevController.Save;
+var
+  FAppendBRSUspev: TAppendBRSUspevCommand;
+  i: integer;
 begin
+  // вносим успеваемость
+  FAppendBRSUspev := TAppendBRSUspevCommand.Create(FBRSVedomost);
 
+  FDataSet.First;
+  for i := 0 to FDataSet.RecordCount - 1 do
+  with FDataSet do
+  begin
+    FAppendBRSUspev.Update(FieldByName('ik_zach').AsInteger,
+    FieldByName('i_balls').AsInteger, FieldByName('PropCount').AsInteger,
+    FieldByName('Uvag_propCount').AsInteger);
+    Next;
+  end;
+
+  FAppendBRSUspev.Free;
+  Refresh;
 end;
 
 procedure TBRSUspevController.SetBRSVedomost(const Value: integer);
 begin
   inherited Reload('GetSmallBRSAttForGrup(' + IntToStr(Value) + ')');
   FBRSVedomost := Value;
+end;
+
+{ TAppendBRSUspevCommand }
+
+constructor TAppendBRSUspevCommand.Create(FVedom: integer);
+begin
+  inherited Create('AppendRezBRSAtt');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@flag', ftInteger, pdInput, 0, 0);
+    CreateParameter('@Ik_ved', ftInteger, pdInput, 0, FVedom);
+    CreateParameter('@Ik_zach', ftInteger, pdInput, 0, 0);
+    CreateParameter('@i_balls', ftInteger, pdInput, 0, 0);
+    CreateParameter('@PropCount', ftInteger, pdInput, 0, 0);
+    CreateParameter('@PropUvajCount', ftInteger, pdInput, 0, 0);
+  end;
+end;
+
+procedure TAppendBRSUspevCommand.Update(StudGrupIK, iBall, PropCount,
+  PropUvajCount: integer);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@flag').Value := 0; // редактирование
+    ParamByName('@Ik_zach').Value := StudGrupIK;
+    ParamByName('@i_balls').Value := iBall;
+    ParamByName('@PropCount').Value := PropCount;
+    ParamByName('@PropUvajCount').Value := PropUvajCount;
+  end;
+  FStor.ExecProc;
 end;
 
 end.
