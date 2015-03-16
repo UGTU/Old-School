@@ -52,8 +52,8 @@ Begin
  //dtpStart.Date := StrToDate('10.03.2015');
    dtpStart.Date:=  Date -31; //"конкретная дата"
    dtpEnd.Date := Date; //текущая дата
-   dtpStart.MaxDate:= dtpEnd.Date;
-   dtpEnd.MinDate:= dtpStart.Date;
+   dtpStart.MaxDate:= dtpEnd.Date-1;
+   dtpEnd.MinDate:= dtpStart.Date+1;
 
 
    //фильтрация
@@ -105,16 +105,19 @@ end;
 procedure TfmDoc.dtpEndChange(Sender: TObject);
 begin
   inherited;
-  dtpStart.MaxDate:= dtpEnd.Date;
+  dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
+  dmDocs.dsDocs.DataSet.Filtered:=true;
+  dtpStart.MaxDate:= dtpEnd.Date-1;
+
 end;
 
 procedure TfmDoc.dtpStartChange(Sender: TObject);
 begin
   inherited;
-//  dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ' + DateTimeToStr(dtpStart.Date);//+ 'and DateCreate <' + DateTimeToStr(dtpEnd.Date);
-//  dmDocs.dsDocs.DataSet.Filtered:=true;
+  dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
+  dmDocs.dsDocs.DataSet.Filtered:=true;
 
-  dtpEnd.MinDate:= dtpStart.Date;
+  dtpEnd.MinDate:= dtpStart.Date+1;
 end;
 
 procedure TfmDoc.dtpStartExit(Sender: TObject);

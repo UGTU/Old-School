@@ -134,7 +134,7 @@ inherited fmDoc: TfmDoc
           PopupMenu = gridColumnSelectMenu
           STFilter.ListSource = dmDocs.dsDocs
           STFilter.Visible = False
-          Title.Caption = #1044#1072#1090#1072
+          Title.Caption = #1044#1072#1090#1072' '#1089#1090#1072#1090#1091#1089#1072
         end
         item
           DynProps = <>
@@ -221,8 +221,6 @@ inherited fmDoc: TfmDoc
       Height = 47
       Align = alTop
       TabOrder = 1
-      ExplicitLeft = -3
-      ExplicitTop = -4
       DesignSize = (
         699
         47)
@@ -250,7 +248,6 @@ inherited fmDoc: TfmDoc
         Caption = #1055#1077#1095#1072#1090#1100
         TabOrder = 0
         OnClick = bPrintClick
-        ExplicitTop = 4
       end
       object dtpEnd: TDateTimePicker
         Left = 190
@@ -282,7 +279,6 @@ inherited fmDoc: TfmDoc
         Caption = #1057#1073#1088#1086#1089
         TabOrder = 3
         OnClick = bResetClick
-        ExplicitTop = 4
       end
     end
   end
