@@ -16,7 +16,6 @@ type
     PageControl1: TPageControl;
     naborpage: TTabSheet;
     ToolBar2: TToolBar;
-    SpeedButton6: TSpeedButton;
     statpage: TTabSheet;
     ToolBar1: TToolBar;
     DS_nabor: TDataSource;
@@ -45,7 +44,6 @@ type
     actEditNabor: TAction;
     actDelNabor: TAction;
     ImageList3: TImageList;
-    SpeedButton2: TSpeedButton;
     ToolButton6: TToolButton;
     dbgrdStatistika: TDBGridEh;
     actPrintNabor: TAction;
@@ -79,6 +77,8 @@ type
     N3: TMenuItem;
     tsExamsErrors: TTabSheet;
     dbgExamsErrors: TDBGridEh;
+    ToolButton12: TToolButton;
+    ToolButton14: TToolButton;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
