@@ -604,16 +604,17 @@ GO
 ----------------------------------------------------------------------------------------------------
 ALTER       PROCEDURE [dbo].[AppendUspevKPTheme]
 @flag INT, 
-@ik_studGrup INT, 				--код зачетки
+@ik_studGrup INT, 	
+@ik_zach INT,			--код зачетки
 @ik_ved INT,
 @KPTheme varchar(max)
 AS
-DECLARE @ik_upContent INT
-DECLARE @ik_zach INT
 
+DECLARE @ik_upContent INT
 SELECT @ik_upContent=ik_upContent FROM Vedomost
 WHERE ik_ved=@ik_ved
 
+if (@ik_zach is null)or(@ik_zach = 0)
 select @ik_zach = ik_zach from StudGrup where Ik_studGrup = @Ik_studGrup
 
 --выбираем код соответствующего документа
