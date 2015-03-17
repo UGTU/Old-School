@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBCtrlsEh, StdCtrls, Mask, ActnList, Buttons,
-  ExtCtrls, Menus, DBCtrls, DB, DBGridEh, DBLookupEh;
+  ExtCtrls, Menus, DBCtrls, DB, DBGridEh, DBLookupEh, System.Actions;
 
 type
   TfrmNewNabor = class(TfrmBaseDialog)

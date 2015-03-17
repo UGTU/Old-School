@@ -200,7 +200,7 @@ object DMAbiturientNabor: TDMAbiturientNabor
     end
     object adoqFacCname_fac: TStringField
       FieldName = 'Cname_fac'
-      Size = 50
+      Size = 500
     end
     object adoqFacCshort_name_fac: TStringField
       FieldName = 'Cshort_name_fac'
@@ -221,7 +221,7 @@ object DMAbiturientNabor: TDMAbiturientNabor
     SQL.Strings = (
       'select * from [dbo].[ABIT_GetSpecList]'
       '(2012,0)'
-      'order by ik_spec desc'
+      'order by Sortorder,Ik_form_ed'
       ''
       ''
       ''
@@ -246,7 +246,7 @@ object DMAbiturientNabor: TDMAbiturientNabor
     end
     object adoqSpecFacCname_fac: TStringField
       FieldName = 'Cname_fac'
-      Size = 50
+      Size = 500
     end
     object adoqSpecFacCshort_name_fac: TStringField
       FieldName = 'Cshort_name_fac'
@@ -260,6 +260,12 @@ object DMAbiturientNabor: TDMAbiturientNabor
     end
     object adoqSpecFacik_direction: TIntegerField
       FieldName = 'ik_direction'
+    end
+    object adoqSpecFacSortorder: TIntegerField
+      FieldName = 'Sortorder'
+    end
+    object adoqSpecFacIk_form_ed: TIntegerField
+      FieldName = 'Ik_form_ed'
     end
   end
   object dsSpecFac: TDataSource
