@@ -187,6 +187,7 @@ inherited frmNewNabor: TfrmNewNabor
     Width = 521
     Height = 19
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_fac'
@@ -202,6 +203,7 @@ inherited frmNewNabor: TfrmNewNabor
     Width = 521
     Height = 19
     Anchors = [akLeft, akTop, akRight]
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_spec_fac'
@@ -216,6 +218,7 @@ inherited frmNewNabor: TfrmNewNabor
     Top = 7
     Width = 179
     Height = 19
+    DataField = ''
     Enabled = False
     EditButtons = <>
     Flat = True
@@ -242,6 +245,7 @@ inherited frmNewNabor: TfrmNewNabor
     Height = 19
     Alignment = taLeftJustify
     Anchors = [akLeft, akTop, akRight]
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 5
@@ -255,6 +259,7 @@ inherited frmNewNabor: TfrmNewNabor
     Height = 19
     Alignment = taLeftJustify
     Anchors = [akLeft, akTop, akRight]
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 6
@@ -268,6 +273,7 @@ inherited frmNewNabor: TfrmNewNabor
     Height = 19
     Alignment = taLeftJustify
     Anchors = [akLeft, akTop, akRight]
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 7
@@ -281,6 +287,7 @@ inherited frmNewNabor: TfrmNewNabor
     Height = 19
     Alignment = taLeftJustify
     Anchors = [akLeft, akTop, akRight]
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 8

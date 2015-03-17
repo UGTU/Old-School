@@ -50,6 +50,8 @@ type
     adoqExamsErrors: TADOQuery;
     dsExamsErrors: TDataSource;
     adoqNaborDiscsDiscName: TStringField;
+    adoqSpecFacSortorder: TIntegerField;
+    adoqSpecFacIk_form_ed: TIntegerField;
   private
     { Private declarations }
   public
