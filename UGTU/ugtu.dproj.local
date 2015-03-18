@@ -635,9 +635,9 @@
     <File Path="Utils\uPhotoBooth.pas"/>
   </ProjectSortOrder>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.208,E:\GitHub\Old-School\UGTU\Presentation\Forms\uEditFilter.pas=E:\GitHub\Old-School\UGTU\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.952,E:\GitHub\Old-School\UGTU\Presentation\Forms\uEditFilter.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.208,E:\GitHub\Old-School\UGTU\Presentation\Forms\uEditFilter.pas=E:\GitHub\Old-School\UGTU\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.422,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.081,=E:\GitHub\Old-School\UGTU\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.489,E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.394,E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
@@ -647,9 +647,9 @@
     <Transaction>1899.12.30 00:00:00.000.366,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaReport2014.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.816,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.858,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Data\uDMDocuments.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.422,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.257,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.467,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.257,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

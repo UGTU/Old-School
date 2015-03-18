@@ -22,17 +22,6 @@ object dmDocs: TdmDocs
       FieldName = 'NumberDoc'
       Size = 50
     end
-    object adodsDocsDateStart: TWideStringField
-      FieldName = 'DateStart'
-      Size = 10
-    end
-    object adodsDocsIk_StatusDoc: TIntegerField
-      FieldName = 'Ik_StatusDoc'
-    end
-    object adodsDocsNameStatusDoc: TStringField
-      FieldName = 'NameStatusDoc'
-      Size = 50
-    end
     object adodsDocsIk_studGrup: TIntegerField
       FieldName = 'Ik_studGrup'
       ReadOnly = True

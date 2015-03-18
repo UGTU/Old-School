@@ -8,7 +8,7 @@ uses
   Vcl.ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
   GridsEh, DBAxisGridsEh, DBGridEh, Vcl.ComCtrls,uDMUgtuStructure, Vcl.DBLookup,
   Vcl.Mask, DBCtrlsEh, DBLookupEh,uDMStudentData,uDMDocuments,EhLibADO,
-  Vcl.Menus;
+  Vcl.Menus, Data.DB, Bde.DBTables;
 
 type
   TfmDoc = class(TfmBase)
@@ -21,14 +21,14 @@ type
     bReset: TButton;
     gridColumnSelectMenu: TPopupMenu;
     Label2: TLabel;
+    Query1: TQuery;
     procedure dbcmbSpecChange(Sender: TObject);
     procedure dbcmbGroupChange(Sender: TObject);
     procedure bPrintClick(Sender: TObject);
     procedure gridColumnSelectMenuPopup(Sender: TObject);
     procedure bResetClick(Sender: TObject);
-    procedure dtpStartExit(Sender: TObject);
-    procedure dtpStartChange(Sender: TObject);
-    procedure dtpEndChange(Sender: TObject);
+    procedure dtpStartCloseUp(Sender: TObject);
+    procedure dtpEndCloseUp(Sender: TObject);
 
   private
   procedure OnMyMenuItemClick (Sender: TObject);//numColumn:integer;checked:boolean);
@@ -56,6 +56,9 @@ Begin
    dtpEnd.MinDate:= dtpStart.Date+1;
 
 
+  // dmDocs.adodsDocs.CommandText:=('select * from MagazineDocs where cName_direction='''+'Бакалавриат''');// + DateTimeToStr(dtpStart.Date)+'''';//+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+''')or DateCreate=NULL';
+    dmDocs.adodsDocs.CommandText:=('select * from MagazineDocs where (DateCreate>'''+DateTimeToStr(dtpStart.Date)+ '''and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+''')or DateCreate IS NULL');
+
    //фильтрация
    uDMDocuments.dmDocs.adodsDocs.Active:=true;   //подключам базу
    uDMDocuments.dmDocs.adodsDocs.Filtered:=True;  //фильтр
@@ -68,7 +71,11 @@ Begin
  //  dbgehMagazineDocs.Columns[1].Title.SortMarker = smDownEh;   //по убыванию
  //  dbgehMagazineDocs.OptionsEh := dbgehMagazineDocs.OptionsEh + [dghMultiSortMarking]; //сортировка по нескольким столбцам
    dbgehMagazineDocs.SortLocal:= True;
+   //dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
 
+
+   //dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
+   //dmDocs.dsDocs.DataSet.Filtered:=true;
 
 
 End;
@@ -86,6 +93,8 @@ procedure TfmDoc.bResetClick(Sender: TObject);
 begin
   inherited;
 self.dbgehMagazineDocs.ClearFilter;
+//dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
+//dmDocs.dsDocs.DataSet.Filtered:=true;
 self.dbgehMagazineDocs.DefaultApplyFilter;
 end;
 
@@ -102,29 +111,22 @@ begin
   inherited;
 end;
 
-procedure TfmDoc.dtpEndChange(Sender: TObject);
+procedure TfmDoc.dtpEndCloseUp(Sender: TObject);
 begin
   inherited;
-  dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
-  dmDocs.dsDocs.DataSet.Filtered:=true;
   dtpStart.MaxDate:= dtpEnd.Date-1;
-
+  dmDocs.adodsDocs.Active:=False;
+  dmDocs.adodsDocs.CommandText:=('select * from MagazineDocs where (DateCreate>'''+DateTimeToStr(dtpStart.Date)+ '''and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+''')or DateCreate IS NULL');
+   dmDocs.adodsDocs.Active:=True;
 end;
 
-procedure TfmDoc.dtpStartChange(Sender: TObject);
+procedure TfmDoc.dtpStartCloseUp(Sender: TObject);
 begin
   inherited;
-  dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
-  dmDocs.dsDocs.DataSet.Filtered:=true;
-
   dtpEnd.MinDate:= dtpStart.Date+1;
-end;
-
-procedure TfmDoc.dtpStartExit(Sender: TObject);
-begin
-  inherited;
-//  dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ' + DateTimeToStr(dtpStart.Date)+ 'and DateCreate <' + DateTimeToStr(dtpEnd.Date);
-//  dmDocs.dsDocs.DataSet.Filtered:=true;
+  dmDocs.adodsDocs.Active:=False;
+  dmDocs.adodsDocs.CommandText:=('select * from MagazineDocs where (DateCreate>'''+DateTimeToStr(dtpStart.Date)+ '''and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+''')or DateCreate IS NULL');
+   dmDocs.adodsDocs.Active:=True;
 end;
 
 procedure TfmDoc.gridColumnSelectMenuPopup(Sender: TObject);
@@ -135,8 +137,8 @@ var
  i : Integer;
 begin
   inherited;   //надо сделать освобождение памяти
- // if pm<>nil then
- // pm.Free;
+  //if pm<>nil then
+ // pm.CloseMenu;
   pm := Sender as TPopupMenu;
   pm.Items.Clear;
   for i := 0 to self.dbgehMagazineDocs.Columns.Count - 1 do
@@ -149,7 +151,6 @@ begin
     mi.Checked := col.Visible;
     pm.Items.Add(mi);
   end;
-
 
 end;
 
@@ -167,4 +168,5 @@ begin
     end;
 end;
 end;
+
 end.

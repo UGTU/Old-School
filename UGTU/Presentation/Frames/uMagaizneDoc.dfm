@@ -118,27 +118,6 @@ inherited fmDoc: TfmDoc
         item
           DynProps = <>
           EditButtons = <>
-          FieldName = 'NameStatusDoc'
-          Footers = <>
-          PopupMenu = gridColumnSelectMenu
-          STFilter.KeyField = 'Ik_StatusDoc'
-          STFilter.ListSource = dmDocs.dsDocs
-          Title.Caption = #1057#1090#1072#1090#1091#1089
-          Width = 135
-        end
-        item
-          DynProps = <>
-          EditButtons = <>
-          FieldName = 'DateStart'
-          Footers = <>
-          PopupMenu = gridColumnSelectMenu
-          STFilter.ListSource = dmDocs.dsDocs
-          STFilter.Visible = False
-          Title.Caption = #1044#1072#1090#1072' '#1089#1090#1072#1090#1091#1089#1072
-        end
-        item
-          DynProps = <>
-          EditButtons = <>
           FieldName = 'Cname_form_ed'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
@@ -257,7 +236,7 @@ inherited fmDoc: TfmDoc
         Date = 42073.571743564810000000
         Time = 42073.571743564810000000
         TabOrder = 1
-        OnChange = dtpEndChange
+        OnCloseUp = dtpEndCloseUp
       end
       object dtpStart: TDateTimePicker
         Left = 53
@@ -267,8 +246,7 @@ inherited fmDoc: TfmDoc
         Date = 42073.571743564810000000
         Time = 42073.571743564810000000
         TabOrder = 2
-        OnChange = dtpStartChange
-        OnExit = dtpStartExit
+        OnCloseUp = dtpStartCloseUp
       end
       object bReset: TButton
         Left = 385
@@ -300,5 +278,10 @@ inherited fmDoc: TfmDoc
     OnPopup = gridColumnSelectMenuPopup
     Left = 576
     Top = 224
+  end
+  object Query1: TQuery
+    DataSource = dmDocs.dsDocs
+    Left = 544
+    Top = 296
   end
 end

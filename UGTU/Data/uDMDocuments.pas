@@ -13,9 +13,6 @@ type
     adodsStatusDoc: TADODataSet;
     adodsDocsDateCreate: TDateTimeField;
     adodsDocsNumberDoc: TStringField;
-    adodsDocsDateStart: TWideStringField;
-    adodsDocsIk_StatusDoc: TIntegerField;
-    adodsDocsNameStatusDoc: TStringField;
     adodsDocsIk_studGrup: TIntegerField;
     adodsDocsnCode: TBCDField;
     adodsDocsFIO: TStringField;
