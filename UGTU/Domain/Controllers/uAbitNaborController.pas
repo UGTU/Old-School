@@ -35,9 +35,9 @@ type
   //GetNabor загружает данные наборов
   function GetNabor(SourceDataSet: PDataSet; nnyear:integer): Variant;
   //AddNabor добавление набора
-  function AddNabor(ik_spec_fac,BeginDiapazon,EndDiapazon,NNYear,MestCKP,MestBudjet,MestKontrakt:integer;lRussian:boolean): integer;
+  function AddNabor(ik_spec_fac, NNYear,MestBudjet,MestCKP,MestLgot: integer;lRussian:boolean): integer;
   //EditNabor редактирует набор
-  procedure EditNabor(ik_spec_fac,BeginDiapazon,EndDiapazon,NNYear,MestCKP,MestBudjet,MestKontrakt:integer;NNrecord:integer;lRussian:boolean);
+  procedure EditNabor(ik_spec_fac,NNYear,MestBudjet,MestCKP,MestLgot: integer;NNrecord:integer;lRussian:boolean);
   //DelNabor Удаляет набор
   procedure DelNabor(NNrecord:integer);
   //ImportNabor импортирует плановые наборы из подсистемы "Нагрузка"
@@ -124,7 +124,7 @@ begin
 end;
 
 //добавление набора
-function TAbitNaborController.AddNabor(ik_spec_fac,BeginDiapazon,EndDiapazon,NNYear,MestCKP,MestBudjet,MestKontrakt:integer;lRussian:boolean): integer;
+function TAbitNaborController.AddNabor(ik_spec_fac, NNYear,MestBudjet,MestCKP,MestLgot: integer;lRussian:boolean): integer;
 var
   tempStoredProc: TADOStoredProc;
 begin
@@ -136,12 +136,11 @@ begin
     tempStoredProc.Parameters.Clear;
     //LockType:=ltBatchOptimistic;
     tempStoredProc.Parameters.CreateParameter('@ik_spec_fac',ftBCD,pdInput,0,ik_spec_fac);
-    tempStoredProc.Parameters.CreateParameter('@BeginDiapazon',ftBCD,pdInput,0,BeginDiapazon);
-    tempStoredProc.Parameters.CreateParameter('@EndDiapazon',ftBCD,pdInput,0,EndDiapazon);
     tempStoredProc.Parameters.CreateParameter('@NNYear',ftBCD,pdInput,0,NNYear);
-    tempStoredProc.Parameters.CreateParameter('@MestCKP',ftBCD,pdInput,0,MestCKP);
     tempStoredProc.Parameters.CreateParameter('@MestBudjet',ftBCD,pdInput,0,MestBudjet);
-    tempStoredProc.Parameters.CreateParameter('@MestKontrakt',ftBCD,pdInput,0,MestKontrakt);
+    tempStoredProc.Parameters.CreateParameter('@MestCKP',ftBCD,pdInput,0,MestCKP);
+    tempStoredProc.Parameters.CreateParameter('@MestLgot',ftBCD,pdInput,0,MestLgot);
+    tempStoredProc.Parameters.CreateParameter('@MestKontrakt',ftBCD,pdInput,0,0);
     tempStoredProc.Parameters.CreateParameter('@lRussian',ftBCD,pdInput,0,lRussian);
     tempStoredProc.Parameters.CreateParameter('@NNrecord',ftInteger,pdOutput,0,0);
     tempStoredProc.ExecProc;
@@ -152,7 +151,7 @@ begin
 end;
 
 //редактирует набор
-procedure TAbitNaborController.EditNabor(ik_spec_fac,BeginDiapazon,EndDiapazon,NNYear,MestCKP,MestBudjet,MestKontrakt:integer;NNrecord:integer;lRussian:boolean);
+procedure TAbitNaborController.EditNabor(ik_spec_fac,NNYear,MestBudjet,MestCKP,MestLgot: integer;NNrecord:integer;lRussian:boolean);
 var
   tempStoredProc: TADOStoredProc;
 begin
@@ -167,12 +166,11 @@ begin
       Active:=false;
       Parameters.Clear;
 			Parameters.CreateParameter('@ik_spec_fac',ftBCD,pdInput,0,ik_spec_fac);
-			Parameters.CreateParameter('@BeginDiapazon',ftBCD,pdInput,0,BeginDiapazon);
-			Parameters.CreateParameter('@EndDiapazon',ftBCD,pdInput,0,EndDiapazon);
 			Parameters.CreateParameter('@NNYear',ftBCD,pdInput,0,NNYear);
+      Parameters.CreateParameter('@MestBudjet',ftBCD,pdInput,0,MestBudjet);
 			Parameters.CreateParameter('@MestCKP',ftBCD,pdInput,0,MestCKP);
-			Parameters.CreateParameter('@MestBudjet',ftBCD,pdInput,0,MestBudjet);
-			Parameters.CreateParameter('@MestKontrakt',ftBCD,pdInput,0,MestKontrakt);
+			Parameters.CreateParameter('@MestLgot',ftBCD,pdInput,0,MestLgot);
+      Parameters.CreateParameter('@MestKontrakt',ftBCD,pdInput,0,0);
 			Parameters.CreateParameter('@nnrecord',ftBCD,pdInput,0,nnrecord);
       tempStoredProc.Parameters.CreateParameter('@lRussian',ftBCD,pdInput,0,lRussian);
       ExecProc;
