@@ -14,7 +14,7 @@ inherited fmAbitNabor: TfmAbitNabor
       Top = 2
       Width = 737
       Height = 427
-      ActivePage = naborpage
+      ActivePage = fac_spec
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
