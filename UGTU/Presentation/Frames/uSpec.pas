@@ -406,8 +406,9 @@ begin
     tempStoredProc.ProcedureName:= 'UpdateSpclz';
     tempStoredProc.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 3);
     tempStoredProc.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, dbgSpclz.DataSource.DataSet.FieldByName('iK_spclz').AsInteger);
+    tempStoredProc.Connection.BeginTrans;
     try
-      tempStoredProc.Connection.BeginTrans;
+
       tempStoredProc.ExecProc;
       tempStoredProc.Connection.CommitTrans;
       tempStoredProc.Free;

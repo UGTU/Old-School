@@ -492,6 +492,7 @@ begin
     FAbitListDataSetInstance.FieldByName('ik_type_zach').Value:=1;
     FAbitListDataSetInstance.FieldByName('ik_zach').Value:=1;
     FAbitListDataSetInstance.FieldByName('nn_zach').Value:=null;
+    dm.DBConnect.CommitTrans;
   except
     on E:Exception do
     begin
@@ -500,7 +501,6 @@ begin
     end;
   end;
 
-  dm.DBConnect.CommitTrans;
   FAbitListDataSetInstance.Next;
   result:=true;
 end;
