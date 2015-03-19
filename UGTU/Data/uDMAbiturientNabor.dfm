@@ -25,7 +25,7 @@ object DMAbiturientNabor: TDMAbiturientNabor
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'select * from [dbo].[ABIT_GetNaborList_340]'
+      'select * from [dbo].[ABIT_GetNaborList]'
       ''
       ''
       ''
