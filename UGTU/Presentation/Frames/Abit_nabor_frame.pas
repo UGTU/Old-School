@@ -756,12 +756,10 @@ begin
   try
 	  Abit_add_nabor_dialog.type_dialog:=2;
 	  frmNewNabor.NNrecord:= nabor.DataSource.DataSet.FieldByName('NNrecord').AsInteger;
-	  frmNewNabor.begind.Value:= nabor.DataSource.DataSet.FieldByName('BeginDiapazon').AsInteger;
-	  frmNewNabor.endd.Value:= nabor.DataSource.DataSet.FieldByName('EndDiapazon').AsInteger;
 	  frmNewNabor.year:= nabor.DataSource.DataSet.FieldByName('nnyear').AsInteger;
 	  frmNewNabor.mestCKP.Value:= nabor.DataSource.DataSet.FieldByName('MestCKP').AsInteger;
 	  frmNewNabor.mestbudjet.Value:= nabor.DataSource.DataSet.FieldByName('MestBudjet').AsInteger;
-	  //frmNewNabor.mestkontrakt.Value:= nabor.DataSource.DataSet.FieldByName('MestKontrakt').AsInteger;
+	  frmNewNabor.MestLgot.Value:= nabor.DataSource.DataSet.FieldByName('MestLgot').AsInteger;
 	  frmNewNabor.ikfac:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
 	  frmNewNabor.ikSpecfac:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
 	  frmNewNabor.cbRussian.Checked:= nabor.DataSource.DataSet.FieldByName('lRussian').AsBoolean;
