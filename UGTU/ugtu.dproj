@@ -90,8 +90,8 @@
         <VerInfo_Release>1</VerInfo_Release>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.539;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>539</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.540;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>540</VerInfo_Build>
         <DCC_UnitSearchPath>Domain\DBTV;Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5;Domain\Graphics32\Packages</DCC_UnitSearchPath>
     </PropertyGroup>
     <ProjectExtensions>

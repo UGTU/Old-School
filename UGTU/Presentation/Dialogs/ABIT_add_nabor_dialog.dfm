@@ -75,9 +75,9 @@ inherited frmNewNabor: TfrmNewNabor
   object Label110: TLabel [7]
     Left = 193
     Top = 110
-    Width = 26
+    Width = 82
     Height = 13
-    Caption = #1062#1050#1055':'
+    Caption = #1062#1077#1083#1077#1074#1086#1081' '#1087#1088#1080#1077#1084':'
   end
   object Label17: TLabel [8]
     Left = 92
@@ -100,7 +100,7 @@ inherited frmNewNabor: TfrmNewNabor
     Caption = #1050#1086#1085#1090#1088#1086#1083#1100#1085#1099#1077' '#1094#1080#1092#1088#1099' '#1087#1088#1080#1077#1084#1072' :'
   end
   object Label3: TLabel [10]
-    Left = 314
+    Left = 373
     Top = 110
     Width = 176
     Height = 13
@@ -111,7 +111,7 @@ inherited frmNewNabor: TfrmNewNabor
     Width = 627
     Height = 33
     TabOrder = 2
-    ExplicitTop = 161
+    ExplicitTop = 137
     ExplicitWidth = 627
     ExplicitHeight = 33
     inherited bbOK: TBitBtn
@@ -214,7 +214,7 @@ inherited frmNewNabor: TfrmNewNabor
     OnChange = nnyearChange
   end
   object mestCKP: TDBNumberEditEh [17]
-    Left = 221
+    Left = 278
     Top = 107
     Width = 71
     Height = 19
@@ -228,7 +228,7 @@ inherited frmNewNabor: TfrmNewNabor
     OnChange = nnyearChange
   end
   object MestLgot: TDBNumberEditEh [18]
-    Left = 493
+    Left = 552
     Top = 107
     Width = 71
     Height = 19
