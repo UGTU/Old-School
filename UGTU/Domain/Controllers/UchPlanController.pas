@@ -624,29 +624,26 @@ begin
       mtConfirmation, mbYesNoCancel, 0) = mrYes then
   begin
     myStoredProc := TADOStoredProc.Create(nil);
-  try
-
-    myStoredProc.Connection := dm.DBConnect;
-    myStoredProc.Connection.BeginTrans;
-    myStoredProc.ProcedureName := 'Hard_DiscDel';
-   // myStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
-    myStoredProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
-      pdInput, 0, DiscInUchPlanIK);
-
     try
 
-      myStoredProc.ExecProc;
-      myStoredProc.Connection.CommitTrans;
-    except
-      myStoredProc.Connection.RollbackTrans;
+      myStoredProc.Connection := dm.DBConnect;
+      myStoredProc.ProcedureName := 'Hard_DiscDel';
+      myStoredProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
+        pdInput, 0, DiscInUchPlanIK);
+   // myStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
+      myStoredProc.Connection.BeginTrans;
 
-    end;
+      try
+
+        myStoredProc.ExecProc;
+        myStoredProc.Connection.CommitTrans;
+      except
+        myStoredProc.Connection.RollbackTrans;
+      end;
  //   myStoredProc.Connection.CommitTrans;
-
-
-  finally
-    myStoredProc.Free;
-  end;
+    finally
+      myStoredProc.Free;
+    end;
 
     // myStoredProc.Free;
     // raise;
