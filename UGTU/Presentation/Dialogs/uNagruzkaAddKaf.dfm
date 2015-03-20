@@ -90,6 +90,7 @@ inherited frmNagruzkaAddKaf: TfrmNagruzkaAddKaf
     Width = 217
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 0
@@ -103,6 +104,7 @@ inherited frmNagruzkaAddKaf: TfrmNagruzkaAddKaf
     Width = 218
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 1

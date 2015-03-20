@@ -620,31 +620,35 @@ procedure TUchPlanController.DeleteDiscFormUchPlan(DiscInUchPlanIK: integer);
 var
   myStoredProc: TADOStoredProc;
 begin
-  myStoredProc := TADOStoredProc.Create(nil);
-  myStoredProc.Connection := dm.DBConnect;
-  myStoredProc.ProcedureName := 'UpdateDiscInUchPlan';
-  myStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
-  myStoredProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
-    pdInput, 0, DiscInUchPlanIK);
-  try
-    myStoredProc.Connection.BeginTrans;
-    myStoredProc.ExecProc;
-    myStoredProc.Connection.CommitTrans;
-  except
-    if MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',
+  if MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',
       mtConfirmation, mbYesNoCancel, 0) = mrYes then
-    begin
-      dm.Hard_DiscDel.Parameters.ParamByName('@ik_disc_uch_plan').value :=
-        DiscInUchPlanIK;
-      dm.Hard_DiscDel.ExecProc;
-      myStoredProc.Connection.CommitTrans;
-    end
-    else
-      myStoredProc.Connection.RollbackTrans;
+  begin
+    myStoredProc := TADOStoredProc.Create(nil);
+    try
+
+      myStoredProc.Connection := dm.DBConnect;
+      myStoredProc.ProcedureName := 'Hard_DiscDel';
+      myStoredProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
+        pdInput, 0, DiscInUchPlanIK);
+   // myStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
+      myStoredProc.Connection.BeginTrans;
+
+      try
+
+        myStoredProc.ExecProc;
+        myStoredProc.Connection.CommitTrans;
+      except
+        myStoredProc.Connection.RollbackTrans;
+      end;
+ //   myStoredProc.Connection.CommitTrans;
+    finally
+      myStoredProc.Free;
+    end;
+
     // myStoredProc.Free;
     // raise;
   end;
-  myStoredProc.Free;
+
 end;
 
 procedure TUchPlanController.DeleteUchPlan(UchPlanIK: integer);
@@ -3713,16 +3717,18 @@ begin
     150, NameSpclz);
   tempStoredProc.Parameters.CreateParameter('@Cshort_name_spclz', ftString,
     pdInput, 20, NameShortSpclz);
+  tempStoredProc.Connection.BeginTrans;
   try
-    tempStoredProc.Connection.BeginTrans;
+  try
     tempStoredProc.ExecProc;
     tempStoredProc.Connection.CommitTrans;
-    tempStoredProc.Free;
     Result := true;
   except
     tempStoredProc.Connection.RollbackTrans;
-    tempStoredProc.Free;
     raise;
+  end;
+  finally
+    tempStoredProc.Free;
   end;
 end;
 

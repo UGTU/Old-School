@@ -5,7 +5,7 @@ alter table documents alter column cvid_doc varchar(500) not null
 values(1, 'особое право', 1, 0)
 
 update Kat_zach set [OutDate]=cast('01.01.2015' as datetime)
-where Ik_kat_zach in (4,5,6,7,13,20,21,23,31)*/
+where Ik_kat_zach in (4,5,6,7,13,20,21,23,31)
 
 ALTER procedure [dbo].[ABIT_Add_Diapazon]
 @ik_spec_fac int,		
@@ -350,7 +350,7 @@ WHERE ABIT_Diapazon_spec_fac.NNyear=@nnyear
 order by 	PostupCount.CShort_name_fac, PostupCount.cShort_spec
 RETURN 
 END
-GO
+GO*/
 
 
 

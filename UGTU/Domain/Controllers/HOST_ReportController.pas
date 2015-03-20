@@ -46,6 +46,8 @@ type
 end;
 
 implementation
+uses ConstantRepository;
+
 var
   FHOST_ReportControllerInstance: THOST_ReportController = nil;
 
@@ -142,7 +144,7 @@ begin
       FindAndInsert(W,'#Адрес#', dmHOST.ProcVivodDogovoraPoCode.FieldByName('Adress').AsString)
     else
       FindAndInsert(W,'#Адрес#', '  ');
-    dmHOST.ProcVivodDogovoraPoCode.Locate('Ik_vid_doc',4,[]);
+    dmHOST.ProcVivodDogovoraPoCode.Locate('Ik_vid_doc',PassportRF,[]);
     if (dmHOST.ProcVivodDogovoraPoCode.FieldByName('Ik_vid_doc').AsString<>'') then
       begin
         FindAndInsert(W,'#Сер#', dmHOST.ProcVivodDogovoraPoCode.FieldByName('Cd_seria').AsString);

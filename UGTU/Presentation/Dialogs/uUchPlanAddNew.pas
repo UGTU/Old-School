@@ -87,8 +87,9 @@ begin
         exit;
       end;
   UchPlanIK:= self.ik;
- try
   dm.DBConnect.BeginTrans;
+ try
+
   if (VidGos=2) and dbcbSpclz.KeyValue = null
      then dbcbSpclz.KeyValue:=0;
   if not TUchPlanController.Instance.SaveUchPlan(self.Tag, UchPlanIK, Label2.Tag, dbcbSpclz.KeyValue, dbcbFormEd.KeyValue, dbcbYear.KeyValue, dtpDateUtv.Date, (VidGos > FGOS2))

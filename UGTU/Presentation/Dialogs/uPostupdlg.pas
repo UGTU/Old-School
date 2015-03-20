@@ -108,7 +108,7 @@ implementation
 
 uses uAddExam, Math, uDM, jpeg, VarfileUtils, uDMStudentSelectionProcs, uDMStudentData,
   uDMStudentActions, uDMAbiturientAction, uAddSpecAbit, ExceptionBase, uDMAdress, uXMLEGEReader,
-  GeneralController;
+  GeneralController, ConstantRepository;
 {$R *.dfm}
 
 function CheckFields:boolean;
@@ -487,7 +487,7 @@ begin
    begin
       First;
       for i:=0 to RecordCount-1 do
-      if FieldByName('Ik_vid_doc').AsInteger=4 then  //id Типа паспорт РФ
+      if FieldByName('Ik_vid_doc').AsInteger=PassportRF then  //id Типа паспорт РФ
       begin
         ps:=FieldByName('Cd_seria').AsString; //серия
         pnum:=FieldByName('Np_number').AsString;//номер
