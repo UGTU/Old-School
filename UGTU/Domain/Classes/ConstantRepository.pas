@@ -29,6 +29,9 @@ const
   Days = 2;
   KolDaysInWeek = 6;
 
+  //виды документов
+  PassportRF = 4;
+
   // служебные функции
 function IfNull(const Value, Default: OleVariant): OleVariant;
 
