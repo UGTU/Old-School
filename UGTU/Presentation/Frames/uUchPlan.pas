@@ -476,14 +476,10 @@ procedure TfmUchPlan.ActionRemDiscExecute(Sender: TObject);
 begin
   if not cbApproved.Checked then
   begin
-    if (Application.MessageBox('Удалить выбранную дисциплину? ', 'Учебный план',
-      MB_YESNO) = mrYes) then
-    begin
       // LocalLog.AddEntry('Удаление дисциплины '+(dsDisc.DataSet.FieldByName('cname_disc').AsString));
       TUchPlanController.Instance.DeleteDiscFormUchPlan
         (dsDisc.DataSet.FieldByName('ik_disc_uch_plan').Value);
       GetDisciplines;
-    end;
   end;
 end;
 
