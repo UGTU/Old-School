@@ -625,12 +625,14 @@ begin
   begin
     myStoredProc := TADOStoredProc.Create(nil);
   try
+
     myStoredProc.Connection := dm.DBConnect;
-    myStoredProc.ProcedureName := 'UpdateDiscInUchPlan';
-    myStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
+    myStoredProc.Connection.BeginTrans;
+    myStoredProc.ProcedureName := 'Hard_DiscDel';
+   // myStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
     myStoredProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
       pdInput, 0, DiscInUchPlanIK);
-    myStoredProc.Connection.BeginTrans;
+
     try
 
       myStoredProc.ExecProc;
@@ -639,7 +641,7 @@ begin
       myStoredProc.Connection.RollbackTrans;
 
     end;
-    myStoredProc.Connection.CommitTrans;
+ //   myStoredProc.Connection.CommitTrans;
 
 
   finally
