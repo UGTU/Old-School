@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, ActnList, StdCtrls, Buttons, ExtCtrls, GridsEh, DBGridEh,
   ComCtrls, DB, DBTVMethodWorkObj, Mask, DBCtrlsEh, DBLookupEh, ToolWin, ImgList,
-  ADODB, MethodWorkController, GeneralController;
+  ADODB, MethodWorkController, GeneralController, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmMethodWork = class(TfmBase)

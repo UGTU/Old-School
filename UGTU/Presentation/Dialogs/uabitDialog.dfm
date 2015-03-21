@@ -32,6 +32,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       Top = 6
       Width = 94
       Height = 26
+      Caption = #1044#1072#1083#1077#1077
       ExplicitLeft = 374
       ExplicitTop = 6
       ExplicitWidth = 94
@@ -57,10 +58,20 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     inherited bbSprav: TBitBtn
       Hint = #1089#1087#1088#1072#1074#1086#1095#1085#1080#1082
     end
+    object btnBack: TButton
+      Left = 293
+      Top = 6
+      Width = 75
+      Height = 25
+      Caption = '<< '#1053#1072#1079#1072#1076
+      TabOrder = 4
+      OnClick = btnBackClick
+    end
   end
   inherited PageControl1: TPageControl
     Width = 579
     Height = 621
+    TabStop = False
     ExplicitWidth = 579
     ExplicitHeight = 621
     inherited TabSheet1: TTabSheet
@@ -69,6 +80,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       inherited PageControl2: TPageControl
         Width = 571
         Height = 593
+        OnChange = PageControl2Change
         ExplicitWidth = 571
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
@@ -81,6 +93,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             ExplicitHeight = 561
             inherited Panel7: TPanel
               Width = 561
+              ExplicitLeft = 14
+              ExplicitTop = -1
               ExplicitWidth = 561
               inherited Label4: TLabel
                 Top = 48
@@ -95,7 +109,13 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label13: TLabel
                 Left = 213
+                Top = 91
                 ExplicitLeft = 213
+                ExplicitTop = 91
+              end
+              inherited Label18: TLabel
+                Top = 91
+                ExplicitTop = 91
               end
               inherited Label45: TLabel
                 Top = 5
@@ -105,9 +125,15 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Top = 4
                 ExplicitTop = 4
               end
+              inherited Label48: TLabel
+                Width = 17
+                ExplicitWidth = 17
+              end
               inherited Label49: TLabel
-                Left = 237
-                ExplicitLeft = 237
+                Left = 252
+                Width = 20
+                ExplicitLeft = 252
+                ExplicitWidth = 20
               end
               inherited Label50: TLabel
                 Left = 392
@@ -122,24 +148,14 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 ExplicitLeft = 323
                 ExplicitTop = 48
               end
-              object lblNeedEmail: TLabel [18]
-                Left = 47
-                Top = 89
-                Width = 4
-                Height = 13
-                Caption = '*'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clRed
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-              end
               inherited dbdteBirthDate: TDBDateTimeEditEh
                 OnExit = dbdteBirthDateExit
                 EditFormat = 'DD/MM/YYYY'
               end
               inherited eFam: TDBEditEh
+                OnChange = nil
+                OnExit = nil
+                OnKeyUp = eFamKeyUp
                 EditMask = ''
               end
               inherited eName: TDBEditEh
@@ -149,20 +165,24 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 EditMask = ''
               end
               inherited eEmail: TDBEditEh
-                Left = 15
-                Top = 108
-                ExplicitLeft = 15
-                ExplicitTop = 108
+                Left = 14
+                Top = 105
+                TabOrder = 7
+                ExplicitLeft = 14
+                ExplicitTop = 105
               end
               inherited eCellphone: TDBEditEh
                 Left = 213
+                Top = 105
                 Width = 228
                 ExplicitLeft = 213
+                ExplicitTop = 105
                 ExplicitWidth = 228
               end
               inherited eNum: TDBEditEh
                 Left = 285
                 Top = 130
+                TabOrder = 9
                 Visible = False
                 ExplicitLeft = 285
                 ExplicitTop = 130
@@ -172,9 +192,15 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Left = 323
                 Top = 64
                 Width = 118
+                TabOrder = 5
                 ExplicitLeft = 323
                 ExplicitTop = 64
                 ExplicitWidth = 118
+              end
+              inherited rgSex: TRadioGroup
+                Left = 221
+                TabOrder = 4
+                ExplicitLeft = 221
               end
             end
             inherited Panel8: TPanel
@@ -323,7 +349,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Top = 61
                 Width = 303
                 Height = 183
-                TabOrder = 6
+                TabOrder = 10
                 ExplicitLeft = 200
                 ExplicitTop = 61
                 ExplicitWidth = 303
@@ -338,6 +364,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                     Style = ebsPlusEh
                     OnClick = dbcbeSchoolEditButtons0Click
                   end>
+                TabOrder = 4
                 OnChange = dbcbeSchoolChange
                 ExplicitLeft = 13
                 ExplicitTop = 23
@@ -346,18 +373,18 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               inherited dbcbeCat: TDBLookupComboboxEh
                 Left = 142
                 Top = 152
-                TabOrder = 7
+                TabOrder = 0
                 Visible = False
                 ExplicitLeft = 142
                 ExplicitTop = 152
               end
               inherited sgLangKeys: TStringGrid
-                TabOrder = 8
+                TabOrder = 1
               end
               inherited dbcbeNumPrik: TDBLookupComboboxEh
                 Left = 151
                 Top = 118
-                TabOrder = 9
+                TabOrder = 2
                 Visible = False
                 ExplicitLeft = 151
                 ExplicitTop = 118
@@ -365,7 +392,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               inherited dbcbeCause: TDBLookupComboboxEh
                 Left = 142
                 Top = 192
-                TabOrder = 10
+                TabOrder = 3
                 Visible = False
                 ExplicitLeft = 142
                 ExplicitTop = 192
@@ -373,7 +400,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               inherited eYearFinished: TDBNumberEditEh
                 Top = 225
                 Width = 171
-                TabOrder = 5
+                TabOrder = 9
                 OnChange = actCheckFieldsExecute
                 ExplicitTop = 225
                 ExplicitWidth = 171
@@ -391,7 +418,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 KeyField = 'Ik_strana'
                 ListField = 'Cstrana'
                 ListSource = dmAdress.DSsChoolStrana
-                TabOrder = 1
+                TabOrder = 5
                 Visible = True
                 OnChange = dbcbeSchoolCountryChange
               end
@@ -408,7 +435,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 KeyField = 'Ik_region'
                 ListField = 'Cregion'
                 ListSource = dmAdress.DSsChoolRegion
-                TabOrder = 2
+                TabOrder = 6
                 Visible = True
                 OnChange = dbcbeSchoolDistChange
               end
@@ -425,7 +452,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 KeyField = 'IK_Raion'
                 ListField = 'CRaion'
                 ListSource = dmAdress.DSsChoolRaion
-                TabOrder = 3
+                TabOrder = 7
                 Visible = True
                 OnChange = dbcbeSchoolRegionChange
               end
@@ -442,7 +469,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 KeyField = 'IK_Gorod'
                 ListField = 'CGorod'
                 ListSource = dmAdress.DSsChoolGorod
-                TabOrder = 4
+                TabOrder = 8
                 Visible = True
                 OnChange = dbcbeSchoolPointChange
               end
@@ -454,6 +481,29 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               ExplicitTop = 426
               ExplicitWidth = 561
               ExplicitHeight = 134
+              inherited sbAddAddress: TSpeedButton
+                Left = 509
+                ExplicitLeft = 509
+              end
+              object Label9: TLabel [3]
+                Left = 53
+                Top = 4
+                Width = 27
+                Height = 13
+                Caption = '*'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clRed
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+              end
+              inherited sgAddress: TStringGrid
+                Height = 105
+                RowCount = 1
+                FixedRows = 0
+                ExplicitHeight = 105
+              end
             end
           end
         end
@@ -468,10 +518,33 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             inherited Panel5: TPanel
               Width = 561
               ExplicitWidth = 561
+              inherited Label27: TLabel
+                Top = 57
+                ExplicitTop = 57
+              end
               inherited Label28: TLabel
                 Left = 249
                 Visible = False
                 ExplicitLeft = 249
+              end
+              inherited Label52: TLabel
+                Top = 9
+                Width = 16
+                ExplicitTop = 9
+                ExplicitWidth = 16
+              end
+              object Label3: TLabel [4]
+                Left = 100
+                Top = 55
+                Width = 37
+                Height = 13
+                Caption = '*'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clRed
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
               end
               inherited dbcbeNationality: TDBLookupComboboxEh
                 Left = 249
@@ -489,9 +562,10 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 ExplicitWidth = 515
               end
               inherited eBirthPlace: TDBEditEh
-                Top = 69
+                Top = 73
                 Width = 515
-                ExplicitTop = 69
+                OnKeyUp = eBirthPlaceKeyUp
+                ExplicitTop = 73
                 ExplicitWidth = 515
               end
             end
@@ -653,7 +727,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

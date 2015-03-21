@@ -38,7 +38,6 @@ type
     TabSheet3: TTabSheet;
     Panel4: TPanel;
     Panel7: TPanel;
-    Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
@@ -47,7 +46,6 @@ type
     Label13: TLabel;
     Label18: TLabel;
     iPhoto: TImage;
-    dbcbeSex: TDBComboBoxEh;
     dbdteBirthDate: TDBDateTimeEditEh;
     eFam: TDBEditEh;
     eName: TDBEditEh;
@@ -152,6 +150,7 @@ type
     actAddAddress: TAction;
     actDelAddress: TAction;
     bShot: TButton;
+    rgSex: TRadioGroup;
     procedure FormShow(Sender: TObject);
 
     procedure bbCancelClick(Sender: TObject);
@@ -160,8 +159,6 @@ type
     procedure eFamExit(Sender: TObject);
     procedure eNameExit(Sender: TObject);
     procedure eMidExit(Sender: TObject);
-    procedure dbcbeSexChange(Sender: TObject);
-    procedure dbcbeSexDropDown(Sender: TObject);
     procedure iPhotoClick(Sender: TObject);
     
     procedure eEmailExit(Sender: TObject);
@@ -212,27 +209,19 @@ implementation
   uses udm,umain, ADODB,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg,
   Math, uSpravForm, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
   uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument, uAddress, 
-  ImageFullSizeShowFrm,ApplicationController;
+  ImageFullSizeShowFrm,ApplicationController, ConstantRepository;
 {$R *.dfm}
 
-function CheckFields:boolean;
+procedure CheckFields;
 begin
-result:=true;
-with ftmStudent do
-begin
-if eFam=nil then exit;
-if (eFam.Text='')
-or(eName.Text='')
-or(eNum.Text='')
-or(eNum.Text='      ')
-or(dbdteBirthDate.Text='  .  .    ')
-or(dbcbeSex.Text='')
-or(dbcbeCitizenship.Text='')
-or(dbcbeSchool.Text='')
-or(dbcbeMedal.Text='')
-or(dbcbeCause.Text='')
-then result:=false;
-end;
+  with ftmStudent do
+  begin
+    bbOK.Enabled := (eFam.Text <> '')and(eName.Text<>'')and(dbcbeSchool.KeyValue >= 0)
+                and (dbdteBirthDate.Text <> '  .  .    ')and(dbcbeCause.KeyValue >= 0)
+                and(eNum.Text <> '') and (eNum.Text <> '      ')
+                and(dbcbeCitizenship.KeyValue >= 0);
+    bbApply.Enabled := bbOK.Enabled;
+  end;
 end;
 
 function ChangeMonthDayPlaces(date:TDateTime):string;
@@ -245,9 +234,6 @@ result[2]:=s1[5];
 result[4]:=s1[1];
 result[5]:=s1[2];
 end;
-
-
-
 
 procedure TftmStudent.FormShow(Sender: TObject);
 //var    SF: TStringField;
@@ -435,24 +421,6 @@ eMid.Text:=s;
  end;
 end;
 
-
-procedure TftmStudent.dbcbeSexChange(Sender: TObject);
-begin
-  inherited;
- dbcbeSex.ReadOnly:=true;
- if dbcbeSex.Text='Мужской' then
-dbcbeFamState.KeyValue:=9 else
-dbcbeFamState.KeyValue:=7;
- actCheckFieldsExecute(Sender);
-end;
-
-procedure TftmStudent.dbcbeSexDropDown(Sender: TObject);
-begin
-  inherited;
- dbcbeSex.ReadOnly:=false;
-
-end;
-
 procedure TftmStudent.iPhotoClick(Sender: TObject);
 begin
   inherited;
@@ -498,11 +466,12 @@ end;
 
 procedure TftmStudent.actAddAddressExecute(Sender: TObject);
 begin
-frmAddress :=TfrmAddress.Create(self);
-frmAddress.EditMode:=false;
-frmAddress.dlgOwner:=true;
-frmAddress.ShowModal;
-frmAddress.Free;
+  frmAddress :=TfrmAddress.Create(self);
+  frmAddress.EditMode:=false;
+  frmAddress.dlgOwner:=true;
+  frmAddress.ShowModal;
+  frmAddress.Free;
+
 end;
 
 procedure TftmStudent.actApplyExecute(Sender: TObject);
@@ -536,9 +505,9 @@ CreateParameter('@deti',ftBoolean,pdInput,0,0);
 if  cbJob.Checked then
 CreateParameter('@rab',ftBoolean,pdInput,0,1) else
 CreateParameter('@rab',ftBoolean,pdInput,0,0);
-if  dbcbeSex.text='Мужской' then
-CreateParameter('@sex',ftBoolean,pdInput,0,1) else
-CreateParameter('@sex',ftBoolean,pdInput,0,0);
+//if  dbcbeSex.text='Мужской' then
+CreateParameter('@sex',ftBoolean,pdInput,0,rgSex.ItemIndex);// else
+//CreateParameter('@sex',ftBoolean,pdInput,0,0);
 if  cbAppNeed.Checked then
 CreateParameter('@obchegit',ftBoolean,pdInput,0,1)else
 CreateParameter('@obchegit',ftBoolean,pdInput,0,0);
@@ -850,7 +819,8 @@ end;
 
 procedure TftmStudent.actCheckFieldsExecute(Sender: TObject);
 begin
-if (efam<>nil) then
+  CheckFields;
+{if (efam<>nil) then
 if checkfields then
 begin
 bbOK.Enabled:=true;
@@ -859,7 +829,7 @@ end else
 begin
 bbOK.Enabled:=false;
 bbApply.Enabled:=false;
-end;
+end;       }
 
 end;
 

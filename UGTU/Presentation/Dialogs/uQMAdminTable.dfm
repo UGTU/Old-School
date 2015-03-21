@@ -64,6 +64,7 @@ inherited frmQMAdminTable: TfrmQMAdminTable
     Top = 25
     Width = 249
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 1
@@ -75,6 +76,7 @@ inherited frmQMAdminTable: TfrmQMAdminTable
     Top = 67
     Width = 249
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 2

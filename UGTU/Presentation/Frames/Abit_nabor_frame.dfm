@@ -14,7 +14,7 @@ inherited fmAbitNabor: TfmAbitNabor
       Top = 2
       Width = 737
       Height = 427
-      ActivePage = fac_spec
+      ActivePage = naborpage
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -162,6 +162,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Width = 170
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'budj'
@@ -169,6 +170,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Title.Caption = #1041#1102#1076#1078#1077#1090' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'ckp'
@@ -176,6 +178,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Title.Caption = #1062#1050#1055' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'lgot'
@@ -183,6 +186,7 @@ inherited fmAbitNabor: TfmAbitNabor
               Title.Caption = #1054#1089#1086#1073#1086#1077' '#1087#1088#1072#1074#1086' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'kont'
@@ -197,20 +201,6 @@ inherited fmAbitNabor: TfmAbitNabor
               Title.Caption = #1059#1095#1080#1090#1099#1074#1072#1090#1100' '#1088#1091#1089#1089#1082#1080#1081' '#1103#1079#1099#1082
               Visible = False
               Width = 151
-            end
-            item
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'BeginDiapazon'
-              Footers = <>
-              Visible = False
-            end
-            item
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'EndDiapazon'
-              Footers = <>
-              Visible = False
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -790,7 +780,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C0101030004006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -941,7 +931,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C0101020004006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1180,7 +1170,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D0030006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

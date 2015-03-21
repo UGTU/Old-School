@@ -7,6 +7,14 @@ uses System.Variants, System.SysUtils;
 // Правила именования констант:
 // если константа является ключом, то пишем префикс "key_"
 const
+  Male = 1;
+  Female = 0;
+
+  DefaultMaleStatus = 9;
+  DefaultFemaleStatus = 7;
+
+  TypeAddressPropiska = 2;
+
   key_FBO = 6; // факультет безотрывного обучения (ФБО)
   key_CommonProfile = 0;
   FGOS3 = 2;

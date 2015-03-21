@@ -29,12 +29,10 @@ type
     Panel6: TPanel;
     Label2: TLabel;
     Panel7: TPanel;
-    Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label12: TLabel;
-    dbcbeSex: TDBComboBoxEh;
     Panel8: TPanel;
     Label1: TLabel;
     Label15: TLabel;
@@ -127,7 +125,6 @@ type
     Label33: TLabel;
     Label46: TLabel;
     Label49: TLabel;
-    Label50: TLabel;
     Label52: TLabel;
     Label53: TLabel;
     Label58: TLabel;
@@ -188,13 +185,13 @@ type
     gbMoved: TGroupBox;
     DBGridEh4: TDBGridEh;
     bShot: TButton;
+    rgSex: TRadioGroup;
+    Label50: TLabel;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
     procedure eMidExit(Sender: TObject);
     procedure eNameExit(Sender: TObject);
-    procedure dbcbeSexChange(Sender: TObject);
-    procedure dbcbeSexDropDown(Sender: TObject);
     procedure eEmailExit(Sender: TObject);
     procedure eFamChange(Sender: TObject);
     procedure dbgeFamExit(Sender: TObject);
@@ -231,6 +228,7 @@ type
     procedure cbModuleBRSChange(Sender: TObject);
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
+    procedure rgSexClick(Sender: TObject);
 
   private
     Fik: integer;
@@ -258,7 +256,7 @@ implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
   uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
-  ImageFullSizeShowFrm;
+  ImageFullSizeShowFrm, ExceptionBase;
 
 {$R *.dfm}
 
@@ -301,7 +299,7 @@ begin
   result := true;
   try
     with dmStudentSelectionProcs.aspSelLanguage do
-    // if dbgeLang.DataSource.DataSet.RecordCount > 0 then
+    if dbgeLang.DataSource.DataSet.RecordCount > 0 then
     begin
       Edit;
       UpdateRecord;
@@ -309,19 +307,15 @@ begin
       Open;
     end;
   except
-  end;
-  try
-    with dmStudentSelectionProcs.aspSelLanguage do
-    begin
-      Edit;
-      UpdateRecord;
-      Post;
-      Open;
-    end;
-  except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении языка.',E);
+        exit;
+      end;
   end;
   try
     with dmStudentSelectionProcs.aspSelDocuments do
+    if dbgeDocuments.DataSource.DataSet.RecordCount > 0 then
     begin
       Edit;
       UpdateRecord;
@@ -329,6 +323,11 @@ begin
       Open;
     end;
   except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
+        exit;
+      end;
   end;
   with dmStudentActions.aspAppendStudent.Parameters do
   begin
@@ -362,10 +361,10 @@ begin
       CreateParameter('@rab', ftBoolean, pdInput, 0, 1)
     else
       CreateParameter('@rab', ftBoolean, pdInput, 0, 0);
-    if dbcbeSex.Text = 'Мужской' then
-      CreateParameter('@sex', ftBoolean, pdInput, 0, 1)
-    else
-      CreateParameter('@sex', ftBoolean, pdInput, 0, 0);
+    //if dbcbeSex.Text = 'Мужской' then
+      CreateParameter('@sex', ftBoolean, pdInput, 0, rgSex.itemIndex);
+    //else
+      //CreateParameter('@sex', ftBoolean, pdInput, 0, 0);
     if cbAppNeed.Checked then
       CreateParameter('@obchegit', ftBoolean, pdInput, 0, 1)
     else
@@ -613,10 +612,7 @@ begin
 
   dbdteBirthDate.Value := obj.BirthDate;
 
-  if obj.Sex then
-    dbcbeSex.Text := 'Мужской'
-  else
-    dbcbeSex.Text := 'Женский';
+  if obj.Sex then rgSex.ItemIndex := 1 else rgSex.ItemIndex := 0;
 
   dbcbeSchool.Text := obj.Finished;
   dbcbeCat.Text := obj.Category;
@@ -790,6 +786,12 @@ end;
 procedure TfmStudent.Read;
 begin
 
+end;
+
+procedure TfmStudent.rgSexClick(Sender: TObject);
+begin
+  inherited;
+  eFamChange(Sender);
 end;
 
 procedure TfmStudent.sbRefreshClick(Sender: TObject);
@@ -1222,25 +1224,12 @@ begin
   end;
 end;
 
-procedure TfmStudent.dbcbeSexChange(Sender: TObject);
-begin
-  dbcbeSex.ReadOnly := true;
-  eFamChange(Sender);
-end;
-
-procedure TfmStudent.dbcbeSexDropDown(Sender: TObject);
-begin
-
-  dbcbeSex.ReadOnly := false;
-end;
-
 procedure TfmStudent.eEmailExit(Sender: TObject);
 begin
   inherited;
   if eEmail.Text = '' then
     exit;
   if (Ansipos('@', eEmail.Text) = 0)
-  // or(Ansipos('.',eEmail.text)=0) or(Ansipos('@',eEmail.text)>Ansipos('.',eEmail.text))
   then
   begin
     showmessage('Неверный e-mail!');

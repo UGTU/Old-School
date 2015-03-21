@@ -206,7 +206,7 @@ object fmLessonShedule: TfmLessonShedule
       object Label1: TLabel
         Left = 525
         Top = 3
-        Width = 113
+        Width = 112
         Height = 13
         Anchors = [akTop, akRight]
         Caption = #1058#1080#1087' '#1090#1077#1082#1091#1097#1077#1081' '#1085#1077#1076#1077#1083#1080': '
@@ -545,7 +545,7 @@ object fmLessonShedule: TfmLessonShedule
         Height = 136
         Cursor = crHandPoint
         Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1076#1072#1090#1091' '#1076#1083#1103' '#1087#1077#1088#1077#1093#1086#1076#1072
-        Date = 39488.529836331020000000
+        Date = 39488.939610081020000000
         ParentShowHint = False
         ShowHint = True
         ShowToday = False
@@ -560,7 +560,7 @@ object fmLessonShedule: TfmLessonShedule
         Height = 137
         Cursor = crHandPoint
         Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1076#1072#1090#1091' '#1076#1083#1103' '#1087#1077#1088#1077#1093#1086#1076#1072
-        Date = 39517.529836331020000000
+        Date = 39517.939610081020000000
         ParentShowHint = False
         ShowHint = True
         ShowToday = False
@@ -575,7 +575,7 @@ object fmLessonShedule: TfmLessonShedule
         Height = 137
         Cursor = crHandPoint
         Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1076#1072#1090#1091' '#1076#1083#1103' '#1087#1077#1088#1077#1093#1086#1076#1072
-        Date = 39548.529836331020000000
+        Date = 39548.939610081020000000
         ParentShowHint = False
         ShowHint = True
         ShowToday = False
@@ -842,6 +842,7 @@ object fmLessonShedule: TfmLessonShedule
       Width = 134
       Height = 19
       AlwaysShowBorder = True
+      DynProps = <>
       EditButtons = <>
       Flat = True
       Kind = dtkDateEh
@@ -853,7 +854,7 @@ object fmLessonShedule: TfmLessonShedule
     Left = 24
     Top = 248
     Bitmap = {
-      494C01010F001300040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F001300080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       000000000000000000000000000000000000BD8A6E00B8866A00B7866A00B584
       6800B3826700B0816700AF7F6500AD7E6300AB7C6200A97A5F00A7785E00A677

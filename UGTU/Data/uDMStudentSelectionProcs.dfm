@@ -5,6 +5,7 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
   object aspSelLanguage: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
+    LockType = ltBatchOptimistic
     AfterEdit = aspSelLanguageAfterEdit
     OnNewRecord = aspSelLanguageNewRecord
     ProcedureName = 'SelLanguage;1'

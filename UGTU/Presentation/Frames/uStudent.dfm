@@ -346,13 +346,6 @@ inherited fmStudent: TfmStudent
                     Height = 13
                     Caption = #1060#1054#1058#1054
                   end
-                  object Label3: TLabel
-                    Left = 158
-                    Top = 48
-                    Width = 23
-                    Height = 13
-                    Caption = #1055#1086#1083':'
-                  end
                   object Label4: TLabel
                     Left = 13
                     Top = 48
@@ -441,19 +434,6 @@ inherited fmStudent: TfmStudent
                     Font.Style = []
                     ParentFont = False
                   end
-                  object Label50: TLabel
-                    Left = 181
-                    Top = 48
-                    Width = 4
-                    Height = 13
-                    Caption = '*'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clRed
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
                   object Label52: TLabel
                     Left = 379
                     Top = 48
@@ -484,22 +464,18 @@ inherited fmStudent: TfmStudent
                     Height = 13
                     Caption = #1058#1077#1083#1077#1092#1086#1085':'
                   end
-                  object dbcbeSex: TDBComboBoxEh
-                    Left = 156
-                    Top = 64
-                    Width = 136
-                    Height = 19
-                    DynProps = <>
-                    EditButtons = <>
-                    Flat = True
-                    Items.Strings = (
-                      #1052#1091#1078#1089#1082#1086#1081
-                      #1046#1077#1085#1089#1082#1080#1081)
-                    ReadOnly = True
-                    TabOrder = 4
-                    Visible = True
-                    OnChange = dbcbeSexChange
-                    OnDropDown = dbcbeSexDropDown
+                  object Label50: TLabel
+                    Left = 203
+                    Top = 50
+                    Width = 22
+                    Height = 13
+                    Caption = '*'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clRed
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = []
+                    ParentFont = False
                   end
                   object dbdteBirthDate: TDBDateTimeEditEh
                     Left = 12
@@ -565,7 +541,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 6
+                    TabOrder = 5
                     Visible = True
                     OnChange = eFamChange
                     OnExit = eEmailExit
@@ -579,7 +555,7 @@ inherited fmStudent: TfmStudent
                     EditButtons = <>
                     Flat = True
                     MaxLength = 6
-                    TabOrder = 5
+                    TabOrder = 4
                     Text = '      '
                     Visible = True
                     OnChange = eFamChange
@@ -595,7 +571,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 7
+                    TabOrder = 6
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -607,7 +583,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 8
+                    TabOrder = 7
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -617,8 +593,22 @@ inherited fmStudent: TfmStudent
                     Width = 93
                     Height = 25
                     Caption = #1057#1085#1080#1084#1086#1082
-                    TabOrder = 9
+                    TabOrder = 8
                     OnClick = bShotClick
+                  end
+                  object rgSex: TRadioGroup
+                    Left = 176
+                    Top = 53
+                    Width = 83
+                    Height = 30
+                    Caption = #1055#1086#1083
+                    Columns = 2
+                    ItemIndex = 1
+                    Items.Strings = (
+                      #1046
+                      #1052)
+                    TabOrder = 9
+                    OnClick = rgSexClick
                   end
                 end
                 object Panel6: TPanel
@@ -1171,7 +1161,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 470
+                Height = 469
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1966,7 +1956,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060009009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

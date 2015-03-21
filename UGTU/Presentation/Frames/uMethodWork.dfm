@@ -22,6 +22,8 @@ inherited fmMethodWork: TfmMethodWork
       object tsFac: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074
         ImageIndex = 4
+        ExplicitTop = 27
+        ExplicitHeight = 407
         object dbgeFac: TDBGridEh
           Left = 0
           Top = 0
@@ -30,44 +32,49 @@ inherited fmMethodWork: TfmMethodWork
           Align = alClient
           AutoFitColWidths = True
           DataSource = DSFac
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          ImeMode = imDisable
+          IndicatorOptions = []
           Options = [dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           RowHeight = 16
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Ik_fac'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_fac'
               Footers = <>
               Title.Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074
               Width = 395
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object TabSheet2: TTabSheet
         Caption = #1042#1080#1076#1099' '#1088#1072#1073#1086#1090
         ImageIndex = 9
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
       object TabSheet1: TTabSheet
         Caption = #1053#1086#1088#1084#1099' '#1074#1088#1077#1084#1077#1085#1080
         ImageIndex = 5
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object ToolBar2: TToolBar
           Left = 0
           Top = 0
@@ -123,34 +130,27 @@ inherited fmMethodWork: TfmMethodWork
               Align = alClient
               AutoFitColWidths = True
               DataSource = dsNormOfTime
+              DynProps = <>
               Flat = True
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'MS Sans Serif'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
               Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               RowHeight = 5
               RowLines = 2
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clBlack
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = []
-              TitleHeight = 15
-              UseMultiTitle = True
+              TitleParams.MultiTitle = True
+              TitleParams.RowHeight = 15
               Columns = <
                 item
                   ButtonStyle = cbsEllipsis
                   Checkboxes = False
+                  DynProps = <>
                   EditButtons = <>
                   FieldName = 'NameW'
                   Footers = <>
@@ -158,25 +158,31 @@ inherited fmMethodWork: TfmMethodWork
                   OnEditButtonClick = dbgMethodWorkColumns0EditButtonClick
                 end
                 item
+                  DynProps = <>
                   EditButtons = <>
                   FieldName = 'Norma'
                   Footers = <>
                 end
                 item
+                  DynProps = <>
                   EditButtons = <>
                   FieldName = 'NormaExpert'
                   Footers = <>
                 end
                 item
+                  DynProps = <>
                   EditButtons = <>
                   FieldName = 'NameUnit'
                   Footers = <>
                 end
                 item
+                  DynProps = <>
                   EditButtons = <>
                   FieldName = 'Remark'
                   Footers = <>
                 end>
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
             object Panel4: TPanel
               Left = 568
@@ -379,6 +385,7 @@ inherited fmMethodWork: TfmMethodWork
               AlwaysShowBorder = True
               AutoSize = False
               Anchors = [akLeft, akTop, akRight]
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 0
@@ -391,6 +398,10 @@ inherited fmMethodWork: TfmMethodWork
       object TabSheet3: TTabSheet
         Caption = #1057#1088#1086#1082#1080' '#1076#1077#1081#1089#1090#1074#1080#1103' '#1086#1073#1077#1089#1087#1077#1095#1077#1085#1080#1103
         ImageIndex = 21
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Panel6: TPanel
           Left = 0
           Top = 22
@@ -424,6 +435,7 @@ inherited fmMethodWork: TfmMethodWork
               AlwaysShowBorder = True
               AutoSize = False
               Anchors = [akLeft, akTop, akRight]
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 0
@@ -446,28 +458,22 @@ inherited fmMethodWork: TfmMethodWork
               Align = alClient
               AutoFitColWidths = True
               DataSource = dsSrok
+              DynProps = <>
               Flat = True
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'MS Sans Serif'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
               Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clBlack
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = []
-              TitleHeight = 15
-              UseMultiTitle = True
+              TitleParams.MultiTitle = True
+              TitleParams.RowHeight = 15
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
             object Panel15: TPanel
               Left = 568
@@ -718,7 +724,7 @@ inherited fmMethodWork: TfmMethodWork
     Left = 408
     Top = 121
     Bitmap = {
-      494C010116001C00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010116001C00080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000006000000001002000000000000060
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

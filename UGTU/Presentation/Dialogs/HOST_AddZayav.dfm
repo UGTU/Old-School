@@ -110,6 +110,7 @@ inherited AddZayav: TAddZayav
       Width = 223
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'Ik_fac'
@@ -125,6 +126,7 @@ inherited AddZayav: TAddZayav
       Width = 223
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'ik_spec_fac'
@@ -140,6 +142,7 @@ inherited AddZayav: TAddZayav
       Width = 223
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'Ik_grup'
@@ -155,6 +158,7 @@ inherited AddZayav: TAddZayav
       Width = 223
       Height = 19
       Anchors = [akLeft, akTop, akRight]
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'nCode'
