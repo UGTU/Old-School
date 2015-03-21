@@ -603,7 +603,7 @@ var i,j:integer;
     stream: TMemoryStream;
     Log : ILogger;
 begin
-  TNullLogger.GetInstance;   //Log := TMemoLogger.GetInstance; //
+  Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance; //
 
   AbitList.RecruitNum:=dbcbeRecruit.KeyValue;
   AbitList.Date:=dbdteList.Value;
@@ -724,15 +724,15 @@ begin
   Log.LogMessage('dopsved=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@dopsved').Value);
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@code',ftInteger,pdInput,0,Null);
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@StazYear',ftInteger,pdInput,0,eXPYear.Value);
-  Log.LogMessage('StazYear=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@StazYear').Value));
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@StazMonth',ftInteger,pdInput,0,eXPMonth.Value);
-  Log.LogMessage('StazMonth=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@StazMonth').Value));
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@cDolgnost',ftString,pdInput,150,eDuty.Text);
   Log.LogMessage('cDolgnost=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@cDolgnost').Value);
   if not(dbcbeEnterprise.KeyValue=-1) then
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ik_pred',ftInteger,pdInput,0,dbcbeEnterprise.KeyValue) else
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ik_pred',ftInteger,pdInput,0,NULL);
-  Log.LogMessage('ik_pred=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@ik_pred').Value));
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@CLgot',ftString,pdInput,500,eBenefits.text);
   Log.LogMessage('CLgot=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@CLgot').Value);
 
