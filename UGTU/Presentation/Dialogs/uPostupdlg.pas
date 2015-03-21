@@ -108,7 +108,7 @@ implementation
 
 uses uAddExam, Math, uDM, jpeg, VarfileUtils, uDMStudentSelectionProcs, uDMStudentData,
   uDMStudentActions, uDMAbiturientAction, uAddSpecAbit, ExceptionBase, uDMAdress, uXMLEGEReader,
-  GeneralController, ConstantRepository;
+  GeneralController, ConstantRepository, CommonIntf, CommonIntfImpl;
 {$R *.dfm}
 
 function CheckFields:boolean;
@@ -601,7 +601,10 @@ var i,j:integer;
     spec:TAdditionalSpec;
     AddExProc:TADOStoredProc;
     stream: TMemoryStream;
+    Log : ILogger;
 begin
+  TNullLogger.GetInstance;   //Log := TMemoLogger.GetInstance; //
+
   AbitList.RecruitNum:=dbcbeRecruit.KeyValue;
   AbitList.Date:=dbdteList.Value;
   AbitList.CatNum:=dbcbeCategory.KeyValue;
@@ -617,39 +620,52 @@ begin
         dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@RETURN_VALUE',ftInteger,pdReturnValue,0,1);
         dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@flag',ftInteger,pdInput,0,1);
         dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@clastn',ftString,pdInput,40,eFam.Text);
+        Log.LogMessage('clastn=' + eFam.Text);
         dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@firstn',ftString,pdInput,40,eName.Text);
-
+        Log.LogMessage('firstn=' + eName.Text);
         if not (eMid.Text='') then
           dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@otch',ftString,pdInput,40,eMid.Text)
         else
           dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@otch',ftString,pdInput,40,null);
-
+        Log.LogMessage('otch=' + eMid.Text);
         if not (DateToStr(dbdteBirthDate.Value)='  .  .    ') then
           dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@birth',ftDateTime,pdInput,0,dbdteBirthDate.Value)
         else
           dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@birth',ftDateTime,pdInput,0,null);
+        Log.LogMessage('birth=' + dbdteBirthDate.Text);
         dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@placebirth',ftString,pdInput,300,eBirthPlace.Text);
+        Log.LogMessage('placebirth=' + eBirthPlace.Text);
         if  cbInvalid.Checked then
           dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@inval',ftBoolean,pdInput,0,1)
           else dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@inval',ftBoolean,pdInput,0,0);
+        Log.LogMessage('inval=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@inval').Value));
         if  cbChildren.Checked then
           dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@deti',ftBoolean,pdInput,0,1)
           else dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@deti',ftBoolean,pdInput,0,0);
+        Log.LogMessage('deti=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@deti').Value));
     if  cbJob.Checked then
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@rab',ftBoolean,pdInput,0,1) else
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@rab',ftBoolean,pdInput,0,0);
-    if  dbcbeSex.text='Мужской' then
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sex',ftBoolean,pdInput,0,1) else
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sex',ftBoolean,pdInput,0,0);
+    Log.LogMessage('rab=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@rab').Value));
+    //if  dbcbeSex.text='Мужской' then
+      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sex',ftBoolean,pdInput,0,rgSex.ItemIndex); //else
+      Log.LogMessage('sex=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@sex').Value));
+     // dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sex',ftBoolean,pdInput,0,0);
     if  cbAppNeed.Checked then
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@obchegit',ftBoolean,pdInput,0,1)else
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@obchegit',ftBoolean,pdInput,0,0);
+    Log.LogMessage('obchegit=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@obchegit').Value));
 
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ik_medal',ftInteger,pdInput,0,dbcbeMedal.KeyValue);
+    Log.LogMessage('ik_medal=' +  IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@ik_medal').Value));
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ik_voen_zvanie',ftInteger,pdInput,0,dbcbeMilitaryState.KeyValue);
+    Log.LogMessage('ik_voen_zvanie=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@ik_voen_zvanie').Value));
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Sottel',ftString,pdInput,50,eCellphone.Text);
+    Log.LogMessage('Sottel=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@Sottel').Value);
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@telefon',ftString,pdInput,20,ePhone.text);
+    Log.LogMessage('telefon=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@telefon').Value);
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Email',ftString,pdInput,50,eEmail.Text);
+    Log.LogMessage('Email=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@Email').Value);
 
     //сохранение фото
     if (iphoto.Picture.Graphic<>nil) then
@@ -668,34 +684,57 @@ begin
 
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Pens',ftInteger,pdInput,0,Null);
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@grazd',ftInteger,pdInput,0,dbcbeCitizenship.KeyValue);
+  Log.LogMessage('grazd=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@grazd').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@podg',ftInteger,pdInput,0,dbcbePreparation.KeyValue);
+  Log.LogMessage('podg=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@podg').Value));
 
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@nac',ftInteger,pdInput,0,Null);
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ob_rab',ftInteger,pdInput,0,dbcbeSocWork.KeyValue);
+  Log.LogMessage('ob_rab=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@ob_rab').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sempol',ftInteger,pdInput,0,dbcbeFamState.KeyValue);
+  Log.LogMessage('sempol=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@sempol').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@spec_uch',ftInteger,pdInput,0,dbcbeSpecCount.KeyValue);
+
+  Log.LogMessage('spec_uch=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@spec_uch').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@zaved',ftInteger,pdInput,0,dbcbeSchool.KeyValue);
+  Log.LogMessage('zaved=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@zaved').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@godokon',ftInteger,pdInput,0,eYearFinished.Value);
+  Log.LogMessage('godokon=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@godokon').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ind_f',ftString,pdInput,10,'');
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@street_f',ftInteger,pdInput,0,null);
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Build_f',ftString,pdInput,10,'');
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Stroen_f',ftString,pdInput,10,Null);
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Kvart_f',ftString,pdInput,10,'');
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ind_pr',ftString,pdInput,10,'');
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@street_pr',ftInteger,pdInput,0,null);
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Build_pr',ftString,pdInput,10,'');
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Stroen_pr',ftString,pdInput,10,Null);
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@Kvart_pr',ftString,pdInput,10,'');
+
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@dopsved',ftString,pdInput,2000,eAddInfo.text);
+  Log.LogMessage('dopsved=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@dopsved').Value);
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@code',ftInteger,pdInput,0,Null);
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@StazYear',ftInteger,pdInput,0,eXPYear.Value);
+  Log.LogMessage('StazYear=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@StazYear').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@StazMonth',ftInteger,pdInput,0,eXPMonth.Value);
+  Log.LogMessage('StazMonth=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@StazMonth').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@cDolgnost',ftString,pdInput,150,eDuty.Text);
+  Log.LogMessage('cDolgnost=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@cDolgnost').Value);
   if not(dbcbeEnterprise.KeyValue=-1) then
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ik_pred',ftInteger,pdInput,0,dbcbeEnterprise.KeyValue) else
     dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@ik_pred',ftInteger,pdInput,0,NULL);
+  Log.LogMessage('ik_pred=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@ik_pred').Value));
   dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@CLgot',ftString,pdInput,500,eBenefits.text);
-
+  Log.LogMessage('CLgot=' + dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@CLgot').Value);
 
   dmAbiturientAction.aspAppendAbit.ExecProc;
 

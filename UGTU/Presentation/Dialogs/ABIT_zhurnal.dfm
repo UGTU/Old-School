@@ -61,6 +61,7 @@ inherited frmAbitZhurnal: TfrmAbitZhurnal
     Top = 29
     Width = 240
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh

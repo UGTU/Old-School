@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, ComCtrls, ImgList, ActnList,
-  ToolWin, GridsEh, DBGridEh, DB, ADODB, Menus, ComObj, Grids, Contnrs;
+  ToolWin, GridsEh, DBGridEh, DB, ADODB, Menus, ComObj, Grids, Contnrs,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  DBAxisGridsEh;
 
 type
   TfmShedule = class(TfmBase)

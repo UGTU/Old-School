@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DBTVFacMethodWorkObj, uBaseFrame, StdCtrls, Buttons, ExtCtrls,
   DBGridEh, DB, Mask, DBCtrlsEh, DBLookupEh, GridsEh, ComCtrls, ToolWin,
-  ActnList, ImgList, MethodWorkController, GeneralController;
+  ActnList, ImgList, MethodWorkController, GeneralController, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 
 type

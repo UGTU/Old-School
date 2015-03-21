@@ -63,6 +63,7 @@ inherited frmQMAdminField: TfrmQMAdminField
     Top = 71
     Width = 258
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 1
@@ -73,6 +74,7 @@ inherited frmQMAdminField: TfrmQMAdminField
     Top = 113
     Width = 258
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 2
@@ -93,6 +95,7 @@ inherited frmQMAdminField: TfrmQMAdminField
     Top = 27
     Width = 258
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_table'
