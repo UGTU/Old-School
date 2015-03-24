@@ -1,4 +1,4 @@
-object dmStudentSelectionProcs: TdmStudentSelectionProcs
+﻿object dmStudentSelectionProcs: TdmStudentSelectionProcs
   OldCreateOrder = False
   Height = 523
   Width = 636
@@ -170,6 +170,7 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
   end
   object aspSelDocuments: TADOStoredProc
     Connection = dm.DBConnect
+    CursorType = ctStatic
     Filter = 'object ADOStoredProc1: TADOStoredProc'
     AfterEdit = aspSelDocumentsAfterEdit
     OnNewRecord = aspSelDocumentsNewRecord
@@ -180,7 +181,7 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
-        Value = Null
+        Value = 0
       end
       item
         Name = '@code'
@@ -245,6 +246,14 @@ object dmStudentSelectionProcs: TdmStudentSelectionProcs
       FieldName = 'Cd_kem_vidan'
       OnChange = aspSelDocumentsdoc_typeChange
       Size = 500
+    end
+    object aspSelDocumentsballs: TIntegerField
+      DisplayLabel = #1044#1086#1087'. '#1073#1072#1083#1083
+      FieldName = 'balls'
+    end
+    object aspSelDocumentsсname_disc: TStringField
+      DisplayLabel = #1055#1086' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1077
+      FieldName = #1089'name_disc'
     end
   end
   object aspSelLastNames: TADOStoredProc

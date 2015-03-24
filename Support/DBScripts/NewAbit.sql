@@ -1,7 +1,7 @@
 --расширим поле с названием документа
-alter table documents alter column cvid_doc varchar(500) not null
+/*alter table documents alter column cvid_doc varchar(500) not null
 
-/*insert into Kat_zach(bit_Lgota,Cname_kat_zach,ik_type_kat,IsRussOlimpWinner)
+insert into Kat_zach(bit_Lgota,Cname_kat_zach,ik_type_kat,IsRussOlimpWinner)
 values(1, 'особое право', 1, 0)
 
 update Kat_zach set [OutDate]=cast('01.01.2015' as datetime)
@@ -352,6 +352,29 @@ RETURN
 END
 GO*/
 
+ALTER    PROCEDURE [dbo].[AppendDoc]
+@ncode			INT,
+@ik_vid_doc		int,
+@sd_seria		varchar(10),
+@np_number		varchar(15),
+@dd_vidan		datetime,
+@cd_kem_vidan	varchar(500),
+@addinfo		varchar(max),
+@balls			int = null,
+@ikDisc			int = null
+AS
+BEGIN
+  declare @ik_doc int
 
+  if @ikDisc = -1 set @ikDisc = null
 
-select * from Doc_stud where Ik_vid_doc = 5
+ INSERT INTO Doc_stud(Dd_vidan,Cd_kem_vidan,Ik_vid_doc,Np_number,Cd_seria,nCode,AdditionalInfo)
+ VALUES(@dd_vidan, @cd_kem_vidan,@ik_vid_doc,@np_number,@sd_seria,@ncode, @addinfo)
+   select @ik_doc = @@IDENTITY
+ 
+ if @balls <> 0
+   insert into Abit_Bonuses(balls,ik_disc,ik_doc)
+   values(@balls, @ikDisc, @ik_doc)
+END
+GO
+

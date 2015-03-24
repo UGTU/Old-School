@@ -69,8 +69,7 @@ object dmStudentData: TdmStudentData
   object adodsDocType: TADODataSet
     Connection = dm.DBConnect
     CursorType = ctStatic
-    CommandText = 'documents'
-    CommandType = cmdTable
+    CommandText = 'select * from documents order by cvid_doc'
     Parameters = <>
     Left = 324
     Top = 20
@@ -658,5 +657,18 @@ object dmStudentData: TdmStudentData
     Parameters = <>
     Left = 376
     Top = 272
+  end
+  object adodsAbitDisc: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    CommandText = 'select * from ABIT_Disc order by '#1089'name_disc'
+    Parameters = <>
+    Left = 292
+    Top = 304
+  end
+  object dsAbitDisc: TDataSource
+    DataSet = adodsAbitDisc
+    Left = 295
+    Top = 352
   end
 end

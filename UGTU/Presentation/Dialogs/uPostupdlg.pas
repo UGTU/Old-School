@@ -647,10 +647,8 @@ begin
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@rab',ftBoolean,pdInput,0,1) else
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@rab',ftBoolean,pdInput,0,0);
     Log.LogMessage('rab=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@rab').Value));
-    //if  dbcbeSex.text='Мужской' then
-      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sex',ftBoolean,pdInput,0,rgSex.ItemIndex); //else
+      dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sex',ftBoolean,pdInput,0,rgSex.ItemIndex);
       Log.LogMessage('sex=' + IntToStr(dmAbiturientAction.aspAppendAbit.Parameters.ParamByName('@sex').Value));
-     // dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@sex',ftBoolean,pdInput,0,0);
     if  cbAppNeed.Checked then
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@obchegit',ftBoolean,pdInput,0,1)else
       dmAbiturientAction.aspAppendAbit.Parameters.CreateParameter('@obchegit',ftBoolean,pdInput,0,0);
@@ -779,29 +777,23 @@ begin
     dmStudentActions.aspAddRelative.ExecProc;
   end;
 
-for i:=0 to sgDocKeys.RowCount-2 do
-begin
-with dmStudentActions.aspAddDoc.Parameters do
-begin
-clear;
-AddParameter;
-Items[0].Value:=IDStudent;
-AddParameter;
-Items[1].Value:=strtoint(sgDockeys.Cells[1,i]);
-AddParameter;
- Items[2].Value:=sgDocs.Cells[1,i+1];
-AddParameter;
- Items[3].Value:=sgDocs.Cells[2,i+1];
-AddParameter;
-  if sgDocs.Cells[3,i+1]='' then
-    Items[4].Value:=Null
-  else
-    Items[4].Value:=(StrtoDate(sgDocs.Cells[3,i+1]));
- AddParameter;
- Items[5].Value:=sgDocs.Cells[4,i+1];;
-end;
-dmStudentActions.aspAddDoc.ExecProc;
-end;
+  for i := 0 to DocRecordList.Count - 1 do
+  begin
+    with dmStudentActions.aspAddDoc.Parameters do
+    begin
+      Clear;
+      CreateParameter('@ncode',ftInteger,pdInput,0,IDStudent);
+      CreateParameter('@ik_vid_doc',ftInteger,pdInput,0,DocRecordList.Items[i].ikDocVid);
+      CreateParameter('@sd_seria',ftString,pdInput,10,DocRecordList.Items[i].seria);
+      CreateParameter('@np_number',ftString,pdInput,15,DocRecordList.Items[i].number);
+      CreateParameter('@dd_vidan',ftDateTime,pdInput,0,DocRecordList.Items[i].get_date);
+      CreateParameter('@cd_kem_vidan',ftString,pdInput,500,DocRecordList.Items[i].kem_vidan);
+      CreateParameter('@addinfo',ftString,pdInput,500,DocRecordList.Items[i].addinfo);
+      CreateParameter('@balls',ftInteger,pdInput,0,DocRecordList.Items[i].balls);
+      CreateParameter('@ikDisc',ftInteger,pdInput,0,DocRecordList.Items[i].ikDisc);
+    end;
+    dmStudentActions.aspAddDoc.ExecProc;
+  end;
 
 if Assigned(AddressRecordList) then
   for i:=0 to AddressRecordList.Count-1 do

@@ -105,6 +105,8 @@ type
     aspSelKatChanges: TADOStoredProc;
     dsSelKatChanges: TDataSource;
     adsGetParamNeedness: TADODataSet;
+    aspSelDocumentsballs: TIntegerField;
+    aspSelDocumentsñname_disc: TStringField;
     procedure aspSelLanguageNewRecord(DataSet: TDataSet);
     procedure aspSelFamilyNewRecord(DataSet: TDataSet);
    

@@ -80,6 +80,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       inherited PageControl2: TPageControl
         Width = 571
         Height = 593
+        ActivePage = TabSheet2
         OnChange = PageControl2Change
         ExplicitWidth = 571
         ExplicitHeight = 593
@@ -93,8 +94,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             ExplicitHeight = 561
             inherited Panel7: TPanel
               Width = 561
-              ExplicitLeft = 14
-              ExplicitTop = -1
               ExplicitWidth = 561
               inherited Label4: TLabel
                 Top = 48
@@ -119,21 +118,22 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label45: TLabel
                 Top = 5
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitTop = 5
+                ExplicitWidth = 6
               end
               inherited Label46: TLabel
                 Top = 4
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitTop = 4
+                ExplicitWidth = 6
               end
               inherited Label48: TLabel
-                Width = 17
-                ExplicitWidth = 17
-              end
-              inherited Label49: TLabel
-                Left = 252
-                Width = 20
-                ExplicitLeft = 252
-                ExplicitWidth = 20
+                Width = 6
+                Font.Style = [fsBold]
+                ExplicitWidth = 6
               end
               inherited Label50: TLabel
                 Left = 392
@@ -206,6 +206,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             inherited Panel8: TPanel
               Width = 561
               Height = 264
+              ParentFont = False
               ExplicitWidth = 561
               ExplicitHeight = 264
               inherited Label1: TLabel
@@ -293,8 +294,11 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               inherited Label62: TLabel
                 Left = 92
                 Top = 209
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitLeft = 92
                 ExplicitTop = 209
+                ExplicitWidth = 6
               end
               object Label64: TLabel [13]
                 Left = 13
@@ -313,14 +317,14 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               object Label68: TLabel [15]
                 Left = 159
                 Top = 4
-                Width = 4
+                Width = 6
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               inherited Label63: TLabel
@@ -478,6 +482,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Top = 426
               Width = 561
               Height = 134
+              ParentFont = False
               ExplicitTop = 426
               ExplicitWidth = 561
               ExplicitHeight = 134
@@ -488,14 +493,14 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               object Label9: TLabel [3]
                 Left = 53
                 Top = 4
-                Width = 27
+                Width = 6
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               inherited sgAddress: TStringGrid
@@ -529,21 +534,22 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label52: TLabel
                 Top = 9
-                Width = 16
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitTop = 9
-                ExplicitWidth = 16
+                ExplicitWidth = 6
               end
               object Label3: TLabel [4]
                 Left = 100
                 Top = 55
-                Width = 37
+                Width = 6
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               inherited dbcbeNationality: TDBLookupComboboxEh
@@ -572,6 +578,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             inherited Panel2: TPanel
               Width = 561
               Height = 276
+              ParentFont = False
               ExplicitWidth = 561
               ExplicitHeight = 276
               inherited Label31: TLabel
@@ -713,6 +720,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           inherited sgDocs: TStringGrid
             Height = 561
             ColCount = 5
+            ParentFont = False
             ExplicitHeight = 561
             ColWidths = (
               119
@@ -727,7 +735,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
