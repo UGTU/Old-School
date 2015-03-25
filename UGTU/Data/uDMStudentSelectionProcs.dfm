@@ -205,7 +205,7 @@
     end
     object aspSelDocumentsdoc_type: TStringField
       DisplayLabel = #1042#1080#1076' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      DisplayWidth = 150
+      DisplayWidth = 70
       FieldKind = fkLookup
       FieldName = 'doc_type'
       LookupDataSet = dmStudentData.adodsDocType
@@ -243,12 +243,21 @@
     end
     object aspSelDocumentsCd_kem_vidan: TStringField
       DisplayLabel = #1050#1077#1084' '#1074#1099#1076#1072#1085
+      DisplayWidth = 70
       FieldName = 'Cd_kem_vidan'
       OnChange = aspSelDocumentsdoc_typeChange
       Size = 500
     end
+    object aspSelDocumentsisreal: TBooleanField
+      Alignment = taCenter
+      DisplayLabel = #1054#1088#1080#1075#1080#1085#1072#1083
+      DisplayWidth = 20
+      FieldName = 'isreal'
+    end
     object aspSelDocumentsballs: TIntegerField
+      Alignment = taCenter
       DisplayLabel = #1044#1086#1087'. '#1073#1072#1083#1083
+      DisplayWidth = 30
       FieldName = 'balls'
     end
     object aspSelDocumentsсname_disc: TStringField

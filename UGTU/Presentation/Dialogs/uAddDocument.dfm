@@ -51,7 +51,7 @@ inherited frmAddDocument: TfrmAddDocument
   end
   object Label6: TLabel [5]
     Left = 10
-    Top = 105
+    Top = 96
     Width = 56
     Height = 13
     Caption = #1050#1077#1084' '#1074#1099#1076#1072#1085
@@ -78,7 +78,7 @@ inherited frmAddDocument: TfrmAddDocument
   end
   object Label5: TLabel [8]
     Left = 10
-    Top = 149
+    Top = 164
     Width = 153
     Height = 13
     Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103
@@ -86,13 +86,13 @@ inherited frmAddDocument: TfrmAddDocument
   inherited Panel1: TPanel
     Top = 354
     Width = 435
-    ExplicitTop = 193
-    ExplicitWidth = 279
+    ExplicitTop = 354
+    ExplicitWidth = 435
     inherited bbOK: TBitBtn
       Left = 170
       Top = 6
       Visible = False
-      ExplicitLeft = 14
+      ExplicitLeft = 170
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
@@ -102,14 +102,14 @@ inherited frmAddDocument: TfrmAddDocument
       Enabled = False
       ParentFont = False
       OnClick = bbApplyClick
-      ExplicitLeft = 99
+      ExplicitLeft = 255
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
       Left = 342
       Top = 6
       Caption = #1047#1072#1082#1088#1099#1090#1100
-      ExplicitLeft = 186
+      ExplicitLeft = 342
       ExplicitTop = 6
     end
     inherited bbSprav: TBitBtn
@@ -167,7 +167,7 @@ inherited frmAddDocument: TfrmAddDocument
   end
   object eWho: TDBEditEh [13]
     Left = 10
-    Top = 121
+    Top = 111
     Width = 413
     Height = 19
     DynProps = <>
@@ -191,7 +191,7 @@ inherited frmAddDocument: TfrmAddDocument
   end
   object dbeAddInfo: TDBEditEh [15]
     Left = 10
-    Top = 165
+    Top = 180
     Width = 413
     Height = 19
     DynProps = <>
@@ -202,7 +202,7 @@ inherited frmAddDocument: TfrmAddDocument
   end
   object btnLoad: TButton [16]
     Left = 8
-    Top = 200
+    Top = 206
     Width = 129
     Height = 25
     Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090#1099'...'
@@ -237,10 +237,6 @@ inherited frmAddDocument: TfrmAddDocument
     ParentFont = False
     TabOrder = 9
     Visible = False
-    ExplicitLeft = 111
-    ExplicitTop = 307
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object Label7: TLabel
       Left = 16
       Top = 8
@@ -256,7 +252,7 @@ inherited frmAddDocument: TfrmAddDocument
       Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072' ('#1087#1088#1080' '#1085#1077#1086#1073#1093#1086#1076#1080#1084#1086#1089#1090#1080')'
     end
     object UpDown1: TUpDown
-      Left = 128
+      Left = 129
       Top = 27
       Width = 16
       Height = 19
@@ -299,6 +295,14 @@ inherited frmAddDocument: TfrmAddDocument
       Visible = True
       OnChange = dbcbeKindChange
     end
+  end
+  object cbReal: TCheckBox [19]
+    Left = 10
+    Top = 138
+    Width = 111
+    Height = 17
+    Caption = #1055#1088#1080#1085#1103#1090' '#1086#1088#1080#1075#1080#1085#1072#1083
+    TabOrder = 10
   end
   inherited actBaseDialog: TActionList
     inherited actApply: TAction

@@ -34,6 +34,7 @@ type
     Label7: TLabel;
     Label10: TLabel;
     dbcbeDisc: TDBLookupComboboxEh;
+    cbReal: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure actCheckFieldsUpdate(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
@@ -73,7 +74,12 @@ end;
 
 procedure TfrmAddDocument.actApplyExecute(Sender: TObject);
 begin
-  CollectDocProperties;
+  if Assigned(studDlg) then
+    CollectDocProperties
+    else
+    begin
+
+    end;
 end;
 
 procedure TfrmAddDocument.actCheckFieldsUpdate(Sender: TObject);
@@ -163,10 +169,12 @@ begin
       if not ((DateToStr(dbdteGetDate.value)) = '  .  .    ') then
         cells[3, rowsc] := DateToStr(dbdteGetDate.value);
     cells[4, rowsc] := eWho.Text;
+    if cbReal.Checked then
+      cells[5, rowsc] := 'Да';
     if chbxBonuses.Checked then
     begin
-      cells[5, rowsc] := dbBalls.Text;
-      cells[6, rowsc] := dbcbeDisc.Text;
+      cells[6, rowsc] := dbBalls.Text;
+      cells[7, rowsc] := dbcbeDisc.Text;
     end;
     RowCount := RowCount + 1;
   end;
@@ -174,7 +182,8 @@ begin
     balls := strtoint(dbBalls.Text)
   else
     balls := 0;
-  doc := TDocRecord.Create(dbcbeKind.KeyValue, balls, dbcbeDisc.KeyValue, eSer.Text, eNum.Text, eWho.Text, dbeAddInfo.Text, dbdteGetDate.value);
+  doc := TDocRecord.Create(dbcbeKind.KeyValue, balls, dbcbeDisc.KeyValue, eSer.Text,
+    eNum.Text, eWho.Text, dbeAddInfo.Text, cbReal.Checked, dbdteGetDate.value);
   (Owner as TftmStudent).DocRecordList.Add(doc);
 end;
 

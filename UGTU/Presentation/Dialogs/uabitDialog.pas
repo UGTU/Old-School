@@ -178,8 +178,9 @@ begin
   sgDocs.Cells[2,0]:='Номер';
   sgDocs.Cells[3,0]:='Дата выдачи';
   sgDocs.Cells[4,0]:='Кем выдан';
-  sgDocs.Cells[5, 0] := 'Баллов';
-  sgDocs.Cells[6, 0] := 'Дисциплина';
+  sgDocs.Cells[5, 0] := 'Оригинал';
+  sgDocs.Cells[6, 0] := 'Баллов';
+  sgDocs.Cells[7, 0] := 'Дисциплина';
 
   sgAddress.Cells[0,0]:='Тип адреса';
   sgAddress.Cells[1,0]:='Страна';

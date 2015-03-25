@@ -95,7 +95,7 @@ inherited ftmStudent: TftmStudent
         Top = 0
         Width = 566
         Height = 556
-        ActivePage = TabSheet3
+        ActivePage = TabSheet2
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1388,6 +1388,7 @@ inherited ftmStudent: TftmStudent
             Top = 0
             Width = 23
             Height = 22
+            Action = actAddDocument
             Flat = True
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
@@ -1416,14 +1417,13 @@ inherited ftmStudent: TftmStudent
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            OnClick = sbAddDocClick
           end
           object SbDelDoc: TSpeedButton
-            Left = 524
+            Left = 523
             Top = 28
             Width = 23
             Height = 22
-            Enabled = False
+            Action = actDelDocument
             Flat = True
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
@@ -1452,7 +1452,6 @@ inherited ftmStudent: TftmStudent
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-            OnClick = SbDelDocClick
           end
           object sgDocs: TStringGrid
             Left = 0
@@ -1502,6 +1501,7 @@ inherited ftmStudent: TftmStudent
     end
   end
   inherited actBaseDialog: TActionList
+    Images = frmMain.ImageList1
     Left = 504
     Top = 24
     inherited actApply: TAction
@@ -1529,12 +1529,23 @@ inherited ftmStudent: TftmStudent
       Enabled = False
       OnExecute = actDelAddressExecute
     end
+    object actAddDocument: TAction
+      Caption = 'actAddDocument'
+      ImageIndex = 44
+    end
+    object actUpdateDocument: TAction
+      Caption = 'actUpdateDocument'
+    end
+    object actDelDocument: TAction
+      Caption = 'actDelDocument'
+      ImageIndex = 42
+    end
   end
   object ilPages: TImageList
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -39,11 +39,12 @@ type
     number: string;
     get_date: Variant;
     kem_vidan: string;
+    isreal: boolean;
     addinfo: string;
     balls: integer;
     ikDisc: Variant;
     constructor Create(aikDocVid, aballs: integer; aikDisc: Variant;
-      aseria, anumber, akem_vidan, aaddinfo: string; aget_date: Variant);
+      aseria, anumber, akem_vidan, aaddinfo: string;  aisreal: boolean; aget_date: Variant);
   end;
 
   TftmStudent = class(TfrmBaseDialog)
@@ -164,6 +165,9 @@ type
     actDelAddress: TAction;
     bShot: TButton;
     rgSex: TRadioGroup;
+    actAddDocument: TAction;
+    actUpdateDocument: TAction;
+    actDelDocument: TAction;
     procedure FormShow(Sender: TObject);
 
     procedure bbCancelClick(Sender: TObject);
@@ -274,8 +278,9 @@ begin
   sgDocs.Cells[2, 0] := 'Номер';
   sgDocs.Cells[3, 0] := 'Дата выдачи';
   sgDocs.Cells[4, 0] := 'Кем выдан';
-  sgDocs.Cells[5, 0] := 'Баллов';
-  sgDocs.Cells[6, 0] := 'Дисциплина';
+  sgDocs.Cells[5, 0] := 'Оригинал';
+  sgDocs.Cells[6, 0] := 'Баллов';
+  sgDocs.Cells[7, 0] := 'Дисциплина';
 
   sgAddress.Cells[0, 0] := 'Тип адреса';
   sgAddress.Cells[1, 0] := 'Страна';
@@ -1049,13 +1054,14 @@ end;
 { TDocRecord }
 
 constructor TDocRecord.Create(aikDocVid, aballs: integer; aikDisc: Variant;
-  aseria, anumber, akem_vidan, aaddinfo: string; aget_date: Variant);
+  aseria, anumber, akem_vidan, aaddinfo: string; aisreal: boolean; aget_date: Variant);
 begin
   ikDocVid := aikDocVid;
   seria := aseria;
   number := anumber;
   get_date := aget_date;
   kem_vidan := akem_vidan;
+  isreal := aisreal;
   addinfo := aaddinfo;
   balls := aballs;
   ikDisc := aikDisc;

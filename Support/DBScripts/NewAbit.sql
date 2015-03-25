@@ -359,6 +359,7 @@ ALTER    PROCEDURE [dbo].[AppendDoc]
 @np_number		varchar(15),
 @dd_vidan		datetime,
 @cd_kem_vidan	varchar(500),
+@isreal			bit,
 @addinfo		varchar(max),
 @balls			int = null,
 @ikDisc			int = null
@@ -378,3 +379,25 @@ BEGIN
 END
 GO
 
+ALTER        PROCEDURE [dbo].[SelDocuments]
+@code numeric
+AS 
+SELECT  
+	nCode,
+	Doc_stud.IK_doc,
+	Doc_stud.Ik_vid_doc,                        --код вида документа
+--	Vid_doc.cVid_doc as [Вид документа],
+	Doc_stud.Np_number,  
+	Doc_stud.Cd_seria,
+	Doc_stud.Dd_vidan, 
+	Doc_stud.Cd_kem_vidan,
+	Abit_Bonuses.balls,
+	ABIT_Disc.сname_disc
+FROM Doc_stud 
+  left join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc
+  left join ABIT_Disc on ABIT_Disc.ik_disc = Abit_Bonuses.ik_disc
+WHERE Doc_stud.nCode=@code
+
+--exec SelDocuments 67
+
+GO

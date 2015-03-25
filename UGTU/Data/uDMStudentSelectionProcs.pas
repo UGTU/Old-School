@@ -107,6 +107,7 @@ type
     adsGetParamNeedness: TADODataSet;
     aspSelDocumentsballs: TIntegerField;
     aspSelDocumentsñname_disc: TStringField;
+    aspSelDocumentsisreal: TBooleanField;
     procedure aspSelLanguageNewRecord(DataSet: TDataSet);
     procedure aspSelFamilyNewRecord(DataSet: TDataSet);
    

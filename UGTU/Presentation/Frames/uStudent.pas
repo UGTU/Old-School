@@ -187,6 +187,11 @@ type
     bShot: TButton;
     rgSex: TRadioGroup;
     Label50: TLabel;
+    SbDelDoc: TSpeedButton;
+    sbAddDoc: TSpeedButton;
+    actAddDocument: TAction;
+    actUpdateDocument: TAction;
+    actDelDocument: TAction;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -229,6 +234,7 @@ type
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
     procedure rgSexClick(Sender: TObject);
+    procedure actAddDocumentExecute(Sender: TObject);
 
   private
     Fik: integer;
@@ -256,7 +262,7 @@ implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
   uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
-  ImageFullSizeShowFrm, ExceptionBase;
+  ImageFullSizeShowFrm, ExceptionBase, uAddDocument;
 
 {$R *.dfm}
 
@@ -837,6 +843,14 @@ begin
   frmAddress.ShowModal;
   dmStudentSelectionProcs.aspGetPersonAddress.Active := false;
   dmStudentSelectionProcs.aspGetPersonAddress.Active := true;
+end;
+
+procedure TfmStudent.actAddDocumentExecute(Sender: TObject);
+begin
+  frmAddDocument := TfrmAddDocument.Create(self);
+  frmAddDocument.isAbit := (self.Name = 'fmAbitCard');
+  frmAddDocument.ShowModal;
+  frmAddDocument.Free;
 end;
 
 procedure TfmStudent.actApplyExecute(Sender: TObject);
