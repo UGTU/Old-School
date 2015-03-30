@@ -20,6 +20,8 @@ type
     GroupBox5: TGroupBox;
     dbgeAdditionalSpec: TDBGridEh;
     ToolButton15: TToolButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     procedure dbgeListsCellClick(Column: TColumnEh);
     procedure eFamChange(Sender: TObject);
     procedure BbSaveclick(Sender: TObject);
@@ -207,6 +209,9 @@ begin
     Parameters[0].Value := obj.id;
     ExecProc;
     Active := true;
+
+    FieldByName('balls').Visible := true;
+    FieldByName('ñname_disc').Visible := true;
   end;
 
   with dmStudentSelectionProcs.aspGetPersonAddress do

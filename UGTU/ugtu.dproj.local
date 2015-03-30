@@ -65,6 +65,7 @@
     <File Path="Domain\Classes\uBRSBallCounter.pas"/>
     <File Path="Domain\Classes\Vedomost2014.pas"/>
     <File Path="Domain\Classes\VedomostItem2014.pas"/>
+    <File Path="Domain\Classes\DocumentClass.pas"/>
     <File Path="Domain\Common"/>
     <File Path="Domain\Common\RegularEx.pas"/>
     <File Path="Domain\Controllers"/>
@@ -119,6 +120,7 @@
     <File Path="Domain\Controllers\uXMLEGEReader.pas"/>
     <File Path="Domain\Controllers\uXMLErrorReader.pas"/>
     <File Path="Domain\Controllers\VersionController.pas"/>
+    <File Path="Domain\Controllers\PersonController.pas"/>
     <File Path="Domain\DBTV"/>
     <File Path="Domain\DBTV\DBDekTreeView_TEST.pas"/>
     <File Path="Domain\DBTV\DBTV.pas"/>
@@ -633,14 +635,18 @@
     <File Path="Utils\uPhotoBooth.pas"/>
   </ProjectSortOrder>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.257,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.076,E:\GitHub\Old-School\UGTU\Domain\Classes\Spravka2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.422,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.816,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.489,E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.394,E:\Projects\GitHub\Old-School\UGTU\Unit1.pas=E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.366,E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaReport2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.257,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.489,E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.076,E:\GitHub\Old-School\UGTU\Domain\Classes\Spravka2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.472,E:\Projects\GitHub\Old-School\UGTU\Domain\Classes\DocumentClass.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.422,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.935,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.394,E:\Projects\GitHub\Old-School\UGTU\Unit1.pas=E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.312,E:\Projects\GitHub\Old-School\UGTU\Unit1.pas=E:\Projects\GitHub\Old-School\UGTU\Domain\Controllers\PersonController.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.469,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.816,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

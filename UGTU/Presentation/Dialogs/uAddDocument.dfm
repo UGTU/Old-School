@@ -2,7 +2,8 @@ inherited frmAddDocument: TfrmAddDocument
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090
   ClientHeight = 395
   ClientWidth = 435
-  OnShow = FormShow
+  OnClose = FormClose
+  OnCreate = FormCreate
   ExplicitWidth = 441
   ExplicitHeight = 424
   PixelsPerInch = 96
@@ -98,10 +99,7 @@ inherited frmAddDocument: TfrmAddDocument
     inherited bbApply: TBitBtn
       Left = 255
       Top = 6
-      Action = nil
-      Enabled = False
       ParentFont = False
-      OnClick = bbApplyClick
       ExplicitLeft = 255
       ExplicitTop = 6
     end
@@ -223,7 +221,7 @@ inherited frmAddDocument: TfrmAddDocument
     TabOrder = 8
     OnClick = chbxBonusesClick
   end
-  object Panel2: TPanel [18]
+  object pnlBonuses: TPanel [18]
     Left = 0
     Top = 281
     Width = 435
@@ -257,9 +255,7 @@ inherited frmAddDocument: TfrmAddDocument
       Width = 16
       Height = 19
       Associate = dbBalls
-      Min = 1
       Max = 35
-      Position = 1
       TabOrder = 0
     end
     object dbBalls: TDBEditEh
@@ -271,7 +267,7 @@ inherited frmAddDocument: TfrmAddDocument
       EditButtons = <>
       Flat = True
       TabOrder = 1
-      Text = '1'
+      Text = '0'
       Visible = True
     end
     object dbcbeDisc: TDBLookupComboboxEh
@@ -307,9 +303,11 @@ inherited frmAddDocument: TfrmAddDocument
   inherited actBaseDialog: TActionList
     inherited actApply: TAction
       Enabled = False
+      OnUpdate = actApplyUpdate
     end
     inherited actOK: TAction
       Enabled = False
+      OnUpdate = actOKUpdate
     end
     object actCheckFields: TAction
       Caption = 'actCheckFields'

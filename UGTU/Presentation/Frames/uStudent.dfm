@@ -1154,83 +1154,12 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
-              DesignSize = (
-                705
-                555)
-              object SbDelDoc: TSpeedButton
-                Left = 678
-                Top = 57
-                Width = 23
-                Height = 22
-                Flat = True
-                Glyph.Data = {
-                  36030000424D3603000000000000360000002800000010000000100000000100
-                  18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
-                  FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-                  FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-                  00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-                  FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-                  FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CCC763493563493563493563493563
-                  4935634935634935634935634935D4CCC7FF00FFFF00FFFF00FFFF00FFFF00FF
-                  B8A494F4E3DAF3DFD4F1DBCFF0D7C9EED3C4EDD0BFECCDBBEBCAB8EAC8B56349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFB8A494F6E8E0F4E3DAF3DFD4F1DBCFF0
-                  D7C9EED3C4EDD0BFECCDBBEBCAB8634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  B8A494F8ECE5F6E8E0F4E3DAF3DFD4F1DBCFF0D7C9EED3C4EDD0BFECCDBB6349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFB9A595F9F0EBF8ECE5F6E8E0F4E3DAF3
-                  DFD4F1DBCFF0D7C9EED3C4EDD0BF634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  BCA697FBF4F0F9F0EB634935634935634935634935634935F0D7C9EED3C46349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFBEA89AFCF7F5FBF4F0F9F0EBF8ECE5F6
-                  E8E0F4E3DAF3DFD4F1DBCFF0D7C9634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  C0AB9CFDFAF9FCF7F5FBF4F0F9F0EBF8ECE5F6E8E0F4E3DAF3DFD4F1DBCF6349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFC3AC9DFEFDFCFDFAF9FCF7F5FBF4F0F9
-                  F0EBF8ECE5F6E8E0F4E3DAF3DFD4634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  C4AE9EFFFFFFFEFDFCFDFAF9FCF7F5FBF4F0F9F0EBF8ECE5F6E8E0F4E3DA6349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFEFE8E4C3AD9EC2AC9DC0AB9CBEA899BB
-                  A798BAA496B8A394B8A394B8A394D4CCC7FF00FFFF00FFFF00FFFF00FFFF00FF
-                  FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-                  FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-                  00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-              end
-              object sbAddDoc: TSpeedButton
-                Left = 679
-                Top = 29
-                Width = 23
-                Height = 22
-                Flat = True
-                Glyph.Data = {
-                  36030000424D3603000000000000360000002800000010000000100000000100
-                  18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
-                  FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-                  FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-                  00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
-                  FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-                  FFFF00FFFF00FFFF00FFFF00FFFF00FFD4CCC763493563493563493563493563
-                  4935634935634935634935634935D4CCC7FF00FFFF00FFFF00FFFF00FFFF00FF
-                  B8A494F4E3DAE4CFC2DDC5B7D9BEACD8BCA9D7BAA7D7B9A5D6B7A3D6B6A26349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFB8A494F6E8E0F4E3DAF3DFD4F1DBCFF0
-                  D7C9EED3C4EDD0BFECCDBBD6B7A3634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  B8A494F8ECE5F6E8E0F4E3DAF3DFD4634935F0D7C9EED3C4EDD0BFD7B9A56349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFB9A595F9F0EBF8ECE5F6E8E0F4E3DA63
-                  4935F1DBCFF0D7C9EED3C4D7BAA7634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  BCA697FBF4F0F9F0EB634935634935634935634935634935F0D7C9D8BCA96349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFBEA89AFCF7F5FBF4F0F9F0EBF8ECE563
-                  4935F4E3DAF3DFD4F1DBCFD9BEAC634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  C0AB9CFDFAF9FCF7F5FBF4F0F9F0EB634935F6E8E0F4E3DAF3DFD4D9C0AF6349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFC3AC9DFEFDFCFDFAF9FCF7F5FBF4F0F9
-                  F0EBF8ECE5F6E8E0F4E3DAE1CDC0634935FF00FFFF00FFFF00FFFF00FFFF00FF
-                  C4AE9EFFFFFFFEFDFCFDFAF9FCF7F5FBF4F0F9F0EBF8ECE5F6E8E0F4E3DA6349
-                  35FF00FFFF00FFFF00FFFF00FFFF00FFEFE8E4C3AD9EC2AC9DC0AB9CBEA899BB
-                  A798BAA496B8A394B8A394B8A394D4CCC7FF00FFFF00FFFF00FFFF00FFFF00FF
-                  FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-                  FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-                  00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
-              end
               object dbgeDocuments: TDBGridEh
                 Left = 0
-                Top = 29
-                Width = 673
-                Height = 468
-                Anchors = [akLeft, akTop, akRight, akBottom]
+                Top = 0
+                Width = 654
+                Height = 555
+                Align = alClient
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
                 DynProps = <>
@@ -1238,7 +1167,6 @@ inherited fmStudent: TfmStudent
                 FooterParams.Color = clWindow
                 IndicatorOptions = []
                 Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-                ReadOnly = True
                 RowHeight = 18
                 TabOrder = 0
                 TitleParams.Font.Charset = DEFAULT_CHARSET
@@ -1274,6 +1202,38 @@ inherited fmStudent: TfmStudent
                 ShowHint = True
                 TabOrder = 1
                 Visible = False
+              end
+              object pnlToolDoc: TPanel
+                Left = 654
+                Top = 0
+                Width = 51
+                Height = 555
+                Align = alRight
+                TabOrder = 2
+                object sbAddDoc: TSpeedButton
+                  Left = 9
+                  Top = 9
+                  Width = 23
+                  Height = 22
+                  Action = actAddDocument
+                  Flat = True
+                end
+                object SpeedButton7: TSpeedButton
+                  Left = 9
+                  Top = 37
+                  Width = 23
+                  Height = 22
+                  Action = actUpdateDocument
+                  Flat = True
+                end
+                object SbDelDoc: TSpeedButton
+                  Left = 9
+                  Top = 65
+                  Width = 23
+                  Height = 22
+                  Action = actDelDocument
+                  Flat = True
+                end
               end
             end
             object TabSheet7: TTabSheet
@@ -2032,7 +1992,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2364,17 +2324,19 @@ inherited fmStudent: TfmStudent
       OnExecute = actPropToFactExecute
     end
     object actAddDocument: TAction
-      Caption = 'actAddDocument'
+      Category = 'ctDocument'
       ImageIndex = 44
       OnExecute = actAddDocumentExecute
     end
     object actUpdateDocument: TAction
-      Caption = 'actUpdateDocument'
+      Category = 'ctDocument'
       ImageIndex = 43
+      OnExecute = actUpdateDocumentExecute
     end
     object actDelDocument: TAction
-      Caption = 'actDelDocument'
+      Category = 'ctDocument'
       ImageIndex = 42
+      OnExecute = actDelDocumentExecute
     end
   end
   object ppmSpravToExcel: TPopupMenu

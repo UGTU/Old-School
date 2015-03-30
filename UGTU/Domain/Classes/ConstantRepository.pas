@@ -25,6 +25,12 @@ const
   GOS_EXAM = 56;
   FISCULTURA_ZE = 2;
 
+  //ErrorCode
+  NoError = 0;
+  ExistError = 1;
+  FailError = 2;
+  StatusError = 3;
+
   // типы дисциплин
   typeTypicalDisc = 1;
   typeGosExam = 5;

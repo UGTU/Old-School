@@ -108,6 +108,17 @@ type
     aspSelDocumentsballs: TIntegerField;
     aspSelDocumentsñname_disc: TStringField;
     aspSelDocumentsisreal: TBooleanField;
+    adoSelDocuments: TADODataSet;
+    adoSelDocumentsIK_doc: TIntegerField;
+    adoSelDocumentsik_vid_doc: TIntegerField;
+    adoSelDocumentscd_seria: TStringField;
+    adoSelDocumentsnp_number: TStringField;
+    adoSelDocumentsdd_vidan: TDateTimeField;
+    adoSelDocumentscd_kem_vidan: TStringField;
+    adoSelDocumentsisreal: TBooleanField;
+    adoSelDocumentsballs: TIntegerField;
+    adoSelDocumentsñname_disc: TStringField;
+    adoSelDocumentscvid_doc: TStringField;
     procedure aspSelLanguageNewRecord(DataSet: TDataSet);
     procedure aspSelFamilyNewRecord(DataSet: TDataSet);
    

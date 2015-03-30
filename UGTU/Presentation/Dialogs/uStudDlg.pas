@@ -8,7 +8,7 @@ uses
   Dialogs, uBaseDialog, StdCtrls, Buttons, ExtCtrls, Grids, DBGridEh,
   DBCtrlsEh, Mask, ComCtrls, ActnList, DBLookupEh, ImgList, DBCtrls,
   ExtDlgs, Jpeg, VarfileUtils, uPrikdlg, ComObj, uError, System.Actions,
-  System.Generics.Collections;
+  System.Generics.Collections, DocumentClass;
 
 type
   TAddressRecord = class
@@ -33,19 +33,6 @@ type
       PointName: string; StreetName: string);
   end;
 
-  TDocRecord = class
-    ikDocVid: integer;
-    seria: string;
-    number: string;
-    get_date: Variant;
-    kem_vidan: string;
-    isreal: boolean;
-    addinfo: string;
-    balls: integer;
-    ikDisc: Variant;
-    constructor Create(aikDocVid, aballs: integer; aikDisc: Variant;
-      aseria, anumber, akem_vidan, aaddinfo: string;  aisreal: boolean; aget_date: Variant);
-  end;
 
   TftmStudent = class(TfrmBaseDialog)
     PageControl1: TPageControl;
@@ -228,7 +215,7 @@ uses udm, umain, ADODB, db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg,
   Math, uSpravForm, uDMStudentSelectionProcs, uDMStudentData, uDMAdress,
   uDMCauses,
   uDMStudentActions, uDMPrikaz, uSelOrder, uEnterprisePick, uAddDocument,
-  uAddress,
+  uAddress, CommandController, PersonController,
   ImageFullSizeShowFrm, ApplicationController, ConstantRepository;
 {$R *.dfm}
 
@@ -684,7 +671,15 @@ begin
     dmStudentActions.aspAddRelative.ExecProc;
   end;
 
+  TPersonController.Instance.AddDocuments(code, DocRecordList);
+
+  {FAddDocument := TAddDocument.Create(code);
   for i := 0 to DocRecordList.Count - 1 do
+  with DocRecordList do
+    FAddDocument.Add(Items[i].ikDocVid,Items[i].balls, Items[i].seria, Items[i].number,
+      Items[i].kem_vidan, Items[i].addinfo, Items[i].isreal, Items[i].get_date, Items[i].ikDisc);  }
+
+  {for i := 0 to DocRecordList.Count - 1 do
   begin
     with dmStudentActions.aspAddDoc.Parameters do
     begin
@@ -711,11 +706,7 @@ begin
       // if DocRecordList.Items[i].get_date then
       CreateParameter('@dd_vidan', ftDateTime, pdInput, 0,
         DocRecordList.Items[i].get_date);
-      { if sgDocs.Cells[3, i + 1] = '' then
-        Items[4].Value := null
-        else
-        Items[4].Value := (StrtoDate(sgDocs.Cells[3, i + 1]));
-        AddParameter; }
+
       CreateParameter('@cd_kem_vidan', ftString, pdInput, 500,
         DocRecordList.Items[i].kem_vidan);
       // Items[5].Value := sgDocs.Cells[4, i + 1];;
@@ -727,7 +718,7 @@ begin
         DocRecordList.Items[i].ikDisc);
     end;
     dmStudentActions.aspAddDoc.ExecProc;
-  end;
+  end;           }
 
   for i := 0 to AddressRecordList.Count - 1 do
   begin
@@ -1049,22 +1040,6 @@ begin
   self.PointName := PointName;
   self.StreetName := StreetName;
 
-end;
-
-{ TDocRecord }
-
-constructor TDocRecord.Create(aikDocVid, aballs: integer; aikDisc: Variant;
-  aseria, anumber, akem_vidan, aaddinfo: string; aisreal: boolean; aget_date: Variant);
-begin
-  ikDocVid := aikDocVid;
-  seria := aseria;
-  number := anumber;
-  get_date := aget_date;
-  kem_vidan := akem_vidan;
-  isreal := aisreal;
-  addinfo := aaddinfo;
-  balls := aballs;
-  ikDisc := aikDisc;
 end;
 
 end.

@@ -13,7 +13,7 @@ uses
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController,
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh, uUspevGroupController;
+  DBAxisGridsEh, uUspevGroupController, DocumentClass, System.Generics.Collections;
 
 type
   TfmStudent = class(TfmBase)
@@ -187,11 +187,13 @@ type
     bShot: TButton;
     rgSex: TRadioGroup;
     Label50: TLabel;
-    SbDelDoc: TSpeedButton;
-    sbAddDoc: TSpeedButton;
     actAddDocument: TAction;
     actUpdateDocument: TAction;
     actDelDocument: TAction;
+    pnlToolDoc: TPanel;
+    sbAddDoc: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SbDelDoc: TSpeedButton;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -235,6 +237,8 @@ type
     procedure iPhotoMouseEnter(Sender: TObject);
     procedure rgSexClick(Sender: TObject);
     procedure actAddDocumentExecute(Sender: TObject);
+    procedure actUpdateDocumentExecute(Sender: TObject);
+    procedure actDelDocumentExecute(Sender: TObject);
 
   private
     Fik: integer;
@@ -249,6 +253,7 @@ type
     procedure ExecuteError(Sender: TObject; E: Exception);
 
   public
+    DocRecordList: TList<TDocRecord>;
     property ik: integer read Fik write Fik;
     property Loaded: Boolean write FLoaded;
     procedure Read;
@@ -262,7 +267,7 @@ implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
   uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
-  ImageFullSizeShowFrm, ExceptionBase, uAddDocument;
+  ImageFullSizeShowFrm, ExceptionBase, uAddDocument, PersonController;
 
 {$R *.dfm}
 
@@ -282,7 +287,7 @@ end;
 function TfmStudent.DoApply: Boolean;
 var
   stream: TMemoryStream;
-  // i:integer;
+  i:integer;
   ndGroup: TDBNodeGroupObject;
 begin
   if obj.ID <> ik then // проверка nCode
@@ -319,7 +324,30 @@ begin
         exit;
       end;
   end;
+
   try
+    with DocRecordList do
+    for I := 0 to Count - 1 do
+    begin
+      if (Items[i].ikDoc <> 0) then
+      begin
+        if Items[i].isDeleted then
+          TPersonController.Instance.DeleteDocument(Items[i].ikDoc) //удалить
+        else TPersonController.Instance.UpdateDocument(Items[i]) // редактировать
+      end
+      else
+        TPersonController.Instance.AddDocument(obj.ID, Items[i]);  //добавить
+    end;
+    DocRecordList.Free;
+  except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
+        exit;
+      end;
+  end;
+
+ { try
     with dmStudentSelectionProcs.aspSelDocuments do
     if dbgeDocuments.DataSource.DataSet.RecordCount > 0 then
     begin
@@ -334,7 +362,8 @@ begin
         raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
         exit;
       end;
-  end;
+  end; }
+
   with dmStudentActions.aspAppendStudent.Parameters do
   begin
     clear;
@@ -694,16 +723,16 @@ begin
     Active := true;
   end;
 
-  with dmStudentSelectionProcs.aspSelDocuments do
+  with dmStudentSelectionProcs.adoSelDocuments do
   begin
-    Active := false;
-    Parameters.clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.ID;
-    ExecProc;
-    Active := true;
+    Close;
+    CommandText := 'select * from SelStudDocuments('+IntToStr(obj.ID)+')';
+    Open;
 
+    FieldByName('balls').Visible := false;
+    FieldByName('сname_disc').Visible := false;
   end;
+
 
   with dmStudentSelectionProcs.aspGetPersonAddress do
   begin
@@ -849,6 +878,7 @@ procedure TfmStudent.actAddDocumentExecute(Sender: TObject);
 begin
   frmAddDocument := TfrmAddDocument.Create(self);
   frmAddDocument.isAbit := (self.Name = 'fmAbitCard');
+  frmAddDocument.nCode := obj.ID;
   frmAddDocument.ShowModal;
   frmAddDocument.Free;
 end;
@@ -867,6 +897,15 @@ begin
   else
     actApply.enabled := false;
 
+end;
+
+procedure TfmStudent.actDelDocumentExecute(Sender: TObject);
+var doc: TDocRecord;
+begin
+  doc := TDocRecord.Create(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value, True);
+  DocRecordList.Add(doc);
+  dbgeDocuments.DataSource.DataSet.Delete;
+  //TPersonController.Instance.DeleteDocument();
 end;
 
 procedure TfmStudent.actDeleteAddressExecute(Sender: TObject);
@@ -1187,6 +1226,15 @@ begin
     actUndo.enabled := true
   else
     actUndo.enabled := false;
+end;
+
+procedure TfmStudent.actUpdateDocumentExecute(Sender: TObject);
+begin
+  frmAddDocument := TfrmAddDocument.Create(self);
+  frmAddDocument.isAbit := (self.Name = 'fmAbitCard');
+  frmAddDocument.DocID := dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value;
+  frmAddDocument.ShowModal;
+  frmAddDocument.Free;
 end;
 
 procedure TfmStudent.BbSaveclick(Sender: TObject);

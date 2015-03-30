@@ -38,10 +38,6 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\FrameFac.htm'
         Caption = #1057#1087#1080#1089#1086#1082' '#1082#1072#1092#1077#1076#1088
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -82,47 +78,40 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsDepartments
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = RUSSIAN_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          ImeMode = imDisable
+          IndicatorOptions = []
           Options = [dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           RowHeight = 16
           TabOrder = 1
-          TitleFont.Charset = RUSSIAN_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
           OnDblClick = DBGridEh1DblClick
           OnKeyDown = DBGridEh1KeyDown
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Ik_kaf'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_kaf'
               Footers = <>
               Title.Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074
               Width = 500
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsTimeNorm: TTabSheet
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\Add_NormOfTime.htm'
         Caption = #1053#1086#1088#1084#1099' '#1074#1088#1077#1084#1077#1085#1080
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Bevel2: TBevel
           Left = 0
           Top = 381
@@ -203,6 +192,7 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
               Width = 236
               Height = 19
               AlwaysShowBorder = True
+              DataField = ''
               EditButtons = <>
               Flat = True
               TabOrder = 0
@@ -237,36 +227,31 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
               AutoFitColWidths = True
               ColumnDefValues.Title.TitleButton = True
               DataSource = dsNormOfTime
+              DynProps = <>
               Flat = True
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'MS Sans Serif'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              GridLineParams.VertEmptySpaceStyle = dessNonEh
+              IndicatorOptions = [gioShowRowIndicatorEh]
               Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-              OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghDialogFind]
+              OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghDialogFind, dghColumnResize, dghColumnMove]
               ParentFont = False
               ParentShowHint = False
               PopupMenu = PopupMenu2
               ShowHint = True
               SortLocal = True
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clBlack
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = []
-              TitleHeight = 15
-              UseMultiTitle = True
+              TitleParams.MultiTitle = True
+              TitleParams.RowHeight = 15
               OnDblClick = dbgVidZanyatDblClick
               OnKeyDown = dbgVidZanyatKeyDown
               OnMouseMove = dbgVidZanyatMouseMove
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
             object ToolBar5: TToolBar
               Left = 545
@@ -336,36 +321,31 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
               AutoFitColWidths = True
               ColumnDefValues.Title.TitleButton = True
               DataSource = dsNormOfTimeForPractice
+              DynProps = <>
               Flat = True
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              FooterColor = clWindow
-              FooterFont.Charset = DEFAULT_CHARSET
-              FooterFont.Color = clWindowText
-              FooterFont.Height = -11
-              FooterFont.Name = 'MS Sans Serif'
-              FooterFont.Style = []
+              FooterParams.Color = clWindow
+              GridLineParams.VertEmptySpaceStyle = dessNonEh
+              IndicatorOptions = [gioShowRowIndicatorEh]
               Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-              OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghDialogFind]
+              OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghDialogFind, dghColumnResize, dghColumnMove]
               ParentFont = False
               ParentShowHint = False
               PopupMenu = PopupMenu3
               ShowHint = True
               SortLocal = True
               TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clBlack
-              TitleFont.Height = -11
-              TitleFont.Name = 'MS Sans Serif'
-              TitleFont.Style = []
-              TitleHeight = 15
-              UseMultiTitle = True
+              TitleParams.MultiTitle = True
+              TitleParams.RowHeight = 15
               OnDblClick = dbgVidZanyatDblClick
               OnKeyDown = dbgVidZanyatKeyDown
               OnMouseMove = dbgVidZanyatMouseMove
+              object RowDetailData: TRowDetailPanelControlEh
+              end
             end
             object ToolBar7: TToolBar
               Left = 545
@@ -450,10 +430,6 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
         HelpKeyword = #1053#1072#1075#1088#1091#1079#1082#1072'\Add_PlanContingent.htm'
         Caption = #1054#1078#1080#1076#1072#1077#1084#1099#1081' '#1082#1086#1085#1090#1080#1085#1075#1077#1085#1090
         ImageIndex = 8
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Bevel1: TBevel
           Left = 0
           Top = 381
@@ -517,23 +493,17 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
             AllowedOperations = [alopInsertEh, alopUpdateEh, alopDeleteEh]
             AutoFitColWidths = True
             DataSource = dsPlanContingentOfSepGroups
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = RUSSIAN_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = [gioShowRowIndicatorEh]
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
-            TitleFont.Charset = RUSSIAN_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            UseMultiTitle = True
+            TitleParams.MultiTitle = True
             OnDblClick = dbgPlanContingentDblClick
             OnDrawDataCell = dbgPlanContingentDrawDataCell
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
           object Panel12: TPanel
             Left = 0
@@ -633,7 +603,7 @@ inherited fmNagruzkaFac: TfmNagruzkaFac
     Left = 488
     Top = 73
     Bitmap = {
-      494C01010E001300300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010E001300340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000C7C3C300827878008278780082787800827878008278

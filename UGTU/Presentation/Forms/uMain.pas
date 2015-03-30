@@ -398,6 +398,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka, uNagruzk
   uSheduleSemester, uAbitOtchetsController,udmUspevaemost, SheduleController,
   uNagruzkaSemester, ApplicationController,uAbitConfirm, udmCauses, DBTVInviteObj,
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj,HOST_Projivaysh,DBTVHabitatsPersonObj, uChangePlanFromGrup,
+  CommandController,
   uPerson;
 
 {$R *.dfm}
@@ -2230,6 +2231,7 @@ procedure TfrmMain.actAddDepPlanExecute(Sender: TObject);
 begin
   (ActiveFrame as TfmNagruzkaDep).actEditPlanExecute((ActiveFrame as TfmNagruzkaDep).actAddPlan);
 end;
+
 
 procedure TfrmMain.actAddPlanPrepNagruzkaExecute(Sender: TObject);
 begin

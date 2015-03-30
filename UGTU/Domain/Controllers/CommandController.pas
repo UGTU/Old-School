@@ -79,9 +79,58 @@ type
     procedure Annul;
   end;
 
+  // добавить документ
+  TAddDocument = class(TBaseADOCommand)
+  public
+    constructor Create(nCode: integer); overload;
+    procedure Add(aVidDoc, aBalls: integer;
+      aSeria, aNumber, aWho, aAddInfo: string; aIsReal: boolean;
+      aGetDate, aDiscIK: Variant);
+  end;
+
+  // редактировать документ
+  TUpdateDocument = class(TBaseADOCommand)
+  public
+    constructor Create(ikDoc: integer); overload;
+    procedure Update(aVidDoc, aBalls: integer;
+      aSeria, aNumber, aWho, aAddInfo: string; aIsReal: boolean;
+      aGetDate, aDiscIK: Variant);
+  end;
+
+  TDeleteDocument = class(TBaseADOCommand)
+  public
+    constructor Create(ikDoc: integer); overload;
+    procedure Delete;
+  end;
+
+
   // ------------------------------------ СЕЛЕКТОРЫ-----------------------------
   TStudentController = class(TBaseSelectController)
 
+  end;
+
+  TDocumentSelect = class(TBaseSelectController)
+  private
+    FVidIK: integer;
+	  Fseria:	Variant;
+	  Fnumber:	Variant;
+	  FGetDate: Variant;
+	  FWho:	Variant;
+	  Fisreal: boolean;
+	  Faddinfo:	Variant;
+	  Fballs: Variant;
+	  FikDisc: Variant;
+  public
+    constructor Create(aDocID: integer);
+    property VidIK: integer read FVidIK;
+	  property seria:	Variant read Fseria;
+	  property number:	Variant read Fnumber;
+	  property GetDate: Variant read FGetDate;
+	  property Who:	Variant read FWho;
+	  property isreal: boolean read Fisreal;
+	  property addinfo:	Variant read Faddinfo;
+	  property balls: Variant read Fballs;
+	  property ikDisc: Variant read FikDisc;
   end;
 
   TUspevController = class(TBaseSelectController)
@@ -107,7 +156,7 @@ type
   end;
 
   { управление планами }
-  TUchPlanController = class(TBaseSelectController)
+  TUchPlanSelector = class(TBaseSelectController)
   private
     FYear: integer;
     FGroup: integer;
@@ -125,7 +174,7 @@ type
   TGroupController = class(TBaseSelectController)
   private
     FikGroup: integer;
-    FUchPlans: TUchPlanController;
+    FUchPlans: TUchPlanSelector;
     procedure SetGroup(const Value: integer);
   public
     function GetCurrentUchPlan: integer; // текущий план
@@ -297,7 +346,7 @@ end;
 constructor TGroupController.Create;
 begin
   inherited Create('Grup');
-  FUchPlans := TUchPlanController.Create;
+  FUchPlans := TUchPlanSelector.Create;
 end;
 
 destructor TGroupController.Destroy;
@@ -484,25 +533,25 @@ begin
   FDataSet.Locate('ik_ved', Value, []);
 end;
 
-{ TUchPlanController }
+{ TUchPlanSelector }
 
-constructor TUchPlanController.Create;
+constructor TUchPlanSelector.Create;
 begin
   inherited Create('UchPlanGrup');
 end;
 
-function TUchPlanController.GetUchPlan: integer;
+function TUchPlanSelector.GetUchPlan: integer;
 begin
   Result := FDataSet.FieldByName('Ik_uch_plan').AsInteger;
 end;
 
-procedure TUchPlanController.SetGroup(const Value: integer);
+procedure TUchPlanSelector.SetGroup(const Value: integer);
 begin
   FGroup := Value;
   SetFilter('ik_grup=' + IntToStr(Value));
 end;
 
-procedure TUchPlanController.SetYear(const Value: integer);
+procedure TUchPlanSelector.SetYear(const Value: integer);
 var
   str: string;
 begin
@@ -531,9 +580,9 @@ begin
     FDataSet.First;
     for i := 0 to FDataSet.RecordCount - 1 do
     begin
-      cos := IfNull(FDataSet.FieldByName('Cosenca').Value,-1);
-      bal := IfNull(FDataSet.FieldByName('i_balls').Value,0);
-      FAppendUspev.DoIt(0, FDataSet.FieldByName('Ik_zach').AsInteger,  cos, bal);
+      cos := IfNull(FDataSet.FieldByName('Cosenca').Value, -1);
+      bal := IfNull(FDataSet.FieldByName('i_balls').Value, 0);
+      FAppendUspev.DoIt(0, FDataSet.FieldByName('Ik_zach').AsInteger, cos, bal);
 
       FDataSet.Next;
     end;
@@ -547,8 +596,8 @@ begin
     FDataSet.First;
     for i := 0 to FDataSet.RecordCount - 1 do
     begin
-      FAppendUspevKPThemeCommand.DoIt(0,FDataSet.FieldByName('Ik_zach').AsInteger,
-        FDataSet.FieldByName('cTema').AsString);
+      FAppendUspevKPThemeCommand.DoIt(0, FDataSet.FieldByName('Ik_zach')
+        .AsInteger, FDataSet.FieldByName('cTema').AsString);
       FDataSet.Next;
     end;
   finally
@@ -585,9 +634,10 @@ begin
     ParamByName('@Ik_studGrup').Value := StudGrupIK;
     ParamByName('@Ik_zach').Value := ZachIK;
     ParamByName('@Cosenca').Value := Cosenca;
-    if Cosenca>0 then
+    if Cosenca > 0 then
       ParamByName('@i_balls').Value := Balls
-      else ParamByName('@i_balls').Value := NULL;
+    else
+      ParamByName('@i_balls').Value := NULL;
   end;
   FStor.ExecProc;
 end;
@@ -624,7 +674,8 @@ begin
   end;
 end;
 
-procedure TAppendUspevKPThemeCommand.DoIt(StudGrupIK, ZachIK: integer; KPTheme: string);
+procedure TAppendUspevKPThemeCommand.DoIt(StudGrupIK, ZachIK: integer;
+  KPTheme: string);
 begin
   with FStor.Parameters do
   begin
@@ -739,7 +790,8 @@ begin
 
       FAppendUspevCommand.DoIt(FStudGrupIK, 0, Cosenca, 0); // сохраняем оценку
       if KPTema <> '' then
-        FAppendUspevKPThemeCommand.DoIt(FStudGrupIK,0, KPTema); // сохраняем тему
+        FAppendUspevKPThemeCommand.DoIt(FStudGrupIK, 0, KPTema);
+      // сохраняем тему
       FVedCommand.Update(FieldByName('ik_vid_exam').Value,
         FieldByName('cNumber_ved').Value, // закрываем направление
         ntab, date_exam, true, true);
@@ -1061,13 +1113,13 @@ begin
 
   FDataSet.First;
   for i := 0 to FDataSet.RecordCount - 1 do
-  with FDataSet do
-  begin
-    FAppendBRSUspev.Update(FieldByName('ik_zach').AsInteger,
-    FieldByName('i_balls').AsInteger, FieldByName('PropCount').AsInteger,
-    FieldByName('Uvag_propCount').AsInteger);
-    Next;
-  end;
+    with FDataSet do
+    begin
+      FAppendBRSUspev.Update(FieldByName('ik_zach').AsInteger,
+        FieldByName('i_balls').AsInteger, FieldByName('PropCount').AsInteger,
+        FieldByName('Uvag_propCount').AsInteger);
+      Next;
+    end;
 
   FAppendBRSUspev.Free;
   Refresh;
@@ -1107,6 +1159,123 @@ begin
     ParamByName('@PropCount').Value := PropCount;
     ParamByName('@PropUvajCount').Value := PropUvajCount;
   end;
+  FStor.ExecProc;
+end;
+
+{ TAddDocument }
+
+procedure TAddDocument.Add(aVidDoc, aBalls: integer;
+  aSeria, aNumber, aWho, aAddInfo: string; aIsReal: boolean;
+  aGetDate, aDiscIK: Variant);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@ik_vid_doc').Value := aVidDoc;
+    ParamByName('@sd_seria').Value := aSeria;
+    ParamByName('@np_number').Value := aNumber;
+    ParamByName('@dd_vidan').Value := aGetDate;
+    ParamByName('@cd_kem_vidan').Value := aWho;
+    ParamByName('@isreal').Value := aIsReal;
+    ParamByName('@addinfo').Value := aAddInfo;
+    ParamByName('@balls').Value := aBalls;
+    ParamByName('@ikDisc').Value := aDiscIK;
+    FStor.ExecProc;
+  end;
+end;
+
+constructor TAddDocument.Create(nCode: integer);
+begin
+  inherited Create('AppendDoc;1');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@ncode', ftInteger, pdInput, 0, nCode);
+    CreateParameter('@ik_vid_doc', ftInteger, pdInput, 0, 0);
+    CreateParameter('@sd_seria', ftString, pdInput, 10, '');
+    CreateParameter('@np_number', ftString, pdInput, 15, '');
+    CreateParameter('@dd_vidan', ftDateTime, pdInput, 0, NULL);
+    CreateParameter('@cd_kem_vidan', ftString, pdInput, 500, '');
+    CreateParameter('@isreal', ftBoolean, pdInput, 0, 0);
+    CreateParameter('@addinfo', ftString, pdInput, 500, '');
+    CreateParameter('@balls', ftInteger, pdInput, 0, 0);
+    CreateParameter('@ikDisc', ftInteger, pdInput, 0, NULL);
+  end;
+end;
+
+{ TUpdateDocument }
+
+procedure TUpdateDocument.Update(aVidDoc, aBalls: integer;
+  aSeria, aNumber, aWho, aAddInfo: string; aIsReal: boolean;
+  aGetDate, aDiscIK: Variant);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@vid').Value := aVidDoc;
+    ParamByName('@datevidan').Value := aGetDate;
+    ParamByName('@kemvidan').Value := aWho;
+    ParamByName('@number').Value := aNumber;
+    ParamByName('@seria').Value := aSeria;
+    ParamByName('@isreal').Value := aIsReal;
+    ParamByName('@addinfo').Value := aAddInfo;
+    ParamByName('@balls').Value := aBalls;
+    ParamByName('@ikDisc').Value := aDiscIK;
+    FStor.ExecProc;
+  end;
+end;
+
+constructor TUpdateDocument.Create(ikDoc: integer);
+begin
+  inherited Create('EditDoc;1');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@ik_doc', ftInteger, pdInput, 0, ikDoc);
+    CreateParameter('@vid', ftInteger, pdInput, 0, 0);
+    CreateParameter('@datevidan', ftDateTime, pdInput, 0, NULL);
+    CreateParameter('@kemvidan', ftString, pdInput, 500, '');
+    CreateParameter('@number', ftString, pdInput, 15, '');
+    CreateParameter('@seria', ftString, pdInput, 10, '');
+    CreateParameter('@isreal', ftBoolean, pdInput, 0, 0);
+    CreateParameter('@addinfo', ftString, pdInput, 500, '');
+    CreateParameter('@balls', ftInteger, pdInput, 0, 0);
+    CreateParameter('@ikDisc', ftInteger, pdInput, 0, NULL);
+  end;
+end;
+
+{ TDocumentSelect }
+
+constructor TDocumentSelect.Create(aDocID: integer);
+begin
+  inherited Create('Stud_Document(' + IntToStr(aDocID) + ')');
+  DataSet.First;
+  with DataSet do
+  begin
+    FVidIK := FieldByName('ik_vid_doc').Value;
+    Fseria := FieldByName('cd_seria').Value;
+	  Fnumber := FieldByName('np_number').Value;
+	  FGetDate := FieldByName('dd_vidan').Value;
+	  FWho := FieldByName('cd_kem_vidan').Value;
+	  Fisreal := FieldByName('isreal').Value;
+	  Faddinfo := FieldByName('addinfo').Value;
+	  Fballs := FieldByName('balls').Value;
+	  FikDisc := FieldByName('ikDisc').Value;
+  end;
+end;
+
+{ TDeleteDocument }
+
+constructor TDeleteDocument.Create(ikDoc: integer);
+begin
+  inherited Create('DeleteDoc;1');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@ik_doc', ftInteger, pdInput, 0, ikDoc);
+  end;
+end;
+
+procedure TDeleteDocument.Delete;
+begin
   FStor.ExecProc;
 end;
 

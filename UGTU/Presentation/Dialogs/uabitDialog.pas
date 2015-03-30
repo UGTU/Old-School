@@ -72,7 +72,8 @@ var
 implementation
 
 uses udm,umain,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg, uSpravForm,
-  uDMStudentSelectionProcs, uDMStudentData, uDMAbiturientAction, uDMAdress, uDMCauses, uDMPrikaz;
+  uDMStudentSelectionProcs, uDMStudentData, uDMAbiturientAction, uDMAdress,
+  uDMCauses, uDMPrikaz, DocumentClass;
 
 
 procedure CheckFields;
