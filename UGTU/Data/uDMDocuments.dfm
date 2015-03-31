@@ -18,10 +18,6 @@ object dmDocs: TdmDocs
     object adodsDocsDateCreate: TDateTimeField
       FieldName = 'DateCreate'
     end
-    object adodsDocsNumberDoc: TStringField
-      FieldName = 'NumberDoc'
-      Size = 50
-    end
     object adodsDocsIk_studGrup: TIntegerField
       FieldName = 'Ik_studGrup'
       ReadOnly = True
@@ -103,18 +99,44 @@ object dmDocs: TdmDocs
     object adodsDocsik_type_disc: TWordField
       FieldName = 'ik_type_disc'
     end
+    object adodsDocsNumberDoc: TIntegerField
+      FieldName = 'NumberDoc'
+    end
+    object adodsDocsDateReady: TDateTimeField
+      FieldName = 'DateReady'
+    end
   end
-  object dsStatusdoc: TDataSource
-    DataSet = adodsDocs
-    Left = 15
-    Top = 130
+  object dsReviewDoc: TDataSource
+    DataSet = adodsReviewDoc
+    Left = 127
+    Top = 18
   end
-  object adodsStatusDoc: TADODataSet
+  object adodsReviewDoc: TADODataSet
     Connection = dm.DBConnect
     CursorType = ctStatic
-    CommandText = 'select * from StatusDoc'
+    Filtered = True
+    CommandText = 'select * from MagazineDocs'
     Parameters = <>
-    Left = 12
-    Top = 179
+    Left = 124
+    Top = 83
+    object StringField2: TStringField
+      FieldName = 'FIO'
+      ReadOnly = True
+      Size = 92
+    end
+    object IntegerField8: TIntegerField
+      FieldName = 'Ik_destination'
+    end
+    object adodsReviewDoccNameDestination: TStringField
+      FieldName = 'cNameDestination'
+      Size = 50
+    end
+    object adodsReviewDocIk_studGrup: TIntegerField
+      FieldName = 'Ik_studGrup'
+      ReadOnly = True
+    end
+    object adodsReviewDocIk_Document: TIntegerField
+      FieldName = 'Ik_Document'
+    end
   end
 end

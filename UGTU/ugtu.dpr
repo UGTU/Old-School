@@ -415,7 +415,8 @@ uses
   Spravka2014 in 'Domain\Classes\Spravka2014.pas',
   SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas',
   uMagaizneDoc in 'Presentation\Frames\uMagaizneDoc.pas' {fmDoc: TFrame},
-  uDMDocuments in 'Data\uDMDocuments.pas' {dmDocs: TDataModule};
+  uDMDocuments in 'Data\uDMDocuments.pas' {dmDocs: TDataModule},
+  uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {fmReviewDoc};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -462,5 +463,6 @@ begin
   Application.CreateForm(TdmHOST, dmHOST);
   Application.CreateForm(TImageFullSizeShowForm, ImageFullSizeShowForm);
   Application.CreateForm(TdmDocs, dmDocs);
+  Application.CreateForm(TfmReviewDoc, fmReviewDoc);
   Application.Run;
 end.

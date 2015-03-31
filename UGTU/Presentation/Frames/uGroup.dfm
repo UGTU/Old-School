@@ -875,9 +875,9 @@ inherited fmGroup: TfmGroup
         ImageIndex = 6
         object dbgeAtt: TDBGridEh
           Left = 0
-          Top = 84
+          Top = 96
           Width = 691
-          Height = 464
+          Height = 452
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
@@ -1066,7 +1066,7 @@ inherited fmGroup: TfmGroup
           Left = 0
           Top = 0
           Width = 691
-          Height = 22
+          Height = 25
           Images = ilMain
           ParentShowHint = False
           ShowHint = True
@@ -1094,15 +1094,16 @@ inherited fmGroup: TfmGroup
         end
         object pAttTop: TPanel
           Left = 0
-          Top = 22
+          Top = 25
           Width = 691
-          Height = 62
+          Height = 71
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 3
+          ExplicitTop = 16
           DesignSize = (
             691
-            62)
+            71)
           object Label19: TLabel
             Left = 149
             Top = 12
@@ -2647,7 +2648,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400440110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400480110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2817,10 +2818,10 @@ inherited fmGroup: TfmGroup
     Top = 183
   end
   object ilMain: TImageList
-    Left = 174
-    Top = 152
+    Left = 326
+    Top = 160
     Bitmap = {
-      494C010111004000400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000440110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3488,10 +3489,10 @@ inherited fmGroup: TfmGroup
       000000000000}
   end
   object ilDisabled: TImageList
-    Left = 201
-    Top = 152
+    Left = 369
+    Top = 160
     Bitmap = {
-      494C010105000800400110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800440110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

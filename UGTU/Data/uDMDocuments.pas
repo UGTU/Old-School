@@ -9,10 +9,7 @@ type
   TdmDocs = class(TDataModule)
     dsDocs: TDataSource;
     adodsDocs: TADODataSet;
-    dsStatusdoc: TDataSource;
-    adodsStatusDoc: TADODataSet;
     adodsDocsDateCreate: TDateTimeField;
-    adodsDocsNumberDoc: TStringField;
     adodsDocsIk_studGrup: TIntegerField;
     adodsDocsnCode: TBCDField;
     adodsDocsFIO: TStringField;
@@ -35,6 +32,15 @@ type
     adodsDocsDateEndCallSpr: TWideStringField;
     adodsDocsIk_Transfer: TIntegerField;
     adodsDocsik_type_disc: TWordField;
+    dsReviewDoc: TDataSource;
+    adodsReviewDoc: TADODataSet;
+    StringField2: TStringField;
+    IntegerField8: TIntegerField;
+    adodsReviewDoccNameDestination: TStringField;
+    adodsReviewDocIk_studGrup: TIntegerField;
+    adodsReviewDocIk_Document: TIntegerField;
+    adodsDocsNumberDoc: TIntegerField;
+    adodsDocsDateReady: TDateTimeField;
   private
     { Private declarations }
   public
