@@ -11,7 +11,7 @@ uses
   Vcl.DBLookup, uDM,
   Vcl.Mask, DBCtrlsEh, DBLookupEh, uDMStudentData, uDMDocuments, EhLibADO,
   uReviewDoc,
-  Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList,  adodb;
+  Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb;
 
 type
   TfmDoc = class(TfmBase)
@@ -128,26 +128,25 @@ begin
           begin
             dm.DBConnect.BeginTrans;
             sp_num := TADODataSet.Create(nil);
-            //надо сделать проверку на уникальность
+            // надо сделать проверку на уникальность
             try
-            dbgehMagazineDocs.DataSource.DataSet.Edit;
-            uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateCreate']
-              := Date();
-            dbgehMagazineDocs.DataSource.DataSet.Post;
-            DecodeDate(Now, AYear, AMonth, ADay);
+              dbgehMagazineDocs.DataSource.DataSet.Edit;
+              uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateCreate']
+                := Date();
+              dbgehMagazineDocs.DataSource.DataSet.Post;
+              DecodeDate(Now, AYear, AMonth, ADay);
 
-            if Date() > StrToDateTime('01.09.' + AYear.ToString()) then
-              datebegin := '01.09.' + AYear.ToString()
-            else
-              datebegin :=
-                '01.09.' + (StrToInt(AYear.ToString()) - 1)
-                .ToString();
-              sp_num.CommandText := 'select * from MaxNumDocument(''' + datebegin+ ''''+
-              ','+''''+ DateTimeToStr(Date())+''')';
+              if Date() > StrToDateTime('01.09.' + AYear.ToString()) then
+                datebegin := '01.09.' + AYear.ToString()
+              else
+                datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1)
+                  .ToString();
+              sp_num.CommandText := 'select * from MaxNumDocument(''' +
+                datebegin + '''' + ',' + '''' + DateTimeToStr(Date()) + ''')';
               sp_num.Connection := dm.DBConnect;
               sp_num.Open;
               sp_num.First;
-               LastNum:= sp_num.FieldByName('MaxNum').AsInteger+1;
+              LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
               dm.DBConnect.CommitTrans;
             except
               dm.DBConnect.RollbackTrans;
@@ -200,7 +199,30 @@ begin
   // end;
 
   inherited;
+  with dbgehMagazineDocs.DataSource.DataSet do
+  begin
 
+    First;
+    DisableControls;
+    try
+      while not EOF do
+      begin
+        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+        begin
+          if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady').Value= Null) then
+          begin
+            dbgehMagazineDocs.DataSource.DataSet.Edit;
+            uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateReady']
+              := Date();
+            dbgehMagazineDocs.DataSource.DataSet.Post;
+          end;
+        end;
+         Next;
+      end;
+    finally
+      EnableControls;
+    end;
+  end;
 end;
 
 procedure TfmDoc.dbcmbGroupChange(Sender: TObject);

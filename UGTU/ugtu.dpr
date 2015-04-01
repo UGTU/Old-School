@@ -416,7 +416,8 @@ uses
   SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas',
   uMagaizneDoc in 'Presentation\Frames\uMagaizneDoc.pas' {fmDoc: TFrame},
   uDMDocuments in 'Data\uDMDocuments.pas' {dmDocs: TDataModule},
-  uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {fmReviewDoc};
+  uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {fmReviewDoc},
+  uDocTr in 'Presentation\Frames\uDocTr.pas' {Frame2: TFrame};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
