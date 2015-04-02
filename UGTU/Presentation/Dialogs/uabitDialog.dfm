@@ -93,8 +93,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             ExplicitHeight = 561
             inherited Panel7: TPanel
               Width = 561
-              ExplicitLeft = 14
-              ExplicitTop = -1
               ExplicitWidth = 561
               inherited Label4: TLabel
                 Top = 48
@@ -119,21 +117,22 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label45: TLabel
                 Top = 5
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitTop = 5
+                ExplicitWidth = 6
               end
               inherited Label46: TLabel
                 Top = 4
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitTop = 4
+                ExplicitWidth = 6
               end
               inherited Label48: TLabel
-                Width = 17
-                ExplicitWidth = 17
-              end
-              inherited Label49: TLabel
-                Left = 252
-                Width = 20
-                ExplicitLeft = 252
-                ExplicitWidth = 20
+                Width = 6
+                Font.Style = [fsBold]
+                ExplicitWidth = 6
               end
               inherited Label50: TLabel
                 Left = 392
@@ -206,6 +205,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             inherited Panel8: TPanel
               Width = 561
               Height = 264
+              ParentFont = False
               ExplicitWidth = 561
               ExplicitHeight = 264
               inherited Label1: TLabel
@@ -293,8 +293,11 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               inherited Label62: TLabel
                 Left = 92
                 Top = 209
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitLeft = 92
                 ExplicitTop = 209
+                ExplicitWidth = 6
               end
               object Label64: TLabel [13]
                 Left = 13
@@ -313,14 +316,14 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               object Label68: TLabel [15]
                 Left = 159
                 Top = 4
-                Width = 4
+                Width = 6
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               inherited Label63: TLabel
@@ -478,6 +481,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Top = 426
               Width = 561
               Height = 134
+              ParentFont = False
               ExplicitTop = 426
               ExplicitWidth = 561
               ExplicitHeight = 134
@@ -488,14 +492,14 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               object Label9: TLabel [3]
                 Left = 53
                 Top = 4
-                Width = 27
+                Width = 6
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               inherited sgAddress: TStringGrid
@@ -529,21 +533,22 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label52: TLabel
                 Top = 9
-                Width = 16
+                Width = 6
+                Font.Style = [fsBold]
                 ExplicitTop = 9
-                ExplicitWidth = 16
+                ExplicitWidth = 6
               end
               object Label3: TLabel [4]
                 Left = 100
                 Top = 55
-                Width = 37
+                Width = 6
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clRed
                 Font.Height = -11
                 Font.Name = 'MS Sans Serif'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               inherited dbcbeNationality: TDBLookupComboboxEh
@@ -572,6 +577,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
             inherited Panel2: TPanel
               Width = 561
               Height = 276
+              ParentFont = False
               ExplicitWidth = 561
               ExplicitHeight = 276
               inherited Label31: TLabel
@@ -704,15 +710,86 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           ExplicitHeight = 561
           inherited sbAddDoc: TSpeedButton
             Left = 520
+            Glyph.Data = {
+              36040000424D3604000000000000360000002800000010000000100000000100
+              2000000000000004000000000000000000000000000000000000FF00FF009C96
+              8C007B69630073615A0073615A00D6CFC6006349310063493100634931006349
+              3100634931006349310063493100D6CFC600FF00FF00FF00FF00AD796B00DEAE
+              9C00D6AE9C00D6A69C00D6A69400BDA69400F7E7DE00DEC7B500DEBEAD00DEBE
+              AD00D6BEA500D6BEA500D6B6A50063493100FF00FF00FF00FF00B5867300FFE7
+              CE00FFE7CE00FFDFC600FFDFC600BDA69400FFEFE700F7E7DE00F7DFD6006349
+              3100F7D7CE00EFD7C600D6BEA50063493100FF00FF00FF00FF00BD8E7300FFE7
+              CE00FFE7CE00FFE7CE00FFDFC600BDA69400FFF7EF00F7EFE700F7E7DE006349
+              3100F7DFCE00F7D7CE00D6BEA50063493100FF00FF00FF00FF00C68E7B00FFE7
+              D600FFE7D600FFE7CE00FFE7CE00BDA69400FFF7F70063493100634931006349
+              31006349310063493100DEBEAD0063493100FF00FF00FF00FF00CE967B00FFEF
+              DE00FFE7D600FFE7D600FFE7CE00BDAE9C00FFF7F700FFF7EF00FFEFE7006349
+              3100F7E7DE00F7DFD600DEBEAD0063493100FF00FF00FF00FF00CE9E8400FFEF
+              DE00FFEFDE00FFE7D600FFE7D600C6AE9C00FFFFFF00FFF7F700FFF7EF006349
+              3100F7EFE700F7E7DE00DEC7AD0063493100FF00FF00FF00FF00D6A68400FFEF
+              E700FFEFDE00FFEFDE00FFEFD600C6AE9C00FFFFFF00FFFFFF00FFF7F700FFF7
+              F700FFF7EF00FFEFE700F7E7DE0063493100FF00FF00FF00FF00DEAE8400FFF7
+              E700FFEFE700FFEFDE00FFEFDE00EFEFE700C6AE9C00C6AE9C00BDAE9C00BDA6
+              9C00BDA69400BDA69400BDA69400D6CFC600FF00FF00FF00FF00DEAE8400FFF7
+              EF00FFF7E700FFEFE700FFEFDE00FFEFDE00FFEFDE00FFE7D600FFE7D600FFE7
+              CE00FFE7CE00F7CFBD0073615A00BDB6B500FF00FF00FF00FF00DEAE8400FFF7
+              EF00FFF7EF00FFF7E700FFEFE700FFEFE700FFEFDE00FFEFDE00FFEFD600FFE7
+              D600FFE7D600F7CFBD007B615A00C6BEB500FF00FF00FF00FF00DEAE8400FFFF
+              F700FFF7EF00FFF7EF00FFF7EF00FFF7E700FFEFE700FFEFDE00FFEFDE00FFEF
+              DE00FFE7D600F7CFBD008C797300CEC7C600FF00FF00FF00FF00DEAE8400FFFF
+              F700FFFFF700FFF7F700FFF7EF00FFF7EF00FFF7E700FFEFE700FFD7CE00FFD7
+              CE00F7B6AD00B58E7B00AD9E9400DEDFD600FF00FF00FF00FF00DEAE8400FFFF
+              FF00FFFFF700FFFFF700FFF7F700FFF7EF00FFF7EF00FFF7E700F7A64200F7A6
+              4200E796420094867B00CEC7C600F7EFEF00FF00FF00FF00FF00DEAE8400FFFF
+              FF00FFFFFF00FFFFFF00FFFFF700FFFFF700FFF7EF00FFF7EF00DEAE8400EFB6
+              73008C716300BDAEAD00E7E7DE00FFFFF700FF00FF00FF00FF00DEAE8400DEAE
+              8400DEAE8400DEAE8400DEAE8400DEAE8400DEAE8C00D6A68400DEAE8400FFF7
+              EF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
             ExplicitLeft = 520
           end
           inherited SbDelDoc: TSpeedButton
             Left = 520
+            Glyph.Data = {
+              36040000424D3604000000000000360000002800000010000000100000000100
+              2000000000000004000000000000000000000000000000000000FF00FF009C96
+              8C007B69630073615A0073615A00D6CFC6006349310063493100634931006349
+              3100634931006349310063493100D6CFC600FF00FF00FF00FF00AD796B00DEAE
+              9C00D6AE9C00D6A69C00D6A69400BDA69400F7E7DE00F7DFCE00F7D7CE00EFD7
+              C600EFD7BD00EFCFBD00EFCFB50063493100FF00FF00FF00FF00B5867300FFE7
+              CE00FFE7CE00FFDFC600FFDFC600BDA69400FFEFE700F7E7DE00F7DFD600F7DF
+              CE00F7D7CE00EFD7C600EFCFBD0063493100FF00FF00FF00FF00BD8E7300FFE7
+              CE00FFE7CE00FFE7CE00FFDFC600BDA69400FFF7EF00F7EFE700F7E7DE00F7DF
+              D600F7DFCE00F7D7CE00EFD7BD0063493100FF00FF00FF00FF00C68E7B00FFE7
+              D600FFE7D600FFE7CE00FFE7CE00BDA69400FFF7F70063493100634931006349
+              31006349310063493100EFD7C60063493100FF00FF00FF00FF00CE967B00FFEF
+              DE00FFE7D600FFE7D600FFE7CE00BDAE9C00FFF7F700FFF7EF00FFEFE700F7EF
+              E700F7E7DE00F7DFD600F7D7CE0063493100FF00FF00FF00FF00CE9E8400FFEF
+              DE00FFEFDE00FFE7D600FFE7D600C6AE9C00FFFFFF00FFF7F700FFF7EF00FFEF
+              E700F7EFE700F7E7DE00F7DFCE0063493100FF00FF00FF00FF00D6A68400FFEF
+              E700FFEFDE00FFEFDE00FFEFD600C6AE9C00FFFFFF00FFFFFF00FFF7F700FFF7
+              F700FFF7EF00FFEFE700F7E7DE0063493100FF00FF00FF00FF00DEAE8400FFF7
+              E700FFEFE700FFEFDE00FFEFDE00EFEFE700C6AE9C00C6AE9C00BDAE9C00BDA6
+              9C00BDA69400BDA69400BDA69400D6CFC600FF00FF00FF00FF00DEAE8400FFF7
+              EF00FFF7E700FFEFE700FFEFDE00FFEFDE00FFEFDE00FFE7D600FFE7D600FFE7
+              CE00FFE7CE00F7CFBD0073615A00BDB6B500FF00FF00FF00FF00DEAE8400FFF7
+              EF00FFF7EF00FFF7E700FFEFE700FFEFE700FFEFDE00FFEFDE00FFEFD600FFE7
+              D600FFE7D600F7CFBD007B615A00C6BEB500FF00FF00FF00FF00DEAE8400FFFF
+              F700FFF7EF00FFF7EF00FFF7EF00FFF7E700FFEFE700FFEFDE00FFEFDE00FFEF
+              DE00FFE7D600F7CFBD008C797300CEC7C600FF00FF00FF00FF00DEAE8400FFFF
+              F700FFFFF700FFF7F700FFF7EF00FFF7EF00FFF7E700FFEFE700FFD7CE00FFD7
+              CE00F7B6AD00B58E7B00AD9E9400DEDFD600FF00FF00FF00FF00DEAE8400FFFF
+              FF00FFFFF700FFFFF700FFF7F700FFF7EF00FFF7EF00FFF7E700F7A64200F7A6
+              4200E796420094867B00CEC7C600F7EFEF00FF00FF00FF00FF00DEAE8400FFFF
+              FF00FFFFFF00FFFFFF00FFFFF700FFFFF700FFF7EF00FFF7EF00DEAE8400EFB6
+              73008C716300BDAEAD00E7E7DE00FFFFF700FF00FF00FF00FF00DEAE8400DEAE
+              8400DEAE8400DEAE8400DEAE8400DEAE8400DEAE8C00D6A68400DEAE8400FFF7
+              EF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
             ExplicitLeft = 520
           end
           inherited sgDocs: TStringGrid
             Height = 561
             ColCount = 5
+            ParentFont = False
             ExplicitHeight = 561
             ColWidths = (
               119
@@ -727,7 +804,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

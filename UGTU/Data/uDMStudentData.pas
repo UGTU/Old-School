@@ -114,6 +114,8 @@ type
     adodsAcademIsFreeAttendance: TBooleanField;
     adodsAcademcObosnOtch: TStringField;
     adsIsOnVacation: TADODataSet;
+    adodsAbitDisc: TADODataSet;
+    dsAbitDisc: TDataSource;
     procedure adodsSmallGroupCalcFields(DataSet: TDataSet);
     procedure adodsPrikazCalcFields(DataSet: TDataSet);
   private

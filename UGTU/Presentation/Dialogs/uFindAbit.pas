@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBCtrlsEh, StdCtrls, Mask, Buttons, GridsEh, DBGridEh,
-  ActnList, ExtCtrls, uDMStudentData, uPostupdlg, ADODB, DB;
+  ActnList, ExtCtrls, uDMStudentData, uPostupdlg, ADODB, DB, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type
   TfrmFindAbit = class(TfrmBaseDialog)
@@ -54,13 +55,14 @@ procedure TfrmFindAbit.actApplyExecute(Sender: TObject);
 begin
 
   //подгрузить документы абитуриента
-  with dmStudentSelectionProcs.aspSelDocuments do
+  with dmStudentSelectionProcs.adoSelDocuments do
   begin
     Active:=false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value:=dmStudentData.aspFindAbit.FieldByName('ncode').Value;;
-    ExecProc;
+    //Parameters.Clear;
+    //Parameters.AddParameter;
+    CommandText := 'select * from SelStudDocuments('+IntToStr(dmStudentData.aspFindAbit.FieldByName('ncode').Value)+')';
+    //Parameters[0].Value:=dmStudentData.aspFindAbit.FieldByName('ncode').Value;;
+    //ExecProc;
     Active:=true;
   end;
 

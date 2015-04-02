@@ -8,7 +8,8 @@ uses
   Dialogs, uStudent, DBGridEh, ExtDlgs, ImgList, StdCtrls, Buttons, ADODB,
   ExtCtrls, DBCtrlsEh, DBCtrls, Mask, DBLookupEh, Grids, ComCtrls, ToolWin,
   GridsEh, ActnList, Menus, uDMAbiturientAction, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh, System.Generics.Collections,
+  DocumentClass;
 
 type
   TfmAbitCard = class(TfmStudent)
@@ -20,6 +21,8 @@ type
     GroupBox5: TGroupBox;
     dbgeAdditionalSpec: TDBGridEh;
     ToolButton15: TToolButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     procedure dbgeListsCellClick(Column: TColumnEh);
     procedure eFamChange(Sender: TObject);
     procedure BbSaveclick(Sender: TObject);
@@ -49,7 +52,7 @@ uses uDM, db, Umain, DBTVObj, DBTVGroupObj, ComObj,
   DBTVStudAbitObj, DBTVStudObj, DBTVspecRecObj, DBTVRecruitobj, uDipl, jpeg,
   VarfileUtils,
   uBaseFrame, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
-  uDMPrikaz, ExceptionBase;
+  uDMPrikaz, ExceptionBase, PersonController;
 
 {$R *.dfm}
 { TfmAbitCard }
@@ -62,6 +65,9 @@ begin
 
   Floaded := false;
   PageControl1.ActivePageIndex := 0;
+
+  if not Assigned(FDocRecordList) then
+      FDocRecordList := TObjectList<TDocRecord>.Create(True);
 
   with dmStudentData do
   begin
@@ -199,14 +205,14 @@ begin
     Active := true;
   end;
 
-  with dmStudentSelectionProcs.aspSelDocuments do
+  with dmStudentSelectionProcs.adoSelDocuments do
   begin
-    Active := false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.id;
-    ExecProc;
-    Active := true;
+    Close;
+    CommandText := 'select * from SelStudDocuments('+IntToStr(obj.ID)+')';
+    Open;
+
+    FieldByName('balls').Visible := true;
+    FieldByName('сname_disc').Visible := true;
   end;
 
   with dmStudentSelectionProcs.aspGetPersonAddress do
@@ -308,6 +314,7 @@ function TfmAbitCard.DoApply: boolean;
 var
   stream: TMemoryStream;
   ndspec: TDBNodeSpecRecObject;
+  i: integer;
 begin
   if obj.id <> ik then
   begin
@@ -355,16 +362,30 @@ begin
     end;
   except
   end;
+
   try
-    with dmStudentSelectionProcs.aspSelDocuments do
+    with DocRecordList do
+    for I := 0 to Count - 1 do
     begin
-      Edit;
-      UpdateRecord;
-      Post;
-      open;
+      if (Items[i].ikDoc <> 0) then
+      begin
+        if Items[i].isDeleted then
+          TPersonController.Instance.DeleteDocument(Items[i].ikDoc) //удалить
+        else TPersonController.Instance.UpdateDocument(Items[i]) // редактировать
+      end
+      else
+        TPersonController.Instance.AddDocument(obj.ID, Items[i]);  //добавить
     end;
   except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
+        exit;
+      end;
   end;
+  DocRecordList.Clear;
+
+
   with dmAbiturientAction.aspAppendAbit.Parameters do
   begin
     Clear;

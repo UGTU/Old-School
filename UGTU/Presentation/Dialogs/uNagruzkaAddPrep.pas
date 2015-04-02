@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, DBLookupEh, StdCtrls, Mask, DBCtrlsEh,
   ActnList, Buttons, ExtCtrls, ADODB, DB, GeneralController, NagruzkaController,
-  GridsEh, ImgList, ComCtrls, ToolWin;
+  GridsEh, ImgList, ComCtrls, ToolWin, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type
   TfrmNagruzkaAddPrep = class(TfrmBaseDialog)

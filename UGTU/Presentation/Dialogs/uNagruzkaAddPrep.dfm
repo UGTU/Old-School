@@ -8,7 +8,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
   OldCreateOrder = True
   OnCreate = FormCreate
   ExplicitWidth = 580
-  ExplicitHeight = 380
+  ExplicitHeight = 377
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -286,6 +286,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
     Width = 133
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 0
@@ -298,6 +299,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
     Width = 127
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 1
@@ -310,6 +312,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
     Width = 124
     Height = 19
     AlwaysShowBorder = True
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 2
@@ -360,6 +363,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
       Width = 495
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 0
@@ -372,6 +376,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
       Width = 495
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 2
@@ -384,6 +389,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
       Width = 495
       Height = 19
       AlwaysShowBorder = True
+      DataField = ''
       EditButtons = <>
       Flat = True
       TabOrder = 1
@@ -397,6 +403,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
     Width = 303
     Height = 19
     AlwaysShowBorder = True
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 3
@@ -409,6 +416,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
     Width = 124
     Height = 19
     AlwaysShowBorder = True
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 4
@@ -451,23 +459,16 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
       AllowedOperations = [alopInsertEh, alopUpdateEh, alopDeleteEh]
       AutoFitColWidths = True
       DataSource = dsWorkTypes
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
       Columns = <
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cName_work_type'
           Footers = <>
@@ -475,6 +476,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
           Width = 125
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cName_capacity'
           Footers = <>
@@ -482,6 +484,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
           Width = 84
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cName_defence_fund'
           Footers = <>
@@ -489,6 +492,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
           Width = 81
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'f_rates'
           Footers = <>
@@ -496,12 +500,15 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
           Width = 50
         end
         item
+          DynProps = <>
           EditButtons = <>
           FieldName = 'release_date'
           Footers = <>
           Title.Caption = #1044#1072#1090#1072' '#1091#1074#1086#1083#1100#1085#1077#1085#1080#1103
           Width = 100
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object Panel2: TPanel
       Left = 546
@@ -582,7 +589,7 @@ inherited frmNagruzkaAddPrep: TfrmNagruzkaAddPrep
     Left = 304
     Top = 80
     Bitmap = {
-      494C010102000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

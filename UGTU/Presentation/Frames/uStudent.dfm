@@ -3,6 +3,7 @@ inherited fmStudent: TfmStudent
   Height = 684
   Constraints.MinHeight = 524
   Constraints.MinWidth = 561
+  OnExit = FrameExit
   ExplicitWidth = 725
   ExplicitHeight = 684
   object ToolBar1: TToolBar [0]
@@ -157,7 +158,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 713
             Height = 587
-            ActivePage = TabSheet3
+            ActivePage = TabSheet6
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -1171,19 +1172,27 @@ inherited fmStudent: TfmStudent
                 555)
               object dbgeDocuments: TDBGridEh
                 Left = 0
-                Top = 29
-                Width = 705
-                Height = 468
-                Anchors = [akLeft, akTop, akRight, akBottom]
+                Top = 0
+                Width = 654
+                Height = 555
+                Align = alClient
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
                 DynProps = <>
                 Flat = True
                 FooterParams.Color = clWindow
                 IndicatorOptions = []
-                Options = [dgEditing, dgTitles, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                 RowHeight = 18
                 TabOrder = 0
+                TitleParams.Font.Charset = DEFAULT_CHARSET
+                TitleParams.Font.Color = clWindowText
+                TitleParams.Font.Height = -11
+                TitleParams.Font.Name = 'Tahoma'
+                TitleParams.Font.Style = []
+                TitleParams.ParentFont = False
+                OnCellClick = dbgeDocumentsCellClick
+                OnDblClick = dbgeDocumentsDblClick
                 OnExit = dbgeFamExit
                 object RowDetailData: TRowDetailPanelControlEh
                 end
@@ -1210,6 +1219,39 @@ inherited fmStudent: TfmStudent
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 1
+                Visible = False
+              end
+              object pnlToolDoc: TPanel
+                Left = 654
+                Top = 0
+                Width = 51
+                Height = 555
+                Align = alRight
+                TabOrder = 2
+                object sbAddDoc: TSpeedButton
+                  Left = 9
+                  Top = 9
+                  Width = 23
+                  Height = 22
+                  Action = actAddDocument
+                  Flat = True
+                end
+                object SpeedButton7: TSpeedButton
+                  Left = 9
+                  Top = 37
+                  Width = 23
+                  Height = 22
+                  Action = actUpdateDocument
+                  Flat = True
+                end
+                object SbDelDoc: TSpeedButton
+                  Left = 9
+                  Top = 65
+                  Width = 23
+                  Height = 22
+                  Action = actDelDocument
+                  Flat = True
+                end
               end
             end
             object TabSheet7: TTabSheet
@@ -1988,7 +2030,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2319,9 +2361,26 @@ inherited fmStudent: TfmStudent
       ImageIndex = 62
       OnExecute = actPropToFactExecute
     end
+    object actAddDocument: TAction
+      Category = 'ctDocument'
+      ImageIndex = 44
+      OnExecute = actAddDocumentExecute
+    end
+    object actUpdateDocument: TAction
+      Category = 'ctDocument'
+      Enabled = False
+      ImageIndex = 43
+      OnExecute = actUpdateDocumentExecute
+    end
+    object actDelDocument: TAction
+      Category = 'ctDocument'
+      Enabled = False
+      ImageIndex = 42
+      OnExecute = actDelDocumentExecute
+    end
   end
   object ppmSpravToExcel: TPopupMenu
-    Left = 375
+    Left = 383
     Top = 138
     object MenuItem1: TMenuItem
       Action = actPrintSprav
@@ -2335,7 +2394,7 @@ inherited fmStudent: TfmStudent
   end
   object ppmStudNapr: TPopupMenu
     Images = frmMain.ImageList1
-    Left = 320
+    Left = 296
     Top = 136
     object N1: TMenuItem
       Action = frmMain.actNapr

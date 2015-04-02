@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uStudDlg, DBGridEh, ExtDlgs, ImgList, ActnList, StdCtrls, Grids,
   DBCtrlsEh, DBLookupEh, Buttons, Mask, ExtCtrls, ComCtrls, adodb, jpeg, VarfileUtils,
-  DateUtils, System.Actions;
+  DateUtils, System.Actions, System.Generics.Collections;
 
 type
   TfrmAbitCardDialog = class(TftmStudent)
@@ -72,7 +72,8 @@ var
 implementation
 
 uses udm,umain,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg, uSpravForm,
-  uDMStudentSelectionProcs, uDMStudentData, uDMAbiturientAction, uDMAdress, uDMCauses, uDMPrikaz;
+  uDMStudentSelectionProcs, uDMStudentData, uDMAbiturientAction, uDMAdress,
+  uDMCauses, uDMPrikaz, DocumentClass;
 
 
 procedure CheckFields;
@@ -135,6 +136,9 @@ frmPostupDlg.HasAddSpec:=HasAddSpec;
 frmPostupDlg.IDpostup:=-1;
 frmPostupDlg.Showmodal;
 frmpostupDlg.Free;
+AddressRecordList.Free;
+DocRecordList.Free;
+
 frmMain.actTreeRefreshActionExecute(Sender);
 
 end;
@@ -175,6 +179,9 @@ begin
   sgDocs.Cells[2,0]:='Номер';
   sgDocs.Cells[3,0]:='Дата выдачи';
   sgDocs.Cells[4,0]:='Кем выдан';
+  sgDocs.Cells[5, 0] := 'Оригинал';
+  sgDocs.Cells[6, 0] := 'Баллов';
+  sgDocs.Cells[7, 0] := 'Дисциплина';
 
   sgAddress.Cells[0,0]:='Тип адреса';
   sgAddress.Cells[1,0]:='Страна';
@@ -184,8 +191,7 @@ begin
   sgAddress.Cells[5,0]:='Квартира';
 
   AddressRecordList:= Tlist.Create;
-
-
+  DocRecordList := TObjectList<TDocRecord>.Create;
 
   with dmAdress do
   begin

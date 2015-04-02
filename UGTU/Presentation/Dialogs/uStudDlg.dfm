@@ -95,9 +95,15 @@ inherited ftmStudent: TftmStudent
         Top = 0
         Width = 566
         Height = 556
-        ActivePage = TabSheet3
+        ActivePage = TabSheet2
         Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
         Images = ilPages
+        ParentFont = False
         Style = tsFlatButtons
         TabOrder = 0
         object TabSheet3: TTabSheet
@@ -115,9 +121,13 @@ inherited ftmStudent: TftmStudent
               Width = 556
               Height = 161
               Align = alTop
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 0
-              ExplicitLeft = -19
-              ExplicitTop = 0
               object Bevel2: TBevel
                 Left = 452
                 Top = 47
@@ -206,37 +216,10 @@ inherited ftmStudent: TftmStudent
                 Font.Style = []
                 ParentFont = False
               end
-              object Label47: TLabel
-                Left = 371
-                Top = 5
-                Width = 4
-                Height = 13
-                Caption = '*'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clRed
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                Visible = False
-              end
               object Label48: TLabel
                 Left = 94
                 Top = 49
                 Width = 4
-                Height = 13
-                Caption = '*'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clRed
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-              end
-              object Label49: TLabel
-                Left = 253
-                Top = 51
-                Width = 27
                 Height = 13
                 Caption = '*'
                 Font.Charset = DEFAULT_CHARSET
@@ -402,10 +385,16 @@ inherited ftmStudent: TftmStudent
                 Height = 30
                 Caption = #1055#1086#1083
                 Columns = 2
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
                 ItemIndex = 1
                 Items.Strings = (
                   #1046
                   #1052)
+                ParentFont = False
                 TabOrder = 9
               end
             end
@@ -600,7 +589,7 @@ inherited ftmStudent: TftmStudent
                 ParentFont = False
               end
               object Label61: TLabel
-                Left = 382
+                Left = 380
                 Top = 46
                 Width = 4
                 Height = 13
@@ -1395,7 +1384,7 @@ inherited ftmStudent: TftmStudent
           Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
           ImageIndex = 3
           object sbAddDoc: TSpeedButton
-            Left = 524
+            Left = 523
             Top = 0
             Width = 23
             Height = 22
@@ -1430,7 +1419,7 @@ inherited ftmStudent: TftmStudent
             OnClick = sbAddDocClick
           end
           object SbDelDoc: TSpeedButton
-            Left = 524
+            Left = 523
             Top = 28
             Width = 23
             Height = 22
@@ -1498,7 +1487,13 @@ inherited ftmStudent: TftmStudent
             FixedCols = 0
             RowCount = 1
             FixedRows = 0
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
             GridLineWidth = 0
+            ParentFont = False
             TabOrder = 1
             Visible = False
           end
@@ -1507,8 +1502,8 @@ inherited ftmStudent: TftmStudent
     end
   end
   inherited actBaseDialog: TActionList
-    Left = 504
-    Top = 24
+    Images = frmMain.ImageList1
+    Left = 480
     inherited actApply: TAction
       OnUpdate = actApplyUpdate
     end
@@ -1534,12 +1529,24 @@ inherited ftmStudent: TftmStudent
       Enabled = False
       OnExecute = actDelAddressExecute
     end
+    object actAddDocument: TAction
+      Caption = 'actAddDocument'
+      ImageIndex = 44
+    end
+    object actUpdateDocument: TAction
+      Caption = 'actUpdateDocument'
+    end
+    object actDelDocument: TAction
+      Caption = 'actDelDocument'
+      ImageIndex = 42
+      OnExecute = actDelDocumentExecute
+    end
   end
   object ilPages: TImageList
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

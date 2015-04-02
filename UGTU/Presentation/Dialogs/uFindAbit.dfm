@@ -129,21 +129,15 @@ inherited frmFindAbit: TfrmFindAbit
     Height = 146
     AutoFitColWidths = True
     DataSource = dmStudentData.dsFindAbit
+    DynProps = <>
     Flat = True
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
+    FooterParams.Color = clWindow
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 7
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
     OnDblClick = actOKExecute
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object rbFIO: TRadioButton [10]
     Left = 16
@@ -170,6 +164,7 @@ inherited frmFindAbit: TfrmFindAbit
     Top = 58
     Width = 185
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 1
@@ -181,6 +176,7 @@ inherited frmFindAbit: TfrmFindAbit
     Top = 142
     Width = 185
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 3
@@ -192,6 +188,7 @@ inherited frmFindAbit: TfrmFindAbit
     Top = 100
     Width = 185
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 2
@@ -204,6 +201,7 @@ inherited frmFindAbit: TfrmFindAbit
     Width = 190
     Height = 19
     Alignment = taLeftJustify
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 5
