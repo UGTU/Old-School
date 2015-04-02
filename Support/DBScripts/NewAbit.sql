@@ -393,7 +393,9 @@ RETURNS @Result TABLE
 	dd_vidan		datetime,
 	cd_kem_vidan	varchar(500),
 	isreal			bit,
+	addinfo			varchar(500),
 	balls			int,
+	ik_disc			int,
 	ñname_disc		varchar(50)
  )
 AS
@@ -408,7 +410,9 @@ Begin
 	Doc_stud.Dd_vidan, 
 	Doc_stud.Cd_kem_vidan,
 	Doc_stud.isreal,
+	Doc_stud.AdditionalInfo,
 	Abit_Bonuses.balls,
+	ABIT_Disc.ik_disc,
 	ABIT_Disc.ñname_disc
 FROM Doc_stud inner join documents on Doc_stud.Ik_vid_doc = documents.ik_vid_doc
   left join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc
