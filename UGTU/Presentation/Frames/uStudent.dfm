@@ -3,6 +3,7 @@ inherited fmStudent: TfmStudent
   Height = 684
   Constraints.MinHeight = 524
   Constraints.MinWidth = 561
+  OnExit = FrameExit
   ExplicitWidth = 725
   ExplicitHeight = 684
   object ToolBar1: TToolBar [0]
@@ -1175,6 +1176,8 @@ inherited fmStudent: TfmStudent
                 TitleParams.Font.Name = 'Tahoma'
                 TitleParams.Font.Style = []
                 TitleParams.ParentFont = False
+                OnCellClick = dbgeDocumentsCellClick
+                OnDblClick = dbgeDocumentsDblClick
                 OnExit = dbgeFamExit
                 object RowDetailData: TRowDetailPanelControlEh
                 end
@@ -1992,7 +1995,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2330,11 +2333,13 @@ inherited fmStudent: TfmStudent
     end
     object actUpdateDocument: TAction
       Category = 'ctDocument'
+      Enabled = False
       ImageIndex = 43
       OnExecute = actUpdateDocumentExecute
     end
     object actDelDocument: TAction
       Category = 'ctDocument'
+      Enabled = False
       ImageIndex = 42
       OnExecute = actDelDocumentExecute
     end

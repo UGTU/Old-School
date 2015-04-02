@@ -7,7 +7,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, uDMStudentData,
   DBGridEh, DBCtrlsEh, Mask, DBLookupEh, uStuddlg, System.Actions, Vcl.ComCtrls,
-  CommandController, DocumentClass;
+  CommandController, DocumentClass, Data.Win.ADODB;
 
 type
   TfrmAddDocument = class(TfrmBaseDialog)
@@ -43,19 +43,24 @@ type
     procedure chbxBonusesClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure UpDown1Click(Sender: TObject; Button: TUDBtnType);
   private
     FnCode: integer;
     FDocID: integer;
-    // FAddCommand: TAddDocument;
+    FisEdit: boolean;
     procedure SetAbitElements(const Value: boolean);
     procedure CollectForParentDialog(aDoc: TDocRecord);
-    procedure SetDocProperties(const Value: integer);
+    procedure SetEditProperties;
     { Private declarations }
   public
     studDlg: TftmStudent;
+    property isEdit: boolean write FisEdit;
     property isAbit: boolean write SetAbitElements;
     property nCode: integer read FnCode write FnCode;
-    property DocID: integer read FDocID write SetDocProperties;
+    property DocID: integer read FDocID write FDocID;
+
+
     { Public declarations }
   end;
 
@@ -86,35 +91,47 @@ begin
     dbcbeDisc.KeyValue, eSer.Text, eNum.Text, eWho.Text, dbeAddInfo.Text,
     cbReal.Checked, dbdteGetDate.Value);
 
-  if Assigned(studDlg) then CollectForParentDialog(doc)
-  else
-  with (Owner as TfmStudent).dbgeDocuments.DataSource.DataSet do
+  if Assigned(studDlg) then
   begin
-    if FDocID <> 0 then Locate('ik_doc',FDocID,[])
-       else
-       begin
-         Last;
-         Insert;
-       end;
-    FieldByName('Np_number').Value := doc.number;
-    FieldByName('Cd_seria').Value := doc.seria;
-    FieldByName('Dd_vidan').Value := doc.get_date;
-    FieldByName('Cd_kem_vidan').Value := doc.kem_vidan;
-    FieldByName('isreal').Value := doc.isreal;
-    FieldByName('balls').Value := doc.balls;
-    FieldByName('сname_disc').Value := dbcbeDisc.Text;
+    CollectForParentDialog(doc);
+    (Owner as TftmStudent).DocRecordList.Add(doc);
+  end
+  else
+  begin
+    with (Owner as TfmStudent).dbgeDocuments.DataSource.DataSet do
+    begin
+      if FisEdit then Edit else Insert;
+      FieldByName('cvid_doc').Value := dbcbeKind.Text;
+      FieldByName('Np_number').Value := doc.number;
+      FieldByName('Cd_seria').Value := doc.seria;
+      FieldByName('Dd_vidan').Value := doc.get_date;
+      FieldByName('Cd_kem_vidan').Value := doc.kem_vidan;
+      FieldByName('isreal').Value := doc.isreal;
+      FieldByName('balls').Value := doc.balls;
+      FieldByName('сname_disc').Value := dbcbeDisc.Text;
+      FieldByName('addinfo').Value := doc.addinfo;
+      FieldByName('ik_disc').Value := doc.ikDisc;
+      FieldByName('ik_vid_doc').Value := doc.ikDocVid;
+    end;
 
+    // добавляем в коллекцию документов родителя
+   (Owner as TfmStudent).DocRecordList.Add(doc);
+   (Owner as TfmStudent).modified := true;
   end;
-    // добавляем в коллекцию документов
-  (Owner as TftmStudent).DocRecordList.Add(doc);
 
-  dbcbeKind.Value := -1;
-  eSer.Text := '';
-  eWho.Text := '';
-  dbdteGetDate.Text := '  .  .    ';
-  eNum.Text := '';
-  dbBalls.Text := '0';
-  dbcbeDisc.Value := -1;
+  IsModified := false;
+
+  if FDocID = 0 then
+    begin
+      dbcbeKind.Value := -1;
+      eSer.Text := '';
+      eWho.Text := '';
+      dbdteGetDate.Text := '  .  .    ';
+      eNum.Text := '';
+      dbBalls.Text := '0';
+      dbcbeDisc.Value := -1;
+      pnlBonuses.Visible := False;
+    end;
 end;
 
 procedure TfrmAddDocument.actCheckFieldsUpdate(Sender: TObject);
@@ -142,11 +159,14 @@ procedure TfrmAddDocument.chbxBonusesClick(Sender: TObject);
 begin
   inherited;
   pnlBonuses.Visible := chbxBonuses.Checked;
+  if not chbxBonuses.Checked then
+    dbBalls.Text := '0';
+  dbcbeKindChange(Sender);
 end;
 
 procedure TfrmAddDocument.dbcbeKindChange(Sender: TObject);
 begin
-    IsModified := CheckFields;
+  IsModified := CheckFields;
 end;
 
 procedure TfrmAddDocument.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -163,6 +183,13 @@ begin
   dmStudentData.adodsAbitDisc.Active := true;
   FnCode := 0;
   FDocID := 0;
+  FisEdit := False;
+end;
+
+procedure TfrmAddDocument.FormShow(Sender: TObject);
+begin
+  inherited;
+  SetEditProperties;
 end;
 
 procedure TfrmAddDocument.SetAbitElements(const Value: boolean);
@@ -170,7 +197,7 @@ begin
   chbxBonuses.Visible := Value;
 end;
 
-procedure TfrmAddDocument.SetDocProperties(const Value: integer);
+{procedure TfrmAddDocument.SetDocProperties(const Value: integer);
 var
   FDocument: TDocumentSelect;
 begin
@@ -179,18 +206,46 @@ begin
   with FDocument do
   begin
     dbcbeKind.KeyValue := VidIK;
-    eSer.Text := seria;
-    eNum.Text := number;
+    eSer.Text := IfNull(seria,'');
+    eNum.Text := IfNull(number,'');
     if GetDate <> NULL then
       dbdteGetDate.Text := DateToStr(GetDate);
-    eWho.Text := Who;
+    eWho.Text := IfNull(Who,'');
     cbReal.Checked := isreal;
-    dbeAddInfo.Text := addinfo;
+    dbeAddInfo.Text := IfNull(addinfo,'');
     pnlBonuses.Visible := (balls > 0);
-    dbBalls.Text := IntToStr(balls);
+    dbBalls.Text := IntToStr(IfNull(balls,0));
     dbcbeDisc.KeyValue := ikDisc;
   end;
   FDocument.Free;
+end;      }
+
+procedure TfrmAddDocument.SetEditProperties;
+begin
+  if FisEdit then
+  begin
+    frmAddDocument.Caption := 'Редактировать документ';
+    with (Owner as TfmStudent).dbgeDocuments.DataSource.DataSet do
+    begin
+      dbcbeKind.KeyValue := FieldByName('ik_vid_doc').Value;
+      eSer.Text := IfNull(FieldByName('cd_seria').Value,'');
+      eNum.Text := IfNull(FieldByName('np_number').Value,'');
+      dbdteGetDate.Text := IfNull(FieldByName('dd_vidan').AsString,'  .  .    ');
+      eWho.Text := IfNull(FieldByName('cd_kem_vidan').Value,'');
+      cbReal.Checked := FieldByName('isreal').Value;
+      dbeAddInfo.Text := IfNull(FieldByName('addinfo').Value,'');
+      pnlBonuses.Visible := (FieldByName('balls').Value > 0);
+      chbxBonuses.Checked := (FieldByName('balls').Value > 0);
+      dbBalls.Text := IntToStr(IfNull(FieldByName('balls').Value,0));
+      dbcbeDisc.KeyValue := FieldByName('ik_disc').Value;
+    end;
+  end;
+  IsModified := False;
+end;
+
+procedure TfrmAddDocument.UpDown1Click(Sender: TObject; Button: TUDBtnType);
+begin
+  dbcbeKindChange(Sender);
 end;
 
 procedure TfrmAddDocument.CollectForParentDialog(aDoc: TDocRecord);

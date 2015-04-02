@@ -239,6 +239,9 @@ type
     procedure actAddDocumentExecute(Sender: TObject);
     procedure actUpdateDocumentExecute(Sender: TObject);
     procedure actDelDocumentExecute(Sender: TObject);
+    procedure FrameExit(Sender: TObject);
+    procedure dbgeDocumentsCellClick(Column: TColumnEh);
+    procedure dbgeDocumentsDblClick(Sender: TObject);
 
   private
     Fik: integer;
@@ -247,16 +250,16 @@ type
     procedure GetUspevStat(ik_zach: integer);
 
   protected
+    FDocRecordList: TObjectList<TDocRecord>;
     procedure DoRefreshFrame; override;
     function DoApply: Boolean; override;
     function DoCancel: Boolean;
     procedure ExecuteError(Sender: TObject; E: Exception);
 
   public
-    DocRecordList: TList<TDocRecord>;
+    property DocRecordList: TObjectList<TDocRecord> read FDocRecordList write FDocRecordList;
     property ik: integer read Fik write Fik;
     property Loaded: Boolean write FLoaded;
-    procedure Read;
     property obj: TDBNodeStudObject read Fobj write Fobj;
   end;
 
@@ -267,7 +270,8 @@ implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
   uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
-  ImageFullSizeShowFrm, ExceptionBase, uAddDocument, PersonController;
+  ImageFullSizeShowFrm, ExceptionBase, uAddDocument, PersonController,
+  ConstantRepository;
 
 {$R *.dfm}
 
@@ -326,7 +330,7 @@ begin
   end;
 
   try
-    with DocRecordList do
+    with FDocRecordList do
     for I := 0 to Count - 1 do
     begin
       if (Items[i].ikDoc <> 0) then
@@ -338,7 +342,6 @@ begin
       else
         TPersonController.Instance.AddDocument(obj.ID, Items[i]);  //добавить
     end;
-    DocRecordList.Free;
   except
     on E:Exception do
       begin
@@ -346,6 +349,7 @@ begin
         exit;
       end;
   end;
+  FDocRecordList.Clear;
 
  { try
     with dmStudentSelectionProcs.aspSelDocuments do
@@ -501,6 +505,9 @@ procedure TfmStudent.DoRefreshFrame;
 begin
   if not(FrameObject is TDBNodeStudObject) then
     exit;
+
+  if not Assigned(FDocRecordList) then
+      FDocRecordList := TObjectList<TDocRecord>.Create(True);
 
   FLoaded := false;
   obj := FrameObject as TDBNodeStudObject;
@@ -818,11 +825,6 @@ begin
   end;
 end;
 
-procedure TfmStudent.Read;
-begin
-
-end;
-
 procedure TfmStudent.rgSexClick(Sender: TObject);
 begin
   inherited;
@@ -877,10 +879,13 @@ end;
 procedure TfmStudent.actAddDocumentExecute(Sender: TObject);
 begin
   frmAddDocument := TfrmAddDocument.Create(self);
-  frmAddDocument.isAbit := (self.Name = 'fmAbitCard');
-  frmAddDocument.nCode := obj.ID;
-  frmAddDocument.ShowModal;
-  frmAddDocument.Free;
+  with frmAddDocument do
+  begin
+    isAbit := (self.Name = 'fmAbitCard');
+    nCode := obj.ID;
+    ShowModal;
+    Free;
+  end;
 end;
 
 procedure TfmStudent.actApplyExecute(Sender: TObject);
@@ -905,6 +910,7 @@ begin
   doc := TDocRecord.Create(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value, True);
   DocRecordList.Add(doc);
   dbgeDocuments.DataSource.DataSet.Delete;
+  modified := true;
   //TPersonController.Instance.DeleteDocument();
 end;
 
@@ -1231,10 +1237,14 @@ end;
 procedure TfmStudent.actUpdateDocumentExecute(Sender: TObject);
 begin
   frmAddDocument := TfrmAddDocument.Create(self);
-  frmAddDocument.isAbit := (self.Name = 'fmAbitCard');
-  frmAddDocument.DocID := dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value;
-  frmAddDocument.ShowModal;
-  frmAddDocument.Free;
+  with frmAddDocument do
+  begin
+    isAbit := (self.Name = 'fmAbitCard');
+    isEdit := true;
+    DocID := IfNull(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value,0);
+    ShowModal;
+    Free;
+  end;
 end;
 
 procedure TfmStudent.BbSaveclick(Sender: TObject);
@@ -1312,6 +1322,17 @@ begin
   inherited;
   dmUspevaemost.adsSelAllBRSBallsForStudent.Sort :=
     '[' + Column.Field.FullName + ']';
+end;
+
+procedure TfmStudent.dbgeDocumentsCellClick(Column: TColumnEh);
+begin
+  actUpdateDocument.Enabled := (dbgeDocuments.DataSource.DataSet.RecordCount > 0) ;
+  actDelDocument.Enabled := (dbgeDocuments.DataSource.DataSet.RecordCount > 0);
+end;
+
+procedure TfmStudent.dbgeDocumentsDblClick(Sender: TObject);
+begin
+  actUpdateDocumentExecute(Sender);
 end;
 
 procedure TfmStudent.dbgeFamExit(Sender: TObject);
@@ -1563,6 +1584,12 @@ begin
   showmessage('Произошла ошибка при экспорте успеваемости cтудента: ' +
     E.Message);
   (Sender as TReportBase).Quit;
+end;
+
+procedure TfmStudent.FrameExit(Sender: TObject);
+begin
+  inherited;
+ // FDocRecordList.Free;
 end;
 
 { try

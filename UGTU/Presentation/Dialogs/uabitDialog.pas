@@ -191,7 +191,7 @@ begin
   sgAddress.Cells[5,0]:=' вартира';
 
   AddressRecordList:= Tlist.Create;
-  DocRecordList := TList<TDocRecord>.Create;
+  DocRecordList := TObjectList<TDocRecord>.Create;
 
   with dmAdress do
   begin

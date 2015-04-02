@@ -450,7 +450,7 @@ AS
 --exec AppendDocs 1,
 GO
 
-create FUNCTION [dbo].[Stud_Document] 
+alter FUNCTION [dbo].[Stud_Document] 
 (@ik_doc int)
 RETURNS @Result TABLE
   (
@@ -469,6 +469,7 @@ BEGIN
   INSERT INTO @Result(ik_vid_doc,cd_seria,np_number,dd_vidan,cd_kem_vidan,isreal,addinfo,balls,ikDisc)
     select ik_vid_doc,cd_seria,np_number,dd_vidan,cd_kem_vidan,isreal,AdditionalInfo,balls,ik_disc
 	from Doc_stud left join Abit_Bonuses on Doc_stud.Ik_doc = Abit_Bonuses.ik_doc
+	where Doc_stud.Ik_doc = @ik_doc
 RETURN
 END
 GO

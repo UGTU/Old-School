@@ -478,9 +478,10 @@ begin
   begin
     ActiveFrame.Visible:= false;
     ActiveFrame.CloseFrame;
-    if ActiveFrame is TfmStudent then begin
-    TDBnodeObject(ActiveFrame.FrameObject).AssociatedObject:=nil;
-    ActiveFrame.Free;
+    if ActiveFrame is TfmStudent then
+    begin
+      TDBnodeObject(ActiveFrame.FrameObject).AssociatedObject:=nil;
+      ActiveFrame.Free;
     end;
   end;
 

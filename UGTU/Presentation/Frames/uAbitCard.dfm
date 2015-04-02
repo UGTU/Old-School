@@ -69,7 +69,10 @@ inherited fmAbitCard: TfmAbitCard
             ParentFont = False
             ExplicitWidth = 557
             inherited TabSheet3: TTabSheet
+              ExplicitLeft = 0
+              ExplicitTop = 0
               ExplicitWidth = 549
+              ExplicitHeight = 0
               inherited Panel4: TPanel
                 Width = 549
                 ExplicitWidth = 549
@@ -409,7 +412,7 @@ inherited fmAbitCard: TfmAbitCard
             end
             inherited TabSheet6: TTabSheet
               ExplicitWidth = 549
-              object SpeedButton5: TSpeedButton [2]
+              object SpeedButton5: TSpeedButton [0]
                 Left = 526
                 Top = 29
                 Width = 23
@@ -417,7 +420,7 @@ inherited fmAbitCard: TfmAbitCard
                 Action = actAddDocument
                 Flat = True
               end
-              object SpeedButton6: TSpeedButton [3]
+              object SpeedButton6: TSpeedButton [1]
                 Left = 526
                 Top = 57
                 Width = 23
@@ -426,10 +429,11 @@ inherited fmAbitCard: TfmAbitCard
                 Flat = True
               end
               inherited dbgeDocuments: TDBGridEh
-                Left = 1
-                Width = 520
-                Height = 523
+                Width = 498
                 OnColExit = dbgeFamExit
+              end
+              inherited pnlToolDoc: TPanel
+                Left = 498
               end
             end
             inherited TabSheet7: TTabSheet
@@ -481,6 +485,10 @@ inherited fmAbitCard: TfmAbitCard
             object TabSheet8: TTabSheet
               Caption = #1055#1086#1089#1090#1091#1087#1083#1077#1085#1080#1077
               ImageIndex = 5
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object GroupBox2: TGroupBox
                 Left = 0
                 Top = 0
@@ -607,7 +615,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900500010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

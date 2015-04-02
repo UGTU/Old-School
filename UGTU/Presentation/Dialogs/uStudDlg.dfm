@@ -108,10 +108,6 @@ inherited ftmStudent: TftmStudent
         TabOrder = 0
         object TabSheet3: TTabSheet
           Caption = #1054#1073#1097#1080#1077
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel4: TPanel
             Left = 0
             Top = 0
@@ -856,10 +852,6 @@ inherited ftmStudent: TftmStudent
         object TabSheet4: TTabSheet
           Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel3: TPanel
             Left = 0
             Top = 0
@@ -1248,10 +1240,6 @@ inherited ftmStudent: TftmStudent
         object TabSheet5: TTabSheet
           Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object sbAddRel: TSpeedButton
             Left = 524
             Top = 25
@@ -1396,11 +1384,10 @@ inherited ftmStudent: TftmStudent
           Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
           ImageIndex = 3
           object sbAddDoc: TSpeedButton
-            Left = 524
+            Left = 523
             Top = 0
             Width = 23
             Height = 22
-            Action = actAddDocument
             Flat = True
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
@@ -1429,13 +1416,14 @@ inherited ftmStudent: TftmStudent
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+            OnClick = sbAddDocClick
           end
           object SbDelDoc: TSpeedButton
             Left = 523
             Top = 28
             Width = 23
             Height = 22
-            Action = actDelDocument
+            Enabled = False
             Flat = True
             Glyph.Data = {
               36030000424D3603000000000000360000002800000010000000100000000100
@@ -1464,6 +1452,7 @@ inherited ftmStudent: TftmStudent
               FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
               FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
               00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+            OnClick = SbDelDocClick
           end
           object sgDocs: TStringGrid
             Left = 0
@@ -1514,8 +1503,7 @@ inherited ftmStudent: TftmStudent
   end
   inherited actBaseDialog: TActionList
     Images = frmMain.ImageList1
-    Left = 504
-    Top = 24
+    Left = 480
     inherited actApply: TAction
       OnUpdate = actApplyUpdate
     end
@@ -1551,13 +1539,14 @@ inherited ftmStudent: TftmStudent
     object actDelDocument: TAction
       Caption = 'actDelDocument'
       ImageIndex = 42
+      OnExecute = actDelDocumentExecute
     end
   end
   object ilPages: TImageList
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

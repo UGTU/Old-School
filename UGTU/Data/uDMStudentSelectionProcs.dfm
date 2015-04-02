@@ -168,103 +168,6 @@
     Left = 133
     Top = 72
   end
-  object aspSelDocuments: TADOStoredProc
-    Connection = dm.DBConnect
-    CursorType = ctStatic
-    LockType = ltBatchOptimistic
-    AfterEdit = aspSelDocumentsAfterEdit
-    OnNewRecord = aspSelDocumentsNewRecord
-    ProcedureName = 'SelDocuments;1'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-        Value = 0
-      end
-      item
-        Name = '@code'
-        Attributes = [paNullable]
-        DataType = ftBCD
-        Precision = 18
-        Value = Null
-      end>
-    Left = 468
-    Top = 358
-    object aspSelDocumentsnCode: TBCDField
-      FieldName = 'nCode'
-      Visible = False
-      Precision = 18
-      Size = 0
-    end
-    object aspSelDocumentsIK_doc: TAutoIncField
-      FieldName = 'IK_doc'
-      ReadOnly = True
-      Visible = False
-    end
-    object aspSelDocumentsdoc_type: TStringField
-      DisplayLabel = #1042#1080#1076' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      DisplayWidth = 70
-      FieldKind = fkLookup
-      FieldName = 'doc_type'
-      LookupDataSet = dmStudentData.adodsDocType
-      LookupKeyFields = 'ik_vid_doc'
-      LookupResultField = 'cvid_doc'
-      KeyFields = 'Ik_vid_doc'
-      OnChange = aspSelDocumentsdoc_typeChange
-      Size = 60
-      Lookup = True
-    end
-    object aspSelDocumentsIk_vid_doc: TIntegerField
-      FieldName = 'Ik_vid_doc'
-      Visible = False
-    end
-    object aspSelDocumentsCd_seria: TStringField
-      DisplayLabel = #1057#1077#1088#1080#1103
-      DisplayWidth = 20
-      FieldName = 'Cd_seria'
-      OnChange = aspSelDocumentsdoc_typeChange
-      Size = 10
-    end
-    object aspSelDocumentsNp_number: TStringField
-      DisplayLabel = #1053#1086#1084#1077#1088
-      DisplayWidth = 30
-      FieldName = 'Np_number'
-      OnChange = aspSelDocumentsdoc_typeChange
-      Size = 15
-    end
-    object aspSelDocumentsDd_vidan: TDateTimeField
-      DisplayLabel = #1044#1072#1090#1072' '#1074#1099#1076#1072#1095#1080
-      DisplayWidth = 35
-      FieldName = 'Dd_vidan'
-      OnChange = aspSelDocumentsdoc_typeChange
-      EditMask = '!99/99/0000;1;_'
-    end
-    object aspSelDocumentsCd_kem_vidan: TStringField
-      DisplayLabel = #1050#1077#1084' '#1074#1099#1076#1072#1085
-      DisplayWidth = 70
-      FieldName = 'Cd_kem_vidan'
-      OnChange = aspSelDocumentsdoc_typeChange
-      Size = 500
-    end
-    object aspSelDocumentsisreal: TBooleanField
-      Alignment = taCenter
-      DisplayLabel = #1054#1088#1080#1075#1080#1085#1072#1083
-      DisplayWidth = 20
-      FieldName = 'isreal'
-    end
-    object aspSelDocumentsballs: TIntegerField
-      Alignment = taCenter
-      DisplayLabel = #1044#1086#1087'. '#1073#1072#1083#1083
-      DisplayWidth = 30
-      FieldName = 'balls'
-    end
-    object aspSelDocumentsсname_disc: TStringField
-      DisplayLabel = #1055#1086' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1077
-      FieldName = #1089'name_disc'
-    end
-  end
   object aspSelLastNames: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
@@ -735,6 +638,7 @@
   object adoSelDocuments: TADODataSet
     Connection = dm.DBConnect
     CursorType = ctStatic
+    LockType = ltBatchOptimistic
     CommandText = 'select * from SelStudDocuments(0)'
     Parameters = <>
     Left = 552
@@ -786,6 +690,14 @@
     object adoSelDocumentsсname_disc: TStringField
       DisplayLabel = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
       FieldName = #1089'name_disc'
+    end
+    object adoSelDocumentsaddinfo: TStringField
+      FieldName = 'addinfo'
+      Visible = False
+    end
+    object adoSelDocumentsik_disc: TIntegerField
+      FieldName = 'ik_disc'
+      Visible = False
     end
   end
 end

@@ -4,6 +4,7 @@ inherited frmAddDocument: TfrmAddDocument
   ClientWidth = 435
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   ExplicitWidth = 441
   ExplicitHeight = 424
   PixelsPerInch = 96
@@ -104,10 +105,10 @@ inherited frmAddDocument: TfrmAddDocument
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
-      Left = 342
+      Left = 344
       Top = 6
       Caption = #1047#1072#1082#1088#1099#1090#1100
-      ExplicitLeft = 342
+      ExplicitLeft = 344
       ExplicitTop = 6
     end
     inherited bbSprav: TBitBtn
@@ -174,6 +175,7 @@ inherited frmAddDocument: TfrmAddDocument
     TabOrder = 5
     Text = #1054#1090#1076#1077#1083' '#1059#1060#1052#1057' '#1056#1086#1089#1089#1080#1080
     Visible = True
+    OnChange = dbcbeKindChange
   end
   object dbdteGetDate: TDBDateTimeEditEh [14]
     Left = 249
@@ -186,6 +188,7 @@ inherited frmAddDocument: TfrmAddDocument
     Kind = dtkDateEh
     TabOrder = 4
     Visible = True
+    OnChange = dbcbeKindChange
   end
   object dbeAddInfo: TDBEditEh [15]
     Left = 10
@@ -197,6 +200,7 @@ inherited frmAddDocument: TfrmAddDocument
     Flat = True
     TabOrder = 6
     Visible = True
+    OnChange = dbcbeKindChange
   end
   object btnLoad: TButton [16]
     Left = 8
@@ -257,6 +261,7 @@ inherited frmAddDocument: TfrmAddDocument
       Associate = dbBalls
       Max = 35
       TabOrder = 0
+      OnClick = UpDown1Click
     end
     object dbBalls: TDBEditEh
       Left = 18
@@ -266,6 +271,7 @@ inherited frmAddDocument: TfrmAddDocument
       DynProps = <>
       EditButtons = <>
       Flat = True
+      ReadOnly = True
       TabOrder = 1
       Text = '0'
       Visible = True
@@ -299,6 +305,7 @@ inherited frmAddDocument: TfrmAddDocument
     Height = 17
     Caption = #1055#1088#1080#1085#1103#1090' '#1086#1088#1080#1075#1080#1085#1072#1083
     TabOrder = 10
+    OnClick = dbcbeKindChange
   end
   inherited actBaseDialog: TActionList
     inherited actApply: TAction

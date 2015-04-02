@@ -192,6 +192,7 @@ type
     procedure actDelAddressExecute(Sender: TObject);
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
+    procedure actDelDocumentExecute(Sender: TObject);
 
   private
     Floaded: Boolean;
@@ -200,7 +201,7 @@ type
     { Private declarations }
   public
     AddressRecordList: TList;
-    DocRecordList: TList<TDocRecord>;
+    DocRecordList: TObjectList<TDocRecord>;
     procedure SyncAddress;
     { Public declarations }
   end;
@@ -277,7 +278,7 @@ begin
   sgAddress.Cells[5, 0] := ' вартира';
 
   AddressRecordList := TList.Create;
-  DocRecordList := TList<TDocRecord>.Create;
+  DocRecordList := TObjectList<TDocRecord>.Create;
 
   PageControl2.ActivePageIndex := 0;
   dmStudentData.adodsLang.Open;
@@ -918,6 +919,12 @@ procedure TftmStudent.actDelAddressExecute(Sender: TObject);
 begin
   AddressRecordList.Delete(sgAddress.Row - 1);
   SyncAddress;
+end;
+
+procedure TftmStudent.actDelDocumentExecute(Sender: TObject);
+begin
+  inherited;
+  // do
 end;
 
 procedure TftmStudent.actEnterprisePickExecute(Sender: TObject);

@@ -523,7 +523,7 @@ begin
     end
   else
     // если редактируем
-    with dmStudentSelectionProcs.aspSelDocuments do
+    with dmStudentSelectionProcs.adoSelDocuments do
     begin
       First;
       for i := 0 to RecordCount - 1 do
@@ -933,7 +933,6 @@ begin
         end;
 
         TPersonController.Instance.AddDocuments(IDStudent, DocRecordList);
-        DocRecordList.Free;
 
         { FAddDocument := TAddDocument.Create(IDStudent);
           for i := 0 to DocRecordList.Count - 1 do
