@@ -350,7 +350,7 @@ WHERE ABIT_Diapazon_spec_fac.NNyear=@nnyear
 order by 	PostupCount.CShort_name_fac, PostupCount.cShort_spec
 RETURN 
 END
-GO*/
+GO
 
 ALTER    PROCEDURE [dbo].[AppendDoc]
 @ncode			INT,
@@ -478,5 +478,18 @@ RETURN
 END
 GO
 
---Выдать права на функцию
+--Выдать права на функцию */
+select nn_abit,  sum_ball + isnull(Abit_Bonuses.balls,0), sredBall
+from
+	(select ABIT_postup.nCode, ABIT_postup.nn_abit, sum(cosenka) as sum_ball, avg(CONVERT(decimal(5,2),cosenka)) as sredBall 
+	from dbo.ABIT_Vstup_exam 
+	inner join ABIT_postup on ABIT_postup.NN_abit = ABIT_Vstup_exam.NN_abit
+	inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
+	inner join dbo.ABIT_sost_zach on ABIT_sost_zach.ik_zach = ABIT_postup.ik_zach
+	WHERE nnyear=2015
+	  and ik_type_zach<>3
+	GROUP BY ABIT_postup.nCode, ABIT_postup.nn_abit) sum_ball
+left join Doc_stud on Doc_stud.nCode = sum_ball.nCode
+left join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc
+where (Abit_Bonuses.ik_disc is null)or(Abit_Bonuses.ik_disc in (select ik_disc from ABIT_Vstup_exam where NN_abit = sum_ball.NN_abit))
 
