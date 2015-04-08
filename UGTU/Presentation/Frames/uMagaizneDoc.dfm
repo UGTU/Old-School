@@ -212,6 +212,12 @@ inherited fmDoc: TfmDoc
           Footers = <>
           ReadOnly = True
           Visible = False
+        end
+        item
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'Ik_destination'
+          Footers = <>
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end
@@ -325,7 +331,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000600110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040006C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

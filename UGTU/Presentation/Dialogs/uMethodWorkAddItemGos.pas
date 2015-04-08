@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, StdCtrls, Mask, DBCtrlsEh, DBLookupEh,
-  ActnList, Buttons, ExtCtrls, MethodWorkController;
+  ActnList, Buttons, ExtCtrls, MethodWorkController, System.Actions;
 
 type
   TfrmMethodWorkAddItemGos = class(TfrmBaseDialog)

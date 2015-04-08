@@ -209,7 +209,8 @@ begin
       begin
         if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
         begin
-          if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady').Value= Null) then
+          if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady')
+            .Value = Null) then
           begin
             dbgehMagazineDocs.DataSource.DataSet.Edit;
             uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateReady']
@@ -217,7 +218,7 @@ begin
             dbgehMagazineDocs.DataSource.DataSet.Post;
           end;
         end;
-         Next;
+        Next;
       end;
     finally
       EnableControls;
@@ -260,16 +261,41 @@ end;
 
 procedure TfmDoc.dbgehMagazineDocsDblClick(Sender: TObject);
 var
-  editF: TfmReviewDoc;
+  editF: TfrmReviewDoc;
   pt: TPoint;
+  dsDoc: TADODataSet;
+  idDest: Integer;
 begin
   inherited;
+  dsDoc := TADODataSet.Create(nil);
   pt := dbgehMagazineDocs.ScreenToClient(Mouse.CursorPos);
   if self.dbgehMagazineDocs.MouseCoord(pt.X, pt.Y).X <> -1 then
   begin
-    editF := TfmReviewDoc.Create(self);
-    editF.Show;
+        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+        begin
+          idDest := uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_destination')
+            .AsInteger;
+          case idDest of   // помениять ikdoc на ikdestinetion
+            1:
+              begin
 
+                dsDoc.CommandText :=
+                  'select * from MagazineDocs where Ik_destination=' +
+                  idDest.ToString();
+                dsDoc.Connection := dm.DBConnect;
+                dsDoc.Open;
+                dsDoc.First;
+                editF := TfrmReviewDoc.Create(self);
+                editF.Show ;
+            //    editF.dtUtv.:= dsDoc.FieldByName('DateCreate').AsDateTime;
+             //   editF.eDest.Text:=dsDoc.FieldByName('DateCreate').AsDateTime;
+
+              end;
+          end;
+
+
+
+        end;
   end;
 end;
 
@@ -321,7 +347,7 @@ begin
   // pm.CloseMenu;
   pm := Sender as TPopupMenu;
   pm.Items.Clear;
-  for i := 0 to self.dbgehMagazineDocs.Columns.Count - 2 do
+  for i := 0 to self.dbgehMagazineDocs.Columns.Count - 3 do
   begin
     mi := TMenuItem.Create(pm);
     col := dbgehMagazineDocs.Columns.Items[i];

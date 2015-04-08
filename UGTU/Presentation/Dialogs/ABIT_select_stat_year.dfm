@@ -58,10 +58,9 @@ inherited viborStat: TviborStat
     Width = 273
     Height = 17
     Caption = #1044#1080#1085#1072#1084#1080#1082#1072' '#1095#1080#1089#1083#1077#1085#1085#1086#1089#1090#1080' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074' '#1087#1086' '#1075#1086#1076#1072#1084
+    DynProps = <>
     Flat = True
     TabOrder = 1
-    ValueChecked = 'True'
-    ValueUnchecked = 'False'
     OnClick = DBCheckBoxEh1Click
   end
   object DBCheckBoxEh2: TDBCheckBoxEh [4]
@@ -70,10 +69,9 @@ inherited viborStat: TviborStat
     Width = 249
     Height = 17
     Caption = #1044#1080#1085#1072#1084#1080#1082#1072' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103' '#1087#1086' '#1087#1086#1083#1091
+    DynProps = <>
     Flat = True
     TabOrder = 2
-    ValueChecked = 'True'
-    ValueUnchecked = 'False'
     OnClick = DBCheckBoxEh1Click
   end
   object DBCheckBoxEh3: TDBCheckBoxEh [5]
@@ -82,10 +80,9 @@ inherited viborStat: TviborStat
     Width = 257
     Height = 17
     Caption = #1044#1080#1085#1072#1084#1080#1082#1072' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103' '#1089#1083#1091#1096#1072#1090#1077#1083#1077#1081' '#1060#1044#1055
+    DynProps = <>
     Flat = True
     TabOrder = 3
-    ValueChecked = 'True'
-    ValueUnchecked = 'False'
     OnClick = DBCheckBoxEh1Click
   end
   object DBCheckBoxEh4: TDBCheckBoxEh [6]
@@ -94,10 +91,9 @@ inherited viborStat: TviborStat
     Width = 265
     Height = 17
     Caption = #1044#1080#1085#1072#1084#1080#1082#1072' '#1087#1086#1076#1090#1074#1077#1088#1076#1080#1074#1096#1080#1093' '#1089#1090#1072#1090#1091#1089' '#1084#1077#1076#1072#1083#1080#1089#1090#1086#1074
+    DynProps = <>
     Flat = True
     TabOrder = 4
-    ValueChecked = 'True'
-    ValueUnchecked = 'False'
     OnClick = DBCheckBoxEh1Click
   end
   object DBCheckBoxEh5: TDBCheckBoxEh [7]
@@ -106,10 +102,9 @@ inherited viborStat: TviborStat
     Width = 265
     Height = 17
     Caption = #1050#1086#1085#1082#1091#1088#1089' '#1087#1086' '#1079#1072#1103#1074#1083#1077#1085#1080#1103#1084
+    DynProps = <>
     Flat = True
     TabOrder = 5
-    ValueChecked = 'True'
-    ValueUnchecked = 'False'
     OnClick = DBCheckBoxEh1Click
   end
   object DBCheckBoxEh6: TDBCheckBoxEh [8]
@@ -118,10 +113,9 @@ inherited viborStat: TviborStat
     Width = 273
     Height = 17
     Caption = #1044#1080#1085#1072#1084#1080#1082#1072' '#1085#1091#1078#1076#1072#1102#1097#1080#1093#1089#1103' '#1074' '#1086#1073#1097#1077#1078#1080#1090#1080#1080
+    DynProps = <>
     Flat = True
     TabOrder = 6
-    ValueChecked = 'True'
-    ValueUnchecked = 'False'
     OnClick = DBCheckBoxEh1Click
   end
 end
