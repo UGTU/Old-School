@@ -109,7 +109,6 @@ type
     Label48: TLabel;
     Label50: TLabel;
     Label52: TLabel;
-    Label53: TLabel;
     actCheckFields: TAction;
     actSAdresAutoFill: TAction;
     eCellphone: TDBEditEh;
@@ -121,15 +120,6 @@ type
     Label59: TLabel;
     Label60: TLabel;
     eAddInfo: TMemo;
-    dbcbeEnterprise: TDBLookupComboboxEh;
-    Label51: TLabel;
-    eDuty: TDBEditEh;
-    Label54: TLabel;
-    eXPyear: TDBNumberEditEh;
-    Label55: TLabel;
-    eXPMonth: TDBNumberEditEh;
-    Label56: TLabel;
-    Label57: TLabel;
     Label61: TLabel;
     Label62: TLabel;
     Label63: TLabel;
@@ -155,6 +145,16 @@ type
     actAddDocument: TAction;
     actUpdateDocument: TAction;
     actDelDocument: TAction;
+    pnlWork: TPanel;
+    eXPMonth: TDBNumberEditEh;
+    Label57: TLabel;
+    Label56: TLabel;
+    eXPyear: TDBNumberEditEh;
+    Label55: TLabel;
+    eDuty: TDBEditEh;
+    Label54: TLabel;
+    Label51: TLabel;
+    dbcbeEnterprise: TDBLookupComboboxEh;
     procedure FormShow(Sender: TObject);
 
     procedure bbCancelClick(Sender: TObject);
@@ -193,6 +193,7 @@ type
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
     procedure actDelDocumentExecute(Sender: TObject);
+    procedure cbJobClick(Sender: TObject);
 
   private
     Floaded: Boolean;
@@ -383,6 +384,12 @@ procedure TftmStudent.bShotClick(Sender: TObject);
 begin
   TApplicationController.GetInstance.GetPhotoBooth
     (ExtractFileDir(Application.ExeName), iPhoto);
+end;
+
+procedure TftmStudent.cbJobClick(Sender: TObject);
+begin
+  inherited;
+  pnlWork.Visible := cbJob.Checked;
 end;
 
 procedure TftmStudent.eFamExit(Sender: TObject);

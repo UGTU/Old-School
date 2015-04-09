@@ -12,8 +12,8 @@ object DMAbiturientNabor: TDMAbiturientNabor
       ''
       ''
       '')
-    Left = 56
-    Top = 24
+    Left = 64
+    Top = 16
   end
   object dsAbitGetPostupStatistika: TDataSource
     DataSet = adospAbitGetPostupStatistika
