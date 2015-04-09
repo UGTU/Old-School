@@ -4,7 +4,7 @@ inherited frmAddress: TfrmAddress
   ClientWidth = 533
   OnShow = FormShow
   ExplicitWidth = 539
-  ExplicitHeight = 325
+  ExplicitHeight = 322
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -207,6 +207,7 @@ inherited frmAddress: TfrmAddress
     Top = 157
     Width = 236
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_street'
@@ -220,6 +221,7 @@ inherited frmAddress: TfrmAddress
     Top = 114
     Width = 156
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'IK_Gorod'
@@ -234,6 +236,7 @@ inherited frmAddress: TfrmAddress
     Top = 157
     Width = 72
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 7
@@ -244,6 +247,7 @@ inherited frmAddress: TfrmAddress
     Top = 157
     Width = 89
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 9
@@ -254,6 +258,7 @@ inherited frmAddress: TfrmAddress
     Top = 114
     Width = 89
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 5
@@ -264,6 +269,7 @@ inherited frmAddress: TfrmAddress
     Top = 114
     Width = 236
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'IK_Raion'
@@ -278,6 +284,7 @@ inherited frmAddress: TfrmAddress
     Top = 69
     Width = 258
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_region'
@@ -292,6 +299,7 @@ inherited frmAddress: TfrmAddress
     Top = 69
     Width = 236
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_strana'
@@ -306,6 +314,7 @@ inherited frmAddress: TfrmAddress
     Top = 25
     Width = 500
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_AddressType'
@@ -319,6 +328,7 @@ inherited frmAddress: TfrmAddress
     Top = 157
     Width = 71
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 8
@@ -329,6 +339,7 @@ inherited frmAddress: TfrmAddress
     Top = 201
     Width = 236
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -340,6 +351,7 @@ inherited frmAddress: TfrmAddress
     Top = 201
     Width = 258
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh

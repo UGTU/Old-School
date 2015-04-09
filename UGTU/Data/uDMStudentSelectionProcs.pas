@@ -27,15 +27,6 @@ type
     aspSelFamilyDSDesigner6: TDateTimeField;
     dsLanguages: TDataSource;
     dsFamily: TDataSource;
-    aspSelDocuments: TADOStoredProc;
-    aspSelDocumentsnCode: TBCDField;
-    aspSelDocumentsIK_doc: TAutoIncField;
-    aspSelDocumentsdoc_type: TStringField;
-    aspSelDocumentsIk_vid_doc: TIntegerField;
-    aspSelDocumentsCd_seria: TStringField;
-    aspSelDocumentsNp_number: TStringField;
-    aspSelDocumentsDd_vidan: TDateTimeField;
-    aspSelDocumentsCd_kem_vidan: TStringField;
     aspSelLastNames: TADOStoredProc;
     dsDocuments: TDataSource;
     dsLastnames: TDataSource;
@@ -105,6 +96,19 @@ type
     aspSelKatChanges: TADOStoredProc;
     dsSelKatChanges: TDataSource;
     adsGetParamNeedness: TADODataSet;
+    adoSelDocuments: TADODataSet;
+    adoSelDocumentsIK_doc: TIntegerField;
+    adoSelDocumentsik_vid_doc: TIntegerField;
+    adoSelDocumentscd_seria: TStringField;
+    adoSelDocumentsnp_number: TStringField;
+    adoSelDocumentsdd_vidan: TDateTimeField;
+    adoSelDocumentscd_kem_vidan: TStringField;
+    adoSelDocumentsisreal: TBooleanField;
+    adoSelDocumentsballs: TIntegerField;
+    adoSelDocumentsñname_disc: TStringField;
+    adoSelDocumentscvid_doc: TStringField;
+    adoSelDocumentsaddinfo: TStringField;
+    adoSelDocumentsik_disc: TIntegerField;
     procedure aspSelLanguageNewRecord(DataSet: TDataSet);
     procedure aspSelFamilyNewRecord(DataSet: TDataSet);
    
@@ -196,7 +200,7 @@ end;
 procedure TdmStudentSelectionProcs.aspSelDocumentsNewRecord(DataSet: TDataSet);
 begin
 //frmMain.ActiveFrame.Modified:=true;
-Dataset.Fields[0].Value:=aspSelDocuments.Parameters[0].Value;
+ // Dataset.Fields[0].Value:=adoSelDocuments.Parameters[0].Value;
 end;
 
 end.

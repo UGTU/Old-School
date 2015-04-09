@@ -30,6 +30,8 @@ inherited fmShedule: TfmShedule
       object TabSheet1: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1091#1095#1077#1073#1085#1099#1093' '#1089#1077#1084#1077#1089#1090#1088#1086#1074
         ImageIndex = 2
+        ExplicitTop = 27
+        ExplicitHeight = 398
         object DBGridEh1: TDBGridEh
           Left = 0
           Top = 25
@@ -38,43 +40,41 @@ inherited fmShedule: TfmShedule
           Align = alClient
           AutoFitColWidths = True
           DataSource = dsSemesterList
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          ImeMode = imDisable
+          IndicatorOptions = []
           Options = [dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           RowHeight = 16
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = DBGridEh1DblClick
           OnKeyDown = DBGridEh1KeyDown
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ik_year_uch_pl'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ik_sem_type'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'sem_name'
               Footers = <>
               Title.Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074
               Width = 395
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar1: TToolBar
           Left = 0
@@ -99,6 +99,10 @@ inherited fmShedule: TfmShedule
       end
       object TabSheet2: TTabSheet
         Caption = #1059#1095#1077#1073#1085#1099#1077' '#1082#1086#1088#1087#1091#1089#1072
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Bevel2: TBevel
           Left = 0
           Top = 367
@@ -179,7 +183,7 @@ inherited fmShedule: TfmShedule
     Left = 184
     Top = 256
     Bitmap = {
-      494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -7,6 +7,14 @@ uses System.Variants, System.SysUtils;
 // Правила именования констант:
 // если константа является ключом, то пишем префикс "key_"
 const
+  Male = 1;
+  Female = 0;
+
+  DefaultMaleStatus = 9;
+  DefaultFemaleStatus = 7;
+
+  TypeAddressPropiska = 2;
+
   key_FBO = 6; // факультет безотрывного обучения (ФБО)
   key_CommonProfile = 0;
   FGOS3 = 2;
@@ -16,6 +24,12 @@ const
   vid_exam = 6;
   GOS_EXAM = 56;
   FISCULTURA_ZE = 2;
+
+  //ErrorCode
+  NoError = 0;
+  ExistError = 1;
+  FailError = 2;
+  StatusError = 3;
 
   // типы дисциплин
   typeTypicalDisc = 1;

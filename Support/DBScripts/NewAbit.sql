@@ -1,7 +1,7 @@
 --расширим поле с названием документа
-alter table documents alter column cvid_doc varchar(500) not null
+/*alter table documents alter column cvid_doc varchar(500) not null
 
-/*insert into Kat_zach(bit_Lgota,Cname_kat_zach,ik_type_kat,IsRussOlimpWinner)
+insert into Kat_zach(bit_Lgota,Cname_kat_zach,ik_type_kat,IsRussOlimpWinner)
 values(1, 'особое право', 1, 0)
 
 update Kat_zach set [OutDate]=cast('01.01.2015' as datetime)
@@ -350,8 +350,148 @@ WHERE ABIT_Diapazon_spec_fac.NNyear=@nnyear
 order by 	PostupCount.CShort_name_fac, PostupCount.cShort_spec
 RETURN 
 END
-GO*/
+GO
 
+ALTER    PROCEDURE [dbo].[AppendDoc]
+@ncode			INT,
+@ik_vid_doc		int,
+@sd_seria		varchar(10),
+@np_number		varchar(15),
+@dd_vidan		datetime,
+@cd_kem_vidan	varchar(500),
+@isreal			bit,
+@addinfo		varchar(max),
+@balls			int = null,
+@ikDisc			int = null
+AS
+BEGIN
+  declare @ik_doc int
 
+  if @ikDisc = -1 set @ikDisc = null
 
-select * from Doc_stud where Ik_vid_doc = 5
+ INSERT INTO Doc_stud(Dd_vidan,Cd_kem_vidan,Ik_vid_doc,Np_number,Cd_seria,nCode, isreal, AdditionalInfo)
+ VALUES(@dd_vidan, @cd_kem_vidan,@ik_vid_doc,@np_number,@sd_seria,@ncode, @isreal, @addinfo)
+   select @ik_doc = @@IDENTITY
+ 
+ if @balls <> 0
+   insert into Abit_Bonuses(balls,ik_disc,ik_doc)
+   values(@balls, @ikDisc, @ik_doc)
+END
+GO
+
+--drop PROCEDURE [dbo].[SelDocuments]
+
+alter function [dbo].[SelStudDocuments]
+(@code numeric)
+RETURNS @Result TABLE
+  (
+    IK_doc			int,
+	cvid_doc		varchar(500),
+	ik_vid_doc		int,
+	cd_seria		varchar(10),
+	np_number		varchar(15),
+	dd_vidan		datetime,
+	cd_kem_vidan	varchar(500),
+	isreal			bit,
+	addinfo			varchar(500),
+	balls			int,
+	ik_disc			int,
+	сname_disc		varchar(50)
+ )
+AS
+Begin 
+  insert into @Result
+  SELECT 
+	Doc_stud.IK_doc,
+	documents.cvid_doc,	
+	Doc_stud.Ik_vid_doc,                        --код вида документа
+	Doc_stud.Cd_seria,
+	Doc_stud.Np_number,  
+	Doc_stud.Dd_vidan, 
+	Doc_stud.Cd_kem_vidan,
+	Doc_stud.isreal,
+	Doc_stud.AdditionalInfo,
+	Abit_Bonuses.balls,
+	ABIT_Disc.ik_disc,
+	ABIT_Disc.сname_disc
+FROM Doc_stud inner join documents on Doc_stud.Ik_vid_doc = documents.ik_vid_doc
+  left join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc
+  left join ABIT_Disc on ABIT_Disc.ik_disc = Abit_Bonuses.ik_disc
+WHERE Doc_stud.nCode=@code
+
+RETURN
+END
+GO
+
+update Doc_stud set isreal = 0
+
+ALTER    PROCEDURE [dbo].[EditDoc]
+@ik_doc INT, 
+@vid INT, 
+@datevidan DATETIME, 
+@kemvidan VARCHAR(500), 
+@number VARCHAR(15), 
+@seria VARCHAR(10),
+@isreal			bit,
+@addinfo		varchar(max),
+@balls			int = null,
+@ikDisc			int = null
+AS
+ declare @ik_ball_doc int 
+
+ UPDATE Doc_stud
+ SET dd_vidan=@datevidan, cd_kem_vidan=@kemvidan, ik_vid_doc=@vid, np_number=@number, cd_seria=@seria,
+	 isreal = @isreal, AdditionalInfo = @addinfo
+ WHERE Ik_doc = @ik_doc 
+
+ if (select count(ik_doc) from Abit_Bonuses where Ik_doc = @ik_doc)>0
+ begin
+   if @balls = 0 delete from Abit_Bonuses where Ik_doc = @ik_doc
+   else update Abit_Bonuses set balls = @balls, ik_disc = @ikDisc where Ik_doc = @ik_doc 
+ end
+ else
+   if  @balls > 0 insert into Abit_Bonuses(balls,ik_disc,ik_doc) values(@balls,@ikDisc,@ik_doc)
+--exec AppendDocs 1,
+GO
+
+alter FUNCTION [dbo].[Stud_Document] 
+(@ik_doc int)
+RETURNS @Result TABLE
+  (
+	ik_vid_doc		int,
+	cd_seria		varchar(10),
+	np_number		varchar(15),
+	dd_vidan		datetime,
+	cd_kem_vidan	varchar(500),
+	isreal			bit,
+	addinfo			varchar(max),
+	balls			int,
+	ikDisc			int
+ )
+AS
+BEGIN
+  INSERT INTO @Result(ik_vid_doc,cd_seria,np_number,dd_vidan,cd_kem_vidan,isreal,addinfo,balls,ikDisc)
+    select ik_vid_doc,cd_seria,np_number,dd_vidan,cd_kem_vidan,isreal,AdditionalInfo,balls,ik_disc
+	from Doc_stud left join Abit_Bonuses on Doc_stud.Ik_doc = Abit_Bonuses.ik_doc
+	where Doc_stud.Ik_doc = @ik_doc
+RETURN
+END
+GO
+
+--Выдать права на функцию */
+select ABIT_postup.nn_abit,  isnull(sum_ball,0) + isnull(Abit_Bonuses.balls,0), sredBall
+from ABIT_postup 
+	inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
+	inner join dbo.ABIT_sost_zach on ABIT_sost_zach.ik_zach = ABIT_postup.ik_zach
+left join
+	(select ABIT_postup.nCode, ABIT_postup.nn_abit, sum(cosenka) as sum_ball, avg(CONVERT(decimal(5,2),cosenka)) as sredBall 
+	from dbo.ABIT_Vstup_exam 
+	inner join ABIT_postup on ABIT_postup.NN_abit = ABIT_Vstup_exam.NN_abit
+	GROUP BY ABIT_postup.nCode, ABIT_postup.nn_abit) sum_ball on sum_ball.NN_abit = ABIT_postup.nn_abit
+left join Doc_stud on Doc_stud.nCode = ABIT_postup.nCode
+left join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc
+where((Abit_Bonuses.ik_disc is null)or(Abit_Bonuses.ik_disc in (select ik_disc from ABIT_Vstup_exam where NN_abit = ABIT_postup.NN_abit)))
+	and nnyear=2015
+	and ik_type_zach<>3
+	and Abit_Bonuses.balls is not null
+

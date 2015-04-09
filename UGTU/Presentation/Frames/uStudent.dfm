@@ -3,6 +3,7 @@ inherited fmStudent: TfmStudent
   Height = 684
   Constraints.MinHeight = 524
   Constraints.MinWidth = 561
+  OnExit = FrameExit
   ExplicitWidth = 725
   ExplicitHeight = 684
   object ToolBar1: TToolBar [0]
@@ -157,7 +158,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 713
             Height = 587
-            ActivePage = TabSheet3
+            ActivePage = TabSheet6
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -346,13 +347,6 @@ inherited fmStudent: TfmStudent
                     Height = 13
                     Caption = #1060#1054#1058#1054
                   end
-                  object Label3: TLabel
-                    Left = 158
-                    Top = 48
-                    Width = 23
-                    Height = 13
-                    Caption = #1055#1086#1083':'
-                  end
                   object Label4: TLabel
                     Left = 13
                     Top = 48
@@ -441,19 +435,6 @@ inherited fmStudent: TfmStudent
                     Font.Style = []
                     ParentFont = False
                   end
-                  object Label50: TLabel
-                    Left = 181
-                    Top = 48
-                    Width = 4
-                    Height = 13
-                    Caption = '*'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clRed
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
                   object Label52: TLabel
                     Left = 379
                     Top = 48
@@ -484,22 +465,18 @@ inherited fmStudent: TfmStudent
                     Height = 13
                     Caption = #1058#1077#1083#1077#1092#1086#1085':'
                   end
-                  object dbcbeSex: TDBComboBoxEh
-                    Left = 156
-                    Top = 64
-                    Width = 136
-                    Height = 19
-                    DynProps = <>
-                    EditButtons = <>
-                    Flat = True
-                    Items.Strings = (
-                      #1052#1091#1078#1089#1082#1086#1081
-                      #1046#1077#1085#1089#1082#1080#1081)
-                    ReadOnly = True
-                    TabOrder = 4
-                    Visible = True
-                    OnChange = dbcbeSexChange
-                    OnDropDown = dbcbeSexDropDown
+                  object Label50: TLabel
+                    Left = 203
+                    Top = 50
+                    Width = 4
+                    Height = 13
+                    Caption = '*'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clRed
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = []
+                    ParentFont = False
                   end
                   object dbdteBirthDate: TDBDateTimeEditEh
                     Left = 12
@@ -565,7 +542,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 6
+                    TabOrder = 5
                     Visible = True
                     OnChange = eFamChange
                     OnExit = eEmailExit
@@ -579,7 +556,7 @@ inherited fmStudent: TfmStudent
                     EditButtons = <>
                     Flat = True
                     MaxLength = 6
-                    TabOrder = 5
+                    TabOrder = 4
                     Text = '      '
                     Visible = True
                     OnChange = eFamChange
@@ -595,7 +572,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 7
+                    TabOrder = 6
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -607,7 +584,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 8
+                    TabOrder = 7
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -617,8 +594,22 @@ inherited fmStudent: TfmStudent
                     Width = 93
                     Height = 25
                     Caption = #1057#1085#1080#1084#1086#1082
-                    TabOrder = 9
+                    TabOrder = 8
                     OnClick = bShotClick
+                  end
+                  object rgSex: TRadioGroup
+                    Left = 176
+                    Top = 53
+                    Width = 83
+                    Height = 30
+                    Caption = #1055#1086#1083
+                    Columns = 2
+                    ItemIndex = 1
+                    Items.Strings = (
+                      #1046
+                      #1052)
+                    TabOrder = 9
+                    OnClick = rgSexClick
                   end
                 end
                 object Panel6: TPanel
@@ -703,6 +694,10 @@ inherited fmStudent: TfmStudent
             object TabSheet4: TTabSheet
               Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
               ImageIndex = 1
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Panel3: TPanel
                 Left = 0
                 Top = 0
@@ -1061,6 +1056,10 @@ inherited fmStudent: TfmStudent
             object TabSheet5: TTabSheet
               Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
               ImageIndex = 2
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object Splitter1: TSplitter
                 Left = 0
                 Top = 25
@@ -1164,24 +1163,36 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               DesignSize = (
                 705
                 555)
               object dbgeDocuments: TDBGridEh
                 Left = 0
-                Top = 29
-                Width = 705
-                Height = 470
-                Anchors = [akLeft, akTop, akRight, akBottom]
+                Top = 0
+                Width = 654
+                Height = 555
+                Align = alClient
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
                 DynProps = <>
                 Flat = True
                 FooterParams.Color = clWindow
                 IndicatorOptions = []
-                Options = [dgEditing, dgTitles, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                 RowHeight = 18
                 TabOrder = 0
+                TitleParams.Font.Charset = DEFAULT_CHARSET
+                TitleParams.Font.Color = clWindowText
+                TitleParams.Font.Height = -11
+                TitleParams.Font.Name = 'Tahoma'
+                TitleParams.Font.Style = []
+                TitleParams.ParentFont = False
+                OnCellClick = dbgeDocumentsCellClick
+                OnDblClick = dbgeDocumentsDblClick
                 OnExit = dbgeFamExit
                 object RowDetailData: TRowDetailPanelControlEh
                 end
@@ -1208,11 +1219,48 @@ inherited fmStudent: TfmStudent
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 1
+                Visible = False
+              end
+              object pnlToolDoc: TPanel
+                Left = 654
+                Top = 0
+                Width = 51
+                Height = 555
+                Align = alRight
+                TabOrder = 2
+                object sbAddDoc: TSpeedButton
+                  Left = 9
+                  Top = 9
+                  Width = 23
+                  Height = 22
+                  Action = actAddDocument
+                  Flat = True
+                end
+                object SpeedButton7: TSpeedButton
+                  Left = 9
+                  Top = 37
+                  Width = 23
+                  Height = 22
+                  Action = actUpdateDocument
+                  Flat = True
+                end
+                object SbDelDoc: TSpeedButton
+                  Left = 9
+                  Top = 65
+                  Width = 23
+                  Height = 22
+                  Action = actDelDocument
+                  Flat = True
+                end
               end
             end
             object TabSheet7: TTabSheet
               Caption = #1057#1086#1073#1099#1090#1080#1103
               ImageIndex = 4
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object gbExiled: TGroupBox
                 Left = 0
                 Top = 0
@@ -1417,6 +1465,10 @@ inherited fmStudent: TfmStudent
         object TabSheet2: TTabSheet
           Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object DBGridEh1: TDBGridEh
             Left = 0
             Top = 26
@@ -1607,6 +1659,10 @@ inherited fmStudent: TfmStudent
         object tsBRSBalls: TTabSheet
           Caption = #1041#1072#1083#1083#1099' '#1087#1086' '#1084#1086#1076#1091#1083#1103#1084
           ImageIndex = 4
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel10: TPanel
             Left = 0
             Top = 0
@@ -1795,6 +1851,10 @@ inherited fmStudent: TfmStudent
         object TabSheet9: TTabSheet
           Caption = #1047#1072#1082#1088#1099#1090#1099#1077' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -1882,6 +1942,10 @@ inherited fmStudent: TfmStudent
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
@@ -1966,7 +2030,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2297,9 +2361,26 @@ inherited fmStudent: TfmStudent
       ImageIndex = 62
       OnExecute = actPropToFactExecute
     end
+    object actAddDocument: TAction
+      Category = 'ctDocument'
+      ImageIndex = 44
+      OnExecute = actAddDocumentExecute
+    end
+    object actUpdateDocument: TAction
+      Category = 'ctDocument'
+      Enabled = False
+      ImageIndex = 43
+      OnExecute = actUpdateDocumentExecute
+    end
+    object actDelDocument: TAction
+      Category = 'ctDocument'
+      Enabled = False
+      ImageIndex = 42
+      OnExecute = actDelDocumentExecute
+    end
   end
   object ppmSpravToExcel: TPopupMenu
-    Left = 375
+    Left = 383
     Top = 138
     object MenuItem1: TMenuItem
       Action = actPrintSprav
@@ -2313,7 +2394,7 @@ inherited fmStudent: TfmStudent
   end
   object ppmStudNapr: TPopupMenu
     Images = frmMain.ImageList1
-    Left = 320
+    Left = 296
     Top = 136
     object N1: TMenuItem
       Action = frmMain.actNapr

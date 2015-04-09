@@ -13,7 +13,7 @@ uses
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController,
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh, uUspevGroupController;
+  DBAxisGridsEh, uUspevGroupController, DocumentClass, System.Generics.Collections;
 
 type
   TfmStudent = class(TfmBase)
@@ -29,12 +29,10 @@ type
     Panel6: TPanel;
     Label2: TLabel;
     Panel7: TPanel;
-    Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label12: TLabel;
-    dbcbeSex: TDBComboBoxEh;
     Panel8: TPanel;
     Label1: TLabel;
     Label15: TLabel;
@@ -127,7 +125,6 @@ type
     Label33: TLabel;
     Label46: TLabel;
     Label49: TLabel;
-    Label50: TLabel;
     Label52: TLabel;
     Label53: TLabel;
     Label58: TLabel;
@@ -188,13 +185,20 @@ type
     gbMoved: TGroupBox;
     DBGridEh4: TDBGridEh;
     bShot: TButton;
+    rgSex: TRadioGroup;
+    Label50: TLabel;
+    actAddDocument: TAction;
+    actUpdateDocument: TAction;
+    actDelDocument: TAction;
+    pnlToolDoc: TPanel;
+    sbAddDoc: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SbDelDoc: TSpeedButton;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
     procedure eMidExit(Sender: TObject);
     procedure eNameExit(Sender: TObject);
-    procedure dbcbeSexChange(Sender: TObject);
-    procedure dbcbeSexDropDown(Sender: TObject);
     procedure eEmailExit(Sender: TObject);
     procedure eFamChange(Sender: TObject);
     procedure dbgeFamExit(Sender: TObject);
@@ -231,6 +235,13 @@ type
     procedure cbModuleBRSChange(Sender: TObject);
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
+    procedure rgSexClick(Sender: TObject);
+    procedure actAddDocumentExecute(Sender: TObject);
+    procedure actUpdateDocumentExecute(Sender: TObject);
+    procedure actDelDocumentExecute(Sender: TObject);
+    procedure FrameExit(Sender: TObject);
+    procedure dbgeDocumentsCellClick(Column: TColumnEh);
+    procedure dbgeDocumentsDblClick(Sender: TObject);
 
   private
     Fik: integer;
@@ -239,15 +250,16 @@ type
     procedure GetUspevStat(ik_zach: integer);
 
   protected
+    FDocRecordList: TObjectList<TDocRecord>;
     procedure DoRefreshFrame; override;
     function DoApply: Boolean; override;
     function DoCancel: Boolean;
     procedure ExecuteError(Sender: TObject; E: Exception);
 
   public
+    property DocRecordList: TObjectList<TDocRecord> read FDocRecordList write FDocRecordList;
     property ik: integer read Fik write Fik;
     property Loaded: Boolean write FLoaded;
-    procedure Read;
     property obj: TDBNodeStudObject read Fobj write Fobj;
   end;
 
@@ -258,7 +270,8 @@ implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
   uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
-  ImageFullSizeShowFrm;
+  ImageFullSizeShowFrm, ExceptionBase, uAddDocument, PersonController,
+  ConstantRepository;
 
 {$R *.dfm}
 
@@ -278,7 +291,7 @@ end;
 function TfmStudent.DoApply: Boolean;
 var
   stream: TMemoryStream;
-  // i:integer;
+  i:integer;
   ndGroup: TDBNodeGroupObject;
 begin
   if obj.ID <> ik then // проверка nCode
@@ -301,7 +314,7 @@ begin
   result := true;
   try
     with dmStudentSelectionProcs.aspSelLanguage do
-    // if dbgeLang.DataSource.DataSet.RecordCount > 0 then
+    if dbgeLang.DataSource.DataSet.RecordCount > 0 then
     begin
       Edit;
       UpdateRecord;
@@ -309,19 +322,38 @@ begin
       Open;
     end;
   except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении языка.',E);
+        exit;
+      end;
   end;
+
   try
-    with dmStudentSelectionProcs.aspSelLanguage do
+    with FDocRecordList do
+    for I := 0 to Count - 1 do
     begin
-      Edit;
-      UpdateRecord;
-      Post;
-      Open;
+      if (Items[i].ikDoc <> 0) then
+      begin
+        if Items[i].isDeleted then
+          TPersonController.Instance.DeleteDocument(Items[i].ikDoc) //удалить
+        else TPersonController.Instance.UpdateDocument(Items[i]) // редактировать
+      end
+      else
+        TPersonController.Instance.AddDocument(obj.ID, Items[i]);  //добавить
     end;
   except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
+        exit;
+      end;
   end;
-  try
+  FDocRecordList.Clear;
+
+ { try
     with dmStudentSelectionProcs.aspSelDocuments do
+   // if dbgeDocuments.DataSource.DataSet.RecordCount > 0 then
     begin
       Edit;
       UpdateRecord;
@@ -329,7 +361,13 @@ begin
       Open;
     end;
   except
-  end;
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
+        exit;
+      end;
+  end; }
+
   with dmStudentActions.aspAppendStudent.Parameters do
   begin
     clear;
@@ -362,10 +400,10 @@ begin
       CreateParameter('@rab', ftBoolean, pdInput, 0, 1)
     else
       CreateParameter('@rab', ftBoolean, pdInput, 0, 0);
-    if dbcbeSex.Text = 'Мужской' then
-      CreateParameter('@sex', ftBoolean, pdInput, 0, 1)
-    else
-      CreateParameter('@sex', ftBoolean, pdInput, 0, 0);
+    //if dbcbeSex.Text = 'Мужской' then
+      CreateParameter('@sex', ftBoolean, pdInput, 0, rgSex.itemIndex);
+    //else
+      //CreateParameter('@sex', ftBoolean, pdInput, 0, 0);
     if cbAppNeed.Checked then
       CreateParameter('@obchegit', ftBoolean, pdInput, 0, 1)
     else
@@ -467,6 +505,9 @@ procedure TfmStudent.DoRefreshFrame;
 begin
   if not(FrameObject is TDBNodeStudObject) then
     exit;
+
+  if not Assigned(FDocRecordList) then
+      FDocRecordList := TObjectList<TDocRecord>.Create(True);
 
   FLoaded := false;
   obj := FrameObject as TDBNodeStudObject;
@@ -613,10 +654,7 @@ begin
 
   dbdteBirthDate.Value := obj.BirthDate;
 
-  if obj.Sex then
-    dbcbeSex.Text := 'Мужской'
-  else
-    dbcbeSex.Text := 'Женский';
+  if obj.Sex then rgSex.ItemIndex := 1 else rgSex.ItemIndex := 0;
 
   dbcbeSchool.Text := obj.Finished;
   dbcbeCat.Text := obj.Category;
@@ -692,16 +730,16 @@ begin
     Active := true;
   end;
 
-  with dmStudentSelectionProcs.aspSelDocuments do
+  with dmStudentSelectionProcs.adoSelDocuments do
   begin
-    Active := false;
-    Parameters.clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.ID;
-    ExecProc;
-    Active := true;
+    Close;
+    CommandText := 'select * from SelStudDocuments('+IntToStr(obj.ID)+')';
+    Open;
 
+    FieldByName('balls').Visible := false;
+    FieldByName('сname_disc').Visible := false;
   end;
+
 
   with dmStudentSelectionProcs.aspGetPersonAddress do
   begin
@@ -787,9 +825,10 @@ begin
   end;
 end;
 
-procedure TfmStudent.Read;
+procedure TfmStudent.rgSexClick(Sender: TObject);
 begin
-
+  inherited;
+  eFamChange(Sender);
 end;
 
 procedure TfmStudent.sbRefreshClick(Sender: TObject);
@@ -837,6 +876,18 @@ begin
   dmStudentSelectionProcs.aspGetPersonAddress.Active := true;
 end;
 
+procedure TfmStudent.actAddDocumentExecute(Sender: TObject);
+begin
+  frmAddDocument := TfrmAddDocument.Create(self);
+  with frmAddDocument do
+  begin
+    isAbit := (self.Name = 'fmAbitCard');
+    nCode := obj.ID;
+    ShowModal;
+    Free;
+  end;
+end;
+
 procedure TfmStudent.actApplyExecute(Sender: TObject);
 begin
   inherited;
@@ -851,6 +902,16 @@ begin
   else
     actApply.enabled := false;
 
+end;
+
+procedure TfmStudent.actDelDocumentExecute(Sender: TObject);
+var doc: TDocRecord;
+begin
+  doc := TDocRecord.Create(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value, True);
+  DocRecordList.Add(doc);
+  dbgeDocuments.DataSource.DataSet.Delete;
+  modified := true;
+  //TPersonController.Instance.DeleteDocument();
 end;
 
 procedure TfmStudent.actDeleteAddressExecute(Sender: TObject);
@@ -1173,6 +1234,19 @@ begin
     actUndo.enabled := false;
 end;
 
+procedure TfmStudent.actUpdateDocumentExecute(Sender: TObject);
+begin
+  frmAddDocument := TfrmAddDocument.Create(self);
+  with frmAddDocument do
+  begin
+    isAbit := (self.Name = 'fmAbitCard');
+    isEdit := true;
+    DocID := IfNull(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value,0);
+    ShowModal;
+    Free;
+  end;
+end;
+
 procedure TfmStudent.BbSaveclick(Sender: TObject);
 begin
   DoApply;
@@ -1222,25 +1296,12 @@ begin
   end;
 end;
 
-procedure TfmStudent.dbcbeSexChange(Sender: TObject);
-begin
-  dbcbeSex.ReadOnly := true;
-  eFamChange(Sender);
-end;
-
-procedure TfmStudent.dbcbeSexDropDown(Sender: TObject);
-begin
-
-  dbcbeSex.ReadOnly := false;
-end;
-
 procedure TfmStudent.eEmailExit(Sender: TObject);
 begin
   inherited;
   if eEmail.Text = '' then
     exit;
   if (Ansipos('@', eEmail.Text) = 0)
-  // or(Ansipos('.',eEmail.text)=0) or(Ansipos('@',eEmail.text)>Ansipos('.',eEmail.text))
   then
   begin
     showmessage('Неверный e-mail!');
@@ -1261,6 +1322,17 @@ begin
   inherited;
   dmUspevaemost.adsSelAllBRSBallsForStudent.Sort :=
     '[' + Column.Field.FullName + ']';
+end;
+
+procedure TfmStudent.dbgeDocumentsCellClick(Column: TColumnEh);
+begin
+  actUpdateDocument.Enabled := (dbgeDocuments.DataSource.DataSet.RecordCount > 0) ;
+  actDelDocument.Enabled := (dbgeDocuments.DataSource.DataSet.RecordCount > 0);
+end;
+
+procedure TfmStudent.dbgeDocumentsDblClick(Sender: TObject);
+begin
+  actUpdateDocumentExecute(Sender);
 end;
 
 procedure TfmStudent.dbgeFamExit(Sender: TObject);
@@ -1512,6 +1584,12 @@ begin
   showmessage('Произошла ошибка при экспорте успеваемости cтудента: ' +
     E.Message);
   (Sender as TReportBase).Quit;
+end;
+
+procedure TfmStudent.FrameExit(Sender: TObject);
+begin
+  inherited;
+ // FDocRecordList.Free;
 end;
 
 { try

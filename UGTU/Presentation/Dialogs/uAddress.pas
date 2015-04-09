@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, DBCtrlsEh, StdCtrls, Mask, DBLookupEh,
-  ActnList, Buttons, ExtCtrls, uDMAdress, DBTVStudObj;
+  ActnList, Buttons, ExtCtrls, uDMAdress, DBTVStudObj, System.Actions;
 
 type
   TfrmAddress = class(TfrmBaseDialog)
@@ -64,7 +64,7 @@ var
 
 implementation
 
-uses uStudDlg, uAbitDialog;
+uses uStudDlg, uAbitDialog, ConstantRepository;
 
 {$R *.dfm}
 
@@ -237,6 +237,7 @@ begin
     if dbcbeReg.KeyValue<0 then dbcbeReg.KeyValue:=1;
     if dbcbeDist.KeyValue<0 then dbcbeDist.KeyValue:=45;
     if dbcbePoint.KeyValue<0 then dbcbePoint.KeyValue:=504;
+    dbcbeAddressType.KeyValue := TypeAddressPropiska;
   end;
 
   if dlgOwner then

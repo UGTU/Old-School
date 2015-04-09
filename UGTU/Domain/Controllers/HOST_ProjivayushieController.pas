@@ -258,14 +258,15 @@ end;
 procedure THOST_ProjivayushieController.VivodDocPerson(nCode: integer);
 begin
  TApplicationController.GetInstance.AddLogEntry('Вывод документов персоны.');
-    with dmStudentSelectionProcs.aspSelDocuments do
+    with dmStudentSelectionProcs.adoSelDocuments do
     begin
       Close;
       Connection:= dm.DBConnect;
-      ProcedureName:= 'SelDocuments;1';
-      Active:=false;
-      Parameters.Clear;
-			Parameters.CreateParameter('@nCode',ftBCD,pdInput,0,nCode);
+      //ProcedureName:= 'SelDocuments;1';
+      //Active:=false;
+      //Parameters.Clear;
+      CommandText := 'select * from SelStudDocuments('+IntToStr(nCode)+')';
+			//Parameters.CreateParameter('@nCode',ftBCD,pdInput,0,nCode);
       Open;
     end;
 end;

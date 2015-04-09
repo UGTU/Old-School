@@ -398,6 +398,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka, uNagruzk
   uSheduleSemester, uAbitOtchetsController,udmUspevaemost, SheduleController,
   uNagruzkaSemester, ApplicationController,uAbitConfirm, udmCauses, DBTVInviteObj,
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj,HOST_Projivaysh,DBTVHabitatsPersonObj, uChangePlanFromGrup,
+  CommandController,
   uPerson;
 
 {$R *.dfm}
@@ -477,9 +478,10 @@ begin
   begin
     ActiveFrame.Visible:= false;
     ActiveFrame.CloseFrame;
-    if ActiveFrame is TfmStudent then begin
-    TDBnodeObject(ActiveFrame.FrameObject).AssociatedObject:=nil;
-    ActiveFrame.Free;
+    if ActiveFrame is TfmStudent then
+    begin
+      TDBnodeObject(ActiveFrame.FrameObject).AssociatedObject:=nil;
+      ActiveFrame.Free;
     end;
   end;
 
@@ -2230,6 +2232,7 @@ procedure TfrmMain.actAddDepPlanExecute(Sender: TObject);
 begin
   (ActiveFrame as TfmNagruzkaDep).actEditPlanExecute((ActiveFrame as TfmNagruzkaDep).actAddPlan);
 end;
+
 
 procedure TfrmMain.actAddPlanPrepNagruzkaExecute(Sender: TObject);
 begin

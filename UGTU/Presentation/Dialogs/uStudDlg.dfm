@@ -97,7 +97,13 @@ inherited ftmStudent: TftmStudent
         Height = 556
         ActivePage = TabSheet2
         Align = alClient
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
         Images = ilPages
+        ParentFont = False
         Style = tsFlatButtons
         TabOrder = 0
         object TabSheet3: TTabSheet
@@ -115,6 +121,12 @@ inherited ftmStudent: TftmStudent
               Width = 556
               Height = 161
               Align = alTop
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 0
               object Bevel2: TBevel
                 Left = 452
@@ -128,13 +140,6 @@ inherited ftmStudent: TftmStudent
                 Width = 34
                 Height = 13
                 Caption = #1060#1054#1058#1054
-              end
-              object Label3: TLabel
-                Left = 213
-                Top = 48
-                Width = 20
-                Height = 13
-                Caption = #1055#1086#1083
               end
               object Label4: TLabel
                 Left = 13
@@ -173,14 +178,14 @@ inherited ftmStudent: TftmStudent
               end
               object Label13: TLabel
                 Left = 323
-                Top = 89
+                Top = 92
                 Width = 90
                 Height = 13
                 Caption = #1057#1086#1090#1086#1074#1099#1081' '#1090#1077#1083#1077#1092#1086#1085
               end
               object Label18: TLabel
                 Left = 13
-                Top = 89
+                Top = 92
                 Width = 28
                 Height = 13
                 Caption = 'E-mail'
@@ -211,36 +216,9 @@ inherited ftmStudent: TftmStudent
                 Font.Style = []
                 ParentFont = False
               end
-              object Label47: TLabel
-                Left = 371
-                Top = 5
-                Width = 4
-                Height = 13
-                Caption = '*'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clRed
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                Visible = False
-              end
               object Label48: TLabel
                 Left = 94
                 Top = 49
-                Width = 4
-                Height = 13
-                Caption = '*'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clRed
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-              end
-              object Label49: TLabel
-                Left = 235
-                Top = 48
                 Width = 4
                 Height = 13
                 Caption = '*'
@@ -276,29 +254,10 @@ inherited ftmStudent: TftmStudent
               end
               object Label8: TLabel
                 Left = 213
-                Top = 89
+                Top = 92
                 Width = 48
                 Height = 13
                 Caption = #1058#1077#1083#1077#1092#1086#1085':'
-              end
-              object dbcbeSex: TDBComboBoxEh
-                Left = 213
-                Top = 64
-                Width = 104
-                Height = 19
-                Alignment = taLeftJustify
-                DynProps = <>
-                EditButtons = <>
-                Flat = True
-                Items.Strings = (
-                  #1052#1091#1078#1089#1082#1086#1081
-                  #1046#1077#1085#1089#1082#1080#1081)
-                ReadOnly = True
-                TabOrder = 4
-                Text = #1052#1091#1078#1089#1082#1086#1081
-                Visible = True
-                OnChange = dbcbeSexChange
-                OnDropDown = dbcbeSexDropDown
               end
               object dbdteBirthDate: TDBDateTimeEditEh
                 Left = 13
@@ -361,26 +320,26 @@ inherited ftmStudent: TftmStudent
               end
               object eEmail: TDBEditEh
                 Left = 13
-                Top = 105
+                Top = 108
                 Width = 192
                 Height = 19
                 Alignment = taLeftJustify
                 DynProps = <>
                 EditButtons = <>
                 Flat = True
-                TabOrder = 6
+                TabOrder = 5
                 Visible = True
                 OnExit = eEmailExit
               end
               object eCellphone: TDBEditEh
                 Left = 323
-                Top = 105
+                Top = 108
                 Width = 123
                 Height = 19
                 DynProps = <>
                 EditButtons = <>
                 Flat = True
-                TabOrder = 7
+                TabOrder = 6
                 Visible = True
               end
               object eNum: TDBEditEh
@@ -392,7 +351,7 @@ inherited ftmStudent: TftmStudent
                 EditButtons = <>
                 Flat = True
                 MaxLength = 6
-                TabOrder = 5
+                TabOrder = 4
                 Text = '      '
                 Visible = True
                 OnChange = actCheckFieldsExecute
@@ -401,13 +360,13 @@ inherited ftmStudent: TftmStudent
               end
               object ePhone: TDBEditEh
                 Left = 213
-                Top = 105
+                Top = 108
                 Width = 104
                 Height = 19
                 DynProps = <>
                 EditButtons = <>
                 Flat = True
-                TabOrder = 8
+                TabOrder = 7
                 Visible = True
               end
               object bShot: TButton
@@ -416,8 +375,27 @@ inherited ftmStudent: TftmStudent
                 Width = 93
                 Height = 25
                 Caption = #1057#1085#1080#1084#1086#1082
-                TabOrder = 9
+                TabOrder = 8
                 OnClick = bShotClick
+              end
+              object rgSex: TRadioGroup
+                Left = 223
+                Top = 53
+                Width = 83
+                Height = 30
+                Caption = #1055#1086#1083
+                Columns = 2
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ItemIndex = 1
+                Items.Strings = (
+                  #1046
+                  #1052)
+                ParentFont = False
+                TabOrder = 9
               end
             end
             object Panel8: TPanel
@@ -611,7 +589,7 @@ inherited ftmStudent: TftmStudent
                 ParentFont = False
               end
               object Label61: TLabel
-                Left = 382
+                Left = 380
                 Top = 46
                 Width = 4
                 Height = 13
@@ -1406,7 +1384,7 @@ inherited ftmStudent: TftmStudent
           Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
           ImageIndex = 3
           object sbAddDoc: TSpeedButton
-            Left = 524
+            Left = 523
             Top = 0
             Width = 23
             Height = 22
@@ -1441,7 +1419,7 @@ inherited ftmStudent: TftmStudent
             OnClick = sbAddDocClick
           end
           object SbDelDoc: TSpeedButton
-            Left = 524
+            Left = 523
             Top = 28
             Width = 23
             Height = 22
@@ -1509,7 +1487,13 @@ inherited ftmStudent: TftmStudent
             FixedCols = 0
             RowCount = 1
             FixedRows = 0
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
             GridLineWidth = 0
+            ParentFont = False
             TabOrder = 1
             Visible = False
           end
@@ -1518,8 +1502,8 @@ inherited ftmStudent: TftmStudent
     end
   end
   inherited actBaseDialog: TActionList
-    Left = 504
-    Top = 24
+    Images = frmMain.ImageList1
+    Left = 480
     inherited actApply: TAction
       OnUpdate = actApplyUpdate
     end
@@ -1545,12 +1529,24 @@ inherited ftmStudent: TftmStudent
       Enabled = False
       OnExecute = actDelAddressExecute
     end
+    object actAddDocument: TAction
+      Caption = 'actAddDocument'
+      ImageIndex = 44
+    end
+    object actUpdateDocument: TAction
+      Caption = 'actUpdateDocument'
+    end
+    object actDelDocument: TAction
+      Caption = 'actDelDocument'
+      ImageIndex = 42
+      OnExecute = actDelDocumentExecute
+    end
   end
   object ilPages: TImageList
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

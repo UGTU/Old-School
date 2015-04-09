@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh, UchPlanController,
-  Mask, DBCtrlsEh, DBLookupEh, ADODB, DB, NagruzkaController, GeneralController;
+  Mask, DBCtrlsEh, DBLookupEh, ADODB, DB, NagruzkaController, GeneralController,
+  System.Actions;
 
 type
   TfrmNagruzkaAddPlan = class(TfrmBaseDialog)
