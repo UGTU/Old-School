@@ -353,7 +353,7 @@ begin
 
  { try
     with dmStudentSelectionProcs.aspSelDocuments do
-    if dbgeDocuments.DataSource.DataSet.RecordCount > 0 then
+   // if dbgeDocuments.DataSource.DataSet.RecordCount > 0 then
     begin
       Edit;
       UpdateRecord;

@@ -75,15 +75,20 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     ExplicitWidth = 579
     ExplicitHeight = 621
     inherited TabSheet1: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 571
       ExplicitHeight = 593
       inherited PageControl2: TPageControl
         Width = 554
         Height = 593
+        ActivePage = TabSheet3
         OnChange = PageControl2Change
         ExplicitWidth = 571
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 563
           ExplicitHeight = 561
           inherited Panel4: TPanel
@@ -512,6 +517,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet4: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 563
           ExplicitHeight = 561
           inherited Panel3: TPanel
@@ -680,6 +687,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet5: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 563
           ExplicitHeight = 561
           inherited Panel9: TPanel
@@ -696,6 +705,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet2: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 563
           ExplicitHeight = 561
           inherited sbAddDoc: TSpeedButton
