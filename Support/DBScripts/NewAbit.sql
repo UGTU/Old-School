@@ -478,20 +478,103 @@ RETURN
 END
 GO
 
---Выдать права на функцию */
-select ABIT_postup.nn_abit,  isnull(sum_ball,0) + isnull(Abit_Bonuses.balls,0), sredBall
-from ABIT_postup 
-	inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
-	inner join dbo.ABIT_sost_zach on ABIT_sost_zach.ik_zach = ABIT_postup.ik_zach
-left join
-	(select ABIT_postup.nCode, ABIT_postup.nn_abit, sum(cosenka) as sum_ball, avg(CONVERT(decimal(5,2),cosenka)) as sredBall 
-	from dbo.ABIT_Vstup_exam 
-	inner join ABIT_postup on ABIT_postup.NN_abit = ABIT_Vstup_exam.NN_abit
-	GROUP BY ABIT_postup.nCode, ABIT_postup.nn_abit) sum_ball on sum_ball.NN_abit = ABIT_postup.nn_abit
-left join Doc_stud on Doc_stud.nCode = ABIT_postup.nCode
-left join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc
-where((Abit_Bonuses.ik_disc is null)or(Abit_Bonuses.ik_disc in (select ik_disc from ABIT_Vstup_exam where NN_abit = ABIT_postup.NN_abit)))
-	and nnyear=2015
-	and ik_type_zach<>3
-	and Abit_Bonuses.balls is not null
+--Выдать права на функцию 
 
+ALTER    FUNCTION [dbo].[ABIT_GetAbitPostupList](@nnyear int)
+RETURNS @Result TABLE
+   (
+	RegNomer							INT,
+	fio									VARCHAR(150),
+	nn_abit								INT,
+	cname_spec							VARCHAR(150),
+	Cshort_name_fac						VARCHAR(100),
+	zach								VARCHAR(100),
+	post								VARCHAR(100),
+	dd_pod_zayav						DATETIME,
+	ik_spec								INT,
+	ik_fac								INT,
+	nnrecord							INT,
+	ik_spec_fac							INT,
+	sum_ball							INT,
+	sredBall							decimal(5,2),
+	nnyear								INT,
+	Realy_postup						BIT,
+	cmedal								VARCHAR(100),
+	ik_type_zach						INT,
+	IsMain								BIT,
+	Ik_form_ed							INT,
+	ik_type_kat							INT
+) 
+
+AS
+BEGIN
+
+INSERT INTO @Result
+select 
+RegNomer,
+fio,
+ABIT_postup.nn_abit,
+Cshort_spec,
+Cshort_name_fac,
+rtrim(Cname_kat_zach) as zach,
+rtrim(cname_zach) as post,
+dd_pod_zayav,
+Relation_spec_fac.ik_spec,
+fac.ik_fac,
+ABIT_postup.nnrecord as nnrecord,
+Relation_spec_fac.ik_spec_fac,
+sum_ball,
+ISNULL(sredBall, ABIT_postup.SchoolAverMark) sredBall,
+@nnyear as nnyear,
+Realy_postup,
+cmedal,
+ik_type_zach,
+IsMain,
+Ik_form_ed,
+ik_type_kat
+from
+	(SELECT * FROM ABIT_postup )ABIT_postup
+	 INNER JOIN 
+	(SELECT NNrecord, ik_spec_fac FROM ABIT_Diapazon_spec_fac WHERE nnyear=@nnyear
+		and ik_spec_fac IN (select ik_spec_fac from dbo.GetSpecAbitPermissionsFromRelTable() ))ABIT_Diapazon_spec_fac
+	  on ABIT_Diapazon_spec_fac.NNrecord= ABIT_postup.NNrecord
+	INNER JOIN Relation_spec_fac
+	  on ABIT_Diapazon_spec_fac.ik_spec_fac=Relation_spec_fac.ik_spec_fac
+	INNER JOIN  spec_stud 
+	  on spec_stud.ik_spec=Relation_spec_fac.ik_spec
+	INNER JOIN fac 
+	  on fac.ik_fac=Relation_spec_fac.ik_fac
+	INNER JOIN  
+	(SELECT rtrim(clastname) + ' ' + rtrim(cfirstname) + ' ' + rtrim(isnull(cotch,'')) AS fio, nCode, ik_medal
+	  FROM stud WHERE nCode IN 
+		(SELECT nCode FROM ABIT_postup ))stud 
+	  on stud.ncode= ABIT_postup.ncode
+	INNER JOIN  dbo.medal_abit
+	  on stud.ik_medal=medal_abit.ik_medal
+	INNER JOIN  ABIT_sost_zach
+	  on ABIT_postup.ik_zach=ABIT_sost_zach.ik_zach
+	INNER JOIN  Kat_zach
+	  on Kat_zach.ik_kat_zach= ABIT_postup.ik_kat_zach
+	LEFT JOIN
+		(select ABIT_postup.nn_abit,  isnull(sum_ball,0) + isnull(bonus_ball.balls,0) as sum_ball, isnull(cast(sredBall as numeric(8,1)),0) as sredBall
+		 from ABIT_postup 
+		 inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
+		 inner join dbo.ABIT_sost_zach on ABIT_sost_zach.ik_zach = ABIT_postup.ik_zach
+		 left join
+			(select ABIT_postup.nCode, ABIT_postup.nn_abit, sum(cosenka) as sum_ball, avg(CONVERT(decimal(5,2),cosenka)) as sredBall 
+			 from dbo.ABIT_Vstup_exam 
+			 inner join ABIT_postup on ABIT_postup.NN_abit = ABIT_Vstup_exam.NN_abit
+			 GROUP BY ABIT_postup.nCode, ABIT_postup.nn_abit) sum_ball on (sum_ball.NN_abit = ABIT_postup.nn_abit)   
+		 left join 
+			(select Doc_stud.nCode, Abit_Bonuses.balls, Abit_Bonuses.ik_disc
+		     from Doc_stud inner join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc) bonus_ball
+		     on bonus_ball.nCode = ABIT_postup.nCode
+			 and ((bonus_ball.ik_disc is null)or(bonus_ball.ik_disc in (select ik_disc from ABIT_Vstup_exam where NN_abit = ABIT_postup.NN_abit)))
+		 where nnyear=@nnyear
+			and ik_type_zach<>3) as SummBall
+	ON SummBall.nn_abit=ABIT_postup.nn_abit
+	order by dd_pod_zayav desc, cname_spec, RegNomer desc, fio
+RETURN 
+END
+
+*/
