@@ -151,7 +151,7 @@ function TDiplOtdKardController.GetGroupList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
   TGeneralController.Instance.InitializeLockupCB(cmp, 'Ik_grup', 'Cname_grup');
-  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'exec OKADRGetExitGroup', 'Ik_grup', false, NULL);
+  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'select * from [dbo].[OKADRGetExitGroup_inline]()', 'Ik_grup', false, NULL);
   Result:= true;
 end;
 
