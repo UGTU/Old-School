@@ -993,9 +993,9 @@ inherited ftmStudent: TftmStudent
               object Label42: TLabel
                 Left = 196
                 Top = 30
-                Width = 39
+                Width = 151
                 Height = 13
-                Caption = #1052#1077#1076#1072#1083#1100
+                Caption = #1052#1077#1076#1072#1083#1100' / '#1044#1080#1087#1083#1086#1084' '#1089' '#1086#1090#1083#1080#1095#1080#1077#1084
               end
               object cbChildren: TCheckBox
                 Left = 183
