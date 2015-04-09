@@ -133,7 +133,7 @@ function TDiplOtdKardController.GetFacList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
   TGeneralController.Instance.InitializeLockupCB(cmp, 'ik_fac', 'Cname_fac');
-  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'select Fac.Ik_fac, Cname_fac from Fac inner join [GetFacDiplomPermissionsFromRelTable]() perm on Fac.ik_fac=perm.ik_fac where fDateExit is null order by Cname_fac', 'ik_fac', false, NULL);
+  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'EXEC [dbo].[OKADRGetFacs]', 'ik_fac', false, NULL);
   Result:= true;
 end;
 
