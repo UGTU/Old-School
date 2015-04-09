@@ -265,37 +265,61 @@ var
   pt: TPoint;
   dsDoc: TADODataSet;
   idDest: Integer;
+  idDoc: Integer;
 begin
   inherited;
   dsDoc := TADODataSet.Create(nil);
   pt := dbgehMagazineDocs.ScreenToClient(Mouse.CursorPos);
-  if self.dbgehMagazineDocs.MouseCoord(pt.X, pt.Y).X <> -1 then
-  begin
-        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+  try
+    if self.dbgehMagazineDocs.MouseCoord(pt.X, pt.Y).X <> -1 then
+    begin
+      idDoc := uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_Document')
+        .AsInteger;
+      if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+      begin
+        dsDoc.CommandText := 'select * from MagazineDocs where Ik_Document='
+          + idDoc.ToString();
+        dsDoc.Connection := dm.DBConnect;
+        dsDoc.Open;
+        dsDoc.First;
+        editF := TfrmReviewDoc.Create(self);
+
+        if (dsDoc.FieldByName('DateCreate').Value <> Null) then
         begin
-          idDest := uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_destination')
-            .AsInteger;
-          case idDest of   // помениять ikdoc на ikdestinetion
-            1:
-              begin
+          editF.dtUtv.Format := '';
+          editF.dtUtv.Date := dsDoc.FieldByName('DateCreate').AsDateTime;
+          if (dsDoc.FieldByName('DateReady').Value <> Null) then
+          begin
+            editF.dtGot.Format := '';
+            editF.dtGot.Date := dsDoc.FieldByName('DateReady').AsDateTime;
+          end
+          else
+            editF.dtGot.Format := #32;
+        end
+        else
+          editF.dtUtv.Format := #32;
 
-                dsDoc.CommandText :=
-                  'select * from MagazineDocs where Ik_destination=' +
-                  idDest.ToString();
-                dsDoc.Connection := dm.DBConnect;
-                dsDoc.Open;
-                dsDoc.First;
-                editF := TfrmReviewDoc.Create(self);
-                editF.Show ;
-            //    editF.dtUtv.:= dsDoc.FieldByName('DateCreate').AsDateTime;
-             //   editF.eDest.Text:=dsDoc.FieldByName('DateCreate').AsDateTime;
+        editF.eDest.Text := dsDoc.FieldByName('cNameDestination').AsString;
+        editF.eNum.Text := dsDoc.FieldByName('NumberDoc').AsString;
+        editF.eInd.Text := dsDoc.FieldByName('Num_podrazd').AsString;
+        editF.Caption := dsDoc.FieldByName('PersName').AsString + ' (' +
+          dsDoc.FieldByName('CName_grup').AsString + ')';
+         editF.ShowModal;
+        case idDest of
+          1: // для справки по месту требования
+            begin
 
-              end;
-          end;
+            end;
+          2: // пенсионный фонд
+            begin
 
-
-
+            end;
         end;
+      end;
+
+    end;
+  finally
+    dsDoc.Free;
   end;
 end;
 
@@ -363,7 +387,8 @@ end;
 procedure TfmDoc.OnMyMenuItemClick(Sender: TObject);
 begin
   if Sender is TMenuItem Then
-    with Sender as TMenuItem do // здесь Sender - пункт меню на который кликнули
+    with Sender as TMenuItem do
+    // здесь Sender - пункт меню на который кликнули
     begin
       if Checked then
         self.dbgehMagazineDocs.Columns.Items[Tag].Visible := False

@@ -13,7 +13,7 @@ uses
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController,
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh, uUspevGroupController;
+  DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc;
 
 type
   TfmStudent = class(TfmBase)
@@ -446,7 +446,7 @@ begin
         dbcbeEnterprise.KeyValue)
     else
       CreateParameter('@ik_pred', ftInteger, pdInput, 0, null);
-    CreateParameter('@CLgot', ftString, pdInput,500, '');
+    CreateParameter('@CLgot', ftString, pdInput, 500, '');
     CreateParameter('@Ik_studGrup', ftInteger, pdInput, 0, obj.StudGrupKey);
   end;
   dmStudentActions.aspAppendStudent.ExecProc;
@@ -1064,11 +1064,100 @@ var // E: Variant;
   // posit:integer;
   // FindRange: Variant;
   // tempStoredProc: TADOStoredProc;
+  tempDS: TADODataSet;
   Report: TReportBase;
+  i, LastNum: integer;
+  datebegin: string;
+  AYear, AMonth, ADay: word;
+  sp_num: TADODataSet;
+  sp_depInd: TADODataSet;
+  k: integer;
+  editF: TfrmReviewDoc;
+  dsDoc: TADODataSet;
 begin
-  Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey, 0);
-  TWaitingController.GetInstance.Process(Report);
-  Report.Free;
+  dsDoc := TADODataSet.Create(nil);
+  sp_num := TADODataSet.Create(nil);
+  sp_depInd := TADODataSet.Create(nil);
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  try
+    // находим номер будущей справки
+
+    DecodeDate(Now, AYear, AMonth, ADay);
+    if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+      datebegin := '01.09.' + AYear.ToString()
+    else
+      datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
+    sp_num.CommandText := 'select * from MaxNumDocument(''' + datebegin + '''' +
+      ',' + '''' + DateTimeToStr(date()) + ''')';
+    sp_num.Connection := dm.DBConnect;
+    sp_num.Open;
+    sp_num.First;
+    LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
+    // берем индекс подразделения
+
+    sp_depInd.CommandText := 'select * from DepIndDoc(' +
+      obj.StudGrupKey.ToString() + ')';
+    sp_depInd.Connection := dm.DBConnect;
+    sp_depInd.Open;
+    sp_depInd.First;
+    // добавляем справку
+
+    tempDS.CommandText := 'Select * from Document';
+    tempDS.Open;
+    tempDS.Insert;
+    tempDS.FieldByName('Ik_studGrup').Value := obj.StudGrupKey;
+    tempDS.FieldByName('Ik_Transfer').Value := 1;
+    tempDS.FieldByName('Ik_destination').Value := 1;
+    tempDS.FieldByName('DateReady').Value := date;
+    tempDS.FieldByName('NumberDoc').Value := LastNum;
+    tempDS.FieldByName('DateCreate').Value := date;
+    tempDS.FieldByName('Num_podrazd').Value :=
+      sp_depInd.FieldByName('Dep_Index').AsString;
+    tempDS.Post;
+    try
+      tempDS.UpdateBatch();
+    except
+      // on E: EOleException do
+      // begin
+      // k := E.ErrorCode;
+      // if (k = ADO_ERROR_TWO) or (k = ADO_ERROR) then
+      // result := true
+      // else
+      // raise;
+      // end;
+      // on E: Exception do
+      // raise;
+    end;
+    editF := TfrmReviewDoc.Create(Self);
+    editF.dtUtv.Format := '';
+    editF.dtUtv.date := Date;
+    editF.dtGot.Format := '';
+    editF.dtGot.date := Date;
+    // ищем информацию о студенте
+    dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
+      obj.StudGrupKey.ToString();
+    dsDoc.Connection := dm.DBConnect;
+    dsDoc.Open;
+    dsDoc.First;
+    editF.eDest.Text := 'По месту требования';
+    editF.eNum.Text := LastNum.ToString();
+    editF.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
+    editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
+      dsDoc.FieldByName('Cname_grup').AsString + ')';
+    editF.ShowModal;
+    if  editF.ModalResult = mrOk then
+     begin
+    Report := TUspevGroupController.Instance.BuildSpravka2014
+      (obj.StudGrupKey, 0);
+    TWaitingController.GetInstance.Process(Report);
+     end;
+  finally
+    tempDS.Free;
+    sp_num.Free;
+    sp_depInd.Free;
+    dsDoc.Free;
+    Report.Free;
+  end;
   // вызываем процедуру, переводящую ФИО в дат. падеж
   // //и возвращающую иную нуную инфу
   // try

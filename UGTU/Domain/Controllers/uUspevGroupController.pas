@@ -15,7 +15,7 @@ uses
   ExcelXP, ComObj, DBGrids, uDMUspevaemost, ComCtrls, DateUtils,
   udmUgtuStructure, DBGridEh, ApplicationController, ExceptionBase, ReportsBase, D_VedomostBRS,
   D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport, D_BRSRankAverageReport,
-  Vedomost2014,Assemly_Report2014,Spravka,SpravkaReport2014,Spravka2014;
+  Vedomost2014,Assemly_Report2014,Spravka,SpravkaReport2014,Spravka2014,  uReviewDoc;
  type
   PDBGrid = ^TDBGridEh;
   TVedType = (exam,zach,KP,KR);
@@ -83,6 +83,7 @@ uses
 
 //закрывает все предметы выбранной аттестации
   function CloseAllAtt(ik_grup, nSem, numAtt:integer):boolean;
+  function ReviewDoc(ik_stud:integer;typeDoc:boolean):boolean;
 
 //сохран€ет одну дату дл€ аттестаций
   function SaveDateAllAtt(ik_grup, nSem, numAtt:integer; dateAtt: TDateTime):boolean;
@@ -397,15 +398,15 @@ begin
 end;
 
 
+// выхов формы
+
+function TUspevGroupController.ReviewDoc(ik_stud: integer;
+  typeDoc: boolean): boolean;
 
 
+begin
 
-
-
-
-
-
-
+end;
 
 //*********Ќ≈ѕќ—–≈ƒ—“¬≈ЌЌќ ”—ѕ≈¬ј≈ћќ—“№*********************
 

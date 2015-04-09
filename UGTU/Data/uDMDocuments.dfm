@@ -18,14 +18,14 @@ object dmDocs: TdmDocs
     object adodsDocsDateCreate: TDateTimeField
       FieldName = 'DateCreate'
     end
-    object adodsDocsIk_studGrup: TIntegerField
-      FieldName = 'Ik_studGrup'
-      ReadOnly = True
-    end
     object adodsDocsnCode: TBCDField
       FieldName = 'nCode'
       Precision = 18
       Size = 0
+    end
+    object adodsDocsIk_studGrup: TIntegerField
+      FieldName = 'Ik_studGrup'
+      ReadOnly = True
     end
     object adodsDocsFIO: TStringField
       FieldName = 'FIO'
@@ -104,6 +104,15 @@ object dmDocs: TdmDocs
     end
     object adodsDocsDateReady: TDateTimeField
       FieldName = 'DateReady'
+    end
+    object adodsDocsNum_podrazd: TStringField
+      FieldName = 'Num_podrazd'
+      Size = 10
+    end
+    object adodsDocsPersName: TStringField
+      FieldName = 'PersName'
+      ReadOnly = True
+      Size = 92
     end
   end
   object dsReviewDoc: TDataSource

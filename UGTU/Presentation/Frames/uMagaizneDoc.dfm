@@ -208,6 +208,14 @@ inherited fmDoc: TfmDoc
         item
           DynProps = <>
           EditButtons = <>
+          FieldName = 'Num_podrazd'
+          Footers = <>
+          STFilter.ListSource = dmDocs.dsDocs
+          Title.Caption = #1053#1086#1084#1077#1088' '#1087#1086#1076#1088#1072#1079#1076#1077#1083#1077#1085#1080#1103
+        end
+        item
+          DynProps = <>
+          EditButtons = <>
           FieldName = 'Ik_Document'
           Footers = <>
           ReadOnly = True
@@ -218,6 +226,7 @@ inherited fmDoc: TfmDoc
           EditButtons = <>
           FieldName = 'Ik_destination'
           Footers = <>
+          Visible = False
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end
@@ -331,7 +340,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C0101110040006C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000780110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

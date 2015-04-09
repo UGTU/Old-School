@@ -41,6 +41,8 @@ type
     adodsReviewDocIk_Document: TIntegerField;
     adodsDocsNumberDoc: TIntegerField;
     adodsDocsDateReady: TDateTimeField;
+    adodsDocsNum_podrazd: TStringField;
+    adodsDocsPersName: TStringField;
   private
     { Private declarations }
   public
