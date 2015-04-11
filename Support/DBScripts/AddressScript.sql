@@ -52,8 +52,9 @@ GO
 
 select * from CitySchoolAlumni order by NNyear, alum_count
 
-
-(select cast(count(distinct ABIT_postup.nCode) as numeric(8,0))/addr.people * 100, addr.people
+select * from gorod
+inner join 
+(select cast(count(distinct ABIT_postup.nCode) as numeric(8,0))/addr.people * 100 as proce, addr.people
 from ABIT_postup inner join Person on ABIT_postup.nCode = Person.nCode
 inner join Student on Student.nCode = Person.nCode
 inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
@@ -67,4 +68,5 @@ inner join
 	group by Gorod.Latitude, Gorod.Longitude) addr 
 	  on addr.Latitude = Gorod.Latitude and addr.Longitude = Gorod.Longitude
 where ABIT_Diapazon_spec_fac.NNyear = 2014
-group by addr.people
+group by addr.people) proc_adr on proc_adr.people = gorod.people
+order by gorod.Cgorod

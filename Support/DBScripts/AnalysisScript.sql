@@ -84,7 +84,7 @@ inner join Relation_spec_fac on grup.ik_spec_fac = Relation_spec_fac.ik_spec_fac
 left join Pricina on Pricina.Ik_pric = StudGrup.ik_pricOtch
 left join Prikaz on Prikaz.Ik_prikaz = StudGrup.Ik_prikazOtch) stud_hist on stud_hist.nCode = Person.nCode
 ) tabl
-where pricina<>'еще обучается' and Cname_type_zach = 'зачислен'
+--where pricina<>'еще обучается' and Cname_type_zach = 'зачислен'
 order by nCode
 
 
