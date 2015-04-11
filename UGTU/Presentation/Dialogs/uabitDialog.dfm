@@ -620,7 +620,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited cbJob: TCheckBox
                 Top = 230
-                OnClick = nil
                 ExplicitTop = 230
               end
               inherited cbInvalid: TCheckBox
@@ -667,7 +666,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Top = 345
               Width = 544
               Height = 105
-              ExplicitTop = 345
               ExplicitWidth = 544
               ExplicitHeight = 105
               inherited dbcbeEnterprise: TDBLookupComboboxEh
@@ -792,7 +790,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
