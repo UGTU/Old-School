@@ -26,14 +26,14 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     Top = 621
     Width = 562
     ExplicitTop = 621
-    ExplicitWidth = 579
+    ExplicitWidth = 562
     inherited bbOK: TBitBtn
       Left = 357
       Top = 6
       Width = 94
       Height = 26
       Caption = #1044#1072#1083#1077#1077
-      ExplicitLeft = 374
+      ExplicitLeft = 357
       ExplicitTop = 6
       ExplicitWidth = 94
       ExplicitHeight = 26
@@ -42,7 +42,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       Left = 469
       Top = 6
       Visible = False
-      ExplicitLeft = 486
+      ExplicitLeft = 469
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
@@ -50,7 +50,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       Top = 6
       Width = 95
       Height = 26
-      ExplicitLeft = 474
+      ExplicitLeft = 457
       ExplicitTop = 6
       ExplicitWidth = 95
       ExplicitHeight = 26
@@ -72,33 +72,28 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     Width = 562
     Height = 621
     TabStop = False
-    ExplicitWidth = 579
+    ExplicitWidth = 562
     ExplicitHeight = 621
     inherited TabSheet1: TTabSheet
-      ExplicitLeft = 4
-      ExplicitTop = 24
-      ExplicitWidth = 571
+      ExplicitWidth = 554
       ExplicitHeight = 593
       inherited PageControl2: TPageControl
         Width = 554
         Height = 593
-        ActivePage = TabSheet3
         OnChange = PageControl2Change
-        ExplicitWidth = 571
+        ExplicitWidth = 554
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
-          ExplicitWidth = 563
+          ExplicitWidth = 546
           ExplicitHeight = 561
           inherited Panel4: TPanel
             Width = 546
             Height = 561
-            ExplicitWidth = 563
+            ExplicitWidth = 546
             ExplicitHeight = 561
             inherited Panel7: TPanel
               Width = 544
-              ExplicitWidth = 561
+              ExplicitWidth = 544
               inherited Label4: TLabel
                 Top = 48
                 ExplicitTop = 48
@@ -211,7 +206,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Width = 544
               Height = 264
               ParentFont = False
-              ExplicitWidth = 561
+              ExplicitWidth = 544
               ExplicitHeight = 264
               inherited Label1: TLabel
                 Left = 200
@@ -488,7 +483,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Height = 134
               ParentFont = False
               ExplicitTop = 426
-              ExplicitWidth = 561
+              ExplicitWidth = 544
               ExplicitHeight = 134
               inherited sbAddAddress: TSpeedButton
                 Left = 509
@@ -517,18 +512,16 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet4: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
-          ExplicitWidth = 563
+          ExplicitWidth = 546
           ExplicitHeight = 561
           inherited Panel3: TPanel
             Width = 546
             Height = 561
-            ExplicitWidth = 563
+            ExplicitWidth = 546
             ExplicitHeight = 561
             inherited Panel5: TPanel
               Width = 544
-              ExplicitWidth = 561
+              ExplicitWidth = 544
               inherited Label27: TLabel
                 Top = 44
                 ExplicitTop = 44
@@ -585,8 +578,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Width = 544
               Height = 256
               ParentFont = False
-              ExplicitTop = 89
-              ExplicitWidth = 561
+              ExplicitWidth = 544
               ExplicitHeight = 256
               inherited Label30: TLabel
                 Visible = False
@@ -607,10 +599,10 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 ExplicitTop = 160
               end
               inherited Label43: TLabel
-                Top = 120
+                Top = 116
                 Width = 252
                 Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082' '#1074#1086#1077#1085#1085#1086#1081' '#1089#1083#1091#1078#1073#1077' / '#1074#1086#1080#1085#1089#1082#1086#1077' '#1079#1074#1072#1085#1080#1077' '
-                ExplicitTop = 120
+                ExplicitTop = 116
                 ExplicitWidth = 252
               end
               inherited Label42: TLabel
@@ -623,11 +615,12 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Left = 13
                 Top = 74
                 Width = 38
-                Height = 14
+                Height = 13
                 Caption = #1051#1100#1075#1086#1090#1099
               end
               inherited cbJob: TCheckBox
                 Top = 230
+                OnClick = nil
                 ExplicitTop = 230
               end
               inherited cbInvalid: TCheckBox
@@ -640,9 +633,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Visible = False
               end
               inherited dbcbeMilitaryState: TDBLookupComboboxEh
-                Top = 135
                 Width = 515
-                ExplicitTop = 135
                 ExplicitWidth = 515
               end
               inherited eAddInfo: TMemo
@@ -655,7 +646,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Left = 13
                 Top = 89
                 Width = 515
-                Height = 20
+                Height = 19
                 Alignment = taLeftJustify
                 DynProps = <>
                 EditButtons = <>
@@ -668,16 +659,16 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Top = 450
               Width = 544
               Height = 110
-              ExplicitTop = 488
-              ExplicitWidth = 561
-              ExplicitHeight = 72
+              ExplicitTop = 450
+              ExplicitWidth = 544
+              ExplicitHeight = 110
             end
             inherited pnlWork: TPanel
               Top = 345
               Width = 544
               Height = 105
-              ExplicitTop = 384
-              ExplicitWidth = 561
+              ExplicitTop = 345
+              ExplicitWidth = 544
               ExplicitHeight = 105
               inherited dbcbeEnterprise: TDBLookupComboboxEh
                 Width = 515
@@ -687,13 +678,11 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet5: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
-          ExplicitWidth = 563
+          ExplicitWidth = 546
           ExplicitHeight = 561
           inherited Panel9: TPanel
             Width = 546
-            ExplicitWidth = 563
+            ExplicitWidth = 546
             inherited dbcbeFamState: TDBLookupComboboxEh
               Left = 119
               ExplicitLeft = 119
@@ -705,9 +694,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet2: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 28
-          ExplicitWidth = 563
+          ExplicitWidth = 546
           ExplicitHeight = 561
           inherited sbAddDoc: TSpeedButton
             Left = 520
@@ -805,7 +792,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C0101050009006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
