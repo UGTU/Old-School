@@ -62,6 +62,7 @@ type
     { Private declarations }
   public
   HasAddSpec : boolean;
+  Year: integer;
   function checkDataAbit :boolean;
     { Public declarations }
   end;
@@ -131,7 +132,7 @@ begin
 frmPostupDlg:=TfrmpostupDlg.create(self);
 frmPostupDlg.Tag:=self.Tag;
 frmPostupDlg.HostForm:=self;
-frmPostupDlg.Hint:=self.Hint;
+frmPostupDlg.Year:=self.Year;
 frmPostupDlg.HasAddSpec:=HasAddSpec;
 frmPostupDlg.IDpostup:=-1;
 frmPostupDlg.Showmodal;

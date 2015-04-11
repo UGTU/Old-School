@@ -96,6 +96,7 @@ type
     DeleteExamList: Tlist;
     CurrentExam: Tlist;
     fn, ln, pn, ps, pnum: string;
+    Year: integer;
     procedure Sync;
     procedure ExamSync;
     procedure AdditionalSpecSync;
@@ -308,13 +309,13 @@ begin
     dmStudentData.adodsKatZach.Active:=true; }
 
   dmStudentData.aspGetAbitCat.Active := false;
-  dmStudentData.aspGetAbitCat.Parameters[1].Value := strtoint(Hint);
+  dmStudentData.aspGetAbitCat.Parameters[1].Value := Year;
   dmStudentData.aspGetAbitCat.Active := true;
 
   dm.adodsNabor.Active := false;
   dm.adodsNabor.CommandType := cmdText;
   dm.adodsNabor.CommandText :=
-    'select * from Tree_abit_Specialties where NNYear=''' + Hint +
+    'select * from Tree_abit_Specialties where NNYear=''' + inttostr(Year) +
     ''' Order By Cshort_name_fac, Cname_spec';
   dm.adodsNabor.Active := true;
 
@@ -382,7 +383,8 @@ end;
 procedure TfrmPostupDlg.sbAddExamClick(Sender: TObject);
 begin
   frmAddExamDialog := TfrmAddExamDialog.Create(self);
-  frmAddExamDialog.Hint := Hint;
+  frmAddExamDialog.Year := Year;
+  frmAddExamDialog.KatZachIK := dbcbeCategory.KeyValue;
   frmAddExamDialog.ShowModal;
   frmAddExamDialog.Free;
   Sync;
@@ -436,7 +438,7 @@ begin
   if ((s <> '') and (s <> ' ')) and (sgExams.Row <> 0) then
   begin
     frmAddExamDialog := TfrmAddExamDialog.Create(self);
-    frmAddExamDialog.Hint := Hint;
+    frmAddExamDialog.Year := Year;
 
     ex := ExamList[sgExams.Row - 1];
     frmAddExamDialog.dbcbeDisc.keyvalue := ex.IkDisc;
