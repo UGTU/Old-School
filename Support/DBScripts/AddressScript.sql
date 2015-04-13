@@ -54,7 +54,7 @@ select * from CitySchoolAlumni order by NNyear, alum_count
 
 select * from gorod
 inner join 
-(select cast(count(distinct ABIT_postup.nCode) as numeric(8,0))/addr.people * 100 as proce, addr.people
+(select cast(count(distinct ABIT_postup.nCode) as numeric(8,0))/addr.people * 100 as proce,count(distinct ABIT_postup.nCode) con, addr.people
 from ABIT_postup inner join Person on ABIT_postup.nCode = Person.nCode
 inner join Student on Student.nCode = Person.nCode
 inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
@@ -70,3 +70,15 @@ inner join
 where ABIT_Diapazon_spec_fac.NNyear = 2014
 group by addr.people) proc_adr on proc_adr.people = gorod.people
 order by gorod.Cgorod
+
+select Gorod.Cgorod, count(distinct Person.nCode) as per_count
+from Person inner join Student on Student.nCode = Person.nCode
+inner join Zaved_stud on Student.Ik_zaved = Zaved_stud.ik_zaved
+inner join Gorod on Gorod.Ik_gorod = Zaved_stud.ik_gorod
+inner join zach on zach.nCode = Person.nCode
+inner join StudGrup on StudGrup.Ik_zach = zach.Ik_zach
+inner join grup on grup.Ik_grup = StudGrup.Ik_grup
+inner join Relation_spec_fac on grup.ik_spec_fac = Relation_spec_fac.ik_spec_fac
+where ik_spec = 354569 and StudGrup.Ik_prikazOtch is null
+GROUP BY Gorod.Cgorod
+order by per_count

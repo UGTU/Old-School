@@ -576,7 +576,7 @@ from
 	order by dd_pod_zayav desc, cname_spec, RegNomer desc, fio
 RETURN 
 END
-*/
+
 ALTER PROCEDURE [dbo].[ABIT_Get_sdacha_abit] 
 @NNyear INT,								--год набора
 @Ik_kat_zach int = null
@@ -588,4 +588,5 @@ from dbo.ABIT_VidSdachi
 where ((Year(OutDate)>@NNyear) or (OutDate IS NULL))
 and((ABIT_VidSdachi.ik_type_kat = (select ik_type_kat from Kat_zach where Ik_kat_zach = @Ik_kat_zach))or(ABIT_VidSdachi.ik_type_kat is null)or(@Ik_kat_zach is null))
 order by cname_sdach
-GO
+GO*/
+
