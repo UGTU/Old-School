@@ -2,7 +2,7 @@ unit ConstantRepository;
 
 interface
 
-uses System.Variants, System.SysUtils;
+uses System.Variants, System.SysUtils, DateUtils;
 
 // Правила именования констант:
 // если константа является ключом, то пишем префикс "key_"
@@ -50,12 +50,14 @@ const
 function IfNull(const Value, Default: OleVariant): OleVariant;
 
 function GetMonthR(month: integer): string; // получить месяц в род.п. по номеру
+function GetFullDate(ddate:TDateTime):string; //получить полную запись даты
 function GetKursP(kurs: integer): string;
 // получить номер курса в предл. п. по номеру
 function GetTimeByType(aEdIzm, aHours: integer): string; // получить
 // function GetWeekCountName(weekCount: integer): string; //получить кол-во недель в виде строки
 function GetWeekCountNameFromDays(daysCount: integer): string;
 // получить кол-во недель в виде строки из часов
+
 
 implementation
 
@@ -99,6 +101,16 @@ begin
   end;
   Result := str;
 end;
+
+function GetFullDate(ddate:TDateTime):string;
+  begin
+   // date:= DateOf(ddate);
+   if (DayOf(ddate)<10) then
+      Result:='0'+IntToStr(DayOf(ddate))+' '+GetMonthR(MonthOf(ddate))+' '+IntToStr(YearOf(ddate))
+   else
+      Result:=IntToStr(DayOf(ddate))+' '+GetMonthR(MonthOf(ddate))+' '+IntToStr(YearOf(ddate));
+  end;
+
 
 function GetKursP(kurs: integer): string;
 var

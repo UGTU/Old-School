@@ -11,7 +11,7 @@ interface
 uses
   Classes, SysUtils, ExcelXP, Barcode, Contnrs, ReportsBase, DB, ADODB,
     DBTVObj, DBTVStudObj, DBTVGroupObj, ComCtrls, StdCtrls, ApplicationController,
-    Variants, GeneralController,uHOST, DateUtils;
+    Variants, GeneralController,uHOST, DateUtils, ConstantRepository;
 
 const TableBeg = 17;
 
@@ -61,7 +61,7 @@ begin
   begin
         dmHOST.ProcVivodKartochk.Locate('ik_AddressType',1,[]);
         imonth:=MonthOf(Date);
-        smonth := TGeneralController.Instance.GetMonthName(imonth);
+        smonth := GetMonthR(imonth);
 
         ActivateWorksheet(1);
         Replace('#í#', FieldByName('NumHostel').AsString);

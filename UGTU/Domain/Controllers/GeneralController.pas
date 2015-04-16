@@ -64,8 +64,6 @@ type
     function getStringListFromStr(sourceStr: string):TStringList;
     function ParseExcelSumExpression(sourceRange: AnsiString): AnsiString;
     function GetExcelColumnLetter(colNumber: integer): string;
-    function GetMonthName(imonth:integer):string;
-    function GetFullDate(ddate:TDateTime):string;
 
     function GetAltKeyState: boolean;
 
@@ -356,32 +354,6 @@ begin
   end;
 end;
 
-function TGeneralController.GetMonthName(imonth:integer):string;
-  begin
-    Result:='Ќет данных';
-    case imonth of
-    1: Result:='€нвар€';
-    2: Result:='феврал€';
-    3: Result:='марта';
-    4: Result:='апрел€';
-    5: Result:='ма€';
-    6: Result:='июн€';
-    7: Result:='июл€';
-    8: Result:='августа';
-    9: Result:='сент€бр€';
-    10: Result:='окт€бр€';
-    11: Result:='но€бр€';
-    12: Result:='декабр€';
-    end;
-  end;
 
-function TGeneralController.GetFullDate(ddate:TDateTime):string;
-  begin
-   // date:= DateOf(ddate);
-   if (DayOf(ddate)<10) then
-      Result:='0'+IntToStr(DayOf(ddate))+' '+GetMonthName(MonthOf(ddate))+' '+IntToStr(YearOf(ddate))
-   else
-      Result:=IntToStr(DayOf(ddate))+' '+GetMonthName(MonthOf(ddate))+' '+IntToStr(YearOf(ddate));
-  end;
 
 end.

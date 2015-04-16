@@ -5,7 +5,7 @@ uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM,
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, DBGridEh,WordXP, DateUtils, uDMOtdKadrDiplom, ApplicationController
-  , ExceptionBase;
+  , ExceptionBase, ConstantRepository;
 type
   PDBGrid = ^TDBGridEh;
   TDiplOtdKardController = class (TObject)
@@ -283,7 +283,7 @@ begin
     imonth:=MonthOf(StrToDate(str));
     iyear:=YearOf(StrToDate(str));
 
-    smonth := TGeneralController.Instance.GetMonthName(imonth);
+    smonth := GetMonthR(imonth);
 
     str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
 
@@ -306,11 +306,11 @@ begin
 
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
     imonth:=MonthOf(StrToDate(str));
-    smonth := TGeneralController.Instance.GetMonthName(imonth);
+    smonth := GetMonthR(imonth);
     FindRange := E.Cells.Replace(What := '#месяц#',Replacement:=smonth);
 
     iyear:=YearOf(StrToDate(str));
-    FindRange := E.Cells.Replace(What := '#год#',Replacement:=Copy(IntToStr(iyear),3,2));
+    FindRange := E.Cells.Replace(What := '#год#',Replacement:=IntToStr(iyear));//Copy(IntToStr(iyear),3,2));
 
     iday:=DayOf(StrToDate(str));
     str:=Inttostr(iDay);
@@ -331,12 +331,8 @@ begin
   E.Sheets[count].Select;
 
   //заносим данные
-
-
-
-
-
-
+  str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' года';
+  FindRange := E.Cells.Replace(What := '#DateDelivery#',Replacement:=str);
   FindRange := E.Cells.Replace(What := '#fiogak#',Replacement:=tempStoredProc.FieldByName('GakMemberName').AsString);
   FindRange := E.Cells.Replace(What := '#Category#',Replacement:=tempStoredProc.FieldByName('SpecСategory').AsString);
   FindRange := E.Cells.Replace(What := '#qualifShort#',Replacement:=tempStoredProc.FieldByName('QualifShortName').AsString);
