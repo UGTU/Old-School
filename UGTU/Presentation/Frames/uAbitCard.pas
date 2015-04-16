@@ -23,6 +23,7 @@ type
     ToolButton15: TToolButton;
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
+    Label3: TLabel;
     procedure dbgeListsCellClick(Column: TColumnEh);
     procedure eFamChange(Sender: TObject);
     procedure BbSaveclick(Sender: TObject);
@@ -564,6 +565,9 @@ constructor TfmAbitCard.CreateFrame(AOwner: TComponent; AObject: TObject;
 begin
   inherited;
   Self.PageControl2.ActivePage := TabSheet1;
+  Label30.Visible := False;
+  dbcbeSocWork.Visible := False;
+  cbInvalid.Visible := False;
 end;
 
 end.

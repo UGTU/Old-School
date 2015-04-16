@@ -481,6 +481,7 @@ begin
    // fHour:= GetTimeByEdIzm(edtHoursGos.Text, fEdIzm);
   end;
   (Sender as TDBEditEh).Color:= clWindow;
+  CalcSRS;
 end;
 
 procedure TfrmUchPlanAddDisc.edtHoursGosKeyPress(Sender: TObject; var Key: Char);

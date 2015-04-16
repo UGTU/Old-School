@@ -23,6 +23,7 @@ type
     { Private declarations }
   public
   HasAddSpec:boolean;
+  Year: integer;
     { Public declarations }
   end;
 
@@ -35,39 +36,38 @@ implementation
 
 procedure TfrmAbitConfirm.actAddAbitExecute(Sender: TObject);
 begin
-frmAbitCardDialog:=TfrmAbitCardDialog.Create(self);
-frmAbitCardDialog.Tag:=self.Tag;
-frmAbitCardDialog.hint:=self.hint;
-frmAbitCardDialog.HasAddSpec:=HasAddSpec;
-self.Close;
-frmAbitCardDialog.ShowModal;
-frmAbitCardDialog.Free;
+  frmAbitCardDialog:=TfrmAbitCardDialog.Create(self);
+  frmAbitCardDialog.Tag:=self.Tag;
+  frmAbitCardDialog.Year:=self.Year;
+  frmAbitCardDialog.HasAddSpec:=HasAddSpec;
+  self.Close;
+  frmAbitCardDialog.ShowModal;
+  frmAbitCardDialog.Free;
 end;
 
 procedure TfrmAbitConfirm.actAddStatementExecute(Sender: TObject);
 begin
-frmFindAbit:=TfrmFindAbit.Create(self);
-frmFindAbit.Tag:=self.Tag;
-frmFindAbit.hint:=self.hint;
-frmFindAbit.HasAddSpec:=HasAddSpec;
-self.Close;
-frmFindAbit.ShowModal;
-frmFindAbit.Free;
+  frmFindAbit:=TfrmFindAbit.Create(self);
+  frmFindAbit.Tag:=self.Tag;
+  frmFindAbit.Year:=self.Year;
+  frmFindAbit.HasAddSpec:=HasAddSpec;
+  self.Close;
+  frmFindAbit.ShowModal;
+  frmFindAbit.Free;
 end;
 
 
 
 procedure TfrmAbitConfirm.actConfirmOnlineExecute(Sender: TObject);
 begin
-frmFindAbit:=TfrmFindAbit.Create(self);
-frmFindAbit.Tag:=self.Tag;
-frmFindAbit.hint:=self.hint;
-frmFindAbit.IsOnline:=true;
-frmFindAbit.HasAddSpec:=HasAddSpec;
-self.Close;
-frmFindAbit.ShowModal;
-frmFindAbit.Free;
-
+  frmFindAbit:=TfrmFindAbit.Create(self);
+  frmFindAbit.Tag:=self.Tag;
+  frmFindAbit.Year:=self.Year;
+  frmFindAbit.IsOnline:=true;
+  frmFindAbit.HasAddSpec:=HasAddSpec;
+  self.Close;
+  frmFindAbit.ShowModal;
+  frmFindAbit.Free;
 end;
 
 end.

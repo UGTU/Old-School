@@ -285,6 +285,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
           Height = 367
           Align = alClient
           TabOrder = 1
+          ExplicitLeft = 3
+          ExplicitTop = 51
           DesignSize = (
             251
             367)
@@ -563,8 +565,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             OnKeyPress = Edit7KeyPress
           end
           object ToolBar1: TToolBar
-            Left = 209
-            Top = 318
+            Left = 175
+            Top = 255
             Width = 53
             Height = 16
             Align = alNone
@@ -710,7 +712,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
   end
   object Panel5: TPanel [22]
-    Left = 138
+    Left = 244
     Top = 156
     Width = 385
     Height = 18
@@ -718,6 +720,12 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
       #1053#1072#1078#1084#1080#1090#1077' <CTRL + '#1055#1088#1086#1073#1077#1083'>, '#1095#1090#1086#1073#1099' '#1091#1089#1090#1072#1085#1086#1074#1080#1090#1100' '#1079#1085#1072#1095#1077#1085#1080#1077' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102'.' +
       '..'
     Color = clInfoBk
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clGreen
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 7
     Visible = False
   end
@@ -786,7 +794,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Left = 440
     Top = 560
     Bitmap = {
-      494C0101030004005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

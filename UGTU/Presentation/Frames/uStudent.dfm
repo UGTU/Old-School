@@ -1,15 +1,15 @@
 inherited fmStudent: TfmStudent
-  Width = 725
+  Width = 668
   Height = 684
   Constraints.MinHeight = 524
   Constraints.MinWidth = 561
   OnExit = FrameExit
-  ExplicitWidth = 725
+  ExplicitWidth = 668
   ExplicitHeight = 684
   object ToolBar1: TToolBar [0]
     Left = 0
     Top = 0
-    Width = 725
+    Width = 668
     Height = 28
     Caption = 'ToolBar1'
     Images = frmMain.ImageList1
@@ -124,16 +124,16 @@ inherited fmStudent: TfmStudent
   end
   inherited Panel1: TPanel
     Top = 28
-    Width = 725
+    Width = 668
     Height = 619
     TabOrder = 2
     ExplicitTop = 28
-    ExplicitWidth = 725
+    ExplicitWidth = 668
     ExplicitHeight = 619
     object ScrollBox1: TScrollBox
       Left = 2
       Top = 2
-      Width = 721
+      Width = 664
       Height = 615
       Align = alClient
       BevelInner = bvNone
@@ -143,9 +143,9 @@ inherited fmStudent: TfmStudent
       object PageControl1: TPageControl
         Left = 0
         Top = 0
-        Width = 721
+        Width = 664
         Height = 615
-        ActivePage = TabSheet1
+        ActivePage = TabSheet2
         Align = alClient
         Constraints.MinWidth = 557
         MultiLine = True
@@ -156,13 +156,19 @@ inherited fmStudent: TfmStudent
           object PageControl2: TPageControl
             Left = 0
             Top = 0
-            Width = 713
+            Width = 656
             Height = 587
-            ActivePage = TabSheet6
+            ActivePage = TabSheet3
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Images = ilPages
+            ParentFont = False
             Style = tsFlatButtons
             TabOrder = 0
             object TabSheet3: TTabSheet
@@ -170,14 +176,14 @@ inherited fmStudent: TfmStudent
               object Panel4: TPanel
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 648
                 Height = 555
                 Align = alClient
                 TabOrder = 0
                 object Panel8: TPanel
                   Left = 1
                   Top = 173
-                  Width = 703
+                  Width = 646
                   Height = 177
                   Align = alTop
                   TabOrder = 2
@@ -330,7 +336,7 @@ inherited fmStudent: TfmStudent
                 object Panel7: TPanel
                   Left = 1
                   Top = 1
-                  Width = 703
+                  Width = 646
                   Height = 172
                   Align = alTop
                   TabOrder = 1
@@ -615,12 +621,12 @@ inherited fmStudent: TfmStudent
                 object Panel6: TPanel
                   Left = 1
                   Top = 350
-                  Width = 703
+                  Width = 646
                   Height = 204
                   Align = alClient
                   TabOrder = 0
                   DesignSize = (
-                    703
+                    646
                     204)
                   object Label2: TLabel
                     Left = 12
@@ -636,31 +642,34 @@ inherited fmStudent: TfmStudent
                     ParentFont = False
                   end
                   object sbAddAddress: TSpeedButton
-                    Left = 672
+                    Left = 615
                     Top = 35
                     Width = 23
                     Height = 23
                     Action = actAddAddress
                     Anchors = [akTop, akRight]
                     Flat = True
+                    ExplicitLeft = 672
                   end
                   object sbRemoveAddress: TSpeedButton
-                    Left = 672
+                    Left = 615
                     Top = 93
                     Width = 23
                     Height = 23
                     Action = actDeleteAddress
                     Anchors = [akTop, akRight]
                     Flat = True
+                    ExplicitLeft = 672
                   end
                   object SpeedButton2: TSpeedButton
-                    Left = 672
+                    Left = 615
                     Top = 64
                     Width = 23
                     Height = 23
                     Action = actEditAddress
                     Anchors = [akTop, akRight]
                     Flat = True
+                    ExplicitLeft = 672
                   end
                   object SpeedButton3: TSpeedButton
                     Left = 108
@@ -673,7 +682,7 @@ inherited fmStudent: TfmStudent
                   object dbgeAddress: TDBGridEh
                     Left = 12
                     Top = 33
-                    Width = 654
+                    Width = 597
                     Height = 146
                     Anchors = [akLeft, akTop, akRight, akBottom]
                     DataSource = dmStudentSelectionProcs.dsGetPersonAddress
@@ -694,21 +703,17 @@ inherited fmStudent: TfmStudent
             object TabSheet4: TTabSheet
               Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
               ImageIndex = 1
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel3: TPanel
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 648
                 Height = 555
                 Align = alClient
                 TabOrder = 0
                 object Panel5: TPanel
                   Left = 1
                   Top = 1
-                  Width = 703
+                  Width = 646
                   Height = 101
                   Align = alTop
                   TabOrder = 0
@@ -728,15 +733,15 @@ inherited fmStudent: TfmStudent
                   end
                   object Label58: TLabel
                     Left = 89
-                    Top = 8
-                    Width = 4
+                    Top = 4
+                    Width = 6
                     Height = 13
                     Caption = '*'
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
                     Font.Height = -11
                     Font.Name = 'MS Sans Serif'
-                    Font.Style = []
+                    Font.Style = [fsBold]
                     ParentFont = False
                   end
                   object dbcbeCitizenship: TDBLookupComboboxEh
@@ -769,106 +774,65 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                 end
-                object Panel2: TPanel
+                object pnlDop: TPanel
                   Left = 1
                   Top = 102
-                  Width = 703
-                  Height = 452
-                  Align = alClient
+                  Width = 646
+                  Height = 307
+                  Align = alTop
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
                   TabOrder = 1
                   object Label30: TLabel
                     Left = 17
-                    Top = 101
+                    Top = 83
                     Width = 119
                     Height = 13
                     Caption = #1054#1073#1097#1077#1089#1090#1074#1077#1085#1085#1072#1103' '#1088#1072#1073#1086#1090#1072':'
                   end
                   object Label31: TLabel
                     Left = 17
-                    Top = 19
+                    Top = 38
                     Width = 132
                     Height = 13
                     Caption = #1044#1086#1074#1091#1079#1086#1074#1089#1082#1072#1103' '#1087#1086#1076#1075#1086#1090#1086#1074#1082#1072':'
                   end
                   object Label32: TLabel
-                    Left = 17
-                    Top = 62
+                    Left = 18
+                    Top = 84
                     Width = 99
                     Height = 13
                     Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1099#1081' '#1091#1095#1077#1090':'
+                    Visible = False
                   end
                   object Label34: TLabel
-                    Left = 198
-                    Top = 141
+                    Left = 17
+                    Top = 177
                     Width = 143
                     Height = 13
                     Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1077' '#1089#1074#1077#1076#1077#1085#1080#1103':'
                   end
                   object Label42: TLabel
-                    Left = 196
-                    Top = 19
+                    Left = 204
+                    Top = 40
                     Width = 43
                     Height = 13
                     Caption = #1052#1077#1076#1072#1083#1100':'
                   end
                   object Label43: TLabel
-                    Left = 196
-                    Top = 101
+                    Left = 17
+                    Top = 135
                     Width = 253
                     Height = 13
                     Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082' '#1074#1086#1077#1085#1085#1086#1081' '#1089#1083#1091#1078#1073#1077' / '#1074#1086#1080#1085#1089#1082#1086#1077' '#1079#1074#1072#1085#1080#1077': '
                   end
-                  object Label57: TLabel
-                    Left = 139
-                    Top = 205
-                    Width = 41
-                    Height = 13
-                    Caption = #1084#1077#1089#1103#1094#1077#1074
-                  end
-                  object Label56: TLabel
-                    Left = 66
-                    Top = 205
-                    Width = 18
-                    Height = 13
-                    Caption = #1083#1077#1090
-                  end
-                  object Label55: TLabel
-                    Left = 17
-                    Top = 182
-                    Width = 72
-                    Height = 13
-                    Caption = #1057#1090#1072#1078' '#1088#1072#1073#1086#1090#1099':'
-                  end
-                  object Label54: TLabel
-                    Left = 17
-                    Top = 141
-                    Width = 61
-                    Height = 13
-                    Caption = #1044#1086#1083#1078#1085#1086#1089#1090#1100':'
-                  end
-                  object Label51: TLabel
-                    Left = 196
-                    Top = 62
-                    Width = 76
-                    Height = 13
-                    Caption = #1052#1077#1089#1090#1086' '#1088#1072#1073#1086#1090#1099':'
-                  end
-                  object Label59: TLabel
-                    Left = 240
-                    Top = 19
-                    Width = 4
-                    Height = 13
-                    Caption = '*'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clRed
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
                   object cbChildren: TCheckBox
-                    Left = 363
-                    Top = 28
+                    Left = 204
+                    Top = 9
                     Width = 97
                     Height = 17
                     Caption = #1053#1072#1083#1080#1095#1080#1077' '#1076#1077#1090#1077#1081
@@ -876,26 +840,32 @@ inherited fmStudent: TfmStudent
                     OnClick = eFamChange
                   end
                   object cbJob: TCheckBox
-                    Left = 363
-                    Top = 80
+                    Left = 17
+                    Top = 280
                     Width = 118
                     Height = 17
                     Caption = #1053#1072#1083#1080#1095#1080#1077' '#1088#1072#1073#1086#1090#1099
                     TabOrder = 1
-                    OnClick = eFamChange
+                    OnClick = cbJobClick
                   end
                   object cbInvalid: TCheckBox
-                    Left = 363
-                    Top = 45
+                    Left = 319
+                    Top = 9
                     Width = 97
                     Height = 17
                     Caption = #1048#1085#1074#1072#1083#1080#1076#1085#1086#1089#1090#1100
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
+                    ParentFont = False
                     TabOrder = 2
                     OnClick = eFamChange
                   end
                   object cbAppNeed: TCheckBox
-                    Left = 363
-                    Top = 63
+                    Left = 18
+                    Top = 9
                     Width = 164
                     Height = 17
                     Caption = #1055#1086#1090#1088#1077#1073#1085#1086#1089#1090#1100' '#1074' '#1086#1073#1097#1077#1078#1080#1090#1080#1080
@@ -904,7 +874,7 @@ inherited fmStudent: TfmStudent
                   end
                   object dbcbePreparation: TDBLookupComboboxEh
                     Left = 17
-                    Top = 37
+                    Top = 56
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
@@ -920,7 +890,7 @@ inherited fmStudent: TfmStudent
                   end
                   object dbcbeSocWork: TDBLookupComboboxEh
                     Left = 17
-                    Top = 118
+                    Top = 100
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
@@ -935,8 +905,8 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                   object dbcbeSpecCount: TDBLookupComboboxEh
-                    Left = 17
-                    Top = 78
+                    Left = 18
+                    Top = 100
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
@@ -947,13 +917,13 @@ inherited fmStudent: TfmStudent
                     ListField = 'Cspecial_uchet'
                     ListSource = dmStudentData.dsCount
                     TabOrder = 6
-                    Visible = True
+                    Visible = False
                     OnChange = eFamChange
                   end
                   object dbcbeMedal: TDBLookupComboboxEh
-                    Left = 196
-                    Top = 35
-                    Width = 157
+                    Left = 204
+                    Top = 56
+                    Width = 212
                     Height = 19
                     Alignment = taLeftJustify
                     DataField = ''
@@ -967,9 +937,9 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                   object dbcbeMilitaryState: TDBLookupComboboxEh
-                    Left = 195
-                    Top = 118
-                    Width = 331
+                    Left = 16
+                    Top = 152
+                    Width = 609
                     Height = 19
                     Alignment = taLeftJustify
                     DataField = ''
@@ -983,9 +953,9 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                   object eAddInfo: TMemo
-                    Left = 195
-                    Top = 158
-                    Width = 332
+                    Left = 17
+                    Top = 196
+                    Width = 608
                     Height = 72
                     BevelInner = bvNone
                     BorderStyle = bsNone
@@ -995,23 +965,60 @@ inherited fmStudent: TfmStudent
                     OnEnter = eAddInfoEnter
                     OnExit = eAddInfoExit
                   end
-                  object eDuty: TDBEditEh
-                    Left = 17
-                    Top = 159
-                    Width = 172
-                    Height = 19
-                    Alignment = taLeftJustify
-                    DynProps = <>
-                    EditButtons = <>
-                    Flat = True
-                    TabOrder = 10
-                    Visible = True
-                    OnChange = eFamChange
+                end
+                object pnlWork: TPanel
+                  Left = 1
+                  Top = 409
+                  Width = 646
+                  Height = 145
+                  Align = alClient
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 2
+                  Visible = False
+                  object Label51: TLabel
+                    Left = 12
+                    Top = 18
+                    Width = 76
+                    Height = 13
+                    Caption = #1052#1077#1089#1090#1086' '#1088#1072#1073#1086#1090#1099':'
+                  end
+                  object Label54: TLabel
+                    Left = 27
+                    Top = 48
+                    Width = 61
+                    Height = 13
+                    Caption = #1044#1086#1083#1078#1085#1086#1089#1090#1100':'
+                  end
+                  object Label55: TLabel
+                    Left = 16
+                    Top = 78
+                    Width = 72
+                    Height = 13
+                    Caption = #1057#1090#1072#1078' '#1088#1072#1073#1086#1090#1099':'
+                  end
+                  object Label56: TLabel
+                    Left = 145
+                    Top = 78
+                    Width = 18
+                    Height = 13
+                    Caption = #1083#1077#1090
+                  end
+                  object Label57: TLabel
+                    Left = 225
+                    Top = 78
+                    Width = 41
+                    Height = 13
+                    Caption = #1084#1077#1089#1103#1094#1077#1074
                   end
                   object dbcbeEnterprise: TDBLookupComboboxEh
-                    Left = 196
-                    Top = 78
-                    Width = 157
+                    Left = 94
+                    Top = 15
+                    Width = 531
                     Height = 19
                     Alignment = taLeftJustify
                     DataField = ''
@@ -1020,33 +1027,46 @@ inherited fmStudent: TfmStudent
                     KeyField = 'Ik_pred'
                     ListField = 'Cname_pred'
                     ListSource = dmStudentData.dsEnterprise
-                    TabOrder = 11
+                    TabOrder = 0
+                    Visible = True
+                    OnChange = eFamChange
+                  end
+                  object eDuty: TDBEditEh
+                    Left = 94
+                    Top = 45
+                    Width = 172
+                    Height = 19
+                    Alignment = taLeftJustify
+                    DynProps = <>
+                    EditButtons = <>
+                    Flat = True
+                    TabOrder = 1
                     Visible = True
                     OnChange = eFamChange
                   end
                   object eXpyear: TDBNumberEditEh
-                    Left = 17
-                    Top = 202
+                    Left = 94
+                    Top = 75
                     Width = 45
                     Height = 19
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
                     MaxValue = 1000.000000000000000000
-                    TabOrder = 12
+                    TabOrder = 2
                     Visible = True
                     OnChange = eFamChange
                   end
                   object eXpMonth: TDBNumberEditEh
-                    Left = 91
-                    Top = 202
+                    Left = 174
+                    Top = 75
                     Width = 45
                     Height = 19
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
                     MaxValue = 11.000000000000000000
-                    TabOrder = 13
+                    TabOrder = 3
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -1056,14 +1076,10 @@ inherited fmStudent: TfmStudent
             object TabSheet5: TTabSheet
               Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Splitter1: TSplitter
                 Left = 0
                 Top = 25
-                Width = 705
+                Width = 648
                 Height = 3
                 Cursor = crVSplit
                 Align = alTop
@@ -1072,7 +1088,7 @@ inherited fmStudent: TfmStudent
               object Panel9: TPanel
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 648
                 Height = 25
                 Align = alTop
                 BevelOuter = bvNone
@@ -1103,7 +1119,7 @@ inherited fmStudent: TfmStudent
               object dbgeFam: TDBGridEh
                 Left = 0
                 Top = 28
-                Width = 705
+                Width = 648
                 Height = 403
                 Align = alClient
                 DataSource = dmStudentSelectionProcs.dsFamily
@@ -1121,7 +1137,7 @@ inherited fmStudent: TfmStudent
               object dbgeChangeFam: TDBGridEh
                 Left = 0
                 Top = 431
-                Width = 705
+                Width = 648
                 Height = 124
                 Align = alBottom
                 AutoFitColWidths = True
@@ -1163,17 +1179,10 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
-              DesignSize = (
-                705
-                555)
               object dbgeDocuments: TDBGridEh
                 Left = 0
                 Top = 0
-                Width = 654
+                Width = 597
                 Height = 555
                 Align = alClient
                 AutoFitColWidths = True
@@ -1222,7 +1231,7 @@ inherited fmStudent: TfmStudent
                 Visible = False
               end
               object pnlToolDoc: TPanel
-                Left = 654
+                Left = 597
                 Top = 0
                 Width = 51
                 Height = 555
@@ -1257,14 +1266,10 @@ inherited fmStudent: TfmStudent
             object TabSheet7: TTabSheet
               Caption = #1057#1086#1073#1099#1090#1080#1103
               ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object gbExiled: TGroupBox
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 648
                 Height = 91
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1086#1090#1095#1080#1089#1083#1077#1085#1080#1080
@@ -1278,7 +1283,7 @@ inherited fmStudent: TfmStudent
                 object DBGridEh5: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 644
                   Height = 74
                   Align = alClient
                   AutoFitColWidths = True
@@ -1297,7 +1302,7 @@ inherited fmStudent: TfmStudent
               object gbAcadem: TGroupBox
                 Left = 0
                 Top = 179
-                Width = 705
+                Width = 648
                 Height = 86
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1072#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1080#1093' '#1086#1090#1087#1091#1089#1082#1072#1093
@@ -1311,7 +1316,7 @@ inherited fmStudent: TfmStudent
                 object dbgeAcadem: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 644
                   Height = 69
                   Align = alClient
                   AutoFitColWidths = True
@@ -1330,7 +1335,7 @@ inherited fmStudent: TfmStudent
               object gbEntered: TGroupBox
                 Left = 0
                 Top = 91
-                Width = 705
+                Width = 648
                 Height = 88
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
@@ -1344,7 +1349,7 @@ inherited fmStudent: TfmStudent
                 object DBGridEh3: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 644
                   Height = 71
                   Align = alClient
                   AutoFitColWidths = True
@@ -1363,7 +1368,7 @@ inherited fmStudent: TfmStudent
               object gbProlongued: TGroupBox
                 Left = 0
                 Top = 457
-                Width = 705
+                Width = 648
                 Height = 98
                 Align = alClient
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1088#1086#1076#1083#1077#1085#1080#1080' '#1089#1077#1089#1089#1080#1080
@@ -1377,7 +1382,7 @@ inherited fmStudent: TfmStudent
                 object DBGridEh6: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 644
                   Height = 81
                   Align = alClient
                   AutoFitColWidths = True
@@ -1396,7 +1401,7 @@ inherited fmStudent: TfmStudent
               object gbCatChange: TGroupBox
                 Left = 0
                 Top = 361
-                Width = 705
+                Width = 648
                 Height = 96
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1089#1084#1077#1085#1077' '#1082#1072#1090#1077#1075#1086#1088#1080#1080' '#1086#1073#1091#1095#1077#1085#1080#1103
@@ -1410,7 +1415,7 @@ inherited fmStudent: TfmStudent
                 object DBGridEh2: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 644
                   Height = 79
                   Align = alClient
                   AutoFitColWidths = True
@@ -1429,7 +1434,7 @@ inherited fmStudent: TfmStudent
               object gbMoved: TGroupBox
                 Left = 0
                 Top = 265
-                Width = 705
+                Width = 648
                 Height = 96
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1077#1088#1077#1074#1086#1076#1072#1093' '#1085#1072' '#1089#1083#1077#1076#1091#1102#1097#1080#1081' '#1082#1091#1088#1089
@@ -1443,7 +1448,7 @@ inherited fmStudent: TfmStudent
                 object DBGridEh4: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 644
                   Height = 79
                   Align = alClient
                   AutoFitColWidths = True
@@ -1465,14 +1470,10 @@ inherited fmStudent: TfmStudent
         object TabSheet2: TTabSheet
           Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object DBGridEh1: TDBGridEh
             Left = 0
             Top = 26
-            Width = 713
+            Width = 656
             Height = 561
             Align = alClient
             AllowedOperations = []
@@ -1495,7 +1496,7 @@ inherited fmStudent: TfmStudent
           object Panel11: TPanel
             Left = 0
             Top = 0
-            Width = 713
+            Width = 656
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -1659,14 +1660,10 @@ inherited fmStudent: TfmStudent
         object tsBRSBalls: TTabSheet
           Caption = #1041#1072#1083#1083#1099' '#1087#1086' '#1084#1086#1076#1091#1083#1103#1084
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel10: TPanel
             Left = 0
             Top = 0
-            Width = 713
+            Width = 656
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -1827,7 +1824,7 @@ inherited fmStudent: TfmStudent
           object dbgeBalls: TDBGridEh
             Left = 0
             Top = 26
-            Width = 713
+            Width = 656
             Height = 561
             Align = alClient
             AllowedOperations = []
@@ -1851,14 +1848,10 @@ inherited fmStudent: TfmStudent
         object TabSheet9: TTabSheet
           Caption = #1047#1072#1082#1088#1099#1090#1099#1077' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
-            Width = 713
+            Width = 656
             Height = 26
             Align = alTop
             BevelOuter = bvNone
@@ -1917,7 +1910,7 @@ inherited fmStudent: TfmStudent
           object dbgrNapr: TDBGridEh
             Left = 0
             Top = 26
-            Width = 713
+            Width = 656
             Height = 561
             Align = alClient
             AllowedOperations = []
@@ -1942,14 +1935,10 @@ inherited fmStudent: TfmStudent
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
-            Width = 713
+            Width = 656
             Height = 587
             Align = alClient
             AllowedOperations = []
@@ -2008,29 +1997,29 @@ inherited fmStudent: TfmStudent
   end
   inherited pnlSave: TPanel
     Top = 647
-    Width = 725
+    Width = 668
     ExplicitTop = 647
-    ExplicitWidth = 725
+    ExplicitWidth = 668
     DesignSize = (
-      725
+      668
       37)
     inherited bbSave: TBitBtn
-      Left = 555
+      Left = 498
       Action = actApply
-      ExplicitLeft = 555
+      ExplicitLeft = 498
     end
     inherited bbUndo: TBitBtn
-      Left = 387
+      Left = 330
       Action = actUndo
       Caption = #1054#1090#1084#1077#1085#1080#1090#1100
-      ExplicitLeft = 387
+      ExplicitLeft = 330
     end
   end
   object ilPages: TImageList
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900B40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

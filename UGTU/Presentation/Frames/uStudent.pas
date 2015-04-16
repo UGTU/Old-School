@@ -42,7 +42,7 @@ type
     Panel5: TPanel;
     Label27: TLabel;
     Label29: TLabel;
-    Panel2: TPanel;
+    pnlDop: TPanel;
     Label30: TLabel;
     Label31: TLabel;
     Label32: TLabel;
@@ -105,15 +105,6 @@ type
     Label47: TLabel;
     eAddInfo: TMemo;
     ToolButton1: TToolButton;
-    Label57: TLabel;
-    Label56: TLabel;
-    Label55: TLabel;
-    eDuty: TDBEditEh;
-    Label54: TLabel;
-    dbcbeEnterprise: TDBLookupComboboxEh;
-    Label51: TLabel;
-    eXpyear: TDBNumberEditEh;
-    eXpMonth: TDBNumberEditEh;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
@@ -128,7 +119,6 @@ type
     Label52: TLabel;
     Label53: TLabel;
     Label58: TLabel;
-    Label59: TLabel;
     gbProlongued: TGroupBox;
     DBGridEh6: TDBGridEh;
     ToolButton10: TToolButton;
@@ -194,6 +184,16 @@ type
     sbAddDoc: TSpeedButton;
     SpeedButton7: TSpeedButton;
     SbDelDoc: TSpeedButton;
+    pnlWork: TPanel;
+    Label51: TLabel;
+    dbcbeEnterprise: TDBLookupComboboxEh;
+    Label54: TLabel;
+    eDuty: TDBEditEh;
+    Label55: TLabel;
+    eXpyear: TDBNumberEditEh;
+    Label56: TLabel;
+    eXpMonth: TDBNumberEditEh;
+    Label57: TLabel;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -242,6 +242,7 @@ type
     procedure FrameExit(Sender: TObject);
     procedure dbgeDocumentsCellClick(Column: TColumnEh);
     procedure dbgeDocumentsDblClick(Sender: TObject);
+    procedure cbJobClick(Sender: TObject);
 
   private
     Fik: integer;
@@ -1382,6 +1383,13 @@ begin
 
   ImageFullSizeShowForm.Image := iPhoto.Picture.Graphic;
   ImageFullSizeShowForm.Show;
+end;
+
+procedure TfmStudent.cbJobClick(Sender: TObject);
+begin
+  inherited;
+  pnlWork.Visible := cbJob.Checked;
+  eFamChange(Sender);
 end;
 
 procedure TfmStudent.cbModuleBRSChange(Sender: TObject);

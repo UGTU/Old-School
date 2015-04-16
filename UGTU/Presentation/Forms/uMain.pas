@@ -2251,7 +2251,7 @@ TApplicationController.GetInstance.AddLogEntry('Добавление абитуриента');
 
 frmAbitConfirm:=tfrmAbitConfirm.Create(self);
 frmAbitConfirm.Tag:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).NNRecord;
-frmAbitConfirm.hint:=inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year);
+frmAbitConfirm.Year:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year;
 yearnode:=TDBNodeAbitYearObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Data);
 frmAbitConfirm.HasAddSpec:=yearnode.HasAddSpec;
 frmAbitConfirm.ShowModal;
