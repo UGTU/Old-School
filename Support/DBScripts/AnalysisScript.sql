@@ -101,3 +101,9 @@ left join Pricina on Pricina.Ik_pric = StudGrup.ik_pricOtch
 where Pricina.ikTypePric in (2,18) and Pricina.Ik_pric<>3
 group by year(Prikaz.Dd_prikazVst), iif(month(Prikaz.Dd_prikazVst)<9,year(Prikaz.Dd_prikazVst)-[nYear_post],year(Prikaz.Dd_prikazVst)-[nYear_post]+1)
 order by year_ot,cour
+
+
+(select count(ABIT_postup.Nn_abit), count(distinct Zach.Ik_zach), ABIT_postup.nCode
+from ABIT_postup
+left join Zach on Zach.nCode = ABIT_postup.nCode
+group by ABIT_postup.nCode)

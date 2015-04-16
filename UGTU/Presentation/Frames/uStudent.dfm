@@ -128,7 +128,7 @@ inherited fmStudent: TfmStudent
     Height = 619
     TabOrder = 2
     ExplicitTop = 28
-    ExplicitWidth = 725
+    ExplicitWidth = 668
     ExplicitHeight = 619
     object ScrollBox1: TScrollBox
       Left = 2
@@ -140,22 +140,19 @@ inherited fmStudent: TfmStudent
       BevelOuter = bvNone
       BorderStyle = bsNone
       TabOrder = 0
-      ExplicitWidth = 721
       object PageControl1: TPageControl
         Left = 0
         Top = 0
         Width = 664
         Height = 615
-        ActivePage = TabSheet1
+        ActivePage = TabSheet2
         Align = alClient
         Constraints.MinWidth = 557
         MultiLine = True
         TabOrder = 0
         OnChange = PageControl1Change
-        ExplicitWidth = 721
         object TabSheet1: TTabSheet
           Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
-          ExplicitWidth = 713
           object PageControl2: TPageControl
             Left = 0
             Top = 0
@@ -176,7 +173,6 @@ inherited fmStudent: TfmStudent
             TabOrder = 0
             object TabSheet3: TTabSheet
               Caption = #1054#1073#1097#1080#1077
-              ExplicitWidth = 705
               object Panel4: TPanel
                 Left = 0
                 Top = 0
@@ -184,7 +180,6 @@ inherited fmStudent: TfmStudent
                 Height = 555
                 Align = alClient
                 TabOrder = 0
-                ExplicitWidth = 705
                 object Panel8: TPanel
                   Left = 1
                   Top = 173
@@ -192,7 +187,6 @@ inherited fmStudent: TfmStudent
                   Height = 177
                   Align = alTop
                   TabOrder = 2
-                  ExplicitWidth = 703
                   object Label1: TLabel
                     Left = 160
                     Top = 44
@@ -346,7 +340,6 @@ inherited fmStudent: TfmStudent
                   Height = 172
                   Align = alTop
                   TabOrder = 1
-                  ExplicitWidth = 703
                   object Bevel2: TBevel
                     Left = 448
                     Top = 47
@@ -632,7 +625,6 @@ inherited fmStudent: TfmStudent
                   Height = 204
                   Align = alClient
                   TabOrder = 0
-                  ExplicitWidth = 703
                   DesignSize = (
                     646
                     204)
@@ -711,7 +703,6 @@ inherited fmStudent: TfmStudent
             object TabSheet4: TTabSheet
               Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
               ImageIndex = 1
-              ExplicitWidth = 705
               object Panel3: TPanel
                 Left = 0
                 Top = 0
@@ -719,7 +710,6 @@ inherited fmStudent: TfmStudent
                 Height = 555
                 Align = alClient
                 TabOrder = 0
-                ExplicitWidth = 705
                 object Panel5: TPanel
                   Left = 1
                   Top = 1
@@ -727,7 +717,6 @@ inherited fmStudent: TfmStudent
                   Height = 101
                   Align = alTop
                   TabOrder = 0
-                  ExplicitWidth = 703
                   object Label27: TLabel
                     Left = 17
                     Top = 52
@@ -991,9 +980,6 @@ inherited fmStudent: TfmStudent
                   ParentFont = False
                   TabOrder = 2
                   Visible = False
-                  ExplicitTop = 440
-                  ExplicitWidth = 703
-                  ExplicitHeight = 114
                   object Label51: TLabel
                     Left = 12
                     Top = 18
@@ -1033,7 +1019,7 @@ inherited fmStudent: TfmStudent
                     Left = 94
                     Top = 15
                     Width = 531
-                    Height = 21
+                    Height = 19
                     Alignment = taLeftJustify
                     DataField = ''
                     EditButtons = <>
@@ -1090,7 +1076,6 @@ inherited fmStudent: TfmStudent
             object TabSheet5: TTabSheet
               Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
               ImageIndex = 2
-              ExplicitWidth = 705
               object Splitter1: TSplitter
                 Left = 0
                 Top = 25
@@ -1108,7 +1093,6 @@ inherited fmStudent: TfmStudent
                 Align = alTop
                 BevelOuter = bvNone
                 TabOrder = 0
-                ExplicitWidth = 705
                 object Label38: TLabel
                   Left = 323
                   Top = 6
@@ -1195,7 +1179,6 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
-              ExplicitWidth = 705
               object dbgeDocuments: TDBGridEh
                 Left = 0
                 Top = 0
@@ -1254,7 +1237,6 @@ inherited fmStudent: TfmStudent
                 Height = 555
                 Align = alRight
                 TabOrder = 2
-                ExplicitLeft = 654
                 object sbAddDoc: TSpeedButton
                   Left = 9
                   Top = 9
@@ -1284,7 +1266,6 @@ inherited fmStudent: TfmStudent
             object TabSheet7: TTabSheet
               Caption = #1057#1086#1073#1099#1090#1080#1103
               ImageIndex = 4
-              ExplicitWidth = 705
               object gbExiled: TGroupBox
                 Left = 0
                 Top = 0
@@ -1299,7 +1280,6 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
-                ExplicitWidth = 705
                 object DBGridEh5: TDBGridEh
                   Left = 2
                   Top = 15
@@ -1333,7 +1313,6 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 1
-                ExplicitWidth = 705
                 object dbgeAcadem: TDBGridEh
                   Left = 2
                   Top = 15
@@ -1367,7 +1346,6 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 2
-                ExplicitWidth = 705
                 object DBGridEh3: TDBGridEh
                   Left = 2
                   Top = 15
@@ -1401,7 +1379,6 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 3
-                ExplicitWidth = 705
                 object DBGridEh6: TDBGridEh
                   Left = 2
                   Top = 15
@@ -1435,7 +1412,6 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 4
-                ExplicitWidth = 705
                 object DBGridEh2: TDBGridEh
                   Left = 2
                   Top = 15
@@ -1469,7 +1445,6 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 5
-                ExplicitWidth = 705
                 object DBGridEh4: TDBGridEh
                   Left = 2
                   Top = 15
@@ -1495,7 +1470,6 @@ inherited fmStudent: TfmStudent
         object TabSheet2: TTabSheet
           Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
           ImageIndex = 1
-          ExplicitWidth = 713
           object DBGridEh1: TDBGridEh
             Left = 0
             Top = 26
@@ -1527,7 +1501,6 @@ inherited fmStudent: TfmStudent
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 1
-            ExplicitWidth = 713
             object Label45: TLabel
               Left = 5
               Top = 7
@@ -1687,7 +1660,6 @@ inherited fmStudent: TfmStudent
         object tsBRSBalls: TTabSheet
           Caption = #1041#1072#1083#1083#1099' '#1087#1086' '#1084#1086#1076#1091#1083#1103#1084
           ImageIndex = 4
-          ExplicitWidth = 713
           object Panel10: TPanel
             Left = 0
             Top = 0
@@ -1696,7 +1668,6 @@ inherited fmStudent: TfmStudent
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitWidth = 713
             object Label7: TLabel
               Left = 5
               Top = 7
@@ -1877,7 +1848,6 @@ inherited fmStudent: TfmStudent
         object TabSheet9: TTabSheet
           Caption = #1047#1072#1082#1088#1099#1090#1099#1077' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
-          ExplicitWidth = 713
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -1886,7 +1856,6 @@ inherited fmStudent: TfmStudent
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
-            ExplicitWidth = 713
             object Label39: TLabel
               Left = 5
               Top = 7
@@ -1966,7 +1935,6 @@ inherited fmStudent: TfmStudent
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
-          ExplicitWidth = 713
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
@@ -2031,27 +1999,27 @@ inherited fmStudent: TfmStudent
     Top = 647
     Width = 668
     ExplicitTop = 647
-    ExplicitWidth = 725
+    ExplicitWidth = 668
     DesignSize = (
       668
       37)
     inherited bbSave: TBitBtn
       Left = 498
       Action = actApply
-      ExplicitLeft = 555
+      ExplicitLeft = 498
     end
     inherited bbUndo: TBitBtn
       Left = 330
       Action = actUndo
       Caption = #1054#1090#1084#1077#1085#1080#1090#1100
-      ExplicitLeft = 387
+      ExplicitLeft = 330
     end
   end
   object ilPages: TImageList
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
