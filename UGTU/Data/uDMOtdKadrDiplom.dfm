@@ -17,8 +17,8 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'select * from Spec_stud'
-      'ORDER BY Cname_spec'
+      '[dbo].[OKADRGetSpecialities] '
+      ''
       ''
       ''
       ''

@@ -170,7 +170,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         object dbcmbxFac: TDBLookupComboboxEh
           Left = 104
           Top = 0
-          Width = 265
+          Width = 185
           Height = 22
           Hint = #1092#1072#1082#1091#1083#1100#1090#1077#1090
           DataField = ''
@@ -185,9 +185,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxFacChange
         end
         object dbcmbxSpec: TDBLookupComboboxEh
-          Left = 369
+          Left = 289
           Top = 0
-          Width = 360
+          Width = 416
           Height = 22
           Hint = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
           DataField = ''
@@ -202,7 +202,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxSpecChange
         end
         object dbcmbxGroup: TDBLookupComboboxEh
-          Left = 729
+          Left = 705
           Top = 0
           Width = 98
           Height = 22
