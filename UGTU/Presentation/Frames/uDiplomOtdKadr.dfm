@@ -187,7 +187,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         object dbcmbxSpec: TDBLookupComboboxEh
           Left = 289
           Top = 0
-          Width = 416
+          Width = 424
           Height = 22
           Hint = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
           DataField = ''
@@ -202,9 +202,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxSpecChange
         end
         object dbcmbxGroup: TDBLookupComboboxEh
-          Left = 705
+          Left = 713
           Top = 0
-          Width = 98
+          Width = 136
           Height = 22
           Hint = #1043#1088#1091#1087#1087#1072
           DataField = ''
@@ -369,8 +369,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           item
             DynProps = <>
             EditButtons = <>
-            FieldName = 'Cshort_spec'
+            FieldName = 'cName_direction'
             Footers = <>
+            ReadOnly = True
             Title.Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1086#1073#1091#1095'.'
             Width = 100
             OnUpdateData = dbgQualifColumns1UpdateData
