@@ -591,9 +591,9 @@ order by cname_sdach
 GO
 
 
-  update [UGTU_TEST].dbo.Strana set [UGTU_TEST].dbo.Strana.[c_grazd] = (select st.c_grazd 
+  update [UGTU_ACTTEST].dbo.Strana set [UGTU_ACTTEST].dbo.Strana.[c_grazd] = (select st.c_grazd 
 												 from [UGTU].dbo.Strana st 
-												 where st.Ik_strana = [UGTU_TEST].dbo.Strana.Ik_strana)
+												 where st.Ik_strana = [UGTU_ACTTEST].dbo.Strana.Ik_strana)
 
   update [UGTU_TEST].dbo.Strana set [UGTU_TEST].dbo.Strana.ik_FB = (select st.ik_FB 
 												 from [UGTU].dbo.Strana st 
@@ -632,8 +632,11 @@ GO*/
 ---------------------------------------------------------------------------------------------------------------------------------------------
 alter table Person drop FK_Person_grazd;
 
+select ik_strana from Strana, Person 
+where Person.Ik_grazd = grazd.ik_grazd and Strana.c_grazd = grazd.c_grazd 
+
 update Person set Ik_grazd = (select ik_strana from Strana, grazd where 
-							  Strana.c_grazd = grazd.c_grazd 
+							  (Strana.c_grazd = grazd.c_grazd 
 							   and Person.Ik_grazd = grazd.ik_grazd)
 
 update Person set Ik_grazd = -1 where Ik_grazd is null
@@ -647,9 +650,13 @@ drop table grazd
 
 create VIEW [dbo].[grazd]
 AS
-  SELECT Ik_strana as ik_grazd, c_grazd, ik_FB
+  SELECT Ik_strana as ik_grazd, c_grazd, ik_FB, ik_type_grazd
   FROM Strana  
   Where c_grazd is not NULL
 GO
 
+select * from documents where (ik_type_grazd is null)or(ik_type_grazd=2)
+order by cvid_doc
+
 ---------------------------------------------------------------------------------------------------
+
