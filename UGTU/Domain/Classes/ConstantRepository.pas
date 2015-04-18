@@ -10,6 +10,8 @@ const
   Male = 1;
   Female = 0;
 
+  Russia = 2;
+
   DefaultMaleStatus = 9;
   DefaultFemaleStatus = 7;
 

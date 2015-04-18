@@ -194,13 +194,16 @@ type
     procedure iPhotoMouseEnter(Sender: TObject);
     procedure actDelDocumentExecute(Sender: TObject);
     procedure cbJobClick(Sender: TObject);
+    procedure dbcbeCitizenshipChange(Sender: TObject);
 
   private
     Floaded: Boolean;
+    FTypeGrazd: integer;
     spravhint: string;
 
     { Private declarations }
   public
+
     AddressRecordList: TList;
     DocRecordList: TObjectList<TDocRecord>;
     procedure SyncAddress;
@@ -390,6 +393,13 @@ procedure TftmStudent.cbJobClick(Sender: TObject);
 begin
   inherited;
   pnlWork.Visible := cbJob.Checked;
+end;
+
+procedure TftmStudent.dbcbeCitizenshipChange(Sender: TObject);
+begin
+  inherited;
+  FTypeGrazd := dbcbeCitizenship.ListSource.DataSet.FieldByName('ik_type_grazd').AsInteger;
+  actCheckFieldsExecute(Sender);
 end;
 
 procedure TftmStudent.eFamExit(Sender: TObject);
@@ -781,6 +791,7 @@ begin
   frmAddDocument := TfrmAddDocument.Create(self);
   frmAddDocument.isAbit := (self.Name = 'frmAbitCardDialog');
   frmAddDocument.StudDlg := self;
+  frmAddDocument.TypeGrazd := FTypeGrazd;
   frmAddDocument.ShowModal;
   frmAddDocument.Free;
   if sgDocs.Cells[0, sgDocs.Row] = '' then

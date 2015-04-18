@@ -243,9 +243,11 @@ type
     procedure dbgeDocumentsCellClick(Column: TColumnEh);
     procedure dbgeDocumentsDblClick(Sender: TObject);
     procedure cbJobClick(Sender: TObject);
+    procedure dbcbeCitizenshipChange(Sender: TObject);
 
   private
     Fik: integer;
+    FTypeGrazd: integer;
     FLoaded: Boolean;
     Fobj: TDBNodeStudObject;
     procedure GetUspevStat(ik_zach: integer);
@@ -1316,6 +1318,13 @@ begin
   modified := true;
   bbSave.enabled := true;
   bbUndo.enabled := true;
+end;
+
+procedure TfmStudent.dbcbeCitizenshipChange(Sender: TObject);
+begin
+  inherited;
+  FTypeGrazd := dbcbeCitizenship.ListSource.DataSet.FieldByName('ik_type_grazd').AsInteger;
+  eFamChange(Sender);
 end;
 
 procedure TfmStudent.dbgeBallsTitleClick(Column: TColumnEh);

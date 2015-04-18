@@ -158,7 +158,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 656
             Height = 587
-            ActivePage = TabSheet3
+            ActivePage = TabSheet4
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -758,7 +758,7 @@ inherited fmStudent: TfmStudent
                     ListSource = dmStudentData.dsCitizen
                     TabOrder = 0
                     Visible = True
-                    OnChange = eFamChange
+                    OnChange = dbcbeCitizenshipChange
                   end
                   object eBirthPlace: TDBEditEh
                     Left = 17
