@@ -49,9 +49,11 @@ type
     FnCode: integer;
     FDocID: integer;
     FisEdit: boolean;
+    FTypeGrazd: integer;
     procedure SetAbitElements(const Value: boolean);
     procedure CollectForParentDialog(aDoc: TDocRecord);
     procedure SetEditProperties;
+    procedure SetTypeGrazd(const Value: integer);
     { Private declarations }
   public
     studDlg: TftmStudent;
@@ -59,7 +61,7 @@ type
     property isAbit: boolean write SetAbitElements;
     property nCode: integer read FnCode write FnCode;
     property DocID: integer read FDocID write FDocID;
-
+    property TypeGrazd: integer write SetTypeGrazd;
 
     { Public declarations }
   end;
@@ -241,6 +243,13 @@ begin
     end;
   end;
   IsModified := False;
+end;
+
+procedure TfrmAddDocument.SetTypeGrazd(const Value: integer);
+begin
+  (dmStudentData.adodsDocType as TADODataSet).Filtered := False;
+  (dmStudentData.adodsDocType as TADODataSet).Filter := '((ik_type_grazd = null) or (ik_type_grazd = ' + IntToStr(Value) + '))';   //  //or )
+  (dmStudentData.adodsDocType as TADODataSet).Filtered := True;
 end;
 
 procedure TfrmAddDocument.UpDown1Click(Sender: TObject; Button: TUDBtnType);

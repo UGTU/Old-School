@@ -588,5 +588,68 @@ from dbo.ABIT_VidSdachi
 where ((Year(OutDate)>@NNyear) or (OutDate IS NULL))
 and((ABIT_VidSdachi.ik_type_kat = (select ik_type_kat from Kat_zach where Ik_kat_zach = @Ik_kat_zach))or(ABIT_VidSdachi.ik_type_kat is null)or(@Ik_kat_zach is null))
 order by cname_sdach
+GO
+
+
+  update [UGTU_TEST].dbo.Strana set [UGTU_TEST].dbo.Strana.[c_grazd] = (select st.c_grazd 
+												 from [UGTU].dbo.Strana st 
+												 where st.Ik_strana = [UGTU_TEST].dbo.Strana.Ik_strana)
+
+  update [UGTU_TEST].dbo.Strana set [UGTU_TEST].dbo.Strana.ik_FB = (select st.ik_FB 
+												 from [UGTU].dbo.Strana st 
+												 where st.Ik_strana = [UGTU_TEST].dbo.Strana.Ik_strana)
+  
+*/
+
+/*SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Type_grazd](
+	[ik_type_grazd] [int] IDENTITY(1,1) NOT NULL,
+	[CTypeGrazd] [varchar](500) NOT NULL,
+ CONSTRAINT [PK_Type_grazd] PRIMARY KEY CLUSTERED 
+(
+	[ik_type_grazd] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Type_grazd] ON 
+
+GO
+INSERT [dbo].[Type_grazd] ([ik_type_grazd], [CTypeGrazd]) VALUES (2, N'иностранное')
+GO
+INSERT [dbo].[Type_grazd] ([ik_type_grazd], [CTypeGrazd]) VALUES (1, N'российское')
+GO
+SET IDENTITY_INSERT [dbo].[Type_grazd] OFF
 GO*/
 
+---------------------------------------------------------------------------------------------------------------------------------------------
+alter table Person drop FK_Person_grazd;
+
+update Person set Ik_grazd = (select ik_strana from Strana, grazd where 
+							  Strana.c_grazd = grazd.c_grazd 
+							   and Person.Ik_grazd = grazd.ik_grazd)
+
+update Person set Ik_grazd = -1 where Ik_grazd is null
+
+ALTER TABLE Person
+ADD CONSTRAINT fk_Person_Strana
+FOREIGN KEY (Ik_grazd)
+REFERENCES Strana(ik_strana)
+
+drop table grazd
+
+create VIEW [dbo].[grazd]
+AS
+  SELECT Ik_strana as ik_grazd, c_grazd, ik_FB
+  FROM Strana  
+  Where c_grazd is not NULL
+GO
+
+---------------------------------------------------------------------------------------------------

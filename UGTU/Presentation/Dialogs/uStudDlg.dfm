@@ -932,7 +932,7 @@ inherited ftmStudent: TftmStudent
                 ListSource = dmStudentData.dsCitizen
                 TabOrder = 1
                 Visible = True
-                OnChange = actCheckFieldsExecute
+                OnChange = dbcbeCitizenshipChange
               end
               object eBirthPlace: TDBEditEh
                 Left = 13
@@ -954,7 +954,6 @@ inherited ftmStudent: TftmStudent
               Height = 244
               Align = alTop
               TabOrder = 1
-              ExplicitTop = 109
               object Label30: TLabel
                 Left = 196
                 Top = 74
@@ -1132,8 +1131,6 @@ inherited ftmStudent: TftmStudent
               Align = alClient
               TabOrder = 2
               Visible = False
-              ExplicitTop = 448
-              ExplicitHeight = 75
             end
             object pnlWork: TPanel
               Left = 1
@@ -1143,7 +1140,6 @@ inherited ftmStudent: TftmStudent
               Align = alTop
               TabOrder = 3
               Visible = False
-              ExplicitTop = 345
               object Label57: TLabel
                 Left = 425
                 Top = 67
@@ -1154,8 +1150,8 @@ inherited ftmStudent: TftmStudent
               object Label56: TLabel
                 Left = 365
                 Top = 67
-                Width = 25
-                Height = 14
+                Width = 17
+                Height = 13
                 Caption = #1083#1077#1090
               end
               object Label55: TLabel
@@ -1547,7 +1543,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

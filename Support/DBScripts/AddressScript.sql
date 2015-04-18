@@ -36,7 +36,7 @@ order by alum_count
 alter VIEW [dbo].[CitySchoolAlumni]
 AS
 select Gorod.Cgorod, count(distinct Person.nCode) alum_count, Gorod.Latitude, Gorod.Longitude,
-  count(distinct Zach.nCode) zach_count, NNyear, bigSpec.Cshort_spec 
+  count(distinct Zach.nCode) zach_count, NNyear, bigSpec.Cshort_spec, pricina.Cname_pric 
 from ABIT_postup inner join Person on ABIT_postup.nCode = Person.nCode
 inner join Student on Student.nCode = Person.nCode
 inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
@@ -46,8 +46,14 @@ inner join Zaved_stud on Student.Ik_zaved = Zaved_stud.ik_zaved
 inner join Gorod on Gorod.Ik_gorod = Zaved_stud.ik_gorod
 left join Zach on Zach.nCode = Person.nCode
 left join EducationBranch bigSpec on bigSpec.ik_spec = EducationBranch.id_parent
+left join (select max(StudGrup.Ik_studGrup) Ik_studGrup,Ik_zach from StudGrup group by Ik_zach) last_gr on last_gr.Ik_zach = Zach.Ik_zach
+left join studGrup on studGrup.Ik_studGrup = last_gr.Ik_studGrup
+left join pricina on pricina.Ik_pric = studGrup.ik_pricOtch
+/*left join (select count(distinct Zach.nCode) as kol,  
+		   from Zach inner join StudGrup on StudGrup.Ik_zach = Zach.Ik_zach
+			inner join Person on Zach.nCode = Person.nCode) otch on otch.*/
 where (Gorod.Longitude is not null) and (Gorod.Latitude is not null) and NNyear<2015
-group by Gorod.Cgorod, Gorod.Latitude, Gorod.Longitude, NNyear, bigSpec.Cshort_spec 
+group by Gorod.Cgorod, Gorod.Latitude, Gorod.Longitude, NNyear, bigSpec.Cshort_spec, pricina.Cname_pric  
 GO
 
 select * from CitySchoolAlumni order by NNyear, alum_count
