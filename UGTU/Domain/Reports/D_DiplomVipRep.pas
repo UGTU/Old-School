@@ -311,7 +311,7 @@ begin
     {Replace('#ФИО#', dmDiplom.adospGetVipiscaForDiplomStudName.AsString);
       }
   end;
-  str:= TGeneralController.Instance.GetFullDate(dmDiplom.adospGetVipiscaForDiplomDd_birth.AsDateTime)+' года';
+  str:= GetFullDate(dmDiplom.adospGetVipiscaForDiplomDd_birth.AsDateTime)+' года';
   Replace('#ДатаРожд#', str);   //docum
   
   i:= dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger;

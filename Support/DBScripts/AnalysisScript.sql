@@ -102,14 +102,8 @@ where Pricina.ikTypePric in (2,18) and Pricina.Ik_pric<>3
 group by year(Prikaz.Dd_prikazVst), iif(month(Prikaz.Dd_prikazVst)<9,year(Prikaz.Dd_prikazVst)-[nYear_post],year(Prikaz.Dd_prikazVst)-[nYear_post]+1)
 order by year_ot,cour
 
-select count(nCode), sum(zach), count_za
-from
-(select count(ABIT_postup.Nn_abit) count_za, count(distinct Zach.Ik_zach) zach, ABIT_postup.nCode
-from ABIT_postup
-inner join ABIT_Diapazon_spec_fac on ABIT_postup.NNrecord = ABIT_Diapazon_spec_fac.NNrecord
-left join Zach on Zach.nCode = ABIT_postup.nCode
-where ABIT_postup.ik_zach not in (2,3,9)
-and NNyear>2010
-group by ABIT_postup.nCode) zach_t
-group by count_za
 
+(select count(ABIT_postup.Nn_abit), count(distinct Zach.Ik_zach), ABIT_postup.nCode
+from ABIT_postup
+left join Zach on Zach.nCode = ABIT_postup.nCode
+group by ABIT_postup.nCode)

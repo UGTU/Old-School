@@ -8,7 +8,7 @@ uses
   DBGridEh,WordXP, udmAbiturientOtchety, DateUtils,
   uAbitZachislenieController, udmAbiturientAction, udmStudentSelectionProcs,
   ApplicationController, uDMAbiturientNabor, ExceptionBase,
-  AbitVstupExamStatistic, ReportsBase, uWaitingController;
+  AbitVstupExamStatistic, ReportsBase, uWaitingController, ConstantRepository;
 
 type
   PDBGrid = ^TDBGridEh;
@@ -684,7 +684,7 @@ begin
           str := Copy(DMAbiturientRasp.adospGetRaspdate_of.AsString,1,2);
           FindRange := E.Cells.Replace(What := '#Дата#',Replacement:=str);
           str := Copy(DMAbiturientRasp.adospGetRaspdate_of.AsString,4,2);
-          str := TGeneralController.Instance.GetMonthName(StrToInt(str));
+          str := GetMonthR(StrToInt(str));
           FindRange := E.Cells.Replace(What := '#Месяц#',Replacement:=str);
           str := Copy(DMAbiturientRasp.adospGetRaspdate_of.AsString,7,4);
           FindRange := E.Cells.Replace(What := '#Год#',Replacement:=str);
@@ -2581,7 +2581,7 @@ begin
 	  FindRange := E.Cells.Replace(What := '#НомерП#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlPDate.AsString;
 	  FindRange := E.Cells.Replace(What := '#ДатаВыд#',Replacement:=str);
-    paspMonth := TGeneralController.Instance.GetMonthName(dmAbiturientAction.adospPrintZayavlPMonth.Value);
+    paspMonth := GetMonthR(dmAbiturientAction.adospPrintZayavlPMonth.Value);
 	  FindRange := E.Cells.Replace(What := '#Месяц#',Replacement:=paspMonth);
 	  str := dmAbiturientAction.adospPrintZayavlPYear.AsString;
 	  FindRange := E.Cells.Replace(What := '#Год#',Replacement:=str);
@@ -2735,7 +2735,7 @@ begin
 
 	  str := dmAbiturientAction.adospPrintZayavlZDate.AsString;
 	  FindRange := E.Cells.Replace(What := '#ДатаЗ#',Replacement:=str);
-    zayavlMonth := TGeneralController.Instance.GetMonthName(dmAbiturientAction.adospPrintZayavlZMonth.AsInteger);
+    zayavlMonth := GetMonthR(dmAbiturientAction.adospPrintZayavlZMonth.AsInteger);
 	  FindRange := E.Cells.Replace(What := '#МесяцЗ#',Replacement:=zayavlMonth);
 	  str := dmAbiturientAction.adospPrintZayavlZYear.AsString;
 	  FindRange := E.Cells.Replace(What := '#ГодЗ#',Replacement:=str);

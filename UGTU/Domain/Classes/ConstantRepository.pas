@@ -2,7 +2,7 @@ unit ConstantRepository;
 
 interface
 
-uses System.Variants, System.SysUtils;
+uses System.Variants, System.SysUtils, DateUtils;
 
 // ѕравила именовани€ констант:
 // если константа €вл€етс€ ключом, то пишем префикс "key_"
@@ -48,16 +48,21 @@ const
   //виды документов
   PassportRF = 4;
 
+  //состо€ни€ студентов
+  AcademReturn = 13;      //¬озврат после отпуска
+
   // служебные функции
 function IfNull(const Value, Default: OleVariant): OleVariant;
 
 function GetMonthR(month: integer): string; // получить мес€ц в род.п. по номеру
+function GetFullDate(ddate:TDateTime):string; //получить полную запись даты
 function GetKursP(kurs: integer): string;
 // получить номер курса в предл. п. по номеру
 function GetTimeByType(aEdIzm, aHours: integer): string; // получить
 // function GetWeekCountName(weekCount: integer): string; //получить кол-во недель в виде строки
 function GetWeekCountNameFromDays(daysCount: integer): string;
 // получить кол-во недель в виде строки из часов
+
 
 implementation
 
@@ -101,6 +106,16 @@ begin
   end;
   Result := str;
 end;
+
+function GetFullDate(ddate:TDateTime):string;
+  begin
+   // date:= DateOf(ddate);
+   if (DayOf(ddate)<10) then
+      Result:='0'+IntToStr(DayOf(ddate))+' '+GetMonthR(MonthOf(ddate))+' '+IntToStr(YearOf(ddate))
+   else
+      Result:=IntToStr(DayOf(ddate))+' '+GetMonthR(MonthOf(ddate))+' '+IntToStr(YearOf(ddate));
+  end;
+
 
 function GetKursP(kurs: integer): string;
 var
