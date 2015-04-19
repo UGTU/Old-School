@@ -48,6 +48,9 @@ const
   //виды документов
   PassportRF = 4;
 
+  //состояния студентов
+  AcademReturn = 13;      //Возврат после отпуска
+
   // служебные функции
 function IfNull(const Value, Default: OleVariant): OleVariant;
 

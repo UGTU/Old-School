@@ -463,7 +463,10 @@ begin
     CreateParameter('@ik_zach', ftInteger, pdInput, 0, obj.RecordbookKey);
     CreateParameter('@grup', ftInteger, pdInput, 0, hint);
     CreateParameter('@kat_zach', ftInteger, pdInput, 0, dbcbeCat.KeyValue);
-    CreateParameter('@prikzach', ftInteger, pdInput, 0, dbcbeOrder.KeyValue);
+    //если нет приказа, но человек в состоянии акадм. отпуска
+    if (dbcbeOrder.KeyValue=0) and (obj.CauseEnterID = AcademReturn) then
+      CreateParameter('@prikzach', ftInteger, pdInput, 0, null)
+      else CreateParameter('@prikzach', ftInteger, pdInput, 0, dbcbeOrder.KeyValue);
     if (obj.CauseEnterID = 0) then
       CreateParameter('@priczach', ftInteger, pdInput, 0, null)
     else
@@ -553,7 +556,7 @@ begin
     frmMain.actPasspChg.enabled := true;
     frmMain.actFamChg.enabled := true;
     frmMain.actOtchisl.enabled := true;
-    frmMain.actPerevod.enabled := false;
+    frmMain.actPerevod.enabled := true;
     frmMain.actAkadem.enabled := true;
 
     frmMain.actAkadem.Caption := 'Изменить академический отпуск...';

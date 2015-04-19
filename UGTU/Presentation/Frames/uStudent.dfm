@@ -145,7 +145,7 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 664
         Height = 615
-        ActivePage = TabSheet2
+        ActivePage = TabSheet1
         Align = alClient
         Constraints.MinWidth = 557
         MultiLine = True
@@ -158,7 +158,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 656
             Height = 587
-            ActivePage = TabSheet4
+            ActivePage = TabSheet3
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -2019,7 +2019,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

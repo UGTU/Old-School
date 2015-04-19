@@ -95,7 +95,7 @@ inherited ftmStudent: TftmStudent
         Top = 0
         Width = 566
         Height = 556
-        ActivePage = TabSheet4
+        ActivePage = TabSheet3
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -879,6 +879,7 @@ inherited ftmStudent: TftmStudent
                 Width = 85
                 Height = 13
                 Caption = #1053#1072#1094#1080#1086#1085#1072#1083#1100#1085#1086#1089#1090#1100
+                Visible = False
               end
               object Label29: TLabel
                 Left = 13
@@ -914,7 +915,7 @@ inherited ftmStudent: TftmStudent
                 ListField = 'Cname_nac'
                 ListSource = dmStudentData.dsNat
                 TabOrder = 0
-                Visible = True
+                Visible = False
                 OnChange = actCheckFieldsExecute
               end
               object dbcbeCitizenship: TDBLookupComboboxEh
@@ -1543,7 +1544,7 @@ inherited ftmStudent: TftmStudent
     Left = 481
     Top = 71
     Bitmap = {
-      494C010105000900680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
