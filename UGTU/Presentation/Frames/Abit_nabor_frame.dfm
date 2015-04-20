@@ -1,32 +1,34 @@
 inherited fmAbitNabor: TfmAbitNabor
-  Width = 741
+  Width = 755
   Height = 468
   HelpKeyword = 'A_Nabor_frame.htm'
-  ExplicitWidth = 741
+  ExplicitWidth = 755
   ExplicitHeight = 468
   inherited Panel1: TPanel
-    Width = 741
+    Width = 755
     Height = 431
     ExplicitWidth = 741
     ExplicitHeight = 431
     object PageControl1: TPageControl
       Left = 2
       Top = 2
-      Width = 737
+      Width = 751
       Height = 427
-      ActivePage = statpage
+      ActivePage = naborpage
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PageControl1Change
       OnChanging = PageControl1Changing
+      ExplicitWidth = 737
       object fac_spec: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074'-'#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 2
+        ExplicitWidth = 729
         object dbgrdMain: TDBGridEh
           Left = 0
           Top = 0
-          Width = 729
+          Width = 743
           Height = 396
           Align = alClient
           AllowedOperations = []
@@ -46,6 +48,7 @@ inherited fmAbitNabor: TfmAbitNabor
       end
       object naborpage: TTabSheet
         Caption = #1054#1073#1097#1080#1077' '#1089#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1085#1072#1073#1086#1088#1077
+        ExplicitWidth = 729
         object nnyear: TDBText
           Left = 288
           Top = 72
@@ -58,11 +61,12 @@ inherited fmAbitNabor: TfmAbitNabor
         object ToolBar2: TToolBar
           Left = 0
           Top = 0
-          Width = 729
+          Width = 743
           Height = 25
           ButtonHeight = 23
           Images = ImageList3
           TabOrder = 0
+          ExplicitWidth = 729
           object ToolButton1: TToolButton
             Left = 0
             Top = 0
@@ -124,7 +128,7 @@ inherited fmAbitNabor: TfmAbitNabor
         object nabor: TDBGridEh
           Left = 0
           Top = 25
-          Width = 729
+          Width = 743
           Height = 371
           Hint = #1044#1072#1085#1085#1099#1077' '#1085#1072#1073#1086#1088#1072
           Align = alClient
@@ -150,8 +154,8 @@ inherited fmAbitNabor: TfmAbitNabor
               EditButtons = <>
               FieldName = 'fac'
               Footers = <>
-              Title.Caption = #1060#1072#1082#1091#1083#1100#1090#1077#1090
-              Width = 50
+              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
+              Width = 70
             end
             item
               DynProps = <>
@@ -159,7 +163,7 @@ inherited fmAbitNabor: TfmAbitNabor
               FieldName = 'SF'
               Footers = <>
               Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
-              Width = 170
+              Width = 300
             end
             item
               Alignment = taCenter
@@ -168,6 +172,7 @@ inherited fmAbitNabor: TfmAbitNabor
               FieldName = 'budj'
               Footers = <>
               Title.Caption = #1041#1102#1076#1078#1077#1090' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
+              Width = 70
             end
             item
               Alignment = taCenter
@@ -176,6 +181,7 @@ inherited fmAbitNabor: TfmAbitNabor
               FieldName = 'ckp'
               Footers = <>
               Title.Caption = #1062#1050#1055' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
+              Width = 70
             end
             item
               Alignment = taCenter
@@ -184,6 +190,7 @@ inherited fmAbitNabor: TfmAbitNabor
               FieldName = 'lgot'
               Footers = <>
               Title.Caption = #1054#1089#1086#1073#1086#1077' '#1087#1088#1072#1074#1086' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
+              Width = 80
             end
             item
               Alignment = taCenter
@@ -192,6 +199,7 @@ inherited fmAbitNabor: TfmAbitNabor
               FieldName = 'kont'
               Footers = <>
               Title.Caption = #1050#1086#1085#1090#1088#1072#1082#1090' ('#1087#1083#1072#1085' /'#1092#1072#1082#1090'/ '#1087#1077#1088#1074#1080#1095#1085#1099#1093')'
+              Width = 70
             end
             item
               DynProps = <>
@@ -206,13 +214,123 @@ inherited fmAbitNabor: TfmAbitNabor
           end
         end
       end
+      object tsNaborDisc: TTabSheet
+        Caption = #1057#1087#1080#1089#1086#1082' '#1074#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1093' '#1101#1082#1079#1072#1084#1077#1085#1086#1074
+        ImageIndex = 4
+        ExplicitWidth = 729
+        object ToolBar5: TToolBar
+          Left = 0
+          Top = 0
+          Width = 743
+          Height = 31
+          ButtonWidth = 24
+          Caption = 'ToolBar1'
+          Images = frmMain.ImageList1
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          ExplicitWidth = 729
+          object DBNavigator1: TDBNavigator
+            Left = 0
+            Top = 0
+            Width = 153
+            Height = 22
+            DataSource = DMAbiturientNabor.dsNaborDiscs
+            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert]
+            Align = alTop
+            Flat = True
+            Hints.Strings = (
+              #1055#1077#1088#1074#1072#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+F)'
+              #1055#1088#1077#1076#1099#1076#1091#1097#1072#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+P)'
+              #1057#1083#1077#1076#1091#1102#1097#1072#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+R)'
+              #1055#1086#1089#1083#1077#1076#1085#1103#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+L)'
+              #1042#1089#1090#1072#1074#1080#1090#1100' '#1079#1072#1087#1080#1089#1100' (Ctrl+N)'
+              #1059#1076#1072#1083#1080#1090#1100' '#1079#1072#1087#1080#1089#1100
+              #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
+              #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084'e'#1085#1077#1085#1080#1103
+              #1054#1090#1084#1077#1085#1072
+              #1054#1095#1080#1089#1090#1080#1090#1100' '#1073#1091#1092#1077#1088)
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+          end
+          object ToolButton10: TToolButton
+            Left = 153
+            Top = 0
+            ImageIndex = 65
+            OnClick = ToolButton10Click
+          end
+          object ToolButton11: TToolButton
+            Left = 177
+            Top = 0
+            Action = actCancelMinBalls
+            ImageIndex = 66
+          end
+          object ToolButton13: TToolButton
+            Left = 201
+            Top = 0
+            Action = actSaveMinBalls
+            ImageIndex = 64
+          end
+        end
+        object dbgNaborDiscs: TDBGridEh
+          Left = 0
+          Top = 31
+          Width = 743
+          Height = 365
+          Align = alClient
+          AutoFitColWidths = True
+          DataSource = DMAbiturientNabor.dsNaborDiscs
+          DynProps = <>
+          Flat = True
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          SortLocal = True
+          TabOrder = 1
+          OnTitleClick = dbgNaborDiscsTitleClick
+          Columns = <
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cshort_name_fac'
+              Footers = <>
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cname_spec'
+              Footers = <>
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DiscName'
+              Footers = <>
+              Title.Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
+              Width = 1500
+              OnDropDownBoxDrawColumnCell = dbgNaborDiscsColumns2DropDownBoxDrawColumnCell
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Min_ball'
+              Footers = <>
+              Width = 120
+              OnUpdateData = dbgNaborDiscsColumns2UpdateData
+            end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
+      end
       object statpage: TTabSheet
         Caption = #1054#1073#1097#1080#1081' '#1089#1087#1080#1089#1086#1082' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
         ImageIndex = 1
+        ExplicitWidth = 729
         object counter: TLabel
           Left = 0
           Top = 383
-          Width = 729
+          Width = 743
           Height = 13
           Align = alBottom
           Visible = False
@@ -221,13 +339,14 @@ inherited fmAbitNabor: TfmAbitNabor
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
-          Width = 729
+          Width = 743
           Height = 24
           Hint = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1091
           Images = frmMain.ImageList1
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
+          ExplicitWidth = 729
           object spec: TDBComboBoxEh
             Left = 0
             Top = 0
@@ -277,7 +396,7 @@ inherited fmAbitNabor: TfmAbitNabor
         object GRD_stat: TStringGrid
           Left = 0
           Top = 24
-          Width = 729
+          Width = 743
           Height = 359
           Hint = #1057#1090#1072#1090#1080#1089#1090#1080#1095#1077#1089#1082#1080#1081' '#1086#1090#1095#1077#1090
           Align = alClient
@@ -293,6 +412,7 @@ inherited fmAbitNabor: TfmAbitNabor
           ShowHint = True
           TabOrder = 1
           Visible = False
+          ExplicitWidth = 729
           ColWidths = (
             64
             71
@@ -332,7 +452,7 @@ inherited fmAbitNabor: TfmAbitNabor
         object dbgrdStatistika: TDBGridEh
           Left = 0
           Top = 24
-          Width = 729
+          Width = 743
           Height = 359
           Align = alClient
           AllowedOperations = []
@@ -451,10 +571,11 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsNaborStatistik: TTabSheet
         Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
         ImageIndex = 3
+        ExplicitWidth = 729
         object dbgNaborStatistik: TDBGridEh
           Left = 0
           Top = 29
-          Width = 729
+          Width = 743
           Height = 367
           Align = alClient
           AllowedOperations = []
@@ -557,11 +678,12 @@ inherited fmAbitNabor: TfmAbitNabor
         object ToolBar3: TToolBar
           Left = 0
           Top = 0
-          Width = 729
+          Width = 743
           Height = 29
           Caption = 'ToolBar3'
           Images = ImageList3
           TabOrder = 1
+          ExplicitWidth = 729
           object ToolButton9: TToolButton
             Left = 0
             Top = 0
@@ -569,120 +691,14 @@ inherited fmAbitNabor: TfmAbitNabor
           end
         end
       end
-      object tsNaborDisc: TTabSheet
-        Caption = #1057#1087#1080#1089#1086#1082' '#1074#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1093' '#1101#1082#1079#1072#1084#1077#1085#1086#1074
-        ImageIndex = 4
-        object ToolBar5: TToolBar
-          Left = 0
-          Top = 0
-          Width = 729
-          Height = 31
-          ButtonWidth = 24
-          Caption = 'ToolBar1'
-          Images = frmMain.ImageList1
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          object DBNavigator1: TDBNavigator
-            Left = 0
-            Top = 0
-            Width = 153
-            Height = 22
-            DataSource = DMAbiturientNabor.dsNaborDiscs
-            VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert]
-            Align = alTop
-            Flat = True
-            Hints.Strings = (
-              #1055#1077#1088#1074#1072#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+F)'
-              #1055#1088#1077#1076#1099#1076#1091#1097#1072#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+P)'
-              #1057#1083#1077#1076#1091#1102#1097#1072#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+R)'
-              #1055#1086#1089#1083#1077#1076#1085#1103#1103' '#1079#1072#1087#1080#1089#1100' (Ctrl+L)'
-              #1042#1089#1090#1072#1074#1080#1090#1100' '#1079#1072#1087#1080#1089#1100' (Ctrl+N)'
-              #1059#1076#1072#1083#1080#1090#1100' '#1079#1072#1087#1080#1089#1100
-              #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
-              #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084'e'#1085#1077#1085#1080#1103
-              #1054#1090#1084#1077#1085#1072
-              #1054#1095#1080#1089#1090#1080#1090#1100' '#1073#1091#1092#1077#1088)
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-          end
-          object ToolButton10: TToolButton
-            Left = 153
-            Top = 0
-            ImageIndex = 65
-            OnClick = ToolButton10Click
-          end
-          object ToolButton11: TToolButton
-            Left = 177
-            Top = 0
-            Action = actCancelMinBalls
-            ImageIndex = 66
-          end
-          object ToolButton13: TToolButton
-            Left = 201
-            Top = 0
-            Action = actSaveMinBalls
-            ImageIndex = 64
-          end
-        end
-        object dbgNaborDiscs: TDBGridEh
-          Left = 0
-          Top = 31
-          Width = 729
-          Height = 365
-          Align = alClient
-          AutoFitColWidths = True
-          DataSource = DMAbiturientNabor.dsNaborDiscs
-          DynProps = <>
-          Flat = True
-          FooterParams.Color = clWindow
-          IndicatorOptions = []
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          SortLocal = True
-          TabOrder = 1
-          OnTitleClick = dbgNaborDiscsTitleClick
-          Columns = <
-            item
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'Cshort_name_fac'
-              Footers = <>
-            end
-            item
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'Cname_spec'
-              Footers = <>
-            end
-            item
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'DiscName'
-              Footers = <>
-              Title.Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
-              Width = 1500
-              OnDropDownBoxDrawColumnCell = dbgNaborDiscsColumns2DropDownBoxDrawColumnCell
-            end
-            item
-              DynProps = <>
-              EditButtons = <>
-              FieldName = 'Min_ball'
-              Footers = <>
-              Width = 120
-              OnUpdateData = dbgNaborDiscsColumns2UpdateData
-            end>
-          object RowDetailData: TRowDetailPanelControlEh
-          end
-        end
-      end
       object tsExamsErrors: TTabSheet
         Caption = #1054#1096#1080#1073#1082#1080' '#1074' '#1101#1082#1079#1072#1084#1077#1085#1072#1093
         ImageIndex = 5
+        ExplicitWidth = 729
         object dbgExamsErrors: TDBGridEh
           Left = 0
           Top = 0
-          Width = 729
+          Width = 743
           Height = 396
           Align = alClient
           AllowedOperations = []
@@ -755,19 +771,19 @@ inherited fmAbitNabor: TfmAbitNabor
   end
   inherited pnlSave: TPanel
     Top = 431
-    Width = 741
+    Width = 755
     ExplicitTop = 431
     ExplicitWidth = 741
     DesignSize = (
-      741
+      755
       37)
     inherited bbSave: TBitBtn
-      Left = 572
+      Left = 586
       Action = actSaveMinBalls
       ExplicitLeft = 572
     end
     inherited bbUndo: TBitBtn
-      Left = 391
+      Left = 405
       Action = actCancelMinBalls
       ExplicitLeft = 391
     end
@@ -780,7 +796,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -931,7 +947,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1170,7 +1186,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
