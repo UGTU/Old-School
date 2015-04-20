@@ -207,10 +207,13 @@ end;
 procedure TfmAbitNabor.LoadMainList;
 begin
   dsMain.DataSet := nil;
-  fac_spec.TabVisible:= true;
+  fac_spec.TabVisible:= false;
+
   if FrameObject is TDBNodeRecruitObject then //ВЫБРАН весь набор
   begin
-    PageControl1.Pages[0].Caption := 'Факультеты';
+    PageControl1.ActivePage := naborpage;
+    fac_spec.Caption := 'Факультеты';
+    //PageControl1.Pages[0].Caption := 'Факультеты';
     dsMain.DataSet := (FrameObject as TDBNodeRecruitObject).DataSet;
     dbgrdMain.Columns[0].Visible := false;
     dbgrdMain.Columns[1].Title.Caption := 'Название';
@@ -224,17 +227,19 @@ begin
   //ВЫБРАН факультет
   if FrameObject is TDBNodeFacRecObject then
   begin
-    PageControl1.Pages[0].Caption := 'Специальности';
+    PageControl1.ActivePage := naborpage;
+    fac_spec.Caption := 'Специальности';
+    //PageControl1.Pages[0].Caption := 'Специальности';
     dsMain.DataSet := (FrameObject as TDBNodeFacRecObject).AdoDataset;
     dbgrdMain.Columns[0].Visible := false;
     dbgrdMain.Columns[1].Visible := false;
     dbgrdMain.Columns[2].Visible := false;
     dbgrdMain.Columns[3].Visible := false;
     dbgrdMain.Columns[4].Title.Caption := 'Номер';
-    dbgrdMain.Columns[4].Width := 30;
+  //  dbgrdMain.Columns[4].Width := 30;
     dbgrdMain.Columns[5].Title.Caption := 'Название';
     dbgrdMain.Columns[6].Title.Caption := 'Короткое название';
-    dbgrdMain.Columns[6].Width := 57;
+   // dbgrdMain.Columns[6].Width := 57;
     dbgrdMain.Columns[6].Alignment := taCenter;
     dbgrdMain.Columns[7].Visible := false;
     dbgrdMain.Columns[8].Visible := false;
@@ -253,6 +258,7 @@ begin
   //специальность
   if FrameObject is TDBNodeSpecRecObject then
   begin
+    PageControl1.ActivePage := tsNaborDisc;
     {PageControl1.Pages[0].Caption := 'Абитуриенты';
     dsMain.DataSet := (FrameObject as TDBNodeSpecRecObject).AdoDataset;
 
@@ -291,9 +297,11 @@ begin
     //скрываем вкладку общих данных набора
     naborpage.TabVisible:=false;
     fac_spec.TabVisible:=false;
-    PageControl1.ActivePage := statpage;
-    PageControl1Change(nil);
+    //PageControl1.ActivePage := statpage;
+
+
   end;
+  PageControl1Change(nil);
 end;
 
 //выполнение функции с фильтром на уровне сервера применяется,
@@ -648,6 +656,7 @@ begin
       raise EApplicationException.Create('Произошла ошибка при загрузке списка лишних экзаменов',E);
     end;
   end;
+
 end;
 
 procedure TfmAbitNabor.PageControl1Changing(Sender: TObject;

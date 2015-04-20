@@ -630,13 +630,16 @@ SET IDENTITY_INSERT [dbo].[Type_grazd] OFF
 GO*/
 
 ---------------------------------------------------------------------------------------------------------------------------------------------
-alter table Person drop FK_Person_grazd;
+/*alter table Person drop FK_Person_grazd;
 
-select ik_strana from Strana, Person 
-where Person.Ik_grazd = grazd.ik_grazd and Strana.c_grazd = grazd.c_grazd 
+select ik_strana from Strana, Person,  grazd
+where Person.Ik_grazd = grazd.ik_grazd 
+  and Strana.c_grazd = grazd.c_grazd 
+
+  select * from Person, grazd where Person.Ik_grazd = grazd.ik_grazd  and c_grazd not in (select c_grazd from Strana)
 
 update Person set Ik_grazd = (select ik_strana from Strana, grazd where 
-							  (Strana.c_grazd = grazd.c_grazd 
+							  Strana.c_grazd = grazd.c_grazd 
 							   and Person.Ik_grazd = grazd.ik_grazd)
 
 update Person set Ik_grazd = -1 where Ik_grazd is null
@@ -653,10 +656,65 @@ AS
   SELECT Ik_strana as ik_grazd, c_grazd, ik_FB, ik_type_grazd
   FROM Strana  
   Where c_grazd is not NULL
-GO
+GO */
 
-select * from documents where (ik_type_grazd is null)or(ik_type_grazd=2)
-order by cvid_doc
+--select * from documents where (ik_type_grazd is null)or(ik_type_grazd=2)
+--order by cvid_doc
 
 ---------------------------------------------------------------------------------------------------
+/*alter table documents drop column IsOsoboePravo
+alter table documents drop column IsPreimushestvo
+alter table documents drop column IsWithoutExam
 
+CREATE TABLE [dbo].[Doc_kat_zach](
+	[ik_doc_kat] [int] IDENTITY(1,1) NOT NULL,
+	[ik_vid_doc] [int] NOT NULL,
+	[Ik_kat_zach] [int] NOT NULL,
+	[NNyear] [int] NOT NULL,
+ CONSTRAINT [PK_Doc_kat_zach] PRIMARY KEY CLUSTERED 
+(
+	[ik_doc_kat] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER AUTHORIZATION ON [dbo].[Doc_kat_zach] TO  SCHEMA OWNER 
+GO
+GRANT SELECT ON [dbo].[Doc_kat_zach] TO [UGTU\Ответственные секретари] AS [dbo]
+GO
+GRANT SELECT ON [dbo].[Doc_kat_zach] TO [UGTU\Учебный Отдел] AS [dbo]
+GO
+SET IDENTITY_INSERT [dbo].[Doc_kat_zach] ON 
+
+GO
+INSERT [dbo].[Doc_kat_zach] ([ik_doc_kat], [ik_vid_doc], [Ik_kat_zach], [NNyear]) VALUES (1, 40, 32, 2015)
+GO
+INSERT [dbo].[Doc_kat_zach] ([ik_doc_kat], [ik_vid_doc], [Ik_kat_zach], [NNyear]) VALUES (2, 41, 32, 2015)
+GO
+INSERT [dbo].[Doc_kat_zach] ([ik_doc_kat], [ik_vid_doc], [Ik_kat_zach], [NNyear]) VALUES (3, 31, 33, 2015)
+GO
+SET IDENTITY_INSERT [dbo].[Doc_kat_zach] OFF
+GO
+/****** Object:  Index [IX_Doc_kat_zach]    Script Date: 20.04.2015 9:04:51 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [IX_Doc_kat_zach] ON [dbo].[Doc_kat_zach]
+(
+	[Ik_kat_zach] ASC,
+	[ik_vid_doc] ASC,
+	[NNyear] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Doc_kat_zach]  WITH CHECK ADD  CONSTRAINT [FK_Doc_kat_zach_ABIT_Years] FOREIGN KEY([NNyear])
+REFERENCES [dbo].[ABIT_Years] ([NNyear])
+GO
+ALTER TABLE [dbo].[Doc_kat_zach] CHECK CONSTRAINT [FK_Doc_kat_zach_ABIT_Years]
+GO
+ALTER TABLE [dbo].[Doc_kat_zach]  WITH CHECK ADD  CONSTRAINT [FK_Doc_kat_zach_documents] FOREIGN KEY([ik_vid_doc])
+REFERENCES [dbo].[documents] ([ik_vid_doc])
+GO
+ALTER TABLE [dbo].[Doc_kat_zach] CHECK CONSTRAINT [FK_Doc_kat_zach_documents]
+GO
+ALTER TABLE [dbo].[Doc_kat_zach]  WITH CHECK ADD  CONSTRAINT [FK_Doc_kat_zach_Kat_zach] FOREIGN KEY([Ik_kat_zach])
+REFERENCES [dbo].[Kat_zach] ([Ik_kat_zach])
+GO
+ALTER TABLE [dbo].[Doc_kat_zach] CHECK CONSTRAINT [FK_Doc_kat_zach_Kat_zach]
+GO*/
