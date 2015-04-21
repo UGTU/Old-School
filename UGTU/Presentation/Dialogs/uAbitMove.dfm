@@ -262,6 +262,7 @@ inherited frmAbitMove: TfrmAbitMove
       ListSource = dm.dsNabor
       TabOrder = 0
       Visible = True
+      OnChange = dbcbeRecruitNewChange
     end
     object dbcbeCategoryNew: TDBLookupComboboxEh
       Left = 127

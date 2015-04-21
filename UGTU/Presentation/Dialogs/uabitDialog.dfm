@@ -528,7 +528,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               end
               inherited Label28: TLabel
                 Left = 249
-                Visible = False
                 ExplicitLeft = 249
               end
               inherited Label52: TLabel
@@ -555,7 +554,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Left = 249
                 Top = 29
                 Width = 279
-                Visible = False
                 ExplicitLeft = 249
                 ExplicitTop = 29
                 ExplicitWidth = 279
@@ -666,6 +664,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               Top = 345
               Width = 544
               Height = 105
+              ExplicitTop = 345
               ExplicitWidth = 544
               ExplicitHeight = 105
               inherited dbcbeEnterprise: TDBLookupComboboxEh
@@ -790,7 +789,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050009007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
