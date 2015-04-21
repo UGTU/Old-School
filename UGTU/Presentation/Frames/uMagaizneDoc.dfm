@@ -1,18 +1,18 @@
 inherited fmDoc: TfmDoc
   Width = 703
-  Height = 613
+  Height = 646
   ExplicitWidth = 703
-  ExplicitHeight = 613
+  ExplicitHeight = 646
   inherited Panel1: TPanel
     Width = 703
-    Height = 576
+    Height = 609
     ExplicitWidth = 703
     ExplicitHeight = 576
     object dbgehMagazineDocs: TDBGridEh
       Left = 2
       Top = 49
       Width = 699
-      Height = 525
+      Height = 558
       Align = alClient
       AllowedSelections = [gstRecordBookmarks, gstAll]
       ColumnDefValues.AutoDropDown = True
@@ -238,114 +238,92 @@ inherited fmDoc: TfmDoc
       Height = 47
       Align = alTop
       TabOrder = 1
+      ExplicitLeft = 4
+      ExplicitTop = -4
+      DesignSize = (
+        699
+        47)
       object Label1: TLabel
-        Left = 185
+        Left = 447
         Top = 12
-        Width = 4
+        Width = 59
         Height = 13
+        Anchors = [akRight, akBottom]
         Caption = '-'
       end
       object Label2: TLabel
-        Left = 14
+        Left = 276
         Top = 12
         Width = 38
         Height = 13
+        Anchors = [akRight, akBottom]
         Caption = #1055#1077#1088#1080#1086#1076
       end
-      object bPrint: TButton
-        Left = 616
-        Top = 10
-        Width = 78
-        Height = 31
-        Align = alCustom
-        Anchors = [akRight, akBottom]
-        Caption = #1055#1077#1095#1072#1090#1100
-        TabOrder = 0
-        OnClick = bPrintClick
-      end
       object dtpEnd: TDateTimePicker
-        Left = 195
+        Left = 460
         Top = 10
         Width = 121
         Height = 21
+        Anchors = [akRight, akBottom]
         Date = 42073.571743564810000000
         Time = 42073.571743564810000000
-        TabOrder = 1
+        TabOrder = 0
         OnCloseUp = dtpEndCloseUp
       end
       object dtpStart: TDateTimePicker
-        Left = 58
+        Left = 320
         Top = 10
         Width = 121
         Height = 21
+        Anchors = [akRight, akBottom]
         Date = 42073.571743564810000000
         Time = 42073.571743564810000000
-        TabOrder = 2
+        TabOrder = 1
         OnCloseUp = dtpStartCloseUp
-      end
-      object bReset: TButton
-        Left = 359
-        Top = 10
-        Width = 82
-        Height = 31
-        Align = alCustom
-        Anchors = [akRight, akBottom]
-        Caption = #1057#1073#1088#1086#1089
-        TabOrder = 3
-        OnClick = bResetClick
-      end
-      object Button1: TButton
-        Left = 528
-        Top = 10
-        Width = 82
-        Height = 31
-        Align = alCustom
-        Anchors = [akRight, akBottom]
-        Caption = #1043#1086#1090#1086#1074#1086
-        TabOrder = 4
-        OnClick = Button1Click
-      end
-      object bbOk: TBitBtn
-        Left = 440
-        Top = 10
-        Width = 82
-        Height = 31
-        Align = alCustom
-        Caption = #1059#1090#1074#1077#1088#1076#1080#1090#1100
-        TabOrder = 5
-        OnClick = bbOkClick
       end
       object ToolBar7: TToolBar
         Left = 14
-        Top = 16
-        Width = 105
+        Top = 6
+        Width = 99
         Height = 25
         Align = alNone
+        ButtonHeight = 25
         Images = ilMain
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
-        object ToolButton20: TToolButton
+        TabOrder = 2
+        object tbUtv: TToolButton
           Left = 0
           Top = 0
+          ImageIndex = 14
+          OnClick = tbUtvClick
         end
-        object ToolButton21: TToolButton
+        object tbGot: TToolButton
           Left = 23
           Top = 0
+          ImageIndex = 8
+          OnClick = tbGotClick
         end
-        object ToolButton22: TToolButton
+        object tbPrint: TToolButton
           Left = 46
           Top = 0
+          ImageIndex = 9
         end
-        object ToolButton23: TToolButton
-          Left = 69
-          Top = 0
-        end
+      end
+      object bbReset: TBitBtn
+        Left = 587
+        Top = 7
+        Width = 91
+        Height = 25
+        Anchors = [akRight, akBottom]
+        Caption = #1057#1073#1088#1086#1089' '#1092#1080#1083#1100#1090#1088#1072
+        TabOrder = 3
+        OnClick = bbResetClick
       end
     end
   end
   inherited pnlSave: TPanel
-    Top = 576
+    Top = 609
     Width = 703
     ExplicitTop = 576
     ExplicitWidth = 703
@@ -367,7 +345,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000840110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000880110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

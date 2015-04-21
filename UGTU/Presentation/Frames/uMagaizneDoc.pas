@@ -16,22 +16,18 @@ uses
 type
   TfmDoc = class(TfmBase)
     dbgehMagazineDocs: TDBGridEh;
-    bPrint: TButton;
     Panel2: TPanel;
     dtpEnd: TDateTimePicker;
     dtpStart: TDateTimePicker;
     Label1: TLabel;
-    bReset: TButton;
     gridColumnSelectMenu: TPopupMenu;
     Label2: TLabel;
-    Button1: TButton;
     ilMain: TImageList;
-    bbOk: TBitBtn;
     ToolBar7: TToolBar;
-    ToolButton20: TToolButton;
-    ToolButton21: TToolButton;
-    ToolButton22: TToolButton;
-    ToolButton23: TToolButton;
+    tbUtv: TToolButton;
+    tbGot: TToolButton;
+    tbPrint: TToolButton;
+    bbReset: TBitBtn;
     procedure dbcmbSpecChange(Sender: TObject);
     procedure dbcmbGroupChange(Sender: TObject);
     procedure bPrintClick(Sender: TObject);
@@ -49,6 +45,10 @@ type
       var Processed: Boolean);
     procedure dbgehMagazineDocsDblClick(Sender: TObject);
     procedure bbOkClick(Sender: TObject);
+    procedure tbUtvClick(Sender: TObject);
+    procedure tbGotClick(Sender: TObject);
+    procedure tbResetClick(Sender: TObject);
+    procedure bbResetClick(Sender: TObject);
 
   private
     procedure OnMyMenuItemClick(Sender: TObject);
@@ -72,7 +72,7 @@ var
   fld: TField;
 Begin
   Inherited;
-  ilMain.GetBitmap(16, bbOk.Glyph);
+  //ilMain.GetBitmap(16, bbOk.Glyph);
   dbgehMagazineDocs.SelectedRows.CurrentRowSelected := true;
 
   // dtpStart.Date := StrToDate('10.03.2015');
@@ -177,6 +177,15 @@ begin
   // if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate')<>nil) then
   // uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate').AsDateTime;
   // dbgehMagazineDocs.DataSource.DataSet.Bookmark:=dbgehMagazineDocs.SelectedRows[i];
+end;
+
+procedure TfmDoc.bbResetClick(Sender: TObject);
+begin
+  inherited;
+  self.dbgehMagazineDocs.ClearFilter;
+  // dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
+  // dmDocs.dsDocs.DataSet.Filtered:=true;
+  self.dbgehMagazineDocs.DefaultApplyFilter;
 end;
 
 procedure TfmDoc.bPrintClick(Sender: TObject);
@@ -402,6 +411,120 @@ begin
         self.dbgehMagazineDocs.Columns.Items[Tag].Width := 130;
       end;
     end;
+end;
+
+procedure TfmDoc.tbGotClick(Sender: TObject);
+var
+  i: Integer;
+begin
+  // for i:=0 to dbgehMagazineDocs.SelCount-1 do begin;
+  // dbgehMagazineDocs.DataSource.DataSet.Bookmark:=dbgehMagazineDocs.SelectedRows[i];
+  // end;
+
+  inherited;
+  with dbgehMagazineDocs.DataSource.DataSet do
+  begin
+
+    First;
+    DisableControls;
+    try
+      while not EOF do
+      begin
+        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+        begin
+          if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady')
+            .Value = Null) then
+          begin
+            dbgehMagazineDocs.DataSource.DataSet.Edit;
+            uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateReady']
+              := Date();
+            dbgehMagazineDocs.DataSource.DataSet.Post;
+          end;
+        end;
+        Next;
+      end;
+    finally
+      EnableControls;
+    end;
+  end;
+end;
+
+procedure TfmDoc.tbUtvClick(Sender: TObject);
+var
+  i, LastNum: Integer;
+  datebegin: string;
+  AYear, AMonth, ADay: word;
+  sp_num: TADODataSet;
+begin
+  inherited;
+  with dbgehMagazineDocs.DataSource.DataSet do
+  begin
+
+    First;
+    DisableControls;
+    try
+      while not EOF do
+      begin
+        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+        begin
+          if (uDMDocuments.dmDocs.adodsDocs.FieldByName('NumberDoc')
+            .AsString = '') then
+          begin
+            dm.DBConnect.BeginTrans;
+            sp_num := TADODataSet.Create(nil);
+            // надо сделать проверку на уникальность
+            try
+              dbgehMagazineDocs.DataSource.DataSet.Edit;
+              uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateCreate']
+                := Date();
+              dbgehMagazineDocs.DataSource.DataSet.Post;
+              DecodeDate(Now, AYear, AMonth, ADay);
+
+              if Date() > StrToDateTime('01.09.' + AYear.ToString()) then
+                datebegin := '01.09.' + AYear.ToString()
+              else
+                datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1)
+                  .ToString();
+              sp_num.CommandText := 'select * from MaxNumDocument(''' +
+                datebegin + '''' + ',' + '''' + DateTimeToStr(Date()) + ''')';
+              sp_num.Connection := dm.DBConnect;
+              sp_num.Open;
+              sp_num.First;
+              LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
+              dm.DBConnect.CommitTrans;
+            except
+              dm.DBConnect.RollbackTrans;
+              sp_num.Free;
+            end;
+            dbgehMagazineDocs.DataSource.DataSet.Edit;
+            uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['NumberDoc']
+              := LastNum;
+            dbgehMagazineDocs.DataSource.DataSet.Post;
+          end;
+        end;
+
+        Next;
+      end;
+    finally
+      EnableControls;
+
+    end;
+  end;
+
+  // for i:=0 to dbgehMagazineDocs.SelectedRows.Count-1 do
+  // begin
+  // if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate')<>nil) then
+  // uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate').AsDateTime;
+  // dbgehMagazineDocs.DataSource.DataSet.Bookmark:=dbgehMagazineDocs.SelectedRows[i];
+end;
+
+procedure TfmDoc.tbResetClick(Sender: TObject);
+begin
+  inherited;
+  self.dbgehMagazineDocs.ClearFilter;
+  // dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
+  // dmDocs.dsDocs.DataSet.Filtered:=true;
+  self.dbgehMagazineDocs.DefaultApplyFilter;
 end;
 
 end.
