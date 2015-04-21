@@ -109,9 +109,9 @@ begin
                   end;
         if I <> first_str + FReport.Historyes.Count - 1 then
         begin
-          Range['A' + inttostr(I + 1), 'N' + inttostr(I + 1)
+          Range['A' + inttostr(I + 1), 'O' + inttostr(I + 1)
             ].Insert(xlDown, xlFormatFromLeftOrAbove);
-          Range['A' + inttostr(I + 1), 'N' + inttostr(I + 1)].Select;
+          Range['A' + inttostr(I + 1), 'O' + inttostr(I + 1)].Select;
         end
       end
       else
