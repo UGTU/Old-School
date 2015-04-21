@@ -718,3 +718,14 @@ REFERENCES [dbo].[Kat_zach] ([Ik_kat_zach])
 GO
 ALTER TABLE [dbo].[Doc_kat_zach] CHECK CONSTRAINT [FK_Doc_kat_zach_Kat_zach]
 GO*/
+
+--[ABIT_Get_Kat_zach] 2009
+ALTER PROCEDURE [dbo].[ABIT_Get_Kat_zach] 
+@NNyear INT			--год набора
+AS
+Select *
+from Kat_zach
+--фильтруем, чтобы не отображать устаревшие данные
+where (Year(OutDate)>@NNyear) or (OutDate IS NULL)
+order by Cname_kat_zach
+GO

@@ -309,7 +309,7 @@ begin
     dmStudentData.adodsKatZach.Active:=true; }
 
   dmStudentData.aspGetAbitCat.Active := false;
-  dmStudentData.aspGetAbitCat.Parameters[1].Value := Year;
+  dmStudentData.aspGetAbitCat.Parameters[1].Value := IkRecruit;
   dmStudentData.aspGetAbitCat.Active := true;
 
   dm.adodsNabor.Active := false;
@@ -617,9 +617,14 @@ begin
   if IsAdditional then
     exit;
 
+  dmStudentData.aspGetAbitCat.Active := false;
+  dmStudentData.aspGetAbitCat.Parameters[1].Value := dbcbeRecruit.KeyValue;
+  dmStudentData.aspGetAbitCat.Active := true;
+
   try
     if (not(dbcbeRecruit.Text = '')) and (not(Tag = 0)) then
     begin
+      
       { dmAbiturientAction.aspGetNewNum.Active:=false;
         dmAbiturientAction.aspGetNewNum.Parameters[1].Value:=dbcbeRecruit.KeyValue;
         dmAbiturientAction.aspGetNewNum.execproc; }
