@@ -54,6 +54,7 @@ begin
   Replace('#Month#', str);
   Replace('#Year#', FReport.Now_year);
   Replace('#dep_ind#', FReport.dep_ind);
+  Replace('#num#', FReport.NumSpr.ToString());
   Replace('#phone_inst#', ',' + FReport.phone);
 
   dir_inst := FReport.dir_inst;

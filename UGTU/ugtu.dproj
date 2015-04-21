@@ -1063,6 +1063,7 @@
             <Form>frmReviewDoc</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Domain\Reports\ReportSprVis.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

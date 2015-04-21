@@ -17,7 +17,6 @@ uses
 
 type
   TfmStudent = class(TfmBase)
-    ToolBar1: TToolBar;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -106,7 +105,6 @@ type
     dbcbeOrder: TDBLookupComboboxEh;
     Label47: TLabel;
     eAddInfo: TMemo;
-    ToolButton1: TToolButton;
     Label57: TLabel;
     Label56: TLabel;
     Label55: TLabel;
@@ -116,14 +114,6 @@ type
     Label51: TLabel;
     eXpyear: TDBNumberEditEh;
     eXpMonth: TDBNumberEditEh;
-    ToolButton2: TToolButton;
-    ToolButton3: TToolButton;
-    ToolButton4: TToolButton;
-    ToolButton5: TToolButton;
-    ToolButton6: TToolButton;
-    ToolButton7: TToolButton;
-    ToolButton8: TToolButton;
-    ToolButton9: TToolButton;
     Label33: TLabel;
     Label46: TLabel;
     Label49: TLabel;
@@ -134,15 +124,12 @@ type
     Label59: TLabel;
     gbProlongued: TGroupBox;
     DBGridEh6: TDBGridEh;
-    ToolButton10: TToolButton;
     KontExcel: TSpeedButton;
-    ToolButton11: TToolButton;
     ActionList1: TActionList;
     actApply: TAction;
     actUndo: TAction;
     actPrintSprav: TAction;
     actPrintPensSprav: TAction;
-    ToolButton12: TToolButton;
     ppmSpravToExcel: TPopupMenu;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -158,11 +145,9 @@ type
     btnPrintSmallUspev: TSpeedButton;
     tsUspevStat: TTabSheet;
     dbgUspevStat: TDBGridEh;
-    ToolButton13: TToolButton;
     ppmStudNapr: TPopupMenu;
     N1: TMenuItem;
     N2: TMenuItem;
-    ToolButton14: TToolButton;
     gbCatChange: TGroupBox;
     DBGridEh2: TDBGridEh;
     dbgeAddress: TDBGridEh;
@@ -188,6 +173,22 @@ type
     gbMoved: TGroupBox;
     DBGridEh4: TDBGridEh;
     bShot: TButton;
+    ToolBar1: TToolBar;
+    ToolButton4: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton13: TToolButton;
+    ToolButton9: TToolButton;
+    ToolButton8: TToolButton;
+    ToolButton7: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton10: TToolButton;
+    ToolButton5: TToolButton;
+    ToolButton14: TToolButton;
+    ToolButton1: TToolButton;
+    ToolButton11: TToolButton;
+    ToolButton12: TToolButton;
+    MenuItem4: TMenuItem;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -231,6 +232,7 @@ type
     procedure cbModuleBRSChange(Sender: TObject);
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
+    procedure MenuItem4Click(Sender: TObject);
 
   private
     Fik: integer;
@@ -464,6 +466,8 @@ begin
 end;
 
 procedure TfmStudent.DoRefreshFrame;
+var
+  dsDoc: TADODataSet;
 begin
   if not(FrameObject is TDBNodeStudObject) then
     exit;
@@ -471,6 +475,23 @@ begin
   FLoaded := false;
   obj := FrameObject as TDBNodeStudObject;
   ik := obj.ID;
+
+  // получаем форму обучения
+  dsDoc := TADODataSet.Create(nil);
+  try
+    dsDoc.CommandText := 'select * from StudInfoForDocs where Ik_studGrup=' +
+      obj.StudGrupKey.ToString();
+    dsDoc.Connection := dm.DBConnect;
+    dsDoc.Open;
+    dsDoc.First;
+    if (dsDoc.FieldByName('Ik_form_ed').Value = 2) then // если заочная форма
+      MenuItem4.Visible := true
+    else
+      MenuItem4.Visible := false;
+  finally
+    dsDoc.Free;
+  end;
+
   // если приказ об отчислении есть
   // obj.State = ssExiled
   if (obj.BaseImageIndex = 12) then
@@ -785,6 +806,7 @@ begin
     TabSheet6.enabled := true;
     TabSheet7.enabled := true;
   end;
+
 end;
 
 procedure TfmStudent.Read;
@@ -942,11 +964,95 @@ var // E: Variant;
   // posit:integer;
   // FindRange: Variant;
   // tempStoredProc: TADOStoredProc;
+  tempDS: TADODataSet;
   Report: TReportBase;
+  i, LastNum: integer;
+  datebegin: string;
+  AYear, AMonth, ADay: word;
+  sp_num: TADODataSet;
+  sp_depInd: TADODataSet;
+  k: integer;
+  editF: TfrmReviewDoc;
+  dsDoc: TADODataSet;
 begin
-  Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey, 1);
-  TWaitingController.GetInstance.Process(Report);
-  Report.Free;
+  dsDoc := TADODataSet.Create(nil);
+  sp_num := TADODataSet.Create(nil);
+  sp_depInd := TADODataSet.Create(nil);
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  try
+    // находим номер будущей справки
+
+    DecodeDate(Now, AYear, AMonth, ADay);
+    if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+      datebegin := '01.09.' + AYear.ToString()
+    else
+      datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
+    sp_num.CommandText := 'select * from MaxNumDocument(''' + datebegin + '''' +
+      ',' + '''' + DateTimeToStr(date()) + ''')';
+    sp_num.Connection := dm.DBConnect;
+    sp_num.Open;
+    sp_num.First;
+    LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
+    // берем индекс подразделения
+
+    sp_depInd.CommandText := 'select * from DepIndDoc(' +
+      obj.StudGrupKey.ToString() + ')';
+    sp_depInd.Connection := dm.DBConnect;
+    sp_depInd.Open;
+    sp_depInd.First;
+
+    editF := TfrmReviewDoc.Create(Self);
+    editF.dtUtv.Format := '';
+    editF.dtUtv.date := date;
+    editF.dtGot.Format := #32;
+    // ищем информацию о студенте
+    dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
+      obj.StudGrupKey.ToString();
+    dsDoc.Connection := dm.DBConnect;
+    dsDoc.Open;
+    dsDoc.First;
+    editF.eDest.Text := 'ПФ';
+  //  editF.eNum.Text := LastNum.ToString();
+    editF.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
+    editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
+      dsDoc.FieldByName('Cname_grup').AsString + ')';
+    editF.ShowModal;
+    if (editF.ModalResult = mrOk) or (editF.ModalResult = mrYes) then
+    begin
+      dm.DBConnect.BeginTrans;
+      try
+        // добавляем справку
+
+        tempDS.CommandText := 'Select * from Document';
+        tempDS.Open;
+        tempDS.Insert;
+        tempDS.FieldByName('Ik_studGrup').Value := obj.StudGrupKey;
+        tempDS.FieldByName('Ik_Transfer').Value := 1;
+        tempDS.FieldByName('Ik_destination').Value := 2;
+        tempDS.FieldByName('NumberDoc').Value := LastNum;
+        tempDS.FieldByName('DateCreate').Value := date;
+        tempDS.FieldByName('Num_podrazd').Value :=
+          sp_depInd.FieldByName('Dep_Index').AsString;
+        tempDS.Post;
+        tempDS.UpdateBatch();
+        dm.DBConnect.CommitTrans;
+      except
+        dm.DBConnect.RollbackTrans;
+      end;
+    end;
+    if (editF.ModalResult = mrYes) then
+    begin
+      Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey,
+        1, LastNum);
+      TWaitingController.GetInstance.Process(Report);
+    end;
+  finally
+    tempDS.Free;
+    sp_num.Free;
+    sp_depInd.Free;
+    dsDoc.Free;
+    Report.Free;
+  end;
   // var E: Variant;
   // str, year_post,dop,dir_inst,copystr1,copystr2:string;
   // year, posit, i, first_step:integer;
@@ -1100,39 +1206,10 @@ begin
     sp_depInd.Connection := dm.DBConnect;
     sp_depInd.Open;
     sp_depInd.First;
-    // добавляем справку
-
-    tempDS.CommandText := 'Select * from Document';
-    tempDS.Open;
-    tempDS.Insert;
-    tempDS.FieldByName('Ik_studGrup').Value := obj.StudGrupKey;
-    tempDS.FieldByName('Ik_Transfer').Value := 1;
-    tempDS.FieldByName('Ik_destination').Value := 1;
-    tempDS.FieldByName('DateReady').Value := date;
-    tempDS.FieldByName('NumberDoc').Value := LastNum;
-    tempDS.FieldByName('DateCreate').Value := date;
-    tempDS.FieldByName('Num_podrazd').Value :=
-      sp_depInd.FieldByName('Dep_Index').AsString;
-    tempDS.Post;
-    try
-      tempDS.UpdateBatch();
-    except
-      // on E: EOleException do
-      // begin
-      // k := E.ErrorCode;
-      // if (k = ADO_ERROR_TWO) or (k = ADO_ERROR) then
-      // result := true
-      // else
-      // raise;
-      // end;
-      // on E: Exception do
-      // raise;
-    end;
     editF := TfrmReviewDoc.Create(Self);
     editF.dtUtv.Format := '';
-    editF.dtUtv.date := Date;
-    editF.dtGot.Format := '';
-    editF.dtGot.date := Date;
+    editF.dtUtv.date := date;
+    editF.dtGot.Format := #32;
     // ищем информацию о студенте
     dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
       obj.StudGrupKey.ToString();
@@ -1140,17 +1217,39 @@ begin
     dsDoc.Open;
     dsDoc.First;
     editF.eDest.Text := 'По месту требования';
-    editF.eNum.Text := LastNum.ToString();
+ //   editF.eNum.Text := LastNum.ToString();
     editF.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
     editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
       dsDoc.FieldByName('Cname_grup').AsString + ')';
     editF.ShowModal;
-    if  editF.ModalResult = mrOk then
-     begin
-    Report := TUspevGroupController.Instance.BuildSpravka2014
-      (obj.StudGrupKey, 0);
-    TWaitingController.GetInstance.Process(Report);
-     end;
+
+    if (editF.ModalResult = mrOk) or (editF.ModalResult = mrYes) then
+    begin
+      dm.DBConnect.BeginTrans;
+      try // добавляем справку
+        tempDS.CommandText := 'Select * from Document';
+        tempDS.Open;
+        tempDS.Insert;
+        tempDS.FieldByName('Ik_studGrup').Value := obj.StudGrupKey;
+        tempDS.FieldByName('Ik_Transfer').Value := 1;
+        tempDS.FieldByName('Ik_destination').Value := 1;
+        tempDS.FieldByName('NumberDoc').Value := LastNum;
+        tempDS.FieldByName('DateCreate').Value := date;
+        tempDS.FieldByName('Num_podrazd').Value :=
+          sp_depInd.FieldByName('Dep_Index').AsString;
+        tempDS.Post;
+        tempDS.UpdateBatch();
+        dm.DBConnect.CommitTrans;
+      except
+        dm.DBConnect.RollbackTrans;
+      end;
+    end;
+    if (editF.ModalResult = mrYes) then // печатаем
+    begin
+      Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey,
+        0, LastNum);
+      TWaitingController.GetInstance.Process(Report);
+    end;
   finally
     tempDS.Free;
     sp_num.Free;
@@ -1596,6 +1695,13 @@ begin
   // Report.BuildReport;
 end;
 
+procedure TfmStudent.MenuItem4Click(Sender: TObject);
+begin
+  inherited;
+
+end;
+
+// справка вызов
 procedure TfmStudent.ExecuteError(Sender: TObject; E: Exception);
 begin
   showmessage('Произошла ошибка при экспорте успеваемости cтудента: ' +

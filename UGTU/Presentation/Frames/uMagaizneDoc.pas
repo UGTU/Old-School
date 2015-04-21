@@ -11,7 +11,7 @@ uses
   Vcl.DBLookup, uDM,
   Vcl.Mask, DBCtrlsEh, DBLookupEh, uDMStudentData, uDMDocuments, EhLibADO,
   uReviewDoc,
-  Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb;
+  Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb, Vcl.ToolWin;
 
 type
   TfmDoc = class(TfmBase)
@@ -27,6 +27,11 @@ type
     Button1: TButton;
     ilMain: TImageList;
     bbOk: TBitBtn;
+    ToolBar7: TToolBar;
+    ToolButton20: TToolButton;
+    ToolButton21: TToolButton;
+    ToolButton22: TToolButton;
+    ToolButton23: TToolButton;
     procedure dbcmbSpecChange(Sender: TObject);
     procedure dbcmbGroupChange(Sender: TObject);
     procedure bPrintClick(Sender: TObject);
@@ -283,7 +288,8 @@ begin
         dsDoc.Open;
         dsDoc.First;
         editF := TfrmReviewDoc.Create(self);
-
+        editF.dtGot.Format := #32;
+        editF.dtUtv.Format := #32;
         if (dsDoc.FieldByName('DateCreate').Value <> Null) then
         begin
           editF.dtUtv.Format := '';
@@ -292,12 +298,10 @@ begin
           begin
             editF.dtGot.Format := '';
             editF.dtGot.Date := dsDoc.FieldByName('DateReady').AsDateTime;
-          end
-          else
-            editF.dtGot.Format := #32;
-        end
-        else
-          editF.dtUtv.Format := #32;
+          end;
+        end ;
+
+
 
         editF.eDest.Text := dsDoc.FieldByName('cNameDestination').AsString;
         editF.eNum.Text := dsDoc.FieldByName('NumberDoc').AsString;

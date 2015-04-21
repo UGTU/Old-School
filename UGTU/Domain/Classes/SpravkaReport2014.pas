@@ -10,11 +10,11 @@ uses
 type
   TSpravka_Report = class
   private
-    ikStudGrup, type_spr: integer;
+    ikStudGrup, type_spr,numspr: integer;
   protected
 
   public
-    constructor Create(_ikStudGrup, _type_spr: integer);
+    constructor Create(_ikStudGrup, _type_spr,_num: integer);
     function AddReport(): TSpravka;
     destructor Destroy; override;
 
@@ -24,10 +24,11 @@ implementation
 
 { TBRS2014Report }
 
-constructor TSpravka_Report.Create(_ikStudGrup, _type_spr: integer);
+constructor TSpravka_Report.Create(_ikStudGrup, _type_spr,_num: integer);
 begin
   ikStudGrup := _ikStudGrup;
   type_spr := _type_spr;
+  numspr:= _num ;
 end;
 
 function TSpravka_Report.AddReport(): TSpravka;
@@ -67,7 +68,8 @@ begin
       sp_spr.FieldByName('sprDate').AsString, sp_spr.FieldByName('sprMonth')
       .AsString, sp_spr.FieldByName('sprYear').AsString,
       sp_spr.FieldByName('studBirthYear').AsString,
-      sp_spr.FieldByName('Dep_Index').AsString);
+      sp_spr.FieldByName('Dep_Index').AsString,
+      numspr);
     sp_spr.First;
 
     While not sp_history.Eof do

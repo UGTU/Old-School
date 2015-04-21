@@ -417,7 +417,8 @@ uses
   uMagaizneDoc in 'Presentation\Frames\uMagaizneDoc.pas' {fmDoc: TFrame},
   uDMDocuments in 'Data\uDMDocuments.pas' {dmDocs: TDataModule},
   uDocTr in 'Presentation\Frames\uDocTr.pas' {Frame2: TFrame},
-  uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {frmReviewDoc};
+  uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {frmReviewDoc},
+  ReportSprVis in 'Domain\Reports\ReportSprVis.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

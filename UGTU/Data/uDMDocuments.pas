@@ -43,6 +43,8 @@ type
     adodsDocsDateReady: TDateTimeField;
     adodsDocsNum_podrazd: TStringField;
     adodsDocsPersName: TStringField;
+    adodsDocsStatus: TStringField;
+    procedure adodsDocsCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -57,5 +59,19 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure TdmDocs.adodsDocsCalcFields(DataSet: TDataSet);
+begin
+if (DataSet.FieldByName('DateCreate').AsString='') then
+ DataSet.FieldByName('Status').AsString:='Заявка'
+ else
+ begin
+ if (DataSet.FieldByName('DateReady').AsString='') then
+    DataSet.FieldByName('Status').AsString:='Утверждено'
+    else
+    DataSet.FieldByName('Status').AsString:='Готово'
+ end;
+
+end;
 
 end.

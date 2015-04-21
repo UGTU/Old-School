@@ -11,6 +11,7 @@ object dmDocs: TdmDocs
     Connection = dm.DBConnect
     CursorType = ctStatic
     Filtered = True
+    OnCalcFields = adodsDocsCalcFields
     CommandText = 'select * from MagazineDocs'
     Parameters = <>
     Left = 12
@@ -113,6 +114,11 @@ object dmDocs: TdmDocs
       FieldName = 'PersName'
       ReadOnly = True
       Size = 92
+    end
+    object adodsDocsStatus: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Status'
+      Calculated = True
     end
   end
   object dsReviewDoc: TDataSource

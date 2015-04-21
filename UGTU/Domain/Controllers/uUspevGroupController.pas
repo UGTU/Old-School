@@ -346,7 +346,7 @@ uses
   //getSpecFromSpecFac возвращает IK специальности
   function getSpecFromSpecFac(SpecFacIK: integer): Integer;
   //экспорт справок
-  function BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
+  function BuildSpravka2014(_ikStudGrup, _type_spr,num: integer):TReportBase;
 
 end;
 
@@ -1395,12 +1395,12 @@ begin
   else
     result:=false;
 end;
- function TUspevGroupController.BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
+ function TUspevGroupController.BuildSpravka2014(_ikStudGrup, _type_spr,num: integer):TReportBase;
    var report:TSpravka_Report;
    result_report:TSpravka;
   FindRange: Variant;
  begin
-   report:= TSpravka_Report.Create(_ikStudGrup, _type_spr);
+   report:= TSpravka_Report.Create(_ikStudGrup, _type_spr,num);
    result_report:=report.AddReport();
    Result := SpravkaReport.Create(result_report);
 

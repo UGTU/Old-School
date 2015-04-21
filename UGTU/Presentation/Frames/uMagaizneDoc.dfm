@@ -27,6 +27,7 @@ inherited fmDoc: TfmDoc
       DynProps = <>
       IndicatorOptions = [gioShowRowIndicatorEh]
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      ReadOnly = True
       SortLocal = True
       STFilter.Local = True
       STFilter.Visible = True
@@ -48,7 +49,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'NumberDoc'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'Ik_Document'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #8470
@@ -57,10 +57,18 @@ inherited fmDoc: TfmDoc
         item
           DynProps = <>
           EditButtons = <>
+          FieldName = 'Status'
+          Footers = <>
+          PopupMenu = gridColumnSelectMenu
+          STFilter.ListSource = dmDocs.dsDocs
+          Title.Caption = #1057#1090#1072#1090#1091#1089
+        end
+        item
+          DynProps = <>
+          EditButtons = <>
           FieldName = 'DateCreate'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           Title.Caption = #1044#1072#1090#1072' '#1091#1090#1074#1077#1088#1078#1076#1077#1085#1080#1103
           Width = 106
         end
@@ -70,7 +78,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'cNameDestination'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'ik_direction'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1053#1072#1079#1085#1072#1095#1077#1085#1080#1077
@@ -98,7 +105,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'Cname_grup'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'Ik_grup'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1043#1088#1091#1087#1087#1072
@@ -109,6 +115,7 @@ inherited fmDoc: TfmDoc
           EditButtons = <>
           FieldName = 'DateReady'
           Footers = <>
+          PopupMenu = gridColumnSelectMenu
           Title.Caption = #1043#1086#1090#1086#1074#1086
         end
         item
@@ -117,7 +124,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'cName_direction'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'ik_direction'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
@@ -129,7 +135,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'Cname_form_ed'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'Ik_form_ed'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1060#1086#1088#1084#1072'. '#1086#1073'.'
@@ -141,7 +146,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'Cname_spec'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'ik_spec'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
@@ -153,7 +157,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'Cname_fac'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'Ik_fac'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
@@ -165,7 +168,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'DateStartCallSpr'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.Visible = False
           Title.Caption = #1057#1087#1088'.'#1074#1099#1079#1086#1074' '#1076#1072#1090#1072' '#1085#1072#1095#1072#1083#1072
           Visible = False
@@ -176,7 +178,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'DateEndCallSpr'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.Visible = False
           Title.Caption = #1057#1087#1088'.'#1074#1099#1079#1086#1074' '#1076#1072#1090#1072' '#1086#1082#1086#1085#1095#1072#1085#1080#1103
           Visible = False
@@ -187,7 +188,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'cNameTransfer'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'Ik_Transfer'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1052#1077#1090#1086#1076' '#1087#1077#1088#1077#1076#1072#1095#1080
@@ -199,7 +199,6 @@ inherited fmDoc: TfmDoc
           FieldName = 'cName_type_disc'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          ReadOnly = True
           STFilter.KeyField = 'ik_type_disc'
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1055#1088#1080#1095#1080#1085#1072' '#1074#1099#1079#1086#1074#1072
@@ -210,15 +209,16 @@ inherited fmDoc: TfmDoc
           EditButtons = <>
           FieldName = 'Num_podrazd'
           Footers = <>
+          PopupMenu = gridColumnSelectMenu
           STFilter.ListSource = dmDocs.dsDocs
           Title.Caption = #1053#1086#1084#1077#1088' '#1087#1086#1076#1088#1072#1079#1076#1077#1083#1077#1085#1080#1103
+          Visible = False
         end
         item
           DynProps = <>
           EditButtons = <>
           FieldName = 'Ik_Document'
           Footers = <>
-          ReadOnly = True
           Visible = False
         end
         item
@@ -315,6 +315,33 @@ inherited fmDoc: TfmDoc
         TabOrder = 5
         OnClick = bbOkClick
       end
+      object ToolBar7: TToolBar
+        Left = 14
+        Top = 16
+        Width = 105
+        Height = 25
+        Align = alNone
+        Images = ilMain
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 6
+        object ToolButton20: TToolButton
+          Left = 0
+          Top = 0
+        end
+        object ToolButton21: TToolButton
+          Left = 23
+          Top = 0
+        end
+        object ToolButton22: TToolButton
+          Left = 46
+          Top = 0
+        end
+        object ToolButton23: TToolButton
+          Left = 69
+          Top = 0
+        end
+      end
     end
   end
   inherited pnlSave: TPanel
@@ -340,7 +367,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000780110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000840110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

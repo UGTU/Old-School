@@ -5,127 +5,11 @@ inherited fmStudent: TfmStudent
   Constraints.MinWidth = 561
   ExplicitWidth = 725
   ExplicitHeight = 684
-  object ToolBar1: TToolBar [0]
-    Left = 0
-    Top = 0
-    Width = 725
-    Height = 28
-    Caption = 'ToolBar1'
-    Images = frmMain.ImageList1
-    TabOrder = 0
-    object ToolButton4: TToolButton
-      Left = 0
-      Top = 0
-      Action = frmMain.actVypiska
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton2: TToolButton
-      Left = 23
-      Top = 0
-      Action = frmMain.actNapr
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton13: TToolButton
-      Left = 46
-      Top = 0
-      Action = frmMain.actNaprClose
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton9: TToolButton
-      Left = 69
-      Top = 0
-      Action = frmMain.actFamChg
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton8: TToolButton
-      Left = 92
-      Top = 0
-      Action = frmMain.actPasspChg
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton7: TToolButton
-      Left = 115
-      Top = 0
-      Action = frmMain.actPerevod
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton6: TToolButton
-      Left = 138
-      Top = 0
-      Action = frmMain.actAkadem
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton3: TToolButton
-      Left = 161
-      Top = 0
-      Action = frmMain.actOtchisl
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton10: TToolButton
-      Left = 184
-      Top = 0
-      Action = frmMain.actAcademRestore
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton5: TToolButton
-      Left = 207
-      Top = 0
-      Action = frmMain.actVosst
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton14: TToolButton
-      Left = 230
-      Top = 0
-      Action = frmMain.actExtendSession
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton1: TToolButton
-      Left = 253
-      Top = 0
-      Caption = 'ToolButton1'
-      ImageIndex = 0
-      ParentShowHint = False
-      ShowHint = True
-      Visible = False
-      OnClick = ToolButton1Click
-    end
-    object ToolButton11: TToolButton
-      Left = 276
-      Top = 0
-      Hint = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
-      Caption = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
-      ImageIndex = 16
-      ParentShowHint = False
-      ShowHint = True
-      Visible = False
-    end
-    object ToolButton12: TToolButton
-      Left = 299
-      Top = 0
-      Action = actPrintSprav
-      DropdownMenu = ppmSpravToExcel
-      ParentShowHint = False
-      PopupMenu = ppmSpravToExcel
-      ShowHint = True
-      Style = tbsDropDown
-    end
-  end
   inherited Panel1: TPanel
     Top = 28
     Width = 725
     Height = 619
-    TabOrder = 2
+    TabOrder = 1
     ExplicitTop = 28
     ExplicitWidth = 725
     ExplicitHeight = 619
@@ -1171,7 +1055,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 465
+                Height = 460
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1945,6 +1829,7 @@ inherited fmStudent: TfmStudent
   inherited pnlSave: TPanel
     Top = 647
     Width = 725
+    TabOrder = 0
     ExplicitTop = 647
     ExplicitWidth = 725
     DesignSize = (
@@ -1962,11 +1847,127 @@ inherited fmStudent: TfmStudent
       ExplicitLeft = 387
     end
   end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 725
+    Height = 28
+    Caption = 'ToolBar1'
+    Images = frmMain.ImageList1
+    TabOrder = 2
+    object ToolButton4: TToolButton
+      Left = 0
+      Top = 0
+      Action = frmMain.actVypiska
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton2: TToolButton
+      Left = 23
+      Top = 0
+      Action = frmMain.actNapr
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton13: TToolButton
+      Left = 46
+      Top = 0
+      Action = frmMain.actNaprClose
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton9: TToolButton
+      Left = 69
+      Top = 0
+      Action = frmMain.actFamChg
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton8: TToolButton
+      Left = 92
+      Top = 0
+      Action = frmMain.actPasspChg
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton7: TToolButton
+      Left = 115
+      Top = 0
+      Action = frmMain.actPerevod
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton6: TToolButton
+      Left = 138
+      Top = 0
+      Action = frmMain.actAkadem
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton3: TToolButton
+      Left = 161
+      Top = 0
+      Action = frmMain.actOtchisl
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton10: TToolButton
+      Left = 184
+      Top = 0
+      Action = frmMain.actAcademRestore
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton5: TToolButton
+      Left = 207
+      Top = 0
+      Action = frmMain.actVosst
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton14: TToolButton
+      Left = 230
+      Top = 0
+      Action = frmMain.actExtendSession
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton1: TToolButton
+      Left = 253
+      Top = 0
+      Caption = 'ToolButton1'
+      ImageIndex = 0
+      ParentShowHint = False
+      ShowHint = True
+      Visible = False
+      OnClick = ToolButton1Click
+    end
+    object ToolButton11: TToolButton
+      Left = 276
+      Top = 0
+      Hint = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
+      Caption = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
+      ImageIndex = 16
+      ParentShowHint = False
+      ShowHint = True
+      Visible = False
+    end
+    object ToolButton12: TToolButton
+      Left = 299
+      Top = 0
+      Action = actPrintSprav
+      DropdownMenu = ppmSpravToExcel
+      ParentShowHint = False
+      PopupMenu = ppmSpravToExcel
+      ShowHint = True
+      Style = tbsDropDown
+    end
+  end
   object ilPages: TImageList
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2309,6 +2310,10 @@ inherited fmStudent: TfmStudent
     end
     object MenuItem3: TMenuItem
       Action = frmMain.actLichnKartStud
+    end
+    object MenuItem4: TMenuItem
+      Caption = #1057#1087#1088#1072#1074#1082#1072'-'#1074#1099#1079#1086#1074
+      OnClick = MenuItem4Click
     end
   end
   object ppmStudNapr: TPopupMenu
