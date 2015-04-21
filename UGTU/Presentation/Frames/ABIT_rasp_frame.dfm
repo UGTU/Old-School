@@ -156,57 +156,56 @@ inherited fmAbitRasp: TfmAbitRasp
         AllowedOperations = []
         AutoFitColWidths = True
         DataSource = DMAbiturientRasp.dsGetRasp
+        DynProps = <>
         Flat = True
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'MS Sans Serif'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
         ParentShowHint = False
         ReadOnly = True
         ShowHint = True
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
         OnDblClick = actEditRaspExecute
         OnKeyDown = raspKeyDown
         OnTitleClick = raspTitleClick
         Columns = <
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'cname_mer'
             Footers = <>
             Title.Alignment = taCenter
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'disc'
             Footers = <>
             Title.Alignment = taCenter
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'cname_sdach'
             Footers = <>
             Title.Alignment = taCenter
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TimeBegin'
             Footers = <>
             Title.Alignment = taCenter
           end
           item
+            DynProps = <>
             EditButtons = <>
             FieldName = 'TimeEnd'
             Footers = <>
             Title.Alignment = taCenter
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
     end
     object ToolBar1: TToolBar
@@ -306,6 +305,7 @@ inherited fmAbitRasp: TfmAbitRasp
         Width = 121
         Height = 22
         Hint = #1044#1072#1090#1072' '#1087#1088#1086#1074#1077#1076#1077#1085#1080#1103' '#1084#1077#1088#1086#1087#1088#1080#1103#1090#1080#1103
+        DynProps = <>
         EditButtons = <>
         Flat = True
         Kind = dtkDateEh
@@ -353,47 +353,45 @@ inherited fmAbitRasp: TfmAbitRasp
             Align = alClient
             AutoFitColWidths = True
             DataSource = DMAbiturientRasp.dsAbitGetSpisok
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = [gioShowRowIndicatorEh]
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
             ParentShowHint = False
             PopupMenu = ppmAbitList
             ShowHint = True
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
             OnCellClick = dbgSpisokCellClick
             Columns = <
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'nnvedom'
                 Footers = <>
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'StudName'
                 Footers = <>
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'cosenka'
                 Footers = <>
                 OnUpdateData = dbgSpisokColumns2UpdateData
               end
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'Cname_room'
                 Footers = <>
                 OnUpdateData = dbgSpisokColumns3UpdateData
               end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object ToolBar4: TToolBar
@@ -440,6 +438,7 @@ inherited fmAbitRasp: TfmAbitRasp
             Width = 250
             Height = 30
             Hint = #1092#1072#1082#1091#1083#1100#1090#1077#1090
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'Ik_fac'
@@ -457,6 +456,7 @@ inherited fmAbitRasp: TfmAbitRasp
             Width = 350
             Height = 30
             Hint = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
+            DataField = ''
             EditButtons = <>
             Flat = True
             KeyField = 'ik_spec_fac'
@@ -500,29 +500,24 @@ inherited fmAbitRasp: TfmAbitRasp
             Align = alClient
             AutoFitColWidths = True
             DataSource = DMAbiturientRasp.dsAbitRaspKab
+            DynProps = <>
             Flat = True
-            FooterColor = clWindow
-            FooterFont.Charset = DEFAULT_CHARSET
-            FooterFont.Color = clWindowText
-            FooterFont.Height = -11
-            FooterFont.Name = 'MS Sans Serif'
-            FooterFont.Style = []
+            FooterParams.Color = clWindow
+            IndicatorOptions = [gioShowRowIndicatorEh]
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
             Columns = <
               item
+                DynProps = <>
                 EditButtons = <>
                 FieldName = 'kabName'
                 Footers = <>
                 OnUpdateData = dbgRoomsColumns0UpdateData
               end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
           end
         end
         object ToolBar3: TToolBar
@@ -614,7 +609,7 @@ inherited fmAbitRasp: TfmAbitRasp
     Left = 483
     Top = 80
     Bitmap = {
-      494C0101030004000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -757,7 +752,7 @@ inherited fmAbitRasp: TfmAbitRasp
     Left = 263
     Top = 202
     Bitmap = {
-      494C010118001D000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010118001D00100010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

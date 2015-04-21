@@ -2,11 +2,21 @@ unit ConstantRepository;
 
 interface
 
-uses System.Variants, System.SysUtils;
+uses System.Variants, System.SysUtils, DateUtils;
 
 // Правила именования констант:
 // если константа является ключом, то пишем префикс "key_"
 const
+  Male = 1;
+  Female = 0;
+
+  Russia = 2;
+
+  DefaultMaleStatus = 9;
+  DefaultFemaleStatus = 7;
+
+  TypeAddressPropiska = 2;
+
   key_FBO = 6; // факультет безотрывного обучения (ФБО)
   key_CommonProfile = 0;
   FGOS3 = 2;
@@ -16,6 +26,12 @@ const
   vid_exam = 6;
   GOS_EXAM = 56;
   FISCULTURA_ZE = 2;
+
+  //ErrorCode
+  NoError = 0;
+  ExistError = 1;
+  FailError = 2;
+  StatusError = 3;
 
   // типы дисциплин
   typeTypicalDisc = 1;
@@ -29,16 +45,24 @@ const
   Days = 2;
   KolDaysInWeek = 6;
 
+  //виды документов
+  PassportRF = 4;
+
+  //состояния студентов
+  AcademReturn = 13;      //Возврат после отпуска
+
   // служебные функции
 function IfNull(const Value, Default: OleVariant): OleVariant;
 
 function GetMonthR(month: integer): string; // получить месяц в род.п. по номеру
+function GetFullDate(ddate:TDateTime):string; //получить полную запись даты
 function GetKursP(kurs: integer): string;
 // получить номер курса в предл. п. по номеру
 function GetTimeByType(aEdIzm, aHours: integer): string; // получить
 // function GetWeekCountName(weekCount: integer): string; //получить кол-во недель в виде строки
 function GetWeekCountNameFromDays(daysCount: integer): string;
 // получить кол-во недель в виде строки из часов
+
 
 implementation
 
@@ -82,6 +106,16 @@ begin
   end;
   Result := str;
 end;
+
+function GetFullDate(ddate:TDateTime):string;
+  begin
+   // date:= DateOf(ddate);
+   if (DayOf(ddate)<10) then
+      Result:='0'+IntToStr(DayOf(ddate))+' '+GetMonthR(MonthOf(ddate))+' '+IntToStr(YearOf(ddate))
+   else
+      Result:=IntToStr(DayOf(ddate))+' '+GetMonthR(MonthOf(ddate))+' '+IntToStr(YearOf(ddate));
+  end;
+
 
 function GetKursP(kurs: integer): string;
 var

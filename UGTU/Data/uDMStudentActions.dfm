@@ -1044,13 +1044,6 @@ object dmStudentActions: TdmStudentActions
     ProcedureName = 'AppendDoc;1'
     Parameters = <
       item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-        Value = -6
-      end
-      item
         Name = '@ncode'
         Attributes = [paNullable]
         DataType = ftInteger
@@ -1090,6 +1083,34 @@ object dmStudentActions: TdmStudentActions
         DataType = ftString
         Size = 500
         Value = Null
+      end
+      item
+        Name = '@addinfo'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 500
+        Value = Null
+      end
+      item
+        Name = '@balls'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@ikDisc'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = -6
       end>
     Left = 36
     Top = 288

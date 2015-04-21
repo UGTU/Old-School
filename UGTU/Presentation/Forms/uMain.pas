@@ -398,6 +398,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka, uNagruzk
   uSheduleSemester, uAbitOtchetsController,udmUspevaemost, SheduleController,
   uNagruzkaSemester, ApplicationController,uAbitConfirm, udmCauses, DBTVInviteObj,
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj,HOST_Projivaysh,DBTVHabitatsPersonObj, uChangePlanFromGrup,
+  CommandController,
   uPerson;
 
 {$R *.dfm}
@@ -477,9 +478,10 @@ begin
   begin
     ActiveFrame.Visible:= false;
     ActiveFrame.CloseFrame;
-    if ActiveFrame is TfmStudent then begin
-    TDBnodeObject(ActiveFrame.FrameObject).AssociatedObject:=nil;
-    ActiveFrame.Free;
+    if ActiveFrame is TfmStudent then
+    begin
+      TDBnodeObject(ActiveFrame.FrameObject).AssociatedObject:=nil;
+      ActiveFrame.Free;
     end;
   end;
 
@@ -2231,6 +2233,7 @@ begin
   (ActiveFrame as TfmNagruzkaDep).actEditPlanExecute((ActiveFrame as TfmNagruzkaDep).actAddPlan);
 end;
 
+
 procedure TfrmMain.actAddPlanPrepNagruzkaExecute(Sender: TObject);
 begin
  // (ActiveFrame as TfmNagruzkaPrep).actEditPlanExecute((ActiveFrame as TfmNagruzkaPrep).actAddPlan);
@@ -2248,7 +2251,7 @@ TApplicationController.GetInstance.AddLogEntry('Добавление абитуриента');
 
 frmAbitConfirm:=tfrmAbitConfirm.Create(self);
 frmAbitConfirm.Tag:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).NNRecord;
-frmAbitConfirm.hint:=inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year);
+frmAbitConfirm.Year:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year;
 yearnode:=TDBNodeAbitYearObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Data);
 frmAbitConfirm.HasAddSpec:=yearnode.HasAddSpec;
 frmAbitConfirm.ShowModal;

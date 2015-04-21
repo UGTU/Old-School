@@ -169,6 +169,7 @@ inherited frmQueryMaster: TfrmQueryMaster
         Top = 26
         Width = 141
         Height = 19
+        DynProps = <>
         EditButtons = <>
         Flat = True
         TabOrder = 0
@@ -180,6 +181,7 @@ inherited frmQueryMaster: TfrmQueryMaster
         Top = 26
         Width = 104
         Height = 19
+        DynProps = <>
         EditButtons = <>
         Flat = True
         Items.Strings = (
@@ -203,6 +205,7 @@ inherited frmQueryMaster: TfrmQueryMaster
         Top = 26
         Width = 62
         Height = 19
+        DynProps = <>
         EditButtons = <>
         Flat = True
         TabOrder = 2
@@ -413,6 +416,10 @@ inherited frmQueryMaster: TfrmQueryMaster
       Visible = False
       object TabSheet1: TTabSheet
         Caption = #1055#1086#1083#1103
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgeFields: TDBGridEh
           Left = 0
           Top = 0
@@ -420,26 +427,24 @@ inherited frmQueryMaster: TfrmQueryMaster
           Height = 217
           Align = alClient
           DataSource = dsFields
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
           OnDblClick = ActAddEntityExecute
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object TabSheet2: TTabSheet
         Caption = #1058#1072#1073#1083#1080#1094#1099
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object dbgeEntities: TDBGridEh
           Left = 0
           Top = 0
@@ -447,21 +452,15 @@ inherited frmQueryMaster: TfrmQueryMaster
           Height = 217
           Align = alClient
           DataSource = dsEntities
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'MS Sans Serif'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
           OnDblClick = ActAddEntityExecute
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
     end
@@ -470,6 +469,7 @@ inherited frmQueryMaster: TfrmQueryMaster
       Top = 40
       Width = 185
       Height = 19
+      DataField = ''
       EditButtons = <>
       Flat = True
       KeyField = 'ik_table'
@@ -600,7 +600,7 @@ inherited frmQueryMaster: TfrmQueryMaster
     Left = 412
     Top = 36
     Bitmap = {
-      494C010103000400040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010103000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -736,7 +736,8 @@ inherited frmQueryMaster: TfrmQueryMaster
       FFFFF000000F0000FF9FF000000F0000FF8F8000000F0000C0070000000F0000
       C0030000000F0000C0030000000E0000C0070000000C0000C00F000000000000
       FF9F000000000000FFBF007F00000000FFFF007FE0000000FFFF007FF8000000
-      FFFF007FFC000000FFFF807FFFFF0000}
+      FFFF007FFC000000FFFF807FFFFF000000000000000000000000000000000000
+      000000000000}
   end
   object ppmFilters: TPopupMenu
     Left = 344

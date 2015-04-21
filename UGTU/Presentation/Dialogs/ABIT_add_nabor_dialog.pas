@@ -5,19 +5,14 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBCtrlsEh, StdCtrls, Mask, ActnList, Buttons,
-  ExtCtrls, Menus, DBCtrls, DB, DBGridEh, DBLookupEh;
+  ExtCtrls, Menus, DBCtrls, DB, DBGridEh, DBLookupEh, System.Actions;
 
 type
   TfrmNewNabor = class(TfrmBaseDialog)
-    Bevel2: TBevel;
     Label2: TLabel;
     Label1: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
     Label6: TLabel;
     Label9: TLabel;
-    Label13: TLabel;
-    Label16: TLabel;
     Label15: TLabel;
     Label10: TLabel;
     Label110: TLabel;
@@ -26,13 +21,11 @@ type
     Spec_Fac: TDBLookupComboboxEh;
     nnyear: TDBLookupComboboxEh;
     cbRussian: TCheckBox;
-    Bevel3: TBevel;
-    Bevel4: TBevel;
     Label5: TLabel;
-    begind: TDBNumberEditEh;
-    endd: TDBNumberEditEh;
     mestBudjet: TDBNumberEditEh;
     mestCKP: TDBNumberEditEh;
+    Label3: TLabel;
+    MestLgot: TDBNumberEditEh;
     function AddData():boolean;
     function EditData():boolean;
     procedure NullData();
@@ -113,11 +106,9 @@ end;
 
 procedure TfrmNewNabor.NullData();
 begin
-  begind.Text:='0';
-  endd.Text:='0';
   mestCKP.Text:='0';
   mestbudjet.Text:='0';
-  //mestkontrakt.Text:='0';
+  MestLgot.Text:='0';
   dbcmbxFac.KeyValue:= FikFac;
   ikSpecfac:= -1;
   frmNewNabor.cbRussian.Checked:= true;
@@ -165,12 +156,10 @@ begin
   nnrecord:=TAbitNaborController.Instance.AddNabor
 	 (
 	  Spec_Fac.KeyValue,
-	  StrToInt(begind.Text),
-	  StrToInt(endd.Text),
 	  nnyear.KeyValue,
+    StrToInt(mestbudjet.Text),
 	  StrToInt(mestCKP.Text),
-	  StrToInt(mestbudjet.Text),
-	  (0),
+	  StrToInt(MestLgot.Text),
     cbRussian.Checked
 	  );
   result:=(nnrecord>0);
@@ -182,12 +171,10 @@ begin
 	  TAbitNaborController.Instance.EditNabor
 	  (
 	  Spec_Fac.KeyValue,
-	  StrToInt(begind.Text),
-	  StrToInt(endd.Text),
 	  nnyear.KeyValue,
-	  StrToInt(mestCKP.Text),
 	  StrToInt(mestbudjet.Text),
-	  (0),
+	  StrToInt(mestCKP.Text),
+	  StrToInt(MestLgot.Text),
 	  NNrecord,
     cbRussian.Checked
 	  ) ;
@@ -219,13 +206,6 @@ end;
 
 function TfrmNewNabor.CheckData: boolean;
 begin
-  result:= false;
-  if (endd.Value<begind.Value) then
-  begin
-    MessageBox(Handle, 'Введены некорректные данные. Проверьте начало и конец диапазона выделенных номеров!','ИС "УГТУ"',
-          MB_OK) ;
-    exit;
-  end;
 
   result:= true;
 end;

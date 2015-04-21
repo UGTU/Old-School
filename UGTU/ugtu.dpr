@@ -414,7 +414,9 @@ uses
   SpravkaHistory2014 in 'Domain\Classes\SpravkaHistory2014.pas',
   Spravka2014 in 'Domain\Classes\Spravka2014.pas',
   SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas',
-  uChangePlanFromGrup in 'Presentation\Dialogs\uChangePlanFromGrup.pas' {frmChangeGrupPlan};
+  uChangePlanFromGrup in 'Presentation\Dialogs\uChangePlanFromGrup.pas' {frmChangeGrupPlan},
+  DocumentClass in 'Domain\Classes\DocumentClass.pas',
+  PersonController in 'Domain\Controllers\PersonController.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

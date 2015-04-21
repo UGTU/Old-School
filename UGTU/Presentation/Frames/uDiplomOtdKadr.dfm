@@ -6,21 +6,23 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
   inherited Panel1: TPanel
     Width = 871
     Height = 487
-    ExplicitWidth = 772
+    ExplicitWidth = 871
+    ExplicitHeight = 487
   end
   inherited pnlSave: TPanel
     Top = 487
     Width = 871
-    ExplicitWidth = 772
+    ExplicitTop = 487
+    ExplicitWidth = 871
     inherited bbSave: TBitBtn
       Left = 702
       Action = actSaveDipl
-      ExplicitLeft = 603
+      ExplicitLeft = 702
     end
     inherited bbUndo: TBitBtn
       Left = 534
       Action = actCancelDiplUpd
-      ExplicitLeft = 435
+      ExplicitLeft = 534
     end
   end
   object pcOtdKadr: TPageControl
@@ -34,12 +36,8 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     TabOrder = 2
     OnChange = pcOtdKadrChange
     OnChanging = pcOtdKadrChanging
-    ExplicitWidth = 772
-    ExplicitHeight = 474
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
-      ExplicitWidth = 764
-      ExplicitHeight = 443
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
@@ -141,7 +139,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
-        ExplicitWidth = 764
         object ToolButton2: TToolButton
           Left = 0
           Top = 0
@@ -173,7 +170,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         object dbcmbxFac: TDBLookupComboboxEh
           Left = 104
           Top = 0
-          Width = 265
+          Width = 185
           Height = 22
           Hint = #1092#1072#1082#1091#1083#1100#1090#1077#1090
           DataField = ''
@@ -188,9 +185,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxFacChange
         end
         object dbcmbxSpec: TDBLookupComboboxEh
-          Left = 369
+          Left = 289
           Top = 0
-          Width = 300
+          Width = 424
           Height = 22
           Hint = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
           DataField = ''
@@ -205,9 +202,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxSpecChange
         end
         object dbcmbxGroup: TDBLookupComboboxEh
-          Left = 669
+          Left = 713
           Top = 0
-          Width = 98
+          Width = 136
           Height = 22
           Hint = #1043#1088#1091#1087#1087#1072
           DataField = ''
@@ -224,8 +221,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
-      ExplicitWidth = 764
-      ExplicitHeight = 443
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
@@ -285,7 +280,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
-        ExplicitWidth = 764
         object DBNavigator1: TDBNavigator
           Left = 0
           Top = 0
@@ -343,8 +337,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
-      ExplicitWidth = 764
-      ExplicitHeight = 443
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
@@ -377,8 +369,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           item
             DynProps = <>
             EditButtons = <>
-            FieldName = 'Cshort_spec'
+            FieldName = 'cName_direction'
             Footers = <>
+            ReadOnly = True
             Title.Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1086#1073#1091#1095'.'
             Width = 100
             OnUpdateData = dbgQualifColumns1UpdateData

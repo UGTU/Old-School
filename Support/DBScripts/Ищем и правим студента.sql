@@ -1,5 +1,5 @@
 
-select * from Person where Clastname='Полий'
+select * from Person where Clastname='Абрамов'
 
 select * from ABIT_postup where nCode=68098
 
@@ -9,13 +9,13 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (69199)
+select * from Zach where ncode in (46878)
 select * from Zach where Ik_zach in (14369)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (29157)
+and ik_zach in (25901)
 
 select * from StudGrup where ik_pricZach=13
 
@@ -43,3 +43,13 @@ where st.cou_stud>1
 select * from StudGrup where Ik_zach=22877
 
 delete from StudGrup where Ik_studGrup=41728
+
+select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana,Raion.Ik_raion, Region.Ik_region,dbo.PersonAddress.ik_AddressType
+		   from dbo.PersonAddress,dbo.Address,dbo.Street,dbo.Gorod,dbo.Raion,dbo.Region,dbo.Strana
+		   where dbo.Address.ik_address = dbo.PersonAddress.ik_address
+		   and dbo.Address.Ik_street = dbo.Street.Ik_street
+		   and dbo.Street.ik_gorod = dbo.Gorod.Ik_gorod
+		   and dbo.Gorod.Ik_raion = dbo.Raion.Ik_raion
+		   and dbo.Raion.Ik_region = dbo.Region.Ik_region
+		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana
+		   and nCode = 38242

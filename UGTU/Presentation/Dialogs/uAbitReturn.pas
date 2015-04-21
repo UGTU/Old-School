@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uAbitMove, DBGridEh, ActnList, DBCtrlsEh, DBLookupEh, StdCtrls, Mask,
-  Buttons, ExtCtrls;
+  Buttons, ExtCtrls, System.Actions;
 
 type
   TfrmAbitReturn = class(TfrmAbitMove)

@@ -9,7 +9,7 @@ inherited frmNagruzkaAddPlan: TfrmNagruzkaAddPlan
   Constraints.MinWidth = 396
   OldCreateOrder = True
   ExplicitWidth = 515
-  ExplicitHeight = 149
+  ExplicitHeight = 146
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -291,6 +291,7 @@ inherited frmNagruzkaAddPlan: TfrmNagruzkaAddPlan
     Width = 117
     Height = 19
     AlwaysShowBorder = True
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 0
@@ -303,6 +304,7 @@ inherited frmNagruzkaAddPlan: TfrmNagruzkaAddPlan
     Width = 171
     Height = 19
     AlwaysShowBorder = True
+    DataField = ''
     EditButtons = <>
     Flat = True
     TabOrder = 1

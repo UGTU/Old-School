@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, DBCtrlsEh, Mask, ActnList, Buttons, ExtCtrls, uQMDatamodule,
-  DBGridEh, DBLookupEh, DB;
+  DBGridEh, DBLookupEh, DB, System.Actions;
 
 type
   TfrmQMAdminField = class(TfrmBaseDialog)

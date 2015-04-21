@@ -50,6 +50,21 @@ type
     adoqExamsErrors: TADOQuery;
     dsExamsErrors: TDataSource;
     adoqNaborDiscsDiscName: TStringField;
+    adoqSpecFacSortorder: TIntegerField;
+    adoqSpecFacIk_form_ed: TIntegerField;
+    dsDocRights: TDataSource;
+    adoDocRights: TADOQuery;
+    adoDocRightsik_vid_doc: TAutoIncField;
+    adoDocRightscvid_doc: TStringField;
+    adoDocRightsIsDefault: TBooleanField;
+    adoDocRightsIsIdentity: TBooleanField;
+    adoDocRightsIsEducational: TBooleanField;
+    adoDocRightsik_FB: TIntegerField;
+    adoDocRightsIsOsoboePravo: TBooleanField;
+    adoDocRightsIsPreimushestvo: TBooleanField;
+    adoDocRightsIsWithoutExam: TBooleanField;
+    adoDocRightsik_subFB: TIntegerField;
+    adoDocRightsik_type_grazd: TIntegerField;
   private
     { Private declarations }
   public

@@ -6,7 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, ComCtrls, StdCtrls, Buttons, ExtCtrls, Grids,
   DBGridEh, ActnList, ImgList, ToolWin, DB, ADODB, Mask, DBCtrlsEh,
-  DBLookupEh, GeneralController, NagruzkaController, NagruzkaClasses, GridsEh, Menus;
+  DBLookupEh, GeneralController, NagruzkaController, NagruzkaClasses, GridsEh, Menus,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+  DBAxisGridsEh;
 
 type
   TfmNagruzkaFac = class(TfmBase)

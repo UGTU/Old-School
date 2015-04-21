@@ -339,8 +339,8 @@ begin
 except
   on E:Exception do
        begin
-         raise EApplicationException.Create('Произошла ошибка при добавление группы.',E);
          dm.DBConnect.RollbackTrans;
+         raise EApplicationException.Create('Произошла ошибка при добавление группы.',E);
          exit;
        end;
   

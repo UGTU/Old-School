@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, Mask,
-  DBCtrlsEh;
+  DBCtrlsEh, System.Actions;
 
 type
   TfrmAbitZhurnal = class(TfrmBaseDialog)

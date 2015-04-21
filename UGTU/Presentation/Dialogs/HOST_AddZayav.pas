@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, DBGridEh, Mask,
-  DBCtrlsEh, DBLookupEh,DBTVInviteHostObj;
+  DBCtrlsEh, DBLookupEh,DBTVInviteHostObj, System.Actions;
 
 type
   TAddZayav = class(TfrmBaseDialog)

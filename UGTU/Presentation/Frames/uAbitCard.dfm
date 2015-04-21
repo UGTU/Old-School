@@ -1,10 +1,11 @@
 inherited fmAbitCard: TfmAbitCard
-  Width = 569
+  Width = 624
   HelpKeyword = 'A_Abit_frame.htm'
-  ExplicitWidth = 569
+  ParentFont = False
+  ExplicitWidth = 624
   inherited ToolBar1: TToolBar
-    Width = 569
-    ExplicitWidth = 569
+    Width = 624
+    ExplicitWidth = 624
     inherited ToolButton4: TToolButton
       Visible = False
     end
@@ -54,29 +55,27 @@ inherited fmAbitCard: TfmAbitCard
     end
   end
   inherited Panel1: TPanel
-    Width = 569
+    Width = 624
+    ParentFont = False
     ExplicitWidth = 569
     inherited ScrollBox1: TScrollBox
-      Width = 565
+      Width = 620
       ExplicitWidth = 565
       inherited PageControl1: TPageControl
-        Width = 565
+        Width = 620
         ExplicitWidth = 565
         inherited TabSheet1: TTabSheet
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited PageControl2: TPageControl
-            Width = 557
+            Width = 612
             ExplicitWidth = 557
             inherited TabSheet3: TTabSheet
               ExplicitWidth = 549
               inherited Panel4: TPanel
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited Panel8: TPanel
-                  Width = 547
+                  Width = 602
                   Height = 215
                   ExplicitWidth = 547
                   ExplicitHeight = 215
@@ -92,9 +91,10 @@ inherited fmAbitCard: TfmAbitCard
                     ExplicitLeft = 12
                   end
                   inherited Label17: TLabel
-                    Left = 299
+                    Left = 448
                     Top = 4
-                    ExplicitLeft = 299
+                    ParentFont = False
+                    ExplicitLeft = 448
                     ExplicitTop = 4
                   end
                   inherited Label47: TLabel
@@ -112,20 +112,21 @@ inherited fmAbitCard: TfmAbitCard
                   end
                   inherited dbcbeSchool: TDBLookupComboboxEh
                     Left = 14
-                    Width = 279
+                    Width = 410
+                    ParentFont = False
                     ExplicitLeft = 14
-                    ExplicitWidth = 279
+                    ExplicitWidth = 410
                   end
                   inherited dbcbeCat: TDBLookupComboboxEh
                     Visible = False
                   end
                   inherited eYearFinished: TDBNumberEditEh
-                    Left = 299
+                    Left = 448
                     Top = 19
-                    Width = 123
-                    ExplicitLeft = 299
+                    Width = 53
+                    ExplicitLeft = 448
                     ExplicitTop = 19
-                    ExplicitWidth = 123
+                    ExplicitWidth = 53
                   end
                   inherited DBNavigator1: TDBNavigator
                     Left = 12
@@ -138,7 +139,7 @@ inherited fmAbitCard: TfmAbitCard
                   end
                 end
                 inherited Panel7: TPanel
-                  Width = 547
+                  Width = 602
                   ExplicitWidth = 547
                   inherited Label4: TLabel
                     Left = 12
@@ -174,17 +175,17 @@ inherited fmAbitCard: TfmAbitCard
                     Left = 298
                     ExplicitLeft = 298
                   end
-                  object Label48: TLabel [17]
+                  object Label48: TLabel [15]
                     Left = 356
                     Top = 0
                     Width = 3
                     Height = 13
                   end
-                  inherited dbcbeSex: TDBComboBoxEh
-                    Left = 158
-                    Width = 134
-                    ExplicitLeft = 158
-                    ExplicitWidth = 134
+                  inherited Label50: TLabel
+                    Left = 205
+                    Top = 52
+                    ExplicitLeft = 205
+                    ExplicitTop = 52
                   end
                   inherited eFam: TDBEditEh
                     EditMask = ''
@@ -220,7 +221,7 @@ inherited fmAbitCard: TfmAbitCard
                 end
                 inherited Panel6: TPanel
                   Top = 388
-                  Width = 547
+                  Width = 602
                   Height = 166
                   ExplicitTop = 388
                   ExplicitWidth = 547
@@ -235,15 +236,15 @@ inherited fmAbitCard: TfmAbitCard
                     ExplicitWidth = 103
                   end
                   inherited sbAddAddress: TSpeedButton
-                    Left = 511
+                    Left = 566
                     ExplicitLeft = 511
                   end
                   inherited sbRemoveAddress: TSpeedButton
-                    Left = 511
+                    Left = 566
                     ExplicitLeft = 511
                   end
                   inherited SpeedButton2: TSpeedButton
-                    Left = 511
+                    Left = 566
                     ExplicitLeft = 511
                   end
                   inherited SpeedButton3: TSpeedButton
@@ -253,7 +254,7 @@ inherited fmAbitCard: TfmAbitCard
                     ExplicitTop = 7
                   end
                   inherited dbgeAddress: TDBGridEh
-                    Width = 491
+                    Width = 546
                     Height = 124
                     RowHeight = 0
                   end
@@ -261,146 +262,245 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet4: TTabSheet
-              ExplicitLeft = 4
-              ExplicitTop = 28
               ExplicitWidth = 549
-              ExplicitHeight = 555
               inherited Panel3: TPanel
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited Panel5: TPanel
-                  Width = 547
+                  Width = 602
+                  ParentFont = False
                   ExplicitWidth = 547
                   inherited Label27: TLabel
-                    Top = 47
-                    ExplicitTop = 47
+                    Top = 55
+                    ParentFont = False
+                    ExplicitTop = 55
+                  end
+                  inherited Label58: TLabel
+                    Top = 5
+                    ExplicitTop = 5
+                  end
+                  object Label3: TLabel [3]
+                    Left = 104
+                    Top = 51
+                    Width = 6
+                    Height = 13
+                    Caption = '*'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clRed
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = [fsBold]
+                    ParentFont = False
                   end
                   inherited dbcbeCitizenship: TDBLookupComboboxEh
                     Top = 24
-                    Width = 510
+                    Width = 512
+                    ParentFont = False
                     ExplicitTop = 24
-                    ExplicitWidth = 510
+                    ExplicitWidth = 512
                   end
                   inherited eBirthPlace: TDBEditEh
                     Width = 512
                     ExplicitWidth = 512
                   end
                 end
-                inherited Panel2: TPanel
-                  Width = 547
-                  ExplicitWidth = 547
+                inherited pnlDop: TPanel
+                  Width = 602
+                  Height = 283
+                  ExplicitWidth = 602
+                  ExplicitHeight = 283
                   inherited Label30: TLabel
-                    Top = 104
-                    ExplicitTop = 104
+                    Left = 205
+                    Top = 81
+                    ParentFont = False
+                    ExplicitLeft = 205
+                    ExplicitTop = 81
+                  end
+                  inherited Label31: TLabel
+                    Top = 36
+                    ParentFont = False
+                    ExplicitTop = 36
+                  end
+                  inherited Label32: TLabel
+                    Left = 17
+                    Top = 81
+                    ParentFont = False
+                    ExplicitLeft = 17
+                    ExplicitTop = 81
                   end
                   inherited Label34: TLabel
-                    Left = 195
-                    Top = 144
-                    ExplicitLeft = 195
-                    ExplicitTop = 144
+                    Left = 18
+                    Top = 125
+                    ParentFont = False
+                    ExplicitLeft = 18
+                    ExplicitTop = 125
+                  end
+                  inherited Label42: TLabel
+                    Top = 38
+                    ExplicitTop = 38
                   end
                   inherited Label43: TLabel
-                    Top = 104
-                    ExplicitTop = 104
+                    Top = 81
+                    ParentFont = False
+                    ExplicitTop = 81
                   end
-                  inherited Label57: TLabel
-                    Top = 203
-                    ExplicitTop = 203
-                  end
-                  inherited Label56: TLabel
-                    Left = 68
-                    Top = 203
-                    ExplicitLeft = 68
-                    ExplicitTop = 203
-                  end
-                  inherited Label55: TLabel
-                    Top = 183
-                    ExplicitTop = 183
-                  end
-                  inherited Label54: TLabel
-                    Top = 144
-                    ExplicitTop = 144
-                  end
-                  inherited Label59: TLabel
-                    Left = 239
-                    ExplicitLeft = 239
-                  end
-                  object Label61: TLabel [12]
+                  object Label61: TLabel [6]
                     Left = 17
-                    Top = 224
+                    Top = 212
                     Width = 38
                     Height = 13
                     Caption = #1051#1100#1075#1086#1090#1099
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
+                    ParentFont = False
                   end
                   inherited cbChildren: TCheckBox
-                    Top = 32
-                    ExplicitTop = 32
+                    Top = 6
+                    ParentFont = False
+                    ExplicitTop = 6
+                  end
+                  inherited cbJob: TCheckBox
+                    Top = 259
+                    ExplicitTop = 259
                   end
                   inherited cbInvalid: TCheckBox
-                    Top = 48
-                    ExplicitTop = 48
+                    Left = 317
+                    Top = 6
+                    ExplicitLeft = 317
+                    ExplicitTop = 6
                   end
                   inherited cbAppNeed: TCheckBox
-                    Top = 64
-                    ExplicitTop = 64
+                    Left = 17
+                    Top = 6
+                    ParentFont = False
+                    ExplicitLeft = 17
+                    ExplicitTop = 6
+                  end
+                  inherited dbcbePreparation: TDBLookupComboboxEh
+                    Top = 52
+                    ParentFont = False
+                    ExplicitTop = 52
                   end
                   inherited dbcbeSocWork: TDBLookupComboboxEh
-                    Top = 120
-                    ExplicitTop = 120
+                    Top = 96
+                    ParentFont = False
+                    ExplicitTop = 96
+                  end
+                  inherited dbcbeSpecCount: TDBLookupComboboxEh
+                    Left = 17
+                    Top = 95
+                    ParentFont = False
+                    ExplicitLeft = 17
+                    ExplicitTop = 95
+                  end
+                  inherited dbcbeMedal: TDBLookupComboboxEh
+                    Top = 52
+                    ExplicitTop = 52
                   end
                   inherited dbcbeMilitaryState: TDBLookupComboboxEh
-                    Top = 120
-                    Width = 333
-                    ExplicitTop = 120
-                    ExplicitWidth = 333
+                    Left = 18
+                    Top = 100
+                    Width = 398
+                    ParentFont = False
+                    ExplicitLeft = 18
+                    ExplicitTop = 100
+                    ExplicitWidth = 398
                   end
                   inherited eAddInfo: TMemo
-                    Top = 163
-                    Width = 333
+                    Top = 144
+                    Width = 564
                     Height = 59
-                    ExplicitTop = 163
-                    ExplicitWidth = 333
+                    ParentFont = False
+                    ExplicitTop = 144
+                    ExplicitWidth = 564
                     ExplicitHeight = 59
-                  end
-                  inherited eDuty: TDBEditEh
-                    Top = 161
-                    ExplicitTop = 161
-                  end
-                  inherited eXpyear: TDBNumberEditEh
-                    Top = 200
-                    ExplicitTop = 200
-                  end
-                  inherited eXpMonth: TDBNumberEditEh
-                    Top = 200
-                    ExplicitTop = 200
                   end
                   object eBenefits: TDBEditEh
                     Left = 17
-                    Top = 240
-                    Width = 512
+                    Top = 228
+                    Width = 564
                     Height = 19
                     Alignment = taLeftJustify
                     DynProps = <>
                     EditButtons = <>
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
                     Flat = True
-                    TabOrder = 14
+                    ParentFont = False
+                    TabOrder = 10
                     Visible = True
                     OnChange = eFamChange
+                  end
+                end
+                inherited pnlWork: TPanel
+                  Top = 385
+                  Width = 602
+                  Height = 169
+                  ExplicitTop = 429
+                  ExplicitWidth = 602
+                  ExplicitHeight = 121
+                  inherited Label51: TLabel
+                    ParentFont = False
+                  end
+                  inherited Label54: TLabel
+                    Top = 46
+                    ExplicitTop = 46
+                  end
+                  inherited Label55: TLabel
+                    Top = 74
+                    ExplicitTop = 74
+                  end
+                  inherited Label56: TLabel
+                    Top = 74
+                    ExplicitTop = 74
+                  end
+                  inherited Label57: TLabel
+                    Left = 221
+                    Top = 74
+                    ExplicitLeft = 221
+                    ExplicitTop = 74
+                  end
+                  inherited dbcbeEnterprise: TDBLookupComboboxEh
+                    Width = 487
+                    Height = 19
+                    ParentFont = False
+                    ExplicitWidth = 487
+                    ExplicitHeight = 19
+                  end
+                  inherited eDuty: TDBEditEh
+                    Top = 43
+                    Width = 168
+                    ParentFont = False
+                    ExplicitTop = 43
+                    ExplicitWidth = 168
+                  end
+                  inherited eXpyear: TDBNumberEditEh
+                    Top = 71
+                    ExplicitTop = 71
+                  end
+                  inherited eXpMonth: TDBNumberEditEh
+                    Left = 169
+                    Top = 71
+                    ExplicitLeft = 169
+                    ExplicitTop = 71
                   end
                 end
               end
             end
             inherited TabSheet5: TTabSheet
-              ExplicitLeft = 4
-              ExplicitTop = 28
               ExplicitWidth = 549
-              ExplicitHeight = 555
               inherited Splitter1: TSplitter
-                Width = 549
+                Width = 604
                 ExplicitWidth = 551
               end
               inherited Panel9: TPanel
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited dbcbeFamState: TDBLookupComboboxEh
                   Top = 2
@@ -408,85 +508,94 @@ inherited fmAbitCard: TfmAbitCard
                 end
               end
               inherited dbgeFam: TDBGridEh
-                Width = 549
+                Width = 604
                 OnColExit = dbgeFamColExit
               end
               inherited dbgeChangeFam: TDBGridEh
-                Width = 549
+                Width = 604
               end
             end
             inherited TabSheet6: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
               ExplicitWidth = 549
-              ExplicitHeight = 0
+              object SpeedButton5: TSpeedButton [0]
+                Left = 526
+                Top = 29
+                Width = 23
+                Height = 22
+                Action = actAddDocument
+                Flat = True
+              end
+              object SpeedButton6: TSpeedButton [1]
+                Left = 526
+                Top = 57
+                Width = 23
+                Height = 22
+                Action = actDelDocument
+                Flat = True
+              end
               inherited dbgeDocuments: TDBGridEh
-                Left = 1
-                Width = 546
-                Height = 523
+                Width = 553
                 OnColExit = dbgeFamExit
+              end
+              inherited pnlToolDoc: TPanel
+                Left = 553
+                ExplicitLeft = 498
               end
             end
             inherited TabSheet7: TTabSheet
               TabVisible = False
-              ExplicitLeft = 4
-              ExplicitTop = 28
               ExplicitWidth = 549
-              ExplicitHeight = 555
               inherited gbExiled: TGroupBox
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited DBGridEh5: TDBGridEh
-                  Width = 545
+                  Width = 600
                 end
               end
               inherited gbAcadem: TGroupBox
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited dbgeAcadem: TDBGridEh
-                  Width = 545
+                  Width = 600
                 end
               end
               inherited gbEntered: TGroupBox
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited DBGridEh3: TDBGridEh
-                  Width = 545
+                  Width = 600
                 end
               end
               inherited gbProlongued: TGroupBox
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited DBGridEh6: TDBGridEh
-                  Width = 545
+                  Width = 600
                 end
               end
               inherited gbCatChange: TGroupBox
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited DBGridEh2: TDBGridEh
-                  Width = 545
+                  Width = 600
                 end
               end
               inherited gbMoved: TGroupBox
-                Width = 549
+                Width = 604
                 ExplicitWidth = 549
                 inherited DBGridEh4: TDBGridEh
-                  Width = 545
+                  Width = 600
                 end
               end
             end
             object TabSheet8: TTabSheet
               Caption = #1055#1086#1089#1090#1091#1087#1083#1077#1085#1080#1077
               ImageIndex = 5
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
+              ExplicitWidth = 549
               object GroupBox2: TGroupBox
                 Left = 0
                 Top = 0
-                Width = 549
+                Width = 604
                 Height = 281
                 Align = alTop
                 Caption = #1069#1082#1079#1072#1084#1077#1085#1099
@@ -497,10 +606,11 @@ inherited fmAbitCard: TfmAbitCard
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 1
+                ExplicitWidth = 549
                 object dbgeExams: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 545
+                  Width = 600
                   Height = 264
                   Align = alClient
                   AutoFitColWidths = True
@@ -518,7 +628,7 @@ inherited fmAbitCard: TfmAbitCard
               object GroupBox5: TGroupBox
                 Left = 0
                 Top = 281
-                Width = 549
+                Width = 604
                 Height = 274
                 Align = alClient
                 Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1103' '#1085#1072' '#1076#1088#1091#1075#1080#1077' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1080
@@ -529,10 +639,11 @@ inherited fmAbitCard: TfmAbitCard
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
+                ExplicitWidth = 549
                 object dbgeAdditionalSpec: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 545
+                  Width = 600
                   Height = 257
                   Align = alClient
                   AutoFitColWidths = True
@@ -554,74 +665,62 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited TabSheet2: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited DBGridEh1: TDBGridEh
-            Width = 557
+            Width = 612
           end
           inherited Panel11: TPanel
-            Width = 557
+            Width = 612
             ExplicitWidth = 557
           end
         end
         inherited tsBRSBalls: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited Panel10: TPanel
-            Width = 557
+            Width = 612
             ExplicitWidth = 557
           end
           inherited dbgeBalls: TDBGridEh
-            Width = 557
+            Width = 612
           end
         end
         inherited TabSheet9: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited Panel12: TPanel
-            Width = 557
+            Width = 612
             ExplicitWidth = 557
           end
           inherited dbgrNapr: TDBGridEh
-            Width = 557
+            Width = 612
           end
         end
         inherited tsUspevStat: TTabSheet
           TabVisible = False
-          ExplicitLeft = 4
-          ExplicitTop = 24
           ExplicitWidth = 557
-          ExplicitHeight = 587
           inherited dbgUspevStat: TDBGridEh
-            Width = 557
+            Width = 612
           end
         end
       end
     end
   end
   inherited pnlSave: TPanel
-    Width = 569
+    Width = 624
     ExplicitWidth = 569
     inherited bbSave: TBitBtn
-      Left = 386
+      Left = 441
       ExplicitLeft = 386
     end
     inherited bbUndo: TBitBtn
-      Left = 218
+      Left = 273
       ExplicitLeft = 218
     end
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

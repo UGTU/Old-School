@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, ActnList, ImgList, ComCtrls, ToolWin, Buttons, ExtCtrls, SheduleClasses, SheduleGrids,
-  StdCtrls, Menus;
+  StdCtrls, Menus, System.Actions;
 
 type
   TExamSheduleState = (essDay, essSession);

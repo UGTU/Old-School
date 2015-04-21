@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, ComCtrls, Grids, Mask,
   DBCtrlsEh, ToolWin, ImgList, ActnList, DBGridEh, DBLookupEh, GridsEh, DB,
   Tabs, DockTabSet, SheduleController, SheduleClasses, SheduleGrids, uLessonShedule, ADODB,
-  uExaminationShedule;
+  uExaminationShedule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmSheduleDep = class(TfmBase)

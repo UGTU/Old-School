@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseFrame, StdCtrls, ComCtrls, Grids, DBGridEh, Buttons,
   ToolWin, DBCtrls, ExtCtrls, Mask, DBCtrlsEh, ImgList, DB, Menus,
   OleServer, WordXP, ExcelXP, DBLookupEh, ActnList, GridsEh, ADODB,
-  ApplicationController, ExceptionBase;
+  ApplicationController, ExceptionBase, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmAbitRasp = class(TfmBase)
