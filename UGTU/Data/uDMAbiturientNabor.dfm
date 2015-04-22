@@ -1,4 +1,4 @@
-object DMAbiturientNabor: TDMAbiturientNabor
+﻿object DMAbiturientNabor: TDMAbiturientNabor
   OldCreateOrder = False
   Height = 255
   Width = 755
@@ -376,6 +376,63 @@ object DMAbiturientNabor: TDMAbiturientNabor
     object adoDocRightsik_type_grazd: TIntegerField
       FieldName = 'ik_type_grazd'
       Visible = False
+    end
+  end
+  object dsIndBall: TDataSource
+    DataSet = adoIndBall
+    Left = 577
+    Top = 203
+  end
+  object adoIndBall: TADOQuery
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from SelectIndBalls'
+      ''
+      '')
+    Left = 576
+    Top = 157
+    object adoIndBallfio: TStringField
+      DisplayWidth = 30
+      FieldName = 'fio'
+      Size = 500
+    end
+    object adoIndBallcvid_doc: TStringField
+      DisplayWidth = 60
+      FieldName = 'cvid_doc'
+      Size = 500
+    end
+    object adoIndBallik_fac: TIntegerField
+      FieldName = 'ik_fac'
+      Visible = False
+    end
+    object adoIndBallCshort_name_fac: TStringField
+      DisplayWidth = 20
+      FieldName = 'Cshort_name_fac'
+      Size = 500
+    end
+    object adoIndBallik_spec_fac: TIntegerField
+      FieldName = 'ik_spec_fac'
+      Visible = False
+    end
+    object adoIndBallCshort_spec: TStringField
+      FieldName = 'Cshort_spec'
+    end
+    object adoIndBallcd_seria: TStringField
+      FieldName = 'cd_seria'
+      Size = 10
+    end
+    object adoIndBallnp_number: TStringField
+      FieldName = 'np_number'
+      Size = 15
+    end
+    object adoIndBallballs: TIntegerField
+      FieldName = 'balls'
+    end
+    object adoIndBallсname_disc: TStringField
+      FieldName = #1089'name_disc'
+      Size = 50
     end
   end
 end

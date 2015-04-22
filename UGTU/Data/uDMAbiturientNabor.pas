@@ -65,6 +65,18 @@ type
     adoDocRightsIsWithoutExam: TBooleanField;
     adoDocRightsik_subFB: TIntegerField;
     adoDocRightsik_type_grazd: TIntegerField;
+    dsIndBall: TDataSource;
+    adoIndBall: TADOQuery;
+    adoIndBallfio: TStringField;
+    adoIndBallcvid_doc: TStringField;
+    adoIndBallik_fac: TIntegerField;
+    adoIndBallCshort_name_fac: TStringField;
+    adoIndBallik_spec_fac: TIntegerField;
+    adoIndBallCshort_spec: TStringField;
+    adoIndBallcd_seria: TStringField;
+    adoIndBallnp_number: TStringField;
+    adoIndBallballs: TIntegerField;
+    adoIndBallñname_disc: TStringField;
   private
     { Private declarations }
   public

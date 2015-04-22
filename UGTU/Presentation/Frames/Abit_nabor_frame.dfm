@@ -2,6 +2,7 @@ inherited fmAbitNabor: TfmAbitNabor
   Width = 755
   Height = 468
   HelpKeyword = 'A_Nabor_frame.htm'
+  ParentFont = False
   ExplicitWidth = 755
   ExplicitHeight = 468
   inherited Panel1: TPanel
@@ -14,8 +15,14 @@ inherited fmAbitNabor: TfmAbitNabor
       Top = 2
       Width = 751
       Height = 427
-      ActivePage = tsExamsErrors
+      ActivePage = IndBalls
       Align = alClient
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PageControl1Change
@@ -23,10 +30,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object fac_spec: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074'-'#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 729
-        ExplicitHeight = 0
         object dbgrdMain: TDBGridEh
           Left = 0
           Top = 0
@@ -50,10 +53,6 @@ inherited fmAbitNabor: TfmAbitNabor
       end
       object naborpage: TTabSheet
         Caption = #1054#1073#1097#1080#1077' '#1089#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1085#1072#1073#1086#1088#1077
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object nnyear: TDBText
           Left = 288
           Top = 72
@@ -497,7 +496,7 @@ inherited fmAbitNabor: TfmAbitNabor
               EditButtons = <>
               FieldName = 'Cshort_name_fac'
               Footers = <>
-              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
+              Title.Caption = #1060#1072#1082#1091#1083#1100#1090#1077#1090
               Width = 60
             end
             item
@@ -703,9 +702,15 @@ inherited fmAbitNabor: TfmAbitNabor
           DataSource = DMAbiturientNabor.dsExamsErrors
           DynProps = <>
           Flat = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
           FooterParams.Color = clWindow
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
           ReadOnly = True
           RowHeight = 2
           RowLines = 1
@@ -725,7 +730,7 @@ inherited fmAbitNabor: TfmAbitNabor
               EditButtons = <>
               FieldName = 'Cname_fac'
               Footers = <>
-              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
+              Title.Caption = #1060#1072#1082#1091#1083#1100#1090#1077#1090
               Width = 74
             end
             item
@@ -764,6 +769,116 @@ inherited fmAbitNabor: TfmAbitNabor
           end
         end
       end
+      object IndBalls: TTabSheet
+        Caption = #1048#1085#1076'. '#1076#1086#1089#1090#1080#1078#1077#1085#1080#1103
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 6
+        ParentFont = False
+        object dbgIndBalls: TDBGridEh
+          Left = 0
+          Top = 0
+          Width = 743
+          Height = 396
+          Align = alClient
+          DataSource = DMAbiturientNabor.dsIndBall
+          DynProps = <>
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          ParentFont = False
+          TabOrder = 0
+          Columns = <
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ik_fac'
+              Footers = <>
+              Visible = False
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cshort_name_fac'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ik_spec_fac'
+              Footers = <>
+              Visible = False
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cshort_spec'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'fio'
+              Footers = <>
+              Title.Caption = #1060#1048#1054
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'cvid_doc'
+              Footers = <>
+              Title.Caption = #1044#1086#1082#1091#1084#1077#1085#1090
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'cd_seria'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1057#1077#1088#1080#1103
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'np_number'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1053#1086#1084#1077#1088
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'balls'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1041#1072#1083#1083#1099
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = #1089'name_disc'
+              Footers = <>
+              Title.Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
+            end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
+      end
     end
   end
   inherited pnlSave: TPanel
@@ -793,7 +908,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C0101030004008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -944,7 +1059,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C0101020004008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1183,7 +1298,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D0030008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
