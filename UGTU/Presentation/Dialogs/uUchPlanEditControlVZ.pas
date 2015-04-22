@@ -166,6 +166,7 @@ begin
     dbgContent.DataSource.DataSet.Insert;
     dbgContent.DataSource.DataSet.FieldByName('n_sem').Value := max + 1;
     dbgContent.DataSource.DataSet.FieldByName('ik_kaf').Value := fDefaultKafIK;
+    dbgContent.DataSource.DataSet.FieldByName('tasks_count').Value := 1;
     dbgContent.DataSource.DataSet.Post;
     dbgContent.SetFocus;
     IsModified := true;
