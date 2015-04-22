@@ -2,6 +2,7 @@ inherited fmAbitNabor: TfmAbitNabor
   Width = 755
   Height = 468
   HelpKeyword = 'A_Nabor_frame.htm'
+  ParentFont = False
   ExplicitWidth = 755
   ExplicitHeight = 468
   inherited Panel1: TPanel
@@ -14,8 +15,14 @@ inherited fmAbitNabor: TfmAbitNabor
       Top = 2
       Width = 751
       Height = 427
-      ActivePage = tsNaborDisc
+      ActivePage = IndBalls
       Align = alClient
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Style = tsFlatButtons
       TabOrder = 0
       OnChange = PageControl1Change
@@ -23,10 +30,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object fac_spec: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074'-'#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 729
-        ExplicitHeight = 0
         object dbgrdMain: TDBGridEh
           Left = 0
           Top = 0
@@ -409,7 +412,6 @@ inherited fmAbitNabor: TfmAbitNabor
           ShowHint = True
           TabOrder = 1
           Visible = False
-          ExplicitWidth = 729
           ColWidths = (
             64
             71
@@ -568,10 +570,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsNaborStatistik: TTabSheet
         Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 729
-        ExplicitHeight = 0
         object dbgNaborStatistik: TDBGridEh
           Left = 0
           Top = 29
@@ -683,7 +681,6 @@ inherited fmAbitNabor: TfmAbitNabor
           Caption = 'ToolBar3'
           Images = ImageList3
           TabOrder = 1
-          ExplicitWidth = 729
           object ToolButton9: TToolButton
             Left = 0
             Top = 0
@@ -694,10 +691,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsExamsErrors: TTabSheet
         Caption = #1054#1096#1080#1073#1082#1080' '#1074' '#1101#1082#1079#1072#1084#1077#1085#1072#1093
         ImageIndex = 5
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 729
-        ExplicitHeight = 0
         object dbgExamsErrors: TDBGridEh
           Left = 0
           Top = 0
@@ -709,9 +702,15 @@ inherited fmAbitNabor: TfmAbitNabor
           DataSource = DMAbiturientNabor.dsExamsErrors
           DynProps = <>
           Flat = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
           FooterParams.Color = clWindow
           IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
           ReadOnly = True
           RowHeight = 2
           RowLines = 1
@@ -770,6 +769,35 @@ inherited fmAbitNabor: TfmAbitNabor
           end
         end
       end
+      object IndBalls: TTabSheet
+        Caption = #1048#1085#1076'. '#1076#1086#1089#1090#1080#1078#1077#1085#1080#1103
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ImageIndex = 6
+        ParentFont = False
+        object DBGridEh1: TDBGridEh
+          Left = 0
+          Top = 0
+          Width = 743
+          Height = 396
+          Align = alClient
+          DataSource = DMAbiturientNabor.dsIndBall
+          DynProps = <>
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          ParentFont = False
+          TabOrder = 0
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
+      end
     end
   end
   inherited pnlSave: TPanel
@@ -799,7 +827,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030004008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -950,7 +978,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020004008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1189,7 +1217,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D0030008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

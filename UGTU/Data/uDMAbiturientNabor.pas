@@ -65,6 +65,19 @@ type
     adoDocRightsIsWithoutExam: TBooleanField;
     adoDocRightsik_subFB: TIntegerField;
     adoDocRightsik_type_grazd: TIntegerField;
+    dsIndBall: TDataSource;
+    adoIndBall: TADOQuery;
+    AutoIncField1: TAutoIncField;
+    StringField1: TStringField;
+    BooleanField1: TBooleanField;
+    BooleanField2: TBooleanField;
+    BooleanField3: TBooleanField;
+    IntegerField1: TIntegerField;
+    BooleanField4: TBooleanField;
+    BooleanField5: TBooleanField;
+    BooleanField6: TBooleanField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
   private
     { Private declarations }
   public

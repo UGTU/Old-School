@@ -717,15 +717,81 @@ ALTER TABLE [dbo].[Doc_kat_zach]  WITH CHECK ADD  CONSTRAINT [FK_Doc_kat_zach_Ka
 REFERENCES [dbo].[Kat_zach] ([Ik_kat_zach])
 GO
 ALTER TABLE [dbo].[Doc_kat_zach] CHECK CONSTRAINT [FK_Doc_kat_zach_Kat_zach]
-GO*/
+GO
 
 --[ABIT_Get_Kat_zach] 2009
 ALTER PROCEDURE [dbo].[ABIT_Get_Kat_zach] 
-@NNyear INT			--год набора
+  @NNRecord INT			--год набора
 AS
-Select *
-from Kat_zach
---фильтруем, чтобы не отображать устаревшие данные
-where (Year(OutDate)>@NNyear) or (OutDate IS NULL)
-order by Cname_kat_zach
+	declare @NNYear			int
+	declare @MestBudjet		int
+	declare @MestCKP		int
+	declare @MestLgot		int
+
+	declare @Result			table
+	(
+	  [Ik_kat_zach]			int,
+	  [Cname_kat_zach]		varchar(50),
+	  [ik_type_kat]			int
+	)
+
+	select @NNYear = NNyear, @MestBudjet = MestBudjet, @MestCKP = MestCKP, @MestLgot = MestLgot
+	from ABIT_Diapazon_spec_fac where NNrecord = @NNRecord
+
+	insert into @Result(Ik_kat_zach,Cname_kat_zach,ik_type_kat)
+	Select Ik_kat_zach,Cname_kat_zach,ik_type_kat from Kat_zach
+	--фильтруем, чтобы не отображать устаревшие данные
+	where (Year(OutDate)>@NNyear) or (OutDate IS NULL)
+
+	if @MestBudjet = 0 delete from @Result where ik_type_kat = 1
+	if @MestCKP = 0 delete from @Result where Ik_kat_zach = 8		--целевой прием
+	if @MestLgot = 0 delete from @Result where Ik_kat_zach = 32		--особое право
+
+	select * from @Result
+	order by Cname_kat_zach
+GO*/
+
+create function [dbo].[SelectIndBalls]
+(@year int)
+RETURNS @Result TABLE
+  (
+    fio				varchar(500),
+	cvid_doc		varchar(500),
+	ik_fac			int, 
+	Cshort_name_fac	varchar(500),
+	NNRecord		int, 
+	Cshort_spec		varchar(20),
+	cd_seria		varchar(10),
+	np_number		varchar(15),
+	balls			int,
+	сname_disc		varchar(50)
+ )
+AS
+Begin 
+  insert into @Result(ik_fac, Cshort_name_fac, NNRecord, Cshort_spec, fio, cvid_doc, cd_seria, np_number, balls, сname_disc)
+  SELECT 
+	Fac.Ik_fac,
+	Fac.Cshort_name_fac,
+	ABIT_Diapazon_spec_fac.NNrecord,
+	EducationBranch.Cshort_spec,
+	[Clastname] + ' ' + [Cfirstname] + ' ' + ISNULL([Cotch],''),
+	documents.cvid_doc, 
+	Doc_stud.Cd_seria, 
+	Doc_stud.Np_number,
+	Abit_Bonuses.balls,
+	ABIT_Disc.сname_disc
+
+  FROM ABIT_Diapazon_spec_fac inner join Relation_spec_fac on ABIT_Diapazon_spec_fac.ik_spec_fac = Relation_spec_fac.ik_spec_fac
+	inner join Fac on fac.Ik_fac = Relation_spec_fac.ik_fac
+	inner join EducationBranch on Relation_spec_fac.ik_spec = EducationBranch.ik_spec
+	inner join ABIT_postup on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
+	inner join Person on Person.nCode = ABIT_postup.nCode
+	inner join Doc_stud on Doc_stud.nCode = ABIT_postup.nCode
+	inner join documents on Doc_stud.Ik_vid_doc = documents.ik_vid_doc
+    inner join Abit_Bonuses on Abit_Bonuses.ik_doc = Doc_stud.Ik_doc
+  left join ABIT_Disc on ABIT_Disc.ik_disc = Abit_Bonuses.ik_disc
+  WHERE ABIT_Diapazon_spec_fac.NNyear=@year
+
+RETURN
+END
 GO

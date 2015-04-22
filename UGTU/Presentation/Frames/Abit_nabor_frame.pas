@@ -79,6 +79,8 @@ type
     dbgExamsErrors: TDBGridEh;
     ToolButton12: TToolButton;
     ToolButton14: TToolButton;
+    IndBalls: TTabSheet;
+    DBGridEh1: TDBGridEh;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -145,6 +147,8 @@ type
      procedure LoadNaborStatistik;
      //загружает список лишних экзаменов
      procedure LoadEcxessExamsList();
+     //загружает все индивидуальные достижения с баллами
+     procedure LoadIndBalls();
 
      procedure RefreshDataSet(dataSet:TADODataSet);
 
@@ -383,6 +387,24 @@ begin
     dbgExamsErrors.Columns[1].Visible := false;
   end;
 
+end;
+
+procedure TfmAbitNabor.LoadIndBalls;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка индивидуальных достижений.');
+  LoadDataFromFunction(DMAbiturientNabor.adoIndBall);
+
+  //настройка отображаемых столбцов
+  if FrameObject is TDBNodeFacRecObject then
+  begin
+    dbgExamsErrors.Columns[1].Visible := false;
+  end;
+
+  if FrameObject is TDBNodeSpecRecObject then
+  begin
+    dbgExamsErrors.Columns[2].Visible := false;
+    dbgExamsErrors.Columns[1].Visible := false;
+  end;
 end;
 
 //загружает список наборов
@@ -656,6 +678,14 @@ begin
       raise EApplicationException.Create('Произошла ошибка при загрузке списка лишних экзаменов',E);
     end;
   end;
+
+  //загружаем индивидуальные достижения
+  if (PageControl1.ActivePage = IndBalls) and
+        (not DMAbiturientNabor.adoIndBall.Active) then
+  begin
+    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Лишние экзамены');
+  end;
+  LoadIndBalls;
 
 end;
 

@@ -378,4 +378,71 @@ object DMAbiturientNabor: TDMAbiturientNabor
       Visible = False
     end
   end
+  object dsIndBall: TDataSource
+    DataSet = adoIndBall
+    Left = 577
+    Top = 203
+  end
+  object adoIndBall: TADOQuery
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from SelectIndBalls')
+    Left = 576
+    Top = 157
+    object AutoIncField1: TAutoIncField
+      FieldName = 'ik_vid_doc'
+      ReadOnly = True
+      Visible = False
+    end
+    object StringField1: TStringField
+      DisplayLabel = #1042#1080#1076' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+      DisplayWidth = 80
+      FieldName = 'cvid_doc'
+      Size = 500
+    end
+    object BooleanField1: TBooleanField
+      FieldName = 'IsDefault'
+      Visible = False
+    end
+    object BooleanField2: TBooleanField
+      FieldName = 'IsIdentity'
+      Visible = False
+    end
+    object BooleanField3: TBooleanField
+      FieldName = 'IsEducational'
+      Visible = False
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'ik_FB'
+      Visible = False
+    end
+    object BooleanField4: TBooleanField
+      Alignment = taCenter
+      DisplayLabel = #1054#1089#1086#1073#1086#1077' '#1087#1088#1072#1074#1086
+      DisplayWidth = 25
+      FieldName = 'IsOsoboePravo'
+    end
+    object BooleanField5: TBooleanField
+      Alignment = taCenter
+      DisplayLabel = #1055#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074#1077#1085#1085#1086#1077' '#1087#1088#1072#1074#1086
+      DisplayWidth = 25
+      FieldName = 'IsPreimushestvo'
+    end
+    object BooleanField6: TBooleanField
+      Alignment = taCenter
+      DisplayLabel = #1041#1077#1079' '#1101#1082#1079#1072#1084#1077#1085#1086#1074
+      DisplayWidth = 25
+      FieldName = 'IsWithoutExam'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'ik_subFB'
+      Visible = False
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'ik_type_grazd'
+      Visible = False
+    end
+  end
 end
