@@ -778,7 +778,7 @@ inherited fmAbitNabor: TfmAbitNabor
         Font.Style = []
         ImageIndex = 6
         ParentFont = False
-        object DBGridEh1: TDBGridEh
+        object dbgIndBalls: TDBGridEh
           Left = 0
           Top = 0
           Width = 743
@@ -794,6 +794,87 @@ inherited fmAbitNabor: TfmAbitNabor
           IndicatorOptions = [gioShowRowIndicatorEh]
           ParentFont = False
           TabOrder = 0
+          Columns = <
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ik_fac'
+              Footers = <>
+              Visible = False
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cshort_name_fac'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ik_spec_fac'
+              Footers = <>
+              Visible = False
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cshort_spec'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'fio'
+              Footers = <>
+              Title.Caption = #1060#1048#1054
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'cvid_doc'
+              Footers = <>
+              Title.Caption = #1044#1086#1082#1091#1084#1077#1085#1090
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'cd_seria'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1057#1077#1088#1080#1103
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'np_number'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1053#1086#1084#1077#1088
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'balls'
+              Footers = <>
+              Title.Alignment = taCenter
+              Title.Caption = #1041#1072#1083#1083#1099
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = #1089'name_disc'
+              Footers = <>
+              Title.Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
+            end>
           object RowDetailData: TRowDetailPanelControlEh
           end
         end
@@ -827,7 +908,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C0101030004008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -978,7 +1059,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C0101020004008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1217,7 +1298,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D0030008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

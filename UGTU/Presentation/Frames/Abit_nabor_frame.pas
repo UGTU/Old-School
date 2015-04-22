@@ -80,7 +80,7 @@ type
     ToolButton12: TToolButton;
     ToolButton14: TToolButton;
     IndBalls: TTabSheet;
-    DBGridEh1: TDBGridEh;
+    dbgIndBalls: TDBGridEh;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -397,13 +397,13 @@ begin
   //настройка отображаемых столбцов
   if FrameObject is TDBNodeFacRecObject then
   begin
-    dbgExamsErrors.Columns[1].Visible := false;
+    dbgIndBalls.Columns[1].Visible := false;
   end;
 
   if FrameObject is TDBNodeSpecRecObject then
   begin
-    dbgExamsErrors.Columns[2].Visible := false;
-    dbgExamsErrors.Columns[1].Visible := false;
+    dbgIndBalls.Columns[3].Visible := false;
+    dbgIndBalls.Columns[1].Visible := false;
   end;
 end;
 
@@ -680,12 +680,18 @@ begin
   end;
 
   //загружаем индивидуальные достижения
-  if (PageControl1.ActivePage = IndBalls) and
-        (not DMAbiturientNabor.adoIndBall.Active) then
+  if (PageControl1.ActivePage = IndBalls) {and
+        (not DMAbiturientNabor.adoIndBall.Active)} then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Лишние экзамены');
+    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Индивидуальные достижения');
+    try
+      LoadIndBalls;
+    except
+      on E:Exception do
+      raise EApplicationException.Create('Произошла ошибка при загрузке индивидуальных достижений',E);
+    end;
   end;
-  LoadIndBalls;
+
 
 end;
 

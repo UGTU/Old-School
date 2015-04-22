@@ -1,4 +1,4 @@
-object DMAbiturientNabor: TDMAbiturientNabor
+﻿object DMAbiturientNabor: TDMAbiturientNabor
   OldCreateOrder = False
   Height = 255
   Width = 755
@@ -388,61 +388,51 @@ object DMAbiturientNabor: TDMAbiturientNabor
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'select * from SelectIndBalls')
+      'select * from SelectIndBalls'
+      ''
+      '')
     Left = 576
     Top = 157
-    object AutoIncField1: TAutoIncField
-      FieldName = 'ik_vid_doc'
-      ReadOnly = True
-      Visible = False
+    object adoIndBallfio: TStringField
+      DisplayWidth = 30
+      FieldName = 'fio'
+      Size = 500
     end
-    object StringField1: TStringField
-      DisplayLabel = #1042#1080#1076' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      DisplayWidth = 80
+    object adoIndBallcvid_doc: TStringField
+      DisplayWidth = 60
       FieldName = 'cvid_doc'
       Size = 500
     end
-    object BooleanField1: TBooleanField
-      FieldName = 'IsDefault'
+    object adoIndBallik_fac: TIntegerField
+      FieldName = 'ik_fac'
       Visible = False
     end
-    object BooleanField2: TBooleanField
-      FieldName = 'IsIdentity'
+    object adoIndBallCshort_name_fac: TStringField
+      DisplayWidth = 20
+      FieldName = 'Cshort_name_fac'
+      Size = 500
+    end
+    object adoIndBallik_spec_fac: TIntegerField
+      FieldName = 'ik_spec_fac'
       Visible = False
     end
-    object BooleanField3: TBooleanField
-      FieldName = 'IsEducational'
-      Visible = False
+    object adoIndBallCshort_spec: TStringField
+      FieldName = 'Cshort_spec'
     end
-    object IntegerField1: TIntegerField
-      FieldName = 'ik_FB'
-      Visible = False
+    object adoIndBallcd_seria: TStringField
+      FieldName = 'cd_seria'
+      Size = 10
     end
-    object BooleanField4: TBooleanField
-      Alignment = taCenter
-      DisplayLabel = #1054#1089#1086#1073#1086#1077' '#1087#1088#1072#1074#1086
-      DisplayWidth = 25
-      FieldName = 'IsOsoboePravo'
+    object adoIndBallnp_number: TStringField
+      FieldName = 'np_number'
+      Size = 15
     end
-    object BooleanField5: TBooleanField
-      Alignment = taCenter
-      DisplayLabel = #1055#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074#1077#1085#1085#1086#1077' '#1087#1088#1072#1074#1086
-      DisplayWidth = 25
-      FieldName = 'IsPreimushestvo'
+    object adoIndBallballs: TIntegerField
+      FieldName = 'balls'
     end
-    object BooleanField6: TBooleanField
-      Alignment = taCenter
-      DisplayLabel = #1041#1077#1079' '#1101#1082#1079#1072#1084#1077#1085#1086#1074
-      DisplayWidth = 25
-      FieldName = 'IsWithoutExam'
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'ik_subFB'
-      Visible = False
-    end
-    object IntegerField3: TIntegerField
-      FieldName = 'ik_type_grazd'
-      Visible = False
+    object adoIndBallсname_disc: TStringField
+      FieldName = #1089'name_disc'
+      Size = 50
     end
   end
 end

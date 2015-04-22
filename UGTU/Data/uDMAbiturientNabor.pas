@@ -67,17 +67,16 @@ type
     adoDocRightsik_type_grazd: TIntegerField;
     dsIndBall: TDataSource;
     adoIndBall: TADOQuery;
-    AutoIncField1: TAutoIncField;
-    StringField1: TStringField;
-    BooleanField1: TBooleanField;
-    BooleanField2: TBooleanField;
-    BooleanField3: TBooleanField;
-    IntegerField1: TIntegerField;
-    BooleanField4: TBooleanField;
-    BooleanField5: TBooleanField;
-    BooleanField6: TBooleanField;
-    IntegerField2: TIntegerField;
-    IntegerField3: TIntegerField;
+    adoIndBallfio: TStringField;
+    adoIndBallcvid_doc: TStringField;
+    adoIndBallik_fac: TIntegerField;
+    adoIndBallCshort_name_fac: TStringField;
+    adoIndBallik_spec_fac: TIntegerField;
+    adoIndBallCshort_spec: TStringField;
+    adoIndBallcd_seria: TStringField;
+    adoIndBallnp_number: TStringField;
+    adoIndBallballs: TIntegerField;
+    adoIndBallñname_disc: TStringField;
   private
     { Private declarations }
   public
