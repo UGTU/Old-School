@@ -935,3 +935,52 @@ set QUOTED_IDENTIFIER ON
 GO
 */
 
+/*
+create function [dbo].[SelectNetworkAbit]
+(@year int)
+RETURNS @Result TABLE
+  (
+   
+	ik_fac			int, 
+	Cshort_name_fac	varchar(500),
+	ik_spec_fac		int, 
+	Cshort_spec		varchar(20),
+	fio				varchar(500),
+	Cname_kat_zach	varchar(50),
+	cSotTel			varchar(500),
+	ctelefon		varchar(20),
+	balls			int
+ )
+AS
+Begin 
+  insert into @Result(ik_fac, Cshort_name_fac, ik_spec_fac, Cshort_spec, fio, Cname_kat_zach, cSotTel, ctelefon, balls)
+  SELECT 
+	Fac.Ik_fac,
+	Fac.Cshort_name_fac,
+	Relation_spec_fac.ik_spec_fac,
+	EducationBranch.Cshort_spec,
+	[Clastname] + ' ' + [Cfirstname] + ' ' + ISNULL([Cotch],''),
+	Cname_kat_zach,
+	cSotTel, 
+	ctelefon,
+	SummBall
+  FROM ABIT_Diapazon_spec_fac inner join Relation_spec_fac on ABIT_Diapazon_spec_fac.ik_spec_fac = Relation_spec_fac.ik_spec_fac
+	inner join Fac on fac.Ik_fac = Relation_spec_fac.ik_fac
+	inner join EducationBranch on Relation_spec_fac.ik_spec = EducationBranch.ik_spec
+	inner join ABIT_postup on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
+	inner join Kat_zach on Kat_zach.Ik_kat_zach = ABIT_postup.ik_kat_zach
+	inner join Person on Person.nCode = ABIT_postup.nCode
+	left JOIN
+	(select nn_abit, sum(cosenka) as SummBall, min(cosenka) as MinBall, AVG(cosenka) as SredBall 
+	  from dbo.ABIT_Vstup_exam where nn_abit IN (SELECT nn_abit FROM ABIT_postup WHERE NNrecord IN
+			(SELECT NNrecord FROM ABIT_Diapazon_spec_fac WHERE nnyear=@year))
+	  GROUP BY nn_abit
+	) BallS on BallS.NN_abit = ABIT_postup.NN_abit
+  WHERE ABIT_Diapazon_spec_fac.NNyear=@year
+    and ABIT_postup.ik_zach = 9
+  order by [Clastname] + ' ' + [Cfirstname] + ' ' + ISNULL([Cotch],'')
+RETURN
+END
+GO
+
+select * from SelectNetworkAbit(2015) */

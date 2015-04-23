@@ -81,6 +81,8 @@ type
     ToolButton14: TToolButton;
     IndBalls: TTabSheet;
     dbgIndBalls: TDBGridEh;
+    Network: TTabSheet;
+    dbgNetwork: TDBGridEh;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -149,6 +151,8 @@ type
      procedure LoadEcxessExamsList();
      //загружает все индивидуальные достижения с баллами
      procedure LoadIndBalls();
+     //загружает абитуриентов, подавших заявление по сети
+     procedure LoadNetworkAbit;
 
      procedure RefreshDataSet(dataSet:TADODataSet);
 
@@ -486,6 +490,24 @@ begin
 end;
 
 
+procedure TfmAbitNabor.LoadNetworkAbit;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка интернет-абитуриентов.');
+  LoadDataFromFunction(DMAbiturientNabor.adoNetworkAbit);
+
+  //настройка отображаемых столбцов
+  if FrameObject is TDBNodeFacRecObject then
+  begin
+    dbgNetwork.Columns[1].Visible := false;
+  end;
+
+  if FrameObject is TDBNodeSpecRecObject then
+  begin
+    dbgNetwork.Columns[3].Visible := false;
+    dbgNetwork.Columns[1].Visible := false;
+  end;
+end;
+
 procedure TfmAbitNabor.Load();
 begin
   try
@@ -692,6 +714,18 @@ begin
     end;
   end;
 
+  //загружаем Интернет-абитуриентов
+  if (PageControl1.ActivePage = Network) {and
+        (not DMAbiturientNabor.adoIndBall.Active)} then
+  begin
+    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Интернет-абитуриенты');
+    try
+      LoadNetworkAbit;
+    except
+      on E:Exception do
+      raise EApplicationException.Create('Произошла ошибка при загрузке абитуриентов, подавших заявление по сети',E);
+    end;
+  end;
 
 end;
 

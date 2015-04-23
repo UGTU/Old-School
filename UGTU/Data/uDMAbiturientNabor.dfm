@@ -310,7 +310,7 @@
   end
   object dsDocRights: TDataSource
     DataSet = adoDocRights
-    Left = 665
+    Left = 697
     Top = 203
   end
   object adoDocRights: TADOQuery
@@ -322,7 +322,7 @@
       'on documents.ik_vid_doc =  Doc_kat_zach.ik_vid_doc'
       'Where (IsIdentity = 0) and (IsEducational = 0)'
       '')
-    Left = 664
+    Left = 696
     Top = 157
     object adoDocRightsik_vid_doc: TAutoIncField
       FieldName = 'ik_vid_doc'
@@ -380,7 +380,7 @@
   end
   object dsIndBall: TDataSource
     DataSet = adoIndBall
-    Left = 577
+    Left = 609
     Top = 203
   end
   object adoIndBall: TADOQuery
@@ -391,7 +391,7 @@
       'select * from SelectIndBalls'
       ''
       '')
-    Left = 576
+    Left = 608
     Top = 157
     object adoIndBallfio: TStringField
       DisplayWidth = 30
@@ -434,5 +434,56 @@
       FieldName = #1089'name_disc'
       Size = 50
     end
+  end
+  object adoNetworkAbit: TADOQuery
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from SelectNetworkAbit'
+      ''
+      ''
+      '')
+    Left = 544
+    Top = 157
+    object adoNetworkAbitik_fac: TIntegerField
+      FieldName = 'ik_fac'
+    end
+    object adoNetworkAbitCshort_name_fac: TStringField
+      DisplayWidth = 30
+      FieldName = 'Cshort_name_fac'
+      Size = 500
+    end
+    object adoNetworkAbitik_spec_fac: TIntegerField
+      FieldName = 'ik_spec_fac'
+    end
+    object adoNetworkAbitCshort_spec: TStringField
+      FieldName = 'Cshort_spec'
+    end
+    object adoNetworkAbitfio: TStringField
+      DisplayWidth = 30
+      FieldName = 'fio'
+      Size = 500
+    end
+    object adoNetworkAbitCname_kat_zach: TStringField
+      FieldName = 'Cname_kat_zach'
+      Size = 50
+    end
+    object adoNetworkAbitcSotTel: TStringField
+      DisplayWidth = 50
+      FieldName = 'cSotTel'
+      Size = 500
+    end
+    object adoNetworkAbitctelefon: TStringField
+      FieldName = 'ctelefon'
+    end
+    object adoNetworkAbitballs: TIntegerField
+      FieldName = 'balls'
+    end
+  end
+  object dsNetworkAbit: TDataSource
+    DataSet = adoNetworkAbit
+    Left = 545
+    Top = 203
   end
 end
