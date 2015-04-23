@@ -15,7 +15,7 @@ inherited fmAbitNabor: TfmAbitNabor
       Top = 2
       Width = 751
       Height = 427
-      ActivePage = IndBalls
+      ActivePage = Network
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -52,7 +52,7 @@ inherited fmAbitNabor: TfmAbitNabor
         end
       end
       object naborpage: TTabSheet
-        Caption = #1054#1073#1097#1080#1077' '#1089#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1085#1072#1073#1086#1088#1077
+        Caption = #1053#1072#1073#1086#1088#1099
         object nnyear: TDBText
           Left = 288
           Top = 72
@@ -218,7 +218,7 @@ inherited fmAbitNabor: TfmAbitNabor
         end
       end
       object tsNaborDisc: TTabSheet
-        Caption = #1057#1087#1080#1089#1086#1082' '#1074#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1093' '#1101#1082#1079#1072#1084#1077#1085#1086#1074
+        Caption = #1042#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1077' '#1101#1082#1079#1072#1084#1077#1085#1099
         ImageIndex = 4
         object ToolBar5: TToolBar
           Left = 0
@@ -326,7 +326,7 @@ inherited fmAbitNabor: TfmAbitNabor
         end
       end
       object statpage: TTabSheet
-        Caption = #1054#1073#1097#1080#1081' '#1089#1087#1080#1089#1086#1082' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
+        Caption = #1057#1087#1080#1089#1086#1082' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
         ImageIndex = 1
         object counter: TLabel
           Left = 0
@@ -496,7 +496,7 @@ inherited fmAbitNabor: TfmAbitNabor
               EditButtons = <>
               FieldName = 'Cshort_name_fac'
               Footers = <>
-              Title.Caption = #1060#1072#1082#1091#1083#1100#1090#1077#1090
+              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
               Width = 60
             end
             item
@@ -730,7 +730,7 @@ inherited fmAbitNabor: TfmAbitNabor
               EditButtons = <>
               FieldName = 'Cname_fac'
               Footers = <>
-              Title.Caption = #1060#1072#1082#1091#1083#1100#1090#1077#1090
+              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
               Width = 74
             end
             item
@@ -791,8 +791,10 @@ inherited fmAbitNabor: TfmAbitNabor
           Font.Height = -11
           Font.Name = 'Tahoma'
           Font.Style = []
+          ImeMode = imDisable
           IndicatorOptions = [gioShowRowIndicatorEh]
           ParentFont = False
+          ReadOnly = True
           TabOrder = 0
           Columns = <
             item
@@ -879,6 +881,95 @@ inherited fmAbitNabor: TfmAbitNabor
           end
         end
       end
+      object Network: TTabSheet
+        Caption = #1048#1085#1090#1077#1088#1085#1077#1090'-'#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1099
+        ImageIndex = 7
+        object dbgNetwork: TDBGridEh
+          Left = 0
+          Top = 0
+          Width = 743
+          Height = 396
+          Align = alClient
+          DataSource = DMAbiturientNabor.dsNetworkAbit
+          DynProps = <>
+          IndicatorOptions = [gioShowRowIndicatorEh]
+          ReadOnly = True
+          TabOrder = 0
+          Columns = <
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ik_fac'
+              Footers = <>
+              Visible = False
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cshort_name_fac'
+              Footers = <>
+              Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
+              Width = 100
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ik_spec_fac'
+              Footers = <>
+              Visible = False
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cshort_spec'
+              Footers = <>
+              Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
+              Width = 150
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'fio'
+              Footers = <>
+              Title.Caption = #1060#1048#1054
+              Width = 300
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Cname_kat_zach'
+              Footers = <>
+              Title.Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
+              Width = 200
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'cSotTel'
+              Footers = <>
+              Title.Caption = #1057#1086#1090'. '#1090#1077#1083#1077#1092#1086#1085
+              Width = 300
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ctelefon'
+              Footers = <>
+              Title.Caption = #1058#1077#1083#1077#1092#1086#1085
+              Width = 200
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'balls'
+              Footers = <>
+              Title.Caption = #1041#1072#1083#1083#1099
+              Width = 100
+            end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
+      end
     end
   end
   inherited pnlSave: TPanel
@@ -908,7 +999,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -1059,7 +1150,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1298,7 +1389,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000900010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

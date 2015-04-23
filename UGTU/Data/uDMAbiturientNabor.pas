@@ -77,6 +77,17 @@ type
     adoIndBallnp_number: TStringField;
     adoIndBallballs: TIntegerField;
     adoIndBallñname_disc: TStringField;
+    adoNetworkAbit: TADOQuery;
+    dsNetworkAbit: TDataSource;
+    adoNetworkAbitik_fac: TIntegerField;
+    adoNetworkAbitCshort_name_fac: TStringField;
+    adoNetworkAbitik_spec_fac: TIntegerField;
+    adoNetworkAbitCshort_spec: TStringField;
+    adoNetworkAbitfio: TStringField;
+    adoNetworkAbitCname_kat_zach: TStringField;
+    adoNetworkAbitcSotTel: TStringField;
+    adoNetworkAbitctelefon: TStringField;
+    adoNetworkAbitballs: TIntegerField;
   private
     { Private declarations }
   public
