@@ -26,6 +26,9 @@ type
     mestCKP: TDBNumberEditEh;
     Label3: TLabel;
     MestLgot: TDBNumberEditEh;
+    Label4: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
     function AddData():boolean;
     function EditData():boolean;
     procedure NullData();
@@ -106,9 +109,9 @@ end;
 
 procedure TfrmNewNabor.NullData();
 begin
-  mestCKP.Text:='0';
+  {mestCKP.Text:='0';
   mestbudjet.Text:='0';
-  MestLgot.Text:='0';
+  MestLgot.Text:='0';   }
   dbcmbxFac.KeyValue:= FikFac;
   ikSpecfac:= -1;
   frmNewNabor.cbRussian.Checked:= true;
@@ -138,7 +141,8 @@ end;
 
 procedure TfrmNewNabor.actApplyUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= (nnrecord<=0)
+  (Sender as TAction).Enabled:= (nnrecord<=0)and(mestBudjet.Text <> '')
+    and (mestCKP.Text <> '') and (MestLgot.Text <> '')
           and (IsModified);
 
 end;

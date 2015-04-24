@@ -52,7 +52,7 @@ begin
   end
   else
   begin
-    first_str := 16;
+    first_str := 18;
     Replace('#f_ob#', FReport.f_obuch);
     Replace('#spec#', FReport.spec);
     //Replace('#NAME_GOS#', AnsiUpperCase(FReport.disc));

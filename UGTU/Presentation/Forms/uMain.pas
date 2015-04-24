@@ -2289,9 +2289,9 @@ begin
  frmpostupDlg.IDStudent:=TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).ik;
  frmpostupDlg.IDpostup:=TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).NNAbit;
  frmpostupDlg.onlyreading:=TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).OnlyReading;
- frmpostupDlg.Hint:=inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.Data).Year);
+ frmpostupDlg.Year := TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.Data).Year;
  frmpostupDlg.HasAddSpec:=TDBNodeAbitYearObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Parent.Data).HasAddSpec;
- frmpostupDlg.Tag:=0;
+ frmpostupDlg.Tag := 0;
  frmPostupDlg.IkRecruit:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.Data).NNRecord;
 
  frmpostupDlg.ShowModal;

@@ -1,5 +1,6 @@
 unit uAbitMove;
-  {#Author sergdev@ist.ugtu.net}
+
+{ #Author sergdev@ist.ugtu.net }
 interface
 
 uses
@@ -32,11 +33,12 @@ type
     dbdteListNew: TDBDateTimeEditEh;
     procedure FormShow(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
-     private
+    procedure dbcbeRecruitNewChange(Sender: TObject);
+  private
     { Private declarations }
   public
-  IDStudent:integer;
-  NNAbit:integer;
+    IDStudent: integer;
+    NNAbit: integer;
     { Public declarations }
   end;
 
@@ -49,84 +51,93 @@ implementation
 uses uDM, uDMStudentData, uDMAbiturientAction;
 {$R *.dfm}
 
-function CheckFields:boolean;
+function CheckFields: boolean;
 begin
-result:=true;
-with frmAbitMove do
-begin
-if (RegNumber<1)
-or(dbcbeRecruit.Text='')
-or(dbcbeCategory.Text='')
- or(dbdteList.Text='  .  .    ') then result:=false;
+  result := true;
+  with frmAbitMove do
+  begin
+    if (RegNumber < 1) or (dbcbeRecruit.Text = '') or (dbcbeCategory.Text = '')
+      or (dbdteList.Text = '  .  .    ') then
+      result := false;
+  end;
 end;
+
+procedure TfrmAbitMove.dbcbeRecruitNewChange(Sender: TObject);
+begin
+  inherited;
+  dmStudentData.aspGetAbitCat.Active := false;
+  dmStudentData.aspGetAbitCat.Parameters[1].Value := dbcbeRecruitNew.KeyValue;
+  dmStudentData.aspGetAbitCat.Active := true;
 end;
 
 procedure TfrmAbitMove.FormShow(Sender: TObject);
 begin
-{with dmStudentData do begin
-  adodsKatZach.Active:=false;
-  adodsKatZach.Active:=true;
-end;}
+  { with dmStudentData do begin
+    adodsKatZach.Active:=false;
+    adodsKatZach.Active:=true;
+    end; }
 
-dmStudentData.aspGetAbitCat.Active:=false;
-dmStudentData.aspGetAbitCat.Parameters[1].Value:=strtoint(Hint);
-dmStudentData.aspGetAbitCat.Active:=true;
+  dmStudentData.aspGetAbitCat.Active := false;
 
-  dm.adodsNabor.Active:=false;
-  dm.adodsNabor.CommandType:=cmdText;
-  dm.adodsNabor.CommandText:='select * from Tree_abit_Specialties where NNYear='''+Hint+''' order by Cshort_name_fac, Cname_spec';
-  dm.adodsNabor.Active:=true;
+  dm.adodsNabor.Active := false;
+  dm.adodsNabor.CommandType := cmdText;
+  dm.adodsNabor.CommandText :=
+    'select * from Tree_abit_Specialties where NNYear=''' + Hint +
+    ''' order by Cshort_name_fac, Cname_spec';
+  dm.adodsNabor.Active := true;
 
-dm.adodsPostupView.Active:=false;
-dm.adodsPostupView.CommandType:=cmdText;
-dm.adodsPostupView.CommandText:='select * from Abit_Postup_View where NN_Abit='''+inttostr(NNAbit)+'''';
-dm.adodsPostupView.Active:=true;
+  dm.adodsPostupView.Active := false;
+  dm.adodsPostupView.CommandType := cmdText;
+  dm.adodsPostupView.CommandText :=
+    'select * from Abit_Postup_View where NN_Abit=''' + inttostr(NNAbit) + '''';
+  dm.adodsPostupView.Active := true;
 
-if (dm.adodsPostupView.RecordCount>0) then begin
-dm.adodsPostupView.First;
+  if (dm.adodsPostupView.RecordCount > 0) then
+  begin
+    dm.adodsPostupView.First;
 
-if dm.adodsPostupView.fieldvalues['RegNomer']<>Null then
-begin
-RegNumber:=dm.adodsPostupView.FieldValues['RegNomer'];
-Text:= 'Перевод заявления абитуриента №'+IntToStr(RegNumber)+' на другую специальность';
-end;
-if dm.adodsPostupView.FieldValues['NNRecord']<>Null then
-dbcbeRecruit.keyvalue:=dm.adodsPostupView.FieldValues['NNRecord'];
-if dm.adodsPostupView.FieldValues['ik_kat_zach']<>Null then
-dbcbeCategory.keyvalue:=dm.adodsPostupView.FieldValues['ik_kat_zach'];
-if dm.adodsPostupView.FieldValues['dd_pod_zayav']<>Null then
-dbdteList.value:=dm.adodsPostupView.FieldValues['dd_pod_zayav'];
+    if dm.adodsPostupView.fieldvalues['RegNomer'] <> Null then
+    begin
+      RegNumber := dm.adodsPostupView.fieldvalues['RegNomer'];
+      Text := 'Перевод заявления абитуриента №' + inttostr(RegNumber) +
+        ' на другую специальность';
+    end;
+    if dm.adodsPostupView.fieldvalues['NNRecord'] <> Null then
+      dbcbeRecruit.KeyValue := dm.adodsPostupView.fieldvalues['NNRecord'];
+    if dm.adodsPostupView.fieldvalues['ik_kat_zach'] <> Null then
+      dbcbeCategory.KeyValue := dm.adodsPostupView.fieldvalues['ik_kat_zach'];
+    if dm.adodsPostupView.fieldvalues['dd_pod_zayav'] <> Null then
+      dbdteList.Value := dm.adodsPostupView.fieldvalues['dd_pod_zayav'];
 
-//заполняем поля нового заявления
+    // заполняем поля нового заявления
 
-if dm.adodsPostupView.FieldValues['ik_kat_zach']<>Null then
-dbcbeCategoryNew.keyvalue:=dm.adodsPostupView.FieldValues['ik_kat_zach'];
-dbdteListNew.value:=Date;
-end;
+    if dm.adodsPostupView.fieldvalues['ik_kat_zach'] <> Null then
+      dbcbeCategoryNew.KeyValue := dm.adodsPostupView.fieldvalues
+        ['ik_kat_zach'];
+    dbdteListNew.Value := Date;
+  end;
 end;
 
 procedure TfrmAbitMove.actOKExecute(Sender: TObject);
 begin
-dmAbiturientAction.aspAbitMove.Active:=false;
+  dmAbiturientAction.aspAbitMove.Active := false;
 
-      with dmAbiturientAction.aspAbitMove.Parameters do
-      begin
-        items[1].Value:=NNAbit;
-        items[2].Value:=dbcbeRecruitNew.KeyValue;
-        items[3].Value:=RegNumber;
-        items[4].Value:=dbcbeCategoryNew.KeyValue;
-        items[5].Value:=dbdteListNew.Value;
+  with dmAbiturientAction.aspAbitMove.Parameters do
+  begin
+    items[1].Value := NNAbit;
+    items[2].Value := dbcbeRecruitNew.KeyValue;
+    items[3].Value := RegNumber;
+    items[4].Value := dbcbeCategoryNew.KeyValue;
+    items[5].Value := dbdteListNew.Value;
 
-      end;
-try
-      dmAbiturientAction.aspAbitMove.ExecProc;
-      close;
-except
-      on E:Exception do
-      raise EApplicationException.Create('Введены неверные данные',E);
+  end;
+  try
+    dmAbiturientAction.aspAbitMove.ExecProc;
+    close;
+  except
+    on E: Exception do
+      raise EApplicationException.Create('Введены неверные данные', E);
+  end;
 end;
-end;
-
-
 
 end.

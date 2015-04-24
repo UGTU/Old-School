@@ -79,6 +79,10 @@ type
     dbgExamsErrors: TDBGridEh;
     ToolButton12: TToolButton;
     ToolButton14: TToolButton;
+    IndBalls: TTabSheet;
+    dbgIndBalls: TDBGridEh;
+    Network: TTabSheet;
+    dbgNetwork: TDBGridEh;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -145,6 +149,10 @@ type
      procedure LoadNaborStatistik;
      //загружает список лишних экзаменов
      procedure LoadEcxessExamsList();
+     //загружает все индивидуальные достижения с баллами
+     procedure LoadIndBalls();
+     //загружает абитуриентов, подавших заявление по сети
+     procedure LoadNetworkAbit;
 
      procedure RefreshDataSet(dataSet:TADODataSet);
 
@@ -207,10 +215,13 @@ end;
 procedure TfmAbitNabor.LoadMainList;
 begin
   dsMain.DataSet := nil;
-  fac_spec.TabVisible:= true;
+  fac_spec.TabVisible:= false;
+
   if FrameObject is TDBNodeRecruitObject then //ВЫБРАН весь набор
   begin
-    PageControl1.Pages[0].Caption := 'Факультеты';
+    PageControl1.ActivePage := naborpage;
+    fac_spec.Caption := 'Факультеты';
+    //PageControl1.Pages[0].Caption := 'Факультеты';
     dsMain.DataSet := (FrameObject as TDBNodeRecruitObject).DataSet;
     dbgrdMain.Columns[0].Visible := false;
     dbgrdMain.Columns[1].Title.Caption := 'Название';
@@ -224,17 +235,19 @@ begin
   //ВЫБРАН факультет
   if FrameObject is TDBNodeFacRecObject then
   begin
-    PageControl1.Pages[0].Caption := 'Специальности';
+    PageControl1.ActivePage := naborpage;
+    fac_spec.Caption := 'Специальности';
+    //PageControl1.Pages[0].Caption := 'Специальности';
     dsMain.DataSet := (FrameObject as TDBNodeFacRecObject).AdoDataset;
     dbgrdMain.Columns[0].Visible := false;
     dbgrdMain.Columns[1].Visible := false;
     dbgrdMain.Columns[2].Visible := false;
     dbgrdMain.Columns[3].Visible := false;
     dbgrdMain.Columns[4].Title.Caption := 'Номер';
-    dbgrdMain.Columns[4].Width := 30;
+  //  dbgrdMain.Columns[4].Width := 30;
     dbgrdMain.Columns[5].Title.Caption := 'Название';
     dbgrdMain.Columns[6].Title.Caption := 'Короткое название';
-    dbgrdMain.Columns[6].Width := 57;
+   // dbgrdMain.Columns[6].Width := 57;
     dbgrdMain.Columns[6].Alignment := taCenter;
     dbgrdMain.Columns[7].Visible := false;
     dbgrdMain.Columns[8].Visible := false;
@@ -253,6 +266,7 @@ begin
   //специальность
   if FrameObject is TDBNodeSpecRecObject then
   begin
+    PageControl1.ActivePage := tsNaborDisc;
     {PageControl1.Pages[0].Caption := 'Абитуриенты';
     dsMain.DataSet := (FrameObject as TDBNodeSpecRecObject).AdoDataset;
 
@@ -291,9 +305,11 @@ begin
     //скрываем вкладку общих данных набора
     naborpage.TabVisible:=false;
     fac_spec.TabVisible:=false;
-    PageControl1.ActivePage := statpage;
-    PageControl1Change(nil);
+    //PageControl1.ActivePage := statpage;
+
+
   end;
+  PageControl1Change(nil);
 end;
 
 //выполнение функции с фильтром на уровне сервера применяется,
@@ -377,6 +393,24 @@ begin
 
 end;
 
+procedure TfmAbitNabor.LoadIndBalls;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка индивидуальных достижений.');
+  LoadDataFromFunction(DMAbiturientNabor.adoIndBall);
+
+  //настройка отображаемых столбцов
+  if FrameObject is TDBNodeFacRecObject then
+  begin
+    dbgIndBalls.Columns[1].Visible := false;
+  end;
+
+  if FrameObject is TDBNodeSpecRecObject then
+  begin
+    dbgIndBalls.Columns[3].Visible := false;
+    dbgIndBalls.Columns[1].Visible := false;
+  end;
+end;
+
 //загружает список наборов
 procedure TfmAbitNabor.LoadNaborList();
 begin
@@ -455,6 +489,24 @@ begin
   TAbitNaborController.Instance.GetNaborStatistik(objectType, objectID, year);
 end;
 
+
+procedure TfmAbitNabor.LoadNetworkAbit;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка интернет-абитуриентов.');
+  LoadDataFromFunction(DMAbiturientNabor.adoNetworkAbit);
+
+  //настройка отображаемых столбцов
+  if FrameObject is TDBNodeFacRecObject then
+  begin
+    dbgNetwork.Columns[1].Visible := false;
+  end;
+
+  if FrameObject is TDBNodeSpecRecObject then
+  begin
+    dbgNetwork.Columns[3].Visible := false;
+    dbgNetwork.Columns[1].Visible := false;
+  end;
+end;
 
 procedure TfmAbitNabor.Load();
 begin
@@ -648,6 +700,33 @@ begin
       raise EApplicationException.Create('Произошла ошибка при загрузке списка лишних экзаменов',E);
     end;
   end;
+
+  //загружаем индивидуальные достижения
+  if (PageControl1.ActivePage = IndBalls) {and
+        (not DMAbiturientNabor.adoIndBall.Active)} then
+  begin
+    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Индивидуальные достижения');
+    try
+      LoadIndBalls;
+    except
+      on E:Exception do
+      raise EApplicationException.Create('Произошла ошибка при загрузке индивидуальных достижений',E);
+    end;
+  end;
+
+  //загружаем Интернет-абитуриентов
+  if (PageControl1.ActivePage = Network) {and
+        (not DMAbiturientNabor.adoIndBall.Active)} then
+  begin
+    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Интернет-абитуриенты');
+    try
+      LoadNetworkAbit;
+    except
+      on E:Exception do
+      raise EApplicationException.Create('Произошла ошибка при загрузке абитуриентов, подавших заявление по сети',E);
+    end;
+  end;
+
 end;
 
 procedure TfmAbitNabor.PageControl1Changing(Sender: TObject;
