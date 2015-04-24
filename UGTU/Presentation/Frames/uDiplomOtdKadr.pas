@@ -409,7 +409,7 @@ begin
 
     if ik_spec<>dbcmbxSpec.Value then
     begin
-      TDiplOtdKardController.Instance.FilterGroupList(@dbcmbxGroup,dbcmbxSpec.Value);
+      TDiplOtdKardController.Instance.FilterGroupList(@dbcmbxGroup,dbcmbxSpec.Value,dbcmbxFac.Value);
       dbcmbxGroup.Value:= dbcmbxGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
       ik_spec:= dbcmbxSpec.Value;
     end;

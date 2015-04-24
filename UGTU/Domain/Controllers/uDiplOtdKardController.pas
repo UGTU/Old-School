@@ -39,7 +39,7 @@ type
   //FilterSpecList фильтрует список специальностей
   function FilterSpecList(cmp: PDBLookupComboboxEh; ik_fac:Variant): boolean;
   //FilterGroupList фильтрует список групп по специальности
-  function FilterGroupList(cmp: PDBLookupComboboxEh; ik_spec:Variant): boolean;
+  function FilterGroupList(cmp: PDBLookupComboboxEh; ik_spec, ik_fac:Variant): boolean;
 
   //GetDiplomList загружает список студентов группы
   function GetDiplomList(SourceDataSet: PDataSet; ik_grup:Variant): boolean;
@@ -141,8 +141,8 @@ end;
 function TDiplOtdKardController.GetSpecList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
-  TGeneralController.Instance.InitializeLockupCB(cmp, 'ik_spec_fac', 'Cname_spec');
-  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'EXEC [dbo].[OKADRGetSpecialities] ', 'ik_spec_fac', false, NULL);
+  TGeneralController.Instance.InitializeLockupCB(cmp, 'ik_spec', 'Cname_spec');
+  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'EXEC [dbo].[OKADRGetSpecialities] ', 'ik_spec', false, NULL);
   Result:= true;
 end;
 
@@ -351,7 +351,7 @@ begin
      FindRange := E.Cells.Replace(What := '#spec#',Replacement:='по направлению');    }
 end;
 
-function TDiplOtdKardController.FilterGroupList(cmp: PDBLookupComboboxEh; ik_spec:Variant): boolean;
+function TDiplOtdKardController.FilterGroupList(cmp: PDBLookupComboboxEh; ik_spec, ik_fac:Variant): boolean;
 begin
   Result:= false;
   if ik_spec<1 then
@@ -362,7 +362,7 @@ begin
   with cmp.ListSource.DataSet do
   begin
     Filtered:= false;
-    Filter:= 'ik_spec_fac='+IntToStr(ik_spec);
+    Filter:= '(ik_spec='+IntToStr(ik_spec)+') and (ik_fac='+IntToStr(ik_fac)+')';
     Filtered:= true;
   end;
   Result:= true;
