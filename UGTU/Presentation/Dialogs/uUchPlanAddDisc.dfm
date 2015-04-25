@@ -4,17 +4,17 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   HelpKeyword = 'Add_discip_in_plan.htm'
   Caption = 'frmUchPlanAddDisc'
   ClientHeight = 663
-  ClientWidth = 637
+  ClientWidth = 656
   Constraints.MinHeight = 160
   Constraints.MinWidth = 327
   OldCreateOrder = True
-  ExplicitWidth = 643
+  ExplicitWidth = 662
   ExplicitHeight = 692
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
     Top = 620
-    Width = 637
+    Width = 656
     Height = 7
     Align = alBottom
     Shape = bsBottomLine
@@ -177,7 +177,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   end
   inherited Panel1: TPanel
     Top = 627
-    Width = 637
+    Width = 656
     Height = 36
     BevelOuter = bvNone
     TabOrder = 6
@@ -185,20 +185,20 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     ExplicitWidth = 637
     ExplicitHeight = 36
     inherited bbOK: TBitBtn
-      Left = 380
+      Left = 399
       Top = 6
       ExplicitLeft = 380
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
-      Left = 546
+      Left = 565
       Top = 6
       TabOrder = 2
       ExplicitLeft = 546
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
-      Left = 463
+      Left = 482
       Top = 6
       TabOrder = 1
       ExplicitLeft = 463
@@ -216,20 +216,22 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object Panel2: TPanel [16]
     Left = 5
     Top = 180
-    Width = 624
+    Width = 643
     Height = 420
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Caption = 'Panel2'
     TabOrder = 5
+    ExplicitWidth = 624
     object Splitter1: TSplitter
-      Left = 370
+      Left = 389
       Top = 0
       Height = 420
+      ExplicitLeft = 370
       ExplicitHeight = 419
     end
     object pnlDiscProp: TPanel
-      Left = 373
+      Left = 392
       Top = 0
       Width = 251
       Height = 420
@@ -238,6 +240,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
       BevelOuter = bvNone
       Caption = 'pnlDiscProp'
       TabOrder = 1
+      ExplicitLeft = 373
       object ScrollBox1: TScrollBox
         Left = 0
         Top = 0
@@ -382,7 +385,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
           object Label19: TLabel
             Left = 55
             Top = 44
-            Width = 134
+            Width = 141
             Height = 13
             Alignment = taRightJustify
             Caption = #1048#1085#1076#1080#1074#1080#1076#1091#1072#1083#1100#1085#1099#1077' '#1079#1072#1085#1103#1090#1080#1103':'
@@ -487,11 +490,11 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
           object Label7: TLabel
             Left = 5
             Top = 20
-            Width = 184
+            Width = 191
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
-            Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1085#1077#1076#1077#1083#1100':'
+            Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1085#1077#1076#1077#1083#1100' ('#1085#1072#1087#1088#1080#1084#1077#1088', 4 1/3):'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -12
@@ -520,8 +523,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             WordWrap = True
           end
           object edtHoursGos: TDBEditEh
-            Left = 194
-            Top = 17
+            Left = 202
+            Top = 15
             Width = 41
             Height = 19
             AlwaysShowBorder = True
@@ -542,7 +545,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             OnKeyPress = edtHoursGosKeyPress
           end
           object Edit7: TDBEditEh
-            Left = 194
+            Left = 202
             Top = 40
             Width = 41
             Height = 19
@@ -600,17 +603,18 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     object Panel4: TPanel
       Left = 0
       Top = 0
-      Width = 370
+      Width = 389
       Height = 420
       Align = alLeft
       Anchors = [akLeft, akTop, akRight, akBottom]
       BevelOuter = bvNone
       Caption = 'Panel4'
       TabOrder = 0
+      ExplicitWidth = 370
       object sgDisc: TStringGrid
         Left = 0
         Top = 0
-        Width = 370
+        Width = 389
         Height = 420
         Align = alClient
         ColCount = 3
@@ -631,6 +635,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         OnKeyDown = sgDiscKeyDown
         OnMouseMove = sgDiscMouseMove
         OnSelectCell = sgDiscSelectCell
+        ExplicitWidth = 370
         ColWidths = (
           113
           87
@@ -656,7 +661,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object dbcbCklDisc: TDBLookupComboboxEh [18]
     Left = 145
     Top = 5
-    Width = 484
+    Width = 503
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -666,11 +671,12 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 0
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 484
   end
   object dbcbGrpDisc: TDBLookupComboboxEh [19]
     Left = 145
     Top = 30
-    Width = 484
+    Width = 503
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -680,11 +686,12 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 1
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 484
   end
   object dbcbDisc: TDBLookupComboboxEh [20]
     Left = 145
     Top = 79
-    Width = 484
+    Width = 503
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -695,11 +702,12 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 2
     Visible = True
     OnKeyValueChanged = dbcbDiscKeyValueChanged
+    ExplicitWidth = 484
   end
   object dbcbKaf: TDBLookupComboboxEh [21]
     Left = 145
     Top = 103
-    Width = 484
+    Width = 503
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -710,6 +718,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 3
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 484
   end
   object Panel5: TPanel [22]
     Left = 244
@@ -732,7 +741,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object dbeGroupVibor: TDBEditEh [23]
     Left = 463
     Top = 127
-    Width = 166
+    Width = 185
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -744,6 +753,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnEnter = Edit6Enter
     OnExit = Edit6Exit
     OnKeyPress = edtHoursGosKeyPress
+    ExplicitWidth = 166
   end
   object cbOtherUchPl: TCheckBox [24]
     Left = 5
@@ -758,7 +768,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object dbcbPdgrpDisc: TDBLookupComboboxEh [25]
     Left = 146
     Top = 55
-    Width = 484
+    Width = 503
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -768,6 +778,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 10
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 484
   end
   inherited actBaseDialog: TActionList
     Left = 567
@@ -794,7 +805,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Left = 440
     Top = 560
     Bitmap = {
-      494C010103000400600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
