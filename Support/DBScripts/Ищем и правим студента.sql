@@ -1,5 +1,5 @@
 
-select * from Person where Clastname='Абрамов'
+select * from Person where Clastname='Берлет'
 
 select * from ABIT_postup where nCode=68098
 
@@ -9,7 +9,7 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (46878)
+select * from Zach where ncode in (45949)
 select * from Zach where Ik_zach in (14369)
 
 

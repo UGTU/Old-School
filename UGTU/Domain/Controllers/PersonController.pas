@@ -60,11 +60,24 @@ end;
 procedure TPersonController.AddDocument(aNCode: Integer; aDoc: TDocRecord);
 var
   FAddDocument: TAddDocument;
+  FAddFile: TAddDocFiles;
+  iDoc: integer;
+  i: integer;
 begin
   FAddDocument := TAddDocument.Create(aNCode);
+
   with aDoc do
-    FAddDocument.Add(ikDocVid, balls, seria, number, kem_vidan, addinfo, isreal,
+    iDoc := FAddDocument.Add(ikDocVid, balls, seria, number, kem_vidan, addinfo, isreal,
       get_date, ikDisc);
+
+  if aDoc.docs.Count > 0 then
+  begin
+    FAddFile := TAddDocFiles.Create(iDoc);
+    for I := 0 to aDoc.docs.Count - 1 do
+      FAddFile.Add(aDoc.docs[i]);
+    FAddFile.Free;
+  end;
+
   FAddDocument.Free;
 end;
 
@@ -111,11 +124,21 @@ end;
 procedure TPersonController.UpdateDocument(aNewDoc: TDocRecord);
 var
   FUpdateDocument: TUpdateDocument;
+  FAddFile: TAddDocFiles;
+  i: integer;
 begin
   FUpdateDocument := TUpdateDocument.Create(aNewDoc.ikDoc);
+  FAddFile := TAddDocFiles.Create(aNewDoc.ikDoc);
   with aNewDoc do
     FUpdateDocument.Update(ikDocVid, balls, seria, number, kem_vidan, addinfo,
       isreal, get_date, ikDisc);
+
+  FAddFile.Delete;  //чистим все файлы
+  if aNewDoc.docs.Count > 0 then    //если файлы подгружены
+    for i := 0 to aNewDoc.docs.Count - 1 do
+       FAddFile.Add(aNewDoc.docs[i]);
+
+  FAddFile.Free;
   FUpdateDocument.Free;
 end;
 

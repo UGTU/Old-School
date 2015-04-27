@@ -699,5 +699,10 @@
       FieldName = 'ik_disc'
       Visible = False
     end
+    object adoSelDocumentsDocCount: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = 'DocCount'
+      Calculated = True
+    end
   end
 end
