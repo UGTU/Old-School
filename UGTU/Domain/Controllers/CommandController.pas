@@ -2,7 +2,7 @@ unit CommandController;
 
 interface
 
-uses Db, Data.Win.ADODB, SysUtils, System.Variants;
+uses Db, Data.Win.ADODB, SysUtils, System.Variants, System.Classes;
 
 type
 
@@ -83,9 +83,17 @@ type
   TAddDocument = class(TBaseADOCommand)
   public
     constructor Create(nCode: integer); overload;
-    procedure Add(aVidDoc, aBalls: integer;
+    function Add(aVidDoc, aBalls: integer;
       aSeria, aNumber, aWho, aAddInfo: string; aIsReal: boolean;
-      aGetDate, aDiscIK: Variant);
+      aGetDate, aDiscIK: Variant): integer;
+  end;
+
+  //добавить файлы документа
+  TAddDocFiles = class(TBaseADOCommand)
+  public
+    constructor Create(nDoc: integer); overload;
+    procedure Add(aFile: TMemoryStream);
+    procedure Delete;
   end;
 
   // редактировать документ
@@ -300,7 +308,7 @@ type
 implementation
 
 uses GeneralController, DateUtils, uDM, ExceptionBase,
-  ConstantRepository;
+  ConstantRepository, VarFileUtils;
 
 { TBaseSelectController }
 
@@ -1164,9 +1172,9 @@ end;
 
 { TAddDocument }
 
-procedure TAddDocument.Add(aVidDoc, aBalls: integer;
+function TAddDocument.Add(aVidDoc, aBalls: integer;
   aSeria, aNumber, aWho, aAddInfo: string; aIsReal: boolean;
-  aGetDate, aDiscIK: Variant);
+  aGetDate, aDiscIK: Variant): integer;
 begin
   with FStor.Parameters do
   begin
@@ -1180,6 +1188,7 @@ begin
     ParamByName('@balls').Value := aBalls;
     ParamByName('@ikDisc').Value := aDiscIK;
     FStor.ExecProc;
+    Result := ParamByName('@Return_Value').Value;
   end;
 end;
 
@@ -1277,6 +1286,39 @@ end;
 procedure TDeleteDocument.Delete;
 begin
   FStor.ExecProc;
+end;
+
+{ TAddDocFiles }
+
+procedure TAddDocFiles.Add(aFile: TMemoryStream);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@code_operation').Value := 1;    //добавление
+    ParamByName('@doc_file').Value := CreateVariantByStream(aFile);
+    FStor.ExecProc;
+  end;
+end;
+
+constructor TAddDocFiles.Create(nDoc: integer);
+begin
+  inherited Create('ManageDocFiles;1');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@code_operation', ftInteger, pdInput, 0, 0);
+    CreateParameter('@ik_doc', ftInteger, pdInput, 0, nDoc);
+    CreateParameter('@doc_file', ftVarBytes, pdInput, 2147483647, null);
+  end;
+end;
+
+procedure TAddDocFiles.Delete;
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@code_operation').Value := -1;    //удалят все файлы
+    FStor.ExecProc;
+  end;
 end;
 
 end.

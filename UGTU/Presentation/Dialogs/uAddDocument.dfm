@@ -1,21 +1,20 @@
 inherited frmAddDocument: TfrmAddDocument
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090
-  ClientHeight = 395
+  ClientHeight = 426
   ClientWidth = 435
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   ExplicitWidth = 441
-  ExplicitHeight = 424
+  ExplicitHeight = 455
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
     Width = 435
-    Height = 281
+    Height = 321
     Align = alTop
-    ExplicitTop = 2
     ExplicitWidth = 435
-    ExplicitHeight = 281
+    ExplicitHeight = 321
   end
   object Label1: TLabel [1]
     Left = 10
@@ -86,9 +85,9 @@ inherited frmAddDocument: TfrmAddDocument
     Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103
   end
   inherited Panel1: TPanel
-    Top = 354
+    Top = 385
     Width = 435
-    ExplicitTop = 354
+    ExplicitTop = 385
     ExplicitWidth = 435
     inherited bbOK: TBitBtn
       Left = 170
@@ -98,17 +97,17 @@ inherited frmAddDocument: TfrmAddDocument
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
-      Left = 255
+      Left = 341
       Top = 6
       ParentFont = False
-      ExplicitLeft = 255
+      ExplicitLeft = 341
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
-      Left = 344
+      Left = 254
       Top = 6
       Caption = #1047#1072#1082#1088#1099#1090#1100
-      ExplicitLeft = 344
+      ExplicitLeft = 254
       ExplicitTop = 6
     end
     inherited bbSprav: TBitBtn
@@ -209,10 +208,11 @@ inherited frmAddDocument: TfrmAddDocument
     Height = 25
     Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090#1099'...'
     TabOrder = 7
+    OnClick = btnLoadClick
   end
   object chbxBonuses: TCheckBox [17]
     Left = 8
-    Top = 258
+    Top = 298
     Width = 121
     Height = 17
     Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1073#1072#1083#1083#1099
@@ -227,9 +227,9 @@ inherited frmAddDocument: TfrmAddDocument
   end
   object pnlBonuses: TPanel [18]
     Left = 0
-    Top = 281
+    Top = 321
     Width = 435
-    Height = 73
+    Height = 64
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -320,10 +320,20 @@ inherited frmAddDocument: TfrmAddDocument
       Caption = 'actCheckFields'
       OnUpdate = actCheckFieldsUpdate
     end
+    object Action1: TAction
+      Caption = 'Action1'
+    end
   end
-  object odOpenFile: TOpenDialog
-    Options = [ofHideReadOnly, ofAllowMultiSelect, ofEnableSizing]
+  object opDocs: TOpenPictureDialog
+    Filter = 
+      'All (*.gif;*.jpg;*.jpeg;*.png;*.bmp;*.tif;*.tiff;*.ico;*.emf;*.w' +
+      'mf)|*.gif;*.jpg;*.jpeg;*.png;*.bmp;*.tif;*.tiff;*.ico;*.emf;*.wm' +
+      'f|GIF Image (*.gif)|*.gif|JPEG Image File (*.jpg)|*.jpg|JPEG Ima' +
+      'ge File (*.jpeg)|*.jpeg|Portable Network Graphics (*.png)|*.png|' +
+      'Bitmaps (*.bmp)|*.bmp|TIFF Images (*.tif)|*.tif|TIFF Images (*.t' +
+      'iff)|*.tiff|Icons (*.ico)|*.ico|Enhanced Metafiles (*.emf)|*.emf' +
+      '|Metafiles (*.wmf)|*.wmf'
     Left = 392
-    Top = 200
+    Top = 208
   end
 end

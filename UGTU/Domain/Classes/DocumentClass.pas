@@ -2,6 +2,8 @@ unit DocumentClass;
 
 interface
 
+uses System.Generics.Collections, System.Classes;
+
 type
   TDocRecord = class
     ikDoc: integer;
@@ -15,9 +17,11 @@ type
     balls: integer;
     ikDisc: Variant;
     isDeleted: boolean;
+    docs: TList<TMemoryStream>;
     constructor Create(aDocIK, aikDocVid, aballs: integer; aikDisc: Variant;
       aseria, anumber, akem_vidan, aaddinfo: string;  aisreal: boolean; aget_date: Variant); overload;
     constructor Create(aDocIK: integer; aIsDeleted: boolean);  overload;
+    procedure AddDoc(aDoc: TMemoryStream);
   end;
 
 implementation
@@ -39,6 +43,12 @@ begin
   balls := aballs;
   ikDisc := aikDisc;
   isDeleted := False;
+  docs := TList<TMemoryStream>.Create;
+end;
+
+procedure TDocRecord.AddDoc(aDoc: TMemoryStream);
+begin
+  docs.Add(aDoc);
 end;
 
 constructor TDocRecord.Create(aDocIK: integer; aIsDeleted: boolean);

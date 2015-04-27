@@ -206,6 +206,8 @@ begin
  DMAbiturientNabor.adospAbitNaborStatistik.Close;
  DMAbiturientNabor.adoqNaborDiscs.Close;
  DMAbiturientNabor.adoqExamsErrors.Close;
+ DMAbiturientNabor.adoNetworkAbit.Close;
+ DMAbiturientNabor.adoIndBall.Close;
  //PageControl1.ActivePageIndex := 0;
  Load;
 

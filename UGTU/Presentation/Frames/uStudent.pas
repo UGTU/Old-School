@@ -13,7 +13,8 @@ uses
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController,
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh, uUspevGroupController, DocumentClass, System.Generics.Collections;
+  DBAxisGridsEh, uUspevGroupController, DocumentClass, System.Generics.Collections,
+  Data.Win.ADODB;
 
 type
   TfmStudent = class(TfmBase)
@@ -194,6 +195,10 @@ type
     Label56: TLabel;
     eXpMonth: TDBNumberEditEh;
     Label57: TLabel;
+    adoSelDocFiles: TADODataSet;
+    adoSelDocFilesik_doc_file: TIntegerField;
+    adoSelDocFilesIK_doc: TIntegerField;
+    adoSelDocFilesdoc_file: TBlobField;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -271,7 +276,7 @@ var
 
 implementation
 
-uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
+uses uDM, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
   uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
   ImageFullSizeShowFrm, ExceptionBase, uAddDocument, PersonController,
   ConstantRepository;
@@ -744,6 +749,13 @@ begin
 
     FieldByName('balls').Visible := false;
     FieldByName('сname_disc').Visible := false;
+  end;
+
+  with adoSelDocFiles do
+    begin
+    Close;
+    CommandText := 'select * from SelDocumentsFiles('+IntToStr(obj.ID)+')';
+    Open;
   end;
 
 
@@ -1241,15 +1253,54 @@ begin
 end;
 
 procedure TfmStudent.actUpdateDocumentExecute(Sender: TObject);
+var tempFilList: TList<TMemoryStream>;
+    i: integer;
+    iDoc: TMemoryStream;
 begin
+
   frmAddDocument := TfrmAddDocument.Create(self);
   with frmAddDocument do
   begin
     isAbit := (self.Name = 'fmAbitCard');
     isEdit := true;
     DocID := IfNull(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value,0);
+
+    adoSelDocFiles.Filtered := false;
+    adoSelDocFiles.Filter := 'ik_doc = ' + IntToStr(DocID);
+    adoSelDocFiles.Filtered := true;
+
+    tempFilList :=  TList<TMemoryStream>.Create;
+
+    //если документ еще не был добавлен в базу
+    if DocID = 0 then
+    with FDocRecordList[dbgeDocuments.DataSource.DataSet.FieldByName('DocCount').Value] do
+    begin
+      if docs.Count > 0 then
+      begin
+        tempFilList :=  TList<TMemoryStream>.Create;
+        for i := 0 to docs.Count - 1 do
+          tempFilList.Add(docs[i]);
+        ImageFiles := tempFilList;
+      end;
+    end
+      //если объект уже в базе
+      else
+      begin
+        if adoSelDocFiles.RecordCount > 0 then
+        begin
+          for i := 0 to adoSelDocFiles.RecordCount - 1 do
+          begin
+            iDoc:=TMemoryStream.Create;
+            (adoSelDocFiles.FieldbyName('doc_file')as TBlobField).SaveToStream(iDoc);
+            iDoc.Seek(0, soFromBeginning);
+            tempFilList.Add(iDoc)
+          end;
+          ImageFiles := tempFilList;
+        end;
+      end;
     ShowModal;
     Free;
+    if Assigned(tempFilList) then tempFilList.Free;
   end;
 end;
 

@@ -983,4 +983,101 @@ RETURN
 END
 GO
 
-select * from SelectNetworkAbit(2015) */
+select * from SelectNetworkAbit(2015) 
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Doc_files](
+	[ik_doc_file] [int] IDENTITY(1,1) NOT NULL,
+	[ik_doc] [int] NOT NULL,
+	[docfile] [image] NOT NULL,
+ CONSTRAINT [PK_Doc_files] PRIMARY KEY CLUSTERED 
+(
+	[ik_doc_file] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[Doc_files]  WITH CHECK ADD  CONSTRAINT [FK_Doc_files_Doc_stud] FOREIGN KEY([ik_doc])
+REFERENCES [dbo].[Doc_stud] ([Ik_doc])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Doc_files] CHECK CONSTRAINT [FK_Doc_files_Doc_stud]
+GO
+
+
+alter  PROCEDURE [dbo].ManageDocFiles
+  @code_operation	int,
+  @ik_doc			INT,
+  @doc_file			image = null
+AS
+BEGIN
+
+if @code_operation = 1  --добавление
+begin
+  INSERT INTO Doc_files(ik_doc, docfile)
+  VALUES(@ik_doc, @doc_file)
+end
+
+if @code_operation = -1
+  delete from Doc_files where ik_doc = @ik_doc
+ 
+END
+GO
+
+create function [dbo].[SelDocumentsFiles]
+(@code numeric)
+RETURNS @Result TABLE
+(
+    ik_doc_file		int,
+    IK_doc			int,
+    doc_file		image
+)
+AS
+Begin 
+  insert into @Result
+  SELECT 
+    Doc_files.ik_doc_file,
+	Doc_files.ik_doc,
+	Doc_files.docfile
+  from Doc_stud inner join Doc_files on Doc_files.ik_doc = Doc_stud.Ik_doc
+  WHERE Doc_stud.nCode=@code
+
+RETURN
+END
+GO*/
+
+
+ALTER    PROCEDURE [dbo].[AppendDoc]
+@ncode			INT,
+@ik_vid_doc		int,
+@sd_seria		varchar(10),
+@np_number		varchar(15),
+@dd_vidan		datetime,
+@cd_kem_vidan	varchar(500),
+@isreal			bit,
+@addinfo		varchar(max),
+@balls			int = null,
+@ikDisc			int = null
+AS
+BEGIN
+  declare @ik_doc int
+
+  if @ikDisc = -1 set @ikDisc = null
+
+ INSERT INTO Doc_stud(Dd_vidan,Cd_kem_vidan,Ik_vid_doc,Np_number,Cd_seria,nCode, isreal, AdditionalInfo)
+ VALUES(@dd_vidan, @cd_kem_vidan,@ik_vid_doc,@np_number,@sd_seria,@ncode, @isreal, @addinfo)
+   select @ik_doc = @@IDENTITY
+ 
+ if @balls <> 0
+   insert into Abit_Bonuses(balls,ik_disc,ik_doc)
+   values(@balls, @ikDisc, @ik_doc)
+
+  return @ik_doc
+END
+GO
+
+
+

@@ -158,7 +158,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 656
             Height = 587
-            ActivePage = TabSheet3
+            ActivePage = TabSheet6
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -2019,7 +2019,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2390,6 +2390,24 @@ inherited fmStudent: TfmStudent
     end
     object N2: TMenuItem
       Action = frmMain.actNaprClose
+    end
+  end
+  object adoSelDocFiles: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 'select * from SelDocumentsFiles(0)'
+    Parameters = <>
+    Left = 616
+    Top = 464
+    object adoSelDocFilesik_doc_file: TIntegerField
+      FieldName = 'ik_doc_file'
+    end
+    object adoSelDocFilesIK_doc: TIntegerField
+      FieldName = 'IK_doc'
+    end
+    object adoSelDocFilesdoc_file: TBlobField
+      FieldName = 'doc_file'
     end
   end
 end
