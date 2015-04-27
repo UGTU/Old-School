@@ -17,7 +17,9 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'SELECT * from [dbo].[OKADRGetEducBranch](2015)'
+      'SELECT * from [dbo].[OKADRGetEducBranch](2015) '
+      ''
+      ''
       ''
       ''
       ''
@@ -36,10 +38,6 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
       FieldName = 'Cname_spec'
       ReadOnly = True
       Size = 326
-    end
-    object adoqSpecik_Gener_spec_fac: TIntegerField
-      FieldName = 'ik_Gener_spec_fac'
-      ReadOnly = True
     end
     object adoqSpecik_fac: TIntegerField
       FieldName = 'ik_fac'
@@ -94,10 +92,6 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
     end
     object adospGakMemberik_fac: TIntegerField
       FieldName = 'ik_fac'
-    end
-    object adospGakMemberik_profile: TIntegerField
-      FieldName = 'ik_profile'
-      ReadOnly = True
     end
   end
   object dsFaculty: TDataSource

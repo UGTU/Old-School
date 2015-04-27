@@ -41,7 +41,7 @@ type
   //FilterGroupList фильтрует список групп по специальности
   function FilterGroupList(cmp: PDBLookupComboboxEh; ik_Gener_spec_fac:Variant): boolean;
   //фильтрует список специальностей ГАКа
-  function FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant): boolean;
+  function FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant; DisplayType: integer): boolean;
 
   //GetDiplomList загружает список студентов группы
   function GetDiplomList(SourceDataSet: PDataSet; ik_grup:Variant): boolean;
@@ -65,7 +65,7 @@ type
   //GetSpecGakList загружает список специальностей (для поля просмотра)
   function GetSpecGakList: boolean;
   //GetGakMemberList загружает список председателей
-  function GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant): boolean;
+  function GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant; DisplayType: integer): boolean;
   //SaveGAK сохраняет ГАК
   procedure SaveGAK(SourceDataSet: PDataSet);
   //CancelUpdatesGAK отменяет сохранение ГАК
@@ -178,13 +178,16 @@ begin
 end;
 
 //фильтрует список специальностей ГАКа
-function TDiplOtdKardController.FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant): boolean;
+function TDiplOtdKardController.FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant; DisplayType: integer): boolean;
 begin
   Result:= false;
   SourceDataSet.Filtered:= false;
   if ik_fac>1 then
   begin
-    SourceDataSet.Filter:= 'ik_fac='+IntToStr(Ik_fac);
+    if (DisplayType<0) then
+        SourceDataSet.Filter:= '(ik_fac='+IntToStr(Ik_fac)+')'
+    else
+        SourceDataSet.Filter:= '(ik_fac='+IntToStr(Ik_fac)+') and (id_type_branch='+IntToStr(DisplayType+1)+')';
     SourceDataSet.Filtered:= true;
   end;
   Result:= true;
@@ -553,7 +556,7 @@ end;
 
 
 //загружает список председателей
-function TDiplOtdKardController.GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant): boolean;
+function TDiplOtdKardController.GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant; DisplayType: integer): boolean;
 begin
   Result:= false;
   TApplicationController.GetInstance.AddLogEntry('Список председателей ГАК. Загрузка списка председателей.');
@@ -564,6 +567,7 @@ begin
     Parameters.Clear;
     //Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
     Parameters.CreateParameter('@ik_year', ftInteger, pdInput, 4, ik_year);
+    Parameters.CreateParameter('@id_type_branch', ftInteger, pdInput, 4, DisplayType+1);
     Open;
   end;
   Result:= true;
