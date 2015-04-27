@@ -9,7 +9,7 @@ uses
   ExtCtrls, DBCtrlsEh, DBCtrls, Mask, DBLookupEh, Grids, ComCtrls, ToolWin,
   GridsEh, ActnList, Menus, uDMAbiturientAction, DBGridEhGrouping, ToolCtrlsEh,
   DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh, System.Generics.Collections,
-  DocumentClass;
+  DocumentClass, Data.DB;
 
 type
   TfmAbitCard = class(TfmStudent)
@@ -49,7 +49,7 @@ var
 
 implementation
 
-uses uDM, db, Umain, DBTVObj, DBTVGroupObj, ComObj,
+uses uDM, Umain, DBTVObj, DBTVGroupObj, ComObj,
   DBTVStudAbitObj, DBTVStudObj, DBTVspecRecObj, DBTVRecruitobj, uDipl, jpeg,
   VarfileUtils,
   uBaseFrame, uDMStudentSelectionProcs, uDMStudentData, uDMAdress, uDMCauses,
@@ -214,6 +214,13 @@ begin
 
     FieldByName('balls').Visible := true;
     FieldByName('ñname_disc').Visible := true;
+  end;
+
+  with adoSelDocFiles do
+    begin
+    Close;
+    CommandText := 'select * from SelDocumentsFiles('+IntToStr(obj.ID)+')';
+    Open;
   end;
 
   with dmStudentSelectionProcs.aspGetPersonAddress do

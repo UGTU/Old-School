@@ -7,7 +7,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, uDMStudentData,
   DBGridEh, DBCtrlsEh, Mask, DBLookupEh, uStuddlg, System.Actions, Vcl.ComCtrls,
-  CommandController, DocumentClass, Data.Win.ADODB;
+  CommandController, DocumentClass, Data.Win.ADODB, Vcl.ExtDlgs, System.Generics.Collections;
 
 type
   TfrmAddDocument = class(TfrmBaseDialog)
@@ -27,7 +27,6 @@ type
     Label5: TLabel;
     dbeAddInfo: TDBEditEh;
     btnLoad: TButton;
-    odOpenFile: TOpenDialog;
     chbxBonuses: TCheckBox;
     pnlBonuses: TPanel;
     UpDown1: TUpDown;
@@ -36,6 +35,8 @@ type
     Label10: TLabel;
     dbcbeDisc: TDBLookupComboboxEh;
     cbReal: TCheckBox;
+    opDocs: TOpenPictureDialog;
+    Action1: TAction;
     procedure actCheckFieldsUpdate(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
@@ -45,16 +46,26 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure UpDown1Click(Sender: TObject; Button: TUDBtnType);
+    procedure btnLoadClick(Sender: TObject);
+    procedure DelDocClick(Sender: TObject);
+    procedure GrowImage(Sender: TObject);
   private
     FnCode: integer;
     FDocID: integer;
     FisEdit: boolean;
     FTypeGrazd: integer;
+    fLeft: integer;
+    fTop: integer;
+    fDocCount: integer;
     procedure SetAbitElements(const Value: boolean);
     procedure CollectForParentDialog(aDoc: TDocRecord);
     procedure SetEditProperties;
     procedure SetTypeGrazd(const Value: integer);
+    procedure SetImageFiles(const Value: TList<TMemoryStream>);
+    procedure CreateDocFrame(aFile: TMemoryStream);
+  protected
     { Private declarations }
+    function DoCancel:boolean; override;
   public
     studDlg: TftmStudent;
     property isEdit: boolean write FisEdit;
@@ -62,6 +73,7 @@ type
     property nCode: integer read FnCode write FnCode;
     property DocID: integer read FDocID write FDocID;
     property TypeGrazd: integer write SetTypeGrazd;
+    property ImageFiles: TList<TMemoryStream> write SetImageFiles;
 
     { Public declarations }
   end;
@@ -71,7 +83,8 @@ var
 
 implementation
 
-uses ConstantRepository, PersonController, uStudent;
+uses ConstantRepository, PersonController, uStudent, ImageFullSizeShowFrm,
+     VarFileUtils, Vcl.Imaging.jpeg;
 
 {$R *.dfm}
 
@@ -88,10 +101,18 @@ end;
 procedure TfrmAddDocument.actApplyExecute(Sender: TObject);
 var
   doc: TDocRecord;
+  i: integer;
+  stream : TMemoryStream;
 begin
   doc := TDocRecord.Create(FDocID, dbcbeKind.KeyValue, StrToInt(dbBalls.Text),
     dbcbeDisc.KeyValue, eSer.Text, eNum.Text, eWho.Text, dbeAddInfo.Text,
     cbReal.Checked, dbdteGetDate.Value);
+  stream := TMemoryStream.Create;
+  for i := 0 to fDocCount - 1 do
+  begin
+    (FindComponent('Image' + IntToStr(i)) as TImage).Picture.Graphic.SaveToStream(stream);
+    doc.AddDoc(stream);
+  end;
 
   if Assigned(studDlg) then
   begin
@@ -114,6 +135,7 @@ begin
       FieldByName('addinfo').Value := doc.addinfo;
       FieldByName('ik_disc').Value := doc.ikDisc;
       FieldByName('ik_vid_doc').Value := doc.ikDocVid;
+      FieldByName('DocCount').Value := doc.docs.Count;
     end;
 
     // добавляем в коллекцию документов родителя
@@ -157,6 +179,16 @@ begin
   close;
 end;
 
+procedure TfrmAddDocument.btnLoadClick(Sender: TObject);
+begin
+  inherited;
+  if opDocs.Execute then
+  begin
+    CreateDocFrame(nil);
+    IsModified := CheckFields;
+  end;
+end;
+
 procedure TfrmAddDocument.chbxBonusesClick(Sender: TObject);
 begin
   inherited;
@@ -169,6 +201,35 @@ end;
 procedure TfrmAddDocument.dbcbeKindChange(Sender: TObject);
 begin
   IsModified := CheckFields;
+end;
+
+procedure TfrmAddDocument.DelDocClick(Sender: TObject);
+var
+  iDoc, iMoveDoc: TImage;
+  iLabel, iMoveLabel: TLabel;
+  i: integer;
+begin
+  iDoc := FindComponent('Image' + IntToStr((Sender as TLabel).Tag)) as TImage;
+  iDoc.Destroy;
+  Sender.Destroy;
+
+  for i := (Sender as TLabel).Tag + 1 to fDocCount - 1 do
+  begin
+    iMoveDoc := FindComponent('Image' + IntToStr(i)) as TImage;
+    iMoveDoc.Name := 'Image' + IntToStr(i-1);
+    iMoveDoc.Left := iMoveDoc.Left - 65;
+    iMoveLabel := FindComponent('Lab' + IntToStr(i)) as TLabel;
+    iMoveLabel.Name := 'Lab' + IntToStr(i-1);
+    iMoveLabel.Left := iMoveLabel.Left - 65;
+  end;
+  fDocCount := fDocCount - 1;
+  fLeft := fLeft - 65;
+  IsModified := CheckFields;
+end;
+
+function TfrmAddDocument.DoCancel: boolean;
+begin
+  Result := true;
 end;
 
 procedure TfrmAddDocument.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -185,6 +246,11 @@ begin
   dmStudentData.adodsAbitDisc.Active := true;
   FnCode := 0;
   FDocID := 0;
+
+  fDocCount := 0;
+  fLeft:= 150;
+  fTop:= 206;
+
   FisEdit := False;
 end;
 
@@ -192,6 +258,39 @@ procedure TfrmAddDocument.FormShow(Sender: TObject);
 begin
   inherited;
   SetEditProperties;
+end;
+
+procedure TfrmAddDocument.GrowImage(Sender: TObject);
+  var
+  pt: TPoint;
+  h, w: integer;
+  prop: double;
+begin
+  if not Assigned((Sender as TImage).Picture.Graphic) then
+    exit;
+
+  pt := (Sender as TImage).ClientToScreen(Point(0, 0));
+
+  if (Sender as TImage).Picture.Graphic.Height > Screen.WorkAreaHeight then
+  begin
+    h := Screen.WorkAreaHeight - 50;
+    prop :=  (Sender as TImage).Height / h;
+    w := Round((Sender as TImage).Width / prop);
+  end else
+    begin
+      h := (Sender as TImage).Picture.Graphic.Height;
+      w := (Sender as TImage).Picture.Graphic.Width;
+    end;
+
+
+  ImageFullSizeShowForm.curControl := Sender as TImage;
+  ImageFullSizeShowForm.Height := h;
+  ImageFullSizeShowForm.Width := w;
+  ImageFullSizeShowForm.Top := pt.Y - (ImageFullSizeShowForm.Height div 2 - (Sender as TImage).Height div 2);
+  ImageFullSizeShowForm.Left := pt.X - (ImageFullSizeShowForm.Width div 2 - (Sender as TImage).Width div 2);
+
+  ImageFullSizeShowForm.Image := (Sender as TImage).Picture.Graphic;
+  ImageFullSizeShowForm.Show;
 end;
 
 procedure TfrmAddDocument.SetAbitElements(const Value: boolean);
@@ -245,6 +344,58 @@ begin
   IsModified := False;
 end;
 
+procedure TfrmAddDocument.SetImageFiles(const Value: TList<TMemoryStream>);
+var i: integer;
+begin
+  for I := 0 to Value.Count - 1 do
+    CreateDocFrame(Value[i]);
+end;
+
+procedure TfrmAddDocument.CreateDocFrame(aFile: TMemoryStream);
+var
+  iDelLabel: TLabel;
+  iDoc: TImage;
+  j: TJPEGImage;
+begin
+  iDoc := TImage.Create(Self);
+
+
+  if Assigned(aFile) then
+  begin
+    j := TJPEGImage.Create;
+    j.LoadFromStream(aFile);
+    iDoc.Picture.Graphic := j;
+    j.Free;
+    //iDoc.Picture.Graphic :=
+    //iDoc.Picture.Graphic.LoadFromStream(aFile)
+  end
+    else iDoc.Picture.LoadFromFile(opDocs.FileName);  //из файла
+
+
+  iDelLabel := TLabel.Create(Self);
+  iDoc.Name := 'Image' + IntToStr(fDocCount);
+  iDelLabel.Name := 'Lab' + IntToStr(fDocCount);
+  iDelLabel.Tag := fDocCount;
+  iDoc.Left := fLeft;
+  iDelLabel.Left := fLeft + 10;
+  iDoc.Top := fTop;
+
+  iDoc.Width := 59;
+  iDoc.Height := Round(iDoc.Picture.Graphic.Height*(59/iDoc.Picture.Graphic.Width));
+  iDelLabel.Top := fTop + iDoc.Height + 3;
+  iDelLabel.Caption := 'удалить';
+  iDoc.Parent := Self;
+  iDelLabel.Parent := Self;
+
+  iDoc.Stretch := true;
+  iDelLabel.Font.Style := [fsUnderline];
+  iDelLabel.Font.Color := clHotLight;
+  iDelLabel.OnClick := DelDocClick;
+  iDoc.OnMouseEnter := GrowImage;
+  fDocCount := fDocCount + 1;
+  fLeft := fLeft + 65;
+end;
+
 procedure TfrmAddDocument.SetTypeGrazd(const Value: integer);
 begin
   (dmStudentData.adodsDocType as TADODataSet).Filtered := False;
@@ -279,6 +430,7 @@ begin
       cells[6, rowsc] := dbBalls.Text;
       cells[7, rowsc] := dbcbeDisc.Text;
     end;
+
     RowCount := RowCount + 1;
   end;
 end;

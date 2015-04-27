@@ -109,6 +109,7 @@ type
     adoSelDocumentscvid_doc: TStringField;
     adoSelDocumentsaddinfo: TStringField;
     adoSelDocumentsik_disc: TIntegerField;
+    adoSelDocumentsDocCount: TIntegerField;
     procedure aspSelLanguageNewRecord(DataSet: TDataSet);
     procedure aspSelFamilyNewRecord(DataSet: TDataSet);
    
