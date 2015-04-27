@@ -1,26 +1,42 @@
 inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
-  Width = 871
+  Width = 927
   Height = 524
-  ExplicitWidth = 871
+  ExplicitWidth = 927
   ExplicitHeight = 524
   inherited Panel1: TPanel
-    Width = 871
+    Width = 927
     Height = 487
     ExplicitWidth = 871
     ExplicitHeight = 487
+    object CheckBox1: TCheckBox
+      Left = 672
+      Top = 32
+      Width = 97
+      Height = 17
+      Caption = 'CheckBox1'
+      TabOrder = 0
+    end
+    object CheckBox2: TCheckBox
+      Left = 656
+      Top = 24
+      Width = 97
+      Height = 17
+      Caption = 'CheckBox2'
+      TabOrder = 1
+    end
   end
   inherited pnlSave: TPanel
     Top = 487
-    Width = 871
+    Width = 927
     ExplicitTop = 487
     ExplicitWidth = 871
     inherited bbSave: TBitBtn
-      Left = 702
+      Left = 758
       Action = actSaveDipl
       ExplicitLeft = 702
     end
     inherited bbUndo: TBitBtn
-      Left = 534
+      Left = 590
       Action = actCancelDiplUpd
       ExplicitLeft = 534
     end
@@ -28,20 +44,22 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
   object pcOtdKadr: TPageControl
     Left = 0
     Top = 0
-    Width = 871
+    Width = 927
     Height = 487
-    ActivePage = tshDiplom
+    ActivePage = tshGak
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 2
     OnChange = pcOtdKadrChange
     OnChanging = pcOtdKadrChanging
+    ExplicitWidth = 871
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
+      ExplicitWidth = 863
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
-        Width = 863
+        Width = 919
         Height = 425
         Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
         Align = alClient
@@ -131,7 +149,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       object ToolBar1: TToolBar
         Left = 0
         Top = 0
-        Width = 863
+        Width = 919
         Height = 31
         ButtonWidth = 24
         Caption = 'ToolBar1'
@@ -172,7 +190,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Top = 0
           Width = 185
           Height = 22
-          Hint = #1092#1072#1082#1091#1083#1100#1090#1077#1090
+          Hint = #1060#1072#1082#1091#1083#1100#1090#1077#1090
           DataField = ''
           EditButtons = <>
           Flat = True
@@ -221,10 +239,11 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
+      ExplicitWidth = 863
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
-        Width = 863
+        Width = 919
         Height = 425
         Hint = #1057#1087#1080#1089#1086#1082' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1077#1081' '#1043#1040#1050
         Align = alClient
@@ -272,7 +291,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       object ToolBar3: TToolBar
         Left = 0
         Top = 0
-        Width = 863
+        Width = 919
         Height = 31
         ButtonWidth = 32
         Caption = 'ToolBar1'
@@ -332,15 +351,45 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Caption = 'ToolButton4'
           Style = tbsSeparator
         end
+        object dbcmbxGAKFac: TDBLookupComboboxEh
+          Left = 380
+          Top = 0
+          Width = 293
+          Height = 22
+          Hint = #1060#1072#1082#1091#1083#1100#1090#1077#1090
+          DataField = ''
+          EditButtons = <>
+          Flat = True
+          KeyField = 'Ik_fac'
+          ListField = 'Cname_fac'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          Visible = True
+          OnChange = dbcmbxGAKFacChange
+        end
+        object cbDisplayType: TComboBox
+          Left = 673
+          Top = 0
+          Width = 192
+          Height = 22
+          Hint = #1058#1080#1087' '#1086#1090#1086#1073#1088#1072#1078#1077#1085#1080#1103
+          Style = csOwnerDrawFixed
+          TabOrder = 3
+          Items.Strings = (
+            #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1080
+            #1055#1088#1086#1092#1080#1083#1080)
+        end
       end
     end
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
+      ExplicitWidth = 863
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
-        Width = 863
+        Width = 919
         Height = 456
         Hint = #1044#1072#1085#1085#1099#1077' '#1086' '#1082#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
         Align = alClient
