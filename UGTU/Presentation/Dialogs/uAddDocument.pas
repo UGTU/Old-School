@@ -107,9 +107,10 @@ begin
   doc := TDocRecord.Create(FDocID, dbcbeKind.KeyValue, StrToInt(dbBalls.Text),
     dbcbeDisc.KeyValue, eSer.Text, eNum.Text, eWho.Text, dbeAddInfo.Text,
     cbReal.Checked, dbdteGetDate.Value);
-  stream := TMemoryStream.Create;
+
   for i := 0 to fDocCount - 1 do
   begin
+    stream := TMemoryStream.Create;
     (FindComponent('Image' + IntToStr(i)) as TImage).Picture.Graphic.SaveToStream(stream);
     doc.AddDoc(stream);
   end;

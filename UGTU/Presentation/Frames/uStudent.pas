@@ -1277,7 +1277,6 @@ begin
     begin
       if docs.Count > 0 then
       begin
-        tempFilList :=  TList<TMemoryStream>.Create;
         for i := 0 to docs.Count - 1 do
           tempFilList.Add(docs[i]);
         ImageFiles := tempFilList;
@@ -1288,12 +1287,14 @@ begin
       begin
         if adoSelDocFiles.RecordCount > 0 then
         begin
+          adoSelDocFiles.First;
           for i := 0 to adoSelDocFiles.RecordCount - 1 do
           begin
             iDoc:=TMemoryStream.Create;
             (adoSelDocFiles.FieldbyName('doc_file')as TBlobField).SaveToStream(iDoc);
             iDoc.Seek(0, soFromBeginning);
-            tempFilList.Add(iDoc)
+            tempFilList.Add(iDoc);
+            adoSelDocFiles.Next;
           end;
           ImageFiles := tempFilList;
         end;

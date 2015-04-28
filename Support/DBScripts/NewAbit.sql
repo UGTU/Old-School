@@ -1047,7 +1047,7 @@ Begin
 
 RETURN
 END
-GO*/
+GO
 
 
 ALTER    PROCEDURE [dbo].[AppendDoc]
@@ -1079,5 +1079,5 @@ BEGIN
 END
 GO
 
-
+*/
 

@@ -6,7 +6,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
   inherited Panel1: TPanel
     Width = 927
     Height = 487
-    ExplicitWidth = 871
+    ExplicitWidth = 927
     ExplicitHeight = 487
     object CheckBox1: TCheckBox
       Left = 672
@@ -29,16 +29,16 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     Top = 487
     Width = 927
     ExplicitTop = 487
-    ExplicitWidth = 871
+    ExplicitWidth = 927
     inherited bbSave: TBitBtn
       Left = 758
       Action = actSaveDipl
-      ExplicitLeft = 702
+      ExplicitLeft = 758
     end
     inherited bbUndo: TBitBtn
       Left = 590
       Action = actCancelDiplUpd
-      ExplicitLeft = 534
+      ExplicitLeft = 590
     end
   end
   object pcOtdKadr: TPageControl
@@ -52,10 +52,8 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     TabOrder = 2
     OnChange = pcOtdKadrChange
     OnChanging = pcOtdKadrChanging
-    ExplicitWidth = 871
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
-      ExplicitWidth = 863
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
@@ -239,7 +237,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
-      ExplicitWidth = 863
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
@@ -376,6 +373,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Hint = #1058#1080#1087' '#1086#1090#1086#1073#1088#1072#1078#1077#1085#1080#1103
           Style = csOwnerDrawFixed
           TabOrder = 3
+          OnChange = dbcmbxYearChange
           Items.Strings = (
             #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1080
             #1055#1088#1086#1092#1080#1083#1080)
@@ -385,7 +383,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
-      ExplicitWidth = 863
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
