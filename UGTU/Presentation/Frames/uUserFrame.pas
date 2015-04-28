@@ -202,12 +202,12 @@ begin
   inherited;
     ChangeModif(false);
   adotElement.Open;
-  adotElemUsers.Close;
+  {adotElemUsers.Close;
   adotElemUsersfilter2.LookupDataSet:=adotFilter2;
   adotElemUsersfilter2.LookupKeyFields:='ik_kaf';
   adotElemUsersfilter2.LookupResultField:='cname_kaf';
   dbcbElement.SelectNextValue(true);
-  adotElemUsers.Open;
+  adotElemUsers.Open;         }
  // btnSave.Caption:='';
   //btnCansel.Caption:='';
   //btnDel.Caption:='';

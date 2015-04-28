@@ -1006,7 +1006,7 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Doc_files] CHECK CONSTRAINT [FK_Doc_files_Doc_stud]
 GO
-*/
+
 
 alter  PROCEDURE [dbo].ManageDocFiles
   @code_operation	int,
@@ -1026,6 +1026,28 @@ if @code_operation = -1
  
 END
 GO
+
+create function [dbo].[SelDocumentsFiles]
+(@code numeric)
+RETURNS @Result TABLE
+(
+    ik_doc_file		int,
+    IK_doc			int,
+    doc_file		image
+)
+AS
+Begin 
+  insert into @Result
+  SELECT 
+    Doc_files.ik_doc_file,
+	Doc_files.ik_doc,
+	Doc_files.docfile
+  from Doc_stud inner join Doc_files on Doc_files.ik_doc = Doc_stud.Ik_doc
+  WHERE Doc_stud.nCode=@code
+
+RETURN
+END
+GO*/
 
 
 ALTER    PROCEDURE [dbo].[AppendDoc]
