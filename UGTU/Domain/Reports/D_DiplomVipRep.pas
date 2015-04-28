@@ -37,6 +37,7 @@ type
     FStudName: string;
     Fik_direction: integer;
     FNameInDatPadez: boolean;
+    Fik_VidGos: integer;
     Fik_fac: integer;
     function GetNextCellVert(cur: String): String;
     function GetPrevCellVert(cur: String): String;
@@ -58,6 +59,7 @@ type
     property ikGroup:integer read FikGroup write FikGroup;
     property StudName:string read FStudName write FStudName;
     property ik_direction:integer read Fik_direction write Fik_direction;
+    property ik_VidGos:integer read Fik_VidGos write Fik_VidGos;
     property ik_fac:integer read Fik_fac write Fik_fac;
     property NameInDatPadez:boolean read FNameInDatPadez write FNameInDatPadez;
   end;
@@ -277,9 +279,14 @@ var
   str, str1: String;   // строка, которую будем вставлять в нужное место в шаблоне
   cur, cur1: String;
   i, weekCount: Integer;
+  WithZachEd: boolean;
 begin
   //Name:= dmDiplom.adospGetVipiscaForDiplomStudName.AsString;
   ActivateWorksheet(MainpageNumber);
+
+  //определяем, выводить ли зачетные единицы или часы
+  WithZachEd:= (ik_direction=3) or ((ik_direction=1) and (ik_VidGos=2));
+
   // вывод общих сведений
   if (NameInDatPadez) then
   begin
@@ -429,40 +436,10 @@ begin
     inc(i);
   end;
 
-  //ActRange.Value :='';
-
-    {str := dmDiplom.adospGetVipiscaForDiplomcdiplom.AsString;
-    FindRange := Find('#дипл#');
-    FindRange.Select;
-    ActRange := Selection;
-    cur:= ActRange.Address;
-
-  SendStringToExcel(str, cur, ActRange);}
-  // вывод курсовых работ
-  //dmDiplom.adospSelKRForVipisca.First;
   FindRange := Find('#КР#');
   FindRange.Select;
   ActRange := Selection;
   cur:= ActRange.Address;
-  //if (dmDiplom.adospSelKRForVipisca.RecordCount=0) then
-
-  {repeat
-  begin
-    if (dmDiplom.adospSelKRForVipisca.Eof) then
-      str:= ''
-    else
-    begin
-      str := dmDiplom.adospSelKRForVipisca.FieldByName('cTema').AsString;
-      if str = '' then str := 'тема не указана';
-      //str :=  str+', '+ dmDiplom.adospSelKRForVipisca.FieldByName('cOsenca').AsString;
-    end;
-    SendStringToExcel(str, cur, ActRange);
-    dmDiplom.adospSelKRForVipisca.Next;
-    SelectNextCellVert(cur, ActRange);
-  end;    
-  until dmDiplom.adospSelKRForVipisca.Eof; }
-  // вывод курсовых проектов, если их мало
-   //if (dmDiplom.adospSelKRForVipisca.RecordCount + dmDiplom.adospSelKPForVipisca.RecordCount <MaxKRCount) then
   begin
     dmDiplom.adospSelKPForVipisca.First;
     ActRange := Range[cur,cur];
@@ -557,15 +534,13 @@ begin
   FindRange.Select;
   ActRange := Selection;
   cur:= ActRange.Address;
-  //i:=1;
   repeat
   begin
     str:= '';
     if (not dmDiplom.adospSelUspevForVipisca.Eof) then
     begin
       if (dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger > 0) then
-        //str := intToStr(i)+'. ';
-      str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
+        str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
     end;
     str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
     ActRange.Value := str;
@@ -578,7 +553,7 @@ begin
 
     cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
-    if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
+    if (WithZachEd) then
     begin
       str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString+' з.е.';
     end
@@ -611,13 +586,11 @@ begin
     else
     begin
       str := dmDiplom.adospSelPractForVipisca.FieldByName('DiscName').AsString;
-      //str :=  str+' '+ dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString;
-      //str :=  str +' недель, '+ dmDiplom.adospSelPractForVipisca.FieldByName('cOsenca').AsString;
     end;
     SendStringToExcel(str, cur, ActRange);
     cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
-    if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
+    if (WithZachEd {(dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)}) then
     begin
       str := dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsString+' з.е.';
     end
@@ -650,7 +623,7 @@ begin
   cur1 := Selection.Address;
   SelectNextCellHor(cur1,ActRange);
   if (dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger>0) then
-    if ({(ik_direction = 1) or }(ik_direction = 3) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)) then
+    if (WithZachEd) then
     begin
       str := dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsString+' з.е.';
     end
@@ -728,8 +701,7 @@ begin
     SendStringToExcel(str, cur, ActRange);
     cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
-    if ((dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger<0) and ((ik_direction = 3)
-      or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169))) then
+    if ((dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger<0) and (WithZachEd)) then
     begin
       str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString+' з.е.';
     end
