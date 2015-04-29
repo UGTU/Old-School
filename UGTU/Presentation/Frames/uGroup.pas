@@ -901,14 +901,11 @@ begin
   begin
     Active := false;
     Parameters[1].Value := ikVed;
-    // Parameters[2].Value := ikVidZan;
-    // Parameters[3].Value := cmbxSemAtt.ItemIndex+1;
     Active := true;
   end;
 
   dbcbeExaminer.KeyValue := dmUspevaemost.adospSelAtt.FieldByName
-    ('itab_n').AsString;
-  // dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsInteger;
+    ('id_teacher').AsInteger;
 
   if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> Null then
     dbdteBRSExam.Value := dmUspevaemost.adospSelAtt.FieldByName('Dd_exam')
@@ -1202,15 +1199,12 @@ begin
   begin
     Active := false;
     Parameters[1].Value := ikVed;
-    // Parameters[2].Value := ikVidZan;
-    // Parameters[3].Value := cmbxSemAtt.ItemIndex+1;
     Active := true;
   end;
 
   // искать в ImportTeachers
   dbcbeExaminer.KeyValue := dmUspevaemost.adospSelBRSExam.FieldByName
-    ('itab_n').AsString;
-  // dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
+    ('id_teacher').AsInteger;
 
   if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime <> Null
   then
@@ -1305,12 +1299,10 @@ begin
   begin
     Active := false;
     Parameters[1].Value := ikVed;
-    // Parameters[2].Value := ikVidZan;
-    // Parameters[3].Value := cmbxSemAtt.ItemIndex+1;
     Active := true;
   end;
 
-  dblcbPrepod.KeyValue := dmUspevaemost.adospSelAtt.FieldByName('itab_n')
+  dblcbPrepod.KeyValue := dmUspevaemost.adospSelAtt.FieldByName('id_teacher')
     .AsInteger;
 
   if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> Null then
@@ -1403,7 +1395,7 @@ begin
 
   // записываем считанные данные
   dbcmbxPrepodVed.KeyValue := dmUspevaemost.adospSelVed.FieldByName
-    ('itab_n').Value;
+    ('id_teacher').Value;
   if dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value <> Null then
     dbdteEx.Value := dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value;
   if (dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value <> Null) and
