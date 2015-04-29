@@ -596,7 +596,7 @@ begin
     end
     else
     begin
-      str:= GetWeekCountNameFromDays(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsInteger);
+      str:= GetWeekCountName(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString);
     end;
     ActRange.Value := str;
 
@@ -622,14 +622,15 @@ begin
 
   cur1 := Selection.Address;
   SelectNextCellHor(cur1,ActRange);
-  if (dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger>0) then
+  if ((dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger>0)
+    and (dmDiplom.adospSelGOSForVipisca.FieldByName('ik_vid_zanyat').AsInteger=31)) then
     if (WithZachEd) then
     begin
       str := dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsString+' з.е.';
     end
     else
     begin
-      str:= GetWeekCountNameFromDays(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger);
+      str:= GetWeekCountName(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsString);
     end
   else
   begin
@@ -644,19 +645,16 @@ begin
   SelectNextCellVert(cur, ActRange);
   str:= 'в том числе:';
   SendStringToExcel(str, cur, ActRange);
-
   SelectNextCellVert(cur, ActRange);
+
   //гос экзамен #ГОС#
   dmDiplom.adospSelGOSForVipisca.First;
-  if (dmDiplom.adospSelGOSForVipisca.Eof) then
-      str:= ''
-  else
+  if (not dmDiplom.adospSelGOSForVipisca.Eof) and (dmDiplom.adospSelGOSForVipisca.FieldByName('ik_vid_zanyat').AsInteger = 56) then
   begin
       if (IsNapravl()) then
         str := 'Итоговый государственный междисциплинарный экзамен по направлению подготовки'
       else
-        str := 'Итоговый государственный междисциплинарный экзамен по специальности'//'Итоговый государственный междисциплинарный экзамен';
-    end;
+        str := 'Итоговый государственный междисциплинарный экзамен по специальности';//'Итоговый государственный междисциплинарный экзамен';
     SendStringToExcel(str, cur, ActRange);
     cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);
@@ -668,6 +666,7 @@ begin
     SendStringToExcel(str, cur, ActRange);
 
     SelectNextCellVert(cur, ActRange);
+  end;
   end;
 
 

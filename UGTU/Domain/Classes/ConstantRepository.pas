@@ -62,6 +62,7 @@ function GetTimeByType(aEdIzm, aHours: integer): string; // получить
 // function GetWeekCountName(weekCount: integer): string; //получить кол-во недель в виде строки
 function GetWeekCountNameFromDays(daysCount: integer): string;
 // получить кол-во недель в виде строки из часов
+function GetWeekCountName(weekCountStr: string): string;
 
 
 implementation

@@ -1,11 +1,11 @@
 inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
   Width = 927
-  Height = 524
+  Height = 541
   ExplicitWidth = 927
-  ExplicitHeight = 524
+  ExplicitHeight = 541
   inherited Panel1: TPanel
     Width = 927
-    Height = 487
+    Height = 504
     ExplicitWidth = 927
     ExplicitHeight = 487
     object CheckBox1: TCheckBox
@@ -26,7 +26,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     end
   end
   inherited pnlSave: TPanel
-    Top = 487
+    Top = 504
     Width = 927
     ExplicitTop = 487
     ExplicitWidth = 927
@@ -45,20 +45,22 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     Left = 0
     Top = 0
     Width = 927
-    Height = 487
+    Height = 504
     ActivePage = tshDiplom
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 2
     OnChange = pcOtdKadrChange
     OnChanging = pcOtdKadrChanging
+    ExplicitHeight = 487
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
+      ExplicitHeight = 456
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
         Width = 919
-        Height = 425
+        Height = 442
         Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
         Align = alClient
         AutoFitColWidths = True
@@ -237,6 +239,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgMemberGak: TDBGridEh
         Left = 0
         Top = 31
@@ -383,6 +389,10 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0

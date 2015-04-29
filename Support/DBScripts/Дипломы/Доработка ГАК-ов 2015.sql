@@ -91,7 +91,7 @@ AND Ik_prikazOtch IS NULL AND ik_pricOtch IS NULL)
 
 GO
 --Выборка всех профилей и специальностей для ГАК определенного года
---SELECT * from [dbo].[OKADRGetEducBranch](2015) where  [id_type_branch]=2
+--SELECT * from [dbo].[OKADRGetEducBranch](2015) where  [id_type_branch]=1 2
 ALTER FUNCTION [dbo].[OKADRGetEducBranch](@year INT)
 RETURNS  TABLE
  
@@ -138,6 +138,29 @@ FROM        Spec_stud INNER JOIN Relation_spec_fac
                        
 
 ORDER BY dbo.Relation_spec_fac.ik_fac, Cname_spec 
+
+
+
+go
+/*
+select *
+from dbo.Relation_spec_fac
+where ik_fac=29 and ik_spec=354592
+
+update dbo.Relation_spec_fac
+set YearObuch=4
+where ik_spec_fac=246
+
+select *,DATEADD(yyyy,-1,DateExit)
+from dbo.Grup
+where Cname_grup like 'ДОУ%з' and ik_spec_fac=246
+
+update dbo.Grup
+set DateExit=DATEADD(yyyy,-1,DateExit)
+where Cname_grup like 'ДОУ%з' and ik_spec_fac=246
+
+*/
+
 
 GO
 --[dbo].[OKADRGetQualifications] 
@@ -220,7 +243,7 @@ left join [dbo].[Direction] on Spec_stud.ik_direction=[Direction].ik_direction
 
 
 go
-
+/*
 declare @year INT=2015,@ik_fac INT=27, @ik_spec INT=354569,@ik_profile INT=293
 
 SELECT TOP 1
@@ -247,3 +270,5 @@ SELECT *
 FROM   
 dbo.Spec_stud 
 where Spec_stud.ik_spec=@ik_spec
+
+*/
