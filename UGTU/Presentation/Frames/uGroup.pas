@@ -2679,8 +2679,8 @@ begin
           dbgDiplom.DataSource.DataSet.FieldByName('ExcelPatternName').AsString,
           dbgDiplom.DataSource.DataSet.FieldByName('ik_direction').AsInteger,
           dbgDiplom.DataSource.DataSet.FieldByName('Ik_fac').AsInteger,
-          dbgDiplom.DataSource.DataSet.FieldByName('DiplVklDatPadez')
-          .AsBoolean);
+          dbgDiplom.DataSource.DataSet.FieldByName('VidGos').AsInteger,
+          dbgDiplom.DataSource.DataSet.FieldByName('DiplVklDatPadez').AsBoolean);
       end;
     end;
     if (not AllRight) then

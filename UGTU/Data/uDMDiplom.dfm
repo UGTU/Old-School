@@ -111,6 +111,9 @@ object dmDiplom: TdmDiplom
       FieldName = 'OverVUZName'
       Size = 150
     end
+    object adospDiplomListVidGos: TIntegerField
+      FieldName = 'VidGos'
+    end
   end
   object dsDiplomList: TDataSource
     DataSet = adospDiplomList
@@ -118,6 +121,7 @@ object dmDiplom: TdmDiplom
     Top = 88
   end
   object adotPredpr: TADOTable
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'Predpr'
@@ -125,6 +129,7 @@ object dmDiplom: TdmDiplom
     Top = 24
   end
   object adotTypeTema: TADOTable
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
