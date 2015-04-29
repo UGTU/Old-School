@@ -255,8 +255,8 @@ type
     adospGetAllVedNaprForGrupiK_vid_zanyat: TIntegerField;
     adospGetAllVedNaprForGrupcName_disc: TStringField;
     adospVedTopiHour_gos: TIntegerField;
-    adodsNapravlItab_n: TStringField;
     adospSelVedGroupi_balls: TIntegerField;
+    adodsNapravlid_teacher: TIntegerField;
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);
     procedure adospSelVedKPCalcFields(DataSet: TDataSet);
     procedure adodsSelBRSExamGroupCalcFields(DataSet: TDataSet);

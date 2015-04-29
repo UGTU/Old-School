@@ -88,7 +88,7 @@ uses
   function SaveDateAllAtt(ik_grup, nSem, numAtt:integer; dateAtt: TDateTime):boolean;
 
 //закрытие аттестации
-  function CloseAtt(ikVed: integer; itab_n: string; lclose : boolean):boolean;
+  function CloseAtt(ikVed, id_teacher: integer; lclose : boolean):boolean;
 
 
 
@@ -932,7 +932,7 @@ end;
 
 end;
 
-function TUspevGroupController.CloseAtt(ikVed: integer; itab_n: string; lclose: boolean): boolean;
+function TUspevGroupController.CloseAtt(ikVed, id_teacher: integer; lclose: boolean): boolean;
 var tempStoredProc: TADOStoredProc;
 begin
 result:=true;
@@ -942,9 +942,8 @@ try
   tempStoredProc.ProcedureName:= 'Dek_CloseAtt;1';
   tempStoredProc.Connection:= dm.DBConnect;
   tempStoredProc.Parameters.CreateParameter('@Ik_ved', ftInteger, pdInput, 0, ikVed);
-  tempStoredProc.Parameters.CreateParameter('@Itab_n', ftString, pdInput, 50, itab_n);
+  tempStoredProc.Parameters.CreateParameter('@id_teacher', ftInteger, pdInput, 0, id_teacher);
   tempStoredProc.Parameters.CreateParameter('@lclose', ftBoolean, pdInput, 0, lclose);
-
   tempStoredProc.ExecProc;
 
 except
@@ -1622,7 +1621,7 @@ begin
       CreateParameter('@ik_vid_zanyat', ftInteger, pdInput, 0, ikVidZan);
       CreateParameter('@n_sem', ftInteger, pdInput, 0, nSem);
       CreateParameter('@ik_disc', ftInteger, pdInput, 0, ikPredm);
-      CreateParameter('@Itab_n', ftString, pdInput, 50, ikPrepod);
+      CreateParameter('@id_teacher', ftInteger, pdInput, 50, ikPrepod);
       CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, ikVidExam);
       CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, DateExam);
       CreateParameter('@dD_vydano', ftDateTime, pdInput, 0, Date);
