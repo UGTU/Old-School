@@ -97,7 +97,7 @@ begin
   else
     dbdteExam.Value:=dmUspevaemost.adodsNapravl.FieldByName('dd_exam').AsDateTime;
 
-  dbcbeEx.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('itab_n').AsString;
+  dbcbeEx.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('id_teacher').AsInteger;
   dbcbeMark.KeyValue:= dmUspevaemost.adodsNapravl.FieldByName('cosenca').AsInteger;
   eTema.Text:= dmUspevaemost.adodsNapravl.FieldByName('ctema').AsString;
 end;

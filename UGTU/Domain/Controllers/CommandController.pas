@@ -37,7 +37,7 @@ type
     // редактирует или удаляет ведомость
   public
     constructor Create(FVedom: integer); overload;
-    procedure Update(ikVidExam: integer; VedNum, ikPrepod: string;
+    procedure Update(ikVidExam, ikPrepod: integer; VedNum: string;
       DateExam: TDateTime; bitClose, bitNapr: boolean);
     procedure Delete;
   end;
@@ -74,8 +74,8 @@ type
     constructor Create(FVedom: integer); overload;
     function Add(ik_contentUP, ik_studGrup, VidEx: integer;
       StartDate, EndDate: TDateTime; cNumber_napr: string): integer;
-    procedure Close(Cosenca: integer; ntab, KPTema: string;
-      date_exam: TDateTime);
+    procedure Close(Cosenca, ikPrepod: integer; KPTema: string;
+  date_exam: TDateTime);
     procedure Annul;
   end;
 
@@ -217,7 +217,7 @@ type
     procedure CreateAllVed;
     // создать все ведомости, которые еще не созданы для текущей группы в семестре
     procedure DelVed(ik_ved: integer);
-    procedure Save(ikVidExam: integer; VedNum, ikPrepod: string;
+    procedure Save(ikVidExam, ikPrepod: integer; VedNum: string;
       // сохранить текущую ведомость
       DateExam: TDateTime; bitClose, bitNapr: boolean);
 
@@ -255,7 +255,7 @@ type
     procedure Reload(ik_grup, n_sem, n_module: integer); overload;
     procedure CreateAllBRS;
     procedure DelVed(ik_ved: integer);
-    procedure Save(ikPrepod: string; // сохранить текущую ведомость
+    procedure Save(ikPrepod: integer; // сохранить текущую ведомость
       DateExam: TDateTime);
 
     property BRSVedomost: integer write SetBRSVedomost;
@@ -505,7 +505,7 @@ begin
   FN_sem := n_sem;
 end;
 
-procedure TVedomostController.Save(ikVidExam: integer; VedNum, ikPrepod: string;
+procedure TVedomostController.Save(ikVidExam, ikPrepod: integer; VedNum: string;
   DateExam: TDateTime; bitClose, bitNapr: boolean);
 var
   FVedCommand: TUpdateVedCommand;
@@ -517,7 +517,7 @@ begin
 
     FVedCommand := TUpdateVedCommand.Create(FDataSet.FieldByName('ik_ved')
       .AsInteger);
-    FVedCommand.Update(ikVidExam, VedNum, ikPrepod, DateExam, bitClose,
+    FVedCommand.Update(ikVidExam, ikPrepod, VedNum,  DateExam, bitClose,
       bitNapr);
     FDataSet.Connection.CommitTrans;
 
@@ -705,7 +705,7 @@ begin
     CreateParameter('@flag', ftInteger, pdInput, 0, 0);
     CreateParameter('@Ik_ved', ftInteger, pdInput, 0, FVedom);
     CreateParameter('@cNumber_ved', ftString, pdInput, 12, '');
-    CreateParameter('@Itab_n', ftString, pdInput, 50, '');
+    CreateParameter('@id_teacher', ftInteger, pdInput, 0, 0);
     CreateParameter('@Ik_vid_exam', ftInteger, pdInput, 0, 0);
     CreateParameter('@Dd_exam', ftDateTime, pdInput, 0, Date);
     CreateParameter('@Dd_vyd', ftDateTime, pdInput, 0, Date);
@@ -723,14 +723,14 @@ begin
   end;
 end;
 
-procedure TUpdateVedCommand.Update(ikVidExam: integer; VedNum, ikPrepod: string;
+procedure TUpdateVedCommand.Update(ikVidExam, ikPrepod: integer; VedNum: string;
   DateExam: TDateTime; bitClose, bitNapr: boolean);
 begin
   with FStor.Parameters do
   begin
     ParamByName('@flag').Value := 0; // редактирование
     ParamByName('@cNumber_ved').Value := VedNum;
-    ParamByName('@Itab_n').Value := ikPrepod;
+    ParamByName('@id_teacher').Value := ikPrepod;
     ParamByName('@Ik_vid_exam').Value := ikVidExam;
     ParamByName('@Dd_exam').Value := DateExam;
     ParamByName('@lClose').Value := bitClose;
@@ -910,13 +910,13 @@ begin
   end;
 end;
 
-procedure TNaprCommand.Close(Cosenca: integer; ntab, KPTema: string;
+procedure TNaprCommand.Close(Cosenca, ikPrepod: integer; KPTema: string;
   date_exam: TDateTime);
 begin
   with FStor.Parameters do
   begin
     ParamByName('@flag').Value := 1; // закрыть направление
-    ParamByName('@Itab_n').Value := ntab;
+    ParamByName('@id_teacher').Value := ikPrepod;
     ParamByName('@KPTema').Value := KPTema;
     ParamByName('@EndDate').Value := date_exam;
     FStor.ExecProc;
@@ -939,7 +939,7 @@ begin
     CreateParameter('@cNumber_napr', ftString, pdInput, 12, '');
     CreateParameter('@ik_ved', ftInteger, pdInput, 0, FVedom);
     CreateParameter('@cosenca', ftInteger, pdInput, 0, 0);
-    CreateParameter('@Itab_n', ftString, pdInput, 50, '');
+    CreateParameter('@id_teacher', ftInteger, pdInput, 0, 0);
     CreateParameter('@KPTema', ftString, pdInput, 2000, '');
   end;
 
@@ -1071,7 +1071,7 @@ begin
   FN_mod := n_module;
 end;
 
-procedure TBRSVedomostController.Save(ikPrepod: string; DateExam: TDateTime);
+procedure TBRSVedomostController.Save(ikPrepod: integer; DateExam: TDateTime);
 var
   FVedCommand: TUpdateVedCommand;
 begin
@@ -1081,7 +1081,7 @@ begin
 
     FVedCommand := TUpdateVedCommand.Create(FDataSet.FieldByName('ik_ved')
       .AsInteger);
-    FVedCommand.Update(0, '', ikPrepod, DateExam, false, false);
+    FVedCommand.Update(0, ikPrepod, '',  DateExam, false, false);
     FDataSet.Connection.CommitTrans;
 
   except

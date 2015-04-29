@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsDiplom
+      ActivePage = tsAtt
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -748,7 +748,7 @@ inherited fmGroup: TfmGroup
               DataField = ''
               EditButtons = <>
               Flat = True
-              KeyField = 'itab_n'
+              KeyField = 'idEmployee'
               ListField = 'NamePrepod'
               ListSource = dmUspevaemost.dsPrepodVedFromUchPlan
               ShowHint = True
@@ -1171,7 +1171,7 @@ inherited fmGroup: TfmGroup
             DataField = ''
             EditButtons = <>
             Flat = True
-            KeyField = 'itab_n'
+            KeyField = 'idEmployee'
             ListField = 'NamePrepod'
             ListSource = dmUspevaemost.dsPrepodVedFromUchPlan
             ShowHint = True
@@ -1628,7 +1628,7 @@ inherited fmGroup: TfmGroup
             DataField = ''
             EditButtons = <>
             Flat = True
-            KeyField = 'itab_n'
+            KeyField = 'idEmployee'
             ListField = 'NamePrepod'
             ListSource = dmUspevaemost.dsPrepodVed
             ShowHint = True

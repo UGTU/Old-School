@@ -702,6 +702,7 @@
     object adoSelDocumentsDocCount: TIntegerField
       FieldKind = fkCalculated
       FieldName = 'DocCount'
+      Visible = False
       Calculated = True
     end
   end
