@@ -189,6 +189,10 @@ type
     ToolButton11: TToolButton;
     ToolButton12: TToolButton;
     MenuItem4: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -1012,7 +1016,7 @@ begin
     dsDoc.Open;
     dsDoc.First;
     editF.eDest.Text := 'ПФ';
-  //  editF.eNum.Text := LastNum.ToString();
+    // editF.eNum.Text := LastNum.ToString();
     editF.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
     editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
       dsDoc.FieldByName('Cname_grup').AsString + ')';
@@ -1217,7 +1221,7 @@ begin
     dsDoc.Open;
     dsDoc.First;
     editF.eDest.Text := 'По месту требования';
- //   editF.eNum.Text := LastNum.ToString();
+    // editF.eNum.Text := LastNum.ToString();
     editF.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
     editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
       dsDoc.FieldByName('Cname_grup').AsString + ')';
@@ -1696,9 +1700,54 @@ begin
 end;
 
 procedure TfmStudent.MenuItem4Click(Sender: TObject);
-begin
-  inherited;
+var
+  datebegin, d1, d2: TDateTime;
 
+  AYear, AMonth, ADay: word;
+  week1, week2, numweek, k, posit,h: integer;
+  mask1, mask2: string;
+begin
+ inherited;
+  week1 := 40;
+  week2 := 42;
+  mask1 := '001111';
+  mask2 := '111000';
+  numweek := 1;
+  k:=0;
+  DecodeDate(Now, AYear, AMonth, ADay);
+  d1 := date;
+  d2 := date;
+  posit:=0;
+
+  if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+    d1 := StrToDateTime('01.09.' + AYear.ToString())
+  else
+  begin
+    d1 := StrToDateTime('01.09.' + (StrToInt(AYear.ToString()) - 1).ToString());
+    AYear := StrToInt(AYear.ToString()) - 1;
+  end;
+
+  if DayOfWeek(d1)  = 1 then
+    d1 := StrToDateTime('02.09.' + AYear.ToString());
+
+  while numweek <> week1 do
+  begin
+    d1 := d1 + 7;
+    numweek := numweek + 1;
+  end;
+
+
+
+  posit := Pos('1', mask1) - 1;
+  d1 := d1 + posit;
+
+      if week1 <> week2 then
+  begin
+    posit := Pos('0', mask2);
+    d2 := d1 + (week2 - week1) * 7 + posit
+  end
+  else
+    d2 := d1 + 6 - DayOfWeek(d1);
 end;
 
 // справка вызов

@@ -1055,7 +1055,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 459
+                Height = 455
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1967,7 +1967,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900D40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2314,6 +2314,18 @@ inherited fmStudent: TfmStudent
     object MenuItem4: TMenuItem
       Caption = #1057#1087#1088#1072#1074#1082#1072'-'#1074#1099#1079#1086#1074
       OnClick = MenuItem4Click
+    end
+    object N3: TMenuItem
+      Caption = #1040#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1072#1103' '#1085#1077#1091#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
+    end
+    object N4: TMenuItem
+      Caption = #1055#1080#1089#1100#1084#1086'-'#1091#1074#1077#1076#1086#1084#1083#1077#1085#1080#1077
+    end
+    object N5: TMenuItem
+      Caption = #1040#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1072#1103' '#1089#1087#1088#1072#1074#1082#1072
+    end
+    object N6: TMenuItem
+      Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1077' '#1085#1072' '#1072#1082#1072#1076#1077#1084'. '#1089#1087#1088#1072#1074#1082#1091
     end
   end
   object ppmStudNapr: TPopupMenu
