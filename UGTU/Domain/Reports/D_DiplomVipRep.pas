@@ -350,6 +350,8 @@ begin
     Replace('#—пециальность#', dmDiplom.adospGetVipiscaForDiplomCname_spec.AsString);
   end;
 
+  Replace('#DateDelivery#', GetFullDate(dmDiplom.adospGetVipiscaForDiplom.FieldByName('DateDiplomDelivery').AsDateTime) +' года');
+
   //записываем пол€, в которых в начале строки м.б. нули
   FindRange := Find('#–егЌом#');
   FindRange.Select;

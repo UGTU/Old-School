@@ -79,14 +79,20 @@ RETURN (
 SELECT distinct
   StudGrup.ik_grup, Cname_grup, Relation_spec_fac.ik_spec, Relation_spec_fac.ik_spec_fac, Relation_spec_fac.ik_spec_fac as Realik_spec_fac, ik_fac,
   --ik_Gener_spec_fac нужен для определения уникальности специальности - используется для связки со специальностями   
-  Relation_spec_fac.ik_spec+dbo.Relation_spec_fac.ik_fac*100000 ik_Gener_spec_fac , Grup.ik_spclz as ik_profile
+  Relation_spec_fac.ik_spec+dbo.Relation_spec_fac.ik_fac*100000 ik_Gener_spec_fac , Grup.ik_spclz as ik_profile,
+  Spec_stud.Cname_spec+ISNULL(' ('+Direction.cShort_name_direction+')','')+ ISNULL(' - '+Spec_stud.Sh_spec,'') Cname_spec,
+  RTRIM([profile].Cname_spec) Cname_profile, Grup.nYear_post
 FROM         
- Grup, Relation_spec_fac, StudGrup 
+ dbo.Grup
+ INNER JOIN dbo.Relation_spec_fac ON Grup.ik_spec_fac=Relation_spec_fac.ik_spec_fac
+ INNER JOIN dbo.StudGrup ON StudGrup.ik_grup=Grup.ik_grup
+ INNER JOIN dbo.EducationBranch Spec_stud ON Spec_stud.ik_spec=Relation_spec_fac.ik_spec
+ INNER JOIN 
+		dbo.Direction ON Spec_stud.ik_direction=Direction.ik_direction
+ LEFT JOIN dbo.EducationBranch [profile] ON [profile].ik_spec=Grup.ik_spclz
 WHERE
- StudGrup.ik_grup=Grup.ik_grup AND
- Grup.ik_spec_fac=Relation_spec_fac.ik_spec_fac AND
- @Year=(Grup.nYear_post+Relation_spec_fac.YearObuch) 
-AND Ik_prikazOtch IS NULL AND ik_pricOtch IS NULL)
+	@Year=(Grup.nYear_post+Relation_spec_fac.YearObuch) 
+		AND Ik_prikazOtch IS NULL AND ik_pricOtch IS NULL)
 
 
 GO

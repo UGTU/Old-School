@@ -458,6 +458,9 @@ object dmDiplom: TdmDiplom
       FieldName = 'ik_spec_fac'
       ReadOnly = True
     end
+    object adospGetVipiscaForDiplomDateDiplomDelivery: TDateTimeField
+      FieldName = 'DateDiplomDelivery'
+    end
   end
   object adospAppendDiplom: TADOStoredProc
     Connection = dm.DBConnect

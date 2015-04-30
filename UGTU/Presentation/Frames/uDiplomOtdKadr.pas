@@ -47,6 +47,11 @@ type
     CheckBox2: TCheckBox;
     dbcmbxGAKFac: TDBLookupComboboxEh;
     cbDisplayType: TComboBox;
+    Splitter1: TSplitter;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    dbgGroups: TDBGridEh;
+    GroupBox1: TGroupBox;
     procedure dbcmbxFacChange(Sender: TObject);
     procedure dbcmbxSpecChange(Sender: TObject);
     procedure dbcmbxGroupChange(Sender: TObject);
@@ -137,6 +142,9 @@ begin
 
     //факультет ГАКа
     ik_GAKfac:= 0;
+    dbgGroups.DataSource:= TDataSource.Create(nil);
+    dbgGroups.DataSource.DataSet:= TADODataSet.Create(nil);
+    TDiplOtdKardController.Instance.LoadExitGroups(@dbgGroups.DataSource.DataSet);
 	  TDiplOtdKardController.Instance.GetFacList(@dbcmbxGAKFac);
     dbcmbxGAKFac.Value:= dbcmbxGAKFac.ListSource.DataSet.FieldByName('ik_fac').AsInteger;
     cbDisplayType.ItemIndex:= 0;
@@ -168,7 +176,6 @@ begin
     end;
     2:  //квалификации
     begin
-
       //отменяем сохранение списка
         TDiplOtdKardController.Instance.CancelUpdatesQualif(@dbgQualif.DataSource.DataSet);
         dbgQualif.DataSource.DataSet.Close;
@@ -418,7 +425,6 @@ end;
 
 
 procedure TfmDiplomOtdKadr.dbcmbxSpecChange(Sender: TObject);
-var Newik_spec: integer;
 begin
   if not DoModified then
   begin
@@ -455,6 +461,12 @@ begin
     TDiplOtdKardController.Instance.GetGakMemberList(@dbgMemberGak.DataSource.DataSet,dbcmbxYear.Value, cbDisplayType.ItemIndex);
     if (dbcmbxYear.Value<>NULL) then
       ik_year:= dbcmbxYear.Value;
+
+    dbgGroups.Columns[0].Visible:= false;
+    dbgGroups.Columns[1].Visible:= false;
+    dbgGroups.Columns[cbDisplayType.ItemIndex].Visible:= true;
+
+
     dbcmbxGAKFacChange(nil);
 end;
 
@@ -506,6 +518,10 @@ begin
     begin
       TDiplOtdKardController.Instance.FilterGAKList(@dbgMemberGak.DataSource.DataSet,dbcmbxGAKFac.Value, -1);
       TDiplOtdKardController.Instance.FilterGAKList(@DMOtdKadrDiplom.adoqSpec,dbcmbxGAKFac.Value, cbDisplayType.ItemIndex);
+      if (cbDisplayType.ItemIndex = 1) then
+        TDiplOtdKardController.Instance.FilterGAKList(@dbgGroups.DataSource.DataSet,dbcmbxGAKFac.Value, cbDisplayType.ItemIndex)
+      else
+        TDiplOtdKardController.Instance.FilterGAKList(@dbgGroups.DataSource.DataSet,dbcmbxGAKFac.Value, -1);
       ik_GAKfac:= dbcmbxGAKFac.Value;
     end;
 end;
