@@ -10,7 +10,7 @@ type
   PDBGrid = ^TDBGridEh;
   TDiplOtdKardController = class (TObject)
   private
-    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac, ik_fac: Integer):TADOStoredProc;
+    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
     procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet);
   protected
     constructor CreateInstance;
@@ -54,7 +54,7 @@ type
   //SetSizes ”становка размеров
   procedure SetSizes(sh1, sh2:Variant);
   //PrintAllDiploms печатает дипломы
-  function PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac, ik_fac,year:integer; OldBlank: boolean):integer;
+  function PrintAllDiploms(SourceDataSet: PDataSet; ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
   //делит строку str1 на 2, если это необходимо (макс. длина строки MaxStrLength)
   procedure ParseString(var str1,str2: string; MaxStrLength: integer);
 
@@ -448,7 +448,7 @@ begin
   end;
 end;
 
-function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac, ik_fac, year:integer; OldBlank: boolean):integer;
+function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
 var
   E, sheet: Variant;
   first, count :integer;
@@ -458,7 +458,7 @@ var
 begin
   Result:=0;
   TApplicationController.GetInstance.AddLogEntry('ƒиплом. Ёкспорт дипломов ');
-  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_spec_fac, ik_fac);
+  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_spec, ik_fac, ik_profile);
   try
     E:= CreateOleObject('Excel.Application');
     try
@@ -591,15 +591,16 @@ begin
   SourceDataSet.Open;
 end;
 
-function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac, ik_fac: Integer):TADOStoredProc;
+function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
 begin
   Result := TADOStoredProc.Create(nil);
   Result.Connection := dm.DBConnect;
   Result.ProcedureName := 'OKADRGetGakMemberForExcel;1';
   Result.Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
-  Result.Parameters.CreateParameter('@ik_spec_fac', ftInteger, pdInput, 4, ik_spec_fac);
+  Result.Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 4, ik_spec);
   Result.Parameters.CreateParameter('@year', ftInteger, pdInput, 4, year);
   Result.Parameters.CreateParameter('@ik_fac', ftInteger, pdInput, 4, ik_fac);
+  Result.Parameters.CreateParameter('@ik_profile', ftInteger, pdInput, 4, ik_profile);
   Result.Open;
 end;
 

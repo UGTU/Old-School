@@ -101,7 +101,7 @@ type
 
 var
   fmDiplomOtdKadr: TfmDiplomOtdKadr;
-  ik_group, ik_fac, ik_spec, ik_GAKfac: integer;
+  ik_group, ik_fac, ik_spec, ik_Gener_spec_fac, ik_GAKfac: integer;
   ik_year: integer;
   CurrentNum:string;
   CurrentDate:TDatetime;
@@ -125,6 +125,7 @@ begin
 	  TDiplOtdKardController.Instance.GetFacList(@dbcmbxFac);
 	//специальность
     ik_spec:= 0;
+    ik_Gener_spec_fac:= 0;
 	  TDiplOtdKardController.Instance.GetSpecList(@dbcmbxSpec);
   //группа
     TDiplOtdKardController.Instance.GetGroupList(@dbcmbxGroup);
@@ -328,7 +329,7 @@ begin
   if not DoModified then
     exit;
   TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, ik_fac, YearOf(Date), false);
+    ik_spec, ik_fac, YearOf(Date), dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, false);
   {case TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
     ik_spec, YearOf(Date)) of
     -2:
@@ -357,7 +358,7 @@ begin
   if not DoModified then
     exit;
   TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, YearOf(Date), ik_fac, true);
+    ik_spec, YearOf(Date), ik_fac, dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, true);
 end;
 
 procedure TfmDiplomOtdKadr.actSaveDiplExecute(Sender: TObject);
@@ -417,21 +418,22 @@ end;
 
 
 procedure TfmDiplomOtdKadr.dbcmbxSpecChange(Sender: TObject);
+var Newik_spec: integer;
 begin
   if not DoModified then
   begin
     Modified:= false;
-    dbcmbxSpec.Value:= ik_spec;
+    dbcmbxSpec.Value:= ik_Gener_spec_fac;
     Modified:= true;
   end;
   TApplicationController.GetInstance.AddLogEntry('Диплом. Выбор специальности '+dbcmbxSpec.Text);
   //фильтруем список групп
-
-    if ik_spec<>dbcmbxSpec.Value then
+    if ik_Gener_spec_fac<>dbcmbxSpec.Value then
     begin
       TDiplOtdKardController.Instance.FilterGroupList(@dbcmbxGroup,dbcmbxSpec.Value);
       dbcmbxGroup.Value:= dbcmbxGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
-      ik_spec:= dbcmbxSpec.Value;
+      ik_Gener_spec_fac:= dbcmbxSpec.Value;
+      ik_spec:= dbcmbxSpec.ListSource.DataSet.FieldByName('ik_spec').AsInteger;
     end;
 
 

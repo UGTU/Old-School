@@ -103,6 +103,7 @@ type
     adospGetVipiscaForDiplomOverVUZName: TStringField;
     adospGetVipiscaForDiplomik_spec: TAutoIncField;
     adospGetVipiscaForDiplomik_spec_fac: TAutoIncField;
+    adospDiplomListVidGos: TIntegerField;
   private
     { Private declarations }
   public
