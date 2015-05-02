@@ -7,35 +7,68 @@ uses
   Dialogs, uBaseFrame, Buttons, ToolWin,
   ComCtrls, StdCtrls, ExtCtrls,DateUtils, DBGridEh, Mask, DBCtrlsEh, DBLookupEh,
   VclTee.TeeGDIPlus, VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs,
-  VCLTee.Chart;
+  VCLTee.Chart, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  Data.DB, Data.Win.ADODB, GridsEh, DBAxisGridsEh, UDM, System.Actions,
+  Vcl.ActnList;
 
 type
   TfmAbitYears = class(TfmBase)
-    ToolBar1: TToolBar;
     Chart1: TChart;
     Series1: TLineSeries;
     Series2: TLineSeries;
     Series3: TLineSeries;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    ToolButton1: TToolButton;
-    dbcbIDReport: TDBLookupComboboxEh;
-    cmbxUspSem: TDBComboBoxEh;
-    ToolButton2: TToolButton;
-    ToolButton3: TToolButton;
-    ToolButton4: TToolButton;
-    SpeedButton3: TSpeedButton;
     Chart2: TChart;
     LineSeries1: TLineSeries;
     LineSeries2: TLineSeries;
     LineSeries3: TLineSeries;
+    PageControl1: TPageControl;
+    statPage: TTabSheet;
+    ToolBar1: TToolBar;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton2: TToolButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    ToolButton1: TToolButton;
+    dbcbIDReport: TDBLookupComboboxEh;
+    cmbxUspSem: TDBComboBoxEh;
+    SpeedButton3: TSpeedButton;
+    KatDocPage: TTabSheet;
+    dbgrKatZach: TDBGridEh;
+    adoKatZach: TADOQuery;
+    dsKatZach: TDataSource;
+    adoKatZachCname_kat_zach: TStringField;
+    Label1: TLabel;
+    dbgrDocs: TDBGridEh;
+    adoKatZachCType_kat: TStringField;
+    dsDocuments: TDataSource;
+    adoKatZachIk_kat_zach: TAutoIncField;
+    adoDocuments: TADODataSet;
+    adoDocumentsik_vid_doc: TIntegerField;
+    adoDocumentscvid_doc: TStringField;
+    adoDocumentsIk_kat_zach: TIntegerField;
+    adoDocumentsik_kat_doc: TIntegerField;
+    adoDocumentsisIncluded: TBooleanField;
+    ActionList1: TActionList;
+    actApply: TAction;
+    actUndo: TAction;
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
     procedure dbcbIDReportChange(Sender: TObject);
     procedure cmbxUspSemChange(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
+    procedure dbgrKatZachCellClick(Column: TColumnEh);
+    procedure dbgrDocsColumns4UpdateData(Sender: TObject; var Text: string;
+      var Value: Variant; var UseText, Handled: Boolean);
+    procedure actApplyExecute(Sender: TObject);
+    procedure actUndoExecute(Sender: TObject);
   private
     { Private declarations }
+    Year: integer;
+    procedure SetDocFilter;
+  protected
+    function DoApply: Boolean; override;
+    function DoCancel: Boolean;
   public
     procedure DoRefreshFrame; override;
     procedure GrafPaint;
@@ -49,12 +82,24 @@ var
 
 implementation
 
-uses DBTVABITYearObj ,ToolCtrlsEh, AbiturientNaborProcs, AbiturientFacade,
+uses DBTVABITYearObj, AbiturientNaborProcs, AbiturientFacade,
   AbiturientBaseProcs, ABIT_add_nabor_dialog, AbiturientAbitProcs,
   AbiturientExamProcs,DBTVRecruitobj,DBTVFacRecobj,DBTVspecRecobj,ABIT_select_stat_ALL,
-  ABIT_nabor_frame, ABIT_panel, ABIT_add_rasp_dialog, AbiturientAbitTables, uDMAbiturientOtchety, uMain;
+  ABIT_nabor_frame, ABIT_panel, ABIT_add_rasp_dialog, AbiturientAbitTables,
+  uDMAbiturientOtchety, uMain, CommandController;
 {$R *.dfm}
 
+procedure TfmAbitYears.actApplyExecute(Sender: TObject);
+begin
+  inherited;
+  DoApply;
+end;
+
+procedure TfmAbitYears.actUndoExecute(Sender: TObject);
+begin
+  inherited;
+  DoCancel;
+end;
 
 procedure TfmAbitYears.cmbxUspSemChange(Sender: TObject);
 begin
@@ -80,20 +125,86 @@ begin
   end;
 end;
 
+procedure TfmAbitYears.dbgrKatZachCellClick(Column: TColumnEh);
+begin
+  SetDocFilter;
+end;
+
+
+procedure TfmAbitYears.dbgrDocsColumns4UpdateData(Sender: TObject;
+  var Text: string; var Value: Variant; var UseText, Handled: Boolean);
+begin
+  Modified := true;
+  bbSave.enabled := true;
+  bbUndo.enabled := true;
+end;
+
+function TfmAbitYears.DoApply: Boolean;
+var
+  I: Integer;
+  FKatZachCommand: TManageKatZachDocs;
+begin
+  dbgrDocs.DataSource := nil;
+  adoDocuments.Filtered := false;
+  adoDocuments.First;
+  FKatZachCommand := TManageKatZachDocs.Create(year);
+  for I := 0 to adoDocuments.RecordCount - 1 do
+  with adoDocuments do
+  begin
+    if (FieldByName('ik_kat_doc').Value = NULL)
+      and (FieldByName('isIncluded').Value) then
+         FKatZachCommand.AddDoc(FieldByName('Ik_kat_zach').Value, FieldByName('ik_vid_doc').Value);
+    if (FieldByName('ik_kat_doc').Value <> NULL)
+      and (not FieldByName('isIncluded').Value) then
+         FKatZachCommand.DeleteDoc(FieldByName('Ik_kat_zach').Value, FieldByName('ik_vid_doc').Value);
+    Next;
+  end;
+  FKatZachCommand.Free;
+  adoDocuments.Filtered := true;
+  dbgrDocs.DataSource := dsDocuments;
+
+  modified := false;
+  bbSave.enabled := false;
+  bbUndo.enabled := false;
+end;
+
+function TfmAbitYears.DoCancel: Boolean;
+begin
+  DoRefreshFrame;
+  result := true;
+end;
+
 procedure TfmAbitYears.doRefreshFrame;
 begin
-   if dbcbIDReport.Value=null then
-   begin
-     DMAbiturientOtchety.adodsAbitReport.Active:=true;
-     dbcbIDReport.Value:=idreport;
-     cmbxUspSem.ItemIndex:=0;
-     Series1.AddXY(date,0);
-     if not SpeedButton3.Visible then GrafPaint;
-   end;
+  year:=TDBNodeAbitYearObject(FrameObject).ik;
+  if dbcbIDReport.Value=null then
+  begin
+    DMAbiturientOtchety.adodsAbitReport.Active:=true;
+    dbcbIDReport.Value:=idreport;
+    cmbxUspSem.ItemIndex:=0;
+    Series1.AddXY(date,0);
+    if not SpeedButton3.Visible then GrafPaint;
+  end;
+  adoKatZach.Close;
+  adoDocuments.Close;
+  adoKatZach.SQL[3] := 'or year(OutDate)>=' + IntTosTR(year);
+  adoDocuments.Parameters.ParamByName('@year').Value := year;
+
+  adoKatZach.Open;
+  adoDocuments.Open;
+
+  if (adoKatZach.RecordCount > 0)and(dbgrDocs.SelectedRows.Count = 0)
+    then adoKatZach.First;
+  SetDocFilter;
+
+  modified := false;
+  bbSave.enabled := false;
+  bbUndo.enabled := false;
+
 end;
 
 procedure TfmAbitYears.GrafPaint;
-var year,All,O,Z,max,DayA,DayO,DayZ:integer;
+var All,O,Z,max,DayA,DayO,DayZ:integer;
    ddate:string;
    day_b,day_e,dd:Tdatetime;
    //count:integer;
@@ -101,7 +212,7 @@ begin
    //bit:=0;     //0 - количество поданных и забранных заявлений
                //1 - общий конкурс, контракт, цкп
 	 //count:=0;
-	 year:=TDBNodeAbitYearObject(FrameObject).ik;
+
 	 Series1.Clear;
 	 Series2.Clear;
 	 Series3.Clear;
@@ -215,6 +326,18 @@ begin
    end;
    if max<25 then max:=25;
    Chart1.LeftAxis.Maximum:=max;//All+1;
+end;
+
+
+
+procedure TfmAbitYears.SetDocFilter;
+begin
+  if (adoKatZach.RecordCount > 0) then
+  begin
+    adoDocuments.Filtered := false;
+    adoDocuments.Filter := 'Ik_kat_zach = ' + adoKatZach.FieldByName('Ik_kat_zach').AsString;
+    adoDocuments.Filtered := true;
+  end;
 end;
 
 procedure TfmAbitYears.SpeedButton1Click(Sender: TObject);

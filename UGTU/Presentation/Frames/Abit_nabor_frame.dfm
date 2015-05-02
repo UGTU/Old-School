@@ -15,7 +15,7 @@ inherited fmAbitNabor: TfmAbitNabor
       Top = 2
       Width = 751
       Height = 427
-      ActivePage = Network
+      ActivePage = naborpage
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -30,10 +30,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object fac_spec: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074'-'#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgrdMain: TDBGridEh
           Left = 0
           Top = 0
@@ -57,10 +53,6 @@ inherited fmAbitNabor: TfmAbitNabor
       end
       object naborpage: TTabSheet
         Caption = #1053#1072#1073#1086#1088#1099
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object nnyear: TDBText
           Left = 288
           Top = 72
@@ -578,10 +570,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsNaborStatistik: TTabSheet
         Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgNaborStatistik: TDBGridEh
           Left = 0
           Top = 29
@@ -703,10 +691,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsExamsErrors: TTabSheet
         Caption = #1054#1096#1080#1073#1082#1080' '#1074' '#1101#1082#1079#1072#1084#1077#1085#1072#1093
         ImageIndex = 5
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgExamsErrors: TDBGridEh
           Left = 0
           Top = 0
@@ -1016,7 +1000,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030004009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -1167,7 +1151,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020004009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1406,7 +1390,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D0030009C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

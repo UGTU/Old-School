@@ -135,6 +135,7 @@ frmPostupDlg.HostForm:=self;
 frmPostupDlg.Year:=self.Year;
 frmPostupDlg.HasAddSpec:=HasAddSpec;
 frmPostupDlg.IDpostup:=-1;
+frmPostupDlg.DocRecordList := DocRecordList;
 frmPostupDlg.Showmodal;
 frmpostupDlg.Free;
 AddressRecordList.Free;

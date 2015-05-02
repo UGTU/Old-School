@@ -21,6 +21,7 @@ type
     constructor Create(aDocIK, aikDocVid, aballs: integer; aikDisc: Variant;
       aseria, anumber, akem_vidan, aaddinfo: string;  aisreal: boolean; aget_date: Variant); overload;
     constructor Create(aDocIK: integer; aIsDeleted: boolean);  overload;
+    constructor Create(aikDocVid: integer); overload;
     procedure AddDoc(aDoc: TMemoryStream);
   end;
 
@@ -55,6 +56,11 @@ constructor TDocRecord.Create(aDocIK: integer; aIsDeleted: boolean);
 begin
   ikDoc := aDocIK;
   isDeleted := aIsDeleted;
+end;
+
+constructor TDocRecord.Create(aikDocVid: integer);
+begin
+  ikDocVid := aikDocVid;
 end;
 
 end.

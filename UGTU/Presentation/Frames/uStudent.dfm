@@ -3,6 +3,7 @@ inherited fmStudent: TfmStudent
   Height = 684
   Constraints.MinHeight = 524
   Constraints.MinWidth = 561
+  ParentFont = False
   OnExit = FrameExit
   ExplicitWidth = 668
   ExplicitHeight = 684
@@ -145,10 +146,16 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 664
         Height = 615
-        ActivePage = TabSheet2
+        ActivePage = TabSheet1
         Align = alClient
         Constraints.MinWidth = 557
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
         MultiLine = True
+        ParentFont = False
         TabOrder = 0
         OnChange = PageControl1Change
         object TabSheet1: TTabSheet
@@ -1252,6 +1259,12 @@ inherited fmStudent: TfmStudent
                   Height = 22
                   Action = actUpdateDocument
                   Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
                 end
                 object SbDelDoc: TSpeedButton
                   Left = 9
@@ -2019,7 +2032,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900CC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

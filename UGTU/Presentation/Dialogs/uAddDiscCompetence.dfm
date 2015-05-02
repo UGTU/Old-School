@@ -3,7 +3,7 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
   ClientHeight = 462
   ClientWidth = 610
   ExplicitWidth = 616
-  ExplicitHeight = 489
+  ExplicitHeight = 491
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -40,22 +40,16 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
     Height = 421
     Align = alClient
     DataSource = dsGetCompetence
+    DynProps = <>
     Flat = True
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
+    FooterParams.Color = clWindow
+    ImeMode = imDisable
+    IndicatorOptions = []
     Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
     Columns = <
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'ik_competence'
         Footers = <>
@@ -63,6 +57,7 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
       end
       item
         Alignment = taCenter
+        DynProps = <>
         EditButtons = <>
         FieldName = 'short_Name'
         Footers = <>
@@ -72,6 +67,7 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
       end
       item
         Alignment = taCenter
+        DynProps = <>
         EditButtons = <>
         FieldName = 'InDiscStr'
         Footers = <>
@@ -81,6 +77,7 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
         OnUpdateData = dbgrCompetenceColumns1UpdateData
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'ik_structure_competence'
         Footers = <>
@@ -89,6 +86,7 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
         Visible = False
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'name_level_competence'
         Footers = <>
@@ -96,6 +94,7 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
         Width = 82
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'description_content'
         Footers = <>
@@ -104,11 +103,14 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
         Width = 900
       end
       item
+        DynProps = <>
         EditButtons = <>
         FieldName = 'ik_type_competence'
         Footers = <>
         Visible = False
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object Panel2: TPanel [3]
     Left = 584
@@ -162,7 +164,7 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
     Left = 248
     Top = 424
     Bitmap = {
-      494C010103000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
