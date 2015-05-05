@@ -828,7 +828,7 @@ end;
 
 procedure TftmStudent.SbDelDocClick(Sender: TObject);
 begin
-
+  DocRecordList.Delete(sgDocs.Row - 1);
   sgDocs.Cells[0, sgDocs.Row] := sgDocs.Cells[0, sgDocs.RowCount - 2];
   sgDocs.Cells[1, sgDocs.Row] := sgDocs.Cells[1, sgDocs.RowCount - 2];
   sgDocs.Cells[2, sgDocs.Row] := sgDocs.Cells[2, sgDocs.RowCount - 2];
@@ -843,7 +843,7 @@ begin
 
   sgDocs.RowCount := sgDocs.RowCount - 1;
 
-  sgDockeys.Cells[0, sgDocs.Row - 1] := sgDockeys.Cells
+ { sgDockeys.Cells[0, sgDocs.Row - 1] := sgDockeys.Cells
     [0, sgDockeys.RowCount - 2];
   sgDockeys.Cells[1, sgDocs.Row - 1] := sgDockeys.Cells
     [1, sgDockeys.RowCount - 2];
@@ -852,7 +852,8 @@ begin
   sgDockeys.Cells[0, sgDockeys.RowCount - 2] := '';
   sgDockeys.Cells[1, sgDockeys.RowCount - 2] := '';
   sgDockeys.Cells[2, sgDockeys.RowCount - 2] := '';
-  sgDockeys.RowCount := sgDockeys.RowCount - 1;
+  sgDockeys.RowCount := sgDockeys.RowCount - 1;      }
+
 end;
 
 procedure TftmStudent.sbDelLangClick(Sender: TObject);
