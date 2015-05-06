@@ -8,7 +8,7 @@ uses
   Dialogs, uBaseDialog, Grids, DBGridEh, StdCtrls, ActnList, Buttons,
   ExtCtrls, adodb, db, DBCtrlsEh, DBLookupEh, Mask, uAbitDialog, uStudDlg,
   uMain, uAbitOtchetsController, comObj, uCertificateDialog,
-  System.Actions;
+  System.Actions, System.Generics.Collections, DocumentClass;
 
 type
   TAbitList = class
@@ -87,8 +87,13 @@ type
     procedure bGetCertDataClick(Sender: TObject);
   private
     { Private declarations }
+    FDocKatFilter: string;
+    procedure LoadDocs;
+    procedure GetAdmissionByDoc;
+    procedure GetKatZach(NNRecord: integer);
   public
     HostForm: TfrmAbitCardDialog;
+    DocRecordList: TObjectList<TDocRecord>;
     IDStudent, IDpostup, IkRecruit, Num, IdCat: integer;
     commited, onlyreading, IsAdditional, IsOnline, HasAddSpec: boolean;
     AbitList: TAbitList;
@@ -212,6 +217,10 @@ begin
 
   if (dbcbeCategory.keyvalue <= 0) then
     dbcbeCategory.keyvalue := AbitList.CatNum;
+
+  if (dbcbeCategory.Text <> AbitList.Cat) then      //Если абитуриент потерял возможность поступления на категорию
+     dbcbeCategory.keyvalue := null;
+
   if (dbdteList.Value <= 0) then
     dbdteList.Value := AbitList.Date;
   if (dbcbeRecruit.keyvalue <= 0) then
@@ -232,6 +241,8 @@ end;
 procedure TfrmPostupDlg.FormShow(Sender: TObject);
 var
   j: integer;
+  I: Integer;
+  docFilter: string;
 begin
   commited := false;
   if AbitList = nil then
@@ -273,8 +284,9 @@ begin
   // если вызываем окно редактирования
   if (dm.adodsPostupView.RecordCount > 0) and (not(IsAdditional)) then
   begin
-    dm.adodsPostupView.First;
+    LoadDocs;
 
+    dm.adodsPostupView.First;
     // для проверки ЕГЭ
     ln := dm.adodsPostupView.FieldByName('Clastname').Value;
     fn := dm.adodsPostupView.FieldByName('Cfirstname').Value;
@@ -308,9 +320,7 @@ begin
   { dmStudentData.adodsKatZach.Active:=false;
     dmStudentData.adodsKatZach.Active:=true; }
 
-  dmStudentData.aspGetAbitCat.Active := false;
-  dmStudentData.aspGetAbitCat.Parameters[1].Value := IkRecruit;
-  dmStudentData.aspGetAbitCat.Active := true;
+  //GetKatZach(IkRecruit); //настройка категорий поступления
 
   dm.adodsNabor.Active := false;
   dm.adodsNabor.CommandType := cmdText;
@@ -378,6 +388,78 @@ begin
   if (AbitList.Num > 0) then
 
     Text := 'Заявление на поступление №' + inttostr(AbitList.Num);
+end;
+
+procedure TfrmPostupDlg.GetAdmissionByDoc;
+var tempDS: TADODataSet;
+  i,j: Integer;
+  inDocs: boolean;
+  k: Integer;
+begin
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDS.CommandText := 'select * from Kat_zach_doc where NNyear = ' + IntTosTr(Year);
+  tempDS.Open;
+  FDocKatFilter := '';
+  dmStudentData.aspGetAbitCat.Filtered := false;
+  dmStudentData.aspGetAbitCat.First;
+  for k := 0 to dmStudentData.aspGetAbitCat.RecordCount - 1 do
+  begin
+    inDocs := false;
+    tempDS.Filtered := false;
+    tempDS.Filter := 'ik_kat_zach = ' + dmStudentData.aspGetAbitCat.FieldByName('ik_kat_zach').AsString;
+    tempDS.Filtered := true;
+    tempDS.First;
+
+    for i := 0 to tempDS.RecordCount - 1 do
+    begin
+      for j := 0 to DocRecordList.Count - 1 do
+        if DocRecordList[j].ikDocVid = tempDS.FieldByName('ik_vid_doc').AsInteger then
+        begin
+          inDocs := true;
+          Break;
+        end;
+      if inDocs then break;
+      tempDS.Next;
+    end;
+    if (not inDocs)and(tempDS.RecordCount > 0) then
+      begin
+        if FDocKatFilter <> '' then  FDocKatFilter := FDocKatFilter + ' and ';
+        FDocKatFilter := FDocKatFilter + '(ik_kat_zach <> ' +
+          dmStudentData.aspGetAbitCat.FieldByName('ik_kat_zach').AsString + ')';
+      end;
+    dmStudentData.aspGetAbitCat.Next;
+  end;
+  tempDS.Free;
+end;
+
+procedure TfrmPostupDlg.GetKatZach(NNRecord: integer);
+begin
+  with dmStudentData.aspGetAbitCat do
+  begin
+    Active := false;
+    Parameters[1].Value := NNRecord;
+    Active := true;
+    GetAdmissionByDoc;
+    Filter := FDocKatFilter;
+    Filtered := true;
+  end;
+end;
+
+procedure TfrmPostupDlg.LoadDocs;
+var DocDS: TADODataSet;
+    I: Integer;
+begin
+  DocRecordList := TObjectList<TDocRecord>.Create;
+  DocDS := TGeneralController.Instance.GetNewADODataSet(true);
+  DocDS.CommandText := 'select * from SelStudDocuments('+IntToStr(IDStudent)+')';
+  DocDS.Open;
+  DocDS.First;
+  for I := 0 to DocDS.RecordCount - 1 do
+  begin
+    DocRecordList.Add(TDocRecord.Create(DocDS.FieldByName('ik_vid_doc').AsInteger));
+    DocDS.Next;
+  end;
+  DocDS.Free;
 end;
 
 procedure TfrmPostupDlg.sbAddExamClick(Sender: TObject);
@@ -574,6 +656,10 @@ end;
 
 procedure TfrmPostupDlg.ButtonsCheck;
 begin
+  if dbcbeCategory.Text='' then dbcbeCategory.Color := clCream
+    else dbcbeCategory.Color := clWindow;
+
+
   if CheckFields then
   begin
     bbOK.Enabled := true;
@@ -617,9 +703,7 @@ begin
   if IsAdditional then
     exit;
 
-  dmStudentData.aspGetAbitCat.Active := false;
-  dmStudentData.aspGetAbitCat.Parameters[1].Value := dbcbeRecruit.KeyValue;
-  dmStudentData.aspGetAbitCat.Active := true;
+  GetKatZach(dbcbeRecruit.KeyValue); //настройка категорий зачисления
 
   try
     if (not(dbcbeRecruit.Text = '')) and (not(Tag = 0)) then

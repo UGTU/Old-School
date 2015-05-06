@@ -1,7 +1,6 @@
 inherited fmAbitCard: TfmAbitCard
   Width = 624
   HelpKeyword = 'A_Abit_frame.htm'
-  ParentFont = False
   ExplicitWidth = 624
   inherited ToolBar1: TToolBar
     Width = 624
@@ -65,22 +64,22 @@ inherited fmAbitCard: TfmAbitCard
         Width = 620
         ExplicitWidth = 620
         inherited TabSheet1: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 24
           ExplicitWidth = 612
+          ExplicitHeight = 587
           inherited PageControl2: TPageControl
             Width = 612
             ExplicitWidth = 612
             inherited TabSheet3: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 549
-              ExplicitHeight = 0
+              ExplicitWidth = 604
               inherited Panel4: TPanel
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited Panel8: TPanel
                   Width = 602
                   Height = 215
-                  ExplicitWidth = 547
+                  ExplicitWidth = 602
                   ExplicitHeight = 215
                   inherited Label1: TLabel
                     Left = 12
@@ -143,7 +142,7 @@ inherited fmAbitCard: TfmAbitCard
                 end
                 inherited Panel7: TPanel
                   Width = 602
-                  ExplicitWidth = 547
+                  ExplicitWidth = 602
                   inherited Label4: TLabel
                     Left = 12
                     ExplicitLeft = 12
@@ -227,7 +226,7 @@ inherited fmAbitCard: TfmAbitCard
                   Width = 602
                   Height = 166
                   ExplicitTop = 388
-                  ExplicitWidth = 547
+                  ExplicitWidth = 602
                   ExplicitHeight = 166
                   inherited Label2: TLabel
                     Left = 13
@@ -265,17 +264,17 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet4: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 549
-              ExplicitHeight = 0
+              ExplicitLeft = 4
+              ExplicitTop = 28
+              ExplicitWidth = 604
+              ExplicitHeight = 555
               inherited Panel3: TPanel
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited Panel5: TPanel
                   Width = 602
                   ParentFont = False
-                  ExplicitWidth = 547
+                  ExplicitWidth = 602
                   inherited Label27: TLabel
                     Top = 55
                     ParentFont = False
@@ -448,9 +447,9 @@ inherited fmAbitCard: TfmAbitCard
                   Top = 385
                   Width = 602
                   Height = 169
-                  ExplicitTop = 429
+                  ExplicitTop = 385
                   ExplicitWidth = 602
-                  ExplicitHeight = 121
+                  ExplicitHeight = 169
                   inherited Label51: TLabel
                     ParentFont = False
                   end
@@ -498,17 +497,17 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet5: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 549
-              ExplicitHeight = 0
+              ExplicitLeft = 4
+              ExplicitTop = 28
+              ExplicitWidth = 604
+              ExplicitHeight = 555
               inherited Splitter1: TSplitter
                 Width = 604
                 ExplicitWidth = 551
               end
               inherited Panel9: TPanel
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited dbcbeFamState: TDBLookupComboboxEh
                   Top = 2
                   ExplicitTop = 2
@@ -523,7 +522,10 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet6: TTabSheet
+              ExplicitLeft = 4
+              ExplicitTop = 28
               ExplicitWidth = 604
+              ExplicitHeight = 555
               object SpeedButton5: TSpeedButton [0]
                 Left = 526
                 Top = 29
@@ -546,53 +548,54 @@ inherited fmAbitCard: TfmAbitCard
               end
               inherited pnlToolDoc: TPanel
                 Left = 553
-                ExplicitLeft = 553
+                ExplicitLeft = 555
+                ExplicitTop = 4
               end
             end
             inherited TabSheet7: TTabSheet
               TabVisible = False
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 549
-              ExplicitHeight = 0
+              ExplicitLeft = 4
+              ExplicitTop = 28
+              ExplicitWidth = 604
+              ExplicitHeight = 555
               inherited gbExiled: TGroupBox
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited DBGridEh5: TDBGridEh
                   Width = 600
                 end
               end
               inherited gbAcadem: TGroupBox
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited dbgeAcadem: TDBGridEh
                   Width = 600
                 end
               end
               inherited gbEntered: TGroupBox
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited DBGridEh3: TDBGridEh
                   Width = 600
                 end
               end
               inherited gbProlongued: TGroupBox
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited DBGridEh6: TDBGridEh
                   Width = 600
                 end
               end
               inherited gbCatChange: TGroupBox
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited DBGridEh2: TDBGridEh
                   Width = 600
                 end
               end
               inherited gbMoved: TGroupBox
                 Width = 604
-                ExplicitWidth = 549
+                ExplicitWidth = 604
                 inherited DBGridEh4: TDBGridEh
                   Width = 600
                 end
@@ -601,10 +604,6 @@ inherited fmAbitCard: TfmAbitCard
             object TabSheet8: TTabSheet
               Caption = #1055#1086#1089#1090#1091#1087#1083#1077#1085#1080#1077
               ImageIndex = 5
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 549
-              ExplicitHeight = 0
               object GroupBox2: TGroupBox
                 Left = 0
                 Top = 0
@@ -619,7 +618,6 @@ inherited fmAbitCard: TfmAbitCard
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 1
-                ExplicitWidth = 549
                 object dbgeExams: TDBGridEh
                   Left = 2
                   Top = 15
@@ -652,7 +650,6 @@ inherited fmAbitCard: TfmAbitCard
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
-                ExplicitWidth = 549
                 object dbgeAdditionalSpec: TDBGridEh
                   Left = 2
                   Top = 15
@@ -678,27 +675,27 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited TabSheet2: TTabSheet
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 557
-          ExplicitHeight = 0
+          ExplicitLeft = 4
+          ExplicitTop = 24
+          ExplicitWidth = 612
+          ExplicitHeight = 587
           inherited DBGridEh1: TDBGridEh
             Width = 612
           end
           inherited Panel11: TPanel
             Width = 612
-            ExplicitWidth = 557
+            ExplicitWidth = 612
           end
         end
         inherited tsBRSBalls: TTabSheet
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 557
-          ExplicitHeight = 0
+          ExplicitLeft = 4
+          ExplicitTop = 24
+          ExplicitWidth = 612
+          ExplicitHeight = 587
           inherited Panel10: TPanel
             Width = 612
-            ExplicitWidth = 557
+            ExplicitWidth = 612
           end
           inherited dbgeBalls: TDBGridEh
             Width = 612
@@ -706,13 +703,13 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited TabSheet9: TTabSheet
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 557
-          ExplicitHeight = 0
+          ExplicitLeft = 4
+          ExplicitTop = 24
+          ExplicitWidth = 612
+          ExplicitHeight = 587
           inherited Panel12: TPanel
             Width = 612
-            ExplicitWidth = 557
+            ExplicitWidth = 612
           end
           inherited dbgrNapr: TDBGridEh
             Width = 612
@@ -720,10 +717,10 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited tsUspevStat: TTabSheet
           TabVisible = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 557
-          ExplicitHeight = 0
+          ExplicitLeft = 4
+          ExplicitTop = 24
+          ExplicitWidth = 612
+          ExplicitHeight = 587
           inherited dbgUspevStat: TDBGridEh
             Width = 612
           end
@@ -745,7 +742,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060009005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1018,5 +1015,8 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ppmSpravToExcel: TPopupMenu
     Left = 420
+  end
+  inherited adoSelDocFiles: TADODataSet
+    Left = 568
   end
 end

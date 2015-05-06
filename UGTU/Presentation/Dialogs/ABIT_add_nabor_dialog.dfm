@@ -318,7 +318,7 @@ inherited frmNewNabor: TfrmNewNabor
       OnUpdate = actApplyUpdate
     end
     inherited actOK: TAction
-      OnUpdate = actApplyUpdate
+      OnUpdate = actOKUpdate
     end
   end
 end

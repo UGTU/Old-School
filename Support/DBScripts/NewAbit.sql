@@ -1080,4 +1080,52 @@ END
 GO
 
 */
+/*
+create function [dbo].[SelectDocKatZach]
+(@year int)
+RETURNS @Result TABLE
+  (
+	ik_vid_doc			int, 
+	cvid_doc			varchar(500),
+	Ik_kat_zach			int,
+	ik_kat_doc			int,
+	isIncluded			bit
+ )
+AS
+Begin 
+ insert into @Result
+	select doc_kat.*, 
+	Kat_zach_doc.ik_kat_doc,
+	0
+	from (select ik_vid_doc, documents.cvid_doc, Kat_zach.Ik_kat_zach
+		  from documents
+		  cross join Kat_zach
+		  where ((OutDate is null) or (year(OutDate)>=@year))
+			and documents.IsIdentity = 0 and documents.IsEducational = 0 ) doc_kat 
+	left join Kat_zach_doc on Kat_zach_doc.ik_vid_doc = doc_kat.ik_vid_doc and Kat_zach_doc.Ik_kat_zach = doc_kat.Ik_kat_zach
+    
+	update @Result set isIncluded = 1 where ik_kat_doc is not null
+	RETURN
+END
+GO
 
+create  PROCEDURE [dbo].ManageKatZachDocs
+  @code_operation	int,
+  @ik_kat_zach 		INT,
+  @ik_vid_doc		int,
+  @year				int
+AS
+BEGIN
+  if @code_operation = 1  --добавить документ к категории
+  begin
+    insert into Kat_zach_doc(Ik_kat_zach,ik_vid_doc,NNyear)
+	values(@ik_kat_zach, @ik_vid_doc, @year)
+  end
+
+  if @code_operation = -1
+  begin
+    delete from Kat_zach_doc
+	where Ik_kat_zach = @ik_kat_zach and ik_vid_doc = @ik_vid_doc and NNyear = @year
+  end 	
+END
+GO*/

@@ -455,5 +455,8 @@ inherited frmPostupDlg: TfrmPostupDlg
   inherited actBaseDialog: TActionList
     Left = 485
     Top = 101
+    inherited actOK: TAction
+      OnUpdate = actOKUpdate
+    end
   end
 end

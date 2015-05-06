@@ -141,7 +141,7 @@ end;
 
 procedure TfrmNewNabor.actApplyUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= (nnrecord<=0)and(mestBudjet.Text <> '')
+  (Sender as TAction).Enabled:= (mestBudjet.Text <> '')  // (nnrecord<=0)and
     and (mestCKP.Text <> '') and (MestLgot.Text <> '')
           and (IsModified);
 
