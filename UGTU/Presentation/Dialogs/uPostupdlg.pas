@@ -217,6 +217,10 @@ begin
 
   if (dbcbeCategory.keyvalue <= 0) then
     dbcbeCategory.keyvalue := AbitList.CatNum;
+
+  if (dbcbeCategory.Text <> AbitList.Cat) then      //Если абитуриент потерял возможность поступления на категорию
+     dbcbeCategory.keyvalue := null;
+
   if (dbdteList.Value <= 0) then
     dbdteList.Value := AbitList.Date;
   if (dbcbeRecruit.keyvalue <= 0) then
@@ -396,6 +400,7 @@ begin
   tempDS.CommandText := 'select * from Kat_zach_doc where NNyear = ' + IntTosTr(Year);
   tempDS.Open;
   FDocKatFilter := '';
+  dmStudentData.aspGetAbitCat.Filtered := false;
   dmStudentData.aspGetAbitCat.First;
   for k := 0 to dmStudentData.aspGetAbitCat.RecordCount - 1 do
   begin
@@ -651,6 +656,10 @@ end;
 
 procedure TfrmPostupDlg.ButtonsCheck;
 begin
+  if dbcbeCategory.Text='' then dbcbeCategory.Color := clCream
+    else dbcbeCategory.Color := clWindow;
+
+
   if CheckFields then
   begin
     bbOK.Enabled := true;
