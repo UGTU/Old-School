@@ -1,5 +1,5 @@
 
-select * from Person where Clastname='Синкевич'
+select * from Person where Clastname='Баракшина'
 
 select * from ABIT_postup where nCode=68098
 

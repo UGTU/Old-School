@@ -8,14 +8,14 @@ inherited fmAbitYears: TfmAbitYears
   inherited Panel1: TPanel
     Width = 817
     Height = 509
-    ExplicitWidth = 654
-    ExplicitHeight = 443
+    ExplicitWidth = 817
+    ExplicitHeight = 509
     object PageControl1: TPageControl
       Left = 2
       Top = 2
       Width = 813
       Height = 505
-      ActivePage = KatDocPage
+      ActivePage = statPage
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -24,11 +24,8 @@ inherited fmAbitYears: TfmAbitYears
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 809
       object statPage: TTabSheet
         Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
-        ExplicitWidth = 801
-        ExplicitHeight = 250
         object Chart2: TChart
           Left = 0
           Top = 339
@@ -57,15 +54,12 @@ inherited fmAbitYears: TfmAbitYears
           TopAxis.LabelsFormat.TextAlignment = taCenter
           View3D = False
           Zoom.Pen.Mode = pmNotXor
-          Align = alBottom
+          Align = alClient
           BevelOuter = bvNone
           ParentShowHint = False
           Enabled = False
           ShowHint = True
           TabOrder = 0
-          ExplicitTop = 0
-          ExplicitWidth = 281
-          ExplicitHeight = 191
           DefaultCanvas = 'TGDIPlusCanvas'
           PrintMargins = (
             15
@@ -319,8 +313,6 @@ inherited fmAbitYears: TfmAbitYears
           Enabled = False
           ShowHint = True
           TabOrder = 2
-          ExplicitTop = 136
-          ExplicitWidth = 801
           DefaultCanvas = 'TGDIPlusCanvas'
           PrintMargins = (
             15
@@ -381,9 +373,6 @@ inherited fmAbitYears: TfmAbitYears
         Font.Style = []
         ImageIndex = 1
         ParentFont = False
-        ExplicitLeft = 44
-        ExplicitTop = 30
-        ExplicitWidth = 801
         DesignSize = (
           805
           477)
@@ -424,11 +413,6 @@ inherited fmAbitYears: TfmAbitYears
               DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_kat_zach'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
               Footers = <>
               Width = 200
             end
@@ -436,11 +420,6 @@ inherited fmAbitYears: TfmAbitYears
               DynProps = <>
               EditButtons = <>
               FieldName = 'CType_kat'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
               Footers = <>
               Width = 100
             end>
@@ -510,18 +489,18 @@ inherited fmAbitYears: TfmAbitYears
   inherited pnlSave: TPanel
     Top = 509
     Width = 817
-    ExplicitTop = 443
-    ExplicitWidth = 654
+    ExplicitTop = 509
+    ExplicitWidth = 817
     inherited bbSave: TBitBtn
       Left = 648
       Action = actApply
-      ExplicitLeft = 485
+      ExplicitLeft = 648
     end
     inherited bbUndo: TBitBtn
       Left = 480
       Action = actUndo
       Caption = #1054#1090#1084#1077#1085#1080#1090#1100
-      ExplicitLeft = 317
+      ExplicitLeft = 480
     end
   end
   object adoKatZach: TADOQuery
