@@ -85,6 +85,7 @@ type
     procedure cbIsMainClick(Sender: TObject);
     procedure bbOkPrintClick(Sender: TObject);
     procedure bGetCertDataClick(Sender: TObject);
+    procedure bbOKClick(Sender: TObject);
   private
     { Private declarations }
     FDocKatFilter: string;
@@ -562,6 +563,11 @@ begin
   AbitList.lAdditionalSpec.Remove(Spec);
   AbitList.AutoNumDecrement(Spec.Num);
   Sync;
+end;
+
+procedure TfrmPostupDlg.bbOKClick(Sender: TObject);
+begin
+  actOKExecute(Sender);
 end;
 
 procedure TfrmPostupDlg.bbOkPrintClick(Sender: TObject);

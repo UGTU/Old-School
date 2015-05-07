@@ -13,7 +13,7 @@ inherited fmZach: TfmZach
       Top = 2
       Width = 849
       Height = 550
-      ActivePage = prikazpage
+      ActivePage = spisokAll
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -33,7 +33,7 @@ inherited fmZach: TfmZach
           Flat = True
           FooterParams.Color = clWindow
           IndicatorOptions = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -43,6 +43,7 @@ inherited fmZach: TfmZach
           Top = 0
           Width = 841
           Height = 29
+          ButtonHeight = 25
           Caption = 'ToolBar3'
           Images = frmMain.ImageList1
           TabOrder = 1
@@ -52,6 +53,29 @@ inherited fmZach: TfmZach
             Action = actGiveZachNumber
             ParentShowHint = False
             ShowHint = True
+          end
+        end
+        object Panel9: TPanel
+          Left = 122
+          Top = 178
+          Width = 337
+          Height = 65
+          BorderStyle = bsSingle
+          TabOrder = 2
+          Visible = False
+          object Label28: TLabel
+            Left = 84
+            Top = 16
+            Width = 131
+            Height = 13
+            Caption = #1042#1099#1076#1072#1095#1072' '#1079#1072#1095#1077#1090#1085#1099#1093' '#1082#1085#1080#1078#1077#1082
+          end
+          object ProgressBar1: TProgressBar
+            Left = 2
+            Top = 35
+            Width = 328
+            Height = 17
+            TabOrder = 0
           end
         end
       end
@@ -819,7 +843,7 @@ inherited fmZach: TfmZach
     Left = 483
     Top = 80
     Bitmap = {
-      494C010105004000540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105004000580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1094,7 +1118,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C010103000400540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828

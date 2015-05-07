@@ -1129,3 +1129,102 @@ BEGIN
   end 	
 END
 GO*/
+
+/*ALTER FUNCTION [dbo].[GetNextZachNumForNabor] 
+(
+	@NNrecord int
+)
+RETURNS VARCHAR(6)
+AS
+BEGIN
+	-- Declare the return variable here
+	DECLARE @next int;
+	DECLARE @ik_fac int;
+	DECLARE @ik_year int;
+	DECLARE @CurNum int;
+	DECLARE @End int;
+	DECLARE @CurNumStr Varchar(6);
+	DECLARE @ik_metafac Varchar(6);
+
+select @ik_fac = ik_fac,  @ik_year = ik_year_uch_pl
+from dbo.Relation_spec_fac
+  inner join dbo.ABIT_Diapazon_spec_fac on dbo.ABIT_Diapazon_spec_fac.ik_spec_fac = dbo.Relation_spec_fac.ik_spec_fac
+  inner join dbo.Year_uch_pl on dbo.Year_uch_pl.year_value = dbo.ABIT_Diapazon_spec_fac.NNyear
+where NNRecord=@NNrecord
+
+select @CurNum = BeginDiapazon, @End = EndDiapazon
+from dbo.Abit_Zach_Diapazons
+where (ik_fac=@ik_fac) and (ik_year=@ik_year)
+
+/*if @CurNum is Null 
+BEGIN
+
+	set @ik_metafac = (select ik_fac from dbo.Relation_spec_fac
+	where ik_spec = (select ik_spec from dbo.Relation_spec_fac where ik_spec_fac =
+	(select ik_spec_fac from dbo.ABIT_Diapazon_spec_fac where NNRecord=@NNrecord)
+	) and ik_fac<>@ik_fac and ik_form_ed = 1)
+
+		if @ik_metafac is Null set @ik_metafac = (select ik_fac from dbo.Relation_spec_fac
+		where ik_spec = ((select ik_main_spec from ABIT_Diapazon_spec_fac,Relation_spec_fac, Spec_stud
+																					  where ABIT_Diapazon_spec_fac.ik_spec_fac = Relation_spec_fac.ik_spec_fac
+																					  and Relation_spec_fac.ik_spec = Spec_stud.ik_spec
+																					  and NNRecord=@NNrecord)) 
+		and ik_fac<>@ik_fac and ik_form_ed = 1)
+
+
+	Set @CurNum = (select BeginDiapazon
+	from dbo.Abit_Zach_Diapazons
+	where (ik_fac=@ik_metafac) and (ik_year=@ik_year))
+
+	Set @End = (select EndDiapazon
+	from dbo.Abit_Zach_Diapazons
+	where (ik_fac=@ik_metafac) and (ik_year=@ik_year))
+End*/
+
+Set @CurNumStr = (SELECT RIGHT('00000'+ CONVERT(VARCHAR,@CurNum),6));
+
+-- Return the result of the function
+if @CurNum is not null
+
+While (@CurNumStr in (select NN_Zach from dbo.Zach))and(@CurNum<=@End)
+begin
+  Set @CurNum = @CurNum+1
+  Set @CurNumStr = (SELECT RIGHT('00000'+ CONVERT(VARCHAR,@CurNum),6));
+end
+
+if @CurNum>@End return Null
+
+return @CurNumStr
+
+END
+GO*/
+
+/*
+create FUNCTION [dbo].[GetAbitsWihoutZach] 
+(
+  @NNYear int
+)
+RETURNS TABLE
+AS
+RETURN
+(
+  Select NN_abit, nCode, ABIT_postup.NNrecord from ABIT_postup inner join ABIT_Diapazon_spec_fac 
+  on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord where nCode not in (select ncode from Zach)
+  and ABIT_postup.ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2) and NNyear = @NNYear
+)
+
+select * from GetAbitsWihoutZach(2015)*/
+
+/*ALTER procedure [dbo].[ABIT_Set_Zach]
+  @NNrecord int, 
+  @nCode	int
+as
+
+declare @Nn_zach		char(6)
+
+set @Nn_zach = (select [dbo].[GetNextZachNumForNabor](@NNrecord))
+if (@Nn_zach is not null) EXEC AppendZach @flag=1, @nzach=@Nn_zach,@code=@nCode
+
+GO
+
+select * from GetAbitsWihoutZach(2015)*/
