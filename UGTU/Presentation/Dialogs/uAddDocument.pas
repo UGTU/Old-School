@@ -103,6 +103,8 @@ var
   doc: TDocRecord;
   i: integer;
   stream : TMemoryStream;
+  iDoc: TImage;
+  iLabel: TLabel;
 begin
   doc := TDocRecord.Create(FDocID, dbcbeKind.KeyValue, StrToInt(dbBalls.Text),
     dbcbeDisc.KeyValue, eSer.Text, eNum.Text, eWho.Text, dbeAddInfo.Text,
@@ -156,6 +158,15 @@ begin
       dbBalls.Text := '0';
       dbcbeDisc.Value := -1;
       pnlBonuses.Visible := False;
+      for I := 0 to fDocCount - 1 do
+      begin
+        iDoc := FindComponent('Image' + IntToStr(i)) as TImage;
+        iDoc.Destroy;
+        iLabel := FindComponent('Lab' + IntToStr(i)) as TLabel;
+        iLabel.Destroy;
+      end;
+      fDocCount := 0;
+      fLeft := 150;
     end;
 end;
 
@@ -341,7 +352,8 @@ begin
       dbBalls.Text := IntToStr(IfNull(FieldByName('balls').Value,0));
       dbcbeDisc.KeyValue := FieldByName('ik_disc').Value;
     end;
-  end;
+  end else
+    bbApply.Caption := 'Добавить';
   IsModified := False;
 end;
 

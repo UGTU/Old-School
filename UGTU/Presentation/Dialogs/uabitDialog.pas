@@ -64,6 +64,7 @@ type
   public
   HasAddSpec : boolean;
   Year: integer;
+  NNRecord: integer;
   function checkDataAbit :boolean;
     { Public declarations }
   end;
@@ -131,7 +132,7 @@ begin
   end;
 
 frmPostupDlg:=TfrmpostupDlg.create(self);
-frmPostupDlg.Tag:=self.Tag;
+frmPostupDlg.NNRecord:=self.NNRecord;
 frmPostupDlg.HostForm:=self;
 frmPostupDlg.Year:=self.Year;
 frmPostupDlg.HasAddSpec:=HasAddSpec;
@@ -228,7 +229,7 @@ begin
   with dmStudentSelectionProcs.adsGetParamNeedness do
   begin
     Active:=true;
-    Locate('NNrecord',Self.Tag,[]);
+    Locate('NNrecord',Self.NNRecord,[]);
     fNeedEmail := (FieldByName('needEmail').Value = true);
     Active := false;
   end;

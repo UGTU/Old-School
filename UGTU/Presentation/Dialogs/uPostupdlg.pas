@@ -103,6 +103,7 @@ type
     CurrentExam: Tlist;
     fn, ln, pn, ps, pnum: string;
     Year: integer;
+    NNRecord: integer;
     procedure Sync;
     procedure ExamSync;
     procedure AdditionalSpecSync;
@@ -219,8 +220,8 @@ begin
   if (dbcbeCategory.keyvalue <= 0) then
     dbcbeCategory.keyvalue := AbitList.CatNum;
 
-  if (dbcbeCategory.Text <> AbitList.Cat) then      //Если абитуриент потерял возможность поступления на категорию
-     dbcbeCategory.keyvalue := null;
+ { if (dbcbeCategory.Text <> AbitList.Cat) then      //Если абитуриент потерял возможность поступления на категорию
+     dbcbeCategory.keyvalue := null;}
 
   if (dbdteList.Value <= 0) then
     dbdteList.Value := AbitList.Date;
@@ -330,10 +331,10 @@ begin
     ''' Order By Cshort_name_fac, Cname_spec';
   dm.adodsNabor.Active := true;
 
-  if Tag > 0 then
+  if NNRecord > 0 then
   begin
     // frmAddPostupDlg:=TfrmAddPostupDlg.Create(self);
-    AbitList.RecruitNum := Tag;
+    AbitList.RecruitNum := NNRecord;
     AbitList.CatNum := 1;
     AbitList.Date := Date;
     Sync;
@@ -712,7 +713,7 @@ begin
   GetKatZach(dbcbeRecruit.KeyValue); //настройка категорий зачисления
 
   try
-    if (not(dbcbeRecruit.Text = '')) and (not(Tag = 0)) then
+    if (not(dbcbeRecruit.Text = '')) and (not(NNRecord = 0)) then
     begin
       
       { dmAbiturientAction.aspGetNewNum.Active:=false;
