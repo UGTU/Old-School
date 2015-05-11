@@ -418,7 +418,8 @@ uses
   uDMDocuments in 'Data\uDMDocuments.pas' {dmDocs: TDataModule},
   uDocTr in 'Presentation\Frames\uDocTr.pas' {Frame2: TFrame},
   uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {frmReviewDoc},
-  ReportSprVis in 'Domain\Reports\ReportSprVis.pas';
+  ReportSprVis in 'Domain\Reports\ReportSprVis.pas',
+  uReviewCallSpr in 'Presentation\Forms\uReviewCallSpr.pas' {fm—hallengeSpr};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -466,5 +467,6 @@ begin
   Application.CreateForm(TImageFullSizeShowForm, ImageFullSizeShowForm);
   Application.CreateForm(TdmDocs, dmDocs);
   Application.CreateForm(TfrmReviewDoc, frmReviewDoc);
+  Application.CreateForm(Tfm—hallengeSpr, fm—hallengeSpr);
   Application.Run;
 end.

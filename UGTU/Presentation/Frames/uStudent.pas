@@ -13,7 +13,7 @@ uses
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController,
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc;
+  DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc, uReviewCallSpr;
 
 type
   TfmStudent = class(TfmBase)
@@ -259,7 +259,7 @@ type
 
 var
   fmStudent: TfmStudent;
-
+  ik_stud:integer;
 implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
@@ -1701,53 +1701,107 @@ end;
 
 procedure TfmStudent.MenuItem4Click(Sender: TObject);
 var
-  datebegin, d1, d2: TDateTime;
-
+  datebegin, d1, z: TDateTime;
+  fReview: TfmСhallengeSpr;
   AYear, AMonth, ADay: word;
-  week1, week2, numweek, k, posit,h: integer;
+  week1, week2, numweek, k, h, i, sem, year: integer;
   mask1, mask2: string;
+  sp_vidz: TADODataSet;
+  sp_info: TADOStoredProc;
 begin
- inherited;
-  week1 := 40;
-  week2 := 42;
-  mask1 := '001111';
-  mask2 := '111000';
-  numweek := 1;
-  k:=0;
-  DecodeDate(Now, AYear, AMonth, ADay);
-  d1 := date;
-  d2 := date;
-  posit:=0;
+  inherited;
+  try
+  ik_stud:= obj.StudGrupKey;
+    DecodeDate(Now, AYear, AMonth, ADay);
+    sp_info := TADOStoredProc.Create(nil);
+    sp_info.ProcedureName := 'StudGetInfForSprav;1';
+    sp_info.Connection := dm.DBConnect;
+    sp_info.Parameters.CreateParameter('@Ik_studGrup', ftString, pdInput, 50,
+      obj.StudGrupKey.ToString());
+    sp_info.Open;
+    sp_info.First;
+    year := sp_info.FieldByName('nYear_post').AsInteger +
+      sp_info.FieldByName('kurs').AsInteger;
+    if year > AYear then
+      sem := sp_info.FieldByName('kurs').AsInteger * 2 - 1
+    else
+      sem := sp_info.FieldByName('kurs').AsInteger * 2;
+    fReview := TfmСhallengeSpr.Create(Self);
+    fReview.cbeSem.clear;
+    for I := 1 to sem do
+       fReview.cbeSem.AddItem(i.ToString(), TObject(i));
+       fReview.cbeSem.ItemIndex:=sem-1;
 
-  if date() > StrToDateTime('01.09.' + AYear.ToString()) then
-    d1 := StrToDateTime('01.09.' + AYear.ToString())
-  else
-  begin
-    d1 := StrToDateTime('01.09.' + (StrToInt(AYear.ToString()) - 1).ToString());
-    AYear := StrToInt(AYear.ToString()) - 1;
-  end;
+//    // найти предстоящие мероприятия у студента в текущем семестре (title - группа, семестр)
+//    sp_vidz := TADODataSet.Create(nil);
+//    sp_vidz.CommandText := 'select * from StudAction(' +
+//      obj.StudGrupKey.ToString() + ',' + sem.ToString() + ')';
+//    sp_vidz.Connection := dm.DBConnect;
+//    sp_vidz.Open;
+//    sp_vidz.First;
+//    // предоставить пользователю виды занятий (сессия, госы, диплом)
+//
+//    // fAsk.Caption:=sp_info.FieldByName('Cname_grup').AsString()+' '+sem.ToString()+ ' семестр';
+//    While not sp_vidz.Eof do
+//    begin
+//      if (sp_vidz.FieldByName('iK_vid_zanyat').AsInteger = 55) then
+//        fReview.cbeVz.AddItem('Промежуточная аттестация', TObject(0));
+//      if (sp_vidz.FieldByName('iK_vid_zanyat').AsInteger = 56) then
+//        fReview.cbeVz.AddItem('Государственный экзамен', TObject(1));
+//      if (sp_vidz.FieldByName('iK_vid_zanyat').AsInteger = 31) then
+//        fReview.cbeVz.AddItem('Диплом', TObject(2));
+//      sp_vidz.Next;
+//    end;
+    fReview.ShowModal;
+    if (fReview.ModalResult = mrOk) then
+    begin
+      // предоставить информацию о документе
+      // Создать документ
+      // достать из базы данные по документу
+      week1 := 40;
+      week2 := 42;
+      mask1 := '001111';
+      mask2 := '111000';
+      numweek := 1;
+      k := 0;
 
-  if DayOfWeek(d1)  = 1 then
-    d1 := StrToDateTime('02.09.' + AYear.ToString());
+      d1 := date;
+      datebegin := date;
+      z := date;
 
-  while numweek <> week1 do
-  begin
-    d1 := d1 + 7;
-    numweek := numweek + 1;
-  end;
+      if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+        d1 := StrToDateTime('01.09.' + AYear.ToString())
+      else
+      begin
+        d1 := StrToDateTime('01.09.' + (StrToInt(AYear.ToString()) - 1)
+          .ToString());
+        AYear := StrToInt(AYear.ToString()) - 1;
+      end;
 
+      if DayOfWeek(d1) = 1 then
+        d1 := StrToDateTime('02.09.' + AYear.ToString());
 
-
-  posit := Pos('1', mask1) - 1;
-  d1 := d1 + posit;
-
+      while numweek <> week1 do
+      begin
+        d1 := d1 + 7;
+        numweek := numweek + 1;
+      end;
       if week1 <> week2 then
-  begin
-    posit := Pos('0', mask2);
-    d2 := d1 + (week2 - week1) * 7 + posit
-  end
-  else
-    d2 := d1 + 6 - DayOfWeek(d1);
+      begin
+        datebegin := d1;
+        For i := 1 to (week2 - week1) * 7 + Pos('0', mask2) - 2 do
+          datebegin := datebegin + 1;
+      end
+      else
+        datebegin := d1 + 6 - DayOfWeek(d1);
+      For i := 1 to (Pos('1', mask1) - 1) do
+        d1 := d1 + 1;
+    end;
+  finally
+    sp_info.Free;
+    sp_vidz.Free;
+  end;
+
 end;
 
 // справка вызов
