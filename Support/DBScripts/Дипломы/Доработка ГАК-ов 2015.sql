@@ -71,7 +71,7 @@ HAVING COUNT(*)>1)
 go
 --Выбираем список выпускных групп 
 --Выбираем только те, в которых есть хотя бы 1 студент
---select * from [dbo].[OKADRGetExitGroup_inline](2015)
+--select * from [dbo].[OKADRGetExitGroup_inline](2015) order by Cname_spec, Cname_profile, nYear_post
 ALTER FUNCTION [dbo].[OKADRGetExitGroup_inline](@Year INT=2015)
 RETURNS TABLE
 AS
@@ -81,7 +81,8 @@ SELECT distinct
   --ik_Gener_spec_fac нужен для определения уникальности специальности - используется для связки со специальностями   
   Relation_spec_fac.ik_spec+dbo.Relation_spec_fac.ik_fac*100000 ik_Gener_spec_fac , Grup.ik_spclz as ik_profile,
   Spec_stud.Cname_spec+ISNULL(' ('+Direction.cShort_name_direction+')','')+ ISNULL(' - '+Spec_stud.Sh_spec,'') Cname_spec,
-  RTRIM([profile].Cname_spec) Cname_profile, Grup.nYear_post
+  Spec_stud.Cshort_spec+' - '+ RTRIM([profile].Cname_spec)+ ISNULL(' - '+Spec_stud.Sh_spec,'') Cname_profile, Grup.nYear_post,
+  IIF(Grup.ik_spclz IS NOT NULL, 2,1) id_type_branch
 FROM         
  dbo.Grup
  INNER JOIN dbo.Relation_spec_fac ON Grup.ik_spec_fac=Relation_spec_fac.ik_spec_fac
@@ -97,7 +98,7 @@ WHERE
 
 GO
 --Выборка всех профилей и специальностей для ГАК определенного года
---SELECT * from [dbo].[OKADRGetEducBranch](2015) where  [id_type_branch]=1 2
+--SELECT * from [dbo].[OKADRGetEducBranch](2015) ORDER BY Cname_spec where  [id_type_branch]=1 2
 ALTER FUNCTION [dbo].[OKADRGetEducBranch](@year INT)
 RETURNS  TABLE
  
@@ -106,7 +107,7 @@ RETURN
 (
 SELECT * FROM
 (SELECT DISTINCT    Spec_stud.Cname_spec+ISNULL(' ('+Direction.cShort_name_direction+')','')+ ISNULL(' - '+Spec_stud.Sh_spec,'') Cname_spec, 
-	/*Spec_stud.ik_spec+dbo.Relation_spec_fac.ik_fac*100000 ik_Gener_spec_fac,*/ dbo.Relation_spec_fac.ik_fac, Spec_stud.Cshort_spec, Spec_stud.ik_spec, [id_type_branch] 
+	/*Spec_stud.ik_spec+dbo.Relation_spec_fac.ik_fac*100000 ik_Gener_spec_fac,*/ dbo.Relation_spec_fac.ik_fac, Spec_stud.Cshort_spec, Spec_stud.ik_spec, Spec_stud.[id_type_branch] 
 FROM 
 	--выбираем специальности   
 	dbo.[OKADRGetExitGroup_inline](@year)ExitGrups INNER JOIN

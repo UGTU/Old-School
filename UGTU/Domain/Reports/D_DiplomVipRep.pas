@@ -678,13 +678,13 @@ begin
   SelectNextCellVert(cur, ActRange);
   str := dmDiplom.adospGetVipiscaForDiplomcdiplom.AsString;
   SendStringToExcel(str, cur, ActRange);
-    cur1 := Selection.Address;
-    SelectNextCellHor(cur1,ActRange);
-    str := 'x';
-    ActRange.Value := str;
-    SelectNextCellHor(cur1,ActRange);
-    str := dmDiplom.adospGetVipiscaForDiplomOcencaDiplom.AsString;
-    ActRange.Value := str;
+  cur1 := Selection.Address;
+  SelectNextCellHor(cur1,ActRange);
+  str := 'x';
+  ActRange.Value := str;
+  SelectNextCellHor(cur1,ActRange);
+  str := dmDiplom.adospGetVipiscaForDiplomOcencaDiplom.AsString;
+  ActRange.Value := str;
 
   //ќбщее кол-во часов
   SelectNextCellVert(cur, ActRange);
@@ -704,10 +704,15 @@ begin
     SelectNextCellHor(cur1,ActRange);
     if ((dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger<0) and (WithZachEd)) then
     begin
-      str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString+' з.е.';
+      dmDiplom.adospSelPractForVipisca.First;
+      dmDiplom.adospSelGOSForVipisca.Last;
+      str := IntToStr(dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger+
+              dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsInteger+
+              dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger)+' з.е.';
     end
     else
       str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';
+
     ActRange.Value := str;
 
     SelectNextCellHor(cur1,ActRange);
