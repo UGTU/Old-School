@@ -41,6 +41,7 @@ type
     HasAddSpec: Boolean;
     IsOnline: Boolean;
     Year: integer;
+    NNRecord: integer;
     { Public declarations }
   end;
 
@@ -70,7 +71,7 @@ begin
   end;
 
   frmPostupDlg := TfrmpostupDlg.create(self);
-  frmPostupDlg.Tag := self.Tag;
+  frmPostupDlg.NNRecord := self.NNRecord;
   frmPostupDlg.Year := self.Year;
   frmPostupDlg.IDStudent := dmStudentData.aspFindAbit.FieldByName
     ('ncode').Value;

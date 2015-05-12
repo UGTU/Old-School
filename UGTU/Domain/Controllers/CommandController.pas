@@ -105,12 +105,20 @@ type
       aGetDate, aDiscIK: Variant);
   end;
 
+  //удалить документ
   TDeleteDocument = class(TBaseADOCommand)
   public
     constructor Create(ikDoc: integer); overload;
     procedure Delete;
   end;
 
+  //управление категориями зачисления и их документами
+  TManageKatZachDocs = class(TBaseADOCommand)
+  public
+    constructor Create(aYear: integer); overload;
+    procedure AddDoc(aKatIK, aVidDoc: integer);
+    procedure DeleteDoc(aKatIK, aVidDoc: integer);
+  end;
 
   // ------------------------------------ СЕЛЕКТОРЫ-----------------------------
   TStudentController = class(TBaseSelectController)
@@ -1198,6 +1206,7 @@ begin
   with FStor.Parameters do
   begin
     Clear;
+    CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 0, 1);
     CreateParameter('@ncode', ftInteger, pdInput, 0, nCode);
     CreateParameter('@ik_vid_doc', ftInteger, pdInput, 0, 0);
     CreateParameter('@sd_seria', ftString, pdInput, 10, '');
@@ -1316,7 +1325,44 @@ procedure TAddDocFiles.Delete;
 begin
   with FStor.Parameters do
   begin
-    ParamByName('@code_operation').Value := -1;    //удалят все файлы
+    ParamByName('@code_operation').Value := -1;    //удаляет все файлы
+    FStor.ExecProc;
+  end;
+end;
+
+{ TManageKatZachDocs }
+
+procedure TManageKatZachDocs.AddDoc(aKatIK, aVidDoc: integer);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@code_operation').Value := 1;    //добавление
+    ParamByName('@ik_kat_zach').Value := aKatIK;
+    ParamByName('@ik_vid_doc').Value := aVidDoc;
+    FStor.ExecProc;
+  end;
+end;
+
+constructor TManageKatZachDocs.Create(aYear: integer);
+begin
+  inherited Create('ManageKatZachDocs;1');
+  with FStor.Parameters do
+  begin
+    Clear;
+    CreateParameter('@code_operation', ftInteger, pdInput, 0, 0);
+    CreateParameter('@ik_kat_zach', ftInteger, pdInput, 0, 0);
+    CreateParameter('@ik_vid_doc', ftInteger, pdInput, 0, 0);
+    CreateParameter('@year', ftInteger, pdInput, 0, aYear);
+  end;
+end;
+
+procedure TManageKatZachDocs.DeleteDoc(aKatIK, aVidDoc: integer);
+begin
+  with FStor.Parameters do
+  begin
+    ParamByName('@code_operation').Value := -1;    //добавление
+    ParamByName('@ik_kat_zach').Value := aKatIK;
+    ParamByName('@ik_vid_doc').Value := aVidDoc;
     FStor.ExecProc;
   end;
 end;

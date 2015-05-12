@@ -2250,7 +2250,7 @@ begin
 TApplicationController.GetInstance.AddLogEntry('Добавление абитуриента');
 
 frmAbitConfirm:=tfrmAbitConfirm.Create(self);
-frmAbitConfirm.Tag:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).NNRecord;
+frmAbitConfirm.NNRecord:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).NNRecord;
 frmAbitConfirm.Year:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year;
 yearnode:=TDBNodeAbitYearObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Data);
 frmAbitConfirm.HasAddSpec:=yearnode.HasAddSpec;
@@ -2291,7 +2291,7 @@ begin
  frmpostupDlg.onlyreading:=TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.Data).OnlyReading;
  frmpostupDlg.Year := TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.Data).Year;
  frmpostupDlg.HasAddSpec:=TDBNodeAbitYearObject(DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Parent.Data).HasAddSpec;
- frmpostupDlg.Tag := 0;
+ frmpostupDlg.NNRecord := 0;
  frmPostupDlg.IkRecruit:=TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.Data).NNRecord;
 
  frmpostupDlg.ShowModal;

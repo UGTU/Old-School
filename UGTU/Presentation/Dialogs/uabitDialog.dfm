@@ -5,6 +5,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   Caption = #1044#1086#1073#1072#1074#1083#1077#1085#1080#1077' '#1082#1072#1088#1090#1086#1095#1082#1080' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072
   ClientHeight = 662
   ClientWidth = 562
+  OnClose = FormClose
   ExplicitWidth = 568
   ExplicitHeight = 691
   PixelsPerInch = 96
@@ -75,6 +76,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
     ExplicitWidth = 562
     ExplicitHeight = 621
     inherited TabSheet1: TTabSheet
+      ExplicitLeft = 4
+      ExplicitTop = 24
       ExplicitWidth = 554
       ExplicitHeight = 593
       inherited PageControl2: TPageControl
@@ -84,6 +87,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
         ExplicitWidth = 554
         ExplicitHeight = 593
         inherited TabSheet3: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 546
           ExplicitHeight = 561
           inherited Panel4: TPanel
@@ -512,6 +517,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet4: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 546
           ExplicitHeight = 561
           inherited Panel3: TPanel
@@ -675,6 +682,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet5: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 546
           ExplicitHeight = 561
           inherited Panel9: TPanel
@@ -691,6 +700,8 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
           end
         end
         inherited TabSheet2: TTabSheet
+          ExplicitLeft = 4
+          ExplicitTop = 28
           ExplicitWidth = 546
           ExplicitHeight = 561
           inherited sbAddDoc: TSpeedButton
@@ -789,7 +800,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C0101050009007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

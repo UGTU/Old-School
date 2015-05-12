@@ -49,6 +49,7 @@ type
     procedure btnLoadClick(Sender: TObject);
     procedure DelDocClick(Sender: TObject);
     procedure GrowImage(Sender: TObject);
+    procedure DoNothing(Sender: TObject);
   private
     FnCode: integer;
     FDocID: integer;
@@ -103,6 +104,8 @@ var
   doc: TDocRecord;
   i: integer;
   stream : TMemoryStream;
+  iDoc: TImage;
+  iLabel: TLabel;
 begin
   doc := TDocRecord.Create(FDocID, dbcbeKind.KeyValue, StrToInt(dbBalls.Text),
     dbcbeDisc.KeyValue, eSer.Text, eNum.Text, eWho.Text, dbeAddInfo.Text,
@@ -139,9 +142,20 @@ begin
       FieldByName('DocCount').Value := doc.docs.Count;
     end;
 
-    // добавляем в коллекцию документов родителя
-   (Owner as TfmStudent).DocRecordList.Add(doc);
-   (Owner as TfmStudent).modified := true;
+    // добавляем/правим в коллекции документов родителя
+    With (Owner as TfmStudent) do
+    begin
+      for i := 0 to DocRecordList.Count - 1 do
+         if (DocRecordList[i].ikDocVid = doc.ikDocVid) and
+         (DocRecordList[i].number = doc.number) then
+         begin
+           DocRecordList.Delete(i);
+           break;
+         end;
+
+      DocRecordList.Add(doc);
+      modified := true;
+    end;
   end;
 
   IsModified := false;
@@ -156,6 +170,15 @@ begin
       dbBalls.Text := '0';
       dbcbeDisc.Value := -1;
       pnlBonuses.Visible := False;
+      for I := 0 to fDocCount - 1 do
+      begin
+        iDoc := FindComponent('Image' + IntToStr(i)) as TImage;
+        iDoc.Destroy;
+        iLabel := FindComponent('Lab' + IntToStr(i)) as TLabel;
+        iLabel.Destroy;
+      end;
+      fDocCount := 0;
+      fLeft := 150;
     end;
 end;
 
@@ -233,6 +256,11 @@ begin
   Result := true;
 end;
 
+procedure TfrmAddDocument.DoNothing(Sender: TObject);
+begin
+  //ничего не делать
+end;
+
 procedure TfrmAddDocument.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   inherited;
@@ -283,7 +311,6 @@ begin
       w := (Sender as TImage).Picture.Graphic.Width;
     end;
 
-
   ImageFullSizeShowForm.curControl := Sender as TImage;
   ImageFullSizeShowForm.Height := h;
   ImageFullSizeShowForm.Width := w;
@@ -298,29 +325,6 @@ procedure TfrmAddDocument.SetAbitElements(const Value: boolean);
 begin
   chbxBonuses.Visible := Value;
 end;
-
-{procedure TfrmAddDocument.SetDocProperties(const Value: integer);
-var
-  FDocument: TDocumentSelect;
-begin
-  FDocID := Value;
-  FDocument := TDocumentSelect.Create(FDocID);
-  with FDocument do
-  begin
-    dbcbeKind.KeyValue := VidIK;
-    eSer.Text := IfNull(seria,'');
-    eNum.Text := IfNull(number,'');
-    if GetDate <> NULL then
-      dbdteGetDate.Text := DateToStr(GetDate);
-    eWho.Text := IfNull(Who,'');
-    cbReal.Checked := isreal;
-    dbeAddInfo.Text := IfNull(addinfo,'');
-    pnlBonuses.Visible := (balls > 0);
-    dbBalls.Text := IntToStr(IfNull(balls,0));
-    dbcbeDisc.KeyValue := ikDisc;
-  end;
-  FDocument.Free;
-end;      }
 
 procedure TfrmAddDocument.SetEditProperties;
 begin
@@ -341,7 +345,8 @@ begin
       dbBalls.Text := IntToStr(IfNull(FieldByName('balls').Value,0));
       dbcbeDisc.KeyValue := FieldByName('ik_disc').Value;
     end;
-  end;
+  end else
+    bbApply.Caption := 'Добавить';
   IsModified := False;
 end;
 
@@ -356,21 +361,18 @@ procedure TfrmAddDocument.CreateDocFrame(aFile: TMemoryStream);
 var
   iDelLabel: TLabel;
   iDoc: TImage;
-  j: TJPEGImage;
 begin
   iDoc := TImage.Create(Self);
 
 
   if Assigned(aFile) then
   begin
-    j := TJPEGImage.Create;
-    j.LoadFromStream(aFile);
-    iDoc.Picture.Graphic := j;
-    j.Free;
-    //iDoc.Picture.Graphic :=
-    //iDoc.Picture.Graphic.LoadFromStream(aFile)
+    aFile.Position := 0;
+    iDoc.Picture.Graphic := TJPEGImage.Create;
+    iDoc.Picture.Graphic.LoadFromStream(aFile);
   end
-    else iDoc.Picture.LoadFromFile(opDocs.FileName);  //из файла
+    else
+      iDoc.Picture.LoadFromFile(opDocs.FileName);  //из файла
 
 
   iDelLabel := TLabel.Create(Self);
@@ -393,6 +395,7 @@ begin
   iDelLabel.Font.Color := clHotLight;
   iDelLabel.OnClick := DelDocClick;
   iDoc.OnMouseEnter := GrowImage;
+  iDoc.OnClick := DoNothing;
   fDocCount := fDocCount + 1;
   fLeft := fLeft + 65;
 end;

@@ -52,6 +52,7 @@ type
     procedure btnBackClick(Sender: TObject);
     procedure actAddAddressExecute(Sender: TObject);
     procedure actDelAddressExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
   floaded:boolean;
@@ -63,6 +64,7 @@ type
   public
   HasAddSpec : boolean;
   Year: integer;
+  NNRecord: integer;
   function checkDataAbit :boolean;
     { Public declarations }
   end;
@@ -130,15 +132,16 @@ begin
   end;
 
 frmPostupDlg:=TfrmpostupDlg.create(self);
-frmPostupDlg.Tag:=self.Tag;
+frmPostupDlg.NNRecord:=self.NNRecord;
 frmPostupDlg.HostForm:=self;
 frmPostupDlg.Year:=self.Year;
 frmPostupDlg.HasAddSpec:=HasAddSpec;
 frmPostupDlg.IDpostup:=-1;
+frmPostupDlg.DocRecordList := DocRecordList;
 frmPostupDlg.Showmodal;
 frmpostupDlg.Free;
-AddressRecordList.Free;
-DocRecordList.Free;
+
+//DocRecordList.Free;
 
 frmMain.actTreeRefreshActionExecute(Sender);
 
@@ -156,6 +159,14 @@ begin
     PageControl2.SelectNextPage(True, False)
   else actApplyExecute(Sender);
 
+end;
+
+procedure TfrmAbitCardDialog.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  DocRecordList.Free;
+  AddressRecordList.Free;
 end;
 
 procedure TfrmAbitCardDialog.FormShow(Sender: TObject);
@@ -218,7 +229,7 @@ begin
   with dmStudentSelectionProcs.adsGetParamNeedness do
   begin
     Active:=true;
-    Locate('NNrecord',Self.Tag,[]);
+    Locate('NNrecord',Self.NNRecord,[]);
     fNeedEmail := (FieldByName('needEmail').Value = true);
     Active := false;
   end;

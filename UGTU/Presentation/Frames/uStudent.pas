@@ -1254,8 +1254,9 @@ end;
 
 procedure TfmStudent.actUpdateDocumentExecute(Sender: TObject);
 var tempFilList: TList<TMemoryStream>;
-    i: integer;
+    i, j: integer;
     iDoc: TMemoryStream;
+    inEditList: boolean;
 begin
 
   frmAddDocument := TfrmAddDocument.Create(self);
@@ -1263,42 +1264,47 @@ begin
   begin
     isAbit := (self.Name = 'fmAbitCard');
     isEdit := true;
-    DocID := IfNull(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value,0);
-
-    adoSelDocFiles.Filtered := false;
-    adoSelDocFiles.Filter := 'ik_doc = ' + IntToStr(DocID);
-    adoSelDocFiles.Filtered := true;
-
     tempFilList :=  TList<TMemoryStream>.Create;
 
-    //если документ еще не был добавлен в базу
-    if DocID = 0 then
-    with FDocRecordList[dbgeDocuments.DataSource.DataSet.FieldByName('DocCount').Value] do
+    inEditList := false;
+    with dbgeDocuments.DataSource.DataSet do    //ищем его в списке документов
+    for i := 0 to FDocRecordList.Count - 1  do
+      if (FieldByName('ik_vid_doc').Value = FDocRecordList[i].ikDocVid) and
+          (FieldByName('Np_number').Value = FDocRecordList[i].number) then
+          begin
+            DocID := 0;
+            inEditList := true;
+            if FDocRecordList[i].docs.Count > 0 then
+            begin
+              for j := 0 to FDocRecordList[i].docs.Count - 1 do
+                tempFilList.Add(FDocRecordList[i].docs[j]);
+              ImageFiles := tempFilList;
+            end;
+            break;
+          end;
+    if not inEditList then
     begin
-      if docs.Count > 0 then
+      DocID := dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value;
+
+      adoSelDocFiles.Filtered := false;
+      adoSelDocFiles.Filter := 'ik_doc = ' + IntToStr(DocID);
+      adoSelDocFiles.Filtered := true;
+
+      if adoSelDocFiles.RecordCount > 0 then
       begin
-        for i := 0 to docs.Count - 1 do
-          tempFilList.Add(docs[i]);
+        adoSelDocFiles.First;
+        for i := 0 to adoSelDocFiles.RecordCount - 1 do
+        begin
+          iDoc:=TMemoryStream.Create;
+          (adoSelDocFiles.FieldbyName('doc_file')as TBlobField).SaveToStream(iDoc);
+          iDoc.Seek(0, soFromBeginning);
+          tempFilList.Add(iDoc);
+          adoSelDocFiles.Next;
+        end;
         ImageFiles := tempFilList;
       end;
-    end
-      //если объект уже в базе
-      else
-      begin
-        if adoSelDocFiles.RecordCount > 0 then
-        begin
-          adoSelDocFiles.First;
-          for i := 0 to adoSelDocFiles.RecordCount - 1 do
-          begin
-            iDoc:=TMemoryStream.Create;
-            (adoSelDocFiles.FieldbyName('doc_file')as TBlobField).SaveToStream(iDoc);
-            iDoc.Seek(0, soFromBeginning);
-            tempFilList.Add(iDoc);
-            adoSelDocFiles.Next;
-          end;
-          ImageFiles := tempFilList;
-        end;
-      end;
+    end;
+
     ShowModal;
     Free;
     if Assigned(tempFilList) then tempFilList.Free;
