@@ -1068,6 +1068,7 @@
             <Form>fmСhallengeSpr</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Domain\Reports\uCallSpr.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

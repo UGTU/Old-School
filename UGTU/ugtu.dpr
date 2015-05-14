@@ -419,7 +419,8 @@ uses
   uDocTr in 'Presentation\Frames\uDocTr.pas' {Frame2: TFrame},
   uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {frmReviewDoc},
   ReportSprVis in 'Domain\Reports\ReportSprVis.pas',
-  uReviewCallSpr in 'Presentation\Forms\uReviewCallSpr.pas' {fm—hallengeSpr};
+  uReviewCallSpr in 'Presentation\Forms\uReviewCallSpr.pas' {fm—hallengeSpr},
+  uCallSpr in 'Domain\Reports\uCallSpr.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

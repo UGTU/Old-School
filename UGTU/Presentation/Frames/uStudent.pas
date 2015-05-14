@@ -13,7 +13,8 @@ uses
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController,
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc, uReviewCallSpr;
+  DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc,
+  uReviewCallSpr;
 
 type
   TfmStudent = class(TfmBase)
@@ -259,7 +260,8 @@ type
 
 var
   fmStudent: TfmStudent;
-  ik_stud:integer;
+  ik_stud: integer;
+
 implementation
 
 uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
@@ -984,6 +986,14 @@ begin
   sp_depInd := TADODataSet.Create(nil);
   tempDS := TGeneralController.Instance.GetNewADODataSet(true);
   try
+
+    // берем индекс подразделения
+
+    sp_depInd.CommandText := 'select * from DepIndDoc(' +
+      obj.StudGrupKey.ToString() + ')';
+    sp_depInd.Connection := dm.DBConnect;
+    sp_depInd.Open;
+    sp_depInd.First;
     // находим номер будущей справки
 
     DecodeDate(Now, AYear, AMonth, ADay);
@@ -992,18 +1002,12 @@ begin
     else
       datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
     sp_num.CommandText := 'select * from MaxNumDocument(''' + datebegin + '''' +
-      ',' + '''' + DateTimeToStr(date()) + ''')';
+      ',' + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
+      sp_depInd.FieldByName('Dep_Index').AsString + ''',2)';
     sp_num.Connection := dm.DBConnect;
     sp_num.Open;
     sp_num.First;
     LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
-    // берем индекс подразделения
-
-    sp_depInd.CommandText := 'select * from DepIndDoc(' +
-      obj.StudGrupKey.ToString() + ')';
-    sp_depInd.Connection := dm.DBConnect;
-    sp_depInd.Open;
-    sp_depInd.First;
 
     editF := TfrmReviewDoc.Create(Self);
     editF.dtUtv.Format := '';
@@ -1197,19 +1201,22 @@ begin
       datebegin := '01.09.' + AYear.ToString()
     else
       datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
-    sp_num.CommandText := 'select * from MaxNumDocument(''' + datebegin + '''' +
-      ',' + '''' + DateTimeToStr(date()) + ''')';
-    sp_num.Connection := dm.DBConnect;
-    sp_num.Open;
-    sp_num.First;
-    LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
-    // берем индекс подразделения
 
     sp_depInd.CommandText := 'select * from DepIndDoc(' +
       obj.StudGrupKey.ToString() + ')';
     sp_depInd.Connection := dm.DBConnect;
     sp_depInd.Open;
     sp_depInd.First;
+
+    sp_num.CommandText := 'select * from MaxNumDocument(''' + datebegin + '''' +
+      ',' + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
+      sp_depInd.FieldByName('Dep_Index').AsString + ''',1 )';
+    sp_num.Connection := dm.DBConnect;
+    sp_num.Open;
+    sp_num.First;
+    LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
+    // берем индекс подразделения
+
     editF := TfrmReviewDoc.Create(Self);
     editF.dtUtv.Format := '';
     editF.dtUtv.date := date;
@@ -1704,14 +1711,53 @@ var
   datebegin, d1, z: TDateTime;
   fReview: TfmСhallengeSpr;
   AYear, AMonth, ADay: word;
-  week1, week2, numweek, k, h, i, sem, year: integer;
-  mask1, mask2: string;
+  week1, week2, numweek, k, h, i, sem, year, ik_doc: integer;
+  mask1, mask2, dateb, l: string;
   sp_vidz: TADODataSet;
   sp_info: TADOStoredProc;
+
+  tempDS, tempDSchall, tempDSikdoc: TADODataSet;
+  Report: TReportBase;
+  LastNum: integer;
+  d3, d2: TDateTime;
+  sp_num: TADODataSet;
+  sp_depInd: TADODataSet;
+  dsDoc: TADODataSet;
 begin
   inherited;
+  dsDoc := TADODataSet.Create(nil);
+  sp_num := TADODataSet.Create(nil);
+  sp_depInd := TADODataSet.Create(nil);
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDSchall := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDSikdoc := TADODataSet.Create(nil);
   try
-  ik_stud:= obj.StudGrupKey;
+    // общая часть формы
+    // -------------------------------------------
+
+    // берем индекс подразделения
+
+    sp_depInd.CommandText := 'select * from DepIndDoc(' +
+      obj.StudGrupKey.ToString() + ')';
+    sp_depInd.Connection := dm.DBConnect;
+    sp_depInd.Open;
+    sp_depInd.First;
+
+    DecodeDate(Now, AYear, AMonth, ADay);
+    if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+      dateb := '01.09.' + AYear.ToString()
+    else
+      dateb := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
+    sp_num.CommandText := 'select * from MaxNumDocument(''' + dateb + '''' + ','
+      + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
+      sp_depInd.FieldByName('Dep_Index').AsString + ''',3)';
+    sp_num.Connection := dm.DBConnect;
+    sp_num.Open;
+    sp_num.First;
+    LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
+
+    // --------------------------------------------------------------------------
+    ik_stud := obj.StudGrupKey;
     DecodeDate(Now, AYear, AMonth, ADay);
     sp_info := TADOStoredProc.Create(nil);
     sp_info.ProcedureName := 'StudGetInfForSprav;1';
@@ -1727,79 +1773,117 @@ begin
     else
       sem := sp_info.FieldByName('kurs').AsInteger * 2;
     fReview := TfmСhallengeSpr.Create(Self);
+    // ---------------------
+    fReview.dtUtv.Format := '';
+    fReview.dtUtv.date := date;
+    fReview.dtGot.Format := #32;
+    // fReview.dtpArrival.Format := #32;
+    // ищем информацию о студенте
+    dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
+      obj.StudGrupKey.ToString();
+    dsDoc.Connection := dm.DBConnect;
+    dsDoc.Open;
+    dsDoc.First;
+    fReview.eDest.Text := 'Справка-вызов';
+    // editF.eNum.Text := LastNum.ToString();
+    fReview.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
+    fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
+      dsDoc.FieldByName('Cname_grup').AsString + ')' + ' ' + sem.ToString() +
+      ' семестр';
+    // ---------------------
     fReview.cbeSem.clear;
-    for I := 1 to sem do
-       fReview.cbeSem.AddItem(i.ToString(), TObject(i));
-       fReview.cbeSem.ItemIndex:=sem-1;
-
-//    // найти предстоящие мероприятия у студента в текущем семестре (title - группа, семестр)
-//    sp_vidz := TADODataSet.Create(nil);
-//    sp_vidz.CommandText := 'select * from StudAction(' +
-//      obj.StudGrupKey.ToString() + ',' + sem.ToString() + ')';
-//    sp_vidz.Connection := dm.DBConnect;
-//    sp_vidz.Open;
-//    sp_vidz.First;
-//    // предоставить пользователю виды занятий (сессия, госы, диплом)
-//
-//    // fAsk.Caption:=sp_info.FieldByName('Cname_grup').AsString()+' '+sem.ToString()+ ' семестр';
-//    While not sp_vidz.Eof do
-//    begin
-//      if (sp_vidz.FieldByName('iK_vid_zanyat').AsInteger = 55) then
-//        fReview.cbeVz.AddItem('Промежуточная аттестация', TObject(0));
-//      if (sp_vidz.FieldByName('iK_vid_zanyat').AsInteger = 56) then
-//        fReview.cbeVz.AddItem('Государственный экзамен', TObject(1));
-//      if (sp_vidz.FieldByName('iK_vid_zanyat').AsInteger = 31) then
-//        fReview.cbeVz.AddItem('Диплом', TObject(2));
-//      sp_vidz.Next;
-//    end;
+    for i := 1 to sem do
+      fReview.cbeSem.AddItem(i.ToString(), TObject(i));
+    fReview.cbeSem.ItemIndex := sem - 1;
     fReview.ShowModal;
-    if (fReview.ModalResult = mrOk) then
+    if (fReview.ModalResult = mrOk) or (fReview.ModalResult = mrYes) then
     begin
-      // предоставить информацию о документе
-      // Создать документ
-      // достать из базы данные по документу
-      week1 := 40;
-      week2 := 42;
-      mask1 := '001111';
-      mask2 := '111000';
-      numweek := 1;
+      dm.DBConnect.BeginTrans;
+      try
+        // // добавляем справку
+
+        tempDS.CommandText := 'Select * from Document ';
+        tempDS.Open;
+        tempDS.Insert;
+        tempDS.FieldByName('Ik_studGrup').Value := obj.StudGrupKey;
+        tempDS.FieldByName('Ik_Transfer').Value := 2;
+        tempDS.FieldByName('Ik_destination').Value := 3;
+        tempDS.FieldByName('NumberDoc').Value := LastNum;
+        tempDS.FieldByName('DateCreate').Value := date;
+        tempDS.FieldByName('Num_podrazd').Value :=
+          sp_depInd.FieldByName('Dep_Index').AsString;
+        tempDS.Post;
+        tempDS.UpdateBatch();
+
+//        dm.DBConnect.CommitTrans;
+//      except
+//        dm.DBConnect.RollbackTrans;
+//      end;
+      // ik_doc:= 'SELECT LAST_INSERT_ID() FROM Document' ;
+
       k := 0;
+      if (fReview.cbeReason.Text = 'Промежуточная аттестация') then
+        k := 55;
+      if (fReview.cbeReason.Text = 'Государственный экзамен') then
+        k := 56;
+      if (fReview.cbeReason.Text = 'Выпускная работа') then
+        k := 31;
 
-      d1 := date;
-      datebegin := date;
-      z := date;
+      sp_vidz := TADODataSet.Create(nil);
+      sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_studGrup=' +
+        uStudent.ik_stud.ToString() + 'and n_sem=' + sem.ToString() +
+        ' and iK_vid_zanyat=' + k.ToString();
+      // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
+      sp_vidz.Connection := dm.DBConnect;
+      sp_vidz.Open;
+      sp_vidz.First;
 
-      if date() > StrToDateTime('01.09.' + AYear.ToString()) then
-        d1 := StrToDateTime('01.09.' + AYear.ToString())
-      else
-      begin
-        d1 := StrToDateTime('01.09.' + (StrToInt(AYear.ToString()) - 1)
-          .ToString());
-        AYear := StrToInt(AYear.ToString()) - 1;
+      tempDSikdoc.CommandText :=
+        'select MAX(Ik_Document)[maxid] from Document where Ik_studGrup=' +
+        obj.StudGrupKey.ToString() + 'and Ik_destination= 3 and NumberDoc =' +
+        LastNum.ToString() + 'and Num_podrazd=''' + sp_depInd.FieldByName
+        ('Dep_Index').AsString + '''';
+      tempDSikdoc.Connection := dm.DBConnect;
+      tempDSikdoc.Open;
+      tempDSikdoc.First;
+
+      // добавляем сущность справка-вызов
+//      dm.DBConnect.BeginTrans;
+//      try
+        tempDSchall.CommandText := 'Select * from CallSpr';
+        tempDSchall.Open;
+        tempDSchall.Insert;
+        tempDSchall.FieldByName('Ik_Document').Value :=
+          tempDSikdoc.FieldByName('maxid').AsInteger;
+        tempDSchall.FieldByName('DateStartPeriod').Value := FormatDateTime('dd.mm.yyyy',fReview.dtpBegin.Date);
+        tempDSchall.FieldByName('DateEndPeriod').Value :=FormatDateTime('dd.mm.yyyy',fReview.dtpEnd.date);;
+        tempDSchall.FieldByName('ik_upContent').Value :=
+          sp_vidz.FieldByName('ik_upContent').AsInteger;
+        tempDSchall.Post;
+        tempDSchall.UpdateBatch();
+        dm.DBConnect.CommitTrans;
+      except
+        dm.DBConnect.RollbackTrans;
       end;
+    end;
 
-      if DayOfWeek(d1) = 1 then
-        d1 := StrToDateTime('02.09.' + AYear.ToString());
-
-      while numweek <> week1 do
-      begin
-        d1 := d1 + 7;
-        numweek := numweek + 1;
-      end;
-      if week1 <> week2 then
-      begin
-        datebegin := d1;
-        For i := 1 to (week2 - week1) * 7 + Pos('0', mask2) - 2 do
-          datebegin := datebegin + 1;
-      end
-      else
-        datebegin := d1 + 6 - DayOfWeek(d1);
-      For i := 1 to (Pos('1', mask1) - 1) do
-        d1 := d1 + 1;
+    if (fReview.ModalResult = mrYes) then
+    begin
+      Report := TUspevGroupController.Instance.BuildCallSpr(obj.StudGrupKey,
+        sem, LastNum, tempDSikdoc.FieldByName('maxid').AsInteger,
+        fReview.dtpBegin.date, fReview.dtpEnd.date);
+      TWaitingController.GetInstance.Process(Report);
     end;
   finally
     sp_info.Free;
     sp_vidz.Free;
+    tempDS.Free;
+    tempDSchall.Free;
+    tempDSikdoc.Free;
+    sp_num.Free;
+    sp_depInd.Free;
+    dsDoc.Free;
+    Report.Free;
   end;
 
 end;
