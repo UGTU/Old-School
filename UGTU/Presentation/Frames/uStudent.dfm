@@ -1055,7 +1055,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 443
+                Height = 442
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1967,7 +1967,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C010106000900040110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900080110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

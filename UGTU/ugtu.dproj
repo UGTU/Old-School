@@ -1077,8 +1077,8 @@
             <Form>frmReviewAkadem</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="Presentation\Forms\uReviewStateMent.pas">
-            <Form>frmReviewStateMent</Form>
+        <DCCReference Include="Presentation\Forms\uReviewApplication.pas">
+            <Form>frmReviewApplication</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Debug">

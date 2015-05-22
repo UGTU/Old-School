@@ -14,7 +14,7 @@ uses
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
   DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc,
-  uReviewCallSpr,uReviewStateMent;
+  uReviewCallSpr,uReviewApplication;
 
 type
   TfmStudent = class(TfmBase)
@@ -1892,7 +1892,7 @@ end;
 procedure TfmStudent.N6Click(Sender: TObject);
 var
 //datebegin, d1, z: TDateTime;
-  fReview: TfrmReviewStateMent;
+  fReview: TfrmReviewApplication;
   AYear, AMonth, ADay: word;
   dateb, l: string;
  // sp_vidz: TADODataSet;
@@ -1938,7 +1938,7 @@ begin
     sp_num.Open;
     sp_num.First;
     LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
-        fReview := TfrmReviewStateMent.Create(Self);
+        fReview := TfrmReviewApplication.Create(Self);
     // ---------------------
 
     fReview.dtUtv.Format := '';
