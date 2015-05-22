@@ -420,7 +420,10 @@ uses
   uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {frmReviewDoc},
   ReportSprVis in 'Domain\Reports\ReportSprVis.pas',
   uReviewCallSpr in 'Presentation\Forms\uReviewCallSpr.pas' {fm—hallengeSpr},
-  uCallSpr in 'Domain\Reports\uCallSpr.pas';
+  uCallSpr in 'Domain\Reports\uCallSpr.pas',
+  uReviewNeusp in 'Presentation\Forms\uReviewNeusp.pas' {frmReviewNeusp},
+  uReviewAkadem in 'Presentation\Forms\uReviewAkadem.pas' {frmReviewAkadem},
+  uReviewStateMent in 'Presentation\Forms\uReviewStateMent.pas' {frmReviewStateMent};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -469,5 +472,8 @@ begin
   Application.CreateForm(TdmDocs, dmDocs);
   Application.CreateForm(TfrmReviewDoc, frmReviewDoc);
   Application.CreateForm(Tfm—hallengeSpr, fm—hallengeSpr);
+  Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
+  Application.CreateForm(TfrmReviewAkadem, frmReviewAkadem);
+  Application.CreateForm(TfrmReviewStateMent, frmReviewStateMent);
   Application.Run;
 end.

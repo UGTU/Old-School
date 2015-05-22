@@ -14,7 +14,7 @@ uses
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
   DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc,
-  uReviewCallSpr;
+  uReviewCallSpr,uReviewStateMent;
 
 type
   TfmStudent = class(TfmBase)
@@ -238,6 +238,7 @@ type
     procedure bShotClick(Sender: TObject);
     procedure iPhotoMouseEnter(Sender: TObject);
     procedure MenuItem4Click(Sender: TObject);
+    procedure N6Click(Sender: TObject);
 
   private
     Fik: integer;
@@ -1886,6 +1887,79 @@ begin
     Report.Free;
   end;
 
+end;
+
+procedure TfmStudent.N6Click(Sender: TObject);
+var
+//datebegin, d1, z: TDateTime;
+  fReview: TfrmReviewStateMent;
+  AYear, AMonth, ADay: word;
+  dateb, l: string;
+ // sp_vidz: TADODataSet;
+ // sp_info: TADOStoredProc;
+
+  tempDS, tempDSchall, tempDSikdoc: TADODataSet;
+  Report: TReportBase;
+  LastNum: integer;
+ // d3, d2: TDateTime;
+  sp_num: TADODataSet;
+  sp_depInd: TADODataSet;
+  dsDoc: TADODataSet;
+begin
+  inherited;
+  ik_stud:=obj.StudGrupKey;
+  dsDoc := TADODataSet.Create(nil);
+  sp_num := TADODataSet.Create(nil);
+  sp_depInd := TADODataSet.Create(nil);
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDSchall := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDSikdoc := TADODataSet.Create(nil);
+  try
+    // обща€ часть формы
+    // -------------------------------------------
+
+    // берем индекс подразделени€
+
+    sp_depInd.CommandText := 'select * from DepIndDoc(' +
+      obj.StudGrupKey.ToString() + ')';
+    sp_depInd.Connection := dm.DBConnect;
+    sp_depInd.Open;
+    sp_depInd.First;
+
+    DecodeDate(Now, AYear, AMonth, ADay);
+    if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+      dateb := '01.09.' + AYear.ToString()
+    else
+      dateb := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
+    sp_num.CommandText := 'select * from MaxNumDocument(''' + dateb + '''' + ','
+      + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
+      sp_depInd.FieldByName('Dep_Index').AsString + ''',4)';
+    sp_num.Connection := dm.DBConnect;
+    sp_num.Open;
+    sp_num.First;
+    LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
+        fReview := TfrmReviewStateMent.Create(Self);
+    // ---------------------
+
+    fReview.dtUtv.Format := '';
+    fReview.dtUtv.date := date;
+    fReview.dtGot.Format := #32;
+    // fReview.dtpArrival.Format := #32;
+    // ищем информацию о студенте
+    dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
+      obj.StudGrupKey.ToString();
+    dsDoc.Connection := dm.DBConnect;
+    dsDoc.Open;
+    dsDoc.First;
+    fReview.eDest.Text := '«а€вление на академическую справку';
+    // editF.eNum.Text := LastNum.ToString();
+    fReview.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
+    fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
+      dsDoc.FieldByName('Cname_grup').AsString + ')';
+      fReview.ShowModal;
+  finally
+
+  end;
 end;
 
 // справка вызов

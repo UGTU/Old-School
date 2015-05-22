@@ -1069,6 +1069,18 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Domain\Reports\uCallSpr.pas"/>
+        <DCCReference Include="Presentation\Forms\uReviewNeusp.pas">
+            <Form>frmReviewNeusp</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Presentation\Forms\uReviewAkadem.pas">
+            <Form>frmReviewAkadem</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Presentation\Forms\uReviewStateMent.pas">
+            <Form>frmReviewStateMent</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -154,4 +154,114 @@ object dmDocs: TdmDocs
       FieldName = 'Ik_Document'
     end
   end
+  object dsPricina: TDataSource
+    DataSet = ADODataSet1
+    Left = 223
+    Top = 18
+  end
+  object ADODataSet1: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Filtered = True
+    CommandText = 'select * from MagazineDocs'
+    Parameters = <>
+    Left = 228
+    Top = 83
+    object StringField1: TStringField
+      FieldName = 'FIO'
+      ReadOnly = True
+      Size = 92
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'Ik_destination'
+    end
+    object StringField3: TStringField
+      FieldName = 'cNameDestination'
+      Size = 50
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'Ik_studGrup'
+      ReadOnly = True
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'Ik_Document'
+    end
+  end
+  object dsStudAddres: TDataSource
+    DataSet = adodsStudAddres
+    Left = 327
+    Top = 18
+  end
+  object adodsStudAddres: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Filtered = True
+    CommandText = 'select * from StudAddress'
+    Parameters = <>
+    Left = 324
+    Top = 83
+    object adodsStudAddresik_AddressType: TIntegerField
+      FieldName = 'ik_AddressType'
+    end
+    object adodsStudAddresAddressTypeName: TStringField
+      FieldName = 'AddressTypeName'
+      Size = 50
+    end
+    object adodsStudAddresik_personAddress: TIntegerField
+      FieldName = 'ik_personAddress'
+    end
+    object adodsStudAddresBuildingNumber: TStringField
+      FieldName = 'BuildingNumber'
+      Size = 10
+    end
+    object adodsStudAddresStructNumber: TStringField
+      FieldName = 'StructNumber'
+      Size = 10
+    end
+    object adodsStudAddresCStreet: TStringField
+      FieldName = 'CStreet'
+      Size = 100
+    end
+    object adodsStudAddrescshort_type_street: TStringField
+      FieldName = 'cshort_type_street'
+      Size = 50
+    end
+    object adodsStudAddresCType_Street: TStringField
+      FieldName = 'CType_Street'
+      Size = 50
+    end
+    object adodsStudAddresCgorod: TStringField
+      FieldName = 'Cgorod'
+      Size = 50
+    end
+    object adodsStudAddresCIndex: TStringField
+      FieldName = 'CIndex'
+    end
+    object adodsStudAddrescshort_type_gorod: TStringField
+      FieldName = 'cshort_type_gorod'
+      Size = 10
+    end
+    object adodsStudAddresctype_gorod: TStringField
+      FieldName = 'ctype_gorod'
+      Size = 50
+    end
+    object adodsStudAddresCraion: TStringField
+      FieldName = 'Craion'
+      Size = 50
+    end
+    object adodsStudAddresCregion: TStringField
+      FieldName = 'Cregion'
+      Size = 50
+    end
+    object adodsStudAddresCstrana: TStringField
+      FieldName = 'Cstrana'
+      Size = 50
+    end
+    object adodsStudAddresbit_SNG: TBooleanField
+      FieldName = 'bit_SNG'
+    end
+    object adodsStudAddresIk_studGrup: TIntegerField
+      FieldName = 'Ik_studGrup'
+    end
+  end
 end

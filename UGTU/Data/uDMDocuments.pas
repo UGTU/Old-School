@@ -44,6 +44,32 @@ type
     adodsDocsNum_podrazd: TStringField;
     adodsDocsPersName: TStringField;
     adodsDocsStatus: TStringField;
+    dsPricina: TDataSource;
+    ADODataSet1: TADODataSet;
+    StringField1: TStringField;
+    IntegerField1: TIntegerField;
+    StringField3: TStringField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    dsStudAddres: TDataSource;
+    adodsStudAddres: TADODataSet;
+    adodsStudAddresik_AddressType: TIntegerField;
+    adodsStudAddresAddressTypeName: TStringField;
+    adodsStudAddresik_personAddress: TIntegerField;
+    adodsStudAddresBuildingNumber: TStringField;
+    adodsStudAddresStructNumber: TStringField;
+    adodsStudAddresCStreet: TStringField;
+    adodsStudAddrescshort_type_street: TStringField;
+    adodsStudAddresCType_Street: TStringField;
+    adodsStudAddresCgorod: TStringField;
+    adodsStudAddresCIndex: TStringField;
+    adodsStudAddrescshort_type_gorod: TStringField;
+    adodsStudAddresctype_gorod: TStringField;
+    adodsStudAddresCraion: TStringField;
+    adodsStudAddresCregion: TStringField;
+    adodsStudAddresCstrana: TStringField;
+    adodsStudAddresbit_SNG: TBooleanField;
+    adodsStudAddresIk_studGrup: TIntegerField;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
