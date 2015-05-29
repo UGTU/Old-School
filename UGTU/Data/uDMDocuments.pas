@@ -102,6 +102,8 @@ type
     adodsPricinaIk_reason_issuing: TIntegerField;
     adodsPricinaIk_destination: TIntegerField;
     adodsPricinacNameDestination: TStringField;
+    dsOsn: TDataSource;
+    spOsn: TADOStoredProc;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
   private
     { Private declarations }

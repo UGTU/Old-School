@@ -20,7 +20,7 @@ uses
   D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport,
   D_BRSRankAverageReport,
   Vedomost2014, Assemly_Report2014, Spravka, SpravkaReport2014, Spravka2014,
-  uReviewDoc, uCallSpr;
+  uReviewDoc, uCallSpr, uApplicationSpr, uAkademSpr;
 
 type
   PDBGrid = ^TDBGridEh;
@@ -361,6 +361,7 @@ type
       : TReportBase;
     function BuildCallSpr(_ikStudGrup, num_sem, num_doc, ik_doc: Integer;
       datebegin, dateend: TDateTime): TReportBase;
+    function BuildSpr(ik_doc, ik_destination: Integer): TReportBase;
 
   end;
 
@@ -1474,6 +1475,62 @@ begin
 
   Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
     'reports\Spr—hallenge.xlt';
+end;
+
+function TUspevGroupController.BuildSpr(ik_doc, ik_destination: Integer)
+  : TReportBase;
+var
+  report: TSpravka_Report;
+  // result_report: TSpravka;
+  // FindRange: variant;
+begin
+  case (ik_destination) of
+    1:
+      begin
+        // report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
+        // result_report := report.AddReport();
+        // Result := SpravkaReport.Create(result_report);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\Sprv.xlt';
+      end;
+
+    2:
+      begin
+        // report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
+        // result_report := report.AddReport();
+        // Result := SpravkaReport.Create(result_report);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprvPens.xlt';
+      end;
+
+    3:
+      begin
+        // Result := CallSprReport.Create(_ikStudGrup, num_sem, num_doc, ik_doc,
+        // datebegin, dateend);
+
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\Spr—hallenge.xlt';
+      end;
+
+    4:
+      begin
+        Result := ApplSprReport.Create(ik_doc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprApplication.xlt';
+      end;
+    5:
+      ;
+    6:
+      ;
+    7:
+      begin
+        Result := AkademSprReport.Create(ik_doc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\Akadem_spr.xlt';
+      end;
+    8:
+      ;
+  end;
 end;
 
 function TUspevGroupController.BuildSpravka2014(_ikStudGrup, _type_spr,

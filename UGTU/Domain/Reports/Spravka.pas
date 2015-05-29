@@ -33,7 +33,7 @@ end;
 
 procedure SpravkaReport.Execute;
 var
-  str, dop, dir_inst, copystr1, copystr2,datebegin,dateend: string;
+  str, dop, dir_inst, copystr1, copystr2, datebegin, dateend: string;
   posit, first_str, I, num: integer;
   YearPric, MonthPric, DayPric: Word;
 begin
@@ -78,34 +78,35 @@ begin
       Items[first_str, 12] := 'Тип приказа';
     end;
 
-
     for I := first_str to first_str + FReport.Historyes.Count - 1 do
     begin
       if I <> 20 then
       begin
         Items[I, 5] := FReport.Historyes[num].NumPric;
         Items[I, 12] := FReport.Historyes[num].NamePric;
-                if FReport.Historyes[num].ikTypePric=4 then
-                begin
-                  datebegin := FReport.Historyes[num].datevih;
-                  posit := Pos('-', datebegin);
-                  dop:= Copy(datebegin, posit+1, 2);
-                  str := GetMonthR(StrToInt(Copy(datebegin, posit+1, 2)));
-                  copystr1 := Copy(datebegin, 9, 10)+' '+str+' '+Copy(datebegin, 0, 4);
+        if FReport.Historyes[num].ikTypePric = 4 then
+        begin
+          datebegin := FReport.Historyes[num].datevih;
+          posit := Pos('-', datebegin);
+          dop := Copy(datebegin, posit + 1, 2);
+          str := GetMonthR(StrToInt(Copy(datebegin, posit + 1, 2)));
+          copystr1 := Copy(datebegin, 9, 10) + ' ' + str + ' ' +
+            Copy(datebegin, 0, 4);
 
-                  dateend := FReport.Historyes[num].datevh;
-                  posit := Pos('-', datebegin);
-                  str := GetMonthR(StrToInt(Copy(dateend, posit+1, 2)));
-                  copystr2 := Copy(datebegin, 9, 10)+' '+str+' '+Copy(datebegin, 0, 4);
-                  Items[I, 7] := copystr1+' - ' + copystr2;
+          dateend := FReport.Historyes[num].datevh;
+          posit := Pos('-', datebegin);
+          str := GetMonthR(StrToInt(Copy(dateend, posit + 1, 2)));
+          copystr2 := Copy(datebegin, 9, 10) + ' ' + str + ' ' +
+            Copy(datebegin, 0, 4);
+          Items[I, 7] := copystr1 + ' - ' + copystr2;
 
-                end
-                else
-                  begin
-                    str := GetMonthR(StrToInt(FReport.Historyes[num].month));
-                    Items[I, 7] := FReport.Historyes[num].day + ' ' + str + ' ' +
-                    FReport.Historyes[num].year;
-                  end;
+        end
+        else
+        begin
+          str := GetMonthR(StrToInt(FReport.Historyes[num].month));
+          Items[I, 7] := FReport.Historyes[num].day + ' ' + str + ' ' +
+            FReport.Historyes[num].year;
+        end;
         if I <> first_str + FReport.Historyes.Count - 1 then
         begin
           Range['A' + inttostr(I + 1), 'N' + inttostr(I + 1)

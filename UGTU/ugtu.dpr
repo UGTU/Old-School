@@ -423,7 +423,9 @@ uses
   uCallSpr in 'Domain\Reports\uCallSpr.pas',
   uReviewNeusp in 'Presentation\Forms\uReviewNeusp.pas' {frmReviewNeusp},
   uReviewAkadem in 'Presentation\Forms\uReviewAkadem.pas' {frmReviewAkadem},
-  uReviewApplication in 'Presentation\Forms\uReviewApplication.pas' {frmReviewApplication};
+  uReviewApplication in 'Presentation\Forms\uReviewApplication.pas' {frmReviewApplication},
+  uApplicationSpr in 'Domain\Reports\uApplicationSpr.pas',
+  uAkademSpr in 'Domain\Reports\uAkademSpr.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

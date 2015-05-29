@@ -388,4 +388,16 @@ object dmDocs: TdmDocs
       Calculated = True
     end
   end
+  object dsOsn: TDataSource
+    DataSet = spOsn
+    Left = 184
+    Top = 232
+  end
+  object spOsn: TADOStoredProc
+    Connection = dm.DBConnect
+    ProcedureName = 'FindBaseDoc;1'
+    Parameters = <>
+    Left = 184
+    Top = 176
+  end
 end
