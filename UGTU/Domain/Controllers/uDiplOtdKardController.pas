@@ -334,7 +334,7 @@ begin
     FindRange := E.Cells.Replace(What := '#месяц#',Replacement:=smonth);
 
     iyear:=YearOf(StrToDate(str));
-    FindRange := E.Cells.Replace(What := '#год#',Replacement:=IntToStr(iyear));//Copy(IntToStr(iyear),3,2));
+    FindRange := E.Cells.Replace(What := '#год#',Replacement:=Copy(IntToStr(iyear),3,2));//IntToStr(iyear));
 
     iday:=DayOf(StrToDate(str));
     str:=Inttostr(iDay);
@@ -355,7 +355,7 @@ begin
   E.Sheets[count].Select;
 
   //заносим данные
-  str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' года';
+    str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' года';
   FindRange := E.Cells.Replace(What := '#DateDelivery#',Replacement:=str);
   FindRange := E.Cells.Replace(What := '#fiogak#',Replacement:=tempStoredProc.FieldByName('GakMemberName').AsString);
   FindRange := E.Cells.Replace(What := '#Category#',Replacement:=tempStoredProc.FieldByName('SpecСategory').AsString);
