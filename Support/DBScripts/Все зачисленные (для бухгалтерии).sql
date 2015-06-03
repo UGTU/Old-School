@@ -27,7 +27,7 @@ select distinct Cshort_name_fac,Cname_spec,Cname_form_ed,
 	   fac.BuildingNumber,
 	   fac.StructNumber,
 	   fac.FlatNumber,
-	   cSotTel
+	   iif(substring(cSotTel,1,1)='+', cSotTel, substring(cSotTel,1,11))
 from
 (
 	select distinct cast(dd_pod_zayav as Date) dd_pod_zayav,
@@ -38,7 +38,7 @@ from
 		   FORMAT(cast(Dd_birth as DATE), 'd', 'de-de' ) Dd_birth, 
 		   Cplacebirth, 
 		   ctelefon, 
-		   substring(REPLACE(REPLACE(REPLACE(REPLACE(cSotTel,' ',''),'-',''),'(',''),')',''),1,11) cSotTel,
+		   substring(REPLACE(REPLACE(REPLACE(REPLACE(cSotTel,' ',''),'-',''),'(',''),')',''),1,12) cSotTel,
 		   Fac.Cshort_name_fac,
 		   Spec_stud.Cname_spec,
 		   Person.nCode,
