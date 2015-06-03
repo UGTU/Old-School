@@ -53,9 +53,9 @@ inherited frmAddDocument: TfrmAddDocument
   object Label6: TLabel [5]
     Left = 10
     Top = 96
-    Width = 56
+    Width = 254
     Height = 13
-    Caption = #1050#1077#1084' '#1074#1099#1076#1072#1085
+    Caption = #1050#1077#1084' '#1074#1099#1076#1072#1085' ('#1087#1086#1083#1085#1086#1089#1090#1100#1102', '#1082#1072#1082' '#1091#1082#1072#1079#1072#1085#1086' '#1074' '#1076#1086#1082#1091#1084#1077#1085#1090#1077')'
   end
   object Label11: TLabel [6]
     Left = 249
@@ -144,6 +144,7 @@ inherited frmAddDocument: TfrmAddDocument
     TabOrder = 2
     Visible = True
     OnChange = dbcbeKindChange
+    OnExit = eSerExit
   end
   object eNum: TDBEditEh [12]
     Left = 111

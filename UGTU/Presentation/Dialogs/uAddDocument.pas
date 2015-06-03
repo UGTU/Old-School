@@ -50,6 +50,7 @@ type
     procedure DelDocClick(Sender: TObject);
     procedure GrowImage(Sender: TObject);
     procedure DoNothing(Sender: TObject);
+    procedure eSerExit(Sender: TObject);
   private
     FnCode: integer;
     FDocID: integer;
@@ -259,6 +260,15 @@ end;
 procedure TfrmAddDocument.DoNothing(Sender: TObject);
 begin
   //ничего не делать
+end;
+
+procedure TfrmAddDocument.eSerExit(Sender: TObject);
+var tempST: string;
+begin
+  inherited;
+  tempST := StringReplace(eSer.Text,' ','', [rfReplaceAll, rfIgnoreCase]);  //без пробелов
+  tempST := StringReplace(tempST,'-','', [rfReplaceAll, rfIgnoreCase]);     //без прочерков
+  eSer.Text := tempST;
 end;
 
 procedure TfrmAddDocument.FormClose(Sender: TObject; var Action: TCloseAction);
