@@ -31,6 +31,7 @@ type
     pnlProfile: TPanel;
     Label8: TLabel;
     dbcbProfile: TDBLookupComboboxEh;
+    lblTemplate: TLabel;
 
     procedure FormShow(Sender: TObject);
     procedure dblcbUchPlnChange(Sender: TObject);
@@ -44,9 +45,10 @@ type
     fSpecFacIK: integer;
     procedure ChangeGroupName;
     procedure LoadUchPlan(aSpecFacIK: integer);
-    procedure LoadProfile(aUchPlan: integer);
+    procedure LoadProfile;
     procedure SetEditStatus(aEdit: boolean);
     procedure uchPlanModify;
+    procedure SetSpecFacIK(const Value: integer);
   protected
     function DoApply:boolean; override;
     function DoCancel:boolean;override;
@@ -58,7 +60,7 @@ type
     FParentUchPlan, FUchPlan: integer;
     WithSpec: boolean;
     VidGos: integer;
-    property SpecFacIK: integer read fSpecFacIK write fSpecFacIK;
+    property SpecFacIK: integer read fSpecFacIK write SetSpecFacIK; //fSpecFacIK;
     property Edit: Boolean write SetEditStatus;
     procedure AddRead;
     procedure EditRead;
@@ -98,15 +100,15 @@ begin
 
 end;
 
-procedure TfrmGroupEdt.LoadProfile(aUchPlan: integer);
+procedure TfrmGroupEdt.LoadProfile;
 begin
-  pnlProfile.Visible := (VidGos>FGOS2);
-  if VidGos>FGOS2 then
-  begin
+  //pnlProfile.Visible := (VidGos>FGOS2);
+  //if VidGos>FGOS2 then
+  //begin
     dm.adsProfile.Close;
-    dm.adsProfile.CommandText := 'select * from GetProfileEduBranches(' + IntToStr(aUchPlan)+')';
+    dm.adsProfile.CommandText := 'select * from GetProfileEduBranches(' + IntToStr(fSpecFacIK)+')';
     dm.adsProfile.Open;
-  end;
+  //end;
 end;
 
 procedure TfrmGroupEdt.LoadUchPlan(aSpecFacIK: integer);
@@ -116,7 +118,8 @@ begin
   IntToStr(aSpecFacIK)+','+dbneYear.Text+')';
   dblcbUchPln.ListSource.DataSet.Open;
   VidGos := dblcbUchPln.ListSource.DataSet.FieldByName('VidGos').AsInteger;
-  pnlProfile.Visible := (VidGos > FGOS2);
+  //pnlProfile.Visible := (VidGos > FGOS2);
+  lblTemplate.Visible := (VidGos > FGOS2);
 end;
 
 procedure TfrmGroupEdt.SetEditStatus(aEdit: boolean);
@@ -124,6 +127,12 @@ var tempDS: TADODataSet;
 begin
   bEdit := aEdit;
   if aEdit then EditRead else AddRead;
+end;
+
+procedure TfrmGroupEdt.SetSpecFacIK(const Value: integer);
+begin
+  fSpecFacIK := Value;
+  LoadProfile;
 end;
 
 procedure TfrmGroupEdt.uchPlanModify;
@@ -242,7 +251,7 @@ begin
       or ((dblcbUchPln.KeyValue <> FUchPlan)and(VidGos = FGOS2)) then
         uchPlanModify;
 
-  LoadProfile((Sender as TDBLookupComboboxEh).KeyValue);
+
 end;
 
 procedure TfrmGroupEdt.dbneYearChange(Sender: TObject);

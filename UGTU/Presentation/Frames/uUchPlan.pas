@@ -585,8 +585,8 @@ begin
     IntToStr(fGroupIK) + ')';
   fGroupDataSet.Open;
   fGrupSpclszIK := fGroupDataSet.FieldByName('ik_spclz').AsInteger;
-  // специализация группы
 
+  // специализация группы
   Pname := fGroupDataSet.FieldByName('Cname_spec').AsString;
   if Pname <> '' then
     lblProfile.Caption := nameSpclz + ' группы: ' + Pname
