@@ -404,8 +404,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         Align = alClient
         Caption = 'Panel2'
         TabOrder = 2
-        ExplicitTop = 500
-        ExplicitHeight = 81
         object GroupBox1: TGroupBox
           Left = 1
           Top = 1
@@ -414,10 +412,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Align = alClient
           Caption = #1043#1088#1091#1087#1087#1099', '#1079#1072#1074#1077#1088#1096#1072#1102#1097#1080#1077' '#1086#1073#1091#1095#1077#1085#1080#1077
           TabOrder = 0
-          ExplicitLeft = 488
-          ExplicitTop = 126
-          ExplicitWidth = 185
-          ExplicitHeight = 105
           object dbgGroups: TDBGridEh
             Left = 2
             Top = 15

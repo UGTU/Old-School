@@ -285,7 +285,7 @@ begin
   ActivateWorksheet(MainpageNumber);
 
   //определяем, выводить ли зачетные единицы или часы
-  WithZachEd:= (ik_direction=3) or ((ik_direction=1) and (ik_VidGos=2));
+  WithZachEd:= (ik_direction=3) or (ik_VidGos=2);
 
   // вывод общих сведений
   if (NameInDatPadez) then
