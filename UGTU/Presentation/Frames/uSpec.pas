@@ -110,7 +110,7 @@ begin
   directionIK:=TUchPlanController.Instance.getDirFromSpec(SpecIK);
   VidGos:=TUchPlanController.Instance.getVidGosFromSpecFac(IK);
   case(directionIK) of
-  1:begin
+  1,9,10:begin
       tsSpclz.Caption:='Список профилей';
       ToolButton3.Caption:='Добавить профиль';
       ToolButton4.Caption:='Изменить профиль';
