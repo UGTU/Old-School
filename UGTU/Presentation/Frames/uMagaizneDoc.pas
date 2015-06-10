@@ -17,8 +17,6 @@ type
   TfmDoc = class(TfmBase)
     dbgehMagazineDocs: TDBGridEh;
     Panel2: TPanel;
-    dtpEnd: TDateTimePicker;
-    dtpStart: TDateTimePicker;
     Label1: TLabel;
     gridColumnSelectMenu: TPopupMenu;
     Label2: TLabel;
@@ -28,6 +26,8 @@ type
     tbGot: TToolButton;
     tbPrint: TToolButton;
     bbReset: TBitBtn;
+    dtpStart: TDateTimePicker;
+    dtpEnd: TDateTimePicker;
     procedure dbcmbSpecChange(Sender: TObject);
     procedure dbcmbGroupChange(Sender: TObject);
     procedure bPrintClick(Sender: TObject);
@@ -49,6 +49,7 @@ type
     procedure tbGotClick(Sender: TObject);
     procedure tbResetClick(Sender: TObject);
     procedure bbResetClick(Sender: TObject);
+
 
   private
     procedure OnMyMenuItemClick(Sender: TObject);
@@ -360,6 +361,8 @@ begin
   dmDocs.adodsDocs.Active := true;
 end;
 
+
+
 procedure TfmDoc.dtpStartCloseUp(Sender: TObject);
 begin
   inherited;
@@ -485,6 +488,11 @@ begin
               else
                 datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1)
                   .ToString();
+               sp_num.CommandText :=   'select * from MaxNumDocument(''' + datebegin + '''' + ','
+      + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
+      uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_Document')
+        .AsString + ''','''+uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_destination')
+        .AsString+''')';
               sp_num.CommandText := 'select * from MaxNumDocument(''' +
                 datebegin + '''' + ',' + '''' + DateTimeToStr(Date()) + ''')';
               sp_num.Connection := dm.DBConnect;

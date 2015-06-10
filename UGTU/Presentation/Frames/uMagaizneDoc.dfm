@@ -7,7 +7,7 @@ inherited fmDoc: TfmDoc
     Width = 703
     Height = 609
     ExplicitWidth = 703
-    ExplicitHeight = 576
+    ExplicitHeight = 609
     object dbgehMagazineDocs: TDBGridEh
       Left = 2
       Top = 49
@@ -238,15 +238,13 @@ inherited fmDoc: TfmDoc
       Height = 47
       Align = alTop
       TabOrder = 1
-      ExplicitLeft = 4
-      ExplicitTop = -4
       DesignSize = (
         699
         47)
       object Label1: TLabel
         Left = 447
         Top = 12
-        Width = 59
+        Width = 4
         Height = 13
         Anchors = [akRight, akBottom]
         Caption = '-'
@@ -259,28 +257,6 @@ inherited fmDoc: TfmDoc
         Anchors = [akRight, akBottom]
         Caption = #1055#1077#1088#1080#1086#1076
       end
-      object dtpEnd: TDateTimePicker
-        Left = 460
-        Top = 10
-        Width = 121
-        Height = 21
-        Anchors = [akRight, akBottom]
-        Date = 42073.571743564810000000
-        Time = 42073.571743564810000000
-        TabOrder = 0
-        OnCloseUp = dtpEndCloseUp
-      end
-      object dtpStart: TDateTimePicker
-        Left = 320
-        Top = 10
-        Width = 121
-        Height = 21
-        Anchors = [akRight, akBottom]
-        Date = 42073.571743564810000000
-        Time = 42073.571743564810000000
-        TabOrder = 1
-        OnCloseUp = dtpStartCloseUp
-      end
       object ToolBar7: TToolBar
         Left = 14
         Top = 6
@@ -291,7 +267,7 @@ inherited fmDoc: TfmDoc
         Images = ilMain
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
+        TabOrder = 0
         object tbUtv: TToolButton
           Left = 0
           Top = 0
@@ -317,15 +293,37 @@ inherited fmDoc: TfmDoc
         Height = 25
         Anchors = [akRight, akBottom]
         Caption = #1057#1073#1088#1086#1089' '#1092#1080#1083#1100#1090#1088#1072
-        TabOrder = 3
+        TabOrder = 1
         OnClick = bbResetClick
+      end
+      object dtpStart: TDateTimePicker
+        Left = 320
+        Top = 10
+        Width = 121
+        Height = 21
+        Anchors = [akRight, akBottom]
+        Date = 42157.433803819450000000
+        Time = 42157.433803819450000000
+        TabOrder = 2
+        OnCloseUp = dtpStartCloseUp
+      end
+      object dtpEnd: TDateTimePicker
+        Left = 457
+        Top = 11
+        Width = 112
+        Height = 21
+        Anchors = [akRight, akBottom]
+        Date = 42157.434117662040000000
+        Time = 42157.434117662040000000
+        TabOrder = 3
+        OnCloseUp = dtpEndCloseUp
       end
     end
   end
   inherited pnlSave: TPanel
     Top = 609
     Width = 703
-    ExplicitTop = 576
+    ExplicitTop = 609
     ExplicitWidth = 703
     inherited bbSave: TBitBtn
       Left = 534
@@ -345,7 +343,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000880110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000940110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

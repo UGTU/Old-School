@@ -400,4 +400,40 @@ object dmDocs: TdmDocs
     Left = 184
     Top = 176
   end
+  object adodsNeusp: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Filtered = True
+    OnCalcFields = adodsDocsCalcFields
+    CommandText = 'select * from SprAkadem'
+    Parameters = <>
+    Left = 260
+    Top = 235
+    object adodsNeuspIk_studGrup: TIntegerField
+      FieldName = 'Ik_studGrup'
+    end
+    object adodsNeuspik_upContent: TIntegerField
+      FieldName = 'ik_upContent'
+    end
+    object adodsNeuspcName_disc: TStringField
+      FieldName = 'cName_disc'
+      Size = 500
+    end
+    object adodsNeuspcName_vid_zanyat: TStringField
+      FieldName = 'cName_vid_zanyat'
+      Size = 50
+    end
+    object adodsNeuspn_sem: TWordField
+      FieldName = 'n_sem'
+    end
+    object adodsNeuspflag: TBooleanField
+      FieldName = 'flag'
+      ReadOnly = True
+    end
+  end
+  object dsNeusp: TDataSource
+    DataSet = adodsNeusp
+    Left = 263
+    Top = 178
+  end
 end

@@ -14,7 +14,7 @@ uses
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
   DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc,
-  uReviewCallSpr, uReviewApplication, uDMDocuments, uReviewAkadem;
+  uReviewCallSpr, uReviewApplication, uDMDocuments, uReviewAkadem,uReviewNeusp;
 
 type
   TfmStudent = class(TfmBase)
@@ -194,6 +194,7 @@ type
     N4: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
+    N7: TMenuItem;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -240,6 +241,7 @@ type
     procedure MenuItem4Click(Sender: TObject);
     procedure N6Click(Sender: TObject);
     procedure N5Click(Sender: TObject);
+    procedure N3Click(Sender: TObject);
 
   private
     Fik: integer;
@@ -1892,6 +1894,82 @@ begin
 
 end;
 
+procedure TfmStudent.N3Click(Sender: TObject);
+var
+  fReview: TfrmReviewNeusp;
+  AYear, AMonth, ADay: word;
+  dateb, l: string;
+  tempDS, tempDSikdoc, dsAppli, tempDSsm, tempDStransf: TADODataSet;
+  Report: TReportBase;
+  LastNum, ik_doc: integer;
+  // d3, d2: TDateTime;
+  sp_num: TADODataSet;
+  sp_depInd: TADODataSet;
+  dsDoc: TADODataSet;
+begin
+  inherited;
+  ik_stud := obj.StudGrupKey;
+  dsDoc := TADODataSet.Create(nil);
+  sp_num := TADODataSet.Create(nil);
+  sp_depInd := TADODataSet.Create(nil);
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDSsm := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDStransf := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDSikdoc := TADODataSet.Create(nil);
+  dsAppli := TADODataSet.Create(nil);
+  try
+
+    // берем индекс подразделения
+
+    sp_depInd.CommandText := 'select * from DepIndDoc(' +
+      obj.StudGrupKey.ToString() + ')';
+    sp_depInd.Connection := dm.DBConnect;
+    sp_depInd.Open;
+    sp_depInd.First;
+    // общая часть формы
+    // -------------------------------------------
+
+    DecodeDate(Now, AYear, AMonth, ADay);
+    if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+      dateb := '01.09.' + AYear.ToString()
+    else
+      dateb := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
+    sp_num.CommandText := 'select * from MaxNumDocument(''' + dateb + '''' + ','
+      + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
+      sp_depInd.FieldByName('Dep_Index').AsString + ''',6)';
+    sp_num.Connection := dm.DBConnect;
+    sp_num.Open;
+    sp_num.First;
+    LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
+    fReview := TfrmReviewNeusp.Create(Self);
+    // ---------------------
+
+    fReview.dtUtv.Format := '';
+    fReview.dtUtv.date := date;
+    fReview.dtGot.Format := #32;
+    // ищем информацию о студенте
+    dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
+      obj.StudGrupKey.ToString();
+    dsDoc.Connection := dm.DBConnect;
+    dsDoc.Open;
+    dsDoc.First;
+    fReview.eDest.Text := 'Письмо об академической неуспеваемости';
+    fReview.eInd.Text := sp_depInd.FieldByName('Dep_Index').AsString;
+    fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
+      dsDoc.FieldByName('Cname_grup').AsString + ')';
+    fReview.ShowModal;
+  finally
+    tempDStransf.Free;
+    dsAppli.Free;
+    tempDS.Free;
+    tempDSikdoc.Free;
+    sp_num.Free;
+    sp_depInd.Free;
+    dsDoc.Free;
+    Report.Free;
+  end;
+end;
+
 procedure TfmStudent.N5Click(Sender: TObject);
 var
   fReview: TfrmReviewAkadem;
@@ -1956,12 +2034,13 @@ begin
     fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
       dsDoc.FieldByName('Cname_grup').AsString + ')';
     // dmDocs.dsOsn..ListSource:=''
+    dmDocs.spOsn.Active := false;
     dmDocs.spOsn.Parameters.Refresh;
     dmDocs.spOsn.Parameters.ParamByName('@Ik_destination').Value := 7;
     dmDocs.spOsn.Parameters.ParamByName('@Ik_StudGrup').Value :=
       obj.StudGrupKey;
     dmDocs.spOsn.Active := true;
-    dmDocs.spOsn.ExecProc;
+ //   dmDocs.spOsn.ExecProc;
     fReview.cbexOsnov.ListField := 'cNameOsn';
     fReview.cbexOsnov.KeyField := 'Ik_Document';
     fReview.ShowModal;
@@ -2029,12 +2108,12 @@ begin
     end;
     if (fReview.ModalResult = mrYes) then
     begin
-    ik_doc :=tempDSikdoc.FieldByName('maxid').AsInteger;
+      ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
       Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 7);
       TWaitingController.GetInstance.Process(Report);
     end;
   finally
-  tempDStransf.Free;
+    tempDStransf.Free;
     dsAppli.Free;
     tempDS.Free;
     tempDSikdoc.Free;

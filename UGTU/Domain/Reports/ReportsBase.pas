@@ -204,7 +204,7 @@ unit ReportsBase;
 
 interface
 uses
-  Classes, SysUtils, ExcelXP, Barcode, Contnrs, XIntf, CommonIntf, Graphics;
+  Classes, SysUtils, Excel2010, Barcode, Contnrs, XIntf, CommonIntf, Graphics;
 type
   // Исключение при установке шага в построении отчёта
   EProgress = class(Exception);
@@ -341,20 +341,20 @@ type
   // Базовый класс для отчётов на Excel
   TExcelReportBase = class(TReportBase, _Application)
   private
-    FCurrentWorkbook: ExcelXP._Workbook;
+    FCurrentWorkbook: _Workbook;
     FBarcodes:TInterfaceList;
 
-    function GetExcelApplication : ExcelXP.ExcelApplication;
-    function GetActiveWorksheet : ExcelXP._Worksheet;
-    function GetCells : ExcelXP.ExcelRange;
+    function GetExcelApplication : ExcelApplication;
+    function GetActiveWorksheet : _Worksheet;
+    function GetCells : ExcelRange;
     function GetItems(ARow:Integer;ACol:Integer) : OleVariant;
     procedure SetItems(ARow:Integer;ACol:Integer; const Value:OleVariant);
-    function GetRange(Cell1:OleVariant; Cell2:OleVariant) : ExcelXP.ExcelRange;
-    function GetRangeByAddr(Address:string) : ExcelXP.ExcelRange;
-    function GetWorksheet(lcid:Integer):ExcelXP._Worksheet;
+    function GetRange(Cell1:OleVariant; Cell2:OleVariant) : ExcelRange;
+    function GetRangeByAddr(Address:string) : Excel2010.ExcelRange;
+    function GetWorksheet(lcid:Integer):Excel2010._Worksheet;
     function GetBarcodeApplet(Index:Integer):IBarcodeApplet;
     function GetActiveBarcodeApplet:IBarcodeApplet;
-    function GetWorksheetBarcode(Sheet:ExcelXP._Worksheet):IBarcodeApplet;
+    function GetWorksheetBarcode(Sheet:Excel2010._Worksheet):IBarcodeApplet;
     function GetSelection:OleVariant;
     procedure DuplicateBarcode(sourceSheet: _Worksheet; BarcodeAppletName: string; targetSheet: _Worksheet);
     function GetName: string;
@@ -366,23 +366,23 @@ type
     function DoGetApplication:OleVariant;override;
     procedure DoOpen;override;
     // Проверят имеет ли указанная страница заданный OLE-объект
-    function HasOleObject(Sheet:ExcelXP._Worksheet; ObjName:string) : Boolean;
+    function HasOleObject(Sheet:Excel2010._Worksheet; ObjName:string) : Boolean;
     // Получает объект ExcelApplication
-    property ExcelApplication : ExcelXP.ExcelApplication read GetExcelApplication implements _Application;
+    property ExcelApplication : Excel2010.ExcelApplication read GetExcelApplication implements _Application;
     // Получает текущую книгу
-    property CurrentWorkbook : ExcelXP._Workbook read FCurrentWorkbook;
+    property CurrentWorkbook : Excel2010._Workbook read FCurrentWorkbook;
     // Получает активный лист текущей книги
-    property ActiveSheet : ExcelXP._Worksheet read GetActiveWorksheet;
+    property ActiveSheet : Excel2010._Worksheet read GetActiveWorksheet;
     // Получает ячейки текущего листа
-    property Cells : ExcelXP.ExcelRange read GetCells;
+    property Cells : Excel2010.ExcelRange read GetCells;
     // Получает или устанавливает значение ячейки на текущем листе
     property Items[ARow:Integer; ACol:Integer]:OleVariant read GetItems write SetItems;default;
     // Получает объект ExcelRange на текущем листе
-    property Range[Start:OleVariant; Stop:OleVariant]:ExcelXP.ExcelRange read GetRange;
+    property Range[Start:OleVariant; Stop:OleVariant]:Excel2010.ExcelRange read GetRange;
     // Получает объект ExcelRange на текущем листе
-    property RangeByAddr[Address:string]:ExcelXP.ExcelRange read GetRangeByAddr;
+    property RangeByAddr[Address:string]:Excel2010.ExcelRange read GetRangeByAddr;
     // Получает объект Worksheet
-    property Worksheet[lcid:Integer]:ExcelXP._Worksheet read GetWorksheet;
+    property Worksheet[lcid:Integer]:Excel2010._Worksheet read GetWorksheet;
     //Получает объект штрих-кода на заданном листе.
     property BarcodeApplet[lcid:Integer]:IBarcodeApplet read GetBarcodeApplet;
     // Получает объект штрих-кода на текущем листе
@@ -443,11 +443,11 @@ type
 
   TExcelBarcodeObject = class (TBarcodeApplet, ISite)
   private
-    FWorksheet : ExcelXP._Worksheet;
+    FWorksheet : Excel2010._Worksheet;
     function GetApplet:IBarcodeApplet;
     function GetSite : IDispatch;
   public
-    constructor Create(Worksheet : ExcelXP._Worksheet);
+    constructor Create(Worksheet : Excel2010._Worksheet);
   protected
     procedure AssignBarcodeValue(barcode:string);override;
     property Site:IDispatch read GetSite;
@@ -738,7 +738,7 @@ begin
   Result := GetWorksheetBarcode(ActiveSheet);
 end;
 
-function TExcelReportBase.GetActiveWorksheet: ExcelXP._Worksheet;
+function TExcelReportBase.GetActiveWorksheet: Excel2010._Worksheet;
 var
   pSheet:IDispatch;
 begin
@@ -758,7 +758,7 @@ begin
   Result := GetWorksheetBarcode(Self.Worksheet[Index]);
 end;
 
-function TExcelReportBase.GetCells: ExcelXP.ExcelRange;
+function TExcelReportBase.GetCells: Excel2010.ExcelRange;
 begin
   Result := ActiveSheet.Cells;
 end;
@@ -770,7 +770,7 @@ begin
   result:= ExcelApplication.DisplayAlerts[lcid];
 end;
 
-function TExcelReportBase.GetExcelApplication: ExcelXP.ExcelApplication;
+function TExcelReportBase.GetExcelApplication: Excel2010.ExcelApplication;
 var
   pDispatch:IDispatch;
   hRes : HRESULT;
@@ -802,12 +802,12 @@ begin
   Result := Cells.Item[ARow,ACol];
 end;
 
-function TExcelReportBase.GetRange(Cell1, Cell2: OleVariant): ExcelXP.ExcelRange;
+function TExcelReportBase.GetRange(Cell1, Cell2: OleVariant): Excel2010.ExcelRange;
 begin
   Result := ActiveSheet.Range[Cell1, Cell2];
 end;
 
-function TExcelReportBase.GetRangeByAddr(Address:string) : ExcelXP.ExcelRange;
+function TExcelReportBase.GetRangeByAddr(Address:string) : Excel2010.ExcelRange;
 var position: integer;
     Cell1, Cell2: OleVariant;
 begin
@@ -824,7 +824,7 @@ begin
   //self.Selection;
 end;
 
-function TExcelReportBase.GetWorksheet(lcid: Integer): ExcelXP._Worksheet;
+function TExcelReportBase.GetWorksheet(lcid: Integer): Excel2010._Worksheet;
 var
   pWorksheet:IDispatch;
 begin
@@ -842,7 +842,7 @@ begin
 end;
 
 function TExcelReportBase.GetWorksheetBarcode(
-  Sheet: ExcelXP._Worksheet): IBarcodeApplet;
+  Sheet: Excel2010._Worksheet): IBarcodeApplet;
 var
   i: Integer;
   item : ISite;
@@ -971,7 +971,7 @@ begin
   ActiveSheet.Name:= Value;
 end;
 
-function TExcelReportBase.HasOleObject(Sheet: ExcelXP._Worksheet; ObjName:string): boolean;
+function TExcelReportBase.HasOleObject(Sheet: Excel2010._Worksheet; ObjName:string): boolean;
 var
   v:OleVariant;
 begin
@@ -1047,7 +1047,7 @@ var
   //pOleObjectDisp : IDispatch;
   pOleObjectDisp : OleVariant;
   //pOleDisp       : IDispatch;
-  //OleObject      : ExcelXP._OLEObject;
+  //OleObject      : Excel2010._OLEObject;
   //pBarcodeObject : IPDF417Ctrl;
 begin
   inherited;
@@ -1061,7 +1061,7 @@ begin
   }
 end;
 
-constructor TExcelBarcodeObject.Create(Worksheet: ExcelXP._Worksheet);
+constructor TExcelBarcodeObject.Create(Worksheet: Excel2010._Worksheet);
 begin
   inherited Create;
   Assert(Assigned(Worksheet), 'Не задана ссылка на интерфейс IWorksheet.');

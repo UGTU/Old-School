@@ -16,7 +16,7 @@ uses
   DBTVDictObj, DBTVPrikObj, DBTVBusinessObj, DBTVAbitObj, DBTVAdminObj,
   DBTVStudObj, DBTVSpecObj, DBTVGroupObj, DBTVMethodWorkObj, DBTVFacDepobj,
   DBTVDepObj, DBTVTeacherObj, DBTVRootScheduleobj, DBTVRIOObj, DBTVOKObj,
-  DBTVSemesterNagrObj, DBTVHostelRootobj,DBTVSprObj;
+  DBTVSemesterNagrObj, DBTVHostelRootobj, DBTVSprObj, uDM;
 
 type
   TDBDekanatTreeView = class(TDBTreeView)
@@ -275,6 +275,8 @@ end;
 function TDBDekanatTreeView.AddElementNode: TTreeNode;
 var
   Node: TTreeNode;
+  dsDoc: TADODataset;
+  z, u: integer;
 begin
   result := nil;
   if ElementDataset.fieldvalues['ik_element'] = 1 then
@@ -381,9 +383,15 @@ begin
     Node.ImageIndex := 1;
   end;
 
-  //журнал справок
-   if ElementDataset.fieldvalues['ik_element'] = 12 then
+  // журнал справок
+  if ElementDataset.fieldvalues['ik_element'] = 12 then
   begin
+//    dsDoc := TADODataset.Create(nil);
+//    dsDoc.CommandText := 'select * from MagazineDocs';
+//    dsDoc.Connection := dm.DBConnect;
+//    dsDoc.Open;
+//    dsDoc.First;
+
     Node := CreateNewNode(nil, ElementDataset.fieldvalues['Nameelement'],
       TDBNodeSprObject);
     Node.HasChildren := false;

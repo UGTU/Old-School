@@ -104,6 +104,14 @@ type
     adodsPricinacNameDestination: TStringField;
     dsOsn: TDataSource;
     spOsn: TADOStoredProc;
+    adodsNeusp: TADODataSet;
+    dsNeusp: TDataSource;
+    adodsNeuspIk_studGrup: TIntegerField;
+    adodsNeuspik_upContent: TIntegerField;
+    adodsNeuspcName_disc: TStringField;
+    adodsNeuspcName_vid_zanyat: TStringField;
+    adodsNeuspn_sem: TWordField;
+    adodsNeuspflag: TBooleanField;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
   private
     { Private declarations }

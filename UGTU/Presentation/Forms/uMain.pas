@@ -719,11 +719,11 @@ actFilterKaf.Visible:=false;
 //------------Журнал справок
     if (dbNode is TDBNodeSprObject) then
   begin
-    Caption:= TApplicationController.GetInstance.ProgramName + ' - [Журнал справок]';
+    Caption:= TApplicationController.GetInstance.ProgramName + ' - [Журнал документов]';
     Frame:=TfmDoc;
     FFrame.RefreshFrame;
-    Comment('Журнал справок', 'Выбранный элемент: '); //+ (FFrame as TfmSpr).dbcbElement.Text);
-    TApplicationController.GetInstance.AddLogEntry('Кадр "Журнал справок". Состояние: '+StatusBar1.Panels.Items[0].Text+'/'+StatusBar1.Panels.Items[1].Text+'/'+StatusBar1.Panels.Items[2].Text);
+    Comment('Журнал документов', 'Выбранный элемент: '); //+ (FFrame as TfmSpr).dbcbElement.Text);
+    TApplicationController.GetInstance.AddLogEntry('Кадр "Журнал документов". Состояние: '+StatusBar1.Panels.Items[0].Text+'/'+StatusBar1.Panels.Items[1].Text+'/'+StatusBar1.Panels.Items[2].Text);
     SetCurrentSearchPanel(sptNone);
   end;
   //------------

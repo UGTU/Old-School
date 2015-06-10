@@ -1055,7 +1055,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 437
+                Height = 431
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1967,7 +1967,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 15
     Bitmap = {
-      494C0101060009001C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900340110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2304,9 +2304,11 @@ inherited fmStudent: TfmStudent
     Top = 138
     object MenuItem1: TMenuItem
       Action = actPrintSprav
+      Caption = #1057#1087#1088#1072#1074#1082#1072' '#1087#1086' '#1084#1077#1089#1090#1091' '#1090#1088#1077#1073#1086#1074#1072#1085#1080#1103
     end
     object MenuItem2: TMenuItem
       Action = actPrintPensSprav
+      Caption = #1057#1087#1088#1072#1074#1082#1072' '#1074' '#1055#1077#1085#1089#1080#1086#1085#1085#1099#1081' '#1060#1086#1085#1076
     end
     object MenuItem3: TMenuItem
       Action = frmMain.actLichnKartStud
@@ -2316,7 +2318,8 @@ inherited fmStudent: TfmStudent
       OnClick = MenuItem4Click
     end
     object N3: TMenuItem
-      Caption = #1040#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1072#1103' '#1085#1077#1091#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
+      Caption = #1055#1080#1089#1100#1084#1086' '#1086#1073' '#1072#1082#1072#1076#1077#1084'. '#1091#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1080
+      OnClick = N3Click
     end
     object N4: TMenuItem
       Caption = #1055#1080#1089#1100#1084#1086'-'#1091#1074#1077#1076#1086#1084#1083#1077#1085#1080#1077
@@ -2328,6 +2331,9 @@ inherited fmStudent: TfmStudent
     object N6: TMenuItem
       Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1077' '#1085#1072' '#1072#1082#1072#1076#1077#1084'. '#1089#1087#1088#1072#1074#1082#1091
       OnClick = N6Click
+    end
+    object N7: TMenuItem
+      Caption = #1042#1099#1087#1080#1089#1082#1072' '#1080#1079' '#1079#1072#1095#1077#1090#1085#1086#1081' '#1074#1077#1076#1086#1084#1086#1089#1090#1080
     end
   end
   object ppmStudNapr: TPopupMenu
