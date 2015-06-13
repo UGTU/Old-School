@@ -410,9 +410,11 @@ begin
 
     //строчки из доп сведений редактируем
     //так приходится делать из-за того, что ячейки объединенные
-  if ((dmDiplom.adospGetVipiscaForDiplomik_direction.AsInteger = 2) and
+  if ((dmDiplom.adospGetVipiscaForDiplomik_direction.AsInteger = 9) or
+      ((dmDiplom.adospGetVipiscaForDiplomik_direction.AsInteger = 2) and
       (dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger < 5))
-      or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169) then
+      or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)
+      or (FikGroup=6244) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=211)) then
   begin
       Replace('#Доп'+IntToStr(i), 'Пройдено ускоренное обучение по образовательной программе.');
       inc(i);
