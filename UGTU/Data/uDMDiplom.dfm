@@ -400,7 +400,7 @@ object dmDiplom: TdmDiplom
     object adospGetVipiscaForDiplomdocumName: TStringField
       FieldName = 'documName'
       ReadOnly = True
-      Size = 50
+      Size = 500
     end
     object adospGetVipiscaForDiplomMonthObuch: TIntegerField
       FieldName = 'MonthObuch'
