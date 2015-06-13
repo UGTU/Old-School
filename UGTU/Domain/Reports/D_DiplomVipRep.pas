@@ -44,7 +44,7 @@ type
     function GetNextCellHor(cur: String): String;
     function LastPos(subStr, str: string): integer;
     function StringFormat(var str: string; strMaxLen:integer): string;
-    function IsNapravl:boolean;
+    //function IsNapravl:boolean;
     procedure SelectNextCellVert(var cur: String; var ActRange: Variant);
     procedure SelectNextCellHor(var cur: String; var ActRange: Variant);
     procedure SendToExcel;
@@ -66,13 +66,13 @@ type
 
 implementation
 
-function TDiplomVipExcelReport.IsNapravl:boolean;
+{function TDiplomVipExcelReport.IsNapravl:boolean;
 begin
   if ((ik_direction=1) or (ik_direction=3)) then
     result:= true
   else
     result:= false;
-end;
+end;   }
 
 function TDiplomVipExcelReport.LastPos(subStr, str: string): integer;
 var poss: integer;
@@ -320,7 +320,7 @@ begin
   end;
   str:= GetFullDate(dmDiplom.adospGetVipiscaForDiplomDd_birth.AsDateTime)+' года';
   Replace('#ДатаРожд#', str);   //docum
-  
+
   i:= dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger;
   //для заочников уменьшаем кол-во лет обучения на 1 год
   if (dmDiplom.adospGetVipiscaForDiplomIk_form_ed.AsInteger=2) and (dmDiplom.adospGetVipiscaForDiplomik_spec.AsInteger<>354460) then
@@ -391,7 +391,7 @@ begin
     i:= 1;
     if (dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString<>'') then
     begin
-      if ((IsNapravl())) then
+      if ((WithZachEd)) then
       begin
         str:= 'Направленность (профиль) образовательной программы: '+dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
       end
@@ -653,10 +653,8 @@ begin
   dmDiplom.adospSelGOSForVipisca.First;
   if (not dmDiplom.adospSelGOSForVipisca.Eof) and (dmDiplom.adospSelGOSForVipisca.FieldByName('ik_vid_zanyat').AsInteger = 56) then
   begin
-      if (IsNapravl()) then
-        str := 'Итоговый государственный междисциплинарный экзамен по направлению подготовки'
-      else
-        str := 'Итоговый государственный междисциплинарный экзамен по специальности';//'Итоговый государственный междисциплинарный экзамен';
+      //if (WithZachEd) then
+    str := 'Итоговый государственный экзамен';//'Итоговый государственный междисциплинарный экзамен';
     SendStringToExcel(str, cur, ActRange);
     cur1 := Selection.Address;
     SelectNextCellHor(cur1,ActRange);

@@ -46,6 +46,7 @@ inherited fmAbitCard: TfmAbitCard
     end
     inherited ToolButton12: TToolButton
       Visible = False
+      ExplicitWidth = 38
     end
     object ToolButton15: TToolButton
       Left = 337
@@ -70,6 +71,7 @@ inherited fmAbitCard: TfmAbitCard
           ExplicitHeight = 587
           inherited PageControl2: TPageControl
             Width = 612
+            ActivePage = TabSheet3
             ExplicitWidth = 612
             inherited TabSheet3: TTabSheet
               ExplicitWidth = 604
@@ -548,8 +550,7 @@ inherited fmAbitCard: TfmAbitCard
               end
               inherited pnlToolDoc: TPanel
                 Left = 553
-                ExplicitLeft = 555
-                ExplicitTop = 4
+                ExplicitLeft = 553
               end
             end
             inherited TabSheet7: TTabSheet
@@ -604,6 +605,10 @@ inherited fmAbitCard: TfmAbitCard
             object TabSheet8: TTabSheet
               Caption = #1055#1086#1089#1090#1091#1087#1083#1077#1085#1080#1077
               ImageIndex = 5
+              ExplicitLeft = 0
+              ExplicitTop = 0
+              ExplicitWidth = 0
+              ExplicitHeight = 0
               object GroupBox2: TGroupBox
                 Left = 0
                 Top = 0
@@ -742,7 +747,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C0101060009005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
