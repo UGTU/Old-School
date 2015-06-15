@@ -409,7 +409,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
                 Top = 225
                 Width = 171
                 TabOrder = 9
-                OnChange = actCheckFieldsExecute
                 ExplicitTop = 225
                 ExplicitWidth = 171
               end
@@ -800,7 +799,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
