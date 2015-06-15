@@ -105,6 +105,7 @@ type
     adospGetVipiscaForDiplomik_spec_fac: TAutoIncField;
     adospDiplomListVidGos: TIntegerField;
     adospGetVipiscaForDiplomDateDiplomDelivery: TDateTimeField;
+    adospGetVipiscaForDiplomOchYearObuch: TIntegerField;
   private
     { Private declarations }
   public
