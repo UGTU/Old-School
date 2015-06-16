@@ -121,7 +121,6 @@ object dmDiplom: TdmDiplom
     Top = 88
   end
   object adotPredpr: TADOTable
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'Predpr'
@@ -129,7 +128,6 @@ object dmDiplom: TdmDiplom
     Top = 24
   end
   object adotTypeTema: TADOTable
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
@@ -460,6 +458,9 @@ object dmDiplom: TdmDiplom
     end
     object adospGetVipiscaForDiplomDateDiplomDelivery: TDateTimeField
       FieldName = 'DateDiplomDelivery'
+    end
+    object adospGetVipiscaForDiplomOchYearObuch: TIntegerField
+      FieldName = 'OchYearObuch'
     end
   end
   object adospAppendDiplom: TADOStoredProc

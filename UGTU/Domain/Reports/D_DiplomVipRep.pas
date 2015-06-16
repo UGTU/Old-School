@@ -177,7 +177,7 @@ begin
   num := StrToInt(nstr);
   num := num+1;
   //переход на следующую страницу
-  if (num>59) then
+  if (num>58) then
     Result := '$F$8'
   else
     Result := bstr+IntToStr(num);
@@ -321,10 +321,7 @@ begin
   str:= GetFullDate(dmDiplom.adospGetVipiscaForDiplomDd_birth.AsDateTime)+' года';
   Replace('#ДатаРожд#', str);   //docum
 
-  i:= dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger;
-  //для заочников уменьшаем кол-во лет обучения на 1 год
-  if (dmDiplom.adospGetVipiscaForDiplomIk_form_ed.AsInteger=2) and (dmDiplom.adospGetVipiscaForDiplomik_spec.AsInteger<>354460) then
-    dec(i);
+  i:= dmDiplom.adospGetVipiscaForDiplomOchYearObuch.AsInteger;
   str1:= IntToStr(i);
   if (i >4) then
      str1:= str1 + ' лет'
