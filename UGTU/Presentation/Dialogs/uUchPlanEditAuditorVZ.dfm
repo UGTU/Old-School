@@ -7,8 +7,8 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
   ClientWidth = 629
   Constraints.MinWidth = 405
   OldCreateOrder = True
-  ExplicitWidth = 637
-  ExplicitHeight = 338
+  ExplicitWidth = 645
+  ExplicitHeight = 351
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -28,13 +28,13 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
     Height = 35
     BevelOuter = bvNone
     ExplicitTop = 277
-    ExplicitWidth = 540
+    ExplicitWidth = 629
     ExplicitHeight = 35
     inherited bbOK: TBitBtn
       Left = 358
       Top = 5
       Width = 87
-      ExplicitLeft = 269
+      ExplicitLeft = 358
       ExplicitTop = 5
       ExplicitWidth = 87
     end
@@ -43,7 +43,7 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
       Top = 5
       Width = 89
       TabOrder = 2
-      ExplicitLeft = 446
+      ExplicitLeft = 535
       ExplicitTop = 5
       ExplicitWidth = 89
     end
@@ -52,7 +52,7 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
       Top = 5
       Width = 86
       TabOrder = 1
-      ExplicitLeft = 358
+      ExplicitLeft = 447
       ExplicitTop = 5
       ExplicitWidth = 86
     end
@@ -74,7 +74,6 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
     BevelOuter = bvNone
     Caption = 'Panel2'
     TabOrder = 1
-    ExplicitWidth = 540
     object Bevel5: TBevel
       Left = 0
       Top = 5
@@ -106,21 +105,15 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
       AllowedOperations = [alopInsertEh, alopUpdateEh, alopDeleteEh]
       AutoFitColWidths = True
       DataSource = dsAudContent
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
+      TitleParams.MultiTitle = True
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object Panel3: TPanel
       Left = 596
@@ -130,7 +123,6 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 507
       object ToolBar1: TToolBar
         Left = 5
         Top = 1
@@ -221,7 +213,7 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
     Left = 288
     Top = 112
     Bitmap = {
-      494C010103000400040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010103000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -357,6 +349,7 @@ inherited frmEditAuditorVZ: TfrmEditAuditorVZ
       FFFFFFFFE0010000C007C007E0010000C007C007C0000000C007C007C0000000
       C007C007C0000000C007C00780000000C007C00700000000C007C00700000000
       C007C00780000000C007C007C0000000C007C007E0010000C007C007E0010000
-      FFFFFFFFF8070000FFFFFFFFFFFF0000}
+      FFFFFFFFF8070000FFFFFFFFFFFF000000000000000000000000000000000000
+      000000000000}
   end
 end

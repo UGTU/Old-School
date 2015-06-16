@@ -226,7 +226,10 @@ begin
   if (dbdteList.Value <= 0) then
     dbdteList.Value := AbitList.Date;
   if (dbcbeRecruit.keyvalue <= 0) then
+  begin
     dbcbeRecruit.keyvalue := AbitList.RecruitNum;
+    GetKatZach(dbcbeRecruit.KeyValue); //настройка категорий зачисления
+  end;
   if (eAvgBall.Value <= 0) then
     eAvgBall.Value := AbitList.AvgBall;
 
@@ -283,10 +286,12 @@ begin
     inttostr(IDStudent) + '''';
   dm.adodsPostupView.Active := true;
 
+  if  (dm.adodsPostupView.RecordCount > 0) then LoadDocs;
+
+
   // если вызываем окно редактирования
   if (dm.adodsPostupView.RecordCount > 0) and (not(IsAdditional)) then
   begin
-    LoadDocs;
 
     dm.adodsPostupView.First;
     // для проверки ЕГЭ
