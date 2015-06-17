@@ -5,7 +5,6 @@
   object aspSelLanguage: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
-    LockType = ltBatchOptimistic
     AfterEdit = aspSelLanguageAfterEdit
     OnNewRecord = aspSelLanguageNewRecord
     ProcedureName = 'SelLanguage;1'
@@ -24,7 +23,7 @@
         Precision = 18
         Value = 0c
       end>
-    Left = 75
+    Left = 59
     Top = 12
     object aspSelLanguageIk_lang: TIntegerField
       FieldName = 'Ik_lang'
