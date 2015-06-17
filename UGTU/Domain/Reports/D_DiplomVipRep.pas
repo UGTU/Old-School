@@ -177,7 +177,7 @@ begin
   num := StrToInt(nstr);
   num := num+1;
   //переход на следующую страницу
-  if (num>58) then
+  if (num>57) then
     Result := '$F$8'
   else
     Result := bstr+IntToStr(num);
@@ -411,7 +411,7 @@ begin
       ((dmDiplom.adospGetVipiscaForDiplomik_direction.AsInteger = 2) and
       (dmDiplom.adospGetVipiscaForDiplomYearObuch.AsInteger < 5))
       or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)
-      or (FikGroup=6244) or (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=211)) then
+      or (FikGroup=6244) ) then
   begin
       Replace('#Доп'+IntToStr(i), 'Пройдено ускоренное обучение по образовательной программе.');
       inc(i);
