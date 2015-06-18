@@ -177,7 +177,7 @@ begin
   num := StrToInt(nstr);
   num := num+1;
   //переход на следующую страницу
-  if (num>57) then
+  if (num>58) then
     Result := '$F$8'
   else
     Result := bstr+IntToStr(num);

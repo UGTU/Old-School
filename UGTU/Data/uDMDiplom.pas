@@ -106,6 +106,10 @@ type
     adospDiplomListVidGos: TIntegerField;
     adospGetVipiscaForDiplomDateDiplomDelivery: TDateTimeField;
     adospGetVipiscaForDiplomOchYearObuch: TIntegerField;
+    adospDiplomListDiplSeries: TStringField;
+    adospDiplomListDiplNumber: TStringField;
+    adospDiplomListProtNumber: TStringField;
+    adospDiplomListProtDate: TDateTimeField;
   private
     { Private declarations }
   public

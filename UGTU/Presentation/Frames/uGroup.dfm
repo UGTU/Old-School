@@ -2508,6 +2508,38 @@ inherited fmGroup: TfmGroup
               Title.Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1076#1088'. '#1042#1059#1047#1072
               Width = 100
               OnUpdateData = dbgDiplomColumns2UpdateData
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ProtNumber'
+              Footers = <>
+              Title.Caption = #1053#1086#1084#1077#1088' '#1087#1088#1086#1090'.'
+              Width = 60
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ProtDate'
+              Footers = <>
+              Title.Caption = #1044#1072#1090#1072' '#1087#1088#1086#1090'.'
+              Width = 60
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DiplSeries'
+              Footers = <>
+              Title.Caption = #1057#1077#1088#1080#1103' '#1076#1080#1087#1083'.'
+              Width = 50
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DiplNumber'
+              Footers = <>
+              Title.Caption = #1053#1086#1084#1077#1088' '#1076#1080#1087#1083'.'
+              Width = 60
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -2648,7 +2680,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004006C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400700110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2821,7 +2853,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000680110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040006C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3492,7 +3524,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800680110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050008006C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7

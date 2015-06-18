@@ -114,6 +114,21 @@ object dmDiplom: TdmDiplom
     object adospDiplomListVidGos: TIntegerField
       FieldName = 'VidGos'
     end
+    object adospDiplomListDiplSeries: TStringField
+      FieldName = 'DiplSeries'
+      Size = 10
+    end
+    object adospDiplomListDiplNumber: TStringField
+      FieldName = 'DiplNumber'
+      Size = 15
+    end
+    object adospDiplomListProtNumber: TStringField
+      FieldName = 'ProtNumber'
+      Size = 12
+    end
+    object adospDiplomListProtDate: TDateTimeField
+      FieldName = 'ProtDate'
+    end
   end
   object dsDiplomList: TDataSource
     DataSet = adospDiplomList
@@ -121,6 +136,7 @@ object dmDiplom: TdmDiplom
     Top = 88
   end
   object adotPredpr: TADOTable
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'Predpr'
@@ -128,6 +144,7 @@ object dmDiplom: TdmDiplom
     Top = 24
   end
   object adotTypeTema: TADOTable
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
