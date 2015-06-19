@@ -161,6 +161,9 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
       FieldName = 'cName_direction'
       Size = 50
     end
+    object adospQualificationYearNormObuch: TIntegerField
+      FieldName = 'YearNormObuch'
+    end
   end
   object dsQualification: TDataSource
     DataSet = adospQualification

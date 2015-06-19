@@ -34,6 +34,7 @@ type
     adoqSpecCshort_spec: TStringField;
     adoqSpecik_spec: TIntegerField;
     adoqSpecid_type_branch: TIntegerField;
+    adospQualificationYearNormObuch: TIntegerField;
   private
     { Private declarations }
   public

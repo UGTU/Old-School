@@ -46,7 +46,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     Top = 0
     Width = 927
     Height = 612
-    ActivePage = tshDiplom
+    ActivePage = tsQualif
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 2
@@ -546,6 +546,13 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             Title.Caption = #1064#1080#1092#1088
             Width = 50
             OnUpdateData = dbgQualifColumns1UpdateData
+          end
+          item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'YearNormObuch'
+            Footers = <>
+            Title.Caption = #1050#1086#1083'-'#1074#1086' '#1083#1077#1090' '#1086#1073#1091#1095#1077#1085#1080#1103
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end

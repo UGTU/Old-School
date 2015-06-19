@@ -2332,7 +2332,7 @@ inherited fmGroup: TfmGroup
           Top = 0
           Width = 691
           Height = 26
-          ButtonWidth = 29
+          ButtonWidth = 26
           Caption = 'ToolBar1'
           Images = ilMain
           ParentShowHint = False
@@ -2344,14 +2344,19 @@ inherited fmGroup: TfmGroup
             Action = actCreateDiploms
           end
           object ToolButton19: TToolButton
-            Left = 29
+            Left = 26
             Top = 0
             Action = actUpdateDiploms
           end
           object ToolButton18: TToolButton
-            Left = 58
+            Left = 52
             Top = 0
             Action = actPrintDipl
+          end
+          object ToolButton27: TToolButton
+            Left = 78
+            Top = 0
+            Action = ActDiplListToExcel
           end
         end
         object dbgDiplom: TDBGridEh
@@ -2514,6 +2519,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'ProtNumber'
               Footers = <>
+              ReadOnly = True
               Title.Caption = #1053#1086#1084#1077#1088' '#1087#1088#1086#1090'.'
               Width = 60
             end
@@ -2522,6 +2528,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'ProtDate'
               Footers = <>
+              ReadOnly = True
               Title.Caption = #1044#1072#1090#1072' '#1087#1088#1086#1090'.'
               Width = 60
             end
@@ -2530,6 +2537,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'DiplSeries'
               Footers = <>
+              ReadOnly = True
               Title.Caption = #1057#1077#1088#1080#1103' '#1076#1080#1087#1083'.'
               Width = 50
             end
@@ -2538,6 +2546,7 @@ inherited fmGroup: TfmGroup
               EditButtons = <>
               FieldName = 'DiplNumber'
               Footers = <>
+              ReadOnly = True
               Title.Caption = #1053#1086#1084#1077#1088' '#1076#1080#1087#1083'.'
               Width = 60
             end>
@@ -2680,7 +2689,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400700110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400780110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2853,7 +2862,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C0101110040006C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000740110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3524,7 +3533,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C0101050008006C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800740110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
@@ -4060,6 +4069,12 @@ inherited fmGroup: TfmGroup
       ImageIndex = 16
       OnExecute = actRefreshVedStudsExecute
       OnUpdate = actRefreshVedStudsUpdate
+    end
+    object ActDiplListToExcel: TAction
+      Category = 'Diplom'
+      Caption = #1042#1099#1074#1077#1089#1090#1080' '#1089#1087#1080#1089#1086#1082' '#1074' Excel'
+      ImageIndex = 8
+      OnExecute = ActDiplListToExcelExecute
     end
   end
   object pmVedomost: TPopupMenu

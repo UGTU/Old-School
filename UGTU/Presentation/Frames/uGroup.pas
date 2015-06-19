@@ -204,6 +204,8 @@ type
     ToolButton25: TToolButton;
     ToolButton26: TToolButton;
     actRefreshVedStuds: TAction;
+    ToolButton27: TToolButton;
+    ActDiplListToExcel: TAction;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -330,6 +332,8 @@ type
       var Value: Variant; var UseText, Handled: Boolean);
     procedure actRefreshVedStudsUpdate(Sender: TObject);
     procedure actRefreshVedStudsExecute(Sender: TObject);
+    procedure ToolButton27Click(Sender: TObject);
+    procedure ActDiplListToExcelExecute(Sender: TObject);
   private
     { Private declarations }
     Fik: Integer;
@@ -395,7 +399,7 @@ uses uDM, DBTVgroupObj, DBTVFacObj, uStudInfo,
   uRaports, uGroupEdtDlg, uVinEkz, uDMGroupActions, uDMUspevaemost,
   uDMUgtuStructure, uNaprClose, uNapr,
   Conditions, CorrectDatatypeChecks, Parser, uDiplomController,
-  uDMDiplom, uDiplomStudSelect, ConstantRepository;
+  uDMDiplom, uDiplomStudSelect, ConstantRepository, ReportDataSet;
 
 {$R *.dfm}
 { TfmGroup }
@@ -3245,6 +3249,24 @@ begin
 
 end;
 
+procedure TfmGroup.ActDiplListToExcelExecute(Sender: TObject);
+var
+  Report:TExcelReportDBGrid;
+begin
+    //TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт вкладки к диплому '+StudName);
+
+    Report := TReportBase.CreateReport(TExcelReportDBGrid) as TExcelReportDBGrid;
+    Report.DataSet := dmDiplom.adospDiplomList;
+    Report.DBGrid:= dbgDiplom;
+    Report.ReportTemplate:= ExtractFilePath(Application.ExeName)+'reports\'+'DiplList.xltx';
+    Report.FreeOnComplete := true;
+    Report.OnExecuteError := ExecuteError;
+    TWaitingController.GetInstance.Process(Report);
+
+    //Report.BuildReport;
+
+end;
+
 procedure TfmGroup.actMkVinExecute(Sender: TObject);
 begin
   TApplicationController.GetInstance.AddLogEntry
@@ -3334,6 +3356,21 @@ procedure TfmGroup.ToolButton13Click(Sender: TObject);
 begin
   cmbxUspSemChange(Sender);
 end;
+
+procedure TfmGroup.ToolButton27Click(Sender: TObject);
+var
+  Report:TExcelBaseReportDataSet;
+begin
+    //TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт вкладки к диплому '+StudName);
+
+    Report := TReportBase.CreateReport(TExcelBaseReportDataSet) as TExcelBaseReportDataSet;
+    Report.FreeOnComplete := true;
+    Report.OnExecuteError := ExecuteError;
+    TWaitingController.GetInstance.Process(Report);
+
+    //Report.BuildReport;
+end;
+
 
 procedure TfmGroup.ToolButton9Click(Sender: TObject);
 var
