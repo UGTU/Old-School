@@ -274,7 +274,7 @@ begin
   Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance; //
   dm.DBConnect.BeginTrans;
   //создание учебного плана
-  if ((FUchPlan = 0) or ((dblcbUchPln.KeyValue<>FParentUchPlan)and(VidGos>FGOS2))) then
+  if ((FUchPlan = 0) or ((dblcbUchPln.KeyValue<>FParentUchPlan)and(VidGos>FGOS2)and(dblcbUchPln.KeyValue <> Null))) then
     with dm.aspAddRupGrup do
     begin
       Log.LogMessage('Need create a new plan');
