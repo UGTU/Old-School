@@ -1,7 +1,7 @@
 object dmDocs: TdmDocs
   OldCreateOrder = False
   Height = 307
-  Width = 419
+  Width = 535
   object dsDocs: TDataSource
     DataSet = adodsDocs
     Left = 15
@@ -119,6 +119,9 @@ object dmDocs: TdmDocs
       FieldKind = fkCalculated
       FieldName = 'Status'
       Calculated = True
+    end
+    object adodsDocsDatePod: TDateTimeField
+      FieldName = 'DatePod'
     end
   end
   object dsReviewDoc: TDataSource
@@ -435,5 +438,176 @@ object dmDocs: TdmDocs
     DataSet = adodsNeusp
     Left = 263
     Top = 178
+  end
+  object dsDestination: TDataSource
+    DataSet = adodsDestination
+    Left = 343
+    Top = 170
+  end
+  object adodsDestination: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Filtered = True
+    OnCalcFields = adodsDocsCalcFields
+    CommandText = 'select * from  Destination'
+    Parameters = <>
+    Left = 332
+    Top = 235
+    object adodsDestinationIk_destination: TAutoIncField
+      FieldName = 'Ik_destination'
+      ReadOnly = True
+    end
+    object adodsDestinationcNameDestination: TStringField
+      FieldName = 'cNameDestination'
+      Size = 50
+    end
+    object adodsDestinationcShortNameDestination: TStringField
+      FieldName = 'cShortNameDestination'
+      Size = 50
+    end
+    object adodsDestinationDescription: TMemoField
+      FieldName = 'Description'
+      BlobType = ftMemo
+    end
+    object adodsDestinationik_typesup: TIntegerField
+      FieldName = 'ik_typesup'
+    end
+    object adodsDestinationBase: TBooleanField
+      FieldName = 'Base'
+    end
+  end
+  object adodsDocStud: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Filtered = True
+    OnCalcFields = adodsDocStudCalcFields
+    CommandText = 'select * from MagazineDocs'
+    Parameters = <>
+    Left = 100
+    Top = 227
+    object DateTimeField3: TDateTimeField
+      FieldName = 'DateCreate'
+    end
+    object BCDField2: TBCDField
+      FieldName = 'nCode'
+      Precision = 18
+      Size = 0
+    end
+    object IntegerField12: TIntegerField
+      FieldName = 'Ik_studGrup'
+      ReadOnly = True
+    end
+    object StringField14: TStringField
+      FieldName = 'FIO'
+      ReadOnly = True
+      Size = 92
+    end
+    object IntegerField13: TIntegerField
+      FieldName = 'Ik_grup'
+    end
+    object StringField15: TStringField
+      FieldName = 'Cname_grup'
+      Size = 50
+    end
+    object IntegerField14: TIntegerField
+      FieldName = 'Ik_form_ed'
+    end
+    object StringField16: TStringField
+      FieldName = 'Cname_form_ed'
+      Size = 50
+    end
+    object IntegerField15: TIntegerField
+      FieldName = 'Ik_fac'
+    end
+    object StringField17: TStringField
+      FieldName = 'Cname_fac'
+      Size = 500
+    end
+    object IntegerField16: TIntegerField
+      FieldName = 'ik_spec'
+    end
+    object StringField18: TStringField
+      FieldName = 'Cname_spec'
+      Size = 300
+    end
+    object IntegerField17: TIntegerField
+      FieldName = 'ik_direction'
+    end
+    object StringField19: TStringField
+      FieldName = 'cNameDestination'
+      Size = 50
+    end
+    object IntegerField18: TIntegerField
+      FieldName = 'Ik_Document'
+    end
+    object IntegerField19: TIntegerField
+      FieldName = 'Ik_destination'
+    end
+    object StringField20: TStringField
+      FieldName = 'cName_direction'
+      Size = 50
+    end
+    object StringField21: TStringField
+      FieldName = 'cNameTransfer'
+      Size = 50
+    end
+    object StringField22: TStringField
+      FieldName = 'cName_type_disc'
+      Size = 30
+    end
+    object WideStringField3: TWideStringField
+      FieldName = 'DateStartCallSpr'
+      Size = 10
+    end
+    object WideStringField4: TWideStringField
+      FieldName = 'DateEndCallSpr'
+      Size = 10
+    end
+    object IntegerField20: TIntegerField
+      FieldName = 'Ik_Transfer'
+    end
+    object WordField2: TWordField
+      FieldName = 'ik_type_disc'
+    end
+    object IntegerField21: TIntegerField
+      FieldName = 'NumberDoc'
+    end
+    object DateTimeField4: TDateTimeField
+      FieldName = 'DateReady'
+    end
+    object StringField23: TStringField
+      FieldName = 'Num_podrazd'
+      Size = 10
+    end
+    object StringField24: TStringField
+      FieldName = 'PersName'
+      ReadOnly = True
+      Size = 92
+    end
+    object StringField25: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Status'
+      Calculated = True
+    end
+    object adodsDocStudDatePod: TDateTimeField
+      FieldName = 'DatePod'
+    end
+  end
+  object dsDocStud: TDataSource
+    DataSet = adodsDocStud
+    Left = 95
+    Top = 170
+  end
+  object spDest: TADOStoredProc
+    Connection = dm.DBConnect
+    ProcedureName = 'DestForStud;1'
+    Parameters = <>
+    Left = 424
+    Top = 168
+  end
+  object dsDest: TDataSource
+    DataSet = spDest
+    Left = 416
+    Top = 232
   end
 end

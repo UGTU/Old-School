@@ -112,7 +112,51 @@ type
     adodsNeuspcName_vid_zanyat: TStringField;
     adodsNeuspn_sem: TWordField;
     adodsNeuspflag: TBooleanField;
+    dsDestination: TDataSource;
+    adodsDestination: TADODataSet;
+    adodsDestinationIk_destination: TAutoIncField;
+    adodsDestinationcNameDestination: TStringField;
+    adodsDestinationcShortNameDestination: TStringField;
+    adodsDestinationDescription: TMemoField;
+    adodsDestinationik_typesup: TIntegerField;
+    adodsDestinationBase: TBooleanField;
+    adodsDocStud: TADODataSet;
+    DateTimeField3: TDateTimeField;
+    BCDField2: TBCDField;
+    IntegerField12: TIntegerField;
+    StringField14: TStringField;
+    IntegerField13: TIntegerField;
+    StringField15: TStringField;
+    IntegerField14: TIntegerField;
+    StringField16: TStringField;
+    IntegerField15: TIntegerField;
+    StringField17: TStringField;
+    IntegerField16: TIntegerField;
+    StringField18: TStringField;
+    IntegerField17: TIntegerField;
+    StringField19: TStringField;
+    IntegerField18: TIntegerField;
+    IntegerField19: TIntegerField;
+    StringField20: TStringField;
+    StringField21: TStringField;
+    StringField22: TStringField;
+    WideStringField3: TWideStringField;
+    WideStringField4: TWideStringField;
+    IntegerField20: TIntegerField;
+    WordField2: TWordField;
+    IntegerField21: TIntegerField;
+    DateTimeField4: TDateTimeField;
+    StringField23: TStringField;
+    StringField24: TStringField;
+    StringField25: TStringField;
+    dsDocStud: TDataSource;
+    spDest: TADOStoredProc;
+    dsDest: TDataSource;
+    adodsDocsDatePod: TDateTimeField;
+    adodsDocStudDatePod: TDateTimeField;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
+    procedure adodsDocStudCalcFields(DataSet: TDataSet);
+
   private
     { Private declarations }
   public
@@ -135,11 +179,26 @@ if (DataSet.FieldByName('DateCreate').AsString='') then
  else
  begin
  if (DataSet.FieldByName('DateReady').AsString='') then
-    DataSet.FieldByName('Status').AsString:='Утверждено'
+    DataSet.FieldByName('Status').AsString:='На рассмотрении'
     else
     DataSet.FieldByName('Status').AsString:='Готово'
  end;
 
+end;
+
+
+
+procedure TdmDocs.adodsDocStudCalcFields(DataSet: TDataSet);
+begin
+if (DataSet.FieldByName('DateCreate').AsString='') then
+ DataSet.FieldByName('Status').AsString:='Заявка'
+ else
+ begin
+ if (DataSet.FieldByName('DateReady').AsString='') then
+    DataSet.FieldByName('Status').AsString:='На рассмотрении'
+    else
+    DataSet.FieldByName('Status').AsString:='Готово'
+ end;
 end;
 
 end.
