@@ -66,10 +66,18 @@ inherited fmDoc: TfmDoc
         item
           DynProps = <>
           EditButtons = <>
+          FieldName = 'DatePod'
+          Footers = <>
+          Title.Caption = #1044#1072#1090#1072' '#1087#1086#1076#1072#1095#1080
+          Width = 136
+        end
+        item
+          DynProps = <>
+          EditButtons = <>
           FieldName = 'DateCreate'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          Title.Caption = #1044#1072#1090#1072' '#1091#1090#1074#1077#1088#1078#1076#1077#1085#1080#1103
+          Title.Caption = #1044#1072#1090#1072' '#1088#1072#1089#1089#1084#1086#1090#1088#1077#1085#1080#1103
           Width = 106
         end
         item
@@ -116,7 +124,7 @@ inherited fmDoc: TfmDoc
           FieldName = 'DateReady'
           Footers = <>
           PopupMenu = gridColumnSelectMenu
-          Title.Caption = #1043#1086#1090#1086#1074#1086
+          Title.Caption = #1044#1072#1090#1072' '#1075#1086#1090#1086#1074#1085#1086#1089#1090#1080
         end
         item
           DynProps = <>
@@ -325,6 +333,9 @@ inherited fmDoc: TfmDoc
     Width = 703
     ExplicitTop = 609
     ExplicitWidth = 703
+    DesignSize = (
+      703
+      37)
     inherited bbSave: TBitBtn
       Left = 534
       ExplicitLeft = 534
@@ -343,7 +354,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000940110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000A40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

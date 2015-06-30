@@ -436,7 +436,8 @@ begin
         if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
         begin
           if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady')
-            .Value = Null) then
+            .Value = Null)and (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate')
+            .Value <> Null) then
           begin
             dbgehMagazineDocs.DataSource.DataSet.Edit;
             uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateReady']
@@ -493,8 +494,6 @@ begin
       uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_Document')
         .AsString + ''','''+uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_destination')
         .AsString+''')';
-              sp_num.CommandText := 'select * from MaxNumDocument(''' +
-                datebegin + '''' + ',' + '''' + DateTimeToStr(Date()) + ''')';
               sp_num.Connection := dm.DBConnect;
               sp_num.Open;
               sp_num.First;
@@ -505,6 +504,8 @@ begin
               sp_num.Free;
             end;
             dbgehMagazineDocs.DataSource.DataSet.Edit;
+            uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateCreate']
+              := date();
             uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['NumberDoc']
               := LastNum;
             dbgehMagazineDocs.DataSource.DataSet.Post;
