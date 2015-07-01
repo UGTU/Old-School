@@ -218,7 +218,7 @@ begin
 
   //редактирование данных создания и расформирования группы
   dbdteCreate.Text:='01.09.'+dbneYear.Text;
-  dbdteExit.Text:='30.06.'+inttostr(dbneYear.Value+year_obuch);
+  dbdteExit.Text:='31.08.'+inttostr(dbneYear.Value+year_obuch);
 end;
 
 procedure TfrmGroupEdt.CheckBox1Click(Sender: TObject);
