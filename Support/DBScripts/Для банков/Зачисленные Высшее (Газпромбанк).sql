@@ -4,14 +4,16 @@ select distinct
 	   Cotch,
 	   iif(lSex = 0,'Æ','Ì') lSex,
 	   pr.Cstrana,
-	   '-' Pr_index,
+	   '' Pr_index,
 	   pr.Cregion,
 	   pr.Craion,
-	   '-' CGorod,
+	   '' CGorod,
 	   pr.Cgorod NPunkt,
 	   pr.CStreet,
-	   pr.BuildingNumber,
-	   pr.StructNumber,
+	   iif(pr.b_i>0,substring(pr.BuildingNumber,1,pr.b_i - 1),pr.BuildingNumber) dom,
+	   iif(pr.b_i>0,substring(pr.BuildingNumber,pr.b_i,1),pr.StructNumber) korpus,
+	   --pr.BuildingNumber,
+	  -- pr.StructNumber,
 	   pr.FlatNumber,
 	   docs.cvid_doc,
 	   Cd_seria,
@@ -22,17 +24,18 @@ select distinct
 	   Cplacebirth,
 	   c_grazd,
 	   ctelefon,
-	   '-' SluzhTel,
+	   '' SluzhTel,
+	   iif(substring(cSotTel,1,1)='+', cSotTel, substring(cSotTel,1,11)),
 	   SotTel,
 	   cEmail,
-	   '-' KontInfo,
-	   '-' FIO,
-	   '-' LawParent,
-	   '-' CodeGorod,
-	   '-' IDUniver,
+	   '' KontInfo,
+	   '' FIO,
+	   '' LawParent,
+	   '' CodeGorod,
+	   '' IDUniver,
 	   Cname_form_ed,
 	   1 Course,
-	   '-' NumDoc
+	   '' NumDoc
 from
 (
 	select distinct cast(dd_pod_zayav as Date) dd_pod_zayav,
@@ -72,7 +75,8 @@ from
 ) stud
 left join (select Doc_stud.*,documents.cvid_doc from Doc_stud, documents where documents.Ik_vid_doc = Doc_stud.Ik_vid_doc and IsIdentity = 1) docs
 on stud.nCode = docs.nCode
-left join (select nCode,fIndex,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Craion,Cstrana,Strana.Ik_strana
+left join (select nCode,fIndex,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Craion,Cstrana,Strana.Ik_strana,
+		   PATINDEX('%[À-ÿ]%',BuildingNumber) b_i, PATINDEX('%[À-ÿ]%',StructNumber) s_i
 		   from dbo.PersonAddress,dbo.Address,dbo.Street,dbo.Gorod,dbo.Raion,dbo.Region,dbo.Strana
 		   where ik_AddressType=2
 		   and dbo.Address.ik_address = dbo.PersonAddress.ik_address
