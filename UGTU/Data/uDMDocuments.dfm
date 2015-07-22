@@ -407,7 +407,6 @@ object dmDocs: TdmDocs
     Connection = dm.DBConnect
     CursorType = ctStatic
     Filtered = True
-    OnCalcFields = adodsDocsCalcFields
     CommandText = 'select * from SprAkadem'
     Parameters = <>
     Left = 260
@@ -431,7 +430,6 @@ object dmDocs: TdmDocs
     end
     object adodsNeuspflag: TBooleanField
       FieldName = 'flag'
-      ReadOnly = True
     end
   end
   object dsNeusp: TDataSource

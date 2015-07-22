@@ -16,7 +16,7 @@ uses
   DBTVDictObj, DBTVPrikObj, DBTVBusinessObj, DBTVAbitObj, DBTVAdminObj,
   DBTVStudObj, DBTVSpecObj, DBTVGroupObj, DBTVMethodWorkObj, DBTVFacDepobj,
   DBTVDepObj, DBTVTeacherObj, DBTVRootScheduleobj, DBTVRIOObj, DBTVOKObj,
-  DBTVSemesterNagrObj, DBTVHostelRootobj, DBTVSprObj, uDM;
+  DBTVSemesterNagrObj, DBTVHostelRootobj, DBTVSprObj;
 
 type
   TDBDekanatTreeView = class(TDBTreeView)

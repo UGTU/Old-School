@@ -1470,11 +1470,11 @@ end;
 function TUspevGroupController.BuildCallSpr(_ikStudGrup, num_sem, num_doc,
   ik_doc: Integer; datebegin, dateend: TDateTime): TReportBase;
 begin
-  Result := CallSprReport.Create(_ikStudGrup, num_sem, num_doc, ik_doc,
-    datebegin, dateend);
-
-  Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-    'reports\Spr—hallenge.xlt';
+//    Result := CallSprReport.Create(_ikStudGrup, num_sem, num_doc, ik_doc,
+//    datebegin, dateend);
+//
+//  Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+//    'reports\Spr—hallenge.xlt';
 end;
 
 function TUspevGroupController.BuildSpr(ik_doc, ik_destination: Integer)
@@ -1505,11 +1505,10 @@ begin
 
     3:
       begin
-        // Result := CallSprReport.Create(_ikStudGrup, num_sem, num_doc, ik_doc,
-        // datebegin, dateend);
+          Result := CallSprReport.Create(ik_doc);
 
-        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-          'reports\Spr—hallenge.xlt';
+  Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+    'reports\Spr—hallenge.xlt';
       end;
 
     4:

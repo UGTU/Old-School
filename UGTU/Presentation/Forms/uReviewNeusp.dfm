@@ -1,14 +1,14 @@
 inherited frmReviewNeusp: TfrmReviewNeusp
   Caption = 'frmReviewNeusp'
   ClientHeight = 487
-  ClientWidth = 467
+  ClientWidth = 452
   OnActivate = FormActivate
-  ExplicitWidth = 473
+  ExplicitWidth = 458
   ExplicitHeight = 516
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Width = 467
+    Width = 452
     Height = 447
     ExplicitLeft = -8
     ExplicitTop = 32
@@ -57,37 +57,33 @@ inherited frmReviewNeusp: TfrmReviewNeusp
   end
   inherited Panel1: TPanel
     Top = 447
-    Width = 467
+    Width = 452
     ExplicitTop = 447
-    ExplicitWidth = 453
+    ExplicitWidth = 452
     inherited bbOK: TBitBtn
-      Left = 292
-      ExplicitLeft = 278
+      Left = 277
+      ExplicitLeft = 277
     end
     inherited bbApply: TBitBtn
-      Left = 44
-      ExplicitLeft = 30
+      Left = 29
+      ExplicitLeft = 29
     end
     inherited bbCancel: TBitBtn
-      Left = 379
-      ExplicitLeft = 365
+      Left = 364
+      ExplicitLeft = 364
     end
     inherited BitBtn1: TBitBtn
-      Left = 146
-      ExplicitLeft = 132
+      Left = 131
+      ExplicitLeft = 131
     end
   end
   inherited eDest: TEdit
-    Left = 144
     Width = 289
-    ExplicitLeft = 144
     ExplicitWidth = 289
   end
   inherited eNum: TEdit
-    Left = 144
     Top = 360
     Width = 49
-    ExplicitLeft = 144
     ExplicitTop = 360
     ExplicitWidth = 49
   end
@@ -98,16 +94,12 @@ inherited frmReviewNeusp: TfrmReviewNeusp
     ExplicitTop = 360
   end
   inherited dtUtv: TDateTimePicker
-    Left = 144
     Width = 289
-    ExplicitLeft = 144
     ExplicitWidth = 289
   end
   inherited dtGot: TDateTimePicker
-    Left = 144
     Top = 395
     Width = 289
-    ExplicitLeft = 144
     ExplicitTop = 395
     ExplicitWidth = 289
   end
@@ -120,42 +112,49 @@ inherited frmReviewNeusp: TfrmReviewNeusp
     DynProps = <>
     IndicatorOptions = [gioShowRowIndicatorEh]
     TabOrder = 6
+    OnColEnter = DBGridEh1ColEnter
+    OnDrawColumnCell = DBGridEh1DrawColumnCell
     Columns = <
       item
+        Alignment = taCenter
+        Checkboxes = False
         DynProps = <>
         EditButtons = <>
         FieldName = 'flag'
         Footers = <>
+        ImeMode = imDisable
         KeyList.Strings = (
           '1;'
           '0')
-        ReadOnly = False
         Title.Caption = #1042#1099#1073#1086#1088
-        Width = 38
+        Width = 64
       end
       item
+        Alignment = taCenter
         DynProps = <>
         EditButtons = <>
         FieldName = 'cName_disc'
         Footers = <>
         Title.Caption = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
-        Width = 217
+        Width = 191
       end
       item
+        Alignment = taCenter
         DynProps = <>
         EditButtons = <>
         FieldName = 'cName_vid_zanyat'
         Footers = <>
         Title.Caption = #1042#1080#1076' '#1079#1072#1085#1103#1090#1080#1103
-        Width = 71
+        Width = 75
       end
       item
+        Alignment = taCenter
         DynProps = <>
         EditButtons = <>
         FieldName = 'n_sem'
         Footers = <>
         Title.Caption = #1057#1077#1084#1077#1089#1090#1088
-        Width = 50
+        Width = 49
       end>
     object RowDetailData: TRowDetailPanelControlEh
     end

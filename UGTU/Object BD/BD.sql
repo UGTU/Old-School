@@ -144,6 +144,7 @@ CONSTRAINT FK_Num_week_Content_UchPl FOREIGN KEY(ik_upContent) REFERENCES [dbo].
 --ADD CONSTRAINT Document_ReasonIssuing_FK FOREIGN KEY(Ik_reason_issuing) REFERENCES ReasonIssuing(Ik_reason_issuing)
 
 
+
 Create Table dbo.AkademNeuspev(
 Ik_Document int not null
 Constraint PrimaryKey_AkademNeuspev primary key,
