@@ -51,6 +51,7 @@ type
     procedure GrowImage(Sender: TObject);
     procedure DoNothing(Sender: TObject);
     procedure eSerExit(Sender: TObject);
+    procedure bbCancelClick(Sender: TObject);
   private
     FnCode: integer;
     FDocID: integer;
@@ -202,6 +203,12 @@ procedure TfrmAddDocument.actOKExecute(Sender: TObject);
 begin
   actApplyExecute(Sender);
   close;
+end;
+
+procedure TfrmAddDocument.bbCancelClick(Sender: TObject);
+begin
+  inherited;
+  (dmStudentData.adodsDocType as TADODataSet).Filtered := False;
 end;
 
 procedure TfrmAddDocument.btnLoadClick(Sender: TObject);

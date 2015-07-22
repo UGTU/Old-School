@@ -1,12 +1,12 @@
 inherited fmSprav: TfmSprav
-  Width = 451
-  Height = 354
+  Width = 575
+  Height = 378
   Align = alClient
   ExplicitWidth = 451
   ExplicitHeight = 305
   inherited Panel1: TPanel
-    Width = 451
-    Height = 317
+    Width = 575
+    Height = 341
     ExplicitWidth = 451
     ExplicitHeight = 268
     object Label1: TLabel
@@ -19,8 +19,8 @@ inherited fmSprav: TfmSprav
     object gSprav: TDBGridEh
       Left = 2
       Top = 33
-      Width = 447
-      Height = 282
+      Width = 571
+      Height = 306
       Align = alClient
       AutoFitColWidths = True
       DataSource = dsSprav
@@ -40,7 +40,7 @@ inherited fmSprav: TfmSprav
     object ToolBar1: TToolBar
       Left = 2
       Top = 2
-      Width = 447
+      Width = 571
       Height = 31
       ButtonWidth = 24
       Caption = 'ToolBar1'
@@ -49,7 +49,7 @@ inherited fmSprav: TfmSprav
       ShowHint = True
       TabOrder = 1
       DesignSize = (
-        447
+        571
         31)
       object DBNavigator1: TDBNavigator
         Left = 0
@@ -121,15 +121,15 @@ inherited fmSprav: TfmSprav
     end
   end
   inherited pnlSave: TPanel
-    Top = 317
-    Width = 451
+    Top = 341
+    Width = 575
     ExplicitTop = 268
     ExplicitWidth = 451
     DesignSize = (
-      451
+      575
       37)
     inherited bbSave: TBitBtn
-      Left = 280
+      Left = 404
       Top = 5
       Action = aSave
       ParentShowHint = False
@@ -138,7 +138,7 @@ inherited fmSprav: TfmSprav
       ExplicitTop = 5
     end
     inherited bbUndo: TBitBtn
-      Left = 108
+      Left = 232
       Top = 5
       Action = aCancel
       Anchors = [akTop, akRight]
@@ -195,7 +195,7 @@ inherited fmSprav: TfmSprav
       TabOrder = 1
     end
     object BitBtn1: TBitBtn
-      Left = 479
+      Left = 603
       Top = 5
       Width = 162
       Height = 25
@@ -206,6 +206,7 @@ inherited fmSprav: TfmSprav
       Layout = blGlyphRight
       ModalResult = 1
       TabOrder = 3
+      ExplicitLeft = 479
     end
   end
   object dsSprav: TDataSource
