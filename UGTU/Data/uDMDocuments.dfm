@@ -1,7 +1,7 @@
 object dmDocs: TdmDocs
   OldCreateOrder = False
   Height = 307
-  Width = 535
+  Width = 571
   object dsDocs: TDataSource
     DataSet = adodsDocs
     Left = 15

@@ -421,11 +421,13 @@ uses
   ReportSprVis in 'Domain\Reports\ReportSprVis.pas',
   uReviewCallSpr in 'Presentation\Forms\uReviewCallSpr.pas' {fm—hallengeSpr},
   uCallSpr in 'Domain\Reports\uCallSpr.pas',
-  uReviewNeusp in 'Presentation\Forms\uReviewNeusp.pas' {frmReviewNeusp},
   uReviewAkadem in 'Presentation\Forms\uReviewAkadem.pas' {frmReviewAkadem},
   uReviewApplication in 'Presentation\Forms\uReviewApplication.pas' {frmReviewApplication},
   uApplicationSpr in 'Domain\Reports\uApplicationSpr.pas',
-  uAkademSpr in 'Domain\Reports\uAkademSpr.pas';
+  uAkademSpr in 'Domain\Reports\uAkademSpr.pas',
+  uReviewNotify in 'Presentation\Forms\uReviewNotify.pas' {frmReviewNeusp},
+  uDebtSpr in 'Domain\Reports\uDebtSpr.pas',
+  uNotification in 'Domain\Reports\uNotification.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -474,8 +476,8 @@ begin
   Application.CreateForm(TdmDocs, dmDocs);
   Application.CreateForm(TfrmReviewDoc, frmReviewDoc);
   Application.CreateForm(Tfm—hallengeSpr, fm—hallengeSpr);
-  Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
   Application.CreateForm(TfrmReviewAkadem, frmReviewAkadem);
   Application.CreateForm(TfrmReviewApplication, frmReviewApplication);
+  Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
   Application.Run;
 end.

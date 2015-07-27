@@ -1,7 +1,7 @@
 USE [UGTU_ACTTEST]
 GO
 
-/****** Object:  View [dbo].[Graph_Uch_Proc]    Script Date: 14.05.2015 9:40:29 ******/
+/****** Object:  View [dbo].[CallSprView]    Script Date: 25.07.2015 15:40:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,11 +10,17 @@ GO
 
 
 
-Alter view [dbo].[CallSprView]
+
+
+ALTER view [dbo].[CallSprView]
 
 AS
 	Select d.[Ik_Document],[Ik_Transfer],dest.[Ik_destination],sg.[Ik_studGrup],[DateReady],[NumberDoc],
-[DateCreate],[Num_podrazd],[DateStartPeriod],[DateEndPeriod],[n_sem],dest.cNameDestination,[cName_vid_zanyat],
+[DateCreate],[Num_podrazd],DAY([DateStartPeriod]) as dayb, Month([DateStartPeriod]) as monthb,
+Year([DateStartPeriod]) as yearb,
+DAY([DateEndPeriod]) as daye, Month([DateEndPeriod]) as monthe,
+Year([DateEndPeriod]) as yeare,[n_sem],
+dest.cNameDestination,[cName_vid_zanyat],
 vz.[iK_vid_zanyat],cup.ik_upContent, vz.reason_call
 	From  Document d inner join StudGrup sg
 	on d.Ik_studGrup=sg.Ik_studGrup
@@ -26,6 +32,8 @@ vz.[iK_vid_zanyat],cup.ik_upContent, vz.reason_call
 	on cup.ik_vid_zanyat = vz.iK_vid_zanyat
 	inner join Destination dest
 	on dest.Ik_destination=d.Ik_destination
+
+
 
 
 GO

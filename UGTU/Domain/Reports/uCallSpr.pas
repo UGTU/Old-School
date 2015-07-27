@@ -32,7 +32,7 @@ end;
 procedure CallSprReport.Execute;
 var
   sp_pers: TADOStoredProc;
-  podgot, dir_inst, copystr1, copystr2: string;
+  podgot, dir_inst, copystr1, copystr2,day: string;
   posit, ik_inst: integer;
   sp_callspr: TADODataSet;
 begin
@@ -89,10 +89,14 @@ begin
     sp_callspr.First;
     Replace('#disc#', sp_callspr.FieldByName('reason_call').AsString);
     Replace('#num#', sp_callspr.FieldByName('NumberDoc').AsString);
-    Replace('#begin#', FormatDateTime('dd.mm.yyyy',
-     StrToDate( sp_callspr.FieldByName('DateStartPeriod').AsString)));
-    Replace('#end#', FormatDateTime('dd.mm.yyyy',
-       StrToDate(sp_callspr.FieldByName('DateEndPeriod').AsString)));
+    day:=  sp_callspr.FieldByName('dayb').AsString;
+    if day.Length=1 then
+      day:='0'+day;
+    Replace('#begin#',day+'.'+sp_callspr.FieldByName('monthb').AsString+'.'+sp_callspr.FieldByName('yearb').AsString);
+     day:=  sp_callspr.FieldByName('daye').AsString;
+    if day.Length=1 then
+      day:='0'+day;
+    Replace('#end#', day+'.'+sp_callspr.FieldByName('monthe').AsString+'.'+sp_callspr.FieldByName('yeare').AsString);
     Replace('#col#',
       IntToStr(DaysBetween(StrToDate( sp_callspr.FieldByName('DateStartPeriod').AsString),
        StrToDate(sp_callspr.FieldByName('DateEndPeriod').AsString) + 1)));
