@@ -1,6 +1,8 @@
 --бяе онкъ б EXCEL ядекюрэ рейярнбшлх!
 
 select distinct 
+	   Cshort_name_fac,
+	   Cname_spec
        '',
 	   43,
 	   Clastname,

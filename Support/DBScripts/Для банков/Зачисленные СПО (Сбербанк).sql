@@ -1,4 +1,6 @@
-select distinct 
+select distinct
+       Cshort_name_fac,
+	   Cname_spec, 
 	   Clastname,
 	   Cfirstname,
 	   Cotch,
@@ -6,28 +8,28 @@ select distinct
 	   Np_number,
 	   FORMAT(cast(Dd_vidan as DATE), 'd', 'de-de' ) Dd_vidan, 
 	   Cd_kem_vidan,
-	   '-' code_otdel,
+	   '' code_otdel,
 	   c_grazd,
 	   resident,
 	   Dd_birth, 
 	   Cplacebirth,
 	   iif(lSex = 0,'Æ','Ì') lSex,
-	   '-' Pr_index,
+	   '' Pr_index,
 	   pr.Cstrana,
-	   '-' code_strana,
+	   '' code_strana,
 	   pr.Cregion,
-	   '-' type_region,
+	   '' type_region,
 	   pr.Craion,
-	   '-' type_raion,
+	   '' type_raion,
 	   pr.Cgorod,
-	   '-' type_gorod,
-	   '-' CPunkt,
-	   '-' type_punkt,
+	   '' type_gorod,
+	   '' CPunkt,
+	   '' type_punkt,
 	   pr.CStreet,
-	   '-' type_street,
-	   pr.BuildingNumber,
+	   '' type_street,
+	   iif(pr.b_i>0,substring(pr.BuildingNumber,1,pr.b_i - 1),pr.BuildingNumber) dom,
 	   pr.FlatNumber,
-	   pr.StructNumber
+	   iif(pr.b_i>0,substring(pr.BuildingNumber,pr.b_i,1),pr.StructNumber) korpus
 from
 (
 	select distinct cast(dd_pod_zayav as Date) dd_pod_zayav,
@@ -38,7 +40,7 @@ from
 		   FORMAT(cast(Dd_birth as DATE), 'd', 'de-de' ) Dd_birth, 
 		   Cplacebirth, 
 		   ctelefon, 
-		   substring(REPLACE(REPLACE(REPLACE(REPLACE(cSotTel,' ',''),'-',''),'(',''),')',''),1,12) cSotTel,
+		   REPLACE(REPLACE(REPLACE(REPLACE(cSotTel,' ',''),'-',''),'(',''),')','') cSotTel,
 		   cSotTel SotTel,
 		   Fac.Cshort_name_fac,
 		   Spec_stud.Cname_spec,
@@ -66,7 +68,8 @@ from
 ) stud
 left join (select * from Doc_stud where Ik_vid_doc in (select Ik_vid_doc from documents where IsIdentity = 1)) docs
 on stud.nCode = docs.nCode
-left join (select nCode,fIndex,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Craion,Cstrana,Strana.Ik_strana
+left join (select nCode,fIndex,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Craion,Cstrana,Strana.Ik_strana,
+		   PATINDEX('%[À-ÿ]%',BuildingNumber) b_i, PATINDEX('%[À-ÿ]%',StructNumber) s_i
 		   from dbo.PersonAddress,dbo.Address,dbo.Street,dbo.Gorod,dbo.Raion,dbo.Region,dbo.Strana
 		   where ik_AddressType=2
 		   and dbo.Address.ik_address = dbo.PersonAddress.ik_address
