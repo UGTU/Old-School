@@ -20,7 +20,7 @@ uses
   D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport,
   D_BRSRankAverageReport,
   Vedomost2014, Assemly_Report2014, Spravka, SpravkaReport2014, Spravka2014,
-  uReviewDoc, uCallSpr, uApplicationSpr, uAkademSpr,uDebtSpr,uNotification;
+  uReviewDoc, uCallSpr, uApplicationSpr, uAkademSpr,uDebtSpr,uNotification,uExtractSpr;
 
 type
   PDBGrid = ^TDBGridEh;
@@ -1537,7 +1537,11 @@ begin
           'reports\Akadem_spr.xlt';
       end;
     8:
-      ;
+       begin
+        Result := ExtractSprReport.Create(ik_doc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\Akadem_spr.xlt';
+      end;
   end;
 end;
 

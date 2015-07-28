@@ -427,7 +427,8 @@ uses
   uAkademSpr in 'Domain\Reports\uAkademSpr.pas',
   uReviewNotify in 'Presentation\Forms\uReviewNotify.pas' {frmReviewNeusp},
   uDebtSpr in 'Domain\Reports\uDebtSpr.pas',
-  uNotification in 'Domain\Reports\uNotification.pas';
+  uNotification in 'Domain\Reports\uNotification.pas',
+  uExtractSpr in 'Domain\Reports\uExtractSpr.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

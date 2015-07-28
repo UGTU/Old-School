@@ -294,6 +294,7 @@ type
     procedure FormApplicationSpr(ik_studGrup, ik_destination: Integer);
     procedure FormAcademSpr(ik_studGrup, ik_destination: Integer);
     procedure FormNeuspSpr(ik_studGrup, ik_destination: Integer);
+    procedure FormExtract(ik_studGrup, ik_destination: Integer);
 
     function CalculationLastNum(ik_studGrup: Integer; ik_dest: Integer)
       : Integer;
@@ -2003,7 +2004,10 @@ begin
           FormAcademSpr(obj.StudGrupKey, ik_dest);
         end;
       8:
-        ;
+        begin
+          FormExtract(obj.StudGrupKey, ik_dest);
+        end;
+
     end;
 
 end;
@@ -2707,12 +2711,12 @@ begin
     // sp_num.Open;
     // sp_num.First;
     // LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
-    // fReview := TfrmReviewAkadem.Create(Self);
+    //
     // ---------------------
     dateb := CalculationBeginYearLern();
     depInd := CalculationDepIndex(ik_studGrup);
     LastNum := CalculationLastNum(ik_studGrup, 7);
-
+    fReview := TfrmReviewAkadem.Create(Self);
     fReview.dtUtv.Format := '';
     fReview.dtUtv.date := date;
     fReview.dtGot.Format := #32;
@@ -3173,6 +3177,88 @@ begin
     Report.Free;
   end;
 
+end;
+
+procedure TfmStudent.FormExtract(ik_studGrup, ik_destination: Integer);
+var
+  tempDS, tempDSikdoc: TADODataSet;
+  Report: TReportBase;
+  i: Integer;
+  datebegin: string;
+  AYear, AMonth, ADay: word;
+  LastNum: Integer;
+  depInd: string;
+  k, ik_doc: Integer;
+  editF: TfrmReviewDoc;
+  dsDoc: TADODataSet;
+begin
+  dsDoc := TADODataSet.Create(nil);;
+  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+  tempDSikdoc := TADODataSet.Create(nil);
+  try
+    DecodeDate(Now, AYear, AMonth, ADay);
+    datebegin := CalculationBeginYearLern();
+    depInd := CalculationDepIndex(ik_studGrup);
+    LastNum := CalculationLastNum(ik_studGrup, ik_destination);
+    editF := TfrmReviewDoc.Create(Self);
+    editF.dtUtv.Format := '';
+    editF.dtUtv.date := date;
+    editF.dtGot.Format := #32;
+    // ищем информацию о студенте
+    dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
+      ik_studGrup.ToString();
+    dsDoc.Connection := dm.DBConnect;
+    dsDoc.Open;
+    dsDoc.First;
+    editF.eDest.Text := '¬ыписка из зачетной ведомости';
+    editF.eInd.Text := depInd;
+    editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
+      dsDoc.FieldByName('Cname_grup').AsString + ')';
+    editF.ShowModal;
+
+    if (editF.ModalResult = mrOk) or (editF.ModalResult = mrYes) then
+    begin
+      dm.DBConnect.BeginTrans;
+      try // добавл€ем справку
+        tempDS.CommandText := 'Select * from Document';
+        tempDS.Open;
+        tempDS.Insert;
+        tempDS.FieldByName('Ik_studGrup').Value := ik_studGrup;
+        tempDS.FieldByName('Ik_Transfer').Value := 1;
+        tempDS.FieldByName('Ik_destination').Value := ik_destination;
+        tempDS.FieldByName('NumberDoc').Value := LastNum;
+        tempDS.FieldByName('DatePod').Value := date;
+        tempDS.FieldByName('DateCreate').Value := date;
+        tempDS.FieldByName('Num_podrazd').Value := depInd;
+        tempDS.Post;
+        tempDS.UpdateBatch();
+        dm.DBConnect.CommitTrans;
+      except
+        dm.DBConnect.RollbackTrans;
+      end;
+    end;
+    tempDSikdoc.CommandText :=
+      'select MAX(Ik_Document)[maxid] from Document where Ik_studGrup=' +
+      ik_studGrup.ToString() + 'and Ik_destination=' + ik_destination.ToString()
+      + 'and NumberDoc =' + LastNum.ToString() + 'and Num_podrazd=''' +
+      depInd + '''';
+    tempDSikdoc.Connection := dm.DBConnect;
+    tempDSikdoc.Open;
+    tempDSikdoc.First;
+    ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
+    if (editF.ModalResult = mrYes) then // печатаем
+    begin
+      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, ik_destination);
+      TWaitingController.GetInstance.Process(Report);
+    end;
+    uDMDocuments.dmDocs.adodsDocStud.Close;
+    uDMDocuments.dmDocs.adodsDocStud.Open;
+  finally
+    tempDS.Free;
+    dsDoc.Free;
+    Report.Free;
+
+  end;
 end;
 
 procedure TfmStudent.FormNeuspSpr(ik_studGrup, ik_destination: Integer);

@@ -1,5 +1,4 @@
-unit uAkademSpr;
-
+unit uExtractSpr;
 interface
 
 uses
@@ -9,7 +8,7 @@ uses
   DateUtils, uDM, ConstantRepository, uDMDocuments;
 
 type
-  AkademSprReport = class(TExcelReportBase)
+  ExtractSprReport = class(TExcelReportBase)
   private
     Fik_doc: integer;
   protected
@@ -26,18 +25,18 @@ implementation
 uses System.Variants;
 { AkademSprReport }
 
-constructor AkademSprReport.Create(_ik_doc: integer);
+constructor ExtractSprReport.Create(_ik_doc: integer);
 begin
   Fik_doc := _ik_doc;
 end;
 
-procedure AkademSprReport.Execute;
+procedure ExtractSprReport.Execute;
 var
   spVipiska, spInf, spGos, spKP, spPrakt, spUspev, spDoc,
     sp_history: TADOStoredProc;
   AYear, AMonth, ADay: word;
   m, I, fkp, k, fusp, w, ind, l: integer;
-  podgot, diplom, prakt, week, ZE, let,str: string;
+  podgot, diplom, prakt, week, ZE, let: string;
   fl, flg, flpr: boolean;
   ZECount: double;
 begin
@@ -236,12 +235,17 @@ begin
             spPrakt.FieldByName('weekCount').AsString + ' ';
           week := spPrakt.FieldByName('weekCount').AsString;
           w := StrToInt(Copy(week, week.Length, 1));
-          if  w.ToString().Length >1 then
-          w:= Integer(Copy(w.ToString(), w.ToString().Length- 1, w.ToString().Length));
-          if (w =1) then  prakt := prakt + 'неделя, ' ;
-          if (w < 5) and (w >1) then  prakt := prakt + 'недели, ' ;
-          if (w >5)or (w =0) then prakt := prakt + 'недель, ';
-
+          if (w < 5) and (w >1) then
+            prakt := prakt + 'недели, '
+          else if (w < 10) or (w > 20) then
+          begin
+            if w = 1 then
+              prakt := prakt + 'неделя, '
+            else
+              prakt := prakt + 'недель, ';
+          end
+          else
+            prakt := prakt + 'недель, ';
           prakt := prakt + spPrakt.FieldByName('cOsenca').AsString;
           Items[fkp, 1] := prakt;
           fkp := fkp + 1;
@@ -302,24 +306,17 @@ begin
           begin
             ZE := spGos.FieldByName('ZECount').AsString;
             ZECount := StrToInt(Copy(ZE, ZE.Length, 1)) / 1.5;
-
-          if  ZECount.ToString().Length >1 then
-          w:= Integer(Copy(ZECount.ToString(), ZECount.ToString().Length- 1, ZECount.ToString().Length));
-          if (w =1) then diplom := ZECount.ToString() + ' неделя' + diplom;
-          if (w < 5) and (w >1) then  diplom := ZECount.ToString() + ' недели' + diplom;
-          if (w >5)or (w =0) then diplom := ZECount.ToString() + ' недель' + diplom ;
-
-//            if ZECount < 5 then
-//              diplom := ZECount.ToString() + ' недели' + diplom
-//            else if (ZECount < 10) or (ZECount > 20) then
-//            begin
-//              if ZECount = 1 then
-//                diplom := ZECount.ToString() + ' неделя' + diplom
-//              else
-//                diplom := ZECount.ToString() + ' недель' + diplom;
-//            end
-//            else
-//              diplom := ZECount.ToString() + ' недель' + diplom;
+            if ZECount < 5 then
+              diplom := ZECount.ToString() + ' недели' + diplom
+            else if (ZECount < 10) or (ZECount > 20) then
+            begin
+              if ZECount = 1 then
+                diplom := ZECount.ToString() + ' неделя' + diplom
+              else
+                diplom := ZECount.ToString() + ' недель' + diplom;
+            end
+            else
+              diplom := ZECount.ToString() + ' недель' + diplom;
 
             Replace('#diplom#', diplom);
           end;
