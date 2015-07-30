@@ -117,7 +117,6 @@ inherited frmReviewApplication: TfrmReviewApplication
   inherited Panel1: TPanel
     Top = 306
     OnClick = Panel1Click
-    ExplicitLeft = 0
     ExplicitTop = 306
     inherited bbOK: TBitBtn
       Left = 269

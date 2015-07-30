@@ -53,8 +53,7 @@ procedure TfrmReviewApplication.actOKExecute(Sender: TObject);
 begin
   inherited;
 
-    ModalResult := mrOk;
-
+  ModalResult := mrOk;
 
 end;
 
@@ -63,14 +62,14 @@ begin
   inherited;
   uDMDocuments.dmDocs.adodsStudAddres.Active := false; // подключам базу
   uDMDocuments.dmDocs.adodsPricina.Active := false;
-  dmDocs.adodsStudAddres.Filter:= 'ik_StudGrup =' +ik_stud.ToString();
-  dmDocs.adodsStudAddres.Filtered:=true;
-  //dmDocs.adodsStudAddres.CommandText :=
-  //  ('select * from StudAddress where ik_StudGrup=' + ik_stud.ToString());
-//  dmDocs.adodsPricina.CommandText :=
-//    ('select * from ReasonForDestination where Ik_destination= 4');
-      dmDocs.adodsPricina.Filter:= 'Ik_destination = 4';
-  dmDocs.adodsPricina.Filtered:=true;
+  dmDocs.adodsStudAddres.Filter := 'ik_StudGrup =' + ik_stud.ToString();
+  dmDocs.adodsStudAddres.Filtered := true;
+  // dmDocs.adodsStudAddres.CommandText :=
+  // ('select * from StudAddress where ik_StudGrup=' + ik_stud.ToString());
+  // dmDocs.adodsPricina.CommandText :=
+  // ('select * from ReasonForDestination where Ik_destination= 4');
+  dmDocs.adodsPricina.Filter := 'Ik_destination = 4';
+  dmDocs.adodsPricina.Filtered := true;
 
   uDMDocuments.dmDocs.adodsStudAddres.Active := true; // подключам базу
   uDMDocuments.dmDocs.adodsPricina.Active := true; // подключам базу
@@ -80,18 +79,18 @@ procedure TfrmReviewApplication.BitBtn1Click(Sender: TObject);
 begin
   inherited;
 
-    ModalResult := mrYes;
-
+  ModalResult := mrYes;
 
 end;
 
 procedure TfrmReviewApplication.cbexReasonChange(Sender: TObject);
 begin
   inherited;
-  if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked))or (rbL.Checked)) then
+  if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
   begin
-    bbOk.Enabled:=true;
-    BitBtn1.Enabled:=true;
+    bbOk.Enabled := true;
+    BitBtn1.Enabled := true;
   end;
 end;
 
@@ -100,9 +99,11 @@ var
   i: integer;
 begin
   inherited;
-  dmDocs.adodsStudAddres.Open;
-  dmDocs.adodsStudAddres.First;
+
   if cbexTransp.Text <> '' then
+  begin
+    dmDocs.adodsStudAddres.Open;
+  dmDocs.adodsStudAddres.First;
     while not dmDocs.adodsStudAddres.Eof do
     begin
       with dmDocs.adodsStudAddres do
@@ -124,10 +125,12 @@ begin
         dmDocs.adodsStudAddres.Next;
       end;
     end;
-  if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked))or (rbL.Checked)) then
+  end;
+  if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
   begin
-    bbOk.Enabled:=true;
-    BitBtn1.Enabled:=true;
+    bbOk.Enabled := true;
+    BitBtn1.Enabled := true;
   end;
 end;
 
