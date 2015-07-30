@@ -1540,7 +1540,7 @@ begin
        begin
         Result := ExtractSprReport.Create(ik_doc);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-          'reports\Akadem_spr.xlt';
+          'reports\SprExtract.xlt';
       end;
   end;
 end;

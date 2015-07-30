@@ -1,11 +1,12 @@
 unit uExtractSpr;
+
 interface
 
 uses
   Classes, dialogs, SysUtils, ExcelXP, Barcode, Contnrs,
   XIntf, CommonIntf, ReportsBase, db, adodb, ExtCtrls,
   udmUspevaemost, ComCtrls, uAverageBalls, SpravkaHistory2014, Spravka2014,
-  DateUtils, uDM, ConstantRepository, uDMDocuments;
+  DateUtils, uDM, ConstantRepository, uDMDocuments, Math;
 
 type
   ExtractSprReport = class(TExcelReportBase)
@@ -32,28 +33,33 @@ end;
 
 procedure ExtractSprReport.Execute;
 var
-  spVipiska, spInf, spGos, spKP, spPrakt, spUspev, spDoc,
-    sp_history: TADOStoredProc;
+  spInf, spGos, spUspev, sp_doc, sp_history: TADOStoredProc;
   AYear, AMonth, ADay: word;
-  m, I, fkp, k, fusp, w, ind, l: integer;
+  I, k, fusp, ind, kurs, sem, lastkurs, ocenka, kol_ocenca, ik_inst, h,
+    g: integer;
   podgot, diplom, prakt, week, ZE, let: string;
-  fl, flg, flpr: boolean;
+  m: Extended;
+  fl, flg, flpr, flag: boolean;
   ZECount: double;
+  sr_b: double;
+  ch: Extended;
 begin
   inherited;
   fl := true;
   flg := true;
   flpr := true;
-  spDoc := TADOStoredProc.Create(nil);
+  sp_doc := TADOStoredProc.Create(nil);
   spInf := TADOStoredProc.Create(nil);
-  spVipiska := TADOStoredProc.Create(nil);
+
   spGos := TADOStoredProc.Create(nil);
-  spKP := TADOStoredProc.Create(nil);
-  spPrakt := TADOStoredProc.Create(nil);
-  spUspev := TADOStoredProc.Create(nil);
+
   sp_history := TADOStoredProc.Create(nil);
   diplom := '';
-  ind := 0;
+  ind := 1;
+  ocenka := 0;
+  kol_ocenca := 0;
+  sr_b := 0;
+  flag := true;
   try
     // данные студента
     spInf.ProcedureName := 'StudInfoSpravBuild;1';
@@ -62,219 +68,153 @@ begin
       50, ik_doc);
     spInf.Open;
     spInf.First;
-    Replace('#form_ed2#', spInf.FieldByName('Cname_form_pril').AsString);
-    k := 0;
-    // данные по выписке
-    spVipiska.ProcedureName := 'GetVipiscaForDiplom;1';
-    spVipiska.Connection := dm.DBConnect;
-    spVipiska.Parameters.CreateParameter('@ik_zach', ftString, pdInput, 50,
-      spInf.FieldByName('Ik_zach').AsString);
-    spVipiska.Parameters.CreateParameter('@ik_CurGroup', ftString, pdInput, 50,
-      spInf.FieldByName('ik_grup').AsString);
-    spVipiska.Open;
-    spVipiska.First;
-    with spVipiska do
-    begin
-      DecodeDate(FieldByName('Dd_birth').AsDateTime, AYear, AMonth, ADay);
-      m := AMonth;
-      Replace('#FIO#', FieldByName('StudName').AsString);
-      Replace('#birth#', 'Дата рождения ' + ADay.ToString() + ' ' + GetMonthR(m)
-        + ' ' + AYear.ToString() + 'г.');
-      Replace('#obr#', FieldByName('docum').AsString);
-      Replace('#god_post#', FieldByName('yearPostup').AsString);
-      let := FieldByName('YearObuch').AsString;
-      l := StrToInt(Copy(let, let.Length, 1));
-      if l < 5 then
-        let := let + ' года '
-      else if (l < 10) or (l > 20) then
-      begin
-        if l = 1 then
-          let := let + ' год '
-        else
-          let := let + ' лет';
-      end
-      else
-        let := let + ' лет ';
-
-      Replace('#kol_y#', let);
-      podgot := spInf.FieldByName('Podgot').AsString;
-      if podgot = 'направления подготовки' then
-        podgot := 'Направление подготовки';
-      Replace('#podgot#', podgot);
-      Replace('#form_ed#', FieldByName('form').AsString);
-      Replace('#sh_spec#', FieldByName('Sh_spec').AsString);
-      Replace('#spec#', spInf.FieldByName('Cname_spec').AsString);
-      if FieldByName('OcencaDiplom').AsString <> '' then
-        if FieldByName('cdiplom').AsString <> '' then
-        begin
-          Replace('#tema_diplom#', FieldByName('cdiplom').AsString);
-          diplom := FieldByName('OcencaDiplom').AsString;
-        end
-        else
-        begin
-          Replace('#tema_diplom#', 'не выполнял(а)');
-          Replace('#diplom#', '');
-          fl := false;
-        end
-      else
-      begin
-        Replace('#tema_diplom#', 'не выполнял(а)');
-        Replace('#diplom#', '');
-      end;
-    end;
-
-    sp_history.ProcedureName := 'StudHistForSpr;1';
-    sp_history.Connection := dm.DBConnect;
-    sp_history.Parameters.CreateParameter('@Ik_document', ftString, pdInput,
-      50, ik_doc);
-    sp_history.Open;
-    sp_history.Last;
-    if sp_history.FieldByName('ikTypePric').AsInteger = 2 then
-    begin
-      DecodeDate(sp_history.FieldByName('Dd_prikazVst').AsDateTime, AYear,
-        AMonth, ADay);
-      // проверить отчислен ли студент ? закончил ли обучение
-      Replace(' #god_zav#', AYear.ToString() +
-        ' году в Федеральном государственном бюджетном образовательном учреждении высшего професисонального образования "Ухтинский государственный технический университет " '
-        + '(' + spVipiska.FieldByName('form').AsString + ' форма обучения)');
-      Replace('#pric#', 'Приказ об отчислении от ' + ADay.ToString() + ' ' +
-        GetMonthR(StrToInt(AMonth.ToString())) + ' ' + AYear.ToString() + ' № '
-        + sp_history.FieldByName('Nn_prikaz').AsString);
-    end
+    // Replace('#form_ed2#', spInf.FieldByName('Cname_form_pril').AsString);
+    Replace('#fio_rod#', spInf.FieldByName('FIOrod').AsString);
+    Replace('#year_post#', spInf.FieldByName('zachYear').AsString);
+    if spInf.FieldByName('Podgot').AsString = 'направления подготовки' then
+      Replace('#podgot#', 'направление подготовки')
     else
-    begin
-      Replace(' #god_zav#', 'продолжает обучение');
-      Replace(' #pric#', 'Продолжает обучение');
-    end;
-
-    spDoc.ProcedureName := 'DocInfoSpravBuild;1';
-    spDoc.Connection := dm.DBConnect;
-    spDoc.Parameters.CreateParameter('@Ik_document', ftString, pdInput,
-      50, ik_doc);
-    spDoc.Open;
-    spDoc.First;
-    Replace('#num#', spDoc.FieldByName('NumberDoc').AsString);
-    Replace('#date_vid#', spDoc.FieldByName('DateCreate').AsString);
-
-    // данные по курсовым
-    spKP.ProcedureName := 'SelKPForVipisca;1';
-    spKP.Connection := dm.DBConnect;
-    spKP.Parameters.CreateParameter('@ik_zach', ftString, pdInput, 50,
-      spInf.FieldByName('Ik_zach').AsString);
-    spKP.Parameters.CreateParameter('@iK_vid_zanyat', ftString, pdInput, 50, 8);
-    spKP.Parameters.CreateParameter('@ik_CurGroup', ftString, pdInput, 50,
-      spInf.FieldByName('ik_grup').AsString);
-    spKP.Open;
-    spKP.First;
-    fkp := 28;
-
-    while not spKP.Eof do
-    begin
-
-      if spKP.FieldByName('Dd_exam').AsDateTime <=
-        spDoc.FieldByName('DateCreate').AsDateTime then
-      begin
-        Range['A' + inttostr(fkp), 'H' + inttostr(fkp)
-          ].Insert(xlDown, xlFormatFromRightOrBelow);
-        // xlFormatFromLeftOrAbove);
-        Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
-        if spKP.FieldByName('discName').AsString.Length < 55 then
-          Items[fkp, 1] := spKP.FieldByName('discName').AsString + ', ' +
-            spKP.FieldByName('cOsenca').AsString
-        else
-        begin
-          Items[fkp, 1] := spKP.FieldByName('discName').AsString + ', ';
-          fkp := fkp + 1;
-          ind := ind + 1;
-          Range['A' + inttostr(fkp), 'H' + inttostr(fkp)
-            ].Insert(xlDown, xlFormatFromRightOrBelow);
-          // xlFormatFromLeftOrAbove);
-          Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
-          Items[fkp, 1] := spKP.FieldByName('cOsenca').AsString
-        end;
-        fkp := fkp + 1;
-        ind := ind + 1;
-        k := k + 1;
-      end;
-      spKP.Next;
-    end;
-
-    if k = 0 then
-    begin
-      Items[fkp, 1] := 'не сдавал(а)';
-      fkp := fkp + 2;
-    end
+      Replace('#podgot#', spInf.FieldByName('Podgot').AsString);
+    Replace('#f_ed#', AnsiLowerCase(spInf.FieldByName('Cname_form_ed')
+      .AsString));
+    Replace('#sh_spec#', spInf.FieldByName('Sh_spec').AsString);
+    Replace('#spec#', LowerCase(spInf.FieldByName('Cname_spec').AsString));
+    Replace('#inst#', LowerCase(spInf.FieldByName('Cname_fac').AsString));
+    if (spInf.FieldByName('ik_type_kat').AsInteger = 1) or
+      (spInf.FieldByName('ik_type_kat').AsInteger = 2) then
+      Replace('#type#', 'бюджет')
     else
+      Replace('#type#', 'договор');
+    ik_inst := spInf.FieldByName('ik_fac').AsInteger;
+    if (ik_inst = 27) or (ik_inst = 29) or (ik_inst = 30) then
+      Replace('#sh_inst#', 'Ин' + spInf.FieldByName('Cname_fac_small').AsString)
+    else
+      Replace('#sh_inst#', spInf.FieldByName('Cname_fac_small').AsString);
+    // заполняем данные по справке
+    sp_doc.ProcedureName := 'DocInfoSpravBuild;1';
+    sp_doc.Connection := dm.DBConnect;
+    sp_doc.Parameters.CreateParameter('@Ik_document', ftString, pdInput,
+      50, ik_doc);
+    sp_doc.Open;
+    sp_doc.First;
+    with sp_doc do
     begin
-      fkp := fkp + 1;
-      Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Delete(xlUp);
+      DecodeDate(FieldByName('DatePod').AsDateTime, AYear, AMonth, ADay);
+      Replace('#num#', FieldByName('NumberDoc').AsString);
+      Replace('#year_now#', AYear.ToString());
+      kurs := spInf.FieldByName('kurs').AsInteger;
+      Replace('#date#', FieldByName('DatePod').AsString);
+      DecodeDate(FieldByName('DateCreate').AsDateTime, AYear, AMonth, ADay);
+      if StrToInt(AMonth.ToString()) > 8 then
+        sem := kurs * 2 - 1
+      else
+        sem := kurs * 2;
     end;
-    fkp := fkp + 1;
 
-    // данные по практике
-    spPrakt.ProcedureName := 'SelPractForVipisca;1';
-    spPrakt.Connection := dm.DBConnect;
-    spPrakt.Parameters.CreateParameter('@ik_zach', ftString, pdInput, 50,
-      spInf.FieldByName('Ik_zach').AsString);
-    spPrakt.Parameters.CreateParameter('@ik_CurGroup', ftString, pdInput, 50,
-      spInf.FieldByName('ik_grup').AsString);
-    spPrakt.Open;
-    spPrakt.First;
-    k := 0;
-    while not spPrakt.Eof do
+    fusp := 19;
+    kurs := 1;
+    // данные по успеваемости
+    for I := 1 to sem do
     begin
-      if spPrakt.FieldByName('Dd_exam').AsDateTime <=
-        spDoc.FieldByName('DateCreate').AsDateTime then
+      spUspev := TADOStoredProc.Create(nil);
+      spUspev.ProcedureName := 'SelUspevForStud;1';
+      spUspev.Connection := dm.DBConnect;
+      spUspev.Parameters.CreateParameter('@n_sem', ftString, pdInput, 50,
+        I.ToString());
+      spUspev.Parameters.CreateParameter('@ik_zach', ftString, pdInput, 50,
+        spInf.FieldByName('Ik_zach').AsString);
+      spUspev.Open;
+      spUspev.First;
+
+      Range['A' + inttostr(fusp), 'K' + inttostr(fusp)
+        ].Insert(xlDown, xlFormatFromRightOrBelow);
+      Range['C' + inttostr(fusp), 'E' + inttostr(fusp)].Select;
+      Items[fusp, 3] := kurs.ToString() + ' курс ' + I.ToString() + ' семестр';
+      Selection.MergeCells := true;
+      Range['C' + inttostr(fusp), 'E' + inttostr(fusp)].HorizontalAlignment
+        := xlCenter;
+      fusp := fusp + 1;
+      flag := true;
+      while not spUspev.Eof do
       begin
-        if spPrakt.FieldByName('ik_disc').AsString.Length <> 0 then
-        begin
-          Range['A' + inttostr(fkp), 'H' + inttostr(fkp)
-            ].Insert(xlDown, xlFormatFromRightOrBelow);
-          Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
-          prakt := spPrakt.FieldByName('DiscName').AsString + ', ' +
-            spPrakt.FieldByName('weekCount').AsString + ' ';
-          week := spPrakt.FieldByName('weekCount').AsString;
-          w := StrToInt(Copy(week, week.Length, 1));
-          if (w < 5) and (w >1) then
-            prakt := prakt + 'недели, '
-          else if (w < 10) or (w > 20) then
+        if spUspev.FieldByName('Dd_exam').AsDateTime <=
+          sp_doc.FieldByName('DateCreate').AsDateTime then
+          if (spUspev.FieldByName('ShortName').AsString.Length <> 0) and
+            (spUspev.FieldByName('ShortName').AsString <> 'не зачт.') then
           begin
-            if w = 1 then
-              prakt := prakt + 'неделя, '
+            Range['A' + inttostr(fusp), 'K' + inttostr(fusp)
+              ].Insert(xlDown, xlFormatFromRightOrBelow);
+            Range['A' + inttostr(fusp), 'K' + inttostr(fusp)].Select;
+            Items[fusp, 2] := ind.ToString();
+            Range['B' + inttostr(fusp), 'B' + inttostr(fusp)
+              ].HorizontalAlignment := xlCenter;
+            Items[fusp, 3] := spUspev.FieldByName('cName_disc').AsString;
+            ch := Int(spUspev.FieldByName('cName_disc').AsString.Length / 42);
+            h := 15;
+            for g := 1 to StrToInt(ch.ToString()) do
+              h := h + 15;
+            Range['A' + (fusp).ToString(), 'K' + (fusp).ToString()
+              ].RowHeight := h;
+            Range['C' + inttostr(fusp), 'E' + inttostr(fusp)].Select;
+            Selection.MergeCells := true;
+            flag := false;
+            if spUspev.FieldByName('cName_disc').AsString <> 'Физическая культура'
+            then
+              if spUspev.FieldByName('Hours').AsString.Length <> 0 then
+              begin
+                m := spUspev.FieldByName('Hours').AsInteger / 36;
+                Items[fusp, 6] := m.ToString();
+                Items[fusp, 7] := spUspev.FieldByName('Hours').AsString;
+              end;
+            Range['G' + inttostr(fusp), 'H' + inttostr(fusp)].Select;
+            Selection.MergeCells := true;
+            Range['G' + inttostr(fusp), 'H' + inttostr(fusp)
+              ].HorizontalAlignment := xlCenter;
+            if (spUspev.FieldByName('cName_vid_zanyat').AsString = 'Зачет') then
+              Items[fusp, 9] := spUspev.FieldByName('ShortName').AsString
             else
-              prakt := prakt + 'недель, ';
-          end
-          else
-            prakt := prakt + 'недель, ';
-          prakt := prakt + spPrakt.FieldByName('cOsenca').AsString;
-          Items[fkp, 1] := prakt;
-          fkp := fkp + 1;
-          ind := ind + 1;
-          flpr := false;
-        end;
+            begin
+              if (spUspev.FieldByName('cName_vid_zanyat').AsString = 'КР') then
+                Items[fusp, 10] := 'КР ' + spUspev.FieldByName
+                  ('ShortName').AsString;
+              if (spUspev.FieldByName('cName_vid_zanyat').AsString = 'КП') then
+                Items[fusp, 10] := 'КП ' + spUspev.FieldByName
+                  ('ShortName').AsString;
 
-        k := k + 1;
+              if (spUspev.FieldByName('cName_vid_zanyat').AsString = 'Экзамен')
+                or (spUspev.FieldByName('cName_vid_zanyat')
+                .AsString = 'Практика') then
+              begin
+                Items[fusp, 10] := spUspev.FieldByName('ShortName').AsString;
+              end;
+              if spUspev.FieldByName('ShortName').AsString = 'удовлетв.' then
+                ocenka := ocenka + 3;
+              if spUspev.FieldByName('ShortName').AsString = 'хорошо' then
+                ocenka := ocenka + 4;
+              if spUspev.FieldByName('ShortName').AsString = 'отлично' then
+                ocenka := ocenka + 5;
+              kol_ocenca := kol_ocenca + 1;
+            end;
+            Range['J' + inttostr(fusp), 'K' + inttostr(fusp)].Select;
+            Selection.MergeCells := true;
+            Range['J' + inttostr(fusp), 'K' + inttostr(fusp)
+              ].HorizontalAlignment := xlCenter;
+            fusp := fusp + 1;
+            ind := ind + 1;
+            // Range['F' + inttostr(fusp - 1), 'H' + inttostr(fusp - 1)].Select;
+            // Selection.MergeCells := true;
+          end;
+        spUspev.Next;
       end;
-      spPrakt.Next;
-
+      if I mod 2 = 0 then
+        kurs := kurs + 1;
+      spUspev.Close;
+      spUspev.Free;
     end;
-
-    if flpr then
-    begin
-      // Range['A' + inttostr(fkp), 'H' + inttostr(fkp)
-      // ].Insert(xlDown, xlFormatFromRightOrBelow);
-      // Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
-      Items[fkp, 1] := 'не сдавал(а)';
-      fkp := fkp + 1;
-    end
-    else
-    begin
-      fkp := fkp + 1;
-      Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Delete(xlUp);
-    end;
-
-    if k = 0 then
-      Items[fkp, 1] := 'не сдавал(а)';
+    if kol_ocenca <> 0 then
+      sr_b := RoundTo(ocenka / kol_ocenca, -1);
+    Replace('#sr_b#', FloatToStr(sr_b));
+    Range['A' + inttostr(fusp), 'K' + inttostr(fusp)].Delete(xlUp);
     // данные по госам
     spGos.ProcedureName := 'SelGOSForVipisca;1';
     spGos.Connection := dm.DBConnect;
@@ -288,100 +228,27 @@ begin
     while not spGos.Eof do
     begin
       if spGos.FieldByName('Dd_exam').AsDateTime <=
-        spDoc.FieldByName('DateCreate').AsDateTime then
+        sp_doc.FieldByName('DateCreate').AsDateTime then
       begin
-        if flg then
+        if spGos.FieldByName('ik_disc').AsInteger = 588 then
         begin
-          if spGos.FieldByName('ik_disc').AsInteger = 588 then
-          begin
-            Replace('#gos#', spGos.FieldByName('cOsenca').AsString);
-            flg := false;
-          end;
-        end;
-
-        if fl then
-        begin
-
-          if spGos.FieldByName('ik_disc').AsInteger = 593 then
-          begin
-            ZE := spGos.FieldByName('ZECount').AsString;
-            ZECount := StrToInt(Copy(ZE, ZE.Length, 1)) / 1.5;
-            if ZECount < 5 then
-              diplom := ZECount.ToString() + ' недели' + diplom
-            else if (ZECount < 10) or (ZECount > 20) then
-            begin
-              if ZECount = 1 then
-                diplom := ZECount.ToString() + ' неделя' + diplom
-              else
-                diplom := ZECount.ToString() + ' недель' + diplom;
-            end
-            else
-              diplom := ZECount.ToString() + ' недель' + diplom;
-
-            Replace('#diplom#', diplom);
-          end;
+          Items[fusp, 3] := 'Итоговый междисциплинарный экзамен';
+          Items[fusp, 10] := spGos.FieldByName('cOsenca').AsString;
         end;
       end;
       spGos.Next;
     end;
-    if flg then
-      Replace('#gos#', 'не сдавал(а)');
-    // данные по документу
-    // данные по успеваемости
-    spUspev.ProcedureName := 'SelUspevForVipisca;1';
-    spUspev.Connection := dm.DBConnect;
-    spUspev.Parameters.CreateParameter('@ik_zach', ftString, pdInput, 50,
-      spInf.FieldByName('Ik_zach').AsString);
-    spUspev.Parameters.CreateParameter('@ik_CurGroup', ftString, pdInput, 50,
-      spInf.FieldByName('ik_grup').AsString);
-    spUspev.Open;
-    spUspev.First;
-    fusp := 57;
-    ind := ind - 3;
-    for I := 0 to ind do
-      Range['A' + inttostr(41 + ind), 'H' + inttostr(41 + ind)].Delete(xlUp);
-    ind := ind + 41;
-    while not spUspev.Eof do
-    begin
-      if spUspev.FieldByName('Dd_exam').AsDateTime <=
-        spDoc.FieldByName('DateCreate').AsDateTime then
-      begin
-        if spUspev.FieldByName('iK_disc').AsInteger > 0 then
-        begin
-          Range['A' + inttostr(fusp), 'K' + inttostr(fusp)
-            ].Insert(xlDown, xlFormatFromRightOrBelow);
-          Range['A' + inttostr(fusp), 'K' + inttostr(fusp)].Select;
-          Items[fusp, 1] := spUspev.FieldByName('cName_disc').AsString;
-          Items[fusp, 6] := spUspev.FieldByName('HourCount').AsString;
-          Items[fusp, 9] := spUspev.FieldByName('cOsenca').AsString;
-          fusp := fusp + 1;
-          Range['F' + inttostr(fusp - 1), 'H' + inttostr(fusp - 1)].Select;
-          Selection.MergeCells := true;
-          // Selection.HorizontalAlignment := xlCenter;
-        end;
-        if spUspev.FieldByName('iK_disc').AsInteger = 0 then
-        begin
-          Replace('#all#', spUspev.FieldByName('HourCount').AsString);
-        end;
-        if spUspev.FieldByName('iK_disc').AsInteger < 0 then
-        begin
-          Replace('#audit#', spUspev.FieldByName('HourCount').AsString);
-        end;
-      end;
-      spUspev.Next;
-    end;
-    Range['A' + inttostr(fusp), 'K' + inttostr(fusp)].Delete(xlUp);
-    // ActiveSheet.ExportAsFixedFormat(0, 'e:\out.pdf', 0, false, true,
-    // EmptyParam, EmptyParam,  true, EmptyParam);
+    if flag then
+      Range['B' + inttostr(fusp - 1), 'K' + inttostr(fusp - 1)].Delete(xlUp);
+    Replace('#fio1#', '');
+    Replace('#fio2#', '');
   finally
     spInf.Free;
-    spVipiska.Free;
     spGos.Free;
-    spKP.Free;
-    spPrakt.Free;
-    spUspev.Free;
+    // spUspev.Free;
     sp_history.Free;
-    spDoc.Free;
+    sp_doc.Free;
+
   end;
 end;
 

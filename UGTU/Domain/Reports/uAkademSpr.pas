@@ -45,6 +45,7 @@ begin
   fl := true;
   flg := true;
   flpr := true;
+
   spDoc := TADOStoredProc.Create(nil);
   spInf := TADOStoredProc.Create(nil);
   spVipiska := TADOStoredProc.Create(nil);
