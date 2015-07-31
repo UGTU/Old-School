@@ -1481,24 +1481,24 @@ function TUspevGroupController.BuildSpr(ik_doc, ik_destination: Integer)
   : TReportBase;
 var
   report: TSpravka_Report;
-  // result_report: TSpravka;
-  // FindRange: variant;
+   result_report: TSpravka;
+   FindRange: variant;
 begin
   case (ik_destination) of
     1:
       begin
-        // report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
-        // result_report := report.AddReport();
-        // Result := SpravkaReport.Create(result_report);
+         report := TSpravka_Report.Create(ik_destination,ik_doc);
+         result_report := report.AddReport();
+         Result := SpravkaReport.Create(result_report);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\Sprv.xlt';
       end;
 
     2:
       begin
-        // report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
-        // result_report := report.AddReport();
-        // Result := SpravkaReport.Create(result_report);
+         report := TSpravka_Report.Create(ik_destination,ik_doc);
+         result_report := report.AddReport();
+         Result := SpravkaReport.Create(result_report);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\SprvPens.xlt';
       end;
@@ -1552,22 +1552,22 @@ var
   result_report: TSpravka;
   FindRange: variant;
 begin
-  report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
-  result_report := report.AddReport();
-  Result := SpravkaReport.Create(result_report);
-
-  if (_type_spr = 1) then
-  begin
-    Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-      'reports\SprvPens.xlt';
-  end
-  else
-  begin
-    Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-      'reports\Sprv.xlt';
-  end;
-
-  report.Free;
+//  report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
+//  result_report := report.AddReport();
+//  Result := SpravkaReport.Create(result_report);
+//
+//  if (_type_spr = 1) then
+//  begin
+//    Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+//      'reports\SprvPens.xlt';
+//  end
+//  else
+//  begin
+//    Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+//      'reports\Sprv.xlt';
+//  end;
+//
+//  report.Free;
 end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nsem, ikVed, ikFac,

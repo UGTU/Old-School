@@ -51,8 +51,7 @@ inherited frmReviewDoc: TfrmReviewDoc
     Top = 185
     Width = 443
     Height = 40
-    ExplicitLeft = -8
-    ExplicitTop = 191
+    ExplicitTop = 185
     ExplicitWidth = 443
     ExplicitHeight = 40
     DesignSize = (

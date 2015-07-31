@@ -64,7 +64,7 @@ begin
   copystr1 := copystr1 + ' ' + copystr2;
   Replace('#dir_inst#', copystr1); // переставит буквы местами
 
-  if FReport.type_spr = 1 then
+  if FReport.type_spr = 2 then
   begin
     Replace('#birth_y#', FReport.birth);
     Replace('#spec#', FReport.specshort);
