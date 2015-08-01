@@ -20,10 +20,10 @@ type
     rbL: TRadioButton;
     Edit1: TEdit;
     Label10: TLabel;
-    cbexTransp: TDBLookupComboboxEh;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
+    cbexTransp: TDBLookupComboboxEh;
     procedure cbexTranspChange(Sender: TObject);
     procedure rbPClick(Sender: TObject);
     procedure rbLClick(Sender: TObject);

@@ -204,35 +204,54 @@ inherited fmDoc: TfmDoc
         item
           DynProps = <>
           EditButtons = <>
-          FieldName = 'cName_type_disc'
+          FieldName = 'addr'
           Footers = <>
-          PopupMenu = gridColumnSelectMenu
-          STFilter.KeyField = 'ik_type_disc'
-          STFilter.ListSource = dmDocs.dsDocs
-          Title.Caption = #1055#1088#1080#1095#1080#1085#1072' '#1074#1099#1079#1086#1074#1072
+          Title.Caption = #1052#1077#1089#1090#1086' '#1085#1072#1079#1085#1072#1095#1077#1085#1080#1103
           Visible = False
         end
         item
           DynProps = <>
           EditButtons = <>
-          FieldName = 'Num_podrazd'
+          FieldName = 'Kol_day'
           Footers = <>
-          PopupMenu = gridColumnSelectMenu
-          STFilter.ListSource = dmDocs.dsDocs
-          Title.Caption = #1053#1086#1084#1077#1088' '#1087#1086#1076#1088#1072#1079#1076#1077#1083#1077#1085#1080#1103
+          Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1076#1085#1077#1081
           Visible = False
         end
         item
           DynProps = <>
           EditButtons = <>
-          FieldName = 'Ik_Document'
+          FieldName = 'Cname_pric'
           Footers = <>
+          Title.Caption = #1055#1088#1080#1095#1080#1085#1072' '#1074#1099#1076#1072#1095#1080' '#1072#1082'. '#1089#1087#1088'.'
+          Visible = False
+        end
+        item
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'n_sem'
+          Footers = <>
+          Title.Caption = #1057#1077#1084#1077#1089#1090#1088' '#1084#1077#1088#1086#1087#1088#1080#1103#1090#1080#1103
+          Visible = False
+        end
+        item
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'cName_disc'
+          Footers = <>
+          Title.Caption = #1052#1077#1088#1086#1087#1088#1080#1103#1090#1080#1077
           Visible = False
         end
         item
           DynProps = <>
           EditButtons = <>
           FieldName = 'Ik_destination'
+          Footers = <>
+          Visible = False
+        end
+        item
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'Ik_Document'
           Footers = <>
           Visible = False
         end>
@@ -354,7 +373,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000A40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000B00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

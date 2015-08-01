@@ -7,7 +7,8 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uReviewDoc, System.Actions,
   Vcl.ActnList, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, EhLibADO,
-  Data.Win.ADODB,DateUtils;
+  Data.Win.ADODB,DateUtils,uDMDocuments, DBGridEh, Vcl.Mask, DBCtrlsEh,
+  DBLookupEh;
 
 type
   Tfm—hallengeSpr = class(TfrmReviewDoc)
@@ -24,13 +25,26 @@ type
     eNumDate: TEdit;
     Label12: TLabel;
     Label11: TLabel;
+    Bevel2: TBevel;
+    Label13: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    rbP: TRadioButton;
+    rbL: TRadioButton;
+    cbexTransp: TDBLookupComboboxEh;
     procedure cbeSemChange(Sender: TObject);
     procedure cbeReasonChange(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure rbPClick(Sender: TObject);
+    procedure rbLClick(Sender: TObject);
+    procedure cbexTranspChange(Sender: TObject);
   private
     { Private declarations }
   public
+   Procedure AfterConstruction; Override;
     { Public declarations }
   end;
 
@@ -49,6 +63,16 @@ procedure Tfm—hallengeSpr.actOKExecute(Sender: TObject);
 begin
   inherited;
 ModalResult:=mrOk;
+end;
+
+procedure Tfm—hallengeSpr.AfterConstruction;
+begin
+  inherited;
+  uDMDocuments.dmDocs.adodsStudAddres.Active := false; // ÔÓ‰ÍÎ˛˜‡Ï ·‡ÁÛ
+  dmDocs.adodsStudAddres.Filter := 'ik_StudGrup =' + ik_stud.ToString();
+  dmDocs.adodsStudAddres.Filtered := true;
+  uDMDocuments.dmDocs.adodsStudAddres.Active := true; // ÔÓ‰ÍÎ˛˜‡Ï ·‡ÁÛ
+
 end;
 
 procedure Tfm—hallengeSpr.BitBtn1Click(Sender: TObject);
@@ -135,10 +159,11 @@ begin
     dtpEnd.date := ds;
     eNumDate.Text :=  IntToStr(DaysBetween(df, ds)+1);//Ó·Â ‰‡Ì˚ ‚ÍÎ˛˜ËÚÂÎ¸ÌÓ
   end;
-     if (cbeSem.Text <> '')and ((cbeReason.Text <> '') ) then
+  if (cbeReason.Text<> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
   begin
-    bbOk.Enabled:=true;
-    BitBtn1.Enabled:=true;
+    bbOk.Enabled := true;
+    BitBtn1.Enabled := true;
   end;
 end;
 
@@ -180,11 +205,7 @@ begin
 
       end;
     end;
-   if (cbeSem.Text <> '') and ((cbeReason.Text <> '') ) then
-  begin
-    bbOk.Enabled:=true;
-    BitBtn1.Enabled:=true;
-  end;
+
   finally
 
     sp_info.Free;
@@ -192,6 +213,70 @@ begin
 
   end;
 
+end;
+
+procedure Tfm—hallengeSpr.cbexTranspChange(Sender: TObject);
+var
+  i: integer;
+begin
+  inherited;
+
+  if cbexTransp.Text <> '' then
+  begin
+    dmDocs.adodsStudAddres.Open;
+  dmDocs.adodsStudAddres.First;
+    while not dmDocs.adodsStudAddres.Eof do
+    begin
+      with dmDocs.adodsStudAddres do
+      begin
+        if FieldByName('ik_AddressType').AsString = cbexTransp.KeyValue then
+        begin
+          Label15.Caption := '';
+          if FieldByName('Cstrana').AsString <> '–ÓÒÒËˇ' then
+            Label10.Caption := FieldByName('Cstrana').AsString + ', ';
+          Label15.Caption := Label10.Caption + FieldByName('Cregion').AsString +
+            ', ' + FieldByName('cshort_type_gorod').AsString +
+            FieldByName('Cgorod').AsString + ', ' +
+            FieldByName('cshort_type_street').AsString + FieldByName('CStreet')
+            .AsString + ', ‰.' + FieldByName('BuildingNumber').AsString +
+            ', Í‚.' + FieldByName('FlatNumber').AsString;
+
+          Label15.Visible := true;
+        end;
+        dmDocs.adodsStudAddres.Next;
+      end;
+    end;
+  end;
+  if (cbeReason.Text<> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
+  begin
+    bbOk.Enabled := true;
+    BitBtn1.Enabled := true;
+  end;
+end;
+
+procedure Tfm—hallengeSpr.rbLClick(Sender: TObject);
+begin
+  inherited;
+  if rbL.Checked then
+  begin
+    cbexTransp.Enabled := false;
+    Label10.Visible := false;
+
+  end;
+end;
+
+procedure Tfm—hallengeSpr.rbPClick(Sender: TObject);
+begin
+  inherited;
+
+  if rbP.Checked then
+  begin
+    cbexTransp.Enabled := true;
+    if cbexTransp.Text <> '' then
+      Label10.Visible := true;
+
+  end;
 end;
 
 end.

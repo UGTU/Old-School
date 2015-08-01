@@ -11,7 +11,9 @@ uses
   Vcl.DBLookup, uDM,
   Vcl.Mask, DBCtrlsEh, DBLookupEh, uDMStudentData, uDMDocuments, EhLibADO,
   uReviewDoc,
-  Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb, Vcl.ToolWin;
+  Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb, Vcl.ToolWin,
+  uReviewCallSpr, uReviewApplication, uReviewAkadem,
+  uReviewNotify;
 
 type
   TfmDoc = class(TfmBase)
@@ -50,7 +52,6 @@ type
     procedure tbResetClick(Sender: TObject);
     procedure bbResetClick(Sender: TObject);
 
-
   private
     procedure OnMyMenuItemClick(Sender: TObject);
     // numColumn:integer;checked:boolean);
@@ -73,7 +74,7 @@ var
   fld: TField;
 Begin
   Inherited;
-  //ilMain.GetBitmap(16, bbOk.Glyph);
+  // ilMain.GetBitmap(16, bbOk.Glyph);
   dbgehMagazineDocs.SelectedRows.CurrentRowSelected := true;
 
   // dtpStart.Date := StrToDate('10.03.2015');
@@ -281,60 +282,359 @@ var
   dsDoc: TADODataSet;
   idDest: Integer;
   idDoc: Integer;
+  fcallspr: TfmÑhallengeSpr;
+  fapplication: TfrmReviewApplication;
+  fneusp: TfrmReviewNeusp;
+  fakadem: TfrmReviewAkadem;
+  sp_pers: TADOStoredProc;
+  sp_doc: TADOStoredProc;
 begin
   inherited;
-  dsDoc := TADODataSet.Create(nil);
-  pt := dbgehMagazineDocs.ScreenToClient(Mouse.CursorPos);
-  try
-    if self.dbgehMagazineDocs.MouseCoord(pt.X, pt.Y).X <> -1 then
-    begin
-      idDoc := uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_Document')
-        .AsInteger;
-      if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
-      begin
-        dsDoc.CommandText := 'select * from MagazineDocs where Ik_Document='
-          + idDoc.ToString();
-        dsDoc.Connection := dm.DBConnect;
-        dsDoc.Open;
-        dsDoc.First;
-        editF := TfrmReviewDoc.Create(self);
-        editF.dtGot.Format := #32;
-        editF.dtUtv.Format := #32;
-        if (dsDoc.FieldByName('DateCreate').Value <> Null) then
-        begin
-          editF.dtUtv.Format := '';
-          editF.dtUtv.Date := dsDoc.FieldByName('DateCreate').AsDateTime;
-          if (dsDoc.FieldByName('DateReady').Value <> Null) then
-          begin
-            editF.dtGot.Format := '';
-            editF.dtGot.Date := dsDoc.FieldByName('DateReady').AsDateTime;
-          end;
-        end ;
-
-
-
-        editF.eDest.Text := dsDoc.FieldByName('cNameDestination').AsString;
-        editF.eNum.Text := dsDoc.FieldByName('NumberDoc').AsString;
-        editF.eInd.Text := dsDoc.FieldByName('Num_podrazd').AsString;
-        editF.Caption := dsDoc.FieldByName('PersName').AsString + ' (' +
-          dsDoc.FieldByName('CName_grup').AsString + ')';
-         editF.ShowModal;
-        case idDest of
-          1: // äëÿ ñïðàâêè ïî ìåñòó òðåáîâàíèÿ
-            begin
-
-            end;
-          2: // ïåíñèîííûé ôîíä
-            begin
-
-            end;
-        end;
-      end;
-
-    end;
-  finally
-    dsDoc.Free;
-  end;
+//  sp_doc := TADOStoredProc.Create(nil);
+//  sp_pers := TADOStoredProc.Create(nil);
+//  dsDoc := TADODataSet.Create(nil);
+//  pt := dbgehMagazineDocs.ScreenToClient(Mouse.CursorPos);
+//  try
+//    if self.dbgehMagazineDocs.MouseCoord(pt.X, pt.Y).X <> -1 then
+//    begin
+//      idDoc := uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_Document')
+//        .AsInteger;
+//      idDest := uDMDocuments.dmDocs.adodsDocs.FieldByName('ik_destination')
+//        .AsInteger;
+//      if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+//      begin
+//        sp_pers.ProcedureName := 'StudInfoSpravBuild;1';
+//        sp_pers.Connection := dm.DBConnect;
+//        sp_pers.Parameters.CreateParameter('@Ik_document', ftString, pdInput,
+//          50, idDoc);
+//        sp_pers.Open;
+//        sp_pers.First;
+//        sp_doc.ProcedureName := 'DocInfoSpravBuild;1';
+//        sp_doc.Connection := dm.DBConnect;
+//        sp_doc.Parameters.CreateParameter('@Ik_document', ftString, pdInput,
+//          50, idDoc);
+//        sp_doc.Open;
+//        sp_doc.First;
+//
+//        case (idDest) of
+//          1:
+//            begin
+//              editF := TfrmReviewDoc.Create(self);
+//              editF.dtGot.Format := #32;
+//              editF.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                editF.dtUtv.Format := '';
+//                editF.dtUtv.Date := sp_doc.FieldByName('DateCreate').AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  editF.dtGot.Format := '';
+//                  editF.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              editF.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              editF.eNum.Text := sp_doc.FieldByName('NumberDoc').AsString;
+//              editF.eInd.Text := sp_doc.FieldByName('Num_podrazd').AsString;
+//              editF.Caption := sp_pers.FieldByName('PersName').AsString + ' (' +
+//                sp_pers.FieldByName('CName_grup').AsString + ')';
+//
+//              editF.ShowModal;
+//            end;
+//          2:
+//            begin
+//              editF := TfrmReviewDoc.Create(self);
+//              editF.dtGot.Format := #32;
+//              editF.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                editF.dtUtv.Format := '';
+//                editF.dtUtv.Date := sp_doc.FieldByName('DateCreate').AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  editF.dtGot.Format := '';
+//                  editF.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              editF.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              editF.eNum.Text := sp_doc.FieldByName('NumberDoc').AsString;
+//              editF.eInd.Text := sp_doc.FieldByName('Num_podrazd').AsString;
+//              editF.Caption := sp_pers.FieldByName('PersName').AsString + ' (' +
+//                sp_pers.FieldByName('CName_grup').AsString + ')';
+//              editF.ShowModal;
+//            end;
+//
+//          3:
+//            begin
+//              fcallspr := TfmÑhallengeSpr.Create(self);
+//              fcallspr.dtGot.Format := #32;
+//              fcallspr.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                fcallspr.dtUtv.Format := '';
+//                fcallspr.dtUtv.Date := sp_doc.FieldByName('DateCreate')
+//                  .AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  fcallspr.dtGot.Format := '';
+//                  fcallspr.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              fcallspr.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              fcallspr.eNum.Text := sp_doc.FieldByName('NumberDoc').AsString;
+//              fcallspr.eInd.Text := sp_doc.FieldByName('Num_podrazd').AsString;
+//              fcallspr.Caption := sp_pers.FieldByName('PersName').AsString +
+//                ' (' + sp_pers.FieldByName('CName_grup').AsString + ')';
+//              fcallspr.ShowModal;
+//            end;
+//
+//          4:
+//            begin
+//              fapplication := TfrmReviewApplication.Create(self);
+//              fapplication.dtGot.Format := #32;
+//              fapplication.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                fapplication.dtUtv.Format := '';
+//                fapplication.dtUtv.Date := sp_doc.FieldByName('DateCreate')
+//                  .AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  fapplication.dtGot.Format := '';
+//                  fapplication.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              fapplication.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              fapplication.eNum.Text := sp_doc.FieldByName('NumberDoc')
+//                .AsString;
+//              fapplication.eInd.Text :=
+//                sp_doc.FieldByName('Num_podrazd').AsString;
+//              fapplication.Caption := sp_pers.FieldByName('PersName').AsString +
+//                ' (' + sp_pers.FieldByName('CName_grup').AsString + ')';
+//              fapplication.ShowModal;
+//            end;
+//          5:
+//            begin
+//              fcallspr := TfmÑhallengeSpr.Create(self);
+//              fcallspr.dtGot.Format := #32;
+//              fcallspr.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                fcallspr.dtUtv.Format := '';
+//                fcallspr.dtUtv.Date := sp_doc.FieldByName('DateCreate')
+//                  .AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  fcallspr.dtGot.Format := '';
+//                  fcallspr.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              fcallspr.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              fcallspr.eNum.Text := sp_doc.FieldByName('NumberDoc').AsString;
+//              fcallspr.eInd.Text := sp_doc.FieldByName('Num_podrazd').AsString;
+//              fcallspr.Caption := sp_pers.FieldByName('PersName').AsString +
+//                ' (' + sp_pers.FieldByName('CName_grup').AsString + ')';
+//              fcallspr.ShowModal;
+//            end;
+//          6:
+//            begin
+//              fneusp := TfrmReviewNeusp.Create(self);
+//              fneusp.dtGot.Format := #32;
+//              fneusp.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                fneusp.dtUtv.Format := '';
+//                fneusp.dtUtv.Date := sp_doc.FieldByName('DateCreate')
+//                  .AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  fneusp.dtGot.Format := '';
+//                  fneusp.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              fneusp.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              fneusp.eNum.Text := sp_doc.FieldByName('NumberDoc').AsString;
+//              fneusp.eInd.Text := sp_doc.FieldByName('Num_podrazd').AsString;
+//              fneusp.Caption := sp_pers.FieldByName('PersName').AsString + ' ('
+//                + sp_pers.FieldByName('CName_grup').AsString + ')';
+//              fneusp.ShowModal;
+//            end;
+//
+//          7:
+//            begin
+//              fakadem := TfrmReviewAkadem.Create(self);
+//              fakadem.dtGot.Format := #32;
+//              fakadem.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                fakadem.dtUtv.Format := '';
+//                fakadem.dtUtv.Date := sp_doc.FieldByName('DateCreate')
+//                  .AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  fakadem.dtGot.Format := '';
+//                  fakadem.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              fakadem.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              fakadem.eNum.Text := sp_doc.FieldByName('NumberDoc').AsString;
+//              fakadem.eInd.Text := sp_doc.FieldByName('Num_podrazd').AsString;
+//              fakadem.Caption := sp_pers.FieldByName('PersName').AsString + ' ('
+//                + sp_pers.FieldByName('CName_grup').AsString + ')';
+//              fakadem.ShowModal;
+//            end;
+//          8:
+//            begin
+//              editF := TfrmReviewDoc.Create(self);
+//              editF.dtGot.Format := #32;
+//              editF.dtUtv.Format := #32;
+//              if (sp_doc.FieldByName('DateCreate').Value <> Null) then
+//              begin
+//                editF.dtUtv.Format := '';
+//                editF.dtUtv.Date := sp_doc.FieldByName('DateCreate').AsDateTime;
+//                if (sp_doc.FieldByName('DateReady').Value <> Null) then
+//                begin
+//                  editF.dtGot.Format := '';
+//                  editF.dtGot.Date := sp_doc.FieldByName('DateReady')
+//                    .AsDateTime;
+//                end
+//                else
+//                begin
+//                  editF.dtGot.Enabled := true;
+//                  editF.BitBtn1.Enabled := false;
+//                  editF.bbOk.Enabled := false;
+//                end;
+//              end
+//              else
+//              begin
+//                editF.dtUtv.Enabled := true;
+//                editF.BitBtn1.Enabled := false;
+//                editF.bbOk.Enabled := false;
+//              end;
+//
+//              editF.eDest.Text :=
+//                sp_doc.FieldByName('cNameDestination').AsString;
+//              editF.eNum.Text := sp_doc.FieldByName('NumberDoc').AsString;
+//              editF.eInd.Text := sp_doc.FieldByName('Num_podrazd').AsString;
+//              editF.Caption := sp_pers.FieldByName('PersName').AsString + ' (' +
+//                sp_pers.FieldByName('CName_grup').AsString + ')';
+//              editF.ShowModal;
+//            end;
+//
+//        end;
+//      end;
+//    end;
+//  finally
+//    dsDoc.Free;
+//    sp_doc.Free;
+//    sp_pers.Free;
+//  end;
 end;
 
 procedure TfmDoc.dbgehMagazineDocsDrawColumnCell(Sender: TObject;
@@ -353,7 +653,7 @@ procedure TfmDoc.dtpEndCloseUp(Sender: TObject);
 begin
   inherited;
   dtpStart.MaxDate := dtpEnd.Date - 1;
-  dmDocs.adodsDocs.Active := False;
+  dmDocs.adodsDocs.Active := false;
   dmDocs.adodsDocs.CommandText :=
     ('select * from MagazineDocs where (DateCreate>''' +
     DateTimeToStr(dtpStart.Date) + '''and DateCreate <''' +
@@ -361,13 +661,11 @@ begin
   dmDocs.adodsDocs.Active := true;
 end;
 
-
-
 procedure TfmDoc.dtpStartCloseUp(Sender: TObject);
 begin
   inherited;
   dtpEnd.MinDate := dtpStart.Date + 1;
-  dmDocs.adodsDocs.Active := False;
+  dmDocs.adodsDocs.Active := false;
   dmDocs.adodsDocs.CommandText :=
     ('select * from MagazineDocs where (DateCreate>''' +
     DateTimeToStr(dtpStart.Date) + '''and DateCreate <''' +
@@ -407,7 +705,7 @@ begin
     // çäåñü Sender - ïóíêò ìåíþ íà êîòîðûé êëèêíóëè
     begin
       if Checked then
-        self.dbgehMagazineDocs.Columns.Items[Tag].Visible := False
+        self.dbgehMagazineDocs.Columns.Items[Tag].Visible := false
       else
       begin
         self.dbgehMagazineDocs.Columns.Items[Tag].Visible := true;
@@ -436,8 +734,9 @@ begin
         if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
         begin
           if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady')
-            .Value = Null)and (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate')
-            .Value <> Null) then
+            .Value = Null) and
+            (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate').Value <>
+            Null) then
           begin
             dbgehMagazineDocs.DataSource.DataSet.Edit;
             uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateReady']
@@ -489,11 +788,12 @@ begin
               else
                 datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1)
                   .ToString();
-               sp_num.CommandText :=   'select * from MaxNumDocument(''' + datebegin + '''' + ','
-      + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
-      uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_Document')
-        .AsString + ''','''+uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_destination')
-        .AsString+''')';
+              sp_num.CommandText := 'select * from MaxNumDocument(''' +
+                datebegin + '''' + ',' + '''' + DateTimeToStr(Date()) + '''' +
+                ',' + '''' + uDMDocuments.dmDocs.adodsDocs.FieldByName
+                ('Ik_Document').AsString + ''',''' +
+                uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_destination')
+                .AsString + ''')';
               sp_num.Connection := dm.DBConnect;
               sp_num.Open;
               sp_num.First;
@@ -505,7 +805,7 @@ begin
             end;
             dbgehMagazineDocs.DataSource.DataSet.Edit;
             uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateCreate']
-              := date();
+              := Date();
             uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['NumberDoc']
               := LastNum;
             dbgehMagazineDocs.DataSource.DataSet.Post;

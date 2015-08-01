@@ -1,10 +1,13 @@
 inherited frmReviewApplication: TfrmReviewApplication
   Caption = 'frmReviewApplication'
   ClientHeight = 346
+  ClientWidth = 446
+  ExplicitWidth = 452
   ExplicitHeight = 375
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
+    Width = 446
     Height = 306
     ExplicitLeft = 32
     ExplicitWidth = 443
@@ -116,15 +119,23 @@ inherited frmReviewApplication: TfrmReviewApplication
   end
   inherited Panel1: TPanel
     Top = 306
+    Width = 446
     OnClick = Panel1Click
     ExplicitTop = 306
     inherited bbOK: TBitBtn
-      Left = 269
+      Left = 272
       Enabled = False
       ModalResult = 0
       ExplicitLeft = 269
     end
+    inherited bbApply: TBitBtn
+      Left = 23
+    end
+    inherited bbCancel: TBitBtn
+      Left = 358
+    end
     inherited BitBtn1: TBitBtn
+      Left = 125
       Enabled = False
     end
   end
@@ -224,7 +235,7 @@ inherited frmReviewApplication: TfrmReviewApplication
     Font.Style = []
     KeyField = 'ik_AddressType'
     ListField = 'AddressTypeName'
-    ListSource = dmDocs.dsStudAddres
+    ListSource = dmDocs.dsStudAddressProc
     ParentFont = False
     TabOrder = 10
     Visible = True

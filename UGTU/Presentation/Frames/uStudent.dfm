@@ -1055,7 +1055,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 415
+                Height = 413
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1886,6 +1886,7 @@ inherited fmStudent: TfmStudent
                 Left = 69
                 Top = 0
                 ImageIndex = 9
+                OnClick = tbPrintClick
               end
             end
             object bbReset: TBitBtn
@@ -1971,6 +1972,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'NumberDoc'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.KeyField = 'Ik_Document'
                 STFilter.ListSource = dmDocs.dsDocs
                 Title.Caption = #8470
@@ -1981,6 +1983,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'Status'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.ListSource = dmDocs.dsDocs
                 Title.Caption = #1057#1090#1072#1090#1091#1089
                 Width = 172
@@ -1990,6 +1993,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'DatePod'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 Title.Caption = #1044#1072#1090#1072' '#1087#1086#1076#1072#1095#1080
                 Width = 174
               end
@@ -1998,6 +2002,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'DateCreate'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 Title.Caption = #1044#1072#1090#1072' '#1088#1072#1089#1089#1084#1086#1090#1088#1077#1085#1080#1103
                 Width = 162
               end
@@ -2006,6 +2011,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'cNameDestination'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.KeyField = 'ik_direction'
                 STFilter.ListSource = dmDocs.dsDocStud
                 Title.Caption = #1053#1072#1079#1085#1072#1095#1077#1085#1080#1077
@@ -2016,6 +2022,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'DateReady'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 Title.Caption = #1044#1072#1090#1072' '#1075#1086#1090#1086#1074#1085#1086#1089#1090#1080
                 Width = 145
               end
@@ -2024,6 +2031,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'Cname_spec'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.KeyField = 'ik_spec'
                 STFilter.ListSource = dmDocs.dsDocs
                 Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
@@ -2034,6 +2042,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'Cname_fac'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.KeyField = 'Ik_fac'
                 STFilter.ListSource = dmDocs.dsDocs
                 Title.Caption = #1048#1085#1089#1090#1080#1090#1091#1090
@@ -2044,6 +2053,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'DateStartCallSpr'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.Visible = False
                 Title.Caption = #1057#1087#1088'.'#1074#1099#1079#1086#1074' '#1076#1072#1090#1072' '#1085#1072#1095#1072#1083#1072
                 Visible = False
@@ -2053,6 +2063,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'DateEndCallSpr'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.Visible = False
                 Title.Caption = #1057#1087#1088'.'#1074#1099#1079#1086#1074' '#1076#1072#1090#1072' '#1086#1082#1086#1085#1095#1072#1085#1080#1103
                 Visible = False
@@ -2062,6 +2073,7 @@ inherited fmStudent: TfmStudent
                 EditButtons = <>
                 FieldName = 'cNameTransfer'
                 Footers = <>
+                PopupMenu = gridColumnSelectMenu
                 STFilter.KeyField = 'Ik_Transfer'
                 STFilter.ListSource = dmDocs.dsDocs
                 Title.Caption = #1052#1077#1090#1086#1076' '#1087#1077#1088#1077#1076#1072#1095#1080
@@ -2070,20 +2082,64 @@ inherited fmStudent: TfmStudent
               item
                 DynProps = <>
                 EditButtons = <>
-                FieldName = 'cName_type_disc'
+                FieldName = 'addr'
                 Footers = <>
-                STFilter.KeyField = 'ik_type_disc'
-                STFilter.ListSource = dmDocs.dsDocs
-                Title.Caption = #1055#1088#1080#1095#1080#1085#1072' '#1074#1099#1079#1086#1074#1072
+                PopupMenu = gridColumnSelectMenu
+                Title.Caption = #1052#1077#1089#1090#1086' '#1085#1072#1079#1085#1072#1095#1077#1085#1080#1103
                 Visible = False
               end
               item
                 DynProps = <>
                 EditButtons = <>
-                FieldName = 'Num_podrazd'
+                FieldName = 'DateStartCallSpr'
                 Footers = <>
-                STFilter.ListSource = dmDocs.dsDocs
-                Title.Caption = #1053#1086#1084#1077#1088' '#1087#1086#1076#1088#1072#1079#1076#1077#1083#1077#1085#1080#1103
+                PopupMenu = gridColumnSelectMenu
+                Title.Caption = #1053#1072#1095#1072#1083#1086' '#1084#1077#1088#1086#1087#1088#1080#1103#1090#1080#1103
+                Visible = False
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'DateEndCallSpr'
+                Footers = <>
+                PopupMenu = gridColumnSelectMenu
+                Title.Caption = #1054#1082#1086#1085#1095#1072#1085#1080#1077' '#1084#1077#1088#1086#1087#1088#1080#1103#1090#1080#1103
+                Visible = False
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'Kol_day'
+                Footers = <>
+                PopupMenu = gridColumnSelectMenu
+                Title.Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1076#1085#1077#1081
+                Visible = False
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'Cname_pric'
+                Footers = <>
+                PopupMenu = gridColumnSelectMenu
+                Title.Caption = #1055#1088#1080#1095#1080#1085#1072' '#1074#1099#1076#1072#1095#1080' '#1072#1082'.'#1089#1087#1088
+                Visible = False
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'n_sem'
+                Footers = <>
+                PopupMenu = gridColumnSelectMenu
+                Title.Caption = #1057#1077#1084#1077#1089#1090#1088' '#1084#1077#1088#1086#1087#1088#1080#1103#1090#1080#1103
+                Visible = False
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'cName_disc'
+                Footers = <>
+                PopupMenu = gridColumnSelectMenu
+                Title.Caption = #1052#1077#1088#1086#1087#1088#1080#1103#1090#1080#1077
                 Visible = False
               end
               item
@@ -2248,7 +2304,7 @@ inherited fmStudent: TfmStudent
     Left = 434
     Top = 65535
     Bitmap = {
-      494C010106000900740110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060009007C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2619,7 +2675,7 @@ inherited fmStudent: TfmStudent
   end
   object ppmStudNapr: TPopupMenu
     Images = frmMain.ImageList1
-    Left = 352
+    Left = 128
     Top = 224
     object N1: TMenuItem
       Action = frmMain.actNapr
@@ -2632,7 +2688,7 @@ inherited fmStudent: TfmStudent
     Left = 646
     Top = 224
     Bitmap = {
-      494C010111004000D80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000E00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3298,5 +3354,10 @@ inherited fmStudent: TfmStudent
       8003800F000180038003800F000180078007800F0001800F800F801F0001801F
       80FF803F0001803F80FFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object gridColumnSelectMenu: TPopupMenu
+    OnPopup = gridColumnSelectMenuPopup
+    Left = 384
+    Top = 352
   end
 end

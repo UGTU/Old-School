@@ -27,11 +27,9 @@ type
     adodsDocsIk_destination: TIntegerField;
     adodsDocscName_direction: TStringField;
     adodsDocscNameTransfer: TStringField;
-    adodsDocscName_type_disc: TStringField;
     adodsDocsDateStartCallSpr: TWideStringField;
     adodsDocsDateEndCallSpr: TWideStringField;
     adodsDocsIk_Transfer: TIntegerField;
-    adodsDocsik_type_disc: TWordField;
     dsReviewDoc: TDataSource;
     adodsReviewDoc: TADODataSet;
     StringField2: TStringField;
@@ -139,11 +137,9 @@ type
     IntegerField19: TIntegerField;
     StringField20: TStringField;
     StringField21: TStringField;
-    StringField22: TStringField;
     WideStringField3: TWideStringField;
     WideStringField4: TWideStringField;
     IntegerField20: TIntegerField;
-    WordField2: TWordField;
     IntegerField21: TIntegerField;
     DateTimeField4: TDateTimeField;
     StringField23: TStringField;
@@ -154,6 +150,22 @@ type
     dsDest: TDataSource;
     adodsDocsDatePod: TDateTimeField;
     adodsDocStudDatePod: TDateTimeField;
+    adodsDocsKol_day: TIntegerField;
+    spStudAddressProc: TADOStoredProc;
+    dsStudAddressProc: TDataSource;
+    adodsDocscName_disc: TStringField;
+    adodsDocsCstrana: TStringField;
+    adodsDocsaddr: TStringField;
+    adodsDocsCname_pric: TStringField;
+    adodsDocsAddressTypeName: TStringField;
+    adodsDocStudcName_disc: TStringField;
+    adodsDocStudKol_day: TIntegerField;
+    adodsDocStudCstrana: TStringField;
+    adodsDocStudaddr: TStringField;
+    adodsDocStudCname_pric: TStringField;
+    adodsDocStudAddressTypeName: TStringField;
+    adodsDocStudn_sem: TWordField;
+    adodsDocsn_sem: TWordField;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
     procedure adodsDocStudCalcFields(DataSet: TDataSet);
 

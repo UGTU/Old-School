@@ -82,10 +82,6 @@ object dmDocs: TdmDocs
       FieldName = 'cNameTransfer'
       Size = 50
     end
-    object adodsDocscName_type_disc: TStringField
-      FieldName = 'cName_type_disc'
-      Size = 30
-    end
     object adodsDocsDateStartCallSpr: TWideStringField
       FieldName = 'DateStartCallSpr'
       Size = 10
@@ -96,9 +92,6 @@ object dmDocs: TdmDocs
     end
     object adodsDocsIk_Transfer: TIntegerField
       FieldName = 'Ik_Transfer'
-    end
-    object adodsDocsik_type_disc: TWordField
-      FieldName = 'ik_type_disc'
     end
     object adodsDocsNumberDoc: TIntegerField
       FieldName = 'NumberDoc'
@@ -122,6 +115,34 @@ object dmDocs: TdmDocs
     end
     object adodsDocsDatePod: TDateTimeField
       FieldName = 'DatePod'
+    end
+    object adodsDocsKol_day: TIntegerField
+      FieldName = 'Kol_day'
+      ReadOnly = True
+    end
+    object adodsDocscName_disc: TStringField
+      FieldName = 'cName_disc'
+      Size = 500
+    end
+    object adodsDocsCstrana: TStringField
+      FieldName = 'Cstrana'
+      Size = 50
+    end
+    object adodsDocsaddr: TStringField
+      FieldName = 'addr'
+      ReadOnly = True
+      Size = 280
+    end
+    object adodsDocsCname_pric: TStringField
+      FieldName = 'Cname_pric'
+      Size = 50
+    end
+    object adodsDocsAddressTypeName: TStringField
+      FieldName = 'AddressTypeName'
+      Size = 50
+    end
+    object adodsDocsn_sem: TWordField
+      FieldName = 'n_sem'
     end
   end
   object dsReviewDoc: TDataSource
@@ -549,10 +570,6 @@ object dmDocs: TdmDocs
       FieldName = 'cNameTransfer'
       Size = 50
     end
-    object StringField22: TStringField
-      FieldName = 'cName_type_disc'
-      Size = 30
-    end
     object WideStringField3: TWideStringField
       FieldName = 'DateStartCallSpr'
       Size = 10
@@ -563,9 +580,6 @@ object dmDocs: TdmDocs
     end
     object IntegerField20: TIntegerField
       FieldName = 'Ik_Transfer'
-    end
-    object WordField2: TWordField
-      FieldName = 'ik_type_disc'
     end
     object IntegerField21: TIntegerField
       FieldName = 'NumberDoc'
@@ -590,6 +604,34 @@ object dmDocs: TdmDocs
     object adodsDocStudDatePod: TDateTimeField
       FieldName = 'DatePod'
     end
+    object adodsDocStudcName_disc: TStringField
+      FieldName = 'cName_disc'
+      Size = 500
+    end
+    object adodsDocStudKol_day: TIntegerField
+      FieldName = 'Kol_day'
+      ReadOnly = True
+    end
+    object adodsDocStudCstrana: TStringField
+      FieldName = 'Cstrana'
+      Size = 50
+    end
+    object adodsDocStudaddr: TStringField
+      FieldName = 'addr'
+      ReadOnly = True
+      Size = 280
+    end
+    object adodsDocStudCname_pric: TStringField
+      FieldName = 'Cname_pric'
+      Size = 50
+    end
+    object adodsDocStudAddressTypeName: TStringField
+      FieldName = 'AddressTypeName'
+      Size = 50
+    end
+    object adodsDocStudn_sem: TWordField
+      FieldName = 'n_sem'
+    end
   end
   object dsDocStud: TDataSource
     DataSet = adodsDocStud
@@ -607,5 +649,17 @@ object dmDocs: TdmDocs
     DataSet = spDest
     Left = 416
     Top = 232
+  end
+  object spStudAddressProc: TADOStoredProc
+    Connection = dm.DBConnect
+    ProcedureName = 'StudAddressProc;1'
+    Parameters = <>
+    Left = 456
+    Top = 16
+  end
+  object dsStudAddressProc: TDataSource
+    DataSet = spStudAddressProc
+    Left = 448
+    Top = 88
   end
 end

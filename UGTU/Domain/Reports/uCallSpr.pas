@@ -97,9 +97,7 @@ begin
     if day.Length=1 then
       day:='0'+day;
     Replace('#end#', day+'.'+sp_callspr.FieldByName('monthe').AsString+'.'+sp_callspr.FieldByName('yeare').AsString);
-    Replace('#col#',
-      IntToStr(DaysBetween(StrToDate( sp_callspr.FieldByName('DateStartPeriod').AsString),
-       StrToDate(sp_callspr.FieldByName('DateEndPeriod').AsString) + 1)));
+    Replace('#col#', sp_callspr.FieldByName('Kol_day').AsString);
   finally
     sp_pers.Free;
     sp_callspr.Free;
