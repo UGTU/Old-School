@@ -62,7 +62,7 @@ from
 	and Form_ed.Ik_form_ed=Relation_spec_fac.Ik_form_ed
 	and Relation_spec_fac.ik_fac = Fac.Ik_fac and Relation_spec_fac.ik_spec = Spec_stud.ik_spec
 	and Spec_stud.ik_direction = Direction.ik_direction
-	--and ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2) --зачисленные
+	and ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2) --зачисленные
 	and Relation_spec_fac.Ik_form_ed = 1									--очники
 	and TypeKatZach.ik_type_kat in (1,2,12)									--не контракт
 	and Relation_spec_fac.ik_fac = 31										--колледжи
