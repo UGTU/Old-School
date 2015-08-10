@@ -6,28 +6,27 @@ uses
   Classes, dialogs, SysUtils, ExcelXP, Barcode, Contnrs,
   XIntf, CommonIntf, ReportsBase, db, adodb, ExtCtrls,
   udmUspevaemost, ComCtrls, uAverageBalls, SpravkaHistory2014, Spravka2014,
-  DateUtils, uDM, ConstantRepository, uDMDocuments, Excel2010;
+  DateUtils, uDM, ConstantRepository, uDMDocuments, Excel2010, Document,
+  System.Generics.Collections;
 
 type
   DebtSprReport = class(TExcelReportBase)
   private
-    Fik_doc: integer;
+    FListDoc: TObjectList<TDopDoc>;
   protected
     procedure Execute; override;
   public
-    property ik_doc: integer read Fik_doc;
-
-    constructor Create(_ik_doc: integer);
+    property ListDoc: TObjectList<TDopDoc> read FListDoc;
+    constructor Create(_ListDoc: TObjectList<TDopDoc>);
 
   end;
 
 implementation
 
-constructor DebtSprReport.Create(_ik_doc: integer);
+constructor DebtSprReport.Create(_ListDoc: TObjectList<TDopDoc>);
 begin
-  Fik_doc := _ik_doc;
+  FListDoc := _ListDoc;
 end;
-
 procedure DebtSprReport.Execute;
 var
   sp_pers: TADOStoredProc;
@@ -36,15 +35,24 @@ var
   sp_debt: TADOStoredProc;
   AYear, AMonth, ADay: word;
   addr, dir, dir_inst, copystr1, copystr2: string;
-  posit, fdebt, ind, i, ik_inst: integer;
+  posit, fdebt, ind, i, ik_inst,ik_doc: integer;
 begin
   inherited;
+      try
+    if ListDoc.Count > 1 then
+      for i := 0 to ListDoc.Count - 2 do
+      DuplicatePage(1, 1);
+       // ActiveSheet.Copy(0, CurrentWorkbook.Sheets[1], 0);
+    for i := 0 to ListDoc.Count - 1 do
+    begin
+      ActivateWorksheet(i + 1);
+      ik_doc:=ListDoc[i].ik_doc;
   addr := '';
   dsAddr := TADODataSet.Create(nil);
   sp_pers := TADOStoredProc.Create(nil);
   sp_doc := TADOStoredProc.Create(nil);
   sp_debt := TADOStoredProc.Create(nil);
-  try
+
     // заполняем данные студента
     sp_pers.ProcedureName := 'StudInfoSpravBuild;1';
     sp_pers.Connection := dm.DBConnect;
@@ -141,7 +149,8 @@ begin
     Range['A' +(ind+5).ToString(), 'K' + (ind+5).ToString()].RowHeight:=30;
     // Sheets.Rows[ind + 4].RowHeight = 50
     // cells(ind + 4).Height :=1;
-    // Rows.RowHeight := 1;
+
+    end;
   finally
     sp_debt.Free;
     sp_doc.Free;

@@ -20,7 +20,11 @@ uses
   D_VedomostBRSLast, D_BRSAllModules, D_BRSExamVedomost, D_BRSRankReport,
   D_BRSRankAverageReport,
   Vedomost2014, Assemly_Report2014, Spravka, SpravkaReport2014, Spravka2014,
-  uReviewDoc, uCallSpr, uApplicationSpr, uAkademSpr,uDebtSpr,uNotification,uExtractSpr;
+  uReviewDoc, uCallSpr, uApplicationSpr, uAkademSpr, uDebtSpr, uNotification,
+  uExtractSpr, uWaitingController,
+  uReviewCallSpr, uReviewApplication, uDMDocuments, uReviewAkadem,
+  uReviewNotify, Document, Destination,
+  System.Generics.Collections;
 
 type
   PDBGrid = ^TDBGridEh;
@@ -361,7 +365,11 @@ type
       : TReportBase;
     function BuildCallSpr(_ikStudGrup, num_sem, num_doc, ik_doc: Integer;
       datebegin, dateend: TDateTime): TReportBase;
-    function BuildSpr(ik_doc, ik_destination: Integer): TReportBase;
+    function BuildSpr(Dest: TDest): TReportBase;
+    procedure PrintAllDoc(ListDist: TObjectList<TDest>);
+    procedure BuildTemplate(ListDoc: TObjectList<TDest>; num: Integer);
+    function AddListDest(ListDist: TObjectList<TDest>; ik_dest, ik_doc: Integer)
+      : TObjectList<TDest>;
 
   end;
 
@@ -1470,79 +1478,101 @@ end;
 function TUspevGroupController.BuildCallSpr(_ikStudGrup, num_sem, num_doc,
   ik_doc: Integer; datebegin, dateend: TDateTime): TReportBase;
 begin
-//    Result := CallSprReport.Create(_ikStudGrup, num_sem, num_doc, ik_doc,
-//    datebegin, dateend);
-//
-//  Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-//    'reports\SprСhallenge.xlt';
+  // Result := CallSprReport.Create(_ikStudGrup, num_sem, num_doc, ik_doc,
+  // datebegin, dateend);
+  //
+  // Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+  // 'reports\SprСhallenge.xlt';
 end;
 
-function TUspevGroupController.BuildSpr(ik_doc, ik_destination: Integer)
-  : TReportBase;
+function TUspevGroupController.BuildSpr(Dest: TDest): TReportBase;
 var
+  ik_doc, ik_destination, i: Integer;
   report: TSpravka_Report;
-   result_report: TSpravka;
-   FindRange: variant;
+  result_report: TSpravka;
+  FindRange: variant;
+  ListSpr: TObjectList<TSpravka>;
 begin
-  case (ik_destination) of
+ try
+ ListSpr:=TObjectList<TSpravka> .Create;
+  case (Dest.ik_dest) of
     1:
       begin
-         report := TSpravka_Report.Create(ik_destination,ik_doc);
-         result_report := report.AddReport();
-         Result := SpravkaReport.Create(result_report);
+      for  i  := 0 to Dest.ListDoc.Count-1 do
+       begin
+        report := TSpravka_Report.Create(Dest.ik_dest, Dest.ListDoc[i].ik_doc);
+        result_report := report.AddReport();
+        ListSpr.Add(result_report);
+       end;
+         Result := SpravkaReport.Create(ListSpr);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\Sprv.xlt';
       end;
 
     2:
       begin
-         report := TSpravka_Report.Create(ik_destination,ik_doc);
-         result_report := report.AddReport();
-         Result := SpravkaReport.Create(result_report);
+      for  i  := 0 to Dest.ListDoc.Count-1 do
+       begin
+        report := TSpravka_Report.Create(Dest.ik_dest, Dest.ListDoc[i].ik_doc);
+        result_report := report.AddReport();
+        ListSpr.Add(result_report);
+       end;
+         Result := SpravkaReport.Create(ListSpr);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\SprvPens.xlt';
+
       end;
 
     3:
       begin
-          Result := CallSprReport.Create(ik_doc);
+        Result := CallSprReport.Create(Dest.ListDoc);
 
-  Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-    'reports\SprСhallenge.xlt';
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprСhallenge.xlt';
+
       end;
 
     4:
       begin
-        Result := ApplSprReport.Create(ik_doc);
+        Result := ApplSprReport.Create(Dest.ListDoc);
+        // Result.ReportTemplate := 'C:\Users\testspr.xlt';
+
+        // ExtractFilePath(Application.ExeName) +
+        // 'testreport\testspr.xlt' ;
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\SprApplication.xlt';
       end;
     5:
-           begin
-        Result := NotificationSprReport.Create(ik_doc);
+      begin
+        Result := NotificationSprReport.Create(Dest.ListDoc);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\SprNotification.xlt';
       end;
     6:
-     begin
-        Result := DebtSprReport.Create(ik_doc);
+      begin
+        Result := DebtSprReport.Create(Dest.ListDoc);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\SprDebt.xlt';
       end;
 
     7:
       begin
-        Result := AkademSprReport.Create(ik_doc);
+        Result := AkademSprReport.Create(Dest.ListDoc);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\Akadem_spr.xlt';
       end;
     8:
-       begin
-        Result := ExtractSprReport.Create(ik_doc);
+      begin
+        Result := ExtractSprReport.Create(Dest.ListDoc);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\SprExtract.xlt';
       end;
   end;
+ finally
+  // ListSpr.Destroy;
+ end;
+
+  // Result := UnAssigned;
 end;
 
 function TUspevGroupController.BuildSpravka2014(_ikStudGrup, _type_spr,
@@ -1552,22 +1582,183 @@ var
   result_report: TSpravka;
   FindRange: variant;
 begin
-//  report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
-//  result_report := report.AddReport();
-//  Result := SpravkaReport.Create(result_report);
-//
-//  if (_type_spr = 1) then
-//  begin
-//    Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-//      'reports\SprvPens.xlt';
-//  end
-//  else
-//  begin
-//    Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
-//      'reports\Sprv.xlt';
-//  end;
-//
-//  report.Free;
+  // report := TSpravka_Report.Create(_ikStudGrup, _type_spr, num);
+  // result_report := report.AddReport();
+  // Result := SpravkaReport.Create(result_report);
+  //
+  // if (_type_spr = 1) then
+  // begin
+  // Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+  // 'reports\SprvPens.xlt';
+  // end
+  // else
+  // begin
+  // Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+  // 'reports\Sprv.xlt';
+  // end;
+  //
+  // report.Free;
+end;
+
+procedure TUspevGroupController.BuildTemplate(ListDoc: TObjectList<TDest>;
+  // mass: array of Integer;
+  num: Integer);
+var
+  editF: TfrmReviewDoc;
+  // pt: TPoint;
+  idDest: Integer;
+  idDoc: Integer;
+  fcallspr: TfmСhallengeSpr;
+  fapplication: TfrmReviewApplication;
+  fneusp: TfrmReviewNeusp;
+  fakadem: TfrmReviewAkadem;
+  sp_doc: TADOStoredProc;
+  VExcel, DestExcel: variant;
+  ind, i, index: Integer;
+  report: TReportBase;
+begin
+  inherited;
+  sp_doc := TADOStoredProc.Create(nil);
+  ind := 0;
+  index := num;
+  idDoc := 0;
+  try
+    // if index > 0 then
+    // begin
+    // VExcel := CreateOleObject('Excel.Application');
+    // VExcel.WorkBooks.Add;
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.DisplayAlerts := false;
+    // for i := 1 to index do
+    // begin
+    //
+    // sp_doc.ProcedureName := 'DocInfoSpravBuild;1';
+    // sp_doc.Connection := dm.DBConnect;
+    // sp_doc.Parameters.CreateParameter('@Ik_document', ftString, pdInput, 50,
+    // ListDoc[i - 1].ik_doc);
+    // sp_doc.Open;
+    // sp_doc.First;
+    // idDest := sp_doc.FieldByName('ik_destination').AsInteger;
+    // report := TUspevGroupController.Instance.BuildSpr(ListDoc[i - 1].ik_doc,
+    // idDest, i);
+    // TWaitingController.GetInstance.Process(report);
+    // report.Quit;
+    // VExcel.WorkBooks.Open('C:\Users\' + (i).ToString() + '.xls');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1], EmptyParam);
+    // VExcel.WorkBooks[2].Close;
+    // case idDest of
+    // 1:
+    // begin
+    //
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\Sprv.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // 2:
+    // begin
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\SprvPens.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // 3:
+    // begin
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\SprСhallenge.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // 4:
+    // begin
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\SprApplication.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // 5:
+    // begin
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\SprNotification.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // 6:
+    // begin
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\SprDebt.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // 7:
+    // begin
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\Akadem_spr.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // 8:
+    // begin
+    // VExcel.WorkBooks.Open(ExtractFilePath(Application.ExeName) +
+    // 'reports\SprExtract.xlt');
+    // VExcel.WorkSheets[1].Activate;
+    // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
+    // EmptyParam);
+    //
+    // VExcel.WorkBooks[2].Close;
+    // end;
+    // //
+    // // DestExcel.WorkSheets[1].Activate;
+    // // DestExcel.ActiveSheet.Copy(EmptyParam,
+    // // DestExcel.WorkBooks[1].Sheets[1]);
+    // // VExcel.WorkBooks[1].Sheets.Add;
+    //
+    // // DestExcel.Range['A1','K24'].select;
+    // // DestExcel.WorkBooks[1].WorkSheets[1].Cells.Select;
+    // // DestExcel.selection.copy;
+    // // VExcel.activeSheet.paste;
+    // // VExcel.Save('c:\temp.xls');
+    // // VExcel.Quit;
+    //
+    // end;
+
+    // ind := ind + 1;
+    // end;
+    //
+    // if ind <> 0 then
+    // begin
+    // VExcel.Visible := true;
+    // VExcel.WorkBooks[1].SaveAs('C:\Users\testspr.xlt');
+    // VExcel.WorkBooks.Close; // закрываю книги экселя
+    // VExcel.Quit; // закрываю эксель
+    // VExcel := UnAssigned
+    // end;
+    // end;
+  finally
+    sp_doc.Free;
+  end;
 end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nsem, ikVed, ikFac,
@@ -2019,13 +2210,13 @@ procedure IncExcelCell(var CellNumber: string);
 var
   c: char;
 begin
-  c := CellNumber[length(CellNumber)];
+  c := CellNumber[Length(CellNumber)];
   if (c = 'Z') then
-    CellNumber := Copy(CellNumber, 1, length(CellNumber) - 1) + 'AA'
+    CellNumber := Copy(CellNumber, 1, Length(CellNumber) - 1) + 'AA'
   else
   begin
     inc(c);
-    CellNumber := Copy(CellNumber, 1, length(CellNumber) - 1) + c;
+    CellNumber := Copy(CellNumber, 1, Length(CellNumber) - 1) + c;
   end;
 
 end;
@@ -2703,7 +2894,7 @@ var
   strCurPosition: Integer; // текущий номер буквы в строке
 begin
   strCurPosition := StartStrPosition;
-  while (strCurPosition <= length(str)) and
+  while (strCurPosition <= Length(str)) and
     (not(str[strCurPosition] in divider)) do
   begin
     inc(strCurPosition);
@@ -2711,8 +2902,8 @@ begin
 
   Result := Copy(str, StartStrPosition, strCurPosition - 1);
 
-  if (strCurPosition > length(str)) then
-    strCurPosition := length(str);
+  if (strCurPosition > Length(str)) then
+    strCurPosition := Length(str);
 
   Delete(str, StartStrPosition, strCurPosition);
 end;
@@ -2732,8 +2923,8 @@ begin
   begin
     pageName := pageName + GetNextSubStr(discName);
   end;
-  if (length(pageName) > 31) then
-    Delete(pageName, 32, length(pageName));
+  if (Length(pageName) > 31) then
+    Delete(pageName, 32, Length(pageName));
 
   // чтобы минимизировать вероятность совпадения названий почти до 0
   // удалим сгенерированное кол-во букв
@@ -2741,10 +2932,37 @@ begin
   begin
     randomize();
     delCount := random(5);
-    Delete(pageName, length(pageName) - delCount, delCount);
+    Delete(pageName, Length(pageName) - delCount, delCount);
   end;
 
   Result := pageName;
+end;
+
+// добавления листа документов
+function TUspevGroupController.AddListDest(ListDist: TObjectList<TDest>;
+  ik_dest, ik_doc: Integer): TObjectList<TDest>;
+var
+  Dest: TDest;
+  doc: TDopDoc;
+  ind, j: Integer;
+begin
+  ind := -1;
+  if (ik_dest > 0) and (ik_doc > 0) then
+  begin
+    for j := 0 to ListDist.Count - 1 do
+      if ListDist[j].ik_dest = ik_dest then
+        ind := j;
+    if ind < 0 then
+    begin
+      Dest := TDest.Create(ik_dest);
+      ListDist.Add(Dest);
+      ind := ListDist.Count - 1;
+    end;
+    doc := TDopDoc.Create(ik_doc);
+    ListDist[ind].ListDoc.Add(doc);
+  end;
+  Result := ListDist;
+
 end;
 
 // настройка следующего листа (для КП - двух следующих)
@@ -3269,6 +3487,18 @@ begin
   VedList := GetAllVedomosts(ikGrup, nsem);
 
   printVedomost(VedList, ikGrup, nsem, ikFac, ikSpec, false);
+end;
+
+procedure TUspevGroupController.PrintAllDoc(ListDist: TObjectList<TDest>);
+var
+  report: TReportBase;
+  i: Integer;
+begin
+  for i := 0 to ListDist.Count - 1 do
+  begin
+    Report:=TUspevGroupController.Instance.BuildSpr(ListDist[i]);
+    TWaitingController.GetInstance.Process(Report);
+  end;
 end;
 
 // *******************************************************

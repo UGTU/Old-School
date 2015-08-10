@@ -6,18 +6,18 @@ uses
   Classes, dialogs, SysUtils, ExcelXP, Barcode, Contnrs,
   XIntf, CommonIntf, ReportsBase, db, adodb, ExtCtrls,
   udmUspevaemost, ComCtrls, uAverageBalls, SpravkaHistory2014, Spravka2014,
-  DateUtils, uDM, ConstantRepository, uDMDocuments, Math;
+  DateUtils, uDM, ConstantRepository, uDMDocuments, Math, Document,
+  System.Generics.Collections;
 
 type
   ExtractSprReport = class(TExcelReportBase)
   private
-    Fik_doc: integer;
+    FListDoc: TObjectList<TDopDoc>;
   protected
     procedure Execute; override;
   public
-    property ik_doc: integer read Fik_doc;
-
-    constructor Create(_ik_doc: integer);
+    property ListDoc: TObjectList<TDopDoc> read FListDoc;
+    constructor Create(_ListDoc: TObjectList<TDopDoc>);
 
   end;
 
@@ -26,17 +26,16 @@ implementation
 uses System.Variants;
 { AkademSprReport }
 
-constructor ExtractSprReport.Create(_ik_doc: integer);
+constructor ExtractSprReport.Create(_ListDoc: TObjectList<TDopDoc>);
 begin
-  Fik_doc := _ik_doc;
+  FListDoc := _ListDoc;
 end;
-
 procedure ExtractSprReport.Execute;
 var
   spInf, spGos, spUspev, sp_doc, sp_history: TADOStoredProc;
   AYear, AMonth, ADay: word;
   I, k, fusp, ind, kurs, sem, lastkurs, ocenka, kol_ocenca, ik_inst, h,
-    g: integer;
+    g,ik_doc,j: integer;
   podgot, diplom, prakt, week, ZE, let: string;
   m: Extended;
   fl, flg, flpr, flag: boolean;
@@ -45,6 +44,15 @@ var
   ch: Extended;
 begin
   inherited;
+    try
+    if ListDoc.Count > 1 then
+      for i := 0 to ListDoc.Count - 2 do
+      DuplicatePage(1, 1);
+        //ActiveSheet.Copy(0, CurrentWorkbook.Sheets[1], 0);
+    for j := 0 to ListDoc.Count - 1 do
+    begin
+      ActivateWorksheet(j + 1);
+      ik_doc:=ListDoc[j].ik_doc;
   fl := true;
   flg := true;
   flpr := true;
@@ -60,7 +68,7 @@ begin
   kol_ocenca := 0;
   sr_b := 0;
   flag := true;
-  try
+
     // данные студента
     spInf.ProcedureName := 'StudInfoSpravBuild;1';
     spInf.Connection := dm.DBConnect;
@@ -242,6 +250,8 @@ begin
       Range['B' + inttostr(fusp - 1), 'K' + inttostr(fusp - 1)].Delete(xlUp);
     Replace('#fio1#', '');
     Replace('#fio2#', '');
+
+    end;
   finally
     spInf.Free;
     spGos.Free;

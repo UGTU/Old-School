@@ -1086,6 +1086,8 @@
         <DCCReference Include="Domain\Reports\uDebtSpr.pas"/>
         <DCCReference Include="Domain\Reports\uNotification.pas"/>
         <DCCReference Include="Domain\Reports\uExtractSpr.pas"/>
+        <DCCReference Include="Domain\Classes\Document.pas"/>
+        <DCCReference Include="Domain\Classes\Destination.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

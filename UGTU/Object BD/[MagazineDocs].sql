@@ -18,7 +18,8 @@ select doc.DatePod, doc.DateCreate,doc.Ik_Document,doc.NumberDoc,sifd.Ik_studGru
 d.Ik_destination,d.cShortNameDestination[cNameDestination],ik_direction, sifd.cName_direction, tm.cNameTransfer, _callspr.DateStartPeriod[DateStartCallSpr], _callspr .DateEndPeriod[DateEndCallSpr],
 tm.Ik_Transfer, DateReady,Num_podrazd,PersName,discpln.cName_disc,(DATEDIFF(day,_callspr.DateStartPeriod,_callspr.DateEndPeriod)+1) as Kol_day, --vid_zaniat.cName_vid_zanyat --,t_disc.cName_type_disc,t_disc.ik_type_disc
 aav.Cstrana, (aav.Cregion+ ', ã. '+ aav.Cgorod+', '+aav.cshort_type_street+' '+
-			 aav.CStreet+' '+addr.BuildingNumber+'-'+addr.FlatNumber) as addr,Pricina.Cname_pric
+			 aav.CStreet+' '+addr.BuildingNumber+'-'+addr.FlatNumber) as addr,Pricina.Cname_pric,AddressType.AddressTypeName,
+			 n_sem
   from 
 Document doc left join TransferMethod tm  on doc.Ik_Transfer=tm.Ik_Transfer
 left join Destination d on  doc.Ik_destination=d.Ik_destination
@@ -39,6 +40,8 @@ left join PersonAddress paddr on addr_doc.ik_personAddress=paddr.ik_personAddres
 					on doc.Ik_reason_issuing=ReasonIssuing.Ik_reason_issuing
 							left join Pricina
 											on ReasonIssuing.ik_pric=Pricina.Ik_pric
+											left join AddressType
+												on paddr.ik_AddressType=AddressType.ik_AddressType
 --left join Type_disc t_disc on discpln.ik_type_disc=t_disc.ik_type_disc
 
 

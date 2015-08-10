@@ -15,7 +15,8 @@ uses
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
   DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc,
   uReviewCallSpr, uReviewApplication, uDMDocuments, uReviewAkadem,
-  uReviewNotify;
+  uReviewNotify, Document, Destination,
+  System.Generics.Collections;
 
 type
   TfmStudent = class(TfmBase)
@@ -979,38 +980,56 @@ begin
 end;
 
 procedure TfmStudent.tbPrintClick(Sender: TObject);
+const
+  n = 100;
 var
-  editF: TfrmReviewDoc;
-  pt: TPoint;
   dsDoc: TADODataSet;
   idDest: Integer;
-  idDoc: Integer;
-  fcallspr: TfmСhallengeSpr;
-  fapplication: TfrmReviewApplication;
-  fneusp: TfrmReviewNeusp;
-  fakadem: TfrmReviewAkadem;
+  j: Integer;
+
   sp_pers: TADOStoredProc;
   sp_doc: TADOStoredProc;
+  i, ind: Integer;
+  mass_doc: array [1 .. n] of Integer;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
 begin
   inherited;
   sp_doc := TADOStoredProc.Create(nil);
   sp_pers := TADOStoredProc.Create(nil);
   dsDoc := TADODataSet.Create(nil);
-  pt := dbgehMagazineDocsStud.ScreenToClient(Mouse.CursorPos);
+  ListDist := TObjectList<TDest>.Create;
+  i := 0;
+  ind := -1;
+  // pt := dbgehMagazineDocsStud.ScreenToClient(Mouse.CursorPos);
   try
-    if self.dbgehMagazineDocsStud.MouseCoord(pt.X, pt.Y).X <> -1 then
+    // // if self.dbgehMagazineDocsStud.MouseCoord(pt.X, pt.Y).X <> -1 then
+    // // begin
+    with dbgehMagazineDocsStud.DataSource.DataSet do
     begin
-      idDoc := uDMDocuments.dmDocs.adodsDocs.FieldByName('Ik_Document')
-       .AsInteger;
-      idDest := uDMDocuments.dmDocs.adodsDocs.FieldByName('ik_destination')
-        .AsInteger;
-      if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+      First;
+      // DisableControls;
+      while not EOF do
       begin
+        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+          if uDMDocuments.dmDocs.adodsDocStud.FieldByName('DateCreate')
+            .AsString.Length <> 0 then
+          begin
+            i := i + 1;
+            ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+              uDMDocuments.dmDocs.adodsDocStud.FieldByName('ik_destination')
+              .AsInteger, dmDocs.adodsDocStud.FieldByName('Ik_Document')
+              .AsInteger);
 
-
+          end;
+        Next;
       end;
+    end;
 
-   end;
+  //   TUspevGroupController.Instance.BuildTemplate(ListDoc, i);
+    TUspevGroupController.Instance.PrintAllDoc(ListDist);
+
   finally
     dsDoc.Free;
     sp_doc.Free;
@@ -1846,7 +1865,7 @@ begin
   // pm.CloseMenu;
   pm := Sender as TPopupMenu;
   pm.Items.Clear;
-  for i := 0 to self.dbgehMagazineDocsStud.Columns.Count - 3 do
+  for i := 0 to Self.dbgehMagazineDocsStud.Columns.Count - 3 do
   begin
     mi := TMenuItem.Create(pm);
     col := dbgehMagazineDocsStud.Columns.Items[i];
@@ -1897,7 +1916,8 @@ begin
       ' and Ik_studGrup=' + obj.StudGrupKey.ToString());
 
     // фильтрация
-    uDMDocuments.dmDocs.adodsDocStud.Active := true; // подключам базу
+    uDMDocuments.dmDocs.adodsDocStud.Active := true;
+    // подключам базу
     uDMDocuments.dmDocs.adodsDestination.Active := true;
     uDMDocuments.dmDocs.adodsDocStud.Filtered := true; // фильтр
     DBGridEhCenter.FilterEditCloseUpApplyFilter := true;
@@ -2038,7 +2058,9 @@ var
   ik_dest: Integer;
 begin
   inherited;
+
   ik_dest := dmDocs.spDest.FieldByName('ik_destination').AsInteger;
+
   if ik_dest > 0 then
     case (ik_dest) of
       1:
@@ -2545,7 +2567,7 @@ begin
     if (fReview.ModalResult = mrYes) then
     begin
       ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 7);
+     // Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 7, 1);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -2709,7 +2731,7 @@ begin
     end;
     if (fReview.ModalResult = mrYes) then
     begin
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 4);
+    //  Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 4, 1);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -2731,11 +2753,11 @@ begin
     // здесь Sender - пункт меню на который кликнули
     begin
       if Checked then
-        self.dbgehMagazineDocsStud.Columns.Items[Tag].Visible := false
+        Self.dbgehMagazineDocsStud.Columns.Items[Tag].Visible := false
       else
       begin
-        self.dbgehMagazineDocsStud.Columns.Items[Tag].Visible := true;
-        self.dbgehMagazineDocsStud.Columns.Items[Tag].Width := 130;
+        Self.dbgehMagazineDocsStud.Columns.Items[Tag].Visible := true;
+        Self.dbgehMagazineDocsStud.Columns.Items[Tag].Width := 130;
       end;
     end;
 end;
@@ -2756,6 +2778,9 @@ var
   tempDS, tempDSikdoc, dsAppli, tempDSsm, tempDStransf: TADODataSet;
   Report: TReportBase;
   LastNum, ik_doc: Integer;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
   // d3, d2: TDateTime;
   // sp_num: TADODataSet;
   // sp_depInd: TADODataSet;
@@ -2888,7 +2913,10 @@ begin
     if (fReview.ModalResult = mrYes) then
     begin
       ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 7);
+      ListDist := TObjectList<TDest>.Create;
+      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+        ik_destination, ik_doc);
+      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -2920,6 +2948,9 @@ var
   // sp_num: TADODataSet;
   // sp_depInd: TADODataSet;
   dsDoc: TADODataSet;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
 begin
   inherited;
   ik_stud := obj.StudGrupKey;
@@ -3058,7 +3089,11 @@ begin
     end;
     if (fReview.ModalResult = mrYes) then
     begin
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 4);
+      ListDist := TObjectList<TDest>.Create;
+
+      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+        ik_destination, ik_doc);
+      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3090,6 +3125,9 @@ var
   // sp_num: TADODataSet;
   // sp_depInd: TADODataSet;
   dsDoc: TADODataSet;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
 begin
   inherited;
   dsDoc := TADODataSet.Create(nil);
@@ -3282,7 +3320,10 @@ begin
       // Report := TUspevGroupController.Instance.BuildCallSpr(ik_studGrup, sem,
       // LastNum, tempDSikdoc.FieldByName('maxid').AsInteger,
       // fReview.dtpBegin.date, fReview.dtpEnd.date);
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, ik_destination);
+      ListDist := TObjectList<TDest>.Create;
+      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+        ik_destination, ik_doc);
+      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3314,6 +3355,9 @@ var
   k, ik_doc: Integer;
   editF: TfrmReviewDoc;
   dsDoc: TADODataSet;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
 begin
   dsDoc := TADODataSet.Create(nil);;
   tempDS := TGeneralController.Instance.GetNewADODataSet(true);
@@ -3371,7 +3415,10 @@ begin
     ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
     if (editF.ModalResult = mrYes) then // печатаем
     begin
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, ik_destination);
+      ListDist := TObjectList<TDest>.Create;
+      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+        ik_destination, ik_doc);
+      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3396,6 +3443,9 @@ var
   // sp_num: TADODataSet;
   // sp_depInd: TADODataSet;
   dsDoc: TADODataSet;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
 begin
   inherited;
   ik_stud := obj.StudGrupKey;
@@ -3512,7 +3562,11 @@ begin
     end;
     if (fReview.ModalResult = mrYes) then // печатаем
     begin
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, ik_destination);
+      ListDist := TObjectList<TDest>.Create;
+
+      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+        ik_destination, ik_doc);
+      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3638,6 +3692,9 @@ var // E: Variant;
   k: Integer;
   editF: TfrmReviewDoc;
   dsDoc, tempDSikdoc: TADODataSet;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
 begin
   dsDoc := TADODataSet.Create(nil);
   // sp_num := TADODataSet.Create(nil);
@@ -3706,7 +3763,10 @@ begin
     ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
     if (editF.ModalResult = mrYes) then
     begin
-      Report := TUspevGroupController.Instance.BuildSpr(ik_doc, ik_destination);
+      ListDist := TObjectList<TDest>.Create;
+      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+        ik_destination, ik_doc);
+      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
