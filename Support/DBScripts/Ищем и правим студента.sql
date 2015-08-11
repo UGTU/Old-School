@@ -1,7 +1,15 @@
 
 select * from Person where Clastname like 'Лепихов'
 
-select * from ABIT_postup where nCode=68098
+select Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, EducationBranch.Cname_spec
+from Person inner join ABIT_postup on ABIT_postup.nCode = Person.nCode
+inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
+inner join  Relation_spec_fac on Relation_spec_fac.ik_spec_fac = ABIT_Diapazon_spec_fac.ik_spec_fac
+inner join fac on fac.Ik_fac = Relation_spec_fac.ik_fac
+inner join EducationBranch on EducationBranch.ik_spec = Relation_spec_fac.ik_spec
+where Person.nCode=114873
+
+select * from ABIT_postup where nCode=115488
 
 select * from ABIT_Diapazon_spec_fac where NNrecord=750 
 select * from Relation_spec_fac where ik_spec_fac = 274
