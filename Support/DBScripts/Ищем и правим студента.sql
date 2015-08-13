@@ -1,13 +1,13 @@
 
-select * from Person where Clastname like 'Лепихов'
+select * from Person where Clastname like 'Павук'
 
-select Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, EducationBranch.Cname_spec
+select ABIT_postup.NN_abit,Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, EducationBranch.Cname_spec, ABIT_postup.ik_zach, ABIT_Diapazon_spec_fac.ik_spec_fac
 from Person inner join ABIT_postup on ABIT_postup.nCode = Person.nCode
 inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
 inner join  Relation_spec_fac on Relation_spec_fac.ik_spec_fac = ABIT_Diapazon_spec_fac.ik_spec_fac
 inner join fac on fac.Ik_fac = Relation_spec_fac.ik_fac
 inner join EducationBranch on EducationBranch.ik_spec = Relation_spec_fac.ik_spec
-where Person.nCode=114873
+where Person.nCode=114075
 
 select * from ABIT_postup where nCode=115488
 

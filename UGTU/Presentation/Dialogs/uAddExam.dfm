@@ -167,6 +167,7 @@ inherited frmAddExamDialog: TfrmAddExamDialog
     Flat = True
     TabOrder = 3
     Visible = True
+    OnChange = dbcbeDiscChange
   end
   object eMark: TDBNumberEditEh [13]
     Left = 14

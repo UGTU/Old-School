@@ -533,6 +533,7 @@ begin
     frmAddExamDialog.dbcbeDisc.keyvalue := ex.IkDisc;
     frmAddExamDialog.dbcbeVid.keyvalue := ex.IkVidSdachi;
     frmAddExamDialog.eVedNum.Value := ex.NVed;
+    frmAddExamDialog.KatZachIK := dbcbeCategory.KeyValue;
     if ex.Mark > 0 then
       frmAddExamDialog.eMark.Value := ex.Mark;
     frmAddExamDialog.EditMode := true;
