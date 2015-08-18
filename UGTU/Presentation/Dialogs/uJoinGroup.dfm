@@ -255,7 +255,8 @@ inherited frmJoinGroup: TfrmJoinGroup
     Visible = True
   end
   inherited actBaseDialog: TActionList
-    Left = 321
+    Left = 233
+    Top = 65528
     inherited actApply: TAction
       OnExecute = nil
     end

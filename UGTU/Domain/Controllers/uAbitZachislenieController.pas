@@ -12,7 +12,7 @@ interface
 uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM,
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
-  ExcelXP, ComObj, DBGrids, uJoinGroup, ABIT_zachislenie_frame,
+  ExcelXP, ComObj, DBGrids, uJoinGroup, uAbitZach, ABIT_zachislenie_frame,
   DBGridEh, ApplicationController, ExceptionBase;
 
  type
@@ -70,10 +70,10 @@ uses
 //IsAbit_ProhodBall Проверяет, набрал ли абитуриент проходной балл
     function IsAbit_ProhodBall(): boolean;
 //Abit_StateChange меняет состояние зачисления абитуриента
-    function Abit_StateChange(nnAbit, state: integer): boolean;
+    function Abit_StateChange(nnAbit, state, aIKPrik: integer): boolean;
 //Abit_Join зачисляет абитуриента (меняет его состояние на зачисленное,
 //но не зачисляет его в группу)
-   procedure Abit_Join(nnAbit: integer);
+   procedure Abit_Join(nnAbit, aikPrik: integer; aNumPrik: TDate);
 //Abit_Current возвращает абитуриента из списка зачисленных
 //в предварительный список на поступление
    function Abit_Current(nnAbit: integer): boolean;
@@ -129,6 +129,12 @@ uses
    //Abit_JoinGroup зачисляет студента в группу
    //(задает номер зачетки и связь с группой)
    function Abit_JoinGroup(grid: PDBGrid): boolean;
+
+  //Abit_ZachPrikaz зачисляет студента с приказом
+  function Abit_ZachWithPrikaz(grid: PDBGrid): boolean;
+
+  //назначает приказы уже зачисленным абитуриентам
+  function Abit_AppointPrikaz(grid: PDBGrid): boolean;
 
    //Abit_JoinGroup меняет группу и (или) номер зачетки студента в приказе
    function Abit_ChangeGroup(grid: PDBGrid): boolean;
@@ -379,7 +385,7 @@ begin
             FAbitListDataSetInstance.FieldByName('ik_kat_zach').Value)); 
 end;
 
-function TAbitZachislenieController.Abit_StateChange(nnAbit, state: integer): boolean;
+function TAbitZachislenieController.Abit_StateChange(nnAbit, state, aIKPrik: integer): boolean;
 var
   tempStoredProc: TADOStoredProc;
 begin
@@ -390,6 +396,7 @@ begin
     tempStoredProc.Connection:= dm.DBConnect;
     tempStoredProc.Parameters.CreateParameter('@nn_abit', ftInteger, pdInput, 0, nnAbit);
     tempStoredProc.Parameters.CreateParameter('@ik_zach', ftInteger, pdInput, 0, state);
+    tempStoredProc.Parameters.CreateParameter('@ik_prikaz_zach', ftInteger, pdInput, 0, aIKPrik);
     tempStoredProc.ExecProc;
     result:=true;
   finally
@@ -397,18 +404,46 @@ begin
   end;
 end;
 
-procedure TAbitZachislenieController.Abit_Join(nnAbit: integer);
+function TAbitZachislenieController.Abit_ZachWithPrikaz(grid: PDBGrid): boolean;
+var i, ikPrik: integer;
+    DatePrik: TDate;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Зачисление абитуриентов с приказом.');
+    	//создаем диалог и передаем ему год и специальность
+  frmAbitZachDialog:=TfrmAbitZachDialog.create(nil);
+  try
+    frmAbitZachDialog.ShowModal;
+    if frmAbitZachDialog.mrOk then
+	  begin
+      ikPrik := frmAbitZachDialog.dbcbeOrder.KeyValue;
+      DatePrik := frmAbitZachDialog.dPrikaz;
+      for i := 0 to (grid.SelectedRows.Count-1) do
+      begin
+        grid.DataSource.DataSet.GotoBookmark(Pointer(grid.SelectedRows[i]));
+        if TAbitZachislenieController.Instance.IsAbit_CanBeZachisl then
+        begin
+          TAbitZachislenieController.Instance.Abit_Join(grid.DataSource.DataSet.FieldValues['NN_abit'],ikPrik,DatePrik);
+        end;
+      end;
+    end;
+  except
+
+  end;
+end;
+
+procedure TAbitZachislenieController.Abit_Join(nnAbit, aikPrik: integer; aNumPrik: TDate);
 begin
 
    TApplicationController.GetInstance.AddLogEntry('Зачисление абитуриента '+
       FAbitListDataSetInstance.FieldByName('fio').AsString);
 
-   if Abit_StateChange(nnAbit,6) then
+   if Abit_StateChange(nnAbit,6,aikPrik) then
    begin
       FAbitListDataSetInstance.Edit;
       FAbitListDataSetInstance.FieldByName('cname_zach').Value:='зачислен';
       FAbitListDataSetInstance.FieldByName('ik_zach').Value:=6;
       FAbitListDataSetInstance.FieldByName('ik_type_zach').Value:=2;
+      FAbitListDataSetInstance.FieldByName('Dd_prikaz').Value:=aNumPrik;
       FAbitListDataSetInstance.Next;
    end;
 
@@ -420,7 +455,7 @@ begin
       FAbitListDataSetInstance.FieldByName('fio').AsString);
 
 
-   if Abit_StateChange(nnAbit,4) then
+   if Abit_StateChange(nnAbit,4, 0) then
    begin
       FAbitListDataSetInstance.Edit;
       FAbitListDataSetInstance.FieldByName('cname_zach').Value:='в резерве';
@@ -486,7 +521,7 @@ begin
 
   try
     //изменяем состояние зачисления
-    Abit_StateChange(nnAbit,1);
+    Abit_StateChange(nnAbit,1, 0);
     FAbitListDataSetInstance.Edit;
     FAbitListDataSetInstance.FieldByName('cname_zach').Value:='текущее';
     FAbitListDataSetInstance.FieldByName('ik_type_zach').Value:=1;
@@ -511,7 +546,7 @@ begin
       FAbitListDataSetInstance.FieldByName('fio').AsString);
 
 
-   if Abit_StateChange(nnAbit,7) then
+   if Abit_StateChange(nnAbit,7, 0) then
    begin
       FAbitListDataSetInstance.Edit;
       FAbitListDataSetInstance.FieldByName('cname_zach').Value:='не зачислен';
@@ -529,7 +564,7 @@ end;
 
 function TAbitZachislenieController.GetPrikazList(SourceDataSet: PDataSet): Variant;
 begin
-   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,'select Ik_prikaz, RTRIM(Nn_prikaz)+'' от ''+CONVERT(VARCHAR(10),Dd_prikaz,104) as NN_Date from dbo.Prikaz order by Dd_prikaz desc', 'Ik_prikaz', false, NULL)
+   Result:= TGeneralController.Instance.getDataSetValues(SourceDataSet,'select Ik_prikaz, RTRIM(Nn_prikaz)+'' от ''+CONVERT(VARCHAR(10),Dd_prikaz,104) as NN_Date,Dd_prikaz from dbo.Prikaz order by Dd_prikaz desc', 'Ik_prikaz', false, NULL)
 end;
 
 function TAbitZachislenieController.GetGrupList(SourceDataSet: PDataSet; ik_spec_fac, nnyear:integer): Variant;
@@ -613,6 +648,30 @@ begin
     tempStoredProc.Free;
     //result:=-3;
     raise;
+  end;
+end;
+
+function TAbitZachislenieController.Abit_AppointPrikaz(grid: PDBGrid): boolean;
+var i, ikPrik: integer;
+    DatePrik: TDate;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Зачисление абитуриентов с приказом.');
+    	//создаем диалог и передаем ему год и специальность
+  frmAbitZachDialog:=TfrmAbitZachDialog.create(nil);
+  try
+    frmAbitZachDialog.ShowModal;
+    if frmAbitZachDialog.mrOk then
+	  begin
+      ikPrik := frmAbitZachDialog.dbcbeOrder.KeyValue;
+      DatePrik := frmAbitZachDialog.dPrikaz;
+      for i := 0 to (grid.SelectedRows.Count-1) do
+      begin
+        grid.DataSource.DataSet.GotoBookmark(Pointer(grid.SelectedRows[i]));
+        TAbitZachislenieController.Instance.Abit_Join(grid.DataSource.DataSet.FieldValues['NN_abit'],ikPrik,DatePrik);
+      end;
+    end;
+  except
+
   end;
 end;
 

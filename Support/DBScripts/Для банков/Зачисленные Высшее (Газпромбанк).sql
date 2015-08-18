@@ -80,6 +80,7 @@ from
 	and Relation_spec_fac.Ik_form_ed = 1									--очники
 	and TypeKatZach.ik_type_kat in (1,2,12)									--не контракт
 	and Relation_spec_fac.ik_fac <> 31										--не колледжи
+	--and direction.ik_direction	= 3											--магистры
 	and dbo.Student.nCode = ABIT_postup.nCode
 	and NNyear=year(GETDATE())
 ) stud
@@ -120,4 +121,5 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 on stud.nCode = vrem.nCode
 --where (pr.Cstrana is null)and(vrem.Cstrana is null)
 --where Dd_vidan is null
+--where stud.nCode = 113819
 order by  Clastname,Cfirstname,Cotch

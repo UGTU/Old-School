@@ -416,7 +416,8 @@ uses
   SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas',
   uChangePlanFromGrup in 'Presentation\Dialogs\uChangePlanFromGrup.pas' {frmChangeGrupPlan},
   DocumentClass in 'Domain\Classes\DocumentClass.pas',
-  PersonController in 'Domain\Controllers\PersonController.pas';
+  PersonController in 'Domain\Controllers\PersonController.pas',
+  uAbitZach in 'Presentation\Dialogs\uAbitZach.pas' {frmAbitZachDialog};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -464,5 +465,6 @@ begin
   Application.CreateForm(TImageFullSizeShowForm, ImageFullSizeShowForm);
   Application.CreateForm(TfrmChangeGrupPlan, frmChangeGrupPlan);
   Application.CreateForm(TfrmChangeGrupPlan, frmChangeGrupPlan);
+  Application.CreateForm(TfrmAbitZachDialog, frmAbitZachDialog);
   Application.Run;
 end.
