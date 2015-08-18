@@ -13,7 +13,7 @@ inherited fmZach: TfmZach
       Top = 2
       Width = 849
       Height = 550
-      ActivePage = prikazpage
+      ActivePage = spisokAll
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -478,6 +478,13 @@ inherited fmZach: TfmZach
             ParentShowHint = False
             ShowHint = True
           end
+          object ToolButton24: TToolButton
+            Left = 207
+            Top = 0
+            Action = actDelFromGroup
+            ParentShowHint = False
+            ShowHint = True
+          end
         end
         object s_ik: TComboBox
           Left = 485
@@ -636,11 +643,6 @@ inherited fmZach: TfmZach
               FieldName = 'RegNomer'
               Footers = <>
               Visible = False
-            end
-            item
-              DynProps = <>
-              EditButtons = <>
-              Footers = <>
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -872,7 +874,7 @@ inherited fmZach: TfmZach
     Left = 483
     Top = 80
     Bitmap = {
-      494C0101050040005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105004000640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1147,7 +1149,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C0101030004005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828
@@ -1433,6 +1435,12 @@ inherited fmZach: TfmZach
       Hint = #1053#1072#1079#1085#1072#1095#1080#1090#1100' '#1087#1088#1080#1082#1072#1079' '#1076#1083#1103' '#1079#1072#1095#1080#1089#1083#1077#1085#1085#1099#1093
       ImageIndex = 69
       OnExecute = actPrikazAppointExecute
+    end
+    object actDelFromGroup: TAction
+      Category = 'Prikaz'
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072' '#1080#1079' '#1075#1088#1091#1087#1087#1099
+      ImageIndex = 57
+      OnExecute = actDelFromGroupExecute
     end
   end
   object adoqTypeKatZach: TADOQuery

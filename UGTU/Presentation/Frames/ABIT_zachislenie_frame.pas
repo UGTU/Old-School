@@ -114,6 +114,8 @@ type
     ProgressBar1: TProgressBar;
     ToolButton23: TToolButton;
     actPrikazAppoint: TAction;
+    ToolButton24: TToolButton;
+    actDelFromGroup: TAction;
     //загружает списки абитуриентов
     procedure GetSpisokOfAbits();
     procedure prikazTitleClick(Column: TColumnEh);
@@ -164,6 +166,7 @@ type
     procedure ToolButton7Click(Sender: TObject);
     procedure actGiveZachNumberExecute(Sender: TObject);
     procedure actPrikazAppointExecute(Sender: TObject);
+    procedure actDelFromGroupExecute(Sender: TObject);
 
     protected
      procedure DoRefreshFrame();override;
@@ -742,6 +745,7 @@ begin
     tempDS.Open;
     if tempDS.RecordCount > 0 then
       MessageBox(Handle, PChar(IntToStr(tempDS.RecordCount)+ ' абитуриентов не получили номера зачетных книжек. Проверьте диапазоны'),'Не удалось распределить зачетные книжки всем абитуриентам',MB_OK);
+    TAbitZachislenieController.Instance.RefreshAbitList;
   except
 
   end;
@@ -800,6 +804,16 @@ end;
 procedure TfmZach.actCancelZachislUpdate(Sender: TObject);
 begin
    (Sender as TAction).Enabled:= (Prikaz.RowCount>0);
+end;
+
+procedure TfmZach.actDelFromGroupExecute(Sender: TObject);
+begin
+  if (MessageBox(Handle, 'Удалить из группы?','ИС "УГТУ"',
+          MB_YESNO) = IDNO) then exit;
+
+  TApplicationController.GetInstance.AddLogEntry('Удалить абитуриентов из группы.');
+  TAbitZachislenieController.Instance.Abit_DeleteFromGroup(@prikaz);
+  prikaz.DataSource.DataSet.Next;
 end;
 
 //меняем фильтр по категории поступления на
