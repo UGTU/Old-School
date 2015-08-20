@@ -430,7 +430,9 @@ uses
   uNotification in 'Domain\Reports\uNotification.pas',
   uExtractSpr in 'Domain\Reports\uExtractSpr.pas',
   Document in 'Domain\Classes\Document.pas',
-  Destination in 'Domain\Classes\Destination.pas';
+  Destination in 'Domain\Classes\Destination.pas',
+  uSprForGroup in 'Presentation\Forms\uSprForGroup.pas' {fmSprForGroup},
+  uDocController in 'Domain\Controllers\uDocController.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -482,5 +484,6 @@ begin
   Application.CreateForm(TfrmReviewAkadem, frmReviewAkadem);
   Application.CreateForm(TfrmReviewApplication, frmReviewApplication);
   Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
+  Application.CreateForm(TfmSprForGroup, fmSprForGroup);
   Application.Run;
 end.

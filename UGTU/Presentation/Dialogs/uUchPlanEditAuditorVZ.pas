@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, Buttons, ExtCtrls, ActnList, ADODB, DB,
   Mask, DBCtrlsEh, DBGridEh, DBLookupEh, UchPlanController, GeneralController,
-  Grids, GridsEh, ComCtrls, ToolWin, ImgList;
+  Grids, GridsEh, ComCtrls, ToolWin, ImgList, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type
   TfrmEditAuditorVZ = class(TfrmBaseDialog)

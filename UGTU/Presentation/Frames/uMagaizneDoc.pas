@@ -13,7 +13,8 @@ uses
   uReviewDoc,
   Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb, Vcl.ToolWin,
   uReviewCallSpr, uReviewApplication, uReviewAkadem,
-  uReviewNotify;
+  uReviewNotify, Document, Destination, uUspevGroupController,
+  System.Generics.Collections;
 
 type
   TfmDoc = class(TfmBase)
@@ -51,6 +52,7 @@ type
     procedure tbGotClick(Sender: TObject);
     procedure tbResetClick(Sender: TObject);
     procedure bbResetClick(Sender: TObject);
+    procedure tbPrintClick(Sender: TObject);
 
   private
     procedure OnMyMenuItemClick(Sender: TObject);
@@ -749,6 +751,64 @@ begin
     finally
       EnableControls;
     end;
+  end;
+end;
+
+procedure TfmDoc.tbPrintClick(Sender: TObject);
+const
+  n = 100;
+var
+  dsDoc: TADODataSet;
+  idDest: Integer;
+  j: Integer;
+
+  sp_pers: TADOStoredProc;
+  sp_doc: TADOStoredProc;
+  i, ind: Integer;
+  mass_doc: array [1 .. n] of Integer;
+  ListDist: TObjectList<TDest>;
+  dest: TDest;
+  doc: TDopDoc;
+begin
+  inherited;
+  sp_doc := TADOStoredProc.Create(nil);
+  sp_pers := TADOStoredProc.Create(nil);
+  dsDoc := TADODataSet.Create(nil);
+  ListDist := TObjectList<TDest>.Create;
+  i := 0;
+  ind := -1;
+  // pt := dbgehMagazineDocsStud.ScreenToClient(Mouse.CursorPos);
+  try
+    // // if self.dbgehMagazineDocsStud.MouseCoord(pt.X, pt.Y).X <> -1 then
+    // // begin
+    with dbgehMagazineDocs.DataSource.DataSet do
+    begin
+      First;
+      // DisableControls;
+      while not EOF do
+      begin
+        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+          if uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate')
+            .AsString.Length <> 0 then
+          begin
+            i := i + 1;
+            ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+              uDMDocuments.dmDocs.adodsDocs.FieldByName('ik_destination')
+              .AsInteger, dmDocs.adodsDocs.FieldByName('Ik_Document')
+              .AsInteger);
+
+          end;
+        Next;
+      end;
+    end;
+
+  //   TUspevGroupController.Instance.BuildTemplate(ListDoc, i);
+    TUspevGroupController.Instance.PrintAllDoc(ListDist);
+
+  finally
+    dsDoc.Free;
+    sp_doc.Free;
+    sp_pers.Free;
   end;
 end;
 

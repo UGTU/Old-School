@@ -1,7 +1,7 @@
 object dmDocs: TdmDocs
   OldCreateOrder = False
-  Height = 307
-  Width = 571
+  Height = 304
+  Width = 803
   object dsDocs: TDataSource
     DataSet = adodsDocs
     Left = 15
@@ -470,7 +470,7 @@ object dmDocs: TdmDocs
     OnCalcFields = adodsDocsCalcFields
     CommandText = 'select * from  Destination'
     Parameters = <>
-    Left = 332
+    Left = 340
     Top = 235
     object adodsDestinationIk_destination: TAutoIncField
       FieldName = 'Ik_destination'
@@ -661,5 +661,157 @@ object dmDocs: TdmDocs
     DataSet = spStudAddressProc
     Left = 448
     Top = 88
+  end
+  object dsAddr: TDataSource
+    DataSet = spAddr
+    Left = 503
+    Top = 170
+  end
+  object spAddr: TADOStoredProc
+    ProcedureName = 'AllAddrStudInGroup;1'
+    Parameters = <>
+    Left = 496
+    Top = 240
+  end
+  object dsStudGrup: TDataSource
+    DataSet = adodsStudGrup
+    Left = 567
+    Top = 170
+  end
+  object adodsStudGrup: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltBatchOptimistic
+    OnCalcFields = spAddrCalcFields
+    CommandText = 'select * from  ViewGroupStud'
+    Parameters = <>
+    Left = 588
+    Top = 235
+    object adodsStudGrupStudAddr: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'StudAddr'
+      Size = 1000
+      Calculated = True
+    end
+    object adodsStudGrupPersonFullName: TStringField
+      FieldName = 'PersonFullName'
+      ReadOnly = True
+      Size = 92
+    end
+    object adodsStudGrupPersonSmallName: TStringField
+      FieldName = 'PersonSmallName'
+      ReadOnly = True
+      Size = 34
+    end
+    object adodsStudGrupnCode: TBCDField
+      FieldName = 'nCode'
+      Precision = 18
+      Size = 0
+    end
+    object adodsStudGrupik_zach: TIntegerField
+      FieldName = 'ik_zach'
+    end
+    object adodsStudGrupik_kat_zach: TIntegerField
+      FieldName = 'ik_kat_zach'
+    end
+    object adodsStudGrupIk_studGrup: TIntegerField
+      FieldName = 'Ik_studGrup'
+    end
+    object adodsStudGrupIk_grup: TIntegerField
+      FieldName = 'Ik_grup'
+    end
+    object adodsStudGrupik_persAddr: TIntegerField
+      FieldName = 'ik_persAddr'
+      ReadOnly = True
+    end
+    object adodsStudGrupAddrType: TStringField
+      FieldKind = fkLookup
+      FieldName = 'AddressTypeName'
+      LookupDataSet = adodsTypeAddr
+      LookupKeyFields = 'ik_AddressType'
+      LookupResultField = 'AddressTypeName'
+      KeyFields = 'ik_AddressType'
+      Size = 100
+      Lookup = True
+    end
+    object adodsStudGrupik_AddressType: TIntegerField
+      FieldName = 'ik_AddressType'
+    end
+  end
+  object dsTypeAddr: TDataSource
+    DataSet = adodsTypeAddr
+    Left = 655
+    Top = 170
+  end
+  object adodsTypeAddr: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Filtered = True
+    LockType = ltBatchOptimistic
+    CommandText = 'select *  from AddressType'
+    Parameters = <>
+    Left = 684
+    Top = 235
+    object adodsTypeAddrik_AddressType: TAutoIncField
+      FieldName = 'ik_AddressType'
+      ReadOnly = True
+    end
+    object adodsTypeAddrAddressTypeName: TStringField
+      FieldName = 'AddressTypeName'
+      Size = 50
+    end
+    object adodsTypeAddrIsFirst: TBooleanField
+      FieldName = 'IsFirst'
+    end
+  end
+  object adodsBaseDest: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    CommandText = 'select * from BaseDest'
+    Parameters = <>
+    Left = 592
+    Top = 8
+    object adodsBaseDestcNameDestination: TStringField
+      FieldName = 'cNameDestination'
+      Visible = False
+      Size = 50
+    end
+    object adodsBaseDestosn: TStringField
+      FieldName = 'osn'
+      Visible = False
+      Size = 50
+    end
+    object adodsBaseDestIk_destination: TIntegerField
+      FieldName = 'Ik_destination'
+      Visible = False
+    end
+    object adodsBaseDestik_osn: TIntegerField
+      FieldName = 'ik_osn'
+      Visible = False
+    end
+    object adodsBaseDestDest: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Dest'
+      LookupDataSet = adodsDestination
+      LookupKeyFields = 'Ik_destination'
+      LookupResultField = 'cNameDestination'
+      KeyFields = 'Ik_destination'
+      Lookup = True
+    end
+    object adodsBaseDestOsnov: TStringField
+      FieldKind = fkLookup
+      FieldName = 'Osnov'
+      LookupDataSet = adodsDestination
+      LookupKeyFields = 'Ik_destination'
+      LookupResultField = 'cNameDestination'
+      KeyFields = 'ik_osn'
+      Lookup = True
+    end
+  end
+  object dsBaseDest: TDataSource
+    DataSet = adodsBaseDest
+    Left = 584
+    Top = 72
   end
 end

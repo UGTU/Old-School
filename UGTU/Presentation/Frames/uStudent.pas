@@ -16,7 +16,7 @@ uses
   DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc,
   uReviewCallSpr, uReviewApplication, uDMDocuments, uReviewAkadem,
   uReviewNotify, Document, Destination,
-  System.Generics.Collections;
+  System.Generics.Collections, uDocController;
 
 type
   TfmStudent = class(TfmBase)
@@ -295,20 +295,21 @@ type
     // procedure FormSpr(ik_studGrup, ik_destination: Integer);
     procedure FormSpr(ik_studGrup, ik_destination: Integer);
     procedure FormCallSpr(ik_studGrup, ik_destination: Integer);
+
     procedure FormApplicationSpr(ik_studGrup, ik_destination: Integer);
     procedure FormAcademSpr(ik_studGrup, ik_destination: Integer);
     procedure FormNeuspSpr(ik_studGrup, ik_destination: Integer);
     procedure FormExtract(ik_studGrup, ik_destination: Integer);
 
-    function CalculationLastNum(ik_studGrup: Integer; ik_dest: Integer)
-      : Integer;
-    function CalculationDepIndex(ik_studGrup: Integer): string;
-    function CalculationBeginYearLern(): string;
+    // function CalculationLastNum(ik_studGrup: Integer; ik_dest: Integer)
+    // : Integer;
+    // function CalculationDepIndex(ik_studGrup: Integer): string;
+    // function CalculationBeginYearLern(): string;
   end;
 
 var
   fmStudent: TfmStudent;
-  ik_stud: Integer;
+  ik_stud, ik_grup: Integer;
 
 implementation
 
@@ -1027,7 +1028,7 @@ begin
       end;
     end;
 
-  //   TUspevGroupController.Instance.BuildTemplate(ListDoc, i);
+    // TUspevGroupController.Instance.BuildTemplate(ListDoc, i);
     TUspevGroupController.Instance.PrintAllDoc(ListDist);
 
   finally
@@ -1968,78 +1969,78 @@ begin
   // Report.BuildReport;
 end;
 
-function TfmStudent.CalculationBeginYearLern: string;
-var
-  datebegin: string;
-  AYear, AMonth, ADay: word;
-begin
-  DecodeDate(Now, AYear, AMonth, ADay);
-  if date() > StrToDateTime('01.09.' + AYear.ToString()) then
-    datebegin := '01.09.' + AYear.ToString()
-  else
-    datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
-  result := datebegin;
-end;
-
-function TfmStudent.CalculationDepIndex(ik_studGrup: Integer): string;
-var
-  sp_depInd: TADODataSet;
-
-begin
-  inherited;
-  sp_depInd := TADODataSet.Create(nil);
-
-  try
-    // берем индекс подразделения
-    sp_depInd.CommandText := 'select * from DepIndDoc(' +
-      ik_studGrup.ToString() + ')';
-    sp_depInd.Connection := dm.DBConnect;
-    sp_depInd.Open;
-    result := sp_depInd.FieldByName('Dep_Index').AsString;
-  finally
-    sp_depInd.Free;
-  end;
-
-end;
-
-function TfmStudent.CalculationLastNum(ik_studGrup: Integer;
-  ik_dest: Integer): Integer;
-var
-  AYear, AMonth, ADay: word;
-  dateb: string;
-  sp_info: TADOStoredProc;
-  sp_num: TADODataSet;
-  // sp_depInd: TADODataSet;
-
-begin
-  inherited;
-  sp_num := TADODataSet.Create(nil);
-  // sp_depInd := TADODataSet.Create(nil);
-  try
-    // берем индекс подразделения
-
-    // sp_depInd.CommandText := 'select * from DepIndDoc(' +
-    // obj.StudGrupKey.ToString() + ')';
-    // sp_depInd.Connection := dm.DBConnect;
-    // sp_depInd.Open;
-    // находим номер
-    DecodeDate(Now, AYear, AMonth, ADay);
-    if date() > StrToDateTime('01.09.' + AYear.ToString()) then
-      dateb := '01.09.' + AYear.ToString()
-    else
-      dateb := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
-    sp_num.CommandText := 'select * from MaxNumDocument(''' + dateb + '''' + ','
-      + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
-      CalculationDepIndex(ik_studGrup) + ''',' + ik_dest.ToString() + ')';
-    sp_num.Connection := dm.DBConnect;
-    sp_num.Open;
-    sp_num.First;
-    result := sp_num.FieldByName('MaxNum').AsInteger + 1;
-  finally
-    // sp_depInd.Free;
-    sp_num.Free;
-  end;
-end;
+// function TfmStudent.CalculationBeginYearLern: string;
+// var
+// datebegin: string;
+// AYear, AMonth, ADay: word;
+// begin
+// DecodeDate(Now, AYear, AMonth, ADay);
+// if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+// datebegin := '01.09.' + AYear.ToString()
+// else
+// datebegin := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
+// result := datebegin;
+// end;
+//
+// function TfmStudent.CalculationDepIndex(ik_studGrup: Integer): string;
+// var
+// sp_depInd: TADODataSet;
+//
+// begin
+// inherited;
+// sp_depInd := TADODataSet.Create(nil);
+//
+// try
+// // берем индекс подразделения
+// sp_depInd.CommandText := 'select * from DepIndDoc(' +
+// ik_studGrup.ToString() + ')';
+// sp_depInd.Connection := dm.DBConnect;
+// sp_depInd.Open;
+// result := sp_depInd.FieldByName('Dep_Index').AsString;
+// finally
+// sp_depInd.Free;
+// end;
+//
+// end;
+//
+// function TfmStudent.CalculationLastNum(ik_studGrup: Integer;
+// ik_dest: Integer): Integer;
+// var
+// AYear, AMonth, ADay: word;
+// dateb: string;
+// sp_info: TADOStoredProc;
+// sp_num: TADODataSet;
+// // sp_depInd: TADODataSet;
+//
+// begin
+// inherited;
+// sp_num := TADODataSet.Create(nil);
+// // sp_depInd := TADODataSet.Create(nil);
+// try
+// // берем индекс подразделения
+//
+// // sp_depInd.CommandText := 'select * from DepIndDoc(' +
+// // obj.StudGrupKey.ToString() + ')';
+// // sp_depInd.Connection := dm.DBConnect;
+// // sp_depInd.Open;
+// // находим номер
+// DecodeDate(Now, AYear, AMonth, ADay);
+// if date() > StrToDateTime('01.09.' + AYear.ToString()) then
+// dateb := '01.09.' + AYear.ToString()
+// else
+// dateb := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
+// sp_num.CommandText := 'select * from MaxNumDocument(''' + dateb + '''' + ','
+// + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
+// CalculationDepIndex(ik_studGrup) + ''',' + ik_dest.ToString() + ')';
+// sp_num.Connection := dm.DBConnect;
+// sp_num.Open;
+// sp_num.First;
+// result := sp_num.FieldByName('MaxNum').AsInteger + 1;
+// finally
+// // sp_depInd.Free;
+// sp_num.Free;
+// end;
+// end;
 
 procedure TfmStudent.eAddInfoEnter(Sender: TObject);
 begin
@@ -2289,7 +2290,7 @@ begin
           k := 31;
 
         sp_vidz := TADODataSet.Create(nil);
-        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_studGrup='
+        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup='
           + uStudent.ik_stud.ToString() + 'and n_sem=' + sem.ToString() +
           ' and iK_vid_zanyat=' + k.ToString();
         // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
@@ -2567,7 +2568,7 @@ begin
     if (fReview.ModalResult = mrYes) then
     begin
       ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
-     // Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 7, 1);
+      // Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 7, 1);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -2731,7 +2732,7 @@ begin
     end;
     if (fReview.ModalResult = mrYes) then
     begin
-    //  Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 4, 1);
+      // Report := TUspevGroupController.Instance.BuildSpr(ik_doc, 4, 1);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -2822,9 +2823,7 @@ begin
     // LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
     //
     // ---------------------
-    dateb := CalculationBeginYearLern();
-    depInd := CalculationDepIndex(ik_studGrup);
-    LastNum := CalculationLastNum(ik_studGrup, 7);
+
     fReview := TfrmReviewAkadem.Create(Self);
     fReview.dtUtv.Format := '';
     fReview.dtUtv.date := date;
@@ -2835,6 +2834,11 @@ begin
     dsDoc.Connection := dm.DBConnect;
     dsDoc.Open;
     dsDoc.First;
+    dateb := TDocController.Instance.CalculationBeginYearLern();
+    depInd := TDocController.Instance.CalculationDepIndex
+      (dsDoc.FieldByName('Ik_grup').AsInteger);
+    LastNum := TDocController.Instance.CalculationLastNum
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
     fReview.eDest.Text := 'Академическая справка';
     fReview.eInd.Text := depInd;
     fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -2985,9 +2989,7 @@ begin
     // sp_num.First;
     // LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
     DecodeDate(Now, AYear, AMonth, ADay);
-    dateb := CalculationBeginYearLern();
-    depInd := CalculationDepIndex(ik_studGrup);
-    LastNum := CalculationLastNum(ik_studGrup, 4);
+
     fReview := TfrmReviewApplication.Create(Self);
     // ---------------------
 
@@ -3000,6 +3002,11 @@ begin
     dsDoc.Connection := dm.DBConnect;
     dsDoc.Open;
     dsDoc.First;
+    dateb := TDocController.Instance.CalculationBeginYearLern();
+    depInd := TDocController.Instance.CalculationDepIndex
+      (dsDoc.FieldByName('Ik_grup').AsInteger);
+    LastNum := TDocController.Instance.CalculationLastNum
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
     fReview.eDest.Text := 'Заявление на академическую справку';
     fReview.eInd.Text := depInd;
     fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -3116,7 +3123,7 @@ var
   week1, week2, numweek, k, h, i, sem, year, ik_doc: Integer;
   mask1, mask2, dateb, l, depInd: string;
   sp_vidz: TADODataSet;
-  sp_info: TADOStoredProc;
+  sp_info, sp_sem: TADOStoredProc;
 
   tempDS, tempDSchall, tempDSikdoc, tempDSsm: TADODataSet;
   Report: TReportBase;
@@ -3128,16 +3135,17 @@ var
   ListDist: TObjectList<TDest>;
   dest: TDest;
   doc: TDopDoc;
+
 begin
   inherited;
-  dsDoc := TADODataSet.Create(nil);
-  // sp_num := TADODataSet.Create(nil);
-  // sp_depInd := TADODataSet.Create(nil);
-  tempDS := TGeneralController.Instance.GetNewADODataSet(true);
-  tempDSchall := TGeneralController.Instance.GetNewADODataSet(true);
-  tempDSikdoc := TADODataSet.Create(nil);
-  tempDSsm := TGeneralController.Instance.GetNewADODataSet(true);
   try
+    dsDoc := TADODataSet.Create(nil);
+    // sp_num := TADODataSet.Create(nil);
+    // sp_depInd := TADODataSet.Create(nil);
+    tempDS := TGeneralController.Instance.GetNewADODataSet(true);
+    tempDSchall := TGeneralController.Instance.GetNewADODataSet(true);
+    tempDSikdoc := TADODataSet.Create(nil);
+    tempDSsm := TGeneralController.Instance.GetNewADODataSet(true);
     // общая часть формы
     // -------------------------------------------
 
@@ -3161,9 +3169,8 @@ begin
     // sp_num.Open;
     // sp_num.First;
     // LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
-    dateb := CalculationBeginYearLern();
-    depInd := CalculationDepIndex(ik_studGrup);
-    LastNum := CalculationLastNum(ik_studGrup, 3);
+    TDocController.Create;
+
     ik_stud := obj.StudGrupKey;
     // --------------------------------------------------------------------------
     DecodeDate(Now, AYear, AMonth, ADay);
@@ -3174,12 +3181,21 @@ begin
       ik_studGrup.ToString());
     sp_info.Open;
     sp_info.First;
-    year := sp_info.FieldByName('nYear_post').AsInteger +
-      sp_info.FieldByName('kurs').AsInteger;
-    if year > AYear then
-      sem := sp_info.FieldByName('kurs').AsInteger * 2 - 1
-    else
-      sem := sp_info.FieldByName('kurs').AsInteger * 2;
+    dateb := TDocController.Instance.CalculationBeginYearLern();
+    ik_grup := sp_info.FieldByName('Ik_grup').AsInteger;
+    depInd := TDocController.Instance.CalculationDepIndex
+      (ik_grup);
+    LastNum := TDocController.Instance.CalculationLastNum
+      (ik_grup, ik_destination);
+
+    sp_sem := TADOStoredProc.Create(nil);
+    sp_sem.ProcedureName := 'InfForGrup;1';
+    sp_sem.Connection := dm.DBConnect;
+  sp_sem.Parameters.CreateParameter('@Ik_grup', ftString, pdInput, 50,
+    ik_grup.ToString());
+    sp_sem.Open;
+    sp_sem.First;
+    sem := sp_sem.FieldByName('dop_sem').AsInteger;
     fReview := TfmСhallengeSpr.Create(Self);
     // ---------------------
     fReview.dtUtv.Format := '';
@@ -3250,8 +3266,8 @@ begin
           k := 31;
 
         sp_vidz := TADODataSet.Create(nil);
-        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_studGrup='
-          + ik_studGrup.ToString() + 'and n_sem=' + sem.ToString() +
+        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup='
+          + ik_grup.ToString() + 'and n_sem=' + sem.ToString() +
           ' and iK_vid_zanyat=' + k.ToString();
         // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
         sp_vidz.Connection := dm.DBConnect;
@@ -3334,7 +3350,7 @@ begin
     tempDS.Free;
     tempDSchall.Free;
     tempDSikdoc.Free;
-    // sp_num.Free;
+    sp_sem.Free;
     // sp_depInd.Free;
     dsDoc.Free;
     Report.Free;
@@ -3364,9 +3380,7 @@ begin
   tempDSikdoc := TADODataSet.Create(nil);
   try
     DecodeDate(Now, AYear, AMonth, ADay);
-    datebegin := CalculationBeginYearLern();
-    depInd := CalculationDepIndex(ik_studGrup);
-    LastNum := CalculationLastNum(ik_studGrup, ik_destination);
+
     editF := TfrmReviewDoc.Create(Self);
     editF.dtUtv.Format := '';
     editF.dtUtv.date := date;
@@ -3377,6 +3391,11 @@ begin
     dsDoc.Connection := dm.DBConnect;
     dsDoc.Open;
     dsDoc.First;
+    datebegin := TDocController.Instance.CalculationBeginYearLern();
+    depInd := TDocController.Instance.CalculationDepIndex
+      (dsDoc.FieldByName('Ik_grup').AsInteger);
+    LastNum := TDocController.Instance.CalculationLastNum
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
     editF.eDest.Text := 'Выписка из зачетной ведомости';
     editF.eInd.Text := depInd;
     editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -3482,9 +3501,7 @@ begin
     // sp_num.First;
     // LastNum := sp_num.FieldByName('MaxNum').AsInteger + 1;
     DecodeDate(Now, AYear, AMonth, ADay);
-    dateb := CalculationBeginYearLern();
-    depInd := CalculationDepIndex(ik_studGrup);
-    LastNum := CalculationLastNum(ik_studGrup, ik_destination);
+
     fReview := TfrmReviewNeusp.Create(Self);
     // ---------------------
 
@@ -3497,6 +3514,11 @@ begin
     dsDoc.Connection := dm.DBConnect;
     dsDoc.Open;
     dsDoc.First;
+    dateb := TDocController.Instance.CalculationBeginYearLern();
+    depInd := TDocController.Instance.CalculationDepIndex
+      (dsDoc.FieldByName('Ik_grup').AsInteger);
+    LastNum := TDocController.Instance.CalculationLastNum
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
     fReview.eDest.Text := 'Письмо об академической неуспеваемости';
     fReview.eInd.Text := depInd;
     fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -3704,9 +3726,6 @@ begin
   try
 
     DecodeDate(Now, AYear, AMonth, ADay);
-    datebegin := CalculationBeginYearLern();
-    depInd := CalculationDepIndex(ik_studGrup);
-    LastNum := CalculationLastNum(ik_studGrup, ik_destination);
 
     editF := TfrmReviewDoc.Create(Self);
     editF.dtUtv.Format := '';
@@ -3718,6 +3737,11 @@ begin
     dsDoc.Connection := dm.DBConnect;
     dsDoc.Open;
     dsDoc.First;
+    datebegin := TDocController.Instance.CalculationBeginYearLern();
+    depInd := TDocController.Instance.CalculationDepIndex
+      (dsDoc.FieldByName('Ik_grup').AsInteger);
+    LastNum := TDocController.Instance.CalculationLastNum
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
     case ik_destination of
       1:
         editF.eDest.Text := 'По месту требования';

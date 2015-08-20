@@ -3,7 +3,7 @@ unit uDMDocuments;
 interface
 
 uses
- uDM, System.SysUtils, System.Classes, DB, ADODB;
+  uDM, System.SysUtils, System.Classes, DB, ADODB,  Vcl.Dialogs;
 
 type
   TdmDocs = class(TDataModule)
@@ -166,8 +166,37 @@ type
     adodsDocStudAddressTypeName: TStringField;
     adodsDocStudn_sem: TWordField;
     adodsDocsn_sem: TWordField;
+    dsAddr: TDataSource;
+    spAddr: TADOStoredProc;
+    dsStudGrup: TDataSource;
+    adodsStudGrup: TADODataSet;
+    adodsStudGrupStudAddr: TStringField;
+    adodsStudGrupPersonFullName: TStringField;
+    adodsStudGrupPersonSmallName: TStringField;
+    adodsStudGrupnCode: TBCDField;
+    adodsStudGrupik_zach: TIntegerField;
+    adodsStudGrupik_kat_zach: TIntegerField;
+    adodsStudGrupIk_studGrup: TIntegerField;
+    adodsStudGrupIk_grup: TIntegerField;
+    dsTypeAddr: TDataSource;
+    adodsTypeAddr: TADODataSet;
+    adodsTypeAddrik_AddressType: TAutoIncField;
+    adodsTypeAddrAddressTypeName: TStringField;
+    adodsTypeAddrIsFirst: TBooleanField;
+    adodsStudGrupik_persAddr: TIntegerField;
+    adodsStudGrupAddrType: TStringField;
+    adodsStudGrupik_AddressType: TIntegerField;
+    adodsBaseDest: TADODataSet;
+    dsBaseDest: TDataSource;
+    adodsBaseDestcNameDestination: TStringField;
+    adodsBaseDestosn: TStringField;
+    adodsBaseDestIk_destination: TIntegerField;
+    adodsBaseDestik_osn: TIntegerField;
+    adodsBaseDestDest: TStringField;
+    adodsBaseDestOsnov: TStringField;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
     procedure adodsDocStudCalcFields(DataSet: TDataSet);
+    procedure spAddrCalcFields(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -180,37 +209,62 @@ var
 
 implementation
 
-{%CLASSGROUP 'Vcl.Controls.TControl'}
+{ %CLASSGROUP 'Vcl.Controls.TControl' }
 
 {$R *.dfm}
 
 procedure TdmDocs.adodsDocsCalcFields(DataSet: TDataSet);
 begin
-if (DataSet.FieldByName('DateCreate').AsString='') then
- DataSet.FieldByName('Status').AsString:='Заявка'
- else
- begin
- if (DataSet.FieldByName('DateReady').AsString='') then
-    DataSet.FieldByName('Status').AsString:='На рассмотрении'
+  if (DataSet.FieldByName('DateCreate').AsString = '') then
+    DataSet.FieldByName('Status').AsString := 'Заявка'
+  else
+  begin
+    if (DataSet.FieldByName('DateReady').AsString = '') then
+      DataSet.FieldByName('Status').AsString := 'На рассмотрении'
     else
-    DataSet.FieldByName('Status').AsString:='Готово'
- end;
+      DataSet.FieldByName('Status').AsString := 'Готово'
+  end;
 
 end;
 
-
-
 procedure TdmDocs.adodsDocStudCalcFields(DataSet: TDataSet);
 begin
-if (DataSet.FieldByName('DateCreate').AsString='') then
- DataSet.FieldByName('Status').AsString:='Заявка'
- else
- begin
- if (DataSet.FieldByName('DateReady').AsString='') then
-    DataSet.FieldByName('Status').AsString:='На рассмотрении'
+  if (DataSet.FieldByName('DateCreate').AsString = '') then
+    DataSet.FieldByName('Status').AsString := 'Заявка'
+  else
+  begin
+    if (DataSet.FieldByName('DateReady').AsString = '') then
+      DataSet.FieldByName('Status').AsString := 'На рассмотрении'
     else
-    DataSet.FieldByName('Status').AsString:='Готово'
- end;
+      DataSet.FieldByName('Status').AsString := 'Готово'
+  end;
+end;
+
+procedure TdmDocs.spAddrCalcFields(DataSet: TDataSet);
+var
+  sp_info: TADOStoredProc;
+  I:INTEGER;
+begin
+try
+//i:=DataSet.FieldByName('ik_personAddress').AsString;
+  if (DataSet.FieldByName('ik_persAddr').AsString.Length > 0) then
+  begin
+    sp_info := TADOStoredProc.Create(nil);
+    sp_info.ProcedureName := 'AllAddrStudInGroup;1';
+    sp_info.Connection := dm.DBConnect;
+    sp_info.Parameters.CreateParameter('@ik_grup', ftString, pdInput, 50,
+      DataSet.FieldByName('ik_grup').AsString);
+    sp_info.Parameters.CreateParameter('@Ik_studGrup', ftString, pdInput, 50,
+      DataSet.FieldByName('Ik_studGrup').AsString);
+    sp_info.Parameters.CreateParameter('@ik_AddressType', ftString, pdInput, 50,
+      DataSet.FieldByName('ik_AddressType').AsString);
+    sp_info.Open;
+    sp_info.First;
+    DataSet.FieldByName('StudAddr').AsString := sp_info.FieldByName('StudAddr').AsString
+  end;
+finally
+ sp_info.Free;
+end;
 end;
 
 end.

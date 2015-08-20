@@ -69,7 +69,7 @@ procedure TfmСhallengeSpr.AfterConstruction;
 begin
   inherited;
   uDMDocuments.dmDocs.adodsStudAddres.Active := false; // подключам базу
-  dmDocs.adodsStudAddres.Filter := 'ik_StudGrup =' + ik_stud.ToString();
+  dmDocs.adodsStudAddres.Filter := 'Ik_studGrup =' + ik_stud.ToString();
   dmDocs.adodsStudAddres.Filtered := true;
   uDMDocuments.dmDocs.adodsStudAddres.Active := true; // подключам базу
 
@@ -105,8 +105,8 @@ begin
       k := 31;
     // k:=    Integer(cbeReason.Items.Objects[cbeReason.ItemIndex]);
     sp_vidz := TADODataSet.Create(nil);
-    sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_studGrup=' +
-      uStudent.ik_stud.ToString() + 'and n_sem=' + cbeSem.Text +
+    sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup=' +
+     ik_grup.ToString() + 'and n_sem=' + cbeSem.Text +
       ' and iK_vid_zanyat=' + k.ToString();
     // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
     sp_vidz.Connection := dm.DBConnect;
@@ -182,7 +182,7 @@ begin
       // найти предстоящие мероприятия у студента в текущем семестре (title - группа, семестр)
       sp_vidz := TADODataSet.Create(nil);
       sp_vidz.CommandText := 'select * from StudAction(' +
-        uStudent.ik_stud.ToString() + ',' + cbeSem.Text + ')';
+        uStudent.ik_grup.ToString() + ',' + cbeSem.Text + ')';
       sp_vidz.Connection := dm.DBConnect;
       sp_vidz.Open;
       sp_vidz.First;

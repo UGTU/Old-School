@@ -395,7 +395,7 @@ begin
     Node := CreateNewNode(nil, ElementDataset.fieldvalues['Nameelement'],
       TDBNodeSprObject);
     Node.HasChildren := false;
-    TDBNodeRioObject(Node.data).Actiongroup := 'none';
+    TDBNodeRioObject(Node.data).Actiongroup := 'actRefreshDSinFrame';
     TDBNodeRioObject(Node.data).SetADODataset(Connection);
     Node.ImageIndex := 3;
   end;
