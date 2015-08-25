@@ -806,6 +806,14 @@ begin
       + '/' + StatusBar1.Panels.Items[1].Text + '/' +
       StatusBar1.Panels.Items[2].Text);
     SetCurrentSearchPanel(sptNone);
+          uDMDocuments.dmDocs.adodsDocs.Active := false; // подключам базу
+  uDMDocuments.dmDocs.adodsDocs.Filtered := false; // фильтр
+      dmDocs.adodsDocs.CommandText :=
+    ('select * from MagazineDocs where (DateCreate>=''' +    //обновляем список документов
+    DateTimeToStr(Date - 31) + '''and DateCreate <=''' +
+    DateTimeToStr(Date) + ''')or DateCreate IS NULL order by DatePod');
+      uDMDocuments.dmDocs.adodsDocs.Active := true; // подключам базу
+  uDMDocuments.dmDocs.adodsDocs.Filtered := true; // фильтр
   end;
   // ------------
   if (dbNode is TDBNodeRecruitObject) then
@@ -1734,6 +1742,7 @@ begin
   actTreeRefreshAction.Execute;
   if FFrame.DataSet <> nil then
   begin
+  FFrame.RefreshFrame;
     { FFrame.DataSet.Active:=false;
       FFrame.DataSet.Active:=true; }
   end;

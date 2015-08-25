@@ -16,7 +16,7 @@ uses
   DBTVDictObj, DBTVPrikObj, DBTVBusinessObj, DBTVAbitObj, DBTVAdminObj,
   DBTVStudObj, DBTVSpecObj, DBTVGroupObj, DBTVMethodWorkObj, DBTVFacDepobj,
   DBTVDepObj, DBTVTeacherObj, DBTVRootScheduleobj, DBTVRIOObj, DBTVOKObj,
-  DBTVSemesterNagrObj, DBTVHostelRootobj, DBTVSprObj;
+  DBTVSemesterNagrObj, DBTVHostelRootobj, DBTVSprObj,uDocController,uDM;
 
 type
   TDBDekanatTreeView = class(TDBTreeView)
@@ -277,6 +277,7 @@ var
   Node: TTreeNode;
   dsDoc: TADODataset;
   z, u: integer;
+  sp_num: TADODataSet;
 begin
   result := nil;
   if ElementDataset.fieldvalues['ik_element'] = 1 then
@@ -391,8 +392,14 @@ begin
 //    dsDoc.Connection := dm.DBConnect;
 //    dsDoc.Open;
 //    dsDoc.First;
+    sp_num := TADODataSet.Create(nil);
+    sp_num.CommandText := 'select * from NumberOfDocuments(''' + TDocController.Instance.CalculationBeginYearLern() + ''',''' + DateTimeToStr(date()) + ''')';
+    sp_num.Connection := dm.DBConnect;
+    sp_num.Open;
+    sp_num.First;
 
-    Node := CreateNewNode(nil, ElementDataset.fieldvalues['Nameelement'],
+    Node := CreateNewNode(nil, ElementDataset.fieldvalues['Nameelement'] + '('+sp_num.FieldByName('NumApplication').AsString+'/ '+
+    sp_num.FieldByName('Num—onsideration').AsString+')',
       TDBNodeSprObject);
     Node.HasChildren := false;
     TDBNodeRioObject(Node.data).Actiongroup := 'actRefreshDSinFrame';

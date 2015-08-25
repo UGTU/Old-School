@@ -186,14 +186,6 @@ type
     adodsStudGrupik_persAddr: TIntegerField;
     adodsStudGrupAddrType: TStringField;
     adodsStudGrupik_AddressType: TIntegerField;
-    adodsBaseDest: TADODataSet;
-    dsBaseDest: TDataSource;
-    adodsBaseDestcNameDestination: TStringField;
-    adodsBaseDestosn: TStringField;
-    adodsBaseDestIk_destination: TIntegerField;
-    adodsBaseDestik_osn: TIntegerField;
-    adodsBaseDestDest: TStringField;
-    adodsBaseDestOsnov: TStringField;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
     procedure adodsDocStudCalcFields(DataSet: TDataSet);
     procedure spAddrCalcFields(DataSet: TDataSet);

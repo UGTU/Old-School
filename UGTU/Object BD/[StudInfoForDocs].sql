@@ -1,12 +1,13 @@
 USE [UGTU_ACTTEST]
 GO
 
-/****** Object:  View [dbo].[StudInfoForDocs]    Script Date: 13.05.2015 11:17:38 ******/
+/****** Object:  View [dbo].[StudInfoForDocs]    Script Date: 24.08.2015 14:11:30 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -17,7 +18,7 @@ ALTER view [dbo].[StudInfoForDocs]
 AS
 
 	select last_st.Ik_studGrup,nCode, [FIO], Ik_grup, Cname_grup,Ik_form_ed,Cname_form_ed, ctelefon, cSotTel,Ik_fac, Cname_fac,ik_spec,Cname_spec,
-	cName_direction,ik_direction
+	cName_direction,ik_direction,ik_spec_fac
 	from
 	(
 		SELECT Person.nCode, Clastname+' '+Cfirstname+' '+ Cotch [FIO], ctelefon, cSotTel, max(Ik_studGrup) Ik_studGrup   --выбираем только самую последнюю запись о движении студента
@@ -28,7 +29,8 @@ AS
 	inner join
 	(
 		  Select 
-				 Cname_grup,Grup.Ik_grup,Form_ed.Ik_form_ed,Cname_form_ed,Fac.Ik_fac, Cname_fac,EducationBranch.ik_spec,EducationBranch.Cname_spec, Ik_studGrup,_dir.cName_direction, _dir.ik_direction
+				 Cname_grup,Grup.Ik_grup,Form_ed.Ik_form_ed,Cname_form_ed,Fac.Ik_fac, Cname_fac,EducationBranch.ik_spec,EducationBranch.Cname_spec, Ik_studGrup,_dir.cName_direction, _dir.ik_direction,
+				rsf.ik_spec_fac
 				
 		  from StudGrup
 			inner join Grup on Grup.Ik_grup = StudGrup.Ik_grup
@@ -43,6 +45,7 @@ AS
 
 			) gr_prop
 			on gr_prop.Ik_studGrup = last_st.Ik_studGrup
+
 
 
 

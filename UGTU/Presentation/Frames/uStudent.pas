@@ -884,7 +884,7 @@ begin
     ('select * from MagazineDocs where ((DateCreate>''' +
     DateTimeToStr(dtpStart.date) + '''and DateCreate <''' +
     DateTimeToStr(dtpEnd.date) + ''')or DateCreate IS NULL)' +
-    ' and Ik_studGrup=' + obj.StudGrupKey.ToString());
+    ' and Ik_studGrup=' + obj.StudGrupKey.ToString() +'order by DatePod');
   dmDocs.adodsDocs.Active := true;
 end;
 
@@ -897,7 +897,7 @@ begin
     ('select * from MagazineDocs where ((DateCreate>''' +
     DateTimeToStr(dtpStart.date) + '''and DateCreate <''' +
     DateTimeToStr(dtpEnd.date) + ''')or DateCreate IS NULL)' +
-    ' and Ik_studGrup=' + obj.StudGrupKey.ToString());
+    ' and Ik_studGrup=' + obj.StudGrupKey.ToString() +'order by DatePod');
   dmDocs.adodsDocStud.Active := true;
 end;
 
@@ -1919,7 +1919,7 @@ begin
     // фильтрация
     uDMDocuments.dmDocs.adodsDocStud.Active := true;
     // подключам базу
-    uDMDocuments.dmDocs.adodsDestination.Active := true;
+  //  uDMDocuments.dmDocs.adodsDestination.Active := true;
     uDMDocuments.dmDocs.adodsDocStud.Filtered := true; // фильтр
     DBGridEhCenter.FilterEditCloseUpApplyFilter := true;
     // сотрировка

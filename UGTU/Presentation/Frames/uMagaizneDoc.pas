@@ -14,7 +14,7 @@ uses
   Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb, Vcl.ToolWin,
   uReviewCallSpr, uReviewApplication, uReviewAkadem,
   uReviewNotify, Document, Destination, uUspevGroupController,
-  System.Generics.Collections;
+  System.Generics.Collections,IniFiles;
 
 type
   TfmDoc = class(TfmBase)
@@ -90,9 +90,9 @@ Begin
 
   // dmDocs.adodsDocs.CommandText:=('select * from MagazineDocs where cName_direction='''+'Бакалавриат''');// + DateTimeToStr(dtpStart.Date)+'''';//+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+''')or DateCreate=NULL';
   dmDocs.adodsDocs.CommandText :=
-    ('select * from MagazineDocs where (DateCreate>''' +
-    DateTimeToStr(dtpStart.Date) + '''and DateCreate <''' +
-    DateTimeToStr(dtpEnd.Date) + ''')or DateCreate IS NULL');
+    ('select * from MagazineDocs where (DateCreate>=''' +
+    DateTimeToStr(dtpStart.Date) + '''and DateCreate <=''' +
+    DateTimeToStr(dtpEnd.Date) + ''')or DateCreate IS NULL order by DatePod');
 
   // фильтрация
   uDMDocuments.dmDocs.adodsDocs.Active := true; // подключам базу
@@ -103,7 +103,8 @@ Begin
     [dghAutoSortMarking];
 
   // автоматическая сортировка
-  // dbgehMagazineDocs.Columns[1].Title.SortMarker = smDownEh;   //по убыванию
+  // dbgehMagazineDocs.Columns[3].Title.SortMarker := smDownEh;   //по убыванию
+
   // dbgehMagazineDocs.OptionsEh := dbgehMagazineDocs.OptionsEh + [dghMultiSortMarking]; //сортировка по нескольким столбцам
   dbgehMagazineDocs.SortLocal := true;
   // dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
@@ -113,7 +114,27 @@ Begin
   // dmDocs.dsDocs.DataSet.Filtered:=true;
 
 End;
+procedure SaveDBGridEhParams(DBGridEh: TDBGridEh; const FileName, Section: string);
+var r: TIniFile;
+begin
+     if DBGridEh <> nil then
+     begin
+      r := TIniFile.Create(FileName);
+      DBGridEh.SaveColumnsLayout(r, Section);
+      r.Free;
+     end;
+end;
 
+procedure RestoreDBGridEhParams(DBGridEh: TDBGridEh; const FileName, Section: string);
+var r: TIniFile;
+begin
+     if DBGridEh <> nil then
+     begin
+      r := TIniFile.Create(FileName);
+      DBGridEh.RestoreColumnsLayout(r, Section, [crpColIndexEh, crpColWidthsEh, crpColVisibleEh]);
+      r.Free;
+     end;
+end;
 procedure TfmDoc.bbOkClick(Sender: TObject);
 var
   i, LastNum: Integer;
