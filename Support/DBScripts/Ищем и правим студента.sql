@@ -1,13 +1,14 @@
 
-select * from Person where Clastname like 'Павук'
+select * from Person where Clastname like 'Бубнов'
 
-select ABIT_postup.NN_abit,Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, EducationBranch.Cname_spec, ABIT_postup.ik_zach, ABIT_Diapazon_spec_fac.ik_spec_fac
+select ABIT_postup.NN_abit,Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, EducationBranch.Cname_spec, ABIT_postup.ik_zach, 
+ABIT_Diapazon_spec_fac.ik_spec_fac, ABIT_postup.ik_prikaz_zach
 from Person inner join ABIT_postup on ABIT_postup.nCode = Person.nCode
 inner join ABIT_Diapazon_spec_fac on ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
 inner join  Relation_spec_fac on Relation_spec_fac.ik_spec_fac = ABIT_Diapazon_spec_fac.ik_spec_fac
 inner join fac on fac.Ik_fac = Relation_spec_fac.ik_fac
 inner join EducationBranch on EducationBranch.ik_spec = Relation_spec_fac.ik_spec
-where Person.nCode=114075
+where Person.nCode=114540
 
 select * from ABIT_postup where nCode=115488
 
@@ -17,13 +18,13 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (45649)
+select * from Zach where ncode in (114540)
 select * from Zach where Ik_zach in (14369)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (24467)
+and ik_zach in (36779)
 
 select * from Prikaz where k
 

@@ -112,6 +112,10 @@ type
     Panel9: TPanel;
     Label28: TLabel;
     ProgressBar1: TProgressBar;
+    ToolButton23: TToolButton;
+    actPrikazAppoint: TAction;
+    ToolButton24: TToolButton;
+    actDelFromGroup: TAction;
     //загружает списки абитуриентов
     procedure GetSpisokOfAbits();
     procedure prikazTitleClick(Column: TColumnEh);
@@ -161,6 +165,8 @@ type
     procedure actPrintExamStatisticExecute(Sender: TObject);
     procedure ToolButton7Click(Sender: TObject);
     procedure actGiveZachNumberExecute(Sender: TObject);
+    procedure actPrikazAppointExecute(Sender: TObject);
+    procedure actDelFromGroupExecute(Sender: TObject);
 
     protected
      procedure DoRefreshFrame();override;
@@ -281,6 +287,7 @@ begin
 			dbgrdMain.DataSource.DataSet:=dataset;
 			DataSet.Fields[0].Visible := false;
 			DataSet.Fields[1].DisplayLabel:= 'Название';
+      DataSet.Fields[1].DisplayWidth := 400;
 			DataSet.Fields[2].DisplayLabel := 'Короткое название';
 			DataSet.Fields[3].Visible := false;
       DataSet.Fields[4].DisplayLabel := 'Зач. книжки (Начало)';
@@ -288,7 +295,7 @@ begin
       DataSet.Fields[4].ReadOnly := false;
       DataSet.Fields[5].ReadOnly := false;
 
-      dbgrdMain.Columns[0].Width := 400;
+     // dbgrdMain.Columns[0].Width := 400;
       dbgrdMain.Columns[1].Width := 100;
       dbgrdMain.Columns[2].Width := 70;
       dbgrdMain.Columns[3].Width := 70;
@@ -608,18 +615,8 @@ var i:integer;
 begin
   Modified:=false;
 
-  if (MessageBox(Handle, '   Зачислить абитуриента(ов)?','ИС "УГТУ"',
-          MB_YESNO) = IDNO) then
-    exit;
-
   TApplicationController.GetInstance.AddLogEntry('Начало зачисления абитуриентов.');
-
-  for i := 0 to (dbgAbitsForZachisl.SelectedRows.Count-1) do
-  begin
-      dbgAbitsForZachisl.DataSource.DataSet.GotoBookmark(Pointer(dbgAbitsForZachisl.SelectedRows[i]));
-      if TAbitZachislenieController.Instance.IsAbit_CanBeZachisl then
-        TAbitZachislenieController.Instance.Abit_Join(dbgAbitsForZachisl.DataSource.DataSet.FieldValues['NN_abit']);
-  end;
+  TAbitZachislenieController.Instance.Abit_ZachWithPrikaz(@dbgAbitsForZachisl);
   dbgAbitsForZachisl.DataSource.DataSet.Next;
 end;
                                                
@@ -748,12 +745,21 @@ begin
     tempDS.Open;
     if tempDS.RecordCount > 0 then
       MessageBox(Handle, PChar(IntToStr(tempDS.RecordCount)+ ' абитуриентов не получили номера зачетных книжек. Проверьте диапазоны'),'Не удалось распределить зачетные книжки всем абитуриентам',MB_OK);
+    TAbitZachislenieController.Instance.RefreshAbitList;
   except
 
   end;
   proc.Free;
   tempDS.Close;
   tempDS.Free;
+end;
+
+procedure TfmZach.actPrikazAppointExecute(Sender: TObject);
+begin
+  inherited;
+  TApplicationController.GetInstance.AddLogEntry('Назначаем приказы зчисленным абитуриентам.');
+  TAbitZachislenieController.Instance.Abit_AppointPrikaz(@prikaz);
+  prikaz.DataSource.DataSet.Next;
 end;
 
 procedure TfmZach.actPrintExamStatisticExecute(Sender: TObject);
@@ -800,6 +806,16 @@ begin
    (Sender as TAction).Enabled:= (Prikaz.RowCount>0);
 end;
 
+procedure TfmZach.actDelFromGroupExecute(Sender: TObject);
+begin
+  if (MessageBox(Handle, 'Удалить из группы?','ИС "УГТУ"',
+          MB_YESNO) = IDNO) then exit;
+
+  TApplicationController.GetInstance.AddLogEntry('Удалить абитуриентов из группы.');
+  TAbitZachislenieController.Instance.Abit_DeleteFromGroup(@prikaz);
+  prikaz.DataSource.DataSet.Next;
+end;
+
 //меняем фильтр по категории поступления на
 //вкладке Предварительного списка
 procedure TfmZach.cbKatZachislChange(Sender: TObject);
@@ -824,7 +840,6 @@ if frmmain.actGroupChange.enabled then frmmain.actGroupChange.execute else
 if frmmain.actJoinGroup.enabled then frmmain.actJoinGroup.execute;
 
 end;
-
 
 
 // Зачисление - функция adospAbitZachisl
