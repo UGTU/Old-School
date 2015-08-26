@@ -1,6 +1,6 @@
 select distinct
        Cshort_name_fac,
-	   Cname_spec, 
+	   Cname_spec, ISNULL(Prikaz.Nn_prikaz +' от '+FORMAT(cast(Prikaz.Dd_prikaz as DATE), 'd', 'de-de' ),'') NumDoc,
 	   Clastname,
 	   Cfirstname,
 	   Cotch,
@@ -51,7 +51,8 @@ from
 		   Strana.ik_type_grazd resident,
 		   NNyear,
 		   Cname_form_ed,
-		   CType_kat
+		   CType_kat,
+		   ABIT_postup.ik_prikaz_zach
 	from dbo.Person,ABIT_postup,ABIT_Diapazon_spec_fac,dbo.Student,Relation_spec_fac,Spec_stud,Fac,
 		 Strana,Form_ed,Kat_zach,TypeKatZach,Direction
 	where ABIT_postup.nCode = dbo.Person.nCode and ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord
@@ -104,6 +105,8 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 		   and dbo.Raion.Ik_region = dbo.Region.Ik_region
 		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana) vrem
 on stud.nCode = vrem.nCode
+
+left join dbo.Prikaz ON  stud.ik_prikaz_zach=Prikaz.Ik_prikaz
 --where (pr.Cstrana is null)and(vrem.Cstrana is null)
 --where Dd_vidan is null
 order by  Clastname,Cfirstname,Cotch
