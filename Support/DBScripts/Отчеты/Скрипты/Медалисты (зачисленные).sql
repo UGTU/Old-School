@@ -1,4 +1,4 @@
-select distinct Cname_form_ed, Cshort_name_fac, Cname_spec, cName_direction, Cname_kat_zach, FIO,cmedal 
+select distinct Cname_form_ed, Cshort_name_fac, Cname_spec, cName_direction, Cname_kat_zach, FIO,cmedal, ctelefon, cSotTel 
 		 from
 (
 select distinct  

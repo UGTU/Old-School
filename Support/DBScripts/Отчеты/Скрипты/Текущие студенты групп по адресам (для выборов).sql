@@ -88,9 +88,16 @@ or
 (Street.CStreet like '%Первомайская%' 
 and (BuildingNumber='19' or BuildingNumber='21' or BuildingNumber='23' or BuildingNumber='25' or BuildingNumber='27' or BuildingNumber='29' or BuildingNumber='30' or BuildingNumber='31' or BuildingNumber='32' or BuildingNumber like '33%'
 or BuildingNumber='34' or BuildingNumber='35' or BuildingNumber='36' or BuildingNumber='38' or BuildingNumber='40' or BuildingNumber='41' or BuildingNumber='42' or BuildingNumber='43' or BuildingNumber='46'))
-))
 
-  
+or
+(Street.CStreet like '%Береговая%' )
+or
+(Street.CStreet like '%Володарского%' )
+or
+(Street.CStreet like '%Загородная%' )
+or
+(Street.CStreet like '%Семяшкина%' )
+))  
 
 /*
 
