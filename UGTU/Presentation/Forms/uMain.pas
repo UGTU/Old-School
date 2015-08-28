@@ -377,6 +377,7 @@ type
     procedure GetLichnKartStud(ncode: Integer; ik_grup: Integer);
     function GetPanel8: TDataProcessingSplashDlg;
     function LoadScheduleBookmarks(): Boolean;
+    procedure DocumentStateChanged(Sender:TObject);
   public
     CurrentTopic: String;
     procedure Comment(str1, str2: String);
@@ -392,6 +393,7 @@ var
   LastSelectedNode: TTreeNode;
   lastCancel, alreadySpec: Boolean;
   id_grup: Integer;
+  //NowNode: TDBnodeObject;
   // флаг "только что нажали отмену" не требуется повторная
   // проверка наличия изменений
 
@@ -795,10 +797,12 @@ begin
   // ------------Журнал справок
   if (dbNode is TDBNodeSprObject) then
   begin
+//    NowNode := dbNode;
     Caption := TApplicationController.GetInstance.ProgramName +
-      ' - [Журнал документов]';
+      (dbNode as TDBNodeSprObject).Name;
     Frame := TfmDoc;
     FFrame.RefreshFrame;
+    (FFrame as TfmDoc).OnDocumentStateChanged:=DocumentStateChanged;
     Comment('Журнал документов', 'Выбранный элемент: ');
     // + (FFrame as TfmSpr).dbcbElement.Text);
     TApplicationController.GetInstance.AddLogEntry
@@ -806,14 +810,15 @@ begin
       + '/' + StatusBar1.Panels.Items[1].Text + '/' +
       StatusBar1.Panels.Items[2].Text);
     SetCurrentSearchPanel(sptNone);
-          uDMDocuments.dmDocs.adodsDocs.Active := false; // подключам базу
-  uDMDocuments.dmDocs.adodsDocs.Filtered := false; // фильтр
-      dmDocs.adodsDocs.CommandText :=
-    ('select * from MagazineDocs where (DateCreate>=''' +    //обновляем список документов
-    DateTimeToStr(Date - 31) + '''and DateCreate <=''' +
-    DateTimeToStr(Date) + ''')or DateCreate IS NULL order by DatePod');
-      uDMDocuments.dmDocs.adodsDocs.Active := true; // подключам базу
-  uDMDocuments.dmDocs.adodsDocs.Filtered := true; // фильтр
+    uDMDocuments.dmDocs.adodsDocs.Active := false; // подключам базу
+    uDMDocuments.dmDocs.adodsDocs.Filtered := false; // фильтр
+    dmDocs.adodsDocs.CommandText :=
+      ('select * from MagazineDocs where (DateCreate>=''' +
+      // обновляем список документов
+      DateTimeToStr(Date - 31) + '''and DateCreate <=''' + DateTimeToStr(Date) +
+      ''')or DateCreate IS NULL order by DatePod');
+    uDMDocuments.dmDocs.adodsDocs.Active := true; // подключам базу
+    uDMDocuments.dmDocs.adodsDocs.Filtered := true; // фильтр
   end;
   // ------------
   if (dbNode is TDBNodeRecruitObject) then
@@ -1718,6 +1723,32 @@ begin
     end; }
 end;
 
+procedure TfrmMain.DocumentStateChanged(Sender: TObject);
+var
+ sp_numdoc : TADODataSet;
+ item : TTreeNode;
+begin
+    sp_numdoc := TADODataSet.Create(nil);
+    try
+    sp_numdoc.CommandText := 'select * from NumberOfDocuments(''' +
+    TDocController.Instance.CalculationBeginYearLern() + ''',''' + DateTimeToStr(date()) + ''')';
+    sp_numdoc.Connection := dm.DBConnect;
+    sp_numdoc.Open;
+    sp_numdoc.First;
+    for item in DBDekTreeView_TEST1.Items do
+    begin
+      if  (TObject(item.Data) is TDBNodeSprObject) then
+      begin
+        item.Text :=      ('Журнал документов'  + '('+sp_numdoc.FieldByName('NumApplication').AsString+'/ '+
+    sp_numdoc.FieldByName('NumСonsideration').AsString+')');
+      end;
+    end;
+
+    finally
+        sp_numdoc.Free;
+    end;
+end;
+
 procedure TfrmMain.actDeleteStudentExecute(Sender: TObject);
 begin
   if MessageBox(Handle, PWideChar('Вы действительно хотите удалить студента?'),
@@ -1742,7 +1773,7 @@ begin
   actTreeRefreshAction.Execute;
   if FFrame.DataSet <> nil then
   begin
-  FFrame.RefreshFrame;
+    FFrame.RefreshFrame;
     { FFrame.DataSet.Active:=false;
       FFrame.DataSet.Active:=true; }
   end;
@@ -2998,7 +3029,10 @@ begin
             tempDS.Insert;
             tempDS.FieldByName('Ik_studGrup').Value :=
               FieldByName('ik_studGrup').AsInteger;
-            tempDS.FieldByName('Ik_Transfer').Value := 2;
+            if  FieldByName('StudAddr').AsString.Length<>0 then
+              tempDS.FieldByName('Ik_Transfer').Value := 2
+              else
+              tempDS.FieldByName('Ik_Transfer').Value := 1;
             tempDS.FieldByName('Ik_destination').Value := ik_destination;
             tempDS.FieldByName('DatePod').Value := Date;
             tempDS.FieldByName('NumberDoc').Value := LastNum;
@@ -3047,7 +3081,7 @@ begin
             ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
             tempDSchall.Post;
             tempDSchall.UpdateBatch();
-            if fReview.rbP.Checked then
+            if FieldByName('StudAddr').AsString.Length<>0 then
             begin
               tempDSsm.CommandText := 'Select * from Addressee_Doc';
               tempDSsm.Open;

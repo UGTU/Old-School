@@ -250,7 +250,7 @@ begin
       Range['B' + inttostr(fusp - 1), 'K' + inttostr(fusp - 1)].Delete(xlUp);
     Replace('#fio1#', '');
     Replace('#fio2#', '');
-
+    ActiveSheet.Name := '¹ '+sp_doc.FieldByName('NumberDoc').AsString+' '+ spInf.FieldByName('FIOrod').AsString;
     end;
   finally
     spInf.Free;

@@ -80,23 +80,23 @@ inherited fmSprForGroup: TfmSprForGroup
   inherited Panel1: TPanel
     Top = 618
     Width = 453
-    ExplicitTop = 643
-    ExplicitWidth = 448
+    ExplicitTop = 618
+    ExplicitWidth = 453
     inherited bbOK: TBitBtn
       Left = 279
       ExplicitLeft = 279
     end
     inherited bbApply: TBitBtn
       Left = 30
-      ExplicitLeft = 25
+      ExplicitLeft = 30
     end
     inherited bbCancel: TBitBtn
       Left = 365
-      ExplicitLeft = 360
+      ExplicitLeft = 365
     end
     inherited BitBtn1: TBitBtn
       Left = 132
-      ExplicitLeft = 127
+      ExplicitLeft = 132
     end
   end
   inherited eNum: TEdit

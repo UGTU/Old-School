@@ -49,6 +49,7 @@ begin
     for i := 0 to ListDoc.Count - 1 do
     begin
       ActivateWorksheet(i + 1);
+
       ik_doc := ListDoc[i].ik_doc;
       addr := '';
       dsAddr := TADODataSet.Create(nil);
@@ -131,6 +132,7 @@ begin
           Replace('#type_stud#', 'ранее обучавшегося в группе')
       else
         Replace('#type_stud#', 'студента(ки) группы');
+      ActiveSheet.Name := '№ '+sp_doc.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
       // if num_list >0 then
       // begin
       // CurrentWorkbook.SaveCopyAs('C:\Users\'+num_list.ToString()+'.xls',0);

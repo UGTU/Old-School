@@ -14,7 +14,7 @@ uses
   Vcl.Menus, Data.DB, Bde.DBTables, Vcl.ImgList, adodb, Vcl.ToolWin,
   uReviewCallSpr, uReviewApplication, uReviewAkadem,
   uReviewNotify, Document, Destination, uUspevGroupController,
-  System.Generics.Collections,IniFiles;
+  System.Generics.Collections,IniFiles,Registry,DBTVSprObj,uDocController;
 
 type
   TfmDoc = class(TfmBase)
@@ -53,22 +53,34 @@ type
     procedure tbResetClick(Sender: TObject);
     procedure bbResetClick(Sender: TObject);
     procedure tbPrintClick(Sender: TObject);
+    procedure dbgehMagazineDocsExit(Sender: TObject);
+//    procedure NewIni(const NomeIni: string);
+//    procedure SaveIni(const FN: string);
+//    procedure LoadIni(const FN: string);
 
   private
+    FDocumentStateChanged : TNotifyEvent;
     procedure OnMyMenuItemClick(Sender: TObject);
     // numColumn:integer;checked:boolean);
     { Private declarations }
+  protected
+    procedure DocumentChanged;virtual;
   public
     Procedure AfterConstruction; Override;
+
+  published
+    property OnDocumentStateChanged: TNotifyEvent read FDocumentStateChanged write FDocumentStateChanged;
     { Public declarations }
   end;
 
 var
   fmDoc: TfmDoc;
 
+
+
   // pm : TPopupMenu;
 implementation
-
+uses uMain;
 {$R *.dfm}
 
 Procedure TfmDoc.AfterConstruction;
@@ -112,29 +124,31 @@ Begin
 
   // dmDocs.dsDocs.DataSet.Filter := 'DateCreate > ''' + DateTimeToStr(dtpStart.Date)+''''+ 'and DateCreate <''' + DateTimeToStr(dtpEnd.Date)+'''';
   // dmDocs.dsDocs.DataSet.Filtered:=true;
-
+dbgehMagazineDocs.RestoreGridLayoutIni(ExtractFilePath(ParamStr(0)) +'ConfigGRID.ini','dbgehMagazineDocs',[grpColIndexEh,grpColWidthsEh]);
 End;
-procedure SaveDBGridEhParams(DBGridEh: TDBGridEh; const FileName, Section: string);
-var r: TIniFile;
-begin
-     if DBGridEh <> nil then
-     begin
-      r := TIniFile.Create(FileName);
-      DBGridEh.SaveColumnsLayout(r, Section);
-      r.Free;
-     end;
-end;
+//procedure SaveDBGridEhParams(DBGridEh: TDBGridEh; const FileName, Section: string);
+//var r: TIniFile;
+//begin
+//     if DBGridEh <> nil then
+//     begin
+//      r := TIniFile.Create(FileName);
+//      DBGridEh.SaveColumnsLayout(r, Section);
+//      r.Free;
+//     end;
+//end;
+//
+//procedure RestoreDBGridEhParams(DBGridEh: TDBGridEh; const FileName, Section: string);
+//var r: TIniFile;
+//begin
+//     if DBGridEh <> nil then
+//     begin
+//      r := TIniFile.Create(FileName);
+//      DBGridEh.RestoreColumnsLayout(r, Section, [crpColIndexEh, crpColWidthsEh, crpColVisibleEh]);
+//      r.Free;
+//     end;
+//end;
 
-procedure RestoreDBGridEhParams(DBGridEh: TDBGridEh; const FileName, Section: string);
-var r: TIniFile;
-begin
-     if DBGridEh <> nil then
-     begin
-      r := TIniFile.Create(FileName);
-      DBGridEh.RestoreColumnsLayout(r, Section, [crpColIndexEh, crpColWidthsEh, crpColVisibleEh]);
-      r.Free;
-     end;
-end;
+
 procedure TfmDoc.bbOkClick(Sender: TObject);
 var
   i, LastNum: Integer;
@@ -285,6 +299,7 @@ begin
   inherited;
   // dbgehMagazineDocs.Columns.Items[0].CheckboxState :=cbChecked;
   // dbgehMagazineDocs.Columns.Items[0].Checkboxes:= true;
+
 
 end;
 
@@ -672,6 +687,19 @@ begin
 
 end;
 
+procedure TfmDoc.dbgehMagazineDocsExit(Sender: TObject);
+begin
+  inherited;
+  dbgehMagazineDocs.SaveGridLayoutIni(ExtractFilePath(ParamStr(0)) + 'ConfigGRID.ini','dbgehMagazineDocs',True);
+
+end;
+
+procedure TfmDoc.DocumentChanged;
+begin
+  if Assigned(FDocumentStateChanged) then
+     FDocumentStateChanged(Self);
+end;
+
 procedure TfmDoc.dtpEndCloseUp(Sender: TObject);
 begin
   inherited;
@@ -721,6 +749,59 @@ begin
 
 end;
 
+//procedure TfmDoc.LoadIni(const FN: string);
+//var
+//  Ini: TIniFile;
+//  i: Integer;
+//  j: Longint;
+//  S: string;
+//  function MyReadInteger(const Section, Ident: string): Longint;
+//  begin
+//    result := Ini.ReadInteger(Section, Ident, -1);
+//    if result=-1 then
+//      raise Exception.Create('Errore nel file di configurazione.');
+//  end;
+//  function MyReadString(const Section, Ident: string): string;
+//  begin
+//    result := Ini.ReadString(Section, Ident, '');
+//    if result='' then
+//      raise Exception.Create('Errore nel file di configurazione.');
+//  end;
+//begin
+//  Ini := TIniFile.Create(FN);
+//  try
+//    with Ini do
+//    begin
+//      for i:=1 to dbgehMagazineDocs.FieldCount do
+//      begin
+//        S:= MyReadString('Campi_Ordine', 'Campo'+IntToStr(i));
+//        j:= MyReadInteger('Campi_Size', 'Campo'+IntToStr(i));
+//        dbgehMagazineDocs.DataSource.DataSet.FieldByName(S).index := i-1;
+//        dbgehMagazineDocs.DataSource.DataSet.FieldByName(S).DisplayWidth := j;
+//      end;
+//    end;
+//  finally
+//    Ini.Free;
+//  end;
+//end;
+//
+//procedure TfmDoc.NewIni(const NomeIni: string);
+//var
+//  F: System.Text;
+//  i: Byte;
+//begin
+//  System.Assign(F, NomeIni);
+//  System.ReWrite(F);
+//  System.WriteLn(F, '[Campi_Ordine]');
+//  for i:=1 to dbgehMagazineDocs.FieldCount do
+//    System.WriteLn(F, 'Campo',i,'=',dbgehMagazineDocs.Fields[i-1].FieldName);
+//  System.WriteLn(F, '');
+//  System.WriteLn(F, '[Campi_Size]');
+//  for i:=1 to dbgehMagazineDocs.FieldCount do
+//    System.WriteLn(F, 'Campo',i,'=',dbgehMagazineDocs.Fields[i-1].DisplayWidth);
+//  System.Close(F);
+//end;
+
 procedure TfmDoc.OnMyMenuItemClick(Sender: TObject);
 begin
   if Sender is TMenuItem Then
@@ -737,9 +818,31 @@ begin
     end;
 end;
 
+//procedure TfmDoc.SaveIni(const FN: string);
+//var
+//  Ini: TIniFile;
+//  i: Integer;
+//  S : string;
+//begin
+//  NewIni(FN);
+//  Ini := TIniFile.Create(FN);
+//  with Ini do begin
+//    for i:=1 to dbgehMagazineDocs.FieldCount do
+//    begin
+//      S:= dbgehMagazineDocs.Fields[i-1].FieldName;
+//      WriteString('Campi_Ordine', 'Campo'+IntToStr(i),
+//      dbgehMagazineDocs.Fields[i-1].FieldName);
+//      WriteInteger('Campi_Size', 'Campo'+IntToStr(i),
+//      dbgehMagazineDocs.Fields[i-1].DisplayWidth);
+//    end;
+//  end;
+//  Ini.Free;
+//end;
+
 procedure TfmDoc.tbGotClick(Sender: TObject);
 var
   i: Integer;
+    sp_numdoc: TADODataSet;
 begin
   // for i:=0 to dbgehMagazineDocs.SelCount-1 do begin;
   // dbgehMagazineDocs.DataSource.DataSet.Bookmark:=dbgehMagazineDocs.SelectedRows[i];
@@ -769,9 +872,25 @@ begin
         end;
         Next;
       end;
+      DocumentChanged;
+{                sp_numdoc := TADODataSet.Create(nil);
+    sp_numdoc.CommandText := 'select * from NumberOfDocuments(''' + TDocController.Instance.CalculationBeginYearLern() + ''',''' + DateTimeToStr(date()) + ''')';
+    sp_numdoc.Connection := dm.DBConnect;
+    sp_numdoc.Open;
+    sp_numdoc.First;
+    }
     finally
       EnableControls;
+     {       if (NowNode is TDBNodeSprObject) then
+  begin
+   Caption:= '∆ÛÌ‡Î ‰ÓÍÛÏÂÌÚÓ‚'  + '('+sp_numdoc.FieldByName('NumApplication').AsString+'/ '+
+    sp_numdoc.FieldByName('Num—onsideration').AsString+')';
+
+  end;
+  sp_numdoc.Free;
+    }
     end;
+
   end;
 end;
 
@@ -839,11 +958,11 @@ var
   datebegin: string;
   AYear, AMonth, ADay: word;
   sp_num: TADODataSet;
+  sp_numdoc: TADODataSet;
 begin
   inherited;
   with dbgehMagazineDocs.DataSource.DataSet do
   begin
-
     First;
     DisableControls;
     try
@@ -892,12 +1011,26 @@ begin
             dbgehMagazineDocs.DataSource.DataSet.Post;
           end;
         end;
-
         Next;
       end;
+
+      DocumentChanged;
+
+    //      sp_numdoc := TADODataSet.Create(nil);
+    //sp_numdoc.CommandText := 'select * from NumberOfDocuments(''' + TDocController.Instance.CalculationBeginYearLern() + ''',''' + DateTimeToStr(date()) + ''')';
+    //sp_numdoc.Connection := dm.DBConnect;
+    //sp_numdoc.Open;
+    //sp_numdoc.First;
+
     finally
       EnableControls;
-
+    //  if (NowNode is TDBNodeSprObject) then
+  //begin
+   //Caption:= '∆ÛÌ‡Î ‰ÓÍÛÏÂÌÚÓ‚'  + '('+sp_numdoc.FieldByName('NumApplication').AsString+'/ '+
+    //sp_numdoc.FieldByName('Num—onsideration').AsString+')';
+   //Refresh;
+  //end;
+  //sp_numdoc.Free;
     end;
   end;
 

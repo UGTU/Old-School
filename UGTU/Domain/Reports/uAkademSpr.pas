@@ -395,7 +395,7 @@ begin
       Range['A' + inttostr(fusp), 'K' + inttostr(fusp)].Delete(xlUp);
       // ActiveSheet.ExportAsFixedFormat(0, 'e:\out.pdf', 0, false, true,
       // EmptyParam, EmptyParam,  true, EmptyParam);
-
+     ActiveSheet.Name := '¹ '+spDoc.FieldByName('NumberDoc').AsString+' '+ spInf.FieldByName('FIOrod').AsString;
     end;
   finally
     spInf.Free;

@@ -46,6 +46,7 @@ begin
     for i := 0 to ListDoc.Count - 1 do
     begin
       ActivateWorksheet(i + 1);
+
       ik_doc:=ListDoc[i].ik_doc;
       sp_pers := TADOStoredProc.Create(nil);
       sp_pers.ProcedureName := 'StudInfoSpravBuild;1';
@@ -110,6 +111,7 @@ begin
       Replace('#end#', day + '.' + sp_callspr.FieldByName('monthe').AsString +
         '.' + sp_callspr.FieldByName('yeare').AsString);
       Replace('#col#', sp_callspr.FieldByName('Kol_day').AsString);
+      ActiveSheet.Name := '¹ '+sp_callspr.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
     end;
 
   finally

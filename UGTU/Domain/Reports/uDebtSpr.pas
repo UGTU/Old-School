@@ -149,7 +149,7 @@ begin
     Range['A' +(ind+5).ToString(), 'K' + (ind+5).ToString()].RowHeight:=30;
     // Sheets.Rows[ind + 4].RowHeight = 50
     // cells(ind + 4).Height :=1;
-
+    ActiveSheet.Name := '¹ '+sp_doc.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
     end;
   finally
     sp_debt.Free;

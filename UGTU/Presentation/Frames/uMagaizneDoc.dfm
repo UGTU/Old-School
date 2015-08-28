@@ -42,6 +42,7 @@ inherited fmDoc: TfmDoc
       OnCellMouseClick = dbgehMagazineDocsCellMouseClick
       OnDblClick = dbgehMagazineDocsDblClick
       OnDrawColumnCell = dbgehMagazineDocsDrawColumnCell
+      OnExit = dbgehMagazineDocsExit
       Columns = <
         item
           DynProps = <>
@@ -337,12 +338,12 @@ inherited fmDoc: TfmDoc
       end
       object dtpEnd: TDateTimePicker
         Left = 457
-        Top = 11
+        Top = 10
         Width = 112
         Height = 21
         Anchors = [akRight, akBottom]
-        Date = 42157.434117662040000000
-        Time = 42157.434117662040000000
+        Date = 42243.578649351850000000
+        Time = 42243.578649351850000000
         TabOrder = 3
         OnCloseUp = dtpEndCloseUp
       end
@@ -374,7 +375,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000B80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000C40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

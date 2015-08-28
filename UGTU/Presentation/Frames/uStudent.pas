@@ -3135,6 +3135,7 @@ var
   ListDist: TObjectList<TDest>;
   dest: TDest;
   doc: TDopDoc;
+  Ik_Transfer:integer;
 
 begin
   inherited;
@@ -3232,6 +3233,9 @@ begin
       fReview.cbeSem.AddItem(i.ToString(), TObject(i));
     fReview.cbeSem.ItemIndex := sem - 1;
     fReview.ShowModal;
+    if fReview.rbL.Checked then
+    Ik_Transfer :=1
+    else Ik_Transfer :=2;
     if (fReview.ModalResult = mrOk) or (fReview.ModalResult = mrYes) then
     begin
       dm.DBConnect.BeginTrans;
@@ -3242,7 +3246,7 @@ begin
         tempDS.Open;
         tempDS.Insert;
         tempDS.FieldByName('Ik_studGrup').Value := ik_studGrup;
-        tempDS.FieldByName('Ik_Transfer').Value := 2;
+        tempDS.FieldByName('Ik_Transfer').Value := Ik_Transfer;
         tempDS.FieldByName('Ik_destination').Value := ik_destination;
         tempDS.FieldByName('DatePod').Value := date;
         tempDS.FieldByName('NumberDoc').Value := LastNum;
