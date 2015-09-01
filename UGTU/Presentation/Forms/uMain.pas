@@ -3092,10 +3092,11 @@ begin
               dmDocs.adodsStudAddres.Open;
               dmDocs.adodsStudAddres.First;
               tempDSsm.FieldByName('ik_personAddress').Value :=
-                FieldByName('ik_persAddr').Value
-            end;
+                FieldByName('ik_persAddr').Value ;
             tempDSsm.Post;
             tempDSsm.UpdateBatch();
+            end;
+
             dm.DBConnect.CommitTrans;
             tempDS.Close;
             tempDSchall.Close;

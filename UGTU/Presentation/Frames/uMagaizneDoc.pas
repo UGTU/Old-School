@@ -736,7 +736,7 @@ begin
   // pm.CloseMenu;
   pm := Sender as TPopupMenu;
   pm.Items.Clear;
-  for i := 0 to self.dbgehMagazineDocs.Columns.Count - 3 do
+  for i := 0 to self.dbgehMagazineDocs.Columns.Count - 4 do
   begin
     mi := TMenuItem.Create(pm);
     col := dbgehMagazineDocs.Columns.Items[i];

@@ -22,7 +22,9 @@ Create Table dbo.Destination(
 Ik_destination int identity (1,1) not null
 Constraint PrimaryKeyDestination primary key,
 cNameDestination varchar(50) not null,
-cShortNameDestination varchar(50) not null);
+cShortNameDestination varchar(50) not null,
+Ik_TypeDest int null,
+CONSTRAINT FK_Destination_TipeDest FOREIGN KEY(Ik_TypeDest) REFERENCES [dbo].TypeDest(Ik_TypeDest));
 
 --основание-назначение для справочника
 Create Table dbo.Base_Destination(
@@ -159,4 +161,21 @@ Ik_upContent int not null,
 Constraint PrimaryKey_Debt primary key (Ik_Document,Ik_upContent) ,
 CONSTRAINT FK_AkademNeuspev_Debt FOREIGN KEY(Ik_Document) REFERENCES [dbo].AkademNeuspev(Ik_Document),
 CONSTRAINT Debt_Content_UchPl_FK FOREIGN KEY(Ik_upContent) REFERENCES Content_UchPl(Ik_upContent),
+);
+-- таблица для указания начала номерации документов
+Create Table dbo.BeginNumDoc (
+Ik_beginNumDoc int identity (1,1) not null
+Constraint PrimaryKeyBeginNumDoc primary key,
+YearD int not null,
+Ik_room int  null,
+Ik_TypeDest int  not null,
+Num int not null,
+CONSTRAINT FK_BeginNumDoc_TypeDest FOREIGN KEY(Ik_TypeDest) REFERENCES [dbo].TypeDest(Ik_TypeDest),
+CONSTRAINT BeginNumDoc_Room FOREIGN KEY(Ik_room) REFERENCES Room(Ik_room)
+);
+
+Create Table dbo.TypeDest (
+Ik_TypeDest int identity (1,1) not null
+Constraint PrimaryKeyTypeDest primary key,
+NumType int not null
 );
