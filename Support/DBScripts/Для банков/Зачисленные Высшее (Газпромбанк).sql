@@ -1,15 +1,17 @@
 --ÂÑÅ ÏÎËß Â EXCEL ÑÄÅËÀÒÜ ÒÅÊÑÒÎÂÛÌÈ!
 
 select distinct 
-	   Cshort_name_fac,
-	   Cname_spec,
-	   cName_direction,
-       '',
-	   43,
-	   Clastname,
-	   Cfirstname,
-	   Cotch,
+	   [PersonFullName],
+	   Dd_birth,
 	   iif(lSex = 0,'Æ','Ì') lSex,
+	   Cplacebirth,
+	   '',
+	   IIF(docs.Ik_vid_doc=16,2,1) vid_doc,
+	   --docs.Ik_vid_doc,
+	   isnull(Cd_seria,'') +' '+isnull(Np_number,'') Np_number,
+	   FORMAT(cast(Dd_vidan as DATE), 'd', 'de-de' ) Dd_vidan, 
+	   Cd_kem_vidan,
+	   '','','',
 	   isnull(pr.Cstrana,vrem.Cstrana) strana,
 	   '' Pr_index,
 	   isnull(pr.Cregion,vrem.Cregion) region,
@@ -20,13 +22,18 @@ select distinct
 	   isnull(iif(pr.b_i>0,substring(pr.BuildingNumber,1,pr.b_i - 1),pr.BuildingNumber),iif(vrem.b_i>0,substring(vrem.BuildingNumber,1,pr.b_i - 1),vrem.BuildingNumber)) dom,
 	   isnull(iif(pr.b_i>0,substring(pr.BuildingNumber,pr.b_i,1),pr.StructNumber),iif(vrem.b_i>0,substring(vrem.BuildingNumber,vrem.b_i,1),vrem.StructNumber)) korpus,
 	   isnull(pr.FlatNumber,vrem.FlatNumber) FlatNumber,
+
+	   Cshort_name_fac,
+	   Cname_spec,
+	   cName_direction,
+       '',
+	   43,
+	   Clastname,
+	   Cfirstname,
+	   Cotch,
 	   docs.cvid_doc,
 	   cast(Cd_seria as varchar(10)) Cd_seria,
 	   cast(Np_number as varchar(20)) Np_number,
-	   FORMAT(cast(Dd_vidan as DATE), 'd', 'de-de' ) Dd_vidan, 
-	   Cd_kem_vidan,
-	   Dd_birth,
-	   Cplacebirth,
 	   c_grazd,
 	   cast(ctelefon as varchar(20)) dom_ctelefon,
 	   '' SluzhTel,
@@ -64,7 +71,8 @@ from
 		   Strana.ik_type_grazd resident,
 		   NNyear,
 		   Cname_form_ed,
-		   CType_kat
+		   CType_kat,
+		   Person.[PersonFullName]
 	from dbo.Person,ABIT_postup,ABIT_Diapazon_spec_fac,dbo.Student,Relation_spec_fac,Spec_stud,Fac,
 		 Strana,Form_ed,Kat_zach,TypeKatZach,Direction
 	where ABIT_postup.nCode = dbo.Person.nCode and ABIT_Diapazon_spec_fac.NNrecord = ABIT_postup.NNrecord

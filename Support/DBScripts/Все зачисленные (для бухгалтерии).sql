@@ -63,7 +63,7 @@ from
 	--and Relation_spec_fac.Ik_form_ed = 1									   --очники
 	--and Relation_spec_fac.ik_fac not in (13,21,22,23)						   --не колледжи
 	and dbo.Student.nCode = ABIT_postup.nCode
-	and NNyear=year(GETDATE())-1
+	and NNyear=year(GETDATE())
 ) stud
 left join (select * from Doc_stud where Ik_vid_doc in (select Ik_vid_doc from documents where IsIdentity = 1)) docs
 on stud.nCode = docs.nCode

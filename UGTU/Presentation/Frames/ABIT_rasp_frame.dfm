@@ -322,8 +322,6 @@ inherited fmAbitRasp: TfmAbitRasp
       Height = 219
       Align = alClient
       TabOrder = 2
-      ExplicitTop = 287
-      ExplicitHeight = 216
       object Panel2: TPanel
         Left = 1
         Top = 1
@@ -331,7 +329,6 @@ inherited fmAbitRasp: TfmAbitRasp
         Height = 217
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 214
         object GroupBox1: TGroupBox
           Left = 1
           Top = 25
@@ -346,7 +343,6 @@ inherited fmAbitRasp: TfmAbitRasp
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          ExplicitHeight = 188
           object dbgSpisok: TDBGridEh
             Left = 2
             Top = 15
@@ -372,6 +368,7 @@ inherited fmAbitRasp: TfmAbitRasp
                 EditButtons = <>
                 FieldName = 'nnvedom'
                 Footers = <>
+                OnUpdateData = dbgSpisokColumns0UpdateData
               end
               item
                 DynProps = <>
@@ -403,7 +400,7 @@ inherited fmAbitRasp: TfmAbitRasp
           Width = 441
           Height = 24
           ButtonHeight = 30
-          ButtonWidth = 1223
+          ButtonWidth = 1247
           Caption = 'ToolBar4'
           Images = ImageList3
           TabOrder = 1
@@ -480,7 +477,6 @@ inherited fmAbitRasp: TfmAbitRasp
         Height = 217
         Align = alRight
         TabOrder = 1
-        ExplicitHeight = 214
         object GroupBox2: TGroupBox
           Left = 1
           Top = 25
@@ -495,7 +491,6 @@ inherited fmAbitRasp: TfmAbitRasp
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          ExplicitHeight = 188
           object dbgRooms: TDBGridEh
             Left = 2
             Top = 15
@@ -614,7 +609,7 @@ inherited fmAbitRasp: TfmAbitRasp
     Left = 483
     Top = 80
     Bitmap = {
-      494C010103000400140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -757,7 +752,7 @@ inherited fmAbitRasp: TfmAbitRasp
     Left = 263
     Top = 202
     Bitmap = {
-      494C010118001D00140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010118001D00180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000007000000001002000000000000070
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
