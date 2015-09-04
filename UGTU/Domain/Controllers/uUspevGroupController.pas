@@ -3498,6 +3498,7 @@ begin
   begin
     Report:=TUspevGroupController.Instance.BuildSpr(ListDist[i]);
     TWaitingController.GetInstance.Process(Report);
+
   end;
 end;
 

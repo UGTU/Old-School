@@ -8,7 +8,7 @@ uses
   uDMUgtuStructure,
   Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj,
   ComCtrls, Math,
-  ConstantRepository, DiscClasses,ExceptionBase;
+  ConstantRepository, DiscClasses,ExceptionBase,ReportsBase,uDMDocuments,uPrintMagazine;
 
 type
 
@@ -24,6 +24,7 @@ type
       : Integer;
     function CalculationDepIndex(ik_Grup: Integer): string;
     function CalculationBeginYearLern(): string;
+    function BuildSpr(datebegin,dateend:string): TReportBase;
     class function AccessInstance(Request: Integer):TDocController;
   end;
 
@@ -63,6 +64,15 @@ end;
 constructor TDocController.CreateInstance;
 begin
   inherited Create;
+end;
+
+function TDocController.BuildSpr(datebegin,dateend:string): TReportBase;
+begin
+        Result := PrintMagazine.Create(datebegin,dateend);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\PrintMagazine.xlt';
+
+
 end;
 
 function TDocController.CalculationBeginYearLern: string;

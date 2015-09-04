@@ -311,7 +311,12 @@ inherited fmDoc: TfmDoc
         object tbPrint: TToolButton
           Left = 46
           Top = 0
+          DropdownMenu = ppmPrint
           ImageIndex = 9
+          ParentShowHint = False
+          PopupMenu = ppmPrint
+          ShowHint = True
+          Style = tbsDropDown
           OnClick = tbPrintClick
         end
       end
@@ -375,7 +380,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000C80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000D80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1041,5 +1046,17 @@ inherited fmDoc: TfmDoc
       8003800F000180038003800F000180078007800F0001800F800F801F0001801F
       80FF803F0001803F80FFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object ppmPrint: TPopupMenu
+    Left = 264
+    Top = 208
+    object N1: TMenuItem
+      Caption = #1055#1077#1095#1072#1090#1100' '#1074#1099#1073#1088#1072#1085#1085#1099#1093' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
+      OnClick = tbPrintClick
+    end
+    object N2: TMenuItem
+      Caption = #1055#1077#1095#1072#1090#1100' '#1078#1091#1088#1085#1072#1083#1072
+      OnClick = N2Click
+    end
   end
 end

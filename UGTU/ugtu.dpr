@@ -432,7 +432,8 @@ uses
   Document in 'Domain\Classes\Document.pas',
   Destination in 'Domain\Classes\Destination.pas',
   uSprForGroup in 'Presentation\Forms\uSprForGroup.pas' {fmSprForGroup},
-  uDocController in 'Domain\Controllers\uDocController.pas';
+  uDocController in 'Domain\Controllers\uDocController.pas',
+  uPrintMagazine in 'Domain\Reports\uPrintMagazine.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

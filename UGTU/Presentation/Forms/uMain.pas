@@ -1397,6 +1397,7 @@ begin
     // frmMain.HelpKeyword:='Студент';
     (dbNode as TDBNodeStudObject).LoadData;
     Frame := TfmStudent;
+    (FFrame as TfmStudent).OnDocumentStateChanged:=DocumentStateChanged;
     FFrame.Hint :=
       inttostr(TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.data).ik);
     FFrame.FrameObject := dbNode;
