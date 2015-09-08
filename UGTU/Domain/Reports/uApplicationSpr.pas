@@ -132,7 +132,8 @@ begin
           Replace('#type_stud#', 'ранее обучавшегося в группе')
       else
         Replace('#type_stud#', 'студента(ки) группы');
-      ActiveSheet.Name := '№ '+sp_doc.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
+    //  ActiveSheet.Name := '№ '+sp_doc.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
+    ActiveSheet.Name := '№ '+sp_doc.FieldByName('NumberDoc').AsString +' '+ sp_pers.FieldByName('PersonSmallName').AsString;
       // if num_list >0 then
       // begin
       // CurrentWorkbook.SaveCopyAs('C:\Users\'+num_list.ToString()+'.xls',0);

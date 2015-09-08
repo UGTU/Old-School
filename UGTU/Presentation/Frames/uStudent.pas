@@ -2096,11 +2096,11 @@ begin
           FormNeuspSpr(obj.StudGrupKey, ik_dest);
         end;
 
-      7:
+     8:
         begin
           FormAcademSpr(obj.StudGrupKey, ik_dest);
         end;
-      8:
+      9:
         begin
           FormExtract(obj.StudGrupKey, ik_dest);
         end;
@@ -2852,7 +2852,7 @@ begin
     // dmDocs.dsOsn..ListSource:=''
     dmDocs.spOsn.Active := false;
     dmDocs.spOsn.Parameters.Refresh;
-    dmDocs.spOsn.Parameters.ParamByName('@Ik_destination').Value := 7;
+    dmDocs.spOsn.Parameters.ParamByName('@Ik_destination').Value := ik_destination;
     dmDocs.spOsn.Parameters.ParamByName('@Ik_StudGrup').Value := ik_studGrup;
     dmDocs.spOsn.Active := true;
     // dmDocs.spOsn.ExecProc;
@@ -2869,7 +2869,7 @@ begin
         tempDS.Open;
         tempDS.Insert;
         tempDS.FieldByName('Ik_studGrup').Value := ik_studGrup;
-        tempDS.FieldByName('Ik_destination').Value := 7;
+        tempDS.FieldByName('Ik_destination').Value := ik_destination;
         tempDS.FieldByName('DatePod').Value := date;
         tempDS.FieldByName('NumberDoc').Value := LastNum;
         tempDS.FieldByName('DateCreate').Value := date;
@@ -2888,7 +2888,7 @@ begin
 
         tempDSikdoc.CommandText :=
           'select MAX(Ik_Document)[maxid] from Document where Ik_studGrup=' +
-          ik_studGrup.ToString() + 'and Ik_destination= 7 and NumberDoc =' +
+          ik_studGrup.ToString() + 'and Ik_destination='+ik_destination.ToString()+' and NumberDoc =' +
           LastNum.ToString() + 'and Num_podrazd=''' + depInd + '''';
         tempDSikdoc.Connection := dm.DBConnect;
         tempDSikdoc.Open;

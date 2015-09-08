@@ -115,7 +115,7 @@ begin
             Replace('#pric#', 'Выпускная работа')
           end;
       end;
-       ActiveSheet.Name := '№ '+dsDoc.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
+       ActiveSheet.Name := '№ '+dsDoc.FieldByName('NumberDoc').AsString +' '+ sp_pers.FieldByName('PersonSmallName').AsString;
     end;
   finally
     sp_debt.Free;

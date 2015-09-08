@@ -1,4 +1,4 @@
-USE [UGTU_ACTTEST]
+USE [UGTU]
 GO
 
 /****** Object:  View [dbo].[ViewGroupStud]    Script Date: 18.08.2015 14:22:35 ******/
@@ -19,7 +19,7 @@ GO
 --SELECT * FROM [dbo].[GetGroupStudForPeriod](1565,GETDATE())--1641
 --выбирает ступисок студентов группы на переданую дату
 --select * from [ViewGroupStud] where Ik_grup=1565
-ALTER view [dbo].[ViewGroupStud]
+Create view [dbo].[ViewGroupStud]
 as
 SELECT  Person.PersonFullName, Person.PersonSmallName, Person.nCode, StudGrup.ik_zach, StudGrup.ik_kat_zach ,StudGrup.Ik_studGrup,StudGrup.Ik_grup ,  PersonAddress.ik_personAddress AS  ik_persAddr,
 PersonAddress.ik_AddressType  
