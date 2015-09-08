@@ -149,6 +149,7 @@ begin
       Replace('#podgot#', FReport[j].podgot);
       Replace('#spec#', FReport[j].spec);
     end;
+      ActiveSheet.Name := '¹ '+FReport[j].NumSpr.ToString();
   end;
 
 end;

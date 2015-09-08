@@ -111,7 +111,8 @@ begin
       Replace('#end#', day + '.' + sp_callspr.FieldByName('monthe').AsString +
         '.' + sp_callspr.FieldByName('yeare').AsString);
       Replace('#col#', sp_callspr.FieldByName('Kol_day').AsString);
-      ActiveSheet.Name := '¹ '+sp_callspr.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
+   //   ActiveSheet.Name := '¹ '+sp_callspr.FieldByName('NumberDoc').AsString+' '+ sp_pers.FieldByName('FIOrod').AsString;
+       ActiveSheet.Name := '¹ '+sp_callspr.FieldByName('NumberDoc').AsString +' '+ sp_pers.FieldByName('PersonSmallName').AsString;
     end;
 
   finally

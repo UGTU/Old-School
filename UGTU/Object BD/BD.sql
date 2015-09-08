@@ -28,6 +28,8 @@ CONSTRAINT FK_Destination_TipeDest FOREIGN KEY(Ik_TypeDest) REFERENCES [dbo].Typ
 
 --основание-назначение для справочника
 Create Table dbo.Base_Destination(
+ik_basedest int  IDENTITY (1,1) not null
+Constraint PrimaryKeyBase_Destination primary key ,
 Ik_destination1 int not null, 
 Ik_destination2 int not null,
 CONSTRAINT Base_Destination_Destination_FK1 FOREIGN KEY(Ik_destination1) REFERENCES Destination(Ik_destination),

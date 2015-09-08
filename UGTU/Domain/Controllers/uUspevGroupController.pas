@@ -1514,7 +1514,7 @@ begin
       for  i  := 0 to Dest.ListDoc.Count-1 do
        begin
         report := TSpravka_Report.Create(Dest.ik_dest, Dest.ListDoc[i].ik_doc);
-        result_report := report.AddReport();
+         result_report := report.AddReport();
         ListSpr.Add(result_report);
        end;
          Result := SpravkaReport.Create(ListSpr);
@@ -1555,13 +1555,13 @@ begin
           'reports\SprDebt.xlt';
       end;
 
-    7:
+    8:
       begin
         Result := AkademSprReport.Create(Dest.ListDoc);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\Akadem_spr.xlt';
       end;
-    8:
+    9:
       begin
         Result := ExtractSprReport.Create(Dest.ListDoc);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
