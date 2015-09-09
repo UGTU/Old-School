@@ -200,7 +200,7 @@ type
     dtpStart: TDateTimePicker;
     ilMain: TImageList;
     dbgehMagazineDocsStud: TDBGridEh;
-    ToolButton15: TToolButton;
+    tbCreate: TToolButton;
     cbeDest: TDBLookupComboboxEh;
     Label10: TLabel;
     dtpEnd: TDateTimePicker;
@@ -257,7 +257,7 @@ type
     procedure bbResetClick(Sender: TObject);
     procedure tbUtvClick(Sender: TObject);
     procedure tbGotClick(Sender: TObject);
-    procedure ToolButton15Click(Sender: TObject);
+    procedure tbCreateClick(Sender: TObject);
     procedure dbgehMagazineDocsStudDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
@@ -1020,7 +1020,7 @@ begin
             .AsString.Length <> 0 then
           begin
             i := i + 1;
-            ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+            ListDist := TDocController.Instance.AddListDest(ListDist,
               uDMDocuments.dmDocs.adodsDocStud.FieldByName('ik_destination')
               .AsInteger, dmDocs.adodsDocStud.FieldByName('Ik_Document')
               .AsInteger);
@@ -1031,7 +1031,7 @@ begin
     end;
 
     // TUspevGroupController.Instance.BuildTemplate(ListDoc, i);
-    TUspevGroupController.Instance.PrintAllDoc(ListDist);
+    TDocController.Instance.PrintAllDoc(ListDist);
 
   finally
     dsDoc.Free;
@@ -1306,9 +1306,9 @@ begin
     end;
     if (editF.ModalResult = mrYes) then
     begin
-      Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey,
-        1, LastNum);
-      TWaitingController.GetInstance.Process(Report);
+//      Report := TUspevGroupController.Instance.BuildSpravka2014(obj.StudGrupKey,
+//        1, LastNum);
+//      TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
     uDMDocuments.dmDocs.adodsDocStud.Open;
@@ -2060,7 +2060,7 @@ begin
   eAddInfo.BevelKind := bknone;
 end;
 
-procedure TfmStudent.ToolButton15Click(Sender: TObject);
+procedure TfmStudent.tbCreateClick(Sender: TObject);
 var
   ik_dest: Integer;
 begin
@@ -2337,9 +2337,9 @@ begin
 
     if (fReview.ModalResult = mrYes) then
     begin
-      Report := TUspevGroupController.Instance.BuildCallSpr(obj.StudGrupKey,
-        sem, LastNum, tempDSikdoc.FieldByName('maxid').AsInteger,
-        fReview.dtpBegin.date, fReview.dtpEnd.date);
+//      Report := TUspevGroupController.Instance.BuildCallSpr(obj.StudGrupKey,
+//        sem, LastNum, tempDSikdoc.FieldByName('maxid').AsInteger,
+//        fReview.dtpBegin.date, fReview.dtpEnd.date);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -2924,9 +2924,9 @@ begin
     begin
       ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
       ListDist := TObjectList<TDest>.Create;
-      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+      ListDist := TDocController.Instance.AddListDest(ListDist,
         ik_destination, ik_doc);
-      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
+      Report := TDocController.Instance.BuildSprReport(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3104,9 +3104,9 @@ begin
     begin
       ListDist := TObjectList<TDest>.Create;
 
-      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+      ListDist := TDocController.Instance.AddListDest(ListDist,
         ik_destination, ik_doc);
-      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
+      Report := TDocController.Instance.BuildSprReport(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3347,9 +3347,9 @@ begin
       // LastNum, tempDSikdoc.FieldByName('maxid').AsInteger,
       // fReview.dtpBegin.date, fReview.dtpEnd.date);
       ListDist := TObjectList<TDest>.Create;
-      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+      ListDist := TDocController.Instance.AddListDest(ListDist,
         ik_destination, ik_doc);
-      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
+      Report := TDocController.Instance.BuildSprReport(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3445,9 +3445,9 @@ begin
     if (editF.ModalResult = mrYes) then // печатаем
     begin
       ListDist := TObjectList<TDest>.Create;
-      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+      ListDist := TDocController.Instance.AddListDest(ListDist,
         ik_destination, ik_doc);
-      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
+      Report := TDocController.Instance.BuildSprReport(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3596,9 +3596,9 @@ begin
     begin
       ListDist := TObjectList<TDest>.Create;
 
-      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+      ListDist := TDocController.Instance.AddListDest(ListDist,
         ik_destination, ik_doc);
-      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
+      Report := TDocController.Instance.BuildSprReport(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3798,9 +3798,9 @@ begin
     if (editF.ModalResult = mrYes) then
     begin
       ListDist := TObjectList<TDest>.Create;
-      ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+      ListDist :=TDocController.Instance.AddListDest(ListDist,
         ik_destination, ik_doc);
-      Report := TUspevGroupController.Instance.BuildSpr(ListDist[0]);
+      Report := TDocController.Instance.BuildSprReport(ListDist[0]);
       TWaitingController.GetInstance.Process(Report);
     end;
     uDMDocuments.dmDocs.adodsDocStud.Close;
@@ -3808,54 +3808,10 @@ begin
   finally
     tempDS.Free;
     tempDSikdoc.Free;
-    // sp_num.Free;
-    // sp_depInd.Free;
     dsDoc.Free;
     Report.Free;
   end;
 end;
 
-{ try
-  ExAppl:=CreateOleObject('Excel.Application');
-  ExAppl.WorkBooks.Add;
-  wb:=ExAppl.WorkBooks.item[ExAppl.WorkBooks.count];
-  ExAppl.DisplayAlerts:= false;
-  dmUspevaemost.adospSelUspevForStud.First;
-  i := 1;
-  wb.sheets[1].cells[i,1] := 'Предмет';
-  wb.sheets[1].cells[i,2] := 'Вид отчётности';
-  wb.sheets[1].cells[i,3] := 'Оценка';
-  wb.sheets[1].cells[i,4] := 'Дата';
-  wb.sheets[1].cells[i,5] := 'Преподаватель';
-  wb.sheets[1].cells[i,6] := 'Семестр';
-  Inc(i);
-  while not dmUspevaemost.adospSelUspevForStud.Eof do
-  begin
-  wb.sheets[1].cells[i,1] := dmUspevaemost.adospSelUspevForStud.Fields[0].Value;
-  wb.sheets[1].cells[i,2] := dmUspevaemost.adospSelUspevForStud.Fields[1].Value;
-  wb.sheets[1].cells[i,3] := dmUspevaemost.adospSelUspevForStud.Fields[2].Value;
-  wb.sheets[1].cells[i,4] := dmUspevaemost.adospSelUspevForStud.Fields[3].Value;
-  wb.sheets[1].cells[i,5] := dmUspevaemost.adospSelUspevForStud.Fields[4].Value;
-  wb.sheets[1].cells[i,6] := dmUspevaemost.adospSelUspevForStud.Fields[5].Value;
-  dmUspevaemost.adospSelUspevForStud.Next;
-  Inc(i);
-  end;
-  wb.sheets[1].Range['A1:F'+intToStr(i-1)].Borders.Weight:=2;
-  wb.sheets[1].Range['A1'].ColumnWidth:=45;
-  wb.sheets[1].Range['B1'].ColumnWidth:=13;     //фио
-  wb.sheets[1].Range['C1'].ColumnWidth:=8;
-  wb.sheets[1].Range['D1'].ColumnWidth:=9;
-  wb.sheets[1].Range['E1'].ColumnWidth:=21;
-  wb.sheets[1].Range['F1'].ColumnWidth:=7;
-
-  ExAppl.DisplayAlerts:= true;
-  ExAppl.Visible := true;
-  except
-  MessageBox(Handle, 'Произошла ошибка при экспорте успеваемости в Excel.','ИС "УГТУ"',
-  MB_OK) ;
-  ExAppl.Quit;
-  ExAppl:= UnAssigned;
-  end;
-  end; }
 
 end.

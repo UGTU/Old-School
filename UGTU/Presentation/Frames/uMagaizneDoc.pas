@@ -963,7 +963,7 @@ begin
             .AsString.Length <> 0 then
           begin
             i := i + 1;
-            ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+            ListDist := TDocController.Instance.AddListDest(ListDist,
               uDMDocuments.dmDocs.adodsDocs.FieldByName('ik_destination')
               .AsInteger, dmDocs.adodsDocs.FieldByName('Ik_Document')
               .AsInteger);
@@ -974,7 +974,7 @@ begin
     end;
 
     // TUspevGroupController.Instance.BuildTemplate(ListDoc, i);
-    TUspevGroupController.Instance.PrintAllDoc(ListDist);
+    TDocController.Instance.PrintAllDoc(ListDist);
 
   finally
     dsDoc.Free;

@@ -3112,14 +3112,14 @@ begin
           except
             dm.DBConnect.RollbackTrans;
           end;
-        ListDist := TUspevGroupController.Instance.AddListDest(ListDist,
+        ListDist := TDocController.Instance.AddListDest(ListDist,
           ik_destination, ik_doc);
         dmDocs.adodsStudGrup.Next;
       end;
       //
       if (fReview.ModalResult = mrYes) then
       begin
-        TUspevGroupController.Instance.PrintAllDoc(ListDist);;
+        TDocController.Instance.PrintAllDoc(ListDist);;
 
       end;
     end;

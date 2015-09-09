@@ -8,7 +8,12 @@ uses
   uDMUgtuStructure,
   Forms, Dialogs, DBLookupEh, Variants, GeneralController, ExcelXP, ComObj,
   ComCtrls, Math,
-  ConstantRepository, DiscClasses,ExceptionBase,ReportsBase,uDMDocuments,uPrintMagazine;
+  ConstantRepository, DiscClasses,ExceptionBase,ReportsBase,uDMDocuments,uPrintMagazine,
+  Destination,  uReviewDoc, uCallSpr, uApplicationSpr, uAkademSpr, uDebtSpr, uNotification,
+  uExtractSpr, uWaitingController,
+  uReviewCallSpr, uReviewApplication, uReviewAkadem,
+  uReviewNotify, Document, Spravka, SpravkaReport2014, Spravka2014,
+  System.Generics.Collections;
 
 type
 
@@ -26,6 +31,11 @@ type
     function CalculationBeginYearLern(): string;
     function BuildSpr(datebegin,dateend:string): TReportBase;
     class function AccessInstance(Request: Integer):TDocController;
+    function BuildSprReport(Dest: TDest): TReportBase;
+    function AddListDest(ListDist: TObjectList<TDest>; ik_dest, ik_doc: Integer)
+      : TObjectList<TDest>;
+
+    procedure PrintAllDoc(ListDist: TObjectList<TDest>);
   end;
 
 implementation
@@ -36,6 +46,19 @@ FDocControllerInstance: TDocController = nil;
 class function TDocController.Instance: TDocController;
 begin
   Result := AccessInstance(1);
+end;
+
+procedure TDocController.PrintAllDoc(ListDist: TObjectList<TDest>);
+var
+  report: TReportBase;
+  i: Integer;
+begin
+  for i := 0 to ListDist.Count - 1 do
+  begin
+    Report:=TDocController.Instance.BuildSprReport(ListDist[i]);
+    TWaitingController.GetInstance.Process(Report);
+
+  end;
 end;
 
 class function TDocController.AccessInstance(Request: Integer): TDocController;
@@ -66,13 +89,122 @@ begin
   inherited Create;
 end;
 
+
+
+function TDocController.AddListDest(ListDist: TObjectList<TDest>; ik_dest,
+  ik_doc: Integer): TObjectList<TDest>;
+var
+  Dest: TDest;
+  doc: TDopDoc;
+  ind, j: Integer;
+begin
+  ind := -1;
+  if (ik_dest > 0) and (ik_doc > 0) then
+  begin
+    for j := 0 to ListDist.Count - 1 do
+      if ListDist[j].ik_dest = ik_dest then
+        ind := j;
+    if ind < 0 then
+    begin
+      Dest := TDest.Create(ik_dest);
+      ListDist.Add(Dest);
+      ind := ListDist.Count - 1;
+    end;
+    doc := TDopDoc.Create(ik_doc);
+    ListDist[ind].ListDoc.Add(doc);
+  end;
+  Result := ListDist;
+
+end;
+
 function TDocController.BuildSpr(datebegin,dateend:string): TReportBase;
 begin
         Result := PrintMagazine.Create(datebegin,dateend);
         Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\PrintMagazine.xlt';
+end;
 
+function TDocController.BuildSprReport(Dest: TDest): TReportBase;
+var
+  ik_doc, ik_destination, i: Integer;
+  report: TSpravka_Report;
+  result_report: TSpravka;
+  FindRange: variant;
+  ListSpr: TObjectList<TSpravka>;
+begin
+ try
+ ListSpr:=TObjectList<TSpravka> .Create;
+  case (Dest.ik_dest) of
+    1:
+      begin
+      for  i  := 0 to Dest.ListDoc.Count-1 do
+       begin
+        report := TSpravka_Report.Create(Dest.ik_dest, Dest.ListDoc[i].ik_doc);
+        result_report := report.AddReport();
+        ListSpr.Add(result_report);
+       end;
+         Result := SpravkaReport.Create(ListSpr);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\Sprv.xlt';
+      end;
 
+    2:
+      begin
+      for  i  := 0 to Dest.ListDoc.Count-1 do
+       begin
+        report := TSpravka_Report.Create(Dest.ik_dest, Dest.ListDoc[i].ik_doc);
+         result_report := report.AddReport();
+        ListSpr.Add(result_report);
+       end;
+         Result := SpravkaReport.Create(ListSpr);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprvPens.xlt';
+
+      end;
+
+    3:
+      begin
+        Result := CallSprReport.Create(Dest.ListDoc);
+
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\Spr—hallenge.xlt';
+
+      end;
+
+    4:
+      begin
+        Result := ApplSprReport.Create(Dest.ListDoc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprApplication.xlt';
+      end;
+    5:
+      begin
+        Result := NotificationSprReport.Create(Dest.ListDoc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprNotification.xlt';
+      end;
+    6:
+      begin
+        Result := DebtSprReport.Create(Dest.ListDoc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprDebt.xlt';
+      end;
+
+    8:
+      begin
+        Result := AkademSprReport.Create(Dest.ListDoc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\Akadem_spr.xlt';
+      end;
+    9:
+      begin
+        Result := ExtractSprReport.Create(Dest.ListDoc);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\SprExtract.xlt';
+      end;
+  end;
+ finally
+ end;
 end;
 
 function TDocController.CalculationBeginYearLern: string;

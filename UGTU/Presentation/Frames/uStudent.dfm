@@ -1055,7 +1055,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 393
+                Height = 392
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1863,12 +1863,11 @@ inherited fmStudent: TfmStudent
               ParentShowHint = False
               ShowHint = True
               TabOrder = 0
-              object ToolButton15: TToolButton
+              object tbCreate: TToolButton
                 Left = 0
                 Top = 0
-                Caption = 'ToolButton15'
                 ImageIndex = 0
-                OnClick = ToolButton15Click
+                OnClick = tbCreateClick
               end
               object tbUtv: TToolButton
                 Left = 23
@@ -2192,6 +2191,7 @@ inherited fmStudent: TfmStudent
     Caption = 'ToolBar1'
     Images = frmMain.ImageList1
     TabOrder = 2
+    ExplicitTop = -4
     object ToolButton4: TToolButton
       Left = 0
       Top = 0
@@ -2304,7 +2304,7 @@ inherited fmStudent: TfmStudent
     Left = 386
     Top = 167
     Bitmap = {
-      494C010106000900CC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900D00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2658,7 +2658,7 @@ inherited fmStudent: TfmStudent
     Left = 646
     Top = 224
     Bitmap = {
-      494C010111004000300210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000340210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
