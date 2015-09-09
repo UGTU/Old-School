@@ -2931,41 +2931,22 @@ var
   d1, z: TDateTime;
   fReview: TfmSprForGroup;
   datebegin: string;
-  // AYear, AMonth, ADay: word;
   week1, week2, numweek, k, h, i, sem, Year, ik_doc: Integer;
   mask1, mask2, dateb, l, depInd: string;
   sp_vidz: TADODataSet;
   sp_info: TADOStoredProc;
-  //
   tempDS, tempDSchall, tempDSikdoc, tempDSsm: TADODataSet;
-  // Report: TReportBase;
   LastNum: Integer;
-  // d3, d2: TDateTime;
-  // // sp_num: TADODataSet;
-  // // sp_depInd: TADODataSet;
-  // dsDoc: TADODataSet;
-  // ListDist: TObjectList<TDest>;
-  // dest: TDest;
-  // doc: TDopDoc;
   ListDist: TObjectList<TDest>;
 begin
   id_grup := TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.data).ik;
   ListDist := TObjectList<TDest>.Create;
   inherited;
   try
-    // dsDoc := TADODataSet.Create(nil);
     tempDS := TGeneralController.Instance.GetNewADODataSet(true);
     tempDSchall := TGeneralController.Instance.GetNewADODataSet(true);
     tempDSikdoc := TADODataSet.Create(nil);
     tempDSsm := TGeneralController.Instance.GetNewADODataSet(true);
-
-    // dateb := TDocController.Instance.CalculationBeginYearLern();
-    // depInd := TDocController.Instance.CalculationDepIndex(ik_studGrup);
-    // LastNum := TDocController.Instance.CalculationLastNum(ik_studGrup,
-    // ik_destination);
-
-    // // --------------------------------------------------------------------------
-    // DecodeDate(Now, AYear, AMonth, ADay);
     sp_info := TADOStoredProc.Create(nil);
     sp_info.ProcedureName := 'InfForGrup;1';
     sp_info.Connection := dm.DBConnect;
@@ -2982,13 +2963,6 @@ begin
     fReview.dtUtv.Format := '';
     fReview.dtUtv.Date := Date;
     fReview.dtGot.Format := #32;
-    // fReview.dtpArrival.Format := #32;
-    // // ищем информацию о студенте
-    // dsDoc.CommandText := 'select * from StudInfoForDocs Where ik_studGrup=' +
-    // ik_studGrup.ToString();
-    // dsDoc.Connection := dm.DBConnect;
-    // dsDoc.Open;
-    // dsDoc.First;
     Case ik_destination of
       3:
         fReview.eDest.Text := 'Справка-вызов';
@@ -3001,11 +2975,6 @@ begin
     sem := sp_info.FieldByName('dop_sem').AsInteger;
     fReview.dtpBegin.Date := Now;
     fReview.dtpEnd.Date := Now;
-    // dmDocs.spStudAddressProc.Active := false;
-    // dmDocs.spStudAddressProc.Parameters.Refresh;
-    // dmDocs.spStudAddressProc.Parameters.ParamByName('@Ik_StudGrup').Value :=
-    // ik_studGrup;
-    // dmDocs.spStudAddressProc.Active := true;
     // // ---------------------
     fReview.cbeSem.Clear;
     for i := 1 to sem do
@@ -3022,9 +2991,6 @@ begin
         with dmDocs.adodsStudGrup do
           try
             dm.DBConnect.BeginTrans;
-
-            // // // добавляем справку
-            //
             tempDS.CommandText := 'Select * from Document ';
             tempDS.Open;
             tempDS.Insert;
@@ -3041,7 +3007,6 @@ begin
             tempDS.FieldByName('Num_podrazd').Value := depInd;
             tempDS.Post;
             tempDS.UpdateBatch();
-
             k := 0;
             if (fReview.cbePrich.Text = 'Промежуточная аттестация') then
               k := 55;
@@ -3054,7 +3019,6 @@ begin
             sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup='
               + id_grup.ToString() + 'and n_sem=' + sem.ToString() +
               ' and iK_vid_zanyat=' + k.ToString();
-            // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
             sp_vidz.Connection := dm.DBConnect;
             sp_vidz.Open;
             sp_vidz.First;
@@ -3103,12 +3067,6 @@ begin
             tempDSchall.Close;
             tempDSikdoc.Close;
             tempDSsm.Close;
-
-            // tempDS.Free;
-            // tempDSchall.Free;
-            // tempDSikdoc.Free;
-            //
-            // tempDSsm.Free;
           except
             dm.DBConnect.RollbackTrans;
           end;
@@ -3125,14 +3083,9 @@ begin
     end;
   finally
     sp_info.Free;
-    // sp_vidz.Free;
     tempDS.Free;
     tempDSchall.Free;
     tempDSikdoc.Free;
-    // sp_num.Free;
-    // sp_depInd.Free;
-    // dsDoc.Free;
-    // Report.Free;
     tempDSsm.Free;
   end;
 
