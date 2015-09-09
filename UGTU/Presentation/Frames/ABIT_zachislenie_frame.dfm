@@ -471,6 +471,20 @@ inherited fmZach: TfmZach
             ShowHint = True
             Style = tbsDropDown
           end
+          object ToolButton23: TToolButton
+            Left = 184
+            Top = 0
+            Action = actPrikazAppoint
+            ParentShowHint = False
+            ShowHint = True
+          end
+          object ToolButton24: TToolButton
+            Left = 207
+            Top = 0
+            Action = actDelFromGroup
+            ParentShowHint = False
+            ShowHint = True
+          end
         end
         object s_ik: TComboBox
           Left = 485
@@ -515,7 +529,7 @@ inherited fmZach: TfmZach
               FieldName = 'fio'
               Footers = <>
               Title.Caption = #1060#1048#1054' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072
-              Width = 150
+              Width = 100
             end
             item
               DynProps = <>
@@ -536,22 +550,36 @@ inherited fmZach: TfmZach
               Width = 83
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_kat_zach'
               Footers = <>
               MaxWidth = 125
+              Title.Alignment = taCenter
               Title.Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103
               Width = 121
             end
             item
+              Alignment = taCenter
               DynProps = <>
               EditButtons = <>
               FieldName = 'cname_zach'
               Footers = <>
               MaxWidth = 125
+              Title.Alignment = taCenter
               Title.Caption = #1057#1086#1089#1090#1086#1103#1085#1080#1077' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
               Width = 125
+            end
+            item
+              Alignment = taCenter
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'Dd_prikaz'
+              Footers = <>
+              ReadOnly = False
+              Title.Alignment = taCenter
+              Title.Caption = #1055#1088#1080#1082#1072#1079
             end
             item
               DynProps = <>
@@ -584,6 +612,7 @@ inherited fmZach: TfmZach
               FieldName = 'SummBall'
               Footers = <>
               Title.Caption = #1057#1091#1084#1084#1072' '#1073#1072#1083#1083#1086#1074
+              Width = 34
             end
             item
               DynProps = <>
@@ -591,6 +620,7 @@ inherited fmZach: TfmZach
               FieldName = 'SredBall'
               Footers = <>
               Title.Caption = #1057#1088#1077#1076'. '#1073#1072#1083#1083
+              Width = 34
             end
             item
               DynProps = <>
@@ -598,6 +628,7 @@ inherited fmZach: TfmZach
               FieldName = 'MinBall'
               Footers = <>
               Title.Caption = #1052#1080#1085'. '#1073#1072#1083#1083
+              Width = 34
             end
             item
               DynProps = <>
@@ -843,7 +874,7 @@ inherited fmZach: TfmZach
     Left = 483
     Top = 80
     Bitmap = {
-      494C010105004000580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105004000640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1118,7 +1149,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C010103000400580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828
@@ -1397,6 +1428,19 @@ inherited fmZach: TfmZach
       Hint = #1042#1099#1076#1072#1090#1100' '#1085#1086#1084#1077#1088#1072' '#1079#1072#1095#1077#1090#1085#1099#1093' '#1082#1085#1080#1078#1077#1082
       ImageIndex = 73
       OnExecute = actGiveZachNumberExecute
+    end
+    object actPrikazAppoint: TAction
+      Category = 'Prikaz'
+      Caption = 'actPrikazAppoint'
+      Hint = #1053#1072#1079#1085#1072#1095#1080#1090#1100' '#1087#1088#1080#1082#1072#1079' '#1076#1083#1103' '#1079#1072#1095#1080#1089#1083#1077#1085#1085#1099#1093
+      ImageIndex = 69
+      OnExecute = actPrikazAppointExecute
+    end
+    object actDelFromGroup: TAction
+      Category = 'Prikaz'
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072' '#1080#1079' '#1075#1088#1091#1087#1087#1099
+      ImageIndex = 57
+      OnExecute = actDelFromGroupExecute
     end
   end
   object adoqTypeKatZach: TADOQuery

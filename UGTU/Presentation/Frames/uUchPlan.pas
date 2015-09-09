@@ -233,6 +233,7 @@ begin
   fGroupIK := 0;
   fTypePlan := key_ModelPlan;
   IsSetPlan := false;
+  dbcbFormEd.KeyValue := NULL;
   dsDisc.DataSet := dm.aspGetDiscModel;
   SetVisualProperty; // визуальные настройки
   cbApproved.Visible := true;
@@ -399,7 +400,7 @@ begin
   // begin
   // LocalLog.AddEntry('Добавление/редактирование учебного плана');
   dsGetFgosBySpec.DataSet := TFgosController.Instance.getFgosBySpec(fSpecIK);
-  if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value = NULL and (VidGos = 2))
+  if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value = NULL and (VidGos = FGOS3))
   then
     Application.MessageBox
       ('Необходимо создать ФГОС для текущего направления подготовки',
@@ -411,7 +412,6 @@ begin
     try
       try
         frmUchPlanAddNew.IK := FIKPlan;
-        // dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
       except
         frmUchPlanAddNew.IK := 0;
       end;
@@ -426,19 +426,21 @@ begin
       if ((frmUchPlanAddNew.ShowModal() = mrOk) or
         (frmUchPlanAddNew.bbApply.Tag = 1)) then
       begin
-        if fVidGos > FGOS2 then
-          TGeneralController.Instance.CloseLockupCB(@dbcbSpclz)
-        else
+        if fVidGos = FGOS2 then
+        {  TGeneralController.Instance.CloseLockupCB(@dbcbSpclz)
+        else }
         begin
           dbcbSpclz.ListSource.DataSet.Open;
           dbcbSpclz.KeyValue := frmUchPlanAddNew.dbcbSpclz.KeyValue;
         end;
         TUchPlanController.Instance.getCurrentFormEd
           (@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
+        ReadModelUchPlan;
         dbcbFormEd.KeyValue := frmUchPlanAddNew.dbcbFormEd.KeyValue;
         dbcbYear.KeyValue := frmUchPlanAddNew.dbcbYear.KeyValue;
         dtpDateUtv.Date := frmUchPlanAddNew.dtpDateUtv.Date;
       end;
+
     finally
       frmUchPlanAddNew.Free;
     end;
@@ -459,9 +461,11 @@ begin
     begin
       TUchPlanController.Instance.DeleteUchPlan
         (dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger);
-      TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
-      dbcbSpclz.KeyValue := TUchPlanController.Instance.
-        getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true);
+      if (VidGos = FGOS2) then
+      begin
+        TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
+        dbcbSpclz.KeyValue := TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true);
+      end;
       if dbcbSpclz.KeyValue = NULL then
         dbcbFormEd.KeyValue := TUchPlanController.Instance.getCurrentFormEd
           (@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
@@ -469,6 +473,7 @@ begin
         actList.Actions[i].OnUpdate(actList.Actions[i]);
       // LocalLog.AddEntry('План удалён');
     end;
+    ReadModelUchPlan;
   end;
 end;
 

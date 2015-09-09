@@ -135,6 +135,8 @@ type
     procedure dbgSpisokColumns3UpdateData(Sender: TObject; var Text: string;
       var Value: Variant; var UseText, Handled: Boolean);
     procedure dbgSpisokCellClick(Column: TColumnEh);
+    procedure dbgSpisokColumns0UpdateData(Sender: TObject; var Text: string;
+      var Value: Variant; var UseText, Handled: Boolean);
     
 
   protected
@@ -304,6 +306,13 @@ begin
   begin
     dbgSpisok.Options:= dbgSpisok.Options-[dgRowSelect]+[dgEditing];
   end;
+end;
+
+procedure TfmAbitRasp.dbgSpisokColumns0UpdateData(Sender: TObject;
+  var Text: string; var Value: Variant; var UseText, Handled: Boolean);
+begin
+  inherited;
+  Modified:= true;
 end;
 
 procedure TfmAbitRasp.dbgSpisokColumns2UpdateData(Sender: TObject;

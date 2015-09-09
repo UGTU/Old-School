@@ -58,6 +58,8 @@ begin
 
   dm.aspAbitExamType.Active := false;
   dm.aspAbitExamType.Parameters[1].Value := Year;
+  {if EditMode then
+    dm.aspAbitExamType.Parameters[2].Value := }
   dm.aspAbitExamType.Parameters[2].Value := KatZachIK;
   dm.aspAbitExamType.Active := true;
 

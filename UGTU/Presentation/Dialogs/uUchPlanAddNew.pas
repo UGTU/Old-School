@@ -1,5 +1,6 @@
 unit uUchPlanAddNew;
- {#Author villain@ist.ugtu.net}
+
+{ #Author villain@ist.ugtu.net }
 interface
 
 uses
@@ -52,15 +53,15 @@ type
   private
     isAlreadyLoad: boolean;
     FSpecFac: integer;
-    VidGos:integer;
-//    iUchPlanIK: integer;
+    VidGos: integer;
+    // iUchPlanIK: integer;
     procedure Load();
   protected
-    function DoApply:boolean; override;
-    function DoCancel:boolean;override;
+    function DoApply: boolean; override;
+    function DoCancel: boolean; override;
   public
     procedure Read();
-    property  specfac:integer read FSpecFac write FSpecFac;
+    property specfac: integer read FSpecFac write FSpecFac;
   end;
 
 var
@@ -70,7 +71,7 @@ implementation
 
 {$R *.dfm}
 
-uses uUchPlan, uDM, DB, uDMUchPlan,  ConstantRepository;
+uses uUchPlan, uDM, DB, uDMUchPlan, ConstantRepository;
 
 { TfrmAddUchPlan }
 
@@ -78,143 +79,157 @@ function TfrmUchPlanAddNew.DoApply: boolean;
 var
   UchPlanIK: integer;
 begin
-  //inherited;
+  // inherited;
   if (CheckBox1.Checked) then
     if (dbcbYearCopy.KeyValue = NULL) then
+    begin
+      Application.MessageBox('Необходимо указать используемый учебный план...',
+        'Учебный план', MB_ICONERROR);
+      Result := false;
+      exit;
+    end;
+  UchPlanIK := self.ik;
+  dm.DBConnect.BeginTrans;
+  try
+    if (VidGos > FGOS2) and dbcbSpclz.KeyValue = NULL then
+      dbcbSpclz.KeyValue := 0;
+
+    if (CheckBox1.Checked) then         //если создаем план из копии
+    begin
+      Panel2.Visible := true;
+      Refresh;
+        TUchPlanController.Instance.CopyUchPlan
+          (dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger,
+          UchPlanIK,dbcbYear.KeyValue);
+
+     {   if (CheckBox2.Checked) then // перенос оценок со старого уч. плана
+          TUchPlanController.Instance.UpdateGrup
+            (dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan')
+            .AsInteger, UchPlanIK, specfac);}
+
+        Panel2.Visible := false;
+    end else
+      if not TUchPlanController.Instance.SaveUchPlan(self.Tag, UchPlanIK,
+        Label2.Tag, dbcbSpclz.KeyValue, dbcbFormEd.KeyValue, dbcbYear.KeyValue,
+        dtpDateUtv.Date, (VidGos > FGOS2)) then
       begin
-        Application.MessageBox('Необходимо указать используемый учебный план...','Учебный план',MB_ICONERROR);
-        Result:= false;
+        Result := false;
         exit;
       end;
-  UchPlanIK:= self.ik;
-  dm.DBConnect.BeginTrans;
- try
-
-  if (VidGos=2) and dbcbSpclz.KeyValue = null
-     then dbcbSpclz.KeyValue:=0;
-  if not TUchPlanController.Instance.SaveUchPlan(self.Tag, UchPlanIK, Label2.Tag, dbcbSpclz.KeyValue, dbcbFormEd.KeyValue, dbcbYear.KeyValue, dtpDateUtv.Date, (VidGos > FGOS2))
-  then
-  begin
-    Result:= false;
-    exit;
+    Result := true;
+    dm.DBConnect.CommitTrans;
+  except
+    dm.DBConnect.RollbackTrans;
+    raise;
   end;
-  if (CheckBox1.Checked) then
-  begin
-    Panel2.Visible:= true;
-    try
-      Refresh;
-      TUchPlanController.Instance.CopyUchPlan(dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger, UchPlanIK);
-
-      if (CheckBox2.Checked) then  //перенос оценок со старого уч. плана
-        TUchPlanController.Instance.UpdateGrup(dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger,UchPlanIK,specfac);
-
-    finally
-      Panel2.Visible:= false;
-    end;
-  end;
-  Result:= true;
-  dm.DBConnect.CommitTrans;
- except
-   dm.DBConnect.RollbackTrans;
-   raise;
- end;
 end;
 
-function TfrmUchPlanAddNew.DoCancel:boolean;
+function TfrmUchPlanAddNew.DoCancel: boolean;
 begin
-  //inherited;
-  case (Application.MessageBox('Сохранить внесенные изменения?','Измение учебного плана', MB_YESNOCANCEL)) of
-      mrYes:
-        begin
-          OK;
-          Result:= false;
-        end;
-      mrNo: Result:= true;
-      mrCancel: Result:= false;
-      else Result:= false;
-   end;
+  // inherited;
+  case (Application.MessageBox('Сохранить внесенные изменения?',
+    'Измение учебного плана', MB_YESNOCANCEL)) of
+    mrYes:
+      begin
+        OK;
+        Result := false;
+      end;
+    mrNo:
+      Result := true;
+    mrCancel:
+      Result := false;
+  else
+    Result := false;
+  end;
 end;
 
 procedure TfrmUchPlanAddNew.dtpDateUtvChange(Sender: TObject);
 begin
-if (VidGos=1) then
-  IsModified:= (dbcbSpclz.KeyValue <> NULL) and (dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL)
-else
-  IsModified:= (dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL)
+  if (VidGos = 1) then
+    IsModified := (dbcbSpclz.KeyValue <> NULL) and (dbcbFormEd.KeyValue <> NULL)
+      and (dbcbYear.KeyValue <> NULL)
+  else
+    IsModified := (dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL)
 end;
 
 procedure TfrmUchPlanAddNew.Read;
 begin
-  TGeneralController.Instance.InitializeLockupCB(@dbcbSpclz, 'iK_spclz', 'cName_spclz');
-  TGeneralController.Instance.InitializeLockupCB(@dbcbFormEd, 'iK_form_ed', 'Cname_form_ed');
-  TGeneralController.Instance.InitializeLockupCB(@dbcbYear, 'ik_year_uch_pl', 'year_value');
-  //TGeneralController.Instance.InitializeLockupCB(@dbcbYearUtv, 'ik_year_uch_pl', 'year_value');
+  TGeneralController.Instance.InitializeLockupCB(@dbcbSpclz, 'iK_spclz',
+    'cName_spclz');
+  TGeneralController.Instance.InitializeLockupCB(@dbcbFormEd, 'iK_form_ed',
+    'Cname_form_ed');
+  TGeneralController.Instance.InitializeLockupCB(@dbcbYear, 'ik_year_uch_pl',
+    'year_value');
   dtpDateUtv.Date := Now;
-  dbcbSpclz.KeyValue:= TUchPlanController.Instance.getAllSpecializations(@dbcbSpclz.ListSource.DataSet, Label2.Tag, false);
-  dbcbFormEd.KeyValue:= TUchPlanController.Instance.getAllFormEd(@dbcbFormEd.ListSource.DataSet, false);
-  dbcbYear.KeyValue:= TUchPlanController.Instance.getAllYears(@dbcbYear.ListSource.DataSet, false);
-  //dbcbYearUtv.KeyValue := TUchPlanController.Instance.getAllYears(@dbcbYearUtv.ListSource.DataSet, false);
+  dbcbSpclz.KeyValue := TUchPlanController.Instance.getAllSpecializations
+    (@dbcbSpclz.ListSource.DataSet, Label2.Tag, false);
+  dbcbFormEd.KeyValue := TUchPlanController.Instance.getAllFormEd
+    (@dbcbFormEd.ListSource.DataSet, false);
+  dbcbYear.KeyValue := TUchPlanController.Instance.getAllYears
+    (@dbcbYear.ListSource.DataSet, false);
 
-  VidGos:=Label1.Tag;
-  if (VidGos=2)and(dbcbSpclz.ListSource.DataSet.RecordCount=0) then
+  VidGos := Label1.Tag;
+  if (VidGos = FGOS3) {and (dbcbSpclz.ListSource.DataSet.RecordCount = 0)} then
   begin
-  Label3.Visible:=false;
-  Label10.Visible:=false;
-  dbcbSpclz.Visible:=false;
-  Label1.Top:=15;
-  Label2.Top:=15;
-  Label9.Visible:=false;
-  dbcbSpclzCopy.Visible:=false;
-  dbcbFormEd.Top:=35;
-  Label4.Top:=37;
-  Label6.Top:=37;
-  dbcbYear.Top:=60;
-  dtpDateUtv.Top:=60;
-  Label17.Top:=60;
-  Label5.Top:=60;
-  Label7.Top:=60;
-  Label13.Top:=72;
-  CheckBox1.Top:=83;
-  CheckBox2.Top:=106;
+    Label3.Visible := false;
+    Label10.Visible := false;
+    dbcbSpclz.Visible := false;
+    Label1.Top := 15;
+    Label2.Top := 15;
+    Label9.Visible := false;
+    dbcbSpclzCopy.Visible := false;
+    dbcbFormEd.Top := 35;
+    Label4.Top := 37;
+    Label6.Top := 37;
+    dbcbYear.Top := 60;
+    dtpDateUtv.Top := 60;
+    Label17.Top := 60;
+    Label5.Top := 60;
+    Label7.Top := 60;
+    Label13.Top := 72;
+    CheckBox1.Top := 83;
+    CheckBox2.Top := 106;
 
-  //подтянуть повыше копию уч. плана
-
-  dbcbFormEdCopy.Top := 24;
-  Label16.Top := 24;
-  dbcbYearCopy.Top := 48;
-  Label14.Top := 48;
-  Label15.Top := 60;
-  DateTimePicker1.Top := 48;
-  Label18.Top := 54;
+    // подтянуть повыше копию уч. плана
+    dbcbFormEdCopy.Top := 24;
+    Label16.Top := 24;
+    dbcbYearCopy.Top := 48;
+    Label14.Top := 48;
+    Label15.Top := 60;
+    DateTimePicker1.Top := 48;
+    Label18.Top := 54;
 
   end;
   if (self.Tag = 2) then
   begin
-      dbcbYear.KeyValue:= (CallFrame as TfmUchPlan).dbcbYear.KeyValue;
-      dtpDateUtv.Date:= (CallFrame as TfmUchPlan).dtpDateUtv.Date;
-      dbcbSpclz.KeyValue:= (CallFrame as TfmUchPlan).dbcbSpclz.KeyValue;
-      dbcbFormEd.KeyValue:= (CallFrame as TfmUchPlan).dbcbFormEd.KeyValue;
-      CheckBox1.Visible:= false;
-      Height:= 177;
-      self.Caption:= 'Изменение учебного плана';
+    dbcbYear.KeyValue := (CallFrame as TfmUchPlan).dbcbYear.KeyValue;
+    dtpDateUtv.Date := (CallFrame as TfmUchPlan).dtpDateUtv.Date;
+    dbcbSpclz.KeyValue := (CallFrame as TfmUchPlan).dbcbSpclz.KeyValue;
+    dbcbFormEd.KeyValue := (CallFrame as TfmUchPlan).dbcbFormEd.KeyValue;
+    CheckBox1.Visible := false;
+    Height := 177;
+    self.Caption := 'Изменение учебного плана';
   end
   else
   begin
-    CheckBox1.Visible:= true;
-    Height:= 190;
-    self.Caption:= 'Добавление учебного плана';
+    CheckBox1.Visible := true;
+    Height := 190;
+    self.Caption := 'Добавление учебного плана';
   end;
-  Label2.Hint:= TUchPlanController.Instance.getSpecName(Label2.Tag);
+  Label2.Hint := TUchPlanController.Instance.getSpecName(Label2.Tag);
   TGeneralController.Instance.SetCaptionDots(@Label2, Label2.Hint, 290);
-  Label2.ShowHint:= true;
-    case(Label3.Tag) of
-  1: Label3.Caption:='Профиль  :';
-  3: Label3.Caption:='Программа  :';
-  else Label3.Caption:='Специализация  :';
+  Label2.ShowHint := true;
+  case (Label3.Tag) of
+    1:
+      Label3.Caption := 'Профиль  :';
+    3:
+      Label3.Caption := 'Программа  :';
+  else
+    Label3.Caption := 'Специализация  :';
   end;
-  Label9.Caption:=Label3.Caption;
-  isAlreadyLoad:= false;
-  IsModified:= false;
+  Label9.Caption := Label3.Caption;
+  isAlreadyLoad := false;
+  IsModified := false;
 end;
 
 procedure TfrmUchPlanAddNew.CheckBox1Click(Sender: TObject);
@@ -222,16 +237,17 @@ begin
   inherited;
   if (CheckBox1.Checked) then
   begin
-    GroupBox1.Visible:= true;
-    CheckBox2.Visible:= true;
-    Height:= 450;
-    if (not isAlreadyLoad) then Load();
+    GroupBox1.Visible := true;
+   // CheckBox2.Visible := true;
+    Height := 450;
+    if (not isAlreadyLoad) then
+      Load();
   end
   else
   begin
-    GroupBox1.Visible:= false;
-    CheckBox2.Visible:= false;
-    Height:= 190;
+    GroupBox1.Visible := false;
+  //  CheckBox2.Visible := false;
+    Height := 190;
   end;
 end;
 
@@ -239,89 +255,110 @@ procedure TfrmUchPlanAddNew.CheckBox2Click(Sender: TObject);
 begin
   inherited;
   if (CheckBox2.Checked) then
-    MessageBox(Handle, 'Внимание! Полное копирование оценок возможно только в случае, если текущий план группы совпадает с учебным планом, на основе которого будет сделана копия, и год поступления группы совпадает с годом утверждения (переутверждения) нового учебного плана',
-					  'ИС УГТУ', MB_OK)
+    MessageBox(Handle,
+      'Внимание! Полное копирование оценок возможно только в случае, если текущий план группы совпадает с учебным планом, на основе которого будет сделана копия, и год поступления группы совпадает с годом утверждения (переутверждения) нового учебного плана',
+      'ИС УГТУ', MB_OK)
 end;
 
 procedure TfrmUchPlanAddNew.Load;
 begin
-  TGeneralController.Instance.InitializeLockupCB(@dbcbSpclzCopy, 'iK_spclz', 'cName_spclz');
-  TGeneralController.Instance.InitializeLockupCB(@dbcbFormEdCopy, 'iK_form_ed', 'Cname_form_ed');
-  TGeneralController.Instance.InitializeLockupCB(@dbcbYearCopy, 'ik_year_uch_pl', 'year_value');
- // TGeneralController.Instance.InitializeLockupCB(@dbcbYearUtvCopy, 'ik_year_uch_pl', 'year_value');
-  dbcbSpclzCopy.KeyValue:= TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclzCopy.ListSource.DataSet, Label2.Tag, true);
+  TGeneralController.Instance.InitializeLockupCB(@dbcbSpclzCopy, 'iK_spclz',
+    'cName_spclz');
+  TGeneralController.Instance.InitializeLockupCB(@dbcbFormEdCopy, 'iK_form_ed',
+    'Cname_form_ed');
+  TGeneralController.Instance.InitializeLockupCB(@dbcbYearCopy,
+    'ik_year_uch_pl', 'year_value');
+  // TGeneralController.Instance.InitializeLockupCB(@dbcbYearUtvCopy, 'ik_year_uch_pl', 'year_value');
+  dbcbSpclzCopy.KeyValue := TUchPlanController.Instance.
+    getCurrentSpecializations(@dbcbSpclzCopy.ListSource.DataSet,
+    Label2.Tag, true);
   if dbcbSpclzCopy.KeyValue = NULL then
   begin
-    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, VidGos, true);
+    dbcbFormEdCopy.KeyValue := TUchPlanController.Instance.getCurrentFormEd
+      (@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, VidGos, true);
   end;
-  isAlreadyLoad:= true;
+  isAlreadyLoad := true;
 end;
 
 procedure TfrmUchPlanAddNew.dbcbSpclzCopyKeyValueChanged(Sender: TObject);
-var splzIK: integer;
+var
+  splzIK: integer;
 begin
   TGeneralController.Instance.CloseLockupCB(@dbcbFormEdCopy);
   if (dbcbSpclz.KeyValue = NULL) then
   begin
     dbcbSpclz.Text := '';
-    splzIK:=0;
-  end  else splzIK := dbcbSpclz.KeyValue;
+    splzIK := 0;
+  end
+  else
+    splzIK := dbcbSpclz.KeyValue;
   if Assigned(dbcbFormEdCopy.ListSource) then
-    dbcbFormEdCopy.KeyValue:= TUchPlanController.Instance.getCurrentFormEd(@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, VidGos, true);
+    dbcbFormEdCopy.KeyValue := TUchPlanController.Instance.getCurrentFormEd
+      (@dbcbFormEdCopy.ListSource.DataSet, Label2.Tag, VidGos, true);
 end;
 
 procedure TfrmUchPlanAddNew.dbcbFormEdCopyKeyValueChanged(Sender: TObject);
-var spczIK: integer;
+var
+  spczIK: integer;
 begin
   TGeneralController.Instance.CloseLockupCB(@dbcbYearCopy);
- // TGeneralController.Instance.CloseLockupCB(@dbcbYearUtvCopy);
- if dbcbSpclzCopy.KeyValue=NULL then spczIK := 0 else spczIK := dbcbSpclzCopy.KeyValue;
+  // TGeneralController.Instance.CloseLockupCB(@dbcbYearUtvCopy);
+  if dbcbSpclzCopy.KeyValue = NULL then
+    spczIK := 0
+  else
+    spczIK := dbcbSpclzCopy.KeyValue;
 
   if (dbcbFormEdCopy.KeyValue <> NULL) then
   begin
-    dbcbYearCopy.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYearCopy.ListSource.DataSet, Label2.Tag, spczIK, dbcbFormEdCopy.KeyValue,VidGos, true);
+    dbcbYearCopy.KeyValue := TUchPlanController.Instance.getCurrentYears
+      (@dbcbYearCopy.ListSource.DataSet, Label2.Tag, spczIK,
+      dbcbFormEdCopy.KeyValue, VidGos, true);
 
-   // dbcbYearUtvCopy.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYearUtvCopy.ListSource.DataSet, Label2.Tag, dbcbSpclzCopy.KeyValue, dbcbFormEdCopy.KeyValue, true);
+    // dbcbYearUtvCopy.KeyValue:= TUchPlanController.Instance.getCurrentYears(@dbcbYearUtvCopy.ListSource.DataSet, Label2.Tag, dbcbSpclzCopy.KeyValue, dbcbFormEdCopy.KeyValue, true);
   end;
 end;
 
 procedure TfrmUchPlanAddNew.dbcbYearCopyKeyValueChanged(Sender: TObject);
 begin
-    dmUchPlan.adodsUchPlan.close;
-    if (dbcbYearCopy.KeyValue<>NULL) then
-    begin
-      dmUchPlan.adodsUchPlan.CommandText := 'select * from Uch_pl where (ik_uch_plan = '+dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan').AsString+')';
-      dmUchPlan.adodsUchPlan.open;
-      with dmUchPlan.adodsUchPlan do
-      DateTimePicker1.Date := StrToDate(copy(FieldByName('date_utv').AsString,9,2) + '.' + copy(FieldByName('date_utv').AsString,6,2) + '.' +  copy(FieldByName('date_utv').AsString,0,4));
-    end;
+  dmUchPlan.adodsUchPlan.close;
+  if (dbcbYearCopy.KeyValue <> NULL) then
+  begin
+    dmUchPlan.adodsUchPlan.CommandText :=
+      'select * from Uch_pl where (ik_uch_plan = ' +
+      dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan').AsString + ')';
+    dmUchPlan.adodsUchPlan.open;
+    with dmUchPlan.adodsUchPlan do
+      DateTimePicker1.Date := StrToDate(copy(FieldByName('date_utv').AsString,
+        9, 2) + '.' + copy(FieldByName('date_utv').AsString, 6, 2) + '.' +
+        copy(FieldByName('date_utv').AsString, 0, 4));
+  end;
 
 end;
 
 procedure TfrmUchPlanAddNew.dbcbYearKeyValueChanged(Sender: TObject);
 begin
-if (VidGos=1) then
-  IsModified:= (dbcbSpclz.KeyValue <> NULL) and (dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL)
-else
-  IsModified:= (dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL)
+  if (VidGos = 1) then
+    IsModified := (dbcbSpclz.KeyValue <> NULL) and (dbcbFormEd.KeyValue <> NULL)
+      and (dbcbYear.KeyValue <> NULL)
+  else
+    IsModified := (dbcbFormEd.KeyValue <> NULL) and (dbcbYear.KeyValue <> NULL)
 end;
 
 procedure TfrmUchPlanAddNew.actSpravExecute(Sender: TObject);
 var
   isMod: boolean;
 begin
-  IsMod:= IsModified;
+  isMod := IsModified;
   inherited;
   TGeneralController.Instance.RefreshLockupCB(@dbcbSpclz);
   TGeneralController.Instance.RefreshLockupCB(@dbcbFormEd);
   TGeneralController.Instance.RefreshLockupCB(@dbcbYear);
- // TGeneralController.Instance.RefreshLockupCB(@dbcbYearUtv);
+  // TGeneralController.Instance.RefreshLockupCB(@dbcbYearUtv);
   TGeneralController.Instance.RefreshLockupCB(@dbcbSpclzCopy);
   TGeneralController.Instance.RefreshLockupCB(@dbcbFormEdCopy);
   TGeneralController.Instance.RefreshLockupCB(@dbcbYearCopy);
- // TGeneralController.Instance.RefreshLockupCB(@dbcbYearUtvCopy);
-  IsModified:= isMod;
+  // TGeneralController.Instance.RefreshLockupCB(@dbcbYearUtvCopy);
+  IsModified := isMod;
 end;
-
 
 end.
