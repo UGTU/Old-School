@@ -1055,7 +1055,7 @@ inherited fmStudent: TfmStudent
                 Left = 0
                 Top = 29
                 Width = 705
-                Height = 392
+                Height = 391
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
@@ -1826,7 +1826,7 @@ inherited fmStudent: TfmStudent
         object TabSheet8: TTabSheet
           Caption = #1046#1091#1088#1085#1072#1083' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
           ImageIndex = 5
-          object Panel13: TPanel
+          object panelMagaz: TPanel
             Left = 0
             Top = 0
             Width = 713
@@ -1836,7 +1836,7 @@ inherited fmStudent: TfmStudent
             DesignSize = (
               713
               47)
-            object Label11: TLabel
+            object lPeriod: TLabel
               Left = 276
               Top = 12
               Width = 38
@@ -1844,7 +1844,7 @@ inherited fmStudent: TfmStudent
               Anchors = [akRight, akBottom]
               Caption = #1055#1077#1088#1080#1086#1076
             end
-            object Label10: TLabel
+            object lDef: TLabel
               Left = 466
               Top = 12
               Width = 4
@@ -1852,7 +1852,7 @@ inherited fmStudent: TfmStudent
               Anchors = [akRight, akBottom]
               Caption = '-'
             end
-            object ToolBar7: TToolBar
+            object tbAction: TToolBar
               Left = 195
               Top = 6
               Width = 115
@@ -2191,7 +2191,6 @@ inherited fmStudent: TfmStudent
     Caption = 'ToolBar1'
     Images = frmMain.ImageList1
     TabOrder = 2
-    ExplicitTop = -4
     object ToolButton4: TToolButton
       Left = 0
       Top = 0
@@ -2304,7 +2303,7 @@ inherited fmStudent: TfmStudent
     Left = 386
     Top = 167
     Bitmap = {
-      494C010106000900D00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900D40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2582,7 +2581,7 @@ inherited fmStudent: TfmStudent
     Left = 496
     Top = 166
   end
-  object ActionList1: TActionList
+  object alAct: TActionList
     Images = frmMain.ImageList1
     Left = 536
     Top = 224
@@ -2658,7 +2657,7 @@ inherited fmStudent: TfmStudent
     Left = 646
     Top = 224
     Bitmap = {
-      494C010111004000340210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000380210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

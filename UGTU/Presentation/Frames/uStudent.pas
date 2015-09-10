@@ -128,7 +128,7 @@ type
     gbProlongued: TGroupBox;
     DBGridEh6: TDBGridEh;
     KontExcel: TSpeedButton;
-    ActionList1: TActionList;
+    alAct: TActionList;
     actApply: TAction;
     actUndo: TAction;
     actPrintSprav: TAction;
@@ -190,9 +190,9 @@ type
     ToolButton11: TToolButton;
     ToolButton12: TToolButton;
     TabSheet8: TTabSheet;
-    Panel13: TPanel;
-    Label11: TLabel;
-    ToolBar7: TToolBar;
+    panelMagaz: TPanel;
+    lPeriod: TLabel;
+    tbAction: TToolBar;
     tbUtv: TToolButton;
     tbGot: TToolButton;
     tbPrint: TToolButton;
@@ -202,7 +202,7 @@ type
     dbgehMagazineDocsStud: TDBGridEh;
     tbCreate: TToolButton;
     cbeDest: TDBLookupComboboxEh;
-    Label10: TLabel;
+    lDef: TLabel;
     dtpEnd: TDateTimePicker;
     gridColumnSelectMenu: TPopupMenu;
 
