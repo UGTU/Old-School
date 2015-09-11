@@ -913,8 +913,8 @@ object dmUspevaemost: TdmUspevaemost
   end
   object dsGetDopuskForVedom: TDataSource
     DataSet = adodsGetDopuskForVedom
-    Left = 129
-    Top = 196
+    Left = 105
+    Top = 204
   end
   object adodsGetDopuskForVedom: TADODataSet
     Connection = dm.DBConnect
@@ -922,7 +922,7 @@ object dmUspevaemost: TdmUspevaemost
     LockType = ltBatchOptimistic
     CommandText = 'select * from GetDopuscForVedom(3226)'
     Parameters = <>
-    Left = 127
+    Left = 103
     Top = 151
   end
   object dsGetDopuskForVedom0: TDataSource
@@ -1277,9 +1277,8 @@ object dmUspevaemost: TdmUspevaemost
     object adodsNapravlDd_exam: TDateTimeField
       FieldName = 'Dd_exam'
     end
-    object adodsNapravlItab_n: TStringField
-      FieldName = 'Itab_n'
-      Size = 50
+    object adodsNapravlid_teacher: TIntegerField
+      FieldName = 'id_teacher'
     end
   end
   object dsNapravl: TDataSource
@@ -1363,8 +1362,8 @@ object dmUspevaemost: TdmUspevaemost
         Precision = 10
         Value = Null
       end>
-    Left = 383
-    Top = 507
+    Left = 375
+    Top = 499
   end
   object dsGetAttVidZan: TDataSource
     DataSet = adospGetAttVidZan

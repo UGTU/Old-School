@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ActnList, ExtCtrls, Buttons, ImgList, VersionController;
+  Dialogs, StdCtrls, ActnList, ExtCtrls, Buttons, ImgList, VersionController,
+  System.Actions;
 
 type
   TNewClientVersionDetectedForm = class(TForm)

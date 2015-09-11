@@ -43,6 +43,15 @@ type
     actUpdateDiploms: TAction;
     ToolButton7: TToolButton;
     actPrintOldDipl: TAction;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    dbcmbxGAKFac: TDBLookupComboboxEh;
+    cbDisplayType: TComboBox;
+    Splitter1: TSplitter;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    dbgGroups: TDBGridEh;
+    GroupBox1: TGroupBox;
     procedure dbcmbxFacChange(Sender: TObject);
     procedure dbcmbxSpecChange(Sender: TObject);
     procedure dbcmbxGroupChange(Sender: TObject);
@@ -82,6 +91,8 @@ type
     procedure dbgQualifTitleClick(Column: TColumnEh);
     procedure actUpdateDiplomsExecute(Sender: TObject);
     procedure actPrintOldDiplExecute(Sender: TObject);
+    procedure dbcmbxGAKFacChange(Sender: TObject);
+    procedure cbDisplayTypeChange(Sender: TObject);
   protected
      procedure DoCancel;override;
      procedure DoCreate;override;
@@ -95,7 +106,7 @@ type
 
 var
   fmDiplomOtdKadr: TfmDiplomOtdKadr;
-  ik_group, ik_fac, ik_spec: integer;
+  ik_group, ik_fac, ik_spec, ik_Gener_spec_fac, ik_GAKfac: integer;
   ik_year: integer;
   CurrentNum:string;
   CurrentDate:TDatetime;
@@ -119,6 +130,7 @@ begin
 	  TDiplOtdKardController.Instance.GetFacList(@dbcmbxFac);
 	//специальность
     ik_spec:= 0;
+    ik_Gener_spec_fac:= 0;
 	  TDiplOtdKardController.Instance.GetSpecList(@dbcmbxSpec);
   //группа
     TDiplOtdKardController.Instance.GetGroupList(@dbcmbxGroup);
@@ -126,6 +138,17 @@ begin
     dbcmbxFac.Value:= dbcmbxFac.ListSource.DataSet.FieldByName('ik_fac').AsInteger;
     pcOtdKadr.ActivePageIndex:= 0;
     ik_year:= 0;
+
+
+    //факультет ГАКа
+    ik_GAKfac:= 0;
+    dbgGroups.DataSource:= TDataSource.Create(nil);
+    dbgGroups.DataSource.DataSet:= TADODataSet.Create(nil);
+    TDiplOtdKardController.Instance.LoadExitGroups(@dbgGroups.DataSource.DataSet);
+	  TDiplOtdKardController.Instance.GetFacList(@dbcmbxGAKFac);
+    dbcmbxGAKFac.Value:= dbcmbxGAKFac.ListSource.DataSet.FieldByName('ik_fac').AsInteger;
+    cbDisplayType.ItemIndex:= 0;
+
 end;
 
 
@@ -153,7 +176,6 @@ begin
     end;
     2:  //квалификации
     begin
-
       //отменяем сохранение списка
         TDiplOtdKardController.Instance.CancelUpdatesQualif(@dbgQualif.DataSource.DataSet);
         dbgQualif.DataSource.DataSet.Close;
@@ -314,7 +336,7 @@ begin
   if not DoModified then
     exit;
   TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, ik_fac, YearOf(Date), false);
+    ik_spec, ik_fac, YearOf(Date), dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, false);
   {case TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
     ik_spec, YearOf(Date)) of
     -2:
@@ -343,7 +365,7 @@ begin
   if not DoModified then
     exit;
   TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, YearOf(Date), ik_fac, true);
+    ik_spec, YearOf(Date), ik_fac, dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, true);
 end;
 
 procedure TfmDiplomOtdKadr.actSaveDiplExecute(Sender: TObject);
@@ -376,6 +398,12 @@ begin
   dbcmbxGroupChange(Sender);
 end;
 
+procedure TfmDiplomOtdKadr.cbDisplayTypeChange(Sender: TObject);
+begin
+  inherited;
+  ShowMessage(cbDisplayType.Text);
+end;
+
 procedure TfmDiplomOtdKadr.dbcmbxFacChange(Sender: TObject);
 begin
   if not DoModified then
@@ -389,7 +417,7 @@ begin
     if ik_fac<>dbcmbxFac.Value then
     begin
       TDiplOtdKardController.Instance.FilterSpecList(@dbcmbxSpec,dbcmbxFac.Value);
-      dbcmbxSpec.Value:= dbcmbxSpec.ListSource.DataSet.FieldByName('ik_spec_fac').AsInteger;
+      dbcmbxSpec.Value:= dbcmbxSpec.ListSource.DataSet.FieldByName('ik_Gener_spec_fac').AsInteger;
       ik_fac:= dbcmbxFac.Value;
     end;
 
@@ -401,17 +429,17 @@ begin
   if not DoModified then
   begin
     Modified:= false;
-    dbcmbxSpec.Value:= ik_spec;
+    dbcmbxSpec.Value:= ik_Gener_spec_fac;
     Modified:= true;
   end;
   TApplicationController.GetInstance.AddLogEntry('Диплом. Выбор специальности '+dbcmbxSpec.Text);
   //фильтруем список групп
-
-    if ik_spec<>dbcmbxSpec.Value then
+    if ik_Gener_spec_fac<>dbcmbxSpec.Value then
     begin
       TDiplOtdKardController.Instance.FilterGroupList(@dbcmbxGroup,dbcmbxSpec.Value);
       dbcmbxGroup.Value:= dbcmbxGroup.ListSource.DataSet.FieldByName('ik_grup').AsInteger;
-      ik_spec:= dbcmbxSpec.Value;
+      ik_Gener_spec_fac:= dbcmbxSpec.Value;
+      ik_spec:= dbcmbxSpec.ListSource.DataSet.FieldByName('ik_spec').AsInteger;
     end;
 
 
@@ -427,13 +455,19 @@ begin
   end;
 
   TApplicationController.GetInstance.AddLogEntry('Список председателей ГАК. Выбор года поступления '+dbcmbxYear.Text);
-  if (dbcmbxYear.Value = ik_year)  then
-    exit;
+  {if (dbcmbxYear.Value = ik_year)  then
+    exit;}
     //загружаем список
-    TDiplOtdKardController.Instance.GetGakMemberList(@dbgMemberGak.DataSource.DataSet,dbcmbxYear.Value);
+    TDiplOtdKardController.Instance.GetGakMemberList(@dbgMemberGak.DataSource.DataSet,dbcmbxYear.Value, cbDisplayType.ItemIndex);
     if (dbcmbxYear.Value<>NULL) then
       ik_year:= dbcmbxYear.Value;
 
+    dbgGroups.Columns[0].Visible:= false;
+    dbgGroups.Columns[1].Visible:= false;
+    dbgGroups.Columns[cbDisplayType.ItemIndex].Visible:= true;
+
+
+    dbcmbxGAKFacChange(nil);
 end;
 
 procedure TfmDiplomOtdKadr.actCancelDiplUpdExecute(Sender: TObject);
@@ -467,6 +501,29 @@ begin
     dbgStudList.DataSource.DataSet.Open;
 
 
+end;
+
+procedure TfmDiplomOtdKadr.dbcmbxGAKFacChange(Sender: TObject);
+begin
+  inherited;
+  if not DoModified then
+  begin
+    Modified:= false;
+    dbcmbxGAKFac.Value:= ik_GAKfac;
+    Modified:= true;
+  end;
+  TApplicationController.GetInstance.AddLogEntry('Диплом. Выбор факультета ГАКа '+dbcmbxGAKFac.Text);
+  //фильтруем список специальностей
+    //if (ik_GAKfac<>dbcmbxGAKFac.Value) and then
+    begin
+      TDiplOtdKardController.Instance.FilterGAKList(@dbgMemberGak.DataSource.DataSet,dbcmbxGAKFac.Value, -1);
+      TDiplOtdKardController.Instance.FilterGAKList(@DMOtdKadrDiplom.adoqSpec,dbcmbxGAKFac.Value, cbDisplayType.ItemIndex);
+      if (cbDisplayType.ItemIndex = 1) then
+        TDiplOtdKardController.Instance.FilterGAKList(@dbgGroups.DataSource.DataSet,dbcmbxGAKFac.Value, cbDisplayType.ItemIndex)
+      else
+        TDiplOtdKardController.Instance.FilterGAKList(@dbgGroups.DataSource.DataSet,dbcmbxGAKFac.Value, -1);
+      ik_GAKfac:= dbcmbxGAKFac.Value;
+    end;
 end;
 
 procedure TfmDiplomOtdKadr.dbcmbxGroupChange(Sender: TObject);
@@ -515,6 +572,8 @@ procedure TfmDiplomOtdKadr.dbgMemberGakColumns0UpdateData(Sender: TObject;
 begin
   modified:= true;
   dbgMemberGak.DataSource.DataSet.FieldByName('ik_year').Value:= ik_year;
+  dbgMemberGak.DataSource.DataSet.FieldByName('ik_fac').Value:= ik_GAKfac;
+ 
 end;
 
 procedure TfmDiplomOtdKadr.dbgMemberGakKeyDown(Sender: TObject; var Key: Word;

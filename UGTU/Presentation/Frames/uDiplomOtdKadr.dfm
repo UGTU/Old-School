@@ -1,50 +1,64 @@
 inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
-  Width = 871
-  Height = 524
-  ExplicitWidth = 871
-  ExplicitHeight = 524
+  Width = 927
+  Height = 649
+  ExplicitWidth = 927
+  ExplicitHeight = 649
   inherited Panel1: TPanel
-    Width = 871
-    Height = 487
-    ExplicitWidth = 772
+    Width = 927
+    Height = 612
+    ExplicitWidth = 927
+    ExplicitHeight = 612
+    object CheckBox1: TCheckBox
+      Left = 672
+      Top = 32
+      Width = 97
+      Height = 17
+      Caption = 'CheckBox1'
+      TabOrder = 0
+    end
+    object CheckBox2: TCheckBox
+      Left = 656
+      Top = 24
+      Width = 97
+      Height = 17
+      Caption = 'CheckBox2'
+      TabOrder = 1
+    end
   end
   inherited pnlSave: TPanel
-    Top = 487
-    Width = 871
-    ExplicitWidth = 772
+    Top = 612
+    Width = 927
+    ExplicitTop = 612
+    ExplicitWidth = 927
     inherited bbSave: TBitBtn
-      Left = 702
+      Left = 758
       Action = actSaveDipl
-      ExplicitLeft = 603
+      ExplicitLeft = 758
     end
     inherited bbUndo: TBitBtn
-      Left = 534
+      Left = 590
       Action = actCancelDiplUpd
-      ExplicitLeft = 435
+      ExplicitLeft = 590
     end
   end
   object pcOtdKadr: TPageControl
     Left = 0
     Top = 0
-    Width = 871
-    Height = 487
-    ActivePage = tshDiplom
+    Width = 927
+    Height = 612
+    ActivePage = tsQualif
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 2
     OnChange = pcOtdKadrChange
     OnChanging = pcOtdKadrChanging
-    ExplicitWidth = 772
-    ExplicitHeight = 474
     object tshDiplom: TTabSheet
       Caption = #1044#1080#1087#1083#1086#1084
-      ExplicitWidth = 764
-      ExplicitHeight = 443
       object dbgStudList: TDBGridEh
         Left = 0
         Top = 31
-        Width = 863
-        Height = 425
+        Width = 919
+        Height = 550
         Hint = #1044#1072#1085#1085#1099#1077' '#1076#1080#1087#1083#1086#1084#1072
         Align = alClient
         AutoFitColWidths = True
@@ -133,7 +147,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
       object ToolBar1: TToolBar
         Left = 0
         Top = 0
-        Width = 863
+        Width = 919
         Height = 31
         ButtonWidth = 24
         Caption = 'ToolBar1'
@@ -141,7 +155,6 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         ParentShowHint = False
         ShowHint = True
         TabOrder = 1
-        ExplicitWidth = 764
         object ToolButton2: TToolButton
           Left = 0
           Top = 0
@@ -173,9 +186,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
         object dbcmbxFac: TDBLookupComboboxEh
           Left = 104
           Top = 0
-          Width = 265
+          Width = 185
           Height = 22
-          Hint = #1092#1072#1082#1091#1083#1100#1090#1077#1090
+          Hint = #1060#1072#1082#1091#1083#1100#1090#1077#1090
           DataField = ''
           EditButtons = <>
           Flat = True
@@ -188,9 +201,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxFacChange
         end
         object dbcmbxSpec: TDBLookupComboboxEh
-          Left = 369
+          Left = 289
           Top = 0
-          Width = 300
+          Width = 424
           Height = 22
           Hint = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
           DataField = ''
@@ -205,9 +218,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           OnChange = dbcmbxSpecChange
         end
         object dbcmbxGroup: TDBLookupComboboxEh
-          Left = 669
+          Left = 713
           Top = 0
-          Width = 98
+          Width = 136
           Height = 22
           Hint = #1043#1088#1091#1087#1087#1072
           DataField = ''
@@ -224,68 +237,26 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     object tshGak: TTabSheet
       Caption = #1055#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1080' '#1043#1040#1050
       ImageIndex = 1
-      ExplicitWidth = 764
-      ExplicitHeight = 443
-      object dbgMemberGak: TDBGridEh
+      object Splitter1: TSplitter
         Left = 0
-        Top = 31
-        Width = 863
-        Height = 425
-        Hint = #1057#1087#1080#1089#1086#1082' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1077#1081' '#1043#1040#1050
-        Align = alClient
-        AutoFitColWidths = True
-        DataSource = dmOtdKadrDiplom.dsGakMember
-        DynProps = <>
-        Flat = True
-        FooterParams.Color = clWindow
-        IndicatorOptions = []
-        Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 0
-        OnKeyDown = dbgMemberGakKeyDown
-        Columns = <
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'specName'
-            Footers = <>
-            Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
-            Width = 250
-            OnUpdateData = dbgMemberGakColumns0UpdateData
-          end
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'GakMemberName'
-            Footers = <>
-            MaxWidth = 1000
-            Title.Caption = #1060#1048#1054' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1103' '#1043#1040#1050
-            Width = 250
-            OnUpdateData = dbgMemberGakColumns0UpdateData
-          end
-          item
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'ik_year'
-            Footers = <>
-            Visible = False
-          end>
-        object RowDetailData: TRowDetailPanelControlEh
-        end
+        Top = 347
+        Width = 919
+        Height = 3
+        Cursor = crVSplit
+        Align = alTop
+        ExplicitTop = 393
       end
       object ToolBar3: TToolBar
         Left = 0
         Top = 0
-        Width = 863
+        Width = 919
         Height = 31
         ButtonWidth = 32
         Caption = 'ToolBar1'
         Images = frmMain.ImageList1
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 1
-        ExplicitWidth = 764
+        TabOrder = 0
         object DBNavigator1: TDBNavigator
           Left = 0
           Top = 0
@@ -338,18 +309,175 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           Caption = 'ToolButton4'
           Style = tbsSeparator
         end
+        object dbcmbxGAKFac: TDBLookupComboboxEh
+          Left = 380
+          Top = 0
+          Width = 293
+          Height = 22
+          Hint = #1060#1072#1082#1091#1083#1100#1090#1077#1090
+          DataField = ''
+          EditButtons = <>
+          Flat = True
+          KeyField = 'Ik_fac'
+          ListField = 'Cname_fac'
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          Visible = True
+          OnChange = dbcmbxGAKFacChange
+        end
+        object cbDisplayType: TComboBox
+          Left = 673
+          Top = 0
+          Width = 192
+          Height = 22
+          Hint = #1058#1080#1087' '#1086#1090#1086#1073#1088#1072#1078#1077#1085#1080#1103
+          Style = csOwnerDrawFixed
+          TabOrder = 3
+          OnChange = dbcmbxYearChange
+          Items.Strings = (
+            #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1080
+            #1055#1088#1086#1092#1080#1083#1080)
+        end
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 31
+        Width = 919
+        Height = 316
+        Align = alTop
+        Caption = 'Panel2'
+        TabOrder = 1
+        object dbgMemberGak: TDBGridEh
+          Left = 1
+          Top = 1
+          Width = 917
+          Height = 314
+          Hint = #1057#1087#1080#1089#1086#1082' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1077#1081' '#1043#1040#1050
+          Align = alClient
+          AutoFitColWidths = True
+          DataSource = dmOtdKadrDiplom.dsGakMember
+          DynProps = <>
+          Flat = True
+          FooterParams.Color = clWindow
+          ImeMode = imDisable
+          IndicatorOptions = []
+          Options = [dgEditing, dgTitles, dgColumnResize, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnKeyDown = dbgMemberGakKeyDown
+          Columns = <
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ik_year'
+              Footers = <>
+              Visible = False
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'specName'
+              Footers = <>
+              Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
+              Width = 300
+              OnUpdateData = dbgMemberGakColumns0UpdateData
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'GakMemberName'
+              Footers = <>
+              Title.Caption = #1060#1048#1054' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1103' '#1043#1040#1050
+              OnUpdateData = dbgMemberGakColumns0UpdateData
+            end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
+        end
+      end
+      object Panel3: TPanel
+        Left = 0
+        Top = 350
+        Width = 919
+        Height = 231
+        Align = alClient
+        Caption = 'Panel2'
+        TabOrder = 2
+        object GroupBox1: TGroupBox
+          Left = 1
+          Top = 1
+          Width = 917
+          Height = 229
+          Align = alClient
+          Caption = #1043#1088#1091#1087#1087#1099', '#1079#1072#1074#1077#1088#1096#1072#1102#1097#1080#1077' '#1086#1073#1091#1095#1077#1085#1080#1077
+          TabOrder = 0
+          object dbgGroups: TDBGridEh
+            Left = 2
+            Top = 15
+            Width = 913
+            Height = 212
+            Hint = #1057#1087#1080#1089#1086#1082' '#1087#1088#1077#1076#1089#1077#1076#1072#1090#1077#1083#1077#1081' '#1043#1040#1050
+            Align = alClient
+            AutoFitColWidths = True
+            DynProps = <>
+            Flat = True
+            FooterParams.Color = clWindow
+            IndicatorOptions = []
+            Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            ParentShowHint = False
+            ReadOnly = True
+            ShowHint = True
+            TabOrder = 0
+            OnKeyDown = dbgMemberGakKeyDown
+            Columns = <
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'Cname_spec'
+                Footers = <>
+                Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
+                Width = 300
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'Cname_profile'
+                Footers = <>
+                Title.Caption = #1055#1088#1086#1092#1080#1083#1100
+                Width = 300
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'Cname_grup'
+                Footers = <>
+                Title.Caption = #1043#1088#1091#1087#1087#1072
+                Width = 200
+              end
+              item
+                DynProps = <>
+                EditButtons = <>
+                FieldName = 'nYear_post'
+                Footers = <>
+                MaxWidth = 1000
+                Title.Caption = #1043#1086#1076' '#1087#1086#1089#1090#1091#1087#1083#1077#1085#1080#1103
+                Width = 80
+              end>
+            object RowDetailData: TRowDetailPanelControlEh
+            end
+          end
+        end
       end
     end
     object tsQualif: TTabSheet
       Caption = #1050#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
       ImageIndex = 2
-      ExplicitWidth = 764
-      ExplicitHeight = 443
       object dbgQualif: TDBGridEh
         Left = 0
         Top = 0
-        Width = 863
-        Height = 456
+        Width = 919
+        Height = 581
         Hint = #1044#1072#1085#1085#1099#1077' '#1086' '#1082#1074#1072#1083#1080#1092#1080#1082#1072#1094#1080#1080
         Align = alClient
         AutoFitColWidths = True
@@ -377,8 +505,9 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
           item
             DynProps = <>
             EditButtons = <>
-            FieldName = 'Cshort_spec'
+            FieldName = 'cName_direction'
             Footers = <>
+            ReadOnly = True
             Title.Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1086#1073#1091#1095'.'
             Width = 100
             OnUpdateData = dbgQualifColumns1UpdateData
@@ -417,6 +546,13 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
             Title.Caption = #1064#1080#1092#1088
             Width = 50
             OnUpdateData = dbgQualifColumns1UpdateData
+          end
+          item
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'YearNormObuch'
+            Footers = <>
+            Title.Caption = #1050#1086#1083'-'#1074#1086' '#1083#1077#1090' '#1086#1073#1091#1095#1077#1085#1080#1103
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end

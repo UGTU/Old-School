@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, Mask, DBCtrlsEh, ActnList, Buttons, DB,
-  ExtCtrls, ADODB;
+  ExtCtrls, ADODB, System.Actions;
 
 type
   TfrmNagruzkaAddKaf = class(TfrmBaseDialog)
@@ -57,8 +57,8 @@ begin
     tempStoredProc.Parameters.CreateParameter('@Cname', ftString, pdInput, 100, dbeName.Text);
     tempStoredProc.Parameters.CreateParameter('@Cname_short', ftString, pdInput, 10, dbeNameShort.Text);
   end;
+  tempStoredProc.Connection.BeginTrans;
   try
-    tempStoredProc.Connection.BeginTrans;
     tempStoredProc.ExecProc;
     tempStoredProc.Connection.CommitTrans;
     tempStoredProc.Free;

@@ -7,7 +7,8 @@ uses
   Dialogs, MethodWorkController, uBaseFrame, DBGridEh, StdCtrls, ExtCtrls, DBCtrlsEh, Buttons, Mask,
   DBLookupEh, ComCtrls, GridsEh, ToolWin, DB, ADODB, DBTVMethodWorkdepobj, GeneralController,
   ImgList, ActnList, DBCtrls, WinProcs, ApplicationController, ExceptionBase,
-  Grids, MethodWorkComboboxFilter;
+  Grids, MethodWorkComboboxFilter, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 const
   IID_IFilter : TGUID = '{FF82FCEB-F9F4-4F6F-A0A5-D5F9934DC29C}';
@@ -321,7 +322,7 @@ var
   fmMethodWorkDep: TfmMethodWorkDep;
 
 implementation
-uses ToolCtrlsEh, uMain, uMethodWorkAddPlanDep, uMethodWorkPlanCurrentMW, uMethodWorkDateFilter,
+uses uMain, uMethodWorkAddPlanDep, uMethodWorkPlanCurrentMW, uMethodWorkDateFilter,
      uMethodWorkAddGos, uMethodWorkAddContentItemGos, uMethodWorkAddContentDiscOnGos,
      ReportsBase, uWaitingForm, MW_DepPlanRep, MW_DepPlanEditionRep, MW_DepFactRep;
 {$R *.dfm}
@@ -2009,3 +2010,4 @@ if (dbcbYearGos.KeyValue <> NULL) then
 end;
 
 end.
+

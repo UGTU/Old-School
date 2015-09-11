@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, uNagruzkaDep,
   GeneralController, NagruzkaController, UchPlanController, DBGridEh, Mask,
   DBCtrlsEh, DBLookupEh, NagruzkaClasses, ImgList, ComCtrls, ToolWin, GridsEh,
-  DB, PlanNagruzkaController, uDM;
+  DB, PlanNagruzkaController, uDM, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type
   TfrmAdditionFactNagr = class(TfrmBaseDialog)

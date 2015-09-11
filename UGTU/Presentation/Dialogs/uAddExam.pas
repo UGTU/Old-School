@@ -1,5 +1,6 @@
 unit uAddExam;
-   {#Author sergdev@ist.ugtu.net}
+
+{ #Author sergdev@ist.ugtu.net }
 interface
 
 uses
@@ -28,8 +29,9 @@ type
   private
     { Private declarations }
   public
-
-  EditMode: boolean;
+    Year: integer;
+    KatZachIK: integer;
+    EditMode: boolean;
     { Public declarations }
   end;
 
@@ -40,107 +42,107 @@ implementation
 
 uses uPostupdlg;
 
-function CheckFields:boolean;
+function CheckFields: boolean;
 begin
-result:=true;
-with frmAddExamDialog do
-begin
-if (dbcbeDisc.Text='')
-or(dbcbeVid.Text='')
-then result:=false;
-end;
+  result := true;
+  with frmAddExamDialog do
+  begin
+    if (dbcbeDisc.Text = '') or (dbcbeVid.Text = '') then
+      result := false;
+  end;
 end;
 {$R *.dfm}
 
 procedure TfrmAddExamDialog.FormShow(Sender: TObject);
 begin
 
-{dm.adodsVidSdachi.Active:=true;
-dm.adodsAbitDisc.Active:=true;}
+  dm.aspAbitExamType.Active := false;
+  dm.aspAbitExamType.Parameters[1].Value := Year;
+  {if EditMode then
+    dm.aspAbitExamType.Parameters[2].Value := }
+  dm.aspAbitExamType.Parameters[2].Value := KatZachIK;
+  dm.aspAbitExamType.Active := true;
 
-dm.aspAbitExamType.Active:=false;
-dm.aspAbitExamType.Parameters[1].Value:=strtoint(Hint);
-dm.aspAbitExamType.Active:=true;
+  dm.aspAbitDisc.Active := false;
+  dm.aspAbitDisc.Parameters[1].Value := Year;
+  dm.aspAbitDisc.Active := true;
 
-dm.aspAbitDisc.Active:=false;
-dm.aspAbitDisc.Parameters[1].Value:=strtoint(Hint);
-dm.aspAbitDisc.Active:=true;
-
-if EditMode then bbApply.Caption:='Изменить';
-
+  if EditMode then
+    bbApply.Caption := 'Изменить';
 
 end;
 
 procedure TfrmAddExamDialog.dbcbeDiscChange(Sender: TObject);
 begin
-
-if (dbcbeDisc<>nil) then
-if checkfields then
-begin
-bbOK.Enabled:=true;
-bbApply.Enabled:=true;
-end else
-begin
-bbOK.Enabled:=false;
-bbApply.Enabled:=false;
-end;
-if (dbcbeVid.KeyValue=7) then
-begin
- label5.Visible:=true;
- label4.Visible:=false;
- label9.Visible:=false;
-end else
-if (dbcbeVid.KeyValue=2)or(dbcbeVid.KeyValue=4)or(dbcbeVid.KeyValue=5) then
-begin
- label5.Visible:=false;
- label4.Visible:=true;
- label9.Visible:=false;
-end else
-begin
-  label5.Visible:=false;
- label4.Visible:=false;
- label9.Visible:=true;
-end;
+  if (dbcbeDisc <> nil) then
+    if CheckFields then
+    begin
+      bbOK.Enabled := true;
+      bbApply.Enabled := true;
+    end
+    else
+    begin
+      bbOK.Enabled := false;
+      bbApply.Enabled := false;
+    end;
+  if (dbcbeVid.KeyValue = 7) then
+  begin
+    Label5.Visible := true;
+    Label4.Visible := false;
+    Label9.Visible := false;
+  end
+  else if (dbcbeVid.KeyValue = 2) or (dbcbeVid.KeyValue = 4) or
+    (dbcbeVid.KeyValue = 5) then
+  begin
+    Label5.Visible := false;
+    Label4.Visible := true;
+    Label9.Visible := false;
+  end
+  else
+  begin
+    Label5.Visible := false;
+    Label4.Visible := false;
+    Label9.Visible := true;
+  end;
 end;
 
 procedure TfrmAddExamDialog.actApplyExecute(Sender: TObject);
-var new:TExam;
+var
+  new: TExam;
 begin
-try
-new:=TExam.Create;
-new.new:=true;
-new.IkDisc:= dbcbeDisc.KeyValue;
-new.IkVidSdachi:=dbcbeVid.KeyValue;
-new.VidSdachi:=dbcbeVid.Text;
-new.Disc:=dbcbeDisc.Text;
-if eMark.value=Null then
-new.Mark:=-1 else
-new.Mark:=eMark.value;
-new.NVed:=eVedNum.Text;
+  try
+    new := TExam.Create;
+    new.new := true;
+    new.IkDisc := dbcbeDisc.KeyValue;
+    new.IkVidSdachi := dbcbeVid.KeyValue;
+    new.VidSdachi := dbcbeVid.Text;
+    new.Disc := dbcbeDisc.Text;
+    if eMark.Value = Null then
+      new.Mark := -1
+    else
+      new.Mark := eMark.Value;
+    new.NVed := eVedNum.Text;
 
-frmPostupDlg.ExamList.Add(new);
-if EditMode then
-frmPostupDlg.sbDelExamClick(Sender);
+    frmPostupDlg.ExamList.Add(new);
+    if EditMode then
+      frmPostupDlg.sbDelExamClick(Sender);
 
+  except
+    showmessage('Неверные данные!');
+  end;
 
-except
-showmessage('Неверные данные!');
+  dbcbeDisc.KeyValue := 0;
+  eMark.Text := '';
+
+  frmPostupDlg.Sync;
+  if EditMode then
+    Close;
 end;
-
-dbcbeDisc.KeyValue:=0;
-eMark.Text:='';
-
-frmPostupDlg.Sync;
-if EditMode then
-Close;
-end;
-
 
 procedure TfrmAddExamDialog.actOKExecute(Sender: TObject);
 begin
-actApplyExecute(sender);
-Close;
-
+  actApplyExecute(Sender);
+  Close;
 end;
 
 end.

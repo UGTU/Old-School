@@ -110,6 +110,7 @@ inherited frmAdditionFactNagr: TfrmAdditionFactNagr
         Height = 19
         AlwaysShowBorder = True
         Anchors = [akLeft, akTop, akRight]
+        DataField = ''
         DropDownBox.Options = [dlgColLinesEh, dlgAutoSortMarkingEh]
         EditButtons = <>
         Flat = True
@@ -146,31 +147,26 @@ inherited frmAdditionFactNagr: TfrmAdditionFactNagr
         Align = alClient
         AutoFitColWidths = True
         DataSource = dsPlanNagr
+        DynProps = <>
         Flat = True
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = []
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'MS Sans Serif'
-        FooterFont.Style = []
+        FooterParams.Color = clWindow
+        GridLineParams.VertEmptySpaceStyle = dessNonEh
+        IndicatorOptions = []
         Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind]
+        OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind, dghColumnResize, dghColumnMove]
         ParentFont = False
         RowHeight = 2
         RowLines = 1
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clBlack
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        TitleHeight = 15
-        UseMultiTitle = True
+        TitleParams.MultiTitle = True
+        TitleParams.RowHeight = 15
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
       object Panel6: TPanel
         Left = 0
@@ -284,7 +280,7 @@ inherited frmAdditionFactNagr: TfrmAdditionFactNagr
     Left = 600
     Top = 8
     Bitmap = {
-      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000900080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

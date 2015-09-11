@@ -59,35 +59,32 @@ inherited fmMethodWorkFac: TfmMethodWorkFac
           Align = alClient
           AutoFitColWidths = True
           DataSource = DSDep
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          ImeMode = imDisable
+          IndicatorOptions = []
           Options = [dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           RowHeight = 16
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Ik_kaf'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_kaf'
               Footers = <>
               Title.Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074
               Width = 500
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
     end
@@ -117,7 +114,7 @@ inherited fmMethodWorkFac: TfmMethodWorkFac
     Left = 480
     Top = 121
     Bitmap = {
-      494C01010E001300040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010E001300080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

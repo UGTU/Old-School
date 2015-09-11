@@ -1,69 +1,223 @@
 inherited fmStudent: TfmStudent
-  Width = 725
+  Width = 684
   Height = 684
   Constraints.MinHeight = 524
   Constraints.MinWidth = 561
-  ExplicitWidth = 725
+  ParentFont = False
+  OnExit = FrameExit
+  ExplicitWidth = 684
   ExplicitHeight = 684
+  object ToolBar1: TToolBar [0]
+    Left = 0
+    Top = 0
+    Width = 684
+    Height = 28
+    Caption = 'ToolBar1'
+    Images = frmMain.ImageList1
+    TabOrder = 2
+    object ToolButton4: TToolButton
+      Left = 0
+      Top = 0
+      Action = frmMain.actVypiska
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton2: TToolButton
+      Left = 23
+      Top = 0
+      Action = frmMain.actNapr
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton13: TToolButton
+      Left = 46
+      Top = 0
+      Action = frmMain.actNaprClose
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton9: TToolButton
+      Left = 69
+      Top = 0
+      Action = frmMain.actFamChg
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton8: TToolButton
+      Left = 92
+      Top = 0
+      Action = frmMain.actPasspChg
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton7: TToolButton
+      Left = 115
+      Top = 0
+      Action = frmMain.actPerevod
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton6: TToolButton
+      Left = 138
+      Top = 0
+      Action = frmMain.actAkadem
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton3: TToolButton
+      Left = 161
+      Top = 0
+      Action = frmMain.actOtchisl
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton10: TToolButton
+      Left = 184
+      Top = 0
+      Action = frmMain.actAcademRestore
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton5: TToolButton
+      Left = 207
+      Top = 0
+      Action = frmMain.actVosst
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton14: TToolButton
+      Left = 230
+      Top = 0
+      Action = frmMain.actExtendSession
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton1: TToolButton
+      Left = 253
+      Top = 0
+      Caption = 'ToolButton1'
+      ImageIndex = 0
+      ParentShowHint = False
+      ShowHint = True
+      Visible = False
+      OnClick = ToolButton1Click
+    end
+    object ToolButton11: TToolButton
+      Left = 276
+      Top = 0
+      Hint = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
+      Caption = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
+      ImageIndex = 16
+      ParentShowHint = False
+      ShowHint = True
+      Visible = False
+    end
+    object ToolButton12: TToolButton
+      Left = 299
+      Top = 0
+      Action = actPrintSprav
+      DropdownMenu = ppmSpravToExcel
+      ParentShowHint = False
+      PopupMenu = ppmSpravToExcel
+      ShowHint = True
+      Style = tbsDropDown
+    end
+  end
   inherited Panel1: TPanel
     Top = 28
-    Width = 725
+    Width = 684
     Height = 619
     TabOrder = 1
     ExplicitTop = 28
-    ExplicitWidth = 725
+    ExplicitWidth = 668
     ExplicitHeight = 619
     object ScrollBox1: TScrollBox
       Left = 2
       Top = 2
-      Width = 721
+      Width = 680
       Height = 615
       Align = alClient
       BevelInner = bvNone
       BevelOuter = bvNone
       BorderStyle = bsNone
       TabOrder = 0
+      ExplicitWidth = 664
       object PageControl1: TPageControl
         Left = 0
         Top = 0
-        Width = 721
+        Width = 680
         Height = 615
-        ActivePage = TabSheet8
+        ActivePage = tbMagazine
         Align = alClient
         Constraints.MinWidth = 557
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
         MultiLine = True
+        ParentFont = False
         TabOrder = 0
         OnChange = PageControl1Change
         object TabSheet1: TTabSheet
           Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+          ExplicitWidth = 656
           object PageControl2: TPageControl
             Left = 0
             Top = 0
-            Width = 713
+            Width = 672
             Height = 587
-            ActivePage = TabSheet3
+            ActivePage = TabSheet4
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
             Images = ilPages
+            ParentFont = False
             Style = tsFlatButtons
             TabOrder = 0
             object TabSheet3: TTabSheet
               Caption = #1054#1073#1097#1080#1077
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              ParentShowHint = False
+              ShowHint = False
               object Panel4: TPanel
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 672
                 Height = 555
                 Align = alClient
                 TabOrder = 0
+                ExplicitWidth = 648
                 object Panel8: TPanel
                   Left = 1
                   Top = 173
-                  Width = 703
+                  Width = 670
                   Height = 177
                   Align = alTop
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
                   TabOrder = 2
+                  ExplicitWidth = 646
                   object Label1: TLabel
                     Left = 160
                     Top = 44
@@ -213,10 +367,11 @@ inherited fmStudent: TfmStudent
                 object Panel7: TPanel
                   Left = 1
                   Top = 1
-                  Width = 703
+                  Width = 670
                   Height = 172
                   Align = alTop
                   TabOrder = 1
+                  ExplicitWidth = 646
                   object Bevel2: TBevel
                     Left = 448
                     Top = 47
@@ -229,13 +384,6 @@ inherited fmStudent: TfmStudent
                     Width = 30
                     Height = 13
                     Caption = #1060#1054#1058#1054
-                  end
-                  object Label3: TLabel
-                    Left = 158
-                    Top = 48
-                    Width = 23
-                    Height = 13
-                    Caption = #1055#1086#1083':'
                   end
                   object Label4: TLabel
                     Left = 13
@@ -325,19 +473,6 @@ inherited fmStudent: TfmStudent
                     Font.Style = []
                     ParentFont = False
                   end
-                  object Label50: TLabel
-                    Left = 181
-                    Top = 48
-                    Width = 4
-                    Height = 13
-                    Caption = '*'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clRed
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
                   object Label52: TLabel
                     Left = 379
                     Top = 48
@@ -368,22 +503,18 @@ inherited fmStudent: TfmStudent
                     Height = 13
                     Caption = #1058#1077#1083#1077#1092#1086#1085':'
                   end
-                  object dbcbeSex: TDBComboBoxEh
-                    Left = 156
-                    Top = 64
-                    Width = 136
-                    Height = 19
-                    DynProps = <>
-                    EditButtons = <>
-                    Flat = True
-                    Items.Strings = (
-                      #1052#1091#1078#1089#1082#1086#1081
-                      #1046#1077#1085#1089#1082#1080#1081)
-                    ReadOnly = True
-                    TabOrder = 4
-                    Visible = True
-                    OnChange = dbcbeSexChange
-                    OnDropDown = dbcbeSexDropDown
+                  object Label50: TLabel
+                    Left = 203
+                    Top = 50
+                    Width = 4
+                    Height = 13
+                    Caption = '*'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clRed
+                    Font.Height = -11
+                    Font.Name = 'MS Sans Serif'
+                    Font.Style = []
+                    ParentFont = False
                   end
                   object dbdteBirthDate: TDBDateTimeEditEh
                     Left = 12
@@ -449,7 +580,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 6
+                    TabOrder = 5
                     Visible = True
                     OnChange = eFamChange
                     OnExit = eEmailExit
@@ -463,7 +594,7 @@ inherited fmStudent: TfmStudent
                     EditButtons = <>
                     Flat = True
                     MaxLength = 6
-                    TabOrder = 5
+                    TabOrder = 4
                     Text = '      '
                     Visible = True
                     OnChange = eFamChange
@@ -479,7 +610,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 7
+                    TabOrder = 6
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -491,7 +622,7 @@ inherited fmStudent: TfmStudent
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
-                    TabOrder = 8
+                    TabOrder = 7
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -501,19 +632,34 @@ inherited fmStudent: TfmStudent
                     Width = 93
                     Height = 25
                     Caption = #1057#1085#1080#1084#1086#1082
-                    TabOrder = 9
+                    TabOrder = 8
                     OnClick = bShotClick
+                  end
+                  object rgSex: TRadioGroup
+                    Left = 176
+                    Top = 53
+                    Width = 83
+                    Height = 30
+                    Caption = #1055#1086#1083
+                    Columns = 2
+                    ItemIndex = 1
+                    Items.Strings = (
+                      #1046
+                      #1052)
+                    TabOrder = 9
+                    OnClick = rgSexClick
                   end
                 end
                 object Panel6: TPanel
                   Left = 1
                   Top = 350
-                  Width = 703
+                  Width = 670
                   Height = 204
                   Align = alClient
                   TabOrder = 0
+                  ExplicitWidth = 646
                   DesignSize = (
-                    703
+                    670
                     204)
                   object Label2: TLabel
                     Left = 12
@@ -529,31 +675,34 @@ inherited fmStudent: TfmStudent
                     ParentFont = False
                   end
                   object sbAddAddress: TSpeedButton
-                    Left = 672
+                    Left = 639
                     Top = 35
                     Width = 23
                     Height = 23
                     Action = actAddAddress
                     Anchors = [akTop, akRight]
                     Flat = True
+                    ExplicitLeft = 672
                   end
                   object sbRemoveAddress: TSpeedButton
-                    Left = 672
+                    Left = 639
                     Top = 93
                     Width = 23
                     Height = 23
                     Action = actDeleteAddress
                     Anchors = [akTop, akRight]
                     Flat = True
+                    ExplicitLeft = 672
                   end
                   object SpeedButton2: TSpeedButton
-                    Left = 672
+                    Left = 639
                     Top = 64
                     Width = 23
                     Height = 23
                     Action = actEditAddress
                     Anchors = [akTop, akRight]
                     Flat = True
+                    ExplicitLeft = 672
                   end
                   object SpeedButton3: TSpeedButton
                     Left = 108
@@ -566,7 +715,7 @@ inherited fmStudent: TfmStudent
                   object dbgeAddress: TDBGridEh
                     Left = 12
                     Top = 33
-                    Width = 654
+                    Width = 621
                     Height = 146
                     Anchors = [akLeft, akTop, akRight, akBottom]
                     DataSource = dmStudentSelectionProcs.dsGetPersonAddress
@@ -586,21 +735,30 @@ inherited fmStudent: TfmStudent
             end
             object TabSheet4: TTabSheet
               Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
               ImageIndex = 1
+              ParentFont = False
+              ExplicitWidth = 648
               object Panel3: TPanel
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 664
                 Height = 555
                 Align = alClient
                 TabOrder = 0
+                ExplicitWidth = 648
                 object Panel5: TPanel
                   Left = 1
                   Top = 1
-                  Width = 703
+                  Width = 662
                   Height = 101
                   Align = alTop
                   TabOrder = 0
+                  ExplicitWidth = 646
                   object Label27: TLabel
                     Left = 17
                     Top = 52
@@ -617,15 +775,15 @@ inherited fmStudent: TfmStudent
                   end
                   object Label58: TLabel
                     Left = 89
-                    Top = 8
-                    Width = 4
+                    Top = 4
+                    Width = 6
                     Height = 13
                     Caption = '*'
                     Font.Charset = DEFAULT_CHARSET
                     Font.Color = clRed
                     Font.Height = -11
                     Font.Name = 'MS Sans Serif'
-                    Font.Style = []
+                    Font.Style = [fsBold]
                     ParentFont = False
                   end
                   object dbcbeCitizenship: TDBLookupComboboxEh
@@ -642,7 +800,7 @@ inherited fmStudent: TfmStudent
                     ListSource = dmStudentData.dsCitizen
                     TabOrder = 0
                     Visible = True
-                    OnChange = eFamChange
+                    OnChange = dbcbeCitizenshipChange
                   end
                   object eBirthPlace: TDBEditEh
                     Left = 17
@@ -658,106 +816,66 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                 end
-                object Panel2: TPanel
+                object pnlDop: TPanel
                   Left = 1
                   Top = 102
-                  Width = 703
-                  Height = 452
-                  Align = alClient
+                  Width = 662
+                  Height = 307
+                  Align = alTop
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
                   TabOrder = 1
+                  ExplicitWidth = 646
                   object Label30: TLabel
                     Left = 17
-                    Top = 101
+                    Top = 83
                     Width = 119
                     Height = 13
                     Caption = #1054#1073#1097#1077#1089#1090#1074#1077#1085#1085#1072#1103' '#1088#1072#1073#1086#1090#1072':'
                   end
                   object Label31: TLabel
                     Left = 17
-                    Top = 19
+                    Top = 38
                     Width = 132
                     Height = 13
                     Caption = #1044#1086#1074#1091#1079#1086#1074#1089#1082#1072#1103' '#1087#1086#1076#1075#1086#1090#1086#1074#1082#1072':'
                   end
                   object Label32: TLabel
-                    Left = 17
-                    Top = 62
+                    Left = 18
+                    Top = 84
                     Width = 99
                     Height = 13
                     Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1099#1081' '#1091#1095#1077#1090':'
+                    Visible = False
                   end
                   object Label34: TLabel
-                    Left = 198
-                    Top = 141
+                    Left = 17
+                    Top = 177
                     Width = 143
                     Height = 13
                     Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1077' '#1089#1074#1077#1076#1077#1085#1080#1103':'
                   end
                   object Label42: TLabel
-                    Left = 196
-                    Top = 19
+                    Left = 204
+                    Top = 40
                     Width = 43
                     Height = 13
                     Caption = #1052#1077#1076#1072#1083#1100':'
                   end
                   object Label43: TLabel
-                    Left = 196
-                    Top = 101
+                    Left = 17
+                    Top = 135
                     Width = 253
                     Height = 13
                     Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082' '#1074#1086#1077#1085#1085#1086#1081' '#1089#1083#1091#1078#1073#1077' / '#1074#1086#1080#1085#1089#1082#1086#1077' '#1079#1074#1072#1085#1080#1077': '
                   end
-                  object Label57: TLabel
-                    Left = 139
-                    Top = 205
-                    Width = 41
-                    Height = 13
-                    Caption = #1084#1077#1089#1103#1094#1077#1074
-                  end
-                  object Label56: TLabel
-                    Left = 66
-                    Top = 205
-                    Width = 18
-                    Height = 13
-                    Caption = #1083#1077#1090
-                  end
-                  object Label55: TLabel
-                    Left = 17
-                    Top = 182
-                    Width = 72
-                    Height = 13
-                    Caption = #1057#1090#1072#1078' '#1088#1072#1073#1086#1090#1099':'
-                  end
-                  object Label54: TLabel
-                    Left = 17
-                    Top = 141
-                    Width = 61
-                    Height = 13
-                    Caption = #1044#1086#1083#1078#1085#1086#1089#1090#1100':'
-                  end
-                  object Label51: TLabel
-                    Left = 196
-                    Top = 62
-                    Width = 76
-                    Height = 13
-                    Caption = #1052#1077#1089#1090#1086' '#1088#1072#1073#1086#1090#1099':'
-                  end
-                  object Label59: TLabel
-                    Left = 240
-                    Top = 19
-                    Width = 4
-                    Height = 13
-                    Caption = '*'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clRed
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
                   object cbChildren: TCheckBox
-                    Left = 363
-                    Top = 28
+                    Left = 204
+                    Top = 9
                     Width = 97
                     Height = 17
                     Caption = #1053#1072#1083#1080#1095#1080#1077' '#1076#1077#1090#1077#1081
@@ -765,26 +883,32 @@ inherited fmStudent: TfmStudent
                     OnClick = eFamChange
                   end
                   object cbJob: TCheckBox
-                    Left = 363
-                    Top = 80
+                    Left = 17
+                    Top = 280
                     Width = 118
                     Height = 17
                     Caption = #1053#1072#1083#1080#1095#1080#1077' '#1088#1072#1073#1086#1090#1099
                     TabOrder = 1
-                    OnClick = eFamChange
+                    OnClick = cbJobClick
                   end
                   object cbInvalid: TCheckBox
-                    Left = 363
-                    Top = 45
+                    Left = 319
+                    Top = 9
                     Width = 97
                     Height = 17
                     Caption = #1048#1085#1074#1072#1083#1080#1076#1085#1086#1089#1090#1100
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
+                    ParentFont = False
                     TabOrder = 2
                     OnClick = eFamChange
                   end
                   object cbAppNeed: TCheckBox
-                    Left = 363
-                    Top = 63
+                    Left = 18
+                    Top = 9
                     Width = 164
                     Height = 17
                     Caption = #1055#1086#1090#1088#1077#1073#1085#1086#1089#1090#1100' '#1074' '#1086#1073#1097#1077#1078#1080#1090#1080#1080
@@ -793,7 +917,7 @@ inherited fmStudent: TfmStudent
                   end
                   object dbcbePreparation: TDBLookupComboboxEh
                     Left = 17
-                    Top = 37
+                    Top = 56
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
@@ -809,7 +933,7 @@ inherited fmStudent: TfmStudent
                   end
                   object dbcbeSocWork: TDBLookupComboboxEh
                     Left = 17
-                    Top = 118
+                    Top = 100
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
@@ -824,8 +948,8 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                   object dbcbeSpecCount: TDBLookupComboboxEh
-                    Left = 17
-                    Top = 78
+                    Left = 18
+                    Top = 100
                     Width = 172
                     Height = 19
                     Alignment = taLeftJustify
@@ -836,13 +960,13 @@ inherited fmStudent: TfmStudent
                     ListField = 'Cspecial_uchet'
                     ListSource = dmStudentData.dsCount
                     TabOrder = 6
-                    Visible = True
+                    Visible = False
                     OnChange = eFamChange
                   end
                   object dbcbeMedal: TDBLookupComboboxEh
-                    Left = 196
-                    Top = 35
-                    Width = 157
+                    Left = 204
+                    Top = 56
+                    Width = 212
                     Height = 19
                     Alignment = taLeftJustify
                     DataField = ''
@@ -856,9 +980,9 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                   object dbcbeMilitaryState: TDBLookupComboboxEh
-                    Left = 195
-                    Top = 118
-                    Width = 331
+                    Left = 16
+                    Top = 152
+                    Width = 609
                     Height = 19
                     Alignment = taLeftJustify
                     DataField = ''
@@ -872,9 +996,9 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                   object eAddInfo: TMemo
-                    Left = 195
-                    Top = 158
-                    Width = 332
+                    Left = 17
+                    Top = 196
+                    Width = 608
                     Height = 72
                     BevelInner = bvNone
                     BorderStyle = bsNone
@@ -884,23 +1008,61 @@ inherited fmStudent: TfmStudent
                     OnEnter = eAddInfoEnter
                     OnExit = eAddInfoExit
                   end
-                  object eDuty: TDBEditEh
-                    Left = 17
-                    Top = 159
-                    Width = 172
-                    Height = 19
-                    Alignment = taLeftJustify
-                    DynProps = <>
-                    EditButtons = <>
-                    Flat = True
-                    TabOrder = 10
-                    Visible = True
-                    OnChange = eFamChange
+                end
+                object pnlWork: TPanel
+                  Left = 1
+                  Top = 409
+                  Width = 662
+                  Height = 145
+                  Align = alClient
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 2
+                  Visible = False
+                  ExplicitWidth = 646
+                  object Label51: TLabel
+                    Left = 12
+                    Top = 18
+                    Width = 76
+                    Height = 13
+                    Caption = #1052#1077#1089#1090#1086' '#1088#1072#1073#1086#1090#1099':'
+                  end
+                  object Label54: TLabel
+                    Left = 27
+                    Top = 48
+                    Width = 61
+                    Height = 13
+                    Caption = #1044#1086#1083#1078#1085#1086#1089#1090#1100':'
+                  end
+                  object Label55: TLabel
+                    Left = 16
+                    Top = 78
+                    Width = 72
+                    Height = 13
+                    Caption = #1057#1090#1072#1078' '#1088#1072#1073#1086#1090#1099':'
+                  end
+                  object Label56: TLabel
+                    Left = 145
+                    Top = 78
+                    Width = 18
+                    Height = 13
+                    Caption = #1083#1077#1090
+                  end
+                  object Label57: TLabel
+                    Left = 225
+                    Top = 78
+                    Width = 41
+                    Height = 13
+                    Caption = #1084#1077#1089#1103#1094#1077#1074
                   end
                   object dbcbeEnterprise: TDBLookupComboboxEh
-                    Left = 196
-                    Top = 78
-                    Width = 157
+                    Left = 94
+                    Top = 15
+                    Width = 531
                     Height = 19
                     Alignment = taLeftJustify
                     DataField = ''
@@ -909,33 +1071,46 @@ inherited fmStudent: TfmStudent
                     KeyField = 'Ik_pred'
                     ListField = 'Cname_pred'
                     ListSource = dmStudentData.dsEnterprise
-                    TabOrder = 11
+                    TabOrder = 0
+                    Visible = True
+                    OnChange = eFamChange
+                  end
+                  object eDuty: TDBEditEh
+                    Left = 94
+                    Top = 45
+                    Width = 172
+                    Height = 19
+                    Alignment = taLeftJustify
+                    DynProps = <>
+                    EditButtons = <>
+                    Flat = True
+                    TabOrder = 1
                     Visible = True
                     OnChange = eFamChange
                   end
                   object eXpyear: TDBNumberEditEh
-                    Left = 17
-                    Top = 202
+                    Left = 94
+                    Top = 75
                     Width = 45
                     Height = 19
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
                     MaxValue = 1000.000000000000000000
-                    TabOrder = 12
+                    TabOrder = 2
                     Visible = True
                     OnChange = eFamChange
                   end
                   object eXpMonth: TDBNumberEditEh
-                    Left = 91
-                    Top = 202
+                    Left = 174
+                    Top = 75
                     Width = 45
                     Height = 19
                     DynProps = <>
                     EditButtons = <>
                     Flat = True
                     MaxValue = 11.000000000000000000
-                    TabOrder = 13
+                    TabOrder = 3
                     Visible = True
                     OnChange = eFamChange
                   end
@@ -945,10 +1120,11 @@ inherited fmStudent: TfmStudent
             object TabSheet5: TTabSheet
               Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
               ImageIndex = 2
+              ExplicitWidth = 648
               object Splitter1: TSplitter
                 Left = 0
                 Top = 25
-                Width = 705
+                Width = 664
                 Height = 3
                 Cursor = crVSplit
                 Align = alTop
@@ -957,11 +1133,12 @@ inherited fmStudent: TfmStudent
               object Panel9: TPanel
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 664
                 Height = 25
                 Align = alTop
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitWidth = 648
                 object Label38: TLabel
                   Left = 323
                   Top = 6
@@ -988,7 +1165,7 @@ inherited fmStudent: TfmStudent
               object dbgeFam: TDBGridEh
                 Left = 0
                 Top = 28
-                Width = 705
+                Width = 664
                 Height = 403
                 Align = alClient
                 DataSource = dmStudentSelectionProcs.dsFamily
@@ -1006,7 +1183,7 @@ inherited fmStudent: TfmStudent
               object dbgeChangeFam: TDBGridEh
                 Left = 0
                 Top = 431
-                Width = 705
+                Width = 664
                 Height = 124
                 Align = alBottom
                 AutoFitColWidths = True
@@ -1048,24 +1225,30 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
-              DesignSize = (
-                705
-                555)
+              ExplicitWidth = 648
               object dbgeDocuments: TDBGridEh
                 Left = 0
-                Top = 29
-                Width = 705
-                Height = 391
-                Anchors = [akLeft, akTop, akRight, akBottom]
+                Top = 0
+                Width = 613
+                Height = 555
+                Align = alClient
                 AutoFitColWidths = True
                 DataSource = dmStudentSelectionProcs.dsDocuments
                 DynProps = <>
                 Flat = True
                 FooterParams.Color = clWindow
                 IndicatorOptions = []
-                Options = [dgEditing, dgTitles, dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
                 RowHeight = 18
                 TabOrder = 0
+                TitleParams.Font.Charset = DEFAULT_CHARSET
+                TitleParams.Font.Color = clWindowText
+                TitleParams.Font.Height = -11
+                TitleParams.Font.Name = 'Tahoma'
+                TitleParams.Font.Style = []
+                TitleParams.ParentFont = False
+                OnCellClick = dbgeDocumentsCellClick
+                OnDblClick = dbgeDocumentsDblClick
                 OnExit = dbgeFamExit
                 object RowDetailData: TRowDetailPanelControlEh
                 end
@@ -1092,15 +1275,56 @@ inherited fmStudent: TfmStudent
                 ParentShowHint = False
                 ShowHint = True
                 TabOrder = 1
+                Visible = False
+              end
+              object pnlToolDoc: TPanel
+                Left = 613
+                Top = 0
+                Width = 51
+                Height = 555
+                Align = alRight
+                TabOrder = 2
+                ExplicitLeft = 597
+                object sbAddDoc: TSpeedButton
+                  Left = 9
+                  Top = 9
+                  Width = 23
+                  Height = 22
+                  Action = actAddDocument
+                  Flat = True
+                end
+                object SpeedButton7: TSpeedButton
+                  Left = 9
+                  Top = 37
+                  Width = 23
+                  Height = 22
+                  Action = actUpdateDocument
+                  Flat = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object SbDelDoc: TSpeedButton
+                  Left = 9
+                  Top = 65
+                  Width = 23
+                  Height = 22
+                  Action = actDelDocument
+                  Flat = True
+                end
               end
             end
             object TabSheet7: TTabSheet
               Caption = #1057#1086#1073#1099#1090#1080#1103
               ImageIndex = 4
+              ExplicitWidth = 648
               object gbExiled: TGroupBox
                 Left = 0
                 Top = 0
-                Width = 705
+                Width = 664
                 Height = 91
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1086#1090#1095#1080#1089#1083#1077#1085#1080#1080
@@ -1111,10 +1335,11 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
+                ExplicitWidth = 648
                 object DBGridEh5: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 660
                   Height = 74
                   Align = alClient
                   AutoFitColWidths = True
@@ -1133,7 +1358,7 @@ inherited fmStudent: TfmStudent
               object gbAcadem: TGroupBox
                 Left = 0
                 Top = 179
-                Width = 705
+                Width = 664
                 Height = 86
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1072#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1080#1093' '#1086#1090#1087#1091#1089#1082#1072#1093
@@ -1144,10 +1369,11 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 1
+                ExplicitWidth = 648
                 object dbgeAcadem: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 660
                   Height = 69
                   Align = alClient
                   AutoFitColWidths = True
@@ -1166,7 +1392,7 @@ inherited fmStudent: TfmStudent
               object gbEntered: TGroupBox
                 Left = 0
                 Top = 91
-                Width = 705
+                Width = 664
                 Height = 88
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
@@ -1177,10 +1403,11 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 2
+                ExplicitWidth = 648
                 object DBGridEh3: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 660
                   Height = 71
                   Align = alClient
                   AutoFitColWidths = True
@@ -1199,7 +1426,7 @@ inherited fmStudent: TfmStudent
               object gbProlongued: TGroupBox
                 Left = 0
                 Top = 457
-                Width = 705
+                Width = 664
                 Height = 98
                 Align = alClient
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1088#1086#1076#1083#1077#1085#1080#1080' '#1089#1077#1089#1089#1080#1080
@@ -1210,10 +1437,11 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 3
+                ExplicitWidth = 648
                 object DBGridEh6: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 660
                   Height = 81
                   Align = alClient
                   AutoFitColWidths = True
@@ -1232,7 +1460,7 @@ inherited fmStudent: TfmStudent
               object gbCatChange: TGroupBox
                 Left = 0
                 Top = 361
-                Width = 705
+                Width = 664
                 Height = 96
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1089#1084#1077#1085#1077' '#1082#1072#1090#1077#1075#1086#1088#1080#1080' '#1086#1073#1091#1095#1077#1085#1080#1103
@@ -1243,10 +1471,11 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 4
+                ExplicitWidth = 648
                 object DBGridEh2: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 660
                   Height = 79
                   Align = alClient
                   AutoFitColWidths = True
@@ -1265,7 +1494,7 @@ inherited fmStudent: TfmStudent
               object gbMoved: TGroupBox
                 Left = 0
                 Top = 265
-                Width = 705
+                Width = 664
                 Height = 96
                 Align = alTop
                 Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1077#1088#1077#1074#1086#1076#1072#1093' '#1085#1072' '#1089#1083#1077#1076#1091#1102#1097#1080#1081' '#1082#1091#1088#1089
@@ -1276,10 +1505,11 @@ inherited fmStudent: TfmStudent
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 5
+                ExplicitWidth = 648
                 object DBGridEh4: TDBGridEh
                   Left = 2
                   Top = 15
-                  Width = 701
+                  Width = 660
                   Height = 79
                   Align = alClient
                   AutoFitColWidths = True
@@ -1301,10 +1531,11 @@ inherited fmStudent: TfmStudent
         object TabSheet2: TTabSheet
           Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
           ImageIndex = 1
+          ExplicitWidth = 656
           object DBGridEh1: TDBGridEh
             Left = 0
             Top = 26
-            Width = 713
+            Width = 672
             Height = 561
             Align = alClient
             AllowedOperations = []
@@ -1327,11 +1558,12 @@ inherited fmStudent: TfmStudent
           object Panel11: TPanel
             Left = 0
             Top = 0
-            Width = 713
+            Width = 672
             Height = 26
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 1
+            ExplicitWidth = 656
             object Label45: TLabel
               Left = 5
               Top = 7
@@ -1491,14 +1723,16 @@ inherited fmStudent: TfmStudent
         object tsBRSBalls: TTabSheet
           Caption = #1041#1072#1083#1083#1099' '#1087#1086' '#1084#1086#1076#1091#1083#1103#1084
           ImageIndex = 4
+          ExplicitWidth = 656
           object Panel10: TPanel
             Left = 0
             Top = 0
-            Width = 713
+            Width = 672
             Height = 26
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
+            ExplicitWidth = 656
             object Label7: TLabel
               Left = 5
               Top = 7
@@ -1655,7 +1889,7 @@ inherited fmStudent: TfmStudent
           object dbgeBalls: TDBGridEh
             Left = 0
             Top = 26
-            Width = 713
+            Width = 672
             Height = 561
             Align = alClient
             AllowedOperations = []
@@ -1679,14 +1913,16 @@ inherited fmStudent: TfmStudent
         object TabSheet9: TTabSheet
           Caption = #1047#1072#1082#1088#1099#1090#1099#1077' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
+          ExplicitWidth = 656
           object Panel12: TPanel
             Left = 0
             Top = 0
-            Width = 713
+            Width = 672
             Height = 26
             Align = alTop
             BevelOuter = bvNone
             TabOrder = 0
+            ExplicitWidth = 656
             object Label39: TLabel
               Left = 5
               Top = 7
@@ -1741,7 +1977,7 @@ inherited fmStudent: TfmStudent
           object dbgrNapr: TDBGridEh
             Left = 0
             Top = 26
-            Width = 713
+            Width = 672
             Height = 561
             Align = alClient
             AllowedOperations = []
@@ -1766,10 +2002,11 @@ inherited fmStudent: TfmStudent
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
+          ExplicitWidth = 656
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
-            Width = 713
+            Width = 672
             Height = 587
             Align = alClient
             AllowedOperations = []
@@ -1823,29 +2060,38 @@ inherited fmStudent: TfmStudent
             end
           end
         end
-        object TabSheet8: TTabSheet
+        object tbMagazine: TTabSheet
           Caption = #1046#1091#1088#1085#1072#1083' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
           ImageIndex = 5
+          ParentFont = False
+          ExplicitWidth = 656
           object panelMagaz: TPanel
             Left = 0
             Top = 0
-            Width = 713
+            Width = 672
             Height = 47
             Align = alTop
             TabOrder = 0
+            ExplicitWidth = 656
             DesignSize = (
-              713
+              672
               47)
             object lPeriod: TLabel
-              Left = 276
+              Left = 292
               Top = 12
               Width = 38
               Height = 13
               Anchors = [akRight, akBottom]
               Caption = #1055#1077#1088#1080#1086#1076
+              ExplicitLeft = 276
             end
             object lDef: TLabel
-              Left = 466
+              Left = 455
               Top = 12
               Width = 4
               Height = 13
@@ -1889,7 +2135,7 @@ inherited fmStudent: TfmStudent
               end
             end
             object bbReset: TBitBtn
-              Left = 611
+              Left = 571
               Top = 8
               Width = 91
               Height = 25
@@ -1899,13 +2145,19 @@ inherited fmStudent: TfmStudent
               OnClick = bbResetClick
             end
             object dtpStart: TDateTimePicker
-              Left = 339
+              Left = 340
               Top = 10
-              Width = 121
+              Width = 109
               Height = 21
               Anchors = [akRight, akBottom]
               Date = 42157.433803819450000000
               Time = 42157.433803819450000000
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 2
               OnCloseUp = dtpStartCloseUp
             end
@@ -1923,9 +2175,9 @@ inherited fmStudent: TfmStudent
               Visible = True
             end
             object dtpEnd: TDateTimePicker
-              Left = 476
+              Left = 465
               Top = 9
-              Width = 112
+              Width = 100
               Height = 22
               Anchors = [akRight, akBottom]
               Date = 42157.434117662040000000
@@ -1937,7 +2189,7 @@ inherited fmStudent: TfmStudent
           object dbgehMagazineDocsStud: TDBGridEh
             Left = 0
             Top = 47
-            Width = 713
+            Width = 672
             Height = 540
             Align = alClient
             AllowedSelections = [gstRecordBookmarks, gstAll]
@@ -1951,8 +2203,14 @@ inherited fmStudent: TfmStudent
             ColumnDefValues.Title.TitleButton = True
             DataSource = dmDocs.dsDocStud
             DynProps = <>
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
             IndicatorOptions = [gioShowRowIndicatorEh]
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+            ParentFont = False
             ReadOnly = True
             SortLocal = True
             STFilter.Local = True
@@ -2164,415 +2422,28 @@ inherited fmStudent: TfmStudent
   end
   inherited pnlSave: TPanel
     Top = 647
-    Width = 725
+    Width = 684
     TabOrder = 0
     ExplicitTop = 647
-    ExplicitWidth = 725
+    ExplicitWidth = 668
     DesignSize = (
-      725
+      684
       37)
     inherited bbSave: TBitBtn
-      Left = 555
+      Left = 514
       Action = actApply
-      ExplicitLeft = 555
+      ExplicitLeft = 498
     end
     inherited bbUndo: TBitBtn
-      Left = 387
+      Left = 346
       Action = actUndo
       Caption = #1054#1090#1084#1077#1085#1080#1090#1100
-      ExplicitLeft = 387
-    end
-  end
-  object ToolBar1: TToolBar
-    Left = 0
-    Top = 0
-    Width = 725
-    Height = 28
-    Caption = 'ToolBar1'
-    Images = frmMain.ImageList1
-    TabOrder = 2
-    object ToolButton4: TToolButton
-      Left = 0
-      Top = 0
-      Action = frmMain.actVypiska
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton2: TToolButton
-      Left = 23
-      Top = 0
-      Action = frmMain.actNapr
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton13: TToolButton
-      Left = 46
-      Top = 0
-      Action = frmMain.actNaprClose
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton9: TToolButton
-      Left = 69
-      Top = 0
-      Action = frmMain.actFamChg
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton8: TToolButton
-      Left = 92
-      Top = 0
-      Action = frmMain.actPasspChg
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton7: TToolButton
-      Left = 115
-      Top = 0
-      Action = frmMain.actPerevod
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton6: TToolButton
-      Left = 138
-      Top = 0
-      Action = frmMain.actAkadem
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton3: TToolButton
-      Left = 161
-      Top = 0
-      Action = frmMain.actOtchisl
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton10: TToolButton
-      Left = 184
-      Top = 0
-      Action = frmMain.actAcademRestore
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton5: TToolButton
-      Left = 207
-      Top = 0
-      Action = frmMain.actVosst
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton14: TToolButton
-      Left = 230
-      Top = 0
-      Action = frmMain.actExtendSession
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object ToolButton1: TToolButton
-      Left = 253
-      Top = 0
-      Caption = 'ToolButton1'
-      ImageIndex = 0
-      ParentShowHint = False
-      ShowHint = True
-      Visible = False
-      OnClick = ToolButton1Click
-    end
-    object ToolButton11: TToolButton
-      Left = 276
-      Top = 0
-      Hint = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
-      Caption = #1051#1080#1095#1085#1072#1103' '#1082#1072#1088#1090#1086#1095#1082#1072' '#1089#1090#1091#1076#1077#1085#1090#1072
-      ImageIndex = 16
-      ParentShowHint = False
-      ShowHint = True
-      Visible = False
-    end
-    object ToolButton12: TToolButton
-      Left = 299
-      Top = 0
-      Action = actPrintSprav
-      DropdownMenu = ppmSpravToExcel
-      ParentShowHint = False
-      PopupMenu = ppmSpravToExcel
-      ShowHint = True
-      Style = tbsDropDown
+      ExplicitLeft = 330
     end
   end
   object ilPages: TImageList
     Left = 386
     Top = 167
-    Bitmap = {
-      494C010106000900D40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
-      0000000000003600000028000000400000002000000001002000000000000020
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000515200005152000051520000515200005152000051
-      5200005152000051520000515200000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000E7E7EF006B5142006349
-      3900634931006B49390073614A006B5139006349310063493100634931006349
-      310063493100B5B6B50000000000000000000000000000000000000000000000
-      0000000000000051520000CFCE0000CFCE0000FFFF0000FFFF0000FFFF0000FF
-      FF00009E9C00009E9C00009E9C00007173000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000BDA69C00F7EFEF00E7DF
-      D600E7CFC600DEC7BD008C8EB500D6BEB500DEB6A500D6B6A500D6AE9C00D6AE
-      9400CE9E8C006349310000000000000000000000000000000000000000000000
-      00000051520000CFCE0000FFFF0000FFFF0000FFFF0000FFFF0000FFFF0000FF
-      FF0000FFFF0000FFFF0000CFCE00007173000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000BDAE9C00FFF7EF00F7EF
-      EF00F7EFE7003151BD001038B5006B79C600E7D7CE00EFD7C600E7CFBD00E7C7
-      B500D6AE94006349310000000000000000000000000000000000000000000000
-      00000051520000CFCE0000FFFF0000FFFF0073FFFF0000C7C60000C7C60073FF
-      FF0000FFFF0000FFFF0000CFCE00007173000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000BDAE9C00FFF7EF00D6D7
-      E7002949C6002951EF002149E7001038B5009C96C600EFD7C600EFCFC600E7C7
-      B500D6AE94006349310000000000000000000000000000000000000000000000
-      00000051520000CFCE0000FFFF0073FFFF0000C7C600FFFFFF000000000000C7
-      C60000FFFF0000FFFF0000CFCE00007173000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000C6AE9C00FFF7F7001841
-      BD002951F7006386FF005271F7003961EF002138B500D6C7C600EFD7CE00E7CF
-      BD00D6AE9C006349310000000000000000000000000000000000000000000000
-      00000051520000CFCE0000CFCE0000FFFF0000C7C600FFFFFF00000000000000
-      000000C7C60000CFCE0000515200000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000C6AEA500FFFFF70084A6
-      FF007B96FF007B8EF700D6D7E7007B96F7004261E7003951AD00EFD7CE00EFD7
-      CE00D6B6A5006349390000000000000000000000000000000000000000000000
-      0000000000000051520000CFCE0000CFCE00006984001079C6001079C6000871
-      AD00004939000051520000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000CEB6A500FFFFFF00E7E7
-      FF00BDC7F700F7EFEF00F7EFE700E7DFE7007B96F7002951DE005261AD00EFDF
-      D600DEC7B5007359420000000000000000000000000000000000000000000000
-      000000000000000000000051520000598400298EEF00319EFF00319EFF00319E
-      FF001079C6000051520000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000CEB6A500FFFFFF00FFFF
-      FF00FFFFF700FFF7F700FFF7EF00F7EFE700EFE7E700738EF7002149D6008C96
-      BD00E7CFC60084695A00000000000000000000000000000000007BAE73006396
-      5A00528E4A0039863100000000001879C60039A6FF0042A6FF0042A6FF0039A6
-      FF00319EFF000049730000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000CEBEAD00FFFFFF00FFFF
-      FF00FFFFFF00FFF7F700FFF7F700F7EFEF00EFE7E700F7EFE7007B96EF002149
-      D6009C96BD00A58E7B0000000000000000000000000052964A00FFF7FF00E7E7
-      E700EFE7EF00F7E7F70039863100218ECE0042AEFF004AB6FF004AB6FF004AAE
-      FF0042AEFF001879BD0000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000D6BEAD00FFFFFF00FFFF
-      FF007B9EAD00638E94006386940063798C005A7184006B868C0094A6AD008CA6
-      EF002949D600AD968C000000000000000000428E390000000000000000000071
-      0000DEEFDE00F7F7F700EFE7EF00218ECE0052B6FF0052BEFF0052BEFF0052B6
-      FF004AB6FF00218ECE0000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000D6BEAD00FFFFFF00FFFF
-      FF0084AEB50094D7E70094E7F7007BD7EF0063C7DE00529EB5006B868C00F7E7
-      DE00E7D7CE00A5968C000000000000000000CEE7C600FFFFFF00000000000079
-      000000790000DEEFDE00E7E7EF005A9E5200319ED6002996C60039A6DE004AB6
-      FF0042AEF7002186B50000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000DEC7B500FFFFFF00FFFF
-      FF00F7FFFF0084A6B500A5AEA5009C8E84007BC7D6004A697B00F7EFEF00EFE7
-      DE00F7E7DE00847163000000000000000000E7EFE700FFFFFF00000000000079
-      000008790800EFF7EF00EFEFEF005A9E5200318EBD0052A6D60073B6DE005AA6
-      C600398EB50008699C0000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000F7F7F700DEC7B500D6BE
-      AD00D6BEAD0073A6B500A5E7EF009CE7F7008CD7E70042617300C6AE9C00BDAE
-      9C00BDA69400E7E7EF000000000000000000428E390000000000000000000871
-      0800FFFFFF00FFFFFF00FFF7FF00398631002186B50084C7E70094CFEF008CC7
-      E700298EBD0000496B0000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000084B6C6007BA6B5006B96A50000000000000000000000
-      000000000000000000000000000000000000000000003986310000000000FFFF
-      FF00000000000000000052964A0000000000006194001871A5004296BD001871
-      A50000517B000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000639E5A006BA6
-      6300529652008CBE8C0000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000FFFFFF00EFEFEF00E7E7E700DEDFDE00DEDFDE00DEDFDE00EFEF
-      EF00FFFFFF000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000EFEFEF00D6D7
-      D600D6D7D600D6D7D600D6D7D600D6D7D600D6D7D600D6D7D600D6D7D600D6D7
-      D600D6D7D600D6D7D600F7F7F700000000000000000000000000FFFFFF00DEDF
-      DE009C9E9C005269520029612900215921001059100010591000215921003959
-      39007B797B00EFEFEF0000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000D6D7D60073717300C6C7C6000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000FFFFFF00C6C7C600C6967B00C696
-      7B00BD8E7B00BD8E7300B5867300B5867300AD797300AD796B00AD716B00A571
-      6B009C696B009C696300D6D7D6000000000000000000000000009CB69C001086
-      100042BE420052C752003186290052C7520052C7520042BE420039B6390021AE
-      210008610800D6D7D60000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000C6C7C6004A514A00318EB50042617300F7F7F700BDBEBD00A5A6A500A5A6
-      A500A5A6A500ADAEAD00CECFCE00EFEFEF00FFFFFF0000000000000000000000
-      000000000000000000000000000000000000B5B6B50073718C00C6968C00FFEF
-      D600FFE7CE00FFE7CE00FFE7C600FFDFBD00FFDFBD00FFDFB500FFD7AD00FFD7
-      AD00FFD7A5009C696300D6D7D60000000000000000000000000029A629004AC7
-      4A005AC75A0052BE5200FFFFE7002186210063CF63005AC75A004ABE4A0031B6
-      310008710800DEDFDE0000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000000000000000000000C6C7
-      C6004A514A002996C60084DFEF006396A500BD512900D6492100EF593900FF61
-      5200FF615200D6492100A538180063514A009C9E9C00949694007B797B007371
-      7300737173007B797B00BDBEBD00FFFFFF00ADD7F700398EEF008479A500F7DF
-      CE00FFEFD600FFE7CE00FFE7CE00FFE7C600FFDFBD00FFDFBD00FFDFB500FFD7
-      AD00FFD7AD009C696300D6D7D60000000000000000000000000031AE310052C7
-      520073D7730018861800FFFFF700EFF7E7006BCF6B006BD76B005AC75A0039BE
-      390052795200FFFFFF0000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000C6C7C6004A51
-      4A002996C60084DFEF006396A50000000000C6411000EF594200FF715A00FF79
-      6300CE592900D6865200FF695A00EF59420042B642002996290052C752004ABE
-      4A0039B6390021AE21005A615A00F7F7F700000000007BD7FF00398EE7008479
-      A500F7DFCE00FFEFD600FFE7CE00FFE7CE00FFE7C600FFDFBD00FFDFBD00FFDF
-      B500FFD7AD009C696300D6D7D6000000000000000000000000001886180063CF
-      63007BD77B00428E3900FFFFFF00FFFFF70084AE73007BD77B0063CF63000871
-      0800E7E7E700000000000000000000000000000000000000000000000000EFE7
-      DE00CEBEAD0094796B0073594200735942009C796B00ADAEAD00293042002996
-      C60084DFEF006396A5000000000000000000D6967B00FF695A00FF866B00EF86
-      5A00FFDFA500FFDFA500FF866B00FF61520063CF6300BDDFAD00429E42006BCF
-      6B0052C7520039B639006B796B00FFFFFF0000000000000000007BC7EF003986
-      DE007B79A500FFEFDE00F7DFC600F7D7C600FFDFC600FFE7C600FFDFBD00FFDF
-      BD00FFDFB5009C696B00D6D7D600000000000000000000000000EFF7EF00298E
-      29008CDF8C0084A66300739EAD000069A500528EA5003179180008690800EFEF
-      EF00000000000000000000000000000000000000000000000000DED7D6008469
-      52009C866300BDA67B00D6AE8400B596730094715A006B5142004A86940084DF
-      EF006396A50000000000000000000000000000000000CE613900FF8E6B00EF9E
-      7B00BD8E8400FFBE9400FF8E7300BD49180084DF8400FFFFFF00FFFFFF0063C7
-      63006BCF6B00299E2900DEDFDE00000000000000000000000000DEAE84007BCF
-      FF009C9E9C00D6A68C00FFF7C600FFFFDE00FFFFDE00C69E9400FFE7C600FFDF
-      BD00FFDFBD00A5716B00D6D7D600000000000000000000000000000000000000
-      0000D6E7D6000069A500218EDE00218EDE00218EDE001079BD0052595A00DEDF
-      DE000000000000000000000000000000000000000000F7F7F7008C695A00C6AE
-      8C00EFD7AD00EFD7AD00EFCFA500E7C79C00DEB68C00A5866300735142006396
-      A50000000000000000000000000000000000EFEFEF004A494A00000000000820
-      7B001028940000107B0063595A00319E310094E79400DED7BD00428EAD009CB6
-      A50042A64200D6D7D60000000000000000000000000000000000DEAE8C00FFF7
-      EF00D6A69C00FFFFCE00FFFFCE00FFFFE700FFFFFF00FFFFFF00CEA69400FFE7
-      C600FFDFBD00AD716B00D6D7D600000000000000000000000000000000000000
-      00005A96B500319EFF00319EFF00399EFF00319EFF00319EFF001071BD008486
-      8400FFFFFF0000000000000000000000000000000000C6B6AD00B59E8400F7DF
-      BD00F7E7C600F7E7C600F7DFBD00EFDFB500E7CFA500D6AE8400947152006B61
-      5A0000000000000000000000000000000000101010001010100008286B001849
-      AD001849B5001849AD0008186B00BDBEBD0094B6C6002996F7002996F7002996
-      EF0010598C00A5A6A500FFFFFF00000000000000000000000000E7AE8C00FFFF
-      F700FFE7BD00FFDFAD00FFFFCE00FFFFE700FFFFF700FFFFE700CEB69C00FFE7
-      CE00FFE7C600AD797300D6D7D600000000000000000000000000000000000000
-      00001079BD0039A6FF0042A6FF0042AEFF0042A6FF0039A6FF0039A6FF003959
-      6B00E7E7E70000000000000000000000000000000000B59E9400CEBEA500F7EF
-      CE00F7EFD600F7EFDE00F7EFD600F7E7C600EFD7B500E7C79C00B59673008C69
-      5A000000000000000000000000000000000018181800212021002161C6002169
-      CE002169D6002161CE0010419C00A5A6A500298EDE0039A6FF0039A6FF0039A6
-      FF00319EFF005A616300EFEFEF00000000000000000000000000E7B68C00FFFF
-      FF00FFF7BD00FFDFAD00FFF7C600FFFFD600FFFFDE00FFFFD600D6B69400FFE7
-      CE00FFE7CE00B5867300D6D7D600000000000000000000000000000000000000
-      0000319EE70042AEFF004AB6FF004AB6FF004AB6FF0042AEFF0042AEFF000861
-      9400CECFCE000000000000000000000000000000000094867300E7DFC600F7F7
-      DE00FFF7EF00FFFFEF00FFF7E700F7EFD600EFDFBD00E7CFA500CEA684007351
-      39000000000000000000000000000000000029282900313031002161B500298E
-      F7003196FF00298EF7001861C600A5A6A50042AEFF004AB6FF004AB6FF004AAE
-      FF0042AEFF0018598400DEDFDE00000000000000000000000000EFB68C00FFFF
-      FF00E7C7A500FFFFEF00FFDFB500FFEFB500FFEFBD00FFF7C600B58E8400FFEF
-      D600FFE7CE00BD867300D6D7D600000000000000000000000000000000000000
-      000039A6EF0052BEFF0052BEFF0052BEFF0052BEFF004AB6FF004AB6FF001886
-      C600BDBEBD0000000000000000000000000000000000BDB6A500CEC7B500FFF7
-      EF00FFFFF700FFFFF700FFF7EF00F7EFDE00F7DFC600EFCFAD00C6A67B007B59
-      4A00000000000000000000000000000000001818180042414200292829001041
-      9C002169DE003196F7001059A500D6D7D60052B6FF0052BEFF0052BEFF0052BE
-      FF004AB6FF001879BD00D6D7D600000000000000000000000000EFBE9400FFFF
-      FF00F7EFEF00FFF7EF00FFFFE700FFEFBD00FFFFCE00E7AE8C00FFEFDE00FFEF
-      D600FFEFD600C68E7B00D6D7D600000000000000000000000000000000000000
-      00003196D6004AB6F7002996CE0042AEF70052B6FF0052B6FF004AB6FF000869
-      9C00CECFCE0000000000000000000000000000000000E7DFD600C6B6AD00F7EF
-      E700FFFFF700FFFFF700FFF7EF00F7EFD600F7DFBD00E7CFA5009C866B00B5A6
-      9C0000000000000000000000000000000000DEDFDE0052515200636163009C9E
-      9C00737173002928290039384200FFFFFF001886BD00298EBD00318EBD001886
-      CE002186CE0010618C00EFEFEF00000000000000000000000000F7BE9400FFFF
-      FF00FFFFFF00FFF7F700BD9E9400D6AE9C00DEB6B500FFF7EF00FFF7E700FFE7
-      D600FFD7C600C6967B00D6D7D600000000000000000000000000000000000000
-      00001871A5002186B500429ED60073B6DE0063AECE00318EB500318EB5001061
-      8C00EFEFEF0000000000000000000000000000000000F7F7EF00C6B6AD00D6C7
-      BD00F7F7EF00FFF7E700F7F7DE00F7EFCE00E7D7B500B59E84007B594A00EFE7
-      E7000000000000000000000000000000000000000000BDBEBD00636163009496
-      94006B696B0029282900F7F7F700000000007BAECE0063AEDE0084C7E7009CCF
-      E7003996C600B5B6BD00FFFFFF00000000000000000000000000F7C79400FFFF
-      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFF700FFF7EF00FFF7EF009C69
-      6B009C696B009C696B00E7E7E700000000000000000000000000000000000000
-      000000000000318EBD0073B6DE0084C7E7009CCFEF005AAED6002186B500B5B6
-      BD00FFFFFF000000000000000000000000000000000000000000E7E7DE00C6B6
-      AD00CEBEB500D6CFBD00DED7BD00C6B69C00A59673008C715A00D6CFC6000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000000000000000000007BAECE005AA6C600398E
-      BD00C6D7DE00FFFFFF0000000000000000000000000000000000FFC79400FFFF
-      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFF700FFFFF700FFE7
-      B500D69E8400D6D7D60000000000000000000000000000000000000000000000
-      000000000000DEEFF7002179AD00BDDFEF0084BEE7001879AD00C6CFD600FFFF
-      FF0000000000000000000000000000000000000000000000000000000000F7F7
-      F700E7DFD600C6BEAD00B5A69C00A5968400BDAE9C00F7E7E700000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000FFCF9C00FFFF
-      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFF7F700F7F7F700F7F7EF00DEA6
-      8400D6D7D600000000000000000000000000424D3E000000000000003E000000
-      2800000040000000200000000100010000000000000100000000000000000000
-      000000000000000000000000FFFFFF00FFFFFC01000000008003F80000000000
-      8003F000000000008003F000000000008003F020000000008003F03100000000
-      8003F803000000008003FC03000000008003C203000000008003800300000000
-      8003600300000000800320030000000080032003000000008003600300000000
-      FC7FAD0700000000FFFFC3FF00000000F807FFFFFFFFC001C003FFF8FFFF0001
-      C003FFF0007F0001C003FFE000000001C003FFC100008001C007E0030000C001
-      C00FC0078001C001F00F800F0003C001F007800F0001C001F007800F0001C001
-      F007800F0001C001F007800F0001C001F007800F0001C001F007800F8101C001
-      F807C01FFF83C003F80FE03FFFFFC00700000000000000000000000000000000
-      000000000000}
   end
   object odPhoto: TOpenPictureDialog
     Filter = 
@@ -2634,17 +2505,34 @@ inherited fmStudent: TfmStudent
       ImageIndex = 62
       OnExecute = actPropToFactExecute
     end
+    object actAddDocument: TAction
+      Category = 'ctDocument'
+      ImageIndex = 44
+      OnExecute = actAddDocumentExecute
+    end
+    object actUpdateDocument: TAction
+      Category = 'ctDocument'
+      Enabled = False
+      ImageIndex = 43
+      OnExecute = actUpdateDocumentExecute
+    end
+    object actDelDocument: TAction
+      Category = 'ctDocument'
+      Enabled = False
+      ImageIndex = 42
+      OnExecute = actDelDocumentExecute
+    end
   end
   object ppmSpravToExcel: TPopupMenu
-    Left = 423
-    Top = 226
+    Left = 184
+    Top = 416
     object MenuItem3: TMenuItem
       Action = frmMain.actLichnKartStud
     end
   end
   object ppmStudNapr: TPopupMenu
     Images = frmMain.ImageList1
-    Left = 128
+    Left = 168
     Top = 224
     object N1: TMenuItem
       Action = frmMain.actNapr
@@ -2654,10 +2542,10 @@ inherited fmStudent: TfmStudent
     end
   end
   object ilMain: TImageList
-    Left = 646
+    Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000380210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040003C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3328,5 +3216,23 @@ inherited fmStudent: TfmStudent
     OnPopup = gridColumnSelectMenuPopup
     Left = 384
     Top = 352
+  end
+  object adoSelDocFiles: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    CommandText = 'select * from SelDocumentsFiles(0)'
+    Parameters = <>
+    Left = 584
+    Top = 400
+    object adoSelDocFilesik_doc_file: TIntegerField
+      FieldName = 'ik_doc_file'
+    end
+    object adoSelDocFilesIK_doc: TIntegerField
+      FieldName = 'IK_doc'
+    end
+    object adoSelDocFilesdoc_file: TBlobField
+      FieldName = 'doc_file'
+    end
   end
 end

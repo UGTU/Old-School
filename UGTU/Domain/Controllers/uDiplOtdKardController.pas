@@ -5,12 +5,12 @@ uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM,
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, DBGridEh,WordXP, DateUtils, uDMOtdKadrDiplom, ApplicationController
-  , ExceptionBase;
+  , ExceptionBase, ConstantRepository;
 type
   PDBGrid = ^TDBGridEh;
   TDiplOtdKardController = class (TObject)
   private
-    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac, ik_fac: Integer):TADOStoredProc;
+    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
     procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet);
   protected
     constructor CreateInstance;
@@ -34,12 +34,16 @@ type
   function GetSpecList(cmp: PDBLookupComboboxEh): boolean;
   //GetGroupList загружает список групп
   function GetGroupList(cmp: PDBLookupComboboxEh): boolean;
+  procedure  LoadExitGroups(TargetDataSet: PDataSet);
 
   //Фильтры
   //FilterSpecList фильтрует список специальностей
   function FilterSpecList(cmp: PDBLookupComboboxEh; ik_fac:Variant): boolean;
   //FilterGroupList фильтрует список групп по специальности
-  function FilterGroupList(cmp: PDBLookupComboboxEh; ik_spec:Variant): boolean;
+  function FilterGroupList(cmp: PDBLookupComboboxEh; ik_Gener_spec_fac:Variant): boolean;
+  function FilterGAKGroupList(SourceDataSet: PDataSet; DisplayType, ik_fac, ik_spec:Variant): boolean;
+  //фильтрует список специальностей ГАКа
+  function FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant; DisplayType: integer): boolean;
 
   //GetDiplomList загружает список студентов группы
   function GetDiplomList(SourceDataSet: PDataSet; ik_grup:Variant): boolean;
@@ -52,7 +56,7 @@ type
   //SetSizes Установка размеров
   procedure SetSizes(sh1, sh2:Variant);
   //PrintAllDiploms печатает дипломы
-  function PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac, ik_fac,year:integer; OldBlank: boolean):integer;
+  function PrintAllDiploms(SourceDataSet: PDataSet; ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
   //делит строку str1 на 2, если это необходимо (макс. длина строки MaxStrLength)
   procedure ParseString(var str1,str2: string; MaxStrLength: integer);
 
@@ -63,7 +67,7 @@ type
   //GetSpecGakList загружает список специальностей (для поля просмотра)
   function GetSpecGakList: boolean;
   //GetGakMemberList загружает список председателей
-  function GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant): boolean;
+  function GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant; DisplayType: integer): boolean;
   //SaveGAK сохраняет ГАК
   procedure SaveGAK(SourceDataSet: PDataSet);
   //CancelUpdatesGAK отменяет сохранение ГАК
@@ -133,7 +137,7 @@ function TDiplOtdKardController.GetFacList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
   TGeneralController.Instance.InitializeLockupCB(cmp, 'ik_fac', 'Cname_fac');
-  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'select Fac.Ik_fac, Cname_fac from Fac inner join [GetFacDiplomPermissionsFromRelTable]() perm on Fac.ik_fac=perm.ik_fac where fDateExit is null order by Cname_fac', 'ik_fac', false, NULL);
+  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'EXEC [dbo].[OKADRGetFacs]', 'ik_fac', false, NULL);
   Result:= true;
 end;
 
@@ -141,8 +145,8 @@ end;
 function TDiplOtdKardController.GetSpecList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
-  TGeneralController.Instance.InitializeLockupCB(cmp, 'ik_spec_fac', 'Cname_spec');
-  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'EXEC [dbo].[OKADRGetSpecialities] ', 'ik_spec_fac', false, NULL);
+  TGeneralController.Instance.InitializeLockupCB(cmp, 'ik_Gener_spec_fac', 'Cname_spec');
+  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'EXEC [dbo].[OKADRGetSpecialities] ', 'ik_Gener_spec_fac', false, NULL);
   Result:= true;
 end;
 
@@ -151,8 +155,13 @@ function TDiplOtdKardController.GetGroupList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
   TGeneralController.Instance.InitializeLockupCB(cmp, 'Ik_grup', 'Cname_grup');
-  TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'exec OKADRGetExitGroup', 'Ik_grup', false, NULL);
+  LoadExitGroups(@cmp.ListSource.DataSet);
   Result:= true;
+end;
+
+procedure  TDiplOtdKardController.LoadExitGroups(TargetDataSet: PDataSet);
+begin
+  TGeneralController.Instance.getDataSetValues(TargetDataSet, 'select * from [dbo].[OKADRGetExitGroup_inline]('+IntToStr(YearOf(Today))+') order by Cname_spec, Cname_profile, nYear_post', 'Ik_grup', false, NULL);
 end;
 
 
@@ -175,8 +184,23 @@ begin
   Result:= true;
 end;
 
+//фильтрует список специальностей ГАКа
+function TDiplOtdKardController.FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant; DisplayType: integer): boolean;
+begin
+  Result:= false;
+  SourceDataSet.Filtered:= false;
+  if ik_fac>1 then
+  begin
+    if (DisplayType<0) then
+        SourceDataSet.Filter:= '(ik_fac='+IntToStr(Ik_fac)+')'
+    else
+        SourceDataSet.Filter:= '(ik_fac='+IntToStr(Ik_fac)+') and (id_type_branch='+IntToStr(DisplayType+1)+')';
+    SourceDataSet.Filtered:= true;
+  end;
+  Result:= true;
+end;
 
-//фильтрует список групп по специальности
+//вывод диплома
 procedure TDiplOtdKardController.FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet);
 const strLength = 40;
 var
@@ -283,7 +307,7 @@ begin
     imonth:=MonthOf(StrToDate(str));
     iyear:=YearOf(StrToDate(str));
 
-    smonth := TGeneralController.Instance.GetMonthName(imonth);
+    smonth := GetMonthR(imonth);
 
     str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
 
@@ -306,11 +330,11 @@ begin
 
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
     imonth:=MonthOf(StrToDate(str));
-    smonth := TGeneralController.Instance.GetMonthName(imonth);
+    smonth := GetMonthR(imonth);
     FindRange := E.Cells.Replace(What := '#месяц#',Replacement:=smonth);
 
     iyear:=YearOf(StrToDate(str));
-    FindRange := E.Cells.Replace(What := '#год#',Replacement:=Copy(IntToStr(iyear),3,2));
+    FindRange := E.Cells.Replace(What := '#год#',Replacement:=Copy(IntToStr(iyear),3,2));//IntToStr(iyear));
 
     iday:=DayOf(StrToDate(str));
     str:=Inttostr(iDay);
@@ -331,12 +355,8 @@ begin
   E.Sheets[count].Select;
 
   //заносим данные
-
-
-
-
-
-
+    str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' года';
+  FindRange := E.Cells.Replace(What := '#DateDelivery#',Replacement:=str);
   FindRange := E.Cells.Replace(What := '#fiogak#',Replacement:=tempStoredProc.FieldByName('GakMemberName').AsString);
   FindRange := E.Cells.Replace(What := '#Category#',Replacement:=tempStoredProc.FieldByName('SpecСategory').AsString);
   FindRange := E.Cells.Replace(What := '#qualifShort#',Replacement:=tempStoredProc.FieldByName('QualifShortName').AsString);
@@ -355,10 +375,10 @@ begin
      FindRange := E.Cells.Replace(What := '#spec#',Replacement:='по направлению');    }
 end;
 
-function TDiplOtdKardController.FilterGroupList(cmp: PDBLookupComboboxEh; ik_spec:Variant): boolean;
+function TDiplOtdKardController.FilterGroupList(cmp: PDBLookupComboboxEh; ik_Gener_spec_fac:Variant): boolean;
 begin
   Result:= false;
-  if ik_spec<1 then
+  if ik_Gener_spec_fac<1 then
   begin
     cmp.Value:= null;
     cmp.Enabled:= false;
@@ -366,7 +386,36 @@ begin
   with cmp.ListSource.DataSet do
   begin
     Filtered:= false;
-    Filter:= 'ik_spec_fac='+IntToStr(ik_spec);
+    Filter:= '(ik_Gener_spec_fac='+IntToStr(ik_Gener_spec_fac)+')';
+    Filtered:= true;
+  end;
+  Result:= true;
+end;
+
+function TDiplOtdKardController.FilterGAKGroupList(SourceDataSet: PDataSet; DisplayType, ik_fac, ik_spec:Variant): boolean;
+var filterStr: string;
+begin
+  Result:= false;
+  if (SourceDataSet^ = nil) then
+    exit;
+
+  if ((ik_fac<1)) then
+    exit;
+
+  filterStr:= '(ik_fac='+IntToStr(ik_fac)+')';
+  if (DisplayType=0) and (ik_spec>0) then
+  begin
+    filterStr:= filterStr+' and (ik_spec='+IntToStr(ik_spec)+')';
+  end;
+  if (DisplayType=1) and (ik_spec>0) then
+  begin
+    filterStr:= filterStr+' and (ik_profile='+IntToStr(ik_spec)+')';
+  end;
+
+  with (SourceDataSet^ as TADODataSet) do
+  begin
+    Filtered:= false;
+    Filter:= filterStr;
     Filtered:= true;
   end;
   Result:= true;
@@ -435,7 +484,7 @@ begin
   end;
 end;
 
-function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_spec_fac, ik_fac, year:integer; OldBlank: boolean):integer;
+function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
 var
   E, sheet: Variant;
   first, count :integer;
@@ -445,7 +494,7 @@ var
 begin
   Result:=0;
   TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт дипломов ');
-  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_spec_fac, ik_fac);
+  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_spec, ik_fac, ik_profile);
   try
     E:= CreateOleObject('Excel.Application');
     try
@@ -533,15 +582,17 @@ end;
 //загружает список специальностей (для поля просмотра)
 function TDiplOtdKardController.GetSpecGakList: boolean;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Загрузка списка председателей ГАК');
+  TApplicationController.GetInstance.AddLogEntry('Диплом. Загрузка списка специальностей для председателей ГАК');
   Result:= false;
   DMOtdKadrDiplom.adoqSpec.Close;
+  DMOtdKadrDiplom.adoqSpec.SQL[0]:='SELECT * from [dbo].[OKADRGetEducBranch]('+IntToStr(YearOf(today))+') ORDER BY Cname_spec';
   DMOtdKadrDiplom.adoqSpec.Open;
   Result:= true;
 end;
 
+
 //загружает список председателей
-function TDiplOtdKardController.GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant): boolean;
+function TDiplOtdKardController.GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant; DisplayType: integer): boolean;
 begin
   Result:= false;
   TApplicationController.GetInstance.AddLogEntry('Список председателей ГАК. Загрузка списка председателей.');
@@ -552,6 +603,7 @@ begin
     Parameters.Clear;
     //Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
     Parameters.CreateParameter('@ik_year', ftInteger, pdInput, 4, ik_year);
+    Parameters.CreateParameter('@id_type_branch', ftInteger, pdInput, 4, DisplayType+1);
     Open;
   end;
   Result:= true;
@@ -575,15 +627,16 @@ begin
   SourceDataSet.Open;
 end;
 
-function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec_fac, ik_fac: Integer):TADOStoredProc;
+function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
 begin
   Result := TADOStoredProc.Create(nil);
   Result.Connection := dm.DBConnect;
   Result.ProcedureName := 'OKADRGetGakMemberForExcel;1';
   Result.Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
-  Result.Parameters.CreateParameter('@ik_spec_fac', ftInteger, pdInput, 4, ik_spec_fac);
+  Result.Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 4, ik_spec);
   Result.Parameters.CreateParameter('@year', ftInteger, pdInput, 4, year);
   Result.Parameters.CreateParameter('@ik_fac', ftInteger, pdInput, 4, ik_fac);
+  Result.Parameters.CreateParameter('@ik_profile', ftInteger, pdInput, 4, ik_profile);
   Result.Open;
 end;
 
@@ -617,3 +670,5 @@ begin
 end;
 
 end.
+
+

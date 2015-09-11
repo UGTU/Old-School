@@ -26,7 +26,9 @@ inherited frmPostupDlg: TfrmPostupDlg
     ExplicitWidth = 522
     inherited bbOK: TBitBtn
       Left = 350
+      Action = nil
       Enabled = False
+      OnClick = bbOKClick
       ExplicitLeft = 350
     end
     inherited bbApply: TBitBtn
@@ -455,5 +457,8 @@ inherited frmPostupDlg: TfrmPostupDlg
   inherited actBaseDialog: TActionList
     Left = 485
     Top = 101
+    inherited actOK: TAction
+      OnUpdate = actOKUpdate
+    end
   end
 end

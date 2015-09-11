@@ -22,7 +22,7 @@ and ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2) --зач
 and dbo.Student.nCode = ABIT_postup.nCode
 and Student.ik_medal = medal_abit.ik_medal
 and Student.ik_medal in (2,3,4) --медаль или диплом с отличием
-and NNyear=2012
+and NNyear=2015
 ) stud
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana
 		   from dbo.PersonAddress,dbo.Address,dbo.Street,dbo.Gorod,dbo.Raion,dbo.Region,dbo.Strana

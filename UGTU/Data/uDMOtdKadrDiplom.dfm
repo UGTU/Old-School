@@ -9,16 +9,19 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
   end
   object dsSpecFac: TDataSource
     DataSet = adoqSpec
-    Left = 85
-    Top = 164
+    Left = 37
+    Top = 172
   end
   object adoqSpec: TADOQuery
     Connection = dm.DBConnect
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'select * from Spec_stud'
-      'ORDER BY Cname_spec'
+      'SELECT * from [dbo].[OKADRGetEducBranch](2015) '
+      ''
+      ''
+      ''
+      ''
       ''
       ''
       ''
@@ -29,15 +32,39 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
       ''
       ''
       '')
-    Left = 85
+    Left = 37
     Top = 133
+    object adoqSpecCname_spec: TStringField
+      FieldName = 'Cname_spec'
+      ReadOnly = True
+      Size = 326
+    end
+    object adoqSpecik_fac: TIntegerField
+      FieldName = 'ik_fac'
+    end
+    object adoqSpecCshort_spec: TStringField
+      FieldName = 'Cshort_spec'
+    end
+    object adoqSpecik_spec: TIntegerField
+      FieldName = 'ik_spec'
+    end
+    object adoqSpecid_type_branch: TIntegerField
+      FieldName = 'id_type_branch'
+      ReadOnly = True
+    end
   end
   object adospGakMember: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
     ProcedureName = 'OKADRGetGakMembers;1'
-    Parameters = <>
+    Parameters = <
+      item
+        Name = '@ik_year'
+        DataType = ftWideString
+        Size = 2
+        Value = '23'
+      end>
     Left = 40
     Top = 24
     object adospGakMemberik_GakMember: TIntegerField
@@ -63,10 +90,13 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
       Size = 150
       Lookup = True
     end
+    object adospGakMemberik_fac: TIntegerField
+      FieldName = 'ik_fac'
+    end
   end
   object dsFaculty: TDataSource
-    Left = 151
-    Top = 166
+    Left = 239
+    Top = 182
   end
   object adoqYear: TADOQuery
     Connection = dm.DBConnect
@@ -87,7 +117,7 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
       ''
       ''
       '')
-    Left = 157
+    Left = 245
     Top = 125
   end
   object adospQualification: TADOStoredProc
@@ -96,7 +126,7 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
     LockType = ltBatchOptimistic
     ProcedureName = 'OKADRGetQualifications;1'
     Parameters = <>
-    Left = 128
+    Left = 240
     Top = 24
     object adospQualificationik_spec: TAutoIncField
       FieldName = 'ik_spec'
@@ -127,10 +157,17 @@ object dmOtdKadrDiplom: TdmOtdKadrDiplom
       FieldName = 'Sh_spec'
       Size = 10
     end
+    object adospQualificationcName_direction: TStringField
+      FieldName = 'cName_direction'
+      Size = 50
+    end
+    object adospQualificationYearNormObuch: TIntegerField
+      FieldName = 'YearNormObuch'
+    end
   end
   object dsQualification: TDataSource
     DataSet = adospQualification
-    Left = 136
-    Top = 72
+    Left = 248
+    Top = 80
   end
 end

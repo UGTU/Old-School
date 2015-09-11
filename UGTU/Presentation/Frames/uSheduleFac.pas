@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, StdCtrls, Buttons, ExtCtrls, ComCtrls, GridsEh, DBGridEh,
-  ImgList, DB, Tabs, DockTabSet, uLessonShedule, uExaminationShedule, ADODB;
+  ImgList, DB, Tabs, DockTabSet, uLessonShedule, uExaminationShedule, ADODB,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh;
 
 type
   TfmSheduleFac = class(TfmBase)

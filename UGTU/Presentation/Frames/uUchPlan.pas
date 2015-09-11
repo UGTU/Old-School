@@ -200,7 +200,6 @@ type
     procedure SetUchPlan(const aUchPlan: Integer);
     procedure SetUchPlanProperties(const aUchPlan: Integer);
     procedure SetVisualProperty;
-    function GetTimeByType(aEdIzm, aHours: integer): string;
   public
 
     nameSpclz: string; // именование Профиль/Программа/Специализация
@@ -234,6 +233,7 @@ begin
   fGroupIK := 0;
   fTypePlan := key_ModelPlan;
   IsSetPlan := false;
+  dbcbFormEd.KeyValue := NULL;
   dsDisc.DataSet := dm.aspGetDiscModel;
   SetVisualProperty; // визуальные настройки
   cbApproved.Visible := true;
@@ -400,7 +400,7 @@ begin
   // begin
   // LocalLog.AddEntry('Добавление/редактирование учебного плана');
   dsGetFgosBySpec.DataSet := TFgosController.Instance.getFgosBySpec(fSpecIK);
-  if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value = NULL and (VidGos = 2))
+  if (dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value = NULL and (VidGos = FGOS3))
   then
     Application.MessageBox
       ('Необходимо создать ФГОС для текущего направления подготовки',
@@ -412,7 +412,6 @@ begin
     try
       try
         frmUchPlanAddNew.IK := FIKPlan;
-        // dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger;
       except
         frmUchPlanAddNew.IK := 0;
       end;
@@ -427,19 +426,21 @@ begin
       if ((frmUchPlanAddNew.ShowModal() = mrOk) or
         (frmUchPlanAddNew.bbApply.Tag = 1)) then
       begin
-        if fVidGos > FGOS2 then
-          TGeneralController.Instance.CloseLockupCB(@dbcbSpclz)
-        else
+        if fVidGos = FGOS2 then
+        {  TGeneralController.Instance.CloseLockupCB(@dbcbSpclz)
+        else }
         begin
           dbcbSpclz.ListSource.DataSet.Open;
           dbcbSpclz.KeyValue := frmUchPlanAddNew.dbcbSpclz.KeyValue;
         end;
         TUchPlanController.Instance.getCurrentFormEd
           (@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
+        ReadModelUchPlan;
         dbcbFormEd.KeyValue := frmUchPlanAddNew.dbcbFormEd.KeyValue;
         dbcbYear.KeyValue := frmUchPlanAddNew.dbcbYear.KeyValue;
         dtpDateUtv.Date := frmUchPlanAddNew.dtpDateUtv.Date;
       end;
+
     finally
       frmUchPlanAddNew.Free;
     end;
@@ -460,9 +461,11 @@ begin
     begin
       TUchPlanController.Instance.DeleteUchPlan
         (dbcbYear.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger);
-      TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
-      dbcbSpclz.KeyValue := TUchPlanController.Instance.
-        getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true);
+      if (VidGos = FGOS2) then
+      begin
+        TGeneralController.Instance.CloseLockupCB(@dbcbSpclz);
+        dbcbSpclz.KeyValue := TUchPlanController.Instance.getCurrentSpecializations(@dbcbSpclz.ListSource.DataSet, fSpecIK, true);
+      end;
       if dbcbSpclz.KeyValue = NULL then
         dbcbFormEd.KeyValue := TUchPlanController.Instance.getCurrentFormEd
           (@dbcbFormEd.ListSource.DataSet, fSpecIK, VidGos, true);
@@ -470,6 +473,7 @@ begin
         actList.Actions[i].OnUpdate(actList.Actions[i]);
       // LocalLog.AddEntry('План удалён');
     end;
+    ReadModelUchPlan;
   end;
 end;
 
@@ -477,14 +481,10 @@ procedure TfmUchPlan.ActionRemDiscExecute(Sender: TObject);
 begin
   if not cbApproved.Checked then
   begin
-    if (Application.MessageBox('Удалить выбранную дисциплину? ', 'Учебный план',
-      MB_YESNO) = mrYes) then
-    begin
       // LocalLog.AddEntry('Удаление дисциплины '+(dsDisc.DataSet.FieldByName('cname_disc').AsString));
       TUchPlanController.Instance.DeleteDiscFormUchPlan
         (dsDisc.DataSet.FieldByName('ik_disc_uch_plan').Value);
       GetDisciplines;
-    end;
   end;
 end;
 
@@ -590,8 +590,8 @@ begin
     IntToStr(fGroupIK) + ')';
   fGroupDataSet.Open;
   fGrupSpclszIK := fGroupDataSet.FieldByName('ik_spclz').AsInteger;
-  // специализация группы
 
+  // специализация группы
   Pname := fGroupDataSet.FieldByName('Cname_spec').AsString;
   if Pname <> '' then
     lblProfile.Caption := nameSpclz + ' группы: ' + Pname
@@ -968,25 +968,6 @@ begin
   end;
 end;
 
-function TfmUchPlan.GetTimeByType(aEdIzm, aHours: integer): string;
-var str: string;
-begin
-  case aEdIzm of
-    Hours: Result := IntToStr(aHours);
-    Days: //в днях
-    begin
-      str := '';
-      if aHours>KolDaysInWeek then
-         str := IntToStr(aHours div KolDaysInWeek);
-      if (aHours mod KolDaysInWeek)>0 then
-      begin
-        if str<>'' then str := str + ' ';
-        str := str + IntToStr(aHours mod KolDaysInWeek) + '/'+IntToStr(KolDaysInWeek);
-      end;
-      Result := str;
-    end;
-  end;
-end;
 
 procedure TfmUchPlan.SpeedButton2Click(Sender: TObject);
 begin

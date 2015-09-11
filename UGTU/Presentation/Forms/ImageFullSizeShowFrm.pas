@@ -42,14 +42,16 @@ begin
 end;
 
 procedure TImageFullSizeShowForm.FormPaint(Sender: TObject);
+var ARect: TRect;
 begin
   if not Assigned(FBitmap) then Exit;
   Canvas.Pen.Width :=6;
   Canvas.Pen.Color := clGray;
-  Canvas.Draw(0, 0, FBitmap);
+  ARect :=  TRect.Create(0,0,ImageFullSizeShowForm.Width,ImageFullSizeShowForm.Height);
+
+  Canvas.StretchDraw(ARect, FBitmap);
   Canvas.Polyline([Point(0,0), Point(ClientWidth, 0),
      Point(ClientWidth, ClientHeight), Point(0, ClientHeight), Point(0,0)]);
-
 end;
 
 procedure TImageFullSizeShowForm.SetBitmap(const Value: TGraphic);

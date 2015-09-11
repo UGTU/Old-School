@@ -27,6 +27,14 @@ type
     adospQualificationSpecategory: TStringField;
     adospQualificationQualifShortName: TStringField;
     adospQualificationSh_spec: TStringField;
+    adospQualificationcName_direction: TStringField;
+    adospGakMemberik_fac: TIntegerField;
+    adoqSpecCname_spec: TStringField;
+    adoqSpecik_fac: TIntegerField;
+    adoqSpecCshort_spec: TStringField;
+    adoqSpecik_spec: TIntegerField;
+    adoqSpecid_type_branch: TIntegerField;
+    adospQualificationYearNormObuch: TIntegerField;
   private
     { Private declarations }
   public

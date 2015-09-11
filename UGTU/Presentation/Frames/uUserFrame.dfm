@@ -123,10 +123,6 @@ inherited fmUsers: TfmUsers
       object tsEvents: TTabSheet
         Caption = #1046#1091#1088#1085#1072#1083' '#1089#1086#1073#1099#1090#1080#1081
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object gEvent: TDBGridEh
           Left = 0
           Top = 25
@@ -272,10 +268,6 @@ inherited fmUsers: TfmUsers
       object TabSheet1: TTabSheet
         Caption = #1052#1072#1089#1090#1077#1088' '#1079#1072#1087#1088#1086#1089#1086#1074
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object PageControl1: TPageControl
           Left = 0
           Top = 0
@@ -287,10 +279,6 @@ inherited fmUsers: TfmUsers
           TabOrder = 0
           object TabSheet2: TTabSheet
             Caption = #1057#1091#1097#1085#1086#1089#1090#1080
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             DesignSize = (
               815
               412)
@@ -453,10 +441,6 @@ inherited fmUsers: TfmUsers
           object TabSheet3: TTabSheet
             Caption = #1055#1086#1083#1103
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             DesignSize = (
               815
               412)
@@ -619,10 +603,6 @@ inherited fmUsers: TfmUsers
           object TabSheet4: TTabSheet
             Caption = #1057#1074#1103#1079#1080
             ImageIndex = 2
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             DesignSize = (
               815
               412)
@@ -1015,7 +995,7 @@ inherited fmUsers: TfmUsers
     BeforePost = adotElemUsersBeforePost
     AfterScroll = adotElemUsersAfterScroll
     TableName = 'Relation_VisElem_User'
-    Left = 601
+    Left = 633
     Top = 80
     object adotElemUsersik_Element: TIntegerField
       FieldName = 'ik_Element'
@@ -1077,13 +1057,13 @@ inherited fmUsers: TfmUsers
     CacheSize = 15
     Connection = dm.DBConnect
     TableName = 'VisElements'
-    Left = 601
-    Top = 120
+    Left = 641
+    Top = 136
   end
   object dsElement: TDataSource
     DataSet = adotElement
     Left = 560
-    Top = 120
+    Top = 136
   end
   object dsElemUsers: TDataSource
     DataSet = adotElemUsers

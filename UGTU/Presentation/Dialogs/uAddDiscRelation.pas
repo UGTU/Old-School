@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DB, GridsEh, DBGridEh, ActnList, StdCtrls, Buttons,
-   GeneralController, ExtCtrls, ADODB;
+   GeneralController, ExtCtrls, ADODB, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type
   TfrmAddDiscRelation = class(TfrmBaseDialog)

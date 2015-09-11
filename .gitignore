@@ -237,3 +237,5 @@ pip-log.txt
 /UGTU/Domain/Interfaces/DefImpl/*.dcu
 /UGTU/Utils/*.dcu
 /UGTU/ugtu.exe
+/UGTU/ugtu.res
+/UGTU/ugtu.dproj.local

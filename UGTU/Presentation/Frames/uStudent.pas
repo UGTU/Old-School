@@ -13,10 +13,16 @@ uses
   ReportsBase, D_StudUspevRep, ApplicationController, uWaitingController,
   uAddress,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
+
   DBAxisGridsEh, uUspevGroupController, GeneralController, uReviewDoc,
   uReviewCallSpr, uReviewApplication, uDMDocuments, uReviewAkadem,
   uReviewNotify, Document, Destination,
-  System.Generics.Collections, uDocController;
+  System.Generics.Collections, uDocController,
+DocumentClass,
+  Data.Win.ADODB,DBTVgroupobj;
+
+
+
 
 type
   TfmStudent = class(TfmBase)
@@ -31,12 +37,10 @@ type
     Panel6: TPanel;
     Label2: TLabel;
     Panel7: TPanel;
-    Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
     Label12: TLabel;
-    dbcbeSex: TDBComboBoxEh;
     Panel8: TPanel;
     Label1: TLabel;
     Label15: TLabel;
@@ -46,7 +50,7 @@ type
     Panel5: TPanel;
     Label27: TLabel;
     Label29: TLabel;
-    Panel2: TPanel;
+    pnlDop: TPanel;
     Label30: TLabel;
     Label31: TLabel;
     Label32: TLabel;
@@ -108,23 +112,12 @@ type
     dbcbeOrder: TDBLookupComboboxEh;
     Label47: TLabel;
     eAddInfo: TMemo;
-    Label57: TLabel;
-    Label56: TLabel;
-    Label55: TLabel;
-    eDuty: TDBEditEh;
-    Label54: TLabel;
-    dbcbeEnterprise: TDBLookupComboboxEh;
-    Label51: TLabel;
-    eXpyear: TDBNumberEditEh;
-    eXpMonth: TDBNumberEditEh;
     Label33: TLabel;
     Label46: TLabel;
     Label49: TLabel;
-    Label50: TLabel;
     Label52: TLabel;
     Label53: TLabel;
     Label58: TLabel;
-    Label59: TLabel;
     gbProlongued: TGroupBox;
     DBGridEh6: TDBGridEh;
     KontExcel: TSpeedButton;
@@ -189,7 +182,7 @@ type
     ToolButton1: TToolButton;
     ToolButton11: TToolButton;
     ToolButton12: TToolButton;
-    TabSheet8: TTabSheet;
+    tbMagazine: TTabSheet;
     panelMagaz: TPanel;
     lPeriod: TLabel;
     tbAction: TToolBar;
@@ -205,13 +198,34 @@ type
     lDef: TLabel;
     dtpEnd: TDateTimePicker;
     gridColumnSelectMenu: TPopupMenu;
+    rgSex: TRadioGroup;
+    Label50: TLabel;
+    actAddDocument: TAction;
+    actUpdateDocument: TAction;
+    actDelDocument: TAction;
+    pnlToolDoc: TPanel;
+    sbAddDoc: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    SbDelDoc: TSpeedButton;
+    pnlWork: TPanel;
+    Label51: TLabel;
+    dbcbeEnterprise: TDBLookupComboboxEh;
+    Label54: TLabel;
+    eDuty: TDBEditEh;
+    Label55: TLabel;
+    eXpyear: TDBNumberEditEh;
+    Label56: TLabel;
+    eXpMonth: TDBNumberEditEh;
+    Label57: TLabel;
+    adoSelDocFiles: TADODataSet;
+    adoSelDocFilesik_doc_file: TIntegerField;
+    adoSelDocFilesIK_doc: TIntegerField;
+    adoSelDocFilesdoc_file: TBlobField;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
     procedure eMidExit(Sender: TObject);
     procedure eNameExit(Sender: TObject);
-    procedure dbcbeSexChange(Sender: TObject);
-    procedure dbcbeSexDropDown(Sender: TObject);
     procedure eEmailExit(Sender: TObject);
     procedure eFamChange(Sender: TObject);
     procedure dbgeFamExit(Sender: TObject);
@@ -263,8 +277,19 @@ type
       State: TGridDrawState);
     procedure gridColumnSelectMenuPopup(Sender: TObject);
     procedure tbPrintClick(Sender: TObject);
+    procedure rgSexClick(Sender: TObject);
+    procedure actAddDocumentExecute(Sender: TObject);
+    procedure actUpdateDocumentExecute(Sender: TObject);
+    procedure actDelDocumentExecute(Sender: TObject);
+    procedure FrameExit(Sender: TObject);
+    procedure dbgeDocumentsCellClick(Column: TColumnEh);
+    procedure dbgeDocumentsDblClick(Sender: TObject);
+    procedure cbJobClick(Sender: TObject);
+    procedure dbcbeCitizenshipChange(Sender: TObject);
+
   private
-    Fik: Integer;
+    Fik: integer;
+    FTypeGrazd: integer;
     FLoaded: Boolean;
     Fobj: TDBNodeStudObject;
     FDocumentStateChanged : TNotifyEvent;
@@ -274,6 +299,7 @@ type
     procedure OnMyMenuItemClick(Sender: TObject);
 
   protected
+    FDocRecordList: TObjectList<TDocRecord>;
     procedure DoRefreshFrame; override;
     function DoApply: Boolean; override;
     function DoCancel: Boolean;
@@ -281,10 +307,12 @@ type
     procedure DocumentChanged;virtual;
 
   public
+
     property DebtList: TStringList read fDebtList write SetDebtList;
-    property ik: Integer read Fik write Fik;
+
+    property DocRecordList: TObjectList<TDocRecord> read FDocRecordList write FDocRecordList;
+    property ik: integer read Fik write Fik;
     property Loaded: Boolean write FLoaded;
-    procedure Read;
     property obj: TDBNodeStudObject read Fobj write Fobj;
     // procedure FormSpr(ik_studGrup, ik_destination: Integer);
     procedure FormSpr(ik_studGrup, ik_destination: Integer);
@@ -308,9 +336,11 @@ var
 
 implementation
 
-uses uDM, ADODB, Umain, DBTVObj, DBTVGroupObj, uDipl, uDMStudentSelectionProcs,
-  uDMStudentActions, uDMStudentData, uDMCauses, uDMAdress, uDMUspevaemost,
-  ImageFullSizeShowFrm;
+uses uDMStudentSelectionProcs, uDMStudentActions, uDM, uMain, uDMStudentData,
+  uDMCauses, uDMAdress, uDMUspevaemost,
+
+  ImageFullSizeShowFrm, ExceptionBase, uAddDocument, PersonController,
+  ConstantRepository, uDipl;
 
 {$R *.dfm}
 
@@ -340,7 +370,8 @@ end;
 function TfmStudent.DoApply: Boolean;
 var
   stream: TMemoryStream;
-  // i:integer;
+
+  i:integer;
   ndGroup: TDBNodeGroupObject;
 begin
   if obj.ID <> ik then // проверка nCode
@@ -363,7 +394,8 @@ begin
   result := true;
   try
     with dmStudentSelectionProcs.aspSelLanguage do
-    // if dbgeLang.DataSource.DataSet.RecordCount > 0 then
+
+    if dbgeLang.DataSource.DataSet.RecordCount > 0 then
     begin
       Edit;
       UpdateRecord;
@@ -371,19 +403,41 @@ begin
       Open;
     end;
   except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении языка.',E);
+        exit;
+      end;
   end;
+
   try
-    with dmStudentSelectionProcs.aspSelLanguage do
+
+    with FDocRecordList do
+    for I := 0 to Count - 1 do
     begin
-      Edit;
-      UpdateRecord;
-      Post;
-      Open;
+
+      if (Items[i].ikDoc <> 0) then
+      begin
+        if Items[i].isDeleted then
+          TPersonController.Instance.DeleteDocument(Items[i].ikDoc) //удалить
+        else TPersonController.Instance.UpdateDocument(Items[i]) // редактировать
+      end
+      else
+        TPersonController.Instance.AddDocument(obj.ID, Items[i]);  //добавить
     end;
   except
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
+        exit;
+      end;
   end;
-  try
+
+  FDocRecordList.Clear;
+
+ { try
     with dmStudentSelectionProcs.aspSelDocuments do
+   // if dbgeDocuments.DataSource.DataSet.RecordCount > 0 then
     begin
       Edit;
       UpdateRecord;
@@ -391,10 +445,17 @@ begin
       Open;
     end;
   except
-  end;
+
+    on E:Exception do
+      begin
+        raise EApplicationException.Create('Произошла ошибка при сохранении документов.',E);
+        exit;
+      end;
+  end; }
+
   with dmStudentActions.aspAppendStudent.Parameters do
   begin
-    Clear;
+    clear;
     CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 0, 1);
     CreateParameter('@flag', ftInteger, pdInput, 0, 0);
     CreateParameter('@clastn', ftString, pdInput, 40, eFam.Text);
@@ -424,10 +485,10 @@ begin
       CreateParameter('@rab', ftBoolean, pdInput, 0, 1)
     else
       CreateParameter('@rab', ftBoolean, pdInput, 0, 0);
-    if dbcbeSex.Text = 'Мужской' then
-      CreateParameter('@sex', ftBoolean, pdInput, 0, 1)
-    else
-      CreateParameter('@sex', ftBoolean, pdInput, 0, 0);
+    //if dbcbeSex.Text = 'Мужской' then
+      CreateParameter('@sex', ftBoolean, pdInput, 0, rgSex.itemIndex);
+    //else
+      //CreateParameter('@sex', ftBoolean, pdInput, 0, 0);
     if cbAppNeed.Checked then
       CreateParameter('@obchegit', ftBoolean, pdInput, 0, 1)
     else
@@ -484,7 +545,11 @@ begin
     CreateParameter('@ik_zach', ftInteger, pdInput, 0, obj.RecordbookKey);
     CreateParameter('@grup', ftInteger, pdInput, 0, hint);
     CreateParameter('@kat_zach', ftInteger, pdInput, 0, dbcbeCat.KeyValue);
-    CreateParameter('@prikzach', ftInteger, pdInput, 0, dbcbeOrder.KeyValue);
+
+    //если нет приказа, но человек в состоянии акадм. отпуска
+    if (dbcbeOrder.KeyValue=0) and (obj.CauseEnterID = AcademReturn) then
+      CreateParameter('@prikzach', ftInteger, pdInput, 0, null)
+      else CreateParameter('@prikzach', ftInteger, pdInput, 0, dbcbeOrder.KeyValue);
     if (obj.CauseEnterID = 0) then
       CreateParameter('@priczach', ftInteger, pdInput, 0, null)
     else
@@ -508,6 +573,7 @@ begin
         dbcbeEnterprise.KeyValue)
     else
       CreateParameter('@ik_pred', ftInteger, pdInput, 0, null);
+
     CreateParameter('@CLgot', ftString, pdInput, 500, '');
     CreateParameter('@Ik_studGrup', ftInteger, pdInput, 0, obj.StudGrupKey);
   end;
@@ -537,6 +603,9 @@ var
 begin
   if not(FrameObject is TDBNodeStudObject) then
     exit;
+
+  if not Assigned(FDocRecordList) then
+      FDocRecordList := TObjectList<TDocRecord>.Create(True);
 
   FLoaded := false;
   obj := FrameObject as TDBNodeStudObject;
@@ -596,7 +665,8 @@ begin
     frmMain.actPasspChg.enabled := true;
     frmMain.actFamChg.enabled := true;
     frmMain.actOtchisl.enabled := true;
-    frmMain.actPerevod.enabled := false;
+
+    frmMain.actPerevod.enabled := true;
     frmMain.actAkadem.enabled := true;
 
     frmMain.actAkadem.Caption := 'Изменить академический отпуск...';
@@ -700,10 +770,8 @@ begin
 
   dbdteBirthDate.Value := obj.BirthDate;
 
-  if obj.Sex then
-    dbcbeSex.Text := 'Мужской'
-  else
-    dbcbeSex.Text := 'Женский';
+
+  if obj.Sex then rgSex.ItemIndex := 1 else rgSex.ItemIndex := 0;
 
   dbcbeSchool.Text := obj.Finished;
   dbcbeCat.Text := obj.Category;
@@ -742,6 +810,7 @@ begin
     Active := false;
     dmStudentSelectionProcs.aspSelLanguagenCode.DefaultExpression :=
       inttostr(obj.ID);
+
     Parameters.Clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.ID;
@@ -752,7 +821,7 @@ begin
   with dmStudentSelectionProcs.aspSelLastNames do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
@@ -762,7 +831,7 @@ begin
   with dmStudentSelectionProcs.aspSelExtendedSessions do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
@@ -772,28 +841,43 @@ begin
   with dmStudentSelectionProcs.aspSelMoves do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
     Active := true;
   end;
 
-  with dmStudentSelectionProcs.aspSelDocuments do
+
+  with dmStudentSelectionProcs.adoSelDocuments do
   begin
+
     Active := false;
     Parameters.Clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.ID;
-    ExecProc;
+    Open;
     Active := true;
+    Close;
+    CommandText := 'select * from SelStudDocuments('+IntToStr(obj.ID)+')';
+    Open;
 
+    FieldByName('balls').Visible := false;
+    FieldByName('сname_disc').Visible := false;
   end;
+
+  with adoSelDocFiles do
+    begin
+    Close;
+    CommandText := 'select * from SelDocumentsFiles('+IntToStr(obj.ID)+')';
+    Open;
+  end;
+
 
   with dmStudentSelectionProcs.aspGetPersonAddress do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.ID;
     ExecProc;
@@ -803,7 +887,7 @@ begin
   with dmStudentSelectionProcs.aspSelAcadem do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
@@ -813,7 +897,7 @@ begin
   with dmStudentSelectionProcs.aspSelExiles do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
@@ -823,7 +907,7 @@ begin
   with dmStudentSelectionProcs.aspSelVosst do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
@@ -833,7 +917,7 @@ begin
   with dmStudentSelectionProcs.aspSelFamily do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.ID;
     ExecProc;
@@ -843,7 +927,7 @@ begin
   with dmStudentSelectionProcs.aspSelKatChanges do
   begin
     Active := false;
-    Parameters.Clear;
+    Parameters.clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
@@ -862,6 +946,7 @@ begin
     TabSheet5.enabled := false;
     TabSheet6.enabled := false;
     TabSheet7.enabled := false;
+    tbMagazine.enabled := false;
 
   end
   else
@@ -871,8 +956,8 @@ begin
     TabSheet5.enabled := true;
     TabSheet6.enabled := true;
     TabSheet7.enabled := true;
+    tbMagazine.enabled := true;
   end;
-
 end;
 
 procedure TfmStudent.dtpEndCloseUp(Sender: TObject);
@@ -902,9 +987,10 @@ begin
   dmDocs.adodsDocStud.Active := true;
 end;
 
-procedure TfmStudent.Read;
-begin
 
+procedure TfmStudent.rgSexClick(Sender: TObject);begin
+  inherited;
+  eFamChange(Sender);
 end;
 
 procedure TfmStudent.sbRefreshClick(Sender: TObject);
@@ -1120,6 +1206,18 @@ begin
   dmStudentSelectionProcs.aspGetPersonAddress.Active := true;
 end;
 
+procedure TfmStudent.actAddDocumentExecute(Sender: TObject);
+begin
+  frmAddDocument := TfrmAddDocument.Create(self);
+  with frmAddDocument do
+  begin
+    isAbit := (self.Name = 'fmAbitCard');
+    nCode := obj.ID;
+    ShowModal;
+    Free;
+  end;
+end;
+
 procedure TfmStudent.actApplyExecute(Sender: TObject);
 begin
   inherited;
@@ -1134,6 +1232,16 @@ begin
   else
     actApply.enabled := false;
 
+end;
+
+procedure TfmStudent.actDelDocumentExecute(Sender: TObject);
+var doc: TDocRecord;
+begin
+  doc := TDocRecord.Create(dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value, True);
+  DocRecordList.Add(doc);
+  dbgeDocuments.DataSource.DataSet.Delete;
+  modified := true;
+  //TPersonController.Instance.DeleteDocument();
 end;
 
 procedure TfmStudent.actDeleteAddressExecute(Sender: TObject);
@@ -1236,6 +1344,7 @@ var // E: Variant;
   editF: TfrmReviewDoc;
   dsDoc: TADODataSet;
 begin
+
   dsDoc := TADODataSet.Create(nil);
   sp_num := TADODataSet.Create(nil);
   sp_depInd := TADODataSet.Create(nil);
@@ -1431,6 +1540,7 @@ begin
 end;
 
 procedure TfmStudent.actPrintSpravExecute(Sender: TObject);
+
 //var // E: Variant;
 //  // str,dir_inst,copystr1,copystr2,dop:string;
 //  // posit:integer;
@@ -1447,6 +1557,7 @@ procedure TfmStudent.actPrintSpravExecute(Sender: TObject);
 //  editF: TfrmReviewDoc;
 //  dsDoc: TADODataSet;
 begin
+
 //  dsDoc := TADODataSet.Create(nil);
 //  sp_num := TADODataSet.Create(nil);
 //  sp_depInd := TADODataSet.Create(nil);
@@ -1609,7 +1720,7 @@ begin
   // finally
   // tempStoredProc.Free;
   // end;
-//end;
+
 
 procedure TfmStudent.actPropToFactExecute(Sender: TObject);
 begin
@@ -1634,13 +1745,71 @@ begin
     actUndo.enabled := false;
 end;
 
+procedure TfmStudent.actUpdateDocumentExecute(Sender: TObject);
+var tempFilList: TList<TMemoryStream>;
+    i, j: integer;
+    iDoc: TMemoryStream;
+    inEditList: boolean;
+begin
+
+  frmAddDocument := TfrmAddDocument.Create(self);
+  with frmAddDocument do
+  begin
+    isAbit := (self.Name = 'fmAbitCard');
+    isEdit := true;
+    tempFilList :=  TList<TMemoryStream>.Create;
+
+    inEditList := false;
+    with dbgeDocuments.DataSource.DataSet do    //ищем его в списке документов
+    for i := 0 to FDocRecordList.Count - 1  do
+      if (FieldByName('ik_vid_doc').Value = FDocRecordList[i].ikDocVid) and
+          (FieldByName('Np_number').Value = FDocRecordList[i].number) then
+          begin
+            DocID := 0;
+            inEditList := true;
+            if FDocRecordList[i].docs.Count > 0 then
+            begin
+              for j := 0 to FDocRecordList[i].docs.Count - 1 do
+                tempFilList.Add(FDocRecordList[i].docs[j]);
+              ImageFiles := tempFilList;
+            end;
+            break;
+          end;
+    if not inEditList then
+    begin
+      DocID := dbgeDocuments.DataSource.DataSet.FieldByName('ik_doc').Value;
+
+      adoSelDocFiles.Filtered := false;
+      adoSelDocFiles.Filter := 'ik_doc = ' + IntToStr(DocID);
+      adoSelDocFiles.Filtered := true;
+
+      if adoSelDocFiles.RecordCount > 0 then
+      begin
+        adoSelDocFiles.First;
+        for i := 0 to adoSelDocFiles.RecordCount - 1 do
+        begin
+          iDoc:=TMemoryStream.Create;
+          (adoSelDocFiles.FieldbyName('doc_file')as TBlobField).SaveToStream(iDoc);
+          iDoc.Seek(0, soFromBeginning);
+          tempFilList.Add(iDoc);
+          adoSelDocFiles.Next;
+        end;
+        ImageFiles := tempFilList;
+      end;
+    end;
+
+    ShowModal;
+    Free;
+    if Assigned(tempFilList) then tempFilList.Free;
+  end;
+end;
+
 procedure TfmStudent.bbResetClick(Sender: TObject);
 begin
   inherited;
   Self.dbgehMagazineDocsStud.ClearFilter;
   Self.dbgehMagazineDocsStud.DefaultApplyFilter;
 end;
-
 procedure TfmStudent.BbSaveclick(Sender: TObject);
 begin
   DoApply;
@@ -1690,25 +1859,12 @@ begin
   end;
 end;
 
-procedure TfmStudent.dbcbeSexChange(Sender: TObject);
-begin
-  dbcbeSex.ReadOnly := true;
-  eFamChange(Sender);
-end;
-
-procedure TfmStudent.dbcbeSexDropDown(Sender: TObject);
-begin
-
-  dbcbeSex.ReadOnly := false;
-end;
-
 procedure TfmStudent.eEmailExit(Sender: TObject);
 begin
   inherited;
   if eEmail.Text = '' then
     exit;
   if (Ansipos('@', eEmail.Text) = 0)
-  // or(Ansipos('.',eEmail.text)=0) or(Ansipos('@',eEmail.text)>Ansipos('.',eEmail.text))
   then
   begin
     showmessage('Неверный e-mail!');
@@ -1724,11 +1880,29 @@ begin
   bbUndo.enabled := true;
 end;
 
+procedure TfmStudent.dbcbeCitizenshipChange(Sender: TObject);
+begin
+  inherited;
+  FTypeGrazd := dbcbeCitizenship.ListSource.DataSet.FieldByName('ik_type_grazd').AsInteger;
+  eFamChange(Sender);
+end;
+
 procedure TfmStudent.dbgeBallsTitleClick(Column: TColumnEh);
 begin
   inherited;
   dmUspevaemost.adsSelAllBRSBallsForStudent.Sort :=
     '[' + Column.Field.FullName + ']';
+end;
+
+procedure TfmStudent.dbgeDocumentsCellClick(Column: TColumnEh);
+begin
+  actUpdateDocument.Enabled := (dbgeDocuments.DataSource.DataSet.RecordCount > 0) ;
+  actDelDocument.Enabled := (dbgeDocuments.DataSource.DataSet.RecordCount > 0);
+end;
+
+procedure TfmStudent.dbgeDocumentsDblClick(Sender: TObject);
+begin
+  actUpdateDocumentExecute(Sender);
 end;
 
 procedure TfmStudent.dbgeFamExit(Sender: TObject);
@@ -1792,6 +1966,13 @@ begin
   ImageFullSizeShowForm.Show;
 end;
 
+procedure TfmStudent.cbJobClick(Sender: TObject);
+begin
+  inherited;
+  pnlWork.Visible := cbJob.Checked;
+  eFamChange(Sender);
+end;
+
 procedure TfmStudent.cbModuleBRSChange(Sender: TObject);
 begin
   sbRefreshClick(Sender);
@@ -1807,6 +1988,7 @@ begin
   dmUspevaemost.adospSelUspevForStud.Active := false;
   with dmUspevaemost.adospSelUspevForStud.Parameters do
   begin
+
     Clear;
     AddParameter;
     Items[0].Value := cmbxSem.ItemIndex;
@@ -1832,6 +2014,7 @@ begin
   dmUspevaemost.adospGetAllNaprStud.Active := false;
   with dmUspevaemost.adospGetAllNaprStud.Parameters do
   begin
+
     Clear;
     AddParameter;
     Items[0].Value := cmbxSemNapr.ItemIndex;
@@ -1843,12 +2026,13 @@ begin
   dmUspevaemost.adospGetAllNaprStud.Active := true;
 end;
 
+
 procedure TfmStudent.GetUspevStat(ik_zach: Integer);
 begin
   dmUspevaemost.adospUspevStatForStud.Close;
   with dmUspevaemost.adospUspevStatForStud.Parameters do
   begin
-    Clear;
+    clear;
     // AddParameter;
     // Items[0].Value := ik_zach;
     CreateParameter('@ik_zach', ftInteger, pdInput, 0, ik_zach);
@@ -2777,6 +2961,7 @@ begin
   (Sender as TReportBase).Quit;
 end;
 
+
 procedure TfmStudent.FormAcademSpr(ik_studGrup, ik_destination: Integer);
 var
   fReview: TfrmReviewAkadem;
@@ -2941,7 +3126,14 @@ begin
     dsDoc.Free;
     Report.Free;
   end;
+  end;
+procedure TfmStudent.FrameExit(Sender: TObject);
+begin
+  inherited;
+ // FDocRecordList.Free;
 end;
+
+
 
 procedure TfmStudent.FormApplicationSpr(ik_studGrup, ik_destination: Integer);
 var
@@ -3119,6 +3311,7 @@ begin
     dsDoc.Free;
     Report.Free;
   end;
+
 end;
 
 procedure TfmStudent.FormCallSpr(ik_studGrup, ik_destination: Integer);

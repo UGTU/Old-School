@@ -4,8 +4,8 @@ object dmGroupActions: TdmGroupActions
   Width = 222
   object dsAppendGrup: TDataSource
     DataSet = adospAppendGrup
-    Left = 151
-    Top = 72
+    Left = 159
+    Top = 88
   end
   object adospAppendGrup: TADOStoredProc
     Connection = dm.DBConnect

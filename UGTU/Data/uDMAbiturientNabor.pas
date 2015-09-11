@@ -50,6 +50,44 @@ type
     adoqExamsErrors: TADOQuery;
     dsExamsErrors: TDataSource;
     adoqNaborDiscsDiscName: TStringField;
+    adoqSpecFacSortorder: TIntegerField;
+    adoqSpecFacIk_form_ed: TIntegerField;
+    dsDocRights: TDataSource;
+    adoDocRights: TADOQuery;
+    adoDocRightsik_vid_doc: TAutoIncField;
+    adoDocRightscvid_doc: TStringField;
+    adoDocRightsIsDefault: TBooleanField;
+    adoDocRightsIsIdentity: TBooleanField;
+    adoDocRightsIsEducational: TBooleanField;
+    adoDocRightsik_FB: TIntegerField;
+    adoDocRightsIsOsoboePravo: TBooleanField;
+    adoDocRightsIsPreimushestvo: TBooleanField;
+    adoDocRightsIsWithoutExam: TBooleanField;
+    adoDocRightsik_subFB: TIntegerField;
+    adoDocRightsik_type_grazd: TIntegerField;
+    dsIndBall: TDataSource;
+    adoIndBall: TADOQuery;
+    adoIndBallfio: TStringField;
+    adoIndBallcvid_doc: TStringField;
+    adoIndBallik_fac: TIntegerField;
+    adoIndBallCshort_name_fac: TStringField;
+    adoIndBallik_spec_fac: TIntegerField;
+    adoIndBallCshort_spec: TStringField;
+    adoIndBallcd_seria: TStringField;
+    adoIndBallnp_number: TStringField;
+    adoIndBallballs: TIntegerField;
+    adoIndBallñname_disc: TStringField;
+    adoNetworkAbit: TADOQuery;
+    dsNetworkAbit: TDataSource;
+    adoNetworkAbitik_fac: TIntegerField;
+    adoNetworkAbitCshort_name_fac: TStringField;
+    adoNetworkAbitik_spec_fac: TIntegerField;
+    adoNetworkAbitCshort_spec: TStringField;
+    adoNetworkAbitfio: TStringField;
+    adoNetworkAbitCname_kat_zach: TStringField;
+    adoNetworkAbitcSotTel: TStringField;
+    adoNetworkAbitctelefon: TStringField;
+    adoNetworkAbitballs: TIntegerField;
   private
     { Private declarations }
   public

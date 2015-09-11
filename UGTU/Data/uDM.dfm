@@ -2743,6 +2743,13 @@ object dm: Tdm
         DataType = ftInteger
         Precision = 10
         Value = Null
+      end
+      item
+        Name = '@Ik_kat_zach'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
       end>
     Left = 416
     Top = 464

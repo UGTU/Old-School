@@ -433,7 +433,10 @@ uses
   Destination in 'Domain\Classes\Destination.pas',
   uSprForGroup in 'Presentation\Forms\uSprForGroup.pas' {fmSprForGroup},
   uDocController in 'Domain\Controllers\uDocController.pas',
-  uPrintMagazine in 'Domain\Reports\uPrintMagazine.pas';
+  uPrintMagazine in 'Domain\Reports\uPrintMagazine.pas',
+  DocumentClass in 'Domain\Classes\DocumentClass.pas',
+  uAbitZach in 'Presentation\Dialogs\uAbitZach.pas' {frmAbitZachDialog},
+  PersonController in 'Domain\Controllers\PersonController.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -486,5 +489,6 @@ begin
   Application.CreateForm(TfrmReviewApplication, frmReviewApplication);
   Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
   Application.CreateForm(TfmSprForGroup, fmSprForGroup);
+  Application.CreateForm(TfrmAbitZachDialog, frmAbitZachDialog);
   Application.Run;
 end.

@@ -22,10 +22,6 @@ inherited fmFacultet: TfmFacultet
       object TabSheet1: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 38
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object DBGridEh1: TDBGridEh
           Left = 0
           Top = 0
@@ -34,28 +30,23 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = DataSource1
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgColumnResize, dgTabs, dgConfirmDelete, dgCancelOnExit]
           RowHeight = 16
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnDblClick = DBGridEh1DblClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Cname_spec'
               Footers = <>
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsKontingent: TTabSheet
@@ -122,87 +113,35 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmFacultetStatistic.dsSmallKont
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 3
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar2: TToolBar
           Left = 0
           Top = 0
           Width = 751
           Height = 24
-          ButtonHeight = 19
+          Images = ilMain
           TabOrder = 4
-          object KontExcel: TSpeedButton
+          object ToolButton1: TToolButton
             Left = 0
             Top = 0
-            Width = 156
-            Height = 19
-            Caption = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072' '#1074' Excel'
-            Flat = True
-            Glyph.Data = {
-              36040000424D3604000000000000360000002800000010000000100000000100
-              2000000000000004000000000000000000000000000000000000FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009E8D8000634935006349350063493500634935006349
-              350063493500634935006349350063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009B8A7D00FCFAF800D9C0AE00D5BCAB00CFB7A600C8B1
-              A000C1AB9B00BBA69600B7A2930063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009B8A7D00FEFEFE00FBF8F700F6F1ED00F1E8E100EBDE
-              D600E5D5C900E1CDBE00BCA5960063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009E8D8000FFFFFF00FEFDFD00FAF7F500F5EFEA00F0E6
-              DF00EBDDD300E5D4C700C1AA9B0063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00A2918400FFFFFF00FFFFFF00FDFDFB00F9F5F300F4ED
-              E800EFE4DC00E9DBD000C8B1A10063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00A7958800FFFFFF00FFFFFF00FFFFFF00FCFBFA00F9F4
-              F100F3ECE600EDE3DA00CFB7A60063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00AB9A8C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FCFA
-              F800F7F3EF00F2EAE400D5BCAB0063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00B09E9000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFE
-              FE00FBF9F700F6F1ED00D9C0AE0063493500FF00FF00FF00FF00FF00FF0070C7
-              E10081D8EE0086E6FA0039BEE50099D8DF0091E1F60081D0E900FFFFFF00FFFF
-              FF00FEFEFD00C4AD9D00C3AB9C00644A3600FF00FF00FF00FF00FF00FF0098E2
-              F30031B7DF007DE9FD005DC6E60093F0FF002FB6DF00A0E8F900FFFFFF00FFFF
-              FF00A9988A00644A3600644A3600644A3600FF00FF00FF00FF00FF00FF0094EA
-              FA0093F1FF00BFF8FF00AFE8F400C7FBFF0093F1FF009FF0FF00FFFFFF00FFFF
-              FF00AE9C8E00D4C5BA00644A3600D0CBC400FF00FF00FF00FF00FF00FF0022AB
-              D90053BFE100AFE8F400F0FFFD00B4EBF60053BFE10036BBE500FFFFFF00FFFF
-              FF00B2A09200644A3600D0CCC500FF00FF00FF00FF00FF00FF00FF00FF0094EA
-              FA0096F3FF00C7FBFF00ADE5F300C3FBFF0096F3FF008BD7E200B6A49600B6A4
-              9600B5A39500D0CCC500FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0096E1
-              F30032B8E0008CF1FF0058C2E30090F1FF002FB6DF008DDDF000FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0066C3
-              E00081D8EE0094EAFA0026AFDB008CE8FA008EDEF10081CCE300FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+            Action = ActKontToExcel
             ParentShowHint = False
             ShowHint = True
-            Transparent = False
-            OnClick = KontExcelClick
-          end
-          object ToolButton1: TToolButton
-            Left = 156
-            Top = 0
-            Width = 8
-            Caption = 'ToolButton1'
-            Style = tbsDivider
           end
           object dbdteEx: TDBDateTimeEditEh
-            Left = 164
+            Left = 23
             Top = 0
             Width = 80
-            Height = 19
+            Height = 22
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -214,10 +153,6 @@ inherited fmFacultet: TfmFacultet
       object tsItogi: TTabSheet
         Caption = #1054#1073#1097#1080#1077' '#1080#1090#1086#1075#1080' '#1089#1077#1089#1089#1080#1080
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ToolBar1: TToolBar
           Left = 0
           Top = 0
@@ -228,58 +163,30 @@ inherited fmFacultet: TfmFacultet
           DesignSize = (
             751
             24)
-          object SpeedButton2: TSpeedButton
+          object ToolButton2: TToolButton
             Left = 0
             Top = 0
-            Width = 137
-            Height = 22
-            Caption = #1055#1086#1083#1091#1095#1080#1090#1100' '#1086#1090#1095#1077#1090
-            Flat = True
-            Glyph.Data = {
-              F6000000424DF600000000000000760000002800000010000000100000000100
-              0400000000008000000000000000000000001000000000000000040204000482
-              04008482040084020400FCFE040004FE04008402840004028400C4C2C400FC02
-              FC0004FEFC00FC020400FCFEFC0004828400848284000402FC00999999999999
-              99999990000000000099990CCCCCCCCCC099900000000000C0990A0E88888880
-              C099900E88888880C0000A0E88888880C040900E88888880C0400A0E88888880
-              C000900E88888880C0990A0E88888880C009900E88888880C8090A0E88888880
-              C809900E88888880C0090A0E8888888009999000000000009999}
+            Action = actLoadReport
             ParentShowHint = False
             ShowHint = True
-            Transparent = False
-            OnClick = SpeedButton2Click
           end
-          object ToolButton3: TToolButton
-            Left = 137
-            Top = 0
-            Width = 8
-            Caption = 'ToolButton3'
-            ImageIndex = 0
-            Style = tbsDivider
-          end
-          object ToolButton8: TToolButton
-            Left = 145
+          object ToolButton4: TToolButton
+            Left = 23
             Top = 0
             Action = actItogiFacToExc
             DropdownMenu = pmItogi
+            ParentShowHint = False
+            ShowHint = True
             Style = tbsDropDown
           end
-          object ToolButton2: TToolButton
-            Left = 183
-            Top = 0
-            Width = 10
-            Caption = 'ToolButton2'
-            Style = tbsDivider
-          end
           object cbSemestr: TComboBox
-            Left = 193
+            Left = 61
             Top = 0
             Width = 145
-            Height = 22
+            Height = 21
             Hint = #1042#1080#1076' '#1089#1077#1084#1077#1089#1090#1088#1072
             Style = csDropDownList
             Anchors = [akTop, akRight]
-            ItemHeight = 0
             ParentShowHint = False
             ShowHint = True
             Sorted = True
@@ -288,16 +195,8 @@ inherited fmFacultet: TfmFacultet
               #1042#1077#1089#1077#1085#1085#1080#1081
               #1054#1089#1077#1085#1085#1080#1081)
           end
-          object ToolButton4: TToolButton
-            Left = 338
-            Top = 0
-            Width = 8
-            Caption = 'ToolButton4'
-            ImageIndex = 0
-            Style = tbsDivider
-          end
           object spYear: TSpinEdit
-            Left = 346
+            Left = 206
             Top = 0
             Width = 92
             Height = 22
@@ -319,20 +218,14 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmFacultetStatistic.dsSelKursItogiCol
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object Panel2: TPanel
           Left = 148
@@ -371,80 +264,35 @@ inherited fmFacultet: TfmFacultet
           Align = alClient
           AutoFitColWidths = True
           DataSource = dmFacultetStatistic.dsSelDaysItogi
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
         object ToolBar4: TToolBar
           Left = 0
           Top = 0
           Width = 751
           Height = 24
-          ButtonHeight = 19
+          Images = ilMain
           TabOrder = 1
-          object SpeedButton3: TSpeedButton
+          object ToolButton3: TToolButton
             Left = 0
             Top = 0
-            Width = 156
-            Height = 19
-            Caption = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072' '#1074' Excel'
-            Flat = True
-            Glyph.Data = {
-              36040000424D3604000000000000360000002800000010000000100000000100
-              2000000000000004000000000000000000000000000000000000FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009E8D8000634935006349350063493500634935006349
-              350063493500634935006349350063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009B8A7D00FCFAF800D9C0AE00D5BCAB00CFB7A600C8B1
-              A000C1AB9B00BBA69600B7A2930063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009B8A7D00FEFEFE00FBF8F700F6F1ED00F1E8E100EBDE
-              D600E5D5C900E1CDBE00BCA5960063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF009E8D8000FFFFFF00FEFDFD00FAF7F500F5EFEA00F0E6
-              DF00EBDDD300E5D4C700C1AA9B0063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00A2918400FFFFFF00FFFFFF00FDFDFB00F9F5F300F4ED
-              E800EFE4DC00E9DBD000C8B1A10063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00A7958800FFFFFF00FFFFFF00FFFFFF00FCFBFA00F9F4
-              F100F3ECE600EDE3DA00CFB7A60063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00AB9A8C00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FCFA
-              F800F7F3EF00F2EAE400D5BCAB0063493500FF00FF00FF00FF00FF00FF00FF00
-              FF00FF00FF00FF00FF00B09E9000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFE
-              FE00FBF9F700F6F1ED00D9C0AE0063493500FF00FF00FF00FF00FF00FF0070C7
-              E10081D8EE0086E6FA0039BEE50099D8DF0091E1F60081D0E900FFFFFF00FFFF
-              FF00FEFEFD00C4AD9D00C3AB9C00644A3600FF00FF00FF00FF00FF00FF0098E2
-              F30031B7DF007DE9FD005DC6E60093F0FF002FB6DF00A0E8F900FFFFFF00FFFF
-              FF00A9988A00644A3600644A3600644A3600FF00FF00FF00FF00FF00FF0094EA
-              FA0093F1FF00BFF8FF00AFE8F400C7FBFF0093F1FF009FF0FF00FFFFFF00FFFF
-              FF00AE9C8E00D4C5BA00644A3600D0CBC400FF00FF00FF00FF00FF00FF0022AB
-              D90053BFE100AFE8F400F0FFFD00B4EBF60053BFE10036BBE500FFFFFF00FFFF
-              FF00B2A09200644A3600D0CCC500FF00FF00FF00FF00FF00FF00FF00FF0094EA
-              FA0096F3FF00C7FBFF00ADE5F300C3FBFF0096F3FF008BD7E200B6A49600B6A4
-              9600B5A39500D0CCC500FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0096E1
-              F30032B8E0008CF1FF0058C2E30090F1FF002FB6DF008DDDF000FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF0066C3
-              E00081D8EE0094EAFA0026AFDB008CE8FA008EDEF10081CCE300FF00FF00FF00
-              FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+            Action = actDailyResultsToExcel
             ParentShowHint = False
             ShowHint = True
-            Transparent = False
-            OnClick = SpeedButton3Click
           end
           object dbdtExam: TDBDateTimeEditEh
-            Left = 156
+            Left = 23
             Top = 0
             Width = 80
-            Height = 19
+            Height = 22
+            DynProps = <>
             EditButtons = <>
             Flat = True
             Kind = dtkDateEh
@@ -538,6 +386,7 @@ inherited fmFacultet: TfmFacultet
               Width = 74
               Height = 19
               Hint = #1053#1072#1095#1072#1083#1086' '#1087#1077#1088#1080#1086#1076#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072' '#1078#1091#1088#1085#1072#1083#1072
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Kind = dtkDateEh
@@ -553,6 +402,7 @@ inherited fmFacultet: TfmFacultet
               Width = 80
               Height = 19
               Hint = #1050#1086#1085#1077#1094' '#1087#1077#1088#1080#1086#1076#1072' '#1087#1088#1086#1089#1084#1086#1090#1088#1072' '#1078#1091#1088#1085#1072#1083#1072
+              DynProps = <>
               EditButtons = <>
               Flat = True
               Kind = dtkDateEh
@@ -574,26 +424,19 @@ inherited fmFacultet: TfmFacultet
           AutoFitColWidths = True
           ColumnDefValues.ToolTips = True
           DataSource = dmUspevaemost.dsGetAllNaprForFac
+          DynProps = <>
           Flat = True
-          FooterColor = clWindow
-          FooterFont.Charset = DEFAULT_CHARSET
-          FooterFont.Color = clWindowText
-          FooterFont.Height = -11
-          FooterFont.Name = 'Tahoma'
-          FooterFont.Style = []
+          FooterParams.Color = clWindow
+          IndicatorOptions = []
           Options = [dgTitles, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
           PopupMenu = ppmFacNapr
           ReadOnly = True
           SortLocal = True
           TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Tahoma'
-          TitleFont.Style = []
           OnTitleClick = dbgrdNaprTitleClick
           Columns = <
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cNumber_ved'
               Footers = <>
@@ -601,6 +444,7 @@ inherited fmFacultet: TfmFacultet
               Width = 53
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'lClose'
               Footers = <>
@@ -608,6 +452,7 @@ inherited fmFacultet: TfmFacultet
               Width = 51
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'StudName'
               Footers = <>
@@ -615,6 +460,7 @@ inherited fmFacultet: TfmFacultet
               Width = 131
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Nn_zach'
               Footers = <>
@@ -622,6 +468,7 @@ inherited fmFacultet: TfmFacultet
               Width = 68
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cName_disc'
               Footers = <>
@@ -629,12 +476,14 @@ inherited fmFacultet: TfmFacultet
               Width = 144
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Name_osenca'
               Footers = <>
               Visible = False
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'cName_vid_exam'
               Footers = <>
@@ -642,6 +491,7 @@ inherited fmFacultet: TfmFacultet
               Width = 100
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'dD_vydano'
               Footers = <>
@@ -649,6 +499,7 @@ inherited fmFacultet: TfmFacultet
               Width = 72
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'Dd_exam'
               Footers = <>
@@ -656,6 +507,7 @@ inherited fmFacultet: TfmFacultet
               Width = 82
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'ctema'
               Footers = <>
@@ -664,11 +516,14 @@ inherited fmFacultet: TfmFacultet
               Width = 300
             end
             item
+              DynProps = <>
               EditButtons = <>
               FieldName = 'UserName'
               Footers = <>
               Title.Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100
             end>
+          object RowDetailData: TRowDetailPanelControlEh
+          end
         end
       end
       object tsAcadem: TTabSheet
@@ -761,7 +616,7 @@ inherited fmFacultet: TfmFacultet
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -930,7 +785,7 @@ inherited fmFacultet: TfmFacultet
     Left = 214
     Top = 152
     Bitmap = {
-      494C01010F001000140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F001000200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1537,6 +1392,26 @@ inherited fmFacultet: TfmFacultet
       ImageIndex = 14
       OnExecute = actEditNaprExecute
       OnUpdate = actPrintNaprUpdate
+    end
+    object ActKontToExcel: TAction
+      Category = 'Kontingent'
+      Caption = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072' '#1074' Excel'
+      Hint = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072' '#1074' Excel'
+      ImageIndex = 9
+      OnExecute = KontExcelClick
+    end
+    object actLoadReport: TAction
+      Category = 'Itogi'
+      Hint = #1055#1086#1083#1091#1095#1080#1090#1100' '#1086#1090#1095#1077#1090
+      ImageIndex = 7
+      OnExecute = SpeedButton2Click
+    end
+    object actDailyResultsToExcel: TAction
+      Category = 'DailyResults'
+      Caption = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072' '#1074' Excel'
+      Hint = #1069#1082#1089#1087#1086#1088#1090' '#1086#1090#1095#1077#1090#1072' '#1074' Excel'
+      ImageIndex = 9
+      OnExecute = SpeedButton3Click
     end
   end
   object ppmFacNapr: TPopupMenu

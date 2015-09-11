@@ -7,7 +7,8 @@ uses
   Dialogs, uBaseFrame, StdCtrls, ComCtrls, Grids, DBGridEh, Buttons,
   ToolWin, DBCtrls, ExtCtrls, Mask, DBCtrlsEh, ImgList, DB, Menus,
   OleServer, WordXP, ExcelXP, DBLookupEh, ActnList, GridsEh, ADODB,
-  ApplicationController, ExceptionBase;
+  ApplicationController, ExceptionBase, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmAbitRasp = class(TfmBase)
@@ -134,6 +135,8 @@ type
     procedure dbgSpisokColumns3UpdateData(Sender: TObject; var Text: string;
       var Value: Variant; var UseText, Handled: Boolean);
     procedure dbgSpisokCellClick(Column: TColumnEh);
+    procedure dbgSpisokColumns0UpdateData(Sender: TObject; var Text: string;
+      var Value: Variant; var UseText, Handled: Boolean);
     
 
   protected
@@ -303,6 +306,13 @@ begin
   begin
     dbgSpisok.Options:= dbgSpisok.Options-[dgRowSelect]+[dgEditing];
   end;
+end;
+
+procedure TfmAbitRasp.dbgSpisokColumns0UpdateData(Sender: TObject;
+  var Text: string; var Value: Variant; var UseText, Handled: Boolean);
+begin
+  inherited;
+  Modified:= true;
 end;
 
 procedure TfmAbitRasp.dbgSpisokColumns2UpdateData(Sender: TObject;

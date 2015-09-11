@@ -1,32 +1,32 @@
 inherited frmAddDiscCompetence: TfrmAddDiscCompetence
   Caption = #1042#1099#1073#1088#1072#1090#1100' '#1089#1086#1089#1090#1072#1074#1083#1103#1102#1097#1080#1077' '#1082#1086#1084#1087#1077#1090#1077#1085#1094#1080#1081' '#1076#1083#1103' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1099
-  ClientHeight = 491
-  ClientWidth = 709
-  ExplicitWidth = 715
-  ExplicitHeight = 520
+  ClientHeight = 462
+  ClientWidth = 610
+  ExplicitWidth = 616
+  ExplicitHeight = 491
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Width = 683
-    Height = 450
+    Width = 584
+    Height = 421
     ExplicitWidth = 610
     ExplicitHeight = 421
   end
   inherited Panel1: TPanel
-    Top = 450
-    Width = 709
-    ExplicitTop = 426
+    Top = 421
+    Width = 610
+    ExplicitTop = 421
     ExplicitWidth = 610
     inherited bbOK: TBitBtn
-      Left = 452
+      Left = 353
       ExplicitLeft = 353
     end
     inherited bbApply: TBitBtn
-      Left = 620
+      Left = 521
       ExplicitLeft = 521
     end
     inherited bbCancel: TBitBtn
-      Left = 536
+      Left = 437
       ExplicitLeft = 437
     end
     inherited bbSprav: TBitBtn
@@ -36,8 +36,8 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
   object dbgrCompetence: TDBGridEh [2]
     Left = 0
     Top = 0
-    Width = 683
-    Height = 450
+    Width = 584
+    Height = 421
     Align = alClient
     DataSource = dsGetCompetence
     DynProps = <>
@@ -113,14 +113,12 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
     end
   end
   object Panel2: TPanel [3]
-    Left = 683
+    Left = 584
     Top = 0
     Width = 26
-    Height = 450
+    Height = 421
     Align = alRight
     TabOrder = 2
-    ExplicitLeft = 584
-    ExplicitHeight = 426
     object ToolBar1: TToolBar
       Left = 1
       Top = 16
@@ -138,8 +136,8 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
     end
   end
   inherited actBaseDialog: TActionList
-    Left = 153
-    Top = 440
+    Left = 145
+    Top = 424
     inherited actApply: TAction
       OnUpdate = actApplyUpdate
     end
@@ -153,8 +151,8 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
   end
   object actStrCmptnc: TActionList
     Images = imgCmptnc
-    Left = 224
-    Top = 440
+    Left = 200
+    Top = 424
     object actEditStrCmptnc: TAction
       Caption = 'actEditStrCmptnc'
       Hint = #1059#1082#1072#1079#1072#1090#1100' '#1089#1090#1088#1091#1082#1090#1091#1088#1091' '#1082#1086#1084#1087#1077#1090#1077#1085#1094#1080#1080
@@ -163,10 +161,10 @@ inherited frmAddDiscCompetence: TfrmAddDiscCompetence
   end
   object imgCmptnc: TImageList
     ShareImages = True
-    Left = 304
-    Top = 448
+    Left = 248
+    Top = 424
     Bitmap = {
-      494C0101030004000C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400080010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ComCtrls, ActnList, StdCtrls, Buttons, ExtCtrls, Mask,
-  DBCtrlsEh, ApplicationController;
+  DBCtrlsEh, ApplicationController, System.Actions;
 
 type
   TfrmAppTweaks = class(TfrmBaseDialog)

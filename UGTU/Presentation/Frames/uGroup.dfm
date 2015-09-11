@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsStudents
+      ActivePage = tsDiplom
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -748,7 +748,7 @@ inherited fmGroup: TfmGroup
               DataField = ''
               EditButtons = <>
               Flat = True
-              KeyField = 'itab_n'
+              KeyField = 'idEmployee'
               ListField = 'NamePrepod'
               ListSource = dmUspevaemost.dsPrepodVedFromUchPlan
               ShowHint = True
@@ -875,9 +875,9 @@ inherited fmGroup: TfmGroup
         ImageIndex = 6
         object dbgeAtt: TDBGridEh
           Left = 0
-          Top = 96
+          Top = 84
           Width = 691
-          Height = 452
+          Height = 464
           Align = alClient
           AllowedOperations = [alopUpdateEh, alopAppendEh]
           ColumnDefValues.ToolTips = True
@@ -1066,7 +1066,7 @@ inherited fmGroup: TfmGroup
           Left = 0
           Top = 0
           Width = 691
-          Height = 25
+          Height = 22
           Images = ilMain
           ParentShowHint = False
           ShowHint = True
@@ -1094,15 +1094,15 @@ inherited fmGroup: TfmGroup
         end
         object pAttTop: TPanel
           Left = 0
-          Top = 25
+          Top = 22
           Width = 691
-          Height = 71
+          Height = 62
           Align = alTop
           BevelOuter = bvNone
           TabOrder = 3
           DesignSize = (
             691
-            71)
+            62)
           object Label19: TLabel
             Left = 149
             Top = 12
@@ -1171,7 +1171,7 @@ inherited fmGroup: TfmGroup
             DataField = ''
             EditButtons = <>
             Flat = True
-            KeyField = 'itab_n'
+            KeyField = 'idEmployee'
             ListField = 'NamePrepod'
             ListSource = dmUspevaemost.dsPrepodVedFromUchPlan
             ShowHint = True
@@ -1628,7 +1628,7 @@ inherited fmGroup: TfmGroup
             DataField = ''
             EditButtons = <>
             Flat = True
-            KeyField = 'itab_n'
+            KeyField = 'idEmployee'
             ListField = 'NamePrepod'
             ListSource = dmUspevaemost.dsPrepodVed
             ShowHint = True
@@ -1667,12 +1667,13 @@ inherited fmGroup: TfmGroup
           end
           object dbcbVed: TDBLookupComboboxEh
             Left = 221
-            Top = 6
+            Top = 5
             Width = 460
-            Height = 21
+            Height = 19
             Anchors = [akLeft, akTop, akRight]
             DataField = ''
             EditButtons = <>
+            Flat = True
             KeyField = 'Ik_ved'
             ListField = 'COLUMN1'
             ListSource = dmUspevaemost.dsGetAllVeds4Group
@@ -2331,7 +2332,7 @@ inherited fmGroup: TfmGroup
           Top = 0
           Width = 691
           Height = 26
-          ButtonWidth = 29
+          ButtonWidth = 26
           Caption = 'ToolBar1'
           Images = ilMain
           ParentShowHint = False
@@ -2343,14 +2344,19 @@ inherited fmGroup: TfmGroup
             Action = actCreateDiploms
           end
           object ToolButton19: TToolButton
-            Left = 29
+            Left = 26
             Top = 0
             Action = actUpdateDiploms
           end
           object ToolButton18: TToolButton
-            Left = 58
+            Left = 52
             Top = 0
             Action = actPrintDipl
+          end
+          object ToolButton27: TToolButton
+            Left = 78
+            Top = 0
+            Action = ActDiplListToExcel
           end
         end
         object dbgDiplom: TDBGridEh
@@ -2507,6 +2513,42 @@ inherited fmGroup: TfmGroup
               Title.Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1076#1088'. '#1042#1059#1047#1072
               Width = 100
               OnUpdateData = dbgDiplomColumns2UpdateData
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ProtNumber'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #1053#1086#1084#1077#1088' '#1087#1088#1086#1090'.'
+              Width = 60
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'ProtDate'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #1044#1072#1090#1072' '#1087#1088#1086#1090'.'
+              Width = 60
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DiplSeries'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #1057#1077#1088#1080#1103' '#1076#1080#1087#1083'.'
+              Width = 50
+            end
+            item
+              DynProps = <>
+              EditButtons = <>
+              FieldName = 'DiplNumber'
+              Footers = <>
+              ReadOnly = True
+              Title.Caption = #1053#1086#1084#1077#1088' '#1076#1080#1087#1083'.'
+              Width = 60
             end>
           object RowDetailData: TRowDetailPanelControlEh
           end
@@ -2647,7 +2689,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004005C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400780110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2817,10 +2859,10 @@ inherited fmGroup: TfmGroup
     Top = 183
   end
   object ilMain: TImageList
-    Left = 326
-    Top = 160
+    Left = 174
+    Top = 152
     Bitmap = {
-      494C010111004000580110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000740110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3488,10 +3530,10 @@ inherited fmGroup: TfmGroup
       000000000000}
   end
   object ilDisabled: TImageList
-    Left = 369
-    Top = 160
+    Left = 201
+    Top = 152
     Bitmap = {
-      494C010105000800580110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800740110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
@@ -4027,6 +4069,12 @@ inherited fmGroup: TfmGroup
       ImageIndex = 16
       OnExecute = actRefreshVedStudsExecute
       OnUpdate = actRefreshVedStudsUpdate
+    end
+    object ActDiplListToExcel: TAction
+      Category = 'Diplom'
+      Caption = #1042#1099#1074#1077#1089#1090#1080' '#1089#1087#1080#1089#1086#1082' '#1074' Excel'
+      ImageIndex = 8
+      OnExecute = ActDiplListToExcelExecute
     end
   end
   object pmVedomost: TPopupMenu

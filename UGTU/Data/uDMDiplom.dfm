@@ -111,6 +111,24 @@ object dmDiplom: TdmDiplom
       FieldName = 'OverVUZName'
       Size = 150
     end
+    object adospDiplomListVidGos: TIntegerField
+      FieldName = 'VidGos'
+    end
+    object adospDiplomListDiplSeries: TStringField
+      FieldName = 'DiplSeries'
+      Size = 10
+    end
+    object adospDiplomListDiplNumber: TStringField
+      FieldName = 'DiplNumber'
+      Size = 15
+    end
+    object adospDiplomListProtNumber: TStringField
+      FieldName = 'ProtNumber'
+      Size = 12
+    end
+    object adospDiplomListProtDate: TDateTimeField
+      FieldName = 'ProtDate'
+    end
   end
   object dsDiplomList: TDataSource
     DataSet = adospDiplomList
@@ -118,6 +136,7 @@ object dmDiplom: TdmDiplom
     Top = 88
   end
   object adotPredpr: TADOTable
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'Predpr'
@@ -125,6 +144,7 @@ object dmDiplom: TdmDiplom
     Top = 24
   end
   object adotTypeTema: TADOTable
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
@@ -395,7 +415,7 @@ object dmDiplom: TdmDiplom
     object adospGetVipiscaForDiplomdocumName: TStringField
       FieldName = 'documName'
       ReadOnly = True
-      Size = 50
+      Size = 500
     end
     object adospGetVipiscaForDiplomMonthObuch: TIntegerField
       FieldName = 'MonthObuch'
@@ -452,6 +472,12 @@ object dmDiplom: TdmDiplom
     object adospGetVipiscaForDiplomik_spec_fac: TAutoIncField
       FieldName = 'ik_spec_fac'
       ReadOnly = True
+    end
+    object adospGetVipiscaForDiplomDateDiplomDelivery: TDateTimeField
+      FieldName = 'DateDiplomDelivery'
+    end
+    object adospGetVipiscaForDiplomOchYearObuch: TIntegerField
+      FieldName = 'OchYearObuch'
     end
   end
   object adospAppendDiplom: TADOStoredProc

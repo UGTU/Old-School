@@ -123,7 +123,7 @@ object dmAbiturientAction: TdmAbiturientAction
         Name = '@SotTel'
         Attributes = [paNullable]
         DataType = ftString
-        Size = 50
+        Size = 500
         Value = Null
       end
       item

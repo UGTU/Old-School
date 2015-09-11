@@ -27,8 +27,9 @@ begin
   tempStoredProc.ProcedureName:= 'UpdateKafedraInFac';
   tempStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
   tempStoredProc.Parameters.CreateParameter('@ik_kaf', ftInteger, pdInput, 0, KafedraIK);
+  tempStoredProc.Connection.BeginTrans;
   try
-      tempStoredProc.Connection.BeginTrans;
+
       tempStoredProc.ExecProc;
       tempStoredProc.Connection.CommitTrans;
       tempStoredProc.Free;

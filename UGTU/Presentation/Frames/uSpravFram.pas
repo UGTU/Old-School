@@ -208,6 +208,7 @@ begin
 end;
 
 //процедура настройки свойств таблицы
+//загрузка данных о связанных (ссылочных) таблицах
 procedure TfmSprav.DoColKey(tbl:string; key:string; name:string;var count:integer);
 var i:integer;
     stt,stk:string;
@@ -249,6 +250,7 @@ begin
 
 end;
 
+//Загрузка ссылочной таблицы
 procedure TfmSprav.OpenDopSprav(Query: TADOQuery;TabName: string);
 begin
    Query.Close;
@@ -261,13 +263,13 @@ begin
 
 end;
 
-//роцедура загружает в PickList список значений
+//процедура загружает в PickList список значений
 procedure TfmSprav.LoadPickList (num:integer; Query: TADOQuery; FieldName: string);
 begin
   try
    Query.First;
    gSprav.Columns.Items[num].PickList.Clear;
-   while not  Query.Eof do
+   while not Query.Eof do
    begin
       gSprav.Columns.Items[num].PickList.Add(Query.FieldByName(FieldName).AsString);
       Query.Next;
@@ -370,12 +372,12 @@ begin
   end;
 end;
 
-//процедура настройки свойств таблицы
+//процедура настройки свойств таблицы - для загрузки ссылочных таблиц
 procedure TfmSprav.DoList;
 var i,j,k:integer;
   str:string;
 begin
-   try  //сортируем справочник
+   try  //сортируем справочник   и загружаем список ссылочных таблиц
 	   tSpravList.Locate('SpravName', cbSprav.Text,[loPartialKey]);
 
      tSprav.SQL.Clear;
@@ -408,6 +410,7 @@ begin
    end;
    end;
 
+   //настройка свойств справочника
    try
 	   cdsSprav.Fields[0].Visible:=false; //код невидим
 	   //если справочник - ссылающаяся таблица
@@ -633,7 +636,7 @@ begin
    //проверяем к - ccылающаяся колонка или нет
       if (num<=TabKeycol*2+Keycol-1) and (num>=TabKeycol*2) then
       begin
-         //определяем соответствующий элемент массива
+         //определяем соответствующий элемент массива ссылочных таблиц
          i:=keyCol-(num-TabKeycol*2)-1;
          //проверяем, есть ли на нёё ссылка в последующем элементе массива
          //и изменилось ли значение соответствующего поля
@@ -664,7 +667,7 @@ begin
          if (ZavTab[i+1].ZavTbNum=i) and (ZavTab[i+1].ZavTbNum>-1)
             and (ZavTab[i+1].value<>gSprav.Fields[num-1].AsString) then
          begin
-            //откываем ссылочную таблицу (определим ключ для фильтрации)
+            //открываем ссылочную таблицу (определим ключ для фильтрации)
                ZavTab[i+1].value:=gSprav.Fields[num-1].AsString;
                OpenDopSprav(tDopSprav,ZavTab[i+1].TbName);
                tDopSprav.Open;
@@ -690,7 +693,7 @@ begin
                   if flexit and (gSprav.Fields[num].AsString<>'') then
                      gSprav.Fields[num].AsString:='';
                   gSprav.Columns.Items[num].PickList.Clear;
-                   gSprav.Fields[num].ReadOnly:=true;
+                  gSprav.Fields[num].ReadOnly:=true;
                   exit;
                 end
                 else

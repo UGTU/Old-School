@@ -67,7 +67,7 @@ type
     {
       CopyUchPlan - копирует содержание учебного плана OldUchPlanIK в учебный план NewUchPlanIK
     }
-    procedure CopyUchPlan(OldUchPlanIK, NewUchPlanIK: integer);
+    procedure CopyUchPlan(OldUchPlanIK, NewUchPlanIK, YearIK: integer);
 
     {
       DeleteDiscFormUchPlan - удаляет дисциплину DiscInUchPlanIK из соответсвующего ей уч. плана
@@ -519,7 +519,7 @@ begin
   Result := FUchPlanControllerInstance;
 end;
 
-procedure TUchPlanController.CopyUchPlan(OldUchPlanIK, NewUchPlanIK: integer);
+procedure TUchPlanController.CopyUchPlan(OldUchPlanIK, NewUchPlanIK, YearIK: integer);
 var
   DataSet: TADOStoredProc;
   tempDataSet: TADODataSet;
@@ -528,10 +528,24 @@ begin
 
   DataSet := TADOStoredProc.Create(nil);
   DataSet.Connection := dm.DBConnect;
-  DataSet.ProcedureName := 'UpdateUchPlan';
+
+  //новая завязка на CopyUchPlan
+  DataSet.ProcedureName := 'CopyUchPlan';
+  with tempDataSet do
+  begin
+    DataSet.Parameters.CreateParameter('@ik_uch_pl', ftInteger, pdInput, 0, OldUchPlanIK);
+    DataSet.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0, 1);
+    DataSet.Parameters.CreateParameter('@ik_newUchPl', ftInteger, pdInput, 0, NewUchPlanIK);
+    DataSet.Parameters.CreateParameter('@ik_year', ftInteger, pdInput, 0, YearIK);
+  end;
+  DataSet.ExecProc;
+
+  {DataSet.ProcedureName := 'UpdateUchPlan';
   DataSet.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 4);
   DataSet.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 0,
     NewUchPlanIK);
+  DataSet.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0,
+    1);
   DataSet.Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 0, NULL);
   DataSet.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, NULL);
   DataSet.Parameters.CreateParameter('@ik_form_ed', ftInteger, pdInput,
@@ -561,6 +575,7 @@ begin
   DataSet.Parameters.CreateParameter('@ik_pdgrp_disc', ftInteger,
     pdInput, 0, 0);
   DataSet.Parameters.CreateParameter('@ViborGroup', ftInteger, pdInput, 0, 0);
+  DataSet.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, 0);
   DataSet.Parameters.CreateParameter('@source_disc_uch_plan', ftInteger,
     pdInput, 0, 0);
 
@@ -592,6 +607,8 @@ begin
       tempDataSet.FieldByName('Cname_ckl_disc1').value;
     DataSet.Parameters.ParamByName('@ViborGroup').value :=
       tempDataSet.FieldByName('ViborGroup').value;
+    DataSet.Parameters.ParamByName('@ik_spclz').value :=
+      tempDataSet.FieldByName('ik_spclz').value;
     try
       DataSet.Open;
       DiscUchPlanIK := DataSet.FieldByName('ReturnValue').AsInteger;
@@ -611,40 +628,36 @@ begin
     tempDataSet.Next;
   end;
   tempDataSet.Close;
-  tempDataSet.Free;
+  tempDataSet.Free;            }
   DataSet.Free;
-
 end;
 
 procedure TUchPlanController.DeleteDiscFormUchPlan(DiscInUchPlanIK: integer);
 var
   myStoredProc: TADOStoredProc;
 begin
-  myStoredProc := TADOStoredProc.Create(nil);
-  myStoredProc.Connection := dm.DBConnect;
-  myStoredProc.ProcedureName := 'UpdateDiscInUchPlan';
-  myStoredProc.Parameters.CreateParameter('@i_type', ftInteger, pdInput, 0, 3);
-  myStoredProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
-    pdInput, 0, DiscInUchPlanIK);
-  try
-    myStoredProc.Connection.BeginTrans;
-    myStoredProc.ExecProc;
-    myStoredProc.Connection.CommitTrans;
-  except
-    if MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',
+  if MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',
       mtConfirmation, mbYesNoCancel, 0) = mrYes then
-    begin
-      dm.Hard_DiscDel.Parameters.ParamByName('@ik_disc_uch_plan').value :=
-        DiscInUchPlanIK;
-      dm.Hard_DiscDel.ExecProc;
-      myStoredProc.Connection.CommitTrans;
-    end
-    else
-      myStoredProc.Connection.RollbackTrans;
-    // myStoredProc.Free;
-    // raise;
+  begin
+    myStoredProc := TADOStoredProc.Create(nil);
+    try
+      myStoredProc.Connection := dm.DBConnect;
+      myStoredProc.ProcedureName := 'Hard_DiscDel';
+      myStoredProc.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
+        pdInput, 0, DiscInUchPlanIK);
+      myStoredProc.Connection.BeginTrans;
+
+      try
+        myStoredProc.ExecProc;
+        myStoredProc.Connection.CommitTrans;
+      except
+        myStoredProc.Connection.RollbackTrans;
+      end;
+    finally
+      myStoredProc.Free;
+    end;
   end;
-  myStoredProc.Free;
+
 end;
 
 procedure TUchPlanController.DeleteUchPlan(UchPlanIK: integer);
@@ -657,6 +670,8 @@ begin
   myStoredProc.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 3);
   myStoredProc.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 0,
     UchPlanIK);
+  myStoredProc.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0,
+    0);
   try
     myStoredProc.ExecProc;
   except
@@ -3713,16 +3728,18 @@ begin
     150, NameSpclz);
   tempStoredProc.Parameters.CreateParameter('@Cshort_name_spclz', ftString,
     pdInput, 20, NameShortSpclz);
+  tempStoredProc.Connection.BeginTrans;
   try
-    tempStoredProc.Connection.BeginTrans;
+  try
     tempStoredProc.ExecProc;
     tempStoredProc.Connection.CommitTrans;
-    tempStoredProc.Free;
     Result := true;
   except
     tempStoredProc.Connection.RollbackTrans;
-    tempStoredProc.Free;
     raise;
+  end;
+  finally
+    tempStoredProc.Free;
   end;
 end;
 

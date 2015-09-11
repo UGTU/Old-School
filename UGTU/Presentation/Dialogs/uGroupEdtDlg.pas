@@ -31,6 +31,7 @@ type
     pnlProfile: TPanel;
     Label8: TLabel;
     dbcbProfile: TDBLookupComboboxEh;
+    lblTemplate: TLabel;
 
     procedure FormShow(Sender: TObject);
     procedure dblcbUchPlnChange(Sender: TObject);
@@ -44,9 +45,10 @@ type
     fSpecFacIK: integer;
     procedure ChangeGroupName;
     procedure LoadUchPlan(aSpecFacIK: integer);
-    procedure LoadProfile(aUchPlan: integer);
+    procedure LoadProfile;
     procedure SetEditStatus(aEdit: boolean);
     procedure uchPlanModify;
+    procedure SetSpecFacIK(const Value: integer);
   protected
     function DoApply:boolean; override;
     function DoCancel:boolean;override;
@@ -58,7 +60,7 @@ type
     FParentUchPlan, FUchPlan: integer;
     WithSpec: boolean;
     VidGos: integer;
-    property SpecFacIK: integer read fSpecFacIK write fSpecFacIK;
+    property SpecFacIK: integer read fSpecFacIK write SetSpecFacIK; //fSpecFacIK;
     property Edit: Boolean write SetEditStatus;
     procedure AddRead;
     procedure EditRead;
@@ -72,7 +74,7 @@ implementation
 
 uses uDM, DBTVgroupObj, DBTVSpecObj, DBTVFacObj, uGroup,
   uSpec,ABIT_zachislenie_frame, uDMGroupActions, uMain, uDMUgtuStructure,
-  ConstantRepository, CommonIntf, CommonIntfImpl;
+  ConstantRepository, CommonIntf, CommonIntfImpl, ExceptionBase;
 
 {$R *.dfm}
 
@@ -98,15 +100,15 @@ begin
 
 end;
 
-procedure TfrmGroupEdt.LoadProfile(aUchPlan: integer);
+procedure TfrmGroupEdt.LoadProfile;
 begin
-  pnlProfile.Visible := (VidGos>FGOS2);
-  if VidGos>FGOS2 then
-  begin
+  //pnlProfile.Visible := (VidGos>FGOS2);
+  //if VidGos>FGOS2 then
+  //begin
     dm.adsProfile.Close;
-    dm.adsProfile.CommandText := 'select * from GetProfileEduBranches(' + IntToStr(aUchPlan)+')';
+    dm.adsProfile.CommandText := 'select * from GetProfileEduBranches(' + IntToStr(fSpecFacIK)+')';
     dm.adsProfile.Open;
-  end;
+  //end;
 end;
 
 procedure TfrmGroupEdt.LoadUchPlan(aSpecFacIK: integer);
@@ -116,7 +118,8 @@ begin
   IntToStr(aSpecFacIK)+','+dbneYear.Text+')';
   dblcbUchPln.ListSource.DataSet.Open;
   VidGos := dblcbUchPln.ListSource.DataSet.FieldByName('VidGos').AsInteger;
-  pnlProfile.Visible := (VidGos > FGOS2);
+  //pnlProfile.Visible := (VidGos > FGOS2);
+  lblTemplate.Visible := (VidGos > FGOS2);
 end;
 
 procedure TfrmGroupEdt.SetEditStatus(aEdit: boolean);
@@ -124,6 +127,12 @@ var tempDS: TADODataSet;
 begin
   bEdit := aEdit;
   if aEdit then EditRead else AddRead;
+end;
+
+procedure TfrmGroupEdt.SetSpecFacIK(const Value: integer);
+begin
+  fSpecFacIK := Value;
+  LoadProfile;
 end;
 
 procedure TfrmGroupEdt.uchPlanModify;
@@ -209,7 +218,7 @@ begin
 
   //редактирование данных создания и расформирования группы
   dbdteCreate.Text:='01.09.'+dbneYear.Text;
-  dbdteExit.Text:='30.06.'+inttostr(dbneYear.Value+year_obuch);
+  dbdteExit.Text:='31.08.'+inttostr(dbneYear.Value+year_obuch);
 end;
 
 procedure TfrmGroupEdt.CheckBox1Click(Sender: TObject);
@@ -242,7 +251,7 @@ begin
       or ((dblcbUchPln.KeyValue <> FUchPlan)and(VidGos = FGOS2)) then
         uchPlanModify;
 
-  LoadProfile((Sender as TDBLookupComboboxEh).KeyValue);
+
 end;
 
 procedure TfrmGroupEdt.dbneYearChange(Sender: TObject);
@@ -265,7 +274,7 @@ begin
   Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance; //
   dm.DBConnect.BeginTrans;
   //создание учебного плана
-  if ((FUchPlan = 0) or ((dblcbUchPln.KeyValue<>FParentUchPlan)and(VidGos>FGOS2))) then
+  if ((FUchPlan = 0) or ((dblcbUchPln.KeyValue<>FParentUchPlan)and(VidGos>FGOS2)and(dblcbUchPln.KeyValue <> Null))) then
     with dm.aspAddRupGrup do
     begin
       Log.LogMessage('Need create a new plan');
@@ -310,14 +319,8 @@ begin
     //если идет добавление группы в ИС "Деканат"
     if not WithSpec then
     begin
-
       ParamByName('@ik_spec_fac').Value := fSpecFacIK;
       Log.LogMessage('SpecFacIK='+IntToStr(fSpecFacIK));
-    {  if frmMain.ActiveFrame is TfmGroup then
-        ParamByName('@ik_spec_fac').Value:= TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject.Parent).ik
-      else if frmMain.ActiveFrame is TfmZach then
-        ParamByName('@ik_spec_fac').Value:= Tag else
-        ParamByName('@ik_spec_fac').Value:= TDBNodeSpecObject(frmMain.DBDekTreeView_TEST1.SelectedObject).ik;}
     end
     else ParamByName('@ik_spec_fac').Value:= dbcbSpec.KeyValue;
 
@@ -343,9 +346,13 @@ begin
 
   dm.DBConnect.CommitTrans;
 except
-  ShowMessage('Добавить группу не удалось!');
-  dm.DBConnect.RollbackTrans;
-
+  on E:Exception do
+       begin
+         dm.DBConnect.RollbackTrans;
+         raise EApplicationException.Create('Произошла ошибка при добавление группы.',E);
+         exit;
+       end;
+  
 end;
 
   Result:= true;

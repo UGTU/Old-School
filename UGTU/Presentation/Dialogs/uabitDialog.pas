@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uStudDlg, DBGridEh, ExtDlgs, ImgList, ActnList, StdCtrls, Grids,
   DBCtrlsEh, DBLookupEh, Buttons, Mask, ExtCtrls, ComCtrls, adodb, jpeg, VarfileUtils,
-  DateUtils, System.Actions;
+  DateUtils, System.Actions, System.Generics.Collections;
 
 type
   TfrmAbitCardDialog = class(TftmStudent)
@@ -22,14 +22,14 @@ type
     Label67: TLabel;
     Label69: TLabel;
     Label70: TLabel;
-    lblNeedEmail: TLabel;
+    Label3: TLabel;
+    btnBack: TButton;
+    Label9: TLabel;
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure actCheckFieldsExecute(Sender: TObject);
-    procedure dbcbeSexChange(Sender: TObject);
     procedure actSpravExecute(Sender: TObject);
-  
+
     procedure bbCancelClick(Sender: TObject);
     procedure dbcbeSchoolCountryChange(Sender: TObject);
     procedure dbcbeSchoolDistChange(Sender: TObject);
@@ -44,15 +44,27 @@ type
     procedure eEmailExit(Sender: TObject);
     procedure eFamExit(Sender: TObject);
     procedure eNameExit(Sender: TObject);
+    procedure PageControl2Change(Sender: TObject);
+    procedure eBirthPlaceKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+   // procedure actCheckFieldsExecute(Sender: TObject);
+    procedure eFamKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnBackClick(Sender: TObject);
+    procedure actAddAddressExecute(Sender: TObject);
+    procedure actDelAddressExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
   floaded:boolean;
   fupmoving:boolean;
   spravhint: string;
   fNeedEmail: boolean;
+    procedure SetVisiblePage;
     { Private declarations }
   public
   HasAddSpec : boolean;
+  Year: integer;
+  NNRecord: integer;
   function checkDataAbit :boolean;
     { Public declarations }
   end;
@@ -63,24 +75,18 @@ var
 implementation
 
 uses udm,umain,db, uLangDlg, uRelativeDlg, uGroup, uPostupdlg, uSpravForm,
-  uDMStudentSelectionProcs, uDMStudentData, uDMAbiturientAction, uDMAdress, uDMCauses, uDMPrikaz;
+  uDMStudentSelectionProcs, uDMStudentData, uDMAbiturientAction, uDMAdress,
+  uDMCauses, uDMPrikaz, DocumentClass;
 
 
-function CheckFields:boolean;
+procedure CheckFields;
 begin
-  result:=true;
   with frmAbitCardDialog do
-  begin
-    if (eFam.Text='')
-    or(eName.Text='')
-    //or(eNum.Text='')
-    or((eEmail.Text='')and(fNeedEmail))
-    or(dbdteBirthDate.Text='  .  .    ')
-    or(dbcbeSex.Text='')
-    or(dbcbeSchool.Text='')
-    or(dbcbeCitizenship.Text='')
-    or(dbcbeMedal.Text='')
-    then result:=false;
+  case PageControl2.ActivePageIndex of
+  0: bbOK.Enabled := (eFam.Text <> '')and(Length(eFam.Text) > 1)and(eName.Text<>'')and(Length(eName.Text)>1)
+                  and(dbcbeSchool.KeyValue >= 0)and (dbdteBirthDate.Text <> '  .  .    ')
+                  and (sgAddress.RowCount>1);
+  1: bbOK.Enabled := (dbcbeCitizenship.KeyValue >= 0)and(eBirthPlace.Text <> '');
   end;
 end;
 
@@ -94,6 +100,12 @@ result[1]:=s1[4];
 result[2]:=s1[5];
 result[4]:=s1[1];
 result[5]:=s1[2];
+end;
+
+procedure TfrmAbitCardDialog.actAddAddressExecute(Sender: TObject);
+begin
+  inherited;
+  CheckFields;
 end;
 
 procedure TfrmAbitCardDialog.actApplyExecute(Sender: TObject);
@@ -120,20 +132,41 @@ begin
   end;
 
 frmPostupDlg:=TfrmpostupDlg.create(self);
-frmPostupDlg.Tag:=self.Tag;
+frmPostupDlg.NNRecord:=self.NNRecord;
 frmPostupDlg.HostForm:=self;
-frmPostupDlg.Hint:=self.Hint;
+frmPostupDlg.Year:=self.Year;
 frmPostupDlg.HasAddSpec:=HasAddSpec;
 frmPostupDlg.IDpostup:=-1;
+frmPostupDlg.DocRecordList := DocRecordList;
 frmPostupDlg.Showmodal;
 frmpostupDlg.Free;
+
+//DocRecordList.Free;
+
 frmMain.actTreeRefreshActionExecute(Sender);
 
 end;
 
+procedure TfrmAbitCardDialog.actDelAddressExecute(Sender: TObject);
+begin
+  inherited;
+  CheckFields;
+end;
+
 procedure TfrmAbitCardDialog.actOKExecute(Sender: TObject);
 begin
-actApplyExecute(Sender);
+  if PageControl2.ActivePageIndex<PageControl2.PageCount-1 then
+    PageControl2.SelectNextPage(True, False)
+  else actApplyExecute(Sender);
+
+end;
+
+procedure TfrmAbitCardDialog.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  DocRecordList.Free;
+  AddressRecordList.Free;
 end;
 
 procedure TfrmAbitCardDialog.FormShow(Sender: TObject);
@@ -158,6 +191,9 @@ begin
   sgDocs.Cells[2,0]:='Номер';
   sgDocs.Cells[3,0]:='Дата выдачи';
   sgDocs.Cells[4,0]:='Кем выдан';
+  sgDocs.Cells[5, 0] := 'Оригинал';
+  sgDocs.Cells[6, 0] := 'Баллов';
+  sgDocs.Cells[7, 0] := 'Дисциплина';
 
   sgAddress.Cells[0,0]:='Тип адреса';
   sgAddress.Cells[1,0]:='Страна';
@@ -167,8 +203,7 @@ begin
   sgAddress.Cells[5,0]:='Квартира';
 
   AddressRecordList:= Tlist.Create;
-
-
+  DocRecordList := TObjectList<TDocRecord>.Create;
 
   with dmAdress do
   begin
@@ -194,7 +229,7 @@ begin
   with dmStudentSelectionProcs.adsGetParamNeedness do
   begin
     Active:=true;
-    Locate('NNrecord',Self.Tag,[]);
+    Locate('NNrecord',Self.NNRecord,[]);
     fNeedEmail := (FieldByName('needEmail').Value = true);
     Active := false;
   end;
@@ -289,32 +324,23 @@ begin
       if dbcbeSchoolPoint.KeyValue<0 then dbcbeSchoolPoint.KeyValue:=504;
        dbcbeSchoolPointChange(Sender);
 
-      lblNeedEmail.Visible := fNeedEmail; 
+      //lblNeedEmail.Visible := fNeedEmail;
 
       eFam.SetFocus;
+  SetVisiblePage;
 end;
 
 
+
+procedure TfrmAbitCardDialog.PageControl2Change(Sender: TObject);
+begin
+  SetVisiblePage;
+  CheckFields;
+end;
 
 procedure TfrmAbitCardDialog.dbcbeEnterpriseChange(Sender: TObject);
 begin
 if dbcbeEnterprise.Text<>'' then cbJob.Checked:=true else cbJob.Checked:=false;
-end;
-
-
-
-procedure TfrmAbitCardDialog.actCheckFieldsExecute(Sender: TObject);
-begin
-  if (efam<>nil) then
-    if checkfields then
-    begin
-      bbOK.Enabled:=true;
-      bbApply.Enabled:=true;
-    end else
-    begin
-      bbOK.Enabled:=false;
-      bbApply.Enabled:=false;
-    end;
 end;
 
 procedure TfrmAbitCardDialog.dbcbeSchoolChange(Sender: TObject);
@@ -322,7 +348,7 @@ begin
   fupmoving:=true;
   dbcbeSchoolPoint.KeyValue:=dmAdress.adodsSchool.FieldByName('ik_gorod').Value;
   fupmoving:=false;
-  actCheckFieldsExecute(sender);
+  CheckFields;
 end;
 
 procedure TfrmAbitCardDialog.dbcbeSchoolCountryChange(Sender: TObject);
@@ -424,7 +450,7 @@ If not Floaded then exit;
       adodsSchool.Active:=true;
       adodsSchool.Sort:='Cname_zaved';
   end;
-  actCheckFieldsExecute(sender);
+  CheckFields;
 end;
 
 procedure TfrmAbitCardDialog.dbcbeSchoolRegionChange(Sender: TObject);
@@ -451,20 +477,10 @@ if fupmoving then dbcbeSchoolDist.KeyValue:=dmAdress.adodsSchoolRaion.FieldByNam
   end;
 end;
 
-procedure TfrmAbitCardDialog.dbcbeSexChange(Sender: TObject);
-begin
-dbcbeSex.ReadOnly:=true;
- if dbcbeSex.Text='Мужской' then
-dbcbeFamState.KeyValue:=9 else
-dbcbeFamState.KeyValue:=7;
- actCheckFieldsExecute(Sender);
-
-end;
-
 procedure TfrmAbitCardDialog.dbdteBirthDateExit(Sender: TObject);
 var doubles:integer;
 begin
-  actCheckFieldsExecute(sender);
+  CheckFields;
 {if (eFam.Text<>'') and (eName.Text<>'') and (dbdteBirthDate.Text<>'  .  .    ') then
 
   with dmAbiturientAction.aspdoubles do
@@ -482,22 +498,35 @@ begin
  }
 end;
 
+procedure TfrmAbitCardDialog.eBirthPlaceKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  CheckFields
+end;
+
 procedure TfrmAbitCardDialog.eEmailExit(Sender: TObject);
 begin
   inherited;
-  actCheckFieldsExecute(sender);
+  CheckFields;
 end;
 
 procedure TfrmAbitCardDialog.eFamExit(Sender: TObject);
 begin
   inherited;
-  actCheckFieldsExecute(sender);  
+  CheckFields;
+end;
+
+procedure TfrmAbitCardDialog.eFamKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  CheckFields;
 end;
 
 procedure TfrmAbitCardDialog.eNameExit(Sender: TObject);
 begin
   inherited;
-  actCheckFieldsExecute(sender);
+  CheckFields;
 end;
 
 procedure TfrmAbitCardDialog.actSpravExecute(Sender: TObject);
@@ -521,24 +550,28 @@ begin
     spravhint:=self.ActiveControl.Hint;
 end;
 
+procedure TfrmAbitCardDialog.btnBackClick(Sender: TObject);
+begin
+  PageControl2.SelectNextPage(False, False);
+end;
+
 function TfrmAbitCardDialog.checkDataAbit: boolean;
 begin
-result:=true;
+  result:=true;
 
-if (Date-StrToDate(dbdteBirthDate.Text))< 14 then
-begin
-  result:=false;
-  showmessage('Проверьте поле "Дата рождения"!');
-  exit;
-end;
+  if (Date-StrToDate(dbdteBirthDate.Text))< 14 then
+  begin
+    result:=false;
+    showmessage('Проверьте поле "Дата рождения"!');
+    exit;
+  end;
 
-//{
-if length(eCellphone.Text)>50 then
-begin
-  result:=false;
-  showmessage('Проверьте поле "Сотовый телефон"! Введите не более 50 символов');
-  exit;
-end;
+  {if length(eCellphone.Text)>50 then
+  begin
+    result:=false;
+    showmessage('Проверьте поле "Сотовый телефон"! Введите не более 50 символов');
+    exit;
+  end;   }
 
 if (StrToint(eYearFinished.text)-YearOf(dbdteBirthDate.value))< 14 then
 begin
@@ -554,8 +587,16 @@ begin
   exit;
 end;
 
-//}
+end;
 
+procedure TfrmAbitCardDialog.SetVisiblePage;
+begin
+  PageControl2.ActivePage.TabVisible := true;
+  TabSheet3.TabVisible := PageControl2.ActivePage = TabSheet3;
+  TabSheet2.TabVisible := PageControl2.ActivePage = TabSheet2;
+  TabSheet4.TabVisible := PageControl2.ActivePage = TabSheet4;
+  TabSheet5.TabVisible := PageControl2.ActivePage = TabSheet5;
+  btnBack.Enabled := (PageControl2.ActivePageIndex <> 0);
 end;
 
 end.

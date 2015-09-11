@@ -71,6 +71,7 @@ inherited frmAppTweaks: TfrmAppTweaks
         Top = 25
         Width = 453
         Height = 19
+        DynProps = <>
         EditButtons = <>
         Flat = True
         TabOrder = 0
@@ -81,6 +82,7 @@ inherited frmAppTweaks: TfrmAppTweaks
         Top = 69
         Width = 453
         Height = 19
+        DynProps = <>
         EditButtons = <>
         Flat = True
         TabOrder = 1
@@ -89,6 +91,10 @@ inherited frmAppTweaks: TfrmAppTweaks
     end
     object TabSheet1: TTabSheet
       Caption = #1044#1080#1072#1075#1085#1086#1089#1090#1080#1082#1072' '#1085#1077#1087#1086#1083#1072#1076#1086#1082
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 3
         Top = 8

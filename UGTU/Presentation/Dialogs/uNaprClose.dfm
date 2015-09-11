@@ -199,7 +199,7 @@ inherited ftmNaprclose: TftmNaprclose
     DataField = ''
     EditButtons = <>
     Flat = True
-    KeyField = 'itab_n'
+    KeyField = 'idEmployee'
     ListField = 'NamePrepod'
     ListSource = dmUspevaemost.dsPrepodVed
     TabOrder = 4

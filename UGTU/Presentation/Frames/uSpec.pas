@@ -110,7 +110,7 @@ begin
   directionIK:=TUchPlanController.Instance.getDirFromSpec(SpecIK);
   VidGos:=TUchPlanController.Instance.getVidGosFromSpecFac(IK);
   case(directionIK) of
-  1:begin
+  1,9,10:begin
       tsSpclz.Caption:='Список профилей';
       ToolButton3.Caption:='Добавить профиль';
       ToolButton4.Caption:='Изменить профиль';
@@ -406,8 +406,9 @@ begin
     tempStoredProc.ProcedureName:= 'UpdateSpclz';
     tempStoredProc.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 3);
     tempStoredProc.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, dbgSpclz.DataSource.DataSet.FieldByName('iK_spclz').AsInteger);
+    tempStoredProc.Connection.BeginTrans;
     try
-      tempStoredProc.Connection.BeginTrans;
+
       tempStoredProc.ExecProc;
       tempStoredProc.Connection.CommitTrans;
       tempStoredProc.Free;

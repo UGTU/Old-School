@@ -204,6 +204,8 @@ type
     ToolButton25: TToolButton;
     ToolButton26: TToolButton;
     actRefreshVedStuds: TAction;
+    ToolButton27: TToolButton;
+    ActDiplListToExcel: TAction;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -330,6 +332,8 @@ type
       var Value: Variant; var UseText, Handled: Boolean);
     procedure actRefreshVedStudsUpdate(Sender: TObject);
     procedure actRefreshVedStudsExecute(Sender: TObject);
+    procedure ToolButton27Click(Sender: TObject);
+    procedure ActDiplListToExcelExecute(Sender: TObject);
   private
     { Private declarations }
     Fik: Integer;
@@ -395,7 +399,7 @@ uses uDM, DBTVgroupObj, DBTVFacObj, uStudInfo,
   uRaports, uGroupEdtDlg, uVinEkz, uDMGroupActions, uDMUspevaemost,
   uDMUgtuStructure, uNaprClose, uNapr,
   Conditions, CorrectDatatypeChecks, Parser, uDiplomController,
-  uDMDiplom, uDiplomStudSelect, ConstantRepository;
+  uDMDiplom, uDiplomStudSelect, ConstantRepository, ReportDataSet;
 
 {$R *.dfm}
 { TfmGroup }
@@ -901,14 +905,11 @@ begin
   begin
     Active := false;
     Parameters[1].Value := ikVed;
-    // Parameters[2].Value := ikVidZan;
-    // Parameters[3].Value := cmbxSemAtt.ItemIndex+1;
     Active := true;
   end;
 
   dbcbeExaminer.KeyValue := dmUspevaemost.adospSelAtt.FieldByName
-    ('itab_n').AsString;
-  // dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelAtt.FieldByName('itab_n').AsInteger;
+    ('id_teacher').AsInteger;
 
   if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> Null then
     dbdteBRSExam.Value := dmUspevaemost.adospSelAtt.FieldByName('Dd_exam')
@@ -1202,15 +1203,12 @@ begin
   begin
     Active := false;
     Parameters[1].Value := ikVed;
-    // Parameters[2].Value := ikVidZan;
-    // Parameters[3].Value := cmbxSemAtt.ItemIndex+1;
     Active := true;
   end;
 
   // искать в ImportTeachers
   dbcbeExaminer.KeyValue := dmUspevaemost.adospSelBRSExam.FieldByName
-    ('itab_n').AsString;
-  // dbcbeExaminer.KeyValue:=dmUspevaemost.adospSelBRSExam.FieldByName('itab_n').AsInteger;
+    ('id_teacher').AsInteger;
 
   if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime <> Null
   then
@@ -1305,12 +1303,10 @@ begin
   begin
     Active := false;
     Parameters[1].Value := ikVed;
-    // Parameters[2].Value := ikVidZan;
-    // Parameters[3].Value := cmbxSemAtt.ItemIndex+1;
     Active := true;
   end;
 
-  dblcbPrepod.KeyValue := dmUspevaemost.adospSelAtt.FieldByName('itab_n')
+  dblcbPrepod.KeyValue := dmUspevaemost.adospSelAtt.FieldByName('id_teacher')
     .AsInteger;
 
   if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> Null then
@@ -1403,7 +1399,7 @@ begin
 
   // записываем считанные данные
   dbcmbxPrepodVed.KeyValue := dmUspevaemost.adospSelVed.FieldByName
-    ('itab_n').Value;
+    ('id_teacher').Value;
   if dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value <> Null then
     dbdteEx.Value := dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value;
   if (dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value <> Null) and
@@ -2679,8 +2675,8 @@ begin
           dbgDiplom.DataSource.DataSet.FieldByName('ExcelPatternName').AsString,
           dbgDiplom.DataSource.DataSet.FieldByName('ik_direction').AsInteger,
           dbgDiplom.DataSource.DataSet.FieldByName('Ik_fac').AsInteger,
-          dbgDiplom.DataSource.DataSet.FieldByName('DiplVklDatPadez')
-          .AsBoolean);
+          dbgDiplom.DataSource.DataSet.FieldByName('VidGos').AsInteger,
+          dbgDiplom.DataSource.DataSet.FieldByName('DiplVklDatPadez').AsBoolean);
       end;
     end;
     if (not AllRight) then
@@ -3253,6 +3249,24 @@ begin
 
 end;
 
+procedure TfmGroup.ActDiplListToExcelExecute(Sender: TObject);
+var
+  Report:TExcelReportDBGrid;
+begin
+    //TApplicationController.GetInstance.AddLogEntry('ƒиплом. Ёкспорт вкладки к диплому '+StudName);
+
+    Report := TReportBase.CreateReport(TExcelReportDBGrid) as TExcelReportDBGrid;
+    Report.DataSet := dmDiplom.adospDiplomList;
+    Report.DBGrid:= dbgDiplom;
+    Report.ReportTemplate:= ExtractFilePath(Application.ExeName)+'reports\'+'DiplList.xltx';
+    Report.FreeOnComplete := true;
+    Report.OnExecuteError := ExecuteError;
+    TWaitingController.GetInstance.Process(Report);
+
+    //Report.BuildReport;
+
+end;
+
 procedure TfmGroup.actMkVinExecute(Sender: TObject);
 begin
   TApplicationController.GetInstance.AddLogEntry
@@ -3342,6 +3356,21 @@ procedure TfmGroup.ToolButton13Click(Sender: TObject);
 begin
   cmbxUspSemChange(Sender);
 end;
+
+procedure TfmGroup.ToolButton27Click(Sender: TObject);
+var
+  Report:TExcelBaseReportDataSet;
+begin
+    //TApplicationController.GetInstance.AddLogEntry('ƒиплом. Ёкспорт вкладки к диплому '+StudName);
+
+    Report := TReportBase.CreateReport(TExcelBaseReportDataSet) as TExcelBaseReportDataSet;
+    Report.FreeOnComplete := true;
+    Report.OnExecuteError := ExecuteError;
+    TWaitingController.GetInstance.Process(Report);
+
+    //Report.BuildReport;
+end;
+
 
 procedure TfmGroup.ToolButton9Click(Sender: TObject);
 var

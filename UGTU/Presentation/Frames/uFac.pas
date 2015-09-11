@@ -8,7 +8,8 @@ uses
   ADODB, Grids, DBGridEh, ComObj, DateUtils, Mask, DBCtrlsEh, 
   Spin, GridsEh, DBLookupEh, ActnList, ImgList, D_FacItogiRep,
   ReportsBase, ReportUI, uWaitingform, Menus, ApplicationController, ExceptionBase, uWaitingController, udmStudentData, D_AcademReport,
-  uAcademFrame, uAverageBalls, DBTVGroupObj;
+  uAcademFrame, uAverageBalls, DBTVGroupObj, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmFacultet = class(TfmBase)
@@ -27,24 +28,17 @@ type
     btnGetRepKont: TButton;
     DBGridEh2: TDBGridEh;
     ToolBar2: TToolBar;
-    KontExcel: TSpeedButton;
     ToolBar1: TToolBar;
     dbgrItogi: TDBGridEh;
     DBGridEh3: TDBGridEh;
     ToolBar4: TToolBar;
-    SpeedButton3: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     dbdteEx: TDBDateTimeEditEh;
-    ToolButton1: TToolButton;
     dbdtExam: TDBDateTimeEditEh;
     Panel2: TPanel;
     Label4: TLabel;
     ProgressBar1: TProgressBar;
     cbSemestr: TComboBox;
     spYear: TSpinEdit;
-    ToolButton2: TToolButton;
-    ToolButton3: TToolButton;
-    ToolButton4: TToolButton;
     tsNapr: TTabSheet;
     ToolBar3: TToolBar;
     tbtPrintNapr: TToolButton;
@@ -75,7 +69,6 @@ type
     N2: TMenuItem;
     actItogiFacToExc: TAction;
     actItogiToExc: TAction;
-    ToolButton8: TToolButton;
     pmItogi: TPopupMenu;
     MSExcel1: TMenuItem;
     MSExcel2: TMenuItem;
@@ -86,6 +79,13 @@ type
     fmAverageBallsFac: TfmAverageBalls;
     actEditNapr: TAction;
     ToolButton9: TToolButton;
+    ActKontToExcel: TAction;
+    actLoadReport: TAction;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    actDailyResultsToExcel: TAction;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
     procedure DBGridEh1DblClick(Sender: TObject);
     procedure tsSessiaChange(Sender: TObject);
     procedure DataSource1DataChange(Sender: TObject; Field: TField);

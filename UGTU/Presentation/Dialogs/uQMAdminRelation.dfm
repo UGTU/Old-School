@@ -66,6 +66,7 @@ inherited frmQMAdminRelation: TfrmQMAdminRelation
     Top = 27
     Width = 192
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_table'
@@ -80,6 +81,7 @@ inherited frmQMAdminRelation: TfrmQMAdminRelation
     Top = 27
     Width = 192
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_table'
@@ -94,6 +96,7 @@ inherited frmQMAdminRelation: TfrmQMAdminRelation
     Top = 69
     Width = 192
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_field'
@@ -107,6 +110,7 @@ inherited frmQMAdminRelation: TfrmQMAdminRelation
     Top = 69
     Width = 192
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_field'
