@@ -76,6 +76,7 @@ type
     procedure PageControl1Change(Sender: TObject);
     procedure ToolButton7Click(Sender: TObject);
     procedure fmUchPlan2ToolButton12Click(Sender: TObject);
+    procedure fmUchPlan1ToolButton1Click(Sender: TObject);
   private
     SpFacik: Integer;
     SpecIK: Integer;
@@ -435,6 +436,13 @@ begin
   if dsSpclz.DataSet <> nil then
     if dsSpclz.DataSet.Active then dsSpclz.DataSet.Close;
   inherited;
+end;
+
+procedure TfmSpec.fmUchPlan1ToolButton1Click(Sender: TObject);
+begin
+  inherited;
+  fmUchPlan1.ActionEditUchPlanExecute(Sender);
+
 end;
 
 procedure TfmSpec.fmUchPlan1ToolButton2Click(Sender: TObject);

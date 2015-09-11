@@ -33,7 +33,7 @@ and Fac.Ik_fac not in (6,9,14,15,17,20,21,22)
   and ((PersonAddress.ik_AddressType = 2)or(PersonAddress.ik_AddressType is null))
 
 and 
-(Gorod.Cgorod like '%Ухта%' and
+((Gorod.Cgorod like '%Ухта%' and
 /*or
 (Street.CStreet like '%Ленина%' 
 and (BuildingNumber='' or BuildingNumber='' or BuildingNumber='' or BuildingNumber='' or BuildingNumber='' or BuildingNumber='' or BuildingNumber='' or BuildingNumber='' or BuildingNumber='' or BuildingNumber=''))
@@ -65,7 +65,7 @@ or
 and (BuildingNumber='8' or BuildingNumber='12' or BuildingNumber='16' or BuildingNumber='18' or BuildingNumber='20' or BuildingNumber='26'))
 or
 (Street.CStreet like '%Чибьюский%' 
-and (BuildingNumber='3' or BuildingNumber='5' or BuildingNumber='7'))*/
+and (BuildingNumber='3' or BuildingNumber='5' or BuildingNumber='7'))
 
 ((Street.CStreet like '%Ленина%' 
 and (BuildingNumber='3' or BuildingNumber='5' or BuildingNumber='9'))
@@ -98,8 +98,61 @@ or
 or
 (Street.CStreet like '%Семяшкина%' )
 ))  
+*/
 
+((Street.CStreet like '%Вокзальная%' )
+or
+(Street.CStreet like '%Горького%' )
+or
+(Street.CStreet like '%Губкина%' )
+or
+(Street.CStreet like '%Железнодорожная%' )
+or
+(Street.CStreet like '%Заречная%' )
+or
+(Street.CStreet like '%Косолапкина%' )
+or
+(Street.CStreet like '%Кремса%' )
+or
+(Street.CStreet like '%Мира%' )
+or
+(Street.CStreet like '%Пушкина%' )
+or
+(Street.CStreet like '%Мира%' )
+or
+(Street.CStreet like '%Октябрьская%' 
+and (BuildingNumber='1' or BuildingNumber='2' or BuildingNumber='3' or BuildingNumber='4' or BuildingNumber='5' or BuildingNumber='6' or BuildingNumber='10' or BuildingNumber='15'
+	 or BuildingNumber='17' or BuildingNumber='20' or BuildingNumber='22'))
+or
+(Street.CStreet like '%Первомайская%' 
+and (BuildingNumber='7' or BuildingNumber='8' or BuildingNumber='10' or BuildingNumber='12' or BuildingNumber='14' or BuildingNumber='15' or BuildingNumber='28' 
+or BuildingNumber like '2%' or BuildingNumber like '4%' or BuildingNumber like '5%'
+or BuildingNumber like '6%' or BuildingNumber like '16%' 
+))
+
+)
+or
+(Gorod.Cgorod like '%Седью%')
+or
+(Gorod.Cgorod like '%Изъюр%')
+or
+(Gorod.Cgorod like '%Лайково%')
+or
+(Gorod.Cgorod like '%Изваиль%')
+or
+(Gorod.Cgorod like '%Гажаяг%')
+)
 /*
+
+Округ №7
+Улицы: Вокзальная; Горького; Губкина; Железнодорожная; Заречная; Косолапкина; Кремса; Мира; Октябрьская, дома №№ 1, 2, 3, 4, 5, 6, 10, 15, 17, 20, 22; 
+Первомайская дома №№ 2/6, 4, 4а, 5, 5а, 6, 6а, 6б, 7, 8, 10, 12, 14, 15, 16/12, 28; 
+Пушкина; 
+пст Седъю с подчиненной ему территорией (пст Изъюр); пст Кэмдин с подчиненной ему территорией (дер. Лайково, Изваиль, Гажаяг).
+
+
+
+
 
 ул.Севастопольская: д.11а, 13, 13а; 
 ул.Сенюкова: д. 1, 3, 7, 9, 11, 25/52;

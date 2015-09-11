@@ -44,7 +44,7 @@ FROM            MaxUspev Vedomost INNER JOIN
                          dbo.Content_UchPl ON Vedomost.ik_upContent = dbo.Content_UchPl.ik_upContent INNER JOIN
                          dbo.vid_zaniat ON dbo.Content_UchPl.ik_vid_zanyat = dbo.vid_zaniat.iK_vid_zanyat INNER JOIN
                          dbo.TypeZanyat ON dbo.vid_zaniat.ikTypeZanyat = dbo.TypeZanyat.ikTypeZanyat
-WHERE Vedomost.Dd_exam >'08.01.2014' AND Vedomost.Dd_exam <'08.08.2015'
+WHERE Vedomost.Dd_exam >'01.08.2014' AND Vedomost.Dd_exam <'08.08.2015'
 	AND TypeZanyat.bitZach<>1 AND Content_UchPl.n_module IS NULL
 	GROUP BY Vedomost.[id_teacher]
 ) Allp

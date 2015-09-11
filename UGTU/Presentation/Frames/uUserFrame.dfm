@@ -166,7 +166,7 @@ inherited fmUsers: TfmUsers
             Alignment = taCenter
             AutoSize = False
             Caption = #1086#1090
-            Transparent = False
+            Transparent = True
           end
           object dbdtEventBegin: TDBDateTimeEditEh
             Left = 33
@@ -980,7 +980,7 @@ inherited fmUsers: TfmUsers
     Connection = dm.DBConnect
     LockType = ltBatchOptimistic
     TableName = 'Fac'
-    Left = 601
+    Left = 641
     Top = 40
   end
   object adotElemUsers: TADOTable
@@ -1032,20 +1032,17 @@ inherited fmUsers: TfmUsers
       LookupResultField = 'Cname_fac'
       KeyFields = 'ik_filter1'
       OnChange = adotElemUsersfilter1Change
-      Size = 150
+      Size = 600
       Lookup = True
     end
     object adotElemUsersfilter2: TStringField
-      DisplayLabel = #1060#1080#1083#1100#1090#1088' 2'
-      DisplayWidth = 100
       FieldKind = fkLookup
       FieldName = 'filter2'
+      LookupDataSet = adotFilter2
       LookupKeyFields = 'ik_kaf'
       LookupResultField = 'cname_kaf'
       KeyFields = 'ik_filter2'
-      LookupCache = True
-      OnChange = adotElemUsersfilter2Change
-      Size = 150
+      Size = 1000
       Lookup = True
     end
   end

@@ -5,17 +5,30 @@ select distinct	Fac.Cname_fac,
 		Form_ed.Cname_form_ed,
 		Kat_zach.Cname_kat_zach,
 		Clastname + ' ' + Cfirstname + ' ' + isnull(Cotch,'') FIO,
+		1,
+		ISNULL([1SrBall].[SrBall],0) [1SrBall],
+		2,
+		ISNULL([2SrBall].[SrBall],0) [2SrBall],
 		AllBalls,
 	    VstupExamBalls,
 		a_balls.EGEBalls,
 		BonusBalls,
-		ISNULL(Otlich,'') Otlich,
-		ISNULL(Soch,'') Soch,
-		ISNULL(GTO,'') GTO,
+
+
+		ISNULL(NextEducBranch.Cname_spec,'нет') as Cname_specPer,
+		IIF([StudGrupAcadem].ik_studGrupNew >0, 'ƒа','Ќет') akadem,		
+		ISNULL(PricinaOtch.[Cname_pric],'нет') as PricinaOtch,
+
+
+
+		--ISNULL(Otlich,'') Otlich,
+		--ISNULL(Soch,'') Soch,
+		--ISNULL(GTO,'') GTO,
 		--Person.nCode,
+		ISNULL(medal_abit.cmedal,'нет') medal_abit,
 		Strana.c_grazd,
-		ISNULL(ISNULL(pr.Cregion,vrem.Cregion),fact.Cregion) Cregion,
-		docs.Cd_kem_vidan
+		ISNULL(ISNULL(ISNULL(pr.Cregion,vrem.Cregion),fact.Cregion),'') Cregion,
+		ISNULL(docs.Cd_kem_vidan,'')
 		/*
 		»нститут\ филиал
 - специальность\ направление
@@ -43,7 +56,59 @@ select distinct	Fac.Cname_fac,
 	inner join Form_ed on Form_ed.Ik_form_ed=Relation_spec_fac.Ik_form_ed
 	inner join Direction on Direction.ik_direction = EducationBranch.ik_direction
 	inner join TypeKatZach on Kat_zach.ik_type_kat = TypeKatZach.ik_type_kat
-	inner join Abit_GetBalls(year(GETDATE())) a_balls on a_balls.nn_abit = ABIT_postup.nn_abit
+	inner join Abit_GetBalls(year(DATEADD(yy,-1,GETDATE()))) a_balls on a_balls.nn_abit = ABIT_postup.nn_abit
+
+
+
+
+--событи€
+inner join dbo.Zach ON ABIT_postup.nCode=Zach.nCode
+inner join (SELECT ik_zach, MIN([Ik_studGrup]) [Ik_studGrup] FROM  [dbo].[StudGrup]
+	GROUP BY ik_zach) [MinStudGrup] ON Zach.[Ik_zach]=[MinStudGrup].[Ik_zach]
+inner join [dbo].[StudGrup] [FirstStudGrup] 
+	ON [MinStudGrup].[Ik_zach]=[FirstStudGrup].[Ik_zach] AND [MinStudGrup].[Ik_studGrup]=[FirstStudGrup].[Ik_studGrup]
+inner join dbo.Grup FirstGrup ON  [FirstStudGrup].ik_grup = FirstGrup.Ik_grup
+left join (SELECT * FROM [dbo].[Pricina] WHERE [Pricina].ikTypePric = 2) PricinaOtch ON [FirstStudGrup].[ik_pricOtch]=PricinaOtch.[ik_pric]
+
+--перевод на др специальность
+left join 
+	dbo.StudGrup NextStudGrup ON [FirstStudGrup].Ik_zach=NextStudGrup.Ik_zach AND [FirstStudGrup].Ik_grup<>NextStudGrup.Ik_grup
+left join
+	dbo.Grup NextGrup ON  NextStudGrup.ik_grup = NextGrup.Ik_grup AND NextGrup.ik_spec_fac<>FirstGrup.ik_spec_fac
+left join Relation_spec_fac NextRelSpecFac on NextGrup.ik_spec_fac = NextRelSpecFac.ik_spec_fac
+left join EducationBranch NextEducBranch on NextRelSpecFac.ik_spec = NextEducBranch.ik_spec
+
+
+left join [dbo].[StudGrupAcadem] ON [FirstStudGrup].[ik_studGrup]=[StudGrupAcadem].[ik_studGrup]
+
+left join dbo.Student stud ON Person.nCode=Stud.nCode
+left join medal_abit ON Stud.ik_medal=medal_abit.ik_medal
+
+
+
+
+
+
+
+
+	--успеваемость
+
+	left join 
+	(SELECT [Ik_zach], [n_sem], AVG(CONVERT(FLOAT,[Cosenca])) SrBall
+		FROM [dbo].[MaxUspev]
+		WHERE [n_sem]=1 AND [Cosenca]>=2
+		GROUP BY [Ik_zach], [n_sem]
+	)[1SrBall] ON Zach.[Ik_zach]=[1SrBall].[Ik_zach]
+	left join
+	(SELECT [Ik_zach], [n_sem], AVG(CONVERT(FLOAT,[Cosenca])) SrBall
+		FROM [dbo].[MaxUspev]
+		WHERE [n_sem]=2 AND [Cosenca]>=2
+		GROUP BY [Ik_zach], [n_sem]
+	)[2SrBall] ON Zach.[Ik_zach]=[2SrBall].[Ik_zach]
+
+
+
+
 	left join (select nCode, 'ƒа' as Otlich 
 			  from doc_stud, Abit_Bonuses, documents 
 			  where Abit_Bonuses.ik_doc = doc_stud.ik_doc 
@@ -98,19 +163,18 @@ on ABIT_postup.nCode = vrem.nCode
 left join (select Doc_stud.*,documents.cvid_doc from Doc_stud, documents where documents.Ik_vid_doc = Doc_stud.Ik_vid_doc and [IsEducational] = 1) docs
 on ABIT_postup.nCode = docs.nCode
 
-	where ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2)	--зачисленные
+	where ABIT_postup.ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2)	--зачисленные
 	  --and TypeKatZach.ik_type_kat in (1,2,12)										--не контракт
 	  --and EducationBranch.ik_direction in (1,2,9,10)								-- бакалавры/специалисты	
-	  and NNyear=year(GETDATE())
-order by Fac.Cname_fac,
+	  and NNyear=year(DATEADD(yy,-1,GETDATE()))
+order by Form_ed.Cname_form_ed desc,Fac.Cname_fac,
 		EducationBranch.Cname_spec,
 		Direction.cName_direction,
-		Form_ed.Cname_form_ed,
 		Kat_zach.Cname_kat_zach,
 		Clastname + ' ' + Cfirstname + ' ' + isnull(Cotch,'') 
 
 --
-select sum(AllBalls), count(nCode)
+/*select sum(AllBalls), count(nCode)
 from
 	(select	EducationBranch.Cname_spec,
 		Form_ed.Cname_form_ed,
@@ -156,4 +220,7 @@ from
 	  --and TypeKatZach.ik_type_kat in (1,2,12)										--не контракт
 	  --and EducationBranch.ik_direction in (1,2,9,10)								-- бакалавры/специалисты	
 	  and NNyear=year(GETDATE())) stat
-where Soch = 'ƒа' 
+where Soch = 'ƒа' */
+
+
+--select year(DATEADD(yy,-1,GETDATE()))
