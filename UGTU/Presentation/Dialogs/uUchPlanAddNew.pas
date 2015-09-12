@@ -102,10 +102,10 @@ begin
           (dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan').AsInteger,
           UchPlanIK,dbcbYear.KeyValue);
 
-     {   if (CheckBox2.Checked) then // перенос оценок со старого уч. плана
+        {if (CheckBox2.Checked) then // перенос оценок со старого уч. плана
           TUchPlanController.Instance.UpdateGrup
             (dbcbYearCopy.ListSource.DataSet.FieldByName('ik_uch_plan')
-            .AsInteger, UchPlanIK, specfac);}
+            .AsInteger, UchPlanIK, specfac); }
 
         Panel2.Visible := false;
     end else

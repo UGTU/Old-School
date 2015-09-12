@@ -39,7 +39,6 @@ type
     adotElemUsersik_filter2: TIntegerField;
     adotElemUsersuser: TStringField;
     adotElemUsersfilter1: TStringField;
-    adotElemUsersfilter2: TStringField;
     adotElement: TADOTable;
     dsElement: TDataSource;
     dsElemUsers: TDataSource;
@@ -99,6 +98,7 @@ type
     dbcbAuditObject: TDBLookupComboboxEh;
     dbcbUsers: TDBLookupComboboxEh;
     dbcbOperationType: TDBLookupComboboxEh;
+    adotElemUsersfilter2: TStringField;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure dbcbElementChange(Sender: TObject);
     procedure aSaveExecute(Sender: TObject);
@@ -277,6 +277,7 @@ begin
          adotFilter2.SQL.Add('SELECT ik_spec_fac, ik_fac, Spec_stud.ik_spec, ''('' + Left(Cname_form_ed,1) + '') '' + FullName as Cname_spec FROM Spec_stud '+
            'INNER JOIN Relation_spec_fac ON Relation_spec_fac.ik_spec=Spec_stud.ik_spec inner join Form_ed on Form_ed.ik_form_ed = Relation_spec_fac.ik_form_ed');
          adotFilter2.Open;
+         adotElemUsersfilter2.KeyFields:= 'ik_filter2';
          adotElemUsersfilter2.LookupKeyFields:='ik_spec_fac';
          adotElemUsersfilter2.LookupResultField:='Cname_spec';
          adotElemUsersfilter2.DisplayLabel:='Специальность';
@@ -287,6 +288,7 @@ begin
          adotElemUsers.Open;
          adotFilter2.Filter:='ik_fac=0';
          adotFilter2.Filtered:=true;
+
       end;
       2: //нагрузка
       begin
@@ -712,6 +714,8 @@ begin
       except
       end;
    end;
+
+
    ChangeModif(true);
 end;
 
