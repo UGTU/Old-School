@@ -32,11 +32,11 @@ and ABIT_postup.ik_kat_zach = Kat_zach.Ik_kat_zach
 and Form_ed.Ik_form_ed = Relation_spec_fac.Ik_form_ed
 and Kat_zach.ik_type_kat = TypeKatZach.ik_type_kat
 and Spec_stud.ik_direction in (1,2,3)				--ВПО
-and ABIT_postup.ik_zach not in (2,3,9)				--исключая переведенных, забравших док-ты, и сетевых
+and ABIT_postup.ik_zach =(6)				--исключая переведенных, забравших док-ты, и сетевых
 and Relation_spec_fac.ik_fac = Fac.Ik_fac and Relation_spec_fac.ik_spec = Spec_stud.ik_spec
 and dbo.Student.nCode = ABIT_postup.nCode
 and ABIT_postup.nCode not in (select nCode from Zach)
-and NNyear=2013
+and NNyear=2015
 ) Allstud
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana,Region.Ik_region
 		   from dbo.PersonAddress,dbo.Address,dbo.Street,dbo.Gorod,dbo.Raion,dbo.Region,dbo.Strana

@@ -9,9 +9,10 @@ select	Fac.Cname_fac,
 	    VstupExamBalls,
 		a_balls.EGEBalls,
 		BonusBalls,
-		Otlich,
-		Soch,
-		GTO,
+		ISNULL(Otlich,''),
+		ISNULL(Soch,''),
+		ISNULL(GTO,''),
+		iif(lSex = 0,'Ж','М') lSex,
 		Person.nCode
 	from dbo.Person 
 	inner join ABIT_postup on ABIT_postup.nCode = dbo.Person.nCode
@@ -42,12 +43,13 @@ select	Fac.Cname_fac,
 			  and Abit_Bonuses.balls = 2
 			  ) Znac_GTO on Znac_GTO.nCode = ABIT_postup.nCode
 	where ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2)	--зачисленные
-	  and TypeKatZach.ik_type_kat in (1,2,12)										--не контракт
+	  --and TypeKatZach.ik_type_kat in (1,2,12)										--не контракт
 	  and EducationBranch.ik_direction in (1,2,9,10)								-- бакалавры/специалисты	
 	  and NNyear=year(GETDATE())
 order by  Clastname,Cfirstname,Cotch
 
 --
+/*
 select sum(AllBalls), count(nCode)
 from
 	(select	EducationBranch.Cname_spec,
@@ -90,4 +92,4 @@ from
 	  and TypeKatZach.ik_type_kat in (1,2,12)										--не контракт
 	  and EducationBranch.ik_direction in (1,2,9,10)								-- бакалавры/специалисты	
 	  and NNyear=year(GETDATE())) stat
-where Soch = 'Да' 
+where Soch = 'Да' */

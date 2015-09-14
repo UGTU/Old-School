@@ -1,10 +1,10 @@
-select Cshort_name_fac,NNyear,FIO,CType_kat,Cname_form_ed,pr.Cstrana + ', ' + pr.Cregion +
+select Cshort_name_fac, Cname_spec,CType_kat,Cname_form_ed,FIO,pr.Cstrana + ', ' + pr.Cregion +
 	   ', ' + pr.Cgorod + ', ' + pr.CStreet+', '+pr.BuildingNumber+' - '+pr.FlatNumber,
 		fac.Cstrana + ', ' + fac.Cregion + ', ' + fac.Cgorod + ', ' + fac.CStreet+', '+fac.BuildingNumber+' - '+fac.FlatNumber, 
 vrem.Cstrana + ', ' + vrem.Cregion + ', ' + vrem.Cgorod + ', ' + vrem.CStreet+', '+vrem.BuildingNumber+' - '+vrem.FlatNumber,c_grazd from
 (
 
-select distinct Fac.Cshort_name_fac,Spec_stud.Cname_spec, Clastname + ' ' + Cfirstname + ' ' + Cotch FIO,
+select distinct Fac.Cshort_name_fac,Spec_stud.Cname_spec, PersonFullName FIO,
 	   dbo.Person.nCode,grazd.Ik_grazd,c_grazd,NNyear,Cname_form_ed,CType_kat
 from dbo.Person,ABIT_postup,ABIT_Diapazon_spec_fac,dbo.Student,Relation_spec_fac,Spec_stud,Fac,
 	 grazd,Form_ed,Kat_zach,TypeKatZach
@@ -17,7 +17,7 @@ and Form_ed.Ik_form_ed=Relation_spec_fac.Ik_form_ed
 and Relation_spec_fac.ik_fac = Fac.Ik_fac and Relation_spec_fac.ik_spec = Spec_stud.ik_spec
 and ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2) --зачисленные
 and dbo.Student.nCode = ABIT_postup.nCode
-and NNyear=2013
+and NNyear=2015
 
 ) stud
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana
@@ -51,5 +51,5 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana) vrem
 on stud.nCode = vrem.nCode
 where /*(pr.Ik_strana<>2)or(fac.Ik_strana<>2)or(vrem.Ik_strana<>2)or(Ik_grazd<>2)or */(Ik_grazd <> 2) 
-order by Cshort_name_fac,NNyear,FIO
+order by Cshort_name_fac, Cname_spec,CType_kat,Cname_form_ed,FIO
 
