@@ -93,9 +93,9 @@ type
     adospPrintZayavlcurrentIK_kat_zaved: TAutoIncField;
     aspAbitConfirmOnline: TADOStoredProc;
     adospPrintZayavlIsNotFirstEducation: TBooleanField;
-    aspDoubles: TADOStoredProc;
     aspAddExamByName: TADOStoredProc;
     adospPrintZayavlcEmail: TStringField;
+    aspDoubles: TADODataSet;
   private
     { Private declarations }
   public
