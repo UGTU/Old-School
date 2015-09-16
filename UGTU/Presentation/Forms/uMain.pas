@@ -377,7 +377,7 @@ type
     procedure GetLichnKartStud(ncode: Integer; ik_grup: Integer);
     function GetPanel8: TDataProcessingSplashDlg;
     function LoadScheduleBookmarks(): Boolean;
-    procedure DocumentStateChanged(Sender:TObject);
+    procedure DocumentStateChanged(Sender: TObject);
   public
     CurrentTopic: String;
     procedure Comment(str1, str2: String);
@@ -393,7 +393,7 @@ var
   LastSelectedNode: TTreeNode;
   lastCancel, alreadySpec: Boolean;
   id_grup: Integer;
-  //NowNode: TDBnodeObject;
+  // NowNode: TDBnodeObject;
   // флаг "только что нажали отмену" не требуется повторная
   // проверка наличия изменений
 
@@ -797,12 +797,12 @@ begin
   // ------------Журнал справок
   if (dbNode is TDBNodeSprObject) then
   begin
-//    NowNode := dbNode;
+    // NowNode := dbNode;
     Caption := TApplicationController.GetInstance.ProgramName +
       (dbNode as TDBNodeSprObject).Name;
     Frame := TfmDoc;
     FFrame.RefreshFrame;
-    (FFrame as TfmDoc).OnDocumentStateChanged:=DocumentStateChanged;
+    (FFrame as TfmDoc).OnDocumentStateChanged := DocumentStateChanged;
     Comment('Журнал документов', 'Выбранный элемент: ');
     // + (FFrame as TfmSpr).dbcbElement.Text);
     TApplicationController.GetInstance.AddLogEntry
@@ -1397,7 +1397,7 @@ begin
     // frmMain.HelpKeyword:='Студент';
     (dbNode as TDBNodeStudObject).LoadData;
     Frame := TfmStudent;
-    (FFrame as TfmStudent).OnDocumentStateChanged:=DocumentStateChanged;
+    (FFrame as TfmStudent).OnDocumentStateChanged := DocumentStateChanged;
     FFrame.Hint :=
       inttostr(TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.Parent.data).ik);
     FFrame.FrameObject := dbNode;
@@ -1726,28 +1726,30 @@ end;
 
 procedure TfrmMain.DocumentStateChanged(Sender: TObject);
 var
- sp_numdoc : TADODataSet;
- item : TTreeNode;
+  sp_numdoc: TADODataSet;
+  Item: TTreeNode;
 begin
-    sp_numdoc := TADODataSet.Create(nil);
-    try
+  sp_numdoc := TADODataSet.Create(nil);
+  try
     sp_numdoc.CommandText := 'select * from NumberOfDocuments(''' +
-    TDocController.Instance.CalculationBeginYearLern() + ''',''' + DateTimeToStr(date()) + ''')';
+      TDocController.Instance.CalculationBeginYearLern() + ''',''' +
+      DateTimeToStr(Date()) + ''')';
     sp_numdoc.Connection := dm.DBConnect;
     sp_numdoc.Open;
     sp_numdoc.First;
-    for item in DBDekTreeView_TEST1.Items do
+    for Item in DBDekTreeView_TEST1.Items do
     begin
-      if  (TObject(item.Data) is TDBNodeSprObject) then
+      if (TObject(Item.data) is TDBNodeSprObject) then
       begin
-        item.Text :=      ('Журнал документов'  + '('+sp_numdoc.FieldByName('NumApplication').AsString+'/ '+
-    sp_numdoc.FieldByName('NumСonsideration').AsString+')');
+        Item.Text := ('Журнал документов' + '(' + sp_numdoc.FieldByName
+          ('NumApplication').AsString + '/ ' + sp_numdoc.FieldByName
+          ('NumСonsideration').AsString + ')');
       end;
     end;
 
-    finally
-        sp_numdoc.Free;
-    end;
+  finally
+    sp_numdoc.Free;
+  end;
 end;
 
 procedure TfrmMain.actDeleteStudentExecute(Sender: TObject);
@@ -2934,7 +2936,7 @@ var
   week1, week2, numweek, k, h, i, sem, Year, ik_doc: Integer;
   mask1, mask2, dateb, l, depInd: string;
   sp_vidz: TADODataSet;
-  sp_info: TADOStoredProc;
+  sp_info, sp_find_callspr: TADOStoredProc;
   tempDS, tempDSchall, tempDSikdoc, tempDSsm: TADODataSet;
   LastNum: Integer;
   ListDist: TObjectList<TDest>;
@@ -2954,6 +2956,7 @@ begin
       id_grup.ToString());
     sp_info.Open;
     sp_info.First;
+
     datebegin := TDocController.Instance.CalculationBeginYearLern();
     depInd := TDocController.Instance.CalculationDepIndex
       (sp_info.FieldByName('Ik_grup').AsInteger);
@@ -2988,25 +2991,9 @@ begin
       begin
         LastNum := TDocController.Instance.CalculationLastNum
           (sp_info.FieldByName('Ik_grup').AsInteger, ik_destination);
-        with dmDocs.adodsStudGrup do
-          try
-            dm.DBConnect.BeginTrans;
-            tempDS.CommandText := 'Select * from Document ';
-            tempDS.Open;
-            tempDS.Insert;
-            tempDS.FieldByName('Ik_studGrup').Value :=
-              FieldByName('ik_studGrup').AsInteger;
-            if  FieldByName('StudAddr').AsString.Length<>0 then
-              tempDS.FieldByName('Ik_Transfer').Value := 2
-              else
-              tempDS.FieldByName('Ik_Transfer').Value := 1;
-            tempDS.FieldByName('Ik_destination').Value := ik_destination;
-            tempDS.FieldByName('DatePod').Value := Date;
-            tempDS.FieldByName('NumberDoc').Value := LastNum;
-            tempDS.FieldByName('DateCreate').Value := Date;
-            tempDS.FieldByName('Num_podrazd').Value := depInd;
-            tempDS.Post;
-            tempDS.UpdateBatch();
+
+
+
             k := 0;
             if (fReview.cbePrich.Text = 'Промежуточная аттестация') then
               k := 55;
@@ -3022,6 +3009,39 @@ begin
             sp_vidz.Connection := dm.DBConnect;
             sp_vidz.Open;
             sp_vidz.First;
+
+            sp_find_callspr := TADOStoredProc.Create(nil);
+            sp_find_callspr.ProcedureName := 'FindCallSprForGrup;1';
+            sp_find_callspr.Connection := dm.DBConnect;
+            sp_find_callspr.Parameters.CreateParameter('@ik_upContent',
+              ftString, pdInput, 50, sp_vidz.FieldByName('ik_upContent').AsString);
+            sp_find_callspr.Parameters.CreateParameter('@ik_studGrup', ftString,
+              pdInput, 50, dmDocs.adodsStudGrup.FieldByName('ik_studGrup').AsString);
+            sp_find_callspr.Parameters.CreateParameter('@Ik_destination',
+              ftString, pdInput, 50, ik_destination.ToString());
+            sp_find_callspr.Open;
+            sp_find_callspr.First;
+            if sp_find_callspr.FieldByName('Ik_Document').AsString.Length=0 then
+            begin
+            with dmDocs.adodsStudGrup do
+            try
+            dm.DBConnect.BeginTrans;
+            tempDS.CommandText := 'Select * from Document ';
+            tempDS.Open;
+            tempDS.Insert;
+            tempDS.FieldByName('Ik_studGrup').Value :=
+              FieldByName('ik_studGrup').AsInteger;
+            if FieldByName('StudAddr').AsString.Length <> 0 then
+              tempDS.FieldByName('Ik_Transfer').Value := 2
+            else
+              tempDS.FieldByName('Ik_Transfer').Value := 1;
+            tempDS.FieldByName('Ik_destination').Value := ik_destination;
+            tempDS.FieldByName('DatePod').Value := Date;
+            tempDS.FieldByName('NumberDoc').Value := LastNum;
+            tempDS.FieldByName('DateCreate').Value := Date;
+            tempDS.FieldByName('Num_podrazd').Value := depInd;
+            tempDS.Post;
+            tempDS.UpdateBatch();
 
             tempDSikdoc.CommandText :=
               'select MAX(Ik_Document)[maxid] from Document where Ik_studGrup='
@@ -3046,7 +3066,7 @@ begin
             ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
             tempDSchall.Post;
             tempDSchall.UpdateBatch();
-            if FieldByName('StudAddr').AsString.Length<>0 then
+            if FieldByName('StudAddr').AsString.Length <> 0 then
             begin
               tempDSsm.CommandText := 'Select * from Addressee_Doc';
               tempDSsm.Open;
@@ -3057,10 +3077,11 @@ begin
               dmDocs.adodsStudAddres.Open;
               dmDocs.adodsStudAddres.First;
               tempDSsm.FieldByName('ik_personAddress').Value :=
-                FieldByName('ik_persAddr').Value ;
-            tempDSsm.Post;
-            tempDSsm.UpdateBatch();
+                FieldByName('ik_persAddr').Value;
+              tempDSsm.Post;
+              tempDSsm.UpdateBatch();
             end;
+
 
             dm.DBConnect.CommitTrans;
             tempDS.Close;
@@ -3070,8 +3091,13 @@ begin
           except
             dm.DBConnect.RollbackTrans;
           end;
-        ListDist := TDocController.Instance.AddListDest(ListDist,
+                  ListDist := TDocController.Instance.AddListDest(ListDist,
           ik_destination, ik_doc);
+            end
+            else
+                    ListDist := TDocController.Instance.AddListDest(ListDist,
+          ik_destination, sp_find_callspr.FieldByName('Ik_Document').AsInteger);
+
         dmDocs.adodsStudGrup.Next;
       end;
       //
@@ -3087,6 +3113,7 @@ begin
     tempDSchall.Free;
     tempDSikdoc.Free;
     tempDSsm.Free;
+    sp_find_callspr.Free;
   end;
 
 end;
