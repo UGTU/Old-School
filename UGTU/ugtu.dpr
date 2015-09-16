@@ -414,10 +414,29 @@ uses
   SpravkaHistory2014 in 'Domain\Classes\SpravkaHistory2014.pas',
   Spravka2014 in 'Domain\Classes\Spravka2014.pas',
   SpravkaReport2014 in 'Domain\Classes\SpravkaReport2014.pas',
-  uChangePlanFromGrup in 'Presentation\Dialogs\uChangePlanFromGrup.pas' {frmChangeGrupPlan},
+  uMagaizneDoc in 'Presentation\Frames\uMagaizneDoc.pas' {fmDoc: TFrame},
+  uDMDocuments in 'Data\uDMDocuments.pas' {dmDocs: TDataModule},
+  uDocTr in 'Presentation\Frames\uDocTr.pas' {Frame2: TFrame},
+  uReviewDoc in 'Presentation\Forms\uReviewDoc.pas' {frmReviewDoc},
+  ReportSprVis in 'Domain\Reports\ReportSprVis.pas',
+  uReviewCallSpr in 'Presentation\Forms\uReviewCallSpr.pas' {fm—hallengeSpr},
+  uCallSpr in 'Domain\Reports\uCallSpr.pas',
+  uReviewAkadem in 'Presentation\Forms\uReviewAkadem.pas' {frmReviewAkadem},
+  uReviewApplication in 'Presentation\Forms\uReviewApplication.pas' {frmReviewApplication},
+  uApplicationSpr in 'Domain\Reports\uApplicationSpr.pas',
+  uAkademSpr in 'Domain\Reports\uAkademSpr.pas',
+  uReviewNotify in 'Presentation\Forms\uReviewNotify.pas' {frmReviewNeusp},
+  uDebtSpr in 'Domain\Reports\uDebtSpr.pas',
+  uNotification in 'Domain\Reports\uNotification.pas',
+  uExtractSpr in 'Domain\Reports\uExtractSpr.pas',
+  Document in 'Domain\Classes\Document.pas',
+  Destination in 'Domain\Classes\Destination.pas',
+  uSprForGroup in 'Presentation\Forms\uSprForGroup.pas' {fmSprForGroup},
+  uDocController in 'Domain\Controllers\uDocController.pas',
+  uPrintMagazine in 'Domain\Reports\uPrintMagazine.pas',
   DocumentClass in 'Domain\Classes\DocumentClass.pas',
-  PersonController in 'Domain\Controllers\PersonController.pas',
-  uAbitZach in 'Presentation\Dialogs\uAbitZach.pas' {frmAbitZachDialog};
+  uAbitZach in 'Presentation\Dialogs\uAbitZach.pas' {frmAbitZachDialog},
+  PersonController in 'Domain\Controllers\PersonController.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -463,8 +482,13 @@ begin
   Application.CreateForm(TftmStudent, ftmStudent);
   Application.CreateForm(TdmHOST, dmHOST);
   Application.CreateForm(TImageFullSizeShowForm, ImageFullSizeShowForm);
-  Application.CreateForm(TfrmChangeGrupPlan, frmChangeGrupPlan);
-  Application.CreateForm(TfrmChangeGrupPlan, frmChangeGrupPlan);
+  Application.CreateForm(TdmDocs, dmDocs);
+  Application.CreateForm(TfrmReviewDoc, frmReviewDoc);
+  Application.CreateForm(Tfm—hallengeSpr, fm—hallengeSpr);
+  Application.CreateForm(TfrmReviewAkadem, frmReviewAkadem);
+  Application.CreateForm(TfrmReviewApplication, frmReviewApplication);
+  Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
+  Application.CreateForm(TfmSprForGroup, fmSprForGroup);
   Application.CreateForm(TfrmAbitZachDialog, frmAbitZachDialog);
   Application.Run;
 end.

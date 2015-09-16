@@ -90,8 +90,8 @@
         <VerInfo_Release>1</VerInfo_Release>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.597;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>597</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.533;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>533</VerInfo_Build>
         <DCC_UnitSearchPath>Domain\DBTV;Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5;Domain\Graphics32\Packages</DCC_UnitSearchPath>
     </PropertyGroup>
     <ProjectExtensions>
@@ -1044,16 +1044,62 @@
         <DCCReference Include="Domain\Classes\SpravkaHistory2014.pas"/>
         <DCCReference Include="Domain\Classes\Spravka2014.pas"/>
         <DCCReference Include="Domain\Classes\SpravkaReport2014.pas"/>
-        <DCCReference Include="Presentation\Dialogs\uChangePlanFromGrup.pas">
-            <Form>frmChangeGrupPlan</Form>
+        <DCCReference Include="Presentation\Frames\uMagaizneDoc.pas">
+            <Form>fmDoc</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Data\uDMDocuments.pas">
+            <Form>dmDocs</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Presentation\Frames\uDocTr.pas">
+            <Form>Frame2</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Presentation\Forms\uReviewDoc.pas">
+            <Form>frmReviewDoc</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Domain\Reports\ReportSprVis.pas"/>
+        <DCCReference Include="Presentation\Forms\uReviewCallSpr.pas">
+            <Form>fmСhallengeSpr</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Domain\Reports\uCallSpr.pas"/>
+        <DCCReference Include="Presentation\Forms\uReviewAkadem.pas">
+            <Form>frmReviewAkadem</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Presentation\Forms\uReviewApplication.pas">
+            <Form>frmReviewApplication</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Domain\Reports\uApplicationSpr.pas"/>
+        <DCCReference Include="Domain\Reports\uAkademSpr.pas"/>
+        <DCCReference Include="Presentation\Forms\uReviewNotify.pas">
+            <Form>frmReviewNeusp</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Domain\Reports\uDebtSpr.pas"/>
+        <DCCReference Include="Domain\Reports\uNotification.pas"/>
+        <DCCReference Include="Domain\Reports\uExtractSpr.pas"/>
+        <DCCReference Include="Domain\Classes\Document.pas"/>
+        <DCCReference Include="Domain\Classes\Destination.pas"/>
+        <DCCReference Include="Presentation\Forms\uSprForGroup.pas">
+            <Form>fmSprForGroup</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Domain\Controllers\uDocController.pas"/>
+        <DCCReference Include="Domain\Reports\uPrintMagazine.pas"/>
         <DCCReference Include="Domain\Classes\DocumentClass.pas"/>
-        <DCCReference Include="Domain\Controllers\PersonController.pas"/>
         <DCCReference Include="Presentation\Dialogs\uAbitZach.pas">
             <Form>frmAbitZachDialog</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Domain\Controllers\PersonController.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

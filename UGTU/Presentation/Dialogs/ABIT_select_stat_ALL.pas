@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uBaseDialog, StdCtrls, DBCtrlsEh, ActnList, Buttons, ExtCtrls;
+  Dialogs, uBaseDialog, StdCtrls, DBCtrlsEh, ActnList, Buttons, ExtCtrls,
+  System.Actions;
 
 type
   TfrmBaseDialog1 = class(TfrmBaseDialog)

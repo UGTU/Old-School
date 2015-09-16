@@ -345,7 +345,7 @@ uses
   //getSpecFromSpecFac возвращает IK специальности
   function getSpecFromSpecFac(SpecFacIK: integer): Integer;
   //экспорт справок
-  function BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
+
 
 end;
 
@@ -1393,26 +1393,7 @@ begin
   else
     result:=false;
 end;
- function TUspevGroupController.BuildSpravka2014(_ikStudGrup, _type_spr: integer):TReportBase;
-   var report:TSpravka_Report;
-   result_report:TSpravka;
-  FindRange: Variant;
- begin
-   report:= TSpravka_Report.Create(_ikStudGrup, _type_spr);
-   result_report:=report.AddReport();
-   Result := SpravkaReport.Create(result_report);
 
-      if (_type_spr=1) then
-          begin
-          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\SprvPens.xlt';
-          end
-      else
-          begin
-          Result.ReportTemplate:=ExtractFilePath(Application.ExeName)+'reports\Sprv.xlt';
-          end;
-
-  report.Free;
- end;
 
 function TUspevGroupController.BuildVedomost2014(ikGrup, nSem, ikVed, ikFac,
   ikSpec: integer; tempStoredProc: TADOStoredProc): TReportBase;

@@ -575,6 +575,7 @@ begin
   Label30.Visible := False;
   dbcbeSocWork.Visible := False;
   cbInvalid.Visible := False;
+  tbMagazine.Visible:=false;
 end;
 
 end.

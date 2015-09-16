@@ -1,7 +1,8 @@
 
-select * from Person where Clastname like 'Шигапов'
+select * from Person where Clastname like 'Косарев' and [Cfirstname] like 'Борис' and [Cotch] like 'Владимирович'
 
-select ABIT_postup.NN_abit,Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, EducationBranch.Cname_spec, EducationBranch.ik_direction,
+select ABIT_postup.NN_abit,Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, 
+EducationBranch.Cname_spec, EducationBranch.ik_direction,
 ABIT_postup.ik_zach, ABIT_postup.ik_kat_zach, Relation_spec_fac.Ik_form_ed,
 ABIT_Diapazon_spec_fac.ik_spec_fac, ABIT_postup.ik_prikaz_zach
 from Person inner join ABIT_postup on ABIT_postup.nCode = Person.nCode

@@ -238,3 +238,4 @@ pip-log.txt
 /UGTU/Utils/*.dcu
 /UGTU/ugtu.exe
 /UGTU/ugtu.res
+/UGTU/ugtu.dproj.local
