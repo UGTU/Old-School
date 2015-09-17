@@ -299,18 +299,21 @@ inherited fmDoc: TfmDoc
         object tbUtv: TToolButton
           Left = 0
           Top = 0
+          Hint = #1053#1072' '#1088#1072#1089#1089#1084#1086#1090#1088#1077#1085#1080#1080
           ImageIndex = 14
           OnClick = tbUtvClick
         end
         object tbGot: TToolButton
           Left = 23
           Top = 0
+          Hint = #1043#1086#1090#1086#1074#1086
           ImageIndex = 8
           OnClick = tbGotClick
         end
         object tbPrint: TToolButton
           Left = 46
           Top = 0
+          Hint = #1055#1077#1095#1072#1090#1100
           DropdownMenu = ppmPrint
           ImageIndex = 9
           ParentShowHint = False
@@ -380,7 +383,7 @@ inherited fmDoc: TfmDoc
     Left = 446
     Top = 224
     Bitmap = {
-      494C010111004000E00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000E40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
