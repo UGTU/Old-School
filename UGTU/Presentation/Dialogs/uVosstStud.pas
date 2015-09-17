@@ -73,7 +73,6 @@ begin
  dmUgtuStructure.adodsGroups.Active:=false;
  if dbcbeFac.KeyValue<>NULL then begin
  dmUgtuStructure.adodsSpec.CommandText:='select Ik_fac, ik_spec_fac, Cname_spec+ISNULL('' (''+[Sh_spec]+'')'','' '') Cname_spec from Tree_specialties where Ik_fac='''+string(dbcbeFac.KeyValue)+'''';
- ShowMessage(dmUgtuStructure.adodsSpec.CommandText);
  dmUgtuStructure.adodsSpec.Active:=true;
   dmUgtuStructure.adodsSpec.Sort := 'CName_spec';
 end;
