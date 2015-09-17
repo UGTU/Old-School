@@ -236,10 +236,10 @@
     <File Path="Domain\Reports\ReportDataSet.pas"/>
     <File Path="Domain\Reports\ReportsBase.pas"/>
     <File Path="Domain\Reports\ReportsBpl.pas"/>
+    <File Path="Domain\Reports\ReportSprVis.pas"/>
     <File Path="Domain\Reports\ReportUI.pas"/>
     <File Path="Domain\Reports\RptColEd.pas"/>
     <File Path="Domain\Reports\Spravka.pas"/>
-    <File Path="Domain\Reports\ReportSprVis.pas"/>
     <File Path="Domain\Reports\uAkademSpr.pas"/>
     <File Path="Domain\Reports\uApplicationSpr.pas"/>
     <File Path="Domain\Reports\uCallSpr.pas"/>
@@ -291,6 +291,8 @@
     <File Path="Presentation\dialogs\uAbitMove.dfm"/>
     <File Path="Presentation\Dialogs\uAbitReturn.pas"/>
     <File Path="Presentation\Dialogs\uAbitReturn.dfm"/>
+    <File Path="Presentation\Dialogs\uAbitZach.pas"/>
+    <File Path="Presentation\Dialogs\uAbitZach.dfm"/>
     <File Path="Presentation\dialogs\uAcadem.pas"/>
     <File Path="Presentation\dialogs\uAcadem.dfm"/>
     <File Path="Presentation\dialogs\uAcademReturn.pas"/>
@@ -502,8 +504,6 @@
     <File Path="Presentation\dialogs\uVinEkz.dfm"/>
     <File Path="Presentation\dialogs\uVosstStud.pas"/>
     <File Path="Presentation\dialogs\uVosstStud.dfm"/>
-    <File Path="Presentation\Dialogs\uAbitZach.pas"/>
-    <File Path="Presentation\Dialogs\uAbitZach.dfm"/>
     <File Path="Presentation\Forms"/>
     <File Path="Presentation\Forms\ABIT_panel.pas"/>
     <File Path="Presentation\Forms\ABIT_panel.dfm"/>
@@ -664,21 +664,21 @@
     <File Path="Utils\uPhotoBooth.pas"/>
   </ProjectSortOrder>
 	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.011,E:\Projects\GitHub\Old-School\UGTU\Presentation\Dialogs\uAbitZach.dfm=E:\Projects\GitHub\Old-School\UGTU\Unit4.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.257,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.422,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.076,E:\GitHub\Old-School\UGTU\Domain\Classes\Spravka2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.489,E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas=</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.394,E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.366,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaReport2014.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.035,=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.076,E:\GitHub\Old-School\UGTU\Unit1.pas=E:\GitHub\Old-School\UGTU\Domain\Classes\Spravka2014.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.011,E:\Projects\GitHub\Old-School\UGTU\Unit4.pas=E:\Projects\GitHub\Old-School\UGTU\Presentation\Dialogs\uAbitZach.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.472,E:\Projects\GitHub\Old-School\UGTU\Unit1.pas=E:\Projects\GitHub\Old-School\UGTU\Domain\Classes\DocumentClass.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.312,E:\Projects\GitHub\Old-School\UGTU\Domain\Controllers\PersonController.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.781,=E:\Projects\GitHub\Old-School\UGTU\Unit4.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.366,E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaReport2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.472,E:\Projects\GitHub\Old-School\UGTU\Domain\Classes\DocumentClass.pas=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.935,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.011,E:\Projects\GitHub\Old-School\UGTU\Unit4.dfm=E:\Projects\GitHub\Old-School\UGTU\Presentation\Dialogs\uAbitZach.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.469,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.394,E:\Projects\GitHub\Old-School\UGTU\Unit1.pas=E:\Projects\GitHub\Old-School\UGTU\Domain\Common\NullCheck.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.312,E:\Projects\GitHub\Old-School\UGTU\Unit1.pas=E:\Projects\GitHub\Old-School\UGTU\Domain\Controllers\PersonController.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.011,E:\Projects\GitHub\Old-School\UGTU\Presentation\Dialogs\uAbitZach.pas=E:\Projects\GitHub\Old-School\UGTU\Unit4.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.781,=E:\Projects\GitHub\Old-School\UGTU\Unit4.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.816,=E:\Projects\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.026,E:\GitHub\Old-School\UGTU\Domain\Classes\SpravkaHistory2014.pas=E:\GitHub\Old-School\UGTU\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

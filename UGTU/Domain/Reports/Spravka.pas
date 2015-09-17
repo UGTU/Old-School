@@ -55,7 +55,7 @@ begin
   for j := 0 to FReport.Count - 1 do
   begin
     ActivateWorksheet(j + 1);
-    ActiveSheet.Name := '¹ '+ FReport[j].NumSpr.ToString()+' '+ FReport[j].FIO;
+   // ActiveSheet.Name := '¹ '+ FReport[j].NumSpr.ToString()+' '+ FReport[j].FIO;
     str := GetKursP(FReport[j].kurs);
 
     Replace('#kurs#', str);
