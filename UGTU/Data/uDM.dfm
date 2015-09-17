@@ -5,13 +5,12 @@ object dm: Tdm
   Width = 1149
   object DBConnect: TADOConnection
     CommandTimeout = 300
-    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
       'fo=False;User ID=developer;Initial Catalog=UGTU_ACTTEST;Data Sou' +
       'rce=ugtudb.ugtu.net;Use Procedure for Prepare=1;Auto Translate=T' +
       'rue;Packet Size=4096;Workstation ID=LAB-6;Use Encryption for Dat' +
-      'a=False;Tag with column collation when possible=False'
+      'a=False;Tag with column collation when possible=False;'
     IsolationLevel = ilReadUncommitted
     LoginPrompt = False
     Provider = 'SQLOLEDB.1'

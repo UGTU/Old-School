@@ -1132,41 +1132,6 @@ object dmAbiturientAction: TdmAbiturientAction
     Left = 361
     Top = 21
   end
-  object aspDoubles: TADOStoredProc
-    Connection = dm.DBConnect
-    ProcedureName = 'DoublesCount;0'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-        Value = Null
-      end
-      item
-        Name = '@Name'
-        Attributes = [paNullable]
-        DataType = ftString
-        Size = 50
-        Value = Null
-      end
-      item
-        Name = '@LastName'
-        Attributes = [paNullable]
-        DataType = ftString
-        Size = 50
-        Value = Null
-      end
-      item
-        Name = '@Birthdate'
-        Attributes = [paNullable]
-        DataType = ftDateTime
-        Value = Null
-      end>
-    Left = 355
-    Top = 149
-  end
   object aspAddExamByName: TADOStoredProc
     Connection = dm.DBConnect
     ProcedureName = 'ABIT_add_vstup_examByName;1'
@@ -1215,5 +1180,42 @@ object dmAbiturientAction: TdmAbiturientAction
       end>
     Left = 358
     Top = 210
+  end
+  object aspDoubles: TADODataSet
+    Connection = dm.DBConnect
+    CommandText = 'select dbo.DoublesCount'
+    Parameters = <
+      item
+        Name = '@Name'
+        Attributes = [paNullable]
+        DataType = ftString
+        Value = Null
+      end
+      item
+        Name = '@LastName'
+        Attributes = [paNullable]
+        DataType = ftString
+        Value = Null
+      end
+      item
+        Name = '@Birthdate'
+        Attributes = [paNullable]
+        DataType = ftString
+        Value = Null
+      end
+      item
+        Name = '@year'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@Result'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Value = Null
+      end>
+    Left = 352
+    Top = 288
   end
 end
