@@ -154,7 +154,24 @@ begin
 end;
 
 procedure TfrmAbitCardDialog.actOKExecute(Sender: TObject);
+var doubles:integer;
+    tempDS: TADODataSet;
 begin
+
+  if PageControl2.ActivePageIndex = 0 then
+  begin
+    tempDS := TADODataSet.Create(Owner);
+    tempDS.Connection:= dm.DBConnect;
+
+    tempDS.CommandText := 'select dbo.DoublesCount('+''''+eName.Text+''''+','+
+      ''''+eFam.Text+''''+','+''''+dbdteBirthDate.Text+''''+','+YearOf(Now).ToString+') as Result';
+    tempDS.Open;
+    doubles:=tempDS.Fields.FieldByName('Result').AsInteger;
+    if doubles>0 then showmessage('Внимание! В этом году уже поступал человек с таким именем, фамилией и датой рождения!');
+    tempDS.Close;
+    tempDS.Free;
+  end;
+
   if PageControl2.ActivePageIndex<PageControl2.PageCount-1 then
     PageControl2.SelectNextPage(True, False)
   else actApplyExecute(Sender);
@@ -478,24 +495,8 @@ if fupmoving then dbcbeSchoolDist.KeyValue:=dmAdress.adodsSchoolRaion.FieldByNam
 end;
 
 procedure TfrmAbitCardDialog.dbdteBirthDateExit(Sender: TObject);
-var doubles:integer;
 begin
   CheckFields;
-{if (eFam.Text<>'') and (eName.Text<>'') and (dbdteBirthDate.Text<>'  .  .    ') then
-
-  with dmAbiturientAction.aspdoubles do
-  begin
-    Active:=false;
-    Parameters[1].Value:=eName.Text;
-    Parameters[2].Value:=eFam.Text;
-    Parameters[3].Value:=dbdteBirthDate.Value;
-
-    Active:=true;
-    doubles:=Fields[0].Value;
-  end;
-
-  if doubles>0 then showmessage('Внимание! В базе системы уже присутствует человек с таким именем, фамилией и датой рождения!');
- }
 end;
 
 procedure TfrmAbitCardDialog.eBirthPlaceKeyUp(Sender: TObject; var Key: Word;

@@ -515,6 +515,7 @@ begin
   try
     //ПОЛУЧАЕМ ДАННЫЕ НАБОРА ДЛЯ КОНКРЕТНОГО ГОДА
     fac_spec.Show;
+
     LoadMainList; //грузим основной список
   except
     on E:Exception do

@@ -12,7 +12,7 @@ type
   private
     FFIO, Fpodgot, Fspec, Fdir_inst,Ff_obuch,Finstut,Fphone,Fspecshort,
     FNow_day,FNow_month,FNow_year,Fbirth,Fdep_ind,Fyear_otch,Fyear_post: string;
-    Fkurs,Ftype_spr: integer;
+    Fkurs,Ftype_spr,FNumSpr: integer;
 
     FHistory: TObjectList<TSpravkaHistory>;
 
@@ -34,12 +34,14 @@ type
     property Now_year: string read FNow_year;
     property dep_ind: string read Fdep_ind;
     property type_spr: integer read Ftype_spr;
+    property NumSpr: integer read FNumSpr;
 
 
   protected
   public
     constructor Create(_FIO, _podgot, _spec,_specshort, _dir_inst,_f_obuch,_instut, _phone: string;
-  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind: string);
+  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind: string;
+  _NumSpr:integer);
 
     destructor Destroy;override;
     property Historyes: TObjectList<TSpravkaHistory> read FHistory;
@@ -47,7 +49,8 @@ type
 implementation
 
 constructor TSpravka.Create(_FIO, _podgot, _spec,_specshort, _dir_inst,_f_obuch,_instut, _phone: string;
-  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind: string);
+  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind: string;
+  _NumSpr:integer);
 begin
 
   FFIO := _FIO;
@@ -68,6 +71,7 @@ begin
   Ftype_spr:=_type_spr ;
   Fbirth:=_birth;
   Fdep_ind:=_dep_ind;
+  FNumSpr:=_NumSpr;
   FHistory := TObjectList<TSpravkaHistory>.Create;
 
 end;

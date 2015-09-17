@@ -54,6 +54,7 @@ object frmMain: TfrmMain
     Top = 0
     Width = 931
     Height = 27
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -61,7 +62,7 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
+    Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -338,6 +339,7 @@ object frmMain: TfrmMain
           OnChange = DBDekTreeView_TEST1Change
           OnClick = DBDekTreeView_TEST1Click
           OnCollapsing = DBDekTreeView_TEST1Collapsing
+          OnContextPopup = DBDekTreeView_TEST1ContextPopup
           OnDblClick = DBDekTreeView_TEST1DblClick
           OnExpanding = DBDekTreeView_TEST1Expanding
           OnMouseDown = DBDekTreeView_TEST1MouseDown
@@ -515,8 +517,8 @@ object frmMain: TfrmMain
     Images = ImageList1
     OnExecute = alMainActionsExecute
     OnUpdate = alMainActionsUpdate
-    Left = 311
-    Top = 142
+    Left = 407
+    Top = 150
     object actFamChg: TAction
       Category = 'catStudActs'
       Caption = #1057#1084#1077#1085#1080#1090#1100' '#1092#1072#1084#1080#1083#1080#1102'...'
@@ -792,12 +794,6 @@ object frmMain: TfrmMain
       ImageIndex = 68
       OnExecute = actLevelUpExecute
     end
-    object actChangePlanFromOtherGroup: TAction
-      Category = 'catGroupAct'
-      Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1091#1095'. '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091
-      ImageIndex = 19
-      OnExecute = actChangePlanFromOtherGroupExecute
-    end
     object actAddDepPlan: TAction
       Category = 'catNagruzkaDep'
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1087#1083#1072#1085' '#1091#1095#1077#1073#1085#1086#1081' '#1085#1072#1075#1088#1091#1079#1082#1080'...'
@@ -1021,12 +1017,25 @@ object frmMain: TfrmMain
       ImageIndex = 36
       OnExecute = actPostupDeleteExecute
     end
+    object actCallSpr: TAction
+      Category = 'catGroupAct'
+      Caption = #1057#1087#1088#1072#1074#1082#1080'-'#1074#1099#1079#1086#1074' '#1085#1072' '#1075#1088#1091#1087#1087#1091
+      ImageIndex = 43
+      OnExecute = actCallSprExecute
+      OnUpdate = actCallSprUpdate
+    end
+    object actNotification: TAction
+      Category = 'catGroupAct'
+      Caption = #1055#1080#1089#1100#1084#1072'-'#1091#1074#1077#1076#1086#1084#1083#1077#1085#1080#1103' '#1085#1072' '#1075#1088#1091#1087#1087#1091
+      ImageIndex = 49
+      OnExecute = actNotificationExecute
+    end
   end
   object ImageList1: TImageList
-    Left = 311
+    Left = 319
     Top = 82
     Bitmap = {
-      494C01014A006800B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014A006800DC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3545,7 +3554,7 @@ object frmMain: TfrmMain
     Left = 262
     Top = 82
     Bitmap = {
-      494C010131004900B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010131004900DC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF
@@ -5582,8 +5591,8 @@ object frmMain: TfrmMain
       item
       end>
     Images = ImageList1
-    Left = 345
-    Top = 82
+    Left = 329
+    Top = 154
     StyleName = 'XP Style'
     object actFilleMenu: TAction
       Category = 'catMainMenu'
@@ -5878,7 +5887,7 @@ object frmMain: TfrmMain
     end
   end
   object ppmDepNagr: TPopupMenu
-    Left = 448
+    Left = 480
     Top = 60
     object N91: TMenuItem
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100'...'
@@ -5899,8 +5908,8 @@ object frmMain: TfrmMain
     end
   end
   object ppmPrepNagr: TPopupMenu
-    Left = 479
-    Top = 60
+    Left = 519
+    Top = 68
     object N88: TMenuItem
       Action = actEditPrep
     end
