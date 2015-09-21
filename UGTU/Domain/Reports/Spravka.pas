@@ -104,18 +104,19 @@ begin
           if FReport[j].Historyes[num].ikTypePric = 4 then
           begin
             datebegin := FReport[j].Historyes[num].datevih;
-            posit := Pos('-', datebegin);
+            posit := Pos('.', datebegin);
             dop := Copy(datebegin, posit + 1, 2);
             str := GetMonthR(StrToInt(Copy(datebegin, posit + 1, 2)));
-            copystr1 := Copy(datebegin, 9, 10) + ' ' + str + ' ' +
-              Copy(datebegin, 0, 4);
+            copystr1 := Copy(datebegin, 0, posit-1) + ' ' + str + ' ' +
+              Copy(datebegin, 7, 10);
 
             dateend := FReport[j].Historyes[num].datevh;
-            posit := Pos('-', datebegin);
+            posit := Pos('.', dateend);
             str := GetMonthR(StrToInt(Copy(dateend, posit + 1, 2)));
-            copystr2 := Copy(datebegin, 9, 10) + ' ' + str + ' ' +
-              Copy(datebegin, 0, 4);
+            copystr2 := Copy(dateend, 0, posit-1) + ' ' + str + ' ' +
+              Copy(dateend, 7, 10);
             Items[I, 7] := copystr1 + ' - ' + copystr2;
+
 
           end
           else

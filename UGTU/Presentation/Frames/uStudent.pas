@@ -1030,7 +1030,7 @@ end;
 
 procedure TfmStudent.tbGotClick(Sender: TObject);
 var
-  i: Integer;
+  i,k: Integer;
 begin
   // for i:=0 to dbgehMagazineDocs.SelCount-1 do begin;
   // dbgehMagazineDocs.DataSource.DataSet.Bookmark:=dbgehMagazineDocs.SelectedRows[i];
@@ -1043,10 +1043,13 @@ begin
     First;
     DisableControls;
     try
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+//        begin
+      For k := 0 to dbgehMagazineDocsStud.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
-        begin
+       dbgehMagazineDocsStud.Datasource.Dataset.Bookmark:= dbgehMagazineDocsStud.SelectedRows.Items[k];
           if (uDMDocuments.dmDocs.adodsDocStud.FieldByName('DateReady')
             .Value = null) and
             (uDMDocuments.dmDocs.adodsDocStud.FieldByName('DateCreate').Value <>
@@ -1058,8 +1061,8 @@ begin
             dbgehMagazineDocsStud.DataSource.DataSet.Post;
           end;
         end;
-        Next;
-      end;
+//        Next;
+//      end;
       DocumentChanged;
     finally
       EnableControls;
@@ -1078,7 +1081,7 @@ var
 
   sp_pers: TADOStoredProc;
   sp_doc: TADOStoredProc;
-  i, ind: Integer;
+  i,k, ind: Integer;
   mass_doc: array [1 .. n] of Integer;
   ListDist: TObjectList<TDest>;
   dest: TDest;
@@ -1097,11 +1100,14 @@ begin
     // // begin
     with dbgehMagazineDocsStud.DataSource.DataSet do
     begin
-      First;
+//      First;
       // DisableControls;
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+      For k := 0 to dbgehMagazineDocsStud.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+       dbgehMagazineDocsStud.Datasource.Dataset.Bookmark:= dbgehMagazineDocsStud.SelectedRows.Items[k];
           if uDMDocuments.dmDocs.adodsDocStud.FieldByName('DateCreate')
             .AsString.Length <> 0 then
           begin
@@ -1112,7 +1118,7 @@ begin
               .AsInteger);
 
           end;
-        Next;
+       // Next;
       end;
     end;
 
@@ -1128,7 +1134,7 @@ end;
 
 procedure TfmStudent.tbUtvClick(Sender: TObject);
 var
-  i, LastNum: Integer;
+  i,k, LastNum: Integer;
   datebegin: string;
   AYear, AMonth, ADay: word;
   sp_num: TADODataSet;
@@ -1140,10 +1146,13 @@ begin
     First;
     DisableControls;
     try
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+//        begin
+      For k := 0 to dbgehMagazineDocsStud.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
-        begin
+       dbgehMagazineDocsStud.Datasource.Dataset.Bookmark:= dbgehMagazineDocsStud.SelectedRows.Items[k];
           if (uDMDocuments.dmDocs.adodsDocStud.FieldByName('NumberDoc')
             .AsString = '') then
           begin
@@ -1186,12 +1195,12 @@ begin
           end;
         end;
 
-        Next;
-      end;
+//        Next;
+//      end;
       DocumentChanged;
     finally
       EnableControls;
-
+     sp_num.Free;
     end;
   end;
 end;
