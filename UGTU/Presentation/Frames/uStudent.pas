@@ -3331,7 +3331,7 @@ var
   week1, week2, numweek, k, h, i, sem, year, ik_doc: Integer;
   mask1, mask2, dateb, l, depInd: string;
   sp_vidz: TADODataSet;
-  sp_info, sp_sem: TADOStoredProc;
+  sp_info, sp_sem,sp_find_callspr: TADOStoredProc;
 
   tempDS, tempDSchall, tempDSikdoc, tempDSsm: TADODataSet;
   Report: TReportBase;
@@ -3450,6 +3450,38 @@ begin
       try
         // // добавляем справку
 
+        k := 0;
+        if (fReview.cbeReason.Text = 'Промежуточная аттестация') then
+          k := 55;
+        if (fReview.cbeReason.Text = 'Государственный экзамен') then
+          k := 56;
+        if (fReview.cbeReason.Text = 'Выпускная работа') then
+          k := 31;
+
+        sp_vidz := TADODataSet.Create(nil);
+        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup='
+          + ik_grup.ToString() + 'and n_sem=' + sem.ToString() +
+          ' and iK_vid_zanyat=' + k.ToString();
+        // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
+        sp_vidz.Connection := dm.DBConnect;
+        sp_vidz.Open;
+        sp_vidz.First;
+
+        sp_find_callspr := TADOStoredProc.Create(nil);
+            sp_find_callspr.ProcedureName := 'FindCallSprForGrup;1';
+            sp_find_callspr.Connection := dm.DBConnect;
+            sp_find_callspr.Parameters.CreateParameter('@ik_upContent',
+              ftString, pdInput, 50, sp_vidz.FieldByName('ik_upContent').AsString);
+            sp_find_callspr.Parameters.CreateParameter('@ik_studGrup', ftString,
+              pdInput, 50, ik_studGrup.ToString());
+            sp_find_callspr.Parameters.CreateParameter('@Ik_destination',
+              ftString, pdInput, 50, ik_destination.ToString());
+            sp_find_callspr.Open;
+            sp_find_callspr.First;
+            if sp_find_callspr.FieldByName('Ik_Document').AsString.Length=0 then
+            begin
+
+
         tempDS.CommandText := 'Select * from Document ';
         tempDS.Open;
         tempDS.Insert;
@@ -3469,22 +3501,6 @@ begin
         // end;
         // ik_doc:= 'SELECT LAST_INSERT_ID() FROM Document' ;
 
-        k := 0;
-        if (fReview.cbeReason.Text = 'Промежуточная аттестация') then
-          k := 55;
-        if (fReview.cbeReason.Text = 'Государственный экзамен') then
-          k := 56;
-        if (fReview.cbeReason.Text = 'Выпускная работа') then
-          k := 31;
-
-        sp_vidz := TADODataSet.Create(nil);
-        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup='
-          + ik_grup.ToString() + 'and n_sem=' + sem.ToString() +
-          ' and iK_vid_zanyat=' + k.ToString();
-        // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
-        sp_vidz.Connection := dm.DBConnect;
-        sp_vidz.Open;
-        sp_vidz.First;
 
         tempDSikdoc.CommandText :=
           'select MAX(Ik_Document)[maxid] from Document where Ik_studGrup=' +
@@ -3537,6 +3553,9 @@ begin
           tempDSsm.Post;
           tempDSsm.UpdateBatch();
         end;
+            end
+            else
+            ik_doc:=sp_find_callspr.FieldByName('Ik_Document').AsInteger;
         dm.DBConnect.CommitTrans;
       except
         dm.DBConnect.RollbackTrans;
@@ -3562,6 +3581,7 @@ begin
     tempDS.Free;
     tempDSchall.Free;
     tempDSikdoc.Free;
+    sp_find_callspr.Free;
     sp_sem.Free;
     // sp_depInd.Free;
     dsDoc.Free;
