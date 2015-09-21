@@ -14,7 +14,8 @@ select Cname_fac[Факультет],Cshort_spec[Специальность],CType_kat, Form_ed.Cname_
 	inner join dbo.Direction on Direction.ik_direction=ss.ik_direction
 	LEFT join dbo.Lang_stud ls on ls.nCode=p.nCode
 	left join dbo.Lang l on l.Ik_lang=ls.Ik_lang 
-	where adsf.NNyear=2015 
+	where adsf.NNyear=YEAR(GETDATE()) 
 	  and ap.ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach=2)	--зачислен
+	  and rsf.Ik_form_ed=2
 	 -- and f.Ik_fac = 6   --ФБО
 	order by Form_ed.Cname_form_ed,Cshort_name_fac,Cshort_spec, Direction.cName_direction, Cname_lang,fio

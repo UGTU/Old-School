@@ -1,35 +1,12 @@
 select distinct
-       Cshort_name_fac,
-	   Cname_spec, ISNULL(Prikaz.Nn_prikaz +' от '+FORMAT(cast(Prikaz.Dd_prikaz as DATE), 'd', 'de-de' ),'') NumDoc,
+	   Cname_form_ed,
 	   Clastname,
 	   Cfirstname,
 	   Cotch,
-	   iif(len(Cd_seria)=4,substring(Cd_seria, 1, 2) + ' ' + substring(Cd_seria, 3, 2), Cd_seria) Cd_seria,
-	   Np_number,
-	   FORMAT(cast(Dd_vidan as DATE), 'd', 'de-de' ) Dd_vidan, 
-	   Cd_kem_vidan,
-	   '' code_otdel,
-	   c_grazd,
-	   resident,
-	   Dd_birth, 
-	   Cplacebirth,
-	   iif(lSex = 0,'Ж','М') lSex,
-	   '' Pr_index,
-	   isnull(pr.Cstrana,vrem.Cstrana) Cstrana,
-	   '' code_strana,
-	   isnull(pr.Cregion,vrem.Cregion) Cregion,
-	   '' type_region,
-	   isnull(pr.Craion,vrem.Craion) Craion,
-	   '' type_raion,
-	   isnull(pr.Cgorod,vrem.Cgorod) Cgorod,
-	   '' type_gorod,
-	   '' CPunkt,
-	   '' type_punkt,
-	   isnull(pr.CStreet,vrem.CStreet) CStreet,
-	   '' type_street,
-	   isnull(iif(pr.b_i>0,substring(pr.BuildingNumber,1,pr.b_i - 1),pr.BuildingNumber),iif(vrem.b_i>0,substring(vrem.BuildingNumber,1,vrem.b_i - 1),vrem.BuildingNumber)) dom,
-	   isnull(pr.FlatNumber,vrem.FlatNumber) FlatNumber,
-	   isnull(iif(pr.b_i>0,substring(pr.BuildingNumber,pr.b_i,1),pr.StructNumber),iif(vrem.b_i>0,substring(vrem.BuildingNumber,vrem.b_i,1),vrem.StructNumber)) korpus
+	   YEAR(Dd_birth) , 
+	   ISNULL(isnull(pr.Cstrana,vrem.Cstrana) +', '+isnull(pr.Cregion,vrem.Cregion) +', '+isnull(pr.Craion,vrem.Craion) +', '
+	   +isnull(pr.Cgorod,vrem.Cgorod) +', '+isnull(pr.CStreet,vrem.CStreet) +', '+isnull(iif(pr.b_i>0,substring(pr.BuildingNumber,1,pr.b_i - 1),pr.BuildingNumber),iif(vrem.b_i>0,substring(vrem.BuildingNumber,1,vrem.b_i - 1),vrem.BuildingNumber)) +', '+
+	   isnull(pr.FlatNumber,vrem.FlatNumber)+', '+isnull(iif(pr.b_i>0,substring(pr.BuildingNumber,pr.b_i,1),pr.StructNumber),iif(vrem.b_i>0,substring(vrem.BuildingNumber,vrem.b_i,1),vrem.StructNumber)),'') [address]
 from
 (
 	select distinct cast(dd_pod_zayav as Date) dd_pod_zayav,
@@ -64,8 +41,8 @@ from
 	and Relation_spec_fac.ik_fac = Fac.Ik_fac and Relation_spec_fac.ik_spec = Spec_stud.ik_spec
 	and Spec_stud.ik_direction = Direction.ik_direction
 	and ik_zach in (select ik_zach from ABIT_sost_zach where ik_type_zach = 2) --зачисленные
-	and Relation_spec_fac.Ik_form_ed = 1									--очники
-	and TypeKatZach.ik_type_kat in (1,2,12)									--не контракт
+	--and Relation_spec_fac.Ik_form_ed = 1									--очники
+	--and TypeKatZach.ik_type_kat in (1,2,12)									--не контракт
 	and Relation_spec_fac.ik_fac = 31										--колледжи
 	and dbo.Student.nCode = ABIT_postup.nCode
 	and NNyear=year(GETDATE())
@@ -109,4 +86,4 @@ on stud.nCode = vrem.nCode
 left join dbo.Prikaz ON  stud.ik_prikaz_zach=Prikaz.Ik_prikaz
 --where (pr.Cstrana is null)and(vrem.Cstrana is null)
 --where Dd_vidan is null
-order by  Clastname,Cfirstname,Cotch
+order by  Cname_form_ed desc,Clastname,Cfirstname,Cotch
