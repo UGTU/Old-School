@@ -194,7 +194,6 @@ type
     ilMain: TImageList;
     dbgehMagazineDocsStud: TDBGridEh;
     tbCreate: TToolButton;
-    cbeDest: TDBLookupComboboxEh;
     lDef: TLabel;
     dtpEnd: TDateTimePicker;
     gridColumnSelectMenu: TPopupMenu;
@@ -221,6 +220,7 @@ type
     adoSelDocFilesik_doc_file: TIntegerField;
     adoSelDocFilesIK_doc: TIntegerField;
     adoSelDocFilesdoc_file: TBlobField;
+    ppmDest: TPopupMenu;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -286,6 +286,7 @@ type
     procedure dbgeDocumentsDblClick(Sender: TObject);
     procedure cbJobClick(Sender: TObject);
     procedure dbcbeCitizenshipChange(Sender: TObject);
+    procedure ppmDestPopup(Sender: TObject);
 
   private
     Fik: integer;
@@ -322,6 +323,7 @@ type
     procedure FormAcademSpr(ik_studGrup, ik_destination: Integer);
     procedure FormNeuspSpr(ik_studGrup, ik_destination: Integer);
     procedure FormExtract(ik_studGrup, ik_destination: Integer);
+    procedure CreateDoc(ik_destination: Integer);
       published
     property OnDocumentStateChanged: TNotifyEvent read FDocumentStateChanged write FDocumentStateChanged;
     // function CalculationLastNum(ik_studGrup: Integer; ik_dest: Integer)
@@ -2036,6 +2038,55 @@ begin
 end;
 
 
+procedure TfmStudent.CreateDoc(ik_destination: Integer);
+var
+  ik_dest: Integer;
+begin
+  inherited;
+
+  ik_dest := dmDocs.spDest.FieldByName('ik_destination').AsInteger;
+
+  if ik_dest > 0 then
+    case (ik_dest) of
+      1:
+        begin
+          FormSpr(obj.StudGrupKey, ik_dest);
+        end;
+      2:
+        begin
+          FormSpr(obj.StudGrupKey, ik_dest);
+        end;
+
+      3:
+        begin
+          FormCallSpr(obj.StudGrupKey, ik_dest);
+        end;
+
+      4:
+        begin
+          FormApplicationSpr(obj.StudGrupKey, ik_dest);
+        end;
+      5:
+        FormCallSpr(obj.StudGrupKey, ik_dest);
+
+      6:
+        begin
+          FormNeuspSpr(obj.StudGrupKey, ik_dest);
+        end;
+
+     8:
+        begin
+          FormAcademSpr(obj.StudGrupKey, ik_dest);
+        end;
+      9:
+        begin
+          FormExtract(obj.StudGrupKey, ik_dest);
+        end;
+
+    end;
+   DocumentChanged;
+end;
+
 procedure TfmStudent.GetUspevStat(ik_zach: Integer);
 begin
   dmUspevaemost.adospUspevStatForStud.Close;
@@ -2130,10 +2181,50 @@ begin
   dmDocs.spDest.Parameters.Refresh;
   dmDocs.spDest.Parameters.ParamByName('@ik_stud').Value := obj.StudGrupKey;
   dmDocs.spDest.Active := true;
-  cbeDest.ListField := 'cShortNameDestination';
-  cbeDest.KeyField := 'ik_destination';
+  //cbeDest.ListField := 'cShortNameDestination';
+ // cbeDest.KeyField := 'ik_destination';
 
 end;
+
+procedure TfmStudent.ppmDestPopup(Sender: TObject);
+var
+  mi, msub: TmenuItem;
+  i,l:integer;
+begin
+  with (Sender as TPopupMenu) do
+  begin
+  while Items.Count > 0 do
+      Items[0].Free;
+  i:=0;
+  with dmDocs.spDest do
+  begin
+    First;
+    DisableControls;
+    try
+      while not EOF do
+      begin
+    // Создаем обычный пункт "Первый"
+        mi := TMenuItem.Create(self);
+        with mi do
+          begin
+          Caption := FieldByName('cShortNameDestination').AsString;
+          OnClick :=tbCreateClick;
+          Tag:= FieldByName('ik_destination').AsInteger;
+        end;
+        Items.Insert(i, mi);
+        Next;
+        i:=i+1;
+    end;
+    finally
+
+    end;
+  end;
+
+  end;
+
+
+end;
+
 
 procedure TfmStudent.bbUndoClick(Sender: TObject);
 begin
@@ -2258,9 +2349,11 @@ var
   ik_dest: Integer;
 begin
   inherited;
-
-  ik_dest := dmDocs.spDest.FieldByName('ik_destination').AsInteger;
-
+ // ik_dest := dmDocs.spDest.FieldByName('ik_destination').AsInteger;
+if Sender is TMenuItem Then
+  with (Sender as TMenuItem) do
+  begin
+  ik_dest:=Tag;
   if ik_dest > 0 then
     case (ik_dest) of
       1:
@@ -2299,6 +2392,7 @@ begin
         end;
 
     end;
+  end;
    DocumentChanged;
 end;
 
