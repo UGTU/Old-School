@@ -43,13 +43,15 @@ var
   spr_h: TSpravkaHistory;
   sp_spr: TADOStoredProc;
 
-  sp_academ: TADODataSet;
+  //sp_academ: TADODataSet;
+  sp_academ: TADOStoredProc;
   sp_doc, sp_history: TADOStoredProc;
 begin
   sp_spr := TADOStoredProc.Create(nil);
   sp_history := TADOStoredProc.Create(nil);;
-  sp_academ := TADODataSet.Create(nil);
+//  sp_academ := TADODataSet.Create(nil);
   sp_doc := TADOStoredProc.Create(nil);
+   sp_academ := TADOStoredProc.Create(nil);
   try
     // sp_spr.ProcedureName := 'StudGetInfForSprav;1';
     sp_spr.ProcedureName := 'StudInfoSpravBuild;1';
@@ -97,17 +99,25 @@ begin
       sp_spr.FieldByName('Dep_Index').AsString, sp_doc.FieldByName('NumberDoc')
       .AsInteger);
     sp_spr.First;
-
+                 sp_academ.ProcedureName := 'SelAcademStud;1';
+    sp_academ.Connection := dm.DBConnect;
+    // sp_spr.Parameters.CreateParameter('@Ik_studGrup', ftString, pdInput, 50,
+    // self.ikStudGrup);
+    sp_academ.Parameters.CreateParameter('@@zach', ftString, pdInput, 50,
+      sp_spr.FieldByName('Ik_zach').AsString);
+    sp_academ.Open;
+    sp_academ.First;
     While not sp_history.Eof do
     begin
       if (sp_history.FieldByName('ikTypePric').AsInteger = 4) then
       begin
-        sp_academ.CommandText := 'select * from StudHistoryAcadem (' + '''' +
-          sp_history.FieldByName('Nn_prikaz').AsString + '''' + ',' +
-          sp_spr.FieldByName('Ik_zach').AsString + ')';
-        sp_academ.Connection := dm.DBConnect;
-        sp_academ.Open;
-        sp_academ.First;
+//        sp_academ.CommandText := 'select * from StudHistoryAcadem (' + '''' +
+//          sp_history.FieldByName('Nn_prikaz').AsString + '''' + ',' +
+//          sp_spr.FieldByName('Ik_zach').AsString + ')';
+//        sp_academ.Connection := dm.DBConnect;
+//        sp_academ.Open;
+//        sp_academ.First;
+
 
         spr_h := TSpravkaHistory.Create(sp_history.FieldByName('Nn_prikaz')
           .AsString, sp_history.FieldByName('Cname_pric').AsString,
@@ -115,9 +125,10 @@ begin
           sp_history.FieldByName('monthpric').AsString,
           sp_history.FieldByName('yearpric').AsString,
           sp_history.FieldByName('ikTypePric').AsInteger,
-          sp_academ.FieldByName('dateBegin').AsString,
-          sp_academ.FieldByName('dateEnd').AsString);
-        sp_academ.Free;
+          sp_academ.FieldByName('Дата начала').AsString,
+          sp_academ.FieldByName('Дата окончания').AsString);
+      sp_academ.Next;
+
       end
       else
         spr_h := TSpravkaHistory.Create(sp_history.FieldByName('Nn_prikaz')
@@ -134,6 +145,7 @@ begin
     sp_spr.Free;
     sp_history.Free;
     sp_doc.Free;
+    sp_academ.Free;
   end;
 
 end;

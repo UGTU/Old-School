@@ -171,7 +171,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 672
             Height = 587
-            ActivePage = TabSheet4
+            ActivePage = TabSheet7
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -2068,9 +2068,9 @@ inherited fmStudent: TfmStudent
               Caption = '-'
             end
             object tbAction: TToolBar
-              Left = 195
+              Left = 10
               Top = 6
-              Width = 98
+              Width = 115
               Height = 25
               Align = alNone
               ButtonHeight = 25
@@ -2083,25 +2083,27 @@ inherited fmStudent: TfmStudent
                 Top = 0
                 Hint = #1053#1086#1074#1099#1081' '#1076#1086#1082#1091#1084#1077#1085#1090
                 Caption = #1053#1086#1074#1099#1081' '#1076#1086#1082#1091#1084#1077#1085#1090
+                DropdownMenu = ppmDest
                 ImageIndex = 0
-                OnClick = tbCreateClick
+                PopupMenu = ppmDest
+                Style = tbsDropDown
               end
               object tbUtv: TToolButton
-                Left = 23
+                Left = 38
                 Top = 0
                 Hint = #1053#1072' '#1088#1072#1089#1089#1084#1086#1090#1088#1077#1085#1080#1080
                 ImageIndex = 14
                 OnClick = tbUtvClick
               end
               object tbGot: TToolButton
-                Left = 46
+                Left = 61
                 Top = 0
                 Hint = #1043#1086#1090#1086#1074#1086' '
                 ImageIndex = 8
                 OnClick = tbGotClick
               end
               object tbPrint: TToolButton
-                Left = 69
+                Left = 84
                 Top = 0
                 Hint = #1055#1077#1095#1072#1090#1100
                 ImageIndex = 9
@@ -2135,19 +2137,6 @@ inherited fmStudent: TfmStudent
               TabOrder = 2
               OnCloseUp = dtpStartCloseUp
             end
-            object cbeDest: TDBLookupComboboxEh
-              Left = 11
-              Top = 8
-              Width = 178
-              Height = 21
-              DataField = ''
-              EditButtons = <>
-              KeyField = 'Ik_destination'
-              ListField = 'cShortNameDestination'
-              ListSource = dmDocs.dsDest
-              TabOrder = 3
-              Visible = True
-            end
             object dtpEnd: TDateTimePicker
               Left = 465
               Top = 9
@@ -2156,7 +2145,7 @@ inherited fmStudent: TfmStudent
               Anchors = [akRight, akBottom]
               Date = 42157.434117662040000000
               Time = 42157.434117662040000000
-              TabOrder = 4
+              TabOrder = 3
               OnCloseUp = dtpEndCloseUp
             end
           end
@@ -2519,7 +2508,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000400210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000500210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3208,5 +3197,10 @@ inherited fmStudent: TfmStudent
     object adoSelDocFilesdoc_file: TBlobField
       FieldName = 'doc_file'
     end
+  end
+  object ppmDest: TPopupMenu
+    OnPopup = ppmDestPopup
+    Left = 312
+    Top = 256
   end
 end

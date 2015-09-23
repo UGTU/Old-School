@@ -886,11 +886,29 @@ begin
     First;
     DisableControls;
     try
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+//        begin
+//          if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady')
+//            .Value = Null) and
+//            (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate').Value <>
+//            Null) then
+//          begin
+//            dbgehMagazineDocs.DataSource.DataSet.Edit;
+//            uDMDocuments.dmDocs.dsDocs.DataSet.FieldValues['DateReady']
+//              := Date();
+//            dbgehMagazineDocs.DataSource.DataSet.Post;
+//          end;
+//        end;
+//
+//        Next;
+//      end;
+//      DocumentChanged;
+      For i := 0 to dbgehMagazineDocs.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
-        begin
-          if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady')
+       dbgehMagazineDocs.Datasource.Dataset.Bookmark:= dbgehMagazineDocs.SelectedRows.Items[i];
+                 if (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateReady')
             .Value = Null) and
             (uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate').Value <>
             Null) then
@@ -900,8 +918,6 @@ begin
               := Date();
             dbgehMagazineDocs.DataSource.DataSet.Post;
           end;
-        end;
-        Next;
       end;
       DocumentChanged;
       { sp_numdoc := TADODataSet.Create(nil);
@@ -912,14 +928,6 @@ begin
       }
     finally
       EnableControls;
-      { if (NowNode is TDBNodeSprObject) then
-        begin
-        Caption:= '∆ÛÌ‡Î ‰ÓÍÛÏÂÌÚÓ‚'  + '('+sp_numdoc.FieldByName('NumApplication').AsString+'/ '+
-        sp_numdoc.FieldByName('Num—onsideration').AsString+')';
-
-        end;
-        sp_numdoc.Free;
-      }
     end;
 
   end;
@@ -935,7 +943,7 @@ var
 
   sp_pers: TADOStoredProc;
   sp_doc: TADOStoredProc;
-  i, ind: Integer;
+  i,k, ind: Integer;
   mass_doc: array [1 .. n] of Integer;
   ListDist: TObjectList<TDest>;
   dest: TDest;
@@ -954,11 +962,14 @@ begin
     // // begin
     with dbgehMagazineDocs.DataSource.DataSet do
     begin
-      First;
-      // DisableControls;
-      while not EOF do
+//      First;
+//      // DisableControls;
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+      For k := 0 to dbgehMagazineDocs.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+       dbgehMagazineDocs.Datasource.Dataset.Bookmark:= dbgehMagazineDocs.SelectedRows.Items[k];
           if uDMDocuments.dmDocs.adodsDocs.FieldByName('DateCreate')
             .AsString.Length <> 0 then
           begin
@@ -969,7 +980,7 @@ begin
               .AsInteger);
 
           end;
-        Next;
+//        Next;
       end;
     end;
 
@@ -985,7 +996,7 @@ end;
 
 procedure TfmDoc.tbUtvClick(Sender: TObject);
 var
-  i, LastNum: Integer;
+  i,k, LastNum: Integer;
   datebegin: string;
   AYear, AMonth, ADay: word;
   sp_num: TADODataSet;
@@ -997,10 +1008,13 @@ begin
     First;
     DisableControls;
     try
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
+//        begin
+      For k := 0 to dbgehMagazineDocs.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocs.SelectedRows.CurrentRowSelected = true) then
-        begin
+       dbgehMagazineDocs.Datasource.Dataset.Bookmark:= dbgehMagazineDocs.SelectedRows.Items[k];
           if (uDMDocuments.dmDocs.adodsDocs.FieldByName('NumberDoc')
             .AsString = '') then
           begin
@@ -1042,26 +1056,14 @@ begin
             dbgehMagazineDocs.DataSource.DataSet.Post;
           end;
         end;
-        Next;
-      end;
+//        Next;
+//      end;
 
       DocumentChanged;
 
-      // sp_numdoc := TADODataSet.Create(nil);
-      // sp_numdoc.CommandText := 'select * from NumberOfDocuments(''' + TDocController.Instance.CalculationBeginYearLern() + ''',''' + DateTimeToStr(date()) + ''')';
-      // sp_numdoc.Connection := dm.DBConnect;
-      // sp_numdoc.Open;
-      // sp_numdoc.First;
-
     finally
       EnableControls;
-      // if (NowNode is TDBNodeSprObject) then
-      // begin
-      // Caption:= '∆ÛÌ‡Î ‰ÓÍÛÏÂÌÚÓ‚'  + '('+sp_numdoc.FieldByName('NumApplication').AsString+'/ '+
-      // sp_numdoc.FieldByName('Num—onsideration').AsString+')';
-      // Refresh;
-      // end;
-      // sp_numdoc.Free;
+      sp_num.Free;;
     end;
   end;
 

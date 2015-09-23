@@ -194,7 +194,6 @@ type
     ilMain: TImageList;
     dbgehMagazineDocsStud: TDBGridEh;
     tbCreate: TToolButton;
-    cbeDest: TDBLookupComboboxEh;
     lDef: TLabel;
     dtpEnd: TDateTimePicker;
     gridColumnSelectMenu: TPopupMenu;
@@ -221,6 +220,7 @@ type
     adoSelDocFilesik_doc_file: TIntegerField;
     adoSelDocFilesIK_doc: TIntegerField;
     adoSelDocFilesdoc_file: TBlobField;
+    ppmDest: TPopupMenu;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -286,6 +286,7 @@ type
     procedure dbgeDocumentsDblClick(Sender: TObject);
     procedure cbJobClick(Sender: TObject);
     procedure dbcbeCitizenshipChange(Sender: TObject);
+    procedure ppmDestPopup(Sender: TObject);
 
   private
     Fik: integer;
@@ -322,6 +323,7 @@ type
     procedure FormAcademSpr(ik_studGrup, ik_destination: Integer);
     procedure FormNeuspSpr(ik_studGrup, ik_destination: Integer);
     procedure FormExtract(ik_studGrup, ik_destination: Integer);
+    procedure CreateDoc(ik_destination: Integer);
       published
     property OnDocumentStateChanged: TNotifyEvent read FDocumentStateChanged write FDocumentStateChanged;
     // function CalculationLastNum(ik_studGrup: Integer; ik_dest: Integer)
@@ -1030,7 +1032,7 @@ end;
 
 procedure TfmStudent.tbGotClick(Sender: TObject);
 var
-  i: Integer;
+  i,k: Integer;
 begin
   // for i:=0 to dbgehMagazineDocs.SelCount-1 do begin;
   // dbgehMagazineDocs.DataSource.DataSet.Bookmark:=dbgehMagazineDocs.SelectedRows[i];
@@ -1043,10 +1045,13 @@ begin
     First;
     DisableControls;
     try
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+//        begin
+      For k := 0 to dbgehMagazineDocsStud.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
-        begin
+       dbgehMagazineDocsStud.Datasource.Dataset.Bookmark:= dbgehMagazineDocsStud.SelectedRows.Items[k];
           if (uDMDocuments.dmDocs.adodsDocStud.FieldByName('DateReady')
             .Value = null) and
             (uDMDocuments.dmDocs.adodsDocStud.FieldByName('DateCreate').Value <>
@@ -1058,8 +1063,8 @@ begin
             dbgehMagazineDocsStud.DataSource.DataSet.Post;
           end;
         end;
-        Next;
-      end;
+//        Next;
+//      end;
       DocumentChanged;
     finally
       EnableControls;
@@ -1078,7 +1083,7 @@ var
 
   sp_pers: TADOStoredProc;
   sp_doc: TADOStoredProc;
-  i, ind: Integer;
+  i,k, ind: Integer;
   mass_doc: array [1 .. n] of Integer;
   ListDist: TObjectList<TDest>;
   dest: TDest;
@@ -1097,11 +1102,14 @@ begin
     // // begin
     with dbgehMagazineDocsStud.DataSource.DataSet do
     begin
-      First;
+//      First;
       // DisableControls;
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+      For k := 0 to dbgehMagazineDocsStud.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+       dbgehMagazineDocsStud.Datasource.Dataset.Bookmark:= dbgehMagazineDocsStud.SelectedRows.Items[k];
           if uDMDocuments.dmDocs.adodsDocStud.FieldByName('DateCreate')
             .AsString.Length <> 0 then
           begin
@@ -1112,7 +1120,7 @@ begin
               .AsInteger);
 
           end;
-        Next;
+       // Next;
       end;
     end;
 
@@ -1128,7 +1136,7 @@ end;
 
 procedure TfmStudent.tbUtvClick(Sender: TObject);
 var
-  i, LastNum: Integer;
+  i,k, LastNum: Integer;
   datebegin: string;
   AYear, AMonth, ADay: word;
   sp_num: TADODataSet;
@@ -1140,10 +1148,13 @@ begin
     First;
     DisableControls;
     try
-      while not EOF do
+//      while not EOF do
+//      begin
+//        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
+//        begin
+      For k := 0 to dbgehMagazineDocsStud.SelectedRows.Count - 1 do
       begin
-        if (dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected = true) then
-        begin
+       dbgehMagazineDocsStud.Datasource.Dataset.Bookmark:= dbgehMagazineDocsStud.SelectedRows.Items[k];
           if (uDMDocuments.dmDocs.adodsDocStud.FieldByName('NumberDoc')
             .AsString = '') then
           begin
@@ -1186,12 +1197,12 @@ begin
           end;
         end;
 
-        Next;
-      end;
+//        Next;
+//      end;
       DocumentChanged;
     finally
       EnableControls;
-
+     sp_num.Free;
     end;
   end;
 end;
@@ -2027,6 +2038,55 @@ begin
 end;
 
 
+procedure TfmStudent.CreateDoc(ik_destination: Integer);
+var
+  ik_dest: Integer;
+begin
+  inherited;
+
+  ik_dest := dmDocs.spDest.FieldByName('ik_destination').AsInteger;
+
+  if ik_dest > 0 then
+    case (ik_dest) of
+      1:
+        begin
+          FormSpr(obj.StudGrupKey, ik_dest);
+        end;
+      2:
+        begin
+          FormSpr(obj.StudGrupKey, ik_dest);
+        end;
+
+      3:
+        begin
+          FormCallSpr(obj.StudGrupKey, ik_dest);
+        end;
+
+      4:
+        begin
+          FormApplicationSpr(obj.StudGrupKey, ik_dest);
+        end;
+      5:
+        FormCallSpr(obj.StudGrupKey, ik_dest);
+
+      6:
+        begin
+          FormNeuspSpr(obj.StudGrupKey, ik_dest);
+        end;
+
+     8:
+        begin
+          FormAcademSpr(obj.StudGrupKey, ik_dest);
+        end;
+      9:
+        begin
+          FormExtract(obj.StudGrupKey, ik_dest);
+        end;
+
+    end;
+   DocumentChanged;
+end;
+
 procedure TfmStudent.GetUspevStat(ik_zach: Integer);
 begin
   dmUspevaemost.adospUspevStatForStud.Close;
@@ -2121,10 +2181,50 @@ begin
   dmDocs.spDest.Parameters.Refresh;
   dmDocs.spDest.Parameters.ParamByName('@ik_stud').Value := obj.StudGrupKey;
   dmDocs.spDest.Active := true;
-  cbeDest.ListField := 'cShortNameDestination';
-  cbeDest.KeyField := 'ik_destination';
+  //cbeDest.ListField := 'cShortNameDestination';
+ // cbeDest.KeyField := 'ik_destination';
 
 end;
+
+procedure TfmStudent.ppmDestPopup(Sender: TObject);
+var
+  mi, msub: TmenuItem;
+  i,l:integer;
+begin
+  with (Sender as TPopupMenu) do
+  begin
+  while Items.Count > 0 do
+      Items[0].Free;
+  i:=0;
+  with dmDocs.spDest do
+  begin
+    First;
+    DisableControls;
+    try
+      while not EOF do
+      begin
+    // Создаем обычный пункт "Первый"
+        mi := TMenuItem.Create(self);
+        with mi do
+          begin
+          Caption := FieldByName('cShortNameDestination').AsString;
+          OnClick :=tbCreateClick;
+          Tag:= FieldByName('ik_destination').AsInteger;
+        end;
+        Items.Insert(i, mi);
+        Next;
+        i:=i+1;
+    end;
+    finally
+
+    end;
+  end;
+
+  end;
+
+
+end;
+
 
 procedure TfmStudent.bbUndoClick(Sender: TObject);
 begin
@@ -2249,9 +2349,11 @@ var
   ik_dest: Integer;
 begin
   inherited;
-
-  ik_dest := dmDocs.spDest.FieldByName('ik_destination').AsInteger;
-
+ // ik_dest := dmDocs.spDest.FieldByName('ik_destination').AsInteger;
+if Sender is TMenuItem Then
+  with (Sender as TMenuItem) do
+  begin
+  ik_dest:=Tag;
   if ik_dest > 0 then
     case (ik_dest) of
       1:
@@ -2290,6 +2392,7 @@ begin
         end;
 
     end;
+  end;
    DocumentChanged;
 end;
 
@@ -3322,7 +3425,7 @@ var
   week1, week2, numweek, k, h, i, sem, year, ik_doc: Integer;
   mask1, mask2, dateb, l, depInd: string;
   sp_vidz: TADODataSet;
-  sp_info, sp_sem: TADOStoredProc;
+  sp_info, sp_sem,sp_find_callspr: TADOStoredProc;
 
   tempDS, tempDSchall, tempDSikdoc, tempDSsm: TADODataSet;
   Report: TReportBase;
@@ -3441,6 +3544,38 @@ begin
       try
         // // добавляем справку
 
+        k := 0;
+        if (fReview.cbeReason.Text = 'Промежуточная аттестация') then
+          k := 55;
+        if (fReview.cbeReason.Text = 'Государственный экзамен') then
+          k := 56;
+        if (fReview.cbeReason.Text = 'Выпускная работа') then
+          k := 31;
+
+        sp_vidz := TADODataSet.Create(nil);
+        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup='
+          + ik_grup.ToString() + 'and n_sem=' + sem.ToString() +
+          ' and iK_vid_zanyat=' + k.ToString();
+        // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
+        sp_vidz.Connection := dm.DBConnect;
+        sp_vidz.Open;
+        sp_vidz.First;
+
+        sp_find_callspr := TADOStoredProc.Create(nil);
+            sp_find_callspr.ProcedureName := 'FindCallSprForGrup;1';
+            sp_find_callspr.Connection := dm.DBConnect;
+            sp_find_callspr.Parameters.CreateParameter('@ik_upContent',
+              ftString, pdInput, 50, sp_vidz.FieldByName('ik_upContent').AsString);
+            sp_find_callspr.Parameters.CreateParameter('@ik_studGrup', ftString,
+              pdInput, 50, ik_studGrup.ToString());
+            sp_find_callspr.Parameters.CreateParameter('@Ik_destination',
+              ftString, pdInput, 50, ik_destination.ToString());
+            sp_find_callspr.Open;
+            sp_find_callspr.First;
+            if sp_find_callspr.FieldByName('Ik_Document').AsString.Length=0 then
+            begin
+
+
         tempDS.CommandText := 'Select * from Document ';
         tempDS.Open;
         tempDS.Insert;
@@ -3460,22 +3595,6 @@ begin
         // end;
         // ik_doc:= 'SELECT LAST_INSERT_ID() FROM Document' ;
 
-        k := 0;
-        if (fReview.cbeReason.Text = 'Промежуточная аттестация') then
-          k := 55;
-        if (fReview.cbeReason.Text = 'Государственный экзамен') then
-          k := 56;
-        if (fReview.cbeReason.Text = 'Выпускная работа') then
-          k := 31;
-
-        sp_vidz := TADODataSet.Create(nil);
-        sp_vidz.CommandText := 'select * from Graph_Uch_Proc Where Ik_Grup='
-          + ik_grup.ToString() + 'and n_sem=' + sem.ToString() +
-          ' and iK_vid_zanyat=' + k.ToString();
-        // String(cbeReason.Items.Objects[cbeReason.ItemIndex]);
-        sp_vidz.Connection := dm.DBConnect;
-        sp_vidz.Open;
-        sp_vidz.First;
 
         tempDSikdoc.CommandText :=
           'select MAX(Ik_Document)[maxid] from Document where Ik_studGrup=' +
@@ -3528,6 +3647,9 @@ begin
           tempDSsm.Post;
           tempDSsm.UpdateBatch();
         end;
+            end
+            else
+            ik_doc:=sp_find_callspr.FieldByName('Ik_Document').AsInteger;
         dm.DBConnect.CommitTrans;
       except
         dm.DBConnect.RollbackTrans;
@@ -3553,6 +3675,7 @@ begin
     tempDS.Free;
     tempDSchall.Free;
     tempDSikdoc.Free;
+    sp_find_callspr.Free;
     sp_sem.Free;
     // sp_depInd.Free;
     dsDoc.Free;
