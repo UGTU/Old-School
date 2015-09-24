@@ -12,6 +12,7 @@ object dmDocs: TdmDocs
     CursorType = ctStatic
     Filtered = True
     OnCalcFields = adodsDocsCalcFields
+    OnFilterRecord = adodsDocsFilterRecord
     CommandText = 'select * from MagazineDocs'
     Parameters = <>
     Left = 12

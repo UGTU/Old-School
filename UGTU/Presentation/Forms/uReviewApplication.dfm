@@ -122,21 +122,25 @@ inherited frmReviewApplication: TfrmReviewApplication
     Width = 446
     OnClick = Panel1Click
     ExplicitTop = 306
+    ExplicitWidth = 446
     inherited bbOK: TBitBtn
       Left = 272
       Enabled = False
       ModalResult = 0
-      ExplicitLeft = 269
+      ExplicitLeft = 272
     end
     inherited bbApply: TBitBtn
       Left = 23
+      ExplicitLeft = 23
     end
     inherited bbCancel: TBitBtn
       Left = 358
+      ExplicitLeft = 358
     end
     inherited BitBtn1: TBitBtn
       Left = 125
       Enabled = False
+      ExplicitLeft = 125
     end
   end
   inherited eDest: TEdit

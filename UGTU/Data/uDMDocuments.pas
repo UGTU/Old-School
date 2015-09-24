@@ -189,6 +189,7 @@ type
     procedure adodsDocsCalcFields(DataSet: TDataSet);
     procedure adodsDocStudCalcFields(DataSet: TDataSet);
     procedure spAddrCalcFields(DataSet: TDataSet);
+    procedure adodsDocsFilterRecord(DataSet: TDataSet; var Accept: Boolean);
 
   private
     { Private declarations }
@@ -216,6 +217,15 @@ begin
     else
       DataSet.FieldByName('Status').AsString := 'Готово'
   end;
+
+end;
+
+procedure TdmDocs.adodsDocsFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+begin
+// if DataSet.FieldByName('Status').AsString = 'Готово' then
+//
+//Accept := true;
+  //Accept := DataSet.FieldByName('Status').AsString = 'Готово';
 
 end;
 

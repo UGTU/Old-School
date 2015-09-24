@@ -276,14 +276,14 @@ begin
         // ].Insert(xlDown, xlFormatFromRightOrBelow);
         // Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
         Items[fkp, 1] := 'не сдавал(а)';
-        fkp := fkp + 1;
+        fkp := fkp + 2;
       end
       else
       begin
         fkp := fkp + 1;
         Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Delete(xlUp);
       end;
-
+      fkp := fkp + 1;
       if k = 0 then
         Items[fkp, 1] := 'не сдавал(а)';
       // данные по госам
