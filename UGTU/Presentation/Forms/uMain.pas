@@ -3106,6 +3106,7 @@ begin
         TDocController.Instance.PrintAllDoc(ListDist);;
 
       end;
+      DocumentStateChanged(self);
     end;
   finally
     sp_info.Free;

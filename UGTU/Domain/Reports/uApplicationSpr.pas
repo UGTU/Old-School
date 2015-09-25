@@ -93,7 +93,10 @@ begin
       begin
         Replace('#reason#', ansilowercase(FieldByName('Cname_pric').AsString));
         if FieldByName('Ik_Transfer').AsInteger = 1 then
-          Replace('#transp#', 'вручить лично в руки')
+      begin
+          Replace('#transp#', 'вручить лично в руки') ;
+          Replace('#address#', '');
+      end
         else
         begin
           Replace('#transp#', 'отправить по почте по адресу');
@@ -106,7 +109,7 @@ begin
           dsAddr.First;
           with dsAddr do
           begin
-            if FieldByName('Cstrana').AsString <> 'Россия' then
+            if FieldByName('Cstrana').AsString <> 'Российская Федерация' then
               addr := FieldByName('Cstrana').AsString + ', ';
             addr := addr + FieldByName('Cregion').AsString + ', ' +
               FieldByName('cshort_type_gorod').AsString + FieldByName('Cgorod')

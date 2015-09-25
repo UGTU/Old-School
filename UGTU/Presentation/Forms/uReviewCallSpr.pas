@@ -232,9 +232,9 @@ begin
         if FieldByName('ik_AddressType').AsString = cbexTransp.KeyValue then
         begin
           Label15.Caption := '';
-          if FieldByName('Cstrana').AsString <> 'Россия' then
-            Label10.Caption := FieldByName('Cstrana').AsString + ', ';
-          Label15.Caption := Label10.Caption + FieldByName('Cregion').AsString +
+          if FieldByName('Cstrana').AsString <> 'Российская Федерация' then
+            Label15.Caption := FieldByName('Cstrana').AsString + ', ';
+          Label15.Caption := Label15.Caption + FieldByName('Cregion').AsString +
             ', ' + FieldByName('cshort_type_gorod').AsString +
             FieldByName('Cgorod').AsString + ', ' +
             FieldByName('cshort_type_street').AsString + FieldByName('CStreet')

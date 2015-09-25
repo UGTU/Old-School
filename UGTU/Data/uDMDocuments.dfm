@@ -12,6 +12,7 @@ object dmDocs: TdmDocs
     CursorType = ctStatic
     Filtered = True
     OnCalcFields = adodsDocsCalcFields
+    OnFilterRecord = adodsDocsFilterRecord
     CommandText = 'select * from MagazineDocs'
     Parameters = <>
     Left = 12
@@ -143,6 +144,10 @@ object dmDocs: TdmDocs
     end
     object adodsDocsn_sem: TWordField
       FieldName = 'n_sem'
+    end
+    object adodsDocsStatosDoc: TStringField
+      FieldName = 'StatusDoc'
+      Size = 15
     end
   end
   object dsReviewDoc: TDataSource
@@ -631,6 +636,10 @@ object dmDocs: TdmDocs
     end
     object adodsDocStudn_sem: TWordField
       FieldName = 'n_sem'
+    end
+    object adodsDocStudStatusDoc: TStringField
+      FieldName = 'StatusDoc'
+      Size = 15
     end
   end
   object dsDocStud: TDataSource

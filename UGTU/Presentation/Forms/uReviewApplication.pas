@@ -52,8 +52,13 @@ uses uDM, uStudent;
 procedure TfrmReviewApplication.actOKExecute(Sender: TObject);
 begin
   inherited;
-
+  if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
+  begin
   ModalResult := mrOk;
+  end
+  else
+  ModalResult := mrNo;
 
 end;
 
@@ -78,8 +83,13 @@ end;
 procedure TfrmReviewApplication.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-
+   if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
+  begin
   ModalResult := mrYes;
+  end
+  else
+  ModalResult := mrNo;
 
 end;
 
@@ -89,9 +99,10 @@ begin
   if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
     (rbL.Checked)) then
   begin
-    bbOk.Enabled := true;
-    BitBtn1.Enabled := true;
-  end;
+   ModalResult := mrYes;
+  end
+    else
+    ModalResult := mrNo;
 end;
 
 procedure TfrmReviewApplication.cbexTranspChange(Sender: TObject);
@@ -137,13 +148,13 @@ end;
 procedure TfrmReviewApplication.Panel1Click(Sender: TObject);
 begin
   inherited;
-  if (cbexReason.Text = '') or ((cbexTransp.Text = '') and (rbP.Checked)) then
-  begin
-    MessageDlg('Заполните все поля', mtWarning, [mbOK], 0);
-    ModalResult := mrNo;
-  end
-  else
-    ModalResult := mrYes;
+//  if (cbexReason.Text = '') or ((cbexTransp.Text = '') and (rbP.Checked)) then
+//  begin
+//    MessageDlg('Заполните все поля', mtWarning, [mbOK], 0);
+//    ModalResult := mrNo;
+//  end
+//  else
+//    ModalResult := mrYes;
 end;
 
 procedure TfrmReviewApplication.rbLClick(Sender: TObject);
@@ -154,6 +165,12 @@ begin
     cbexTransp.Enabled := false;
     Label10.Visible := false;
 
+  end;
+  if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
+  begin
+    bbOk.Enabled := true;
+    BitBtn1.Enabled := true;
   end;
 end;
 
@@ -167,6 +184,15 @@ begin
       Label10.Visible := true;
 
   end;
+    if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked)) then
+  begin
+    bbOk.Enabled := true;
+    BitBtn1.Enabled := true;
+  end
+  else
+  bbOk.Enabled := false;
+  BitBtn1.Enabled := false;
 end;
 
 end.
