@@ -2201,12 +2201,12 @@ inherited fmStudent: TfmStudent
               item
                 DynProps = <>
                 EditButtons = <>
-                FieldName = 'Status'
+                FieldName = 'StatusDoc'
                 Footers = <>
                 PopupMenu = gridColumnSelectMenu
                 STFilter.ListSource = dmDocs.dsDocs
                 Title.Caption = #1057#1090#1072#1090#1091#1089
-                Width = 172
+                Width = 166
               end
               item
                 DynProps = <>
@@ -2508,7 +2508,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000580210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040005C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

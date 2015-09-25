@@ -186,6 +186,8 @@ type
     adodsStudGrupik_persAddr: TIntegerField;
     adodsStudGrupAddrType: TStringField;
     adodsStudGrupik_AddressType: TIntegerField;
+    adodsDocsStatosDoc: TStringField;
+    adodsDocStudStatusDoc: TStringField;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
     procedure adodsDocStudCalcFields(DataSet: TDataSet);
     procedure spAddrCalcFields(DataSet: TDataSet);
@@ -208,15 +210,15 @@ implementation
 
 procedure TdmDocs.adodsDocsCalcFields(DataSet: TDataSet);
 begin
-  if (DataSet.FieldByName('DateCreate').AsString = '') then
-    DataSet.FieldByName('Status').AsString := 'Заявка'
-  else
-  begin
-    if (DataSet.FieldByName('DateReady').AsString = '') then
-      DataSet.FieldByName('Status').AsString := 'На рассмотрении'
-    else
-      DataSet.FieldByName('Status').AsString := 'Готово'
-  end;
+//  if (DataSet.FieldByName('DateCreate').AsString = '') then
+//    DataSet.FieldByName('Status').AsString := 'Заявка'
+//  else
+//  begin
+//    if (DataSet.FieldByName('DateReady').AsString = '') then
+//      DataSet.FieldByName('Status').AsString := 'На рассмотрении'
+//    else
+//      DataSet.FieldByName('Status').AsString := 'Готово'
+//  end;
 
 end;
 

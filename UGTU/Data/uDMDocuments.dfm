@@ -145,6 +145,10 @@ object dmDocs: TdmDocs
     object adodsDocsn_sem: TWordField
       FieldName = 'n_sem'
     end
+    object adodsDocsStatosDoc: TStringField
+      FieldName = 'StatusDoc'
+      Size = 15
+    end
   end
   object dsReviewDoc: TDataSource
     DataSet = adodsReviewDoc
@@ -632,6 +636,10 @@ object dmDocs: TdmDocs
     end
     object adodsDocStudn_sem: TWordField
       FieldName = 'n_sem'
+    end
+    object adodsDocStudStatusDoc: TStringField
+      FieldName = 'StatusDoc'
+      Size = 15
     end
   end
   object dsDocStud: TDataSource
