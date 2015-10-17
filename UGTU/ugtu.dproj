@@ -1100,6 +1100,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Domain\Controllers\PersonController.pas"/>
+        <DCCReference Include="Presentation\Dialogs\uPricDialog.pas">
+            <Form>frmPricDialog</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Domain\Reports\uReportPrikaz.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

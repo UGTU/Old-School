@@ -774,4 +774,20 @@ object dmDocs: TdmDocs
       FieldName = 'IsFirst'
     end
   end
+  object dsPric: TDataSource
+    DataSet = adodsPric
+    Left = 560
+    Top = 16
+  end
+  object adodsPric: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    CommandText = 
+      'select Ik_prikaz, RTRIM(Nn_prikaz)+'#39' '#1086#1090' '#39'+CONVERT(VARCHAR(10),Dd' +
+      '_prikaz,104) as NN_Date,Dd_prikaz from dbo.Prikaz order by Dd_pr' +
+      'ikaz desc'
+    Parameters = <>
+    Left = 560
+    Top = 88
+  end
 end

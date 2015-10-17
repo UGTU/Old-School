@@ -8,7 +8,7 @@ uses
   ComCtrls, Buttons, ToolWin, DBCtrls, ExtCtrls, ImgList, DB, ActnList,
   ADODB,ComObj, DBLookupEh, Menus, OleServer, ExcelXP, GridsEh, ApplicationController,
   ExceptionBase, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
-  System.Actions, DBAxisGridsEh;
+  System.Actions, DBAxisGridsEh,uPricDialog,uDocController;
 
 type
   TfmZach = class(TfmBase)
@@ -771,8 +771,20 @@ end;
 
 //Экспорт в Word общего приказа на зачисление
 procedure TfmZach.actExpPrikSpecExecute(Sender: TObject);
+var
+fPric: TfrmPricDialog;
+  Report: TReportBase;
 begin
-  TAbitZachislenieController.Instance.SpecPrikazToWord(@Prikaz);
+
+ fPric := TfrmPricDialog.Create(Self);
+ fPric.ShowModal;
+ if fPric.ModalResult = mrOk then
+ if fPric.dbcbePric.Text<>'' then
+    begin
+ // TAbitZachislenieController.Instance.SpecPrikazToWord(@Prikaz);
+    Report := TDocController.Instance.BuildPrikaz(fPric.dbcbePric.KeyValue,fPric.dbcbePric.Text);
+    TWaitingController.GetInstance.Process(Report);
+    end;
 end;
 
 

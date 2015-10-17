@@ -13,7 +13,7 @@ uses
   uExtractSpr, uWaitingController,
   uReviewCallSpr, uReviewApplication, uReviewAkadem,
   uReviewNotify, Document, Spravka, SpravkaReport2014, Spravka2014,
-  System.Generics.Collections;
+  System.Generics.Collections,uReportPrikaz;
 
 type
 
@@ -32,6 +32,7 @@ type
     function BuildSpr(datebegin,dateend:string): TReportBase;
     class function AccessInstance(Request: Integer):TDocController;
     function BuildSprReport(Dest: TDest): TReportBase;
+    function BuildPrikaz(ik_prikaz: integer; num:string): TReportBase;
     function AddListDest(ListDist: TObjectList<TDest>; ik_dest, ik_doc: Integer)
       : TObjectList<TDest>;
 
@@ -115,6 +116,13 @@ begin
   end;
   Result := ListDist;
 
+end;
+
+function TDocController.BuildPrikaz(ik_prikaz: integer;num:string): TReportBase;
+begin
+        Result := ReportPrikaz.Create(ik_prikaz,num);
+        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+          'reports\PricZach.xlt';
 end;
 
 function TDocController.BuildSpr(datebegin,dateend:string): TReportBase;

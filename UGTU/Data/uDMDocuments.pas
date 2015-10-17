@@ -188,6 +188,8 @@ type
     adodsStudGrupik_AddressType: TIntegerField;
     adodsDocsStatosDoc: TStringField;
     adodsDocStudStatusDoc: TStringField;
+    dsPric: TDataSource;
+    adodsPric: TADODataSet;
     procedure adodsDocsCalcFields(DataSet: TDataSet);
     procedure adodsDocStudCalcFields(DataSet: TDataSet);
     procedure spAddrCalcFields(DataSet: TDataSet);

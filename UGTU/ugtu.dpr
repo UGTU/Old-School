@@ -436,7 +436,9 @@ uses
   uPrintMagazine in 'Domain\Reports\uPrintMagazine.pas',
   DocumentClass in 'Domain\Classes\DocumentClass.pas',
   uAbitZach in 'Presentation\Dialogs\uAbitZach.pas' {frmAbitZachDialog},
-  PersonController in 'Domain\Controllers\PersonController.pas';
+  PersonController in 'Domain\Controllers\PersonController.pas',
+  uPricDialog in 'Presentation\Dialogs\uPricDialog.pas' {frmPricDialog},
+  uReportPrikaz in 'Domain\Reports\uReportPrikaz.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -490,5 +492,6 @@ begin
   Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
   Application.CreateForm(TfmSprForGroup, fmSprForGroup);
   Application.CreateForm(TfrmAbitZachDialog, frmAbitZachDialog);
+  Application.CreateForm(TfrmPricDialog, frmPricDialog);
   Application.Run;
 end.

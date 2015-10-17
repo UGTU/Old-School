@@ -72,9 +72,9 @@ inherited frmAbitZachDialog: TfrmAbitZachDialog
     end
     inherited bbCancel: TBitBtn
       Left = 305
-      Top = 7
+      Top = 6
       ExplicitLeft = 305
-      ExplicitTop = 7
+      ExplicitTop = 6
     end
   end
   object dbcbeOrder: TDBLookupComboboxEh [4]
