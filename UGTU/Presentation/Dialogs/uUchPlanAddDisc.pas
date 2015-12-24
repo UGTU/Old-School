@@ -111,6 +111,9 @@ type
     procedure actAddDiscRelationExecute(Sender: TObject);
     procedure dbcbSpclzMouseMove(Sender: TObject; Shift: TShiftState; X,
       Y: Integer);
+    procedure edtHoursAuditEnter(Sender: TObject);
+    procedure edtHoursAuditExit(Sender: TObject);
+    procedure edtHoursAuditKeyPress(Sender: TObject; var Key: Char);
   private
     isCellTextChange: boolean;
     curRow, curCol: integer;
@@ -290,7 +293,7 @@ begin
   //if dbcbSpclz.KeyValue = Null then SpclzIK := 0 else SpclzIK := dbcbSpclz.KeyValue;
   
   if not TUchPlanController.Instance.SaveDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue, dbcbGrpDisc.KeyValue,
-  dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, SpclzIK, fHour, iIndivid,
+  dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, SpclzIK, fHour, StrToInt(edtHoursAudit.Text), iIndivid,
   StrToInt(dbeGroupVibor.Value), Edit6.Text,fStrCmptncList,fDiscRelationList) then //передаю не компетенции, а структуру
   begin
     Result:= false;
@@ -301,7 +304,7 @@ begin
     begin       //аналогичное изменение дисциплины в планах-потомках
       //dbcbSpclz.KeyValue;
       TUchPlanController.Instance.ChangeDiscInUchPlan(iUchPlan, DiscInUchPlanIK, dbcbCklDisc.KeyValue,
-      dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, fHour, iIndivid,
+      dbcbGrpDisc.KeyValue, dbcbPdgrpDisc.KeyValue, dbcbDisc.KeyValue, dbcbKaf.KeyValue, fHour, StrToInt(edtHoursAudit.Text), iIndivid,
       StrToInt(dbeGroupVibor.Value), dbcbSpclz.KeyValue, Edit6.Text, fStrCmptncList);   //передаю не компетенции, а структуру
     end;
 
@@ -769,6 +772,31 @@ begin
     CalcSRS;
   end;
   (Sender as TDBEditEh).Color:= clWindow;
+end;
+
+procedure TfrmUchPlanAddDisc.edtHoursAuditEnter(Sender: TObject);
+begin
+  inherited;
+  (Sender as TDBEditEh).Color:= clAqua;
+end;
+
+procedure TfrmUchPlanAddDisc.edtHoursAuditExit(Sender: TObject);
+begin
+  inherited;
+  (Sender as TDBEditEh).Color:= clWindow;
+end;
+
+procedure TfrmUchPlanAddDisc.edtHoursAuditKeyPress(Sender: TObject;
+  var Key: Char);
+const
+  allow:set of char = ['1','2','3','4','5','6','7','8','9','0', ' ', '/', ',' , '.', Chr(VK_BACK)];
+begin
+  if (not (Key in allow)) then
+  begin
+    key:= #0;
+    exit;
+  end;
+  dbcbGrpDiscKeyValueChanged(Sender);
 end;
 
 procedure TfrmUchPlanAddDisc.edtHoursGosEnter(Sender: TObject);

@@ -5,7 +5,6 @@ object dm: Tdm
   Width = 1149
   object DBConnect: TADOConnection
     CommandTimeout = 300
-    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
       'fo=False;User ID=developer;Initial Catalog=UGTU_ACTTEST;Data Sou' +
@@ -421,7 +420,6 @@ object dm: Tdm
     Top = 304
   end
   object aspGetDiscModel: TADOStoredProc
-    Active = True
     Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
@@ -576,6 +574,7 @@ object dm: Tdm
     end
     object aspGetDiscModeliHour_Audit: TIntegerField
       FieldName = 'iHour_Audit'
+      Visible = False
     end
   end
   object adsVidNagruzki: TADODataSet
@@ -3417,7 +3416,6 @@ object dm: Tdm
     Top = 656
   end
   object aspGetDiscWork: TADOStoredProc
-    Active = True
     Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
@@ -3571,6 +3569,7 @@ object dm: Tdm
     end
     object aspGetDiscWorkiHour_Audit: TIntegerField
       FieldName = 'iHour_Audit'
+      Visible = False
     end
   end
   object adsGetUchPlanGrup: TADODataSet
@@ -3751,6 +3750,11 @@ object dm: Tdm
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@iHour_Audit'
+        DataType = ftInteger
         Value = Null
       end>
     Left = 288

@@ -362,6 +362,7 @@ begin
         Trim(dsDisc.DataSet.FieldByName('cname_ckl_disc1').AsString);
       frmUchPlanAddDisc.edtHoursGos.Text := GetTimeByType(dsDisc.DataSet.FieldByName('ik_ed_izm').AsInteger,
                       dsDisc.DataSet.FieldByName('iHour_gos').AsInteger);
+      frmUchPlanAddDisc.edtHoursAudit.Text := dsDisc.DataSet.FieldByName('iHour_Audit').AsString;
       frmUchPlanAddDisc.iIndivid := dsDisc.DataSet.FieldByName('iIndivid')
         .AsInteger;
       frmUchPlanAddDisc.dbcbDisc.KeyValue := dsDisc.DataSet.FieldByName
@@ -828,7 +829,7 @@ end;
 procedure TfmUchPlan.dsDiscDataChange(Sender: TObject; Field: TField);
 var
   i, lect, lab, pract, kol_rec: Integer;
-  lTypeDisc, lGosID, lHour_gos, lDiscUP, lDiscIK, lZnachZE, lIndiv,
+  lTypeDisc, lGosID, lHour_gos, lHourAudit, lDiscUP, lDiscIK, lZnachZE, lIndiv,
     lEdIK: Integer;
   lShowEd: string;
   slColumnKafedra, slColumnValues: TStringList;
@@ -841,6 +842,7 @@ begin
     // загруженные данные по дисциплине
     lTypeDisc := dsDisc.DataSet.FieldByName('ik_type_disc').AsInteger;
     lHour_gos := IfNull(dsDisc.DataSet.FieldByName('iHour_gos').Value, 0);
+    lHourAudit := IfNull(dsDisc.DataSet.FieldByName('iHour_Audit').Value, 0);
     lDiscUP := dsDisc.DataSet.FieldByName('ik_disc_uch_plan').AsInteger; // дисциплина учебного плана
     lDiscIK := dsDisc.DataSet.FieldByName('ik_disc').AsInteger; // дисциплина
     lGosID := IfNull(dsGetFgosBySpec.DataSet.FieldByName('IDGos').Value, 0);
@@ -893,7 +895,7 @@ begin
         Label18.Caption := IntToStr(lect);
         Label21.Caption := IntToStr(lab);
         Label22.Caption := IntToStr(pract);
-        Label26.Caption := IntToStr(pract + lab + lect);
+        Label26.Caption := IntToStr(lHourAudit);
         Label23.Caption := IntToStr(lIndiv);
         Label24.Caption := IntToStr(lHour_gos - (pract + lab + lect) - lIndiv);
       end

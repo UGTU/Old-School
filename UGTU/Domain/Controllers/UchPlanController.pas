@@ -323,7 +323,7 @@ type
       CodeGOS - шифр дисциплины по ГОС
     }
     function SaveDiscInUchPlan(UchPlanIK: integer; var DiscInUchPlanIK: integer;
-      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, SpclzIK, GOSHour,
+      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, SpclzIK, GOSHour, AuditHour,
       IndividHour, GroupViborNum: integer; CodeGOS: string;
       aStrCompetenceList, DiscRelationList: TStringList): boolean;
     { aCompetenceList }
@@ -337,7 +337,7 @@ type
       CodeGOS - шифр дисциплины по ГОС
     }
     function ChangeDiscInUchPlan(UchPlanIK: integer; DiscInUchPlanIK: integer;
-      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour,
+      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour,
       GroupViborNum, SpclzIK: integer; CodeGOS: string;
       aCompetenceList: TStringList): boolean;
 
@@ -371,7 +371,7 @@ type
     function getGrupYear(ik_grup: integer): Variant;
 
     procedure AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK,
-      PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,
+      PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour, GroupViborNum,
       SpclzIK: integer; CodeGOS: string);
 
     procedure ReplaseDisc(ik_uch_plan: integer;
@@ -1685,7 +1685,7 @@ end;
 
 function TUchPlanController.SaveDiscInUchPlan(UchPlanIK: integer;
   var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK,
-  SpclzIK, GOSHour, IndividHour, GroupViborNum: integer; CodeGOS: string;
+  SpclzIK, GOSHour, AuditHour, IndividHour, GroupViborNum: integer; CodeGOS: string;
   aStrCompetenceList, DiscRelationList: TStringList): boolean;
 { aCompetenceList }
 var
@@ -1717,6 +1717,7 @@ begin
       Parameters.ParamByName('@Cname_ckl_disc_gos').value := CodeGOS;
       Parameters.ParamByName('@ik_pdgrp_disc').value := PodGroupIK;
       Parameters.ParamByName('@ViborGroup').value := GroupViborNum;
+      Parameters.ParamByName('@iHour_Audit').value := AuditHour;
       if SpclzIK = 0 then
         Parameters.ParamByName('@ik_spclz').value := NULL
       else Parameters.ParamByName('@ik_spclz').value := SpclzIK;
@@ -4024,7 +4025,7 @@ end;
 
 function TUchPlanController.ChangeDiscInUchPlan(UchPlanIK: integer;
   DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK,
-  GOSHour, IndividHour, GroupViborNum, SpclzIK: integer; CodeGOS: string;
+  GOSHour, AuditHour, IndividHour, GroupViborNum, SpclzIK: integer; CodeGOS: string;
   aCompetenceList: TStringList): boolean;
 var
   DataSet: TADOStoredProc;
@@ -4060,7 +4061,7 @@ begin
         try
           if ik_disc_uch_plan_temp = 0 then // добавление
             AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK,
-              PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour,
+              PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour,
               GroupViborNum, SpclzIK, CodeGOS)
           else // замена
             ReplaseDisc(ik_uch_plan, ik_disc_uch_plan_temp, DiscInUchPlanIK,
@@ -4096,7 +4097,7 @@ begin
 end;
 
 procedure TUchPlanController.AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK,
-  GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, IndividHour, GroupViborNum,
+  GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour, GroupViborNum,
   SpclzIK: integer; CodeGOS: string);
 var
   DataSet: TADOStoredProc;
@@ -4122,6 +4123,7 @@ begin
       Parameters.ParamByName('@ik_pdgrp_disc').value := PodGroupIK;
       Parameters.ParamByName('@ViborGroup').value := GroupViborNum;
       Parameters.ParamByName('@ik_spclz').value := SpclzIK;
+      Parameters.ParamByName('@iHour_Audit').value := AuditHour;
       try
         ExecProc;
         new_ik_disc_uch_plan := Parameters.ParamByName('@RETURN_VALUE').value;

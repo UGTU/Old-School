@@ -524,7 +524,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
           end
           object Edit7: TDBEditEh
             Left = 202
-            Top = 40
+            Top = 39
             Width = 41
             Height = 19
             AlwaysShowBorder = True
@@ -576,8 +576,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             TabOrder = 3
           end
           object edtHoursAudit: TDBEditEh
-            Left = 202
-            Top = 65
+            Left = 201
+            Top = 64
             Width = 41
             Height = 19
             AlwaysShowBorder = True
@@ -593,9 +593,9 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             TabOrder = 4
             Text = '0'
             Visible = True
-            OnEnter = edtHoursGosEnter
-            OnExit = edtHoursGosExit
-            OnKeyPress = edtHoursGosKeyPress
+            OnEnter = edtHoursAuditEnter
+            OnExit = edtHoursAuditExit
+            OnKeyPress = edtHoursAuditKeyPress
           end
         end
       end
