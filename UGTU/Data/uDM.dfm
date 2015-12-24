@@ -5,6 +5,7 @@ object dm: Tdm
   Width = 1149
   object DBConnect: TADOConnection
     CommandTimeout = 300
+    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
       'fo=False;User ID=developer;Initial Catalog=UGTU_ACTTEST;Data Sou' +
@@ -420,6 +421,7 @@ object dm: Tdm
     Top = 304
   end
   object aspGetDiscModel: TADOStoredProc
+    Active = True
     Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
@@ -437,42 +439,42 @@ object dm: Tdm
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
+        Value = 1620
       end
       item
         Name = '@ik_ckl_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
+        Value = 11
       end
       item
         Name = '@ik_grp_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
+        Value = 9
       end
       item
         Name = '@ik_pdgrp_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
+        Value = 3
       end
       item
         Name = '@n_sem'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
+        Value = 0
       end
       item
         Name = '@ik_vid_zan'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = Null
+        Value = 0
       end
       item
         Name = '@ik_grup'
@@ -558,6 +560,22 @@ object dm: Tdm
     object aspGetDiscModelik_ed_izm: TIntegerField
       FieldName = 'ik_ed_izm'
       Visible = False
+    end
+    object aspGetDiscModelik_podckl: TIntegerField
+      FieldName = 'ik_podckl'
+    end
+    object aspGetDiscModeluchet: TBooleanField
+      FieldName = 'uchet'
+    end
+    object aspGetDiscModeliK_disc1: TIntegerField
+      FieldName = 'iK_disc1'
+    end
+    object aspGetDiscModelcshortname: TStringField
+      FieldName = 'cshortname'
+      Size = 40
+    end
+    object aspGetDiscModeliHour_Audit: TIntegerField
+      FieldName = 'iHour_Audit'
     end
   end
   object adsVidNagruzki: TADODataSet
@@ -3399,6 +3417,7 @@ object dm: Tdm
     Top = 656
   end
   object aspGetDiscWork: TADOStoredProc
+    Active = True
     Connection = DBConnect
     CursorType = ctStatic
     LockType = ltBatchOptimistic
@@ -3416,28 +3435,28 @@ object dm: Tdm
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = 0
+        Value = 1620
       end
       item
         Name = '@ik_ckl_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = 0
+        Value = 11
       end
       item
         Name = '@ik_grp_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = 0
+        Value = 9
       end
       item
         Name = '@ik_pdgrp_disc'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
-        Value = 0
+        Value = 3
       end
       item
         Name = '@n_sem'
@@ -3549,6 +3568,9 @@ object dm: Tdm
     object aspGetDiscWorkShowToUser: TStringField
       FieldName = 'ShowToUser'
       Visible = False
+    end
+    object aspGetDiscWorkiHour_Audit: TIntegerField
+      FieldName = 'iHour_Audit'
     end
   end
   object adsGetUchPlanGrup: TADODataSet

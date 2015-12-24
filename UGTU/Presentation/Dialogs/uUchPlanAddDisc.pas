@@ -55,7 +55,6 @@ type
     Bevel2: TBevel;
     Bevel3: TBevel;
     Bevel6: TBevel;
-    Bevel7: TBevel;
     edtHoursGos: TDBEditEh;
     Edit7: TDBEditEh;
     Label11: TLabel;
@@ -69,13 +68,14 @@ type
     Label24: TLabel;
     Label25: TLabel;
     Label26: TLabel;
-    Label27: TLabel;
     Label7: TLabel;
     lblCompetence: TLabel;
     lblNotice: TLabel;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     Button1: TButton;
+    DBEditEh1: TDBEditEh;
+    edtHoursAudit: TDBEditEh;
     procedure sgDiscDblClick(Sender: TObject);
     procedure sgDiscSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
@@ -358,8 +358,6 @@ begin
     Label24.Tag:= lab;
     Label25.Caption:= IntToStr(pract);
     Label25.Tag:= pract;
-    Label27.Caption:= IntToStr(pract + lab + lect);
-    Label27.Tag:= pract + lab + lect;
   end
   else
   begin
@@ -369,8 +367,6 @@ begin
     Label24.Tag:= 0;
     Label25.Caption:= '-';
     Label25.Tag:= 0;
-    Label27.Caption:= '-';
-    Label27.Tag:= 0;
   end;
   CalcSRS;
 
@@ -813,8 +809,8 @@ begin
   inherited;
   if ((ssCtrl in Shift) and (Key = VK_SPACE)) then
   begin
-    individ := round(StrToInt(Label27.Caption) * TUchPlanController.Instance.GetConsultationPercent);
-    if (iIndivid = individ) then exit;
+    //individ := round(StrToInt(Label27.Caption) * TUchPlanController.Instance.GetConsultationPercent);
+    //if (iIndivid = individ) then exit;
     iIndivid:= individ;
     isIndividMod:= true;
     dbcbGrpDiscKeyValueChanged(nil);
@@ -985,7 +981,7 @@ begin
   Label24.Enabled:= discType = typeTypicalDisc;
   Label25.Enabled:= discType = typeTypicalDisc;
   Label26.Enabled:= discType = typeTypicalDisc;
-  Label27.Enabled:= discType = typeTypicalDisc;
+  //Label27.Enabled:= discType = typeTypicalDisc;
 end;
 
 {procedure TfrmUchPlanAddDisc.SetHourGos(const Value: integer);

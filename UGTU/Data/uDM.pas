@@ -555,6 +555,12 @@ type
     aspGetDiscWorkShowToUser: TStringField;
     aspGetDiscModelShowToUser: TStringField;
     aspGetDiscModelik_ed_izm: TIntegerField;
+    aspGetDiscModelik_podckl: TIntegerField;
+    aspGetDiscModeluchet: TBooleanField;
+    aspGetDiscModeliK_disc1: TIntegerField;
+    aspGetDiscModelcshortname: TStringField;
+    aspGetDiscModeliHour_Audit: TIntegerField;
+    aspGetDiscWorkiHour_Audit: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

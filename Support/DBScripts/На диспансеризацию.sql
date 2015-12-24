@@ -1,8 +1,8 @@
 select distinct Clastname +' '+ Cfirstname +' '+ isnull(Cotch,'') FIO, Cname_grup, Cshort_name_fac, year(Dd_birth),  Cname_spec, 
-pr.Cstrana + ', ' + pr.Cregion +
-	   ', ' + pr.Cgorod + ', ' + pr.CStreet+', '+pr.BuildingNumber+' - '+pr.FlatNumber,
-		fac.Cstrana + ', ' + fac.Cregion + ', ' + fac.Cgorod + ', ' + fac.CStreet+', '+fac.BuildingNumber+' - '+fac.FlatNumber, 
-		vrem.Cstrana + ', ' + vrem.Cregion + ', ' + vrem.Cgorod + ', ' + vrem.CStreet+', '+vrem.BuildingNumber+' - '+vrem.FlatNumber
+ISNULL(pr.Cstrana + ', ' + pr.Cregion +
+	   ', ' + pr.Cgorod + ', ' + pr.CStreet+', '+pr.BuildingNumber+' - '+pr.FlatNumber,''),
+		ISNULL(fac.Cstrana + ', ' + fac.Cregion + ', ' + fac.Cgorod + ', ' + fac.CStreet+', '+fac.BuildingNumber+' - '+fac.FlatNumber,''), 
+		ISNULL(vrem.Cstrana + ', ' + vrem.Cregion + ', ' + vrem.Cgorod + ', ' + vrem.CStreet+', '+vrem.BuildingNumber+' - '+vrem.FlatNumber,'')
 from (
 
 select Person.nCode,Clastname, Cfirstname, Cotch, Dd_birth, ctelefon, cSotTel, Grup.Cname_grup, Cname_spec, Cshort_name_fac,[Cplacebirth],Person.ik_grazd
@@ -18,6 +18,7 @@ where (Grup.DateExit>getdate())
 and(StudGrup.Ik_prikazOtch is null)
 and (Ik_form_ed = 1)
 and Fac.ik_fac not in (15,17)
+and  YEAR(Grup.DateCreate)=2015
 
 ) Allstud
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana,Raion.Ik_raion, Region.Ik_region
