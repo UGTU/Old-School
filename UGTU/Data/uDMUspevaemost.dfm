@@ -2581,6 +2581,7 @@ object dmUspevaemost: TdmUspevaemost
     Top = 888
   end
   object adospPredmStud: TADOStoredProc
+    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'GetAllVedomostsForNapr;1'
@@ -2589,13 +2590,13 @@ object dmUspevaemost: TdmUspevaemost
         Name = '@ik_zach'
         DataType = ftInteger
         Size = 5
-        Value = 20437
+        Value = 39605
       end
       item
         Name = '@n_sem'
         DataType = ftInteger
         Size = 1
-        Value = 4
+        Value = 2
       end>
     Left = 296
     Top = 384

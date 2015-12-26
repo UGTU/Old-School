@@ -162,7 +162,7 @@ begin
 
       items[1].value := dbcbeNum.Text;
     end;
-    dmUspevaemost.adospPredmStud.ExecProc;
+    dmUspevaemost.adospPredmStud.Open;
   end;
 end;
 
