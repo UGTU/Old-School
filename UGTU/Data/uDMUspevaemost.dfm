@@ -694,7 +694,7 @@ object dmUspevaemost: TdmUspevaemost
         DataType = ftBoolean
         Value = Null
       end>
-    Left = 285
+    Left = 293
     Top = 267
   end
   object dsGetAllVeds4Group: TDataSource
@@ -2581,7 +2581,6 @@ object dmUspevaemost: TdmUspevaemost
     Top = 888
   end
   object adospPredmStud: TADOStoredProc
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'GetAllVedomostsForNapr;1'
