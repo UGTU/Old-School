@@ -1,11 +1,12 @@
 unit uVosstStud;
-   {#Author sergdev@ist.ugtu.net}
+
+{ #Author sergdev@ist.ugtu.net }
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, StdCtrls, Mask, DBCtrlsEh, DBLookupEh,
-  ActnList, Buttons, ExtCtrls, dbtvStudobj,dbtvGroupobj, System.Actions;
+  ActnList, Buttons, ExtCtrls, dbtvStudobj, dbtvGroupobj, System.Actions;
 
 type
   TfrmStudVosst = class(TfrmBaseDialog)
@@ -39,7 +40,7 @@ type
   private
     { Private declarations }
   public
-  student:TDBNodeStudObject;
+    student: TDBNodeStudObject;
     { Public declarations }
   end;
 
@@ -52,70 +53,77 @@ uses uDM, uDMCauses, uDMStudentActions, uDMUgtuStructure, uDMPrikaz, uMain;
 
 {$R *.dfm}
 
-function CheckFields:boolean;
+function CheckFields: boolean;
 begin
-result:=true;
-with frmStudVosst do
-begin
-if (dbcbeNumPrik.Text='')
-or(dbcbeCause.Text='')
-or(dbcbeFac.Text='')
-or(dbcbeSpec.Text='')
-or(dbcbeGroup.Text='')
-then result:=false
-end;
+  result := true;
+  with frmStudVosst do
+  begin
+    if (dbcbeNumPrik.Text = '') or (dbcbeCause.Text = '') or
+      (dbcbeFac.Text = '') or (dbcbeSpec.Text = '') or (dbcbeGroup.Text = '')
+    then
+      result := false
+  end;
 end;
 
 procedure TfrmStudVosst.dbcbeFacChange(Sender: TObject);
 begin
   inherited;
- dmUgtuStructure.adodsSpec.Active:=false;
- dmUgtuStructure.adodsGroups.Active:=false;
- if dbcbeFac.KeyValue<>NULL then begin
- dmUgtuStructure.adodsSpec.CommandText:='select Ik_fac, ik_spec_fac, Cname_spec+ISNULL('' (''+[Sh_spec]+'')'','' '') Cname_spec from Tree_specialties where Ik_fac='''+string(dbcbeFac.KeyValue)+'''';
- dmUgtuStructure.adodsSpec.Active:=true;
-  dmUgtuStructure.adodsSpec.Sort := 'CName_spec';
-end;
+  dmUgtuStructure.adodsSpec.Active := false;
+  dmUgtuStructure.adodsGroups.Active := false;
+  if dbcbeFac.KeyValue <> NULL then
+  begin
+    dmUgtuStructure.adodsSpec.CommandText :=
+      'select Ik_fac, ik_spec_fac, Cname_spec+ISNULL('' (''+[Sh_spec]+'')'','' '') Cname_spec from Tree_specialties where Ik_fac='''
+      + string(dbcbeFac.KeyValue) + '''';
+    dmUgtuStructure.adodsSpec.Active := true;
+    dmUgtuStructure.adodsSpec.Sort := 'CName_spec';
+  end;
 
-if CheckFields then begin
-bbOk.Enabled:=true;
-bbApply.Enabled:=true;
-end else
-begin
-bbOk.Enabled:=false;
-bbApply.Enabled:=false;
-end;
+  if CheckFields then
+  begin
+    bbOk.Enabled := true;
+    bbApply.Enabled := true;
+  end
+  else
+  begin
+    bbOk.Enabled := false;
+    bbApply.Enabled := false;
+  end;
 end;
 
 procedure TfrmStudVosst.dbcbeSpecChange(Sender: TObject);
 begin
   inherited;
- dmUgtuStructure.adodsGroups.Active:=false;
- if dbcbeSpec.KeyValue<>NULL then begin
- dmUgtuStructure.adodsGroups.CommandText:='select * from Tree_groups where Ik_spec_fac='''+string(dbcbespec.KeyValue)+'''';
- dmUgtuStructure.adodsGroups.Active:=true;
- dmUgtuStructure.adodsGroups.Sort := 'CName_grup';
- end;
+  dmUgtuStructure.adodsGroups.Active := false;
+  if dbcbeSpec.KeyValue <> NULL then
+  begin
+    dmUgtuStructure.adodsGroups.CommandText :=
+      'select * from Tree_groups where Ik_spec_fac=''' +
+      string(dbcbeSpec.KeyValue) + '''';
+    dmUgtuStructure.adodsGroups.Active := true;
+    dmUgtuStructure.adodsGroups.Sort := 'CName_grup';
+  end;
 
- if CheckFields then begin
-bbOk.Enabled:=true;
-bbApply.Enabled:=true;
-end else
-begin
-bbOk.Enabled:=false;
-bbApply.Enabled:=false;
-end;
-
+  if CheckFields then
+  begin
+    bbOk.Enabled := true;
+    bbApply.Enabled := true;
+  end
+  else
+  begin
+    bbOk.Enabled := false;
+    bbApply.Enabled := false;
+  end;
 
 end;
 
 procedure TfrmStudVosst.FormShow(Sender: TObject);
 begin
-dmUgtuStructure.adodsFaculty.Active:=true;
-dmUgtuStructure.adodsFaculty.Sort := 'CName_fac';
-dmPrikaz.adodsPrikaz.active:=true;
-dmCauses.adodsRestoreCause.Active:=true;
-dbcbeCause.KeyValue:=116;
+  dmUgtuStructure.adodsFaculty.Active := true;
+  dmUgtuStructure.adodsFaculty.Sort := 'CName_fac';
+  dmPrikaz.adodsPrikaz.Active := true;
+  dmCauses.adodsRestoreCause.Active := true;
+  dbcbeCause.KeyValue := 116;
 end;
 
 procedure TfrmStudVosst.sbAddPrikazClick(Sender: TObject);
@@ -124,60 +132,63 @@ begin
 end;
 
 procedure TfrmStudVosst.actApplyExecute(Sender: TObject);
-//vAR ndGroup:TDBNodeGroupObject;
+// vAR ndGroup:TDBNodeGroupObject;
 begin
 
-dmStudentActions.aspAppendStudGroup.Active:=false;
+  dmStudentActions.aspAppendStudGroup.Active := false;
 
-with dmStudentActions.aspAppendStudGroup.Parameters do begin
-items[1].Value:=1;
-//ndGroup:=(Student.Node.Parent.Data);
-items[2].Value:=dbcbeGroup.KeyValue;
-items[3].Value:=student.RecordbookKey;
-items[4].Value:=student.CategoryID;
-items[5].Value:=dbcbeNumPrik.KeyValue;//student.OrderEnterId;
-items[6].Value:=dbcbeCause.KeyValue;//student.CauseEnterID;
-items[7].Value:=Null;//dbcbeNumPrik.KeyValue;
-items[8].Value:=Null;//dbcbeCause.KeyValue;
-items[9].Value:=eZachObosn.Text;
-items[10].Value:=Null;
-end;
+  with dmStudentActions.aspAppendStudGroup.Parameters do
+  begin
+    items[1].Value := 1;
+    // ndGroup:=(Student.Node.Parent.Data);
+    items[2].Value := dbcbeGroup.KeyValue;
+    items[3].Value := student.RecordbookKey;
+    items[4].Value := student.CategoryID;
+    items[5].Value := dbcbeNumPrik.KeyValue; // student.OrderEnterId;
+    items[6].Value := dbcbeCause.KeyValue; // student.CauseEnterID;
+    items[7].Value := NULL; // dbcbeNumPrik.KeyValue;
+    items[8].Value := NULL; // dbcbeCause.KeyValue;
+    items[9].Value := ezachObosn.Text;
+    items[10].Value := NULL;
+  end;
 
-try
-dmStudentActions.aspAppendStudGroup.ExecProc;
- close;
-except
-showmessage('Неверно заданы параметры!');
-end;
+  try
+    dmStudentActions.aspAppendStudGroup.ExecProc;
+    close;
+  except
+    showmessage('Неверно заданы параметры!');
+  end;
 end;
 
 procedure TfrmStudVosst.actOKExecute(Sender: TObject);
 begin
- actApply.Execute;
+  actApply.Execute;
 
 end;
 
 procedure TfrmStudVosst.dbcbeNumPrikChange(Sender: TObject);
 begin
-if CheckFields then begin
-bbOk.Enabled:=true;
-bbApply.Enabled:=true;
-end else
-begin
-bbOk.Enabled:=false;
-bbApply.Enabled:=false;
-end;
+  if CheckFields then
+  begin
+    bbOk.Enabled := true;
+    bbApply.Enabled := true;
+  end
+  else
+  begin
+    bbOk.Enabled := false;
+    bbApply.Enabled := false;
+  end;
 
 end;
 
 procedure TfrmStudVosst.ezachObosnEnter(Sender: TObject);
 begin
-ezachObosn.BevelKind:=bkSoft;
+  ezachObosn.BevelKind := bkSoft;
 end;
 
 procedure TfrmStudVosst.ezachObosnExit(Sender: TObject);
 begin
-ezachObosn.BevelKind:=bkNone;
+  ezachObosn.BevelKind := bkNone;
 end;
 
 end.

@@ -430,9 +430,10 @@ begin
   dmUchPlan.adodsUchPlan.CommandText :=
     'select * from Uch_pl where (ik_uch_plan = ' + inttostr(ik) + ')';
   dmUchPlan.adodsUchPlan.open;
-  if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value<>NULL) then
-     FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
-     else FIsBRS := false;
+  if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
+    FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
+  else
+    FIsBRS := false;
   { if (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value <> NULL) then
     FIsBRS := (dmUchPlan.adodsUchPlan.FieldByName('IsBRSPlan').Value)
     else FIsBRS :=false;
@@ -722,7 +723,7 @@ begin
 
   dmUspevaemost.adospGetAllVedNaprForDisc.Active := false;
 
-  dbcbNapr.KeyValue := Null;
+  dbcbNapr.KeyValue := NULL;
 
   nSem := cmbxSemNapr.ItemIndex + 1;
 
@@ -897,7 +898,7 @@ begin
   TUspevGroupController.Instance.SelAtt(cmbxSemAtt.ItemIndex + 1, ikPredm,
     ikVidZan, ik, cmbxNumber.Value);
 
-  if dmUspevaemost.adospSelAtt.FieldByName('lClose').Value <> Null then
+  if dmUspevaemost.adospSelAtt.FieldByName('lClose').Value <> NULL then
     dbcbxCloseAtt.Checked := dmUspevaemost.adospSelAtt.FieldByName
       ('lClose').Value;
 
@@ -908,10 +909,10 @@ begin
     Active := true;
   end;
 
-  dbcbeExaminer.KeyValue := dmUspevaemost.adospSelAtt.FieldByName
-    ('id_teacher').AsInteger;
+  dbcbeExaminer.KeyValue := dmUspevaemost.adospSelAtt.FieldByName('id_teacher')
+    .AsInteger;
 
-  if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> Null then
+  if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> NULL then
     dbdteBRSExam.Value := dmUspevaemost.adospSelAtt.FieldByName('Dd_exam')
       .AsDateTime;
 
@@ -921,7 +922,7 @@ procedure TfmGroup.dbcmbxDiscChange(Sender: TObject);
 begin
   inherited;
 
-  if (dbcmbxDisc.KeyValue = Null) or (dbcmbxDisc.Text = '') or
+  if (dbcmbxDisc.KeyValue = NULL) or (dbcmbxDisc.Text = '') or
     (cmbxNumber.Text = '') then
     Exit; // будет управление преподавателями
 
@@ -995,7 +996,7 @@ end;
 procedure TfmGroup.CheckEnabled;
 begin
   if (cmbxSem.ItemIndex = -1) or (dbcmbxPrepodVed.KeyValue = -1) or
-    (dbcmbxPrepodVed.KeyValue = Null) or (dbdteEx.Text = '  .  .    ') then
+    (dbcmbxPrepodVed.KeyValue = NULL) or (dbdteEx.Text = '  .  .    ') then
     actCreateAllVeds.Enabled := false
   else
     actCreateAllVeds.Enabled := true;
@@ -1195,7 +1196,7 @@ begin
   TUspevGroupController.Instance.SelBRSExam(cmbxSemAtt.ItemIndex + 1, ikPredm,
     ikVidZan, ik);
 
-  if dmUspevaemost.adospSelBRSExam.FieldByName('lClose').Value <> Null then
+  if dmUspevaemost.adospSelBRSExam.FieldByName('lClose').Value <> NULL then
     dbcbxCloseAtt.Checked := dmUspevaemost.adospSelBRSExam.FieldByName
       ('lClose').Value;
 
@@ -1210,7 +1211,7 @@ begin
   dbcbeExaminer.KeyValue := dmUspevaemost.adospSelBRSExam.FieldByName
     ('id_teacher').AsInteger;
 
-  if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime <> Null
+  if dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam').AsDateTime <> NULL
   then
     dbdteBRSExam.Value := dmUspevaemost.adospSelBRSExam.FieldByName('Dd_exam')
       .AsDateTime;
@@ -1272,7 +1273,7 @@ begin
       Modified := false;
   end;
 
-  if (dbcbeDisc.KeyValue = Null) or (dbcbeDisc.Text = '') or (nAtt.Text = '')
+  if (dbcbeDisc.KeyValue = NULL) or (dbcbeDisc.Text = '') or (nAtt.Text = '')
   then
     Exit;
 
@@ -1296,7 +1297,7 @@ begin
   TUspevGroupController.Instance.SelAtt(dbcbeSemAtt.ItemIndex + 1, ikPredm,
     ikVidZan, ik, nAtt.Value);
 
-  if dmUspevaemost.adospSelAtt.FieldByName('lClose').Value <> Null then
+  if dmUspevaemost.adospSelAtt.FieldByName('lClose').Value <> NULL then
     cbAttClose.Checked := dmUspevaemost.adospSelAtt.FieldByName('lClose').Value;
 
   with dmUspevaemost.aspPrepodVedFromUchPlan do
@@ -1309,7 +1310,7 @@ begin
   dblcbPrepod.KeyValue := dmUspevaemost.adospSelAtt.FieldByName('id_teacher')
     .AsInteger;
 
-  if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> Null then
+  if dmUspevaemost.adospSelAtt.FieldByName('Dd_exam').AsDateTime <> NULL then
     dbdteAttBegin.Value := dmUspevaemost.adospSelAtt.FieldByName('Dd_exam')
       .AsDateTime;
 
@@ -1354,7 +1355,7 @@ begin
   // actCloseNapr.Enabled := false;
   // actPrintNapr.Enabled := false;
 
-  if (dbcbNapr.KeyValue = Null) or (dbcbNapr.Text = '') then
+  if (dbcbNapr.KeyValue = NULL) or (dbcbNapr.Text = '') then
     Exit;
 
   ikPredm := dmUspevaemost.adospGetAllVedNaprForGrup.FieldValues['ik_disc'];
@@ -1400,9 +1401,9 @@ begin
   // записываем считанные данные
   dbcmbxPrepodVed.KeyValue := dmUspevaemost.adospSelVed.FieldByName
     ('id_teacher').Value;
-  if dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value <> Null then
+  if dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value <> NULL then
     dbdteEx.Value := dmUspevaemost.adospSelVed.FieldByName('Dd_exam').Value;
-  if (dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value <> Null) and
+  if (dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value <> NULL) and
     (dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value <>
     '            ') then
     dbeNum.Text := dmUspevaemost.adospSelVed.FieldByName('cNumber_ved').Value
@@ -1436,6 +1437,7 @@ begin
     else
       Modified := false;
   end;
+
   // Выборка дисциплин в этом семестре из учебного плана
   dbcbeDisc.KeyValue := -1;
   // cmbxDate.ItemIndex := -1;
@@ -1540,8 +1542,8 @@ begin
     // dmUspevaemost.adospGetAllVeds4Group.Close;
     dmUspevaemost.adospSelVed.close;
     dmUspevaemost.adospSelVedGroup.close;
-    dbcmbxPrepodVed.Value := Null;
-    dbdteEx.Value := Null;
+    dbcmbxPrepodVed.Value := NULL;
+    dbdteEx.Value := NULL;
     SetVedEnabled;
     Exit;
   end;
@@ -1593,7 +1595,7 @@ begin
 
     lVinost.Visible := false;
     // выбираем преподавателей
-    if not TUspevGroupController.Instance.SelPrepodsForVedom(Null, Null, Null)
+    if not TUspevGroupController.Instance.SelPrepodsForVedom(NULL, NULL, NULL)
     then
     begin
       MessageBox(Handle, 'Произошла ошибка при выборе преподавателей.',
@@ -1802,7 +1804,7 @@ begin
           'ИС УГТУ', MB_YESNO) = IDYES then // dialog
         begin
           if not TUspevGroupController.Instance.OpenVed(ikVed) then
-          // openVedAtt
+            // openVedAtt
             MessageBox(Handle, 'При открытии ведомости произошла ошибка.',
               'ИС УГТУ', MB_OK)
         end
@@ -1915,7 +1917,7 @@ begin
     MessageBox(Handle, 'Нельзя редактировать закрытую ведомость!',
       'ИС УГТУ', MB_OK);
 
-  if (dbgrdVed.Fields[1].Value = Null) or (dbgrdVed.Fields[1].Text = '') or
+  if (dbgrdVed.Fields[1].Value = NULL) or (dbgrdVed.Fields[1].Text = '') or
     (not dmUspevaemost.adospSelVedGroup.FieldByName('dopusc').AsBoolean) or
     (dmUspevaemost.adospSelVed.FieldByName('lClose').AsBoolean) then
   begin
@@ -1965,7 +1967,7 @@ var
   // medalBall:integer;
 begin
 
-  if dbgrdVed.DataSource.DataSet.FieldByName('ik_zach').AsInteger = Null then
+  if dbgrdVed.DataSource.DataSet.FieldByName('ik_zach').AsInteger = NULL then
     Exit;
   if (gdSelected in State) and (dbgrdVed.Focused) then
     Exit;
@@ -2090,7 +2092,7 @@ begin
 
   if Text = '' then
   begin
-    Value := Null;
+    Value := NULL;
     Modified := true;
   end;
   try
@@ -2100,11 +2102,11 @@ begin
       Text := inttostr(Value)
     else
     begin
-      Value := Null;
+      Value := NULL;
       Text := '';
     end;
   except
-    Value := Null;
+    Value := NULL;
     Text := '';
   end;
   TApplicationController.GetInstance.AddLogEntry('Диплом. Ввод оценки ' +
@@ -2137,27 +2139,27 @@ begin
   CurrentDplVidDate := 0;
   bdown := true;
 
-  if dbgDiplom.DataSource.DataSet.FieldByName('RegNumber').Value <> Null then
+  if dbgDiplom.DataSource.DataSet.FieldByName('RegNumber').Value <> NULL then
     if dbgDiplom.SelectedField.FieldName = 'RegNumber' then
     begin
       CurrentNum := dbgDiplom.DataSource.DataSet.FieldByName('RegNumber').Value;
     end;
 
-  if dbgDiplom.DataSource.DataSet.FieldByName('VipNumber').Value <> Null then
+  if dbgDiplom.DataSource.DataSet.FieldByName('VipNumber').Value <> NULL then
     if dbgDiplom.SelectedField.FieldName = 'VipNumber' then
     begin
       CurrentVipNum := dbgDiplom.DataSource.DataSet.FieldByName
         ('VipNumber').Value;
     end;
 
-  if dbgDiplom.DataSource.DataSet.FieldByName('Dd_dipl').Value <> Null then
+  if dbgDiplom.DataSource.DataSet.FieldByName('Dd_dipl').Value <> NULL then
     if dbgDiplom.SelectedField.FieldName = 'Dd_dipl' then
     begin
       CurrentDplDate := dbgDiplom.DataSource.DataSet.FieldByName
         ('Dd_dipl').Value;
     end;
 
-  if dbgDiplom.DataSource.DataSet.FieldByName('Dd_VidDipl').Value <> Null then
+  if dbgDiplom.DataSource.DataSet.FieldByName('Dd_VidDipl').Value <> NULL then
     if dbgDiplom.SelectedField.FieldName = 'Dd_VidDipl' then
     begin
       CurrentDplVidDate := dbgDiplom.DataSource.DataSet.FieldByName
@@ -2173,7 +2175,7 @@ var
   str: string;
 begin
   if (bdown) and (CurrentNum <> '') and
-    ((dbgDiplom.SelectedField.Value = Null) or
+    ((dbgDiplom.SelectedField.Value = NULL) or
     (dbgDiplom.SelectedField.Value = '')) then
     try
       dbgDiplom.DataSource.DataSet.Edit;
@@ -2193,7 +2195,7 @@ begin
     end;
 
   if (bdown) and (CurrentVipNum <> '') and
-    ((dbgDiplom.SelectedField.Value = Null) or
+    ((dbgDiplom.SelectedField.Value = NULL) or
     (dbgDiplom.SelectedField.Value = '')) then
     try
       dbgDiplom.DataSource.DataSet.Edit;
@@ -2214,7 +2216,7 @@ begin
       dbgDiplom.SelectedField.Value := (CurrentVipNum);
     end;
 
-  if (bdown) and (CurrentDplDate <> 0) and (dbgDiplom.SelectedField.Value = Null)
+  if (bdown) and (CurrentDplDate <> 0) and (dbgDiplom.SelectedField.Value = NULL)
   then
   begin
     dbgDiplom.DataSource.DataSet.Edit;
@@ -2223,7 +2225,7 @@ begin
   end;
 
   if (bdown) and (CurrentDplVidDate <> 0) and
-    (dbgDiplom.SelectedField.Value = Null) then
+    (dbgDiplom.SelectedField.Value = NULL) then
   begin
     dbgDiplom.DataSource.DataSet.Edit;
     dbgDiplom.SelectedField.Value := CurrentDplVidDate;
@@ -2329,14 +2331,14 @@ var
 begin
   if Text = '' then
   begin
-    Value := Null;
+    Value := NULL;
     Modified := true;
   end;
-  if (dbgrdBRSAtt.Fields[1].Value = Null) or (dbgrdBRSAtt.Fields[1].Text = '')
+  if (dbgrdBRSAtt.Fields[1].Value = NULL) or (dbgrdBRSAtt.Fields[1].Text = '')
   then
     Text := '';
 
-  if (dbgrdBRSAtt.Fields[3].Text = '') or (dbgrdBRSAtt.Fields[3].Value = Null)
+  if (dbgrdBRSAtt.Fields[3].Text = '') or (dbgrdBRSAtt.Fields[3].Value = NULL)
   then
     Lastballs := 0
   else
@@ -2346,14 +2348,14 @@ begin
     if (Value < Lastballs) then
     begin
       Text := '';
-      Value := Null;
+      Value := NULL;
       showmessage('Количество баллов не может уменьшиться в ходе испытания!')
     end;
 
   if (Value > MaxBall) then
   begin
     Text := '';
-    Value := Null;
+    Value := NULL;
     showmessage('Сумма баллов после этого испытания не может быть больше ' +
       inttostr(MaxBall) + '!')
   end
@@ -2369,25 +2371,25 @@ procedure TfmGroup.dbgrdBRSExamColumns5UpdateData(Sender: TObject;
 begin
   if (Text = '') or (dbgrdBRSExam.Fields[3].Text = '') then
   begin
-    Value := Null;
+    Value := NULL;
     Modified := (Text = '');
     Exit;
   end;
-  if (dbgrdBRSExam.Fields[1].Value = Null) or (dbgrdBRSExam.Fields[1].Text = '')
+  if (dbgrdBRSExam.Fields[1].Value = NULL) or (dbgrdBRSExam.Fields[1].Text = '')
   then
     Text := '';
 
   if (Value < 0) then
   begin
     Text := '';
-    Value := Null;
+    Value := NULL;
     showmessage('Количество баллов не может уменьшиться в ходе экзамена!')
   end;
 
   if (Value + dbgrdBRSExam.Fields[3].Value > MaxBall) then
   begin
     Text := '';
-    Value := Null;
+    Value := NULL;
     showmessage('Сумма баллов после экзамена не может быть больше ' +
       inttostr(MaxBall) + '!')
   end
@@ -2404,7 +2406,7 @@ begin
   // or(dmUspevaemost.adodsSelBRSExamGroup.FieldByName('i_sumall').Value<60)
   if (Value < 0) or (Value > 5) then
   begin
-    Value := Null;
+    Value := NULL;
     Text := '';
   end;
 
@@ -2676,7 +2678,8 @@ begin
           dbgDiplom.DataSource.DataSet.FieldByName('ik_direction').AsInteger,
           dbgDiplom.DataSource.DataSet.FieldByName('Ik_fac').AsInteger,
           dbgDiplom.DataSource.DataSet.FieldByName('VidGos').AsInteger,
-          dbgDiplom.DataSource.DataSet.FieldByName('DiplVklDatPadez').AsBoolean);
+          dbgDiplom.DataSource.DataSet.FieldByName('DiplVklDatPadez')
+          .AsBoolean);
       end;
     end;
     if (not AllRight) then
@@ -2847,13 +2850,13 @@ begin
     if dbcbVed.Text = '' then
       Exit;
 
-    if dbcmbxPrepodVed.KeyValue = Null then
+    if dbcmbxPrepodVed.KeyValue = NULL then
     begin
       MessageBox(Handle, 'Выберите преподавателя!', 'ИС УГТУ', MB_OK);
       Exit;
     end;
 
-    if (dbdteEx.Text = '  .  .    ') or (dbdteEx.Value = Null) then
+    if (dbdteEx.Text = '  .  .    ') or (dbdteEx.Value = NULL) then
     begin
       MessageBox(Handle, 'Укажите дату!', 'ИС УГТУ', MB_OK);
       Exit;
@@ -3149,7 +3152,7 @@ begin
     // удаление дисциплины
     TUspevGroupController.Instance.DelVed(ikVed);
     // все переоткрываем
-    dbcmbxDisc.Value := Null;
+    dbcmbxDisc.Value := NULL;
     dmUspevaemost.adodsSelAttGroup.close;
     dmUspevaemost.adospGetAllAtt.close;
     dmUspevaemost.adospGetAllAtt.open;
@@ -3176,10 +3179,10 @@ begin
       with dmGroupActions.adospAppendGrup.Parameters do
       begin
         ParamByName('@flag').Value := -1;
-        ParamByName('@ik_spec_fac').Value := Null;
-        ParamByName('@Cname_grup').Value := Null;
-        ParamByName('@Ik_uch_plan').Value := Null;
-        ParamByName('@nYear_post').Value := Null;
+        ParamByName('@ik_spec_fac').Value := NULL;
+        ParamByName('@Cname_grup').Value := NULL;
+        ParamByName('@Ik_uch_plan').Value := NULL;
+        ParamByName('@nYear_post').Value := NULL;
         ParamByName('@Ik_grup').Value := ik;
       end;
       dmGroupActions.adospAppendGrup.ExecProc;
@@ -3228,7 +3231,7 @@ begin
     TUspevGroupController.Instance.DelVed(ikVed);
     Modified := false;
     // все переоткрываем
-    dbcbVed.Value := Null;
+    dbcbVed.Value := NULL;
     dmUspevaemost.adospSelVedGroup.close;
     dmUspevaemost.adospGetAllVeds4Group.close;
     dmUspevaemost.adospGetAllVeds4Group.open;
@@ -3251,19 +3254,20 @@ end;
 
 procedure TfmGroup.ActDiplListToExcelExecute(Sender: TObject);
 var
-  Report:TExcelReportDBGrid;
+  Report: TExcelReportDBGrid;
 begin
-    //TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт вкладки к диплому '+StudName);
+  // TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт вкладки к диплому '+StudName);
 
-    Report := TReportBase.CreateReport(TExcelReportDBGrid) as TExcelReportDBGrid;
-    Report.DataSet := dmDiplom.adospDiplomList;
-    Report.DBGrid:= dbgDiplom;
-    Report.ReportTemplate:= ExtractFilePath(Application.ExeName)+'reports\'+'DiplList.xltx';
-    Report.FreeOnComplete := true;
-    Report.OnExecuteError := ExecuteError;
-    TWaitingController.GetInstance.Process(Report);
+  Report := TReportBase.CreateReport(TExcelReportDBGrid) as TExcelReportDBGrid;
+  Report.DataSet := dmDiplom.adospDiplomList;
+  Report.DBGrid := dbgDiplom;
+  Report.ReportTemplate := ExtractFilePath(Application.ExeName) + 'reports\' +
+    'DiplList.xltx';
+  Report.FreeOnComplete := true;
+  Report.OnExecuteError := ExecuteError;
+  TWaitingController.GetInstance.Process(Report);
 
-    //Report.BuildReport;
+  // Report.BuildReport;
 
 end;
 
@@ -3359,18 +3363,18 @@ end;
 
 procedure TfmGroup.ToolButton27Click(Sender: TObject);
 var
-  Report:TExcelBaseReportDataSet;
+  Report: TExcelBaseReportDataSet;
 begin
-    //TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт вкладки к диплому '+StudName);
+  // TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт вкладки к диплому '+StudName);
 
-    Report := TReportBase.CreateReport(TExcelBaseReportDataSet) as TExcelBaseReportDataSet;
-    Report.FreeOnComplete := true;
-    Report.OnExecuteError := ExecuteError;
-    TWaitingController.GetInstance.Process(Report);
+  Report := TReportBase.CreateReport(TExcelBaseReportDataSet)
+    as TExcelBaseReportDataSet;
+  Report.FreeOnComplete := true;
+  Report.OnExecuteError := ExecuteError;
+  TWaitingController.GetInstance.Process(Report);
 
-    //Report.BuildReport;
+  // Report.BuildReport;
 end;
-
 
 procedure TfmGroup.ToolButton9Click(Sender: TObject);
 var
@@ -3611,7 +3615,7 @@ var
   // dateAtt: TDate;
 begin
 
-  if (cmbxNumber.Value = Null) or (cmbxNumber.Text = '') then
+  if (cmbxNumber.Value = NULL) or (cmbxNumber.Text = '') then
     Exit;
 
   actCreateAtt.Enabled := true;
@@ -3681,7 +3685,7 @@ var
 
 begin
 
-  if (cmbxNumber.Value = Null) or (cmbxNumber.Text = '') then
+  if (cmbxNumber.Value = NULL) or (cmbxNumber.Text = '') then
     Exit;
 
   // actCreateAtt.Enabled := true;
@@ -3741,7 +3745,7 @@ var
   // dateAtt: TDate;
 begin
 
-  if (nAtt.Value = Null) or (nAtt.Text = '') then
+  if (nAtt.Value = NULL) or (nAtt.Text = '') then
     Exit;
 
   // проверить Action на соответствии обычным аттестациям

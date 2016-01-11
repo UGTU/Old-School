@@ -17,10 +17,10 @@ and nCode not in (select nCode from Export_FB_journal)
 
 select * from [dbo].[Export_FB_journal] where nnyear = 2015
 and ((Is_actual = 0)or(Is_actual is null))
-order by [Import_result]
+order by prikaz_result
 
 --те, кто прошли с ошибками--------------------------------------------------------------------------------------------------------------------------
-select Person.nCode,Person.Clastname, Person.Cfirstname,  [Import_result], prikaz_result, Cshort_name_fac, Cshort_spec, cName_direction, Cname_form_ed, CType_kat
+select Person.nCode,Person.Clastname, Person.Cfirstname, Person.Cotch,  [Import_result], prikaz_result, Cshort_name_fac, Cshort_spec, cName_direction, Cname_form_ed, CType_kat
 from [dbo].[Export_FB_journal] inner join Person on Person.nCode = [dbo].[Export_FB_journal].nCode
 left join (select Fac.Cshort_name_fac, EducationBranch.Cshort_spec, ABIT_postup.nCode, Direction.cName_direction,
 			Form_ed.Cname_form_ed, TypeKatZach.CType_kat
@@ -38,11 +38,18 @@ where nnyear = 2015
 and ((is_actual = 0)or(is_actual is null))
 --order by  Person.Clastname, Person.Cfirstname
 --order by cName_direction,CType_kat
-order by prikaz_result
+order by Clastname--prikaz_result
 -------------------------------------------------------------------------------------------------------------------------------------------------------
+--после попытки импорта
+update [dbo].[Export_FB_journal] set Is_actual = 0
+--select * from [dbo].[Export_FB_journal]
+where nnyear = 2015 and ((ErrorCode <> 0 and ErrorCode<>3001)or(prikaz_result is null))
 
 update [dbo].[Export_FB_journal] set Is_actual = 1, prikaz_result = 'In Prikaz', ErrorCode = 0
 where nnyear = 2015 and ErrorCode = 3020
+
+update [dbo].[Export_FB_journal] set Is_actual = 1, [Import_result] = 'Is exported'
+where nnyear = 2015 and ErrorCode in (0,113)
 
 update [dbo].[Export_FB_journal] set prikaz_result = 'Результаты ЕГЭ не подтверждены'
 where nnyear = 2015 and ErrorCode = 1
@@ -147,3 +154,9 @@ select Fac.Cshort_name_fac, EducationBranch.Cshort_spec, ABIT_postup.nCode, Dire
 		   and ABIT_postup.ik_zach = 6 
 
 select * from ABIT_postup where nCode = 115524
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+select * from Person where [Clastname] like '%Безрук%'
+
+select * from [dbo].[Export_FB_journal]
+where nCode in (137233,137234)
