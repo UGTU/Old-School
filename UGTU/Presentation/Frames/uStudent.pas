@@ -2181,6 +2181,7 @@ begin
   dmDocs.spDest.Parameters.Refresh;
   dmDocs.spDest.Parameters.ParamByName('@ik_stud').Value := obj.StudGrupKey;
   dmDocs.spDest.Active := true;
+
   //cbeDest.ListField := 'cShortNameDestination';
  // cbeDest.KeyField := 'ik_destination';
 
@@ -3359,12 +3360,13 @@ begin
           'select MAX(Ik_Document)[maxid] from Document where Ik_studGrup=' +
           ik_studGrup.ToString() + 'and Ik_destination= 4 and NumberDoc =' +
           LastNum.ToString() + 'and Num_podrazd=''' + depInd + '''';
-
-        if fReview.rbP.Checked then // если пересылка почтой
-        begin
-          tempDSikdoc.Connection := dm.DBConnect;
+                    tempDSikdoc.Connection := dm.DBConnect;
           tempDSikdoc.Open;
           tempDSikdoc.First;
+
+        ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
+        if fReview.rbP.Checked then // если пересылка почтой
+        begin
 
           // добавляем место назначения отправки
           tempDSsm.CommandText := 'Select * from Addressee_Doc';
@@ -3372,7 +3374,7 @@ begin
           tempDSsm.Insert;
           tempDSsm.FieldByName('Ik_Document').Value :=
             tempDSikdoc.FieldByName('maxid').AsInteger;
-          ik_doc := tempDSikdoc.FieldByName('maxid').AsInteger;
+
           dmDocs.adodsStudAddres.Open;
           dmDocs.adodsStudAddres.First;
           while not dmDocs.adodsStudAddres.EOF do

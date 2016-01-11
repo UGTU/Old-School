@@ -164,7 +164,7 @@ inherited fmUchPlan: TfmUchPlan
               ParentFont = False
             end
             object dbgDisc: TDBGridEh
-              Left = 5
+              Left = 1
               Top = 25
               Width = 443
               Height = 363
@@ -1047,7 +1047,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00800010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1574,8 +1574,8 @@ inherited fmUchPlan: TfmUchPlan
   object dsDisc: TDataSource
     DataSet = dm.aspGetDiscModel
     OnDataChange = dsDiscDataChange
-    Left = 728
-    Top = 408
+    Left = 856
+    Top = 232
   end
   object dsDiscZE: TDataSource
     DataSet = dmFgos.aspGetDiscZE
@@ -1611,19 +1611,19 @@ inherited fmUchPlan: TfmUchPlan
   end
   object dsGetDataTitle: TDataSource
     DataSet = dmFgos.aspGetDataTitle
-    Left = 656
-    Top = 296
+    Left = 784
+    Top = 120
   end
   object dsGetAllDiscFgos: TDataSource
-    Left = 672
-    Top = 352
+    Left = 800
+    Top = 176
   end
   object dsGetAllComp: TDataSource
-    Left = 712
-    Top = 352
+    Left = 840
+    Top = 176
   end
   object dsComp_Disc: TDataSource
-    Left = 752
-    Top = 344
+    Left = 880
+    Top = 168
   end
 end

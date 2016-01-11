@@ -694,7 +694,7 @@ object dmUspevaemost: TdmUspevaemost
         DataType = ftBoolean
         Value = Null
       end>
-    Left = 285
+    Left = 293
     Top = 267
   end
   object dsGetAllVeds4Group: TDataSource
@@ -2589,13 +2589,13 @@ object dmUspevaemost: TdmUspevaemost
         Name = '@ik_zach'
         DataType = ftInteger
         Size = 5
-        Value = 20437
+        Value = 39605
       end
       item
         Name = '@n_sem'
         DataType = ftInteger
         Size = 1
-        Value = 4
+        Value = 2
       end>
     Left = 296
     Top = 384
