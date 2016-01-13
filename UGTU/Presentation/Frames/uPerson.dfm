@@ -18,16 +18,12 @@ inherited fmPerson: TfmPerson
       TabOrder = 0
       object TabLichnDan: TTabSheet
         Caption = #1051#1080#1095#1085#1099#1077' '#1076#1072#1085#1085#1099#1077
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object PageLichDannie: TPageControl
           Left = 0
           Top = 0
           Width = 901
           Height = 529
-          ActivePage = TabAdress
+          ActivePage = TabDoc
           Align = alClient
           Constraints.MinHeight = 165
           Constraints.MinWidth = 281
@@ -468,10 +464,6 @@ inherited fmPerson: TfmPerson
           object TabAdress: TTabSheet
             Caption = #1040#1076#1088#1077#1089
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object Panel3: TPanel
               Left = 0
               Top = 0
@@ -846,10 +838,6 @@ inherited fmPerson: TfmPerson
           object TabDoc: TTabSheet
             Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
             ImageIndex = 3
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             DesignSize = (
               893
               498)
@@ -878,28 +866,28 @@ inherited fmPerson: TfmPerson
                 item
                   DynProps = <>
                   EditButtons = <>
-                  FieldName = 'Cd_seria'
+                  FieldName = 'cd_seria'
                   Footers = <>
                   Width = 95
                 end
                 item
                   DynProps = <>
                   EditButtons = <>
-                  FieldName = 'Np_number'
+                  FieldName = 'np_number'
                   Footers = <>
                   Width = 115
                 end
                 item
                   DynProps = <>
                   EditButtons = <>
-                  FieldName = 'Dd_vidan'
+                  FieldName = 'dd_vidan'
                   Footers = <>
                   Width = 144
                 end
                 item
                   DynProps = <>
                   EditButtons = <>
-                  FieldName = 'Cd_kem_vidan'
+                  FieldName = 'cd_kem_vidan'
                   Footers = <>
                   Width = 192
                 end>
@@ -955,7 +943,7 @@ inherited fmPerson: TfmPerson
     Left = 594
     Top = 95
     Bitmap = {
-      494C010106000900340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

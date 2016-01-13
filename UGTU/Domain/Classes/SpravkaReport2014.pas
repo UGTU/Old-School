@@ -39,44 +39,30 @@ end;
 
 function TSpravka_Report.AddReport(): TSpravka;
 var
-
   spr_h: TSpravkaHistory;
   sp_spr: TADOStoredProc;
-
-  //sp_academ: TADODataSet;
   sp_academ: TADOStoredProc;
   sp_doc, sp_history: TADOStoredProc;
 begin
   sp_spr := TADOStoredProc.Create(nil);
   sp_history := TADOStoredProc.Create(nil);;
-//  sp_academ := TADODataSet.Create(nil);
   sp_doc := TADOStoredProc.Create(nil);
    sp_academ := TADOStoredProc.Create(nil);
   try
-    // sp_spr.ProcedureName := 'StudGetInfForSprav;1';
+
     sp_spr.ProcedureName := 'StudInfoSpravBuild;1';
     sp_spr.Connection := dm.DBConnect;
-    // sp_spr.Parameters.CreateParameter('@Ik_studGrup', ftString, pdInput, 50,
-    // self.ikStudGrup);
+
     sp_spr.Parameters.CreateParameter('@Ik_document', ftString, pdInput, 50,
       self.ik_doc);
     sp_spr.Open;
     sp_spr.First;
     sp_history.ProcedureName := 'StudHistForSpr;1';
     sp_history.Connection := dm.DBConnect;
-    // sp_spr.Parameters.CreateParameter('@Ik_studGrup', ftString, pdInput, 50,
-    // self.ikStudGrup);
     sp_history.Parameters.CreateParameter('@Ik_document', ftString, pdInput, 50,
       self.ik_doc);
     sp_history.Open;
     sp_history.First;
-
-    // sp_history.CommandText := 'select * from StudHistory(' +
-    // self.ikStudGrup.ToString() + ')';
-
-    // sp_history.Connection := dm.DBConnect;
-    // sp_history.Open;
-    // sp_history.First;
 
     sp_doc.ProcedureName := 'DocInfoSpravBuild;1';
     sp_doc.Connection := dm.DBConnect;
@@ -84,7 +70,7 @@ begin
       50, ik_doc);
     sp_doc.Open;
     sp_doc.First;
-    Result := TSpravka.Create(sp_spr.FieldByName('FIOrod').AsString,
+    Result := TSpravka.Create(sp_spr.FieldByName('FIOdat').AsString,
       sp_spr.FieldByName('Podgot').AsString, sp_spr.FieldByName('Cname_spec')
       .AsString, sp_spr.FieldByName('Cshort_spec').AsString,
       sp_spr.FieldByName('ManagerSmallName').AsString,
@@ -101,8 +87,6 @@ begin
     sp_spr.First;
                  sp_academ.ProcedureName := 'SelAcademStud;1';
     sp_academ.Connection := dm.DBConnect;
-    // sp_spr.Parameters.CreateParameter('@Ik_studGrup', ftString, pdInput, 50,
-    // self.ikStudGrup);
     sp_academ.Parameters.CreateParameter('@@zach', ftString, pdInput, 50,
       sp_spr.FieldByName('Ik_zach').AsString);
     sp_academ.Open;
@@ -111,14 +95,6 @@ begin
     begin
       if (sp_history.FieldByName('ikTypePric').AsInteger = 4) then
       begin
-//        sp_academ.CommandText := 'select * from StudHistoryAcadem (' + '''' +
-//          sp_history.FieldByName('Nn_prikaz').AsString + '''' + ',' +
-//          sp_spr.FieldByName('Ik_zach').AsString + ')';
-//        sp_academ.Connection := dm.DBConnect;
-//        sp_academ.Open;
-//        sp_academ.First;
-
-
         spr_h := TSpravkaHistory.Create(sp_history.FieldByName('Nn_prikaz')
           .AsString, sp_history.FieldByName('Cname_pric').AsString,
           sp_history.FieldByName('daypric').AsString,
