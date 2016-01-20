@@ -4,17 +4,17 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   HelpKeyword = 'Add_discip_in_plan.htm'
   Caption = 'frmUchPlanAddDisc'
   ClientHeight = 663
-  ClientWidth = 656
+  ClientWidth = 680
   Constraints.MinHeight = 160
   Constraints.MinWidth = 327
   OldCreateOrder = True
-  ExplicitWidth = 662
+  ExplicitWidth = 686
   ExplicitHeight = 692
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
     Top = 620
-    Width = 656
+    Width = 680
     Height = 7
     Align = alBottom
     Shape = bsBottomLine
@@ -177,7 +177,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   end
   inherited Panel1: TPanel
     Top = 627
-    Width = 656
+    Width = 680
     Height = 36
     BevelOuter = bvNone
     TabOrder = 6
@@ -185,20 +185,20 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     ExplicitWidth = 656
     ExplicitHeight = 36
     inherited bbOK: TBitBtn
-      Left = 399
+      Left = 423
       Top = 6
       ExplicitLeft = 399
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
-      Left = 565
+      Left = 589
       Top = 6
       TabOrder = 2
       ExplicitLeft = 565
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
-      Left = 482
+      Left = 506
       Top = 6
       TabOrder = 1
       ExplicitLeft = 482
@@ -216,44 +216,55 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object Panel2: TPanel [16]
     Left = 5
     Top = 180
-    Width = 643
+    Width = 667
     Height = 420
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelOuter = bvNone
     Caption = 'Panel2'
     TabOrder = 5
+    ExplicitWidth = 643
     object Splitter1: TSplitter
-      Left = 389
+      Left = 391
       Top = 0
+      Width = 0
       Height = 420
-      ExplicitLeft = 370
-      ExplicitHeight = 419
+      ExplicitLeft = 394
     end
     object pnlDiscProp: TPanel
-      Left = 392
+      Left = 391
       Top = 0
-      Width = 251
+      Width = 276
       Height = 420
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
       Caption = 'pnlDiscProp'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 1
+      ExplicitLeft = 394
+      ExplicitWidth = 254
       object ScrollBox1: TScrollBox
         Left = 0
         Top = 0
-        Width = 251
+        Width = 276
         Height = 420
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 0
+        ExplicitWidth = 251
         object pnlProfile: TPanel
           Left = 0
           Top = 0
-          Width = 251
+          Width = 276
           Height = 53
           Align = alTop
           TabOrder = 0
+          ExplicitWidth = 251
           object lblSpclz: TLabel
             Left = 10
             Top = 3
@@ -282,14 +293,19 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         object pnlMain: TPanel
           Left = 0
           Top = 53
-          Width = 251
+          Width = 276
           Height = 367
           Align = alClient
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 1
-          ExplicitLeft = 3
-          ExplicitTop = 59
+          ExplicitWidth = 254
           DesignSize = (
-            251
+            276
             367)
           object allCompetence: TLabel
             Left = 41
@@ -374,8 +390,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             ParentFont = False
           end
           object Label19: TLabel
-            Left = 62
-            Top = 44
+            Left = 86
+            Top = 72
             Width = 134
             Height = 13
             Alignment = taRightJustify
@@ -388,8 +404,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             ParentFont = False
           end
           object Label20: TLabel
-            Left = 173
-            Top = 107
+            Left = 194
+            Top = 97
             Width = 24
             Height = 13
             Caption = #1057#1056#1057':'
@@ -400,9 +416,9 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             Font.Style = []
             ParentFont = False
           end
-          object Label22: TLabel
-            Left = 202
-            Top = 107
+          object AllSRS: TLabel
+            Left = 226
+            Top = 97
             Width = 3
             Height = 13
             Caption = '-'
@@ -413,7 +429,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             Font.Style = []
             ParentFont = False
           end
-          object Label23: TLabel
+          object AllLect: TLabel
             Left = 158
             Top = 151
             Width = 3
@@ -426,7 +442,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             Font.Style = []
             ParentFont = False
           end
-          object Label24: TLabel
+          object AllLab: TLabel
             Left = 158
             Top = 169
             Width = 3
@@ -439,7 +455,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             Font.Style = []
             ParentFont = False
           end
-          object Label25: TLabel
+          object AllPract: TLabel
             Left = 158
             Top = 187
             Width = 3
@@ -453,8 +469,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             ParentFont = False
           end
           object Label26: TLabel
-            Left = 68
-            Top = 72
+            Left = 93
+            Top = 45
             Width = 127
             Height = 13
             Caption = #1042#1089#1077#1075#1086' '#1072#1091#1076#1080#1090#1086#1088#1085#1099#1093' '#1095#1072#1089#1086#1074':'
@@ -466,18 +482,18 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             ParentFont = False
           end
           object Label7: TLabel
-            Left = 5
-            Top = 20
-            Width = 191
+            Left = 6
+            Top = 18
+            Width = 214
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
-            Caption = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1085#1077#1076#1077#1083#1100' ('#1085#1072#1087#1088#1080#1084#1077#1088', 4 1/3):'
+            Caption = #1042#1089#1077#1075#1086' '#1085#1077#1076#1077#1083#1100' ('#1085#1072#1087#1088#1080#1084#1077#1088', 4 1/3):'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -12
             Font.Name = 'MS Sans Serif'
-            Font.Style = []
+            Font.Style = [fsBold]
             ParentFont = False
           end
           object lblCompetence: TLabel
@@ -501,7 +517,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             WordWrap = True
           end
           object edtHoursGos: TDBEditEh
-            Left = 202
+            Left = 226
             Top = 15
             Width = 41
             Height = 19
@@ -523,8 +539,8 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             OnKeyPress = edtHoursGosKeyPress
           end
           object Edit7: TDBEditEh
-            Left = 202
-            Top = 39
+            Left = 226
+            Top = 69
             Width = 41
             Height = 19
             AlwaysShowBorder = True
@@ -548,7 +564,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
           object ToolBar1: TToolBar
             Left = 175
             Top = 255
-            Width = 53
+            Width = 78
             Height = 16
             Align = alNone
             Anchors = [akLeft, akTop, akRight]
@@ -564,7 +580,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             end
           end
           object Button1: TButton
-            Left = 175
+            Left = 194
             Top = 215
             Width = 23
             Height = 26
@@ -574,10 +590,11 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
+            ExplicitLeft = 175
           end
           object edtHoursAudit: TDBEditEh
-            Left = 201
-            Top = 64
+            Left = 226
+            Top = 42
             Width = 41
             Height = 19
             AlwaysShowBorder = True
@@ -603,17 +620,23 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     object Panel4: TPanel
       Left = 0
       Top = 0
-      Width = 389
+      Width = 391
       Height = 420
       Align = alLeft
       Anchors = [akLeft, akTop, akRight, akBottom]
       BevelOuter = bvNone
       Caption = 'Panel4'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 0
       object sgDisc: TStringGrid
         Left = 0
         Top = 0
-        Width = 389
+        Width = 391
         Height = 420
         Align = alClient
         ColCount = 3
@@ -622,7 +645,13 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         DefaultRowHeight = 18
         FixedCols = 0
         RowCount = 2
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSizing, goColSizing, goTabs]
+        ParentFont = False
         ParentShowHint = False
         ShowHint = True
         TabOrder = 0
@@ -634,6 +663,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         OnKeyDown = sgDiscKeyDown
         OnMouseMove = sgDiscMouseMove
         OnSelectCell = sgDiscSelectCell
+        ExplicitWidth = 370
         ColWidths = (
           113
           87
@@ -659,7 +689,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object dbcbCklDisc: TDBLookupComboboxEh [18]
     Left = 145
     Top = 5
-    Width = 503
+    Width = 527
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -669,11 +699,12 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 0
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 503
   end
   object dbcbGrpDisc: TDBLookupComboboxEh [19]
     Left = 145
     Top = 30
-    Width = 503
+    Width = 527
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -683,18 +714,25 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 1
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 503
   end
   object dbcbDisc: TDBLookupComboboxEh [20]
     Left = 145
     Top = 79
-    Width = 503
+    Width = 527
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
     DataField = ''
     DropDownBox.Options = [dlgColLinesEh, dlgAutoSortMarkingEh]
     EditButtons = <>
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
     Flat = True
+    ParentFont = False
     TabOrder = 2
     Visible = True
     OnKeyValueChanged = dbcbDiscKeyValueChanged
@@ -702,7 +740,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object dbcbKaf: TDBLookupComboboxEh [21]
     Left = 145
     Top = 103
-    Width = 503
+    Width = 527
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -713,6 +751,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 3
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 503
   end
   object Panel5: TPanel [22]
     Left = 244
@@ -735,7 +774,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object dbeGroupVibor: TDBEditEh [23]
     Left = 463
     Top = 127
-    Width = 185
+    Width = 209
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -747,6 +786,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnEnter = Edit6Enter
     OnExit = Edit6Exit
     OnKeyPress = edtHoursGosKeyPress
+    ExplicitWidth = 185
   end
   object cbOtherUchPl: TCheckBox [24]
     Left = 5
@@ -761,7 +801,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
   object dbcbPdgrpDisc: TDBLookupComboboxEh [25]
     Left = 146
     Top = 55
-    Width = 503
+    Width = 527
     Height = 19
     AlwaysShowBorder = True
     Anchors = [akLeft, akTop, akRight]
@@ -771,6 +811,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 10
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
+    ExplicitWidth = 503
   end
   inherited actBaseDialog: TActionList
     Left = 567
@@ -797,7 +838,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Left = 440
     Top = 560
     Bitmap = {
-      494C010103000400680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030004006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

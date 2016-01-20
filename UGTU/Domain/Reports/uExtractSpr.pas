@@ -77,10 +77,10 @@ begin
     spInf.Open;
     spInf.First;
     // Replace('#form_ed2#', spInf.FieldByName('Cname_form_pril').AsString);
-    Replace('#fio_rod#', spInf.FieldByName('FIOrod').AsString);
+    Replace('#fio_rod#', spInf.FieldByName('FIOdat').AsString);
     Replace('#year_post#', spInf.FieldByName('zachYear').AsString);
     if spInf.FieldByName('Podgot').AsString = 'направления подготовки' then
-      Replace('#podgot#', 'направление подготовки')
+      Replace('#podgot#', 'направлению подготовки')
     else
       Replace('#podgot#', spInf.FieldByName('Podgot').AsString);
     Replace('#f_ed#', AnsiLowerCase(spInf.FieldByName('Cname_form_ed')

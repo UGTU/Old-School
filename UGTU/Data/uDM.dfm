@@ -503,10 +503,6 @@ object dm: Tdm
       FieldName = 'ik_uch_plan'
       Visible = False
     end
-    object aspGetDiscModeliHour_gos: TIntegerField
-      FieldName = 'iHour_gos'
-      Visible = False
-    end
     object aspGetDiscModelik_disc_uch_plan: TAutoIncField
       FieldName = 'ik_disc_uch_plan'
       ReadOnly = True
@@ -517,7 +513,7 @@ object dm: Tdm
       Visible = False
     end
     object aspGetDiscModelcName_disc: TStringField
-      DisplayLabel = #1053#1072#1079#1074#1072#1085#1080#1077' '#1076#1080#1089#1094#1080#1087#1083#1080#1085#1099
+      DisplayLabel = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
       DisplayWidth = 150
       FieldName = 'cName_disc'
       Size = 100
@@ -548,7 +544,7 @@ object dm: Tdm
     end
     object aspGetDiscModelcName_spclz_short: TStringField
       DisplayLabel = #1055#1088#1086#1092#1080#1083#1100
-      DisplayWidth = 40
+      DisplayWidth = 50
       FieldName = 'cName_spclz_short'
     end
     object aspGetDiscModelShowToUser: TStringField
@@ -561,20 +557,32 @@ object dm: Tdm
     end
     object aspGetDiscModelik_podckl: TIntegerField
       FieldName = 'ik_podckl'
+      Visible = False
     end
     object aspGetDiscModeluchet: TBooleanField
       FieldName = 'uchet'
+      Visible = False
     end
     object aspGetDiscModeliK_disc1: TIntegerField
       FieldName = 'iK_disc1'
+      Visible = False
     end
     object aspGetDiscModelcshortname: TStringField
       FieldName = 'cshortname'
+      Visible = False
       Size = 40
     end
+    object aspGetDiscModeliHour_gos: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = #1063#1072#1089#1099
+      DisplayWidth = 20
+      FieldName = 'iHour_gos'
+    end
     object aspGetDiscModeliHour_Audit: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = #1040#1091#1076#1080#1090
+      DisplayWidth = 20
       FieldName = 'iHour_Audit'
-      Visible = False
     end
   end
   object adsVidNagruzki: TADODataSet
@@ -3509,10 +3517,6 @@ object dm: Tdm
       FieldName = 'uchet'
       Visible = False
     end
-    object aspGetDiscWorkihour_gos: TIntegerField
-      FieldName = 'ihour_gos'
-      Visible = False
-    end
     object aspGetDiscWorkik_disc_uch_plan: TIntegerField
       FieldName = 'ik_disc_uch_plan'
       Visible = False
@@ -3534,6 +3538,7 @@ object dm: Tdm
       Visible = False
     end
     object aspGetDiscWorkcname_disc: TStringField
+      DisplayLabel = #1044#1080#1089#1094#1080#1087#1083#1080#1085#1072
       DisplayWidth = 150
       FieldName = 'cname_disc'
       Size = 500
@@ -3552,7 +3557,8 @@ object dm: Tdm
       Visible = False
     end
     object aspGetDiscWorkcName_spclz_short: TStringField
-      DisplayWidth = 40
+      DisplayLabel = #1055#1088#1086#1092#1080#1083#1100
+      DisplayWidth = 50
       FieldName = 'cName_spclz_short'
     end
     object aspGetDiscWorkik_spclz: TIntegerField
@@ -3567,9 +3573,17 @@ object dm: Tdm
       FieldName = 'ShowToUser'
       Visible = False
     end
+    object aspGetDiscWorkihour_gos: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = #1063#1072#1089#1099
+      DisplayWidth = 20
+      FieldName = 'ihour_gos'
+    end
     object aspGetDiscWorkiHour_Audit: TIntegerField
+      Alignment = taCenter
+      DisplayLabel = #1040#1091#1076#1080#1090
+      DisplayWidth = 20
       FieldName = 'iHour_Audit'
-      Visible = False
     end
   end
   object adsGetUchPlanGrup: TADODataSet

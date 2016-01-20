@@ -63,10 +63,10 @@ type
     Label18: TLabel;
     Label19: TLabel;
     Label20: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
+    AllSRS: TLabel;
+    AllLect: TLabel;
+    AllLab: TLabel;
+    AllPract: TLabel;
     Label26: TLabel;
     Label7: TLabel;
     lblCompetence: TLabel;
@@ -74,7 +74,6 @@ type
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     Button1: TButton;
-    DBEditEh1: TDBEditEh;
     edtHoursAudit: TDBEditEh;
     procedure sgDiscDblClick(Sender: TObject);
     procedure sgDiscSelectCell(Sender: TObject; ACol, ARow: Integer;
@@ -274,7 +273,7 @@ var
   DiscInUchPlanIK: integer;
   tempProc: TADOStoredProc;
 begin
-  if ((Label22.Tag < 0) or (fixRow.Count > 0)) then
+  if ((AllSRS.Tag < 0) or (fixRow.Count > 0)) then
   begin
     Application.MessageBox('Поля, выделенные красным цветом, заполнены некорректно!','Изменение дисциплины в учебном плане',MB_ICONWARNING);
     Result:= false;
@@ -355,21 +354,21 @@ begin
   TUchPlanController.Instance.getColumnsValues(0, lect, lab, pract, slColumnValues, @slColumnKafedra, true);
   if fCurrentDiscType = 1 then
   begin
-    Label23.Caption:= IntToStr(lect);
-    Label23.Tag:= lect;
-    Label24.Caption:= IntToStr(lab);
-    Label24.Tag:= lab;
-    Label25.Caption:= IntToStr(pract);
-    Label25.Tag:= pract;
+    AllLect.Caption:= IntToStr(lect);
+    AllLect.Tag:= lect;
+    AllLab.Caption:= IntToStr(lab);
+    AllLab.Tag:= lab;
+    AllPract.Caption:= IntToStr(pract);
+    AllPract.Tag:= pract;
   end
   else
   begin
-    Label23.Caption:= '-';
-    Label23.Tag:= 0;
-    Label24.Caption:= '-';
-    Label24.Tag:= 0;
-    Label25.Caption:= '-';
-    Label25.Tag:= 0;
+    AllLect.Caption:= '-';
+    AllLect.Tag:= 0;
+    AllLab.Caption:= '-';
+    AllLab.Tag:= 0;
+    AllPract.Caption:= '-';
+    AllPract.Tag:= 0;
   end;
   CalcSRS;
 
@@ -475,10 +474,7 @@ end;
 procedure TfrmUchPlanAddDisc.edtHoursGosExit(Sender: TObject);
 begin
   if (isHourGosMod) then
-  begin
     if (Length(edtHoursGos.Text) = 0) then edtHoursGos.Text:= '0';
-   // fHour:= GetTimeByEdIzm(edtHoursGos.Text, fEdIzm);
-  end;
   (Sender as TDBEditEh).Color:= clWindow;
   CalcSRS;
 end;
@@ -642,16 +638,16 @@ procedure TfrmUchPlanAddDisc.CalcSRS;
 begin
   if fCurrentDiscType = typeTypicalDisc then
   begin
-    Label22.Tag:= StrToInt(edtHoursGos.Text) - (Label23.Tag + Label24.Tag + Label25.Tag) - iIndivid;
-    Label22.Caption:= IntToStr(Label22.Tag);
-    if Label22.Tag < 0 then Label22.Font.Color:= clRed
-    else Label22.Font.Color:= clBlack;
+    AllSRS.Tag:= StrToInt(edtHoursGos.Text) - StrToInt(edtHoursAudit.Text) - iIndivid;
+    AllSRS.Caption:= IntToStr(AllSRS.Tag);
+    if AllSRS.Tag < 0 then AllSRS.Font.Color:= clRed
+    else AllSRS.Font.Color:= clBlack;
   end
   else
   begin
-    Label22.Caption:= '-';
-    Label22.Tag:= 0;
-    Label22.Font.Color:= clBlack;
+    AllSRS.Caption:= '-';
+    AllSRS.Tag:= 0;
+    AllSRS.Font.Color:= clBlack;
   end;
 end;
 
@@ -1001,13 +997,13 @@ begin
   Edit7.Enabled:= discType = typeTypicalDisc;
   Label19.Enabled:= discType = typeTypicalDisc;
   Label20.Enabled:= discType = typeTypicalDisc;
-  Label22.Enabled:= discType = typeTypicalDisc;
+  AllSRS.Enabled:= discType = typeTypicalDisc;
   Label11.Enabled:= discType = typeTypicalDisc;
   Label15.Enabled:= discType = typeTypicalDisc;
   Label18.Enabled:= discType = typeTypicalDisc;
-  Label23.Enabled:= discType = typeTypicalDisc;
-  Label24.Enabled:= discType = typeTypicalDisc;
-  Label25.Enabled:= discType = typeTypicalDisc;
+  AllLect.Enabled:= discType = typeTypicalDisc;
+  AllLab.Enabled:= discType = typeTypicalDisc;
+  AllPract.Enabled:= discType = typeTypicalDisc;
   Label26.Enabled:= discType = typeTypicalDisc;
   //Label27.Enabled:= discType = typeTypicalDisc;
 end;

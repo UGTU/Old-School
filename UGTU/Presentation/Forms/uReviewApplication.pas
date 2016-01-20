@@ -29,7 +29,6 @@ type
     procedure rbLClick(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
     procedure cbexReasonChange(Sender: TObject);
   private
     { Private declarations }
@@ -80,29 +79,11 @@ begin
   uDMDocuments.dmDocs.adodsPricina.Active := true; // подключам базу
 end;
 
-procedure TfrmReviewApplication.BitBtn1Click(Sender: TObject);
-begin
-  inherited;
-   if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
-    (rbL.Checked)) then
-  begin
-  ModalResult := mrYes;
-  end
-  else
-  ModalResult := mrNo;
-
-end;
-
 procedure TfrmReviewApplication.cbexReasonChange(Sender: TObject);
 begin
   inherited;
-  if (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
-    (rbL.Checked)) then
-  begin
-   ModalResult := mrYes;
-  end
-    else
-    ModalResult := mrNo;
+  IsModified := (cbexReason.Text <> '') and (((cbexTransp.Text <> '') and (rbP.Checked)) or
+    (rbL.Checked));
 end;
 
 procedure TfrmReviewApplication.cbexTranspChange(Sender: TObject);

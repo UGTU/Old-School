@@ -65,8 +65,8 @@ inherited frmReviewApplication: TfrmReviewApplication
     Caption = #1042#1080#1079#1099
   end
   object Label10: TLabel [10]
-    Left = 166
-    Top = 177
+    Left = 21
+    Top = 175
     Width = 32
     Height = 12
     Caption = 'Label10'

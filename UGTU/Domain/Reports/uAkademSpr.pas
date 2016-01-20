@@ -46,7 +46,6 @@ begin
     if ListDoc.Count > 1 then
       for I := 0 to ListDoc.Count - 2 do
       DuplicatePage(1, 1);
-       // ActiveSheet.Copy(0, CurrentWorkbook.Sheets[1], 0);
     for j := 0 to ListDoc.Count - 1 do
     begin
       ActivateWorksheet(j + 1);
@@ -130,7 +129,7 @@ begin
         else
         begin
           Replace('#tema_diplom#', 'не выполнял(а)');
-          Replace('#diplom#', '');
+         // Replace('#diplom#', '');
         end;
       end;
 
@@ -188,7 +187,6 @@ begin
         begin
           Range['A' + inttostr(fkp), 'H' + inttostr(fkp)
             ].Insert(xlDown, xlFormatFromRightOrBelow);
-          // xlFormatFromLeftOrAbove);
           Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
           if spKP.FieldByName('discName').AsString.Length < 55 then
             Items[fkp, 1] := spKP.FieldByName('discName').AsString + ', ' +
@@ -200,7 +198,6 @@ begin
             ind := ind + 1;
             Range['A' + inttostr(fkp), 'H' + inttostr(fkp)
               ].Insert(xlDown, xlFormatFromRightOrBelow);
-            // xlFormatFromLeftOrAbove);
             Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
             Items[fkp, 1] := spKP.FieldByName('cOsenca').AsString
           end;
@@ -272,9 +269,6 @@ begin
 
       if flpr then
       begin
-        // Range['A' + inttostr(fkp), 'H' + inttostr(fkp)
-        // ].Insert(xlDown, xlFormatFromRightOrBelow);
-        // Range['A' + inttostr(fkp), 'H' + inttostr(fkp)].Select;
         Items[fkp, 1] := 'не сдавал(а)';
         fkp := fkp + 2;
       end
@@ -328,18 +322,6 @@ begin
               if (w > 5) or (w = 0) then
                 diplom := ZECount.ToString() + ' недель' + diplom;
 
-              // if ZECount < 5 then
-              // diplom := ZECount.ToString() + ' недели' + diplom
-              // else if (ZECount < 10) or (ZECount > 20) then
-              // begin
-              // if ZECount = 1 then
-              // diplom := ZECount.ToString() + ' неделя' + diplom
-              // else
-              // diplom := ZECount.ToString() + ' недель' + diplom;
-              // end
-              // else
-              // diplom := ZECount.ToString() + ' недель' + diplom;
-
               Replace('#diplom#', diplom);
             end;
           end;
@@ -379,7 +361,6 @@ begin
             fusp := fusp + 1;
             Range['F' + inttostr(fusp - 1), 'H' + inttostr(fusp - 1)].Select;
             Selection.MergeCells := true;
-            // Selection.HorizontalAlignment := xlCenter;
           end;
           if spUspev.FieldByName('iK_disc').AsInteger = 0 then
           begin
@@ -393,9 +374,6 @@ begin
         spUspev.Next;
       end;
       Range['A' + inttostr(fusp), 'K' + inttostr(fusp)].Delete(xlUp);
-      // ActiveSheet.ExportAsFixedFormat(0, 'e:\out.pdf', 0, false, true,
-      // EmptyParam, EmptyParam,  true, EmptyParam);
-    // ActiveSheet.Name := '№ '+spDoc.FieldByName('NumberDoc').AsString+' '+ spInf.FieldByName('FIOrod').AsString;
      ActiveSheet.Name := '№ '+spDoc.FieldByName('NumberDoc').AsString +' '+ spInf.FieldByName('PersonSmallName').AsString;
     end;
   finally

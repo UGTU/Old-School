@@ -63,7 +63,7 @@ begin
     with sp_pers do
     begin
       Replace('#grup#', FieldByName('Cname_grup').AsString);
-      Replace('#fio#', FieldByName('FIOrod').AsString);
+      Replace('#fio#', FieldByName('FIOdat').AsString);
       dir_inst := FieldByName('ManagerSmallName').AsString;
       posit := Pos(' ', dir_inst);
       copystr1 := Copy(dir_inst, posit + 1, Length(dir_inst));

@@ -219,20 +219,24 @@ end;
 
 procedure TGeneralController.SetCaptionDots(lpSource: PLabel;
   strCapt: string; maxWidth: integer);
-var
-  i:integer;
+{var
+  i:integer;      }
 begin
-  lpSource^.Caption:= '';
-  for i:= 1 to Length(strCapt) do
+ // lpSource^.Caption:= '';
+  if lpSource^.Canvas.TextWidth(strCapt)>maxWidth then
+      lpSource^.Caption:= strCapt.Substring(0,((maxWidth div 5) - 5)) + '...'
+      else lpSource^.Caption:= strCapt;
+
+ { for i:= 1 to Length(strCapt) do
   begin
     lpSource^.Caption:= lpSource^.Caption + strCapt[i];
     lpSource^.Refresh;
-    if (lpSource^.Width > maxWidth-5) then
+    if (lpSource^.Canvas.TextWidth > maxWidth-5) then
     begin
       lpSource^.Caption:= lpSource^.Caption + '...';
       Break;
     end;
-  end;
+  end; }
 end;
 
 function TGeneralController.CloseLockupCB(cmp: PDBLookupComboboxEh): Variant;

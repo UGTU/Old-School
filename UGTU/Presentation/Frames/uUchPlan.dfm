@@ -181,7 +181,7 @@ inherited fmUchPlan: TfmUchPlan
               Font.Style = []
               FooterParams.Color = clWindow
               IndicatorOptions = []
-              Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+              Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
               ParentFont = False
               PopupMenu = PopupMenu1
               TabOrder = 0
@@ -1047,7 +1047,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1589,8 +1589,8 @@ inherited fmUchPlan: TfmUchPlan
   end
   object dsGetFgosBySpec: TDataSource
     DataSet = dmFgos.aspGetFgosBySpec
-    Left = 592
-    Top = 248
+    Left = 904
+    Top = 104
   end
   object PopupMenu2: TPopupMenu
     Left = 432

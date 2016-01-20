@@ -60,6 +60,7 @@ type
     function DoApply: boolean; override;
     function DoCancel: boolean; override;
   public
+    OperationType: word;
     procedure Read();
     property specfac: integer read FSpecFac write FSpecFac;
   end;
@@ -109,7 +110,7 @@ begin
 
         Panel2.Visible := false;
     end else
-      if not TUchPlanController.Instance.SaveUchPlan(self.Tag, UchPlanIK,
+      if not TUchPlanController.Instance.SaveUchPlan(OperationType, UchPlanIK,
         Label2.Tag, dbcbSpclz.KeyValue, dbcbFormEd.KeyValue, dbcbYear.KeyValue,
         dtpDateUtv.Date, (VidGos > FGOS2)) then
       begin

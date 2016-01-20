@@ -416,7 +416,8 @@ begin
       except
         frmUchPlanAddNew.IK := 0;
       end;
-      frmUchPlanAddNew.Tag := (Sender as TAction).Tag;
+      frmUchPlanAddNew.OperationType := (Sender as TAction).Tag;
+
       frmUchPlanAddNew.Label2.Tag := fSpecIK;
       frmUchPlanAddNew.Label3.Tag := dirIK;
       frmUchPlanAddNew.Label1.Tag := VidGos;
@@ -859,7 +860,7 @@ begin
     lblShifr.Caption := IfNull(dsDisc.DataSet.FieldByName('cname_ckl_disc1').Value, '<не указано>');
     Label17.Caption := GetTimeByType(lEdIK, lHour_gos);
     TGeneralController.Instance.SetCaptionDots(@Label10,       //если длинная дисциплина, то сократить название
-      dsDisc.DataSet.FieldByName('cName_disc').AsString, 100);
+      dsDisc.DataSet.FieldByName('cName_disc').AsString, 280);
 
     slColumnKafedra := TStringList.Create;
     slColumnValues := TStringList.Create;
