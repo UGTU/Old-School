@@ -67,9 +67,9 @@ type
     Label21: TLabel;
     Label22: TLabel;
     Label23: TLabel;
-    Label24: TLabel;
+    AllSRS: TLabel;
     Label25: TLabel;
-    Label26: TLabel;
+    AllAudit: TLabel;
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
@@ -573,10 +573,10 @@ begin
   Label21.Enabled := discType = typeTypicalDisc;
   Label22.Enabled := discType = typeTypicalDisc;
   Label25.Enabled := discType = typeTypicalDisc;
-  Label26.Enabled := discType = typeTypicalDisc;
+  AllAudit.Enabled := discType = typeTypicalDisc;
   Label19.Enabled := discType = typeTypicalDisc;
   Label23.Enabled := discType = typeTypicalDisc;
-  Label24.Enabled := discType = typeTypicalDisc;
+  AllSRS.Enabled := discType = typeTypicalDisc;
   Label20.Enabled := discType = typeTypicalDisc;
 end;
 
@@ -896,18 +896,18 @@ begin
         Label18.Caption := IntToStr(lect);
         Label21.Caption := IntToStr(lab);
         Label22.Caption := IntToStr(pract);
-        Label26.Caption := IntToStr(lHourAudit);
+        AllAudit.Caption := IntToStr(lHourAudit);
         Label23.Caption := IntToStr(lIndiv);
-        Label24.Caption := IntToStr(lHour_gos - (pract + lab + lect) - lIndiv);
+        AllSRS.Caption := IntToStr(lHour_gos - lHourAudit - lIndiv);
       end
       else
       begin
         Label18.Caption := '-';
         Label21.Caption := '-';
         Label22.Caption := '-';
-        Label26.Caption := '-';
+        AllAudit.Caption := '-';
         Label23.Caption := '-';
-        Label24.Caption := '-';
+        AllSRS.Caption := '-';
       end;
 
       //вывод содержания дисциплины

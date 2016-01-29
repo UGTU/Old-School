@@ -55,7 +55,7 @@ begin
   for j := 0 to FReport.Count - 1 do
   begin
     ActivateWorksheet(j + 1);
-   // ActiveSheet.Name := '¹ '+ FReport[j].NumSpr.ToString()+' '+ FReport[j].FIO;
+    // ActiveSheet.Name := '¹ '+ FReport[j].NumSpr.ToString()+' '+ FReport[j].FIO;
     str := GetKursP(FReport[j].kurs);
 
     Replace('#kurs#', str);
@@ -107,16 +107,15 @@ begin
             posit := Pos('.', datebegin);
             dop := Copy(datebegin, posit + 1, 2);
             str := GetMonthR(StrToInt(Copy(datebegin, posit + 1, 2)));
-            copystr1 := Copy(datebegin, 0, posit-1) + ' ' + str + ' ' +
+            copystr1 := Copy(datebegin, 0, posit - 1) + ' ' + str + ' ' +
               Copy(datebegin, 7, 10);
 
             dateend := FReport[j].Historyes[num].datevh;
             posit := Pos('.', dateend);
             str := GetMonthR(StrToInt(Copy(dateend, posit + 1, 2)));
-            copystr2 := Copy(dateend, 0, posit-1) + ' ' + str + ' ' +
+            copystr2 := Copy(dateend, 0, posit - 1) + ' ' + str + ' ' +
               Copy(dateend, 7, 10);
             Items[I, 7] := copystr1 + ' - ' + copystr2;
-
 
           end
           else
@@ -150,7 +149,7 @@ begin
       Replace('#podgot#', FReport[j].podgot);
       Replace('#spec#', FReport[j].spec);
     end;
-      ActiveSheet.Name := '¹ '+FReport[j].NumSpr.ToString();
+    ActiveSheet.Name := '¹ ' + FReport[j].NumSpr.ToString();
   end;
 
 end;

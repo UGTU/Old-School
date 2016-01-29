@@ -427,7 +427,7 @@ inherited fmUchPlan: TfmUchPlan
                   Font.Style = []
                   ParentFont = False
                 end
-                object Label24: TLabel
+                object AllSRS: TLabel
                   Left = 334
                   Top = 153
                   Width = 6
@@ -453,7 +453,7 @@ inherited fmUchPlan: TfmUchPlan
                   Font.Style = []
                   ParentFont = False
                 end
-                object Label26: TLabel
+                object AllAudit: TLabel
                   Left = 334
                   Top = 115
                   Width = 6
@@ -931,9 +931,8 @@ inherited fmUchPlan: TfmUchPlan
       object lblProfile: TLabel
         Left = 414
         Top = 9
-        Width = 39
+        Width = 3
         Height = 13
-        Caption = 'lblProfile'
       end
       object dbcbGroup: TDBLookupComboboxEh
         Left = 55

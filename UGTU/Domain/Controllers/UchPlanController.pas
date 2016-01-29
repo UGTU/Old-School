@@ -36,6 +36,7 @@ type
     function getStringListFromStr(sourceStr: string): TStringList;
     function getValuesFromStringList(lpSource: PStringList; tableName: string;
       fieldIK: string; fieldName: string): string;
+    procedure LoadContentAndWeeks(DiscInUchPlanIK: integer);
   protected
     constructor CreateInstance;
     class function AccessInstance(Request: integer): TUchPlanController;
@@ -323,8 +324,8 @@ type
       CodeGOS - шифр дисциплины по ГОС
     }
     function SaveDiscInUchPlan(UchPlanIK: integer; var DiscInUchPlanIK: integer;
-      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, SpclzIK, GOSHour, AuditHour,
-      IndividHour, GroupViborNum: integer; CodeGOS: string;
+      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, SpclzIK, GOSHour,
+      AuditHour, IndividHour, GroupViborNum: integer; CodeGOS: string;
       aStrCompetenceList, DiscRelationList: TStringList): boolean;
     { aCompetenceList }
 
@@ -337,8 +338,8 @@ type
       CodeGOS - шифр дисциплины по ГОС
     }
     function ChangeDiscInUchPlan(UchPlanIK: integer; DiscInUchPlanIK: integer;
-      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour,
-      GroupViborNum, SpclzIK: integer; CodeGOS: string;
+      CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour,
+      IndividHour, GroupViborNum, SpclzIK: integer; CodeGOS: string;
       aCompetenceList: TStringList): boolean;
 
     {
@@ -371,8 +372,8 @@ type
     function getGrupYear(ik_grup: integer): Variant;
 
     procedure AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK, GroupIK,
-      PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour, GroupViborNum,
-      SpclzIK: integer; CodeGOS: string);
+      PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour,
+      GroupViborNum, SpclzIK: integer; CodeGOS: string);
 
     procedure ReplaseDisc(ik_uch_plan: integer;
       var ik_disc_uch_plan_temp: integer; DiscInUchPlanIK: integer;
@@ -519,7 +520,8 @@ begin
   Result := FUchPlanControllerInstance;
 end;
 
-procedure TUchPlanController.CopyUchPlan(OldUchPlanIK, NewUchPlanIK, YearIK: integer);
+procedure TUchPlanController.CopyUchPlan(OldUchPlanIK, NewUchPlanIK,
+  YearIK: integer);
 var
   DataSet: TADOStoredProc;
   tempDataSet: TADODataSet;
@@ -529,106 +531,109 @@ begin
   DataSet := TADOStoredProc.Create(nil);
   DataSet.Connection := dm.DBConnect;
 
-  //новая завязка на CopyUchPlan
+  // новая завязка на CopyUchPlan
   DataSet.ProcedureName := 'CopyUchPlan';
   with tempDataSet do
   begin
-    DataSet.Parameters.CreateParameter('@ik_uch_pl', ftInteger, pdInput, 0, OldUchPlanIK);
+    DataSet.Parameters.CreateParameter('@ik_uch_pl', ftInteger, pdInput, 0,
+      OldUchPlanIK);
     DataSet.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0, 1);
-    DataSet.Parameters.CreateParameter('@ik_newUchPl', ftInteger, pdInput, 0, NewUchPlanIK);
-    DataSet.Parameters.CreateParameter('@ik_year', ftInteger, pdInput, 0, YearIK);
+    DataSet.Parameters.CreateParameter('@ik_newUchPl', ftInteger, pdInput, 0,
+      NewUchPlanIK);
+    DataSet.Parameters.CreateParameter('@ik_year', ftInteger, pdInput,
+      0, YearIK);
   end;
   DataSet.ExecProc;
 
-  {DataSet.ProcedureName := 'UpdateUchPlan';
-  DataSet.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 4);
-  DataSet.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 0,
+  { DataSet.ProcedureName := 'UpdateUchPlan';
+    DataSet.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 4);
+    DataSet.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 0,
     NewUchPlanIK);
-  DataSet.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0,
+    DataSet.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0,
     1);
-  DataSet.Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 0, NULL);
-  DataSet.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, NULL);
-  DataSet.Parameters.CreateParameter('@ik_form_ed', ftInteger, pdInput,
+    DataSet.Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 0, NULL);
+    DataSet.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, NULL);
+    DataSet.Parameters.CreateParameter('@ik_form_ed', ftInteger, pdInput,
     0, NULL);
-  DataSet.Parameters.CreateParameter('@ik_year_uch_pl', ftInteger,
+    DataSet.Parameters.CreateParameter('@ik_year_uch_pl', ftInteger,
     pdInput, 0, NULL);
-  DataSet.Parameters.CreateParameter('@date_utv', ftDate, pdInput, 0, NULL);
-  DataSet.Parameters.CreateParameter('@old_uch_plan', ftInteger, pdInput, 0,
+    DataSet.Parameters.CreateParameter('@date_utv', ftDate, pdInput, 0, NULL);
+    DataSet.Parameters.CreateParameter('@old_uch_plan', ftInteger, pdInput, 0,
     OldUchPlanIK);
-  DataSet.ExecProc;
+    DataSet.ExecProc;
 
-  DataSet.Parameters.Clear;
-  DataSet.ProcedureName := 'UpdateDiscInUchPlan';
-  DataSet.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 1);
-  DataSet.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
+    DataSet.Parameters.Clear;
+    DataSet.ProcedureName := 'UpdateDiscInUchPlan';
+    DataSet.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 1);
+    DataSet.Parameters.CreateParameter('@ik_disc_uch_plan', ftInteger,
     pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@ik_disc', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@ik_default_kaf', ftInteger,
+    DataSet.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@ik_disc', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@ik_default_kaf', ftInteger,
     pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@iHour_gos', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@iIndivid', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@ik_ckl_disc', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@ik_grp_disc', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@Cname_ckl_disc_gos', ftString,
+    DataSet.Parameters.CreateParameter('@iHour_gos', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@iIndivid', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@ik_ckl_disc', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@ik_grp_disc', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@Cname_ckl_disc_gos', ftString,
     pdInput, 20, '');
-  DataSet.Parameters.CreateParameter('@ik_pdgrp_disc', ftInteger,
+    DataSet.Parameters.CreateParameter('@ik_pdgrp_disc', ftInteger,
     pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@ViborGroup', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, 0);
-  DataSet.Parameters.CreateParameter('@source_disc_uch_plan', ftInteger,
+    DataSet.Parameters.CreateParameter('@ViborGroup', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@ik_spclz', ftInteger, pdInput, 0, 0);
+    DataSet.Parameters.CreateParameter('@source_disc_uch_plan', ftInteger,
     pdInput, 0, 0);
 
-  tempDataSet := TADODataSet.Create(nil);
-  tempDataSet.Connection := dm.DBConnect;
-  tempDataSet.CommandText := 'Select * From sv_disc Where ik_uch_plan = ' +
+    tempDataSet := TADODataSet.Create(nil);
+    tempDataSet.Connection := dm.DBConnect;
+    tempDataSet.CommandText := 'Select * From sv_disc Where ik_uch_plan = ' +
     IntToStr(OldUchPlanIK);
-  tempDataSet.Open;
+    tempDataSet.Open;
 
-  while (not tempDataSet.Eof) do
-  begin
+    while (not tempDataSet.Eof) do
+    begin
     DataSet.Parameters.ParamByName('@i_type').value := 1;
     DataSet.Parameters.ParamByName('@ik_uch_plan').value := NewUchPlanIK;
     DataSet.Parameters.ParamByName('@ik_disc').value :=
-      tempDataSet.FieldByName('ik_disc').value;
+    tempDataSet.FieldByName('ik_disc').value;
     DataSet.Parameters.ParamByName('@ik_default_kaf').value :=
-      tempDataSet.FieldByName('ik_default_kaf').value;
+    tempDataSet.FieldByName('ik_default_kaf').value;
     DataSet.Parameters.ParamByName('@iHour_gos').value :=
-      tempDataSet.FieldByName('iHour_gos').value;
+    tempDataSet.FieldByName('iHour_gos').value;
     DataSet.Parameters.ParamByName('@iIndivid').value :=
-      tempDataSet.FieldByName('iIndivid').value;
+    tempDataSet.FieldByName('iIndivid').value;
     DataSet.Parameters.ParamByName('@ik_ckl_disc').value :=
-      tempDataSet.FieldByName('ik_ckl_disc').value;
+    tempDataSet.FieldByName('ik_ckl_disc').value;
     DataSet.Parameters.ParamByName('@ik_grp_disc').value :=
-      tempDataSet.FieldByName('ik_grp_disc').value;
+    tempDataSet.FieldByName('ik_grp_disc').value;
     DataSet.Parameters.ParamByName('@ik_pdgrp_disc').value :=
-      tempDataSet.FieldByName('ik_pdgrp_disc').value;
+    tempDataSet.FieldByName('ik_pdgrp_disc').value;
     DataSet.Parameters.ParamByName('@Cname_ckl_disc_gos').value :=
-      tempDataSet.FieldByName('Cname_ckl_disc1').value;
+    tempDataSet.FieldByName('Cname_ckl_disc1').value;
     DataSet.Parameters.ParamByName('@ViborGroup').value :=
-      tempDataSet.FieldByName('ViborGroup').value;
+    tempDataSet.FieldByName('ViborGroup').value;
     DataSet.Parameters.ParamByName('@ik_spclz').value :=
-      tempDataSet.FieldByName('ik_spclz').value;
+    tempDataSet.FieldByName('ik_spclz').value;
     try
-      DataSet.Open;
-      DiscUchPlanIK := DataSet.FieldByName('ReturnValue').AsInteger;
-      DataSet.Close;
+    DataSet.Open;
+    DiscUchPlanIK := DataSet.FieldByName('ReturnValue').AsInteger;
+    DataSet.Close;
     except
-      raise;
+    raise;
     end;
     DataSet.Parameters.ParamByName('@i_type').value := 4;
     DataSet.Parameters.ParamByName('@ik_disc_uch_plan').value := DiscUchPlanIK;
     DataSet.Parameters.ParamByName('@source_disc_uch_plan').value :=
-      tempDataSet.FieldByName('ik_disc_uch_plan').value;
+    tempDataSet.FieldByName('ik_disc_uch_plan').value;
     try
-      DataSet.ExecProc;
+    DataSet.ExecProc;
     except
-      raise;
+    raise;
     end;
     tempDataSet.Next;
-  end;
-  tempDataSet.Close;
-  tempDataSet.Free;            }
+    end;
+    tempDataSet.Close;
+    tempDataSet.Free; }
   DataSet.Free;
 end;
 
@@ -637,7 +642,7 @@ var
   myStoredProc: TADOStoredProc;
 begin
   if MessageDlg('Будут удалены ведомости по данной дисциплине. Продолжить?',
-      mtConfirmation, mbYesNoCancel, 0) = mrYes then
+    mtConfirmation, mbYesNoCancel, 0) = mrYes then
   begin
     myStoredProc := TADOStoredProc.Create(nil);
     try
@@ -670,8 +675,7 @@ begin
   myStoredProc.Parameters.CreateParameter('@i_type', ftWord, pdInput, 0, 3);
   myStoredProc.Parameters.CreateParameter('@ik_uch_plan', ftInteger, pdInput, 0,
     UchPlanIK);
-  myStoredProc.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0,
-    0);
+  myStoredProc.Parameters.CreateParameter('@is_main', ftInteger, pdInput, 0, 0);
   try
     myStoredProc.ExecProc;
   except
@@ -1008,8 +1012,8 @@ function TUchPlanController.getAllDisciplines(SourceDataSet: PDataSet;
   isShowFirst: boolean): Variant;
 begin
   Result := TGeneralController.Instance.getDataSetValues(SourceDataSet,
-    'Select * From AllDisciplines order By name_disc',
-    'iK_disc', isShowFirst, NULL);
+    'Select * From AllDisciplines order By name_disc', 'iK_disc',
+    isShowFirst, NULL);
 end;
 
 function TUchPlanController.getAllDisciplineCyclesWithoutAll
@@ -1437,50 +1441,45 @@ begin
   DataSet.Close;
   case discTypeIK of
     1:
-    begin
-      if semestrStr='' then semestrStr := 'iK_vid_zanyat=-1';
+      begin
+        if semestrStr = '' then semestrStr := 'iK_vid_zanyat=-1';
 
-      (DataSet as TADODataSet).CommandText :=
-        'SELECT * FROM Uch_plan_columns WHERE (ik_type_disc = 1) and (((i_type_column IN (3, 4, 5, 6)) or ((i_type_column = 11) and ('
-        + semestrStr + ')))) ORDER BY ik_column';
-    end
+        (DataSet as TADODataSet).CommandText :=
+          'SELECT * FROM Uch_plan_columns WHERE (ik_type_disc = 1) and (((i_type_column IN (3, 4, 5, 6)) or ((i_type_column = 11) and ('
+          + semestrStr + ')))) ORDER BY ik_column';
+      end
   else
     (DataSet as TADODataSet).CommandText :=
       'SELECT * FROM Uch_plan_columns WHERE ik_type_disc = ' +
       IntToStr(discTypeIK);
-end;
-DataSet.Open;
-Result := TStringList.Create;
-case discTypeIK of
-  1:
-    SetLength(arColumns, DataSet.RecordCount - 3);
-    // минус лекции, практ. и лаб.
-else
-  SetLength(arColumns, DataSet.RecordCount);
-end;
-n := 0;
-while (not DataSet.Eof) do
-begin
-  case (DataSet.FieldByName('i_type_column').AsInteger) of
-    4:
-      auditorVZ[0] := DataSet.FieldByName('ik_vid_zanyat').AsInteger;
-    5:
-      auditorVZ[1] := DataSet.FieldByName('ik_vid_zanyat').AsInteger;
-    6:
-      auditorVZ[2] := DataSet.FieldByName('ik_vid_zanyat').AsInteger;
-  else
-    begin
-      arColumns[n].columnType := DataSet.FieldByName('i_type_column').AsInteger;
-      arColumns[n].VidZanyatIK := DataSet.FieldByName('ik_vid_zanyat')
-        .AsInteger;
-      arColumns[n].columnName := DataSet.FieldByName('Cname_column').AsString;
-      Result.Add(arColumns[n].columnName);
-      inc(n);
-    end;
   end;
-  DataSet.Next;
-end;
-DataSet.Close;
+  DataSet.Open;
+  Result := TStringList.Create;
+  case discTypeIK of
+  1:
+    SetLength(arColumns, DataSet.RecordCount - 3); // минус лекции, практ. и лаб.
+  else SetLength(arColumns, DataSet.RecordCount);
+  end;
+
+  n := 0;
+  while (not DataSet.Eof) do
+  begin
+    case (DataSet.FieldByName('i_type_column').AsInteger) of
+      4: auditorVZ[0] := DataSet.FieldByName('ik_vid_zanyat').AsInteger;
+      5: auditorVZ[1] := DataSet.FieldByName('ik_vid_zanyat').AsInteger;
+      6: auditorVZ[2] := DataSet.FieldByName('ik_vid_zanyat').AsInteger;
+    else
+      begin
+        arColumns[n].columnType := DataSet.FieldByName('i_type_column').AsInteger;
+        arColumns[n].VidZanyatIK := DataSet.FieldByName('ik_vid_zanyat').AsInteger;
+        arColumns[n].columnName := DataSet.FieldByName('Cname_column').AsString;
+        Result.Add(arColumns[n].columnName);
+        inc(n);
+      end;
+    end;
+    DataSet.Next;
+  end;
+  DataSet.Close;
 end;
 
 procedure TUchPlanController.getColumnsValues(DiscInUchPlanIK: integer;
@@ -1490,71 +1489,18 @@ var
   tempSL: TStringList;
   tempStr, secTempStr: string;
   k, i, g: integer;
-  tempDS: TADODataSet;
 begin
-  if not isAlreadyOpen then
-  begin
-    if dm.qContentUchPlan.Active then
-      dm.qContentUchPlan.Close;
-    if Assigned(weekCountExceptionList) then
-      weekCountExceptionList.Clear;
-    dm.qContentUchPlan.Connection := dm.DBConnect;
-    dm.qContentUchPlan.SQL.Clear;
-    dm.qContentUchPlan.SQL.Add
-      ('Select * From Content_UchPl Where ik_disc_uch_plan = ' +
-      IntToStr(DiscInUchPlanIK));
-    dm.qContentUchPlan.Open;
-    tempDS := TGeneralController.Instance.GetNewADODataSet(false);
-    try
-      tempDS.CommandText :=
-        'SELECT ik_vid_zanyat, ik_kaf, n_sem, week_count FROM Content_UchPl INNER JOIN UchPlan_WeekCount_Exception upwce ON Content_UchPl.ik_upContent = upwce.ik_upContent WHERE ik_disc_uch_plan = '
-        + IntToStr(DiscInUchPlanIK);
-      tempDS.Open;
-      while not tempDS.Eof do
-      begin
-        weekCountExceptionList.Add
-          (TVidZanyatException.Create(tempDS.FieldByName('ik_vid_zanyat')
-          .AsInteger, tempDS.FieldByName('n_sem').AsInteger,
-          tempDS.FieldByName('ik_kaf').AsInteger, 1,
-          tempDS.FieldByName('week_count').AsInteger));
-        tempDS.Next;
-      end;
-    finally
-      if tempDS.Active then
-        tempDS.Close;
-      tempDS.Free;
-    end;
-  end;
+  if not isAlreadyOpen then LoadContentAndWeeks(DiscInUchPlanIK);
+
   LectHour := 0;
   LabHour := 0;
   PractHour := 0;
-
-  { for g:= 0 to Length(semesters)-1 do
-    begin
-    for i:= 0 to 2 do
-    semesters[g].auditorHour[i]:= 0;
-
-    dm.qContentUchPlan.First;
-    while not dm.qContentUchPlan.Eof do
-    begin
-    for i:= 0 to 2 do
-    begin
-    if (dm.qContentUchPlan.FieldByName('n_sem').AsInteger = semesters[g].number) and
-    (dm.qContentUchPlan.FieldByName('ik_vid_zanyat').AsInteger = auditorVZ[i]) then
-    semesters[g].auditorHour[i]:= semesters[g].auditorHour[i] + dm.qContentUchPlan.FieldByName('i_hour_per_week').AsInteger;
-    end;
-    dm.qContentUchPlan.Next;
-    end;
-    LectHour:= LectHour + semesters[g].weekCount * semesters[g].auditorHour[0];
-    LabHour:= LabHour + semesters[g].weekCount * semesters[g].auditorHour[1];
-    PractHour:= PractHour + semesters[g].weekCount * semesters[g].auditorHour[2];
-    end; }
 
   tempSL := TStringList.Create;
   for k := 0 to Length(arColumns) - 1 do
   begin
     case (arColumns[k].columnType) of
-      3:
+      3: //не аудиторные
         begin
           dm.qContentUchPlan.first;
           tempStr := '';
@@ -1685,8 +1631,8 @@ end;
 
 function TUchPlanController.SaveDiscInUchPlan(UchPlanIK: integer;
   var DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK,
-  SpclzIK, GOSHour, AuditHour, IndividHour, GroupViborNum: integer; CodeGOS: string;
-  aStrCompetenceList, DiscRelationList: TStringList): boolean;
+  SpclzIK, GOSHour, AuditHour, IndividHour, GroupViborNum: integer;
+  CodeGOS: string; aStrCompetenceList, DiscRelationList: TStringList): boolean;
 { aCompetenceList }
 var
   DataSet: TADOStoredProc;
@@ -1720,7 +1666,8 @@ begin
       Parameters.ParamByName('@iHour_Audit').value := AuditHour;
       if SpclzIK = 0 then
         Parameters.ParamByName('@ik_spclz').value := NULL
-      else Parameters.ParamByName('@ik_spclz').value := SpclzIK;
+      else
+        Parameters.ParamByName('@ik_spclz').value := SpclzIK;
       ExecProc;
       DiscInUchPlanIK := Parameters.ParamByName('@RETURN_VALUE').value;
     end;
@@ -2648,7 +2595,7 @@ begin
             end;
           end;
           if TempIKList.Count > 0 then
-          // если были удалены какие-то виды и занятия
+            // если были удалены какие-то виды и занятия
             for i := 0 to TempIKList.Count - 1 do
               if dm.qContentUchPlan.Locate('iK_vid_zanyat; n_sem',
                 VarArrayOf([VidZanyatIK, TempIKList[i]]), [loPartialKey]) then
@@ -3731,14 +3678,14 @@ begin
     pdInput, 20, NameShortSpclz);
   tempStoredProc.Connection.BeginTrans;
   try
-  try
-    tempStoredProc.ExecProc;
-    tempStoredProc.Connection.CommitTrans;
-    Result := true;
-  except
-    tempStoredProc.Connection.RollbackTrans;
-    raise;
-  end;
+    try
+      tempStoredProc.ExecProc;
+      tempStoredProc.Connection.CommitTrans;
+      Result := true;
+    except
+      tempStoredProc.Connection.RollbackTrans;
+      raise;
+    end;
   finally
     tempStoredProc.Free;
   end;
@@ -4025,8 +3972,8 @@ end;
 
 function TUchPlanController.ChangeDiscInUchPlan(UchPlanIK: integer;
   DiscInUchPlanIK: integer; CycleIK, GroupIK, PodGroupIK, DiscIK, KafedraIK,
-  GOSHour, AuditHour, IndividHour, GroupViborNum, SpclzIK: integer; CodeGOS: string;
-  aCompetenceList: TStringList): boolean;
+  GOSHour, AuditHour, IndividHour, GroupViborNum, SpclzIK: integer;
+  CodeGOS: string; aCompetenceList: TStringList): boolean;
 var
   DataSet: TADOStoredProc;
   i, ik_disc_uch_plan_temp, ik_uch_plan, year_uch_plan: integer;
@@ -4097,8 +4044,8 @@ begin
 end;
 
 procedure TUchPlanController.AddNewDisc(ik_uch_plan, DiscInUchPlanIK, CycleIK,
-  GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour, GroupViborNum,
-  SpclzIK: integer; CodeGOS: string);
+  GroupIK, PodGroupIK, DiscIK, KafedraIK, GOSHour, AuditHour, IndividHour,
+  GroupViborNum, SpclzIK: integer; CodeGOS: string);
 var
   DataSet: TADOStoredProc;
   tempDS, tempDS_new: TADODataSet;
@@ -4740,6 +4687,42 @@ begin
   if dm.qContentUchPlan_temp.Active then
     dm.qContentUchPlan_temp.Close;
 
+end;
+
+procedure TUchPlanController.LoadContentAndWeeks(DiscInUchPlanIK: integer);
+var
+  tempDS: TADODataSet;
+begin
+  if dm.qContentUchPlan.Active then
+    dm.qContentUchPlan.Close;
+  if Assigned(weekCountExceptionList) then
+    weekCountExceptionList.Clear;
+  dm.qContentUchPlan.Connection := dm.DBConnect;
+  dm.qContentUchPlan.SQL.Clear;
+  dm.qContentUchPlan.SQL.Add
+    ('Select * From Content_UchPl Where ik_disc_uch_plan = ' +
+    IntToStr(DiscInUchPlanIK));
+  dm.qContentUchPlan.Open;
+  tempDS := TGeneralController.Instance.GetNewADODataSet(false);
+  try
+    tempDS.CommandText :=
+      'SELECT ik_vid_zanyat, ik_kaf, n_sem, week_count FROM Content_UchPl INNER JOIN UchPlan_WeekCount_Exception upwce ON Content_UchPl.ik_upContent = upwce.ik_upContent WHERE ik_disc_uch_plan = '
+      + IntToStr(DiscInUchPlanIK);
+    tempDS.Open;
+    while not tempDS.Eof do
+    begin
+      weekCountExceptionList.Add
+        (TVidZanyatException.Create(tempDS.FieldByName('ik_vid_zanyat')
+        .AsInteger, tempDS.FieldByName('n_sem').AsInteger,
+        tempDS.FieldByName('ik_kaf').AsInteger, 1,
+        tempDS.FieldByName('week_count').AsInteger));
+      tempDS.Next;
+    end;
+  finally
+    if tempDS.Active then
+      tempDS.Close;
+    tempDS.Free;
+  end;
 end;
 
 end.
