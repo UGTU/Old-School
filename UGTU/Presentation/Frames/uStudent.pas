@@ -2017,6 +2017,8 @@ begin
     AddParameter;
     Items[1].Value := TDBNodeStudObject
       (frmMain.DBDekTreeView_TEST1.SelectedObject).RecordbookKey;
+      ShowMessage(TDBNodeStudObject
+      (frmMain.DBDekTreeView_TEST1.SelectedObject).RecordbookKey.ToString());
   end;
   dmUspevaemost.adospSelUspevForStud.ExecProc;
   dmUspevaemost.adospSelUspevForStud.Active := true;
