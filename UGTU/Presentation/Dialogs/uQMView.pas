@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, GridsEh, DBGridEh, ActnList, StdCtrls, Buttons, ExtCtrls,
   uQMController, ComObj, ADODB, DB, uQueryMaster, DBCtrls, Mask, DBCtrlsEh,
-  ComCtrls, Menus, uMain;
+  ComCtrls, Menus, uMain, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, DBAxisGridsEh, System.Actions;
 
 type
   TfrmQMView = class(TfrmBaseDialog)
@@ -52,11 +53,7 @@ begin
   PanelProgressBar.Visible:=true;
   E := CreateOleObject('Excel.Application');
   E.WorkBooks.Add();
-  E.Sheets[1].Select;
-  E.Sheets[1].delete;
-  E.Sheets[1].delete;
-  E.Sheets[1].name:='Запрос';
-  //E.Visible := true;
+  E.ActiveSheet.name:='Запрос';
 
   dbgEhResultQuery.DataSource.DataSet.DisableControls;
   
@@ -70,13 +67,13 @@ begin
     E.Sheets[1].rows[i+1].RowHeight:=14;
   end; }
 
-  E.Sheets[1].rows[1].Font.Bold:=true;
+  E.ActiveSheet.rows[1].Font.Bold:=true;
 
   for i:=1 to CountCol do
   begin
-    E.Sheets[1].Columns[i].ColumnWidth:=16.43;
-    E.Sheets[1].cells[1,i]:=dsResultDataSours.DataSet.Fields[i-1].FieldName;
-    E.Sheets[1].Columns[i].NumberFormat:='@';
+    E.ActiveSheet.Columns[i].ColumnWidth:=16.43;
+    E.ActiveSheet.cells[1,i]:=dsResultDataSours.DataSet.Fields[i-1].FieldName;
+    E.ActiveSheet.Columns[i].NumberFormat:='@';
   end;
 
   dsResultDataSours.DataSet.First;
@@ -84,7 +81,7 @@ begin
   begin
     for j:=1 to countcol do
     begin
-      E.Sheets[1].cells[(i+1),j]:=dsResultDataSours.DataSet.Fields[j-1].AsString;
+      E.ActiveSheet.cells[(i+1),j]:=dsResultDataSours.DataSet.Fields[j-1].AsString;
     end;
   dsResultDataSours.DataSet.Next;
   ProgressBar1.Position:=i;

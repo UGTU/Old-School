@@ -77,7 +77,6 @@ type
     qContentUchPlan: TADOQuery;
     adsSemester: TADODataSet;
     aspGetDiscModel: TADOStoredProc;
-    aspGetDiscModelik_disc: TIntegerField;
     aspGetDiscModelik_grp_disc: TIntegerField;
     aspGetDiscModelik_ckl_disc: TIntegerField;
     aspGetDiscModelcname_ckl_disc1: TStringField;
@@ -561,6 +560,7 @@ type
     aspGetDiscModelcshortname: TStringField;
     aspGetDiscModeliHour_Audit: TIntegerField;
     aspGetDiscWorkiHour_Audit: TIntegerField;
+    aspGetDiscModelik_disc: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

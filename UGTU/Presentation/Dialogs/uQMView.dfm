@@ -10,8 +10,8 @@ inherited frmQMView: TfrmQMView
   Menu = MainMenu1
   Position = poDesigned
   OnShow = FormShow
-  ExplicitWidth = 700
-  ExplicitHeight = 607
+  ExplicitWidth = 708
+  ExplicitHeight = 612
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -24,7 +24,7 @@ inherited frmQMView: TfrmQMView
     Top = 512
     Width = 692
     Visible = False
-    ExplicitTop = 518
+    ExplicitTop = 512
     ExplicitWidth = 692
     inherited bbOK: TBitBtn
       Left = 470
@@ -64,21 +64,15 @@ inherited frmQMView: TfrmQMView
       Align = alClient
       AutoFitColWidths = True
       DataSource = dsResultDataSours
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
       OnTitleClick = dbgEhResultQueryTitleClick
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object Panel3: TPanel
       Left = 0
@@ -154,7 +148,6 @@ inherited frmQMView: TfrmQMView
         Align = alLeft
         Flat = True
         TabOrder = 0
-        ExplicitHeight = 28
       end
     end
     object eCountRecords: TDBEditEh
@@ -162,6 +155,7 @@ inherited frmQMView: TfrmQMView
       Top = 5
       Width = 58
       Height = 19
+      DynProps = <>
       EditButtons = <>
       Flat = True
       ReadOnly = True

@@ -365,8 +365,16 @@ begin
       frmUchPlanAddDisc.edtHoursAudit.Text := dsDisc.DataSet.FieldByName('iHour_Audit').AsString;
       frmUchPlanAddDisc.iIndivid := dsDisc.DataSet.FieldByName('iIndivid')
         .AsInteger;
-      frmUchPlanAddDisc.dbcbDisc.KeyValue := dsDisc.DataSet.FieldByName
-        ('ik_disc').AsInteger;
+
+        {ShowMessage(PWideChar(dsDisc.DataSet.FieldByName
+        ('ik_disc').AsInteger));
+        ShowMessage(PWideChar(dsDisc.DataSet.FieldByName
+        ('ik_disc_uch_plan').AsInteger));    }
+      frmUchPlanAddDisc.dbcbDisc.KeyValue := dsDisc.DataSet.FieldByName('ik_disc').Value;
+      frmUchPlanAddDisc.dbcbCklDisc.KeyValue :=
+        dsDisc.DataSet.FieldByName('IK_ckl_disc').AsInteger;
+      frmUchPlanAddDisc.dbcbGrpDisc.KeyValue :=
+        dsDisc.DataSet.FieldByName('IK_grp_disc').AsInteger;
 
       frmUchPlanAddDisc.dbeGroupVibor.Value :=
         dsDisc.DataSet.FieldByName('ViborGroup').AsString;
@@ -375,11 +383,7 @@ begin
       else
         frmUchPlanAddDisc.dbcbKaf.KeyValue := dsDisc.DataSet.FieldByName
           ('ik_default_kaf').AsInteger;
-      frmUchPlanAddDisc.dbcbCklDisc.KeyValue :=
-        dsDisc.DataSet.FieldByName('IK_ckl_disc').AsInteger;
-      frmUchPlanAddDisc.dbcbGrpDisc.KeyValue :=
-        dsDisc.DataSet.FieldByName('IK_grp_disc').AsInteger;
-      frmUchPlanAddDisc.dbcbPdgrpDisc.KeyValue :=
+       frmUchPlanAddDisc.dbcbPdgrpDisc.KeyValue :=
         dsDisc.DataSet.FieldByName('iK_pdgrp_disc').AsInteger;
       index := dsDisc.DataSet.FieldByName('ik_disc').AsInteger;
       frmUchPlanAddDisc.IsModified := false;

@@ -482,10 +482,6 @@ object dm: Tdm
       end>
     Left = 648
     Top = 296
-    object aspGetDiscModelik_disc: TIntegerField
-      FieldName = 'ik_disc'
-      Visible = False
-    end
     object aspGetDiscModelik_grp_disc: TIntegerField
       FieldName = 'ik_grp_disc'
       Visible = False
@@ -583,6 +579,10 @@ object dm: Tdm
       DisplayLabel = #1040#1091#1076#1080#1090
       DisplayWidth = 20
       FieldName = 'iHour_Audit'
+    end
+    object aspGetDiscModelik_disc: TIntegerField
+      FieldName = 'ik_disc'
+      Visible = False
     end
   end
   object adsVidNagruzki: TADODataSet
