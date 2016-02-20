@@ -3,133 +3,188 @@ inherited frmStudVosst: TfrmStudVosst
   Top = 270
   HelpKeyword = 'stud_rejoin.htm'
   Caption = #1042#1086#1089#1089#1090#1072#1085#1086#1074#1083#1077#1085#1080#1077' '#1089#1090#1091#1076#1077#1085#1090#1072
-  ClientHeight = 405
-  ClientWidth = 290
+  ClientHeight = 509
+  ClientWidth = 561
+  Constraints.MinHeight = 197
+  Constraints.MinWidth = 363
   OldCreateOrder = True
   OnShow = FormShow
-  ExplicitWidth = 296
-  ExplicitHeight = 434
-  PixelsPerInch = 96
-  TextHeight = 13
+  ExplicitWidth = 567
+  ExplicitHeight = 544
+  PixelsPerInch = 120
+  TextHeight = 16
   inherited Bevel1: TBevel
-    Width = 290
-    Height = 364
-    ExplicitWidth = 287
-    ExplicitHeight = 323
+    Width = 561
+    Height = 459
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
+    ExplicitWidth = 357
+    ExplicitHeight = 448
   end
   object Label1: TLabel [1]
-    Left = 12
-    Top = 51
-    Width = 108
-    Height = 13
+    Left = 15
+    Top = 63
+    Width = 142
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #1055#1088#1080#1095#1080#1085#1072' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103':'
   end
   object Label2: TLabel [2]
-    Left = 12
-    Top = 11
-    Width = 59
-    Height = 13
+    Left = 15
+    Top = 14
+    Width = 75
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #8470' '#1087#1088#1080#1082#1072#1079#1072':'
   end
   object Label3: TLabel [3]
-    Left = 13
-    Top = 171
-    Width = 38
-    Height = 13
+    Left = 16
+    Top = 210
+    Width = 50
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #1043#1088#1091#1087#1087#1072':'
   end
   object Label4: TLabel [4]
-    Left = 12
-    Top = 214
-    Width = 71
-    Height = 13
+    Left = 15
+    Top = 263
+    Width = 92
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #1054#1073#1086#1089#1085#1086#1074#1072#1085#1080#1077':'
   end
   object Label57: TLabel [5]
-    Left = 73
-    Top = 11
-    Width = 4
-    Height = 13
+    Left = 90
+    Top = 14
+    Width = 5
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label5: TLabel [6]
-    Left = 121
-    Top = 51
-    Width = 4
-    Height = 13
+    Left = 149
+    Top = 63
+    Width = 5
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label6: TLabel [7]
-    Left = 52
-    Top = 171
-    Width = 4
-    Height = 13
+    Left = 64
+    Top = 210
+    Width = 5
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label7: TLabel [8]
-    Left = 12
-    Top = 129
-    Width = 81
-    Height = 13
+    Left = 15
+    Top = 159
+    Width = 104
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100':'
   end
   object Label8: TLabel [9]
-    Left = 94
-    Top = 129
-    Width = 4
-    Height = 13
+    Left = 116
+    Top = 159
+    Width = 5
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label9: TLabel [10]
-    Left = 12
-    Top = 89
-    Width = 59
-    Height = 13
+    Left = 15
+    Top = 110
+    Width = 74
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #1060#1072#1082#1091#1083#1100#1090#1077#1090':'
   end
   object Label10: TLabel [11]
-    Left = 73
-    Top = 89
-    Width = 4
-    Height = 13
+    Left = 90
+    Top = 110
+    Width = 5
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object sbAddPrikaz: TSpeedButton [12]
-    Left = 251
-    Top = 26
-    Width = 27
-    Height = 20
+    Left = 511
+    Top = 32
+    Width = 33
+    Height = 25
     Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1087#1088#1080#1082#1072#1079'...'
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akTop, akRight]
     Flat = True
     Glyph.Data = {
       36040000424D3604000000000000360000002800000010000000100000000100
@@ -167,37 +222,63 @@ inherited frmStudVosst: TfrmStudVosst
       8400DEAD8400DEAD8400DEAD8400DEAD8400DEAD8C00D6A58400DEAD8400FFF7
       EF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
     OnClick = sbAddPrikazClick
+    ExplicitLeft = 309
   end
   inherited Panel1: TPanel
-    Top = 364
-    Width = 290
-    ExplicitTop = 364
-    ExplicitWidth = 290
+    Top = 459
+    Width = 561
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
+    ExplicitTop = 448
+    ExplicitWidth = 357
     inherited bbOK: TBitBtn
-      Left = 35
+      Left = 247
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Enabled = False
-      ExplicitLeft = 35
+      ExplicitLeft = 43
     end
     inherited bbApply: TBitBtn
-      Left = 201
-      Width = 78
+      Left = 451
+      Width = 96
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Enabled = False
-      ExplicitLeft = 201
-      ExplicitWidth = 78
+      ExplicitLeft = 247
+      ExplicitWidth = 96
     end
     inherited bbCancel: TBitBtn
-      Left = 118
-      ExplicitLeft = 118
+      Left = 349
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
+      ExplicitLeft = 145
     end
     inherited bbSprav: TBitBtn
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Visible = False
     end
   end
   object dbcbeNumPrik: TDBLookupComboboxEh [14]
-    Left = 12
-    Top = 26
-    Width = 231
-    Height = 19
+    Left = 15
+    Top = 32
+    Width = 486
+    Height = 22
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight]
     DataField = ''
     EditButtons = <>
     Flat = True
@@ -207,12 +288,18 @@ inherited frmStudVosst: TfrmStudVosst
     TabOrder = 1
     Visible = True
     OnChange = dbcbeNumPrikChange
+    ExplicitWidth = 284
   end
   object dbcbeCause: TDBLookupComboboxEh [15]
-    Left = 12
-    Top = 67
-    Width = 266
-    Height = 19
+    Left = 15
+    Top = 82
+    Width = 529
+    Height = 22
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight]
     DataField = ''
     EditButtons = <>
     Flat = True
@@ -222,12 +309,18 @@ inherited frmStudVosst: TfrmStudVosst
     TabOrder = 2
     Visible = True
     OnChange = dbcbeNumPrikChange
+    ExplicitWidth = 327
   end
   object dbcbeSpec: TDBLookupComboboxEh [16]
-    Left = 12
-    Top = 146
-    Width = 266
-    Height = 19
+    Left = 15
+    Top = 180
+    Width = 529
+    Height = 22
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight]
     DataField = ''
     EditButtons = <>
     Flat = True
@@ -237,12 +330,18 @@ inherited frmStudVosst: TfrmStudVosst
     TabOrder = 3
     Visible = True
     OnChange = dbcbeSpecChange
+    ExplicitWidth = 327
   end
   object dbcbeFac: TDBLookupComboboxEh [17]
-    Left = 12
-    Top = 104
-    Width = 267
-    Height = 19
+    Left = 15
+    Top = 128
+    Width = 530
+    Height = 22
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight]
     DataField = ''
     EditButtons = <>
     Flat = True
@@ -252,12 +351,18 @@ inherited frmStudVosst: TfrmStudVosst
     TabOrder = 4
     Visible = True
     OnChange = dbcbeFacChange
+    ExplicitWidth = 328
   end
   object dbcbeGroup: TDBLookupComboboxEh [18]
-    Left = 12
-    Top = 188
-    Width = 266
-    Height = 19
+    Left = 15
+    Top = 231
+    Width = 529
+    Height = 22
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight]
     DataField = ''
     EditButtons = <>
     Flat = True
@@ -267,18 +372,25 @@ inherited frmStudVosst: TfrmStudVosst
     TabOrder = 5
     Visible = True
     OnChange = dbcbeNumPrikChange
+    ExplicitWidth = 327
   end
   object ezachObosn: TMemo [19]
-    Left = 12
-    Top = 233
-    Width = 267
-    Height = 121
+    Left = 15
+    Top = 287
+    Width = 529
+    Height = 149
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    Anchors = [akLeft, akTop, akRight]
     BevelInner = bvNone
     BorderStyle = bsNone
     MaxLength = 1000
     TabOrder = 6
     OnEnter = ezachObosnEnter
     OnExit = ezachObosnExit
+    ExplicitWidth = 327
   end
   inherited actBaseDialog: TActionList
     Left = 114
