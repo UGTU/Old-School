@@ -1,13 +1,13 @@
 declare @YearMinDisp INT = 1995, @Step INT=3
 
-select distinct Clastname +' '+ Cfirstname +' '+ isnull(Cotch,'') FIO, Cname_grup, Cshort_name_fac, year(Dd_birth), CONVERT(VARCHAR(10),Dd_birth,104) ,  Cname_spec, 
+select distinct c_grazd, Clastname +' '+ Cfirstname +' '+ isnull(Cotch,'') FIO, Cname_grup, Cshort_name_fac, year(Dd_birth), CONVERT(VARCHAR(10),Dd_birth,104) ,  Cname_spec, 
 ISNULL(pr.Cstrana + ', ' + pr.Cregion +
 	   ', ' + pr.Cgorod + ', ' + pr.CStreet+', '+pr.BuildingNumber+' - '+pr.FlatNumber,''),
 		ISNULL(fac.Cstrana + ', ' + fac.Cregion + ', ' + fac.Cgorod + ', ' + fac.CStreet+', '+fac.BuildingNumber+' - '+fac.FlatNumber,''), 
 		ISNULL(vrem.Cstrana + ', ' + vrem.Cregion + ', ' + vrem.Cgorod + ', ' + vrem.CStreet+', '+vrem.BuildingNumber+' - '+vrem.FlatNumber,'')
 from (
 
-select Person.nCode,Clastname, Cfirstname, Cotch, Dd_birth, ctelefon, cSotTel, Grup.Cname_grup, Cname_spec, Cshort_name_fac,[Cplacebirth],Person.ik_grazd
+select Person.nCode,Clastname, Cfirstname, Cotch, Dd_birth, ctelefon, cSotTel, Grup.Cname_grup, Cname_spec, Cshort_name_fac,[Cplacebirth],Person.ik_grazd, grazd.c_grazd
 from person
 left join grazd on grazd.ik_grazd = Person.Ik_grazd
 left join Zach on Zach.nCode = person.nCode

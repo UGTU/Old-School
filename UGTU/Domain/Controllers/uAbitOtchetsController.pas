@@ -2522,7 +2522,7 @@ begin
 	  E := CreateOleObject('Excel.Application');
     try
       E.Visible := false;
-		  TmplFile := ExtractFilePath(Application.ExeName)+'reports\Zayavl2012.xlt';
+		  TmplFile := ExtractFilePath(Application.ExeName)+'reports\Zayavl2016.xlt';
 		  E.WorkBooks.Add(TmplFile);
 		  E.Sheets[1].Select;
       try
@@ -2620,8 +2620,8 @@ begin
 
 	  case dmAbiturientAction.adospPrintZayavlik_type_kat.AsInteger of
 		  1:E.Range['K'+inttostr(27)+':K'+inttostr(27)]:='R';
-		  2:E.Range['M'+inttostr(27)+':M'+inttostr(27)]:='R';
-		  3:E.Range['E'+inttostr(28)+':E'+inttostr(28)]:='R';
+		  2:E.Range['K'+inttostr(29)+':K'+inttostr(29)]:='R';
+		  3:E.Range['K'+inttostr(28)+':K'+inttostr(28)]:='R';
 	  end;
 
 
