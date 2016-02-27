@@ -2616,7 +2616,7 @@ begin
 	  if dmAbiturientAction.adospPrintZayavl.FieldByName('Ik_form_ed').AsInteger=1 then
 		 E.Range['B'+inttostr(26)+':B'+inttostr(26)]:='R'
 	  else
-		 E.Range['F'+inttostr(26)+':F'+inttostr(26)]:='R';
+		 E.Range['G'+inttostr(26)+':G'+inttostr(26)]:='R';
 
 	  case dmAbiturientAction.adospPrintZayavlik_type_kat.AsInteger of
 		  1:E.Range['K'+inttostr(27)+':K'+inttostr(27)]:='R';
@@ -2668,9 +2668,7 @@ begin
 		if dmAbiturientAction.adospPrintZayavlAIk_vid_doc.AsString<>'' then
 		  E.Range['S'+inttostr(7)+':S'+inttostr(7)]:='R';
 
-	  if (dmAbiturientAction.adospPrintZayavlIsNotFirstEducation.AsBoolean) then
-		 E.Range['AD'+inttostr(21)+':AD'+inttostr(21)]:='R'
-	  else
+	  if (not dmAbiturientAction.adospPrintZayavlIsNotFirstEducation.AsBoolean) then
 		 E.Range['AA'+inttostr(21)+':AA'+inttostr(21)]:='R';
 
 	  //вывод иностранных языков

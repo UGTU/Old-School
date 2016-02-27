@@ -5,6 +5,7 @@ object dm: Tdm
   Width = 1149
   object DBConnect: TADOConnection
     CommandTimeout = 300
+    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
       'fo=False;User ID=developer;Initial Catalog=UGTU_ACTTEST;Data Sou' +
@@ -359,6 +360,7 @@ object dm: Tdm
   end
   object adodsNabor: TADODataSet
     Connection = DBConnect
+    CursorType = ctStatic
     CommandText = 'TREE_ABIT_Specialties'
     CommandType = cmdTable
     Parameters = <>
@@ -397,6 +399,32 @@ object dm: Tdm
       FieldName = 'Name'
       ReadOnly = True
       Size = 103
+    end
+    object adodsNaborSh_spec: TStringField
+      FieldName = 'Sh_spec'
+      ReadOnly = True
+      Size = 10
+    end
+    object adodsNaborcName_direction: TStringField
+      FieldName = 'cName_direction'
+      Size = 50
+    end
+    object adodsNaborCname_form_ed: TStringField
+      FieldName = 'Cname_form_ed'
+      Size = 50
+    end
+    object adodsNaborIk_form_ed: TIntegerField
+      FieldName = 'Ik_form_ed'
+    end
+    object adodsNaborBeginDiapazon: TIntegerField
+      FieldName = 'BeginDiapazon'
+    end
+    object adodsNaborEndDiapazon: TIntegerField
+      FieldName = 'EndDiapazon'
+    end
+    object adodsNaborFullName: TStringField
+      FieldName = 'FullName'
+      Size = 500
     end
   end
   object dsNabor: TDataSource

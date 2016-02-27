@@ -561,6 +561,13 @@ type
     aspGetDiscModeliHour_Audit: TIntegerField;
     aspGetDiscWorkiHour_Audit: TIntegerField;
     aspGetDiscModelik_disc: TIntegerField;
+    adodsNaborSh_spec: TStringField;
+    adodsNaborcName_direction: TStringField;
+    adodsNaborCname_form_ed: TStringField;
+    adodsNaborIk_form_ed: TIntegerField;
+    adodsNaborBeginDiapazon: TIntegerField;
+    adodsNaborEndDiapazon: TIntegerField;
+    adodsNaborFullName: TStringField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);
