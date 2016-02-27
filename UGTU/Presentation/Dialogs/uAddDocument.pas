@@ -37,6 +37,8 @@ type
     cbReal: TCheckBox;
     opDocs: TOpenPictureDialog;
     Action1: TAction;
+    Label9: TLabel;
+    WhoRequired: TLabel;
     procedure actCheckFieldsUpdate(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
@@ -97,7 +99,17 @@ begin
   with frmAddDocument do
   begin
     if (dbcbeKind.Text = '') { or (eSer.Text = '') } or (eNum.Text = '') then
-      result := false
+      result := false;
+    if (dbcbeKind.Text <> '') then
+      if (dbcbeKind.ListSource.DataSet.FieldByName('IsIdentity').AsBoolean) or
+         (dbcbeKind.ListSource.DataSet.FieldByName('IsEducational').AsBoolean) then
+      begin
+         if (eWho.Text = '') then
+          result := false;
+         WhoRequired.Visible := true;
+      end
+      else
+        WhoRequired.Visible := false;
   end;
 end;
 

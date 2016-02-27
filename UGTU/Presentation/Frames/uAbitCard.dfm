@@ -63,7 +63,6 @@ inherited fmAbitCard: TfmAbitCard
       ExplicitWidth = 620
       inherited PageControl1: TPageControl
         Width = 620
-        ActivePage = TabSheet1
         ExplicitWidth = 620
         inherited TabSheet1: TTabSheet
           ExplicitWidth = 612
@@ -702,10 +701,11 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited tbMagazine: TTabSheet
           TabVisible = False
-          ExplicitWidth = 0
+          ExplicitWidth = 612
           inherited panelMagaz: TPanel
             Width = 612
             ParentFont = False
+            ExplicitWidth = 612
           end
           inherited dbgehMagazineDocsStud: TDBGridEh
             Width = 612
@@ -918,7 +918,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C0101060009006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1194,7 +1194,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilMain: TImageList
     Bitmap = {
-      494C010111004000400210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000440210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

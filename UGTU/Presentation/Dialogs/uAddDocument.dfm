@@ -13,6 +13,7 @@ inherited frmAddDocument: TfrmAddDocument
     Width = 435
     Height = 321
     Align = alTop
+    ExplicitTop = 2
     ExplicitWidth = 435
     ExplicitHeight = 321
   end
@@ -84,6 +85,32 @@ inherited frmAddDocument: TfrmAddDocument
     Height = 13
     Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103
   end
+  object Label9: TLabel [9]
+    Left = 96
+    Top = 28
+    Width = 177
+    Height = 1
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object WhoRequired: TLabel [10]
+    Left = 266
+    Top = 96
+    Width = 7
+    Height = 9
+    Caption = '*'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   inherited Panel1: TPanel
     Top = 385
     Width = 435
@@ -118,7 +145,7 @@ inherited frmAddDocument: TfrmAddDocument
       ExplicitTop = 6
     end
   end
-  object dbcbeKind: TDBLookupComboboxEh [10]
+  object dbcbeKind: TDBLookupComboboxEh [12]
     Left = 10
     Top = 27
     Width = 414
@@ -133,7 +160,7 @@ inherited frmAddDocument: TfrmAddDocument
     Visible = True
     OnChange = dbcbeKindChange
   end
-  object eSer: TDBEditEh [11]
+  object eSer: TDBEditEh [13]
     Left = 10
     Top = 71
     Width = 95
@@ -146,7 +173,7 @@ inherited frmAddDocument: TfrmAddDocument
     OnChange = dbcbeKindChange
     OnExit = eSerExit
   end
-  object eNum: TDBEditEh [12]
+  object eNum: TDBEditEh [14]
     Left = 111
     Top = 71
     Width = 132
@@ -164,7 +191,7 @@ inherited frmAddDocument: TfrmAddDocument
     Visible = True
     OnChange = dbcbeKindChange
   end
-  object eWho: TDBEditEh [13]
+  object eWho: TDBEditEh [15]
     Left = 10
     Top = 111
     Width = 413
@@ -177,7 +204,7 @@ inherited frmAddDocument: TfrmAddDocument
     Visible = True
     OnChange = dbcbeKindChange
   end
-  object dbdteGetDate: TDBDateTimeEditEh [14]
+  object dbdteGetDate: TDBDateTimeEditEh [16]
     Left = 249
     Top = 71
     Width = 175
@@ -190,7 +217,7 @@ inherited frmAddDocument: TfrmAddDocument
     Visible = True
     OnChange = dbcbeKindChange
   end
-  object dbeAddInfo: TDBEditEh [15]
+  object dbeAddInfo: TDBEditEh [17]
     Left = 10
     Top = 180
     Width = 413
@@ -202,7 +229,7 @@ inherited frmAddDocument: TfrmAddDocument
     Visible = True
     OnChange = dbcbeKindChange
   end
-  object btnLoad: TButton [16]
+  object btnLoad: TButton [18]
     Left = 8
     Top = 206
     Width = 129
@@ -211,7 +238,7 @@ inherited frmAddDocument: TfrmAddDocument
     TabOrder = 7
     OnClick = btnLoadClick
   end
-  object chbxBonuses: TCheckBox [17]
+  object chbxBonuses: TCheckBox [19]
     Left = 8
     Top = 298
     Width = 121
@@ -226,7 +253,7 @@ inherited frmAddDocument: TfrmAddDocument
     TabOrder = 8
     OnClick = chbxBonusesClick
   end
-  object pnlBonuses: TPanel [18]
+  object pnlBonuses: TPanel [20]
     Left = 0
     Top = 321
     Width = 435
@@ -299,7 +326,7 @@ inherited frmAddDocument: TfrmAddDocument
       OnChange = dbcbeKindChange
     end
   end
-  object cbReal: TCheckBox [19]
+  object cbReal: TCheckBox [21]
     Left = 10
     Top = 138
     Width = 111
