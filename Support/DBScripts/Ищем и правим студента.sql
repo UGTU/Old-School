@@ -1,5 +1,7 @@
 
-select * from Person where Clastname like 'Косарев' and [Cfirstname] like 'Борис' and [Cotch] like 'Владимирович'
+select * from Person where Clastname like 'Лысенк%' 
+
+and [Cfirstname] like 'Борис' and [Cotch] like 'Владимирович'
 
 select ABIT_postup.NN_abit,Person.Clastname, Person.Cfirstname, Person.Cotch,  fac.Cshort_name_fac, 
 EducationBranch.Cname_spec, EducationBranch.ik_direction,
@@ -20,13 +22,13 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (114928)
+select * from Zach where ncode in (45383)
 select * from Zach where Ik_zach in (14369)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (36779)
+and ik_zach in (24736)
 
 select * from Prikaz where k
 
