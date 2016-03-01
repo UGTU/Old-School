@@ -66,7 +66,7 @@ inherited fmZach: TfmZach
           object Label28: TLabel
             Left = 84
             Top = 16
-            Width = 131
+            Width = 132
             Height = 13
             Caption = #1042#1099#1076#1072#1095#1072' '#1079#1072#1095#1077#1090#1085#1099#1093' '#1082#1085#1080#1078#1077#1082
           end
@@ -342,21 +342,21 @@ inherited fmZach: TfmZach
           object Label2: TLabel
             Left = 39
             Top = 12
-            Width = 129
+            Width = 130
             Height = 13
             Caption = '- '#1076#1086#1089#1090#1091#1087#1085#1099' '#1082' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1102
           end
           object Label4: TLabel
             Left = 203
             Top = 12
-            Width = 245
+            Width = 246
             Height = 13
             Caption = '- '#1085#1077#1076#1086#1089#1090#1072#1090#1086#1095#1085#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074' ('#1087#1072#1089#1087#1086#1088#1090'/'#1072#1090#1090#1077#1089#1090#1072#1090')'
           end
           object Label5: TLabel
             Left = 486
             Top = 12
-            Width = 226
+            Width = 227
             Height = 13
             Caption = '- '#1085#1077' '#1074#1089#1077' '#1074#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1077' '#1080#1089#1087#1099#1090#1072#1085#1080#1103' '#1074#1074#1077#1076#1077#1085#1099
           end
@@ -874,7 +874,7 @@ inherited fmZach: TfmZach
     Left = 483
     Top = 80
     Bitmap = {
-      494C010105004000680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050040006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1149,7 +1149,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C010103000400680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101030004006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828
@@ -1442,6 +1442,10 @@ inherited fmZach: TfmZach
       ImageIndex = 57
       OnExecute = actDelFromGroupExecute
     end
+    object ActZachProtocol: TAction
+      Category = 'Zachisl'
+      Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
+    end
   end
   object adoqTypeKatZach: TADOQuery
     Connection = dm.DBConnect
@@ -1454,8 +1458,8 @@ inherited fmZach: TfmZach
   end
   object PopupMenu1: TPopupMenu
     Images = frmMain.ImageList1
-    Left = 174
-    Top = 299
+    Left = 190
+    Top = 259
     object N1: TMenuItem
       Action = frmMain.actJoinGroup
     end
@@ -1467,13 +1471,13 @@ inherited fmZach: TfmZach
     end
   end
   object dsList: TDataSource
-    Left = 208
-    Top = 298
+    Left = 232
+    Top = 258
   end
   object PopupMenu2: TPopupMenu
     Images = frmMain.ImageList1
     Left = 142
-    Top = 299
+    Top = 259
     object N4: TMenuItem
       Action = actZachislAbit
     end
@@ -1521,6 +1525,9 @@ inherited fmZach: TfmZach
     end
     object N7: TMenuItem
       Action = actPrintExamStatistic
+    end
+    object N8: TMenuItem
+      Action = ActZachProtocol
     end
   end
 end
