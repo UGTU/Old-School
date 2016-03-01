@@ -169,6 +169,7 @@ type
     procedure actGiveZachNumberExecute(Sender: TObject);
     procedure actPrikazAppointExecute(Sender: TObject);
     procedure actDelFromGroupExecute(Sender: TObject);
+    procedure ActZachProtocolExecute(Sender: TObject);
 
     protected
      procedure DoRefreshFrame();override;
@@ -923,6 +924,12 @@ end;
 procedure TfmZach.actZachislAbitUpdate(Sender: TObject);
 begin
   actZachislAbit.Enabled:=(dbgAbitsForZachisl.RowCount>0);
+end;
+
+procedure TfmZach.ActZachProtocolExecute(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('dfhbfg');
 end;
 
 function TfmZach.DoApply: Boolean;

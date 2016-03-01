@@ -445,8 +445,16 @@ inherited fmZach: TfmZach
             ParentShowHint = False
             ShowHint = True
           end
-          object ToolButton6: TToolButton
+          object ToolButton24: TToolButton
             Left = 100
+            Top = 0
+            Hint = #1059#1076#1072#1083#1080#1090#1100' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072' '#1080#1079' '#1075#1088#1091#1087#1087#1099
+            Action = actDelFromGroup
+            ParentShowHint = False
+            ShowHint = True
+          end
+          object ToolButton6: TToolButton
+            Left = 123
             Top = 0
             Width = 8
             Caption = 'ToolButton6'
@@ -454,7 +462,7 @@ inherited fmZach: TfmZach
             Style = tbsSeparator
           end
           object ToolButton16: TToolButton
-            Left = 108
+            Left = 131
             Top = 0
             Action = actExpPrikSpec
             DropdownMenu = ppmPrikazOtchet
@@ -463,7 +471,7 @@ inherited fmZach: TfmZach
             Style = tbsDropDown
           end
           object ToolButton4: TToolButton
-            Left = 146
+            Left = 169
             Top = 0
             Action = actAbitSpisokToExcel
             DropdownMenu = ppmPrikazExcelOtchet
@@ -472,18 +480,12 @@ inherited fmZach: TfmZach
             Style = tbsDropDown
           end
           object ToolButton23: TToolButton
-            Left = 184
+            Left = 207
             Top = 0
             Action = actPrikazAppoint
             ParentShowHint = False
             ShowHint = True
-          end
-          object ToolButton24: TToolButton
-            Left = 207
-            Top = 0
-            Action = actDelFromGroup
-            ParentShowHint = False
-            ShowHint = True
+            Visible = False
           end
         end
         object s_ik: TComboBox
@@ -1445,6 +1447,7 @@ inherited fmZach: TfmZach
     object ActZachProtocol: TAction
       Category = 'Zachisl'
       Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
+      OnExecute = ActZachProtocolExecute
     end
   end
   object adoqTypeKatZach: TADOQuery

@@ -1605,9 +1605,10 @@ end;
 // экспорт протокола о зачислении в Excel
 procedure TAbitZachislenieController.ExportProtokolToExcel;
 const
-  l = 6; // кол-во строк заголовка
+  l = 12; // кол-во строк заголовка
   m = 11; // кол-во абитуриентов на 1 странице
   exEnd = 'E';
+  RowHeigh = 33;
 var
   E: Variant;
   pagecount, spec: Integer;
@@ -1705,7 +1706,7 @@ begin
               E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)
                 ].Borders.Weight := 2;
               E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)
-                ].RowHeight := 54;
+                ].RowHeight := RowHeigh;
               i := i + l + 1;
             end;
 
@@ -1715,11 +1716,11 @@ begin
             E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('fio')
               .AsString;
             inc(j);
-            E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('RegNomer')
+            E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cname_kat_zach')
               .AsString;
             inc(j);
-            E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cName_zaved')
-              .AsString;
+            //E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('RegNomer')
+              //.AsString;
             inc(j);
             E.Cells[i, j] := '    Зачислить';
             inc(j);
@@ -1780,5 +1781,15 @@ begin
   end;
 
 end;
+
+
+{procedure TAbitZachislenieController.AbitsToExcel();
+var
+  E: Variant;
+  i, ii: Integer;
+  // cell,fac_spec:string;
+  // XLApp: TExcelApplication;
+begin
+end; }
 
 end.
