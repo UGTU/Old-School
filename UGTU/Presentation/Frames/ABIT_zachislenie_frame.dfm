@@ -1444,11 +1444,6 @@ inherited fmZach: TfmZach
       ImageIndex = 57
       OnExecute = actDelFromGroupExecute
     end
-    object ActZachProtocol: TAction
-      Category = 'Zachisl'
-      Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
-      OnExecute = ActZachProtocolExecute
-    end
   end
   object adoqTypeKatZach: TADOQuery
     Connection = dm.DBConnect
@@ -1528,9 +1523,6 @@ inherited fmZach: TfmZach
     end
     object N7: TMenuItem
       Action = actPrintExamStatistic
-    end
-    object N8: TMenuItem
-      Action = ActZachProtocol
     end
   end
 end

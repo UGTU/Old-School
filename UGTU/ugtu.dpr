@@ -437,7 +437,7 @@ uses
   DocumentClass in 'Domain\Classes\DocumentClass.pas',
   uAbitZach in 'Presentation\Dialogs\uAbitZach.pas' {frmAbitZachDialog},
   PersonController in 'Domain\Controllers\PersonController.pas',
-  AbitZachProtocolReport in 'Domain\Reports\AbitZachProtocolReport.pas';
+  AbitPostupProtocolReport in 'Domain\Reports\AbitPostupProtocolReport.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

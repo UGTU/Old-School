@@ -116,8 +116,6 @@ type
     actPrikazAppoint: TAction;
     ToolButton24: TToolButton;
     actDelFromGroup: TAction;
-    ActZachProtocol: TAction;
-    N8: TMenuItem;
     //загружает списки абитуриентов
     procedure GetSpisokOfAbits();
     procedure prikazTitleClick(Column: TColumnEh);

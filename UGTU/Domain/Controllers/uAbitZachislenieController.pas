@@ -1606,7 +1606,7 @@ end;
 procedure TAbitZachislenieController.ExportProtokolToExcel;
 const
   l = 12; // кол-во строк заголовка
-  m = 11; // кол-во абитуриентов на 1 странице
+  m = 1000; // кол-во абитуриентов на 1 странице
   exEnd = 'E';
   RowHeigh = 33;
 var
@@ -1627,7 +1627,7 @@ begin
       FAbitListDataSetInstance.DisableControls;
       // отсортировать
       sort := TADODataSet(FAbitListDataSetInstance).sort;
-      TADODataSet(FAbitListDataSetInstance).sort := 'Cname_fac, cname_spec';
+      TADODataSet(FAbitListDataSetInstance).sort := 'Cname_fac, cname_spec, ik_spec_fac';
       spec := -1;
       AbitCount := 1;
       i := l + 1;
@@ -1651,12 +1651,25 @@ begin
                   E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
                     ].Borders.Weight := 2;
                   E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
-                    ].RowHeight := 54;
+                    ].RowHeight := RowHeigh;
                 end;
 
+                inc(i);
+                E.Cells[i, 1] :='ќтветственный секретарь';
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
+
+                inc(i);
+                E.Cells[i, 1] :='приемной комиссии';
+                E.Cells[i, 5] :='—. ё. ƒубиковский';
+                E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].Merge(true);
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
+                E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].HorizontalAlignment:= 4 ;
               end;
               if FAbitListDataSetInstance.Eof then
                 break;
+
               // добавл€ем страницу и настраиваем
               E.Sheets.add(after := E.Sheets.Item[pagecount - 1]);
               E.Sheets[1].Range['A1:' + exEnd + IntToStr(50)
@@ -1678,16 +1691,11 @@ begin
               E.Sheets[pagecount].PageSetup.Orientation :=
                 E.Sheets[1].PageSetup.Orientation;
 
-              if (FAbitListDataSetInstance.FieldByName('ik_direction').Value
-                <> 2) then
-                E.Sheets[pagecount].Name := FAbitListDataSetInstance.FieldByName
+              E.Sheets[pagecount].Name := FAbitListDataSetInstance.FieldByName
                   ('Cshort_name_fac').AsString + ' ' +
                   FAbitListDataSetInstance.FieldByName('Cshort_spec').AsString +
-                  FAbitListDataSetInstance.FieldByName('ik_direction').AsString
-              else
-                E.Sheets[pagecount].Name := FAbitListDataSetInstance.FieldByName
-                  ('Cshort_name_fac').AsString + ' ' +
-                  FAbitListDataSetInstance.FieldByName('Cshort_spec').AsString;
+                  FAbitListDataSetInstance.FieldByName('ik_spec_fac').AsString;
+
               E.Sheets[pagecount].Select;
               spec := FAbitListDataSetInstance.FieldByName('ik_spec_fac').Value;
               i := l + 1;
@@ -1719,7 +1727,7 @@ begin
             E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cname_kat_zach')
               .AsString;
             inc(j);
-            //E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('RegNomer')
+            //E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cName_zaved')
               //.AsString;
             inc(j);
             E.Cells[i, j] := '    «ачислить';
