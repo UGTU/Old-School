@@ -568,6 +568,9 @@ type
     adodsNaborBeginDiapazon: TIntegerField;
     adodsNaborEndDiapazon: TIntegerField;
     adodsNaborFullName: TStringField;
+    adodsPostupViewAbitFullName: TStringField;
+    adodsPostupViewik_spec_fac: TIntegerField;
+    adodsPostupViewdateOriginal: TDateTimeField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

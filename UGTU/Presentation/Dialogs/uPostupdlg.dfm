@@ -152,6 +152,13 @@ inherited frmPostupDlg: TfrmPostupDlg
       Font.Style = []
       ParentFont = False
     end
+    object Label9: TLabel
+      Left = 340
+      Top = 126
+      Width = 123
+      Height = 13
+      Caption = #1044#1072#1090#1072' '#1087#1086#1076#1072#1095#1080' '#1086#1088#1080#1075#1080#1085#1072#1083#1072':'
+    end
     object dbcbeRecruit: TDBLookupComboboxEh
       Left = 9
       Top = 34
@@ -206,7 +213,7 @@ inherited frmPostupDlg: TfrmPostupDlg
     end
     object cbIsMain: TCheckBox
       Left = 9
-      Top = 167
+      Top = 166
       Width = 325
       Height = 17
       Caption = #1071#1074#1083#1103#1077#1090#1089#1103' '#1087#1077#1088#1074#1080#1095#1085#1099#1084' ('#1083#1080#1095#1085#1086#1077' '#1076#1077#1083#1086' '#1085#1072' '#1101#1090#1086#1081' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100')'
@@ -454,9 +461,22 @@ inherited frmPostupDlg: TfrmPostupDlg
         421)
     end
   end
+  object dtpDateOriginal: TDBDateTimeEditEh [5]
+    Left = 340
+    Top = 142
+    Width = 174
+    Height = 19
+    DynProps = <>
+    EditButtons = <>
+    Flat = True
+    Kind = dtkDateEh
+    TabOrder = 4
+    Visible = True
+    OnChange = eNumChange
+  end
   inherited actBaseDialog: TActionList
     Left = 485
-    Top = 101
+    Top = 93
     inherited actOK: TAction
       OnUpdate = actOKUpdate
     end

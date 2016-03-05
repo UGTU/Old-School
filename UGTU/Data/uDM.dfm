@@ -843,6 +843,17 @@ object dm: Tdm
       FieldName = 'Cname_form_ed'
       Size = 50
     end
+    object adodsPostupViewAbitFullName: TStringField
+      FieldName = 'AbitFullName'
+      ReadOnly = True
+      Size = 92
+    end
+    object adodsPostupViewik_spec_fac: TIntegerField
+      FieldName = 'ik_spec_fac'
+    end
+    object adodsPostupViewdateOriginal: TDateTimeField
+      FieldName = 'dateOriginal'
+    end
   end
   object dsPostupView: TDataSource
     DataSet = adodsPostupView
