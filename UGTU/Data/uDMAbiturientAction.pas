@@ -96,6 +96,7 @@ type
     aspAddExamByName: TADOStoredProc;
     adospPrintZayavlcEmail: TStringField;
     aspDoubles: TADODataSet;
+    adospPrintZayavlFullName: TStringField;
   private
     { Private declarations }
   public

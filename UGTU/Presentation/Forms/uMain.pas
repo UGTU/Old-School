@@ -369,6 +369,7 @@ type
     procedure DBDekTreeView_TEST1ContextPopup(Sender: TObject; MousePos: TPoint;
       var Handled: Boolean);
     procedure actNotificationExecute(Sender: TObject);
+    procedure actPrintEnrollAgreementExecute(Sender: TObject);
 
   private
     FFrame: TfmBase;
@@ -3369,7 +3370,13 @@ begin
         TAbitOtchetsController.Instance.ExpSpisForEGEToExc(Year);
       end;
 
-      procedure TfrmMain.actPrintItogiPostForSpecExecute(Sender: TObject);
+procedure TfrmMain.actPrintEnrollAgreementExecute(Sender: TObject);
+begin
+  TAbitOtchetsController.Instance.ExportEnrollAgreement
+    (TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.data).NNAbit);
+end;
+
+procedure TfrmMain.actPrintItogiPostForSpecExecute(Sender: TObject);
       var
         ikSpecFac: Integer;
       begin

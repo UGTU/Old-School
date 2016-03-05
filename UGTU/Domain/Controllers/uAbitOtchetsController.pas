@@ -8,7 +8,8 @@ uses
   DBGridEh,WordXP, udmAbiturientOtchety, DateUtils,
   uAbitZachislenieController, udmAbiturientAction, udmStudentSelectionProcs,
   ApplicationController, uDMAbiturientNabor, ExceptionBase,
-  AbitVstupExamStatistic, ReportsBase, uWaitingController, ConstantRepository;
+  AbitVstupExamStatistic, ReportsBase, uWaitingController, ConstantRepository,
+  AbitEnrollAgreement;
 
 type
   PDBGrid = ^TDBGridEh;
@@ -98,6 +99,8 @@ type
   //экспорт отчета по предварительному зачислению
   procedure ExportPredvSpisok(NNyear:integer);
 
+  //экспорт завления на зачисление
+  procedure ExportEnrollAgreement(NN_abit:integer);
 end;
 
 implementation
@@ -2834,5 +2837,19 @@ begin
 
 end;
 
+
+//****************Экспорт заявления в Excel*******************
+//открывает список абитуриентов для доп. специальности
+procedure TAbitOtchetsController.ExportEnrollAgreement(NN_abit:integer);
+var
+  Report:TReportBase;
+begin
+    Report := TReportBase.CreateReport(TAbitEnrollAgreementReport);
+    Report.FreeOnComplete := true;
+    Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\AbitEnrollAgreement.XLT';
+    TAbitEnrollAgreementReport(Report).NN_abit := NN_abit;
+    TWaitingController.GetInstance.Process(Report);
+
+end;
 
 end.

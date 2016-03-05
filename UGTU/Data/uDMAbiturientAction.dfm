@@ -653,6 +653,10 @@ object dmAbiturientAction: TdmAbiturientAction
       FieldName = 'cEmail'
       Size = 50
     end
+    object adospPrintZayavlFullName: TStringField
+      FieldName = 'FullName'
+      Size = 92
+    end
   end
   object adospAbit_docsForZayavl: TADOStoredProc
     Connection = dm.DBConnect
@@ -1189,18 +1193,21 @@ object dmAbiturientAction: TdmAbiturientAction
         Name = '@Name'
         Attributes = [paNullable]
         DataType = ftString
+        Size = -1
         Value = Null
       end
       item
         Name = '@LastName'
         Attributes = [paNullable]
         DataType = ftString
+        Size = -1
         Value = Null
       end
       item
         Name = '@Birthdate'
         Attributes = [paNullable]
         DataType = ftString
+        Size = -1
         Value = Null
       end
       item

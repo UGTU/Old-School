@@ -9,7 +9,7 @@ uses
   ExtCtrls, DBCtrlsEh, DBCtrls, Mask, DBLookupEh, Grids, ComCtrls, ToolWin,
   GridsEh, ActnList, Menus, uDMAbiturientAction, DBGridEhGrouping, ToolCtrlsEh,
   DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh, System.Generics.Collections,
-  DocumentClass, Data.DB;
+  DocumentClass, Data.DB, uAbitOtchetsController;
 
 type
   TfmAbitCard = class(TfmStudent)
@@ -24,6 +24,7 @@ type
     SpeedButton5: TSpeedButton;
     SpeedButton6: TSpeedButton;
     Label3: TLabel;
+    ToolButton16: TToolButton;
     procedure dbgeListsCellClick(Column: TColumnEh);
     procedure eFamChange(Sender: TObject);
     procedure BbSaveclick(Sender: TObject);
@@ -32,6 +33,7 @@ type
     procedure dbgeFamColExit(Sender: TObject);
     procedure dbgeDocumentsCellClick(Column: TColumnEh);
     procedure actPropToFactExecute(Sender: TObject);
+    procedure ToolButton16Click(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -522,6 +524,12 @@ begin
   Modified := true;
   bbSave.Enabled := true;
   bbUndo.Enabled := true;
+end;
+
+procedure TfmAbitCard.ToolButton16Click(Sender: TObject);
+begin
+  inherited;
+  TAbitOtchetsController.Instance.ExportEnrollAgreement(dm.adodsPostupView.FieldValues['NN_abit']);
 end;
 
 procedure TfmAbitCard.actPropToFactExecute(Sender: TObject);
