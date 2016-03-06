@@ -24,12 +24,11 @@ procedure TAbitEnrollAgreementReport.LoadData;
 begin
     dmAbiturientAction.adospPrintZayavl.Close;
 	  dmAbiturientAction.adospPrintZayavl.Parameters.ParamByName('@NN_abit').Value:= NN_abit;
-	  dmAbiturientAction.adospPrintZayavl.Open;
+	  dmAbiturientAction.adospPrintZayavl.Active := true;
 end;
 
 
 procedure TAbitEnrollAgreementReport.Execute;
-var  tempStr: string;
 begin
   inherited;
   LoadData;
@@ -40,15 +39,15 @@ begin
     exit;
 
   dmAbiturientAction.adospPrintZayavl.First;
-  tempStr:= dmAbiturientAction.adospPrintZayavlFIO.ToString;
-  ShowMessage(tempStr);
-  Replace('#FIO#', tempStr);
-  Replace('#FIOFull#', dmAbiturientAction.adospPrintZayavl.FieldByName('FullName').ToString);
-  Replace('#Spec#', dmAbiturientAction.adospPrintZayavl.FieldByName('Cname_spec').ToString);
+  Replace('#FIO#', dmAbiturientAction.adospPrintZayavlFIO.Value);
+  Replace('#FIOFull#', dmAbiturientAction.adospPrintZayavl.FieldByName('FullName').Value);
+  Replace('#Spec#', dmAbiturientAction.adospPrintZayavl.FieldByName('Cname_spec').Value);
   //dateStr:= ;
   Replace('#Date#', DateToStr(Date));
-
-
+  if (dmAbiturientAction.adospPrintZayavl.FieldByName('ik_type_kat').Value = 3) then
+    Items[12,1]:='R'
+  else
+    Items[11,1]:='R';
 
   {ActiveBarcodeApplet.AppletName := 'PDF417Ctrl1';
   ActiveBarcodeApplet.BarcodeHeader := TBarcodeReportHeader.Create;
