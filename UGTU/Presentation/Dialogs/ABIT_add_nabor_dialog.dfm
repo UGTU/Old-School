@@ -3,20 +3,21 @@ inherited frmNewNabor: TfrmNewNabor
   Top = 214
   HelpKeyword = 'A_Add_str_in_nabor.htm'
   Caption = #1053#1072#1073#1086#1088
-  ClientHeight = 170
+  ClientHeight = 194
   ClientWidth = 627
   OldCreateOrder = True
   OnCreate = FormCreate
   OnShow = FormShow
   ExplicitWidth = 633
-  ExplicitHeight = 199
+  ExplicitHeight = 223
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
     Width = 627
-    Height = 137
+    Height = 161
+    ExplicitTop = -2
     ExplicitWidth = 627
-    ExplicitHeight = 137
+    ExplicitHeight = 161
   end
   object Label2: TLabel [1]
     Left = 29
@@ -34,7 +35,7 @@ inherited frmNewNabor: TfrmNewNabor
   end
   object Label6: TLabel [3]
     Left = 51
-    Top = 110
+    Top = 139
     Width = 43
     Height = 13
     Caption = #1041#1102#1076#1078#1077#1090':'
@@ -80,7 +81,7 @@ inherited frmNewNabor: TfrmNewNabor
   end
   object Label110: TLabel [7]
     Left = 188
-    Top = 110
+    Top = 139
     Width = 82
     Height = 13
     Caption = #1062#1077#1083#1077#1074#1086#1081' '#1087#1088#1080#1077#1084':'
@@ -100,7 +101,7 @@ inherited frmNewNabor: TfrmNewNabor
   end
   object Label5: TLabel [9]
     Left = 11
-    Top = 87
+    Top = 116
     Width = 230
     Height = 13
     Caption = #1050#1086#1085#1090#1088#1086#1083#1100#1085#1099#1077' '#1094#1080#1092#1088#1099' '#1087#1088#1080#1077#1084#1072' '#1080' '#1082#1074#1086#1090#1099' :'
@@ -113,7 +114,7 @@ inherited frmNewNabor: TfrmNewNabor
   end
   object Label3: TLabel [10]
     Left = 368
-    Top = 110
+    Top = 139
     Width = 74
     Height = 13
     Caption = #1054#1089#1086#1073#1086#1077' '#1087#1088#1072#1074#1086':'
@@ -126,7 +127,7 @@ inherited frmNewNabor: TfrmNewNabor
   end
   object Label4: TLabel [11]
     Left = 92
-    Top = 106
+    Top = 135
     Width = 6
     Height = 13
     Caption = '*'
@@ -139,7 +140,7 @@ inherited frmNewNabor: TfrmNewNabor
   end
   object Label7: TLabel [12]
     Left = 270
-    Top = 106
+    Top = 135
     Width = 6
     Height = 13
     Caption = '*'
@@ -152,7 +153,7 @@ inherited frmNewNabor: TfrmNewNabor
   end
   object Label8: TLabel [13]
     Left = 441
-    Top = 106
+    Top = 135
     Width = 6
     Height = 13
     Caption = '*'
@@ -163,8 +164,15 @@ inherited frmNewNabor: TfrmNewNabor
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object Label11: TLabel [14]
+    Left = 40
+    Top = 83
+    Width = 55
+    Height = 13
+    Caption = #1055#1088#1086#1092#1080#1083#1100':'
+  end
   inherited Panel1: TPanel
-    Top = 137
+    Top = 161
     Width = 627
     Height = 33
     TabOrder = 2
@@ -199,7 +207,7 @@ inherited frmNewNabor: TfrmNewNabor
       ExplicitTop = 4
     end
   end
-  object dbcmbxFac: TDBLookupComboboxEh [15]
+  object dbcmbxFac: TDBLookupComboboxEh [16]
     Left = 102
     Top = 32
     Width = 521
@@ -215,7 +223,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = dbcmbxFacChange
   end
-  object Spec_Fac: TDBLookupComboboxEh [16]
+  object Spec_Fac: TDBLookupComboboxEh [17]
     Left = 102
     Top = 55
     Width = 521
@@ -231,7 +239,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object nnyear: TDBLookupComboboxEh [17]
+  object nnyear: TDBLookupComboboxEh [18]
     Left = 102
     Top = 7
     Width = 179
@@ -247,7 +255,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object cbRussian: TCheckBox [18]
+  object cbRussian: TCheckBox [19]
     Left = 287
     Top = 9
     Width = 154
@@ -263,9 +271,9 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = False
     OnClick = nnyearChange
   end
-  object mestBudjet: TDBNumberEditEh [19]
+  object mestBudjet: TDBNumberEditEh [20]
     Left = 102
-    Top = 107
+    Top = 136
     Width = 71
     Height = 19
     Alignment = taLeftJustify
@@ -283,9 +291,9 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object mestCKP: TDBNumberEditEh [20]
+  object mestCKP: TDBNumberEditEh [21]
     Left = 278
-    Top = 107
+    Top = 136
     Width = 71
     Height = 19
     Alignment = taLeftJustify
@@ -297,9 +305,9 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object MestLgot: TDBNumberEditEh [21]
+  object MestLgot: TDBNumberEditEh [22]
     Left = 448
-    Top = 107
+    Top = 136
     Width = 71
     Height = 19
     Alignment = taLeftJustify
@@ -308,6 +316,22 @@ inherited frmNewNabor: TfrmNewNabor
     EditButtons = <>
     Flat = True
     TabOrder = 7
+    Visible = True
+    OnChange = nnyearChange
+  end
+  object DBLookupComboboxEh1: TDBLookupComboboxEh [23]
+    Left = 101
+    Top = 80
+    Width = 521
+    Height = 19
+    Anchors = [akLeft, akTop, akRight]
+    DataField = ''
+    EditButtons = <>
+    Flat = True
+    KeyField = 'ik_spec_fac'
+    ListField = 'Cname_spec'
+    ListSource = DMAbiturientNabor.dsSpecFac
+    TabOrder = 8
     Visible = True
     OnChange = nnyearChange
   end

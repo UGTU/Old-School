@@ -29,6 +29,8 @@ type
     Label4: TLabel;
     Label7: TLabel;
     Label8: TLabel;
+    Label11: TLabel;
+    DBLookupComboboxEh1: TDBLookupComboboxEh;
     function AddData():boolean;
     function EditData():boolean;
     procedure NullData();
