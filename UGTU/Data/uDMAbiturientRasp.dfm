@@ -1,4 +1,4 @@
-object DMAbiturientRasp: TDMAbiturientRasp
+﻿object DMAbiturientRasp: TDMAbiturientRasp
   OldCreateOrder = False
   Height = 410
   Width = 561
@@ -200,6 +200,23 @@ object DMAbiturientRasp: TDMAbiturientRasp
       KeyFields = 'id_rasp_kab'
       Size = 50
       Lookup = True
+    end
+    object adospAbitGetSpisokNNyear: TIntegerField
+      FieldName = 'NNyear'
+    end
+    object adospAbitGetSpisokсname_disc: TStringField
+      FieldName = #1089'name_disc'
+      FixedChar = True
+      Size = 50
+    end
+    object adospAbitGetSpisokDiscVedomName: TStringField
+      FieldName = 'DiscVedomName'
+      FixedChar = True
+      Size = 50
+    end
+    object adospAbitGetSpisokNumber: TStringField
+      FieldName = 'Number'
+      ReadOnly = True
     end
   end
   object dsAbitGetSpisok: TDataSource
@@ -460,5 +477,22 @@ object DMAbiturientRasp: TDMAbiturientRasp
     DataSet = adoqSpecFac
     Left = 37
     Top = 324
+  end
+  object adoqMaxVedomNumber: TADOQuery
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT MAX(Number) as MaxNumber  FROM ABIT_SpisokOfExam'
+      ''
+      ''
+      '')
+    Left = 345
+    Top = 189
+    object adoqMaxVedomNumberMaxNumber: TStringField
+      FieldName = 'MaxNumber'
+      ReadOnly = True
+    end
   end
 end
