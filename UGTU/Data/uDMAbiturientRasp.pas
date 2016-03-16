@@ -87,6 +87,12 @@ type
     adoqSpecFacik_spec_fac: TAutoIncField;
     adoqSpecFacCname_spec: TStringField;
     adoqSpecFacCshort_spec: TStringField;
+    adospAbitGetSpisokNNyear: TIntegerField;
+    adospAbitGetSpisokñname_disc: TStringField;
+    adospAbitGetSpisokDiscVedomName: TStringField;
+    adospAbitGetSpisokNumber: TStringField;
+    adoqMaxVedomNumber: TADOQuery;
+    adoqMaxVedomNumberMaxNumber: TStringField;
     procedure adospGetRaspAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }

@@ -585,7 +585,8 @@ procedure TfrmPostupDlg.bbOkPrintClick(Sender: TObject);
 begin
   actOKExecute(Sender);
   TAbitOtchetsController.Instance.ExportZayavl(AbitList.NNAbit);
-  TAbitOtchetsController.Instance.ExportEnrollAgreement(AbitList.NNAbit);
+  if (cbReal.checked) then
+    TAbitOtchetsController.Instance.ExportEnrollAgreement(AbitList.NNAbit);
 end;
 
 procedure TfrmPostupDlg.bGetCertDataClick(Sender: TObject);

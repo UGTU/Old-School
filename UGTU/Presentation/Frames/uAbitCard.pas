@@ -25,6 +25,9 @@ type
     SpeedButton6: TSpeedButton;
     Label3: TLabel;
     ToolButton16: TToolButton;
+    ActZachislZayavl: TAction;
+    N3: TMenuItem;
+    N4: TMenuItem;
     procedure dbgeListsCellClick(Column: TColumnEh);
     procedure eFamChange(Sender: TObject);
     procedure BbSaveclick(Sender: TObject);
@@ -33,7 +36,7 @@ type
     procedure dbgeFamColExit(Sender: TObject);
     procedure dbgeDocumentsCellClick(Column: TColumnEh);
     procedure actPropToFactExecute(Sender: TObject);
-    procedure ToolButton16Click(Sender: TObject);
+    procedure ActZachislZayavlExecute(Sender: TObject);
   private
     { Private declarations }
   protected
@@ -64,6 +67,8 @@ procedure TfmAbitCard.DoRefreshFrame;
 var
   year: integer;
 begin
+  ToolButton1.Visible:= false;
+
   tsUspevStat.Visible := false;
 
   Floaded := false;
@@ -297,7 +302,7 @@ begin
   if (TDBNodeAbitStudObject(FrameObject).OnlyReading) then
   begin
     TabSheet1.Caption := 'Личные данные (только просмотр)';
-    Toolbutton1.Enabled := false;
+    Toolbutton12.Enabled := false;
     TabSheet3.Enabled := false;
     TabSheet5.Enabled := false;
     TabSheet4.Enabled := false;
@@ -309,7 +314,7 @@ begin
   end
   else
   begin
-    Toolbutton1.Enabled := true;
+    Toolbutton12.Enabled := true;
     TabSheet1.Caption := 'Личные данные';
     TabSheet3.Enabled := true;
     TabSheet5.Enabled := true;
@@ -526,18 +531,20 @@ begin
   bbUndo.Enabled := true;
 end;
 
-procedure TfmAbitCard.ToolButton16Click(Sender: TObject);
-begin
-  inherited;
-  TAbitOtchetsController.Instance.ExportEnrollAgreement(dm.adodsPostupView.FieldValues['NN_abit']);
-end;
-
 procedure TfmAbitCard.actPropToFactExecute(Sender: TObject);
 begin
   dmAdress.aspPropToFact.Parameters[1].Value := obj.id;
   dmAdress.aspPropToFact.ExecProc;
   dmStudentSelectionProcs.aspGetPersonAddress.Active := false;
   dmStudentSelectionProcs.aspGetPersonAddress.Active := true;
+end;
+
+
+
+procedure TfmAbitCard.ActZachislZayavlExecute(Sender: TObject);
+begin
+  inherited;
+  TAbitOtchetsController.Instance.ExportEnrollAgreement(dm.adodsPostupView.FieldValues['NN_abit']);
 end;
 
 procedure TfmAbitCard.BbSaveclick(Sender: TObject);
