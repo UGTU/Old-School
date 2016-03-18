@@ -83,6 +83,11 @@ type
     dbgIndBalls: TDBGridEh;
     Network: TTabSheet;
     dbgNetwork: TDBGridEh;
+    ppmNaborToExcel: TPopupMenu;
+    actPrintProtocol: TAction;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    ToolButton15: TToolButton;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);

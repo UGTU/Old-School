@@ -112,8 +112,17 @@ inherited fmAbitNabor: TfmAbitNabor
             ParentShowHint = False
             ShowHint = True
           end
-          object ToolButton7: TToolButton
+          object ToolButton2: TToolButton
             Left = 123
+            Top = 0
+            Action = actPrintProtocol
+            ParentShowHint = False
+            PopupMenu = ppmNaborToExcel
+            ShowHint = True
+            Style = tbsDropDown
+          end
+          object ToolButton7: TToolButton
+            Left = 161
             Top = 0
             Width = 8
             Caption = 'ToolButton7'
@@ -121,12 +130,11 @@ inherited fmAbitNabor: TfmAbitNabor
             Style = tbsSeparator
             Visible = False
           end
-          object ToolButton2: TToolButton
-            Left = 131
+          object ToolButton15: TToolButton
+            Left = 169
             Top = 0
-            Action = actPrintDinamica
-            ParentShowHint = False
-            ShowHint = True
+            Caption = 'ToolButton15'
+            ImageIndex = 3
           end
         end
         object nabor: TDBGridEh
@@ -376,22 +384,22 @@ inherited fmAbitNabor: TfmAbitNabor
             Visible = False
             OnChange = facChange
           end
-          object ToolButton5: TToolButton
+          object ToolButton8: TToolButton
             Left = 242
+            Top = 0
+            Action = actPrintStat
+            DropdownMenu = ppmStatToExcel
+            ImageIndex = 56
+            Style = tbsDropDown
+          end
+          object ToolButton5: TToolButton
+            Left = 280
             Top = 0
             Width = 8
             Caption = 'ToolButton5'
             ImageIndex = 1
             Style = tbsSeparator
             Visible = False
-          end
-          object ToolButton8: TToolButton
-            Left = 250
-            Top = 0
-            Action = actPrintStat
-            DropdownMenu = ppmStatToExcel
-            ImageIndex = 56
-            Style = tbsDropDown
           end
         end
         object GRD_stat: TStringGrid
@@ -1001,7 +1009,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -1152,7 +1160,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1386,12 +1394,17 @@ inherited fmAbitNabor: TfmAbitNabor
       Hint = #1069#1082#1089#1087#1086#1088#1090' '#1074' Excel '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080' '#1087#1086' '#1101#1082#1079#1072#1084#1077#1085#1072#1084
       OnExecute = actPrintExamStatisticExecute
     end
+    object actPrintProtocol: TAction
+      Category = 'Nabor'
+      Caption = #1042#1099#1074#1086#1076' '#1087#1088#1086#1090#1086#1082#1086#1083#1072
+      ImageIndex = 20
+    end
   end
   object ImageList3: TImageList
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000A40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000A80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2468,6 +2481,17 @@ inherited fmAbitNabor: TfmAbitNabor
     end
     object N3: TMenuItem
       Action = actPrintExamStatistic
+    end
+  end
+  object ppmNaborToExcel: TPopupMenu
+    Left = 435
+    Top = 158
+    object N4: TMenuItem
+      Action = actPrintDinamica
+    end
+    object N5: TMenuItem
+      Action = actPrintProtocol
+      Caption = #1055#1088#1086#1090#1086#1082#1086#1083
     end
   end
 end
