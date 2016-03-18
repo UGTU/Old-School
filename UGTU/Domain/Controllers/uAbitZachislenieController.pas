@@ -166,8 +166,10 @@ type
     // сгруппированный по группам
     procedure GroupPrikazToWord(grid: PDBGrid);
 
+    
+
     // ExportProtokolToExcel экспорт протокола о зачислении в Excel
-    procedure ExportProtokolToExcel;
+    procedure ExportZachislProtokolToExcel;
 
     // AddAllProhBalls добавляет все проходные баллы для набора или
     // для всех наборов текущего года
@@ -1602,13 +1604,16 @@ begin
   end;
 end;
 
+
 // экспорт протокола о зачислении в Excel
-procedure TAbitZachislenieController.ExportProtokolToExcel;
+procedure TAbitZachislenieController.ExportZachislProtokolToExcel;
 const
   l = 12; // кол-во строк заголовка
   m = 1000; // кол-во абитуриентов на 1 странице
   exEnd = 'E';
   RowHeigh = 33;
+  PredsName = 'С. Ю. Дубиковский';
+  ResultState = '    Зачислить';
 var
   E: Variant;
   pagecount, spec: Integer;
@@ -1622,7 +1627,7 @@ begin
   try
     E := CreateOleObject('Excel.Application');
     try
-      path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocol.XLT';
+      path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocolZach.XLT';
       E.WorkBooks.add(path);
       E.DisplayAlerts := false;
       FAbitListDataSetInstance.DisableControls;
@@ -1662,7 +1667,7 @@ begin
 
                 inc(i);
                 E.Cells[i, 1] :='приемной комиссии';
-                E.Cells[i, 5] :='С. Ю. Дубиковский';
+                E.Cells[i, 5] := PredsName;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].Merge(true);
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
@@ -1736,7 +1741,7 @@ begin
             E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cName_zaved')
               .AsString;
             inc(j);
-            E.Cells[i, j] := '    Зачислить';
+            E.Cells[i, j] := ResultState;
             inc(j);
             FAbitListDataSetInstance.Next;
             inc(i);
@@ -1773,6 +1778,8 @@ begin
     FAbitListDataSetInstance.EnableControls;
   end;
 end;
+
+
 
 procedure TAbitZachislenieController.AddAllProhBalls(nnyear, ik_fac,
   ik_spec_fac: Variant);

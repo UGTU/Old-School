@@ -15,7 +15,7 @@ inherited fmAbitNabor: TfmAbitNabor
       Top = 2
       Width = 751
       Height = 427
-      ActivePage = naborpage
+      ActivePage = statpage
       Align = alClient
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -115,11 +115,10 @@ inherited fmAbitNabor: TfmAbitNabor
           object ToolButton2: TToolButton
             Left = 123
             Top = 0
-            Action = actPrintProtocol
+            Action = actPrintDinamica
             ParentShowHint = False
-            PopupMenu = ppmNaborToExcel
             ShowHint = True
-            Style = tbsDropDown
+            Style = tbsCheck
           end
           object ToolButton7: TToolButton
             Left = 161
@@ -1344,7 +1343,7 @@ inherited fmAbitNabor: TfmAbitNabor
     end
     object actPrintStat: TAction
       Category = 'AbitList'
-      Caption = #1069#1082#1089#1087#1086#1088#1090' '#1089#1087#1080#1089#1082#1072' '#1074' Excel'
+      Caption = 'C'#1087#1080#1089#1086#1082' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
       Hint = #1069#1082#1089#1087#1086#1088#1090' '#1089#1087#1080#1089#1082#1072' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074' '#1074' Excel'
       OnExecute = actPrintStatExecute
     end
@@ -1395,9 +1394,10 @@ inherited fmAbitNabor: TfmAbitNabor
       OnExecute = actPrintExamStatisticExecute
     end
     object actPrintProtocol: TAction
-      Category = 'Nabor'
+      Category = 'AbitList'
       Caption = #1042#1099#1074#1086#1076' '#1087#1088#1086#1090#1086#1082#1086#1083#1072
       ImageIndex = 20
+      OnExecute = actPrintProtocolExecute
     end
   end
   object ImageList3: TImageList
@@ -2470,6 +2470,9 @@ inherited fmAbitNabor: TfmAbitNabor
   object ppmStatToExcel: TPopupMenu
     Left = 379
     Top = 30
+    object N6: TMenuItem
+      Action = actPrintProtocol
+    end
     object Excel1: TMenuItem
       Action = actPrintStat
     end
@@ -2481,17 +2484,6 @@ inherited fmAbitNabor: TfmAbitNabor
     end
     object N3: TMenuItem
       Action = actPrintExamStatistic
-    end
-  end
-  object ppmNaborToExcel: TPopupMenu
-    Left = 435
-    Top = 158
-    object N4: TMenuItem
-      Action = actPrintDinamica
-    end
-    object N5: TMenuItem
-      Action = actPrintProtocol
-      Caption = #1055#1088#1086#1090#1086#1082#1086#1083
     end
   end
 end

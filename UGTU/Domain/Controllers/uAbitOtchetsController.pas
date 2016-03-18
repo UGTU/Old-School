@@ -101,6 +101,9 @@ type
 
   //экспорт завления на зачисление
   procedure ExportEnrollAgreement(NN_abit:integer);
+
+  // ExportProtokolToExcel экспорт протокола о рассмотрении в Excel
+    procedure ExportProtokolToExcel;
 end;
 
 implementation
@@ -2852,4 +2855,178 @@ begin
 
 end;
 
+
+// экспорт протокола о зачислении в Excel
+procedure TAbitOtchetsController.ExportProtokolToExcel;
+const
+  l = 12; // кол-во строк заголовка
+  m = 1000; // кол-во абитуриентов на 1 странице
+  exEnd = 'E';
+  RowHeigh = 33;
+  PredsName = 'С. Ю. Дубиковский';
+  ResultState = '    Зачислить';
+var
+  E: Variant;
+  pagecount, spec: Integer;
+  path, sort: string;
+  i, j, AbitCount: Integer;
+  FindRange: Variant;
+begin
+  TApplicationController.GetInstance.AddLogEntry
+    ('Экспорт протокола зачисления в Excel');
+
+  try
+    E := CreateOleObject('Excel.Application');
+    try
+      path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocolZach.XLT';
+      E.WorkBooks.add(path);
+      E.DisplayAlerts := false;
+      FAbitListDataSetInstance.DisableControls;
+      // отсортировать
+      sort := TADODataSet(FAbitListDataSetInstance).sort;
+      TADODataSet(FAbitListDataSetInstance).sort := 'Cname_fac, cname_spec, ik_spec_fac';
+      spec := -1;
+      AbitCount := 1;
+      i := l + 1;
+      // FAbitListDataSetInstance.FieldByName('').AsString
+      try
+        FAbitListDataSetInstance.First;
+        try
+          pagecount := 2;
+          while true do
+          begin
+            if (spec <> FAbitListDataSetInstance.FieldByName('ik_spec_fac')
+              .Value) or (FAbitListDataSetInstance.Eof) then
+            begin
+              // перенастраиваем старую специальность
+              if spec > -1 then
+              begin
+                dec(i);
+                j := ((AbitCount - 1) mod m);
+                if j > 0 then
+                begin
+                  E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
+                    ].Borders.Weight := 2;
+                  E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
+                    ].RowHeight := RowHeigh;
+                end;
+
+                inc(i);
+                E.Cells[i, 1] :='Ответственный секретарь';
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
+
+                inc(i);
+                E.Cells[i, 1] :='приемной комиссии';
+                E.Cells[i, 5] := PredsName;
+                E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].Merge(true);
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
+                E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
+                E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].HorizontalAlignment:= 4 ;
+
+
+	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(Date));
+	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(Date)));
+	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(Date));
+              end;
+              if FAbitListDataSetInstance.Eof then
+                break;
+
+              // добавляем страницу и настраиваем
+              E.Sheets.add(after := E.Sheets.Item[pagecount - 1]);
+              E.Sheets[1].Range['A1:' + exEnd + IntToStr(50)
+                ].EntireColumn.copy(EmptyParam); // поместим в БО
+              E.Sheets[pagecount].Paste(E.Sheets.Item[pagecount].Range
+                ['A1:' + exEnd + IntToStr(50), EmptyParam], EmptyParam);
+              E.Sheets[1].Range['A1:' + exEnd + IntToStr(50)
+                ].EntireRow.copy(EmptyParam); // поместим в БО
+              E.Sheets[pagecount].Paste(E.Sheets.Item[pagecount].Range
+                ['A1:' + exEnd + IntToStr(50), EmptyParam], EmptyParam);
+              E.Sheets[pagecount].PageSetup.LeftMargin :=
+                E.Sheets[1].PageSetup.LeftMargin;
+              E.Sheets[pagecount].PageSetup.RightMargin :=
+                E.Sheets[1].PageSetup.RightMargin;
+              E.Sheets[pagecount].PageSetup.TopMargin :=
+                E.Sheets[1].PageSetup.TopMargin;
+              E.Sheets[pagecount].PageSetup.BottomMargin :=
+                E.Sheets[1].PageSetup.BottomMargin;
+              E.Sheets[pagecount].PageSetup.Orientation :=
+                E.Sheets[1].PageSetup.Orientation;
+
+              E.Sheets[pagecount].Name := FAbitListDataSetInstance.FieldByName
+                  ('Cshort_name_fac').AsString + ' ' +
+                  FAbitListDataSetInstance.FieldByName('Cshort_spec').AsString +
+                  FAbitListDataSetInstance.FieldByName('ik_spec_fac').AsString;
+
+              E.Sheets[pagecount].Select;
+              spec := FAbitListDataSetInstance.FieldByName('ik_spec_fac').Value;
+              i := l + 1;
+              inc(pagecount);
+              AbitCount := 1;
+            end;
+            // добавляем заголовок
+            if (AbitCount > 1) and (((AbitCount - 1) mod m) = 0) then
+            begin // +exEnd+inttoStr(l)
+              E.Sheets[1].Range['A1:' + exEnd + IntToStr(l)
+                ].EntireRow.copy(EmptyParam); // поместим в БО
+              E.Sheets[pagecount - 1]
+                .Paste(E.Sheets[pagecount - 1].Range['A' + IntToStr(i) + ':' +
+                exEnd + IntToStr(i + l - 1), EmptyParam], EmptyParam);
+              dec(i);
+              E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)
+                ].Borders.Weight := 2;
+              E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)
+                ].RowHeight := RowHeigh;
+              i := i + l + 1;
+            end;
+
+            j := 1;
+            E.Cells[i, j] := AbitCount;
+            inc(j);
+            E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('fio')
+              .AsString;
+            inc(j);
+            E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cname_kat_zach')
+              .AsString;
+            inc(j);
+            E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cName_zaved')
+              .AsString;
+            inc(j);
+            E.Cells[i, j] := ResultState;
+            inc(j);
+            FAbitListDataSetInstance.Next;
+            inc(i);
+            inc(AbitCount);
+          end;
+
+        except
+          on Ex: Exception do
+          begin
+            E.Quit;
+            raise EApplicationException.Create
+              ('Ошибка при экспорте в Excel', Ex);
+          end;
+        end;
+
+        if AbitCount > 1 then
+        begin
+          E.Sheets[1].Delete;
+          E.Sheets[1].Select;
+          // E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
+          E.Visible := true;
+        end
+        else
+        begin
+          E.Quit;
+          raise EApplicationException.Create('Нет зачисленных абитуриентов');
+        end;
+      finally
+        E := UnAssigned;
+      end;
+    except
+    end;
+  finally
+    FAbitListDataSetInstance.EnableControls;
+  end;
+end;
 end.
