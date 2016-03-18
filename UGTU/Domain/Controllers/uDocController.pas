@@ -132,8 +132,8 @@ var
   FindRange: variant;
   ListSpr: TObjectList<TSpravka>;
 begin
- try
- ListSpr:=TObjectList<TSpravka> .Create;
+  try
+  ListSpr:=TObjectList<TSpravka>.Create;
   case (Dest.ik_dest) of
     1:
       begin
@@ -143,8 +143,8 @@ begin
         result_report := report.AddReport();
         ListSpr.Add(result_report);
        end;
-         Result := SpravkaReport.Create(ListSpr);
-        Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
+       Result := SpravkaReport.Create(ListSpr);
+       Result.ReportTemplate := ExtractFilePath(Application.ExeName) +
           'reports\Sprv.xlt';
       end;
 
