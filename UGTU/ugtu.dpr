@@ -438,7 +438,8 @@ uses
   uAbitZach in 'Presentation\Dialogs\uAbitZach.pas' {frmAbitZachDialog},
   PersonController in 'Domain\Controllers\PersonController.pas',
   AbitPostupProtocolReport in 'Domain\Reports\AbitPostupProtocolReport.pas',
-  AbitEnrollAgreement in 'Domain\Reports\AbitEnrollAgreement.pas';
+  AbitEnrollAgreement in 'Domain\Reports\AbitEnrollAgreement.pas',
+  uChangePlanFromGrup in 'Presentation\Dialogs\uChangePlanFromGrup.pas' {frmChangeGrupPlan};
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',
@@ -492,5 +493,6 @@ begin
   Application.CreateForm(TfrmReviewNeusp, frmReviewNeusp);
   Application.CreateForm(TfmSprForGroup, fmSprForGroup);
   Application.CreateForm(TfrmAbitZachDialog, frmAbitZachDialog);
+  Application.CreateForm(TfrmChangeGrupPlan, frmChangeGrupPlan);
   Application.Run;
 end.

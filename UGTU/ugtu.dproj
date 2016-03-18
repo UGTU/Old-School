@@ -1101,6 +1101,10 @@
         <DCCReference Include="Domain\Controllers\PersonController.pas"/>
         <DCCReference Include="Domain\Reports\AbitPostupProtocolReport.pas"/>
         <DCCReference Include="Domain\Reports\AbitEnrollAgreement.pas"/>
+        <DCCReference Include="Presentation\Dialogs\uChangePlanFromGrup.pas">
+            <Form>frmChangeGrupPlan</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
