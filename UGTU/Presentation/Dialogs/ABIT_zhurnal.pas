@@ -37,14 +37,14 @@ uses uMain, DateUtils;
 
 procedure TfrmAbitZhurnal.FormShow(Sender: TObject);
 begin
-  if (YearOf(Date)<>year) and (year>2000) then
+  {if (YearOf(Date)<>year) and (year>2000) then
   begin
      dbdtmDate.EditText:='31.08.'+IntToStr(year);
      dbdtmDate.Value:= EndOfAMonth(year,8);
   end
   else
-    dbdtmDate.Value:=Date;
-    lastDate:= dbdtmDate.Value;
+    dbdtmDate.Value:=Date;   }
+  lastDate:= dbdtmDate.Value;
 
   Text:= 'Экспорт '+ ReportName;
   Label1.Caption := 'Дата выдачи '+ReportName;

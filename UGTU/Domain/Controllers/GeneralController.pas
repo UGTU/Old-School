@@ -11,7 +11,7 @@ interface
 
 uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM,
-  Forms, Dialogs, DBLookupEh, Variants, StdCtrls, ApplicationController, DateUtils, ExceptionBase;
+  Forms, Dialogs, DBLookupEh, Variants, StdCtrls, ApplicationController, DateUtils, ExceptionBase, ABIT_zhurnal;
 
 type
   PDataSet = ^TCustomADODataSet;
@@ -67,6 +67,7 @@ type
 
     function GetAltKeyState: boolean;
 
+    function SetReportDate(var DefaultDate: TDateTime; RepName: string): boolean;
     //Вывод приказов в Word
 //FindAndInsert заменяет в документе FindText на ReplacementText
     function FindAndInsert(W:Variant; FindText, ReplacementText:string):boolean;
@@ -240,6 +241,18 @@ begin
   end; }
 end;
 
+//функция устанавливает дату выдачи отчета
+function TGeneralController.SetReportDate(var DefaultDate: TDateTime; RepName: string): boolean;
+begin
+  frmAbitZhurnal := TfrmAbitZhurnal.Create(nil);
+  frmAbitZhurnal.dbdtmDate.Value:=  DefaultDate;
+  frmAbitZhurnal.ReportName := RepName;
+  frmAbitZhurnal.ShowModal;
+  DefaultDate:= frmAbitZhurnal.dbdtmDate.Value;
+  result:= frmAbitZhurnal.ModalResult = mrOk;
+  frmAbitZhurnal.Free;
+end;
+
 function TGeneralController.CloseLockupCB(cmp: PDBLookupComboboxEh): Variant;
 begin
   if (cmp^ <> nil) then
@@ -358,6 +371,8 @@ begin
     if (Length(number) > 0) then Result.Add(number);
   end;
 end;
+
+
 
 
 

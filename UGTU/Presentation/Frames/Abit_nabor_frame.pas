@@ -1036,7 +1036,8 @@ end;
 procedure TfmAbitNabor.actPrintProtocolExecute(Sender: TObject);
 begin
   inherited;
-  TAbitOtchetsController.Instance.ExportProtokolToExcel;
+
+  TAbitOtchetsController.Instance.ExportProtokolToExcel(GetYear);
 end;
 
 procedure TfmAbitNabor.actPrintStatExecute(Sender: TObject);

@@ -3248,6 +3248,7 @@ begin
       procedure TfrmMain.actPrintMagExecute(Sender: TObject);
       var
         Year: Integer;
+        DateZh: TDateTime;
       begin
         // устанавливаем год
         Year := YearOf(Date);
@@ -3266,10 +3267,16 @@ begin
             (TDBNodeSpecRecObject(ActiveFrame.FrameObject)
             .Node.Parent.Parent.data).ik;
 
-        frmAbitZhurnal := TfrmAbitZhurnal.Create(self);
+        if ((YearOf(Date)<>year) and (year>2000)) or (MonthOf(Date) < 6) or (MonthOf(Date) > 8) then
+        begin
+          DateZh:=StrToDate('15.07.'+IntToStr(year));
+        end
+        else
+          DateZh:=Date;
+        if not TGeneralController.Instance.SetReportDate(DateZh, 'журнала') then
+          exit;
 
-        frmAbitZhurnal.Year := Year;
-        frmAbitZhurnal.ReportName := 'журнала';
+
         frmAbitZhurnal.ShowModal;
         if frmAbitZhurnal.ModalResult <> mrOk then
         begin

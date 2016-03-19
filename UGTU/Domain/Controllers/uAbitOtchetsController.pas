@@ -9,7 +9,7 @@ uses
   uAbitZachislenieController, udmAbiturientAction, udmStudentSelectionProcs,
   ApplicationController, uDMAbiturientNabor, ExceptionBase,
   AbitVstupExamStatistic, ReportsBase, uWaitingController, ConstantRepository,
-  AbitEnrollAgreement;
+  AbitEnrollAgreement, ABIT_zhurnal;
 
 type
   PDBGrid = ^TDBGridEh;
@@ -103,7 +103,7 @@ type
   procedure ExportEnrollAgreement(NN_abit:integer);
 
   // ExportProtokolToExcel экспорт протокола о рассмотрении в Excel
-    procedure ExportProtokolToExcel;
+    procedure ExportProtokolToExcel(year: integer);
 end;
 
 implementation
@@ -2857,7 +2857,7 @@ end;
 
 
 // экспорт протокола о зачислении в Excel
-procedure TAbitOtchetsController.ExportProtokolToExcel;
+procedure TAbitOtchetsController.ExportProtokolToExcel(year: integer);
 const
   l = 12; // кол-во строк заголовка
   m = 1000; // кол-во абитуриентов на 1 странице
@@ -2870,18 +2870,21 @@ var
   path, sort: string;
   i, j, AbitCount: Integer;
   FindRange: Variant;
+  dateProt: TDateTime;
 begin
+  if ((YearOf(Date)<>year) and (year>2000)) or (MonthOf(Date) < 6) or (MonthOf(Date) > 8) then
+  begin
+     dateProt:=StrToDate('15.07.'+IntToStr(year));
+  end
+  else
+    dateProt:=Date;
+  if not TGeneralController.Instance.SetReportDate(dateProt, 'протокола') then
+    exit;
+
   TApplicationController.GetInstance.AddLogEntry
     ('Экспорт протокола зачисления в Excel');
   with DMAbiturientNabor.adospAbitGetPostupStatistika do
   begin
-
-  try
-    E := CreateOleObject('Excel.Application');
-    try
-      path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocol.XLT';
-      E.WorkBooks.add(path);
-      E.DisplayAlerts := false;
       DisableControls;
       // отсортировать
       sort := sort;
@@ -2892,7 +2895,18 @@ begin
       // FAbitListDataSetInstance.FieldByName('').AsString
       try
         First;
-        Locate('dd_pod_zayav',Date,[]);
+        if not Locate('dd_pod_zayav',dateProt,[]) then
+          exit;
+
+  try
+    E := CreateOleObject('Excel.Application');
+    try
+      path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocol.XLT';
+      E.WorkBooks.add(path);
+      E.DisplayAlerts := false;
+
+      //E.Visible := true;
+
         try
           pagecount := 2;
           while true do
@@ -3007,7 +3021,7 @@ begin
           end;
         end;
 
-        if AbitCount > 1 then
+        if (AbitCount > 1) or (pagecount > 2) then
         begin
           E.Sheets[1].Delete;
           E.Sheets[1].Select;
