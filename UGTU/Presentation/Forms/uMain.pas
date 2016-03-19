@@ -364,7 +364,6 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure actGazpromStatementExecute(Sender: TObject);
     procedure actPostupDeleteExecute(Sender: TObject);
-    procedure actChangePlanFromOtherGroupExecute(Sender: TObject);
     procedure actCallSprUpdate(Sender: TObject);
     procedure actCallSprExecute(Sender: TObject);
     procedure DBDekTreeView_TEST1ContextPopup(Sender: TObject; MousePos: TPoint;
@@ -423,7 +422,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka,
   uNagruzkaSemester, ApplicationController, uAbitConfirm, udmCauses,
   DBTVInviteObj,
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj, HOST_Projivaysh,
-  DBTVHabitatsPersonObj, uChangePlanFromGrup,
+  DBTVHabitatsPersonObj,
   uPerson;
 
 {$R *.dfm}
@@ -3270,6 +3269,7 @@ begin
         frmAbitZhurnal := TfrmAbitZhurnal.Create(self);
 
         frmAbitZhurnal.Year := Year;
+        frmAbitZhurnal.ReportName := 'журнала';
         frmAbitZhurnal.ShowModal;
         if frmAbitZhurnal.ModalResult <> mrOk then
         begin
@@ -3623,14 +3623,6 @@ procedure TfrmMain.actPrintItogiPostForSpecExecute(Sender: TObject);
       procedure TfrmMain.actCurrentReturnExecute(Sender: TObject);
       begin
         (ActiveFrame as TfmZach).actAbitReturnExecuteExecute(Sender);
-      end;
-
-      procedure TfrmMain.actChangePlanFromOtherGroupExecute(Sender: TObject);
-      begin
-  //
-      frmChangeGrupPlan := TfrmChangeGrupPlan.Create(Self);
-      frmChangeGrupPlan.GrupIK := ((DBDekTreeView_TEST1.SelectedObject)as TDBNodeGroupObject).ik;
-      frmChangeGrupPlan.ShowModal;
       end;
 
       procedure TfrmMain.actCallSprExecute(Sender: TObject);

@@ -794,12 +794,6 @@ object frmMain: TfrmMain
       ImageIndex = 68
       OnExecute = actLevelUpExecute
     end
-    object actChangePlanFromOtherGroup: TAction
-      Category = 'catGroupAct'
-      Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1091#1095'. '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091
-      ImageIndex = 19
-      OnExecute = actChangePlanFromOtherGroupExecute
-    end
     object actAddDepPlan: TAction
       Category = 'catNagruzkaDep'
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1087#1083#1072#1085' '#1091#1095#1077#1073#1085#1086#1081' '#1085#1072#1075#1088#1091#1079#1082#1080'...'

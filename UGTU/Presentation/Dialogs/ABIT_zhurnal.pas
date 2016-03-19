@@ -19,10 +19,12 @@ type
     procedure actOKExecute(Sender: TObject);
     procedure dbdtmDateChange(Sender: TObject);
   private
+    FReportName: string;
     { Private declarations }
   public
     { Public declarations }
     year:integer;
+    property ReportName:string read FReportName write FReportName;
   end;
 
 var
@@ -43,6 +45,9 @@ begin
   else
     dbdtmDate.Value:=Date;
     lastDate:= dbdtmDate.Value;
+
+  Text:= 'Экспорт '+ ReportName;
+  Label1.Caption := 'Дата выдачи '+ReportName;
 end;
 
 procedure TfrmAbitZhurnal.dbdtmDateChange(Sender: TObject);

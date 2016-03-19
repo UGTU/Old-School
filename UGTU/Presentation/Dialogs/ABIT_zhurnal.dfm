@@ -9,7 +9,7 @@ inherited frmAbitZhurnal: TfrmAbitZhurnal
   OnCloseQuery = nil
   OnShow = FormShow
   ExplicitWidth = 266
-  ExplicitHeight = 137
+  ExplicitHeight = 134
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel

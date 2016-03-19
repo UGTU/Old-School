@@ -1611,9 +1611,9 @@ const
   l = 12; // кол-во строк заголовка
   m = 1000; // кол-во абитуриентов на 1 странице
   exEnd = 'E';
-  RowHeigh = 33;
-  PredsName = 'С. Ю. Дубиковский';
-  ResultState = '    Зачислить';
+  RowHeigh = 45;
+  //PredsName = 'С. Ю. Дубиковский';
+  ResultState = 'Зачислить';
 var
   E: Variant;
   pagecount, spec: Integer;
@@ -1633,7 +1633,7 @@ begin
       FAbitListDataSetInstance.DisableControls;
       // отсортировать
       sort := TADODataSet(FAbitListDataSetInstance).sort;
-      TADODataSet(FAbitListDataSetInstance).sort := 'Cname_fac, cname_spec, ik_spec_fac';
+      TADODataSet(FAbitListDataSetInstance).sort := 'Cname_fac, cname_spec, ik_spec_fac, fio';
       spec := -1;
       AbitCount := 1;
       i := l + 1;
@@ -1658,6 +1658,8 @@ begin
                     ].Borders.Weight := 2;
                   E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
                     ].RowHeight := RowHeigh;
+                  E.Range['A' + IntToStr(i+1) + ':' + exEnd + IntToStr(i+3)
+                    ].RowHeight := 19;
                 end;
 
                 inc(i);
@@ -1667,7 +1669,7 @@ begin
 
                 inc(i);
                 E.Cells[i, 1] :='приемной комиссии';
-                E.Cells[i, 5] := PredsName;
+                E.Cells[i, 5] := HeadOfPrCom;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].Merge(true);
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;

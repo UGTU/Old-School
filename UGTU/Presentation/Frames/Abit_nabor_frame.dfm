@@ -121,7 +121,7 @@ inherited fmAbitNabor: TfmAbitNabor
             Style = tbsCheck
           end
           object ToolButton7: TToolButton
-            Left = 161
+            Left = 146
             Top = 0
             Width = 8
             Caption = 'ToolButton7'
@@ -130,7 +130,7 @@ inherited fmAbitNabor: TfmAbitNabor
             Visible = False
           end
           object ToolButton15: TToolButton
-            Left = 169
+            Left = 154
             Top = 0
             Caption = 'ToolButton15'
             ImageIndex = 3

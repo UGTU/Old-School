@@ -78,6 +78,7 @@ type
     ADO_ERROR: integer = -2147467259;
     ADO_ERROR_TWO: integer = -2147217864;
     MAX_EXCEL_SUM_ARGUMENTS = 16;
+    HeadOfPrCom = 'С. Ю. Дубиковский';
     
 implementation
 
