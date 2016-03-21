@@ -2867,7 +2867,7 @@ const
 var
   E: Variant;
   pagecount, spec: Integer;
-  path, sort: string;
+  path, currentSort: string;
   i, j, AbitCount: Integer;
   FindRange: Variant;
   dateProt: TDateTime;
@@ -2887,16 +2887,14 @@ begin
   begin
       DisableControls;
       // отсортировать
-      sort := sort;
-      sort := 'dd_pod_zayav,Cshort_name_fac, cname_spec, ik_spec_fac, fio';
+      currentSort := sort;
+      //sort := 'dd_pod_zayav,Cshort_name_fac, cname_spec, ik_spec_fac, fio';
+      sort := 'ik_spec_fac';
       spec := -1;
       AbitCount := 1;
       i := l + 1;
-      // FAbitListDataSetInstance.FieldByName('').AsString
       try
         First;
-        if not Locate('dd_pod_zayav',dateProt,[]) then
-          exit;
 
   try
     E := CreateOleObject('Excel.Application');
@@ -2906,18 +2904,20 @@ begin
       E.DisplayAlerts := false;
 
       //E.Visible := true;
-
         try
           pagecount := 2;
           while true do
           begin
+
             if (spec <> FieldByName('ik_spec_fac').Value) or (Eof) then
             begin
+
               // перенастраиваем старую специальность
               if spec > -1 then
               begin
                 dec(i);
                 j := ((AbitCount - 1) mod m);
+
                 if j > 0 then
                 begin
                   E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
@@ -2941,11 +2941,11 @@ begin
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].HorizontalAlignment:= 4 ;
 
-
 	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(Date));
 	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(Date)));
 	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(Date));
               end;
+
               if Eof then
                 break;
 
@@ -2969,17 +2969,23 @@ begin
                 E.Sheets[1].PageSetup.BottomMargin;
               E.Sheets[pagecount].PageSetup.Orientation :=
                 E.Sheets[1].PageSetup.Orientation;
-
               E.Sheets[pagecount].Name := FieldByName('Cshort_name_fac').AsString + ' ' +
                   FieldByName('Cshort_spec').AsString +
                   FieldByName('ik_spec_fac').AsString;
-
               E.Sheets[pagecount].Select;
               spec := FieldByName('ik_spec_fac').Value;
               i := l + 1;
               inc(pagecount);
               AbitCount := 1;
             end;
+
+            if (DateToStr(dateProt) <> DateToStr(FieldByName('dd_pod_zayav').Value)) then
+            begin
+              //ShowMessage(DateToStr(dateProt)+' '+DateToStr(FieldByName('dd_pod_zayav').Value));
+              Next;
+              Continue;
+            end;
+
             // добавляем заголовок
             if (AbitCount > 1) and (((AbitCount - 1) mod m) = 0) then
             begin // +exEnd+inttoStr(l)
@@ -3021,7 +3027,7 @@ begin
           end;
         end;
 
-        if (AbitCount > 1) or (pagecount > 2) then
+        if (AbitCount > 1) or (pagecount > 1) then
         begin
           E.Sheets[1].Delete;
           E.Sheets[1].Select;
@@ -3033,12 +3039,14 @@ begin
           E.Quit;
           raise EApplicationException.Create('Нет зачисленных абитуриентов');
         end;
+
       finally
         E := UnAssigned;
       end;
     except
     end;
   finally
+    sort:= currentSort;
     EnableControls;
   end;
   end;
