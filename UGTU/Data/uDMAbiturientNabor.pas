@@ -88,18 +88,8 @@ type
     adoNetworkAbitcSotTel: TStringField;
     adoNetworkAbitctelefon: TStringField;
     adoNetworkAbitballs: TIntegerField;
-    DataSource1: TDataSource;
+    dsProfile: TDataSource;
     adoqProfile: TADOQuery;
-    IntegerField1: TIntegerField;
-    AutoIncField1: TAutoIncField;
-    StringField1: TStringField;
-    StringField2: TStringField;
-    StringField3: TStringField;
-    IntegerField2: TIntegerField;
-    StringField4: TStringField;
-    IntegerField3: TIntegerField;
-    IntegerField4: TIntegerField;
-    IntegerField5: TIntegerField;
   private
     { Private declarations }
   public

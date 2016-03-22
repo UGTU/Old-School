@@ -47,6 +47,7 @@ type
     FYear: integer;
     FikSpecfac: integer;
     FikFac: integer;
+    FikProfile: integer;
     procedure SetYear(const Value: Integer);
     procedure SetikSpecfac(const Value: Integer);
     procedure Setikfac(const Value: Integer);
@@ -61,6 +62,8 @@ type
     property year:Integer read FYear write SetYear;
     // Текущий код специальности набора
     property ikSpecfac:Integer read FikSpecfac write SetikSpecfac;
+    // Текущий код профиля набора
+    property ikProfile: integer read FikProfile write FikProfile;
     // Текущий код факультета набора
     property ikfac:Integer read FikFac write Setikfac;
 
@@ -86,6 +89,7 @@ begin
   if type_dialog=1 then
   begin
     DMAbiturientNabor.adoqSpecfac.SQL.Strings[1]:='('+inttostr(year)+ ', 0)';
+    DMAbiturientNabor.adoqProfile.SQL.Strings[1]:='('+inttostr(year)+ ', 0, 0)';
     NullData;
     Caption:='Добавить набор';
   end
@@ -93,10 +97,12 @@ begin
   else
   begin
     DMAbiturientNabor.adoqSpecfac.SQL.Strings[1]:='('+inttostr(year)+','+ inttostr(ikSpecfac)+')';
+    DMAbiturientNabor.adoqProfile.SQL.Strings[1]:='('+inttostr(year)+','+ inttostr(ikSpecfac)+', 0)';
     Caption:='Редактировать набор';
   end;
 
   DMAbiturientNabor.adoqSpecfac.Open;
+  DMAbiturientNabor.adoqProfile.Open;
   if not DMAbiturientNabor.adoqFac.Active then
     DMAbiturientNabor.adoqFac.Open;
   isModified:=false;
