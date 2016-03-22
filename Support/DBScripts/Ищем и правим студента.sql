@@ -1,5 +1,9 @@
 
-select * from Person where Clastname like 'Лысенк%' 
+select * from Person where Clastname like 'Писаренк%' 
+
+select * from PersonAddress where nCode=34534
+
+select * from [dbo].Audit_Event where [Description] like '%18416%' order by [AuditDateTime]
 
 and [Cfirstname] like 'Борис' and [Cotch] like 'Владимирович'
 

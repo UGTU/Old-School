@@ -269,12 +269,19 @@ end;
 function TfrmGroupEdt.DoApply: boolean;
 var   tempProc: TADOStoredProc;
       Log : ILogger;
+      isPlanChanged: boolean;
 begin
   try
   Log := TNullLogger.GetInstance;   //TMemoLogger.GetInstance; //
   dm.DBConnect.BeginTrans;
-  //создание учебного плана
-  if ((FUchPlan = 0) or ((dblcbUchPln.KeyValue<>FParentUchPlan)and(VidGos>FGOS2)and(dblcbUchPln.KeyValue <> Null))) then
+
+  isPlanChanged := (dblcbUchPln.KeyValue<>null)and        //план поменялся?
+    (((VidGos>FGOS2)and(dblcbUchPln.KeyValue<>FParentUchPlan)) or
+    ((VidGos=FGOS2)and(dblcbUchPln.KeyValue <> FUchPlan)));
+
+  //если меняется план
+  if isPlanChanged then
+   if (VidGos>FGOS2) then //создаем РУП для ФГОС3 и выше
     with dm.aspAddRupGrup do
     begin
       Log.LogMessage('Need create a new plan');
@@ -293,27 +300,22 @@ begin
       Log.LogMessage('execproc: ' + VarToStr(Parameters.ParamByName('@inserted_uch_plan').Value));
       FUchPlan := Parameters.ParamByName('@inserted_uch_plan').Value;
       Log.LogMessage('Plan is created = '+IntToStr(FUchPlan));
-    end;
-  //if VidGos=FGOS2 then FUchPlan := dblcbUchPln.KeyValue;
+    end
+    else FUchPlan := dblcbUchPln.KeyValue;  //для ФГОС2
 
   if not bEdit then
-  begin
-    with dmGroupActions.adospAppendGrup.Parameters do
-    begin
-      ParamByName('@flag').Value:= 1;
-    end;
-  end
+    dmGroupActions.adospAppendGrup.Parameters.ParamByName('@flag').Value:= 1
   else
   begin
-   // if (CheckBox1.Checked) then  //перенос оценок со старого уч. плана
-    TUchPlanController.Instance.UpdateUspev(ik, FUchPlan);
-
+    //если менялся план, то переносим оценки из старого плана
+    if isPlanChanged then TUchPlanController.Instance.UpdateUspev(ik, FUchPlan);
     with dmGroupActions.adospAppendGrup.Parameters do
     begin
       ParamByName('@flag').Value:= 0;
       ParamByName('@Ik_grup').Value:= ik;
     end;
   end;
+
   with dmGroupActions.adospAppendGrup.Parameters do
   begin
     //если идет добавление группы в ИС "Деканат"
@@ -345,7 +347,7 @@ begin
   Log.LogMessage('group is created');
 
   dm.DBConnect.CommitTrans;
-except
+  except
   on E:Exception do
        begin
          dm.DBConnect.RollbackTrans;
