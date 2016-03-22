@@ -1002,7 +1002,7 @@ end;
 
 procedure TfmZach.actProtokolToExcelExecute(Sender: TObject);
 begin
-  TAbitZachislenieController.Instance.ExportProtokolToExcel;
+  TAbitZachislenieController.Instance.ExportZachislProtokolToExcel;
 end;
 
 end.

@@ -15,7 +15,7 @@ uses
   SysUtils, Windows, Messages, Classes, Graphics, Controls, ADODB, DB, uDM,
   Forms, Dialogs, DBLookupEh, Variants, StdCtrls, GeneralController, Grids,
   ExcelXP, ComObj, DBGrids, uJoinGroup, uAbitZach, ABIT_zachislenie_frame,
-  DBGridEh, ApplicationController, ExceptionBase;
+  DBGridEh, ApplicationController, ExceptionBase, DateUtils, ConstantRepository;
 
 type
   PDBGrid = ^TDBGridEh;
@@ -166,8 +166,10 @@ type
     // сгруппированный по группам
     procedure GroupPrikazToWord(grid: PDBGrid);
 
+    
+
     // ExportProtokolToExcel экспорт протокола о зачислении в Excel
-    procedure ExportProtokolToExcel;
+    procedure ExportZachislProtokolToExcel;
 
     // AddAllProhBalls добавляет все проходные баллы для набора или
     // для всех наборов текущего года
@@ -1602,18 +1604,22 @@ begin
   end;
 end;
 
+
 // экспорт протокола о зачислении в Excel
-procedure TAbitZachislenieController.ExportProtokolToExcel;
+procedure TAbitZachislenieController.ExportZachislProtokolToExcel;
 const
   l = 12; // кол-во строк заголовка
   m = 1000; // кол-во абитуриентов на 1 странице
   exEnd = 'E';
-  RowHeigh = 33;
+  RowHeigh = 45;
+  //PredsName = 'С. Ю. Дубиковский';
+  ResultState = 'Зачислить';
 var
   E: Variant;
   pagecount, spec: Integer;
   path, sort: string;
   i, j, AbitCount: Integer;
+  FindRange: Variant;
 begin
   TApplicationController.GetInstance.AddLogEntry
     ('Экспорт протокола зачисления в Excel');
@@ -1621,13 +1627,13 @@ begin
   try
     E := CreateOleObject('Excel.Application');
     try
-      path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocol.XLT';
+      path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocolZach.XLT';
       E.WorkBooks.add(path);
       E.DisplayAlerts := false;
       FAbitListDataSetInstance.DisableControls;
       // отсортировать
       sort := TADODataSet(FAbitListDataSetInstance).sort;
-      TADODataSet(FAbitListDataSetInstance).sort := 'Cname_fac, cname_spec, ik_spec_fac';
+      TADODataSet(FAbitListDataSetInstance).sort := 'Cname_fac, cname_spec, ik_spec_fac, fio';
       spec := -1;
       AbitCount := 1;
       i := l + 1;
@@ -1652,6 +1658,8 @@ begin
                     ].Borders.Weight := 2;
                   E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
                     ].RowHeight := RowHeigh;
+                  E.Range['A' + IntToStr(i+1) + ':' + exEnd + IntToStr(i+3)
+                    ].RowHeight := 19;
                 end;
 
                 inc(i);
@@ -1661,11 +1669,16 @@ begin
 
                 inc(i);
                 E.Cells[i, 1] :='приемной комиссии';
-                E.Cells[i, 5] :='С. Ю. Дубиковский';
+                E.Cells[i, 5] := HeadOfPrCom;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].Merge(true);
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].HorizontalAlignment:= 4 ;
+
+
+	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(Date));
+	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(Date)));
+	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(Date));
               end;
               if FAbitListDataSetInstance.Eof then
                 break;
@@ -1727,10 +1740,10 @@ begin
             E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cname_kat_zach')
               .AsString;
             inc(j);
-            //E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cName_zaved')
-              //.AsString;
+            E.Cells[i, j] := FAbitListDataSetInstance.FieldByName('cName_zaved')
+              .AsString;
             inc(j);
-            E.Cells[i, j] := '    Зачислить';
+            E.Cells[i, j] := ResultState;
             inc(j);
             FAbitListDataSetInstance.Next;
             inc(i);
@@ -1767,6 +1780,8 @@ begin
     FAbitListDataSetInstance.EnableControls;
   end;
 end;
+
+
 
 procedure TAbitZachislenieController.AddAllProhBalls(nnyear, ik_fac,
   ik_spec_fac: Variant);

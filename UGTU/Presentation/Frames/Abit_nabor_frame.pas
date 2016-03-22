@@ -83,6 +83,9 @@ type
     dbgIndBalls: TDBGridEh;
     Network: TTabSheet;
     dbgNetwork: TDBGridEh;
+    actPrintProtocol: TAction;
+    ToolButton15: TToolButton;
+    N6: TMenuItem;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -125,6 +128,7 @@ type
     procedure dbgNaborDiscsColumns2DropDownBoxDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
+    procedure actPrintProtocolExecute(Sender: TObject);
   private
     function GetikFac: Integer;
     function GetikSpecfac: Integer;
@@ -1028,6 +1032,13 @@ begin
     TAbitOtchetsController.Instance.ExportNaborWord(nabor.DataSource.DataSet);
 end;
 
+
+procedure TfmAbitNabor.actPrintProtocolExecute(Sender: TObject);
+begin
+  inherited;
+
+  TAbitOtchetsController.Instance.ExportProtokolToExcel(GetYear);
+end;
 
 procedure TfmAbitNabor.actPrintStatExecute(Sender: TObject);
 begin
