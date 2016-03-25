@@ -167,7 +167,7 @@ inherited frmNewNabor: TfrmNewNabor
   object Label11: TLabel [14]
     Left = 40
     Top = 83
-    Width = 55
+    Width = 49
     Height = 13
     Caption = #1055#1088#1086#1092#1080#1083#1100':'
   end
@@ -176,7 +176,7 @@ inherited frmNewNabor: TfrmNewNabor
     Width = 627
     Height = 33
     TabOrder = 2
-    ExplicitTop = 137
+    ExplicitTop = 161
     ExplicitWidth = 627
     ExplicitHeight = 33
     inherited bbOK: TBitBtn
@@ -328,15 +328,15 @@ inherited frmNewNabor: TfrmNewNabor
     DataField = ''
     EditButtons = <>
     Flat = True
-    KeyField = 'ik_spec_fac'
+    KeyField = 'ik_spec'
     ListField = 'Cname_spec'
-    ListSource = DMAbiturientNabor.dsSpecFac
+    ListSource = DMAbiturientNabor.dsProfile
     TabOrder = 8
-    Visible = True
+    Visible = False
     OnChange = nnyearChange
   end
   inherited actBaseDialog: TActionList
-    Left = 333
+    Left = 549
     Top = 2
     inherited actApply: TAction
       OnUpdate = actApplyUpdate

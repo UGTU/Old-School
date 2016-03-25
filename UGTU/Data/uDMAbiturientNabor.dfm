@@ -486,7 +486,7 @@
     Left = 545
     Top = 203
   end
-  object DataSource1: TDataSource
+  object dsProfile: TDataSource
     DataSet = adoqProfile
     Left = 237
     Top = 204
@@ -496,9 +496,10 @@
     CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
-      'select * from [dbo].[ABIT_GetSpecList]'
+      'select * from [dbo].[ABIT_GetProfileList]'
       '(2012,0)'
-      'order by Sortorder,Ik_form_ed'
+      'order by Sortorder,Cname_spec'
+      ''
       ''
       ''
       ''
@@ -510,39 +511,5 @@
       '')
     Left = 237
     Top = 157
-    object IntegerField1: TIntegerField
-      FieldName = 'ik_fac'
-    end
-    object AutoIncField1: TAutoIncField
-      FieldName = 'ik_spec_fac'
-      ReadOnly = True
-    end
-    object StringField1: TStringField
-      FieldName = 'Cname_spec'
-      Size = 250
-    end
-    object StringField2: TStringField
-      FieldName = 'Cname_fac'
-      Size = 500
-    end
-    object StringField3: TStringField
-      FieldName = 'Cshort_name_fac'
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'ik_spec'
-    end
-    object StringField4: TStringField
-      FieldName = 'Cshort_spec'
-      Size = 10
-    end
-    object IntegerField3: TIntegerField
-      FieldName = 'ik_direction'
-    end
-    object IntegerField4: TIntegerField
-      FieldName = 'Sortorder'
-    end
-    object IntegerField5: TIntegerField
-      FieldName = 'Ik_form_ed'
-    end
   end
 end

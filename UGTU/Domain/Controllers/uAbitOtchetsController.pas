@@ -2941,9 +2941,9 @@ begin
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].HorizontalAlignment:= 4 ;
 
-	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(Date));
-	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(Date)));
-	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(Date));
+	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(dateProt));
+	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(dateProt)));
+	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(dateProt));
               end;
 
               if Eof then
