@@ -88,8 +88,8 @@ INSERT INTO [dbo].[Sprav]
            ,[CTableVn]
            ,[CPrKey]
            ,[TableVnName]
-           ,[lFlag]
            ,[TabCount]
-           ,[Visible]
-           ,[DefaultID])
-		   values ('PDirectionRequirement','Требования к образовательному уровню','','','','','','','')
+           ,[Visible])
+		   values ('PDirectionRequirement','Требования к образовательному уровню',
+			'Direction,Direction','cName_direction,cName_direction',
+			'',2,1)

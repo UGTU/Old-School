@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsVed
+      ActivePage = tsDiplom
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -23,10 +23,6 @@ inherited fmGroup: TfmGroup
       OnChanging = pcMainChanging
       object tsStudents: TTabSheet
         Caption = #1057#1086#1089#1090#1072#1074' '#1075#1088#1091#1087#1087#1099
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgStudList: TDBGridEh
           Left = 0
           Top = 29
@@ -336,10 +332,6 @@ inherited fmGroup: TfmGroup
       object tsAttBRS: TTabSheet
         Caption = #1056#1091#1073#1077#1078#1085#1099#1081' '#1082#1086#1085#1090#1088#1086#1083#1100
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgrdBRSAtt: TDBGridEh
           Left = 0
           Top = 81
@@ -1735,10 +1727,6 @@ inherited fmGroup: TfmGroup
       object tsNapr: TTabSheet
         Caption = #1053#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Panel6: TPanel
           Left = 0
           Top = 548
@@ -2049,10 +2037,6 @@ inherited fmGroup: TfmGroup
       object tshUspev: TTabSheet
         Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object sgUspev: TStringGrid
           Left = 0
           Top = 27
@@ -2343,10 +2327,6 @@ inherited fmGroup: TfmGroup
       object tsDiplom: TTabSheet
         Caption = #1044#1080#1087#1083#1086#1084
         ImageIndex = 5
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
@@ -2709,7 +2689,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C0101020004008C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400900110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2882,7 +2862,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000880110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040008C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3553,7 +3533,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800880110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101050008008C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
