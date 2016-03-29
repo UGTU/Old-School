@@ -24,7 +24,7 @@ interface
 uses
   Classes, SysUtils, ExcelXP, Barcode, Contnrs, ReportsBase, DB, ADODB, uDMDiplom,
     Variants, GeneralController, ApplicationController, ExceptionBase, uDiplOtdKardController,
-    ConstantRepository, Vcl.Dialogs;
+    ConstantRepository;
 
 type
    TDiplomVipExcelReport = class(TExcelReportBase)
@@ -309,7 +309,6 @@ begin
   else
   begin
     Replace('#Фамилия#', dmDiplom.adospGetVipiscaForDiplom.FieldByName('iClastname').Value);
-    ShowMessage(dmDiplom.adospGetVipiscaForDiplom.FieldByName('iClastname').Value);
     Replace('#Имя#', dmDiplom.adospGetVipiscaForDiplomiFirstName.AsString);
     Replace('#Отчество#', dmDiplom.adospGetVipiscaForDiplomiPatronymic.AsString);
     Replace('#АттГод#', dmDiplom.adospGetVipiscaForDiplomattYear.AsString);

@@ -145,7 +145,7 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 680
         Height = 615
-        ActivePage = tbMagazine
+        ActivePage = TabSheet2
         Align = alClient
         Constraints.MinWidth = 557
         Font.Charset = DEFAULT_CHARSET
@@ -829,14 +829,14 @@ inherited fmStudent: TfmStudent
                   object Label31: TLabel
                     Left = 17
                     Top = 38
-                    Width = 132
+                    Width = 133
                     Height = 13
                     Caption = #1044#1086#1074#1091#1079#1086#1074#1089#1082#1072#1103' '#1087#1086#1076#1075#1086#1090#1086#1074#1082#1072':'
                   end
                   object Label32: TLabel
                     Left = 18
                     Top = 84
-                    Width = 99
+                    Width = 100
                     Height = 13
                     Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1099#1081' '#1091#1095#1077#1090':'
                     Visible = False
@@ -858,7 +858,7 @@ inherited fmStudent: TfmStudent
                   object Label43: TLabel
                     Left = 17
                     Top = 135
-                    Width = 253
+                    Width = 254
                     Height = 13
                     Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082' '#1074#1086#1077#1085#1085#1086#1081' '#1089#1083#1091#1078#1073#1077' / '#1074#1086#1080#1085#1089#1082#1086#1077' '#1079#1074#1072#1085#1080#1077': '
                   end
@@ -1774,7 +1774,7 @@ inherited fmStudent: TfmStudent
             object Label9: TLabel
               Left = 144
               Top = 6
-              Width = 42
+              Width = 43
               Height = 13
               Hint = '1'
               Caption = #1052#1086#1076#1091#1083#1100':'
@@ -2507,7 +2507,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000780210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040007C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
