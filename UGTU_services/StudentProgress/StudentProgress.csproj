@@ -29,6 +29,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -85,7 +86,6 @@
     <Compile Include="StudentProgressDTO.cs" />
     <Compile Include="StudentProgressService.asmx.cs">
       <DependentUpon>StudentProgressService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

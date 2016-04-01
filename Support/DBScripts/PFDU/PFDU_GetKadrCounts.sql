@@ -1,3 +1,5 @@
+--select * from PFDU_GetKadrCounts(getDate())
+
 alter FUNCTION [dbo].[PFDU_GetKadrCounts](@date date)
 RETURNS @Result TABLE
    (
