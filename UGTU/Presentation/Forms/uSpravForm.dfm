@@ -3,8 +3,8 @@ object frmSprav: TfrmSprav
   Top = 259
   BorderStyle = bsDialog
   Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082#1080
-  ClientHeight = 551
-  ClientWidth = 582
+  ClientHeight = 654
+  ClientWidth = 912
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,19 +22,21 @@ object frmSprav: TfrmSprav
   TextHeight = 13
   object pnlSave: TPanel
     Left = 0
-    Top = 506
-    Width = 582
+    Top = 609
+    Width = 912
     Height = 45
     Align = alBottom
     BevelInner = bvRaised
     BevelOuter = bvLowered
     TabOrder = 0
     Visible = False
+    ExplicitTop = 506
+    ExplicitWidth = 582
     DesignSize = (
-      582
+      912
       45)
     object bbUndo: TBitBtn
-      Left = 245
+      Left = 575
       Top = 10
       Width = 162
       Height = 25
@@ -70,9 +72,10 @@ object frmSprav: TfrmSprav
         FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 0
+      ExplicitLeft = 245
     end
     object BitBtn1: TBitBtn
-      Left = 413
+      Left = 743
       Top = 10
       Width = 162
       Height = 25
@@ -109,52 +112,55 @@ object frmSprav: TfrmSprav
         00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
       Layout = blGlyphRight
       TabOrder = 1
+      ExplicitLeft = 413
     end
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 582
-    Height = 506
+    Width = 912
+    Height = 609
     Align = alClient
     BevelOuter = bvNone
     Constraints.MinHeight = 506
     Constraints.MinWidth = 500
     TabOrder = 1
+    ExplicitWidth = 582
+    ExplicitHeight = 506
     inline fmSprav1: TfmSprav
       Left = 0
       Top = 0
-      Width = 582
-      Height = 506
+      Width = 912
+      Height = 609
       Align = alClient
       TabOrder = 0
       ExplicitWidth = 582
       ExplicitHeight = 506
       inherited Panel1: TPanel
-        Width = 582
-        Height = 469
+        Width = 912
+        Height = 572
         ExplicitWidth = 582
         ExplicitHeight = 469
         inherited gSprav: TDBGridEh
-          Width = 578
-          Height = 434
+          Width = 908
+          Height = 537
         end
         inherited ToolBar1: TToolBar
-          Width = 578
+          Width = 908
           ExplicitWidth = 578
         end
       end
       inherited pnlSave: TPanel
-        Top = 469
-        Width = 582
+        Top = 572
+        Width = 912
         ExplicitTop = 469
         ExplicitWidth = 582
         inherited bbSave: TBitBtn
-          Left = 411
+          Left = 741
           ExplicitLeft = 411
         end
         inherited bbUndo: TBitBtn
-          Left = 239
+          Left = 569
           ExplicitLeft = 239
         end
         inherited btnSprav: TBitBtn
