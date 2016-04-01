@@ -143,6 +143,8 @@ type
     ToolBar2: TToolBar;
     ToolButton12: TToolButton;
     lblProfile: TLabel;
+    lGosHourCount: TLabel;
+    lAuditHourCount: TLabel;
     procedure ActionRemUchPlanUpdate(Sender: TObject);
     procedure ActionRemUchPlanExecute(Sender: TObject);
     procedure ActionRemDiscUpdate(Sender: TObject);
@@ -603,6 +605,10 @@ begin
     lblProfile.Caption := nameSpclz + ' группы: ' + Pname
   else
     lblProfile.Caption := nameSpclz + ' группы: общий';
+
+   lGosHourCount.Caption :=  'Общее кол-во часов: ' +fGroupDataSet.FieldByName('GosHourCount').AsString
+      +', кол-во зач единиц: '+fGroupDataSet.FieldByName('ZECount').AsString;
+   lAuditHourCount.Caption :=  'Кол-во аудиторных часов: ' +fGroupDataSet.FieldByName('AuditHourCount').AsString;
   IKPlan := TUchPlanController.Instance.getUchPlanForGroup(aGroupIK);
 end;
 
