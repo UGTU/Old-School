@@ -35,8 +35,6 @@ inherited fmUchPlan: TfmUchPlan
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 0
-        ExplicitTop = -1
         DesignSize = (
           982
           585)
@@ -133,9 +131,8 @@ inherited fmUchPlan: TfmUchPlan
         object lGosHourCount: TLabel
           Left = 616
           Top = 13
-          Width = 68
+          Width = 5
           Height = 16
-          Caption = #1057#1077#1084#1077#1089#1090#1088':'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15
@@ -146,9 +143,8 @@ inherited fmUchPlan: TfmUchPlan
         object lAuditHourCount: TLabel
           Left = 616
           Top = 40
-          Width = 68
+          Width = 5
           Height = 16
-          Caption = #1057#1077#1084#1077#1089#1090#1088':'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -15
@@ -1086,7 +1082,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00940010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
