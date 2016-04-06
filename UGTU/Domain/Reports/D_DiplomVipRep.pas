@@ -95,6 +95,7 @@ begin
     Clear;
     CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
     CreateParameter('@ik_zach', ftInteger, pdInput, 4, FikZach);
+    CreateParameter('@spec', ftInteger, pdInput, 4, 0);
     CreateParameter('@ik_CurGroup', ftInteger, pdInput, 4, FikGroup);
   end;
   dmDiplom.adospGetVipiscaForDiplom.Open;
@@ -113,6 +114,7 @@ begin
     CreateParameter('@ik_CurGroup', ftInteger, pdInput, 4, FikGroup);
   end;
   dmDiplom.adospSelUspevForVipisca.Open;
+  dmDiplom.adospSelUspevForVipisca.First;
 
   dmDiplom.adospSelKPForVipisca.Close;
   with dmDiplom.adospSelKPForVipisca.Parameters do
@@ -306,7 +308,7 @@ begin
   end
   else
   begin
-    Replace('#Фамилия#', dmDiplom.adospGetVipiscaForDiplomiClastname.AsString);
+    Replace('#Фамилия#', dmDiplom.adospGetVipiscaForDiplom.FieldByName('iClastname').Value);
     Replace('#Имя#', dmDiplom.adospGetVipiscaForDiplomiFirstName.AsString);
     Replace('#Отчество#', dmDiplom.adospGetVipiscaForDiplomiPatronymic.AsString);
     Replace('#АттГод#', dmDiplom.adospGetVipiscaForDiplomattYear.AsString);
