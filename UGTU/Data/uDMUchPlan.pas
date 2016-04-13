@@ -14,6 +14,7 @@ type
     adsGetHours: TADODataSet;
     ADOQContentForDiscVC: TADODataSet;
     ADOQContentForDiscAZ: TADODataSet;
+    adospGetUchPlanSums: TADOStoredProc;
   private
     { Private declarations }
   public

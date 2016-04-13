@@ -12,6 +12,8 @@ update Zach set Nn_zach='111111'
 
 update [dbo].[Uspev] set [Cosenca] = -1
 
+update [Import].[KafTeachers] set [BirthDate] = '01.01.1970'
+
 update [dbo].[Employee] set [itab_n]='000', [FirstName] = SUBSTRING([FirstName],2,1) + 'AAAAAA',
        [LastName] = SUBSTRING([LastName],2,1), [Otch] = SUBSTRING([Otch],2,1), [BirthDate] = '01.01.1980',
 		[BirthPlace] = '', [SexBit] = 1 - [SexBit], [idGrazd] = 2, [EmployeeLogin] = '', [paspser] = '0000', 

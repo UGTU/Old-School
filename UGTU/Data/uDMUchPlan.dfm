@@ -1,11 +1,11 @@
 object dmUchPlan: TdmUchPlan
   OldCreateOrder = False
-  Height = 148
-  Width = 409
+  Height = 213
+  Width = 538
   object dsUchPlan: TDataSource
     DataSet = adodsUchPlan
     Left = 41
-    Top = 60
+    Top = 132
   end
   object adodsUchPlan: TADODataSet
     Connection = dm.DBConnect
@@ -13,7 +13,7 @@ object dmUchPlan: TdmUchPlan
     LockType = ltBatchOptimistic
     CommandText = 'select * from UchPl'
     Parameters = <>
-    Left = 39
+    Left = 31
     Top = 15
   end
   object qCanRemoveBRS: TADOQuery
@@ -47,7 +47,7 @@ object dmUchPlan: TdmUchPlan
         Value = Null
       end>
     Left = 120
-    Top = 64
+    Top = 136
   end
   object adsGetHours: TADODataSet
     Connection = dm.DBConnect
@@ -73,7 +73,7 @@ object dmUchPlan: TdmUchPlan
       '7))'
     Parameters = <>
     Left = 207
-    Top = 71
+    Top = 135
   end
   object ADOQContentForDiscAZ: TADODataSet
     Connection = dm.DBConnect
@@ -94,6 +94,13 @@ object dmUchPlan: TdmUchPlan
       'd (n_sem = 2)'
     Parameters = <>
     Left = 303
-    Top = 71
+    Top = 135
+  end
+  object adospGetUchPlanSums: TADOStoredProc
+    Connection = dm.DBConnect
+    ProcedureName = 'GetUchPlanSums;1'
+    Parameters = <>
+    Left = 424
+    Top = 136
   end
 end

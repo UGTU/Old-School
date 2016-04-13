@@ -143,6 +143,8 @@ type
     ToolBar2: TToolBar;
     ToolButton12: TToolButton;
     lblProfile: TLabel;
+    lGosHourCount: TLabel;
+    lAuditHourCount: TLabel;
     procedure ActionRemUchPlanUpdate(Sender: TObject);
     procedure ActionRemUchPlanExecute(Sender: TObject);
     procedure ActionRemDiscUpdate(Sender: TObject);
@@ -200,6 +202,7 @@ type
     procedure SetUchPlan(const aUchPlan: Integer);
     procedure SetUchPlanProperties(const aUchPlan: Integer);
     procedure SetVisualProperty;
+    procedure RefreshGroupData;
   public
 
     nameSpclz: string; // именование Профиль/Программа/Специализация
@@ -328,6 +331,7 @@ begin
         GetDisciplines;
     finally
       frmUchPlanAddDisc.Free;
+      RefreshGroupData;
     end;
   end;
 end;
@@ -395,6 +399,7 @@ begin
       end;
     finally
       frmUchPlanAddDisc.Free;
+      RefreshGroupData;
     end;
   end;
 end;
@@ -492,6 +497,7 @@ begin
         (dsDisc.DataSet.FieldByName('ik_disc_uch_plan').Value);
       GetDisciplines;
   end;
+  RefreshGroupData;
 end;
 
 procedure TfmUchPlan.GetDisciplines;
@@ -584,13 +590,22 @@ begin
   Label20.Enabled := discType = typeTypicalDisc;
 end;
 
+
+
 procedure TfmUchPlan.SetGroupUchPlan(const aGroupIK: Integer);
-var
-  Pname: string;
-  spIK: Integer;
 begin
   fGroupIK := aGroupIK;
   dbcbGroup.KeyValue := aGroupIK;
+
+  RefreshGroupData;
+
+  IKPlan := TUchPlanController.Instance.getUchPlanForGroup(aGroupIK);
+end;
+
+procedure TfmUchPlan.RefreshGroupData;
+var
+  Pname: string;
+begin
   fGroupDataSet.Close;
   fGroupDataSet.CommandText := 'select * from GrupInfo(' +
     IntToStr(fGroupIK) + ')';
@@ -603,7 +618,10 @@ begin
     lblProfile.Caption := nameSpclz + ' группы: ' + Pname
   else
     lblProfile.Caption := nameSpclz + ' группы: общий';
-  IKPlan := TUchPlanController.Instance.getUchPlanForGroup(aGroupIK);
+
+  lGosHourCount.Caption :=  'Общее кол-во часов: ' +fGroupDataSet.FieldByName('GosHourCount').AsString
+      +', кол-во зач единиц: '+fGroupDataSet.FieldByName('ZECount').AsString;
+  lAuditHourCount.Caption :=  'Кол-во аудиторных часов: ' +fGroupDataSet.FieldByName('AuditHourCount').AsString;
 end;
 
 procedure TfmUchPlan.SetUchPlan(const aUchPlan: Integer);

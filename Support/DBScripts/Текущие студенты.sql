@@ -17,7 +17,9 @@ left join Fac on Fac.Ik_fac = Relation_spec_fac.ik_fac
 left join EducationBranch on Relation_spec_fac.ik_spec = EducationBranch.ik_spec
 where (Grup.DateExit>getdate())
 and(StudGrup.Ik_prikazOtch is null)
-and Grup.Ik_grup in (9557, 9481, 9569,9486,9554, 9484, 9551)
+and Grup.nYear_post = 2015
+and EducationBranch.[ik_direction] in (1,9,10)
+and Fac.ik_fac = 27
 --and (Ik_form_ed = 1)
 --order by Cshort_name_fac, Grup.Cname_grup, Cfirstname
 --and Fac.ik_fac not in (15,17)
