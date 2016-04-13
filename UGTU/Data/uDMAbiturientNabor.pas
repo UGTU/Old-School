@@ -90,6 +90,12 @@ type
     adoNetworkAbitballs: TIntegerField;
     dsProfile: TDataSource;
     adoqProfile: TADOQuery;
+    adoqProfileik_spec: TIntegerField;
+    adoqProfileCname_spec: TStringField;
+    adoqProfileCshort_spec: TStringField;
+    adoqProfileik_direction: TIntegerField;
+    adoqProfileSortorder: TIntegerField;
+    adoqProfileid_parent: TIntegerField;
   private
     { Private declarations }
   public

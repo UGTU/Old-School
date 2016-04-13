@@ -47,7 +47,7 @@ SELECT DISTINCT Ik_fac, Cname_fac, Cname_spec, ik_spec,
 	[1] AS [Очное], [2] AS [Заочное]
 FROM 
 (SELECT DISTINCT Fac.Ik_fac, Fac.Cname_fac, EducationBranch.Cname_spec
-	, Form_ed.Ik_form_ed,  Zach.Ik_zach, EducationBranch.ik_spec
+	, Form_ed.Ik_form_ed, Zach.Ik_zach, EducationBranch.ik_spec
 		FROM            dbo.Fac INNER JOIN
                          dbo.Relation_spec_fac ON dbo.Fac.Ik_fac = dbo.Relation_spec_fac.ik_fac INNER JOIN
                          dbo.EducationBranch ON dbo.Relation_spec_fac.ik_spec = dbo.EducationBranch.ik_spec INNER JOIN

@@ -237,7 +237,7 @@ inherited frmNewNabor: TfrmNewNabor
     ListSource = DMAbiturientNabor.dsSpecFac
     TabOrder = 1
     Visible = True
-    OnChange = nnyearChange
+    OnChange = Spec_FacChange
   end
   object nnyear: TDBLookupComboboxEh [18]
     Left = 102
@@ -292,7 +292,7 @@ inherited frmNewNabor: TfrmNewNabor
     OnChange = nnyearChange
   end
   object mestCKP: TDBNumberEditEh [21]
-    Left = 278
+    Left = 276
     Top = 136
     Width = 71
     Height = 19
@@ -319,7 +319,7 @@ inherited frmNewNabor: TfrmNewNabor
     Visible = True
     OnChange = nnyearChange
   end
-  object DBLookupComboboxEh1: TDBLookupComboboxEh [23]
+  object dbcmbxPrifile: TDBLookupComboboxEh [23]
     Left = 101
     Top = 80
     Width = 521
@@ -332,8 +332,8 @@ inherited frmNewNabor: TfrmNewNabor
     ListField = 'Cname_spec'
     ListSource = DMAbiturientNabor.dsProfile
     TabOrder = 8
-    Visible = False
-    OnChange = nnyearChange
+    Visible = True
+    OnChange = dbcmbxPrifileChange
   end
   inherited actBaseDialog: TActionList
     Left = 549

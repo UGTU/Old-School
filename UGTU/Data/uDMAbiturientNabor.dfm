@@ -497,8 +497,8 @@
     Parameters = <>
     SQL.Strings = (
       'select * from [dbo].[ABIT_GetProfileList]'
-      '(2012,0)'
-      'order by Sortorder,Cname_spec'
+      '(2016,156, 12)'
+      ' order by Sortorder,Cname_spec'
       ''
       ''
       ''
@@ -511,5 +511,25 @@
       '')
     Left = 237
     Top = 157
+    object adoqProfileik_spec: TIntegerField
+      FieldName = 'ik_spec'
+    end
+    object adoqProfileCname_spec: TStringField
+      FieldName = 'Cname_spec'
+      ReadOnly = True
+      Size = 364
+    end
+    object adoqProfileCshort_spec: TStringField
+      FieldName = 'Cshort_spec'
+    end
+    object adoqProfileik_direction: TIntegerField
+      FieldName = 'ik_direction'
+    end
+    object adoqProfileSortorder: TIntegerField
+      FieldName = 'Sortorder'
+    end
+    object adoqProfileid_parent: TIntegerField
+      FieldName = 'id_parent'
+    end
   end
 end

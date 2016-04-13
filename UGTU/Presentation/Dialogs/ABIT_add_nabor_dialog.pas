@@ -30,7 +30,7 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label11: TLabel;
-    DBLookupComboboxEh1: TDBLookupComboboxEh;
+    dbcmbxPrifile: TDBLookupComboboxEh;
     function AddData():boolean;
     function EditData():boolean;
     procedure NullData();
@@ -43,6 +43,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
+    procedure Spec_FacChange(Sender: TObject);
+    procedure dbcmbxPrifileChange(Sender: TObject);
   private
     FYear: integer;
     FikSpecfac: integer;
@@ -51,6 +53,8 @@ type
     procedure SetYear(const Value: Integer);
     procedure SetikSpecfac(const Value: Integer);
     procedure Setikfac(const Value: Integer);
+    procedure SetComboBoxEnable;
+    procedure SetikProfile(const Value: integer);
     { Private declarations }
   protected
     function CheckData:boolean;
@@ -63,7 +67,7 @@ type
     // Текущий код специальности набора
     property ikSpecfac:Integer read FikSpecfac write SetikSpecfac;
     // Текущий код профиля набора
-    property ikProfile: integer read FikProfile write FikProfile;
+    property ikProfile: integer read FikProfile write SetikProfile;
     // Текущий код факультета набора
     property ikfac:Integer read FikFac write Setikfac;
 
@@ -101,6 +105,7 @@ begin
     Caption:='Редактировать набор';
   end;
 
+
   DMAbiturientNabor.adoqSpecfac.Open;
   DMAbiturientNabor.adoqProfile.Open;
   if not DMAbiturientNabor.adoqFac.Active then
@@ -115,6 +120,24 @@ begin
   frmNewNabor.nnyear.KeyValue:=(FYear);
 end;
 
+procedure TfrmNewNabor.Spec_FacChange(Sender: TObject);
+begin
+  inherited;
+  ikfac:= dbcmbxFac.KeyValue;
+  ikSpecfac:= Spec_Fac.KeyValue;
+  dbcmbxPrifile.KeyValue:=null;
+
+  if (Spec_Fac.KeyValue>-1) then
+  begin
+    DMAbiturientNabor.adoqProfile.Filtered:=false;
+    DMAbiturientNabor.adoqProfile.Filter:='id_parent='+IntToStr(DMAbiturientNabor.adoqSpecFac.FieldByName('ik_spec').Value);
+    ShowMessage(DMAbiturientNabor.adoqProfile.Filter);
+    DMAbiturientNabor.adoqProfile.Filtered:=true;
+  end;
+
+  SetComboBoxEnable;
+end;
+
 procedure TfrmNewNabor.NullData();
 begin
   {mestCKP.Text:='0';
@@ -122,14 +145,30 @@ begin
   MestLgot.Text:='0';   }
   dbcmbxFac.KeyValue:= FikFac;
   ikSpecfac:= -1;
+  ikProfile:= -1;
   frmNewNabor.cbRussian.Checked:= true;
   self.nnrecord:= 0;
+end;
+
+procedure TfrmNewNabor.SetComboBoxEnable;
+begin
+  Spec_Fac.Enabled:=dbcmbxFac.KeyValue > 0;
+  dbcmbxPrifile.Enabled:=Spec_Fac.KeyValue > 0;
+
+  isModified:= (nnyear.KeyValue>-1) and (spec_fac.KeyValue>-1)
+      {and (MestBudjet.Text<>'') and (MestBudjet.Text<>' ')};
 end;
 
 procedure TfrmNewNabor.Setikfac(const Value: Integer);
 begin
   FikFac := Value;
   dbcmbxFac.KeyValue:= FikFac;
+end;
+
+procedure TfrmNewNabor.SetikProfile(const Value: integer);
+begin
+  FikProfile := Value;
+  dbcmbxPrifile.KeyValue:= FikProfile;
 end;
 
 procedure TfrmNewNabor.SetikSpecfac(const Value: Integer);
@@ -172,6 +211,7 @@ begin
     StrToInt(mestbudjet.Text),
 	  StrToInt(mestCKP.Text),
 	  StrToInt(MestLgot.Text),
+    dbcmbxPrifile.KeyValue,
     cbRussian.Checked
 	  );
   result:=(nnrecord>0);
@@ -187,27 +227,25 @@ begin
 	  StrToInt(mestbudjet.Text),
 	  StrToInt(mestCKP.Text),
 	  StrToInt(MestLgot.Text),
+    dbcmbxPrifile.KeyValue,
 	  NNrecord,
     cbRussian.Checked
 	  ) ;
     result:=true;
 end;
 
+
+
 procedure TfrmNewNabor.nnyearChange(Sender: TObject);
 begin
   //inherited;
-  IF (dbcmbxFac.KeyValue<0) then
-    Spec_Fac.Enabled:=false
-  else
-    Spec_Fac.Enabled:=true;
-
   if (dbcmbxFac.KeyValue>-1) then
   begin
     DMAbiturientNabor.adoqSpecFac.Filter:='ik_fac='+IntToStr(dbcmbxFac.KeyValue);
     DMAbiturientNabor.adoqSpecFac.Filtered:=true;
   end;
-  isModified:= (nnyear.KeyValue>-1) and (spec_fac.KeyValue>-1)
-      {and (MestBudjet.Text<>'') and (MestBudjet.Text<>' ')};
+
+  SetComboBoxEnable;
 end;
 
 procedure TfrmNewNabor.bbCancelClick(Sender: TObject);
@@ -254,13 +292,20 @@ procedure TfrmNewNabor.dbcmbxFacChange(Sender: TObject);
 begin
   ikfac:= dbcmbxFac.KeyValue;
   Spec_Fac.KeyValue:=null;
-  Spec_Fac.Enabled:=true;
 
   if (dbcmbxFac.KeyValue>-1) then
   begin
     DMAbiturientNabor.adoqSpecFac.Filter:='ik_fac='+IntToStr(ikfac);
     DMAbiturientNabor.adoqSpecFac.Filtered:=true;
   end;
+
+  SetComboBoxEnable;
+end;
+
+procedure TfrmNewNabor.dbcmbxPrifileChange(Sender: TObject);
+begin
+  inherited;
+  SetComboBoxEnable;
 end;
 
 end.
