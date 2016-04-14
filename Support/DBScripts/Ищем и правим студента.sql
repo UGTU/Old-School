@@ -1,7 +1,7 @@
 
-select * from Person where Clastname like 'Писаренк%' 
+select * from Person where Clastname like 'Закиров%' order by Cfirstname
 
-select * from PersonAddress where nCode=34534
+select * from PersonAddress where nCode in (41371,43865,113271)
 
 select * from [dbo].Audit_Event where [Description] like '%18416%' order by [AuditDateTime]
 
@@ -26,20 +26,24 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (45383)
+select * from Zach where ncode in (30185,115448,115450)
+
 select * from Zach where Ik_zach in (14369)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (24736)
+and ik_zach in (35815,35816)
 
-select * from Prikaz where k
+select * from Prikaz
 
 select * from StudGrup where ik_pricZach=13
 
-update Uspev set ik_zach = 18621 where ik_zach = 26406
+update Uspev set ik_zach = 24410 where ik_zach = 35779
+
 and Ik_ved not in (select Ik_ved from Uspev where ik_zach = 18621)
+
+select * from Uspev where ik_zach in (22324,24410,35779) order by ik_zach
 
 select * from Uspev where Ik_ved in (select Ik_ved from Uspev where ik_zach = 26406 )
 and Ik_ved in (select Ik_ved from Vedomost where lPriznak_napr = 1)

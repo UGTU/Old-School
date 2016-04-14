@@ -232,6 +232,7 @@ type
     actPostupDelete: TAction;
     actCallSpr: TAction;
     actNotification: TAction;
+    actChangePlanFromOtherGroup: TAction;
     procedure FormCreate(Sender: TObject);
 
     procedure DBDekTreeView_TEST1Change(Sender: TObject; Node: TTreeNode);
@@ -370,6 +371,7 @@ type
       var Handled: Boolean);
     procedure actNotificationExecute(Sender: TObject);
     procedure actPrintEnrollAgreementExecute(Sender: TObject);
+    procedure actChangePlanFromOtherGroupExecute(Sender: TObject);
 
     procedure Test();
 
@@ -422,7 +424,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka,
   uDMAbiturientZachisl, uAbitZachislenieController, uNagruzkaPrepAllInfo,
   uSheduleSemester, uAbitOtchetsController, udmUspevaemost, SheduleController,
   uNagruzkaSemester, ApplicationController, uAbitConfirm, udmCauses,
-  DBTVInviteObj,
+  DBTVInviteObj,  uChangePlanFromGrup,
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj, HOST_Projivaysh,
   DBTVHabitatsPersonObj,
   uPerson;
@@ -3648,7 +3650,14 @@ procedure TfrmMain.actPrintItogiPostForSpecExecute(Sender: TObject);
         // ((ActiveFrame as TfmZach).prikaz.DataSource.DataSet.FieldByName('Ik_form_ed').Value=2);
       end;
 
-      procedure TfrmMain.actChangeSemFilterExecute(Sender: TObject);
+procedure TfrmMain.actChangePlanFromOtherGroupExecute(Sender: TObject);
+begin
+  frmChangeGrupPlan := TfrmChangeGrupPlan.Create(Self);
+  frmChangeGrupPlan.GrupIK := ((DBDekTreeView_TEST1.SelectedObject)as TDBNodeGroupObject).ik;
+  frmChangeGrupPlan.ShowModal;
+end;
+
+procedure TfrmMain.actChangeSemFilterExecute(Sender: TObject);
       begin
         if actCurrentSem.Checked then
           actAllSem.Checked := true

@@ -1030,6 +1030,12 @@ object frmMain: TfrmMain
       ImageIndex = 49
       OnExecute = actNotificationExecute
     end
+    object actChangePlanFromOtherGroup: TAction
+      Category = 'catGroupAct'
+      Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091' '#1076#1088'. '#1075#1088#1091#1087#1087#1099
+      ImageIndex = 19
+      OnExecute = actChangePlanFromOtherGroupExecute
+    end
   end
   object ImageList1: TImageList
     Left = 319
