@@ -373,8 +373,6 @@ type
     procedure actPrintEnrollAgreementExecute(Sender: TObject);
     procedure actChangePlanFromOtherGroupExecute(Sender: TObject);
 
-    procedure Test();
-
   private
     FFrame: TfmBase;
     procedure SetFrame(FrameClass: TBaseFrameClass);
@@ -3856,12 +3854,5 @@ procedure TfrmMain.actChangeSemFilterExecute(Sender: TObject);
           TDBNodeGroupObject(TDBNodeStudObject(ActiveFrame.FrameObject)
           .Node.Parent.data).ik);
       end;
-
-
-
-      procedure TfrmMain.Test();
-begin
-  FormSprForGrup(TDBNodeGroupObject(DBDekTreeView_TEST1.Selected.data).ik, 5);
-end;
 
 end.
