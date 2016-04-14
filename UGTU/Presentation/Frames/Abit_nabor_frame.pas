@@ -846,13 +846,13 @@ begin
 	  frmNewNabor.mestCKP.Value:= nabor.DataSource.DataSet.FieldByName('MestCKP').AsInteger;
 	  frmNewNabor.mestbudjet.Value:= nabor.DataSource.DataSet.FieldByName('MestBudjet').AsInteger;
 	  frmNewNabor.MestLgot.Value:= nabor.DataSource.DataSet.FieldByName('MestLgot').AsInteger;
-	  frmNewNabor.ikfac:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
-	  frmNewNabor.ikSpecfac:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
-    frmNewNabor.ikProfile:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').AsInteger;
-	  frmNewNabor.cbRussian.Checked:= nabor.DataSource.DataSet.FieldByName('lRussian').AsBoolean;
 	  frmNewNabor.dbcmbxFac.Enabled:=false;
 	  frmNewNabor.Spec_Fac.Enabled:=false;
     frmNewNabor.dbcmbxPrifile.Enabled:=false;
+    frmNewNabor.ikfac:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
+	  frmNewNabor.ikSpecfac:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
+    frmNewNabor.ikProfile:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').Value;
+	  frmNewNabor.cbRussian.Checked:= nabor.DataSource.DataSet.FieldByName('lRussian').AsBoolean;
     frmNewNabor.IsModified:= false;
 	  frmNewNabor.ShowModal;
 
