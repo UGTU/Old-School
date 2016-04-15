@@ -129,7 +129,6 @@ begin
     begin
       DMAbiturientNabor.adoqProfile.Filtered:=false;
       DMAbiturientNabor.adoqProfile.Filter:='id_parent='+IntToStr(DMAbiturientNabor.adoqSpecFac.FieldByName('ik_spec').Value);
-      ShowMessage('filter: '+DMAbiturientNabor.adoqProfile.Filter);
       DMAbiturientNabor.adoqProfile.Filtered:=true;
     end;
   end;
