@@ -851,7 +851,13 @@ begin
     frmNewNabor.dbcmbxPrifile.Enabled:=false;
     frmNewNabor.ikfac:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
 	  frmNewNabor.ikSpecfac:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
-    frmNewNabor.ikProfile:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').Value;
+    frmNewNabor.ikProfile:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').AsInteger;
+
+    frmNewNabor.sets;
+
+    frmNewNabor.dbcmbxFac.KeyValue:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
+	  frmNewNabor.Spec_Fac.KeyValue:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
+    frmNewNabor.dbcmbxPrifile.KeyValue:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').AsInteger;
 	  frmNewNabor.cbRussian.Checked:= nabor.DataSource.DataSet.FieldByName('lRussian').AsBoolean;
     frmNewNabor.IsModified:= false;
 	  frmNewNabor.ShowModal;

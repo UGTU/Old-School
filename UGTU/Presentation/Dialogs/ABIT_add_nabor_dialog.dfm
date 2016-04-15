@@ -208,8 +208,8 @@ inherited frmNewNabor: TfrmNewNabor
     end
   end
   object dbcmbxFac: TDBLookupComboboxEh [16]
-    Left = 102
-    Top = 32
+    Left = 104
+    Top = 30
     Width = 521
     Height = 19
     Anchors = [akLeft, akTop, akRight]
