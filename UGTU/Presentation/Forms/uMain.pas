@@ -2714,6 +2714,7 @@ begin
     (DBDekTreeView_TEST1.SelectedObject).NNRecord;
   frmAbitConfirm.Hint :=
     inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year);
+  frmAbitConfirm.Year := (TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year);
   yearnode := TDBNodeAbitYearObject
     (DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.data);
   frmAbitConfirm.HasAddSpec := yearnode.HasAddSpec;
@@ -2758,6 +2759,8 @@ begin
   frmpostupDlg.Hint :=
     inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.
     data).Year);
+  frmpostupDlg.Year := TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.
+    data).Year;
   frmpostupDlg.HasAddSpec := TDBNodeAbitYearObject
     (DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Parent.data).HasAddSpec;
   frmpostupDlg.Tag := 0;
