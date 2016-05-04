@@ -1,5 +1,5 @@
 
-select * from Person where Clastname like 'Закиров%' order by Cfirstname
+select * from Person where Clastname like 'Осипова%' order by Cfirstname
 
 select * from PersonAddress where nCode in (41371,43865,113271)
 
@@ -26,14 +26,14 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (30185,115448,115450)
+select * from Zach where ncode in (31446)
 
 select * from Zach where Ik_zach in (14369)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (35815,35816)
+and ik_zach in (18483)
 
 select * from Prikaz
 

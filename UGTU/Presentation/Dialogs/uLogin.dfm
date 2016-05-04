@@ -14,7 +14,7 @@ object frmLogin: TfrmLogin
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poScreenCenter
   OnCreate = FormCreate
   OnKeyUp = FormKeyUp
   DesignSize = (
