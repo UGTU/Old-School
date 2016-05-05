@@ -340,7 +340,6 @@ begin
     if (Value <> null) then
     begin
       DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
-        DMAbiturientRasp.adospAbitGetSpisok.FieldByName('DiscVedomName').Value+'-'+
         DMAbiturientRasp.adoqMaxVedomNumber.FieldByName('MaxNumber').Value;
     end;
   except

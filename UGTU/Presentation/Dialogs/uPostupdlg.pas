@@ -340,9 +340,6 @@ begin
     ''' Order By Cshort_name_fac, Cname_spec';
   dm.adodsNabor.Active := true;
   dm.adodsNabor.Open;
-  ShowMessage(dm.adodsNabor.CommandText);
-  if (dm.adodsNabor.Active) then
-    ShowMessage(dm.adodsNabor.RecordCount.ToString());
 
   if NNRecord > 0 then
   begin
