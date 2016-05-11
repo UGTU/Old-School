@@ -4,7 +4,7 @@
 
 
 
---select * from [dbo].[ABIT_GetVedomNumber](714)
+--select * from [dbo].[ABIT_GetVedomNumber](715)
 --функция возвращает макс номер ведомости для экзаменов по данной дисциплине
 --в данном году поступления
 alter FUNCTION [dbo].[ABIT_GetVedomNumber](@id_rasp int)
@@ -14,10 +14,10 @@ AS
 
 RETURN (
 SELECT 
-AllMaxNumber as MaxNumber
+RTRIM(AllMaxNumber) as MaxNumber
 FROM
 	(SELECT [DiscVedomName], ISNULL(ISNULL(MaxNumber,
-		[DiscVedomName]+'-'+CONVERT(VARCHAR(10),(CONVERT(INT,SUBSTRING(MaxAllExamNumber,CHARINDEX('-',MaxAllExamNumber)+1,Len(MaxAllExamNumber)))+1))),'1') AllMaxNumber FROM
+		[DiscVedomName]+'-'+RTRIM(CONVERT(VARCHAR(10),(CONVERT(INT,SUBSTRING(MaxAllExamNumber,CHARINDEX('-',MaxAllExamNumber)+1,Len(MaxAllExamNumber)))+1)))),'1') AllMaxNumber FROM
 		(SELECT [ABIT_Disc].[DiscVedomName], MAX(allVusYearExams.nnvedom) MaxAllExamNumber FROM
 		[dbo].[ABIT_Raspisanie]	thisRasp
 		INNER JOIN 
