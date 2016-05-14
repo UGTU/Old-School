@@ -1,5 +1,5 @@
 
-select * from Person where Clastname like 'Осипова%' order by Cfirstname
+select * from Person where Clastname like 'Гомон%' order by Cfirstname
 
 select * from PersonAddress where nCode in (41371,43865,113271)
 
@@ -26,7 +26,7 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (31446)
+select * from Zach where ncode in (32906)
 
 select * from Zach where Ik_zach in (14369)
 
