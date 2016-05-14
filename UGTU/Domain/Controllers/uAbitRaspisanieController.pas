@@ -357,10 +357,12 @@ begin
 			DMAbiturientRasp.adospAbitGetSpisok.SQL.Strings[1]:='WHERE (ik_disc='+DMAbiturientRasp.adospGetRaspik_disc.AsString+' and  ik_sdach='+
       DMAbiturientRasp.adospGetRaspik_sdach.AsString+' and (id_rasp IS NULL OR id_rasp='+DMAbiturientRasp.adospGetRaspid_rasp.AsString+'))';
 
-      DMAbiturientRasp.adoqMaxVedomNumber.SQL.Strings[1]:='WHERE (ik_disc='+DMAbiturientRasp.adospGetRaspik_disc.AsString+')';
+      DMAbiturientRasp.adoqMaxVedomNumber.SQL.Strings[1]:='('+IntToStr(DMAbiturientRasp.adospGetRaspid_rasp.Value)+')';
     end;
+    DMAbiturientRasp.adoqMaxVedomNumber.Open;
     FilterAbitList(YearOf(DMAbiturientRasp.adospGetRaspdate_of.Value), null, null);
     DMAbiturientRasp.adospAbitGetSpisok.Open;
+    DMAbiturientRasp.adospAbitGetSpisok.First;
     result:= true;
   except
     result:= false;
@@ -401,11 +403,7 @@ begin
   if ik_spec_fac>0 then
     filter:=filter+' and (ik_spec_fac='+IntToStr(ik_spec_fac)+')';
   DMAbiturientRasp.adospAbitGetSpisok.SQL.Strings[2]:=filter;
-  DMAbiturientRasp.adoqMaxVedomNumber.SQL.Strings[2]:=filter;
   DMAbiturientRasp.adospAbitGetSpisok.Open;
-  DMAbiturientRasp.adoqMaxVedomNumber.Open;
-
-  DMAbiturientRasp.adoqMaxVedomNumber.First;
 end;
 
 

@@ -484,9 +484,7 @@
     LockType = ltBatchOptimistic
     Parameters = <>
     SQL.Strings = (
-      'SELECT MAX(Number) as MaxNumber  FROM ABIT_SpisokOfExam'
-      ''
-      ''
+      'SELECT * FROM [dbo].[ABIT_GetVedomNumber]'
       '')
     Left = 345
     Top = 189

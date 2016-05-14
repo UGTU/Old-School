@@ -339,6 +339,7 @@ begin
     'select * from Tree_abit_Specialties where NNYear=''' + inttostr(Year) +
     ''' Order By Cshort_name_fac, Cname_spec';
   dm.adodsNabor.Active := true;
+  dm.adodsNabor.Open;
 
   if NNRecord > 0 then
   begin
