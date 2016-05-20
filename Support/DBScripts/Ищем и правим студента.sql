@@ -1,5 +1,5 @@
 
-select * from Person where Clastname like 'Гомон%' order by Cfirstname
+select * from Person where Clastname like 'Женихова%' order by Cfirstname
 
 select * from PersonAddress where nCode in (41371,43865,113271)
 
@@ -26,24 +26,25 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (32906)
+select * from Zach where ncode in (38514,57312)
 
 select * from Zach where Ik_zach in (14369)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (18483)
+and ik_zach in (20720,27480)
 
 select * from Prikaz
 
 select * from StudGrup where ik_pricZach=13
 
-update Uspev set ik_zach = 24410 where ik_zach = 35779
+update Uspev set ik_zach = 20720 where ik_zach = 27480
+and ik_ved not in (select ik_ved from Uspev where ik_zach = 20720)
 
 and Ik_ved not in (select Ik_ved from Uspev where ik_zach = 18621)
 
-select * from Uspev where ik_zach in (22324,24410,35779) order by ik_zach
+select * from Uspev where ik_zach in (20720,27480) order by ik_zach
 
 select * from Uspev where Ik_ved in (select Ik_ved from Uspev where ik_zach = 26406 )
 and Ik_ved in (select Ik_ved from Vedomost where lPriznak_napr = 1)
