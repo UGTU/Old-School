@@ -283,6 +283,8 @@ begin
   end
   else}
   //begin
+
+  //если это колледжи
   if ((tempStoredProc.FieldByName('Ik_fac').AsInteger = 23) or
       (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) or
       (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21)) then
@@ -314,6 +316,8 @@ begin
     FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
 
   end
+
+  //если ¬”«
   else
   begin
     FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
@@ -323,9 +327,9 @@ begin
     //при замене тер€ютс€ начальные нули, при вставке напр€мую в €чейку все в пор€дке
     str:=SourceDataSet.FieldByName('RegNumber').AsString   ;
     //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
-    E.Sheets[count].Range['t40'].Value:=str;
+    E.Sheets[count].Range['S42'].Value:=str;
     FindRange := E.Cells.Replace(What := '#shifr#',Replacement:=tempStoredProc.FieldByName('Sh_spec').AsString);
-    E.Sheets[count].Range['AZ35'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
+    E.Sheets[count].Range['BD36'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
     //E.Sheets[count].Range['t48'].Value:=str;
 
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;

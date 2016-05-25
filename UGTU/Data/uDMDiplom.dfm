@@ -84,8 +84,10 @@ object dmDiplom: TdmDiplom
       Lookup = True
     end
     object adospDiplomListExcelPatternName: TStringField
+      DisplayWidth = 150
       FieldName = 'ExcelPatternName'
-      Size = 30
+      LookupCache = True
+      Size = 150
     end
     object adospDiplomListik_direction: TAutoIncField
       FieldName = 'ik_direction'
@@ -651,12 +653,14 @@ object dmDiplom: TdmDiplom
         DataType = ftInteger
         Direction = pdReturnValue
         Precision = 10
+        Value = Null
       end
       item
         Name = '@ik_CurGroup'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 416
     Top = 175
