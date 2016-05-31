@@ -11,7 +11,7 @@ type
   TDiplOtdKardController = class (TObject)
   private
     function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
-    procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet);
+    procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; Is2016:boolean);
   protected
     constructor CreateInstance;
  //AccessInstance предоставл€ет доступ к экземпл€ру контроллера
@@ -201,7 +201,7 @@ begin
 end;
 
 //вывод диплома
-procedure TDiplOtdKardController.FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet);
+procedure TDiplOtdKardController.FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; Is2016:boolean);
 const strLength = 40;
 var
   str, str2:string;
@@ -314,7 +314,6 @@ begin
     str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
 
     FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
-
   end
 
   //если ¬”«
@@ -324,12 +323,9 @@ begin
     FindRange := E.Cells.Replace(What := '#surname#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iClastname').AsString));
     FindRange := E.Cells.Replace(What := '#name#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iFirstName').AsString));
     FindRange := E.Cells.Replace(What := '#Patronymic#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iPatronymic').AsString));
-    //при замене тер€ютс€ начальные нули, при вставке напр€мую в €чейку все в пор€дке
-    str:=SourceDataSet.FieldByName('RegNumber').AsString   ;
     //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
-    E.Sheets[count].Range['S42'].Value:=str;
+
     FindRange := E.Cells.Replace(What := '#shifr#',Replacement:=tempStoredProc.FieldByName('Sh_spec').AsString);
-    E.Sheets[count].Range['BD36'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
     //E.Sheets[count].Range['t48'].Value:=str;
 
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
@@ -344,9 +340,19 @@ begin
     str:=Inttostr(iDay);
     if (iday < 10) then
       str:= '0'+str;
-    E.Sheets[count].Range['BG35'].Value:=str;
-
-
+    //при замене тер€ютс€ начальные нули, при вставке напр€мую в €чейку все в пор€дке
+    if (Is2016) then
+    begin
+      E.Sheets[count].Range['S42'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
+      E.Sheets[count].Range['BD36'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
+      E.Sheets[count].Range['BG35'].Value:=str;
+    end
+    else
+    begin
+      E.Sheets[count].Range['T40'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
+      E.Sheets[count].Range['AZ35'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
+      E.Sheets[count].Range['BG35'].Value:=str;
+    end;
   end;
   //end;
 
@@ -530,7 +536,7 @@ begin
 
           try
             HasAllData:= true;
-            FillTheDiplom(E, count, tempStoredProc, SourceDataSet);
+            FillTheDiplom(E, count, tempStoredProc, SourceDataSet, Pos('2016',path)>0); //показатель нового шаблона (2016));
           except
             on Ex:Exception do begin
             E.Quit;

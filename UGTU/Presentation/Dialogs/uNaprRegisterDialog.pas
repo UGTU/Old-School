@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, DBGridEh, DBCtrlsEh, DBLookupEh, StdCtrls, Mask,
-  ActnList, Buttons, ExtCtrls, uDMUspevaemost, uDM;
+  ActnList, Buttons, ExtCtrls, uDMUspevaemost, uDM, System.Actions;
 
 type
   TfrmNaprRegister = class(TfrmBaseDialog)
