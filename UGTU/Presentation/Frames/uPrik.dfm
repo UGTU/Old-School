@@ -8,23 +8,17 @@ inherited fmPrik: TfmPrik
       Align = alClient
       AutoFitColWidths = True
       DataSource = dmPrikaz.dsPrikaz
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       PopupMenu = ppmPrik
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       OnDblClick = dbgePrikDblClick
       OnTitleClick = dbgePrikTitleClick
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object ToolBar1: TToolBar
       Left = 2
@@ -78,6 +72,7 @@ inherited fmPrik: TfmPrik
         Top = 0
         Width = 148
         Height = 22
+        DataField = ''
         EditButtons = <>
         KeyField = 'ik_typePrikaz'
         ListField = 'cTypePrikaz'
