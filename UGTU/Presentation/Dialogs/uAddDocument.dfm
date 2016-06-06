@@ -88,8 +88,8 @@ inherited frmAddDocument: TfrmAddDocument
   object Label9: TLabel [9]
     Left = 96
     Top = 28
-    Width = 177
-    Height = 1
+    Width = 6
+    Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
@@ -101,8 +101,8 @@ inherited frmAddDocument: TfrmAddDocument
   object WhoRequired: TLabel [10]
     Left = 266
     Top = 96
-    Width = 7
-    Height = 9
+    Width = 6
+    Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed

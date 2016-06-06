@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseFrame, Grids, DBGridEh, StdCtrls, Buttons, ExtCtrls, uDm,
   Menus, uMain, ComCtrls, ToolWin, ActnList, Mask, DBCtrlsEh, DBLookupEh, Adodb,
-  GridsEh, ApplicationController, ExceptionBase;
+  GridsEh, ApplicationController, ExceptionBase, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, System.Actions, DBAxisGridsEh;
 
 type
   TfmPrik = class(TfmBase)

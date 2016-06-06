@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsDiplom
+      ActivePage = tsVed
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -2689,7 +2689,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400A80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400AC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2862,7 +2862,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000A40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000A80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3533,7 +3533,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800A40110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800A80110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
@@ -3970,7 +3970,7 @@ inherited fmGroup: TfmGroup
       OnExecute = actDelAttExecute
     end
     object actNaprRegister: TAction
-      Category = 'Napr'
+      Category = 'vedomost'
       Caption = #1047#1072#1088#1077#1075#1080#1089#1090#1088#1080#1088#1086#1074#1072#1090#1100' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
       OnExecute = actNaprRegisterExecute
     end
@@ -4076,6 +4076,11 @@ inherited fmGroup: TfmGroup
       ImageIndex = 8
       OnExecute = ActDiplListToExcelExecute
     end
+    object actDelStudFromVed: TAction
+      Category = 'vedomost'
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1091#1076#1077#1085#1090#1072' '#1080#1079' '#1074#1077#1076#1086#1084#1086#1089#1090#1080
+      OnExecute = actDelStudFromVedExecute
+    end
   end
   object pmVedomost: TPopupMenu
     Images = ilMain
@@ -4084,6 +4089,9 @@ inherited fmGroup: TfmGroup
     Top = 160
     object N1: TMenuItem
       Action = actNaprRegister
+    end
+    object N8: TMenuItem
+      Action = actDelStudFromVed
     end
   end
   object ppmGroupNapr: TPopupMenu

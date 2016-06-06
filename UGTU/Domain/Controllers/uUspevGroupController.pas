@@ -234,6 +234,8 @@ uses
     ik_group,ik_upContent: integer):boolean;
   //Удаление ведомости
   procedure DelVed(ik_ved: variant);
+  //Удаление студента из ведомости
+  procedure DelStudFromVed(ik_ved, ik_zach: variant);
 
 
 
@@ -1790,7 +1792,28 @@ end;
 
 
 
+//Удаление студента из ведомости
+procedure TUspevGroupController.DelStudFromVed(ik_ved, ik_zach: variant);
+var
+  tempStoredProc: TADOStoredProc;
+begin
+  TApplicationController.GetInstance.AddLogEntry('Удаление студента из ведомости');
 
+  tempStoredProc:= TADOStoredProc.Create(nil);
+  try
+    tempStoredProc.ProcedureName:= 'DelStudFromVed;1';
+    tempStoredProc.Connection:= dm.DBConnect;
+    with tempStoredProc.Parameters do
+    begin
+      Clear;
+      CreateParameter('@ik_ved', ftInteger, pdInput, 0, ik_ved);
+      CreateParameter('@ik_zach', ftInteger, pdInput, 0, ik_zach);
+    end;
+    tempStoredProc.ExecProc;
+  finally
+    tempStoredProc.Free;
+  end;
+end;
 
 //Удаление ведомости
 procedure TUspevGroupController.DelVed(ik_ved: variant);

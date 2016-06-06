@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, DBCtrlsEh, ActnList, Buttons, ExtCtrls,
-  ComObj, uDM, D_GroupListRep, ReportsBase;
+  ComObj, uDM, D_GroupListRep, ReportsBase, System.Actions;
 
 type
   TfrmStudInfo = class(TfrmBaseDialog)
