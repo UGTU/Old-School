@@ -67,6 +67,7 @@ type
     // Текущий код факультета набора
     property ikfac:Integer read FikFac write FikFac;
 
+    procedure Setikfac(const Value: Integer);
     procedure sets();
     { Public declarations }
   end;
@@ -156,7 +157,7 @@ begin
       {and (MestBudjet.Text<>'') and (MestBudjet.Text<>' ')};
 end;
 
-{procedure TfrmNewNabor.Setikfac(const Value: Integer);
+procedure TfrmNewNabor.Setikfac(const Value: Integer);
 begin
   FikFac := Value;
 
@@ -172,9 +173,9 @@ begin
 
     dbcmbxFac.KeyValue:= ikfac;
   end;
+  dbcmbxFac.Enabled:=false;
   SetComboBoxEnable;
 end;
-}
 
 procedure TfrmNewNabor.actApplyExecute(Sender: TObject);
 begin
@@ -284,7 +285,7 @@ end;
 procedure TfrmNewNabor.FormShow(Sender: TObject);
 begin
   inherited;
-  //Sets;
+  Sets;
 end;
 
 procedure TfrmNewNabor.dbcmbxFacChange(Sender: TObject);
