@@ -813,10 +813,7 @@ begin
 
     //если фрейм факультет, то его не может изменить
     if fc<>0 then
-    begin
-			frmNewNabor.ikfac:=fc;
-			frmNewNabor.dbcmbxFac.Enabled:=false;
-    end
+			frmNewNabor.Setikfac(fc)
     else frmNewNabor.dbcmbxFac.Enabled:=true;
 
     frmNewNabor.ShowModal;
