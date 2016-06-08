@@ -46,7 +46,7 @@ inherited fmDiplomOtdKadr: TfmDiplomOtdKadr
     Top = 0
     Width = 927
     Height = 612
-    ActivePage = tshDiplom
+    ActivePage = tshGak
     Align = alClient
     Style = tsFlatButtons
     TabOrder = 2
