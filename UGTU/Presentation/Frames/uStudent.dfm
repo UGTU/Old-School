@@ -625,7 +625,7 @@ inherited fmStudent: TfmStudent
                     Top = 131
                     Width = 93
                     Height = 25
-                    Caption = #1057#1085#1080#1084#1086#1082
+                    Caption = #1057#1076#1077#1083#1072#1090#1100' '#1089#1085#1080#1084#1086#1082
                     TabOrder = 8
                     OnClick = bShotClick
                   end
@@ -829,14 +829,14 @@ inherited fmStudent: TfmStudent
                   object Label31: TLabel
                     Left = 17
                     Top = 38
-                    Width = 133
+                    Width = 132
                     Height = 13
                     Caption = #1044#1086#1074#1091#1079#1086#1074#1089#1082#1072#1103' '#1087#1086#1076#1075#1086#1090#1086#1074#1082#1072':'
                   end
                   object Label32: TLabel
                     Left = 18
                     Top = 84
-                    Width = 100
+                    Width = 99
                     Height = 13
                     Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1099#1081' '#1091#1095#1077#1090':'
                     Visible = False
@@ -858,7 +858,7 @@ inherited fmStudent: TfmStudent
                   object Label43: TLabel
                     Left = 17
                     Top = 135
-                    Width = 254
+                    Width = 253
                     Height = 13
                     Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082' '#1074#1086#1077#1085#1085#1086#1081' '#1089#1083#1091#1078#1073#1077' / '#1074#1086#1080#1085#1089#1082#1086#1077' '#1079#1074#1072#1085#1080#1077': '
                   end
@@ -1774,7 +1774,7 @@ inherited fmStudent: TfmStudent
             object Label9: TLabel
               Left = 144
               Top = 6
-              Width = 43
+              Width = 42
               Height = 13
               Hint = '1'
               Caption = #1052#1086#1076#1091#1083#1100':'
@@ -2416,8 +2416,8 @@ inherited fmStudent: TfmStudent
   end
   object alAct: TActionList
     Images = frmMain.ImageList1
-    Left = 536
-    Top = 224
+    Left = 584
+    Top = 288
     object actAddAddress: TAction
       Category = 'Address'
       ImageIndex = 21
@@ -2507,7 +2507,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000800210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000840210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
