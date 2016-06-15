@@ -8,7 +8,7 @@ uses
   Dialogs, uBaseDialog, Grids, DBGridEh, StdCtrls, ActnList, Buttons,
   ExtCtrls, adodb, db, DBCtrlsEh, DBLookupEh, Mask, uAbitDialog, uStudDlg,
   uMain, uAbitOtchetsController, comObj, uCertificateDialog,
-  System.Actions, System.Generics.Collections, DocumentClass;
+  System.Actions, System.Generics.Collections, DocumentClass, DateUtils;
 
 type
   TAbitList = class
@@ -20,6 +20,7 @@ type
     lAdditionalSpec: Tlist;
     ldelAdditionalSpec: Tlist;
     AvgBall: real;
+    DateOriginal: TDateTime;
 
     function NewSpecNum: integer;
     // constructor Create;
@@ -69,6 +70,8 @@ type
     Label8: TLabel;
     bGetCertData: TButton;
     Label1: TLabel;
+    Label9: TLabel;
+    dtpDateOriginal: TDBDateTimeEditEh;
     procedure FormShow(Sender: TObject);
     procedure sbAddExamClick(Sender: TObject);
     procedure sgExamsClick(Sender: TObject);
@@ -227,13 +230,14 @@ begin
     dbdteList.Value := AbitList.Date;
   if (dbcbeRecruit.keyvalue <= 0) then
   begin
-    dbcbeRecruit.keyvalue := AbitList.RecruitNum;
+    dbcbeRecruit.keyvalue := NNRecord;//AbitList.RecruitNum;
     GetKatZach(dbcbeRecruit.KeyValue); //настройка категорий зачисления
   end;
   if (eAvgBall.Value <= 0) then
     eAvgBall.Value := AbitList.AvgBall;
 
   cbReal.checked := AbitList.real;
+  dtpDateOriginal.Enabled := AbitList.real;
   cbIsMain.checked := AbitList.IsMain;
 
   ExamSync;
@@ -335,6 +339,7 @@ begin
     'select * from Tree_abit_Specialties where NNYear=''' + inttostr(Year) +
     ''' Order By Cshort_name_fac, Cname_spec';
   dm.adodsNabor.Active := true;
+  dm.adodsNabor.Open;
 
   if NNRecord > 0 then
   begin
@@ -581,6 +586,8 @@ procedure TfrmPostupDlg.bbOkPrintClick(Sender: TObject);
 begin
   actOKExecute(Sender);
   TAbitOtchetsController.Instance.ExportZayavl(AbitList.NNAbit);
+  if (cbReal.checked) then
+    TAbitOtchetsController.Instance.ExportEnrollAgreement(AbitList.NNAbit);
 end;
 
 procedure TfrmPostupDlg.bGetCertDataClick(Sender: TObject);
@@ -689,26 +696,28 @@ end;
 
 procedure TfrmPostupDlg.cbIsMainClick(Sender: TObject);
 begin
+  AbitList.IsMain :=  cbIsMain.checked;
+
   if not cbIsMain.checked then
   begin
     cbReal.checked := false;
-    AbitList.IsMain := false;
     AbitList.real := false;
-  end
-  else
-    AbitList.IsMain := true;
+  end;
 end;
 
 procedure TfrmPostupDlg.cbRealClick(Sender: TObject);
 begin
+  AbitList.real := cbReal.checked;
+  dtpDateOriginal.Enabled := cbReal.checked;
   if cbReal.checked then
   begin
     cbIsMain.checked := true;
     AbitList.IsMain := true;
-    AbitList.real := true;
+    if (dtpDateOriginal.Value = null) and (Year = YearOf(Date())) then
+      dtpDateOriginal.Value := Date();
   end
   else
-    AbitList.real := false;
+    dtpDateOriginal.Value := null;
 end;
 
 procedure TfrmPostupDlg.dbcbeRecruitChange(Sender: TObject);
@@ -1317,6 +1326,8 @@ begin
     AbitList.AvgBall := Dataset.FieldValues['SchoolAverMark'];
   if Dataset.FieldValues['IsMain'] <> NULL then
     AbitList.IsMain := Dataset.FieldValues['IsMain'];
+  if Dataset.FieldValues['dateOriginal'] <> NULL then
+    AbitList.DateOriginal := Dataset.FieldValues['dateOriginal'];
   AbitList.closed := onlyreading;
 
   AbitList.lAdditionalSpec := Tlist.Create;

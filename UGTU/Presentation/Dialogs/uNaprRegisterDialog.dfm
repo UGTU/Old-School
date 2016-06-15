@@ -4,7 +4,7 @@ inherited frmNaprRegister: TfrmNaprRegister
   ClientWidth = 260
   OnShow = FormShow
   ExplicitWidth = 266
-  ExplicitHeight = 283
+  ExplicitHeight = 280
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
@@ -164,6 +164,7 @@ inherited frmNaprRegister: TfrmNaprRegister
     Width = 121
     Height = 19
     Alignment = taLeftJustify
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 1
@@ -174,6 +175,7 @@ inherited frmNaprRegister: TfrmNaprRegister
     Top = 21
     Width = 118
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'ik_vid_exam'
@@ -187,6 +189,7 @@ inherited frmNaprRegister: TfrmNaprRegister
     Top = 58
     Width = 121
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -198,9 +201,10 @@ inherited frmNaprRegister: TfrmNaprRegister
     Top = 136
     Width = 242
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
-    KeyField = 'itab_n'
+    KeyField = 'idEmployee'
     ListField = 'NamePrepod'
     ListSource = dmUspevaemost.dsPrepodVed
     TabOrder = 4
@@ -211,6 +215,7 @@ inherited frmNaprRegister: TfrmNaprRegister
     Top = 96
     Width = 242
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Cosenca'
@@ -224,6 +229,7 @@ inherited frmNaprRegister: TfrmNaprRegister
     Top = 58
     Width = 118
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -235,6 +241,7 @@ inherited frmNaprRegister: TfrmNaprRegister
     Top = 173
     Width = 242
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     TabOrder = 7

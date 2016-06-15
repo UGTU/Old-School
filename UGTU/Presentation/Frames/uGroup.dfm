@@ -15,7 +15,7 @@ inherited fmGroup: TfmGroup
       Top = 2
       Width = 699
       Height = 609
-      ActivePage = tsVed
+      ActivePage = tshUspev
       Align = alClient
       Style = tsFlatButtons
       TabOrder = 0
@@ -623,7 +623,7 @@ inherited fmGroup: TfmGroup
           object Label11: TLabel
             Left = 112
             Top = 5
-            Width = 42
+            Width = 43
             Height = 13
             Caption = #1052#1086#1076#1091#1083#1100':'
           end
@@ -735,7 +735,7 @@ inherited fmGroup: TfmGroup
             object Label17: TLabel
               Left = 6
               Top = 7
-              Width = 145
+              Width = 146
               Height = 13
               Caption = #1044#1072#1090#1072' '#1088#1091#1073#1077#1078#1085#1086#1075#1086' '#1080#1089#1087#1099#1090#1072#1085#1080#1103':'
             end
@@ -2304,14 +2304,14 @@ inherited fmGroup: TfmGroup
           object Label12: TLabel
             Left = 24
             Top = 6
-            Width = 131
+            Width = 132
             Height = 13
             Caption = '- '#1054#1090#1083#1080#1095#1085#1080#1082#1080' '#1080' '#1093#1086#1088#1086#1096#1080#1089#1090#1099
           end
           object Label13: TLabel
             Left = 182
             Top = 6
-            Width = 210
+            Width = 211
             Height = 13
             Caption = '- '#1045#1089#1090#1100' '#1090#1088#1086#1081#1082#1080' '#1080#1083#1080' '#1085#1077' '#1091#1083#1086#1078#1080#1083#1080#1089#1100' '#1074' '#1089#1077#1089#1089#1080#1102
           end
@@ -2689,7 +2689,7 @@ inherited fmGroup: TfmGroup
           end
           inherited ilBalls: TImageList
             Bitmap = {
-              494C010102000400840110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+              494C010102000400B00110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
               0000000000003600000028000000400000001000000001002000000000000010
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
@@ -2862,7 +2862,7 @@ inherited fmGroup: TfmGroup
     Left = 174
     Top = 152
     Bitmap = {
-      494C010111004000800110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000AC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3533,7 +3533,7 @@ inherited fmGroup: TfmGroup
     Left = 201
     Top = 152
     Bitmap = {
-      494C010105000800800110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000800AC0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000DEDFDE008C8A8C0094969400FFFBFF00F7F7F700F7F3F700EFEFEF00E7E7
@@ -3970,7 +3970,7 @@ inherited fmGroup: TfmGroup
       OnExecute = actDelAttExecute
     end
     object actNaprRegister: TAction
-      Category = 'Napr'
+      Category = 'vedomost'
       Caption = #1047#1072#1088#1077#1075#1080#1089#1090#1088#1080#1088#1086#1074#1072#1090#1100' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1077
       OnExecute = actNaprRegisterExecute
     end
@@ -4076,6 +4076,11 @@ inherited fmGroup: TfmGroup
       ImageIndex = 8
       OnExecute = ActDiplListToExcelExecute
     end
+    object actDelStudFromVed: TAction
+      Category = 'vedomost'
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1091#1076#1077#1085#1090#1072' '#1080#1079' '#1074#1077#1076#1086#1084#1086#1089#1090#1080
+      OnExecute = actDelStudFromVedExecute
+    end
   end
   object pmVedomost: TPopupMenu
     Images = ilMain
@@ -4084,6 +4089,9 @@ inherited fmGroup: TfmGroup
     Top = 160
     object N1: TMenuItem
       Action = actNaprRegister
+    end
+    object N8: TMenuItem
+      Action = actDelStudFromVed
     end
   end
   object ppmGroupNapr: TPopupMenu

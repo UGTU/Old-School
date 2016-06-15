@@ -28,6 +28,12 @@ inherited fmUchPlan: TfmUchPlan
         Height = 585
         Align = alClient
         BorderStyle = bsNone
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
         TabOrder = 0
         DesignSize = (
           982
@@ -121,6 +127,30 @@ inherited fmUchPlan: TfmUchPlan
           Width = 114
           Height = 13
           Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' '#1076#1080#1089#1094#1080#1087#1083#1080#1085':'
+        end
+        object lGosHourCount: TLabel
+          Left = 616
+          Top = 13
+          Width = 5
+          Height = 16
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lAuditHourCount: TLabel
+          Left = 616
+          Top = 40
+          Width = 5
+          Height = 16
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
         object Panel2: TPanel
           Left = 0
@@ -788,6 +818,12 @@ inherited fmUchPlan: TfmUchPlan
           Width = 395
           Height = 17
           Caption = #1059#1090#1074#1077#1088#1078#1076#1077#1085' ('#1079#1072#1087#1088#1077#1090' '#1085#1072' '#1088#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1085#1080#1077')'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 10
           Visible = False
           OnMouseDown = cbApprovedMouseDown
@@ -1046,7 +1082,7 @@ inherited fmUchPlan: TfmUchPlan
     Left = 520
     Top = 32
     Bitmap = {
-      494C010108000C00880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010108000C00980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

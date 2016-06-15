@@ -175,8 +175,9 @@ begin
     Report.FreeOnComplete := true;
     Report.OnExecuteError := ExecuteError;
     if ((ExcelPatternName='') or (ExcelPatternName=null)) then
-       ExcelPatternName:= 'DiplomVkl.XLT';
+       ExcelPatternName:= 'DiplomVklVUS2016.XLT';
     Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\'+ExcelPatternName;
+
     Report.ikZach:= ikZach;
     Report.ikGroup:= ikGroup;
     Report.StudName:= StudName;

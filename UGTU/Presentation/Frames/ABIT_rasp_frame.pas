@@ -318,6 +318,8 @@ end;
 procedure TfmAbitRasp.dbgSpisokColumns2UpdateData(Sender: TObject;
   var Text: string; var Value: Variant; var UseText, Handled: Boolean);
 begin
+  {ShowMessage(Text+', '+DMAbiturientRasp.adospAbitGetSpisok.FieldByName('DiscVedomName').Value+'-'+
+        DMAbiturientRasp.adoqMaxVedomNumber.FieldByName('MaxNumber').Value);      }
   Modified:= true;
   try
     if (DMAbiturientRasp.adospAbitGetSpisok.FieldByName('Cname_room').AsString='')
@@ -335,10 +337,11 @@ begin
       Text:= '100';
     end;
 
-    TApplicationController.GetInstance.AddLogEntry('Указание абитуриенту '+
-          DMAbiturientRasp.adospAbitGetSpisok.FieldByName('StudName').AsString+
-          ' оценки '+Text);
-
+    if (Value <> null) then
+    begin
+      DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
+        DMAbiturientRasp.adoqMaxVedomNumber.FieldByName('MaxNumber').Value;
+    end;
   except
   end;
 

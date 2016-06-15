@@ -19,10 +19,12 @@ type
     procedure actOKExecute(Sender: TObject);
     procedure dbdtmDateChange(Sender: TObject);
   private
+    FReportName: string;
     { Private declarations }
   public
     { Public declarations }
     year:integer;
+    property ReportName:string read FReportName write FReportName;
   end;
 
 var
@@ -35,14 +37,17 @@ uses uMain, DateUtils;
 
 procedure TfrmAbitZhurnal.FormShow(Sender: TObject);
 begin
-  if (YearOf(Date)<>year) and (year>2000) then
+  {if (YearOf(Date)<>year) and (year>2000) then
   begin
      dbdtmDate.EditText:='31.08.'+IntToStr(year);
      dbdtmDate.Value:= EndOfAMonth(year,8);
   end
   else
-    dbdtmDate.Value:=Date;
-    lastDate:= dbdtmDate.Value;
+    dbdtmDate.Value:=Date;   }
+  lastDate:= dbdtmDate.Value;
+
+  Text:= 'Экспорт '+ ReportName;
+  Label1.Caption := 'Дата выдачи '+ReportName;
 end;
 
 procedure TfrmAbitZhurnal.dbdtmDateChange(Sender: TObject);

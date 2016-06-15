@@ -232,6 +232,7 @@ type
     actPostupDelete: TAction;
     actCallSpr: TAction;
     actNotification: TAction;
+    actChangePlanFromOtherGroup: TAction;
     procedure FormCreate(Sender: TObject);
 
     procedure DBDekTreeView_TEST1Change(Sender: TObject; Node: TTreeNode);
@@ -369,6 +370,8 @@ type
     procedure DBDekTreeView_TEST1ContextPopup(Sender: TObject; MousePos: TPoint;
       var Handled: Boolean);
     procedure actNotificationExecute(Sender: TObject);
+    procedure actPrintEnrollAgreementExecute(Sender: TObject);
+    procedure actChangePlanFromOtherGroupExecute(Sender: TObject);
 
   private
     FFrame: TfmBase;
@@ -419,7 +422,7 @@ uses uLogin, uDM, uSpravFram, uFac, uGroup, uStudent, uSpec, uNagruzka,
   uDMAbiturientZachisl, uAbitZachislenieController, uNagruzkaPrepAllInfo,
   uSheduleSemester, uAbitOtchetsController, udmUspevaemost, SheduleController,
   uNagruzkaSemester, ApplicationController, uAbitConfirm, udmCauses,
-  DBTVInviteObj,
+  DBTVInviteObj,  uChangePlanFromGrup,
   HOST_Zaselenie, DBTVInviteHostObj, DBTVHabitatsObj, HOST_Projivaysh,
   DBTVHabitatsPersonObj,
   uPerson;
@@ -2707,10 +2710,11 @@ begin
   TApplicationController.GetInstance.AddLogEntry('Добавление абитуриента');
 
   frmAbitConfirm := tfrmAbitConfirm.Create(self);
-  frmAbitConfirm.Tag := TDBNodeSpecRecObject
+  frmAbitConfirm.NNRecord := TDBNodeSpecRecObject
     (DBDekTreeView_TEST1.SelectedObject).NNRecord;
   frmAbitConfirm.Hint :=
     inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year);
+  frmAbitConfirm.Year := (TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year);
   yearnode := TDBNodeAbitYearObject
     (DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.data);
   frmAbitConfirm.HasAddSpec := yearnode.HasAddSpec;
@@ -2755,6 +2759,8 @@ begin
   frmpostupDlg.Hint :=
     inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.
     data).Year);
+  frmpostupDlg.Year := TDBNodeSpecRecObject(DBDekTreeView_TEST1.Selected.Parent.
+    data).Year;
   frmpostupDlg.HasAddSpec := TDBNodeAbitYearObject
     (DBDekTreeView_TEST1.Selected.Parent.Parent.Parent.Parent.data).HasAddSpec;
   frmpostupDlg.Tag := 0;
@@ -3250,6 +3256,7 @@ begin
       procedure TfrmMain.actPrintMagExecute(Sender: TObject);
       var
         Year: Integer;
+        DateZh: TDateTime;
       begin
         // устанавливаем год
         Year := YearOf(Date);
@@ -3268,9 +3275,16 @@ begin
             (TDBNodeSpecRecObject(ActiveFrame.FrameObject)
             .Node.Parent.Parent.data).ik;
 
-        frmAbitZhurnal := TfrmAbitZhurnal.Create(self);
+        if ((YearOf(Date)<>year) and (year>2000)) or (MonthOf(Date) < 6) or (MonthOf(Date) > 8) then
+        begin
+          DateZh:=StrToDate('15.07.'+IntToStr(year));
+        end
+        else
+          DateZh:=Date;
+        if not TGeneralController.Instance.SetReportDate(DateZh, 'журнала') then
+          exit;
 
-        frmAbitZhurnal.Year := Year;
+
         frmAbitZhurnal.ShowModal;
         if frmAbitZhurnal.ModalResult <> mrOk then
         begin
@@ -3372,7 +3386,13 @@ begin
         TAbitOtchetsController.Instance.ExpSpisForEGEToExc(Year);
       end;
 
-      procedure TfrmMain.actPrintItogiPostForSpecExecute(Sender: TObject);
+procedure TfrmMain.actPrintEnrollAgreementExecute(Sender: TObject);
+begin
+  TAbitOtchetsController.Instance.ExportEnrollAgreement
+    (TDBNodeAbitStudObject(DBDekTreeView_TEST1.Selected.data).NNAbit);
+end;
+
+procedure TfrmMain.actPrintItogiPostForSpecExecute(Sender: TObject);
       var
         ikSpecFac: Integer;
       begin
@@ -3634,7 +3654,14 @@ begin
         // ((ActiveFrame as TfmZach).prikaz.DataSource.DataSet.FieldByName('Ik_form_ed').Value=2);
       end;
 
-      procedure TfrmMain.actChangeSemFilterExecute(Sender: TObject);
+procedure TfrmMain.actChangePlanFromOtherGroupExecute(Sender: TObject);
+begin
+  frmChangeGrupPlan := TfrmChangeGrupPlan.Create(Self);
+  frmChangeGrupPlan.GrupIK := ((DBDekTreeView_TEST1.SelectedObject)as TDBNodeGroupObject).ik;
+  frmChangeGrupPlan.ShowModal;
+end;
+
+procedure TfrmMain.actChangeSemFilterExecute(Sender: TObject);
       begin
         if actCurrentSem.Checked then
           actAllSem.Checked := true

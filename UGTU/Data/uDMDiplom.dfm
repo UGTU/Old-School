@@ -84,8 +84,10 @@ object dmDiplom: TdmDiplom
       Lookup = True
     end
     object adospDiplomListExcelPatternName: TStringField
+      DisplayWidth = 150
       FieldName = 'ExcelPatternName'
-      Size = 30
+      LookupCache = True
+      Size = 150
     end
     object adospDiplomListik_direction: TAutoIncField
       FieldName = 'ik_direction'
@@ -136,7 +138,6 @@ object dmDiplom: TdmDiplom
     Top = 88
   end
   object adotPredpr: TADOTable
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'Predpr'
@@ -144,7 +145,6 @@ object dmDiplom: TdmDiplom
     Top = 24
   end
   object adotTypeTema: TADOTable
-    Active = True
     Connection = dm.DBConnect
     CursorType = ctStatic
     TableName = 'typeTema'
@@ -641,5 +641,42 @@ object dmDiplom: TdmDiplom
     Parameters = <>
     Left = 283
     Top = 248
+  end
+  object adospGetVipiscaCommonInf: TADOStoredProc
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    LockType = ltBatchOptimistic
+    ProcedureName = 'GetVipiscaCommonInf;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@ik_CurGroup'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 416
+    Top = 175
+    object IntegerField1: TIntegerField
+      FieldName = 'ik_disc'
+    end
+    object StringField1: TStringField
+      FieldName = 'cTema'
+      Size = 100
+    end
+    object StringField2: TStringField
+      FieldName = 'cOsenca'
+    end
+    object StringField3: TStringField
+      FieldName = 'discName'
+      Size = 500
+    end
   end
 end

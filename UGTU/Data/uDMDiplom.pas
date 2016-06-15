@@ -110,6 +110,11 @@ type
     adospDiplomListDiplNumber: TStringField;
     adospDiplomListProtNumber: TStringField;
     adospDiplomListProtDate: TDateTimeField;
+    adospGetVipiscaCommonInf: TADOStoredProc;
+    IntegerField1: TIntegerField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
   private
     { Private declarations }
   public

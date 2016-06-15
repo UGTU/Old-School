@@ -30,10 +30,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object fac_spec: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1086#1074'-'#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1077#1081
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgrdMain: TDBGridEh
           Left = 0
           Top = 0
@@ -80,6 +76,7 @@ inherited fmAbitNabor: TfmAbitNabor
             Action = actImportNabor
             ParentShowHint = False
             ShowHint = True
+            Visible = False
           end
           object ToolButton12: TToolButton
             Left = 23
@@ -115,8 +112,16 @@ inherited fmAbitNabor: TfmAbitNabor
             ParentShowHint = False
             ShowHint = True
           end
-          object ToolButton7: TToolButton
+          object ToolButton2: TToolButton
             Left = 123
+            Top = 0
+            Action = actPrintDinamica
+            ParentShowHint = False
+            ShowHint = True
+            Style = tbsCheck
+          end
+          object ToolButton7: TToolButton
+            Left = 146
             Top = 0
             Width = 8
             Caption = 'ToolButton7'
@@ -124,12 +129,11 @@ inherited fmAbitNabor: TfmAbitNabor
             Style = tbsSeparator
             Visible = False
           end
-          object ToolButton2: TToolButton
-            Left = 131
+          object ToolButton15: TToolButton
+            Left = 154
             Top = 0
-            Action = actPrintDinamica
-            ParentShowHint = False
-            ShowHint = True
+            Caption = 'ToolButton15'
+            ImageIndex = 3
           end
         end
         object nabor: TDBGridEh
@@ -224,10 +228,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsNaborDisc: TTabSheet
         Caption = #1042#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1077' '#1101#1082#1079#1072#1084#1077#1085#1099
         ImageIndex = 4
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object ToolBar5: TToolBar
           Left = 0
           Top = 0
@@ -336,17 +336,14 @@ inherited fmAbitNabor: TfmAbitNabor
       object statpage: TTabSheet
         Caption = #1057#1087#1080#1089#1086#1082' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object counter: TLabel
           Left = 0
           Top = 383
-          Width = 3
+          Width = 743
           Height = 13
           Align = alBottom
           Visible = False
+          ExplicitWidth = 3
         end
         object ToolBar1: TToolBar
           Left = 0
@@ -386,22 +383,22 @@ inherited fmAbitNabor: TfmAbitNabor
             Visible = False
             OnChange = facChange
           end
-          object ToolButton5: TToolButton
+          object ToolButton8: TToolButton
             Left = 242
+            Top = 0
+            Action = actPrintStat
+            DropdownMenu = ppmStatToExcel
+            ImageIndex = 56
+            Style = tbsDropDown
+          end
+          object ToolButton5: TToolButton
+            Left = 280
             Top = 0
             Width = 8
             Caption = 'ToolButton5'
             ImageIndex = 1
             Style = tbsSeparator
             Visible = False
-          end
-          object ToolButton8: TToolButton
-            Left = 250
-            Top = 0
-            Action = actPrintStat
-            DropdownMenu = ppmStatToExcel
-            ImageIndex = 56
-            Style = tbsDropDown
           end
         end
         object GRD_stat: TStringGrid
@@ -581,10 +578,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsNaborStatistik: TTabSheet
         Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
         ImageIndex = 3
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgNaborStatistik: TDBGridEh
           Left = 0
           Top = 29
@@ -706,10 +699,6 @@ inherited fmAbitNabor: TfmAbitNabor
       object tsExamsErrors: TTabSheet
         Caption = #1054#1096#1080#1073#1082#1080' '#1074' '#1101#1082#1079#1072#1084#1077#1085#1072#1093
         ImageIndex = 5
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object dbgExamsErrors: TDBGridEh
           Left = 0
           Top = 0
@@ -1019,7 +1008,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -1170,7 +1159,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1354,7 +1343,7 @@ inherited fmAbitNabor: TfmAbitNabor
     end
     object actPrintStat: TAction
       Category = 'AbitList'
-      Caption = #1069#1082#1089#1087#1086#1088#1090' '#1089#1087#1080#1089#1082#1072' '#1074' Excel'
+      Caption = 'C'#1087#1080#1089#1086#1082' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
       Hint = #1069#1082#1089#1087#1086#1088#1090' '#1089#1087#1080#1089#1082#1072' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074' '#1074' Excel'
       OnExecute = actPrintStatExecute
     end
@@ -1404,12 +1393,18 @@ inherited fmAbitNabor: TfmAbitNabor
       Hint = #1069#1082#1089#1087#1086#1088#1090' '#1074' Excel '#1089#1090#1072#1090#1080#1089#1090#1080#1082#1080' '#1087#1086' '#1101#1082#1079#1072#1084#1077#1085#1072#1084
       OnExecute = actPrintExamStatisticExecute
     end
+    object actPrintProtocol: TAction
+      Category = 'AbitList'
+      Caption = #1042#1099#1074#1086#1076' '#1087#1088#1086#1090#1086#1082#1086#1083#1072
+      ImageIndex = 20
+      OnExecute = actPrintProtocolExecute
+    end
   end
   object ImageList3: TImageList
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000BC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2475,6 +2470,9 @@ inherited fmAbitNabor: TfmAbitNabor
   object ppmStatToExcel: TPopupMenu
     Left = 379
     Top = 30
+    object N6: TMenuItem
+      Action = actPrintProtocol
+    end
     object Excel1: TMenuItem
       Action = actPrintStat
     end

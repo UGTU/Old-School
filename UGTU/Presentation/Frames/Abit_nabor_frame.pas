@@ -83,6 +83,9 @@ type
     dbgIndBalls: TDBGridEh;
     Network: TTabSheet;
     dbgNetwork: TDBGridEh;
+    actPrintProtocol: TAction;
+    ToolButton15: TToolButton;
+    N6: TMenuItem;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -125,6 +128,7 @@ type
     procedure dbgNaborDiscsColumns2DropDownBoxDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
+    procedure actPrintProtocolExecute(Sender: TObject);
   private
     function GetikFac: Integer;
     function GetikSpecfac: Integer;
@@ -809,10 +813,7 @@ begin
 
     //если фрейм факультет, то его не может изменить
     if fc<>0 then
-    begin
-			frmNewNabor.ikfac:=fc;
-			frmNewNabor.dbcmbxFac.Enabled:=false;
-    end
+			frmNewNabor.Setikfac(fc)
     else frmNewNabor.dbcmbxFac.Enabled:=true;
 
     frmNewNabor.ShowModal;
@@ -842,11 +843,19 @@ begin
 	  frmNewNabor.mestCKP.Value:= nabor.DataSource.DataSet.FieldByName('MestCKP').AsInteger;
 	  frmNewNabor.mestbudjet.Value:= nabor.DataSource.DataSet.FieldByName('MestBudjet').AsInteger;
 	  frmNewNabor.MestLgot.Value:= nabor.DataSource.DataSet.FieldByName('MestLgot').AsInteger;
-	  frmNewNabor.ikfac:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
-	  frmNewNabor.ikSpecfac:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
-	  frmNewNabor.cbRussian.Checked:= nabor.DataSource.DataSet.FieldByName('lRussian').AsBoolean;
 	  frmNewNabor.dbcmbxFac.Enabled:=false;
 	  frmNewNabor.Spec_Fac.Enabled:=false;
+    frmNewNabor.dbcmbxPrifile.Enabled:=false;
+    frmNewNabor.ikfac:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
+	  frmNewNabor.ikSpecfac:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
+    frmNewNabor.ikProfile:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').AsInteger;
+
+    //frmNewNabor.sets;
+
+    frmNewNabor.dbcmbxFac.KeyValue:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
+	  frmNewNabor.Spec_Fac.KeyValue:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
+    frmNewNabor.dbcmbxPrifile.KeyValue:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').AsInteger;
+	  frmNewNabor.cbRussian.Checked:= nabor.DataSource.DataSet.FieldByName('lRussian').AsBoolean;
     frmNewNabor.IsModified:= false;
 	  frmNewNabor.ShowModal;
 
@@ -1028,6 +1037,13 @@ begin
     TAbitOtchetsController.Instance.ExportNaborWord(nabor.DataSource.DataSet);
 end;
 
+
+procedure TfmAbitNabor.actPrintProtocolExecute(Sender: TObject);
+begin
+  inherited;
+
+  TAbitOtchetsController.Instance.ExportProtokolToExcel(GetYear);
+end;
 
 procedure TfmAbitNabor.actPrintStatExecute(Sender: TObject);
 begin

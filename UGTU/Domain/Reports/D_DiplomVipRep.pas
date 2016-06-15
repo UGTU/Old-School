@@ -62,6 +62,7 @@ type
     property ik_VidGos:integer read Fik_VidGos write Fik_VidGos;
     property ik_fac:integer read Fik_fac write Fik_fac;
     property NameInDatPadez:boolean read FNameInDatPadez write FNameInDatPadez;
+
   end;
 
 implementation
@@ -95,6 +96,7 @@ begin
     Clear;
     CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
     CreateParameter('@ik_zach', ftInteger, pdInput, 4, FikZach);
+    CreateParameter('@spec', ftInteger, pdInput, 4, 0);
     CreateParameter('@ik_CurGroup', ftInteger, pdInput, 4, FikGroup);
   end;
   dmDiplom.adospGetVipiscaForDiplom.Open;
@@ -113,6 +115,7 @@ begin
     CreateParameter('@ik_CurGroup', ftInteger, pdInput, 4, FikGroup);
   end;
   dmDiplom.adospSelUspevForVipisca.Open;
+  dmDiplom.adospSelUspevForVipisca.First;
 
   dmDiplom.adospSelKPForVipisca.Close;
   with dmDiplom.adospSelKPForVipisca.Parameters do
@@ -177,7 +180,7 @@ begin
   num := StrToInt(nstr);
   num := num+1;
   //переход на следующую страницу
-  if (num>58) then
+  if (num>57) then
     Result := '$F$8'
   else
     Result := bstr+IntToStr(num);
@@ -306,7 +309,7 @@ begin
   end
   else
   begin
-    Replace('#Фамилия#', dmDiplom.adospGetVipiscaForDiplomiClastname.AsString);
+    Replace('#Фамилия#', dmDiplom.adospGetVipiscaForDiplom.FieldByName('iClastname').Value);
     Replace('#Имя#', dmDiplom.adospGetVipiscaForDiplomiFirstName.AsString);
     Replace('#Отчество#', dmDiplom.adospGetVipiscaForDiplomiPatronymic.AsString);
     Replace('#АттГод#', dmDiplom.adospGetVipiscaForDiplomattYear.AsString);
@@ -716,53 +719,12 @@ begin
     str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
     ActRange.Value := str;
 
-    {if (str1<>'') then
-    begin
-      SelectNextCellVert(cur, ActRange);
-      ActRange.Value := str1;    //записываем остаток строки
-    end; }
 
     dmDiplom.adospSelUspevForVipisca.Next;
     inc(i);
     SelectNextCellVert(cur, ActRange);
   end;
   until (dmDiplom.adospSelUspevForVipisca.Eof);
-  {cur1:= cur;
-  cur1 := GetPrevCellVert(cur1);
-  cur1 := GetPrevCellVert(cur1);
-  ActRange := Range[cur1,cur1];
-  ActRange.Borders.item[8].Weight := 2;
-  cur1 := GetNextCellHor(cur1);
-  ActRange := Range[cur1,cur1];
-  ActRange.Borders.item[8].Weight := 2;    }
-  // вывод курсовых проектов, если их мало
-  {if (dmDiplom.adospSelKRForVipisca.RecordCount + dmDiplom.adospSelKPForVipisca.RecordCount >=MaxKRCount) then
-  begin
-    dmDiplom.adospSelKPForVipisca.First;
-    ActRange := Range[cur,cur];
-    repeat
-    begin
-      if (dmDiplom.adospSelKPForVipisca.Eof) then
-        str:= ''
-      else
-      begin
-        str := dmDiplom.adospSelKPForVipiscacTema.AsString;
-        if str = '' then str := 'тема не указана';
-        str :=  str+', '+ dmDiplom.adospSelKPForVipiscacOsenca.AsString;
-      end;
-      SendStringToExcel(str, cur, ActRange);
-      dmDiplom.adospSelKPForVipisca.Next;
-      SelectNextCellVert(cur, ActRange);
-    end;
-    until dmDiplom.adospSelKPForVipisca.Eof;
-  end
-  else
-    ActRange := Range[cur,cur];
-  ActRange.Borders.item[8].Weight := 2;
-  ActRange.Value := 'Конец документа';
-        }
-  //end;
-  //ActRange.HorizontalAlignment := -4108;
   ActivateWorksheet(MainpageNumber);
 end;
 

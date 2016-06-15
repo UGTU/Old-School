@@ -10,12 +10,9 @@ uses
 type
   TSpravka_Report = class
   private
-    // ikStudGrup, type_spr,numspr: integer;
     Fik_destination, Fik_doc: integer;
   protected
-
   public
-    // constructor Create(_ikStudGrup, _type_spr,_num: integer);
     function AddReport(): TSpravka;
     destructor Destroy; override;
     property ik_doc: integer read Fik_doc;
@@ -30,9 +27,6 @@ implementation
 
 constructor TSpravka_Report.Create(_ik_destination, _ik_doc: integer);
 begin
-  // ikStudGrup := _ikStudGrup;
-  // type_spr := _type_spr;
-  // numspr:= _num ;
   Fik_doc := _ik_doc;
   Fik_destination := _ik_destination;
 end;
@@ -47,16 +41,15 @@ begin
   sp_spr := TADOStoredProc.Create(nil);
   sp_history := TADOStoredProc.Create(nil);;
   sp_doc := TADOStoredProc.Create(nil);
-   sp_academ := TADOStoredProc.Create(nil);
+  sp_academ := TADOStoredProc.Create(nil);
   try
-
     sp_spr.ProcedureName := 'StudInfoSpravBuild;1';
     sp_spr.Connection := dm.DBConnect;
-
     sp_spr.Parameters.CreateParameter('@Ik_document', ftString, pdInput, 50,
       self.ik_doc);
     sp_spr.Open;
     sp_spr.First;
+
     sp_history.ProcedureName := 'StudHistForSpr;1';
     sp_history.Connection := dm.DBConnect;
     sp_history.Parameters.CreateParameter('@Ik_document', ftString, pdInput, 50,
@@ -70,6 +63,7 @@ begin
       50, ik_doc);
     sp_doc.Open;
     sp_doc.First;
+
     Result := TSpravka.Create(sp_spr.FieldByName('FIOdat').AsString,
       sp_spr.FieldByName('Podgot').AsString, sp_spr.FieldByName('Cname_spec')
       .AsString, sp_spr.FieldByName('Cshort_spec').AsString,

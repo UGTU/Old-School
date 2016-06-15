@@ -7,7 +7,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, ActnList, StdCtrls, Buttons, ExtCtrls, uDMStudentData,
   DBGridEh, DBCtrlsEh, Mask, DBLookupEh, uStuddlg, System.Actions, Vcl.ComCtrls,
-  CommandController, DocumentClass, Data.Win.ADODB, Vcl.ExtDlgs, System.Generics.Collections;
+  CommandController, DocumentClass, Data.Win.ADODB, Vcl.ExtDlgs, System.Generics.Collections,
+  System.DateUtils;
 
 type
   TfrmAddDocument = class(TfrmBaseDialog)
@@ -37,6 +38,8 @@ type
     cbReal: TCheckBox;
     opDocs: TOpenPictureDialog;
     Action1: TAction;
+    Label9: TLabel;
+    WhoRequired: TLabel;
     procedure actCheckFieldsUpdate(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
@@ -96,8 +99,26 @@ begin
   result := true;
   with frmAddDocument do
   begin
+
+    if (dbdteGetDate.Value > Today) then
+    begin
+      showmessage('Дата выдачи должна быть раньше текущей!');
+      dbdteGetDate.Value:= Today;
+      exit;
+    end;
+
     if (dbcbeKind.Text = '') { or (eSer.Text = '') } or (eNum.Text = '') then
-      result := false
+      result := false;
+    if (dbcbeKind.Text <> '') then
+      if (dbcbeKind.ListSource.DataSet.FieldByName('IsIdentity').AsBoolean) or
+         (dbcbeKind.ListSource.DataSet.FieldByName('IsEducational').AsBoolean) then
+      begin
+         if (eWho.Text = '') then
+          result := false;
+         WhoRequired.Visible := true;
+      end
+      else
+        WhoRequired.Visible := false;
   end;
 end;
 

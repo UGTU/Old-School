@@ -8,7 +8,7 @@ inherited frmStudInfo: TfrmStudInfo
   OldCreateOrder = True
   OnShow = FormShow
   ExplicitWidth = 401
-  ExplicitHeight = 383
+  ExplicitHeight = 384
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel

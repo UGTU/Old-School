@@ -35,9 +35,9 @@ type
   //GetNabor загружает данные наборов
   function GetNabor(SourceDataSet: PDataSet; nnyear:integer): Variant;
   //AddNabor добавление набора
-  function AddNabor(ik_spec_fac, NNYear,MestBudjet,MestCKP,MestLgot: integer;lRussian:boolean): integer;
+  function AddNabor(ik_spec_fac, NNYear,MestBudjet,MestCKP,MestLgot: integer; ikProfile: Variant;lRussian:boolean): integer;
   //EditNabor редактирует набор
-  procedure EditNabor(ik_spec_fac,NNYear,MestBudjet,MestCKP,MestLgot: integer;NNrecord:integer;lRussian:boolean);
+  procedure EditNabor(ik_spec_fac,NNYear,MestBudjet,MestCKP,MestLgot: integer; ikProfile: Variant;NNrecord:integer;lRussian:boolean);
   //DelNabor Удаляет набор
   procedure DelNabor(NNrecord:integer);
   //ImportNabor импортирует плановые наборы из подсистемы "Нагрузка"
@@ -124,7 +124,7 @@ begin
 end;
 
 //добавление набора
-function TAbitNaborController.AddNabor(ik_spec_fac, NNYear,MestBudjet,MestCKP,MestLgot: integer;lRussian:boolean): integer;
+function TAbitNaborController.AddNabor(ik_spec_fac, NNYear,MestBudjet,MestCKP,MestLgot: integer; ikProfile: Variant;lRussian:boolean): integer;
 var
   tempStoredProc: TADOStoredProc;
 begin
@@ -143,6 +143,7 @@ begin
     tempStoredProc.Parameters.CreateParameter('@MestKontrakt',ftBCD,pdInput,0,0);
     tempStoredProc.Parameters.CreateParameter('@lRussian',ftBCD,pdInput,0,lRussian);
     tempStoredProc.Parameters.CreateParameter('@NNrecord',ftInteger,pdOutput,0,0);
+    tempStoredProc.Parameters.CreateParameter('@ik_profile',ftInteger,pdInput,0,ikProfile);
     tempStoredProc.ExecProc;
     Result := tempStoredProc.Parameters.ParamByName('@NNrecord').Value;
   finally
@@ -151,7 +152,7 @@ begin
 end;
 
 //редактирует набор
-procedure TAbitNaborController.EditNabor(ik_spec_fac,NNYear,MestBudjet,MestCKP,MestLgot: integer;NNrecord:integer;lRussian:boolean);
+procedure TAbitNaborController.EditNabor(ik_spec_fac,NNYear,MestBudjet,MestCKP,MestLgot: integer; ikProfile: Variant; NNrecord:integer;lRussian:boolean);
 var
   tempStoredProc: TADOStoredProc;
 begin
@@ -172,7 +173,8 @@ begin
 			Parameters.CreateParameter('@MestLgot',ftBCD,pdInput,0,MestLgot);
       Parameters.CreateParameter('@MestKontrakt',ftBCD,pdInput,0,0);
 			Parameters.CreateParameter('@nnrecord',ftBCD,pdInput,0,nnrecord);
-      tempStoredProc.Parameters.CreateParameter('@lRussian',ftBCD,pdInput,0,lRussian);
+      Parameters.CreateParameter('@lRussian',ftBCD,pdInput,0,lRussian);
+      Parameters.CreateParameter('@ik_profile',ftBCD,pdInput,0,ikProfile);
       ExecProc;
     end;
   finally

@@ -90,8 +90,8 @@
         <VerInfo_Release>1</VerInfo_Release>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.602;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>602</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.0.1.618;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>618</VerInfo_Build>
         <DCC_UnitSearchPath>Domain\DBTV;Domain\EhLib\EhLib 6.2 Full Source\RADStudioXE5;Domain\Graphics32\Packages</DCC_UnitSearchPath>
     </PropertyGroup>
     <ProjectExtensions>
@@ -152,7 +152,6 @@
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
-    
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
@@ -1100,6 +1099,12 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Domain\Controllers\PersonController.pas"/>
+        <DCCReference Include="Domain\Reports\AbitPostupProtocolReport.pas"/>
+        <DCCReference Include="Domain\Reports\AbitEnrollAgreement.pas"/>
+        <DCCReference Include="Presentation\Dialogs\uChangePlanFromGrup.pas">
+            <Form>frmChangeGrupPlan</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

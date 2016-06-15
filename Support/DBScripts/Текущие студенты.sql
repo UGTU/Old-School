@@ -1,5 +1,6 @@
-select distinct Clastname +' '+ Cfirstname +' '+ isnull(Cotch,'') FIO, year(Dd_birth), Cname_grup, Cname_spec, Cshort_name_fac,
-pr.Cstrana + ', ' + pr.Cregion +
+select distinct Cname_grup, Clastname +' '+ Cfirstname +' '+ isnull(Cotch,'') FIO, /*year(Dd_birth), Cname_grup,, Cname_spec, Cshort_name_fac,*/
+		ctelefon, cSotTel,
+		pr.Cstrana + ', ' + pr.Cregion +
 	   ', ' + pr.Cgorod + ', ' + pr.CStreet+', '+pr.BuildingNumber+' - '+pr.FlatNumber,
 		fac.Cstrana + ', ' + fac.Cregion + ', ' + fac.Cgorod + ', ' + fac.CStreet+', '+fac.BuildingNumber+' - '+fac.FlatNumber, 
 		vrem.Cstrana + ', ' + vrem.Cregion + ', ' + vrem.Cgorod + ', ' + vrem.CStreet+', '+vrem.BuildingNumber+' - '+vrem.FlatNumber
@@ -16,8 +17,12 @@ left join Fac on Fac.Ik_fac = Relation_spec_fac.ik_fac
 left join EducationBranch on Relation_spec_fac.ik_spec = EducationBranch.ik_spec
 where (Grup.DateExit>getdate())
 and(StudGrup.Ik_prikazOtch is null)
-and (Ik_form_ed = 1)
-order by Cshort_name_fac, Grup.Cname_grup, Cfirstname
+and Grup.nYear_post = 2015
+and Cname_grup like '%ÝÒ%'
+--and EducationBranch.[ik_direction] in (1,9,10)
+--and Fac.ik_fac = 27
+--and (Ik_form_ed = 1)
+--order by Cshort_name_fac, Grup.Cname_grup, Cfirstname
 --and Fac.ik_fac not in (15,17)
 ) Allstud
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana,Raion.Ik_raion, Region.Ik_region
@@ -50,4 +55,4 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 		   and dbo.Raion.Ik_region = dbo.Region.Ik_region
 		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana) vrem
 on Allstud.nCode = vrem.nCode
-order by FIO
+order by Cname_grup, FIO

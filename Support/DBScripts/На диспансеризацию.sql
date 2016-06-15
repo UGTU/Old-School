@@ -1,11 +1,13 @@
-select distinct Clastname +' '+ Cfirstname +' '+ isnull(Cotch,'') FIO, Cname_grup, Cshort_name_fac, year(Dd_birth),  Cname_spec, 
+declare @YearMinDisp INT = 1995, @Step INT=3
+
+select distinct c_grazd, Clastname +' '+ Cfirstname +' '+ isnull(Cotch,'') FIO, Cname_grup, Cshort_name_fac, year(Dd_birth), CONVERT(VARCHAR(10),Dd_birth,104) ,  Cname_spec, 
 ISNULL(pr.Cstrana + ', ' + pr.Cregion +
 	   ', ' + pr.Cgorod + ', ' + pr.CStreet+', '+pr.BuildingNumber+' - '+pr.FlatNumber,''),
 		ISNULL(fac.Cstrana + ', ' + fac.Cregion + ', ' + fac.Cgorod + ', ' + fac.CStreet+', '+fac.BuildingNumber+' - '+fac.FlatNumber,''), 
 		ISNULL(vrem.Cstrana + ', ' + vrem.Cregion + ', ' + vrem.Cgorod + ', ' + vrem.CStreet+', '+vrem.BuildingNumber+' - '+vrem.FlatNumber,'')
 from (
 
-select Person.nCode,Clastname, Cfirstname, Cotch, Dd_birth, ctelefon, cSotTel, Grup.Cname_grup, Cname_spec, Cshort_name_fac,[Cplacebirth],Person.ik_grazd
+select Person.nCode,Clastname, Cfirstname, Cotch, Dd_birth, ctelefon, cSotTel, Grup.Cname_grup, Cname_spec, Cshort_name_fac,[Cplacebirth],Person.ik_grazd, grazd.c_grazd
 from person
 left join grazd on grazd.ik_grazd = Person.Ik_grazd
 left join Zach on Zach.nCode = person.nCode
@@ -18,7 +20,7 @@ where (Grup.DateExit>getdate())
 and(StudGrup.Ik_prikazOtch is null)
 and (Ik_form_ed = 1)
 and Fac.ik_fac not in (15,17)
-and  YEAR(Grup.DateCreate)=2015
+--and  YEAR(Grup.DateCreate)=2015
 
 ) Allstud
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana,Raion.Ik_raion, Region.Ik_region
@@ -52,7 +54,13 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana) vrem
 on Allstud.nCode = vrem.nCode
 Where year(Dd_birth)
-  in (1994, 1991, 1988, 1985, 1982, 1979, 1976, 1973, 1970, 1967, 1964, 1961, 1958, 1955, 1952, 1949, 1946, 1943, 1940, 1937, 1934, 1931, 1928, 1925, 1922, 1919, 1916)
+  in (@YearMinDisp, @YearMinDisp-@Step, @YearMinDisp-2*@Step, @YearMinDisp-3*@Step, 
+  @YearMinDisp-4*@Step, @YearMinDisp-5*@Step, @YearMinDisp-6*@Step, 
+  @YearMinDisp-7*@Step, @YearMinDisp-8*@Step, @YearMinDisp-9*@Step, 
+  @YearMinDisp-10*@Step, @YearMinDisp-11*@Step, @YearMinDisp-12*@Step,
+  @YearMinDisp-13*@Step, @YearMinDisp-14*@Step, @YearMinDisp-15*@Step,
+  @YearMinDisp-16*@Step, @YearMinDisp-17*@Step, @YearMinDisp-18*@Step,
+  @YearMinDisp-19*@Step, @YearMinDisp-20*@Step, @YearMinDisp-21*@Step)
   --and ((pr.Ik_raion=45)or(vrem.vremraion = 45))
   and ik_grazd = 2
 order by FIO

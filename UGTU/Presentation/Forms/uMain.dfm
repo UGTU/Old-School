@@ -69,6 +69,7 @@ object frmMain: TfrmMain
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
+    UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
     ColorMap.HighlightColor = clWhite
@@ -76,7 +77,7 @@ object frmMain: TfrmMain
     ColorMap.UnusedColor = clWhite
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clMenuText
+    Font.Color = clWindowText
     Font.Height = -15
     Font.Name = 'Segoe UI'
     Font.Style = []
@@ -1163,12 +1164,18 @@ object frmMain: TfrmMain
       ImageIndex = 49
       OnExecute = actNotificationExecute
     end
+    object actChangePlanFromOtherGroup: TAction
+      Category = 'catGroupAct'
+      Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091' '#1076#1088'. '#1075#1088#1091#1087#1087#1099
+      ImageIndex = 19
+      OnExecute = actChangePlanFromOtherGroupExecute
+  end
   end
   object ImageList1: TImageList
     Left = 319
     Top = 82
     Bitmap = {
-      494C01014A006800E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014A006800F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3687,7 +3694,7 @@ object frmMain: TfrmMain
     Left = 262
     Top = 82
     Bitmap = {
-      494C010131004900E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010131004900F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF

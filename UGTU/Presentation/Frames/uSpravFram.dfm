@@ -1,12 +1,12 @@
 inherited fmSprav: TfmSprav
-  Width = 575
-  Height = 378
+  Width = 846
+  Height = 361
   Align = alClient
   ExplicitWidth = 451
   ExplicitHeight = 305
   inherited Panel1: TPanel
-    Width = 575
-    Height = 341
+    Width = 846
+    Height = 324
     ExplicitWidth = 451
     ExplicitHeight = 268
     object Label1: TLabel
@@ -19,8 +19,8 @@ inherited fmSprav: TfmSprav
     object gSprav: TDBGridEh
       Left = 2
       Top = 33
-      Width = 571
-      Height = 306
+      Width = 842
+      Height = 289
       Align = alClient
       AutoFitColWidths = True
       DataSource = dsSprav
@@ -40,7 +40,7 @@ inherited fmSprav: TfmSprav
     object ToolBar1: TToolBar
       Left = 2
       Top = 2
-      Width = 571
+      Width = 842
       Height = 31
       ButtonWidth = 24
       Caption = 'ToolBar1'
@@ -49,7 +49,7 @@ inherited fmSprav: TfmSprav
       ShowHint = True
       TabOrder = 1
       DesignSize = (
-        571
+        842
         31)
       object DBNavigator1: TDBNavigator
         Left = 0
@@ -109,7 +109,7 @@ inherited fmSprav: TfmSprav
       object cbSprav: TComboBox
         Left = 289
         Top = 0
-        Width = 190
+        Width = 496
         Height = 21
         Hint = #1042#1099#1073#1086#1088' '#1089#1087#1088#1072#1074#1086#1095#1085#1080#1082#1072
         Style = csDropDownList
@@ -121,15 +121,15 @@ inherited fmSprav: TfmSprav
     end
   end
   inherited pnlSave: TPanel
-    Top = 341
-    Width = 575
+    Top = 324
+    Width = 846
     ExplicitTop = 268
     ExplicitWidth = 451
     DesignSize = (
-      575
+      846
       37)
     inherited bbSave: TBitBtn
-      Left = 404
+      Left = 675
       Top = 5
       Action = aSave
       ParentShowHint = False
@@ -138,7 +138,7 @@ inherited fmSprav: TfmSprav
       ExplicitTop = 5
     end
     inherited bbUndo: TBitBtn
-      Left = 232
+      Left = 503
       Top = 5
       Action = aCancel
       Anchors = [akTop, akRight]
@@ -195,7 +195,7 @@ inherited fmSprav: TfmSprav
       TabOrder = 1
     end
     object BitBtn1: TBitBtn
-      Left = 603
+      Left = 874
       Top = 5
       Width = 162
       Height = 25

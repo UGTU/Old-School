@@ -12,16 +12,11 @@ type
   SpravkaReport = class(TExcelReportBase)
   private
     FReport: TObjectList<TSpravka>;
-    // FReport: TSpravka;
-    // Fnum_list:integer;
   protected
     procedure Execute; override;
   public
     property ListDoc: TObjectList<TSpravka> read FReport;
-    // property Report: TSpravka read FReport;
-    // property num_list: integer read Fnum_list;
     constructor Create(_ListDoc: TObjectList<TSpravka>);
-    // function GetMonthR(month:integer):string;
   end;
 
 implementation
@@ -41,21 +36,16 @@ procedure SpravkaReport.Execute;
 var
   str, dop, dir_inst, copystr1, copystr2, datebegin, dateend: string;
   posit, first_str, j, I, num: integer;
-  // YearPric, MonthPric, DayPric: Word;
 begin
   inherited;
-  // VExcel.ActiveSheet.Copy(VExcel.WorkBooks[1].Sheets[1],
-  // EmptyParam);
   ActivateWorksheet(1);
   if FReport.Count > 1 then
     for I := 0 to FReport.Count - 2 do
       DuplicatePage(1, 1);
-  // ActiveSheet.Copy(CurrentWorkbook.Sheets[1],0, 0);
 
   for j := 0 to FReport.Count - 1 do
   begin
     ActivateWorksheet(j + 1);
-    // ActiveSheet.Name := '¹ '+ FReport[j].NumSpr.ToString()+' '+ FReport[j].FIO;
     str := GetKursP(FReport[j].kurs);
 
     Replace('#kurs#', str);

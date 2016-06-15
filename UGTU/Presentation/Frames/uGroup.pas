@@ -206,6 +206,8 @@ type
     actRefreshVedStuds: TAction;
     ToolButton27: TToolButton;
     ActDiplListToExcel: TAction;
+    actDelStudFromVed: TAction;
+    N8: TMenuItem;
     procedure dbgStudListDblClick(Sender: TObject);
     procedure dbgStudListTitleClick(Column: TColumnEh);
     procedure cmbxSemChange(Sender: TObject);
@@ -334,6 +336,7 @@ type
     procedure actRefreshVedStudsExecute(Sender: TObject);
     procedure ToolButton27Click(Sender: TObject);
     procedure ActDiplListToExcelExecute(Sender: TObject);
+    procedure actDelStudFromVedExecute(Sender: TObject);
   private
     { Private declarations }
     Fik: Integer;
@@ -3221,6 +3224,18 @@ begin
     (Sender as TAction).Enabled := false;
 end;
 
+procedure TfmGroup.actDelStudFromVedExecute(Sender: TObject);
+begin
+  // inherited;
+  //if MessageBox(Handle, 'Вы уверены, что хотите удалить ведомость?', 'ИС УГТУ',
+    //MB_YESNO) = IDYES then
+  begin
+    TUspevGroupController.Instance.DelStudFromVed(ikVed, dmUspevaemost.adospSelVedGroupik_zach.Value);
+    dmUspevaemost.adospSelVedGroup.Close;
+    dmUspevaemost.adospSelVedGroup.Open;
+  end;
+end;
+
 procedure TfmGroup.actDelVedExecute(Sender: TObject);
 begin
   // inherited;
@@ -3810,4 +3825,6 @@ begin
 end;
 
 end.
+
+
 

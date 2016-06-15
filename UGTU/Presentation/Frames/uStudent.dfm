@@ -4,7 +4,6 @@ inherited fmStudent: TfmStudent
   Constraints.MinHeight = 524
   Constraints.MinWidth = 561
   ParentFont = False
-  OnExit = FrameExit
   ExplicitWidth = 684
   ExplicitHeight = 684
   object ToolBar1: TToolBar [0]
@@ -146,7 +145,7 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 680
         Height = 615
-        ActivePage = tbMagazine
+        ActivePage = TabSheet1
         Align = alClient
         Constraints.MinWidth = 557
         Font.Charset = DEFAULT_CHARSET
@@ -171,7 +170,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 672
             Height = 587
-            ActivePage = TabSheet7
+            ActivePage = TabSheet3
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -626,7 +625,7 @@ inherited fmStudent: TfmStudent
                     Top = 131
                     Width = 93
                     Height = 25
-                    Caption = #1057#1085#1080#1084#1086#1082
+                    Caption = #1057#1076#1077#1083#1072#1090#1100' '#1089#1085#1080#1084#1086#1082
                     TabOrder = 8
                     OnClick = bShotClick
                   end
@@ -2417,8 +2416,8 @@ inherited fmStudent: TfmStudent
   end
   object alAct: TActionList
     Images = frmMain.ImageList1
-    Left = 536
-    Top = 224
+    Left = 584
+    Top = 288
     object actAddAddress: TAction
       Category = 'Address'
       ImageIndex = 21
@@ -2508,7 +2507,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000640210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000840210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

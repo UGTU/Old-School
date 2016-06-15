@@ -359,6 +359,7 @@ object dm: Tdm
   end
   object adodsNabor: TADODataSet
     Connection = DBConnect
+    CursorType = ctStatic
     CommandText = 'TREE_ABIT_Specialties'
     CommandType = cmdTable
     Parameters = <>
@@ -397,6 +398,32 @@ object dm: Tdm
       FieldName = 'Name'
       ReadOnly = True
       Size = 103
+    end
+    object adodsNaborSh_spec: TStringField
+      FieldName = 'Sh_spec'
+      ReadOnly = True
+      Size = 10
+    end
+    object adodsNaborcName_direction: TStringField
+      FieldName = 'cName_direction'
+      Size = 50
+    end
+    object adodsNaborCname_form_ed: TStringField
+      FieldName = 'Cname_form_ed'
+      Size = 50
+    end
+    object adodsNaborIk_form_ed: TIntegerField
+      FieldName = 'Ik_form_ed'
+    end
+    object adodsNaborBeginDiapazon: TIntegerField
+      FieldName = 'BeginDiapazon'
+    end
+    object adodsNaborEndDiapazon: TIntegerField
+      FieldName = 'EndDiapazon'
+    end
+    object adodsNaborFullName: TStringField
+      FieldName = 'FullName'
+      Size = 500
     end
   end
   object dsNabor: TDataSource
@@ -482,10 +509,6 @@ object dm: Tdm
       end>
     Left = 648
     Top = 296
-    object aspGetDiscModelik_disc: TIntegerField
-      FieldName = 'ik_disc'
-      Visible = False
-    end
     object aspGetDiscModelik_grp_disc: TIntegerField
       FieldName = 'ik_grp_disc'
       Visible = False
@@ -583,6 +606,10 @@ object dm: Tdm
       DisplayLabel = #1040#1091#1076#1080#1090
       DisplayWidth = 20
       FieldName = 'iHour_Audit'
+    end
+    object aspGetDiscModelik_disc: TIntegerField
+      FieldName = 'ik_disc'
+      Visible = False
     end
   end
   object adsVidNagruzki: TADODataSet
@@ -815,6 +842,17 @@ object dm: Tdm
     object adodsPostupViewCname_form_ed: TStringField
       FieldName = 'Cname_form_ed'
       Size = 50
+    end
+    object adodsPostupViewAbitFullName: TStringField
+      FieldName = 'AbitFullName'
+      ReadOnly = True
+      Size = 92
+    end
+    object adodsPostupViewik_spec_fac: TIntegerField
+      FieldName = 'ik_spec_fac'
+    end
+    object adodsPostupViewdateOriginal: TDateTimeField
+      FieldName = 'dateOriginal'
     end
   end
   object dsPostupView: TDataSource

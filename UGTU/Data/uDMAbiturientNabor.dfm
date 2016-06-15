@@ -220,7 +220,7 @@
     Parameters = <>
     SQL.Strings = (
       'select * from [dbo].[ABIT_GetSpecList]'
-      '(2012,0)'
+      '(2015,0)'
       'order by Sortorder,Ik_form_ed'
       ''
       ''
@@ -231,8 +231,8 @@
       ''
       ''
       '')
-    Left = 13
-    Top = 157
+    Left = 21
+    Top = 149
     object adoqSpecFacik_fac: TIntegerField
       FieldName = 'ik_fac'
     end
@@ -286,8 +286,8 @@
       ''
       ''
       'order by NNyear, ik_fac, ik_spec, NN_abit, OrderNumber')
-    Left = 296
-    Top = 136
+    Left = 408
+    Top = 120
   end
   object adoqExamsErrors: TADOQuery
     Connection = dm.DBConnect
@@ -485,5 +485,51 @@
     DataSet = adoNetworkAbit
     Left = 545
     Top = 203
+  end
+  object dsProfile: TDataSource
+    DataSet = adoqProfile
+    Left = 237
+    Top = 204
+  end
+  object adoqProfile: TADOQuery
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from [dbo].[ABIT_GetProfileList]'
+      '(2016,156, 12)'
+      ' order by Sortorder,Cname_spec'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      '')
+    Left = 237
+    Top = 157
+    object adoqProfileik_spec: TIntegerField
+      FieldName = 'ik_spec'
+    end
+    object adoqProfileCname_spec: TStringField
+      FieldName = 'Cname_spec'
+      ReadOnly = True
+      Size = 364
+    end
+    object adoqProfileCshort_spec: TStringField
+      FieldName = 'Cshort_spec'
+    end
+    object adoqProfileik_direction: TIntegerField
+      FieldName = 'ik_direction'
+    end
+    object adoqProfileSortorder: TIntegerField
+      FieldName = 'Sortorder'
+    end
+    object adoqProfileid_parent: TIntegerField
+      FieldName = 'id_parent'
+    end
   end
 end

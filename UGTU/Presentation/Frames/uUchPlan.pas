@@ -143,6 +143,8 @@ type
     ToolBar2: TToolBar;
     ToolButton12: TToolButton;
     lblProfile: TLabel;
+    lGosHourCount: TLabel;
+    lAuditHourCount: TLabel;
     procedure ActionRemUchPlanUpdate(Sender: TObject);
     procedure ActionRemUchPlanExecute(Sender: TObject);
     procedure ActionRemDiscUpdate(Sender: TObject);
@@ -200,6 +202,7 @@ type
     procedure SetUchPlan(const aUchPlan: Integer);
     procedure SetUchPlanProperties(const aUchPlan: Integer);
     procedure SetVisualProperty;
+    procedure RefreshGroupData;
   public
 
     nameSpclz: string; // именование Профиль/Программа/Специализация
@@ -328,6 +331,7 @@ begin
         GetDisciplines;
     finally
       frmUchPlanAddDisc.Free;
+      RefreshGroupData;
     end;
   end;
 end;
@@ -365,8 +369,16 @@ begin
       frmUchPlanAddDisc.edtHoursAudit.Text := dsDisc.DataSet.FieldByName('iHour_Audit').AsString;
       frmUchPlanAddDisc.iIndivid := dsDisc.DataSet.FieldByName('iIndivid')
         .AsInteger;
-      frmUchPlanAddDisc.dbcbDisc.KeyValue := dsDisc.DataSet.FieldByName
-        ('ik_disc').AsInteger;
+
+        {ShowMessage(PWideChar(dsDisc.DataSet.FieldByName
+        ('ik_disc').AsInteger));
+        ShowMessage(PWideChar(dsDisc.DataSet.FieldByName
+        ('ik_disc_uch_plan').AsInteger));    }
+      frmUchPlanAddDisc.dbcbDisc.KeyValue := dsDisc.DataSet.FieldByName('ik_disc').Value;
+      frmUchPlanAddDisc.dbcbCklDisc.KeyValue :=
+        dsDisc.DataSet.FieldByName('IK_ckl_disc').AsInteger;
+      frmUchPlanAddDisc.dbcbGrpDisc.KeyValue :=
+        dsDisc.DataSet.FieldByName('IK_grp_disc').AsInteger;
 
       frmUchPlanAddDisc.dbeGroupVibor.Value :=
         dsDisc.DataSet.FieldByName('ViborGroup').AsString;
@@ -375,11 +387,7 @@ begin
       else
         frmUchPlanAddDisc.dbcbKaf.KeyValue := dsDisc.DataSet.FieldByName
           ('ik_default_kaf').AsInteger;
-      frmUchPlanAddDisc.dbcbCklDisc.KeyValue :=
-        dsDisc.DataSet.FieldByName('IK_ckl_disc').AsInteger;
-      frmUchPlanAddDisc.dbcbGrpDisc.KeyValue :=
-        dsDisc.DataSet.FieldByName('IK_grp_disc').AsInteger;
-      frmUchPlanAddDisc.dbcbPdgrpDisc.KeyValue :=
+       frmUchPlanAddDisc.dbcbPdgrpDisc.KeyValue :=
         dsDisc.DataSet.FieldByName('iK_pdgrp_disc').AsInteger;
       index := dsDisc.DataSet.FieldByName('ik_disc').AsInteger;
       frmUchPlanAddDisc.IsModified := false;
@@ -391,6 +399,7 @@ begin
       end;
     finally
       frmUchPlanAddDisc.Free;
+      RefreshGroupData;
     end;
   end;
 end;
@@ -488,6 +497,7 @@ begin
         (dsDisc.DataSet.FieldByName('ik_disc_uch_plan').Value);
       GetDisciplines;
   end;
+  RefreshGroupData;
 end;
 
 procedure TfmUchPlan.GetDisciplines;
@@ -580,13 +590,22 @@ begin
   Label20.Enabled := discType = typeTypicalDisc;
 end;
 
+
+
 procedure TfmUchPlan.SetGroupUchPlan(const aGroupIK: Integer);
-var
-  Pname: string;
-  spIK: Integer;
 begin
   fGroupIK := aGroupIK;
   dbcbGroup.KeyValue := aGroupIK;
+
+  RefreshGroupData;
+
+  IKPlan := TUchPlanController.Instance.getUchPlanForGroup(aGroupIK);
+end;
+
+procedure TfmUchPlan.RefreshGroupData;
+var
+  Pname: string;
+begin
   fGroupDataSet.Close;
   fGroupDataSet.CommandText := 'select * from GrupInfo(' +
     IntToStr(fGroupIK) + ')';
@@ -599,7 +618,10 @@ begin
     lblProfile.Caption := nameSpclz + ' группы: ' + Pname
   else
     lblProfile.Caption := nameSpclz + ' группы: общий';
-  IKPlan := TUchPlanController.Instance.getUchPlanForGroup(aGroupIK);
+
+  lGosHourCount.Caption :=  'Общее кол-во часов: ' +fGroupDataSet.FieldByName('GosHourCount').AsString
+      +', кол-во зач единиц: '+fGroupDataSet.FieldByName('ZECount').AsString;
+  lAuditHourCount.Caption :=  'Кол-во аудиторных часов: ' +fGroupDataSet.FieldByName('AuditHourCount').AsString;
 end;
 
 procedure TfmUchPlan.SetUchPlan(const aUchPlan: Integer);

@@ -167,6 +167,7 @@ type
     procedure actGiveZachNumberExecute(Sender: TObject);
     procedure actPrikazAppointExecute(Sender: TObject);
     procedure actDelFromGroupExecute(Sender: TObject);
+    procedure ActZachProtocolExecute(Sender: TObject);
 
     protected
      procedure DoRefreshFrame();override;
@@ -923,6 +924,12 @@ begin
   actZachislAbit.Enabled:=(dbgAbitsForZachisl.RowCount>0);
 end;
 
+procedure TfmZach.ActZachProtocolExecute(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('dfhbfg');
+end;
+
 function TfmZach.DoApply: Boolean;
 begin
 //сохраняем изменения в проходных баллах
@@ -995,7 +1002,7 @@ end;
 
 procedure TfmZach.actProtokolToExcelExecute(Sender: TObject);
 begin
-  TAbitZachislenieController.Instance.ExportProtokolToExcel;
+  TAbitZachislenieController.Instance.ExportZachislProtokolToExcel;
 end;
 
 end.

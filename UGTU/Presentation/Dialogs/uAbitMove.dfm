@@ -136,7 +136,7 @@ inherited frmAbitMove: TfrmAbitMove
       EditButtons = <>
       Flat = True
       KeyField = 'NNrecord'
-      ListField = 'Name'
+      ListField = 'FullName'
       ListSource = dm.dsNabor
       TabOrder = 0
       Visible = True
@@ -258,7 +258,7 @@ inherited frmAbitMove: TfrmAbitMove
       EditButtons = <>
       Flat = True
       KeyField = 'NNrecord'
-      ListField = 'Name'
+      ListField = 'FullName'
       ListSource = dm.dsNabor
       TabOrder = 0
       Visible = True
@@ -266,7 +266,7 @@ inherited frmAbitMove: TfrmAbitMove
     end
     object dbcbeCategoryNew: TDBLookupComboboxEh
       Left = 127
-      Top = 77
+      Top = 78
       Width = 495
       Height = 19
       Anchors = [akLeft, akTop, akRight]

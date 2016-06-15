@@ -66,7 +66,7 @@ inherited fmZach: TfmZach
           object Label28: TLabel
             Left = 84
             Top = 16
-            Width = 131
+            Width = 132
             Height = 13
             Caption = #1042#1099#1076#1072#1095#1072' '#1079#1072#1095#1077#1090#1085#1099#1093' '#1082#1085#1080#1078#1077#1082
           end
@@ -342,21 +342,21 @@ inherited fmZach: TfmZach
           object Label2: TLabel
             Left = 39
             Top = 12
-            Width = 129
+            Width = 130
             Height = 13
             Caption = '- '#1076#1086#1089#1090#1091#1087#1085#1099' '#1082' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1102
           end
           object Label4: TLabel
             Left = 203
             Top = 12
-            Width = 245
+            Width = 246
             Height = 13
             Caption = '- '#1085#1077#1076#1086#1089#1090#1072#1090#1086#1095#1085#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074' ('#1087#1072#1089#1087#1086#1088#1090'/'#1072#1090#1090#1077#1089#1090#1072#1090')'
           end
           object Label5: TLabel
             Left = 486
             Top = 12
-            Width = 226
+            Width = 227
             Height = 13
             Caption = '- '#1085#1077' '#1074#1089#1077' '#1074#1089#1090#1091#1087#1080#1090#1077#1083#1100#1085#1099#1077' '#1080#1089#1087#1099#1090#1072#1085#1080#1103' '#1074#1074#1077#1076#1077#1085#1099
           end
@@ -445,8 +445,16 @@ inherited fmZach: TfmZach
             ParentShowHint = False
             ShowHint = True
           end
-          object ToolButton6: TToolButton
+          object ToolButton24: TToolButton
             Left = 100
+            Top = 0
+            Hint = #1059#1076#1072#1083#1080#1090#1100' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1072' '#1080#1079' '#1075#1088#1091#1087#1087#1099
+            Action = actDelFromGroup
+            ParentShowHint = False
+            ShowHint = True
+          end
+          object ToolButton6: TToolButton
+            Left = 123
             Top = 0
             Width = 8
             Caption = 'ToolButton6'
@@ -454,7 +462,7 @@ inherited fmZach: TfmZach
             Style = tbsSeparator
           end
           object ToolButton16: TToolButton
-            Left = 108
+            Left = 131
             Top = 0
             Action = actExpPrikSpec
             DropdownMenu = ppmPrikazOtchet
@@ -463,7 +471,7 @@ inherited fmZach: TfmZach
             Style = tbsDropDown
           end
           object ToolButton4: TToolButton
-            Left = 146
+            Left = 169
             Top = 0
             Action = actAbitSpisokToExcel
             DropdownMenu = ppmPrikazExcelOtchet
@@ -472,18 +480,12 @@ inherited fmZach: TfmZach
             Style = tbsDropDown
           end
           object ToolButton23: TToolButton
-            Left = 184
+            Left = 207
             Top = 0
             Action = actPrikazAppoint
             ParentShowHint = False
             ShowHint = True
-          end
-          object ToolButton24: TToolButton
-            Left = 207
-            Top = 0
-            Action = actDelFromGroup
-            ParentShowHint = False
-            ShowHint = True
+            Visible = False
           end
         end
         object s_ik: TComboBox
@@ -874,7 +876,7 @@ inherited fmZach: TfmZach
     Left = 483
     Top = 80
     Bitmap = {
-      494C010105004000680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105004000700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1149,7 +1151,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C010103000400680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828
@@ -1359,8 +1361,8 @@ inherited fmZach: TfmZach
     end
     object actAbitSpisokToExcel: TAction
       Category = 'Zachisl'
-      Caption = #1069#1082#1089#1087#1086#1088#1090' '#1089#1087#1080#1089#1082#1072' '#1074' Excel'
-      Hint = #1069#1082#1089#1087#1086#1088#1090' '#1089#1087#1080#1089#1082#1072' '#1074' Excel'
+      Caption = #1057#1087#1080#1089#1086#1082' '#1072#1073#1080#1090#1091#1088#1080#1077#1085#1090#1086#1074
+      Hint = #1055#1086#1083#1091#1095#1080#1090#1100' '#1089#1087#1080#1089#1086#1082
       ImageIndex = 56
       OnExecute = actAbitSpisokToExcelExecute
       OnUpdate = actAbitSpisokToExcelUpdate
@@ -1374,7 +1376,7 @@ inherited fmZach: TfmZach
     end
     object actProtokolToExcel: TAction
       Category = 'Prikaz'
-      Caption = #1069#1082#1089#1087#1086#1088#1090' '#1087#1088#1086#1090#1086#1082#1086#1083#1072' '#1074' Ecxel'
+      Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
       Hint = #1069#1082#1089#1087#1086#1088#1090' '#1087#1088#1086#1090#1086#1082#1086#1083#1072' '#1074' Ecxel'
       OnExecute = actProtokolToExcelExecute
     end
@@ -1454,8 +1456,8 @@ inherited fmZach: TfmZach
   end
   object PopupMenu1: TPopupMenu
     Images = frmMain.ImageList1
-    Left = 174
-    Top = 299
+    Left = 190
+    Top = 259
     object N1: TMenuItem
       Action = frmMain.actJoinGroup
     end
@@ -1467,13 +1469,13 @@ inherited fmZach: TfmZach
     end
   end
   object dsList: TDataSource
-    Left = 208
-    Top = 298
+    Left = 232
+    Top = 258
   end
   object PopupMenu2: TPopupMenu
     Images = frmMain.ImageList1
     Left = 142
-    Top = 299
+    Top = 259
     object N4: TMenuItem
       Action = actZachislAbit
     end
