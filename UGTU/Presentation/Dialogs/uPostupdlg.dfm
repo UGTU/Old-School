@@ -135,9 +135,9 @@ inherited frmPostupDlg: TfrmPostupDlg
     object Label8: TLabel
       Left = 9
       Top = 99
-      Width = 73
+      Width = 140
       Height = 13
-      Caption = #1057#1088#1077#1076#1085#1080#1081' '#1073#1072#1083#1083':'
+      Caption = #1057#1088#1077#1076#1085#1080#1081' '#1073#1072#1083#1083' ('#1042#1055#1054' '#1080' '#1057#1055#1054'):'
     end
     object Label1: TLabel
       Left = 48
@@ -245,6 +245,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Anchors = [akLeft, akTop, akRight]
       Caption = #1055#1086#1083#1091#1095#1080#1090#1100' '#1076#1072#1085#1085#1099#1077' '#1089#1077#1088#1090#1080#1092#1080#1082#1072#1090#1072' '#1045#1043#1069
       TabOrder = 6
+      Visible = False
       OnClick = bGetCertDataClick
     end
   end

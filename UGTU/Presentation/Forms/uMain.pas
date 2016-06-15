@@ -2710,7 +2710,7 @@ begin
   TApplicationController.GetInstance.AddLogEntry('Добавление абитуриента');
 
   frmAbitConfirm := tfrmAbitConfirm.Create(self);
-  frmAbitConfirm.Tag := TDBNodeSpecRecObject
+  frmAbitConfirm.NNRecord := TDBNodeSpecRecObject
     (DBDekTreeView_TEST1.SelectedObject).NNRecord;
   frmAbitConfirm.Hint :=
     inttostr(TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).Year);

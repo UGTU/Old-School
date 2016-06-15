@@ -220,7 +220,7 @@
     Parameters = <>
     SQL.Strings = (
       'select * from [dbo].[ABIT_GetSpecList]'
-      '(2012,0)'
+      '(2015,0)'
       'order by Sortorder,Ik_form_ed'
       ''
       ''
@@ -231,8 +231,8 @@
       ''
       ''
       '')
-    Left = 13
-    Top = 157
+    Left = 21
+    Top = 149
     object adoqSpecFacik_fac: TIntegerField
       FieldName = 'ik_fac'
     end

@@ -230,7 +230,7 @@ begin
     dbdteList.Value := AbitList.Date;
   if (dbcbeRecruit.keyvalue <= 0) then
   begin
-    dbcbeRecruit.keyvalue := AbitList.RecruitNum;
+    dbcbeRecruit.keyvalue := NNRecord;//AbitList.RecruitNum;
     GetKatZach(dbcbeRecruit.KeyValue); //настройка категорий зачисления
   end;
   if (eAvgBall.Value <= 0) then

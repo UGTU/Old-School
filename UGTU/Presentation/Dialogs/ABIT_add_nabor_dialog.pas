@@ -86,7 +86,8 @@ uses AbiturientBaseProcs, AbiturientNaborProcs, AbiturientFacade,
 
 procedure TfrmNewNabor.sets();
 begin
-  DMAbiturientNabor.adoqSpecfac.Close;
+  if (DMAbiturientNabor.adoqSpecfac.Active) then
+     DMAbiturientNabor.adoqSpecfac.Close;
   //создание набора
   if type_dialog=1 then
   begin
