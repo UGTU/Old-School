@@ -2867,7 +2867,7 @@ const
 var
   E: Variant;
   pagecount, spec: Integer;
-  path, currentSort: string;
+  path, currentSort, tempStr: string;
   i, j, AbitCount: Integer;
   FindRange: Variant;
   dateProt: TDateTime;
@@ -2878,6 +2878,7 @@ begin
   end
   else
     dateProt:=Date;
+
   if not TGeneralController.Instance.SetReportDate(dateProt, 'протокола') then
     exit;
 
@@ -2885,16 +2886,16 @@ begin
     ('Экспорт протокола зачисления в Excel');
   with DMAbiturientNabor.adospAbitGetPostupStatistika do
   begin
-      DisableControls;
+    DisableControls;
       // отсортировать
-      currentSort := sort;
+    currentSort := sort;
       //sort := 'dd_pod_zayav,Cshort_name_fac, cname_spec, ik_spec_fac, fio';
-      sort := 'ik_spec_fac';
-      spec := -1;
-      AbitCount := 1;
-      i := l + 1;
-      try
-        First;
+    sort := 'ik_spec_fac';
+    spec := -1;
+    AbitCount := 1;
+    i := l + 1;
+    try
+      First;
 
   try
     E := CreateOleObject('Excel.Application');
@@ -2944,6 +2945,7 @@ begin
 	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(dateProt));
 	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(dateProt)));
 	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(dateProt));
+                FindRange := E.Cells.Replace(What := '#Spec#',Replacement:=FieldByName('specFullName').AsString);
               end;
 
               if Eof then
@@ -2979,9 +2981,9 @@ begin
               AbitCount := 1;
             end;
 
-            if (DateToStr(dateProt) <> DateToStr(FieldByName('dd_pod_zayav').Value)) then
+            if (DateToStr(dateProt) <> DateToStr(FieldByName('dd_pod_zayav').Value))
+                or ( not FieldByName('IsMain').AsBoolean) then
             begin
-              //ShowMessage(DateToStr(dateProt)+' '+DateToStr(FieldByName('dd_pod_zayav').Value));
               Next;
               Continue;
             end;
@@ -3007,8 +3009,13 @@ begin
             inc(j);
             E.Cells[i, j] := FieldByName('fio').AsString;
             inc(j);
-            E.Cells[i, j] := FieldByName('zach').AsString;
+
+            tempStr:= '';
+            if (FieldByName('Realy_postup').AsBoolean) then
+              tempStr:= ' (оригинал)';
+            E.Cells[i, j] := FieldByName('zach').AsString + tempStr;
             inc(j);
+
             E.Cells[i, j] := FieldByName('cName_zaved').AsString;
             inc(j);
             E.Cells[i, j] := ResultState;
