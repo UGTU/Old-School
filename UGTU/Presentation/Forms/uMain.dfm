@@ -2,15 +2,15 @@ object frmMain: TfrmMain
   Left = 221
   Top = 140
   Caption = #1048#1057' '#1059#1043#1058#1059
-  ClientHeight = 596
-  ClientWidth = 931
+  ClientHeight = 734
+  ClientWidth = 1146
   Color = clBtnFace
-  Constraints.MinHeight = 548
-  Constraints.MinWidth = 492
+  Constraints.MinHeight = 674
+  Constraints.MinWidth = 606
   DragKind = dkDock
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -14
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   KeyPreview = True
@@ -22,22 +22,31 @@ object frmMain: TfrmMain
   OnResize = FormResize
   OnShow = FormShow
   DesignSize = (
-    931
-    596)
-  PixelsPerInch = 96
-  TextHeight = 13
+    1146
+    734)
+  PixelsPerInch = 120
+  TextHeight = 16
   object Splitter1: TSplitter
-    Left = 377
-    Top = 81
-    Height = 496
-    ExplicitTop = 70
-    ExplicitHeight = 511
+    Left = 464
+    Top = 90
+    Width = 4
+    Height = 625
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ExplicitTop = 100
+    ExplicitHeight = 610
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 577
-    Width = 931
+    Top = 715
+    Width = 1146
     Height = 19
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Panels = <
       item
         Width = 450
@@ -48,12 +57,18 @@ object frmMain: TfrmMain
       item
         Width = 50
       end>
+    ExplicitTop = 710
+    ExplicitWidth = 931
   end
   object MainMenuBar: TActionMainMenuBar
     Left = 0
     Top = 0
-    Width = 931
-    Height = 27
+    Width = 1146
+    Height = 32
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     UseSystemFont = False
     ActionManager = ActionManager1
     Caption = 'MainMenuBar'
@@ -63,83 +78,116 @@ object frmMain: TfrmMain
     EdgeBorders = [ebBottom]
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -15
     Font.Name = 'Segoe UI'
     Font.Style = []
     Spacing = 0
     OnPopup = MainMenuBarPopup
+    ExplicitHeight = 33
   end
   object ActionToolBar1: TActionToolBar
     Left = 0
-    Top = 27
-    Width = 931
-    Height = 54
+    Top = 32
+    Width = 1146
+    Height = 58
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     ActionManager = ActionManager1
     ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
     ColorMap.UnusedColor = clWhite
-    Constraints.MinHeight = 26
+    Constraints.MinHeight = 32
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     Spacing = 1
+    ExplicitTop = 33
+    ExplicitHeight = 67
   end
   object Panel1: TPanel
-    Left = 380
-    Top = 81
-    Width = 551
-    Height = 496
+    Left = 468
+    Top = 90
+    Width = 678
+    Height = 625
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alClient
     BevelOuter = bvNone
-    Constraints.MinHeight = 400
-    Constraints.MinWidth = 543
+    Constraints.MinHeight = 492
+    Constraints.MinWidth = 668
     ParentBackground = False
     TabOrder = 3
+    ExplicitTop = 100
+    ExplicitHeight = 610
     object Panel7: TPanel
-      Left = 401
+      Left = 494
       Top = 0
-      Width = 25
-      Height = 19
+      Width = 30
+      Height = 23
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       BevelOuter = bvNone
       TabOrder = 0
     end
     object Panel4: TPanel
       Left = 0
       Top = 0
-      Width = 551
-      Height = 496
+      Width = 678
+      Height = 610
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alClient
       BevelOuter = bvNone
-      Constraints.MinHeight = 400
-      Constraints.MinWidth = 543
+      Constraints.MinHeight = 492
+      Constraints.MinWidth = 668
       ParentBackground = False
       TabOrder = 1
       object Panel5: TPanel
-        Left = 401
+        Left = 494
         Top = 0
-        Width = 25
-        Height = 19
+        Width = 30
+        Height = 23
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         BevelOuter = bvNone
         TabOrder = 0
       end
     end
   end
   object StudSearchPanel: TPanel
-    Left = 477
-    Top = 25
-    Width = 450
-    Height = 25
+    Left = 587
+    Top = 31
+    Width = 554
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Anchors = [akTop, akRight]
     BevelOuter = bvNone
     TabOrder = 4
     object cmbSearch: TDBComboBoxEh
-      Left = 121
-      Top = 4
-      Width = 118
+      Left = 149
+      Top = 5
+      Width = 145
       Height = 19
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       DynProps = <>
       EditButtons = <>
       Flat = True
@@ -152,10 +200,14 @@ object frmMain: TfrmMain
       OnChange = cmbSearchChange
     end
     object dbcbeSearch: TDBLookupComboboxEh
-      Left = 243
-      Top = 4
-      Width = 205
-      Height = 19
+      Left = 299
+      Top = 5
+      Width = 252
+      Height = 22
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       DataField = ''
       EditButtons = <>
       Flat = True
@@ -168,28 +220,40 @@ object frmMain: TfrmMain
       OnKeyPress = dbcbeSearchKeyPress
     end
     object StaticText1: TStaticText
-      Left = 33
-      Top = 7
-      Width = 87
-      Height = 17
+      Left = 41
+      Top = 9
+      Width = 111
+      Height = 20
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caption = #1055#1086#1080#1089#1082' '#1089#1090#1091#1076#1077#1085#1090#1072':'
       TabOrder = 2
     end
   end
   object TeacherSearchPanel: TPanel
-    Left = 465
-    Top = 26
-    Width = 466
-    Height = 25
+    Left = 572
+    Top = 32
+    Width = 574
+    Height = 31
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Anchors = [akTop, akRight]
     BevelOuter = bvNone
     TabOrder = 5
     Visible = False
     object cmbTeachSearch: TDBComboBoxEh
-      Left = 134
-      Top = 3
-      Width = 118
+      Left = 165
+      Top = 4
+      Width = 145
       Height = 19
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       DynProps = <>
       EditButtons = <>
       Flat = True
@@ -204,10 +268,14 @@ object frmMain: TfrmMain
       OnChange = cmbTeachSearchChange
     end
     object dbcbeTeachSearch: TDBLookupComboboxEh
-      Left = 255
-      Top = 3
-      Width = 205
-      Height = 19
+      Left = 314
+      Top = 4
+      Width = 252
+      Height = 22
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       DataField = ''
       EditButtons = <>
       Flat = True
@@ -220,19 +288,27 @@ object frmMain: TfrmMain
       OnKeyPress = dbcbeSearchKeyPress
     end
     object StaticText2: TStaticText
-      Left = 14
-      Top = 5
-      Width = 119
-      Height = 17
+      Left = 17
+      Top = 6
+      Width = 152
+      Height = 20
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caption = #1055#1086#1080#1089#1082' '#1087#1088#1077#1087#1086#1076#1072#1074#1072#1090#1077#1083#1103':'
       TabOrder = 2
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 81
-    Width = 4
-    Height = 496
+    Top = 90
+    Width = 5
+    Height = 625
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alLeft
     BevelOuter = bvNone
     ParentBackground = False
@@ -241,11 +317,17 @@ object frmMain: TfrmMain
     OnMouseEnter = Panel2MouseEnter
     OnMouseLeave = Panel2MouseLeave
     OnResize = Panel2Resize
+    ExplicitTop = 100
+    ExplicitHeight = 610
     object Image1: TImage
       Left = -1
-      Top = 216
-      Width = 8
-      Height = 8
+      Top = 266
+      Width = 10
+      Height = 10
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Picture.Data = {
         055449636F6E0000010001000509000001001800DC0000001600000028000000
         05000000120000000100180000000000B4000000000000000000000000000000
@@ -259,9 +341,13 @@ object frmMain: TfrmMain
     end
     object Image2: TImage
       Left = 0
-      Top = 216
-      Width = 6
-      Height = 9
+      Top = 266
+      Width = 7
+      Height = 11
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Picture.Data = {
         055449636F6E0000010001000509000001001800DC0000001600000028000000
         05000000120000000100180000000000B4000000000000000000000000000000
@@ -274,30 +360,45 @@ object frmMain: TfrmMain
     end
   end
   object Panel3: TPanel
-    Left = 4
-    Top = 81
-    Width = 373
-    Height = 496
+    Left = 5
+    Top = 90
+    Width = 459
+    Height = 625
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Align = alLeft
     Color = clSilver
-    Constraints.MaxWidth = 400
+    Constraints.MaxWidth = 492
     DockSite = True
     ParentBackground = False
     TabOrder = 7
+    ExplicitTop = 100
+    ExplicitHeight = 610
     object Panel6: TPanel
       Left = 1
       Top = 1
-      Width = 371
-      Height = 494
+      Width = 457
+      Height = 623
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Align = alClient
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 608
       object Button1: TButton
-        Left = 5
-        Top = 440
-        Width = 75
-        Height = 25
+        Left = 6
+        Top = 542
+        Width = 92
+        Height = 30
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Caption = #1054#1090#1082#1072#1079#1072#1090#1100
         TabOrder = 0
         Visible = False
@@ -306,25 +407,35 @@ object frmMain: TfrmMain
       object pnlTree: TPanel
         Left = 1
         Top = 1
-        Width = 369
-        Height = 52
+        Width = 455
+        Height = 79
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alClient
         BevelOuter = bvNone
         Caption = 'pnlTree'
         TabOrder = 1
+        ExplicitWidth = 454
+        ExplicitHeight = 64
         object DBDekTreeView_TEST1: TDBDekTreeView_TEST
           Left = 0
           Top = 0
-          Width = 369
-          Height = 52
+          Width = 455
+          Height = 79
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Align = alClient
           BorderStyle = bsNone
           ChangeDelay = 200
-          Constraints.MaxWidth = 400
-          Constraints.MinWidth = 150
+          Constraints.MaxWidth = 492
+          Constraints.MinWidth = 185
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
-          Font.Height = -15
+          Font.Height = -18
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           Images = TreeIcons
@@ -343,13 +454,19 @@ object frmMain: TfrmMain
           OnDblClick = DBDekTreeView_TEST1DblClick
           OnExpanding = DBDekTreeView_TEST1Expanding
           OnMouseDown = DBDekTreeView_TEST1MouseDown
+          ExplicitWidth = 454
+          ExplicitHeight = 64
         end
       end
       object pnlImage: TPanel
         Left = 1
-        Top = 53
-        Width = 369
-        Height = 440
+        Top = 80
+        Width = 455
+        Height = 542
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Align = alBottom
         BevelEdges = []
         BevelOuter = bvNone
@@ -358,31 +475,44 @@ object frmMain: TfrmMain
         ParentBackground = False
         TabOrder = 2
         Visible = False
+        ExplicitTop = 65
+        ExplicitWidth = 454
         object imgChristmas: TImage
           Left = 0
           Top = 0
-          Width = 369
-          Height = 440
+          Width = 454
+          Height = 542
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Align = alClient
           Center = True
-          ExplicitWidth = 370
         end
       end
     end
   end
   object Panel13: TPanel
-    Left = 1296
+    Left = 1595
     Top = 0
-    Width = 25
-    Height = 23
+    Width = 31
+    Height = 28
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     BevelOuter = bvNone
     TabOrder = 8
   end
   object ScheduleBookmarksPanel: TPanel
-    Left = 776
-    Top = 25
-    Width = 153
-    Height = 26
+    Left = 955
+    Top = 31
+    Width = 188
+    Height = 32
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Anchors = [akTop, akRight]
     BevelOuter = bvNone
     TabOrder = 9
@@ -390,8 +520,12 @@ object frmMain: TfrmMain
     object ActionToolBar2: TActionToolBar
       Left = 0
       Top = 0
-      Width = 150
-      Height = 26
+      Width = 185
+      Height = 32
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       ActionManager = ActionManager1
       Align = alLeft
       Caption = 'ActionToolBar2'
@@ -400,7 +534,7 @@ object frmMain: TfrmMain
       ColorMap.UnusedColor = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -11
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
@@ -1035,7 +1169,7 @@ object frmMain: TfrmMain
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091' '#1076#1088'. '#1075#1088#1091#1087#1087#1099
       ImageIndex = 19
       OnExecute = actChangePlanFromOtherGroupExecute
-    end
+  end
   end
   object ImageList1: TImageList
     Left = 319

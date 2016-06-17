@@ -2767,6 +2767,9 @@ begin
   frmpostupDlg.IkRecruit := TDBNodeSpecRecObject
     (DBDekTreeView_TEST1.Selected.Parent.data).NNRecord;
 
+        frmpostupDlg.NNRecord := TDBNodeSpecRecObject
+    (DBDekTreeView_TEST1.Selected.Parent.data).NNRecord;
+
   frmpostupDlg.ShowModal;
   frmpostupDlg.Free;
   ActiveFrame.RefreshFrame;
