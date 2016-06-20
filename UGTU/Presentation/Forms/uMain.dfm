@@ -57,8 +57,6 @@ object frmMain: TfrmMain
       item
         Width = 50
       end>
-    ExplicitTop = 710
-    ExplicitWidth = 931
   end
   object MainMenuBar: TActionMainMenuBar
     Left = 0
@@ -83,7 +81,6 @@ object frmMain: TfrmMain
     Font.Style = []
     Spacing = 0
     OnPopup = MainMenuBarPopup
-    ExplicitHeight = 33
   end
   object ActionToolBar1: TActionToolBar
     Left = 0
@@ -106,8 +103,6 @@ object frmMain: TfrmMain
     Font.Style = []
     ParentFont = False
     Spacing = 1
-    ExplicitTop = 33
-    ExplicitHeight = 67
   end
   object Panel1: TPanel
     Left = 468
@@ -124,8 +119,6 @@ object frmMain: TfrmMain
     Constraints.MinWidth = 668
     ParentBackground = False
     TabOrder = 3
-    ExplicitTop = 100
-    ExplicitHeight = 610
     object Panel7: TPanel
       Left = 494
       Top = 0
@@ -142,7 +135,7 @@ object frmMain: TfrmMain
       Left = 0
       Top = 0
       Width = 678
-      Height = 610
+      Height = 625
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -183,7 +176,7 @@ object frmMain: TfrmMain
       Left = 149
       Top = 5
       Width = 145
-      Height = 19
+      Height = 22
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -249,7 +242,7 @@ object frmMain: TfrmMain
       Left = 165
       Top = 4
       Width = 145
-      Height = 19
+      Height = 22
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
@@ -317,8 +310,6 @@ object frmMain: TfrmMain
     OnMouseEnter = Panel2MouseEnter
     OnMouseLeave = Panel2MouseLeave
     OnResize = Panel2Resize
-    ExplicitTop = 100
-    ExplicitHeight = 610
     object Image1: TImage
       Left = -1
       Top = 266
@@ -374,8 +365,6 @@ object frmMain: TfrmMain
     DockSite = True
     ParentBackground = False
     TabOrder = 7
-    ExplicitTop = 100
-    ExplicitHeight = 610
     object Panel6: TPanel
       Left = 1
       Top = 1
@@ -389,7 +378,6 @@ object frmMain: TfrmMain
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitHeight = 608
       object Button1: TButton
         Left = 6
         Top = 542
@@ -417,8 +405,6 @@ object frmMain: TfrmMain
         BevelOuter = bvNone
         Caption = 'pnlTree'
         TabOrder = 1
-        ExplicitWidth = 454
-        ExplicitHeight = 64
         object DBDekTreeView_TEST1: TDBDekTreeView_TEST
           Left = 0
           Top = 0
@@ -454,8 +440,6 @@ object frmMain: TfrmMain
           OnDblClick = DBDekTreeView_TEST1DblClick
           OnExpanding = DBDekTreeView_TEST1Expanding
           OnMouseDown = DBDekTreeView_TEST1MouseDown
-          ExplicitWidth = 454
-          ExplicitHeight = 64
         end
       end
       object pnlImage: TPanel
@@ -475,12 +459,10 @@ object frmMain: TfrmMain
         ParentBackground = False
         TabOrder = 2
         Visible = False
-        ExplicitTop = 65
-        ExplicitWidth = 454
         object imgChristmas: TImage
           Left = 0
           Top = 0
-          Width = 454
+          Width = 455
           Height = 542
           Margins.Left = 4
           Margins.Top = 4
@@ -488,6 +470,7 @@ object frmMain: TfrmMain
           Margins.Bottom = 4
           Align = alClient
           Center = True
+          ExplicitWidth = 454
         end
       end
     end
@@ -651,8 +634,8 @@ object frmMain: TfrmMain
     Images = ImageList1
     OnExecute = alMainActionsExecute
     OnUpdate = alMainActionsUpdate
-    Left = 407
-    Top = 150
+    Left = 423
+    Top = 158
     object actFamChg: TAction
       Category = 'catStudActs'
       Caption = #1057#1084#1077#1085#1080#1090#1100' '#1092#1072#1084#1080#1083#1080#1102'...'
@@ -1169,13 +1152,13 @@ object frmMain: TfrmMain
       Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1083#1072#1085' '#1087#1086' '#1086#1073#1088#1072#1079#1094#1091' '#1076#1088'. '#1075#1088#1091#1087#1087#1099
       ImageIndex = 19
       OnExecute = actChangePlanFromOtherGroupExecute
-  end
+    end
   end
   object ImageList1: TImageList
     Left = 319
     Top = 82
     Bitmap = {
-      494C01014A006800F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01014A006800000110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003001000001002000000000000030
       0100000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3694,7 +3677,7 @@ object frmMain: TfrmMain
     Left = 262
     Top = 82
     Bitmap = {
-      494C010131004900F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010131004900000110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000040000000D0000000010020000000000000D0
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000EFEFEF00E7E7E700DEDEDE00DEDEDE00DEDEDE00EFEF
@@ -5420,8 +5403,8 @@ object frmMain: TfrmMain
   object ppmTree: TPopupMenu
     Images = ImageList1
     OnPopup = ppmTreePopup
-    Left = 253
-    Top = 141
+    Left = 221
+    Top = 157
   end
   object ActionManager1: TActionManager
     ActionBars = <
@@ -5731,8 +5714,8 @@ object frmMain: TfrmMain
       item
       end>
     Images = ImageList1
-    Left = 329
-    Top = 154
+    Left = 321
+    Top = 162
     StyleName = 'XP Style'
     object actFilleMenu: TAction
       Category = 'catMainMenu'
