@@ -268,10 +268,7 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet4: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
               ExplicitWidth = 604
-              ExplicitHeight = 0
               inherited Panel3: TPanel
                 Width = 604
                 ExplicitWidth = 604
@@ -501,10 +498,7 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet5: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
               ExplicitWidth = 604
-              ExplicitHeight = 0
               inherited Splitter1: TSplitter
                 Width = 604
                 ExplicitWidth = 551
@@ -526,10 +520,7 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet6: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
               ExplicitWidth = 604
-              ExplicitHeight = 0
               object SpeedButton5: TSpeedButton [0]
                 Left = 526
                 Top = 29
@@ -557,10 +548,7 @@ inherited fmAbitCard: TfmAbitCard
             end
             inherited TabSheet7: TTabSheet
               TabVisible = False
-              ExplicitLeft = 0
-              ExplicitTop = 0
               ExplicitWidth = 604
-              ExplicitHeight = 0
               inherited gbExiled: TGroupBox
                 Width = 604
                 ExplicitWidth = 604
@@ -936,7 +924,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000900880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1229,7 +1217,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilMain: TImageList
     Bitmap = {
-      494C010111004000580210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040005C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
