@@ -1679,6 +1679,7 @@ begin
 	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(Date));
 	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(Date)));
 	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(Date));
+                FindRange := E.Cells.Replace(What := '#Spec#',Replacement:=FAbitListDataSetInstance.FieldByName('specFullName').AsString);
               end;
               if FAbitListDataSetInstance.Eof then
                 break;

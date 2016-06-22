@@ -116,6 +116,8 @@ type
     adsIsOnVacation: TADODataSet;
     adodsAbitDisc: TADODataSet;
     dsAbitDisc: TDataSource;
+    adoqTargetOrganization: TADOQuery;
+    dsTargetOrganization: TDataSource;
     procedure adodsSmallGroupCalcFields(DataSet: TDataSet);
     procedure adodsPrikazCalcFields(DataSet: TDataSet);
   private

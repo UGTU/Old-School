@@ -72,6 +72,9 @@ type
     Label1: TLabel;
     Label9: TLabel;
     dtpDateOriginal: TDBDateTimeEditEh;
+    dbcbeTargetOrganization: TDBLookupComboboxEh;
+    lOrganiz: TLabel;
+    lOrganiz0: TLabel;
     procedure FormShow(Sender: TObject);
     procedure sbAddExamClick(Sender: TObject);
     procedure sgExamsClick(Sender: TObject);
@@ -95,6 +98,8 @@ type
     procedure LoadDocs;
     procedure GetAdmissionByDoc;
     procedure GetKatZach(NNRecord: integer);
+    procedure LoadTargetOrganizations;
+    procedure SetTargetOrganizationsVisible(isVisible: boolean);
   public
     HostForm: TfrmAbitCardDialog;
     DocRecordList: TObjectList<TDocRecord>;
@@ -474,6 +479,18 @@ begin
   DocDS.Free;
 end;
 
+procedure TfrmPostupDlg.LoadTargetOrganizations;
+begin
+  if (dbcbeCategory.KeyValue = 8) then
+  begin
+    dmStudentData.adoqTargetOrganization.Close;
+    dmStudentData.adoqTargetOrganization.Open;
+    SetTargetOrganizationsVisible(true);
+  end
+  else
+    SetTargetOrganizationsVisible(false);
+end;
+
 procedure TfrmPostupDlg.sbAddExamClick(Sender: TObject);
 begin
   frmAddExamDialog := TfrmAddExamDialog.Create(self);
@@ -577,6 +594,13 @@ begin
   Sync;
 end;
 
+procedure TfrmPostupDlg.SetTargetOrganizationsVisible(isVisible: boolean);
+begin
+  dbcbeTargetOrganization.Visible:= isVisible;
+  lOrganiz.Visible:= isVisible;
+  lOrganiz0.Visible:= isVisible;
+end;
+
 procedure TfrmPostupDlg.bbOKClick(Sender: TObject);
 begin
   actOKExecute(Sender);
@@ -674,10 +698,15 @@ begin
   Sync;
 end;
 
+
+
 procedure TfrmPostupDlg.ButtonsCheck;
 begin
   if dbcbeCategory.Text='' then dbcbeCategory.Color := clCream
     else dbcbeCategory.Color := clWindow;
+
+
+  LoadTargetOrganizations;
 
 
   if CheckFields then

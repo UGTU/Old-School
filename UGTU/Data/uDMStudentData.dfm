@@ -1,7 +1,7 @@
 object dmStudentData: TdmStudentData
   OldCreateOrder = False
-  Height = 427
-  Width = 522
+  Height = 434
+  Width = 673
   object adodsZaved_Stud: TADODataSet
     Connection = dm.DBConnect
     CursorType = ctStatic
@@ -670,5 +670,24 @@ object dmStudentData: TdmStudentData
     DataSet = adodsAbitDisc
     Left = 295
     Top = 352
+  end
+  object adoqTargetOrganization: TADOQuery
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from [dbo].[TargetOrganization]'
+      ''
+      ''
+      ''
+      ''
+      '')
+    Left = 552
+    Top = 312
+  end
+  object dsTargetOrganization: TDataSource
+    DataSet = adoqTargetOrganization
+    Left = 551
+    Top = 360
   end
 end
