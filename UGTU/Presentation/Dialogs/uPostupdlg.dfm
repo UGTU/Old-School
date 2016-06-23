@@ -12,9 +12,9 @@ inherited frmPostupDlg: TfrmPostupDlg
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Top = 265
+    Top = 249
     Width = 565
-    Height = 157
+    Height = 173
     ExplicitTop = 117
     ExplicitWidth = 528
     ExplicitHeight = 198
@@ -22,47 +22,48 @@ inherited frmPostupDlg: TfrmPostupDlg
   inherited Panel1: TPanel
     Top = 560
     Width = 565
-    ExplicitTop = 538
-    ExplicitWidth = 522
+    ExplicitTop = 560
+    ExplicitWidth = 565
     inherited bbOK: TBitBtn
       Left = 389
       Top = 6
       Action = nil
       Enabled = False
       OnClick = bbOKClick
-      ExplicitLeft = 346
+      ExplicitLeft = 389
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
       Left = 476
       Enabled = False
       Visible = False
-      ExplicitLeft = 433
+      ExplicitLeft = 476
     end
     inherited bbCancel: TBitBtn
       Left = 476
-      ExplicitLeft = 433
+      Top = 6
+      ExplicitLeft = 476
+      ExplicitTop = 6
     end
     inherited bbSprav: TBitBtn
       Visible = False
     end
     object bbOkPrint: TBitBtn
-      Left = 220
-      Top = 8
+      Left = 212
+      Top = 6
       Width = 171
       Height = 25
       Anchors = [akRight, akBottom]
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080' '#1074#1099#1076#1072#1090#1100' '#1074' MS Excel'
       TabOrder = 4
       OnClick = bbOkPrintClick
-      ExplicitLeft = 177
     end
   end
   object GroupBox1: TGroupBox [2]
     Left = 0
     Top = 0
     Width = 565
-    Height = 265
+    Height = 249
     Align = alTop
     Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1077
     Font.Charset = DEFAULT_CHARSET
@@ -72,11 +73,9 @@ inherited frmPostupDlg: TfrmPostupDlg
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    ExplicitTop = -6
-    ExplicitWidth = 522
     DesignSize = (
       565
-      265)
+      249)
     object Label2: TLabel
       Left = 12
       Top = 15
@@ -158,15 +157,15 @@ inherited frmPostupDlg: TfrmPostupDlg
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 389
-      Top = 154
+      Left = 378
+      Top = 148
       Width = 123
       Height = 13
       Caption = #1044#1072#1090#1072' '#1087#1086#1076#1072#1095#1080' '#1086#1088#1080#1075#1080#1085#1072#1083#1072':'
     end
     object lOrganiz: TLabel
       Left = 165
-      Top = 100
+      Top = 99
       Width = 120
       Height = 13
       Caption = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103'-'#1079#1072#1082#1072#1079#1095#1080#1082':'
@@ -229,7 +228,7 @@ inherited frmPostupDlg: TfrmPostupDlg
     end
     object cbReal: TCheckBox
       Left = 3
-      Top = 171
+      Top = 147
       Width = 325
       Height = 17
       Caption = #1047#1072#1103#1074#1083#1077#1085#1080#1077' '#1076#1077#1081#1089#1090#1074#1080#1090#1077#1083#1100#1085#1086' ('#1074#1089#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1099' '#1074' '#1086#1088#1080#1075#1080#1085#1072#1083#1077')'
@@ -238,10 +237,10 @@ inherited frmPostupDlg: TfrmPostupDlg
     end
     object cbIsMain: TCheckBox
       Left = 3
-      Top = 194
+      Top = 170
       Width = 325
       Height = 17
-      Caption = #1071#1074#1083#1103#1077#1090#1089#1103' '#1087#1077#1088#1074#1080#1095#1085#1099#1084' ('#1083#1080#1095#1085#1086#1077' '#1076#1077#1083#1086' '#1085#1072' '#1101#1090#1086#1081' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100')'
+      Caption = #1071#1074#1083#1103#1077#1090#1089#1103' '#1087#1077#1088#1074#1080#1095#1085#1099#1084' ('#1083#1080#1095#1085#1086#1077' '#1076#1077#1083#1086' '#1085#1072' '#1101#1090#1086#1081' '#1089#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1080')'
       TabOrder = 4
       OnClick = cbIsMainClick
     end
@@ -264,7 +263,7 @@ inherited frmPostupDlg: TfrmPostupDlg
     end
     object bGetCertData: TButton
       Left = 3
-      Top = 224
+      Top = 208
       Width = 548
       Height = 35
       Anchors = [akLeft, akTop, akRight]
@@ -272,14 +271,22 @@ inherited frmPostupDlg: TfrmPostupDlg
       TabOrder = 6
       Visible = False
       OnClick = bGetCertDataClick
-      ExplicitWidth = 505
+    end
+    object chbNeedCheckEGE: TCheckBox
+      Left = 3
+      Top = 217
+      Width = 312
+      Height = 17
+      Caption = #1055#1088#1086#1074#1077#1088#1103#1090#1100' '#1045#1043#1069' ('#1089#1076#1072#1085#1086' '#1074' '#1087#1088#1077#1076#1099#1076#1091#1097#1080#1077' '#1075#1086#1076#1099')'
+      TabOrder = 7
+      OnClick = cbRealClick
     end
   end
   object GroupBox2: TGroupBox [3]
     Left = 0
-    Top = 265
+    Top = 249
     Width = 565
-    Height = 157
+    Height = 173
     Align = alClient
     Caption = #1069#1082#1079#1072#1084#1077#1085#1099
     Font.Charset = DEFAULT_CHARSET
@@ -289,9 +296,8 @@ inherited frmPostupDlg: TfrmPostupDlg
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 241
-    ExplicitWidth = 522
-    ExplicitHeight = 181
+    ExplicitTop = 265
+    ExplicitHeight = 157
     object sbAddExam: TSpeedButton
       Left = 539
       Top = 16
@@ -367,7 +373,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       Left = 2
       Top = 15
       Width = 531
-      Height = 140
+      Height = 156
       Align = alLeft
       BorderStyle = bsNone
       ColCount = 4
@@ -379,6 +385,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       TabOrder = 0
       OnClick = sgExamsClick
       OnDblClick = sgExamsDblClick
+      ExplicitHeight = 140
       ColWidths = (
         177
         117
@@ -400,8 +407,6 @@ inherited frmPostupDlg: TfrmPostupDlg
     Font.Style = []
     ParentFont = False
     TabOrder = 3
-    ExplicitTop = 400
-    ExplicitWidth = 522
     object sbAddSpec: TSpeedButton
       Left = 539
       Top = 16
@@ -494,9 +499,9 @@ inherited frmPostupDlg: TfrmPostupDlg
     end
   end
   object dtpDateOriginal: TDBDateTimeEditEh [5]
-    Left = 383
-    Top = 173
-    Width = 179
+    Left = 378
+    Top = 167
+    Width = 184
     Height = 19
     DynProps = <>
     EditButtons = <>

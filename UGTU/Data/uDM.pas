@@ -571,6 +571,8 @@ type
     adodsPostupViewAbitFullName: TStringField;
     adodsPostupViewik_spec_fac: TIntegerField;
     adodsPostupViewdateOriginal: TDateTimeField;
+    adodsPostupViewidTargetOrganization: TIntegerField;
+    adodsPostupViewNeedCheckEGE: TBooleanField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

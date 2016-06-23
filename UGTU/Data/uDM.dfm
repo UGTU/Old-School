@@ -854,6 +854,12 @@ object dm: Tdm
     object adodsPostupViewdateOriginal: TDateTimeField
       FieldName = 'dateOriginal'
     end
+    object adodsPostupViewidTargetOrganization: TIntegerField
+      FieldName = 'idTargetOrganization'
+    end
+    object adodsPostupViewNeedCheckEGE: TBooleanField
+      FieldName = 'NeedCheckEGE'
+    end
   end
   object dsPostupView: TDataSource
     DataSet = adodsPostupView
