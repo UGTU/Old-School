@@ -536,7 +536,7 @@ procedure TApplicationController.GetPhotoBooth(eName: string; img: TImage);
 begin
   if not Assigned(pBooth) then
   begin
-    pBooth := TPhotoBooth.Create('Enter - make photo, Esc - cancel',eName,img);
+    pBooth := TPhotoBooth.Create('Enter - сделать снимок, Esc - отменить',eName,img);
     pBooth.MakePhoto();
   end;
 end;
