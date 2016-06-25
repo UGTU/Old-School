@@ -334,7 +334,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       OnClick = sbAddExamClick
     end
     object sbDelExam: TSpeedButton
-      Left = 491
+      Left = 539
       Top = 41
       Width = 23
       Height = 22
@@ -443,7 +443,7 @@ inherited frmPostupDlg: TfrmPostupDlg
       OnClick = sbAddSpecClick
     end
     object SbDelSpec: TSpeedButton
-      Left = 491
+      Left = 539
       Top = 45
       Width = 23
       Height = 22

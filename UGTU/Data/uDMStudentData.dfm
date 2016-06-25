@@ -1,7 +1,7 @@
 object dmStudentData: TdmStudentData
   OldCreateOrder = False
   Height = 434
-  Width = 673
+  Width = 621
   object adodsZaved_Stud: TADODataSet
     Connection = dm.DBConnect
     CursorType = ctStatic
@@ -682,12 +682,12 @@ object dmStudentData: TdmStudentData
       ''
       ''
       '')
-    Left = 552
+    Left = 520
     Top = 312
   end
   object dsTargetOrganization: TDataSource
     DataSet = adoqTargetOrganization
-    Left = 551
+    Left = 519
     Top = 360
   end
 end
