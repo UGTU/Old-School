@@ -86,6 +86,8 @@ type
     actPrintProtocol: TAction;
     ToolButton15: TToolButton;
     N6: TMenuItem;
+    tbPhotosExport4Bank: TToolButton;
+    actExportPhotos: TAction;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -129,6 +131,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
     procedure actPrintProtocolExecute(Sender: TObject);
+    procedure actExportPhotosExecute(Sender: TObject);
   private
     function GetikFac: Integer;
     function GetikSpecfac: Integer;
@@ -870,7 +873,13 @@ begin
   end;
 end;
 
-procedure TfmAbitNabor.actImportNaborExecute(Sender: TObject);
+pprocedure TfmAbitNabor.actExportPhotosExecute(Sender: TObject);
+begin
+  inherited;
+
+end;
+
+rocedure TfmAbitNabor.actImportNaborExecute(Sender: TObject);
 begin
   inherited;
     //импортирование доступно только для фрейма общего набор
@@ -1079,6 +1088,11 @@ begin
     //Report.ReportTemplate := ExtractFilePath(Application.ExeName)+'reports\AbitDinamica.XLT';
     TWaitingController.GetInstance.Process(Report);
 
+end;
+
+procedure TfmAbitNabor.actExportPhotosExecute(Sender: TObject);
+begin
+  TPhotosExportController.Instance.Export4Bank(nabor.DataSource.DataSet);
 end;
 
 end.
