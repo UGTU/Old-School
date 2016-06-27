@@ -21,6 +21,8 @@ type
     ldelAdditionalSpec: Tlist;
     AvgBall: real;
     DateOriginal: TDateTime;
+    TargetNum: Variant;
+    NeedCheckEGE: boolean;
 
     function NewSpecNum: integer;
     // constructor Create;
@@ -75,6 +77,7 @@ type
     dbcbeTargetOrganization: TDBLookupComboboxEh;
     lOrganiz: TLabel;
     lOrganiz0: TLabel;
+    chbNeedCheckEGE: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure sbAddExamClick(Sender: TObject);
     procedure sgExamsClick(Sender: TObject);
@@ -228,6 +231,11 @@ begin
   if (dbcbeCategory.keyvalue <= 0) then
     dbcbeCategory.keyvalue := AbitList.CatNum;
 
+  if (dbcbeTargetOrganization.KeyValue <= 0) then
+    dbcbeTargetOrganization.KeyValue := AbitList.TargetNum;
+
+  chbNeedCheckEGE.Checked:= AbitList.NeedCheckEGE;
+
  { if (dbcbeCategory.Text <> AbitList.Cat) then      //Если абитуриент потерял возможность поступления на категорию
      dbcbeCategory.keyvalue := null;}
 
@@ -259,6 +267,11 @@ var
   docFilter: string;
 begin
   commited := false;
+
+  LoadTargetOrganizations;
+
+
+
   if AbitList = nil then
     AbitList := TAbitList.Create;
   AbitList.lAdditionalSpec := Tlist.Create;
@@ -481,14 +494,8 @@ end;
 
 procedure TfrmPostupDlg.LoadTargetOrganizations;
 begin
-  if (dbcbeCategory.KeyValue = 8) then
-  begin
-    dmStudentData.adoqTargetOrganization.Close;
-    dmStudentData.adoqTargetOrganization.Open;
-    SetTargetOrganizationsVisible(true);
-  end
-  else
-    SetTargetOrganizationsVisible(false);
+  dmStudentData.adoqTargetOrganization.Close;
+  dmStudentData.adoqTargetOrganization.Open;
 end;
 
 procedure TfrmPostupDlg.sbAddExamClick(Sender: TObject);
@@ -705,8 +712,12 @@ begin
   if dbcbeCategory.Text='' then dbcbeCategory.Color := clCream
     else dbcbeCategory.Color := clWindow;
 
-
-  LoadTargetOrganizations;
+  if (dbcbeCategory.KeyValue = 8) then
+  begin
+    SetTargetOrganizationsVisible(true);
+  end
+  else
+    SetTargetOrganizationsVisible(false);
 
 
   if CheckFields then
@@ -805,6 +816,8 @@ begin
   AbitList.Date := dbdteList.Value;
   AbitList.CatNum := dbcbeCategory.keyvalue;
   AbitList.AvgBall := eAvgBall.Value;
+  AbitList.TargetNum := dbcbeTargetOrganization.KeyValue;
+  AbitList.NeedCheckEGE := chbNeedCheckEGE.Checked;
 
   try
     dm.DBConnect.BeginTrans;
@@ -1203,6 +1216,11 @@ begin
           Items[7].Value := AbitList.IsMain;
 
           Items[8].Value := AbitList.AvgBall;
+
+          Items[9].Value := AbitList.TargetNum;
+
+          Items[10].Value := AbitList.NeedCheckEGE;
+
         end;
 
         dmAbiturientAction.aspAddPostup.ExecProc;
@@ -1234,6 +1252,10 @@ begin
           Items[8].Value := cbIsMain.checked;
 
           Items[9].Value := AbitList.AvgBall;
+
+          Items[10].Value := AbitList.TargetNum;
+
+          Items[11].Value := AbitList.NeedCheckEGE;
 
         end;
         dmAbiturientAction.aspEditPostup.ExecProc;
@@ -1343,6 +1365,7 @@ begin
     AbitList.RecruitNum := Dataset.FieldValues['NNRecord'];
   if Dataset.FieldValues['ik_kat_zach'] <> NULL then
     AbitList.CatNum := Dataset.FieldValues['ik_kat_zach'];
+  AbitList.TargetNum := Dataset.FieldValues['idTargetOrganization'];
   if Dataset.FieldValues['dd_pod_zayav'] <> NULL then
     AbitList.Date := Dataset.FieldValues['dd_pod_zayav'];
   if Dataset.FieldValues['Cname_kat_zach'] <> NULL then
@@ -1357,6 +1380,8 @@ begin
     AbitList.IsMain := Dataset.FieldValues['IsMain'];
   if Dataset.FieldValues['dateOriginal'] <> NULL then
     AbitList.DateOriginal := Dataset.FieldValues['dateOriginal'];
+  if (Dataset.FieldValues['NeedCheckEGE'] <> NULL) then
+    AbitList.NeedCheckEGE := Dataset.FieldValues['NeedCheckEGE'];
   AbitList.closed := onlyreading;
 
   AbitList.lAdditionalSpec := Tlist.Create;

@@ -790,6 +790,16 @@ object dmAbiturientAction: TdmAbiturientAction
         DataType = ftFloat
         Precision = 15
         Value = Null
+      end
+      item
+        Name = '@idTargetOrganization'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@NeedCheckEGE'
+        DataType = ftBoolean
+        Value = Null
       end>
     Left = 143
     Top = 340
@@ -856,6 +866,16 @@ object dmAbiturientAction: TdmAbiturientAction
         Attributes = [paNullable]
         DataType = ftFloat
         Precision = 15
+        Value = Null
+      end
+      item
+        Name = '@idTargetOrganization'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@NeedCheckEGE'
+        DataType = ftBoolean
         Value = Null
       end>
     Left = 355
