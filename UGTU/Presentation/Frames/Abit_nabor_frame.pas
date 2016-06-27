@@ -9,7 +9,7 @@ uses
   ImgList, Mask, DBCtrlsEh, Menus, //TeeProcs, TeEngine, Chart, Series,
   ActnList,ComObj, GridsEh, ApplicationController, ExceptionBase, DBGrids,
   DBLookupEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
-  System.Actions, DBAxisGridsEh;
+  System.Actions, DBAxisGridsEh, uPhotosExportController;
 
 type
   TfmAbitNabor = class(TfmBase)
@@ -873,13 +873,12 @@ begin
   end;
 end;
 
-pprocedure TfmAbitNabor.actExportPhotosExecute(Sender: TObject);
+procedure TfmAbitNabor.actExportPhotosExecute(Sender: TObject);
 begin
-  inherited;
-
+  TPhotosExportController.Instance.Export4Bank(dbgrdStatistika.DataSource.DataSet,'Photos4Bank');
 end;
 
-rocedure TfmAbitNabor.actImportNaborExecute(Sender: TObject);
+procedure TfmAbitNabor.actImportNaborExecute(Sender: TObject);
 begin
   inherited;
     //импортирование доступно только для фрейма общего набор
@@ -1090,9 +1089,5 @@ begin
 
 end;
 
-procedure TfmAbitNabor.actExportPhotosExecute(Sender: TObject);
-begin
-  TPhotosExportController.Instance.Export4Bank(nabor.DataSource.DataSet);
-end;
 
 end.
