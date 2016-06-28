@@ -232,22 +232,24 @@ begin
   if (AbitList = nil) then
     exit;
 
-  if (dbcbeCategory.keyvalue <= 0) then
-    dbcbeCategory.keyvalue := AbitList.CatNum;
-
-  if (dbcbeTargetOrganization.KeyValue <= 0) then
-    dbcbeTargetOrganization.KeyValue := AbitList.TargetNum;
 
   chbNeedCheckEGE.Checked:= AbitList.NeedCheckEGE;
 
  { if (dbcbeCategory.Text <> AbitList.Cat) then      //≈сли абитуриент потер€л возможность поступлени€ на категорию
      dbcbeCategory.keyvalue := null;}
+  if (dbcbeCategory.keyvalue <= 0) then
+    dbcbeCategory.keyvalue := AbitList.CatNum;
 
   if (dbcbeRecruit.keyvalue <= 0) then
   begin
     dbcbeRecruit.keyvalue := NNRecord;//AbitList.RecruitNum;
     GetKatZach(NNRecord); //настройка категорий зачислени€
   end;
+
+
+  if (dbcbeTargetOrganization.KeyValue <= 0) then
+    dbcbeTargetOrganization.KeyValue := AbitList.TargetNum;
+
   if (eAvgBall.Value <= 0) then
     eAvgBall.Value := AbitList.AvgBall;
 
@@ -277,6 +279,14 @@ begin
 
   LoadTargetOrganizations;
 
+
+  dm.adodsNabor.Active := false;
+  dm.adodsNabor.CommandType := cmdText;
+  dm.adodsNabor.CommandText :=
+    'select * from Tree_abit_Specialties where NNYear=''' + inttostr(Year) +
+    ''' Order By Cshort_name_fac, Cname_spec';
+  dm.adodsNabor.Active := true;
+  dm.adodsNabor.Open;
 
 
   if AbitList = nil then
@@ -357,14 +367,6 @@ begin
     dmStudentData.adodsKatZach.Active:=true; }
 
   //GetKatZach(IkRecruit); //настройка категорий поступлени€
-
-  dm.adodsNabor.Active := false;
-  dm.adodsNabor.CommandType := cmdText;
-  dm.adodsNabor.CommandText :=
-    'select * from Tree_abit_Specialties where NNYear=''' + inttostr(Year) +
-    ''' Order By Cshort_name_fac, Cname_spec';
-  dm.adodsNabor.Active := true;
-  dm.adodsNabor.Open;
 
   if NNRecord > 0 then
   begin
