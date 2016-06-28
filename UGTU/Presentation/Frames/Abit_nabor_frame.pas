@@ -9,7 +9,7 @@ uses
   ImgList, Mask, DBCtrlsEh, Menus, //TeeProcs, TeEngine, Chart, Series,
   ActnList,ComObj, GridsEh, ApplicationController, ExceptionBase, DBGrids,
   DBLookupEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
-  System.Actions, DBAxisGridsEh;
+  System.Actions, DBAxisGridsEh, uPhotosExportController;
 
 type
   TfmAbitNabor = class(TfmBase)
@@ -86,6 +86,8 @@ type
     actPrintProtocol: TAction;
     ToolButton15: TToolButton;
     N6: TMenuItem;
+    tbPhotosExport4Bank: TToolButton;
+    actExportPhotos: TAction;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -129,6 +131,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
     procedure actPrintProtocolExecute(Sender: TObject);
+    procedure actExportPhotosExecute(Sender: TObject);
   private
     function GetikFac: Integer;
     function GetikSpecfac: Integer;
@@ -870,6 +873,11 @@ begin
   end;
 end;
 
+procedure TfmAbitNabor.actExportPhotosExecute(Sender: TObject);
+begin
+  TPhotosExportController.Instance.Export4Bank(dbgrdStatistika.DataSource.DataSet,'Photos4Bank');
+end;
+
 procedure TfmAbitNabor.actImportNaborExecute(Sender: TObject);
 begin
   inherited;
@@ -1080,5 +1088,6 @@ begin
     TWaitingController.GetInstance.Process(Report);
 
 end;
+
 
 end.

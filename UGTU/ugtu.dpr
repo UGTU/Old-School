@@ -439,7 +439,8 @@ uses
   PersonController in 'Domain\Controllers\PersonController.pas',
   AbitPostupProtocolReport in 'Domain\Reports\AbitPostupProtocolReport.pas',
   AbitEnrollAgreement in 'Domain\Reports\AbitEnrollAgreement.pas',
-  uChangePlanFromGrup in 'Presentation\Dialogs\uChangePlanFromGrup.pas' {frmChangeGrupPlan};
+  uChangePlanFromGrup in 'Presentation\Dialogs\uChangePlanFromGrup.pas' {frmChangeGrupPlan},
+  uPhotosExportController in 'Domain\Controllers\uPhotosExportController.pas';
 
 //MW_DepPlanRep in 'Domain\Reports\MW_DepPlanRep.pas',
   //MW_DepPlanEditionRep in 'Domain\Reports\MW_DepPlanEditionRep.pas',

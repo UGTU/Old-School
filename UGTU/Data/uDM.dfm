@@ -5,6 +5,7 @@ object dm: Tdm
   Width = 1149
   object DBConnect: TADOConnection
     CommandTimeout = 300
+    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
       'fo=False;User ID=developer;Initial Catalog=UGTU_ACTTEST;Data Sou' +
