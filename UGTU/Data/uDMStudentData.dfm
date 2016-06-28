@@ -385,7 +385,37 @@ object dmStudentData: TdmStudentData
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'Abit_Search_Abit;1'
-    Parameters = <>
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@regnomer'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = '@clastname'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = '@cfirstname'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = '@cotch'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 30
+      end>
     Left = 167
     Top = 302
     object aspFindAbitclastname: TStringField
@@ -434,7 +464,7 @@ object dmStudentData: TdmStudentData
     Left = 167
     Top = 352
   end
-  object aspGetAbitCat: TADOStoredProc
+  object aspGetAbitCat0: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'ABIT_Get_Kat_zach;1'
@@ -447,7 +477,7 @@ object dmStudentData: TdmStudentData
         Value = Null
       end
       item
-        Name = '@NNyear'
+        Name = '@NNRecord'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
@@ -689,5 +719,37 @@ object dmStudentData: TdmStudentData
     DataSet = adoqTargetOrganization
     Left = 519
     Top = 360
+  end
+  object aspGetAbitCat: TADOStoredProc
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    ProcedureName = 'ABIT_Get_Kat_zach;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = 0
+      end
+      item
+        Name = '@NNRecord'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = 1926
+      end>
+    Left = 263
+    Top = 270
+    object aspGetAbitCatIk_kat_zach: TIntegerField
+      FieldName = 'Ik_kat_zach'
+    end
+    object aspGetAbitCatCname_kat_zach: TStringField
+      FieldName = 'Cname_kat_zach'
+      Size = 50
+    end
+    object aspGetAbitCatik_type_kat: TIntegerField
+      FieldName = 'ik_type_kat'
+    end
   end
 end

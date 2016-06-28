@@ -14,7 +14,7 @@ type
   TAbitList = class
   public
     Num, RecruitNum, CatNum, NNAbit: integer;
-    Date: TDateTime;
+    Date: Variant;
     Recruit, Cat: string;
     new, delete, closed, real, IsMain: boolean;
     lAdditionalSpec: Tlist;
@@ -243,8 +243,6 @@ begin
  { if (dbcbeCategory.Text <> AbitList.Cat) then      //Если абитуриент потерял возможность поступления на категорию
      dbcbeCategory.keyvalue := null;}
 
-  if (dbdteList.Value <= 0) then
-    dbdteList.Value := AbitList.Date;
   if (dbcbeRecruit.keyvalue <= 0) then
   begin
     dbcbeRecruit.keyvalue := NNRecord;//AbitList.RecruitNum;
@@ -255,7 +253,12 @@ begin
 
   cbReal.checked := AbitList.real;
   dtpDateOriginal.Enabled := AbitList.real;
+  dtpDateOriginal.Value := AbitList.DateOriginal;
   cbIsMain.checked := AbitList.IsMain;
+  if (dbdteList.Value <= 0) then
+    dbdteList.Value := AbitList.Date;
+
+
 
   ExamSync;
   AdditionalSpecSync;
@@ -471,7 +474,9 @@ begin
   with dmStudentData.aspGetAbitCat do
   begin
     Active := false;
-    Parameters[1].Value := NNRecord;
+    Parameters.Clear;
+    Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
+    Parameters.CreateParameter('@NNRecord', ftInteger, pdInput, 4, NNRecord);
     Active := true;
     GetAdmissionByDoc;
     Filter := FDocKatFilter;
