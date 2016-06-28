@@ -246,7 +246,7 @@ begin
   if (dbcbeRecruit.keyvalue <= 0) then
   begin
     dbcbeRecruit.keyvalue := NNRecord;//AbitList.RecruitNum;
-    GetKatZach(dbcbeRecruit.KeyValue); //настройка категорий зачисления
+    GetKatZach(NNRecord); //настройка категорий зачисления
   end;
   if (eAvgBall.Value <= 0) then
     eAvgBall.Value := AbitList.AvgBall;

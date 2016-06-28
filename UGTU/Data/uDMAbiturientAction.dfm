@@ -1129,6 +1129,10 @@ object dmAbiturientAction: TdmAbiturientAction
       DisplayLabel = #1044
       FieldName = 'Realy_postup'
     end
+    object aspGetOtherspecdateOriginal: TDateTimeField
+      DisplayLabel = #1044#1072#1090#1072' '#1086#1088#1080#1075#1080#1085#1072#1083#1072
+      FieldName = 'dateOriginal'
+    end
   end
   object dsAbitOtherlSpec: TDataSource
     DataSet = aspGetOtherspec
