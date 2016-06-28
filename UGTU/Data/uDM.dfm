@@ -5,7 +5,6 @@ object dm: Tdm
   Width = 1149
   object DBConnect: TADOConnection
     CommandTimeout = 300
-    Connected = True
     ConnectionString = 
       'Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security In' +
       'fo=False;User ID=developer;Initial Catalog=UGTU_ACTTEST;Data Sou' +
@@ -425,6 +424,32 @@ object dm: Tdm
     object adodsNaborFullName: TStringField
       FieldName = 'FullName'
       Size = 500
+    end
+    object adodsNaborMestCKP: TIntegerField
+      FieldName = 'MestCKP'
+    end
+    object adodsNaborMestBudjet: TIntegerField
+      FieldName = 'MestBudjet'
+    end
+    object adodsNaborMestKontrakt: TIntegerField
+      FieldName = 'MestKontrakt'
+    end
+    object adodsNaborMestLgot: TIntegerField
+      FieldName = 'MestLgot'
+    end
+    object adodsNaborik_profile: TIntegerField
+      FieldName = 'ik_profile'
+    end
+    object adodsNaborlRussian: TBooleanField
+      FieldName = 'lRussian'
+    end
+    object adodsNaborid_type_direction: TIntegerField
+      FieldName = 'id_type_direction'
+      ReadOnly = True
+    end
+    object adodsNaboridDirectionSuperType: TIntegerField
+      FieldName = 'idDirectionSuperType'
+      ReadOnly = True
     end
   end
   object dsNabor: TDataSource

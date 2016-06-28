@@ -296,8 +296,6 @@ inherited frmPostupDlg: TfrmPostupDlg
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitTop = 265
-    ExplicitHeight = 157
     object sbAddExam: TSpeedButton
       Left = 539
       Top = 16
@@ -385,7 +383,6 @@ inherited frmPostupDlg: TfrmPostupDlg
       TabOrder = 0
       OnClick = sgExamsClick
       OnDblClick = sgExamsDblClick
-      ExplicitHeight = 140
       ColWidths = (
         177
         117

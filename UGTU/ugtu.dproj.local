@@ -126,6 +126,7 @@
     <File Path="Domain\Controllers\CommandController.pas"/>
     <File Path="Domain\Controllers\uDocController.pas"/>
     <File Path="Domain\Controllers\PersonController.pas"/>
+    <File Path="Domain\Controllers\uPhotosExportController.pas"/>
     <File Path="Domain\DBTV"/>
     <File Path="Domain\DBTV\DBDekTreeView_TEST.pas"/>
     <File Path="Domain\DBTV\DBTV.pas"/>

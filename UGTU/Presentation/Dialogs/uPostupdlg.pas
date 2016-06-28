@@ -147,6 +147,10 @@ begin
       (dbdteList.Text = '  .  .    ') or (AbitList = nil) then
       result := false;
 
+      //у СПО д.б. занесены средние баллы
+    if ((dm.adodsNaboridDirectionSuperType.Value=2) and (eAvgBall.Value < 1)) then
+      result:= false;
+
   end;
 end;
 
@@ -811,6 +815,8 @@ var
 
 begin
   Log := TNullLogger.GetInstance; // TMemoLogger.GetInstance; //
+
+
 
   AbitList.RecruitNum := dbcbeRecruit.keyvalue;
   AbitList.Date := dbdteList.Value;
