@@ -255,7 +255,8 @@ begin
 
   cbReal.checked := AbitList.real;
   dtpDateOriginal.Enabled := AbitList.real;
-  dtpDateOriginal.Value := AbitList.DateOriginal;
+  if (dtpDateOriginal.Enabled) then
+    dtpDateOriginal.Value := AbitList.DateOriginal;
   cbIsMain.checked := AbitList.IsMain;
   if (dbdteList.Value <= 0) then
     dbdteList.Value := AbitList.Date;
