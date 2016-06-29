@@ -89,6 +89,11 @@ begin
          (Owner as TftmStudent).dbcbeCitizenship.KeyValue := dbcbeCountry.KeyValue;
     end;
 
+    if (dbcbeAddressType.KeyValue = 1) then
+      dbcbeAddressType.KeyValue := 3;
+    if (dbcbeAddressType.KeyValue = 2) then
+      dbcbeAddressType.KeyValue := 1;
+
   end
   else if EditMode then
   begin
