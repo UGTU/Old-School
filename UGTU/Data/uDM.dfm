@@ -425,6 +425,32 @@ object dm: Tdm
       FieldName = 'FullName'
       Size = 500
     end
+    object adodsNaborMestCKP: TIntegerField
+      FieldName = 'MestCKP'
+    end
+    object adodsNaborMestBudjet: TIntegerField
+      FieldName = 'MestBudjet'
+    end
+    object adodsNaborMestKontrakt: TIntegerField
+      FieldName = 'MestKontrakt'
+    end
+    object adodsNaborMestLgot: TIntegerField
+      FieldName = 'MestLgot'
+    end
+    object adodsNaborik_profile: TIntegerField
+      FieldName = 'ik_profile'
+    end
+    object adodsNaborlRussian: TBooleanField
+      FieldName = 'lRussian'
+    end
+    object adodsNaborid_type_direction: TIntegerField
+      FieldName = 'id_type_direction'
+      ReadOnly = True
+    end
+    object adodsNaboridDirectionSuperType: TIntegerField
+      FieldName = 'idDirectionSuperType'
+      ReadOnly = True
+    end
   end
   object dsNabor: TDataSource
     DataSet = adodsNabor
@@ -853,6 +879,12 @@ object dm: Tdm
     end
     object adodsPostupViewdateOriginal: TDateTimeField
       FieldName = 'dateOriginal'
+    end
+    object adodsPostupViewidTargetOrganization: TIntegerField
+      FieldName = 'idTargetOrganization'
+    end
+    object adodsPostupViewNeedCheckEGE: TBooleanField
+      FieldName = 'NeedCheckEGE'
     end
   end
   object dsPostupView: TDataSource

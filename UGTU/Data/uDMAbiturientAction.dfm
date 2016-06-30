@@ -790,6 +790,16 @@ object dmAbiturientAction: TdmAbiturientAction
         DataType = ftFloat
         Precision = 15
         Value = Null
+      end
+      item
+        Name = '@idTargetOrganization'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@NeedCheckEGE'
+        DataType = ftBoolean
+        Value = Null
       end>
     Left = 143
     Top = 340
@@ -856,6 +866,16 @@ object dmAbiturientAction: TdmAbiturientAction
         Attributes = [paNullable]
         DataType = ftFloat
         Precision = 15
+        Value = Null
+      end
+      item
+        Name = '@idTargetOrganization'
+        DataType = ftInteger
+        Value = Null
+      end
+      item
+        Name = '@NeedCheckEGE'
+        DataType = ftBoolean
         Value = Null
       end>
     Left = 355
@@ -1108,6 +1128,10 @@ object dmAbiturientAction: TdmAbiturientAction
     object aspGetOtherspecRealy_postup: TBooleanField
       DisplayLabel = #1044
       FieldName = 'Realy_postup'
+    end
+    object aspGetOtherspecdateOriginal: TDateTimeField
+      DisplayLabel = #1044#1072#1090#1072' '#1086#1088#1080#1075#1080#1085#1072#1083#1072
+      FieldName = 'dateOriginal'
     end
   end
   object dsAbitOtherlSpec: TDataSource

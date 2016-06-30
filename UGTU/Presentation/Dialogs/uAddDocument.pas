@@ -69,6 +69,8 @@ type
     procedure SetTypeGrazd(const Value: integer);
     procedure SetImageFiles(const Value: TList<TMemoryStream>);
     procedure CreateDocFrame(aFile: TMemoryStream);
+    function CheckData: boolean;
+    function CheckFields: boolean;
   protected
     { Private declarations }
     function DoCancel:boolean; override;
@@ -94,18 +96,24 @@ uses ConstantRepository, PersonController, uStudent, ImageFullSizeShowFrm,
 
 {$R *.dfm}
 
-function CheckFields: boolean;
+function TfrmAddDocument.CheckData: boolean;
+begin
+  result:= true;
+  if (dbdteGetDate.Value > Today) then
+    begin
+      showmessage('Дата выдачи должна быть раньше текущей!');
+      dbdteGetDate.Value:= Today;
+      result:= false;
+    end;
+end;
+
+function TfrmAddDocument.CheckFields: boolean;
 begin
   result := true;
   with frmAddDocument do
   begin
 
-    if (dbdteGetDate.Value > Today) then
-    begin
-      showmessage('Дата выдачи должна быть раньше текущей!');
-      dbdteGetDate.Value:= Today;
-      exit;
-    end;
+
 
     if (dbcbeKind.Text = '') { or (eSer.Text = '') } or (eNum.Text = '') then
       result := false;
@@ -130,6 +138,9 @@ var
   iDoc: TImage;
   iLabel: TLabel;
 begin
+  if not CheckData then
+    exit;
+
   doc := TDocRecord.Create(FDocID, dbcbeKind.KeyValue, StrToInt(dbBalls.Text),
     dbcbeDisc.KeyValue, eSer.Text, eNum.Text, eWho.Text, dbeAddInfo.Text,
     cbReal.Checked, dbdteGetDate.Value);

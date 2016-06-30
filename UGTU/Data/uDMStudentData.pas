@@ -71,7 +71,7 @@ type
     aspFindAbitcfirstname: TStringField;
     aspFindAbitcotch: TStringField;
     aspFindAbitncode: TIntegerField;
-    aspGetAbitCat: TADOStoredProc;
+    aspGetAbitCat0: TADOStoredProc;
     dsGetAbitCat: TDataSource;
     aspFindAbitnn_abit: TIntegerField;
     aspFindAbitidCat: TIntegerField;
@@ -116,6 +116,12 @@ type
     adsIsOnVacation: TADODataSet;
     adodsAbitDisc: TADODataSet;
     dsAbitDisc: TDataSource;
+    adoqTargetOrganization: TADOQuery;
+    dsTargetOrganization: TDataSource;
+    aspGetAbitCat: TADOStoredProc;
+    aspGetAbitCatIk_kat_zach: TIntegerField;
+    aspGetAbitCatCname_kat_zach: TStringField;
+    aspGetAbitCatik_type_kat: TIntegerField;
     procedure adodsSmallGroupCalcFields(DataSet: TDataSet);
     procedure adodsPrikazCalcFields(DataSet: TDataSet);
   private

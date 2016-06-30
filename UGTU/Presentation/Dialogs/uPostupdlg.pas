@@ -14,13 +14,15 @@ type
   TAbitList = class
   public
     Num, RecruitNum, CatNum, NNAbit: integer;
-    Date: TDateTime;
+    Date: Variant;
     Recruit, Cat: string;
     new, delete, closed, real, IsMain: boolean;
     lAdditionalSpec: Tlist;
     ldelAdditionalSpec: Tlist;
     AvgBall: real;
     DateOriginal: TDateTime;
+    TargetNum: Variant;
+    NeedCheckEGE: boolean;
 
     function NewSpecNum: integer;
     // constructor Create;
@@ -72,6 +74,10 @@ type
     Label1: TLabel;
     Label9: TLabel;
     dtpDateOriginal: TDBDateTimeEditEh;
+    dbcbeTargetOrganization: TDBLookupComboboxEh;
+    lOrganiz: TLabel;
+    lOrganiz0: TLabel;
+    chbNeedCheckEGE: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure sbAddExamClick(Sender: TObject);
     procedure sgExamsClick(Sender: TObject);
@@ -95,6 +101,8 @@ type
     procedure LoadDocs;
     procedure GetAdmissionByDoc;
     procedure GetKatZach(NNRecord: integer);
+    procedure LoadTargetOrganizations;
+    procedure SetTargetOrganizationsVisible(isVisible: boolean);
   public
     HostForm: TfrmAbitCardDialog;
     DocRecordList: TObjectList<TDocRecord>;
@@ -138,6 +146,10 @@ begin
     if (dbcbeRecruit.Text = '') or (dbcbeCategory.Text = '') or
       (dbdteList.Text = '  .  .    ') or (AbitList = nil) then
       result := false;
+
+      //у СПО д.б. занесены средние баллы
+    if ((dm.adodsNaboridDirectionSuperType.Value=2) and (eAvgBall.Value < 1)) then
+      result:= false;
 
   end;
 end;
@@ -220,25 +232,36 @@ begin
   if (AbitList = nil) then
     exit;
 
-  if (dbcbeCategory.keyvalue <= 0) then
-    dbcbeCategory.keyvalue := AbitList.CatNum;
+
+  chbNeedCheckEGE.Checked:= AbitList.NeedCheckEGE;
 
  { if (dbcbeCategory.Text <> AbitList.Cat) then      //Если абитуриент потерял возможность поступления на категорию
      dbcbeCategory.keyvalue := null;}
+  if (dbcbeCategory.keyvalue <= 0) then
+    dbcbeCategory.keyvalue := AbitList.CatNum;
 
-  if (dbdteList.Value <= 0) then
-    dbdteList.Value := AbitList.Date;
   if (dbcbeRecruit.keyvalue <= 0) then
   begin
     dbcbeRecruit.keyvalue := NNRecord;//AbitList.RecruitNum;
-    GetKatZach(dbcbeRecruit.KeyValue); //настройка категорий зачисления
+    GetKatZach(NNRecord); //настройка категорий зачисления
   end;
+
+
+  if (dbcbeTargetOrganization.KeyValue <= 0) then
+    dbcbeTargetOrganization.KeyValue := AbitList.TargetNum;
+
   if (eAvgBall.Value <= 0) then
     eAvgBall.Value := AbitList.AvgBall;
 
   cbReal.checked := AbitList.real;
   dtpDateOriginal.Enabled := AbitList.real;
+  if (dtpDateOriginal.Enabled) then
+    dtpDateOriginal.Value := AbitList.DateOriginal;
   cbIsMain.checked := AbitList.IsMain;
+  if (dbdteList.Value <= 0) then
+    dbdteList.Value := AbitList.Date;
+
+
 
   ExamSync;
   AdditionalSpecSync;
@@ -254,6 +277,19 @@ var
   docFilter: string;
 begin
   commited := false;
+
+  LoadTargetOrganizations;
+
+
+  dm.adodsNabor.Active := false;
+  dm.adodsNabor.CommandType := cmdText;
+  dm.adodsNabor.CommandText :=
+    'select * from Tree_abit_Specialties where NNYear=''' + inttostr(Year) +
+    ''' Order By Cshort_name_fac, Cname_spec';
+  dm.adodsNabor.Active := true;
+  dm.adodsNabor.Open;
+
+
   if AbitList = nil then
     AbitList := TAbitList.Create;
   AbitList.lAdditionalSpec := Tlist.Create;
@@ -332,14 +368,6 @@ begin
     dmStudentData.adodsKatZach.Active:=true; }
 
   //GetKatZach(IkRecruit); //настройка категорий поступления
-
-  dm.adodsNabor.Active := false;
-  dm.adodsNabor.CommandType := cmdText;
-  dm.adodsNabor.CommandText :=
-    'select * from Tree_abit_Specialties where NNYear=''' + inttostr(Year) +
-    ''' Order By Cshort_name_fac, Cname_spec';
-  dm.adodsNabor.Active := true;
-  dm.adodsNabor.Open;
 
   if NNRecord > 0 then
   begin
@@ -449,7 +477,9 @@ begin
   with dmStudentData.aspGetAbitCat do
   begin
     Active := false;
-    Parameters[1].Value := NNRecord;
+    Parameters.Clear;
+    Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
+    Parameters.CreateParameter('@NNRecord', ftInteger, pdInput, 4, NNRecord);
     Active := true;
     GetAdmissionByDoc;
     Filter := FDocKatFilter;
@@ -472,6 +502,12 @@ begin
     DocDS.Next;
   end;
   DocDS.Free;
+end;
+
+procedure TfrmPostupDlg.LoadTargetOrganizations;
+begin
+  dmStudentData.adoqTargetOrganization.Close;
+  dmStudentData.adoqTargetOrganization.Open;
 end;
 
 procedure TfrmPostupDlg.sbAddExamClick(Sender: TObject);
@@ -577,6 +613,13 @@ begin
   Sync;
 end;
 
+procedure TfrmPostupDlg.SetTargetOrganizationsVisible(isVisible: boolean);
+begin
+  dbcbeTargetOrganization.Visible:= isVisible;
+  lOrganiz.Visible:= isVisible;
+  lOrganiz0.Visible:= isVisible;
+end;
+
 procedure TfrmPostupDlg.bbOKClick(Sender: TObject);
 begin
   actOKExecute(Sender);
@@ -674,10 +717,19 @@ begin
   Sync;
 end;
 
+
+
 procedure TfrmPostupDlg.ButtonsCheck;
 begin
   if dbcbeCategory.Text='' then dbcbeCategory.Color := clCream
     else dbcbeCategory.Color := clWindow;
+
+  if (dbcbeCategory.KeyValue = 8) then
+  begin
+    SetTargetOrganizationsVisible(true);
+  end
+  else
+    SetTargetOrganizationsVisible(false);
 
 
   if CheckFields then
@@ -772,10 +824,14 @@ var
 begin
   Log := TNullLogger.GetInstance; // TMemoLogger.GetInstance; //
 
+
+
   AbitList.RecruitNum := dbcbeRecruit.keyvalue;
   AbitList.Date := dbdteList.Value;
   AbitList.CatNum := dbcbeCategory.keyvalue;
   AbitList.AvgBall := eAvgBall.Value;
+  AbitList.TargetNum := dbcbeTargetOrganization.KeyValue;
+  AbitList.NeedCheckEGE := chbNeedCheckEGE.Checked;
 
   try
     dm.DBConnect.BeginTrans;
@@ -1174,6 +1230,11 @@ begin
           Items[7].Value := AbitList.IsMain;
 
           Items[8].Value := AbitList.AvgBall;
+
+          Items[9].Value := AbitList.TargetNum;
+
+          Items[10].Value := AbitList.NeedCheckEGE;
+
         end;
 
         dmAbiturientAction.aspAddPostup.ExecProc;
@@ -1205,6 +1266,10 @@ begin
           Items[8].Value := cbIsMain.checked;
 
           Items[9].Value := AbitList.AvgBall;
+
+          Items[10].Value := AbitList.TargetNum;
+
+          Items[11].Value := AbitList.NeedCheckEGE;
 
         end;
         dmAbiturientAction.aspEditPostup.ExecProc;
@@ -1314,6 +1379,7 @@ begin
     AbitList.RecruitNum := Dataset.FieldValues['NNRecord'];
   if Dataset.FieldValues['ik_kat_zach'] <> NULL then
     AbitList.CatNum := Dataset.FieldValues['ik_kat_zach'];
+  AbitList.TargetNum := Dataset.FieldValues['idTargetOrganization'];
   if Dataset.FieldValues['dd_pod_zayav'] <> NULL then
     AbitList.Date := Dataset.FieldValues['dd_pod_zayav'];
   if Dataset.FieldValues['Cname_kat_zach'] <> NULL then
@@ -1328,6 +1394,8 @@ begin
     AbitList.IsMain := Dataset.FieldValues['IsMain'];
   if Dataset.FieldValues['dateOriginal'] <> NULL then
     AbitList.DateOriginal := Dataset.FieldValues['dateOriginal'];
+  if (Dataset.FieldValues['NeedCheckEGE'] <> NULL) then
+    AbitList.NeedCheckEGE := Dataset.FieldValues['NeedCheckEGE'];
   AbitList.closed := onlyreading;
 
   AbitList.lAdditionalSpec := Tlist.Create;

@@ -218,6 +218,7 @@ type
     adoSelDocFilesIK_doc: TIntegerField;
     adoSelDocFilesdoc_file: TBlobField;
     ppmDest: TPopupMenu;
+    bClearPhoto: TButton;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -283,6 +284,7 @@ type
     procedure cbJobClick(Sender: TObject);
     procedure dbcbeCitizenshipChange(Sender: TObject);
     procedure ppmDestPopup(Sender: TObject);
+    procedure bClearPhotoClick(Sender: TObject);
 
   private
     Fik: Integer;
@@ -2026,6 +2028,13 @@ begin
 
   bbSave.enabled := false;
   bbUndo.enabled := false;
+end;
+
+procedure TfmStudent.bClearPhotoClick(Sender: TObject);
+begin
+if iPhoto.Picture.Graphic<>nil then  modified:=true;
+  iPhoto.Picture.Graphic := nil;
+
 end;
 
 procedure TfmStudent.bShotClick(Sender: TObject);

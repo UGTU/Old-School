@@ -97,6 +97,7 @@ type
     adospPrintZayavlcEmail: TStringField;
     aspDoubles: TADODataSet;
     adospPrintZayavlFullName: TStringField;
+    aspGetOtherspecdateOriginal: TDateTimeField;
   private
     { Private declarations }
   public

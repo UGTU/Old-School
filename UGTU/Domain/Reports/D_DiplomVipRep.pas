@@ -39,13 +39,14 @@ type
     FNameInDatPadez: boolean;
     Fik_VidGos: integer;
     Fik_fac: integer;
-    function GetNextCellVert(cur: String): String;
+    function GetNextCellVert(cur: String; StrRest: string = ''): String;
     function GetPrevCellVert(cur: String): String;
     function GetNextCellHor(cur: String): String;
     function LastPos(subStr, str: string): integer;
     function StringFormat(var str: string; strMaxLen:integer): string;
     //function IsNapravl:boolean;
-    procedure SelectNextCellVert(var cur: String; var ActRange: Variant);
+    procedure SelectNextCellVert(var cur: String; var ActRange: Variant; StrRest: string = '');
+    procedure SelectPrevCellVert(var cur: String; var ActRange: Variant);
     procedure SelectNextCellHor(var cur: String; var ActRange: Variant);
     procedure SendToExcel;
     procedure SendStringToExcel(var str, cur: string; ActRange: Variant; StrMaxLength: integer = 0);
@@ -161,7 +162,7 @@ begin
 
 end;
 
-function TDiplomVipExcelReport.GetNextCellVert(cur: String): String;
+function TDiplomVipExcelReport.GetNextCellVert(cur: String; StrRest: string = ''): String;
 var
   num: Integer;
   i: Integer;
@@ -180,7 +181,7 @@ begin
   num := StrToInt(nstr);
   num := num+1;
   //переход на следующую страницу
-  if (num>57) then
+  if (num>57) or ((num>56) and (StrRest.Length >0 ))then
     Result := '$F$8'
   else
     Result := bstr+IntToStr(num);
@@ -237,9 +238,17 @@ begin
   ActRange.Select;
 end;
 
-procedure TDiplomVipExcelReport.SelectNextCellVert(var cur: String; var ActRange: Variant);
+
+procedure TDiplomVipExcelReport.SelectNextCellVert(var cur: String; var ActRange: Variant; StrRest: string = '');
 begin
-  cur := GetNextCellVert(cur);
+  cur := GetNextCellVert(cur, StrRest);
+  ActRange := Range[cur,cur];
+  ActRange.Select;
+end;
+
+procedure TDiplomVipExcelReport.SelectPrevCellVert(var cur: String; var ActRange: Variant);
+begin
+  cur := GetPrevCellVert(cur);
   ActRange := Range[cur,cur];
   ActRange.Select;
 end;
@@ -538,6 +547,7 @@ begin
   FindRange.Select;
   ActRange := Selection;
   cur:= ActRange.Address;
+  SelectPrevCellVert(cur, ActRange);
   repeat
   begin
     str:= '';
@@ -547,6 +557,7 @@ begin
         str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
     end;
     str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
+    SelectNextCellVert(cur, ActRange, str1);
     ActRange.Value := str;
 
     if (str1<>'') then
@@ -571,7 +582,7 @@ begin
 
     dmDiplom.adospSelUspevForVipisca.Next;
     //inc(i);
-    SelectNextCellVert(cur, ActRange);
+
   end;
   until (dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger <= 0);
 
@@ -580,6 +591,7 @@ begin
   SendStringToExcel(str, cur, ActRange); }
   
 
+  SelectNextCellVert(cur, ActRange);
   SelectNextCellVert(cur, ActRange);
   //вывод практик  #ѕрактики#
   dmDiplom.adospSelPractForVipisca.First;

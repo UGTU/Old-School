@@ -571,6 +571,16 @@ type
     adodsPostupViewAbitFullName: TStringField;
     adodsPostupViewik_spec_fac: TIntegerField;
     adodsPostupViewdateOriginal: TDateTimeField;
+    adodsPostupViewidTargetOrganization: TIntegerField;
+    adodsPostupViewNeedCheckEGE: TBooleanField;
+    adodsNaborMestCKP: TIntegerField;
+    adodsNaborMestBudjet: TIntegerField;
+    adodsNaborMestKontrakt: TIntegerField;
+    adodsNaborMestLgot: TIntegerField;
+    adodsNaborik_profile: TIntegerField;
+    adodsNaborlRussian: TBooleanField;
+    adodsNaborid_type_direction: TIntegerField;
+    adodsNaboridDirectionSuperType: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
 
     procedure adospSelVedEkzCalcFields(DataSet: TDataSet);

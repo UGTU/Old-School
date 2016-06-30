@@ -366,6 +366,7 @@ inherited fmStudent: TfmStudent
                   Height = 172
                   Align = alTop
                   TabOrder = 1
+                  ExplicitTop = -1
                   object Bevel2: TBevel
                     Left = 448
                     Top = 47
@@ -621,11 +622,11 @@ inherited fmStudent: TfmStudent
                     OnChange = eFamChange
                   end
                   object bShot: TButton
-                    Left = 448
+                    Left = 445
                     Top = 131
-                    Width = 93
+                    Width = 80
                     Height = 25
-                    Caption = #1057#1076#1077#1083#1072#1090#1100' '#1089#1085#1080#1084#1086#1082
+                    Caption = #1057#1085#1080#1084#1086#1082
                     TabOrder = 8
                     OnClick = bShotClick
                   end
@@ -642,6 +643,17 @@ inherited fmStudent: TfmStudent
                       #1052)
                     TabOrder = 9
                     OnClick = rgSexClick
+                  end
+                  object bClearPhoto: TButton
+                    Left = 522
+                    Top = 131
+                    Width = 22
+                    Height = 25
+                    ImageAlignment = iaCenter
+                    ImageIndex = 18
+                    Images = frmMain.ImageList1
+                    TabOrder = 10
+                    OnClick = bClearPhotoClick
                   end
                 end
                 object Panel6: TPanel
@@ -829,14 +841,14 @@ inherited fmStudent: TfmStudent
                   object Label31: TLabel
                     Left = 17
                     Top = 38
-                    Width = 132
+                    Width = 133
                     Height = 13
                     Caption = #1044#1086#1074#1091#1079#1086#1074#1089#1082#1072#1103' '#1087#1086#1076#1075#1086#1090#1086#1074#1082#1072':'
                   end
                   object Label32: TLabel
                     Left = 18
                     Top = 84
-                    Width = 99
+                    Width = 100
                     Height = 13
                     Caption = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1099#1081' '#1091#1095#1077#1090':'
                     Visible = False
@@ -858,7 +870,7 @@ inherited fmStudent: TfmStudent
                   object Label43: TLabel
                     Left = 17
                     Top = 135
-                    Width = 253
+                    Width = 254
                     Height = 13
                     Caption = #1054#1090#1085#1086#1096#1077#1085#1080#1077' '#1082' '#1074#1086#1077#1085#1085#1086#1081' '#1089#1083#1091#1078#1073#1077' / '#1074#1086#1080#1085#1089#1082#1086#1077' '#1079#1074#1072#1085#1080#1077': '
                   end
@@ -1774,7 +1786,7 @@ inherited fmStudent: TfmStudent
             object Label9: TLabel
               Left = 144
               Top = 6
-              Width = 42
+              Width = 43
               Height = 13
               Hint = '1'
               Caption = #1052#1086#1076#1091#1083#1100':'
@@ -2088,21 +2100,21 @@ inherited fmStudent: TfmStudent
                 Style = tbsDropDown
               end
               object tbUtv: TToolButton
-                Left = 38
+                Left = 42
                 Top = 0
                 Hint = #1053#1072' '#1088#1072#1089#1089#1084#1086#1090#1088#1077#1085#1080#1080
                 ImageIndex = 14
                 OnClick = tbUtvClick
               end
               object tbGot: TToolButton
-                Left = 61
+                Left = 65
                 Top = 0
                 Hint = #1043#1086#1090#1086#1074#1086' '
                 ImageIndex = 8
                 OnClick = tbGotClick
               end
               object tbPrint: TToolButton
-                Left = 84
+                Left = 88
                 Top = 0
                 Hint = #1055#1077#1095#1072#1090#1100
                 ImageIndex = 9
@@ -2507,7 +2519,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000840210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101110040008C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

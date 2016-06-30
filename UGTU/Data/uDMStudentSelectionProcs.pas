@@ -110,6 +110,8 @@ type
     adoSelDocumentsaddinfo: TStringField;
     adoSelDocumentsik_disc: TIntegerField;
     adoSelDocumentsDocCount: TIntegerField;
+    aspSelStudPhotoAndPassport: TADOStoredProc;
+    dsSelStudPhotoAndPassport: TDataSource;
     procedure aspSelLanguageNewRecord(DataSet: TDataSet);
     procedure aspSelFamilyNewRecord(DataSet: TDataSet);
    

@@ -351,7 +351,7 @@ inherited fmAbitNabor: TfmAbitNabor
           Width = 743
           Height = 24
           Hint = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1092#1072#1082#1091#1083#1100#1090#1077#1090#1091
-          Images = frmMain.ImageList1
+          Images = ImageList1
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
@@ -388,16 +388,24 @@ inherited fmAbitNabor: TfmAbitNabor
             Top = 0
             Action = actPrintStat
             DropdownMenu = ppmStatToExcel
-            ImageIndex = 56
+            ImageIndex = 0
             Style = tbsDropDown
           end
           object ToolButton5: TToolButton
-            Left = 280
+            Left = 284
             Top = 0
             Width = 8
             Caption = 'ToolButton5'
             ImageIndex = 1
             Style = tbsSeparator
+            Visible = False
+          end
+          object tbPhotosExport4Bank: TToolButton
+            Left = 292
+            Top = 0
+            Action = actExportPhotos
+            Caption = #1069#1082#1089#1087#1086#1088#1090' '#1092#1086#1090#1086
+            Style = tbsTextButton
             Visible = False
           end
         end
@@ -1008,7 +1016,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 640
     Top = 32
     Bitmap = {
-      494C010103000400C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400C80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000021493900214939002149
       3900184131001841310018413100103029001030290010302900103029000828
@@ -1159,7 +1167,7 @@ inherited fmAbitNabor: TfmAbitNabor
     Left = 896
     Top = 40
     Bitmap = {
-      494C010102000400C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000400C80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1399,12 +1407,18 @@ inherited fmAbitNabor: TfmAbitNabor
       ImageIndex = 20
       OnExecute = actPrintProtocolExecute
     end
+    object actExportPhotos: TAction
+      Category = 'AbitList'
+      Caption = 'actExportPhotos'
+      ImageIndex = 4
+      OnExecute = actExportPhotosExecute
+    end
   end
   object ImageList3: TImageList
     Left = 612
     Top = 32
     Bitmap = {
-      494C01011D003000C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011D003000C80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

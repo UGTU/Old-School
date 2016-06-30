@@ -45,8 +45,11 @@ inherited fmAbitCard: TfmAbitCard
     inherited ToolButton11: TToolButton
       Action = frmMain.actPostupDlgShow
     end
+    inherited ToolButton12: TToolButton
+      ExplicitWidth = 38
+    end
     object ToolButton15: TToolButton
-      Left = 341
+      Left = 337
       Top = 0
       Action = frmMain.actGazpromStatement
       ParentShowHint = False
@@ -58,7 +61,7 @@ inherited fmAbitCard: TfmAbitCard
       Caption = 'ToolButton16'
       ImageIndex = 61
       Visible = False
-  end
+    end
   end
   inherited Panel1: TPanel
     Width = 624
@@ -77,7 +80,7 @@ inherited fmAbitCard: TfmAbitCard
           ExplicitHeight = 587
           inherited PageControl2: TPageControl
             Width = 612
-            ActivePage = TabSheet6
+            ActivePage = TabSheet8
             ExplicitWidth = 612
             inherited TabSheet3: TTabSheet
               ExplicitWidth = 604
@@ -150,6 +153,7 @@ inherited fmAbitCard: TfmAbitCard
                 end
                 inherited Panel7: TPanel
                   Width = 602
+                  ExplicitTop = 1
                   ExplicitWidth = 602
                   inherited Label4: TLabel
                     Left = 12
@@ -272,10 +276,10 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet4: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
+              ExplicitLeft = 4
+              ExplicitTop = 28
               ExplicitWidth = 604
-              ExplicitHeight = 0
+              ExplicitHeight = 555
               inherited Panel3: TPanel
                 Width = 604
                 ExplicitWidth = 604
@@ -505,10 +509,10 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet5: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
+              ExplicitLeft = 4
+              ExplicitTop = 28
               ExplicitWidth = 604
-              ExplicitHeight = 0
+              ExplicitHeight = 555
               inherited Splitter1: TSplitter
                 Width = 604
                 ExplicitWidth = 551
@@ -530,10 +534,10 @@ inherited fmAbitCard: TfmAbitCard
               end
             end
             inherited TabSheet6: TTabSheet
-              ExplicitLeft = 0
-              ExplicitTop = 0
+              ExplicitLeft = 4
+              ExplicitTop = 28
               ExplicitWidth = 604
-              ExplicitHeight = 0
+              ExplicitHeight = 555
               object SpeedButton5: TSpeedButton [0]
                 Left = 526
                 Top = 29
@@ -561,10 +565,10 @@ inherited fmAbitCard: TfmAbitCard
             end
             inherited TabSheet7: TTabSheet
               TabVisible = False
-              ExplicitLeft = 0
-              ExplicitTop = 0
+              ExplicitLeft = 4
+              ExplicitTop = 28
               ExplicitWidth = 604
-              ExplicitHeight = 0
+              ExplicitHeight = 555
               inherited gbExiled: TGroupBox
                 Width = 604
                 ExplicitWidth = 604
@@ -735,23 +739,29 @@ inherited fmAbitCard: TfmAbitCard
         end
         inherited tbMagazine: TTabSheet
           TabVisible = False
+          ExplicitLeft = 4
+          ExplicitTop = 24
           ExplicitWidth = 612
+          ExplicitHeight = 587
           inherited panelMagaz: TPanel
             Width = 612
             ParentFont = False
             ExplicitWidth = 612
+            inherited tbAction: TToolBar
+              inherited tbCreate: TToolButton
+                ExplicitWidth = 38
               end
               inherited tbUtv: TToolButton
-                Left = 42
-                ExplicitLeft = 42
+                Left = 38
+                ExplicitLeft = 38
               end
               inherited tbGot: TToolButton
-                Left = 65
-                ExplicitLeft = 65
+                Left = 61
+                ExplicitLeft = 61
               end
               inherited tbPrint: TToolButton
-                Left = 88
-                ExplicitLeft = 88
+                Left = 84
+                ExplicitLeft = 84
               end
             end
           end
@@ -966,7 +976,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010106000900840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101060009008C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1248,7 +1258,7 @@ inherited fmAbitCard: TfmAbitCard
     Left = 420
     inherited MenuItem3: TMenuItem
       Visible = False
-  end
+    end
     object N4: TMenuItem
       Action = frmMain.actListToExcel
     end
@@ -1259,7 +1269,7 @@ inherited fmAbitCard: TfmAbitCard
   end
   inherited ilMain: TImageList
     Bitmap = {
-      494C010111004000580210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000600210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

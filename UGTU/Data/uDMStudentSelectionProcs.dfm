@@ -266,7 +266,7 @@
         Precision = 10
         Value = 14752
       end>
-    Left = 48
+    Left = 64
     Top = 229
     object aspSelAcademStringField: TStringField
       FieldName = #1055#1088#1086#1096#1083#1072#1103' '#1075#1088#1091#1087#1087#1072
@@ -704,5 +704,30 @@
       Visible = False
       Calculated = True
     end
+  end
+  object aspSelStudPhotoAndPassport: TADOStoredProc
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    ProcedureName = 'SelectStudPhotoAndPassport'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+      end
+      item
+        Name = '@ncode'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 337
+    Top = 355
+  end
+  object dsSelStudPhotoAndPassport: TDataSource
+    DataSet = aspSelStudPhotoAndPassport
+    Left = 340
+    Top = 419
   end
 end

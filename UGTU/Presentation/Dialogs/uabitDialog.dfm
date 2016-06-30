@@ -83,6 +83,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
       inherited PageControl2: TPageControl
         Width = 554
         Height = 593
+        ActivePage = TabSheet3
         OnChange = PageControl2Change
         ExplicitWidth = 554
         ExplicitHeight = 593
@@ -489,10 +490,6 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
               ExplicitTop = 426
               ExplicitWidth = 544
               ExplicitHeight = 134
-              inherited sbAddAddress: TSpeedButton
-                Left = 509
-                ExplicitLeft = 509
-              end
               object Label9: TLabel [3]
                 Left = 53
                 Top = 4
@@ -799,7 +796,7 @@ inherited frmAbitCardDialog: TfrmAbitCardDialog
   end
   inherited ilPages: TImageList
     Bitmap = {
-      494C010105000900980010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105000900A00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
