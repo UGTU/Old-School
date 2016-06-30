@@ -1,5 +1,5 @@
 
-select * from Person where Clastname like 'Женихова%' order by Cfirstname
+select * from Person where Clastname like 'Автамонов%' order by Cfirstname
 
 select * from PersonAddress where nCode in (41371,43865,113271)
 
@@ -18,7 +18,7 @@ inner join fac on fac.Ik_fac = Relation_spec_fac.ik_fac
 inner join EducationBranch on EducationBranch.ik_spec = Relation_spec_fac.ik_spec
 where Person.nCode=114928
 
-select * from ABIT_postup where nCode=115488
+select * from ABIT_postup where nCode=167909
 
 select * from ABIT_Diapazon_spec_fac where NNrecord=750 
 select * from Relation_spec_fac where ik_spec_fac = 274
@@ -26,14 +26,14 @@ select * from Spec_stud where ik_spec=354607
 
 select * from Doc_stud where nCode = 15966
 
-select * from Zach where ncode in (38514,57312)
+select * from Zach where ncode in (19631)
 
-select * from Zach where Ik_zach in (14369)
+select * from Zach where Ik_zach in (19631)
 
 
 select StudGrup.*, Cname_grup from StudGrup, Grup 
 where StudGrup.Ik_grup = Grup.Ik_grup
-and ik_zach in (20720,27480)
+and ik_zach in (13078)
 
 select * from Prikaz
 
