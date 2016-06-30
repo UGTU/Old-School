@@ -16,6 +16,7 @@ inner join Fac on Relation_spec_fac.ik_fac = Fac.Ik_fac
 inner join Form_ed on  Form_ed.Ik_form_ed = Relation_spec_fac.Ik_form_ed
 where  StudGrup.Ik_prikazOtch is null --не отчислен из группы
 and (year(Grup.DateExit)>year(GETDATE()))
+and Spec_stud.ik_direction in (1,2,3,9,10)
 --and Fac.Ik_fac in (6)						--заочники
 ) Allstud
 
@@ -49,5 +50,5 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 		   and dbo.Raion.Ik_region = dbo.Region.Ik_region
 		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana) vrem
 on Allstud.nCode = vrem.nCode)
-where (pr.Ik_region in (55))or(fac.Ik_region in (55))or(vrem.Ik_region in (55))
+where (pr.Ik_raion in (22))or(fac.Ik_raion in (22))or(vrem.Ik_raion in (22))
 order by FIO
