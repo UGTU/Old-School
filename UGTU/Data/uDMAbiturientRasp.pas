@@ -115,8 +115,7 @@ procedure TDMAbiturientRasp.adospGetRaspAfterScroll(DataSet: TDataSet);
 begin
   //if fmAbitRasp.Modified then
     //fmAbitRasp.GetRaspScroll;
-  if not TAbitRaspisanieController.Instance.OpenAllForRasp then
-    raise EApplicationException.Create('Произошла ошибка при загрузке данных с сервера');
+  TAbitRaspisanieController.Instance.OpenAllForRasp;
 
 end;
 

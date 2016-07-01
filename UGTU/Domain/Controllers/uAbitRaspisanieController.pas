@@ -330,9 +330,15 @@ end;
 function TAbitRaspisanieController.OpenAllForRasp:boolean;
 var str:string;
 begin
+  result:= false;
 //загружаем список возможных кабинетов
+  if (DMAbiturientRasp.adospGetRasp.RecordCount=0) then
+  begin
+    exit;
+  end;
+
   TApplicationController.GetInstance.AddLogEntry('ѕереход на меропри€тие:  '+DMAbiturientRasp.adospGetRasp.FieldByName('disc').AsString+', '+DMAbiturientRasp.adospGetRasp.FieldByName('cname_sdach').AsString);
-  try
+  //try
 
     DMAbiturientRasp.adospAbitNotBusyKab.Close;
     DMAbiturientRasp.adospAbitNotBusyKab.Open;
@@ -364,9 +370,9 @@ begin
     DMAbiturientRasp.adospAbitGetSpisok.Open;
     DMAbiturientRasp.adospAbitGetSpisok.First;
     result:= true;
-  except
+  //except
     result:= false;
-  end;
+  //end;
 end;
 
 //очищает аудитории в списке абитуриентов
@@ -393,6 +399,10 @@ procedure TAbitRaspisanieController.FilterAbitList(NNyear, ik_fac, ik_spec_fac:V
 var filter:string;
 begin
   TApplicationController.GetInstance.AddLogEntry('Ќаложение фильтра на список абитуриентов.');
+  if (DMAbiturientRasp.adospGetRasp.RecordCount=0) then
+  begin
+    exit;
+  end;
 
   filter:='';
   DMAbiturientRasp.adospAbitGetSpisok.Close;
