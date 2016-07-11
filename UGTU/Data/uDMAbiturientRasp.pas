@@ -93,6 +93,7 @@ type
     adospAbitGetSpisokNumber: TStringField;
     adoqMaxVedomNumber: TADOQuery;
     adoqMaxVedomNumberMaxNumber: TStringField;
+    adospGetRaspDiscVedomName: TStringField;
     procedure adospGetRaspAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }

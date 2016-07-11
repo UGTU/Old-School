@@ -348,6 +348,9 @@ begin
     begin
       DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
         DMAbiturientRasp.adoqMaxVedomNumber.FieldByName('MaxNumber').Value;
+      if (DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value = null) then
+        DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
+           DMAbiturientRasp.adospGetRaspDiscVedomName.Value+'-1';
     end;
   except
   end;

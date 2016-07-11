@@ -124,6 +124,10 @@
       FieldName = 'TimeEnd'
       DisplayFormat = 'HH:MM'
     end
+    object adospGetRaspDiscVedomName: TStringField
+      FieldName = 'DiscVedomName'
+      Size = 10
+    end
   end
   object dsGetRasp: TDataSource
     DataSet = adospGetRasp
