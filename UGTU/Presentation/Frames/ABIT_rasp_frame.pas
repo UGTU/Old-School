@@ -348,7 +348,8 @@ begin
     begin
       DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
         DMAbiturientRasp.adoqMaxVedomNumber.FieldByName('MaxNumber').Value;
-      if (DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value = null) then
+      if ((DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value = null) or
+        (DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value = '')) then
         DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
            DMAbiturientRasp.adospGetRaspDiscVedomName.Value+'-1';
     end;
@@ -812,6 +813,7 @@ begin
   finally
     DMAbiturientRasp.adospAbitGetSpisok.Close;
     DMAbiturientRasp.adospAbitGetSpisok.Open;
+    TAbitRaspisanieController.Instance.OpenAllForRasp;
   end;
   modified:=false;
   result:=true;

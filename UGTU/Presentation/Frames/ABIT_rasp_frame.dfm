@@ -400,7 +400,7 @@ inherited fmAbitRasp: TfmAbitRasp
           Width = 441
           Height = 24
           ButtonHeight = 30
-          ButtonWidth = 2951
+          ButtonWidth = 2975
           Caption = 'ToolBar4'
           Images = ImageList3
           TabOrder = 1
