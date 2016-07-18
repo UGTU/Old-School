@@ -629,7 +629,7 @@ procedure TfrmPostupDlg.bbOkPrintClick(Sender: TObject);
 begin
   actOKExecute(Sender);
   TAbitOtchetsController.Instance.ExportZayavl(AbitList.NNAbit);
-  if (cbReal.checked) then
+  if (cbReal.checked) and (dm.adodsNaboridDirectionSuperType.Value =1) then
     TAbitOtchetsController.Instance.ExportEnrollAgreement(AbitList.NNAbit);
 end;
 

@@ -134,7 +134,7 @@ begin
   SearchDataset.Connection := Connection;
   SearchDataset.Active := false;
   SearchDataset.CommandText := 'select * from TREE_Stud_Search where ik_zach='''
-    + inttostr(value) + '''';
+    + inttostr(value) + ''' ORDER BY Ik_studGrup DESC';
   SearchDataset.Active := true;
   SearchDataset.First;
   result := FindAndSelect;

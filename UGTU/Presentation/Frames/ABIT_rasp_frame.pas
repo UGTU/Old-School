@@ -177,14 +177,15 @@ procedure TfmAbitRasp.LoadRasp(raspDate:Variant);
 begin
 try
   Modified:=false;
-  if not TAbitRaspisanieController.Instance.DoLoadRasp(raspDate,TDBNodeScheduleObject(FrameObject).ik) then
+  if not TAbitRaspisanieController.Instance.DoLoadRasp(raspDate,TDBNodeScheduleObject(FrameObject).ik)
+  or (DMAbiturientRasp.adospGetRasp.RecordCount=0) then
   begin
     exit;
   end;
-  DMAbiturientRasp.adospGetRasp.First;
   if (DMAbiturientRasp.adospGetRasp.RecordCount>0) and
      (DMAbiturientRasp.adospGetRaspdate_of.AsDateTime<>Moncal.Value) then
   begin
+    DMAbiturientRasp.adospGetRasp.First;
     Moncal.Value:= DMAbiturientRasp.adospGetRaspdate_of.AsDateTime;
     Moncal.EditText:= DateToStr(DMAbiturientRasp.adospGetRaspdate_of.AsDateTime);
   end;
@@ -272,6 +273,12 @@ end;
 procedure TfmAbitRasp.dbcmbxFacChange(Sender: TObject);
 begin
   inherited;
+  if (DMAbiturientRasp.adospGetRasp.RecordCount=0) then
+  begin
+    exit;
+  end;
+
+
   TApplicationController.GetInstance.AddLogEntry('Выбор фильтра по факультет '+dbcmbxFac.Text+
         ', специальность '+Spec_Fac.Text);
 
@@ -341,6 +348,10 @@ begin
     begin
       DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
         DMAbiturientRasp.adoqMaxVedomNumber.FieldByName('MaxNumber').Value;
+      if ((DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value = null) or
+        (DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value = '')) then
+        DMAbiturientRasp.adospAbitGetSpisok.FieldByName('nnvedom').Value:=
+           DMAbiturientRasp.adospGetRaspDiscVedomName.Value+'-1';
     end;
   except
   end;
@@ -477,20 +488,21 @@ end;
 
 procedure TfmAbitRasp.actEditRaspUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospGetRasp.RecordCount<>0) and
+  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospGetRasp.RecordCount>0) and
               (rasp.SelectedRows<>nil);
 end;
 
 procedure TfmAbitRasp.actDelRaspUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospGetRasp.RecordCount<>0) and
+  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospGetRasp.RecordCount>0) and
     (DMAbiturientRasp.adospGetRaspid_rasp.Value>0);
 end;
 
 procedure TfmAbitRasp.actRaspredAbitUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospAbitGetSpisok.RecordCount>0) and
-      (dmAbiturientOtchety.adospAbitRaspKab.RecordCount>0) {and
+
+  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospAbitGetSpisok.Active) and (DMAbiturientRasp.adospAbitGetSpisok.RecordCount>0) and
+      (dmAbiturientOtchety.adospAbitRaspKab.Active) and (dmAbiturientOtchety.adospAbitRaspKab.RecordCount>0) {and
       (DMAbiturientRasp.adospAbitGetSpisok.Locate('Cname_room','',[loCaseInsensitive]))};
 end;
 
@@ -801,6 +813,7 @@ begin
   finally
     DMAbiturientRasp.adospAbitGetSpisok.Close;
     DMAbiturientRasp.adospAbitGetSpisok.Open;
+    TAbitRaspisanieController.Instance.OpenAllForRasp;
   end;
   modified:=false;
   result:=true;
@@ -899,14 +912,14 @@ end;
 
 procedure TfmAbitRasp.actSpisToExelUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospAbitGetSpisok.RecordCount>0) and
-      (dmAbiturientOtchety.adospAbitRaspKab.RecordCount>0);
+  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospAbitGetSpisok.Active) and (DMAbiturientRasp.adospAbitGetSpisok.RecordCount>0) and
+      (dmAbiturientOtchety.adospAbitRaspKab.Active) and (dmAbiturientOtchety.adospAbitRaspKab.RecordCount>0);
 end;
 
 procedure TfmAbitRasp.actVedToExcelUpdate(Sender: TObject);
 begin
-  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospAbitGetSpisok.RecordCount>0) and
-      (dmAbiturientOtchety.adospAbitRaspKab.RecordCount>0);
+  (Sender as TAction).Enabled:= (DMAbiturientRasp.adospAbitGetSpisok.Active) and (DMAbiturientRasp.adospAbitGetSpisok.RecordCount>0) and
+      (dmAbiturientOtchety.adospAbitRaspKab.Active) and (dmAbiturientOtchety.adospAbitRaspKab.RecordCount>0);
 end;
 
 procedure TfmAbitRasp.actRezToExelExecute(Sender: TObject);

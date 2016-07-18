@@ -80,7 +80,6 @@ inherited fmAbitCard: TfmAbitCard
           ExplicitHeight = 587
           inherited PageControl2: TPageControl
             Width = 612
-            ActivePage = TabSheet8
             ExplicitWidth = 612
             inherited TabSheet3: TTabSheet
               ExplicitWidth = 604
