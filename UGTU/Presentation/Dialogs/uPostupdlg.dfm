@@ -279,7 +279,6 @@ inherited frmPostupDlg: TfrmPostupDlg
       Height = 17
       Caption = #1055#1088#1086#1074#1077#1088#1103#1090#1100' '#1045#1043#1069' ('#1089#1076#1072#1085#1086' '#1074' '#1087#1088#1077#1076#1099#1076#1091#1097#1080#1077' '#1075#1086#1076#1099')'
       TabOrder = 7
-      OnClick = cbRealClick
     end
   end
   object GroupBox2: TGroupBox [3]
