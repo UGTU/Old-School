@@ -1,5 +1,5 @@
 
-select * from Person where Clastname like 'Автамонов%' order by Cfirstname
+select * from Person where Clastname like 'Лукаш%' order by Cfirstname
 
 select * from PersonAddress where nCode in (41371,43865,113271)
 
@@ -18,7 +18,7 @@ inner join fac on fac.Ik_fac = Relation_spec_fac.ik_fac
 inner join EducationBranch on EducationBranch.ik_spec = Relation_spec_fac.ik_spec
 where Person.nCode=114928
 
-select * from ABIT_postup where nCode=167909
+select * from ABIT_postup where nCode=169669
 
 select * from ABIT_Diapazon_spec_fac where NNrecord=750 
 select * from Relation_spec_fac where ik_spec_fac = 274

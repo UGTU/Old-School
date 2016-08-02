@@ -800,6 +800,12 @@ object dmAbiturientAction: TdmAbiturientAction
         Name = '@NeedCheckEGE'
         DataType = ftBoolean
         Value = Null
+      end
+      item
+        Name = '@dateOriginal'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Value = Null
       end>
     Left = 143
     Top = 340
@@ -876,6 +882,12 @@ object dmAbiturientAction: TdmAbiturientAction
       item
         Name = '@NeedCheckEGE'
         DataType = ftBoolean
+        Value = Null
+      end
+      item
+        Name = '@dateOriginal'
+        Attributes = [paNullable]
+        DataType = ftDateTime
         Value = Null
       end>
     Left = 355

@@ -765,7 +765,7 @@ begin
   begin
     cbIsMain.checked := true;
     AbitList.IsMain := true;
-    if (dtpDateOriginal.Value = null) and (Year = YearOf(Date())) then
+    if (dtpDateOriginal.Value = null) and (YearOf(AbitList.DateOriginal) < YearOf(Date()) ) and (Year = YearOf(Date())) then
       dtpDateOriginal.Value := Date();
   end
   else
@@ -1235,6 +1235,8 @@ begin
 
           Items[10].Value := AbitList.NeedCheckEGE;
 
+          Items[11].Value := AbitList.DateOriginal;
+
         end;
 
         dmAbiturientAction.aspAddPostup.ExecProc;
@@ -1270,6 +1272,8 @@ begin
           Items[10].Value := AbitList.TargetNum;
 
           Items[11].Value := AbitList.NeedCheckEGE;
+
+          Items[12].Value := AbitList.DateOriginal;
 
         end;
         dmAbiturientAction.aspEditPostup.ExecProc;
@@ -1470,6 +1474,8 @@ end;
 
 procedure TfrmPostupDlg.eNumChange(Sender: TObject);
 begin
+  if (dtpDateOriginal.Value <> null) then
+    AbitList.DateOriginal := dtpDateOriginal.Value;
   ButtonsCheck;
 end;
 
