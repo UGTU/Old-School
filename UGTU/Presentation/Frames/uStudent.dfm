@@ -366,12 +366,12 @@ inherited fmStudent: TfmStudent
                   Height = 172
                   Align = alTop
                   TabOrder = 1
-                  ExplicitTop = -1
                   object Bevel2: TBevel
                     Left = 448
                     Top = 47
                     Width = 93
                     Height = 77
+                    Visible = False
                   end
                   object Label44: TLabel
                     Left = 471
@@ -487,6 +487,8 @@ inherited fmStudent: TfmStudent
                     Width = 93
                     Height = 77
                     Cursor = crHandPoint
+                    Center = True
+                    Proportional = True
                     Stretch = True
                     OnClick = iPhotoClick
                     OnMouseEnter = iPhotoMouseEnter
@@ -498,18 +500,19 @@ inherited fmStudent: TfmStudent
                     Height = 13
                     Caption = #1058#1077#1083#1077#1092#1086#1085':'
                   end
-                  object Label50: TLabel
-                    Left = 203
+                  object rgSex: TRadioGroup
+                    Left = 182
                     Top = 50
-                    Width = 4
-                    Height = 13
-                    Caption = '*'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clRed
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
+                    Width = 83
+                    Height = 35
+                    Caption = #1055#1086#1083
+                    Columns = 2
+                    ItemIndex = 1
+                    Items.Strings = (
+                      #1046
+                      #1052)
+                    TabOrder = 9
+                    OnClick = rgSexClick
                   end
                   object dbdteBirthDate: TDBDateTimeEditEh
                     Left = 12
@@ -629,20 +632,6 @@ inherited fmStudent: TfmStudent
                     Caption = #1057#1085#1080#1084#1086#1082
                     TabOrder = 8
                     OnClick = bShotClick
-                  end
-                  object rgSex: TRadioGroup
-                    Left = 176
-                    Top = 53
-                    Width = 83
-                    Height = 30
-                    Caption = #1055#1086#1083
-                    Columns = 2
-                    ItemIndex = 1
-                    Items.Strings = (
-                      #1046
-                      #1052)
-                    TabOrder = 9
-                    OnClick = rgSexClick
                   end
                   object bClearPhoto: TButton
                     Left = 522
@@ -2519,7 +2508,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C0101110040008C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000900210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

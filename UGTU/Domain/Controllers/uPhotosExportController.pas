@@ -2,7 +2,7 @@ unit uPhotosExportController;
 
 interface
 
-uses System.Generics.Collections, classes, ADODB, DB, VCL.Graphics, jpeg, uDMStudentSelectionProcs;
+uses dialogs, System.Generics.Collections, classes, ADODB, DB, VCL.Graphics, jpeg, uDMStudentSelectionProcs;
 
 const BankCode = '001000';
 const LogoPath = 'Reports\LI.jpg';
@@ -50,6 +50,8 @@ begin
     ExportStud4Bank(ds.FieldByName('nCode').Value);
     ds.Next;
     end;
+
+    ShowMessage('Все доступные фотографии экспортированы в директорию '+FPath);
 end;
 
 procedure TPhotosExportController.ExportStud4Bank(id: integer);
@@ -76,11 +78,6 @@ with dmStudentSelectionProcs.aspSelStudPhotoAndPassport do
   if (dmStudentSelectionProcs.aspSelStudPhotoAndPassport.RecordCount>0) then
   begin
 
-  (dmStudentSelectionProcs.aspSelStudPhotoAndPassport.FieldbyName('Photo')as TBlobField).SaveToStream(phstream);
-
-  //стрим превращаем в картинку
-  photo.LoadFromStream(phstream);
-
   ser:=dmStudentSelectionProcs.aspSelStudPhotoAndPassport.FieldbyName('cd_Seria').Value;
   num:=dmStudentSelectionProcs.aspSelStudPhotoAndPassport.FieldbyName('np_Number').Value;
 
@@ -88,7 +85,7 @@ with dmStudentSelectionProcs.aspSelStudPhotoAndPassport do
       FLogo.SaveToFile(FPath+'\LI_'+ser+'_'+num+'_'+BankCode+'.jpg');
 
   //сохраняем картинку с фото в файл FI_<SSSS>_<NNNNNN>_<BBBFFF>.jpg
-      photo.SaveToFile(FPath+'\FI_'+ser+'_'+num+'_'+BankCode+'.jpg');
+      (dmStudentSelectionProcs.aspSelStudPhotoAndPassport.FieldbyName('Photo')as TBlobField).SaveToFile(FPath+'\FI_'+ser+'_'+num+'_'+BankCode+'.jpg');
   end;
 end;
 

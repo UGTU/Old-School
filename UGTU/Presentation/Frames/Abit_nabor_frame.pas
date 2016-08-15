@@ -875,7 +875,13 @@ end;
 
 procedure TfmAbitNabor.actExportPhotosExecute(Sender: TObject);
 begin
-  TPhotosExportController.Instance.Export4Bank(dbgrdStatistika.DataSource.DataSet,'Photos4Bank');
+
+with TFileOpenDialog.Create(nil) do
+  begin
+    Options := [fdoPickFolders];
+    if Execute then
+    TPhotosExportController.Instance.Export4Bank(dbgrdStatistika.DataSource.DataSet,FileName);
+  end;
 end;
 
 procedure TfmAbitNabor.actImportNaborExecute(Sender: TObject);

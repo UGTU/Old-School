@@ -195,7 +195,6 @@ type
     dtpEnd: TDateTimePicker;
     gridColumnSelectMenu: TPopupMenu;
     rgSex: TRadioGroup;
-    Label50: TLabel;
     actAddDocument: TAction;
     actUpdateDocument: TAction;
     actDelDocument: TAction;
