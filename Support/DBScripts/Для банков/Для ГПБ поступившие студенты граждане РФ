@@ -47,7 +47,7 @@ select distinct
 	   iif (Ik_form_ed=1,2,1) as Ik_form_ed,
 --	   Cname_form_ed,
 	   1 Course,
-	   [Nn_prikaz],
+	isnull([Nn_prikaz],'') +' '+isnull((Dd_prikaz),'') as DocPr,
 	   643 as StranaUZ
 from
 (
@@ -75,6 +75,8 @@ from
 		   Cname_form_ed,
 		   CType_kat,
 		  [Prikaz].[Nn_prikaz],
+		  FORMAT(cast([Dd_prikaz] as DATE), 'd', 'de-de' ) Dd_prikaz, 
+		 --[Prikaz].[Dd_prikaz] isnull(cast([Dd_prikaz] as DATE),
 		   Person.[PersonFullName]
 	from dbo.Person,ABIT_postup,[Prikaz],ABIT_Diapazon_spec_fac,dbo.Student,Relation_spec_fac,Spec_stud,Fac,
 		 Strana,Form_ed,Kat_zach,TypeKatZach,Direction
@@ -132,4 +134,7 @@ left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cr
 		   and dbo.Raion.Ik_region = dbo.Region.Ik_region
 		   and dbo.Region.Ik_strana = dbo.Strana.Ik_strana) vrem
 on stud.nCode = vrem.nCode
+--where (pr.Cstrana is null)and(vrem.Cstrana is null)
+--where Dd_vidan is null
+--where stud.nCode = 113819
 order by  Clastname,Cfirstname,Cotch
