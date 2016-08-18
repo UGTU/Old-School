@@ -395,10 +395,10 @@ begin
   // Result:=true;     //пока возвращаем всегда true
   // exit;
 
-  if FAbitListDataSetInstance.FieldByName('SummBall').Value = NULL then
+  if FAbitListDataSetInstance.FieldByName('RealSummBall').Value = NULL then
     Result := false
   else
-    Result := (FAbitListDataSetInstance.FieldByName('SummBall').Value >=
+    Result := (FAbitListDataSetInstance.FieldByName('RealSummBall').Value >=
       Abit_Get_Ball(FAbitListDataSetInstance.FieldByName('NNRecord').Value,
       FAbitListDataSetInstance.FieldByName('ik_kat_zach').Value));
 end;
