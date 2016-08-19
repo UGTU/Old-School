@@ -708,20 +708,8 @@
   object aspSelStudPhotoAndPassport: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
-    ProcedureName = 'SelectStudPhotoAndPassport'
-    Parameters = <
-      item
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        Direction = pdReturnValue
-        Precision = 10
-      end
-      item
-        Name = '@ncode'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-      end>
+    ProcedureName = 'SelectStudPhotoAndPassport;1'
+    Parameters = <>
     Left = 337
     Top = 355
   end

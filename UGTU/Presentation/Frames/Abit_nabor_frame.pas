@@ -86,7 +86,6 @@ type
     actPrintProtocol: TAction;
     ToolButton15: TToolButton;
     N6: TMenuItem;
-    tbPhotosExport4Bank: TToolButton;
     actExportPhotos: TAction;
     constructor CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);override;
     procedure naborKeyDown(Sender: TObject; var Key: Word;

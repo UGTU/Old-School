@@ -8,7 +8,7 @@ uses
   ComCtrls, Buttons, ToolWin, DBCtrls, ExtCtrls, ImgList, DB, ActnList,
   ADODB,ComObj, DBLookupEh, Menus, OleServer, ExcelXP, GridsEh, ApplicationController,
   ExceptionBase, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
-  System.Actions, DBAxisGridsEh;
+  System.Actions, DBAxisGridsEh, uPhotosExportController;
 
 type
   TfmZach = class(TfmBase)
@@ -116,6 +116,8 @@ type
     actPrikazAppoint: TAction;
     ToolButton24: TToolButton;
     actDelFromGroup: TAction;
+    ToolButton25: TToolButton;
+    actExportPhoto4Bank: TAction;
     //загружает списки абитуриентов
     procedure GetSpisokOfAbits();
     procedure prikazTitleClick(Column: TColumnEh);
@@ -168,6 +170,7 @@ type
     procedure actPrikazAppointExecute(Sender: TObject);
     procedure actDelFromGroupExecute(Sender: TObject);
     procedure ActZachProtocolExecute(Sender: TObject);
+    procedure actExportPhoto4BankExecute(Sender: TObject);
 
     protected
      procedure DoRefreshFrame();override;
@@ -827,6 +830,16 @@ begin
 end;
 
 //Экспорт приказа на зачисление по группам в Word
+procedure TfmZach.actExportPhoto4BankExecute(Sender: TObject);
+begin
+  with TFileOpenDialog.Create(nil) do
+  begin
+    Options := [fdoPickFolders];
+    if Execute then
+    TPhotosExportController.Instance.Export4Bank(prikaz.DataSource.DataSet,FileName);
+  end;
+end;
+
 procedure TfmZach.actExpPrikGrupExecute(Sender: TObject);
 begin
   TAbitZachislenieController.Instance.GroupPrikazToWord(@Prikaz);
