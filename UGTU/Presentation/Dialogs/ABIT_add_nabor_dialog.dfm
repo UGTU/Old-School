@@ -261,12 +261,14 @@ inherited frmNewNabor: TfrmNewNabor
     Width = 154
     Height = 17
     Caption = #1059#1095#1080#1090#1099#1074#1072#1090#1100' '#1088#1091#1089#1089#1082#1080#1081' '#1103#1079#1099#1082
+    Checked = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+    State = cbChecked
     TabOrder = 4
     Visible = False
     OnClick = nnyearChange
