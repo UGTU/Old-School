@@ -1,14 +1,14 @@
 inherited frmExtendSession: TfrmExtendSession
   Caption = #1055#1088#1086#1076#1083#1080#1090#1100' '#1089#1077#1089#1089#1080#1102
   ClientHeight = 237
-  ClientWidth = 299
+  ClientWidth = 368
   OnShow = FormShow
-  ExplicitWidth = 305
-  ExplicitHeight = 269
+  ExplicitWidth = 374
+  ExplicitHeight = 266
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Width = 299
+    Width = 368
     Height = 196
     ExplicitWidth = 299
     ExplicitHeight = 196
@@ -54,7 +54,7 @@ inherited frmExtendSession: TfrmExtendSession
     ParentFont = False
   end
   object SpeedButton2: TSpeedButton [5]
-    Left = 136
+    Left = 192
     Top = 30
     Width = 26
     Height = 19
@@ -98,15 +98,15 @@ inherited frmExtendSession: TfrmExtendSession
     OnClick = SpeedButton2Click
   end
   object Label3: TLabel [6]
-    Left = 168
-    Top = 12
+    Left = 224
+    Top = 11
     Width = 68
     Height = 13
     Caption = #1055#1088#1086#1076#1083#1077#1085#1086' '#1076#1086':'
   end
   object Label4: TLabel [7]
-    Left = 238
-    Top = 12
+    Left = 294
+    Top = 11
     Width = 4
     Height = 13
     Caption = '*'
@@ -139,18 +139,18 @@ inherited frmExtendSession: TfrmExtendSession
   end
   inherited Panel1: TPanel
     Top = 196
-    Width = 299
+    Width = 368
     ExplicitTop = 196
     ExplicitWidth = 299
     inherited bbApply: TBitBtn [0]
-      Left = 116
+      Left = 185
       Top = 6
       Visible = False
       ExplicitLeft = 116
       ExplicitTop = 6
     end
     inherited bbOK: TBitBtn [1]
-      Left = 116
+      Left = 185
       Top = 6
       Width = 83
       ExplicitLeft = 116
@@ -158,7 +158,7 @@ inherited frmExtendSession: TfrmExtendSession
       ExplicitWidth = 83
     end
     inherited bbCancel: TBitBtn
-      Left = 205
+      Left = 274
       Top = 6
       Width = 83
       ExplicitLeft = 205
@@ -172,8 +172,9 @@ inherited frmExtendSession: TfrmExtendSession
   object dbcbeNumPrik: TDBLookupComboboxEh [11]
     Left = 12
     Top = 30
-    Width = 120
+    Width = 174
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_prikaz'
@@ -185,8 +186,9 @@ inherited frmExtendSession: TfrmExtendSession
   object dbcbeCause: TDBLookupComboboxEh [12]
     Left = 12
     Top = 71
-    Width = 276
+    Width = 345
     Height = 19
+    DataField = ''
     EditButtons = <>
     Flat = True
     KeyField = 'Ik_pric'
@@ -196,10 +198,11 @@ inherited frmExtendSession: TfrmExtendSession
     Visible = True
   end
   object dbdteTerm: TDBDateTimeEditEh [13]
-    Left = 168
+    Left = 224
     Top = 30
-    Width = 120
+    Width = 133
     Height = 19
+    DynProps = <>
     EditButtons = <>
     Flat = True
     Kind = dtkDateEh
@@ -209,7 +212,7 @@ inherited frmExtendSession: TfrmExtendSession
   object eDescription: TMemo [14]
     Left = 12
     Top = 112
-    Width = 276
+    Width = 345
     Height = 73
     BevelInner = bvNone
     BorderStyle = bsNone

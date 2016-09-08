@@ -2089,21 +2089,21 @@ inherited fmStudent: TfmStudent
                 Style = tbsDropDown
               end
               object tbUtv: TToolButton
-                Left = 42
+                Left = 38
                 Top = 0
                 Hint = #1053#1072' '#1088#1072#1089#1089#1084#1086#1090#1088#1077#1085#1080#1080
                 ImageIndex = 14
                 OnClick = tbUtvClick
               end
               object tbGot: TToolButton
-                Left = 65
+                Left = 61
                 Top = 0
                 Hint = #1043#1086#1090#1086#1074#1086' '
                 ImageIndex = 8
                 OnClick = tbGotClick
               end
               object tbPrint: TToolButton
-                Left = 88
+                Left = 84
                 Top = 0
                 Hint = #1055#1077#1095#1072#1090#1100
                 ImageIndex = 9
@@ -2508,7 +2508,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000900210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000940210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

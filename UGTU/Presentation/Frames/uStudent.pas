@@ -737,6 +737,7 @@ begin
     dmCauses.adodsExile.Active := true;
     adodsSempol.Active := true;
     adodsPrikaz.Active := true;
+    adodsPrikaz.Sort := 'Nn_prikaz';
     modified := false;
     bbSave.enabled := false;
     bbUndo.enabled := false;

@@ -1,14 +1,14 @@
 inherited frmChangeKatZach: TfrmChangeKatZach
   Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1082#1072#1090#1077#1075#1086#1088#1080#1102' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
   ClientHeight = 155
-  ClientWidth = 405
+  ClientWidth = 510
   OnShow = FormShow
-  ExplicitWidth = 411
-  ExplicitHeight = 187
+  ExplicitWidth = 516
+  ExplicitHeight = 184
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel1: TBevel
-    Width = 405
+    Width = 510
     Height = 114
     ExplicitTop = 2
     ExplicitWidth = 405
@@ -35,16 +35,16 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     ParentFont = False
   end
   object Label1: TLabel [3]
-    Left = 168
-    Top = 12
+    Left = 8
+    Top = 56
     Width = 135
     Height = 13
     Caption = #1055#1088#1080#1095#1080#1085#1072' '#1089#1084#1077#1085#1099' '#1082#1072#1090#1077#1075#1086#1088#1080#1080
   end
   object Label5: TLabel [4]
-    Left = 306
+    Left = 276
     Top = 11
-    Width = 4
+    Width = 34
     Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
@@ -99,16 +99,16 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     OnClick = SpeedButton2Click
   end
   object Label4: TLabel [6]
-    Left = 10
-    Top = 56
+    Left = 183
+    Top = 11
     Width = 87
     Height = 13
     Caption = #1053#1086#1074#1072#1103' '#1082#1072#1090#1077#1075#1086#1088#1080#1103
   end
   object Label3: TLabel [7]
-    Left = 101
+    Left = 149
     Top = 56
-    Width = 4
+    Width = 13
     Height = 13
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
@@ -120,31 +120,31 @@ inherited frmChangeKatZach: TfrmChangeKatZach
   end
   inherited Panel1: TPanel
     Top = 114
-    Width = 405
+    Width = 510
     ExplicitTop = 114
     ExplicitWidth = 405
     inherited bbOK: TBitBtn
-      Left = 229
+      Left = 334
       Top = 6
       ExplicitLeft = 229
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
-      Left = 316
+      Left = 421
       Visible = False
       ExplicitLeft = 316
     end
     inherited bbCancel: TBitBtn
-      Left = 313
+      Left = 418
       Top = 6
       ExplicitLeft = 313
       ExplicitTop = 6
     end
   end
   object dbcbeCause: TDBLookupComboboxEh [9]
-    Left = 168
-    Top = 30
-    Width = 225
+    Left = 12
+    Top = 75
+    Width = 490
     Height = 19
     DataField = ''
     EditButtons = <>
@@ -159,7 +159,7 @@ inherited frmChangeKatZach: TfrmChangeKatZach
   object dbcbeNumPrik: TDBLookupComboboxEh [10]
     Left = 12
     Top = 30
-    Width = 120
+    Width = 165
     Height = 19
     DataField = ''
     EditButtons = <>
@@ -172,9 +172,9 @@ inherited frmChangeKatZach: TfrmChangeKatZach
     OnChange = dbcbeCauseChange
   end
   object dbcbeNewKat: TDBLookupComboboxEh [11]
-    Left = 12
-    Top = 75
-    Width = 381
+    Left = 183
+    Top = 30
+    Width = 319
     Height = 19
     DataField = ''
     EditButtons = <>
