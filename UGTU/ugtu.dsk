@@ -1,63 +1,47 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\dialogs\uQueryMaster.pas',0,1,422,32,425,0,0,,
-File_1=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Domain\Controllers\StoHTMLHelp.pas',0,1,149,50,168,0,0,,
-File_2=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Frames\uDiplomOtdKadr.pas',0,1,269,44,281,0,0,,
-File_3=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Frames\uNagruzkaPrep.pas',0,1,228,38,254,0,0,,
-File_4=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Dialogs\uNagruzkaSelTeacherForFactEdit.pas',0,1,1,1,1,0,0,,
-File_5=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Frames\uStudent.pas',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Data\uDMStudentSelectionProcs.pas',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\Indy10\Protocols\IdReplySMTP.pas',0,1,491,27,507,0,0,,
+File_1=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\Indy10\Core\IdTCPConnection.pas',0,1,577,1,594,0,0,,
+File_2=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\Indy10\Protocols\IdSMTPBase.pas',0,1,269,1,286,0,0,,
+File_3=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uMailer.pas',0,1,62,1,79,0,0,,
+File_4=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\data\Data.DB.pas',0,1,3467,1,3484,0,0,,
+File_5=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.dfm',0,1,1,1,1,0,0,,
+File_6=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas',0,1,1,1,1,0,0,,
+File_7=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas',0,1,1,46,10,0,0,,
+File_8=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas',0,1,91,79,14,0,0,,
+File_9=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas',0,1,79,70,13,0,0,,
+File_10=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\Abit_nabor_frame.pas',0,1,1,1,1,0,0,,
+File_11=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas',0,1,47,68,65,0,0,,
+File_12=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas',0,1,119,55,130,0,0,,
+File_13=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas',0,1,1,12,14,0,0,,
+File_14=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\dialogs\uQueryMaster.pas',0,1,422,32,425,0,0,,
 
 [Modules]
-Module0=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
-Module1=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas
-Module2=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\Abit_nabor_frame.pas
-Module3=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
-Module4=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas
-Module5=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas
-Module6=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas
-Module7=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas
-Module8=default.htm
-Count=9
+Module0=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
+Module1=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas
+Module2=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas
+Module3=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas
+Module4=default.htm
+Count=5
 EditWindowCount=1
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\Abit_nabor_frame.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
 
 [C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas]
 ModuleType=TSourceModule
-FormState=0
+FormState=1
+FormOnTop=1
+
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas]
+ModuleType=TSourceModule
+FormState=1
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas]
 ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas]
-ModuleType=TSourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
 [default.htm]
@@ -71,26 +55,30 @@ FormOnTop=0
 FormState=1
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMStudentSelectionProcs.pas]
 FormState=1
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMStudentData.pas]
+FormState=1
+FormOnTop=0
+
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMUspevaemost.pas]
+FormState=1
+FormOnTop=0
+
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMDocuments.pas]
 FormState=1
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=9
-CurrentEditView=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
+ViewCount=5
+CurrentEditView=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
-View5=5
-View6=6
-View7=7
-View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -126,51 +114,40 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas
 CursorX=46
-CursorY=10
-TopLine=1
+CursorY=957
+TopLine=933
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas
+EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas
 
 [View2]
 CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas
-CursorX=79
-CursorY=14
-TopLine=91
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas
-
-[View3]
-CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas
-CursorX=70
-CursorY=13
-TopLine=79
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas
-
-[View4]
-CustomEditViewType=TEditView
 Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
-CursorX=48
-CursorY=12
-TopLine=1
+CursorX=24
+CursorY=344
+TopLine=336
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
 
-[View5]
+[View3]
 CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\Abit_nabor_frame.pas
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas
+CursorX=1
+CursorY=706
+TopLine=689
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas
+
+[View4]
+CustomEditViewType=TEditView
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas
 CursorX=1
 CursorY=1
 TopLine=1
@@ -178,39 +155,6 @@ LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
-
-[View6]
-CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas
-CursorX=68
-CursorY=65
-TopLine=47
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas
-
-[View7]
-CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
-CursorX=50
-CursorY=143
-TopLine=119
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
-
-[View8]
-CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas
-CursorX=12
-CursorY=14
-TopLine=1
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas
 
 [Watches]
 Count=0
@@ -226,11 +170,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1114
+Height=1047
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1114
+ClientHeight=1047
 TBDockHeight=213
 LRDockWidth=13599
 Dockable=1
@@ -345,11 +289,16 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
 ClientHeight=3479
-TBDockHeight=8857
+TBDockHeight=6890
 LRDockWidth=1896
 Dockable=1
 StayOnTop=0
 SplitPos=111
+
+[PropInspDesignerSelection]
+ArrangeBy=Name
+SelectedItem=Name,
+ExpandedItems=Anchors=0,Constraints=0,Font=0,"LiveBindings Designer=0"
 
 [TFileExplorerForm]
 PercentageSizes=1
@@ -357,8 +306,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=-1536
-Top=-118
+Left=-1418
+Top=-24
 Width=2844
 Height=6202
 MaxLeft=-1
@@ -377,7 +326,7 @@ Visible=0
 Docked=1
 State=0
 Left=-1728
-Top=-118
+Top=255
 Width=276
 Height=359
 MaxLeft=-1
@@ -401,11 +350,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1114
+Height=1047
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1114
+ClientHeight=1047
 TBDockHeight=407
 LRDockWidth=4948
 Dockable=1
@@ -420,11 +369,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1114
+Height=1047
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1114
+ClientHeight=1047
 TBDockHeight=213
 LRDockWidth=7406
 Dockable=1
@@ -443,11 +392,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1114
+Height=1047
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1114
+ClientHeight=1047
 TBDockHeight=1541
 LRDockWidth=3479
 Dockable=1
@@ -462,11 +411,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1114
+Height=1047
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1114
+ClientHeight=1047
 TBDockHeight=2064
 LRDockWidth=3479
 Dockable=1
@@ -481,11 +430,11 @@ State=0
 Left=0
 Top=0
 Width=2339
-Height=1182
+Height=940
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2339
-ClientHeight=1182
+ClientHeight=940
 TBDockHeight=2316
 LRDockWidth=2823
 Dockable=1
@@ -519,11 +468,11 @@ State=0
 Left=0
 Top=0
 Width=2339
-Height=1172
+Height=1182
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2339
-ClientHeight=1172
+ClientHeight=1182
 TBDockHeight=1153
 LRDockWidth=3677
 Dockable=1
@@ -546,11 +495,11 @@ State=0
 Left=0
 Top=0
 Width=2000
-Height=8556
+Height=6589
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=8556
+ClientHeight=6589
 TBDockHeight=4884
 LRDockWidth=7151
 Dockable=1
@@ -565,11 +514,11 @@ State=0
 Left=0
 Top=0
 Width=2000
-Height=8556
+Height=6589
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=8556
+ClientHeight=6589
 TBDockHeight=4884
 LRDockWidth=5307
 Dockable=1
@@ -582,7 +531,7 @@ Visible=0
 Docked=1
 State=0
 Left=-182
-Top=-118
+Top=-111
 Width=1844
 Height=3149
 MaxLeft=-1
@@ -638,8 +587,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=0
-Top=0
+Left=367
+Top=822
 Width=2859
 Height=3207
 MaxLeft=-1
@@ -660,11 +609,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1114
+Height=1047
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1114
+ClientHeight=1047
 TBDockHeight=1550
 LRDockWidth=8745
 Dockable=1
@@ -751,14 +700,14 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=0
+Top=23
 Width=3823
-Height=1415
+Height=1347
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1415
-TBDockHeight=1415
+ClientHeight=1347
+TBDockHeight=1347
 LRDockWidth=3823
 Dockable=1
 StayOnTop=0
@@ -782,7 +731,7 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
 ClientHeight=4632
-TBDockHeight=8857
+TBDockHeight=6890
 LRDockWidth=2000
 Dockable=1
 StayOnTop=0
@@ -806,7 +755,7 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
 ClientHeight=3585
-TBDockHeight=8857
+TBDockHeight=6890
 LRDockWidth=1896
 Dockable=1
 StayOnTop=0
@@ -830,7 +779,7 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
 ClientHeight=2432
-TBDockHeight=8857
+TBDockHeight=6890
 LRDockWidth=2000
 Dockable=1
 StayOnTop=0
