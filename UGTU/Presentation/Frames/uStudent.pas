@@ -945,7 +945,7 @@ begin
   bbUndo.enabled := false;
   FLoaded := true;
 
-  if (obj.Node.ImageIndex <> 9) and (obj.Node.ImageIndex <> 11) then
+  {if (obj.Node.ImageIndex <> 9) and (obj.Node.ImageIndex <> 11) then
   begin
     TabSheet3.enabled := false;
     TabSheet4.enabled := false;
@@ -956,14 +956,14 @@ begin
 
   end
   else
-  begin
+  begin}
     TabSheet3.enabled := true;
     TabSheet4.enabled := true;
     TabSheet5.enabled := true;
     TabSheet6.enabled := true;
     TabSheet7.enabled := true;
     tbMagazine.enabled := true;
-  end;
+  {end; }
 end;
 
 procedure TfmStudent.dtpEndCloseUp(Sender: TObject);
