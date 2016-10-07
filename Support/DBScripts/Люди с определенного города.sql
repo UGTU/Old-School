@@ -18,7 +18,7 @@ inner join Form_ed on Form_ed.Ik_form_ed = Relation_spec_fac.Ik_form_ed
 inner join grazd on grazd.ik_grazd = Person.Ik_grazd
 where  StudGrup.Ik_prikazOtch is null --не отчислен из группы
 and Grup.DateExit>GETDATE()
-and Fac.Ik_fac not in (15,17) order by c_grazd	 					--заочники 
+and Fac.Ik_fac not in (15,17) --order by c_grazd	 					--заочники 
 ) Allstud
 
 left join (select nCode,FlatNumber,StructNumber,BuildingNumber,CStreet,Cgorod,Cregion,Cstrana,Strana.Ik_strana,Raion.Ik_raion, Region.Ik_region
