@@ -126,8 +126,8 @@ procedure TfrmPerevStud.FormShow(Sender: TObject);
 begin
   dmCauses.adodsMoveFromCause.Active := true;
   dmCauses.adodsMoveToCause.Active := true;
-  dmUgtuStructure.adodsFaculty.Active := true;
-  dmUgtuStructure.adodsFaculty.Sort := 'CName_fac';
+  dmUgtuStructure.adodsFacultyAll.Active := true;
+  dmUgtuStructure.adodsFacultyAll.Sort := 'CName_fac';
   dmPrikaz.adodsPrikaz.Active := false;
   dmPrikaz.adodsPrikaz.Active := true;
 end;

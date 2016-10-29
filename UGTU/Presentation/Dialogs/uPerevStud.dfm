@@ -312,7 +312,7 @@ inherited frmPerevStud: TfrmPerevStud
     Flat = True
     KeyField = 'Ik_fac'
     ListField = 'Cname_fac'
-    ListSource = dmUgtuStructure.dsFaculty
+    ListSource = dmUgtuStructure.dsFacultyAll
     TabOrder = 5
     Visible = True
     OnChange = dbcbeFacChange

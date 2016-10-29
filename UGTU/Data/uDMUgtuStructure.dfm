@@ -16,12 +16,12 @@ object dmUgtuStructure: TdmUgtuStructure
     CursorType = ctStatic
     CommandText = 'select * from Tree_Faculties'
     Parameters = <>
-    Left = 153
-    Top = 138
+    Left = 113
+    Top = 234
   end
   object dsFaculty: TDataSource
     DataSet = adodsFaculty
-    Left = 415
+    Left = 111
     Top = 294
   end
   object adodsSpec: TADODataSet
@@ -76,8 +76,8 @@ object dmUgtuStructure: TdmUgtuStructure
       ''
       ''
       '')
-    Left = 217
-    Top = 125
+    Left = 185
+    Top = 237
     object adoqFacIk_fac: TAutoIncField
       FieldName = 'Ik_fac'
       ReadOnly = True
@@ -95,8 +95,8 @@ object dmUgtuStructure: TdmUgtuStructure
   end
   object dsFac: TDataSource
     DataSet = adoqFac
-    Left = 217
-    Top = 172
+    Left = 185
+    Top = 292
   end
   object adoqSpecFac: TADOQuery
     Connection = dm.DBConnect
@@ -208,20 +208,21 @@ object dmUgtuStructure: TdmUgtuStructure
     CursorType = ctStatic
     CommandText = 
       'select * from fac where ik_fac<>5 and ik_fac<>9 and (ik_fac<14 o' +
-      'r ik_fac>17) order by 2'
+      'r ik_fac>17) and (fDateExit IS NULL OR fDateExit > GETDATE()) or' +
+      'der by 2'
     Parameters = <>
-    Left = 33
-    Top = 202
+    Left = 41
+    Top = 234
   end
   object dsFacultyAll: TDataSource
     DataSet = adodsFacultyAll
-    Left = 23
-    Top = 326
+    Left = 47
+    Top = 294
   end
   object dsSpecForNagr: TDataSource
     DataSet = adospSpecForNagr
-    Left = 90
-    Top = 294
+    Left = 138
+    Top = 398
   end
   object adospSpecForNagr: TADOStoredProc
     Connection = dm.DBConnect
@@ -256,39 +257,39 @@ object dmUgtuStructure: TdmUgtuStructure
         Precision = 10
         Value = 1
       end>
-    Left = 90
-    Top = 248
+    Left = 138
+    Top = 352
   end
   object adospSpclzForNagr: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'SelectSpclzForNagr;1'
     Parameters = <>
-    Left = 178
-    Top = 264
+    Left = 234
+    Top = 352
   end
   object dsSpclzForNagr: TDataSource
     DataSet = adospSpclzForNagr
-    Left = 146
-    Top = 358
+    Left = 234
+    Top = 398
   end
   object adospFormEdForNagr: TADOStoredProc
     Connection = dm.DBConnect
     CursorType = ctStatic
     ProcedureName = 'SelectFormEdForNagr;1'
     Parameters = <>
-    Left = 250
-    Top = 224
+    Left = 338
+    Top = 352
   end
   object dsFormEdForNagr: TDataSource
     DataSet = adospFormEdForNagr
-    Left = 218
-    Top = 334
+    Left = 338
+    Top = 398
   end
   object dsYearUPForNagr: TDataSource
     DataSet = dsYearForUchPlan
-    Left = 314
-    Top = 302
+    Left = 458
+    Top = 398
   end
   object dsYearForUchPlan: TADOStoredProc
     Connection = dm.DBConnect
@@ -336,8 +337,8 @@ object dmUgtuStructure: TdmUgtuStructure
         Precision = 10
         Value = Null
       end>
-    Left = 336
-    Top = 240
+    Left = 456
+    Top = 360
   end
   object adsSpecFac: TADODataSet
     Connection = dm.DBConnect
