@@ -1,7 +1,7 @@
 object dmUgtuStructure: TdmUgtuStructure
   OldCreateOrder = False
-  Height = 443
-  Width = 540
+  Height = 470
+  Width = 554
   object adoqSelAllGroups: TADOQuery
     Connection = dm.DBConnect
     CursorType = ctStatic
@@ -207,9 +207,8 @@ object dmUgtuStructure: TdmUgtuStructure
     Connection = dm.DBConnect
     CursorType = ctStatic
     CommandText = 
-      'select * from fac where ik_fac<>5 and ik_fac<>9 and (ik_fac<14 o' +
-      'r ik_fac>17) and (fDateExit IS NULL OR fDateExit > GETDATE()) or' +
-      'der by 2'
+      'select * from fac where ik_fac<>9 and (fDateExit IS NULL OR fDat' +
+      'eExit > GETDATE()) order by 2'
     Parameters = <>
     Left = 41
     Top = 234
