@@ -77,15 +77,15 @@ end;
 
 procedure TfrmPerevStud.dbcbeFacChange(Sender: TObject);
 begin
-  dmUgtuStructure.adodsSpec.Active := false;
+  dmUgtuStructure.adodsAllSpec.Active := false;
   dmUgtuStructure.adodsGroups.Active := false;
   if dbcbeFac.KeyValue <> NULL then
   begin
-    dmUgtuStructure.adodsSpec.CommandText :=
-      'select * from Tree_specialties where Ik_fac=''' +
+    dmUgtuStructure.adodsAllSpec.CommandText :=
+      'select * from AllSpecialties where Ik_fac=''' +
       string(dbcbeFac.KeyValue) + '''';
-    dmUgtuStructure.adodsSpec.Active := true;
-    dmUgtuStructure.adodsSpec.Sort := 'CName_spec';
+    dmUgtuStructure.adodsAllSpec.Active := true;
+    dmUgtuStructure.adodsAllSpec.Sort := 'CName_spec';
   end;
   if CheckFields then
   begin

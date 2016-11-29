@@ -51,6 +51,8 @@ type
     adoqSpecFacYearObuch: TIntegerField;
     dsYearForUchPlan: TADOStoredProc;
     adsSpecFac: TADODataSet;
+    adodsAllSpec: TADODataSet;
+    dsAllSpec: TDataSource;
     
   private
     { Private declarations }

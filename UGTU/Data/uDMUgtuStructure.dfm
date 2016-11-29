@@ -29,13 +29,13 @@ object dmUgtuStructure: TdmUgtuStructure
     CursorType = ctStatic
     CommandText = 'select * from Tree_specialties'
     Parameters = <>
-    Left = 20
-    Top = 131
+    Left = 76
+    Top = 355
   end
   object dsSpec: TDataSource
-    DataSet = adodsSpec
-    Left = 324
-    Top = 139
+    DataSet = adodsAllSpec
+    Left = 76
+    Top = 411
   end
   object adodsGroups: TADODataSet
     Connection = dm.DBConnect
@@ -220,7 +220,7 @@ object dmUgtuStructure: TdmUgtuStructure
   end
   object dsSpecForNagr: TDataSource
     DataSet = adospSpecForNagr
-    Left = 138
+    Left = 154
     Top = 398
   end
   object adospSpecForNagr: TADOStoredProc
@@ -256,8 +256,8 @@ object dmUgtuStructure: TdmUgtuStructure
         Precision = 10
         Value = 1
       end>
-    Left = 138
-    Top = 352
+    Left = 154
+    Top = 344
   end
   object adospSpclzForNagr: TADOStoredProc
     Connection = dm.DBConnect
@@ -345,5 +345,18 @@ object dmUgtuStructure: TdmUgtuStructure
     Parameters = <>
     Left = 432
     Top = 208
+  end
+  object adodsAllSpec: TADODataSet
+    Connection = dm.DBConnect
+    CursorType = ctStatic
+    CommandText = 'select * from AllSpecialties'
+    Parameters = <>
+    Left = 468
+    Top = 259
+  end
+  object dsAllSpec: TDataSource
+    DataSet = adodsAllSpec
+    Left = 468
+    Top = 315
   end
 end

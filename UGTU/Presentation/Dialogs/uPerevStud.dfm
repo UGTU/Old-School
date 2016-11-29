@@ -282,7 +282,7 @@ inherited frmPerevStud: TfrmPerevStud
     Flat = True
     KeyField = 'ik_spec_fac'
     ListField = 'Cname_spec'
-    ListSource = dmUgtuStructure.dsSpec
+    ListSource = dmUgtuStructure.dsAllSpec
     TabOrder = 3
     Visible = True
     OnChange = dbcbeSpecChange

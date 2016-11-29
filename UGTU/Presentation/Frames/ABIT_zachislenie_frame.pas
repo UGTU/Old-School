@@ -761,7 +761,7 @@ end;
 procedure TfmZach.actPrikazAppointExecute(Sender: TObject);
 begin
   inherited;
-  TApplicationController.GetInstance.AddLogEntry('Назначаем приказы зчисленным абитуриентам.');
+  TApplicationController.GetInstance.AddLogEntry('Назначаем приказы зaчисленным абитуриентам.');
   TAbitZachislenieController.Instance.Abit_AppointPrikaz(@prikaz);
   prikaz.DataSource.DataSet.Next;
 end;
