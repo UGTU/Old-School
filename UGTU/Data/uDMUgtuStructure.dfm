@@ -33,7 +33,7 @@ object dmUgtuStructure: TdmUgtuStructure
     Top = 355
   end
   object dsSpec: TDataSource
-    DataSet = adodsAllSpec
+    DataSet = adodsSpec
     Left = 76
     Top = 411
   end

@@ -10,6 +10,11 @@ namespace StudentProgress
     public class StudentMainInfo
     {
         /// <summary>
+        /// Получает или устанавливает id зачётной книжки студента (уникальное id)
+        /// </summary>
+        public int zachID { get; set; }
+        
+        /// <summary>
         /// Получает или устанавливает номер зачётной книжки студента
         /// </summary>
         public string ID { get; set; }
@@ -206,7 +211,6 @@ namespace StudentProgress
         [WebMethod]
         public StudentProgressDTO GetStudentProgressByID(int StudID)
         {
-
             using (DataLayer.ServicesDataContextDataContext ctx = new DataLayer.ServicesDataContextDataContext("Data Source=ugtudb.ugtu.net;Initial Catalog=UGTU;Integrated Security=True"))
             {
                 string BookID = (string)ctx.Zaches.Where(p => (p.nCode == StudID)).Select(x => x.Nn_zach).First();
@@ -231,17 +235,17 @@ namespace StudentProgress
 
         private bool CheckStudentAttributes(DataLayer.ServicesDataContextDataContext ctx, string StudentID, string PasportNum)
         {
-            IEnumerable<DataLayer.Zach> zach = ctx.Zaches.Where(zch => zch.Nn_zach == StudentID);
+            IEnumerable<DataLayer.Zach> zach = ctx.Zaches.Where(zch => zch.Nn_zach == StudentID).ToArray();
             if (zach.Count() == 0)
                 return false;
             else
             {
-                DataLayer.Person pers= zach.First().Student.Person;
+                IEnumerable<DataLayer.Person> pers= zach.Select(z => z.Student.Person).ToArray();
                 if ((PasportNum != "") && (PasportNum != null))
                 {
-                    IEnumerable<DataLayer.Doc_stud> docs = pers.Doc_studs.Where(doc =>
+                    IEnumerable<DataLayer.Doc_stud> docs = pers.SelectMany(per => per.Doc_studs).Where(doc =>
                         //(doc.document.IsDefault == true) && 
-                        (doc.document.IsIdentity == true));
+                        (doc.document.IsIdentity == true)).ToArray();
 
                     //все верно, если паспорта нет или он совпадает
                     if ((docs.Count() == 0) || (docs.Where(doc => doc.Np_number == PasportNum).Count() > 0))

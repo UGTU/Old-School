@@ -59,12 +59,15 @@ begin
   end;
 
   Replace('#date_ekz#', '');
-  dir_inst := FReport.dir_inst;
+  {dir_inst := FReport.dir_inst;
   posit := Pos(' ', dir_inst);
   copystr1 := Copy(dir_inst, posit + 1, Length(dir_inst));
   copystr2 := Copy(dir_inst, 1, posit - 1);
-  copystr1 := copystr1 + ' ' + copystr2;
+  copystr1 := copystr1 + ' ' + copystr2;     }
   Replace('#dir_inst#', FReport.dir_inst);
+
+  //copystr1:= FReport.depPostManagerName;
+  Replace('#postName#', FReport.depPostManagerName);
 
   num := 0;
   for I := first_str to first_str + FReport.Students.Count - 1 do

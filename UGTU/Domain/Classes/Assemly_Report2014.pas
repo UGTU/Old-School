@@ -53,7 +53,6 @@ begin
       self.ikVed);
     sp_studs.Open;
     sp_studs.First;
-
     Result := TVedomost.Create(sp_shapka.FieldByName('Cname_fac_small')
       .AsString, sp_shapka.FieldByName('Cname_grup').AsString,
       sp_shapka.FieldByName('Cname_spec').AsString,
@@ -64,7 +63,8 @@ begin
       sp_shapka.FieldByName('iK_vid_zanyat').AsInteger,
       sp_shapka.FieldByName('nYear_post').AsInteger,
       sp_shapka.FieldByName('IsBRSPlan').AsBoolean,
-      sp_shapka.FieldByName('Cname_form_ed').AsString);
+      sp_shapka.FieldByName('Cname_form_ed').AsString,
+      sp_shapka.FieldByName('ManagerPostName').AsString);
     sp_studs.First;
 
     While not sp_studs.Eof do

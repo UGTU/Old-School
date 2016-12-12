@@ -16,6 +16,7 @@ type
     Fdate: TDateTime;
     FStudent: TObjectList<TVedomostItem>;
     FIs_brs: boolean;
+    FDepPostManagerName: string;
   public
 
     property Institute: string read FInstitute;
@@ -32,12 +33,12 @@ type
     property date: TDateTime read Fdate;
     property Is_brs: boolean read FIs_brs;
     property f_obuch: string read Ff_obuch;
-
+    property depPostManagerName: string  read FDepPostManagerName;
   protected
   public
     constructor Create(_Institute, _grup, _spec, _disc: string; _num_s: integer;
       _dir_inst: string; _date: TDateTime;
-      _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean; _f_obuch: string);
+      _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean; _f_obuch, _depPostManagerName: string);
 
     destructor Destroy;override;
     property Students: TObjectList<TVedomostItem> read FStudent;
@@ -47,7 +48,7 @@ implementation
 
 constructor TVedomost.Create(_Institute, _grup, _spec, _disc: string;
   _num_s: integer; _dir_inst: string; _date: TDateTime;
-  _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean; _f_obuch:string);
+  _n_ved, _ik_vid_zan, _year_post: integer; _Is_brs: boolean; _f_obuch, _depPostManagerName:string);
 begin
 
   FInstitute := _Institute;
@@ -63,6 +64,7 @@ begin
   Fyear_post := _year_post;
   FIs_brs := _Is_brs;
   Ff_obuch:=_f_obuch;
+  FDepPostManagerName := _depPostManagerName;
   FStudent := TObjectList<TVedomostItem>.Create;
 
 end;
