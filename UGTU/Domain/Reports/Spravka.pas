@@ -70,6 +70,7 @@ begin
     copystr2 := Copy(dir_inst, 1, posit - 1);
     copystr1 := copystr1 + ' ' + copystr2;
     Replace('#dir_inst#', copystr1); // переставит буквы местами
+    Replace('#postName#', FReport[j].managerPostName);
 
     if FReport[j].type_spr = 2 then
     begin

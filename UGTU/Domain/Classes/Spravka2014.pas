@@ -11,7 +11,7 @@ type
   TSpravka = class
   private
     FFIO, Fpodgot, Fspec, Fdir_inst,Ff_obuch,Finstut,Fphone,Fspecshort,
-    FNow_day,FNow_month,FNow_year,Fbirth,Fdep_ind,Fyear_otch,Fyear_post: string;
+    FNow_day,FNow_month,FNow_year,Fbirth,Fdep_ind,Fyear_otch,Fyear_post, FManagerPostName: string;
     Fkurs,Ftype_spr,FNumSpr: integer;
 
     FHistory: TObjectList<TSpravkaHistory>;
@@ -35,12 +35,13 @@ type
     property dep_ind: string read Fdep_ind;
     property type_spr: integer read Ftype_spr;
     property NumSpr: integer read FNumSpr;
+    property managerPostName: string read FManagerPostName;
 
 
   protected
   public
     constructor Create(_FIO, _podgot, _spec,_specshort, _dir_inst,_f_obuch,_instut, _phone: string;
-  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind: string;
+  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind, _managerPostName: string;
   _NumSpr:integer);
 
     destructor Destroy;override;
@@ -49,7 +50,7 @@ type
 implementation
 
 constructor TSpravka.Create(_FIO, _podgot, _spec,_specshort, _dir_inst,_f_obuch,_instut, _phone: string;
-  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind: string;
+  _year_post:string;_kurs,_type_spr:integer;_year_otch,_Now_day,_Now_month,_Now_year,_birth,_dep_ind, _managerPostName: string;
   _NumSpr:integer);
 begin
 
@@ -72,6 +73,7 @@ begin
   Fbirth:=_birth;
   Fdep_ind:=_dep_ind;
   FNumSpr:=_NumSpr;
+  FManagerPostName:= _managerPostName;
   FHistory := TObjectList<TSpravkaHistory>.Create;
 
 end;

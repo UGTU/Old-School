@@ -68,15 +68,15 @@ end;
 procedure TfrmStudVosst.dbcbeFacChange(Sender: TObject);
 begin
   inherited;
-  dmUgtuStructure.adodsSpec.Active := false;
+  dmUgtuStructure.adodsAllSpec.Active := false;
   dmUgtuStructure.adodsGroups.Active := false;
   if dbcbeFac.KeyValue <> NULL then
   begin
-    dmUgtuStructure.adodsSpec.CommandText :=
-      'select Ik_fac, ik_spec_fac, Cname_spec+ISNULL('' (''+[Sh_spec]+'')'','' '') Cname_spec from Tree_specialties where Ik_fac='''
-      + string(dbcbeFac.KeyValue) + '''';
-    dmUgtuStructure.adodsSpec.Active := true;
-    dmUgtuStructure.adodsSpec.Sort := 'CName_spec';
+    dmUgtuStructure.adodsAllSpec.CommandText :=
+      'select * from AllSpecialties where Ik_fac=''' +
+      string(dbcbeFac.KeyValue) + '''';
+    dmUgtuStructure.adodsAllSpec.Active := true;
+    dmUgtuStructure.adodsAllSpec.Sort := 'CName_spec';
   end;
 
   if CheckFields then
@@ -119,8 +119,8 @@ end;
 
 procedure TfrmStudVosst.FormShow(Sender: TObject);
 begin
-  dmUgtuStructure.adodsFaculty.Active := true;
-  dmUgtuStructure.adodsFaculty.Sort := 'CName_fac';
+  dmUgtuStructure.adodsFacultyAll.Active := true;
+  dmUgtuStructure.adodsFacultyAll.Sort := 'CName_fac';
   dmPrikaz.adodsPrikaz.Active := true;
   dmCauses.adodsRestoreCause.Active := true;
   dbcbeCause.KeyValue := 116;
