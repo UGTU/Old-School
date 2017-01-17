@@ -161,7 +161,7 @@ end;
 
 procedure  TDiplOtdKardController.LoadExitGroups(TargetDataSet: PDataSet);
 begin
-  TGeneralController.Instance.getDataSetValues(TargetDataSet, 'select * from [dbo].[OKADRGetExitGroup_inline]('+IntToStr(YearOf(Today))+') order by Cname_spec, Cname_profile, nYear_post', 'Ik_grup', false, NULL);
+  TGeneralController.Instance.getDataSetValues(TargetDataSet, 'select * from [dbo].[OKADRGetExitGroup_inline]('+IntToStr(YearOf(Today)-1)+') order by Cname_spec, Cname_profile, nYear_post', 'Ik_grup', false, NULL);
 end;
 
 
