@@ -170,7 +170,7 @@ inherited fmStudent: TfmStudent
             Top = 0
             Width = 672
             Height = 587
-            ActivePage = TabSheet3
+            ActivePage = TabSheet6
             Align = alClient
             Constraints.MinHeight = 426
             Constraints.MinWidth = 540
@@ -736,10 +736,6 @@ inherited fmStudent: TfmStudent
               Font.Style = []
               ImageIndex = 1
               ParentFont = False
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Panel3: TPanel
                 Left = 0
                 Top = 0
@@ -1113,10 +1109,6 @@ inherited fmStudent: TfmStudent
             object TabSheet5: TTabSheet
               Caption = #1057#1077#1084#1100#1103' '#1080' '#1092#1072#1084#1080#1083#1080#1103
               ImageIndex = 2
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object Splitter1: TSplitter
                 Left = 0
                 Top = 25
@@ -1220,10 +1212,6 @@ inherited fmStudent: TfmStudent
             object TabSheet6: TTabSheet
               Caption = #1044#1086#1082#1091#1084#1077#1085#1090#1099
               ImageIndex = 3
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
               object dbgeDocuments: TDBGridEh
                 Left = 0
                 Top = 0
@@ -1314,210 +1302,211 @@ inherited fmStudent: TfmStudent
                 end
               end
             end
-            object TabSheet7: TTabSheet
-              Caption = #1057#1086#1073#1099#1090#1080#1103
-              ImageIndex = 4
-              ExplicitLeft = 0
-              ExplicitTop = 0
-              ExplicitWidth = 0
-              ExplicitHeight = 0
-              object gbExiled: TGroupBox
-                Left = 0
-                Top = 0
-                Width = 664
-                Height = 91
-                Align = alTop
-                Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1086#1090#1095#1080#1089#1083#1077#1085#1080#1080
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 0
-                object DBGridEh5: TDBGridEh
-                  Left = 2
-                  Top = 15
-                  Width = 660
-                  Height = 74
-                  Align = alClient
-                  AutoFitColWidths = True
-                  DataSource = dmStudentSelectionProcs.dsExiles
-                  DynProps = <>
-                  Flat = True
-                  FooterParams.Color = clWindow
-                  IndicatorOptions = []
-                  Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-                  RowHeight = 18
-                  TabOrder = 0
-                  object RowDetailData: TRowDetailPanelControlEh
-                  end
-                end
+          end
+        end
+        object tsStudEvents: TTabSheet
+          Caption = #1057#1086#1073#1099#1090#1080#1103
+          ImageIndex = 6
+          object gbExiled: TGroupBox
+            Left = 0
+            Top = 0
+            Width = 672
+            Height = 91
+            Align = alTop
+            Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1086#1090#1095#1080#1089#1083#1077#1085#1080#1080
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            ExplicitTop = -1
+            object DBGridEh5: TDBGridEh
+              Left = 2
+              Top = 15
+              Width = 668
+              Height = 74
+              Align = alClient
+              AutoFitColWidths = True
+              DataSource = dmStudentSelectionProcs.dsExiles
+              DynProps = <>
+              Flat = True
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
+              Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              RowHeight = 18
+              TabOrder = 0
+              object RowDetailData: TRowDetailPanelControlEh
               end
-              object gbAcadem: TGroupBox
-                Left = 0
-                Top = 179
-                Width = 664
-                Height = 86
-                Align = alTop
-                Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1072#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1080#1093' '#1086#1090#1087#1091#1089#1082#1072#1093
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 1
-                object dbgeAcadem: TDBGridEh
-                  Left = 2
-                  Top = 15
-                  Width = 660
-                  Height = 69
-                  Align = alClient
-                  AutoFitColWidths = True
-                  DataSource = dmStudentSelectionProcs.dsAcadem
-                  DynProps = <>
-                  Flat = True
-                  FooterParams.Color = clWindow
-                  IndicatorOptions = []
-                  Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-                  RowHeight = 18
-                  TabOrder = 0
-                  object RowDetailData: TRowDetailPanelControlEh
-                  end
-                end
+            end
+          end
+          object gbAcadem: TGroupBox
+            Left = 0
+            Top = 179
+            Width = 672
+            Height = 86
+            Align = alTop
+            Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086#1073' '#1072#1082#1072#1076#1077#1084#1080#1095#1077#1089#1082#1080#1093' '#1086#1090#1087#1091#1089#1082#1072#1093
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            ExplicitTop = 163
+            object dbgeAcadem: TDBGridEh
+              Left = 2
+              Top = 15
+              Width = 668
+              Height = 69
+              Align = alClient
+              AutoFitColWidths = True
+              DataSource = dmStudentSelectionProcs.dsAcadem
+              DynProps = <>
+              Flat = True
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
+              Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              RowHeight = 18
+              TabOrder = 0
+              object RowDetailData: TRowDetailPanelControlEh
               end
-              object gbEntered: TGroupBox
-                Left = 0
-                Top = 91
-                Width = 664
-                Height = 88
-                Align = alTop
-                Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 2
-                object DBGridEh3: TDBGridEh
-                  Left = 2
-                  Top = 15
-                  Width = 660
-                  Height = 71
-                  Align = alClient
-                  AutoFitColWidths = True
-                  DataSource = dmStudentSelectionProcs.dsVosst
-                  DynProps = <>
-                  Flat = True
-                  FooterParams.Color = clWindow
-                  IndicatorOptions = []
-                  Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-                  RowHeight = 18
-                  TabOrder = 0
-                  object RowDetailData: TRowDetailPanelControlEh
-                  end
-                end
+            end
+          end
+          object gbEntered: TGroupBox
+            Left = 0
+            Top = 91
+            Width = 672
+            Height = 88
+            Align = alTop
+            Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1080
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            ExplicitLeft = 2
+            object DBGridEh3: TDBGridEh
+              Left = 2
+              Top = 15
+              Width = 668
+              Height = 71
+              Align = alClient
+              AutoFitColWidths = True
+              DataSource = dmStudentSelectionProcs.dsVosst
+              DynProps = <>
+              Flat = True
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
+              Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              RowHeight = 18
+              TabOrder = 0
+              object RowDetailData: TRowDetailPanelControlEh
               end
-              object gbProlongued: TGroupBox
-                Left = 0
-                Top = 457
-                Width = 664
-                Height = 98
-                Align = alClient
-                Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1088#1086#1076#1083#1077#1085#1080#1080' '#1089#1077#1089#1089#1080#1080
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 3
-                object DBGridEh6: TDBGridEh
-                  Left = 2
-                  Top = 15
-                  Width = 660
-                  Height = 81
-                  Align = alClient
-                  AutoFitColWidths = True
-                  DataSource = dmStudentSelectionProcs.dsExtendedSessions
-                  DynProps = <>
-                  Flat = True
-                  FooterParams.Color = clWindow
-                  IndicatorOptions = []
-                  Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-                  RowHeight = 18
-                  TabOrder = 0
-                  object RowDetailData: TRowDetailPanelControlEh
-                  end
-                end
+            end
+          end
+          object gbProlongued: TGroupBox
+            Left = 0
+            Top = 457
+            Width = 672
+            Height = 130
+            Align = alClient
+            Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1088#1086#1076#1083#1077#1085#1080#1080' '#1089#1077#1089#1089#1080#1080
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 3
+            object DBGridEh6: TDBGridEh
+              Left = 2
+              Top = 15
+              Width = 668
+              Height = 113
+              Align = alClient
+              AutoFitColWidths = True
+              DataSource = dmStudentSelectionProcs.dsExtendedSessions
+              DynProps = <>
+              Flat = True
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
+              Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              RowHeight = 18
+              TabOrder = 0
+              object RowDetailData: TRowDetailPanelControlEh
               end
-              object gbCatChange: TGroupBox
-                Left = 0
-                Top = 361
-                Width = 664
-                Height = 96
-                Align = alTop
-                Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1089#1084#1077#1085#1077' '#1082#1072#1090#1077#1075#1086#1088#1080#1080' '#1086#1073#1091#1095#1077#1085#1080#1103
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 4
-                object DBGridEh2: TDBGridEh
-                  Left = 2
-                  Top = 15
-                  Width = 660
-                  Height = 79
-                  Align = alClient
-                  AutoFitColWidths = True
-                  DataSource = dmStudentSelectionProcs.dsSelKatChanges
-                  DynProps = <>
-                  Flat = True
-                  FooterParams.Color = clWindow
-                  IndicatorOptions = []
-                  Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-                  RowHeight = 18
-                  TabOrder = 0
-                  object RowDetailData: TRowDetailPanelControlEh
-                  end
-                end
+            end
+          end
+          object gbCatChange: TGroupBox
+            Left = 0
+            Top = 361
+            Width = 672
+            Height = 96
+            Align = alTop
+            Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1089#1084#1077#1085#1077' '#1082#1072#1090#1077#1075#1086#1088#1080#1080' '#1086#1073#1091#1095#1077#1085#1080#1103
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 4
+            ExplicitTop = 275
+            object DBGridEh2: TDBGridEh
+              Left = 2
+              Top = 15
+              Width = 668
+              Height = 79
+              Align = alClient
+              AutoFitColWidths = True
+              DataSource = dmStudentSelectionProcs.dsSelKatChanges
+              DynProps = <>
+              Flat = True
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
+              Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              RowHeight = 18
+              TabOrder = 0
+              object RowDetailData: TRowDetailPanelControlEh
               end
-              object gbMoved: TGroupBox
-                Left = 0
-                Top = 265
-                Width = 664
-                Height = 96
-                Align = alTop
-                Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1077#1088#1077#1074#1086#1076#1072#1093' '#1085#1072' '#1089#1083#1077#1076#1091#1102#1097#1080#1081' '#1082#1091#1088#1089
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = []
-                ParentFont = False
-                TabOrder = 5
-                object DBGridEh4: TDBGridEh
-                  Left = 2
-                  Top = 15
-                  Width = 660
-                  Height = 79
-                  Align = alClient
-                  AutoFitColWidths = True
-                  DataSource = dmStudentSelectionProcs.dsMoves
-                  DynProps = <>
-                  Flat = True
-                  FooterParams.Color = clWindow
-                  IndicatorOptions = []
-                  Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-                  RowHeight = 18
-                  TabOrder = 0
-                  object RowDetailData: TRowDetailPanelControlEh
-                  end
-                end
+            end
+          end
+          object gbMoved: TGroupBox
+            Left = 0
+            Top = 265
+            Width = 672
+            Height = 96
+            Align = alTop
+            Caption = #1057#1074#1077#1076#1077#1085#1080#1103' '#1086' '#1087#1077#1088#1077#1074#1086#1076#1072#1093' '#1085#1072' '#1089#1083#1077#1076#1091#1102#1097#1080#1081' '#1082#1091#1088#1089
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 5
+            ExplicitTop = 0
+            object DBGridEh4: TDBGridEh
+              Left = 2
+              Top = 15
+              Width = 668
+              Height = 79
+              Align = alClient
+              AutoFitColWidths = True
+              DataSource = dmStudentSelectionProcs.dsMoves
+              DynProps = <>
+              Flat = True
+              FooterParams.Color = clWindow
+              IndicatorOptions = []
+              Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+              RowHeight = 18
+              TabOrder = 0
+              object RowDetailData: TRowDetailPanelControlEh
               end
             end
           end
@@ -1525,10 +1514,6 @@ inherited fmStudent: TfmStudent
         object TabSheet2: TTabSheet
           Caption = #1059#1089#1087#1077#1074#1072#1077#1084#1086#1089#1090#1100
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object DBGridEh1: TDBGridEh
             Left = 0
             Top = 26
@@ -1719,10 +1704,6 @@ inherited fmStudent: TfmStudent
         object tsBRSBalls: TTabSheet
           Caption = #1041#1072#1083#1083#1099' '#1087#1086' '#1084#1086#1076#1091#1083#1103#1084
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel10: TPanel
             Left = 0
             Top = 0
@@ -1911,10 +1892,6 @@ inherited fmStudent: TfmStudent
         object TabSheet9: TTabSheet
           Caption = #1047#1072#1082#1088#1099#1090#1099#1077' '#1085#1072#1087#1088#1072#1074#1083#1077#1085#1080#1103
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Panel12: TPanel
             Left = 0
             Top = 0
@@ -2002,10 +1979,6 @@ inherited fmStudent: TfmStudent
         object tsUspevStat: TTabSheet
           Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object dbgUspevStat: TDBGridEh
             Left = 0
             Top = 0
@@ -2072,10 +2045,6 @@ inherited fmStudent: TfmStudent
           Font.Style = []
           ImageIndex = 5
           ParentFont = False
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object panelMagaz: TPanel
             Left = 0
             Top = 0
@@ -2544,7 +2513,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C0101110040009C0210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000A00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

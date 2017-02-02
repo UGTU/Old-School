@@ -59,7 +59,6 @@ type
     TabSheet5: TTabSheet;
     dbdteBirthDate: TDBDateTimeEditEh;
     TabSheet6: TTabSheet;
-    TabSheet7: TTabSheet;
     gbExiled: TGroupBox;
     DBGridEh5: TDBGridEh;
     gbAcadem: TGroupBox;
@@ -218,6 +217,7 @@ type
     adoSelDocFilesdoc_file: TBlobField;
     ppmDest: TPopupMenu;
     bClearPhoto: TButton;
+    tsStudEvents: TTabSheet;
 
     procedure BbSaveclick(Sender: TObject);
     procedure eFamExit(Sender: TObject);
@@ -295,6 +295,7 @@ type
     procedure GetUspevStat(ik_zach: Integer);
     procedure SetDebtList(const Value: TStringList);
     procedure OnMyMenuItemClick(Sender: TObject);
+    procedure LoadEvents;
 
   protected
     FDocRecordList: TObjectList<TDocRecord>;
@@ -322,6 +323,8 @@ type
     procedure FormNeuspSpr(ik_studGrup, ik_destination: Integer);
     procedure FormExtract(ik_studGrup, ik_destination: Integer);
     procedure CreateDoc(ik_destination: Integer);
+
+
   published
     property OnDocumentStateChanged: TNotifyEvent read FDocumentStateChanged
       write FDocumentStateChanged;
@@ -836,26 +839,6 @@ begin
     Active := true;
   end;
 
-  with dmStudentSelectionProcs.aspSelExtendedSessions do
-  begin
-    Active := false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.RecordbookKey;
-    ExecProc;
-    Active := true;
-  end;
-
-  with dmStudentSelectionProcs.aspSelMoves do
-  begin
-    Active := false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.RecordbookKey;
-    ExecProc;
-    Active := true;
-  end;
-
   with dmStudentSelectionProcs.adoSelDocuments do
   begin
 
@@ -890,52 +873,12 @@ begin
     Active := true;
   end;
 
-  with dmStudentSelectionProcs.aspSelAcadem do
-  begin
-    Active := false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.RecordbookKey;
-    ExecProc;
-    Active := true;
-  end;
-
-  with dmStudentSelectionProcs.aspSelExiles do
-  begin
-    Active := false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.RecordbookKey;
-    ExecProc;
-    Active := true;
-  end;
-
-  with dmStudentSelectionProcs.aspSelVosst do
-  begin
-    Active := false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.RecordbookKey;
-    ExecProc;
-    Active := true;
-  end;
-
   with dmStudentSelectionProcs.aspSelFamily do
   begin
     Active := false;
     Parameters.Clear;
     Parameters.AddParameter;
     Parameters[0].Value := obj.ID;
-    ExecProc;
-    Active := true;
-  end;
-
-  with dmStudentSelectionProcs.aspSelKatChanges do
-  begin
-    Active := false;
-    Parameters.Clear;
-    Parameters.AddParameter;
-    Parameters[0].Value := obj.RecordbookKey;
     ExecProc;
     Active := true;
   end;
@@ -961,7 +904,6 @@ begin
     TabSheet4.enabled := true;
     TabSheet5.enabled := true;
     TabSheet6.enabled := true;
-    TabSheet7.enabled := true;
     tbMagazine.enabled := true;
   {end; }
 end;
@@ -1978,6 +1920,12 @@ begin
       [dghAutoSortMarking];
     dbgehMagazineDocsStud.SortLocal := true;
   end;
+
+  if (PageControl1.ActivePage = tsStudEvents) then
+  begin
+    LoadEvents;
+  end;
+
   dmDocs.spDest.Active := false;
   dmDocs.spDest.Parameters.Refresh;
   dmDocs.spDest.Parameters.ParamByName('@ik_stud').Value := obj.StudGrupKey;
@@ -2227,6 +2175,71 @@ begin
     TADODataSet(dmUspevaemost.adospSelUspevForStud);
   TStudUspevExcelReport(Report).IsSmall := false;
   TWaitingController.GetInstance.Process(Report);
+end;
+
+procedure TfmStudent.LoadEvents;
+begin
+with dmStudentSelectionProcs.aspSelExtendedSessions do
+  begin
+    Active := false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value := obj.RecordbookKey;
+    ExecProc;
+    Active := true;
+  end;
+
+  with dmStudentSelectionProcs.aspSelMoves do
+  begin
+    Active := false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value := obj.RecordbookKey;
+    ExecProc;
+    Active := true;
+  end;
+
+
+  with dmStudentSelectionProcs.aspSelAcadem do
+  begin
+    Active := false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value := obj.RecordbookKey;
+    ExecProc;
+    Active := true;
+  end;
+
+  with dmStudentSelectionProcs.aspSelExiles do
+  begin
+    Active := false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value := obj.RecordbookKey;
+    ExecProc;
+    Active := true;
+  end;
+
+  with dmStudentSelectionProcs.aspSelVosst do
+  begin
+    Active := false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value := obj.RecordbookKey;
+    ExecProc;
+    Active := true;
+  end;
+
+  with dmStudentSelectionProcs.aspSelKatChanges do
+  begin
+    Active := false;
+    Parameters.Clear;
+    Parameters.AddParameter;
+    Parameters[0].Value := obj.RecordbookKey;
+    ExecProc;
+    Active := true;
+  end;
+
 end;
 
 procedure TfmStudent.MenuItem4Click(Sender: TObject);

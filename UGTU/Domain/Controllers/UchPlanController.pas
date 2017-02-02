@@ -20,6 +20,7 @@ uses
 const
   FISCULTURA = 10; // для особого учета зачетных единиц физической культуры
   FISCULTURA_CIKL = 19; // для особого учета зачетных единиц физической культуры
+  SUM_AUDITVIDZANYAT = 100; //код вида занятий для всех аудиторных занятий
 
 type
   PStringList = ^TStringList;
@@ -399,6 +400,7 @@ type
   TSemInfo = record
     number: integer;
     auditorHour: array [0 .. 2] of integer;
+    auditorSumHourCount: integer;
     weekCount: integer;
   end;
 
@@ -1445,8 +1447,10 @@ begin
         if semestrStr = '' then semestrStr := 'iK_vid_zanyat=-1';
 
         (DataSet as TADODataSet).CommandText :=
-          'SELECT * FROM Uch_plan_columns WHERE (ik_type_disc = 1) and (((i_type_column IN (3, 4, 5, 6)) or ((i_type_column = 11) and ('
+          'SELECT * FROM Uch_plan_columns WHERE (ik_type_disc = 1) and (((i_type_column IN (3, 4, 5, 6)) or ((i_type_column = 13) and ('
           + semestrStr + ')))) ORDER BY ik_column';
+
+
       end
   else
     (DataSet as TADODataSet).CommandText :=
@@ -1507,8 +1511,7 @@ begin
           tempSL.Clear;
           while (not dm.qContentUchPlan.Eof) do
           begin
-            if (dm.qContentUchPlan.FieldByName('iK_vid_zanyat')
-              .AsInteger = arColumns[k].VidZanyatIK) then
+            if (dm.qContentUchPlan.FieldByName('iK_vid_zanyat').AsInteger = arColumns[k].VidZanyatIK) then
             begin
               if (KafedraColumn <> nil) then
               begin
@@ -1530,7 +1533,32 @@ begin
             KafedraColumn^.Add(getValuesFromStringList(@tempSL, 'kafedra',
               'ik_kaf', 'cshort_name_kaf'));
         end;
-      11:
+
+    {13:
+        begin
+          i:= Length(semesters) - 1;
+          for g := 0 to i do
+            if (arColumns[k].VidZanyatIK = semesters[g].number) then
+            begin
+
+              tempStr := '0';
+              tempSL.Clear;
+
+              if dm.qContentUchPlan.Locate('ik_vid_zanyat; n_sem',
+                  VarArrayOf([SUM_AUDITVIDZANYAT,semesters[g].number]), [loPartialKey]) then
+              begin
+                if (dm.qContentUchPlan.FieldByName('ik_kaf').value <> NULL) then
+                  if (tempSL.IndexOf(dm.qContentUchPlan.FieldByName('ik_kaf').AsString) = -1) then
+                    tempSL.Add(dm.qContentUchPlan.FieldByName('ik_kaf').AsString);
+                tempStr := dm.qContentUchPlan.FieldByName('i_hours_per_sem').AsString ;
+              end;
+
+              ValuesColumn.Add(tempStr);
+              break;
+            end;
+         end;   }
+
+          11:
         begin
           for g := 0 to Length(semesters) - 1 do
             if (arColumns[k].VidZanyatIK = semesters[g].number) then
@@ -1624,6 +1652,9 @@ begin
             end;
         end;
     end;
+
+
+
   end;
   if not isAlreadyOpen then
     dm.qContentUchPlan.Close;
@@ -3789,7 +3820,7 @@ function TUchPlanController.GetSemesterHourityString(semesterNumber
 var
   i: integer;
 begin
-  Result := '00\00\00';
+  {Result := '00\00\00';
   for i := 0 to Length(semesters) - 1 do
     if semesters[i].number = semesterNumber then
     begin
@@ -3821,7 +3852,7 @@ begin
       else
         Result := Result + '00';
       exit;
-    end;
+    end; }
 end;
 
 { TWeekCountExceptionList }

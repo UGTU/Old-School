@@ -182,26 +182,26 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     BevelOuter = bvNone
     TabOrder = 6
     ExplicitTop = 627
-    ExplicitWidth = 656
+    ExplicitWidth = 680
     ExplicitHeight = 36
     inherited bbOK: TBitBtn
       Left = 423
       Top = 6
-      ExplicitLeft = 399
+      ExplicitLeft = 423
       ExplicitTop = 6
     end
     inherited bbApply: TBitBtn
       Left = 589
       Top = 6
       TabOrder = 2
-      ExplicitLeft = 565
+      ExplicitLeft = 589
       ExplicitTop = 6
     end
     inherited bbCancel: TBitBtn
       Left = 506
       Top = 6
       TabOrder = 1
-      ExplicitLeft = 482
+      ExplicitLeft = 506
       ExplicitTop = 6
     end
     inherited bbSprav: TBitBtn
@@ -222,7 +222,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     BevelOuter = bvNone
     Caption = 'Panel2'
     TabOrder = 5
-    ExplicitWidth = 643
     object Splitter1: TSplitter
       Left = 391
       Top = 0
@@ -246,8 +245,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 394
-      ExplicitWidth = 254
       object ScrollBox1: TScrollBox
         Left = 0
         Top = 0
@@ -256,7 +253,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         Align = alClient
         BorderStyle = bsNone
         TabOrder = 0
-        ExplicitWidth = 251
         object pnlProfile: TPanel
           Left = 0
           Top = 0
@@ -264,7 +260,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
           Height = 53
           Align = alTop
           TabOrder = 0
-          ExplicitWidth = 251
           object lblSpclz: TLabel
             Left = 10
             Top = 3
@@ -303,7 +298,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
           Font.Style = []
           ParentFont = False
           TabOrder = 1
-          ExplicitWidth = 254
           DesignSize = (
             276
             367)
@@ -590,7 +584,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
             ParentShowHint = False
             ShowHint = True
             TabOrder = 3
-            ExplicitLeft = 175
           end
           object edtHoursAudit: TDBEditEh
             Left = 226
@@ -663,7 +656,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
         OnKeyDown = sgDiscKeyDown
         OnMouseMove = sgDiscMouseMove
         OnSelectCell = sgDiscSelectCell
-        ExplicitWidth = 370
         ColWidths = (
           113
           87
@@ -699,7 +691,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 0
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
-    ExplicitWidth = 503
   end
   object dbcbGrpDisc: TDBLookupComboboxEh [19]
     Left = 145
@@ -714,7 +705,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 1
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
-    ExplicitWidth = 503
   end
   object dbcbDisc: TDBLookupComboboxEh [20]
     Left = 145
@@ -751,7 +741,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 3
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
-    ExplicitWidth = 503
   end
   object Panel5: TPanel [22]
     Left = 244
@@ -786,7 +775,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     OnEnter = Edit6Enter
     OnExit = Edit6Exit
     OnKeyPress = edtHoursGosKeyPress
-    ExplicitWidth = 185
   end
   object cbOtherUchPl: TCheckBox [24]
     Left = 5
@@ -811,7 +799,6 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     TabOrder = 10
     Visible = True
     OnKeyValueChanged = dbcbGrpDiscKeyValueChanged
-    ExplicitWidth = 503
   end
   inherited actBaseDialog: TActionList
     Left = 567
@@ -838,7 +825,7 @@ inherited frmUchPlanAddDisc: TfrmUchPlanAddDisc
     Left = 440
     Top = 560
     Bitmap = {
-      494C0101030004006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

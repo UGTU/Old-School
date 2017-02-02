@@ -502,9 +502,9 @@ begin
     if (Key = VK_RETURN) then sgDiscDblClick(nil);
   if (sgDisc.Col = 1) and (Key = VK_DELETE) and (not isCellTextChange) then
   begin
-    if (sgDisc.Row > NoAudRowCount) then
+    {if (sgDisc.Row > NoAudRowCount) then
       sgDisc.Cells[sgDisc.Col, sgDisc.Row]:= '00\00\00'
-    else sgDisc.Cells[sgDisc.Col, sgDisc.Row]:= '';
+    else} sgDisc.Cells[sgDisc.Col, sgDisc.Row]:= '';
     isCellTextChange:= true;
     curRow:= sgDisc.Row;
     curCol:= sgDisc.Col;
@@ -526,8 +526,8 @@ end;
 procedure TfrmUchPlanAddDisc.sgDiscGetEditMask(Sender: TObject; ACol,
   ARow: Integer; var Value: String);
 begin
-  if ((ACol = 1) and (ARow > NoAudRowCount) and (not isCellTextChange)) then
-    Value:= '00\\00\\00'//'99\\99\\99;1;0';
+  {if ((ACol = 1) and (ARow > NoAudRowCount) and (not isCellTextChange)) then
+    Value:= '00\\00\\00'//'99\\99\\99;1;0';    }
 end;
 
 procedure TfrmUchPlanAddDisc.sgDiscDrawCell(Sender: TObject; ACol,

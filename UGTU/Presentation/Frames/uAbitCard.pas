@@ -307,7 +307,6 @@ begin
     TabSheet5.Enabled := false;
     TabSheet4.Enabled := false;
     TabSheet6.Enabled := false;
-    TabSheet7.Enabled := false;
     TabSheet8.Enabled := false;
     frmMain.actAbitMove.Enabled := false;
     frmMain.actDocsRetrieve.Enabled := false;
@@ -320,7 +319,6 @@ begin
     TabSheet5.Enabled := true;
     TabSheet4.Enabled := true;
     TabSheet6.Enabled := true;
-    TabSheet7.Enabled := true;
     TabSheet8.Enabled := true;
   end;
 end;
