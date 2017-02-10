@@ -47,6 +47,8 @@ begin
   if BDay.ToString.Length = 1 then
     b := '0';
   Replace('#date#', a+BDay.ToString  + '.' + b+BMonth.ToString + '.' + BYear.ToString);
+  uDMDocuments.dmDocs.adodsDocs.DisableControls;
+  try
   with uDMDocuments.dmDocs.adodsDocs do
   begin
     First;
@@ -62,8 +64,8 @@ begin
         ].Insert(xlDown, xlFormatFromRightOrBelow);
 
       // Range['C' + inttostr(fusp), 'E' + inttostr(fusp)].Select;
-      Items[fusp, 1] := n.ToString();
-      Items[fusp, 2] := FieldByName('DateReady').AsString;
+      Items[fusp, 1] := FieldByName('NumberDoc').AsString;
+      Items[fusp, 2] := FieldByName('DateCreate').AsString;
       Items[fusp, 3] := FieldByName('FIO').AsString;
       Items[fusp, 7] := FieldByName('Cname_grup').AsString;
       Items[fusp, 8] := FieldByName('cNameDestination').AsString;
@@ -89,7 +91,10 @@ begin
       n := n + 1;
       fusp := fusp + 1;
     end;
+  end;
 
+  finally
+    uDMDocuments.dmDocs.adodsDocs.EnableControls;
   end;
 end;
 
