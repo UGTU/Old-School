@@ -145,7 +145,7 @@ inherited fmStudent: TfmStudent
         Top = 0
         Width = 680
         Height = 615
-        ActivePage = TabSheet1
+        ActivePage = tbMagazine
         Align = alClient
         Constraints.MinWidth = 557
         Font.Charset = DEFAULT_CHARSET
@@ -1321,7 +1321,6 @@ inherited fmStudent: TfmStudent
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            ExplicitTop = -1
             object DBGridEh5: TDBGridEh
               Left = 2
               Top = 15
@@ -1355,7 +1354,6 @@ inherited fmStudent: TfmStudent
             Font.Style = []
             ParentFont = False
             TabOrder = 1
-            ExplicitTop = 163
             object dbgeAcadem: TDBGridEh
               Left = 2
               Top = 15
@@ -1389,7 +1387,6 @@ inherited fmStudent: TfmStudent
             Font.Style = []
             ParentFont = False
             TabOrder = 2
-            ExplicitLeft = 2
             object DBGridEh3: TDBGridEh
               Left = 2
               Top = 15
@@ -1456,7 +1453,6 @@ inherited fmStudent: TfmStudent
             Font.Style = []
             ParentFont = False
             TabOrder = 4
-            ExplicitTop = 275
             object DBGridEh2: TDBGridEh
               Left = 2
               Top = 15
@@ -1490,7 +1486,6 @@ inherited fmStudent: TfmStudent
             Font.Style = []
             ParentFont = False
             TabOrder = 5
-            ExplicitTop = 0
             object DBGridEh4: TDBGridEh
               Left = 2
               Top = 15
@@ -2513,7 +2508,7 @@ inherited fmStudent: TfmStudent
     Left = 630
     Top = 224
     Bitmap = {
-      494C010111004000A00210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010111004000A40210001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

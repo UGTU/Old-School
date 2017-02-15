@@ -1893,8 +1893,13 @@ begin
   if PageControl1.ActivePage = tsBRSBalls then
     sbRefreshClick(Sender);
 
-  if PageControl1.ActivePageIndex = 5 then
+  if false{ PageControl1.ActivePage = tbMagazine} then
   begin
+    dmDocs.spDest.Active := false;
+    dmDocs.spDest.Parameters.Refresh;
+    dmDocs.spDest.Parameters.ParamByName('@ik_stud').Value := obj.StudGrupKey;
+    dmDocs.spDest.Active := true;
+
     dbgehMagazineDocsStud.SelectedRows.CurrentRowSelected := true;
     dtpStart.date := date - 31; // "конкретная дата"
     dtpEnd.date := date; // текущая дата
@@ -1925,11 +1930,6 @@ begin
   begin
     LoadEvents;
   end;
-
-  dmDocs.spDest.Active := false;
-  dmDocs.spDest.Parameters.Refresh;
-  dmDocs.spDest.Parameters.ParamByName('@ik_stud').Value := obj.StudGrupKey;
-  dmDocs.spDest.Active := true;
 end;
 
 procedure TfmStudent.ppmDestPopup(Sender: TObject);
