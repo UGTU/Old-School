@@ -62,7 +62,7 @@ begin
     Replace('#Year#', FReport[j].Now_year);
     Replace('#dep_ind#', FReport[j].dep_ind);
     Replace('#num#', FReport[j].NumSpr.ToString());
-    Replace('#phone_inst#', ',' + FReport[j].phone);
+    //Replace('#phone_inst#', ',' + FReport[j].phone);
 
     dir_inst := FReport[j].dir_inst;
     posit := Pos(' ', dir_inst);
@@ -75,7 +75,8 @@ begin
     if FReport[j].type_spr = 2 then
     begin
       Replace('#birth_y#', FReport[j].birth);
-      Replace('#spec#', FReport[j].specshort);
+      Replace('#spec#', FReport[j].spec);
+      Replace('#shifr#', FReport[j].cypher);
       first_str := 20;
       num := 0;
 

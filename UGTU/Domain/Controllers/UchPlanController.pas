@@ -2461,8 +2461,8 @@ var
   canDel: boolean;
 begin
 
-  IKList := TStringList.Create;
-  TempIKList := TStringList.Create;
+  IKList := TStringList.Create;  //новые записи по виду занятий
+  TempIKList := TStringList.Create;     //предыдущие записи по виду занятий
 
   semKafList := TSemKafList.Create;
   dm.adsContentVZ.DisableControls;
@@ -2578,7 +2578,10 @@ begin
       end else n:= n+1;
       until n=newContentIKList.Count;    * }
 
-    // если семестры данного вида занятий не совпадают с теми, что были
+    // если семестры данного вида занятий не совпадают с теми, что были,
+    //то оставляем в обоих списках только не совпадения
+    //(т.е в новом будет все новое, что нужно добавить
+    //а в старом все, что нужно удалить
     if (not isListEqual(IKList, TempIKList)) then
     begin
       // если еще остались хоть какие-то занятия

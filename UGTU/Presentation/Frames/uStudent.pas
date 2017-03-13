@@ -1893,7 +1893,7 @@ begin
   if PageControl1.ActivePage = tsBRSBalls then
     sbRefreshClick(Sender);
 
-  if false{ PageControl1.ActivePage = tbMagazine} then
+  if  PageControl1.ActivePage = tbMagazine then
   begin
     dmDocs.spDest.Active := false;
     dmDocs.spDest.Parameters.Refresh;

@@ -77,6 +77,7 @@ begin
       sp_spr.FieldByName('sprMonth').AsString, sp_spr.FieldByName('sprYear')
       .AsString, sp_spr.FieldByName('studBirthYear').AsString,
       sp_spr.FieldByName('Dep_Index').AsString, sp_spr.FieldByName('ManagerPostName').AsString,
+      sp_spr.FieldByName('Sh_spec').AsString,
       sp_doc.FieldByName('NumberDoc')
       .AsInteger);
     sp_spr.First;
