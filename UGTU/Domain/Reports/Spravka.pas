@@ -52,7 +52,7 @@ begin
     Replace('#fio#', FReport[j].FIO);
     Replace('#fac#', FReport[j].instut);
     Replace('#otdel#', FReport[j].f_obuch);
-    Replace('#YearOtch#', FReport[j].year_otch);
+
     dop := FReport[j].Now_day;
     if (dop.Length = 1) then
       dop := '0' + dop;
@@ -72,11 +72,14 @@ begin
     Replace('#dir_inst#', copystr1); // переставит буквы местами
     Replace('#postName#', FReport[j].managerPostName);
 
+    Replace('#birth_y#', FReport[j].birth);
+    Replace('#spec#', FReport[j].spec);
+    Replace('#shifr#', FReport[j].cypher);
+
     if FReport[j].type_spr = 2 then
     begin
-      Replace('#birth_y#', FReport[j].birth);
-      Replace('#spec#', FReport[j].spec);
-      Replace('#shifr#', FReport[j].cypher);
+      Replace('#YearOtch#', FReport[j].year_otch);
+
       first_str := 20;
       num := 0;
 
@@ -134,12 +137,6 @@ begin
         end;
         num := num + 1;
       end;
-    end
-    else
-    begin
-      Replace('#YearZ#', FReport[j].year_post);
-      Replace('#podgot#', FReport[j].podgot);
-      Replace('#spec#', FReport[j].spec);
     end;
     ActiveSheet.Name := '№ ' + FReport[j].NumSpr.ToString();
   end;
