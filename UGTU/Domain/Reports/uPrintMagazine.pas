@@ -40,13 +40,13 @@ var
 begin
   inherited;
   n := 1;
-  fusp := 9;
-  DecodeDate(Now, BYear, BMonth, BDay);
+  fusp := 21;
+  {DecodeDate(Now, BYear, BMonth, BDay);
   if BMonth.ToString.Length = 1 then
     a := '0';
   if BDay.ToString.Length = 1 then
     b := '0';
-  Replace('#date#', a+BDay.ToString  + '.' + b+BMonth.ToString + '.' + BYear.ToString);
+  Replace('#date#', a+BDay.ToString  + '.' + b+BMonth.ToString + '.' + BYear.ToString);  }
   uDMDocuments.dmDocs.adodsDocs.DisableControls;
   try
   with uDMDocuments.dmDocs.adodsDocs do
@@ -69,11 +69,11 @@ begin
       Items[fusp, 3] := FieldByName('FIO').AsString;
       Items[fusp, 7] := FieldByName('Cname_grup').AsString;
       Items[fusp, 8] := FieldByName('cNameDestination').AsString;
-      Items[fusp, 11] := FieldByName('cNameTransfer').AsString;
+      //Items[fusp, 11] := FieldByName('cNameTransfer').AsString;
       Range['C' + inttostr(fusp), 'F' + inttostr(fusp)].Select;
       Selection.MergeCells := true;
       Selection.Borders.LineStyle := 1;
-      Range['H' + inttostr(fusp), 'J' + inttostr(fusp)].Select;
+      Range['H' + inttostr(fusp), 'K' + inttostr(fusp)].Select;
       Selection.MergeCells := true;
       Selection.Borders.LineStyle := 1;
       Range['A' + inttostr(fusp), 'A' + inttostr(fusp)].Select;

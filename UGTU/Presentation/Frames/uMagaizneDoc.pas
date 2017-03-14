@@ -334,8 +334,8 @@ begin
   c:='0';
     if EDay.ToString.Length=1 then
   d:='0';
-  Report := TDocController.Instance.BuildSpr(a+BDay.ToString  + '.' + b+BMonth.ToString + '.' + BYear.ToString,
-    c+EDay.ToString + '.' + d+EMonth.ToString + '.' +  EYear.ToString);
+  Report := TDocController.Instance.BuildSpr(b+BDay.ToString  + '.' + a+BMonth.ToString + '.' + BYear.ToString,
+    d+EDay.ToString + '.' + c+EMonth.ToString + '.' +  EYear.ToString);
   TWaitingController.GetInstance.Process(Report);
 end;
 
