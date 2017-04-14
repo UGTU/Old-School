@@ -2840,7 +2840,7 @@ begin
     depInd := TDocController.Instance.CalculationDepIndex
       (dsDoc.FieldByName('Ik_grup').AsInteger);
     LastNum := TDocController.Instance.CalculationLastNum
-      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination, dsDoc.FieldByName('Ik_form_ed').AsInteger);
     fReview.eDest.Text := 'Академическая справка';
     fReview.eInd.Text := depInd;
     fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -2977,7 +2977,7 @@ begin
     depInd := TDocController.Instance.CalculationDepIndex
       (dsDoc.FieldByName('Ik_grup').AsInteger);
     LastNum := TDocController.Instance.CalculationLastNum
-      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination, dsDoc.FieldByName('Ik_form_ed').AsInteger);
     fReview.eDest.Text := 'Заявление на академическую справку';
     fReview.eInd.Text := depInd;
     fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -3133,7 +3133,7 @@ begin
     ik_grup := sp_info.FieldByName('Ik_grup').AsInteger;
     depInd := TDocController.Instance.CalculationDepIndex(ik_grup);
     LastNum := TDocController.Instance.CalculationLastNum(ik_grup,
-      ik_destination);
+      ik_destination, dsDoc.FieldByName('Ik_form_ed').AsInteger);
 
     sp_sem := TADOStoredProc.Create(nil);
     sp_sem.ProcedureName := 'InfForGrup;1';
@@ -3346,7 +3346,7 @@ begin
     depInd := TDocController.Instance.CalculationDepIndex
       (dsDoc.FieldByName('Ik_grup').AsInteger);
     LastNum := TDocController.Instance.CalculationLastNum
-      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination, dsDoc.FieldByName('Ik_form_ed').AsInteger);
     editF.eDest.Text := 'Выписка из зачетной ведомости';
     editF.eInd.Text := depInd;
     editF.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -3441,7 +3441,7 @@ begin
     depInd := TDocController.Instance.CalculationDepIndex
       (dsDoc.FieldByName('Ik_grup').AsInteger);
     LastNum := TDocController.Instance.CalculationLastNum
-      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination, dsDoc.FieldByName('Ik_form_ed').AsInteger);
     fReview.eDest.Text := 'Письмо об академической неуспеваемости';
     fReview.eInd.Text := depInd;
     fReview.Caption := dsDoc.FieldByName('FIO').AsString + ' (' +
@@ -3654,7 +3654,7 @@ begin
     depInd := TDocController.Instance.CalculationDepIndex
       (dsDoc.FieldByName('Ik_grup').AsInteger);
     LastNum := TDocController.Instance.CalculationLastNum
-      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination);
+      (dsDoc.FieldByName('Ik_grup').AsInteger, ik_destination, dsDoc.FieldByName('Ik_form_ed').Value);
     case ik_destination of
       1:
         editF.eDest.Text := 'По месту требования';

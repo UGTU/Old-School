@@ -2999,7 +2999,7 @@ begin
       While not dmDocs.adodsStudGrup.Eof do
       begin
         LastNum := TDocController.Instance.CalculationLastNum
-          (sp_info.FieldByName('Ik_grup').AsInteger, ik_destination);
+          (sp_info.FieldByName('Ik_grup').AsInteger, ik_destination, sp_info.FieldByName('Ik_form_ed').AsInteger);
 
 
 

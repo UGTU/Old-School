@@ -25,7 +25,7 @@ type
     constructor Create;
     destructor Destroy;
     class function Instance: TDocController;
-    function CalculationLastNum(ik_Grup: Integer; ik_dest: Integer)
+    function CalculationLastNum(ik_Grup: Integer; ik_dest, ik_formEd: Integer)
       : Integer;
     function CalculationDepIndex(ik_Grup: Integer): string;
     function CalculationBeginYearLern(): string;
@@ -242,7 +242,7 @@ begin
 end;
 
 function TDocController.CalculationLastNum(ik_Grup,
-  ik_dest: Integer): Integer;
+  ik_dest, ik_formEd: Integer): Integer;
 var
   AYear, AMonth, ADay: word;
   dateb: string;
@@ -260,7 +260,7 @@ begin
       dateb := '01.09.' + (StrToInt(AYear.ToString()) - 1).ToString();
     sp_num.CommandText := 'select * from MaxNumDocument(''' + dateb + '''' + ','
       + '''' + DateTimeToStr(date()) + '''' + ',' + '''' +
-      CalculationDepIndex(ik_Grup) + ''',' + ik_dest.ToString() + ')';
+      CalculationDepIndex(ik_Grup) + ''',' + ik_dest.ToString() + ',' + ik_formEd.ToString()+ ')';
     sp_num.Connection := dm.DBConnect;
     sp_num.Open;
     sp_num.First;
