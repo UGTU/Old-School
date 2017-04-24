@@ -139,7 +139,6 @@ begin
     pcOtdKadr.ActivePageIndex:= 0;
     ik_year:= 0;
 
-
     //факультет ГАКа
     ik_GAKfac:= 0;
     dbgGroups.DataSource:= TDataSource.Create(nil);

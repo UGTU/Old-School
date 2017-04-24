@@ -160,8 +160,14 @@ begin
 end;
 
 procedure  TDiplOtdKardController.LoadExitGroups(TargetDataSet: PDataSet);
+var year: integer;
 begin
-  TGeneralController.Instance.getDataSetValues(TargetDataSet, 'select * from [dbo].[OKADRGetExitGroup_inline]('+IntToStr(YearOf(Today)-1)+') order by Cname_spec, Cname_profile, nYear_post', 'Ik_grup', false, NULL);
+  year:= YearOf(Today);
+  //до 10 апреля показываем выпускников пред года
+  if ((MonthOf(Today)<4) or ((MonthOf(Today) = 4) and (DayOf(Today) < 10)))  then
+      year:= year - 1;
+
+  TGeneralController.Instance.getDataSetValues(TargetDataSet, 'select * from [dbo].[OKADRGetExitGroup_inline]('+IntToStr(year)+') order by Cname_spec, Cname_profile, nYear_post', 'Ik_grup', false, NULL);
 end;
 
 
