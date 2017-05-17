@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.ist.ugtu.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.ist.ugtu.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.ist.ugtu.net/">
+      <s:element name="GetStudentProgress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StudentID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PasportNum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStudentProgressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStudentProgressResult" type="tns:StudentProgressDTO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StudentProgressDTO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Semesters" type="tns:ArrayOfSemesterInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Thesis" type="tns:ThesisWorkInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSemesterInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SemesterInfo" nillable="true" type="tns:SemesterInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SemesterInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SemesterNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SemesterStartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SemesterEndDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SessionStartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SessionEndDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Progress" type="tns:ArrayOfProgressInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="CheckPoints" type="tns:ArrayOfCheckPointInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prolong" type="tns:StudentSemesterProlong" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProgressInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProgressInfo" nillable="true" type="tns:ProgressInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProgressInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Discipline" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LessonType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PassDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="PlanDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCheckPointInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CheckPointInfo" nillable="true" type="tns:CheckPointInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CheckPointInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Disciplines" type="tns:ArrayOfCheckDisciplinePointInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckPointNum" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckPointStartDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CheckPointEndDate" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCheckDisciplinePointInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CheckDisciplinePointInfo" nillable="true" type="tns:CheckDisciplinePointInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CheckDisciplinePointInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Discipline" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasPassed" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AbsentHours" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AbsentByReasonHours" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StudentSemesterProlong">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProlongTo" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProlongReason" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ThesisWorkInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ThesisMark" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThesisType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ThesisTitle" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThesisDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Holder" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetStudentProgressSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStudentProgress" />
+  </wsdl:message>
+  <wsdl:message name="GetStudentProgressSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStudentProgressResponse" />
+  </wsdl:message>
+  <wsdl:portType name="StudentProgressServiceSoap">
+    <wsdl:operation name="GetStudentProgress">
+      <wsdl:input message="tns:GetStudentProgressSoapIn" />
+      <wsdl:output message="tns:GetStudentProgressSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StudentProgressServiceSoap" type="tns:StudentProgressServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStudentProgress">
+      <soap:operation soapAction="http://services.ist.ugtu.net/GetStudentProgress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="StudentProgressServiceSoap12" type="tns:StudentProgressServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStudentProgress">
+      <soap12:operation soapAction="http://services.ist.ugtu.net/GetStudentProgress" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StudentProgressService">
+    <wsdl:port name="StudentProgressServiceSoap" binding="tns:StudentProgressServiceSoap">
+      <soap:address location="https://services.ist.ugtu.net/studentprogressservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="StudentProgressServiceSoap12" binding="tns:StudentProgressServiceSoap12">
+      <soap12:address location="https://services.ist.ugtu.net/studentprogressservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

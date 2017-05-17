@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
-  <contractRef ref="http://localhost:1216/ScheduleService.asmx?wsdl" docRef="http://localhost:1216/ScheduleService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
-  <soap address="http://localhost:1216/ScheduleService.asmx" xmlns:q1="http://services.ist.ugtu.net/" binding="q1:Сервис_x005F_x0020_предоставления_x005F_x0020_расписанияSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-  <soap address="http://localhost:1216/ScheduleService.asmx" xmlns:q2="http://services.ist.ugtu.net/" binding="q2:Сервис_x005F_x0020_предоставления_x005F_x0020_расписанияSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
-</discovery>
