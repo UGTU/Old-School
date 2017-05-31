@@ -13,7 +13,7 @@ uses
   Fgos_Application12Report, uWaitingController, uAddDiscRelation,
   ConstantRepository,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.Actions,
-  DBAxisGridsEh;
+  DBAxisGridsEh, Math;
 
 const
   FISCULTURA = 10; // для особого учета зачетных единиц физической культуры
@@ -920,7 +920,7 @@ begin
         Label22.Caption := IntToStr(pract);
         AllAudit.Caption := IntToStr(lHourAudit);
         Label23.Caption := IntToStr(lIndiv);
-        AllSRS.Caption := IntToStr(lHour_gos - lHourAudit - lIndiv);
+        AllSRS.Caption :=  IntToStr(max(lHour_gos - lHourAudit - lIndiv,0));
       end
       else
       begin

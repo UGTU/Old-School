@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uBaseDialog, StdCtrls, Buttons, ExtCtrls, ADODB, DB, UchPlanController,
   Grids,uUchPlan, DBGrids, ActnList, AppEvnts, Mask, DBCtrlsEh, DBGridEh,
-  DBLookupEh, GeneralController, ImgList, ComCtrls, ToolWin, System.Actions;
+  DBLookupEh, GeneralController, ImgList, ComCtrls, ToolWin, System.Actions, Math;
 
 type
   PEdit = ^TEdit;
@@ -638,7 +638,7 @@ procedure TfrmUchPlanAddDisc.CalcSRS;
 begin
   if fCurrentDiscType = typeTypicalDisc then
   begin
-    AllSRS.Tag:= StrToInt(edtHoursGos.Text) - StrToInt(edtHoursAudit.Text) - iIndivid;
+    AllSRS.Tag:= max(StrToInt(edtHoursGos.Text) - StrToInt(edtHoursAudit.Text) - iIndivid, 0);
     AllSRS.Caption:= IntToStr(AllSRS.Tag);
     if AllSRS.Tag < 0 then AllSRS.Font.Color:= clRed
     else AllSRS.Font.Color:= clBlack;
