@@ -104,7 +104,7 @@ inherited fmZach: TfmZach
           Width = 841
           Height = 24
           ButtonHeight = 30
-          ButtonWidth = 71
+          ButtonWidth = 95
           Images = frmMain.ImageList1
           TabOrder = 0
           object cbKatZachisl: TDBLookupComboboxEh
@@ -133,7 +133,7 @@ inherited fmZach: TfmZach
             ShowHint = True
           end
           object ToolButton1: TToolButton
-            Left = 223
+            Left = 247
             Top = 0
             Width = 8
             Caption = 'ToolButton1'
@@ -141,34 +141,34 @@ inherited fmZach: TfmZach
             Style = tbsSeparator
           end
           object ToolButton13: TToolButton
-            Left = 231
+            Left = 255
             Top = 0
             Action = actAutomaticZachisl
             Visible = False
           end
           object ToolButton5: TToolButton
-            Left = 302
+            Left = 350
             Top = 0
             Action = actZachislAbit
             ParentShowHint = False
             ShowHint = True
           end
           object ToolButton11: TToolButton
-            Left = 373
+            Left = 445
             Top = 0
             Action = actRezervAbit
             ParentShowHint = False
             ShowHint = True
           end
           object ToolButton12: TToolButton
-            Left = 444
+            Left = 540
             Top = 0
             Action = actExileAbit
             ParentShowHint = False
             ShowHint = True
           end
           object ToolButton2: TToolButton
-            Left = 515
+            Left = 635
             Top = 0
             Width = 8
             Caption = 'ToolButton2'
@@ -176,7 +176,7 @@ inherited fmZach: TfmZach
             Style = tbsSeparator
           end
           object ToolButton17: TToolButton
-            Left = 523
+            Left = 643
             Top = 0
             Action = actAbitSpisokToExcel
             DropdownMenu = ppmPredvOtchet
@@ -185,7 +185,7 @@ inherited fmZach: TfmZach
             Style = tbsDropDown
           end
           object ToolButton18: TToolButton
-            Left = 609
+            Left = 753
             Top = 0
             Width = 8
             Caption = 'ToolButton18'
@@ -193,14 +193,14 @@ inherited fmZach: TfmZach
             Style = tbsSeparator
           end
           object ToolButton19: TToolButton
-            Left = 617
+            Left = 761
             Top = 0
             Action = actPredvSpisokZachisl
             ParentShowHint = False
             ShowHint = True
           end
           object ToolButton20: TToolButton
-            Left = 688
+            Left = 856
             Top = 0
             Width = 8
             Caption = 'ToolButton20'
@@ -883,7 +883,7 @@ inherited fmZach: TfmZach
     Left = 483
     Top = 80
     Bitmap = {
-      494C010105004000840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010105004000880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1158,7 +1158,7 @@ inherited fmZach: TfmZach
     Left = 163
     Top = 328
     Bitmap = {
-      494C010103000400840010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400880010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000214D3900214D3900214D
       3900184531001845310018453100103429001034290010342900103429000828

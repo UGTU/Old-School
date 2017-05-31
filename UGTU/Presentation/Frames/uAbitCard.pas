@@ -589,6 +589,7 @@ begin
   dbcbeSocWork.Visible := False;
   cbInvalid.Visible := False;
   tbMagazine.Visible:=false;
+  tsStudEvents.Visible := false;
 end;
 
 end.
