@@ -2659,9 +2659,9 @@ begin
 		  E.Range['X'+inttostr(8)+':X'+inttostr(8)]:='R';
 
 	  if dmAbiturientAction.adospPrintZayavlLobchegit.AsBoolean then
-		 E.Range['T'+inttostr(15)+':T'+inttostr(15)]:='R'
+		 E.Range['T'+inttostr(17)+':T'+inttostr(17)]:='R'
 	  else
-		 E.Range['X'+inttostr(15)+':X'+inttostr(15)]:='R';
+		 E.Range['X'+inttostr(17)+':X'+inttostr(17)]:='R';
 
     if dmAbiturientAction.adospPrintZayavl.FieldByName('IsRussOlimpWinner').AsBoolean then
 		 E.Range['Y'+inttostr(9)+':Y'+inttostr(9)]:='R';
@@ -2675,7 +2675,7 @@ begin
 		  E.Range['S'+inttostr(7)+':S'+inttostr(7)]:='R';
 
 	  if (not dmAbiturientAction.adospPrintZayavlIsNotFirstEducation.AsBoolean) then
-		 E.Range['AA'+inttostr(21)+':AA'+inttostr(21)]:='R';
+		 E.Range['AA'+inttostr(18)+':AA'+inttostr(18)]:='R';
 
 	  //вывод иностранных языков
 
