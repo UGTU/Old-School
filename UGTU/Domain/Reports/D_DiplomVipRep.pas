@@ -2,7 +2,7 @@
     Отчет - вывод выписки к диплому студента в Excel
     Версия: 1.0.0.1
     Создано: 02.04.2009
-    Последняя правка: 
+    Последняя правка:
     Автор: Вокуева Т.А.
 
     ПРИМЕЧАНИЯ:
@@ -66,6 +66,14 @@ type
 
   end;
 
+  //#NG
+  TCustom = class
+  public
+    Name: string;
+    ZE: string;
+    Mark: string;
+  end;
+  //#NG
 implementation
 
 {function TDiplomVipExcelReport.IsNapravl:boolean;
@@ -159,7 +167,6 @@ begin
     CreateParameter('@ik_CurGroup', ftInteger, pdInput, 4, FikGroup);
   end;
   dmDiplom.adospSelGOSForVipisca.Open;
-
 end;
 
 function TDiplomVipExcelReport.GetNextCellVert(cur: String; StrRest: string = ''): String;
@@ -292,6 +299,16 @@ var
   cur, cur1: String;
   i, weekCount: Integer;
   WithZachEd: boolean;
+
+  //#NG
+  FacList: TList;
+  ElecList: TList;
+  Custom: TCustom;
+  varInt: integer;
+  varInt2: integer;
+  varCountZEFacult: integer;
+  varCountAuditHourFacult: integer;
+  //#NG
 begin
   //Name:= dmDiplom.adospGetVipiscaForDiplomStudName.AsString;
   ActivateWorksheet(MainpageNumber);
@@ -548,10 +565,18 @@ begin
   ActRange := Selection;
   cur:= ActRange.Address;
   SelectPrevCellVert(cur, ActRange);
+
+  //#NG
+  FacList:= TList.Create;
+  ElecList:= TList.Create;
+  varCountZEFacult:=0;
+  varCountAuditHourFacult:=0;
+  //#NG
   repeat
   begin
     str:= '';
-    if (not dmDiplom.adospSelUspevForVipisca.Eof) then
+    //
+    {if (not dmDiplom.adospSelUspevForVipisca.Eof) then
     begin
       if (dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger > 0) then
         str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
@@ -580,16 +605,83 @@ begin
     str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
     ActRange.Value := str;
 
-    dmDiplom.adospSelUspevForVipisca.Next;
+    dmDiplom.adospSelUspevForVipisca.Next; }
     //inc(i);
 
+    //#NG
+    if (not dmDiplom.adospSelUspevForVipisca.Eof) then
+    begin
+      varInt := dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger;
+      if (varInt > 0)
+      then begin
+        varInt2 := dmDiplom.adospSelUspevForVipisca.FieldByName('IdTypeDiscipline').AsInteger;
+        if (varInt2 = 20)
+        then begin
+          if (varInt = 5211)
+          then begin
+            Custom := TCustom.Create;
+            Custom.Name := dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
+            Custom.ZE := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString;
+            if (Custom.ZE = '0') then Custom.ZE := 'x'
+            else Custom.ZE := Custom.ZE + ' з.е.';
+            Custom.Mark := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
+            ElecList.Add(Custom);
+            varCountZEFacult := varCountZEFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
+            //varCountAuditHourFacult := varCountAuditHourFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('AuditHourCount').AsInteger;
+          end
+          else begin
+            Custom := TCustom.Create;
+            Custom.Name := dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
+            Custom.ZE := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString;
+            if (Custom.ZE = '0') then Custom.ZE := 'x'
+            else Custom.ZE := Custom.ZE + ' з.е.';
+            Custom.Mark := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
+            FacList.Add(Custom);
+            varCountZEFacult := varCountZEFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
+            varCountAuditHourFacult := varCountAuditHourFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('AuditHourCount').AsInteger;
+          end;
+        end
+          else begin
+            str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
+
+            str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
+            SelectNextCellVert(cur, ActRange, str1);
+            ActRange.Value := str;
+
+            if (str1<>'') then
+            begin
+              SelectNextCellVert(cur, ActRange);
+              ActRange.Value := str1;    //записываем остаток строки
+            end;
+
+            cur1 := Selection.Address;
+            SelectNextCellHor(cur1,ActRange);
+            if (WithZachEd) then
+            begin
+              str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString;
+              if (StrToInt(str) = 0) then str := 'x'
+              else str := str + ' з.е.'
+
+            end
+            else str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';
+
+            ActRange.Value := str;
+
+            SelectNextCellHor(cur1,ActRange);
+            str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
+            ActRange.Value := str;
+          end;
+      end;
+      dmDiplom.adospSelUspevForVipisca.Next;
+    end;
+    //#NG
   end;
   until (dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger <= 0);
 
   {SelectNextCellVert(cur, ActRange);
   str:=  'Практики';
   SendStringToExcel(str, cur, ActRange); }
-  
+
 
   SelectNextCellVert(cur, ActRange);
   SelectNextCellVert(cur, ActRange);
@@ -718,12 +810,16 @@ begin
     begin
       dmDiplom.adospSelPractForVipisca.First;
       dmDiplom.adospSelGOSForVipisca.Last;
-      str := IntToStr(dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger+
-              dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsInteger+
-              dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger)+' з.е.';
+      varInt := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger
+                + dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsInteger
+                + dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger
+                - varCountZEFacult;//вычитаем факультативы
+      str := IntToStr(varInt)+' з.е.';
     end
-    else
-      str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';
+    else begin
+      varInt := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsInteger - varCountAuditHourFacult;
+      str := IntToStr(varInt)+' час.';
+    end;
 
     ActRange.Value := str;
 
@@ -737,6 +833,80 @@ begin
     SelectNextCellVert(cur, ActRange);
   end;
   until (dmDiplom.adospSelUspevForVipisca.Eof);
+
+  //#NG
+  if(FacList.Count > 0)
+  then begin
+    SelectNextCellVert(cur, ActRange);
+    str := 'Факультативные дисциплины';
+    SendStringToExcel(str, cur, ActRange);
+
+    SelectNextCellVert(cur, ActRange);
+    str := 'в том числе:';
+    SendStringToExcel(str, cur, ActRange);
+
+    while (FacList.Count > 0) do
+    begin
+      //название
+      Custom := FacList.First;
+      str:= Custom.Name;
+      str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
+      SelectNextCellVert(cur, ActRange, str1);
+      ActRange.Value := str;
+
+      if (str1<>'') then
+      begin
+        SelectNextCellVert(cur, ActRange);
+        ActRange.Value := str1;    //записываем остаток строки
+      end;
+
+      //зач. ед.
+      cur1 := Selection.Address;
+      SelectNextCellHor(cur1,ActRange);
+      str := Custom.ZE;
+      ActRange.Value := str;
+
+      //оценка
+      SelectNextCellHor(cur1,ActRange);
+      str := Custom.Mark;
+      ActRange.Value := str;
+
+      //SelectNextCellVert(cur, ActRange);
+      FacList.Remove(FacList.First);
+    end;
+  end;
+
+  SelectNextCellVert(cur, ActRange);
+  while (ElecList.Count > 0) do
+  begin
+    //название
+    Custom := ElecList.First;
+    str:= Custom.Name;
+    str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
+    SelectNextCellVert(cur, ActRange, str1);
+    ActRange.Value := str;
+
+    if (str1<>'') then
+    begin
+      SelectNextCellVert(cur, ActRange);
+      ActRange.Value := str1;    //записываем остаток строки
+    end;
+
+    //зач. ед.
+    cur1 := Selection.Address;
+    SelectNextCellHor(cur1,ActRange);
+    str := Custom.ZE;
+    ActRange.Value := str;
+
+    //оценка
+    SelectNextCellHor(cur1,ActRange);
+    str := Custom.Mark;
+    ActRange.Value := str;
+
+    //SelectNextCellVert(cur, ActRange);
+    ElecList.Remove(ElecList.First);
+  end;
+  //#NG
   ActivateWorksheet(MainpageNumber);
 end;
 
