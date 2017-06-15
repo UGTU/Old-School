@@ -30,6 +30,7 @@ type
    TDiplomVipExcelReport = class(TExcelReportBase)
   const MainpageNumber = 1;
   const strLength = 60;
+  const DiscNextPageAddress = '$F$8';
 
   private
     FikZach: integer;
@@ -39,6 +40,7 @@ type
     FNameInDatPadez: boolean;
     Fik_VidGos: integer;
     Fik_fac: integer;
+    CurrentDiskPageNumber: integer;
     function GetNextCellVert(cur: String; StrRest: string = ''): String;
     function GetPrevCellVert(cur: String): String;
     function GetNextCellHor(cur: String): String;
@@ -189,7 +191,10 @@ begin
   num := num+1;
   //переход на следующую страницу
   if (num>57) or ((num>56) and (StrRest.Length >0 ))then
-    Result := '$F$8'
+  begin
+    CurrentDiskPageNumber:= CurrentDiskPageNumber + 1;
+    Result := DiscNextPageAddress
+  end
   else
     Result := bstr+IntToStr(num);
 end;
@@ -312,6 +317,7 @@ var
 begin
   //Name:= dmDiplom.adospGetVipiscaForDiplomStudName.AsString;
   ActivateWorksheet(MainpageNumber);
+  CurrentDiskPageNumber:= 1;
 
   //определяем, выводить ли зачетные единицы или часы
   WithZachEd:= (ik_direction=3) or (ik_VidGos=2);
@@ -683,10 +689,22 @@ begin
   SendStringToExcel(str, cur, ActRange); }
 
 
-  SelectNextCellVert(cur, ActRange);
-  SelectNextCellVert(cur, ActRange);
+
   //вывод практик  #Практики#
   dmDiplom.adospSelPractForVipisca.First;
+  //переход на след страницу, если его еще не было
+  if (CurrentDiskPageNumber = 2) then
+  begin
+    SelectNextCellVert(cur, ActRange);
+    SelectNextCellVert(cur, ActRange);
+  end
+  else
+  begin
+    cur := DiscNextPageAddress;
+    ActRange := Range[cur,cur];
+    ActRange.Select;
+  end;
+
   repeat
   begin
     if (dmDiplom.adospSelPractForVipisca.Eof) then

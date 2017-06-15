@@ -2760,12 +2760,12 @@ begin
 	  while not dmAbiturientOtchety.adoPrintExams.Eof do
 	  begin
 		  E.Cells[i,3]:= str+dmAbiturientOtchety.adoPrintExamsname_disc.AsString;
-			case dmAbiturientOtchety.adoPrintExamsik_sdach.AsInteger of
+			{case dmAbiturientOtchety.adoPrintExamsik_sdach.AsInteger of
 				5:  //≈√›
 				  E.Range['G'+inttostr(i)+':G'+inttostr(i)]:='R';
-        else
+        else }
           E.Range['N'+inttostr(i)+':N'+inttostr(i)]:='R';
-			end;
+			//end;
       inc(i);
 		  dmAbiturientOtchety.adoPrintExams.Next;
 	  end;
