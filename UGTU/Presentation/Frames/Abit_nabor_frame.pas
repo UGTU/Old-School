@@ -818,6 +818,7 @@ begin
 			frmNewNabor.Setikfac(fc)
     else frmNewNabor.dbcmbxFac.Enabled:=true;
 
+    frmNewNabor.sets;
     frmNewNabor.ShowModal;
 
     {if DMAbiturientNabor.adoqNaborList.Active then
@@ -852,7 +853,7 @@ begin
 	  frmNewNabor.ikSpecfac:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;
     frmNewNabor.ikProfile:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_profile').AsInteger;
 
-    //frmNewNabor.sets;
+    frmNewNabor.sets;
 
     frmNewNabor.dbcmbxFac.KeyValue:= nabor.DataSource.DataSet.FieldByName('ik_fac').AsInteger;
 	  frmNewNabor.Spec_Fac.KeyValue:= DMAbiturientNabor.adoqNaborList.FieldByName('ik_spec_fac').AsInteger;

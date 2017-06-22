@@ -36,7 +36,6 @@ type
     procedure NullData();
     procedure nnyearChange(Sender: TObject);
     procedure bbCancelClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure actApplyUpdate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure actApplyExecute(Sender: TObject);
@@ -86,14 +85,12 @@ uses AbiturientBaseProcs, AbiturientNaborProcs, AbiturientFacade,
 
 procedure TfrmNewNabor.sets();
 begin
-  if (DMAbiturientNabor.adoqSpecfac.Active) then
-     DMAbiturientNabor.adoqSpecfac.Close;
   //создание набора
   if type_dialog=1 then
   begin
+    NullData;
     DMAbiturientNabor.adoqSpecfac.SQL.Strings[1]:='('+inttostr(year)+ ', 0)';
     DMAbiturientNabor.adoqProfile.SQL.Strings[1]:='('+inttostr(year)+ ', 0, 0)';
-    NullData;
     Caption:='Добавить набор';
   end
     //редактирование набора
@@ -139,10 +136,12 @@ end;
 
 procedure TfrmNewNabor.NullData();
 begin
-  {mestCKP.Text:='0';
+  mestCKP.Text:='0';
   mestbudjet.Text:='0';
-  MestLgot.Text:='0';   }
+  MestLgot.Text:='0';
   dbcmbxFac.KeyValue:= FikFac;
+  Spec_Fac.KeyValue := -1;
+  dbcmbxPrifile.KeyValue:= -1;
   ikSpecfac:= -1;
   ikProfile:= -1;
   frmNewNabor.cbRussian.Checked:= true;
@@ -279,14 +278,8 @@ procedure TfrmNewNabor.FormCreate(Sender: TObject);
 begin
   inherited;
   dm.adoqYears.Open;
-  DMAbiturientNabor.adoqSpecfac.Open;
+  //DMAbiturientNabor.adoqSpecfac.Open;
   DMAbiturientNabor.adoqFac.Open;
-end;
-
-procedure TfrmNewNabor.FormShow(Sender: TObject);
-begin
-  inherited;
-  Sets;
 end;
 
 procedure TfrmNewNabor.dbcmbxFacChange(Sender: TObject);

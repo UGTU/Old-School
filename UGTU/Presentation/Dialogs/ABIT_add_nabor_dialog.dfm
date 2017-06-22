@@ -7,7 +7,6 @@ inherited frmNewNabor: TfrmNewNabor
   ClientWidth = 627
   OldCreateOrder = True
   OnCreate = FormCreate
-  OnShow = FormShow
   ExplicitWidth = 633
   ExplicitHeight = 223
   PixelsPerInch = 96
@@ -224,7 +223,7 @@ inherited frmNewNabor: TfrmNewNabor
     OnChange = dbcmbxFacChange
   end
   object Spec_Fac: TDBLookupComboboxEh [17]
-    Left = 102
+    Left = 104
     Top = 55
     Width = 521
     Height = 19
