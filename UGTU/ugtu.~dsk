@@ -1,87 +1,98 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\dialogs\uQueryMaster.pas',0,1,422,32,425,0,0,,
-File_1=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Domain\Controllers\StoHTMLHelp.pas',0,1,149,50,168,0,0,,
-File_2=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Frames\uDiplomOtdKadr.pas',0,1,269,44,281,0,0,,
-File_3=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Frames\uNagruzkaPrep.pas',0,1,228,38,254,0,0,,
-File_4=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Dialogs\uNagruzkaSelTeacherForFactEdit.pas',0,1,1,1,1,0,0,,
-File_5=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Presentation\Frames\uStudent.pas',0,1,1,1,1,0,0,,
-File_6=TSourceModule,'C:\Documents and Settings\serg.IST\Рабочий стол\UGTU\Data\uDMStudentSelectionProcs.pas',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\SOURCE\RTL\SYS\System.pas',0,1,36049,1,36067,0,0,,
+File_1=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\rtl\common\System.Classes.pas',0,1,5273,1,5290,0,0,,
+File_2=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\SOURCE\RTL\SYS\GETMEM.INC',0,1,1932,1,1957,0,0,,
+File_3=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\data\Data.DB.pas',0,1,12272,1,12290,0,0,,
+File_4=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\SOURCE\RTL\SYS\System.Variants.pas',0,1,882,1,903,0,0,,
+File_5=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\SOURCE\RTL\SYS\System.VarUtils.pas',0,1,321,1,338,0,0,,
+File_6=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\SOURCE\VCL\Vcl.StdCtrls.pas',0,1,3074,1,3091,0,0,{{1650,4}
+File_7=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\Indy10\Protocols\IdReplySMTP.pas',0,1,491,27,507,0,0,,
+File_8=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\Indy10\Core\IdTCPConnection.pas',0,1,577,1,594,0,0,,
+File_9=TSourceModule,'c:\program files (x86)\embarcadero\rad studio\12.0\source\Indy10\Protocols\IdSMTPBase.pas',0,1,269,1,286,0,0,,
+File_10=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uMailer.pas',0,1,62,1,79,0,0,,
+File_11=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.dfm',0,1,1,1,1,0,0,,
+File_12=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas',0,1,1,46,10,0,0,,
+File_13=TSourceModule,'C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas',0,1,91,79,14,0,0,,
 
 [Modules]
-Module0=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
-Module1=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas
-Module2=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\Abit_nabor_frame.pas
-Module3=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
-Module4=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas
-Module5=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas
-Module6=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas
-Module7=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas
+Module0=c:\program files (x86)\embarcadero\rad studio\12.0\source\data\ado\Data.Win.ADODB.pas
+Module1=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\dialogs\uPostupdlg.pas
+Module2=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas
+Module3=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMStudentData.pas
+Module4=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMAbiturientAction.pas
+Module5=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
+Module6=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas
+Module7=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas
 Module8=default.htm
 Count=9
 EditWindowCount=1
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas]
+[c:\program files (x86)\embarcadero\rad studio\12.0\source\data\ado\Data.Win.ADODB.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\Abit_nabor_frame.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\dialogs\uPostupdlg.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
+
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMStudentData.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMAbiturientAction.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
 
 [C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas]
 ModuleType=TSourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas]
 ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas]
-ModuleType=TSourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
 [default.htm]
 ModuleType=TURLModule
 
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\dialogs\uBaseDialog.pas]
+FormState=1
+FormOnTop=0
+
 [C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uBaseFrame.pas]
 FormState=1
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMAbiturientNabor.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMStudentSelectionProcs.pas]
 FormState=1
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMUspevaemost.pas]
 FormState=1
 FormOnTop=0
 
-[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas]
+[C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMDocuments.pas]
 FormState=1
 FormOnTop=0
 
 [EditWindow0]
 ViewCount=9
-CurrentEditView=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
+CurrentEditView=c:\program files (x86)\embarcadero\rad studio\12.0\source\data\ado\Data.Win.ADODB.pas
 View0=0
 View1=1
 View2=2
@@ -109,13 +120,13 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1896
 LeftPanelClients=PropertyInspector,DockSite3
-LeftPanelData=00000800010100000000D90F00000000000001680700000000000001000000005C0E000009000000446F636B536974653301000000002D1C00001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=00000800010100000000351300000000000001680700000000000001000000005C0E000009000000446F636B53697465330100000000252200001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=2000
 RightPanelClients=DockSite2,DockSite4
-RightPanelData=00000800010100000000D90F00000000000001D00700000000000001000000004412000009000000446F636B536974653201000000002D1C000009000000446F636B5369746534FFFFFFFF
-BottomPanelSize=1500
+RightPanelData=00000800010100000000351300000000000001D00700000000000001000000004412000009000000446F636B536974653201000000002522000009000000446F636B5369746534FFFFFFFF
+BottomPanelSize=0
 BottomPanelClients=DockSite1,MessageView
-BottomPanelData=0000080001020100000009000000446F636B5369746531724500000000000002DC050000000000000100000000724500000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomPanelData=0000080001020200000009000000446F636B53697465310F0000004D65737361676556696577466F726D1534000000000000022606000000000000FFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0,GraphDrawingModel
 BottomMiddelPanelData=0000080001020200000009000000446F636B536974653010000000477261706844726177696E6756696577961D00000000000002F206000000000000FFFFFFFF
@@ -126,51 +137,51 @@ WelcomePageURL=bds:/default.htm
 
 [View1]
 CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas
 CursorX=46
-CursorY=10
-TopLine=1
+CursorY=957
+TopLine=933
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\uPhotosExportController.pas
+EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\uStudent.pas
 
 [View2]
 CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas
-CursorX=79
-CursorY=14
-TopLine=91
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\BRSVedom2014.pas
-
-[View3]
-CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas
-CursorX=70
-CursorY=13
-TopLine=79
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Reports\Fgos_Application12Report.pas
-
-[View4]
-CustomEditViewType=TEditView
 Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
-CursorX=48
-CursorY=12
-TopLine=1
+CursorX=30
+CursorY=357
+TopLine=336
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\ApplicationController.pas
 
+[View3]
+CustomEditViewType=TEditView
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\dialogs\uPostupdlg.pas
+CursorX=1
+CursorY=484
+TopLine=467
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\dialogs\uPostupdlg.pas
+
+[View4]
+CustomEditViewType=TEditView
+Module=c:\program files (x86)\embarcadero\rad studio\12.0\source\data\ado\Data.Win.ADODB.pas
+CursorX=51
+CursorY=5252
+TopLine=5229
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=c:\program files (x86)\embarcadero\rad studio\12.0\source\data\ado\Data.Win.ADODB.pas
+
 [View5]
 CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Frames\Abit_nabor_frame.pas
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMStudentData.pas
 CursorX=1
 CursorY=1
 TopLine=1
@@ -181,36 +192,36 @@ EditViewName=Borland.FormDesignerView
 
 [View6]
 CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas
-CursorX=68
-CursorY=65
-TopLine=47
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVRecruitobj.pas
-
-[View7]
-CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
-CursorX=50
-CursorY=143
-TopLine=119
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\DBTV\DBTVSpecRecObj.pas
-
-[View8]
-CustomEditViewType=TEditView
-Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas
-CursorX=12
-CursorY=14
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDMAbiturientAction.pas
+CursorX=1
+CursorY=1
 TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Domain\Controllers\HOST_ReportController.pas
+EditViewName=Borland.FormDesignerView
+
+[View7]
+CustomEditViewType=TEditView
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas
+CursorX=1
+CursorY=706
+TopLine=689
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Data\uDM.pas
+
+[View8]
+CustomEditViewType=TEditView
+Module=C:\Users\skudelin\Documents\GitHub\Old-School\UGTU\Presentation\Forms\uMain.pas
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
 
 [Watches]
 Count=0
@@ -296,18 +307,18 @@ StayOnTop=0
 [MessageView]
 PercentageSizes=1
 Create=1
-Visible=1
+Visible=0
 Docked=1
 State=0
 Left=0
-Top=23
-Width=10000
-Height=1347
+Top=0
+Width=2771
+Height=1415
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=10000
-ClientHeight=1347
-TBDockHeight=1347
+ClientWidth=2771
+ClientHeight=1415
+TBDockHeight=1415
 LRDockWidth=2771
 Dockable=1
 StayOnTop=0
@@ -321,11 +332,11 @@ State=0
 Left=0
 Top=0
 Width=2000
-Height=2432
+Height=4031
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=2432
+ClientHeight=4031
 TBDockHeight=7151
 LRDockWidth=2000
 Dockable=1
@@ -340,11 +351,11 @@ State=0
 Left=0
 Top=420
 Width=1896
-Height=3479
+Height=5078
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1896
-ClientHeight=3479
+ClientHeight=5078
 TBDockHeight=8857
 LRDockWidth=1896
 Dockable=1
@@ -825,11 +836,11 @@ State=0
 Left=0
 Top=528
 Width=2000
-Height=2432
+Height=4031
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=2432
+ClientHeight=4031
 TBDockHeight=8857
 LRDockWidth=2000
 Dockable=1

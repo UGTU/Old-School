@@ -2,75 +2,103 @@ inherited frmJoinGroup: TfrmJoinGroup
   Left = 173
   Top = 235
   Caption = #1047#1072#1095#1080#1089#1083#1077#1085#1080#1077' '#1074' '#1075#1088#1091#1087#1087#1091
-  ClientHeight = 133
-  ClientWidth = 310
-  Constraints.MinHeight = 160
-  Constraints.MinWidth = 304
+  ClientHeight = 165
+  ClientWidth = 382
+  Constraints.MinHeight = 197
+  Constraints.MinWidth = 374
   OldCreateOrder = True
   OnCloseQuery = nil
   OnShow = FormShow
-  ExplicitWidth = 316
-  ExplicitHeight = 162
-  PixelsPerInch = 96
-  TextHeight = 13
+  ExplicitWidth = 388
+  ExplicitHeight = 200
+  PixelsPerInch = 120
+  TextHeight = 16
   inherited Bevel1: TBevel
-    Width = 310
-    Height = 0
-    ExplicitWidth = 310
-    ExplicitHeight = 105
+    Width = 382
+    Height = 1
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
+    ExplicitWidth = 382
+    ExplicitHeight = 0
   end
   object Label2: TLabel [1]
-    Left = 15
-    Top = 50
-    Width = 98
-    Height = 13
+    Left = 18
+    Top = 62
+    Width = 130
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #1047#1072#1095#1080#1089#1083#1080#1090#1100' '#1074' '#1075#1088#1091#1087#1087#1091
   end
   object Label4: TLabel [2]
-    Left = 15
-    Top = 8
-    Width = 105
-    Height = 13
+    Left = 18
+    Top = 10
+    Width = 139
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = #1055#1088#1080#1095#1080#1085#1072' '#1079#1072#1095#1080#1089#1083#1077#1085#1080#1103
   end
   object Label5: TLabel [3]
-    Left = 123
-    Top = 8
-    Width = 4
-    Height = 13
+    Left = 151
+    Top = 10
+    Width = 5
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label7: TLabel [4]
-    Left = 115
-    Top = 50
-    Width = 4
-    Height = 13
+    Left = 142
+    Top = 62
+    Width = 5
+    Height = 16
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Caption = '*'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   inherited Panel1: TPanel
-    Top = 0
-    Width = 310
-    Height = 133
+    Top = 1
+    Width = 382
+    Height = 164
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     ExplicitTop = 0
-    ExplicitWidth = 310
-    ExplicitHeight = 133
+    ExplicitWidth = 382
+    ExplicitHeight = 164
     object SpeedButton2: TSpeedButton [0]
-      Left = 278
-      Top = 63
-      Width = 23
-      Height = 22
+      Left = 342
+      Top = 78
+      Width = 28
+      Height = 27
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Anchors = [akLeft, akTop, akRight, akBottom]
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -102,40 +130,60 @@ inherited frmJoinGroup: TfrmJoinGroup
       OnClick = AddGroupClick
     end
     inherited bbOK: TBitBtn
-      Left = 131
-      Top = 102
+      Left = 161
+      Top = 126
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Enabled = False
       ModalResult = 1
-      ExplicitLeft = 131
-      ExplicitTop = 102
+      ExplicitLeft = 161
+      ExplicitTop = 126
     end
     inherited bbApply: TBitBtn
-      Left = 221
-      Top = 100
+      Left = 272
+      Top = 123
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Visible = False
-      ExplicitLeft = 221
-      ExplicitTop = 100
+      ExplicitLeft = 272
+      ExplicitTop = 123
     end
     inherited bbCancel: TBitBtn
-      Left = 218
-      Top = 102
+      Left = 268
+      Top = 126
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       ModalResult = 2
-      ExplicitLeft = 218
-      ExplicitTop = 102
+      ExplicitLeft = 268
+      ExplicitTop = 126
     end
     inherited bbSprav: TBitBtn
-      Left = -64
-      Top = 102
+      Left = -79
+      Top = 126
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Visible = False
-      ExplicitLeft = -64
-      ExplicitTop = 102
+      ExplicitLeft = -79
+      ExplicitTop = 126
     end
   end
   object DbcbeGroup: TDBLookupComboboxEh [6]
-    Left = 15
-    Top = 66
-    Width = 257
-    Height = 19
+    Left = 18
+    Top = 81
+    Width = 317
+    Height = 22
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     DataField = ''
     EditButtons = <>
     Flat = True
@@ -146,10 +194,14 @@ inherited frmJoinGroup: TfrmJoinGroup
     OnChange = DbcbeGroupChange
   end
   object dbcbeCause: TDBLookupComboboxEh [7]
-    Left = 15
-    Top = 24
-    Width = 257
-    Height = 19
+    Left = 18
+    Top = 30
+    Width = 317
+    Height = 22
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     DataField = ''
     EditButtons = <>
     Flat = True
