@@ -311,7 +311,7 @@ var
   Custom: TCustom;
   varInt: integer;
   varInt2: integer;
-  varCountZEFacult: integer;
+  varNegCountZE: integer;
   varCountAuditHourFacult: integer;
   //#NG
 begin
@@ -575,7 +575,7 @@ begin
   //#NG
   FacList:= TList.Create;
   ElecList:= TList.Create;
-  varCountZEFacult:=0;
+  varNegCountZE:=0;
   varCountAuditHourFacult:=0;
   //#NG
   repeat
@@ -632,7 +632,7 @@ begin
             else Custom.ZE := Custom.ZE + ' з.е.';
             Custom.Mark := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
             ElecList.Add(Custom);
-            varCountZEFacult := varCountZEFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
+            varNegCountZE := varNegCountZE + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
             //varCountAuditHourFacult := varCountAuditHourFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('AuditHourCount').AsInteger;
           end
           else begin
@@ -643,7 +643,7 @@ begin
             else Custom.ZE := Custom.ZE + ' з.е.';
             Custom.Mark := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
             FacList.Add(Custom);
-            varCountZEFacult := varCountZEFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
+            varNegCountZE := varNegCountZE + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
             varCountAuditHourFacult := varCountAuditHourFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('AuditHourCount').AsInteger;
           end;
         end
@@ -718,6 +718,7 @@ begin
     SelectNextCellHor(cur1,ActRange);
     if (WithZachEd {(dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger=169)}) then
     begin
+      if (str = 'Практики') then varNegCountZE:=varNegCountZE + dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsInteger;      
       str := dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsString+' з.е.';
     end
     else
@@ -753,6 +754,7 @@ begin
     if (WithZachEd) then
     begin
       str := dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsString+' з.е.';
+      varNegCountZE := varNegCountZE + dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger;
     end
     else
     begin
@@ -777,7 +779,7 @@ begin
   dmDiplom.adospSelGOSForVipisca.First;
   if (not dmDiplom.adospSelGOSForVipisca.Eof) and (dmDiplom.adospSelGOSForVipisca.FieldByName('ik_vid_zanyat').AsInteger = 56) then
   begin
-      //if (WithZachEd) then
+      //if (WithZachEd) then            
     str := 'Итоговый государственный экзамен';//'Итоговый государственный междисциплинарный экзамен';
     SendStringToExcel(str, cur, ActRange);
     cur1 := Selection.Address;
@@ -790,7 +792,22 @@ begin
     SendStringToExcel(str, cur, ActRange);
 
     SelectNextCellVert(cur, ActRange);
-  end;
+  end
+  else  if (ik_direction=2) then  //только для специалитета
+        begin
+          str := 'Итоговый государственный экзамен';//'Итоговый государственный междисциплинарный экзамен';
+          SendStringToExcel(str, cur, ActRange);
+          cur1 := Selection.Address;
+          SelectNextCellHor(cur1,ActRange);
+          str := 'x';
+          ActRange.Value := str;
+          SelectNextCellHor(cur1,ActRange);
+          str := 'не указана';
+          ActRange.Value := str;
+          SendStringToExcel(str, cur, ActRange);
+
+          SelectNextCellVert(cur, ActRange);
+        end;
   end;
 
 
@@ -831,7 +848,7 @@ begin
       varInt := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger
                 + dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsInteger
                 + dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger
-                - varCountZEFacult;//вычитаем факультативы
+                - varNegCountZE;//вычитаем факультативы
       str := IntToStr(varInt)+' з.е.';
     end
     else begin
