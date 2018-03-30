@@ -581,39 +581,6 @@ begin
   repeat
   begin
     str:= '';
-    //
-    {if (not dmDiplom.adospSelUspevForVipisca.Eof) then
-    begin
-      if (dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger > 0) then
-        str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
-    end;
-    str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
-    SelectNextCellVert(cur, ActRange, str1);
-    ActRange.Value := str;
-
-    if (str1<>'') then
-    begin
-      SelectNextCellVert(cur, ActRange);
-      ActRange.Value := str1;    //записываем остаток строки
-    end;
-
-    cur1 := Selection.Address;
-    SelectNextCellHor(cur1,ActRange);
-    if (WithZachEd) then
-    begin
-      str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString+' з.е.';
-    end
-    else
-      str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString+' час.';
-    ActRange.Value := str;
-
-    SelectNextCellHor(cur1,ActRange);
-    str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
-    ActRange.Value := str;
-
-    dmDiplom.adospSelUspevForVipisca.Next; }
-    //inc(i);
-
     //#NG
     if (not dmDiplom.adospSelUspevForVipisca.Eof) then
     begin
@@ -633,7 +600,6 @@ begin
             Custom.Mark := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
             ElecList.Add(Custom);
             varNegCountZE := varNegCountZE + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
-            //varCountAuditHourFacult := varCountAuditHourFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('AuditHourCount').AsInteger;
           end
           else begin
             Custom := TCustom.Create;
@@ -779,7 +745,7 @@ begin
   dmDiplom.adospSelGOSForVipisca.First;
   if (not dmDiplom.adospSelGOSForVipisca.Eof) and (dmDiplom.adospSelGOSForVipisca.FieldByName('ik_vid_zanyat').AsInteger = 56) then
   begin
-      //if (WithZachEd) then            
+      //if (WithZachEd) then
     str := 'Итоговый государственный экзамен';//'Итоговый государственный междисциплинарный экзамен';
     SendStringToExcel(str, cur, ActRange);
     cur1 := Selection.Address;
@@ -793,21 +759,7 @@ begin
 
     SelectNextCellVert(cur, ActRange);
   end
-  else  if (ik_direction=2) then  //только для специалитета
-        begin
-          str := 'Итоговый государственный экзамен';//'Итоговый государственный междисциплинарный экзамен';
-          SendStringToExcel(str, cur, ActRange);
-          cur1 := Selection.Address;
-          SelectNextCellHor(cur1,ActRange);
-          str := 'x';
-          ActRange.Value := str;
-          SelectNextCellHor(cur1,ActRange);
-          str := 'не указана';
-          ActRange.Value := str;
-          SendStringToExcel(str, cur, ActRange);
-
-          SelectNextCellVert(cur, ActRange);
-        end;
+  else
   end;
 
 

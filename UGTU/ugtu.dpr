@@ -452,7 +452,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.Title := '»— "”√“”"';
+  Application.Title := '»— ”√“”';
   Application.HelpFile := '';
   Application.OnException := ExceptionHandler.ExceptionHandler;
 
