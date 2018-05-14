@@ -509,59 +509,6 @@ begin
     until dmDiplom.adospSelKPForVipisca.Eof;
   end;
 
-  {
-  //вывод практик  #Практики#
-  dmDiplom.adospSelPractForVipisca.First;
-  FindRange := Find('#Практики#');
-  FindRange.Select;
-  ActRange := Selection;
-  cur:= ActRange.Address;
-  repeat
-  begin
-    if (dmDiplom.adospSelPractForVipisca.Eof) then
-      str:= ''
-    else
-    begin
-      str := dmDiplom.adospSelPractForVipisca.FieldByName('cName_disc').AsString;
-      str :=  str+', '+ dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString;
-      str :=  str +' недель, '+ dmDiplom.adospSelPractForVipisca.FieldByName('cOsenca').AsString;
-    end;
-    SendStringToExcel(str, cur, ActRange);
-    dmDiplom.adospSelPractForVipisca.Next;
-    SelectNextCellVert(cur, ActRange);
-  end;
-  until dmDiplom.adospSelPractForVipisca.Eof;
-
-  //гос экзамен #ГОС#
-  dmDiplom.adospSelGOSForVipisca.First;
-  if (dmDiplom.adospSelPractForVipisca.RecordCount>MaxPractCount) then
-    SelectNextCellVert(cur, ActRange)
-  else
-  begin
-    FindRange := Find('#ГОС#');
-    FindRange.Select;
-    ActRange := Selection;
-    cur:= ActRange.Address;
-  end;
-  repeat
-  begin
-    if (dmDiplom.adospSelGOSForVipisca.Eof) then
-      str:= ''
-    else
-    begin
-      if ((ik_direction = 3) or (ik_direction = 1)) then
-        str := 'междисциплинарный по направлению'
-      else
-        str := 'междисциплинарный по специальности';
-      str :=  str +', '+ dmDiplom.adospSelGOSForVipisca.FieldByName('cOsenca').AsString;
-    end;
-    SendStringToExcel(str, cur, ActRange);
-    dmDiplom.adospSelGOSForVipisca.Next;
-    SelectNextCellVert(cur, ActRange);
-  end;
-  until dmDiplom.adospSelGOSForVipisca.Eof;
-  }
-
   //********** ВТОРАЯ   СТРАНИЦА *******************
   ActivateWorksheet(MainpageNumber+1);
   // вывод оценок
@@ -630,7 +577,10 @@ begin
             SelectNextCellHor(cur1,ActRange);
             if (WithZachEd) then
             begin
-              str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString;
+              //для электива нет з.е.
+              if pos('Электив', str) > 0 then str:= '0'
+              else str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString;
+
               if (StrToInt(str) = 0) then str := 'x'
               else str := str + ' з.е.'
 
