@@ -239,3 +239,5 @@ pip-log.txt
 /UGTU/ugtu.exe
 /UGTU/ugtu.res
 /UGTU/ugtu.dproj.local
+*.identcache
+*.identcache
