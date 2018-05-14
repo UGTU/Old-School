@@ -11,7 +11,7 @@ type
   TDiplOtdKardController = class (TObject)
   private
     function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
-    procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; Is2016:boolean);
+    procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; IsOther:boolean);
   protected
     constructor CreateInstance;
  //AccessInstance предоставл€ет доступ к экземпл€ру контроллера
@@ -207,7 +207,7 @@ begin
 end;
 
 //вывод диплома
-procedure TDiplOtdKardController.FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; Is2016:boolean);
+procedure TDiplOtdKardController.FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; IsOther:boolean);
 const strLength = 40;
 var
   str, str2:string;
@@ -344,21 +344,19 @@ begin
 
     iday:=DayOf(StrToDate(str));
     str:=Inttostr(iDay);
-    if (iday < 10) then
-      str:= '0'+str;
+    if (iday < 10) then str:= '0'+str;
+    E.Sheets[count].Range['BG35'].Value:=str;
+
     //при замене тер€ютс€ начальные нули, при вставке напр€мую в €чейку все в пор€дке
-    if (Is2016) then
-    begin
+    if IsOther then begin
       E.Sheets[count].Range['S42'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
       E.Sheets[count].Range['BD36'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
-      E.Sheets[count].Range['BG35'].Value:=str;
     end
-    else
-    begin
+    else begin
       E.Sheets[count].Range['T40'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
       E.Sheets[count].Range['AZ35'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
-      E.Sheets[count].Range['BG35'].Value:=str;
     end;
+
   end;
   //end;
 
@@ -542,7 +540,7 @@ begin
 
           try
             HasAllData:= true;
-            FillTheDiplom(E, count, tempStoredProc, SourceDataSet, Pos('2016',path)>0); //показатель нового шаблона (2016));
+            FillTheDiplom(E, count, tempStoredProc, SourceDataSet, Pos('2018Vorkuta',path)>0); //показатель нового шаблона (2016));
           except
             on Ex:Exception do begin
             E.Quit;
