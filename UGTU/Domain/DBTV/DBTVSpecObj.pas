@@ -73,7 +73,7 @@ per_year:=0;
 if month<9 then per_year:=1; //showmessage (inttostr(month));
 
 if ShowActual then
-AdoDataset.CommandText:='select * from TREE_groups where (ik_spec_fac='''+inttostr(IK)+''')and(('''+INTTOSTR(CurrentYear)+'''-NYear_post)<'''+inttostr(Studyyears+per_year)+''') and (dateExit >getdate()) order by NYear_post' else
+AdoDataset.CommandText:='select * from TREE_groups where (ik_spec_fac='''+inttostr(IK)+''')and(('''+INTTOSTR(CurrentYear)+'''-NYear_post)<='''+inttostr(Studyyears+per_year)+''') and (dateExit >getdate()) order by NYear_post' else
 AdoDataset.CommandText:='select * from TREE_groups where ik_spec_fac='''+inttostr(IK)+''' order by NYear_post';
  AdoDataset.Active:=true;
  if (AdoDataset.RecordCount=0) then Node.HasChildren:=false;
