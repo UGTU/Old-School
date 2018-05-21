@@ -223,22 +223,22 @@ var
 begin
   TApplicationController.GetInstance.AddLogEntry('ƒиплом. Ёкспорт диплома студента '+SourceDataSet.FieldByName('Clastname').AsString);
   case tempStoredProc.FieldByName('Ik_fac').AsInteger  of
-  23:
-  begin
-    RangeRightBorder:= 'JB';
-    RangeBottomBorder:= 156;
+    23:
+      begin
+        RangeRightBorder:= 'JB';
+        RangeBottomBorder:= 156;
+      end;
+    22:
+      begin
+        RangeRightBorder:= 'T';
+        RangeBottomBorder:= 27;
+      end;
+    else begin
+      RangeRightBorder:= 'CE';
+      RangeBottomBorder:= 50;
+    end;
   end;
-  22:
-  begin
-    RangeRightBorder:= 'T';
-    RangeBottomBorder:= 27;
-  end;
-  else
-  begin
-    RangeRightBorder:= 'CE';
-    RangeBottomBorder:= 50;
-  end;
-  end;
+
   E.sheets.Add(after:=E.sheets.item[count-1]);
 
   E.Sheets[1].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].EntireColumn.Copy(EmptyParam); // поместим в Ѕќ
@@ -253,86 +253,46 @@ begin
   E.Sheets[count].PageSetup.Orientation:=E.Sheets[1].PageSetup.Orientation;
 
   E.Sheets.item[1].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].Copy;
-     //E.Sheets.item[count].Range['A1:CE'+inttoStr(50)].Insert;
-  if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 23) then
-  begin
-    E.Sheets[count].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].ColumnWidth:=
-      E.Sheets[1].Range['A1:A2'].ColumnWidth;
-    E.Sheets[count].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].RowHeight:=
-      E.Sheets[1].Range['A1:B1'].RowHeight;
+
+  if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 23)
+  then begin
+    E.Sheets[count].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].ColumnWidth := E.Sheets[1].Range['A1:A2'].ColumnWidth;
+    E.Sheets[count].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].RowHeight := E.Sheets[1].Range['A1:B1'].RowHeight;
   end;
 
-
-  {if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 18) then
-  begin
-    FindRange := E.Cells.Replace(What := '#surname#',Replacement:=(SourceDataSet.FieldByName('iClastname').AsString));
-    FindRange := E.Cells.Replace(What := '#name#',Replacement:=(SourceDataSet.FieldByName('iFirstName').AsString));
-    FindRange := E.Cells.Replace(What := '#Patronymic#',Replacement:=(SourceDataSet.FieldByName('iPatronymic').AsString));
-    FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
-    FindRange := E.Cells.Replace(What := '#shifr#',Replacement:=tempStoredProc.FieldByName('Sh_spec').AsString);
-
-    //при замене тер€ютс€ начальные нули, при вставке напр€мую в €чейку все в пор€дке
-    str:=SourceDataSet.FieldByName('RegNumber').AsString   ;
-    E.Sheets[count].Range['t34'].Value:=str;
-    //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
-
-    str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
-    iday:=DayOf(StrToDate(str));
-    imonth:=MonthOf(StrToDate(str));
-    iyear:=YearOf(StrToDate(str));
-
-    smonth := TGeneralController.Instance.GetMonthName(imonth);
-
-    str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
-
-    FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
-  end
-  else}
-  //begin
 
   //если это колледжи
   if ((tempStoredProc.FieldByName('Ik_fac').AsInteger = 23) or
       (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) or
-      (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21)) then
-  begin
+      (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21))
+  then begin
     FindRange := E.Cells.Replace(What := '#surname#',Replacement:=(SourceDataSet.FieldByName('Clastname').AsString));
     FindRange := E.Cells.Replace(What := '#name#',Replacement:=(SourceDataSet.FieldByName('FirstName').AsString));
     FindRange := E.Cells.Replace(What := '#Patronymic#',Replacement:=(SourceDataSet.FieldByName('Patronymic').AsString));
     str:=SourceDataSet.FieldByName('RegNumber').AsString;
-    if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) or
-      (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21) then
-    begin
+    if (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) or (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21)
+    then begin
       FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
       E.Sheets[count].Range['h18'].Value:=str;
     end
-    else
-      E.Sheets[count].Range['AZ135'].Value:=str;
-    //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
-
+    else E.Sheets[count].Range['AZ135'].Value:=str;
 
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
     iday:=DayOf(StrToDate(str));
     imonth:=MonthOf(StrToDate(str));
     iyear:=YearOf(StrToDate(str));
-
     smonth := GetMonthR(imonth);
-
     str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
-
     FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
   end
+  else begin  //если ¬”«
 
-  //если ¬”«
-  else
-  begin
     FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
     FindRange := E.Cells.Replace(What := '#surname#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iClastname').AsString));
     FindRange := E.Cells.Replace(What := '#name#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iFirstName').AsString));
     FindRange := E.Cells.Replace(What := '#Patronymic#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iPatronymic').AsString));
-    //FindRange := E.Cells.Replace(What := '#regNum#',Replacement:=str);
 
     FindRange := E.Cells.Replace(What := '#shifr#',Replacement:=tempStoredProc.FieldByName('Sh_spec').AsString);
-    //E.Sheets[count].Range['t48'].Value:=str;
 
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
     imonth:=MonthOf(StrToDate(str));
@@ -344,11 +304,12 @@ begin
 
     iday:=DayOf(StrToDate(str));
     str:=Inttostr(iDay);
-    if (iday < 10) then str:= '0'+str;
+    if (iday < 10) then str := '0' + str;
     E.Sheets[count].Range['BG35'].Value:=str;
 
     //при замене тер€ютс€ начальные нули, при вставке напр€мую в €чейку все в пор€дке
-    if IsOther then begin
+    if IsOther
+    then begin
       E.Sheets[count].Range['S42'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
       E.Sheets[count].Range['BD36'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
     end
@@ -356,20 +317,18 @@ begin
       E.Sheets[count].Range['T40'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
       E.Sheets[count].Range['AZ35'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
     end;
-
   end;
-  //end;
 
   //проверка дл€ однофамильцев
-  fam:=E.Sheets[count-1].name;
-  if fam=SourceDataSet.FieldByName('Clastname').AsString then
-    E.Sheets[count].name:=SourceDataSet.FieldByName('Clastname').AsString+'_'
-  else
-    E.Sheets[count].name:=SourceDataSet.FieldByName('Clastname').AsString;
+  fam := E.Sheets[count-1].name;
+
+  if (fam = SourceDataSet.FieldByName('Clastname').AsString) then E.Sheets[count].name:=SourceDataSet.FieldByName('Clastname').AsString+'_'
+  else E.Sheets[count].name:=SourceDataSet.FieldByName('Clastname').AsString;
+
   E.Sheets[count].Select;
 
   //заносим данные
-    str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' года';
+  str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' года';
   FindRange := E.Cells.Replace(What := '#DateDelivery#',Replacement:=str);
   FindRange := E.Cells.Replace(What := '#fiogak#',Replacement:=tempStoredProc.FieldByName('GakMemberName').AsString);
   FindRange := E.Cells.Replace(What := '#Category#',Replacement:=tempStoredProc.FieldByName('Spec—ategory').AsString);
@@ -379,14 +338,6 @@ begin
   FindRange := E.Cells.Replace(What := '#qualif#',Replacement:=str);
   FindRange := E.Cells.Replace(What := '#qualifPart2#',Replacement:=str2);
   FindRange := E.Cells.Replace(What := '#spec#',Replacement:='');
-  {if tempStoredProc.FieldByName('ik_direction').AsInteger=2 then
-  begin
-     FindRange := E.Cells.Replace(What := '#spec#',Replacement:='по специальности');
-     if (str2<> '') then
-       E.Sheets[1].Range['AW37:AW37'].Font.Size:=10.5;
-  end
-  else
-     FindRange := E.Cells.Replace(What := '#spec#',Replacement:='по направлению');    }
 end;
 
 function TDiplOtdKardController.FilterGroupList(cmp: PDBLookupComboboxEh; ik_Gener_spec_fac:Variant): boolean;
