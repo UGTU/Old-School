@@ -10,5 +10,5 @@ COPY UGTU\Midas.dll_Error_Repair_Tool-WinThruster.exe   Release\Midas.dll_Error_
 COPY UGTU\Prikaz.dot                                    Release\Prikaz.dot
 COPY UGTU\ugtu_help.chm                                 Release\ugtu_help.chm
 XCOPY UGTU\Reports  /E /Y /J                            Release\Reports
-XCOPY Support       /E /Y /J                            Release\Support
+XCOPY UGTU\Support  /E /Y /J                            Release\Support
 XCOPY UGTU\Utils    /E /Y /J                            Release\Utils
