@@ -491,46 +491,49 @@ begin
                     if (varInt = 5211)
                     then begin
                         ElecList.Add(Custom);
-                        varNegCountZE := varNegCountZE + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
                     end
                     else begin
                         FacList.Add(Custom);
-                        varNegCountZE := varNegCountZE + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
                         varCountAuditHourFacult := varCountAuditHourFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('AuditHourCount').AsInteger;
-                    end;
-                end
-                else begin
-                    str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
-                    str1 := StringFormat(str, maxDiscStr);   //запоминаем остаток строки
-                    SelectNextCellVert(cur, ActRange, str1);
-                    ActRange.Value := str;
-
-                    if (str1 <> '')
-                    then begin
-                        SelectNextCellVert(cur, ActRange);
-                        ActRange.Value := str1;    //записываем остаток строки
-                    end;
-
-                    cur1 := Selection.Address;
-                    SelectNextCellHor(cur1,ActRange);
-
-                    if WithZachEd
-                    then begin
-                        //для электива нет з.е.
-                        if pos('Электив', str) > 0 then str := '0'
-                        else str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString;
-
-                        if (StrToInt(str) = 0) then str := 'x'
-                        else str := str + ' з.е.'
-                    end
-                    else str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString + ' час.';
-
-                    ActRange.Value := str;
-                    SelectNextCellHor(cur1,ActRange);
-                    str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
-                    ActRange.Value := str;
+                        dmDiplom.adospSelUspevForVipisca.Next;
                     end;
                 end;
+
+                str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
+                str1 := StringFormat(str, maxDiscStr);   //запоминаем остаток строки
+                SelectNextCellVert(cur, ActRange, str1);
+                ActRange.Value := str;
+
+                if (str1 <> '')
+                then begin
+                    SelectNextCellVert(cur, ActRange);
+                    ActRange.Value := str1;    //записываем остаток строки
+                end;
+
+                cur1 := Selection.Address;
+                SelectNextCellHor(cur1,ActRange);
+
+                if WithZachEd
+                then begin
+                    //для электива нет з.е.
+                    if pos('Электив', str) > 0
+                    then begin
+                        //varNegCountZE := varNegCountZE + dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsInteger;
+                        str := '0'
+                    end
+                    else str := dmDiplom.adospSelUspevForVipisca.FieldByName('ZECount').AsString;
+
+                    if (StrToInt(str) = 0) then str := 'x'
+                    else str := str + ' з.е.'
+                end
+                else str := dmDiplom.adospSelUspevForVipisca.FieldByName('HourCount').AsString + ' час.';
+
+                ActRange.Value := str;
+                SelectNextCellHor(cur1,ActRange);
+                str := dmDiplom.adospSelUspevForVipisca.FieldByName('cOsenca').AsString;
+                ActRange.Value := str;
+                end;
+
             dmDiplom.adospSelUspevForVipisca.Next;
         end;
     until (dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger <= 0);
@@ -568,7 +571,6 @@ begin
 
         if WithZachEd
         then begin
-            //if (str = 'Практики') then varNegCountZE := varNegCountZE + dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsInteger;
             str := dmDiplom.adospSelPractForVipisca.FieldByName('ZECount').AsString + ' з.е.';
         end
         else str := GetWeekCountName(dmDiplom.adospSelPractForVipisca.FieldByName('weekCount').AsString);
@@ -602,7 +604,7 @@ begin
         if WithZachEd
         then begin
             str := dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsString+' з.е.';
-            varNegCountZE := varNegCountZE + dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger;
+            //varNegCountZE := varNegCountZE + dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger;
         end
         else str:= GetWeekCountName(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsString);
     end
