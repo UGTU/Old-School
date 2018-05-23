@@ -495,8 +495,8 @@ begin
                     else begin
                         FacList.Add(Custom);
                         varCountAuditHourFacult := varCountAuditHourFacult + dmDiplom.adospSelUspevForVipisca.FieldByName('AuditHourCount').AsInteger;
-                        dmDiplom.adospSelUspevForVipisca.Next;
                     end;
+                    dmDiplom.adospSelUspevForVipisca.Next;
                 end;
 
                 str := str+dmDiplom.adospSelUspevForVipisca.FieldByName('cName_disc').AsString;
