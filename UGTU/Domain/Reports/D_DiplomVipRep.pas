@@ -475,7 +475,6 @@ begin
         then begin
             varInt := dmDiplom.adospSelUspevForVipisca.FieldByName('iK_disc').AsInteger;
 
-            //"ktrnb
             if (varInt > 0)
             then begin
                 varInt2 := dmDiplom.adospSelUspevForVipisca.FieldByName('IdTypeDiscipline').AsInteger;
@@ -595,11 +594,7 @@ begin
 
     if ((dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsInteger > 0) and (dmDiplom.adospSelGOSForVipisca.FieldByName('ik_vid_zanyat').AsInteger = 31))
     then begin
-        if WithZachEd
-        then begin
-            str := dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsString+' з.е.';
-            //varNegCountZE := varNegCountZE + dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsInteger;
-        end
+        if WithZachEd then str := dmDiplom.adospSelGOSForVipisca.FieldByName('ZECount').AsString+' з.е.'
         else str:= GetWeekCountName(dmDiplom.adospSelGOSForVipisca.FieldByName('iHour_gos').AsString);
     end
     else begin
@@ -688,7 +683,6 @@ begin
         SelectNextCellVert(cur, ActRange);
     until dmDiplom.adospSelUspevForVipisca.Eof;
 
-    //#NG
     if(FacList.Count > 0)
     then begin
          SelectNextCellVert(cur, ActRange);
@@ -704,14 +698,14 @@ begin
              //название
              Custom := FacList.First;
              str:= Custom.Name;
-             str1:=StringFormat(str, maxDiscStr);   //запоминаем остаток строки
+             str1:=StringFormat(str, maxDiscStr);     //запоминаем остаток строки
              SelectNextCellVert(cur, ActRange, str1);
              ActRange.Value := str;
 
              if (str1 <> '')
              then begin
                  SelectNextCellVert(cur, ActRange);
-                 ActRange.Value := str1;    //записываем остаток строки
+                 ActRange.Value := str1;              //записываем остаток строки
              end;
 
              //зач. ед.
@@ -761,7 +755,6 @@ begin
         //SelectNextCellVert(cur, ActRange);
         ElecList.Remove(ElecList.First);
     end;
-    //#NG
     ActivateWorksheet(MainpageNumber);
 end;
 
