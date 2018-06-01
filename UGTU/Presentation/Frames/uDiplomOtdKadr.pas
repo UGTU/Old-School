@@ -1,4 +1,4 @@
-unit uDiplomOtdKadr;
+п»їunit uDiplomOtdKadr;
   {#Author tanyav@ist.ugtu.net}
 interface
 
@@ -124,22 +124,22 @@ begin
     if (DMOtdKadrDiplom = nil) then
        DMOtdKadrDiplom:= TdmOtdKadrDiplom.Create(nil);
 
-  	//инициализируем списки (combo box)
-	//факультет
+  	//РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј СЃРїРёСЃРєРё (combo box)
+	//С„Р°РєСѓР»СЊС‚РµС‚
     ik_fac:= 0;
 	  TDiplOtdKardController.Instance.GetFacList(@dbcmbxFac);
-	//специальность
+	//СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
     ik_spec:= 0;
     ik_Gener_spec_fac:= 0;
 	  TDiplOtdKardController.Instance.GetSpecList(@dbcmbxSpec);
-  //группа
+  //РіСЂСѓРїРїР°
     TDiplOtdKardController.Instance.GetGroupList(@dbcmbxGroup);
     ik_group:= 0;
     dbcmbxFac.Value:= dbcmbxFac.ListSource.DataSet.FieldByName('ik_fac').AsInteger;
     pcOtdKadr.ActivePageIndex:= 0;
     ik_year:= 0;
 
-    //факультет ГАКа
+    //С„Р°РєСѓР»СЊС‚РµС‚ Р“РђРљР°
     ik_GAKfac:= 0;
     dbgGroups.DataSource:= TDataSource.Create(nil);
     dbgGroups.DataSource.DataSet:= TADODataSet.Create(nil);
@@ -154,7 +154,7 @@ end;
 procedure TfmDiplomOtdKadr.DoCancel;
 begin
     case pcOtdKadr.ActivePageIndex of
-    0:  //Диплом
+    0:  //Р”РёРїР»РѕРј
      begin
 
         TDiplOtdKardController.Instance.CancelDiplomUpdates(@dbgStudList.DataSource.DataSet);
@@ -163,19 +163,19 @@ begin
         Modified:= false;
 
      end;
-    1:  //ГАК
+    1:  //Р“РђРљ
     begin
 
-      //отменяем сохранение списка
+      //РѕС‚РјРµРЅСЏРµРј СЃРѕС…СЂР°РЅРµРЅРёРµ СЃРїРёСЃРєР°
         TDiplOtdKardController.Instance.CancelUpdatesGAK(@dbgMemberGak.DataSource.DataSet);
         dbgMemberGak.DataSource.DataSet.Close;
         dbgMemberGak.DataSource.DataSet.Open;
         Modified:= false;
 
     end;
-    2:  //квалификации
+    2:  //РєРІР°Р»РёС„РёРєР°С†РёРё
     begin
-      //отменяем сохранение списка
+      //РѕС‚РјРµРЅСЏРµРј СЃРѕС…СЂР°РЅРµРЅРёРµ СЃРїРёСЃРєР°
         TDiplOtdKardController.Instance.CancelUpdatesQualif(@dbgQualif.DataSource.DataSet);
         dbgQualif.DataSource.DataSet.Close;
         dbgQualif.DataSource.DataSet.Open;
@@ -189,41 +189,41 @@ function TfmDiplomOtdKadr.DoApply:boolean;
 begin
   result:= false;
   case pcOtdKadr.ActivePageIndex of
-    0:  //Диплом
+    0:  //Р”РёРїР»РѕРј
      begin
 
-      //сохраняем список
+      //СЃРѕС…СЂР°РЅСЏРµРј СЃРїРёСЃРѕРє
         TDiplOtdKardController.Instance.SaveDiploms(@dbgStudList.DataSource.DataSet);
         Modified:= false;
         result:= true;
 
      end;
-    1:  //ГАК
+    1:  //Р“РђРљ
     begin
       try
-      //сохраняем список
+      //СЃРѕС…СЂР°РЅСЏРµРј СЃРїРёСЃРѕРє
         TDiplOtdKardController.Instance.SaveGAK(@dbgMemberGak.DataSource.DataSet);
         dbgMemberGak.DataSource.DataSet.Close;
         dbgMemberGak.DataSource.DataSet.Open;
         Modified:= false;
         result:= true;
       except
-        {MessageBox(Handle, 'Произошла ошибка при сохранении списка паредседателей ГАК.','ИС "УГТУ"',
+        {MessageBox(Handle, 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё СЃРїРёСЃРєР° РїР°СЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ.','РРЎ "РЈР“РўРЈ"',
           MB_OK) ;}
       end;
 
     end;
-    2:  //квалификации
+    2:  //РєРІР°Р»РёС„РёРєР°С†РёРё
     begin
       try
-      //сохраняем список
+      //СЃРѕС…СЂР°РЅСЏРµРј СЃРїРёСЃРѕРє
         TDiplOtdKardController.Instance.SaveQualif(@dbgQualif.DataSource.DataSet);
         dbgQualif.DataSource.DataSet.Close;
         dbgQualif.DataSource.DataSet.Open;
         Modified:= false;
         result:= true;
       except
-        {MessageBox(Handle, 'Произошла ошибка при сохранении списка паредседателей ГАК.','ИС "УГТУ"',
+        {MessageBox(Handle, 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё СЃРїРёСЃРєР° РїР°СЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ.','РРЎ "РЈР“РўРЈ"',
           MB_OK) ;}
       end;
 
@@ -245,24 +245,24 @@ end;
 procedure TfmDiplomOtdKadr.pcOtdKadrChange(Sender: TObject);
 begin
   case pcOtdKadr.ActivePageIndex of
-    0:  //ГАК
+    0:  //Р“РђРљ
     begin
-       TApplicationController.GetInstance.AddLogEntry('Диплом. Переход на вкладку дипломы.');
+       TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РґРёРїР»РѕРјС‹.');
     end;
-    1:  //ГАК
+    1:  //Р“РђРљ
     begin
-       TApplicationController.GetInstance.AddLogEntry('Диплом. Переход на вкладку председатели ГАК');
-        //открываем справочник специальности
+       TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РїСЂРµРґСЃРµРґР°С‚РµР»Рё Р“РђРљ');
+        //РѕС‚РєСЂС‹РІР°РµРј СЃРїСЂР°РІРѕС‡РЅРёРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
         TDiplOtdKardController.Instance.GetSpecGakList;
-	      //годы загружаем
+	      //РіРѕРґС‹ Р·Р°РіСЂСѓР¶Р°РµРј
 	      if dbcmbxYear.ListSource=nil then
           TDiplOtdKardController.Instance.GetYearList(@dbcmbxYear);
 
     end;
-    2:  //квалификации
+    2:  //РєРІР°Р»РёС„РёРєР°С†РёРё
     begin
-       TApplicationController.GetInstance.AddLogEntry('Диплом. Переход на вкладку Квалификации');
-       //открываем справочник специальности
+       TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РљРІР°Р»РёС„РёРєР°С†РёРё');
+       //РѕС‚РєСЂС‹РІР°РµРј СЃРїСЂР°РІРѕС‡РЅРёРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
        TDiplOtdKardController.Instance.GetQualifications(@dbgQualif.DataSource.DataSet);
 
     end;
@@ -283,15 +283,15 @@ begin
   if Modified then
   begin
     case pcOtdKadr.ActivePageIndex of
-      0:  //Диплом
-          tmpStr := 'Данные диплома были изменены. Сохранить изменения?';
-      1:  //ГАК
-          tmpStr := 'Список председателей ГАК был изменен. Сохранить изменения?';
-      2:  //Квалификации
-          tmpStr := 'Список клалификаций был изменен. Сохранить изменения?';
+      0:  //Р”РёРїР»РѕРј
+          tmpStr := 'Р”Р°РЅРЅС‹Рµ РґРёРїР»РѕРјР° Р±С‹Р»Рё РёР·РјРµРЅРµРЅС‹. РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ?';
+      1:  //Р“РђРљ
+          tmpStr := 'РЎРїРёСЃРѕРє РїСЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ Р±С‹Р» РёР·РјРµРЅРµРЅ. РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ?';
+      2:  //РљРІР°Р»РёС„РёРєР°С†РёРё
+          tmpStr := 'РЎРїРёСЃРѕРє РєР»Р°Р»РёС„РёРєР°С†РёР№ Р±С‹Р» РёР·РјРµРЅРµРЅ. РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ?';
 
     end;
-    case MessageBox(Handle, PWideChar(tmpStr),'ИС "УГТУ"',
+    case MessageBox(Handle, PWideChar(tmpStr),'РРЎ "РЈР“РўРЈ"',
           MB_YESNOCANCEL)  of
      ID_YES:
         Apply;
@@ -334,21 +334,8 @@ procedure TfmDiplomOtdKadr.actPrintDiplExecute(Sender: TObject);
 begin
   if not DoModified then
     exit;
-  TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, ik_fac, YearOf(Date), dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, false);
-  {case TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, YearOf(Date)) of
-    -2:
-      MessageBox(Handle, 'Произошла ошибка при выборке данных для дипломов.','ИС "УГТУ"',
-          MB_OK) ;
-    -1:
-      MessageBox(Handle, 'Произошла ошибка при экспорте данных для дипломов.','ИС "УГТУ"',
-          MB_OK) ;
-    0:
-      MessageBox(Handle, 'Не заполнены данные для дипломов. Экспорт невозможен.','ИС "УГТУ"',
-          MB_OK) ;
-  end; }
-
+  TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet, ik_group, ik_spec, ik_fac, YearOf(Date)
+                                                  , dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, false);
 end;
 
 procedure TfmDiplomOtdKadr.actPrintDiplUpdate(Sender: TObject);
@@ -363,8 +350,8 @@ procedure TfmDiplomOtdKadr.actPrintOldDiplExecute(Sender: TObject);
 begin
   if not DoModified then
     exit;
-  TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet,
-    ik_spec, YearOf(Date), ik_fac, dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, true);
+    TDiplOtdKardController.Instance.PrintAllDiploms(@dbgStudList.DataSource.DataSet, ik_group, ik_spec, ik_fac, YearOf(Date)
+                                                    , dbcmbxGroup.ListSource.DataSet.FieldByName('ik_profile').AsInteger, true);
 end;
 
 procedure TfmDiplomOtdKadr.actSaveDiplExecute(Sender: TObject);
@@ -411,8 +398,8 @@ begin
     dbcmbxFac.Value:= ik_fac;
     Modified:= true;
   end;
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Выбор факультета '+dbcmbxFac.Text);
-  //фильтруем список специальностей
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р’С‹Р±РѕСЂ С„Р°РєСѓР»СЊС‚РµС‚Р° '+dbcmbxFac.Text);
+  //С„РёР»СЊС‚СЂСѓРµРј СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№
     if ik_fac<>dbcmbxFac.Value then
     begin
       TDiplOtdKardController.Instance.FilterSpecList(@dbcmbxSpec,dbcmbxFac.Value);
@@ -431,8 +418,8 @@ begin
     dbcmbxSpec.Value:= ik_Gener_spec_fac;
     Modified:= true;
   end;
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Выбор специальности '+dbcmbxSpec.Text);
-  //фильтруем список групп
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р’С‹Р±РѕСЂ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё '+dbcmbxSpec.Text);
+  //С„РёР»СЊС‚СЂСѓРµРј СЃРїРёСЃРѕРє РіСЂСѓРїРї
     if ik_Gener_spec_fac<>dbcmbxSpec.Value then
     begin
       TDiplOtdKardController.Instance.FilterGroupList(@dbcmbxGroup,dbcmbxSpec.Value);
@@ -453,10 +440,10 @@ begin
     Modified:= true;
   end;
 
-  TApplicationController.GetInstance.AddLogEntry('Список председателей ГАК. Выбор года поступления '+dbcmbxYear.Text);
+  TApplicationController.GetInstance.AddLogEntry('РЎРїРёСЃРѕРє РїСЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ. Р’С‹Р±РѕСЂ РіРѕРґР° РїРѕСЃС‚СѓРїР»РµРЅРёСЏ '+dbcmbxYear.Text);
   {if (dbcmbxYear.Value = ik_year)  then
     exit;}
-    //загружаем список
+    //Р·Р°РіСЂСѓР¶Р°РµРј СЃРїРёСЃРѕРє
     TDiplOtdKardController.Instance.GetGakMemberList(@dbgMemberGak.DataSource.DataSet,dbcmbxYear.Value, cbDisplayType.ItemIndex);
     if (dbcmbxYear.Value<>NULL) then
       ik_year:= dbcmbxYear.Value;
@@ -494,7 +481,7 @@ end;
 
 procedure TfmDiplomOtdKadr.actCreateDiplomsExecute(Sender: TObject);
 begin
-    TApplicationController.GetInstance.AddLogEntry('Диплом. Создание дипломов для группы.');
+    TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. РЎРѕР·РґР°РЅРёРµ РґРёРїР»РѕРјРѕРІ РґР»СЏ РіСЂСѓРїРїС‹.');
     TDiplomController.Instance.CreateDiploms(ik_group);
     dbgStudList.DataSource.DataSet.Close;
     dbgStudList.DataSource.DataSet.Open;
@@ -511,8 +498,8 @@ begin
     dbcmbxGAKFac.Value:= ik_GAKfac;
     Modified:= true;
   end;
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Выбор факультета ГАКа '+dbcmbxGAKFac.Text);
-  //фильтруем список специальностей
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р’С‹Р±РѕСЂ С„Р°РєСѓР»СЊС‚РµС‚Р° Р“РђРљР° '+dbcmbxGAKFac.Text);
+  //С„РёР»СЊС‚СЂСѓРµРј СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№
     //if (ik_GAKfac<>dbcmbxGAKFac.Value) and then
     begin
       TDiplOtdKardController.Instance.FilterGAKList(@dbgMemberGak.DataSource.DataSet,dbcmbxGAKFac.Value, -1);
@@ -536,30 +523,30 @@ begin
   if (dbcmbxGroup.Value = ik_group) then
     exit;
   try
-    //загружаем список
-    TApplicationController.GetInstance.AddLogEntry('Диплом. Выбор группы '+dbcmbxGroup.Text);
+    //Р·Р°РіСЂСѓР¶Р°РµРј СЃРїРёСЃРѕРє
+    TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р’С‹Р±РѕСЂ РіСЂСѓРїРїС‹ '+dbcmbxGroup.Text);
     TDiplOtdKardController.Instance.GetDiplomList(@dbgStudList.DataSource.DataSet,dbcmbxGroup.Value);
     ik_group:= dbcmbxGroup.Value;
   except
    on E:Exception do
    Begin
-    raise EApplicationException.Create('Произошла ошибка при выборе данных о дипломах.',Exception.Create(E.Message));
-    //если не загрузили, возвращаем прежнее значение группы
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‹Р±РѕСЂРµ РґР°РЅРЅС‹С… Рѕ РґРёРїР»РѕРјР°С….',Exception.Create(E.Message));
+    //РµСЃР»Рё РЅРµ Р·Р°РіСЂСѓР·РёР»Рё, РІРѕР·РІСЂР°С‰Р°РµРј РїСЂРµР¶РЅРµРµ Р·РЅР°С‡РµРЅРёРµ РіСЂСѓРїРїС‹
     dbcmbxGroup.Value:= ik_group;
     exit;
    End;
   end;
-    //если список пуст, предлагаем создать дипломы
+    //РµСЃР»Рё СЃРїРёСЃРѕРє РїСѓСЃС‚, РїСЂРµРґР»Р°РіР°РµРј СЃРѕР·РґР°С‚СЊ РґРёРїР»РѕРјС‹
   if (dbgStudList.DataSource.DataSet.RecordCount<1) and
       ((dbcmbxGroup.Value>1)) then
   begin
-      if (MessageBox(Handle, 'Для выбранной группы дипломы еще не созданы. Создать дипломы сейчас?','ИС "УГТУ"',
+      if (MessageBox(Handle, 'Р”Р»СЏ РІС‹Р±СЂР°РЅРЅРѕР№ РіСЂСѓРїРїС‹ РґРёРїР»РѕРјС‹ РµС‰Рµ РЅРµ СЃРѕР·РґР°РЅС‹. РЎРѕР·РґР°С‚СЊ РґРёРїР»РѕРјС‹ СЃРµР№С‡Р°СЃ?','РРЎ "РЈР“РўРЈ"',
           MB_YESNO))=IDYES then
       begin
         actCreateDiplomsExecute(Sender);
       end;
   end
-  //иначе обновляем список дипломов (досоздаем)
+  //РёРЅР°С‡Рµ РѕР±РЅРѕРІР»СЏРµРј СЃРїРёСЃРѕРє РґРёРїР»РѕРјРѕРІ (РґРѕСЃРѕР·РґР°РµРј)
   else
     actCreateDiplomsExecute(Sender);
 
@@ -625,7 +612,7 @@ begin
   try
     Text:=DateToStr(StrToDate(Text));
   except
-    raise EApplicationException.Create('Введена неверная дата.');
+    raise EApplicationException.Create('Р’РІРµРґРµРЅР° РЅРµРІРµСЂРЅР°СЏ РґР°С‚Р°.');
   end;
 end;
 

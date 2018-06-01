@@ -273,20 +273,21 @@ const maxDiscStr = 63;
 var
     FindRange: Variant;
     ActRange: Variant;
-    str, str1: String;   // строка, которую будем вставлять в нужное место в шаблоне
+    str, str1: String;                  // строка, которую будем вставлять в нужное место в шаблоне
     cur, cur1: String;
     i, weekCount: Integer;
     WithZachEd: boolean;
 
     //#NG
-    FacList: TList;   //Список факультативов
-    ElecList: TList;  //Список элективов
-    Custom: TCustom;
+    FacList: TList;                     //Список факультативов
+    ElecList: TList;                    //Список элективов
+    Custom: TCustom;                    //дисциплина
     varInt: integer;
     varInt2: integer;
-    varNegCountZE: integer;           //Сумма з.е, что не должа входить в итог
-    varCountAuditHourFacult: integer;
-    direction : integer;
+    varNegCountZE: integer;             //Сумма з.е, что не должа входить в итог
+    varCountAuditHourFacult: integer;   //Сумма аудиторных часов факультативов
+    direction : integer;                //Уровень образования (бакалавриат, магистратура...)
+    IsFast : Boolean;                   //True - по ускоренной программе
     //#NG
 begin
     ActivateWorksheet(MainpageNumber);
@@ -387,7 +388,10 @@ begin
         //строчки из доп сведений редактируем
         //так приходится делать из-за того, что ячейки объединенные
         direction := dmDiplom.adospGetVipiscaForDiplomik_direction.AsInteger;
-        if (direction = 9)
+        IsFast := dmDiplom.adospGetVipiscaForDiplomIsFast.AsBoolean;
+
+        if IsFast
+            OR (direction = 9)
             OR ((direction = 2) AND (direction < 5))
             OR (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger = 169)
             OR (FikGroup = 6244)

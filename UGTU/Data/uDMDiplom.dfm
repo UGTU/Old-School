@@ -302,6 +302,9 @@ object dmDiplom: TdmDiplom
         Name = '@ik_CurGroup'
         DataType = ftInteger
         Value = 100
+      end
+      item
+        Value = Null
       end>
     Left = 155
     Top = 248
@@ -478,6 +481,9 @@ object dmDiplom: TdmDiplom
     end
     object adospGetVipiscaForDiplomOchYearObuch: TIntegerField
       FieldName = 'OchYearObuch'
+    end
+    object adospGetVipiscaForDiplomIsFast: TBooleanField
+      FieldName = 'IsFast'
     end
   end
   object adospAppendDiplom: TADOStoredProc

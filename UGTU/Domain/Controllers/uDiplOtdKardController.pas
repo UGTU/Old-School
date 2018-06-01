@@ -1,4 +1,4 @@
-unit uDiplOtdKardController;
+п»їunit uDiplOtdKardController;
   {#Author tanyav@ist.ugtu.net}
 interface
 uses
@@ -10,76 +10,77 @@ type
   PDBGrid = ^TDBGridEh;
   TDiplOtdKardController = class (TObject)
   private
-    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
+    function OpenOKADRGetGakMemberForExcel(year: Integer; ik_group, ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
     procedure FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; IsOther:boolean);
   protected
     constructor CreateInstance;
- //AccessInstance предоставляет доступ к экземпляру контроллера
+ //AccessInstance РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ РґРѕСЃС‚СѓРї Рє СЌРєР·РµРјРїР»СЏСЂСѓ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
     class function AccessInstance(Request: Integer):
        TDiplOtdKardController;
 
   public
 
     constructor Create;
-  //Instance - возвращает экзепляр данного контроллера
+  //Instance - РІРѕР·РІСЂР°С‰Р°РµС‚ СЌРєР·РµРїР»СЏСЂ РґР°РЅРЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
     class function Instance: TDiplOtdKardController;
-  //ReleaseInstance - уничтожает контроллер
+  //ReleaseInstance - СѓРЅРёС‡С‚РѕР¶Р°РµС‚ РєРѕРЅС‚СЂРѕР»Р»РµСЂ
     class procedure ReleaseInstance;
 
-  //*********САМ КОНТРОЛЛЕР*********
-  //********ДИПЛОМ**********
-  //GetFacList загружает список факультетов
+  //*********РЎРђРњ РљРћРќРўР РћР›Р›Р•Р *********
+  //********Р”РРџР›РћРњ**********
+  //GetFacList Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє С„Р°РєСѓР»СЊС‚РµС‚РѕРІ
   function GetFacList(cmp: PDBLookupComboboxEh): boolean;
-  //GetSpecList загружает список cпециальностей
+  //GetSpecList Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє cРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№
   function GetSpecList(cmp: PDBLookupComboboxEh): boolean;
-  //GetGroupList загружает список групп
+  //GetGroupList Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РіСЂСѓРїРї
   function GetGroupList(cmp: PDBLookupComboboxEh): boolean;
   procedure  LoadExitGroups(TargetDataSet: PDataSet);
 
-  //Фильтры
-  //FilterSpecList фильтрует список специальностей
+  //Р¤РёР»СЊС‚СЂС‹
+  //FilterSpecList С„РёР»СЊС‚СЂСѓРµС‚ СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№
   function FilterSpecList(cmp: PDBLookupComboboxEh; ik_fac:Variant): boolean;
-  //FilterGroupList фильтрует список групп по специальности
+  //FilterGroupList С„РёР»СЊС‚СЂСѓРµС‚ СЃРїРёСЃРѕРє РіСЂСѓРїРї РїРѕ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
   function FilterGroupList(cmp: PDBLookupComboboxEh; ik_Gener_spec_fac:Variant): boolean;
   function FilterGAKGroupList(SourceDataSet: PDataSet; DisplayType, ik_fac, ik_spec:Variant): boolean;
-  //фильтрует список специальностей ГАКа
+  //С„РёР»СЊС‚СЂСѓРµС‚ СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№ Р“РђРљР°
   function FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant; DisplayType: integer): boolean;
 
-  //GetDiplomList загружает список студентов группы
+
+  //GetDiplomList Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє СЃС‚СѓРґРµРЅС‚РѕРІ РіСЂСѓРїРїС‹
   function GetDiplomList(SourceDataSet: PDataSet; ik_grup:Variant): boolean;
 
-  //SaveDiploms сохраняет дипломы
+  //SaveDiploms СЃРѕС…СЂР°РЅСЏРµС‚ РґРёРїР»РѕРјС‹
   procedure SaveDiploms(SourceDataSet: PDataSet);
-  //CancelDiplomUpdates отменяет изменения дипломов
+  //CancelDiplomUpdates РѕС‚РјРµРЅСЏРµС‚ РёР·РјРµРЅРµРЅРёСЏ РґРёРїР»РѕРјРѕРІ
   procedure CancelDiplomUpdates(SourceDataSet: PDataSet);
 
-  //SetSizes Установка размеров
+  //SetSizes РЈСЃС‚Р°РЅРѕРІРєР° СЂР°Р·РјРµСЂРѕРІ
   procedure SetSizes(sh1, sh2:Variant);
-  //PrintAllDiploms печатает дипломы
-  function PrintAllDiploms(SourceDataSet: PDataSet; ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
-  //делит строку str1 на 2, если это необходимо (макс. длина строки MaxStrLength)
+  //PrintAllDiploms РїРµС‡Р°С‚Р°РµС‚ РґРёРїР»РѕРјС‹
+  function PrintAllDiploms(SourceDataSet: PDataSet; ik_group, ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
+  //РґРµР»РёС‚ СЃС‚СЂРѕРєСѓ str1 РЅР° 2, РµСЃР»Рё СЌС‚Рѕ РЅРµРѕР±С…РѕРґРёРјРѕ (РјР°РєСЃ. РґР»РёРЅР° СЃС‚СЂРѕРєРё MaxStrLength)
   procedure ParseString(var str1,str2: string; MaxStrLength: integer);
 
 
-  //*************ПРЕДСЕДАТЕЛЬ ГАК****************
-  //GetYearList загружает список годов
+  //*************РџР Р•Р”РЎР•Р”РђРўР•Р›Р¬ Р“РђРљ****************
+  //GetYearList Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РіРѕРґРѕРІ
   function GetYearList(cmp: PDBLookupComboboxEh): boolean;
-  //GetSpecGakList загружает список специальностей (для поля просмотра)
+  //GetSpecGakList Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№ (РґР»СЏ РїРѕР»СЏ РїСЂРѕСЃРјРѕС‚СЂР°)
   function GetSpecGakList: boolean;
-  //GetGakMemberList загружает список председателей
+  //GetGakMemberList Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РїСЂРµРґСЃРµРґР°С‚РµР»РµР№
   function GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant; DisplayType: integer): boolean;
-  //SaveGAK сохраняет ГАК
+  //SaveGAK СЃРѕС…СЂР°РЅСЏРµС‚ Р“РђРљ
   procedure SaveGAK(SourceDataSet: PDataSet);
-  //CancelUpdatesGAK отменяет сохранение ГАК
+  //CancelUpdatesGAK РѕС‚РјРµРЅСЏРµС‚ СЃРѕС…СЂР°РЅРµРЅРёРµ Р“РђРљ
   procedure CancelUpdatesGAK(SourceDataSet: PDataSet);
 
 
-  //************КВАЛИФИКАЦИИ***************
-  //GetQualifications загрузка квалификаций
+  //************РљР’РђР›РР¤РРљРђР¦РР***************
+  //GetQualifications Р·Р°РіСЂСѓР·РєР° РєРІР°Р»РёС„РёРєР°С†РёР№
   procedure GetQualifications(SourceDataSet: PDataSet);
-  //SaveQualif сохраняет квалификаций
+  //SaveQualif СЃРѕС…СЂР°РЅСЏРµС‚ РєРІР°Р»РёС„РёРєР°С†РёР№
   procedure SaveQualif(SourceDataSet: PDataSet);
-  //CancelUpdatesQualif отменяет сохранение квалификаций
+  //CancelUpdatesQualif РѕС‚РјРµРЅСЏРµС‚ СЃРѕС…СЂР°РЅРµРЅРёРµ РєРІР°Р»РёС„РёРєР°С†РёР№
   procedure CancelUpdatesQualif(SourceDataSet: PDataSet);
 
 end;
@@ -88,7 +89,7 @@ end;
 implementation
 
 var
-//FAbitRaspisanieControllerInstance - экземпляр контроллера
+//FAbitRaspisanieControllerInstance - СЌРєР·РµРјРїР»СЏСЂ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
   FTDiplOtdKardControllerInstance: TDiplOtdKardController = nil;
 constructor TDiplOtdKardController.CreateInstance;
 begin
@@ -99,7 +100,7 @@ end;
 constructor TDiplOtdKardController.Create;
 begin
   inherited Create;
-  raise Exception.CreateFmt('Доступ к классу %s можно получить только через поле Instance!', [ClassName]);
+  raise Exception.CreateFmt('Р”РѕСЃС‚СѓРї Рє РєР»Р°СЃСЃСѓ %s РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ С‚РѕР»СЊРєРѕ С‡РµСЂРµР· РїРѕР»Рµ Instance!', [ClassName]);
 end;
 
 
@@ -115,7 +116,7 @@ begin
             FTDiplOtdKardControllerInstance.Free;
             FTDiplOtdKardControllerInstance:= nil;
           end;
-    else raise EApplicationException.Create('Ошибка в программе!',Exception.CreateFmt('Неизвестное значение параметра %d в методе AccessInstance контроллера TAbitOtchetsController', [Request]));
+    else raise EApplicationException.Create('РћС€РёР±РєР° РІ РїСЂРѕРіСЂР°РјРјРµ!',Exception.CreateFmt('РќРµРёР·РІРµСЃС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° %d РІ РјРµС‚РѕРґРµ AccessInstance РєРѕРЅС‚СЂРѕР»Р»РµСЂР° TAbitOtchetsController', [Request]));
   end;  Result := FTDiplOtdKardControllerInstance;
 end;
 
@@ -130,9 +131,9 @@ begin
    AccessInstance(2);
 end;
 
-//*********САМ КОНТРОЛЛЕР*********
-//********ДИПЛОМ**********
-//загружает список факультетов
+//*********РЎРђРњ РљРћРќРўР РћР›Р›Р•Р *********
+//********Р”РРџР›РћРњ**********
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє С„Р°РєСѓР»СЊС‚РµС‚РѕРІ
 function TDiplOtdKardController.GetFacList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
@@ -141,7 +142,7 @@ begin
   Result:= true;
 end;
 
-//загружает список cпециальностей
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє cРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№
 function TDiplOtdKardController.GetSpecList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
@@ -150,7 +151,7 @@ begin
   Result:= true;
 end;
 
-//загружает список групп
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РіСЂСѓРїРї
 function TDiplOtdKardController.GetGroupList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
@@ -163,7 +164,7 @@ procedure  TDiplOtdKardController.LoadExitGroups(TargetDataSet: PDataSet);
 var year: integer;
 begin
   year:= YearOf(Today);
-  //до 10 апреля показываем выпускников пред года
+  //РґРѕ 10 Р°РїСЂРµР»СЏ РїРѕРєР°Р·С‹РІР°РµРј РІС‹РїСѓСЃРєРЅРёРєРѕРІ РїСЂРµРґ РіРѕРґР°
   if ((MonthOf(Today)<4) or ((MonthOf(Today) = 4) and (DayOf(Today) < 10)))  then
       year:= year - 1;
 
@@ -171,8 +172,8 @@ begin
 end;
 
 
-//Фильтры
-//фильтрует список специальностей
+//Р¤РёР»СЊС‚СЂС‹
+//С„РёР»СЊС‚СЂСѓРµС‚ СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№
 function TDiplOtdKardController.FilterSpecList(cmp: PDBLookupComboboxEh; ik_fac:Variant): boolean;
 begin
   Result:= false;
@@ -190,7 +191,7 @@ begin
   Result:= true;
 end;
 
-//фильтрует список специальностей ГАКа
+//С„РёР»СЊС‚СЂСѓРµС‚ СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№ Р“РђРљР°
 function TDiplOtdKardController.FilterGAKList(SourceDataSet: PDataSet; ik_fac:Variant; DisplayType: integer): boolean;
 begin
   Result:= false;
@@ -206,7 +207,7 @@ begin
   Result:= true;
 end;
 
-//вывод диплома
+//РІС‹РІРѕРґ РґРёРїР»РѕРјР°
 procedure TDiplOtdKardController.FillTheDiplom(E:OleVariant; count:integer; tempStoredProc:TADOStoredProc; SourceDataSet: PDataSet; IsOther:boolean);
 const strLength = 40;
 var
@@ -221,7 +222,7 @@ var
   RangeBottomBorder: integer;
 
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт диплома студента '+SourceDataSet.FieldByName('Clastname').AsString);
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р­РєСЃРїРѕСЂС‚ РґРёРїР»РѕРјР° СЃС‚СѓРґРµРЅС‚Р° '+SourceDataSet.FieldByName('Clastname').AsString);
   case tempStoredProc.FieldByName('Ik_fac').AsInteger  of
     23:
       begin
@@ -241,9 +242,9 @@ begin
 
   E.sheets.Add(after:=E.sheets.item[count-1]);
 
-  E.Sheets[1].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].EntireColumn.Copy(EmptyParam); // поместим в БО
+  E.Sheets[1].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].EntireColumn.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
   E.Sheets[count].Paste(E.Sheets.item[count].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder), EmptyParam], EmptyParam);
-  E.Sheets[1].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].EntireRow.Copy(EmptyParam); // поместим в БО
+  E.Sheets[1].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder)].EntireRow.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
   E.Sheets[count].Paste(E.Sheets.item[count].Range['A1:'+RangeRightBorder+inttoStr(RangeBottomBorder), EmptyParam], EmptyParam);
 
   E.Sheets[count].PageSetup.LeftMargin:=E.Sheets[1].PageSetup.LeftMargin;
@@ -261,7 +262,7 @@ begin
   end;
 
 
-  //если это колледжи
+  //РµСЃР»Рё СЌС‚Рѕ РєРѕР»Р»РµРґР¶Рё
   if ((tempStoredProc.FieldByName('Ik_fac').AsInteger = 23) or
       (tempStoredProc.FieldByName('Ik_fac').AsInteger = 22) or
       (tempStoredProc.FieldByName('Ik_fac').AsInteger = 21))
@@ -285,7 +286,7 @@ begin
     str:=Inttostr(iDay)+ ' ' +smonth+ ' ' + inttostr(iyear);
     FindRange := E.Cells.Replace(What := '#date#',Replacement:=str);
   end
-  else begin  //если ВУЗ
+  else begin  //РµСЃР»Рё Р’РЈР—
 
     FindRange := E.Cells.Replace(What := '#specname#',Replacement:=tempStoredProc.FieldByName('Cname_spec').AsString);
     FindRange := E.Cells.Replace(What := '#surname#',Replacement:=Ansiuppercase(SourceDataSet.FieldByName('iClastname').AsString));
@@ -297,17 +298,17 @@ begin
     str:=SourceDataSet.FieldByName('Dd_dipl').AsString;
     imonth:=MonthOf(StrToDate(str));
     smonth := GetMonthR(imonth);
-    FindRange := E.Cells.Replace(What := '#месяц#',Replacement:=smonth);
+    FindRange := E.Cells.Replace(What := '#РјРµСЃСЏС†#',Replacement:=smonth);
 
     iyear:=YearOf(StrToDate(str));
-    FindRange := E.Cells.Replace(What := '#год#',Replacement:=Copy(IntToStr(iyear),3,2));//IntToStr(iyear));
+    FindRange := E.Cells.Replace(What := '#РіРѕРґ#',Replacement:=Copy(IntToStr(iyear),3,2));//IntToStr(iyear));
 
     iday:=DayOf(StrToDate(str));
     str:=Inttostr(iDay);
     if (iday < 10) then str := '0' + str;
     E.Sheets[count].Range['BG35'].Value:=str;
 
-    //при замене теряются начальные нули, при вставке напрямую в ячейку все в порядке
+    //РїСЂРё Р·Р°РјРµРЅРµ С‚РµСЂСЏСЋС‚СЃСЏ РЅР°С‡Р°Р»СЊРЅС‹Рµ РЅСѓР»Рё, РїСЂРё РІСЃС‚Р°РІРєРµ РЅР°РїСЂСЏРјСѓСЋ РІ СЏС‡РµР№РєСѓ РІСЃРµ РІ РїРѕСЂСЏРґРєРµ
     if IsOther
     then begin
       E.Sheets[count].Range['S42'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
@@ -319,7 +320,7 @@ begin
     end;
   end;
 
-  //проверка для однофамильцев
+  //РїСЂРѕРІРµСЂРєР° РґР»СЏ РѕРґРЅРѕС„Р°РјРёР»СЊС†РµРІ
   fam := E.Sheets[count-1].name;
 
   if (fam = SourceDataSet.FieldByName('Clastname').AsString) then E.Sheets[count].name:=SourceDataSet.FieldByName('Clastname').AsString+'_'
@@ -327,11 +328,11 @@ begin
 
   E.Sheets[count].Select;
 
-  //заносим данные
-  str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' года';
+  //Р·Р°РЅРѕСЃРёРј РґР°РЅРЅС‹Рµ
+  str:= GetFullDate(tempStoredProc.FieldByName('DateDiplomDelivery').AsDateTime) +' РіРѕРґР°';
   FindRange := E.Cells.Replace(What := '#DateDelivery#',Replacement:=str);
   FindRange := E.Cells.Replace(What := '#fiogak#',Replacement:=tempStoredProc.FieldByName('GakMemberName').AsString);
-  FindRange := E.Cells.Replace(What := '#Category#',Replacement:=tempStoredProc.FieldByName('SpecСategory').AsString);
+  FindRange := E.Cells.Replace(What := '#Category#',Replacement:=tempStoredProc.FieldByName('SpecРЎategory').AsString);
   FindRange := E.Cells.Replace(What := '#qualifShort#',Replacement:=tempStoredProc.FieldByName('QualifShortName').AsString);
   str:= tempStoredProc.FieldByName('Cname_qualif').AsString;
   ParseString(str, str2, strLength);
@@ -387,39 +388,39 @@ begin
 end;
 
 
-//загружает список студентов группы
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє СЃС‚СѓРґРµРЅС‚РѕРІ РіСЂСѓРїРїС‹
 function TDiplOtdKardController.GetDiplomList(SourceDataSet: PDataSet; ik_grup:Variant): boolean;
 begin
   Result:= false;
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Загрузка списка дипломов');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° РґРёРїР»РѕРјРѕРІ');
   TGeneralController.Instance.getDataSetValues(SourceDataSet, 'exec OKADRGetStudForDiplom @ik_grup='+IntToStr(ik_grup), 'Ik_zach', false, NULL);
   Result:= true;
 end;
 
 
-//сохраняет дипломы
+//СЃРѕС…СЂР°РЅСЏРµС‚ РґРёРїР»РѕРјС‹
 procedure TDiplOtdKardController.SaveDiploms(SourceDataSet: PDataSet);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Cохранение данных дипломов');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. CРѕС…СЂР°РЅРµРЅРёРµ РґР°РЅРЅС‹С… РґРёРїР»РѕРјРѕРІ');
   try
     SourceDataSet^.UpdateBatch();
   except
     on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при сохранении! Проверьте правильность введенных данных - регистрационный номер диплома должен состоять не менее чем из 3 цифр.',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё! РџСЂРѕРІРµСЂСЊС‚Рµ РїСЂР°РІРёР»СЊРЅРѕСЃС‚СЊ РІРІРµРґРµРЅРЅС‹С… РґР°РЅРЅС‹С… - СЂРµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Р№ РЅРѕРјРµСЂ РґРёРїР»РѕРјР° РґРѕР»Р¶РµРЅ СЃРѕСЃС‚РѕСЏС‚СЊ РЅРµ РјРµРЅРµРµ С‡РµРј РёР· 3 С†РёС„СЂ.',E);
   end;
   SourceDataSet^.Close;
   SourceDataSet^.Open;
 
 end;
 
-//отменяет изменения дипломов
+//РѕС‚РјРµРЅСЏРµС‚ РёР·РјРµРЅРµРЅРёСЏ РґРёРїР»РѕРјРѕРІ
 procedure TDiplOtdKardController.CancelDiplomUpdates(SourceDataSet: PDataSet);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Отмена действий над списком дипломов');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. РћС‚РјРµРЅР° РґРµР№СЃС‚РІРёР№ РЅР°Рґ СЃРїРёСЃРєРѕРј РґРёРїР»РѕРјРѕРІ');
   SourceDataSet^.CancelBatch;
 end;
 
-//Установка размеров
+//РЈСЃС‚Р°РЅРѕРІРєР° СЂР°Р·РјРµСЂРѕРІ
 procedure TDiplOtdKardController.SetSizes(sh1, sh2:Variant);
 var i:integer;
 begin
@@ -449,17 +450,17 @@ begin
   end;
 end;
 
-function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
+function TDiplOtdKardController.PrintAllDiploms(SourceDataSet: PDataSet; ik_group, ik_spec, ik_fac, year, ik_profile:integer; OldBlank: boolean):integer;
 var
   E, sheet: Variant;
   first, count :integer;
   tempStoredProc:TADOStoredProc;
   path:string;
-  HasAllData: boolean;  //флаг показывает, есть ли хоть один заполненный диплом
+  HasAllData: boolean;  //С„Р»Р°Рі РїРѕРєР°Р·С‹РІР°РµС‚, РµСЃС‚СЊ Р»Рё С…РѕС‚СЊ РѕРґРёРЅ Р·Р°РїРѕР»РЅРµРЅРЅС‹Р№ РґРёРїР»РѕРј
 begin
   Result:=0;
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Экспорт дипломов ');
-  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_spec, ik_fac, ik_profile);
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р­РєСЃРїРѕСЂС‚ РґРёРїР»РѕРјРѕРІ ');
+  tempStoredProc:=OpenOKADRGetGakMemberForExcel(year, ik_group, ik_spec, ik_fac, ik_profile);
   try
     E:= CreateOleObject('Excel.Application');
     try
@@ -491,11 +492,11 @@ begin
 
           try
             HasAllData:= true;
-            FillTheDiplom(E, count, tempStoredProc, SourceDataSet, Pos('2018Vorkuta',path)>0); //показатель нового шаблона (2016));
+            FillTheDiplom(E, count, tempStoredProc, SourceDataSet, Pos('2018Vorkuta',path)>0); //РїРѕРєР°Р·Р°С‚РµР»СЊ РЅРѕРІРѕРіРѕ С€Р°Р±Р»РѕРЅР° (2016));
           except
             on Ex:Exception do begin
             E.Quit;
-            raise EApplicationException.Create('Ошибка при экспорте в Excel',Ex);
+            raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ Excel',Ex);
             end;
           end;
 
@@ -513,7 +514,7 @@ begin
         begin
 
           E.Quit;
-          raise EApplicationException.Create('Нет студентов для выдачи диплома. Проверьте, чтобы были введены регистрационные номера и даты защиты дипломов.');
+          raise EApplicationException.Create('РќРµС‚ СЃС‚СѓРґРµРЅС‚РѕРІ РґР»СЏ РІС‹РґР°С‡Рё РґРёРїР»РѕРјР°. РџСЂРѕРІРµСЂСЊС‚Рµ, С‡С‚РѕР±С‹ Р±С‹Р»Рё РІРІРµРґРµРЅС‹ СЂРµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Рµ РЅРѕРјРµСЂР° Рё РґР°С‚С‹ Р·Р°С‰РёС‚С‹ РґРёРїР»РѕРјРѕРІ.');
         end;
       finally
         SourceDataSet^.EnableControls;
@@ -526,16 +527,16 @@ begin
       tempStoredProc.Free;
     end;
     if (not HasAllData) then
-      Application.MessageBox('Нет студентов для выдачи диплома. Проверьте, чтобы были введены регистрационные номера и даты защиты дипломов!', 'Подсистема "Диплом"', MB_ICONWARNING);
+      Application.MessageBox('РќРµС‚ СЃС‚СѓРґРµРЅС‚РѕРІ РґР»СЏ РІС‹РґР°С‡Рё РґРёРїР»РѕРјР°. РџСЂРѕРІРµСЂСЊС‚Рµ, С‡С‚РѕР±С‹ Р±С‹Р»Рё РІРІРµРґРµРЅС‹ СЂРµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Рµ РЅРѕРјРµСЂР° Рё РґР°С‚С‹ Р·Р°С‰РёС‚С‹ РґРёРїР»РѕРјРѕРІ!', 'РџРѕРґСЃРёСЃС‚РµРјР° "Р”РёРїР»РѕРј"', MB_ICONWARNING);
 end;
 
 
-//*************ПРЕДСЕДАТЕЛЬ ГАК****************
-//загружает список годов
+//*************РџР Р•Р”РЎР•Р”РђРўР•Р›Р¬ Р“РђРљ****************
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РіРѕРґРѕРІ
 function TDiplOtdKardController.GetYearList(cmp: PDBLookupComboboxEh): boolean;
 begin
   Result:= false;
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Загрузка годов сдачи дипломов.');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р—Р°РіСЂСѓР·РєР° РіРѕРґРѕРІ СЃРґР°С‡Рё РґРёРїР»РѕРјРѕРІ.');
   TGeneralController.Instance.InitializeLockupCB(cmp, 'ik_year', 'year_value');
   TGeneralController.Instance.getDataSetValues(@cmp.ListSource.DataSet, 'exec OKADRGetYears', 'ik_year', false, NULL);
   cmp.ListSource.DataSet.Locate('year_value',YearOf(date),[]);
@@ -544,10 +545,10 @@ begin
   Result:= true;
 end;
 
-//загружает список специальностей (для поля просмотра)
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№ (РґР»СЏ РїРѕР»СЏ РїСЂРѕСЃРјРѕС‚СЂР°)
 function TDiplOtdKardController.GetSpecGakList: boolean;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Загрузка списка специальностей для председателей ГАК');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№ РґР»СЏ РїСЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ');
   Result:= false;
   DMOtdKadrDiplom.adoqSpec.Close;
   DMOtdKadrDiplom.adoqSpec.SQL[0]:='SELECT * from [dbo].[OKADRGetEducBranch]('+IntToStr(YearOf(today))+') ORDER BY Cname_spec';
@@ -556,11 +557,11 @@ begin
 end;
 
 
-//загружает список председателей
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РїСЂРµРґСЃРµРґР°С‚РµР»РµР№
 function TDiplOtdKardController.GetGakMemberList(SourceDataSet: PDataSet; ik_year:Variant; DisplayType: integer): boolean;
 begin
   Result:= false;
-  TApplicationController.GetInstance.AddLogEntry('Список председателей ГАК. Загрузка списка председателей.');
+  TApplicationController.GetInstance.AddLogEntry('РЎРїРёСЃРѕРє РїСЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ. Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° РїСЂРµРґСЃРµРґР°С‚РµР»РµР№.');
   with  DMOtdKadrDiplom.adospGakMember do
   begin
     Close;
@@ -574,30 +575,31 @@ begin
   Result:= true;
 end;
 
-//сохраняет ГАК
+//СЃРѕС…СЂР°РЅСЏРµС‚ Р“РђРљ
 procedure TDiplOtdKardController.SaveGAK(SourceDataSet: PDataSet);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Cохранение списка председателей ГАК');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. CРѕС…СЂР°РЅРµРЅРёРµ СЃРїРёСЃРєР° РїСЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ');
   SourceDataSet.UpdateBatch();
   SourceDataSet.Close;
   SourceDataSet.Open;
 end;
 
-//отменяет сохранение ГАК
+//РѕС‚РјРµРЅСЏРµС‚ СЃРѕС…СЂР°РЅРµРЅРёРµ Р“РђРљ
 procedure TDiplOtdKardController.CancelUpdatesGAK(SourceDataSet: PDataSet);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Отмена изменений в списке председателей ГАК');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. РћС‚РјРµРЅР° РёР·РјРµРЅРµРЅРёР№ РІ СЃРїРёСЃРєРµ РїСЂРµРґСЃРµРґР°С‚РµР»РµР№ Р“РђРљ');
   SourceDataSet.CancelBatch;
   SourceDataSet.Close;
   SourceDataSet.Open;
 end;
 
-function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
+function TDiplOtdKardController.OpenOKADRGetGakMemberForExcel(year: Integer; ik_group, ik_spec, ik_fac, ik_profile: Integer):TADOStoredProc;
 begin
   Result := TADOStoredProc.Create(nil);
   Result.Connection := dm.DBConnect;
   Result.ProcedureName := 'OKADRGetGakMemberForExcel;1';
   Result.Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
+  Result.Parameters.CreateParameter('@ik_group', ftInteger, pdInput, 4, ik_group);
   Result.Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 4, ik_spec);
   Result.Parameters.CreateParameter('@year', ftInteger, pdInput, 4, year);
   Result.Parameters.CreateParameter('@ik_fac', ftInteger, pdInput, 4, ik_fac);
@@ -606,29 +608,29 @@ begin
 end;
 
 
-//************КВАЛИФИКАЦИИ***************
-//загрузка квалификаций
+//************РљР’РђР›РР¤РРљРђР¦РР***************
+//Р·Р°РіСЂСѓР·РєР° РєРІР°Р»РёС„РёРєР°С†РёР№
 procedure TDiplOtdKardController.GetQualifications(SourceDataSet: PDataSet);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Загрузка списка квалификаций');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° РєРІР°Р»РёС„РёРєР°С†РёР№');
   SourceDataSet.Close;
   SourceDataSet.Open;
 end;
 
-//сохраняет квалификаций
+//СЃРѕС…СЂР°РЅСЏРµС‚ РєРІР°Р»РёС„РёРєР°С†РёР№
 procedure TDiplOtdKardController.SaveQualif(SourceDataSet: PDataSet);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Cохранение списка квалификаций');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. CРѕС…СЂР°РЅРµРЅРёРµ СЃРїРёСЃРєР° РєРІР°Р»РёС„РёРєР°С†РёР№');
   SourceDataSet.UpdateBatch();
   SourceDataSet.Close;
   SourceDataSet.Open;
 
 end;
 
-//отменяет сохранение квалификаций
+//РѕС‚РјРµРЅСЏРµС‚ СЃРѕС…СЂР°РЅРµРЅРёРµ РєРІР°Р»РёС„РёРєР°С†РёР№
 procedure TDiplOtdKardController.CancelUpdatesQualif(SourceDataSet: PDataSet);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Диплом. Отмена изменений в списке квалификаций');
+  TApplicationController.GetInstance.AddLogEntry('Р”РёРїР»РѕРј. РћС‚РјРµРЅР° РёР·РјРµРЅРµРЅРёР№ РІ СЃРїРёСЃРєРµ РєРІР°Р»РёС„РёРєР°С†РёР№');
   SourceDataSet.CancelBatch;
   SourceDataSet.Close;
   SourceDataSet.Open;

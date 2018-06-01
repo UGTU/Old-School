@@ -115,6 +115,7 @@ type
     StringField1: TStringField;
     StringField2: TStringField;
     StringField3: TStringField;
+    adospGetVipiscaForDiplomIsFast: TBooleanField;
   private
     { Private declarations }
   public
