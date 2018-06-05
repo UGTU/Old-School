@@ -391,10 +391,6 @@ begin
         IsFast := dmDiplom.adospGetVipiscaForDiplomIsFast.AsBoolean;
 
         if IsFast
-            OR (direction = 9)
-            OR ((direction = 2) AND (direction < 5))
-            OR (dmDiplom.adospGetVipiscaForDiplomik_spec_fac.AsInteger = 169)
-            OR (FikGroup = 6244)
         then begin
             Replace('#Доп' + IntToStr(i), 'Пройдено ускоренное обучение по образовательной программе.');
             inc(i);
