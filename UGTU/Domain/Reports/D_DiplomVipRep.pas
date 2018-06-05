@@ -371,7 +371,7 @@ begin
         i := 1;
         if (dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString <> '')
         then begin
-            if (WithZachEd) then str := 'Направленность (профиль) образовательной программы: ' + dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString
+            if (ik_direction <> 2) then str := 'Направленность (профиль) образовательной программы: ' + dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString
             else str:= 'Специализация: '+dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
 
             str1 := StringFormat(str, 95);
