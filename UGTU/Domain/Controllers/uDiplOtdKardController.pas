@@ -599,7 +599,7 @@ begin
   Result.Connection := dm.DBConnect;
   Result.ProcedureName := 'OKADRGetGakMemberForExcel;1';
   Result.Parameters.CreateParameter('@RETURN_VALUE', ftInteger, pdReturnValue, 4, NULL);
-  Result.Parameters.CreateParameter('@ik_group', ftInteger, pdInput, 4, ik_group);
+  //Result.Parameters.CreateParameter('@ik_group', ftInteger, pdInput, 4, ik_group);
   Result.Parameters.CreateParameter('@ik_spec', ftInteger, pdInput, 4, ik_spec);
   Result.Parameters.CreateParameter('@year', ftInteger, pdInput, 4, year);
   Result.Parameters.CreateParameter('@ik_fac', ftInteger, pdInput, 4, ik_fac);
