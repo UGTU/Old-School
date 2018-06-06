@@ -371,8 +371,21 @@ begin
         i := 1;
         if (dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString <> '')
         then begin
-            if (ik_direction <> 2) then str := 'Направленность (профиль) образовательной программы: ' + dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString
-            else str:= 'Специализация: '+dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
+            if (ik_direction <> 2)
+            then begin
+                str := 'Направленность (профиль) образовательной программы: ' + dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
+
+                if (ik_direction in [1, 9, 10])
+                then begin
+                    Replace('#направление#', 'БАКАЛАВРА');
+                    Replace('#подготовка#', 'по направлению подготовки');
+                end;
+            end
+            else begin
+                str:= 'Специализация: ' + dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
+                Replace('#направление#', 'СПЕЦИАЛИСТА');
+                Replace('#подготовка#', 'по специализации');
+            end;
 
             str1 := StringFormat(str, 95);
             Replace('#Доп'+IntToStr(i), str);
