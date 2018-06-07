@@ -384,7 +384,7 @@ begin
             else begin
                 str:= 'Специализация: ' + dmDiplom.adospGetVipiscaForDiplomcName_spclz.AsString;
                 Replace('#направление#', 'СПЕЦИАЛИСТА');
-                Replace('#подготовка#', 'по специализации');
+                Replace('#подготовка#', 'по специальности');
             end;
 
             str1 := StringFormat(str, 95);
@@ -414,10 +414,13 @@ begin
         then begin
             weekCount:= dmDiplom.adospGetVipiscaForDiplomOverVWeekCount.AsInteger;
 
-            if (weekCount mod 10 = 1) and (weekCount <> 11) then str:= 'Часть образовательной программы в объеме ' + IntToStr(weekCount) + ' недели'
-            else str:= 'Часть образовательной программы в объеме '+IntToStr(weekCount)+' недель';
+            str := 'Часть образовательной программы в объеме ' + IntToStr(weekCount);
 
-            str := str + ' освоена в ' + dmDiplom.adospGetVipiscaForDiplomOverVUZName.AsString + '.';
+            if (weekCount mod 10 = 1) then str := str + ' зачетной единицы освоена в '
+            else str := str + ' зачетных единиц освоена в ';
+
+            str := str + dmDiplom.adospGetVipiscaForDiplomOverVUZName.AsString + '.';
+
             str1 := StringFormat(str, 95);
             Replace('#Доп'+IntToStr(i), str);
             inc(i);
