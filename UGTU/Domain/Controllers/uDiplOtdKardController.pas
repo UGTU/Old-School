@@ -316,7 +316,14 @@ begin
     end
     else begin
       E.Sheets[count].Range['T40'].Value:=SourceDataSet.FieldByName('RegNumber').AsString;
-      E.Sheets[count].Range['AZ35'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
+      //E.Sheets[count].Range['AZ35'].Value:=SourceDataSet.FieldByName('VipNumber').AsString;
+      if (Pos('ИНЖЕНЕР', AnsiUpperCase(tempStoredProc.FieldByName('Cname_qualif').AsString)) > 0)
+      then begin
+        E.Sheets[count].Range['BD35'].Value := SourceDataSet.FieldByName('VipNumber').AsString;
+      end
+      else begin
+          E.Sheets[count].Range['AZ35'].Value := SourceDataSet.FieldByName('VipNumber').AsString;
+      end;
     end;
   end;
 
