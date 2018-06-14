@@ -57,13 +57,13 @@ type
     function DoCancel:boolean;override;
   public
     nnrecord:integer;
-    // Текущий год набора
+    // РўРµРєСѓС‰РёР№ РіРѕРґ РЅР°Р±РѕСЂР°
     property year:Integer read FYear write SetYear;
-    // Текущий код специальности набора
+    // РўРµРєСѓС‰РёР№ РєРѕРґ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё РЅР°Р±РѕСЂР°
     property ikSpecfac:Integer read FikSpecfac write FikSpecfac;
-    // Текущий код профиля набора
+    // РўРµРєСѓС‰РёР№ РєРѕРґ РїСЂРѕС„РёР»СЏ РЅР°Р±РѕСЂР°
     property ikProfile: variant read FikProfile write FikProfile;
-    // Текущий код факультета набора
+    // РўРµРєСѓС‰РёР№ РєРѕРґ С„Р°РєСѓР»СЊС‚РµС‚Р° РЅР°Р±РѕСЂР°
     property ikfac:Integer read FikFac write FikFac;
 
     procedure Setikfac(const Value: Integer);
@@ -85,20 +85,20 @@ uses AbiturientBaseProcs, AbiturientNaborProcs, AbiturientFacade,
 
 procedure TfrmNewNabor.sets();
 begin
-  //создание набора
+  //СЃРѕР·РґР°РЅРёРµ РЅР°Р±РѕСЂР°
   if type_dialog=1 then
   begin
     NullData;
     DMAbiturientNabor.adoqSpecfac.SQL.Strings[1]:='('+inttostr(year)+ ', 0)';
     DMAbiturientNabor.adoqProfile.SQL.Strings[1]:='('+inttostr(year)+ ', 0, 0)';
-    Caption:='Добавить набор';
+    Caption:='Р”РѕР±Р°РІРёС‚СЊ РЅР°Р±РѕСЂ';
   end
-    //редактирование набора
+    //СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РЅР°Р±РѕСЂР°
   else
   begin
     DMAbiturientNabor.adoqSpecfac.SQL.Strings[1]:='('+inttostr(year)+', '+ inttostr(ikSpecfac)+')';
     DMAbiturientNabor.adoqProfile.SQL.Strings[1]:='('+inttostr(year)+', '+ inttostr(ikSpecfac)+', '+inttostr(ikProfile)+')';
-    Caption:='Редактировать набор';
+    Caption:='Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ РЅР°Р±РѕСЂ';
   end;
 
 
@@ -262,9 +262,9 @@ end;
 
 function TfrmNewNabor.DoApply: boolean;
 begin
-    //создание набора
+    //СЃРѕР·РґР°РЅРёРµ РЅР°Р±РѕСЂР°
   if type_dialog=1 then Result:= AddData()
-  //редактирование
+  //СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ
   else Result:= EditData();
   
 end;
