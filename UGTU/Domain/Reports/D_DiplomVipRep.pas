@@ -634,7 +634,7 @@ begin
     if (not dmDiplom.adospSelGOSForVipisca.Eof) and (dmDiplom.adospSelGOSForVipisca.FieldByName('ik_vid_zanyat').AsInteger = 56)
     then begin
         //if (WithZachEd) then
-        str := 'Итоговый государственный экзамен';//'Итоговый государственный междисциплинарный экзамен';
+        str := 'итоговый государственный экзамен';//'Итоговый государственный междисциплинарный экзамен';
         SendStringToExcel(str, cur, ActRange);
         cur1 := Selection.Address;
         SelectNextCellHor(cur1,ActRange);
@@ -648,7 +648,7 @@ begin
     end;
 
     //диплом
-    str :=  'Выпускная квалификационная работа';
+    str :=  'выпускная квалификационная работа';
     SendStringToExcel(str, cur, ActRange);
     SelectNextCellVert(cur, ActRange);
     str := dmDiplom.adospGetVipiscaForDiplomcdiplom.AsString;
