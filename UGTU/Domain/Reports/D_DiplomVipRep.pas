@@ -567,12 +567,9 @@ begin
         else str := dmDiplom.adospSelPractForVipisca.FieldByName('DiscName').AsString;
 
         //для ТЛП-14 название практик с срочной буквы
-        if (FikGroup = 6180) AND (str <> 'Практики')
-        then begin
-            str := AnsiLowerCase(str);
-        end;
+        if (FikGroup = 6180) AND (str <> 'Практики') then str := AnsiLowerCase(str);
         //для МЛК-14 название практик с заглавной буквы
-        if (FikGroup = 6178) AND (str <> 'Практики') then str[1] := AnsiUpperCase(Copy(str, 1, 1))[1];
+        if (FikGroup = 6178) AND (str <> 'практики') then str[1] := AnsiUpperCase(Copy(str, 1, 1))[1];
 
         SendStringToExcel(str, cur, ActRange);
         cur1 := Selection.Address;
