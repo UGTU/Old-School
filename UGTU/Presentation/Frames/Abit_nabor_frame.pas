@@ -1,4 +1,4 @@
-unit ABIT_nabor_frame;
+﻿unit ABIT_nabor_frame;
    {#Author tanyav@ist.ugtu.net}
 interface
 
@@ -891,7 +891,7 @@ begin
   if not (FrameObject is TDBNodeRecruitObject)  then
     exit;
 
-  if (MessageBox(Handle, 'При импорте плановых наборов из подсистемы "Нагрузка" будут созданы все наборы, которые заполнил учебный отдел. Для них будут указаны плановые наборы на контракт и бюджет. Продолжать выполнение функции?','ИС "УГТУ"',
+  if (MessageBox(Handle, 'При импорте плановых наборов из "Нагрузка" будут созданы все наборы, которые заполнил учебный отдел. Для них будут указаны плановые наборы на контракт и бюджет. Продолжать выполнение?','ИС "УГТУ"',
           MB_YESNO) = IDYES) then
   begin
     TAbitNaborController.Instance.ImportNabor(year);

@@ -16,99 +16,99 @@ type
   TAbitOtchetsController = class (TObject)
   protected
     constructor CreateInstance;
- //AccessInstance предоставляет доступ к экземпляру контроллера
+ //AccessInstance РїСЂРµРґРѕСЃС‚Р°РІР»СЏРµС‚ РґРѕСЃС‚СѓРї Рє СЌРєР·РµРјРїР»СЏСЂСѓ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
     class function AccessInstance(Request: Integer):
        TAbitOtchetsController;
 
   public
 
     constructor Create;
-  //Instance - возвращает экзепляр данного контроллера
+  //Instance - РІРѕР·РІСЂР°С‰Р°РµС‚ СЌРєР·РµРїР»СЏСЂ РґР°РЅРЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
     class function Instance: TAbitOtchetsController;
-  //ReleaseInstance - уничтожает контроллер
+  //ReleaseInstance - СѓРЅРёС‡С‚РѕР¶Р°РµС‚ РєРѕРЅС‚СЂРѕР»Р»РµСЂ
     class procedure ReleaseInstance;
 
-  //*********САМ КОНТРОЛЛЕР*********
-  //*************ФРЕЙМ ГОД*******************
-  //ExpSpisForEGEToExc экспортирует список для ЕГЭ в Excel
+  //*********РЎРђРњ РљРћРќРўР РћР›Р›Р•Р *********
+  //*************Р¤Р Р•Р™Рњ Р“РћР”*******************
+  //ExpSpisForEGEToExc СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ СЃРїРёСЃРѕРє РґР»СЏ Р•Р“Р­ РІ Excel
   procedure ExpSpisForEGEToExc(year: integer);
 
-  //********ОТЧЕТЫ ПО НАБОРУ**********
+  //********РћРўР§Р•РўР« РџРћ РќРђР‘РћР РЈ**********
   procedure MoveRight(WordAppl: TWordApplication;dir, count, extend: OleVariant);
-  //ExportNaborWord экспортирует данные наборов в Word
+  //ExportNaborWord СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ РґР°РЅРЅС‹Рµ РЅР°Р±РѕСЂРѕРІ РІ Word
   procedure ExportNaborWord(DataSet:TDataSet);
-  //StatToExcel экспортирует статистику по набору в Excel
+  //StatToExcel СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕ РЅР°Р±РѕСЂСѓ РІ Excel
   procedure StatToExcel;
-  //ExamsStatToExcel экспортирует статистику по вступ экзаменам в Excel
+  //ExamsStatToExcel СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕ РІСЃС‚СѓРї СЌРєР·Р°РјРµРЅР°Рј РІ Excel
   procedure ExamsStatToExcel(year: integer; ik_fac, ik_spec_fac: Variant; OnlyZachisl: boolean);
 
-  //********************Отчеты по расписанию вступительных экзаменов************************
-  //ExpExamSpisAbitsToExc выгружает список абитуриентов на экзамен в Excel
+  //********************РћС‚С‡РµС‚С‹ РїРѕ СЂР°СЃРїРёСЃР°РЅРёСЋ РІСЃС‚СѓРїРёС‚РµР»СЊРЅС‹С… СЌРєР·Р°РјРµРЅРѕРІ************************
+  //ExpExamSpisAbitsToExc РІС‹РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° СЌРєР·Р°РјРµРЅ РІ Excel
   procedure ExpExamSpisAbitsToExc;
-  //ExpExamVedsToExc выгружает экзаменационные ведомости  вст. экзамена в Excel (для каждой специальности своя)
+  //ExpExamVedsToExc РІС‹РіСЂСѓР¶Р°РµС‚ СЌРєР·Р°РјРµРЅР°С†РёРѕРЅРЅС‹Рµ РІРµРґРѕРјРѕСЃС‚Рё  РІСЃС‚. СЌРєР·Р°РјРµРЅР° РІ Excel (РґР»СЏ РєР°Р¶РґРѕР№ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё СЃРІРѕСЏ)
   procedure ExpExamVedsToExc;
-  //ExpExamResultsToExc выгружает результаты экзамена в Excel
+  //ExpExamResultsToExc РІС‹РіСЂСѓР¶Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚С‹ СЌРєР·Р°РјРµРЅР° РІ Excel
   procedure ExpExamResultsToExc;
 
-  //**********Общие итоги (журналы)**************
-  //PrintObColvo вспомогательная
+  //**********РћР±С‰РёРµ РёС‚РѕРіРё (Р¶СѓСЂРЅР°Р»С‹)**************
+  //PrintObColvo РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ
   procedure PrintObColvo(E:Variant;var i:integer);
-  //ExportAbitToZhurnal выводит одну запись в журнал (1 абитуриента)
+  //ExportAbitToZhurnal РІС‹РІРѕРґРёС‚ РѕРґРЅСѓ Р·Р°РїРёСЃСЊ РІ Р¶СѓСЂРЅР°Р» (1 Р°Р±РёС‚СѓСЂРёРµРЅС‚Р°)
   procedure ExportAbitToZhurnal(E:Variant;var i:integer);
-  //OpenAllStat открывает все процедуры с данными для журнала
+  //OpenAllStat РѕС‚РєСЂС‹РІР°РµС‚ РІСЃРµ РїСЂРѕС†РµРґСѓСЂС‹ СЃ РґР°РЅРЅС‹РјРё РґР»СЏ Р¶СѓСЂРЅР°Р»Р°
   function OpenAllStat(year,ik_spec_fac,dd_pod_zayav:Variant):boolean;
-  //ExportAllStatToExcel выводит итоги (всю статистику за год) в Excel
+  //ExportAllStatToExcel РІС‹РІРѕРґРёС‚ РёС‚РѕРіРё (РІСЃСЋ СЃС‚Р°С‚РёСЃС‚РёРєСѓ Р·Р° РіРѕРґ) РІ Excel
   function ExportAllStatToExcel(year:integer; filter:string):boolean;
-  //PrintMag Непосредственно экспорт журнала
+  //PrintMag РќРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ СЌРєСЃРїРѕСЂС‚ Р¶СѓСЂРЅР°Р»Р°
   procedure PrintMag(ik_spec_fac:integer; E:Variant; ZhDate:string);
-  //ExportDaysMagToExcel Экспорт журнала за 1 день и по определенной специальности
+  //ExportDaysMagToExcel Р­РєСЃРїРѕСЂС‚ Р¶СѓСЂРЅР°Р»Р° Р·Р° 1 РґРµРЅСЊ Рё РїРѕ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
   function ExportDaysMagToExcel(ik_spec_fac:Variant; zurDate:TDateTime): boolean;
-  //SetSizes задает размеры ячеек листа для журнала
-  //принимает лист Excel
+  //SetSizes Р·Р°РґР°РµС‚ СЂР°Р·РјРµСЂС‹ СЏС‡РµРµРє Р»РёСЃС‚Р° РґР»СЏ Р¶СѓСЂРЅР°Р»Р°
+  //РїСЂРёРЅРёРјР°РµС‚ Р»РёСЃС‚ Excel
   procedure SetSizes(sh:Variant);
-  //ExportAllZhurnals Экспорт всех доступных журналов
+  //ExportAllZhurnals Р­РєСЃРїРѕСЂС‚ РІСЃРµС… РґРѕСЃС‚СѓРїРЅС‹С… Р¶СѓСЂРЅР°Р»РѕРІ
   function ExportAllZhurnals(zurDate:TDateTime): boolean;
-  //ExportItogiPostupl Экспорт итогов поступления (списки)
+  //ExportItogiPostupl Р­РєСЃРїРѕСЂС‚ РёС‚РѕРіРѕРІ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ (СЃРїРёСЃРєРё)
   procedure ExportItogiPostupl(year:variant);
-  //OpenDataForItogi открывает все процедуры с данными для печати итогов
+  //OpenDataForItogi РѕС‚РєСЂС‹РІР°РµС‚ РІСЃРµ РїСЂРѕС†РµРґСѓСЂС‹ СЃ РґР°РЅРЅС‹РјРё РґР»СЏ РїРµС‡Р°С‚Рё РёС‚РѕРіРѕРІ
   function OpenDataForItogi:boolean;
-  //GetAbitListForItogi открывает список абитуриентов для печати итогов
+  //GetAbitListForItogi РѕС‚РєСЂС‹РІР°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РґР»СЏ РїРµС‡Р°С‚Рё РёС‚РѕРіРѕРІ
   function GetAbitListForItogi(year,ik_spec_fac:Variant):boolean;
-  //PrintItogiPost Непосредственно печать итогов по 1 специальности
+  //PrintItogiPost РќРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РїРµС‡Р°С‚СЊ РёС‚РѕРіРѕРІ РїРѕ 1 СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
   procedure PrintItogiPost(ik_spec_fac:integer; E:Variant);
   //SetItogiSizes
   procedure SetItogiSizes(sh, sh1:Variant);
-  //ExportItogiPostuplForSpec Экспорт итогов поступления (списки)  для специальности
+  //ExportItogiPostuplForSpec Р­РєСЃРїРѕСЂС‚ РёС‚РѕРіРѕРІ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ (СЃРїРёСЃРєРё)  РґР»СЏ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
   procedure ExportItogiPostuplForSpec(year, ik_spec_fac:variant);
 
-  //ExportAbitListForDopSpecToExcel экспорт списка абитуриентов на дополнительную специальность в Excel
+  //ExportAbitListForDopSpecToExcel СЌРєСЃРїРѕСЂС‚ СЃРїРёСЃРєР° Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅСѓСЋ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ РІ Excel
   procedure ExportAbitListForDopSpecToExcel(nnyear:integer );
-  //OpenAbitListForDopSpec открывает список абитуриентов для доп. специальности
+  //OpenAbitListForDopSpec РѕС‚РєСЂС‹РІР°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РґР»СЏ РґРѕРї. СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
   function OpenAbitListForDopSpec(nnyear:integer):TADOStoredProc;
 
-  //****************Экспорт заявления в Excel*******************
-  //открывает список абитуриентов для доп. специальности
+  //****************Р­РєСЃРїРѕСЂС‚ Р·Р°СЏРІР»РµРЅРёСЏ РІ Excel*******************
+  //РѕС‚РєСЂС‹РІР°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РґР»СЏ РґРѕРї. СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
   procedure ExportZayavl(NN_abit:integer);
-  //экспортируем данные в заявление
+  //СЌРєСЃРїРѕСЂС‚РёСЂСѓРµРј РґР°РЅРЅС‹Рµ РІ Р·Р°СЏРІР»РµРЅРёРµ
   procedure FillTheZayavl(E:OleVariant);
 
-  //загрузка данных для экспорта заявления на карточку карточки
+  //Р·Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РґР»СЏ СЌРєСЃРїРѕСЂС‚Р° Р·Р°СЏРІР»РµРЅРёСЏ РЅР° РєР°СЂС‚РѕС‡РєСѓ РєР°СЂС‚РѕС‡РєРё
   function GetAbitDataForGazpromZayavl(NNAbit:integer):TADOStoredProc;
-  //Экспорт заявления на карточку в Газпром
+  //Р­РєСЃРїРѕСЂС‚ Р·Р°СЏРІР»РµРЅРёСЏ РЅР° РєР°СЂС‚РѕС‡РєСѓ РІ Р“Р°Р·РїСЂРѕРј
   procedure GazpromBankStatementToWord(NNAbit: integer);
-  //экспорт отчета по предварительному зачислению
+  //СЌРєСЃРїРѕСЂС‚ РѕС‚С‡РµС‚Р° РїРѕ РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕРјСѓ Р·Р°С‡РёСЃР»РµРЅРёСЋ
   procedure ExportPredvSpisok(NNyear:integer);
 
-  //экспорт завления на зачисление
+  //СЌРєСЃРїРѕСЂС‚ Р·Р°РІР»РµРЅРёСЏ РЅР° Р·Р°С‡РёСЃР»РµРЅРёРµ
   procedure ExportEnrollAgreement(NN_abit:integer);
 
-  // ExportProtokolToExcel экспорт протокола о рассмотрении в Excel
+  // ExportProtokolToExcel СЌРєСЃРїРѕСЂС‚ РїСЂРѕС‚РѕРєРѕР»Р° Рѕ СЂР°СЃСЃРјРѕС‚СЂРµРЅРёРё РІ Excel
     procedure ExportProtokolToExcel(year: integer);
 end;
 
 implementation
 var
-//FAbitRaspisanieControllerInstance - экземпляр контроллера
+//FAbitRaspisanieControllerInstance - СЌРєР·РµРјРїР»СЏСЂ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°
   FAbitOtchetsControllerInstance: TAbitOtchetsController = nil;
 constructor TAbitOtchetsController.CreateInstance;
 begin
@@ -119,7 +119,7 @@ end;
 constructor TAbitOtchetsController.Create;
 begin
   inherited Create;
-  raise EApplicationException.CreateFmt('Доступ к классу %s можно получить только через поле Instance!', [ClassName]);
+  raise EApplicationException.CreateFmt('Р”РѕСЃС‚СѓРї Рє РєР»Р°СЃСЃСѓ %s РјРѕР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ С‚РѕР»СЊРєРѕ С‡РµСЂРµР· РїРѕР»Рµ Instance!', [ClassName]);
 end;
 
 
@@ -135,7 +135,7 @@ begin
             FAbitOtchetsControllerInstance.Free;
             FAbitOtchetsControllerInstance:= nil;
           end;
-    else raise EApplicationException.Create('Ошибка в программе!',Exception.CreateFmt('Неизвестное значение параметра %d в методе AccessInstance контроллера TAbitOtchetsController', [Request]));
+    else raise EApplicationException.Create('РћС€РёР±РєР° РІ РїСЂРѕРіСЂР°РјРјРµ!',Exception.CreateFmt('РќРµРёР·РІРµСЃС‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° %d РІ РјРµС‚РѕРґРµ AccessInstance РєРѕРЅС‚СЂРѕР»Р»РµСЂР° TAbitOtchetsController', [Request]));
   end;  Result := FAbitOtchetsControllerInstance;
 end;
 
@@ -150,10 +150,10 @@ begin
    AccessInstance(2);
 end;
 
-//*********САМ КОНТРОЛЛЕР*********
+//*********РЎРђРњ РљРћРќРўР РћР›Р›Р•Р *********
 
-//*************ФРЕЙМ ГОД*******************
-//ExpSpisForEGEToExc экспортирует список для ЕГЭ в Excel
+//*************Р¤Р Р•Р™Рњ Р“РћР”*******************
+//ExpSpisForEGEToExc СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ СЃРїРёСЃРѕРє РґР»СЏ Р•Р“Р­ РІ Excel
 procedure TAbitOtchetsController.ExpSpisForEGEToExc(year: integer);
 var i,j:integer;
       E:Variant;
@@ -171,27 +171,27 @@ begin
 		  E.DisplayAlerts:= false;
 		  E.Visible := false;
 		  E.Sheets[1].Select;
-		  //шапка
-		  i:=1; //бегунокu
+		  //С€Р°РїРєР°
+		  i:=1; //Р±РµРіСѓРЅРѕРєu
 		  j:=1;
-		  E.cells[i,j]:='Фамилия';   inc(j);
-		  E.cells[i,j]:='Имя'; inc(j);
-		  E.cells[i,j]:='Отчество'; inc(j);
-		  E.cells[i,j]:='Серия документа'; inc(j);
-		  E.cells[i,j]:='Номер документа'; inc(j);
-		  E.cells[i,j]:='Тип документа (в соответствии со справочником)'; inc(j);
-		  E.cells[i,j]:='Пол (М/Ж)'; inc(j);
-		  E.cells[i,j]:='Рус'; inc(j);
-		  E.cells[i,j]:='Мат'; inc(j);
-		  E.cells[i,j]:='Физ'; inc(j);
-		  E.cells[i,j]:='Хим'; inc(j);
-		  E.cells[i,j]:='Био'; inc(j);
-		  E.cells[i,j]:='Ист'; inc(j);
-		  E.cells[i,j]:='Инф'; inc(j);
-		  E.cells[i,j]:='Общ'; inc(j);
-		  E.cells[i,j]:='Лит'; inc(j);
-		  E.cells[i,j]:='Дата рождения'; inc(j);
-		  E.cells[i,j]:='Номер документа об образовании';
+		  E.cells[i,j]:='Р¤Р°РјРёР»РёСЏ';   inc(j);
+		  E.cells[i,j]:='РРјСЏ'; inc(j);
+		  E.cells[i,j]:='РћС‚С‡РµСЃС‚РІРѕ'; inc(j);
+		  E.cells[i,j]:='РЎРµСЂРёСЏ РґРѕРєСѓРјРµРЅС‚Р°'; inc(j);
+		  E.cells[i,j]:='РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р°'; inc(j);
+		  E.cells[i,j]:='РўРёРї РґРѕРєСѓРјРµРЅС‚Р° (РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃРѕ СЃРїСЂР°РІРѕС‡РЅРёРєРѕРј)'; inc(j);
+		  E.cells[i,j]:='РџРѕР» (Рњ/Р–)'; inc(j);
+		  E.cells[i,j]:='Р СѓСЃ'; inc(j);
+		  E.cells[i,j]:='РњР°С‚'; inc(j);
+		  E.cells[i,j]:='Р¤РёР·'; inc(j);
+		  E.cells[i,j]:='РҐРёРј'; inc(j);
+		  E.cells[i,j]:='Р‘РёРѕ'; inc(j);
+		  E.cells[i,j]:='РСЃС‚'; inc(j);
+		  E.cells[i,j]:='РРЅС„'; inc(j);
+		  E.cells[i,j]:='РћР±С‰'; inc(j);
+		  E.cells[i,j]:='Р›РёС‚'; inc(j);
+		  E.cells[i,j]:='Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ'; inc(j);
+		  E.cells[i,j]:='РќРѕРјРµСЂ РґРѕРєСѓРјРµРЅС‚Р° РѕР± РѕР±СЂР°Р·РѕРІР°РЅРёРё';
 
 		  E.Range['A1'].ColumnWidth:=12;
 		  E.Range['B2'].ColumnWidth:=10;
@@ -208,7 +208,7 @@ begin
 		  E.range['A1:R1'].HorizontalAlignment:=-4108;
 		  E.range['A1:R1'].VerticalAlignment:=-4108;
 
-		  //вывод данных
+		  //РІС‹РІРѕРґ РґР°РЅРЅС‹С…
 		  dm.adotEgeOtchet.First;
 		  while not dm.adotEgeOtchet.Eof do
 		  begin
@@ -221,8 +221,8 @@ begin
 			E.cells[i,j]:=dm.adotEgeOtchetNp_number.AsString; inc(j);
 			E.cells[i,j]:=1; inc(j);
 			if  dm.adotEgeOtchetlSex.Value then
-				E.cells[i,j]:='М'
-			else E.cells[i,j]:='Ж';  inc(j);
+				E.cells[i,j]:='Рњ'
+			else E.cells[i,j]:='Р–';  inc(j);
 			E.cells[i,j]:=dm.adotEgeOtchetRuss.AsString; inc(j);
 			E.cells[i,j]:=dm.adotEgeOtchetMath.AsString; inc(j);
 			E.cells[i,j]:=dm.adotEgeOtchetPhis.AsString; inc(j);
@@ -238,16 +238,16 @@ begin
 			dm.adotEgeOtchet.Next;
 		  end;
 		  E.StandardFontSize:=9;
-		  E.ActiveSheet.PageSetup.Orientation:=2; //альбомная ориентация
+		  E.ActiveSheet.PageSetup.Orientation:=2; //Р°Р»СЊР±РѕРјРЅР°СЏ РѕСЂРёРµРЅС‚Р°С†РёСЏ
 
-		 //подсчет суммы
+		 //РїРѕРґСЃС‡РµС‚ СЃСѓРјРјС‹
 		 if i>2 then
 			formula:='=H2';
 		 for j := 3 to i do
 			 formula:=formula+'+H'+IntToStr(j);
 		 inc(i);
 		 E.range['H'+inttostr(i)+':P'+inttostr(i)].formula:=formula;
-		 E.cells[i,1]:= '  ИТОГО';
+		 E.cells[i,1]:= '  РРўРћР“Рћ';
 		 E.range['A'+inttostr(i)+':Z'+inttostr(i)].font.Bold:=true;
 		  E.range['F2:Q'+IntToStr(i)].HorizontalAlignment:=-4108;
 		  E.Range['A1:R'+IntToStr(i)].Borders.Weight:=2;
@@ -258,7 +258,7 @@ begin
       on Ex:Exception do
       begin
         E.Quit;
-        raise EApplicationException.Create('Ошибка при экспорте в Excel',Ex);
+        raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ Excel',Ex);
       end;
     end;
 
@@ -267,20 +267,20 @@ begin
   end;
 end;
 
-//********ОТЧЕТЫ ПО НАБОРУ**********
+//********РћРўР§Р•РўР« РџРћ РќРђР‘РћР РЈ**********
 procedure TAbitOtchetsController.MoveRight(WordAppl: TWordApplication;dir, count, extend: OleVariant);
 begin
   WordAppl.Selection.MoveRight(dir,count,extend);
 end;
 
-//экспортирует данные наборов в Word
+//СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ РґР°РЅРЅС‹Рµ РЅР°Р±РѕСЂРѕРІ РІ Word
 procedure TAbitOtchetsController.ExportNaborWord(DataSet:TDataSet);
 var j:integer;
     Doc:_document;
     Tab:Table;
     WordApplication1: TWordApplication;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Экспорт в Word списка наборов.');
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р­РєСЃРїРѕСЂС‚ РІ Word СЃРїРёСЃРєР° РЅР°Р±РѕСЂРѕРІ.');
 
   DataSet.DisableControls;
   try
@@ -292,15 +292,15 @@ begin
 			  WordApplication1.Visible:=false;
 			  Doc.Tables.Add(Doc.Range(EmptyParam,EmptyParam),DataSet.RecordCount-2,5,EmptyParam,EmptyParam);
 			  Tab:=Doc.Tables.Item(1);
-			  WordApplication1.Selection.TypeText('Факультет');
+			  WordApplication1.Selection.TypeText('Р¤Р°РєСѓР»СЊС‚РµС‚');
 			  MoveRight(WordApplication1,wdCell,1,0);
-			  WordApplication1.Selection.TypeText('Специальность');
+			  WordApplication1.Selection.TypeText('РЎРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ');
 			  MoveRight(WordApplication1,wdCell,1,0);
-		 	  WordApplication1.Selection.TypeText('Бюджет (план /факт/ первичных)');
+		 	  WordApplication1.Selection.TypeText('Р‘СЋРґР¶РµС‚ (РїР»Р°РЅ /С„Р°РєС‚/ РїРµСЂРІРёС‡РЅС‹С…)');
 			  MoveRight(WordApplication1,wdCell,1,0);
-		 	  WordApplication1.Selection.TypeText('ЦКП (план /факт/ первичных)');
+		 	  WordApplication1.Selection.TypeText('Р¦РљРџ (РїР»Р°РЅ /С„Р°РєС‚/ РїРµСЂРІРёС‡РЅС‹С…)');
 			  MoveRight(WordApplication1,wdCell,1,0);
-		 	  WordApplication1.Selection.TypeText('Контракт (план /факт/ первичных)');
+		 	  WordApplication1.Selection.TypeText('РљРѕРЅС‚СЂР°РєС‚ (РїР»Р°РЅ /С„Р°РєС‚/ РїРµСЂРІРёС‡РЅС‹С…)');
 			 //MoveRight(WordApplication1,wdCell,1,0);
 
 			  DataSet.First;
@@ -320,7 +320,7 @@ begin
         on Ex:Exception do
         begin
           WordApplication1.Quit;
-          raise EApplicationException.Create('Ошибка при экспорте в MS Word',Ex);
+          raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ MS Word',Ex);
         end;
 			 //WordApplication1.Disconnect;
 		  end;
@@ -332,19 +332,19 @@ begin
    end;
 end;
 
-//экспортирует статистику по набору в Excel
+//СЌРєСЃРїРѕСЂС‚РёСЂСѓРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕ РЅР°Р±РѕСЂСѓ РІ Excel
 procedure TAbitOtchetsController.StatToExcel;
 var
-WorkBk : _WorkBook; //  определяем WorkBook
-WorkSheet : _WorkSheet; //  определяем WorkSheet
+WorkBk : _WorkBook; //  РѕРїСЂРµРґРµР»СЏРµРј WorkBook
+WorkSheet : _WorkSheet; //  РѕРїСЂРµРґРµР»СЏРµРј WorkSheet
 I, J, R, C : Integer;
-realCount: integer;    //кол-во действительных заявлений
-mainCount: integer;    //кол-во первичных заявлений
-abitCount: array [1..3] of integer;  //массив кол-ва заявлений по категориям зачислений
+realCount: integer;    //РєРѕР»-РІРѕ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… Р·Р°СЏРІР»РµРЅРёР№
+mainCount: integer;    //РєРѕР»-РІРѕ РїРµСЂРІРёС‡РЅС‹С… Р·Р°СЏРІР»РµРЅРёР№
+abitCount: array [1..3] of integer;  //РјР°СЃСЃРёРІ РєРѕР»-РІР° Р·Р°СЏРІР»РµРЅРёР№ РїРѕ РєР°С‚РµРіРѕСЂРёСЏРј Р·Р°С‡РёСЃР»РµРЅРёР№
 TabGrid : Variant;
 XLApp: TExcelApplication;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Экспорт общего списка абитуриентов в Excel');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ РѕР±С‰РµРіРѕ СЃРїРёСЃРєР° Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РІ Excel');
   with DMAbiturientNabor.adospAbitGetPostupStatistika do
   begin
     Active:=true;
@@ -354,18 +354,18 @@ begin
       C :=12;
       TabGrid := VarArrayCreate([0,(R-1),0,(C - 1)],VarOleStr);
 
-      TabGrid[0,0]:='Регистрационный номер';
-      TabGrid[0,1]:='ФИО';
-      TabGrid[0,2]:='Дата подачи заявления';
-      TabGrid[0,3]:='Факультет';
-      TabGrid[0,4]:='Специальность';
-      TabGrid[0,5]:='Категория зачисления';
-      TabGrid[0,6]:='Медаль';
-      TabGrid[0,7]:='Состояние поступления';
-      TabGrid[0,8]:='Сумма баллов';
-      TabGrid[0,9]:='Средний балл';
-      TabGrid[0,10]:='Заявление первично';
-      TabGrid[0,11]:='Заявление действительно';
+      TabGrid[0,0]:='Р РµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Р№ РЅРѕРјРµСЂ';
+      TabGrid[0,1]:='Р¤РРћ';
+      TabGrid[0,2]:='Р”Р°С‚Р° РїРѕРґР°С‡Рё Р·Р°СЏРІР»РµРЅРёСЏ';
+      TabGrid[0,3]:='Р¤Р°РєСѓР»СЊС‚РµС‚';
+      TabGrid[0,4]:='РЎРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ';
+      TabGrid[0,5]:='РљР°С‚РµРіРѕСЂРёСЏ Р·Р°С‡РёСЃР»РµРЅРёСЏ';
+      TabGrid[0,6]:='РњРµРґР°Р»СЊ';
+      TabGrid[0,7]:='РЎРѕСЃС‚РѕСЏРЅРёРµ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ';
+      TabGrid[0,8]:='РЎСѓРјРјР° Р±Р°Р»Р»РѕРІ';
+      TabGrid[0,9]:='РЎСЂРµРґРЅРёР№ Р±Р°Р»Р»';
+      TabGrid[0,10]:='Р—Р°СЏРІР»РµРЅРёРµ РїРµСЂРІРёС‡РЅРѕ';
+      TabGrid[0,11]:='Р—Р°СЏРІР»РµРЅРёРµ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ';
 
       for I := 1 to 3 do
         abitCount[i]:=0;
@@ -387,22 +387,22 @@ begin
         TabGrid[i,j]:=FieldByName('sredBall').AsString; inc(j);
         if FieldByName('IsMain').AsBoolean then
         begin
-           TabGrid[i,j]:='Да';
+           TabGrid[i,j]:='Р”Р°';
            if FieldByName('ik_type_zach').AsInteger<>3 then
               inc(mainCount);
         end
         else
-           TabGrid[i,j]:='Нет';
+           TabGrid[i,j]:='РќРµС‚';
 
         inc(j);
         if FieldByName('Realy_postup').AsBoolean then
         begin
-           TabGrid[i,j]:='Да';
+           TabGrid[i,j]:='Р”Р°';
            if FieldByName('ik_type_zach').AsInteger<>3 then
               inc(realCount);
         end
         else
-           TabGrid[i,j]:='Нет';
+           TabGrid[i,j]:='РќРµС‚';
 
         if (FieldByName('ik_type_zach').AsInteger>0)
           and (FieldByName('ik_type_zach').AsInteger<length(abitCount)) then
@@ -411,12 +411,12 @@ begin
         Next;
       end;
 
-      //вывод итоговых данных по набору
-      TabGrid[r-1,1]:= 'Всего: '+IntToStr(abitCount[1])+' текущих заявлений, '
-        +IntToStr(abitCount[2])+' зачислено, из них первичных '
+      //РІС‹РІРѕРґ РёС‚РѕРіРѕРІС‹С… РґР°РЅРЅС‹С… РїРѕ РЅР°Р±РѕСЂСѓ
+      TabGrid[r-1,1]:= 'Р’СЃРµРіРѕ: '+IntToStr(abitCount[1])+' С‚РµРєСѓС‰РёС… Р·Р°СЏРІР»РµРЅРёР№, '
+        +IntToStr(abitCount[2])+' Р·Р°С‡РёСЃР»РµРЅРѕ, РёР· РЅРёС… РїРµСЂРІРёС‡РЅС‹С… '
         +IntToStr(mainCount)
-        +', действительных '+IntToStr(realCount)+' заявлений, '+IntToStr(abitCount[3])+
-        ' забрали документы';
+        +', РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… '+IntToStr(realCount)+' Р·Р°СЏРІР»РµРЅРёР№, '+IntToStr(abitCount[3])+
+        ' Р·Р°Р±СЂР°Р»Рё РґРѕРєСѓРјРµРЅС‚С‹';
     finally
       EnableControls;
     end;
@@ -425,19 +425,19 @@ begin
   XLApp:= TExcelApplication.Create(nil);
   try
     try
-			 XLApp.Connect; // Соединяемся с сервером TExcelApplication
-			 XLApp.WorkBooks.Add(xlWBatWorkSheet,0);  // Добавляем WorkBooks в ExcelApplication
-			 WorkBk := XLApp.WorkBooks.Item[XLApp.WorkBooks.Count];  // Выбираем последнюю (добавленную) WorkBook
-			 WorkSheet := WorkBk.WorkSheets.Get_Item(1) as _WorkSheet; // Определяем первый WorkSheet
+			 XLApp.Connect; // РЎРѕРµРґРёРЅСЏРµРјСЃСЏ СЃ СЃРµСЂРІРµСЂРѕРј TExcelApplication
+			 XLApp.WorkBooks.Add(xlWBatWorkSheet,0);  // Р”РѕР±Р°РІР»СЏРµРј WorkBooks РІ ExcelApplication
+			 WorkBk := XLApp.WorkBooks.Item[XLApp.WorkBooks.Count];  // Р’С‹Р±РёСЂР°РµРј РїРѕСЃР»РµРґРЅСЋСЋ (РґРѕР±Р°РІР»РµРЅРЅСѓСЋ) WorkBook
+			 WorkSheet := WorkBk.WorkSheets.Get_Item(1) as _WorkSheet; // РћРїСЂРµРґРµР»СЏРµРј РїРµСЂРІС‹Р№ WorkSheet
 
-			 Worksheet.Range['A1',Worksheet.Cells.Item[R,C]].Formula := TabGrid; // Сопоставляем Delphi массив-матрицу с матрицей в WorkSheet
+			 Worksheet.Range['A1',Worksheet.Cells.Item[R,C]].Formula := TabGrid; // РЎРѕРїРѕСЃС‚Р°РІР»СЏРµРј Delphi РјР°СЃСЃРёРІ-РјР°С‚СЂРёС†Сѓ СЃ РјР°С‚СЂРёС†РµР№ РІ WorkSheet
 
-			 WorkSheet.Name := 'Отчет'; // Заполняем свойства WorkSheet
+			 WorkSheet.Name := 'РћС‚С‡РµС‚'; // Р—Р°РїРѕР»РЅСЏРµРј СЃРІРѕР№СЃС‚РІР° WorkSheet
 			 WorkSheet.Columns.AutoFit;
 			 Worksheet.Range[Worksheet.Cells.Item[R,1],Worksheet.Cells.Item[R,C]].Font.Bold:=true;
 			 Worksheet.Range[Worksheet.Cells.Item[R,1],Worksheet.Cells.Item[R,C]].Font.Italic:=true;
 
-			 //заливка цветом нулевой строки и столбца
+			 //Р·Р°Р»РёРІРєР° С†РІРµС‚РѕРј РЅСѓР»РµРІРѕР№ СЃС‚СЂРѕРєРё Рё СЃС‚РѕР»Р±С†Р°
 			 Worksheet.Range['A1',Worksheet.Cells.Item[1,C]].Interior.ColorIndex:=15;
 			 Worksheet.Range['A1',Worksheet.Cells.Item[1,C]].Interior.Pattern:=xlSolid;
 			 Worksheet.Range['A1',Worksheet.Cells.Item[1,C]].Interior.PatternColorIndex:=xlAutomatic;
@@ -446,7 +446,7 @@ begin
 			 Worksheet.Range['A1',Worksheet.Cells.Item[R,1]].Interior.Pattern:=xlSolid;
 			 Worksheet.Range['A1',Worksheet.Cells.Item[R,1]].Interior.PatternColorIndex:=xlAutomatic;
 
-			 //установить внутренние и внешние границы диапозона
+			 //СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РІРЅСѓС‚СЂРµРЅРЅРёРµ Рё РІРЅРµС€РЅРёРµ РіСЂР°РЅРёС†С‹ РґРёР°РїРѕР·РѕРЅР°
 			 Worksheet.Range['A1',Worksheet.Cells.Item[R,1]].Borders[xlDiagonalDown].LineStyle:=xlNone;
 			 Worksheet.Range['A1',Worksheet.Cells.Item[R,1]].Borders[xlDiagonalUp].LineStyle:=xlNone;
 
@@ -474,37 +474,37 @@ begin
 			 Worksheet.Range['A1',Worksheet.Cells.Item[R,C]].Borders[xlInsideHorizontal].Weight:=xlThin;
 			 Worksheet.Range['A1',Worksheet.Cells.Item[R,C]].Borders[xlInsideHorizontal].ColorIndex:=xlAutomatic;
 
-			 XLApp.Visible[0] := True; // Показываем Excel
+			 XLApp.Visible[0] := True; // РџРѕРєР°Р·С‹РІР°РµРј Excel
     except
       on Ex:Exception do
       begin
         XLApp.Quit;
-        raise EApplicationException.Create('Ошибка при экспорте в Excel',Ex);
+        raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ Excel',Ex);
       end;
     end;
 
   finally
     //XLApp.Free;
   end;
-    //XLApp.Disconnect; // Разрываем связь с сервером
+    //XLApp.Disconnect; // Р Р°Р·СЂС‹РІР°РµРј СЃРІСЏР·СЊ СЃ СЃРµСЂРІРµСЂРѕРј
     TabGrid := Unassigned; // Unassign the Delphi Variant Matrix
 end;
 
 
 
-//***************ОТЧЕТЫ ПО РАСПИСАНИЮ ВСТУПИТЕЛЬНЫХ ЭКЗАМЕНОВ*******************
+//***************РћРўР§Р•РўР« РџРћ Р РђРЎРџРРЎРђРќРР® Р’РЎРўРЈРџРРўР•Р›Р¬РќР«РҐ Р­РљР—РђРњР•РќРћР’*******************
 
-//ExpExamSpisAbitsToExc выгружает список абитуриентов на экзамен в Excel
+//ExpExamSpisAbitsToExc РІС‹РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° СЌРєР·Р°РјРµРЅ РІ Excel
 procedure TAbitOtchetsController.ExpExamSpisAbitsToExc;
-const EndCopyRowNumber = 4; //номер строки по которую копировать
-    firstPageNumber = 1;    //номер первой страницы отчета
+const EndCopyRowNumber = 4; //РЅРѕРјРµСЂ СЃС‚СЂРѕРєРё РїРѕ РєРѕС‚РѕСЂСѓСЋ РєРѕРїРёСЂРѕРІР°С‚СЊ
+    firstPageNumber = 1;    //РЅРѕРјРµСЂ РїРµСЂРІРѕР№ СЃС‚СЂР°РЅРёС†С‹ РѕС‚С‡РµС‚Р°
 var i, k, id, cell, maxi, AbitCount:integer;
       E: Variant;
       Room:string;
-      CurrentPage: integer;   //номер текущей страницы
-      ReportTemplateName: string;   //название файла шаблона
+      CurrentPage: integer;   //РЅРѕРјРµСЂ С‚РµРєСѓС‰РµР№ СЃС‚СЂР°РЅРёС†С‹
+      ReportTemplateName: string;   //РЅР°Р·РІР°РЅРёРµ С„Р°Р№Р»Р° С€Р°Р±Р»РѕРЅР°
 begin
-  TApplicationController.GetInstance.AddLogEntry('Экспорт списка закрепленных абитуриентов.');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ СЃРїРёСЃРєР° Р·Р°РєСЂРµРїР»РµРЅРЅС‹С… Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ.');
 
   E := CreateOleObject('Excel.Application');
   try
@@ -527,11 +527,11 @@ begin
     E.Range['A1:D3'].Font.Size:=12;
     E.Range['A1:D2'].RowHeight:=25;
     E.range['A1:D3'].HorizontalAlignment:=-4108;}
-    // вывод шапки
-    E.Cells[1,1]:='Экзамен по '+DMAbiturientRasp.adospGetRaspdisc.AsString;
-    E.Cells[2,1]:=DMAbiturientRasp.adospGetRaspdate_of.AsString +' начало '+ Copy(TimeToStr(DMAbiturientRasp.adospGetRaspTimeBegin.AsDateTime),1,length(TimeToStr(DMAbiturientRasp.adospGetRaspTimeBegin.AsDateTime))-3);
-    // вывод списка
-  //открываем доп. список абитуриентов
+    // РІС‹РІРѕРґ С€Р°РїРєРё
+    E.Cells[1,1]:='Р­РєР·Р°РјРµРЅ РїРѕ '+DMAbiturientRasp.adospGetRaspdisc.AsString;
+    E.Cells[2,1]:=DMAbiturientRasp.adospGetRaspdate_of.AsString +' РЅР°С‡Р°Р»Рѕ '+ Copy(TimeToStr(DMAbiturientRasp.adospGetRaspTimeBegin.AsDateTime),1,length(TimeToStr(DMAbiturientRasp.adospGetRaspTimeBegin.AsDateTime))-3);
+    // РІС‹РІРѕРґ СЃРїРёСЃРєР°
+  //РѕС‚РєСЂС‹РІР°РµРј РґРѕРї. СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ
     DMAbiturientRasp.adoqHelp.Close;
     DMAbiturientRasp.adoqHelp.SQL.Text:=DMAbiturientRasp.adospAbitGetSpisok.SQL.Text;
     DMAbiturientRasp.adoqHelp.Open;
@@ -541,10 +541,10 @@ begin
     i:=1;
     while not DMAbiturientRasp.adoqHelp.Eof do
     begin
-    //если абитуриент закреплен, заносим его в Excel
+    //РµСЃР»Рё Р°Р±РёС‚СѓСЂРёРµРЅС‚ Р·Р°РєСЂРµРїР»РµРЅ, Р·Р°РЅРѕСЃРёРј РµРіРѕ РІ Excel
       if DMAbiturientRasp.adoqHelp.FieldByName('id_rasp_kab').AsString<>'' then
       begin
-        //если аудитория другая, то заносим сначала её
+        //РµСЃР»Рё Р°СѓРґРёС‚РѕСЂРёСЏ РґСЂСѓРіР°СЏ, С‚Рѕ Р·Р°РЅРѕСЃРёРј СЃРЅР°С‡Р°Р»Р° РµС‘
         if Room<>DMAbiturientRasp.adoqHelp.FieldByName('Cname_room').AsString then
         begin
 
@@ -553,20 +553,20 @@ begin
             E.Range['A'+intToStr(maxi-((AbitCount+1) div 2))+':D'+intToStr(maxi-1)].Borders.Weight:=2;
           end;
 
-          //добавляем новую страницу
+          //РґРѕР±Р°РІР»СЏРµРј РЅРѕРІСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ
           E.sheets.Add(after:=E.sheets.item[CurrentPage]);
           inc(CurrentPage);
 
-          E.Sheets[firstPageNumber].Range['A1:CE'+inttoStr(EndCopyRowNumber)].EntireColumn.Copy(EmptyParam); // поместим в БО
+          E.Sheets[firstPageNumber].Range['A1:CE'+inttoStr(EndCopyRowNumber)].EntireColumn.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
           E.Sheets[CurrentPage].Paste(E.Sheets.item[CurrentPage].Range['A1:CE'+inttoStr(EndCopyRowNumber), EmptyParam], EmptyParam);
-          E.Sheets[firstPageNumber].Range['A1:CE'+inttoStr(EndCopyRowNumber)].EntireRow.Copy(EmptyParam); // поместим в БО
+          E.Sheets[firstPageNumber].Range['A1:CE'+inttoStr(EndCopyRowNumber)].EntireRow.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
           E.Sheets[CurrentPage].Paste(E.Sheets.item[CurrentPage].Range['A1:CE'+inttoStr(EndCopyRowNumber), EmptyParam], EmptyParam);
 
           E.Sheets[CurrentPage].Select;
 
 
           Room:= DMAbiturientRasp.adoqHelp.FieldByName('Cname_room').AsString;
-          //считаем кол-во абитуриентов в данной аудитории
+          //СЃС‡РёС‚Р°РµРј РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РІ РґР°РЅРЅРѕР№ Р°СѓРґРёС‚РѕСЂРёРё
           id:=DMAbiturientRasp.adoqHelpid_VstEx.Value;
           AbitCount:=0;
           while (Room=DMAbiturientRasp.adoqHelp.FieldByName('Cname_room').AsString) and (not DMAbiturientRasp.adoqHelp.Eof) do
@@ -574,12 +574,12 @@ begin
             inc(AbitCount);
             DMAbiturientRasp.adoqHelp.Next;
           end;
-          //встаем обратно на первого в списке в аудиторию
+          //РІСЃС‚Р°РµРј РѕР±СЂР°С‚РЅРѕ РЅР° РїРµСЂРІРѕРіРѕ РІ СЃРїРёСЃРєРµ РІ Р°СѓРґРёС‚РѕСЂРёСЋ
           DMAbiturientRasp.adoqHelp.Locate('id_VstEx',id,[loCaseInsensitive]);
 
 
           i:=EndCopyRowNumber;
-          E.Cells[i,1]:='Аудитория '+Room;
+          E.Cells[i,1]:='РђСѓРґРёС‚РѕСЂРёСЏ '+Room;
           //E.Sheets[CurrentPage].name:=Room;
           {E.range['A'+inttoStr(i)+':D'+inttoStr(i)].Font.Size:=12;
           E.range['A'+inttoStr(i)+':D'+inttoStr(i)].HorizontalAlignment:=-4108;
@@ -618,7 +618,7 @@ begin
       on Ex:Exception do
       begin
         E.Quit;
-        raise EApplicationException.Create('Произошла ошибка при экспорте списка в Excel',Ex);
+        raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ СЃРїРёСЃРєР° РІ Excel',Ex);
       end;
 
    end;
@@ -627,7 +627,7 @@ begin
   end;
 end;
 
-//выгружает экзаменационные ведомости  вст. экзамена в Excel (для каждой специальности своя)
+//РІС‹РіСЂСѓР¶Р°РµС‚ СЌРєР·Р°РјРµРЅР°С†РёРѕРЅРЅС‹Рµ РІРµРґРѕРјРѕСЃС‚Рё  РІСЃС‚. СЌРєР·Р°РјРµРЅР° РІ Excel (РґР»СЏ РєР°Р¶РґРѕР№ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё СЃРІРѕСЏ)
 procedure TAbitOtchetsController.ExpExamVedsToExc;
 var i,k,m:integer;
       E,sh:Variant;
@@ -635,18 +635,18 @@ var i,k,m:integer;
       str:string;
       Firstspec:integer;
       FindRange: Variant;
-      count:integer; //кол-во ведомостей (страниц)
+      count:integer; //РєРѕР»-РІРѕ РІРµРґРѕРјРѕСЃС‚РµР№ (СЃС‚СЂР°РЅРёС†)
 begin
-  TApplicationController.GetInstance.AddLogEntry('Экспорт ведомостей к экзаменам.');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ РІРµРґРѕРјРѕСЃС‚РµР№ Рє СЌРєР·Р°РјРµРЅР°Рј.');
 
-  //загрузка данных
+  //Р·Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С…
     dmUgtuStructure.adoqSpecFac.Open;
     dmUgtuStructure.adoqSpecFac.Filtered:=false;
-    //открываем доп. список абитуриентов
+    //РѕС‚РєСЂС‹РІР°РµРј РґРѕРї. СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ
     DMAbiturientRasp.adoqHelp.Close;
     DMAbiturientRasp.adoqHelp.SQL.Text:=DMAbiturientRasp.adospAbitGetSpisok.SQL.Text;
     DMAbiturientRasp.adoqHelp.Open;
-    DMAbiturientRasp.adoqHelp.Sort:='ik_spec_fac';  //сортируем по специальности
+    DMAbiturientRasp.adoqHelp.Sort:='ik_spec_fac';  //СЃРѕСЂС‚РёСЂСѓРµРј РїРѕ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
     DMAbiturientRasp.adoqHelp.First;
 
   E := CreateOleObject('Excel.Application');
@@ -659,14 +659,14 @@ begin
     E.DisplayAlerts:= false;
     E.Sheets[1].Select;
 
-    //пустые строки прокручиваем
+    //РїСѓСЃС‚С‹Рµ СЃС‚СЂРѕРєРё РїСЂРѕРєСЂСѓС‡РёРІР°РµРј
 
     spec:= -1;   Firstspec:=-1;
     i:=12; m:=11; k:=1;
     count:= 2;
       while (i>0) do
       begin
-        //вносим данные предыдущей специальности
+        //РІРЅРѕСЃРёРј РґР°РЅРЅС‹Рµ РїСЂРµРґС‹РґСѓС‰РµР№ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
         if (((spec<>DMAbiturientRasp.adoqHelpik_spec_fac.Value) and
             (DMAbiturientRasp.adoqHelp.FieldByName('id_rasp_kab').AsString<>'')) or
              (DMAbiturientRasp.adoqHelp.Eof))  and (spec<>-1) then
@@ -674,26 +674,26 @@ begin
           E.Range['A'+inttoStr(i-k)+':E'+inttoStr(i-1)].Borders.Weight:=2;
           dmUgtuStructure.adoqSpecFac.Locate('ik_spec_fac',spec,[loCaseInsensitive]);
           str := dmUgtuStructure.adoqSpecFacCname_spec.AsString;
-          E.Cells[5,1]:='Специальность  '+dmUgtuStructure.adoqSpecFacCname_spec.AsString;
+          E.Cells[5,1]:='РЎРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ  '+dmUgtuStructure.adoqSpecFacCname_spec.AsString;
           str := DMAbiturientRasp.adospGetRaspdate_of.AsString;
           E.Range['L1:M2'].Copy;
           E.Range['D'+inttoStr(i)+':E'+inttoStr(i+1)].Insert;
           E.Cells[1,10]:='';
           E.Range['L1:M2'].Delete;
-          FindRange := E.Cells.Replace(What := '#ДатаЭк#',Replacement:=str);
+          FindRange := E.Cells.Replace(What := '#Р”Р°С‚Р°Р­Рє#',Replacement:=str);
           str :=DMAbiturientRasp.adospGetRaspdisc.AsString;
-          FindRange := E.Cells.Replace(What := '#Дисципл#',Replacement:=str);
+          FindRange := E.Cells.Replace(What := '#Р”РёСЃС†РёРїР»#',Replacement:=str);
           str := Copy(TimeToStr(DMAbiturientRasp.adospGetRaspTimeBegin.AsDateTime),1,length(TimeToStr(DMAbiturientRasp.adospGetRaspTimeBegin.AsDateTime))-3);
-          FindRange := E.Cells.Replace(What := '#Начало#',Replacement:=str);
+          FindRange := E.Cells.Replace(What := '#РќР°С‡Р°Р»Рѕ#',Replacement:=str);
           str := Copy(TimeToStr(DMAbiturientRasp.adospGetRaspTimeEnd.AsDateTime),1,5);
-          FindRange := E.Cells.Replace(What := '#Конец#',Replacement:=str);
+          FindRange := E.Cells.Replace(What := '#РљРѕРЅРµС†#',Replacement:=str);
           str := Copy(DMAbiturientRasp.adospGetRaspdate_of.AsString,1,2);
-          FindRange := E.Cells.Replace(What := '#Дата#',Replacement:=str);
+          FindRange := E.Cells.Replace(What := '#Р”Р°С‚Р°#',Replacement:=str);
           str := Copy(DMAbiturientRasp.adospGetRaspdate_of.AsString,4,2);
           str := GetMonthR(StrToInt(str));
-          FindRange := E.Cells.Replace(What := '#Месяц#',Replacement:=str);
+          FindRange := E.Cells.Replace(What := '#РњРµСЃСЏС†#',Replacement:=str);
           str := Copy(DMAbiturientRasp.adospGetRaspdate_of.AsString,7,4);
-          FindRange := E.Cells.Replace(What := '#Год#',Replacement:=str);
+          FindRange := E.Cells.Replace(What := '#Р“РѕРґ#',Replacement:=str);
           E.Range['A'+inttoStr(i-k)+':E'+inttoStr(i-1)].Borders.Weight:=2;
         end;
         if (DMAbiturientRasp.adoqHelp.Eof) then
@@ -702,19 +702,19 @@ begin
           break;
         end;
         
-    //если абитуриент закреплен, заносим его в Excel
+    //РµСЃР»Рё Р°Р±РёС‚СѓСЂРёРµРЅС‚ Р·Р°РєСЂРµРїР»РµРЅ, Р·Р°РЅРѕСЃРёРј РµРіРѕ РІ Excel
         if (DMAbiturientRasp.adoqHelp.FieldByName('id_rasp_kab').AsString<>'')  then
         begin
-					//следующая специальность - добавляем новую страницу
+					//СЃР»РµРґСѓСЋС‰Р°СЏ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ - РґРѕР±Р°РІР»СЏРµРј РЅРѕРІСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ
           if (spec<>DMAbiturientRasp.adoqHelpik_spec_fac.Value)  then
           begin
 						 //E.Sheets.item[count].Range['A1:CE'+inttoStr(50)].Insert;
               //E.Sheets[count-1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
               E.sheets.Add(after:=E.sheets.item[count-1]);
 
-              E.Sheets[1].Range['A1:CE'+inttoStr(50)].EntireColumn.Copy(EmptyParam); // поместим в БО
+              E.Sheets[1].Range['A1:CE'+inttoStr(50)].EntireColumn.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
               E.Sheets[count].Paste(E.Sheets.item[count].Range['A1:CE'+inttoStr(50), EmptyParam], EmptyParam);
-              E.Sheets[1].Range['A1:CE'+inttoStr(50)].EntireRow.Copy(EmptyParam); // поместим в БО
+              E.Sheets[1].Range['A1:CE'+inttoStr(50)].EntireRow.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
               E.Sheets[count].Paste(E.Sheets.item[count].Range['A1:CE'+inttoStr(50), EmptyParam], EmptyParam);
 
               E.Sheets[count].PageSetup.LeftMargin:=E.Sheets[1].PageSetup.LeftMargin;
@@ -729,7 +729,7 @@ begin
               E.Sheets[count].name:=str;
               E.Sheets[count].Select;
 						  str := dmUgtuStructure.adoqSpecFacCname_spec.AsString;
-						  FindRange := E.Range['A'+inttoStr(i)+':E'+inttoStr(i+m)].Replace(What := '#Спец#',Replacement:=str);
+						  FindRange := E.Range['A'+inttoStr(i)+':E'+inttoStr(i+m)].Replace(What := '#РЎРїРµС†#',Replacement:=str);
 						  E.Range['A'+inttoStr(i+m-1)+':E'+inttoStr(i+m-1)].RowHeight:=35;
 						  i:=12;
 						  k:=1;
@@ -738,15 +738,15 @@ begin
           spec:= DMAbiturientRasp.adoqHelpik_spec_fac.Value;
           E.Cells[i,1]:=IntToStr(k);
           E.Cells[i,2]:= DMAbiturientRasp.adoqHelp.FieldByName('StudName').AsString;
-              //проверяем, чтобы для русского языка выводилось зачет/незачет
+              //РїСЂРѕРІРµСЂСЏРµРј, С‡С‚РѕР±С‹ РґР»СЏ СЂСѓСЃСЃРєРѕРіРѕ СЏР·С‹РєР° РІС‹РІРѕРґРёР»РѕСЃСЊ Р·Р°С‡РµС‚/РЅРµР·Р°С‡РµС‚
           if (DMAbiturientRasp.adospGetRaspik_disc.Value=3) and (DMAbiturientRasp.adospGetRaspik_sdach.Value>=2)
             and (DMAbiturientRasp.adospGetRaspik_sdach.Value<=5) and (DMAbiturientRasp.adoqHelpcosenka.Value>-1)
              and (DMAbiturientRasp.adoqHelpcosenka.Value<2) then
           begin
             if DMAbiturientRasp.adoqHelpcosenka.Value=1 then
-              E.Cells[i,3]:=' зачет'
+              E.Cells[i,3]:=' Р·Р°С‡РµС‚'
             else
-              E.Cells[i,3]:=' незачет';
+              E.Cells[i,3]:=' РЅРµР·Р°С‡РµС‚';
           end
           else
             E.Cells[i,3]:='   '+DMAbiturientRasp.adoqHelpcosenka.AsString;
@@ -766,7 +766,7 @@ begin
     else
     begin
       E.Quit;
-      raise EApplicationException.Create('Нет данных для выдачи ведомостей');
+      raise EApplicationException.Create('РќРµС‚ РґР°РЅРЅС‹С… РґР»СЏ РІС‹РґР°С‡Рё РІРµРґРѕРјРѕСЃС‚РµР№');
     end;
     E.DisplayAlerts:= true;
     dmUgtuStructure.adoqSpecFac.Filtered:=true;
@@ -774,7 +774,7 @@ begin
     on Ex:Exception do
     begin
       E.Quit;
-      raise EApplicationException.Create('Ошибка при экспорте в Excel',Ex);
+      raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ Excel',Ex);
     end;
    end;
   finally
@@ -783,7 +783,7 @@ begin
 end;
 
 
-//выгружает результаты экзамена в Excel
+//РІС‹РіСЂСѓР¶Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚С‹ СЌРєР·Р°РјРµРЅР° РІ Excel
 procedure TAbitOtchetsController.ExamsStatToExcel(year: integer; ik_fac,
   ik_spec_fac: Variant; OnlyZachisl: boolean);
 var
@@ -807,10 +807,10 @@ procedure TAbitOtchetsController.ExpExamResultsToExc;
 var i,k:integer;
       E:Variant;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Экспорт результатов экзамена.');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ СЌРєР·Р°РјРµРЅР°.');
 
-    // вывод списка
-    //открываем список студентов
+    // РІС‹РІРѕРґ СЃРїРёСЃРєР°
+    //РѕС‚РєСЂС‹РІР°РµРј СЃРїРёСЃРѕРє СЃС‚СѓРґРµРЅС‚РѕРІ
   DMAbiturientRasp.adoqHelp.Close;
   DMAbiturientRasp.adoqHelp.SQL.Text:=DMAbiturientRasp.adospAbitGetSpisok.SQL.Text;
   DMAbiturientRasp.adoqHelp.Open;
@@ -822,7 +822,7 @@ begin
     E.Visible := false;
     E.DisplayAlerts:= false;
     E.Sheets[1].Select;
-    // вывод шапки
+    // РІС‹РІРѕРґ С€Р°РїРєРё
     E.range['A1:A4'].ColumnWidth:=5;
     E.range['B1:B4'].ColumnWidth:=50;
     E.range['C1:C4'].ColumnWidth:=24;
@@ -830,19 +830,19 @@ begin
       E.range['A'+inttostr(i)+':C'+inttostr(i)].Merge(true);
     E.Range['A1:D2'].Font.Size:=12;
     E.Range['A1:D2'].RowHeight:=25;
-    E.Cells[1,1]:='Результаты экзамена по '+DMAbiturientRasp.adospGetRaspdisc.AsString;
+    E.Cells[1,1]:='Р РµР·СѓР»СЊС‚Р°С‚С‹ СЌРєР·Р°РјРµРЅР° РїРѕ '+DMAbiturientRasp.adospGetRaspdisc.AsString;
     E.Cells[2,1]:=DMAbiturientRasp.adospGetRaspdate_of.AsString;
 
-    //шапка таблицы
+    //С€Р°РїРєР° С‚Р°Р±Р»РёС†С‹
     i:=4;
     E.range['A1:C'+IntToStr(i)].HorizontalAlignment:=-4108;
     E.Range['A1:C'+IntToStr(i)].Font.Bold:=true;
     E.Range['A'+IntToStr(i)+':C'+IntToStr(i)].Font.Size:=9;
 
-    E.Cells[i,1]:='№ п/п';
-    E.Cells[i,2]:='Фамилия, имя, отчество';
-    E.Cells[i,3]:='Количество баллов';
-    DMAbiturientRasp.adoqHelp.Sort:='StudName';  //сортируем по ФИО
+    E.Cells[i,1]:='в„– Рї/Рї';
+    E.Cells[i,2]:='Р¤Р°РјРёР»РёСЏ, РёРјСЏ, РѕС‚С‡РµСЃС‚РІРѕ';
+    E.Cells[i,3]:='РљРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°Р»Р»РѕРІ';
+    DMAbiturientRasp.adoqHelp.Sort:='StudName';  //СЃРѕСЂС‚РёСЂСѓРµРј РїРѕ Р¤РРћ
     DMAbiturientRasp.adoqHelp.First;
     inc(i);
     k:=1;
@@ -852,15 +852,15 @@ begin
       begin
         E.Cells[i,1]:=IntToStr(k);;
         E.Cells[i,2]:='   '+DMAbiturientRasp.adoqHelpStudName.AsString;
-        //проверяем, чтобы для русского языка выводилось зачет/незачет
+        //РїСЂРѕРІРµСЂСЏРµРј, С‡С‚РѕР±С‹ РґР»СЏ СЂСѓСЃСЃРєРѕРіРѕ СЏР·С‹РєР° РІС‹РІРѕРґРёР»РѕСЃСЊ Р·Р°С‡РµС‚/РЅРµР·Р°С‡РµС‚
         if (DMAbiturientRasp.adospGetRaspik_disc.Value=3) and (DMAbiturientRasp.adospGetRaspik_sdach.Value>=2)
           and (DMAbiturientRasp.adospGetRaspik_sdach.Value<=5) and (DMAbiturientRasp.adoqHelpcosenka.Value>-1)
              and (DMAbiturientRasp.adoqHelpcosenka.Value<2) then
         begin
           if DMAbiturientRasp.adoqHelpcosenka.Value=1 then
-            E.Cells[i,3]:=' зачет'
+            E.Cells[i,3]:=' Р·Р°С‡РµС‚'
           else
-            E.Cells[i,3]:=' незачет';
+            E.Cells[i,3]:=' РЅРµР·Р°С‡РµС‚';
         end
         else
           E.Cells[i,3]:='   '+DMAbiturientRasp.adoqHelpcosenka.AsString;
@@ -883,7 +883,7 @@ begin
     on Ex:Exception do
     begin
       E.Quit;
-      raise EApplicationException.Create('Произошла ошибка при экспорте результатов экзамена в Excel',Ex);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ СЌРєР·Р°РјРµРЅР° РІ Excel',Ex);
     end;
    end;
   finally
@@ -893,7 +893,7 @@ begin
 end;
 
 
-//вспомогательная
+//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ
 procedure TAbitOtchetsController.PrintObColvo(E:Variant;var i:integer);
 var j:integer;
 begin
@@ -902,45 +902,45 @@ begin
                 dm.adoqAbitItogiCountZCPFCount.Value+
                 dm.adoqAbitItogiCountContrCount.Value;
   inc(i);
-  E.cells[i,j]:='Общий конкурс:';
+  E.cells[i,j]:='РћР±С‰РёР№ РєРѕРЅРєСѓСЂСЃ:';
   E.cells[i,j+2]:=dm.adoqAbitItogiCountObFCount.AsString;
   inc(i);
-  E.cells[i,j]:='ЦКП:';
+  E.cells[i,j]:='Р¦РљРџ:';
   E.cells[i,j+2]:=dm.adoqAbitItogiCountZCPFCount.AsString;
   inc(i);
-  E.cells[i,j]:='Контракт:';
+  E.cells[i,j]:='РљРѕРЅС‚СЂР°РєС‚:';
   E.cells[i,j+2]:=dm.adoqAbitItogiCountContrCount.AsString;
   inc(i);
-  E.cells[i,j]:='Медалистов:';
+  E.cells[i,j]:='РњРµРґР°Р»РёСЃС‚РѕРІ:';
   E.cells[i,j+2]:=dm.adoqAbitItogiCountMedalCount.AsString;
   E.Range['A'+inttoStr(i-4)+':J'+inttoStr(i)].Font.Bold:=true;
   i:=i+3;
 end;
 
-//выводит одну запись в журнал (1 абитуриента)
+//РІС‹РІРѕРґРёС‚ РѕРґРЅСѓ Р·Р°РїРёСЃСЊ РІ Р¶СѓСЂРЅР°Р» (1 Р°Р±РёС‚СѓСЂРёРµРЅС‚Р°)
 procedure TAbitOtchetsController.ExportAbitToZhurnal(E:Variant;var i:integer);
 var j, balls, excount:integer;
     str:string;
 begin
-    //вывод общей информации
+    //РІС‹РІРѕРґ РѕР±С‰РµР№ РёРЅС„РѕСЂРјР°С†РёРё
       j:=1;
       E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalRegNomer.AsString; inc(j);
       E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnaldd_pod_zayav.AsString;  inc(j);
       E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalStudname.AsString; inc(j);
       E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalDd_birth.AsString;  inc(j);
       if dmAbiturientOtchety.adospAbitZhurnallSex.Value then
-       E.cells[i,j]:='М'
+       E.cells[i,j]:='Рњ'
       else
-       E.cells[i,j]:='Ж';   inc(j);
+       E.cells[i,j]:='Р–';   inc(j);
 
-      //образование
+      //РѕР±СЂР°Р·РѕРІР°РЅРёРµ
       str:='';
       if dmAbiturientOtchety.adospAbitZhurnalik_kat_zaved.AsString<>'' then
         str:=dmAbiturientOtchety.adospAbitZhurnalcKat_Zaved.AsString;
       str:=str+' '+dmAbiturientOtchety.adospAbitZhurnalcName_zaved.AsString;
       E.cells[i,j]:=str;
 
-      str:='';  //место работы, должность и стаж
+      str:='';  //РјРµСЃС‚Рѕ СЂР°Р±РѕС‚С‹, РґРѕР»Р¶РЅРѕСЃС‚СЊ Рё СЃС‚Р°Р¶
         inc(j);
       if dmAbiturientOtchety.adospAbitZhurnalCname_pred.AsString<>'' then
         str:=dmAbiturientOtchety.adospAbitZhurnalCname_pred.AsString;
@@ -951,21 +951,21 @@ begin
           str:=dmAbiturientOtchety.adospAbitZhurnalcDolgnost.AsString;
       if (dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString<>'') then
         if str<>'' then
-          str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' лет'
+          str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' Р»РµС‚'
         else
-          str:=dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' лет';
+          str:=dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' Р»РµС‚';
       if dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString<>'' then
         if str<>'' then
-          str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' месяцев'
+          str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' РјРµСЃСЏС†РµРІ'
         else
-          str:=dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' месяцев';
+          str:=dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' РјРµСЃСЏС†РµРІ';
 
       E.cells[i,j]:=str;   inc(j);
 
       E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalCname_kat_zach.AsString;
       inc(j);
 
-      //вывод документов
+      //РІС‹РІРѕРґ РґРѕРєСѓРјРµРЅС‚РѕРІ
       str:='';
       if dmAbiturientOtchety.adospAbitDocsForZhurnal.Locate('nCode',dmAbiturientOtchety.adospAbitZhurnalnCode.Value,[loCaseInsensitive]) then
       begin
@@ -977,18 +977,18 @@ begin
           else
             str:=str+'; '+dmAbiturientOtchety.adospAbitDocsForZhurnalcvid_doc.AsString;
           if dmAbiturientOtchety.adospAbitDocsForZhurnalCd_seria.AsString<>'' then
-            str:=str+' серия '+dmAbiturientOtchety.adospAbitDocsForZhurnalCd_seria.AsString;
+            str:=str+' СЃРµСЂРёСЏ '+dmAbiturientOtchety.adospAbitDocsForZhurnalCd_seria.AsString;
           if dmAbiturientOtchety.adospAbitDocsForZhurnalNp_number.AsString<>'' then
-            str:=str+' № '+dmAbiturientOtchety.adospAbitDocsForZhurnalNp_number.AsString;
+            str:=str+' в„– '+dmAbiturientOtchety.adospAbitDocsForZhurnalNp_number.AsString;
           if dmAbiturientOtchety.adospAbitDocsForZhurnalDd_vidan.AsString<>'' then
-            str:=str+' выдан '+dmAbiturientOtchety.adospAbitDocsForZhurnalDd_vidan.AsString+' г.';
+            str:=str+' РІС‹РґР°РЅ '+dmAbiturientOtchety.adospAbitDocsForZhurnalDd_vidan.AsString+' Рі.';
           dmAbiturientOtchety.adospAbitDocsForZhurnal.Next;
         end;
       end;
       E.cells[i,j]:=str;  inc(j);
 
-      //вывод адресов
-      str:='';  //фактический
+      //РІС‹РІРѕРґ Р°РґСЂРµСЃРѕРІ
+      str:='';  //С„Р°РєС‚РёС‡РµСЃРєРёР№
       if dmAbiturientOtchety.adospAbitZhurnalIk_Street_fact.AsString<>'' then
         if dmAbiturientOtchety.adospAbitAddressForZhurnal.Locate('Ik_street',
           dmAbiturientOtchety.adospAbitZhurnalIk_Street_fact.Value,[loCaseInsensitive]) then
@@ -996,7 +996,7 @@ begin
             str:=dmAbiturientOtchety.adospAbitAddressForZhurnalAddress.AsString+', '+
               dmAbiturientOtchety.adospAbitZhurnalAddressf.AsString;
         end;
-    //прописка
+    //РїСЂРѕРїРёСЃРєР°
       if (dmAbiturientOtchety.adospAbitZhurnalIk_Street_prop.AsString<>'') and
         (dmAbiturientOtchety.adospAbitZhurnalIk_Street_prop.Value<>dmAbiturientOtchety.adospAbitZhurnalIk_Street_fact.Value) then
         if dmAbiturientOtchety.adospAbitAddressForZhurnal.Locate('Ik_street',
@@ -1010,7 +1010,7 @@ begin
               dmAbiturientOtchety.adospAbitZhurnalAddressp.AsString;
         end;
 
-    //номера телефонов
+    //РЅРѕРјРµСЂР° С‚РµР»РµС„РѕРЅРѕРІ
       if (dmAbiturientOtchety.adospAbitZhurnalctelefon.AsString<>'') then
         if (str<>'') then
           str := str+'; '+dmAbiturientOtchety.adospAbitZhurnalctelefon.AsString
@@ -1025,16 +1025,16 @@ begin
       E.cells[i,j]:=str;
       inc(j);
       if dmAbiturientOtchety.adospAbitZhurnalLobchegit.Value then
-        E.cells[i,j]:='Да'
+        E.cells[i,j]:='Р”Р°'
       else
-        E.cells[i,j]:='Нет';   inc(j);
+        E.cells[i,j]:='РќРµС‚';   inc(j);
 
       if dmAbiturientOtchety.adospAbitZhurnalik_medal.Value<>1 then
-        E.cells[i,j]:='Да'
+        E.cells[i,j]:='Р”Р°'
       else
-        E.cells[i,j]:='Нет';
+        E.cells[i,j]:='РќРµС‚';
       j:=j+3;;
-      //вывод ин. языков
+      //РІС‹РІРѕРґ РёРЅ. СЏР·С‹РєРѕРІ
       str:='';
       if dmAbiturientOtchety.adospAbitLangForZhurnal.Locate('nCode',dmAbiturientOtchety.adospAbitZhurnalnCode.Value,[loCaseInsensitive])
       then
@@ -1049,9 +1049,9 @@ begin
         end;
       E.cells[i,j]:=str;  inc(j);
 
-    //вывод экзаменов
-      balls:=0;  //общее кол-во баллов
-      exCount:=0; //кол-во экзаменов
+    //РІС‹РІРѕРґ СЌРєР·Р°РјРµРЅРѕРІ
+      balls:=0;  //РѕР±С‰РµРµ РєРѕР»-РІРѕ Р±Р°Р»Р»РѕРІ
+      exCount:=0; //РєРѕР»-РІРѕ СЌРєР·Р°РјРµРЅРѕРІ
 
       if dmAbiturientOtchety.adospAbitExForZhurnal.Locate('NN_abit',dmAbiturientOtchety.adospAbitZhurnalNN_abit.Value,[loCaseInsensitive])
       then
@@ -1072,37 +1072,37 @@ begin
               str:='+';
           end;
           case dmAbiturientOtchety.adospAbitExForZhurnalik_disc.Value of
-            1:  //математика
+            1:  //РјР°С‚РµРјР°С‚РёРєР°
               E.cells[i,j]:=str;
-            2:  //физика
+            2:  //С„РёР·РёРєР°
               E.cells[i,j+1]:=str;
-            3:  //русский
+            3:  //СЂСѓСЃСЃРєРёР№
               if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString<>'' then
               begin
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value=0 then
-                  E.cells[i,j+2]:='незачет';
+                  E.cells[i,j+2]:='РЅРµР·Р°С‡РµС‚';
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value=1 then
-                  E.cells[i,j+2]:='зачет';
+                  E.cells[i,j+2]:='Р·Р°С‡РµС‚';
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value>1 then
                   E.cells[i,j+2]:=dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString;
               end
               else
                 E.cells[i,j+2]:='+';
-            4:  //информатику
+            4:  //РёРЅС„РѕСЂРјР°С‚РёРєСѓ
               E.cells[i,j+3]:=str;
-            5:  //обществознание
+            5:  //РѕР±С‰РµСЃС‚РІРѕР·РЅР°РЅРёРµ
               E.cells[i,j+4]:=str;
-            8:  //тв. конкурс
+            8:  //С‚РІ. РєРѕРЅРєСѓСЂСЃ
               E.cells[i,j+5]:=str;
-            7:  //физ. культ.
+            7:  //С„РёР·. РєСѓР»СЊС‚.
               E.cells[i,j+6]:=str;
-            9:  //черчение
+            9:  //С‡РµСЂС‡РµРЅРёРµ
               E.cells[i,j+7]:=str;
-            10:  //композиция
+            10:  //РєРѕРјРїРѕР·РёС†РёСЏ
               E.cells[i,j+8]:=str;
-            11:  //рисунок
+            11:  //СЂРёСЃСѓРЅРѕРє
               E.cells[i,j+9]:=str;
-            12:  //биология
+            12:  //Р±РёРѕР»РѕРіРёСЏ
               E.cells[i,j+10]:=str;
           end;
           dmAbiturientOtchety.adospAbitExForZhurnal.Next;
@@ -1115,13 +1115,13 @@ begin
       inc(i);
 end;
 
-//открывает все процедуры с данными для журнала
+//РѕС‚РєСЂС‹РІР°РµС‚ РІСЃРµ РїСЂРѕС†РµРґСѓСЂС‹ СЃ РґР°РЅРЅС‹РјРё РґР»СЏ Р¶СѓСЂРЅР°Р»Р°
 function TAbitOtchetsController.OpenAllStat(year,ik_spec_fac,dd_pod_zayav:Variant):boolean;
 begin
   result:=false;
   try
-		  //открываем прцедуры журнала
-		  dmAbiturientOtchety.adospAbitZhurnal.Close;   //общая информация
+		  //РѕС‚РєСЂС‹РІР°РµРј РїСЂС†РµРґСѓСЂС‹ Р¶СѓСЂРЅР°Р»Р°
+		  dmAbiturientOtchety.adospAbitZhurnal.Close;   //РѕР±С‰Р°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ
 		  dmAbiturientOtchety.adospAbitZhurnal.ProcedureName:='ABIT_get_InfForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitZhurnal.Parameters.Clear;
 		  dmAbiturientOtchety.adospAbitZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1134,7 +1134,7 @@ begin
         exit;
       end;
 
-		  dmAbiturientOtchety.adospAbitLangForZhurnal.Close;   //список ин. языков
+		  dmAbiturientOtchety.adospAbitLangForZhurnal.Close;   //СЃРїРёСЃРѕРє РёРЅ. СЏР·С‹РєРѕРІ
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.ProcedureName:='ABIT_get_LangvsForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.Parameters.Clear;
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1142,7 +1142,7 @@ begin
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.Parameters.CreateParameter('@NNyear',ftInteger,pdInput,4,year);
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.Open;
 
-		  dmAbiturientOtchety.adospAbitDocsForZhurnal.Close;   //список документов
+		  dmAbiturientOtchety.adospAbitDocsForZhurnal.Close;   //СЃРїРёСЃРѕРє РґРѕРєСѓРјРµРЅС‚РѕРІ
 		  dmAbiturientOtchety.adospAbitDocsForZhurnal.ProcedureName:='ABIT_get_DocsForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitDocsForZhurnal.Parameters.Clear;
 		  dmAbiturientOtchety.adospAbitDocsForZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1150,7 +1150,7 @@ begin
 		  dmAbiturientOtchety.adospAbitDocsForZhurnal.Parameters.CreateParameter('@NNyear',ftInteger,pdInput,4,year);
 		  dmAbiturientOtchety.adospAbitDocsForZhurnal.Open;
 
-		  dmAbiturientOtchety.adospAbitExForZhurnal.Close;   //список экзаменов
+		  dmAbiturientOtchety.adospAbitExForZhurnal.Close;   //СЃРїРёСЃРѕРє СЌРєР·Р°РјРµРЅРѕРІ
 		  dmAbiturientOtchety.adospAbitExForZhurnal.ProcedureName:='ABIT_Get_ekz_Spisok_ForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitExForZhurnal.Parameters.Clear;
 		  dmAbiturientOtchety.adospAbitExForZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1158,7 +1158,7 @@ begin
 		  dmAbiturientOtchety.adospAbitExForZhurnal.Parameters.CreateParameter('@NNyear',ftInteger,pdInput,4,year);
 		  dmAbiturientOtchety.adospAbitExForZhurnal.Open;
 
-		  dmAbiturientOtchety.adospAbitAddressForZhurnal.Close;   //адреса
+		  dmAbiturientOtchety.adospAbitAddressForZhurnal.Close;   //Р°РґСЂРµСЃР°
 		  dmAbiturientOtchety.adospAbitAddressForZhurnal.ProcedureName:='ABIT_get_AddrForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitAddressForZhurnal.Parameters.Clear;
 		  dmAbiturientOtchety.adospAbitAddressForZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1168,11 +1168,11 @@ begin
   result:= true;
 
   except
-    raise EApplicationException.Create('Произошла ошибка при загрузке данных для отчета с сервера.');
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РґР°РЅРЅС‹С… РґР»СЏ РѕС‚С‡РµС‚Р° СЃ СЃРµСЂРІРµСЂР°.');
   end;
 end;
 
-//выводит итоги (всю статистику за год) в Excel
+//РІС‹РІРѕРґРёС‚ РёС‚РѕРіРё (РІСЃСЋ СЃС‚Р°С‚РёСЃС‚РёРєСѓ Р·Р° РіРѕРґ) РІ Excel
 function TAbitOtchetsController.ExportAllStatToExcel(year:integer; filter:string):boolean;
 var i,k:integer;
 			  E:Variant;
@@ -1182,27 +1182,27 @@ var i,k:integer;
 			  fl:boolean;
 begin
   result:=false;
-  //открываем прoцедуры журнала
+  //РѕС‚РєСЂС‹РІР°РµРј РїСЂoС†РµРґСѓСЂС‹ Р¶СѓСЂРЅР°Р»Р°
   if not OpenAllStat(year,null,null) then
   begin
     exit;
   end;
 
   try
-    		  //открываем таблицy общих итогов
+    		  //РѕС‚РєСЂС‹РІР°РµРј С‚Р°Р±Р»РёС†y РѕР±С‰РёС… РёС‚РѕРіРѕРІ
 		  str:='('+IntToStr(year)+')';
 		  dm.adoqAbitItogiCount.SQL.Strings[1]:=str;
 		  dm.adoqAbitItogiCount.Open;
-		  //накладываем фильтр в зависомости от выбранного объекта
+		  //РЅР°РєР»Р°РґС‹РІР°РµРј С„РёР»СЊС‚СЂ РІ Р·Р°РІРёСЃРѕРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РѕР±СЉРµРєС‚Р°
       dm.adoqAbitItogiCount.Filter:=Filter;
 		  dm.adoqAbitItogiCount.Filtered:=true;
   except
-    raise EApplicationException.Create('Произошла ошибка при загрузке данных для отчета с сервера.');
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РґР°РЅРЅС‹С… РґР»СЏ РѕС‚С‡РµС‚Р° СЃ СЃРµСЂРІРµСЂР°.');
     exit;
   end;
 
   E := CreateOleObject('Excel.Application');
-//cам экспорт
+//cР°Рј СЌРєСЃРїРѕСЂС‚
   try
     try
 		  str := ExtractFilePath(Application.ExeName)+'Reports\AbitItogi.XLT';
@@ -1211,26 +1211,26 @@ begin
 		  E.Sheets[1].Select;
       E.DisplayAlerts:= false;
 
-		  //общий цикл по таблице  adoqAbitItogiCount (по специальностям)
-		  i:=2;  //№ строки в Excel
+		  //РѕР±С‰РёР№ С†РёРєР» РїРѕ С‚Р°Р±Р»РёС†Рµ  adoqAbitItogiCount (РїРѕ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЏРј)
+		  i:=2;  //в„– СЃС‚СЂРѕРєРё РІ Excel
 		  fl:=false;
-		  k:=0; //кол-во абитуриентов на специальности
+		  k:=0; //РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 		  dm.adoqAbitItogiCount.First;
-		  //вывод даты
+		  //РІС‹РІРѕРґ РґР°С‚С‹
       if year=YearOf(Date) then
         str:=DateToStr(Date)
       else
         str:='31.08.'+IntToStr(year);
-		  FindRange := E.Cells.Replace(What := '#Дата#',Replacement:=str);
+		  FindRange := E.Cells.Replace(What := '#Р”Р°С‚Р°#',Replacement:=str);
 
-		  //вывод названия факультета
+		  //РІС‹РІРѕРґ РЅР°Р·РІР°РЅРёСЏ С„Р°РєСѓР»СЊС‚РµС‚Р°
 		  fac:=dm.adoqAbitItogiCountIk_fac.Value;
 		  E.cells[i,1]:=dm.adoqAbitItogiCountCname_fac.AsString;
 		  E.cells[i+1,1]:=dm.adoqAbitItogiCountCname_spec.AsString;
 		  i:=6;
 		  while (not dm.adoqAbitItogiCount.Eof) do
 		  begin
-		  //вывод шапки специальности и итогов
+		  //РІС‹РІРѕРґ С€Р°РїРєРё СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё Рё РёС‚РѕРіРѕРІ
 			if fl then
 			begin
 			 if k>0 then
@@ -1239,11 +1239,11 @@ begin
 			  E.Range['A'+inttoStr(i-k)+':AE'+inttoStr(i-1)].Borders.Weight:=2;
 			 end;
 			  E.Range['A'+inttoStr(i)+':F'+inttoStr(i)].Merge(true);
-			  E.cells[i,1]:='Итого по '+dm.adoqAbitItogiCountCname_spec.AsString;
+			  E.cells[i,1]:='РС‚РѕРіРѕ РїРѕ '+dm.adoqAbitItogiCountCname_spec.AsString;
 			  PrintObColvo(E,i);
 			  dm.adoqAbitItogiCount.Next;
 
-			  //вывод итогов по факультету
+			  //РІС‹РІРѕРґ РёС‚РѕРіРѕРІ РїРѕ С„Р°РєСѓР»СЊС‚РµС‚Сѓ
 			  while ((dm.adoqAbitItogiCountik_spec_fac.AsString='') or
 					(dm.adoqAbitItogiCountik_fac.AsString='')) and
 					(not dm.adoqAbitItogiCount.Eof) do
@@ -1251,11 +1251,11 @@ begin
 				E.Range['A'+inttoStr(i)+':F'+inttoStr(i)].Merge(true);
 				if (dm.adoqAbitItogiCountik_fac.AsString='') then
 				begin
-				  E.cells[i,1]:='Итого по университету ';
+				  E.cells[i,1]:='РС‚РѕРіРѕ РїРѕ СѓРЅРёРІРµСЂСЃРёС‚РµС‚Сѓ ';
 				  E.Range['A'+inttoStr(i-4)+':J'+inttoStr(i)].Font.Size:=13;
 				end
 				else
-				  E.cells[i,1]:='Итого по '+dm.adoqAbitItogiCountCname_fac.AsString;
+				  E.cells[i,1]:='РС‚РѕРіРѕ РїРѕ '+dm.adoqAbitItogiCountCname_fac.AsString;
 				PrintObColvo(E,i);
 				dm.adoqAbitItogiCount.Next;
 			  end;
@@ -1268,7 +1268,7 @@ begin
 			  end;
 
 
-			  //вывод названия факультета
+			  //РІС‹РІРѕРґ РЅР°Р·РІР°РЅРёСЏ С„Р°РєСѓР»СЊС‚РµС‚Р°
 			  if fac<>dm.adoqAbitItogiCountIk_fac.Value then
 			  begin
 				  E.Range['A'+inttoStr(i)+':J'+inttoStr(i)].Merge(true);
@@ -1286,13 +1286,13 @@ begin
 			  E.Range['A'+inttoStr(i+2)+':AE'+inttoStr(i+2)].RowHeight:=84;
 			  E.cells[i,1]:=dm.adoqAbitItogiCountCname_spec.AsString;
 			  i:=i+3;
-			  k:=0;  //кол-во абитуриентов на специальности
+			  k:=0;  //РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 			end;
-			//вывод шапки специальности
+			//РІС‹РІРѕРґ С€Р°РїРєРё СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 			//E.Range['A'+inttoStr(j)+':J'+inttoStr(i)].Clear;
 
 
-		  //вывод журнала
+		  //РІС‹РІРѕРґ Р¶СѓСЂРЅР°Р»Р°
 			dmAbiturientOtchety.adospAbitZhurnal.First;
 			dmAbiturientOtchety.adospAbitZhurnal.Locate('ik_spec_fac',dm.adoqAbitItogiCountik_spec_fac.Value,[loCaseInsensitive]);
 			while (dm.adoqAbitItogiCountik_spec_fac.Value=dmAbiturientOtchety.adospAbitZhurnalik_spec_fac.Value)
@@ -1305,13 +1305,13 @@ begin
 			if not fl then
 			  fl:=true;
 		  end;
-		  //указываем факультет, специальность и дату
+		  //СѓРєР°Р·С‹РІР°РµРј С„Р°РєСѓР»СЊС‚РµС‚, СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ Рё РґР°С‚Сѓ
 		  {if dm.adoqSpecFac.Locate('ik_spec_fac',TDBNodeSpecRecObject(DBDekTreeView_TEST1.SelectedObject).ik,[loCaseInsensitive]) then
 		  begin
 			 str:=dm.adoqSpecFacCname_spec.AsString;
-			 FindRange := E.Cells.Replace(What := '#Спец#',Replacement:=str);
+			 FindRange := E.Cells.Replace(What := '#РЎРїРµС†#',Replacement:=str);
 			 str:=dm.adoqSpecFacCshort_name_fac.AsString;
-			 FindRange := E.Cells.Replace(What := '#Фак#',Replacement:=str);
+			 FindRange := E.Cells.Replace(What := '#Р¤Р°Рє#',Replacement:=str);
 		  end;  }
 
 		  //E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
@@ -1323,7 +1323,7 @@ begin
     on Ex:Exception do
     begin
       E.Quit;
-      raise EApplicationException.Create('Ошибка при экспорте в Excel',Ex);
+      raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ Excel',Ex);
     end;
    end;
   finally
@@ -1331,9 +1331,9 @@ begin
   end;
 end;
 
-//Непосредственно экспорт журнала за 1 день
+//РќРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ СЌРєСЃРїРѕСЂС‚ Р¶СѓСЂРЅР°Р»Р° Р·Р° 1 РґРµРЅСЊ
 procedure TAbitOtchetsController.PrintMag(ik_spec_fac:integer; E:Variant; ZhDate:string);
-const m=4;   //кол-во абитуриентов на одном листе
+const m=4;   //РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° РѕРґРЅРѕРј Р»РёСЃС‚Рµ
 var i,j,k,balls,exCount, count:integer;
       //sh:Variant;
       //spec:integer;
@@ -1341,11 +1341,11 @@ var i,j,k,balls,exCount, count:integer;
       FindRange: Variant;
 begin
   //m:=4;
-  //определяем кол-во листов
+  //РѕРїСЂРµРґРµР»СЏРµРј РєРѕР»-РІРѕ Р»РёСЃС‚РѕРІ
   count:=(dmAbiturientOtchety.adospAbitZhurnal.RecordCount div m);
   if (dmAbiturientOtchety.adospAbitZhurnal.RecordCount mod m)>0 then
     inc(count);
-    //добавляем нужные страницы
+    //РґРѕР±Р°РІР»СЏРµРј РЅСѓР¶РЅС‹Рµ СЃС‚СЂР°РЅРёС†С‹
   for i:=1 to count-1 do
   begin
      E.Range['A1:AF'+inttoStr(3+m)].Copy;
@@ -1355,32 +1355,32 @@ begin
      E.Range['A'+inttoStr(i*(3+m)+3)+':AF'+inttoStr(i*(3+m)+3)].RowHeight:=84;
      E.Range['A'+inttoStr(i*(3+m)+4)+':AF'+inttoStr((i+1)*(3+m))].RowHeight:=105;
   end;
-  //начинаем вывод
-  i:=4; //№ строки в Excel
-  k:=1; //№ записываемого абитуриента
+  //РЅР°С‡РёРЅР°РµРј РІС‹РІРѕРґ
+  i:=4; //в„– СЃС‚СЂРѕРєРё РІ Excel
+  k:=1; //в„– Р·Р°РїРёСЃС‹РІР°РµРјРѕРіРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚Р°
   while not dmAbiturientOtchety.adospAbitZhurnal.Eof do
   begin
     if (k>1) and (((k-1) mod m)=0) then
       i:=i+3;
     j:=1;
-    //вывод общей информации
+    //РІС‹РІРѕРґ РѕР±С‰РµР№ РёРЅС„РѕСЂРјР°С†РёРё
     E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalRegNomer.AsString; inc(j);
     E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnaldd_pod_zayav.AsString;  inc(j);
     E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalStudname.AsString; inc(j);
     E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalDd_birth.AsString;  inc(j);
     if dmAbiturientOtchety.adospAbitZhurnallSex.Value then
-       E.cells[i,j]:='М'
+       E.cells[i,j]:='Рњ'
     else
-       E.cells[i,j]:='Ж';   inc(j);
+       E.cells[i,j]:='Р–';   inc(j);
 
-    //образование
+    //РѕР±СЂР°Р·РѕРІР°РЅРёРµ
     str:='';
     if dmAbiturientOtchety.adospAbitZhurnalik_kat_zaved.AsString<>'' then
       str:=dmAbiturientOtchety.adospAbitZhurnalcKat_Zaved.AsString;
     str:=str+' '+dmAbiturientOtchety.adospAbitZhurnalcName_zaved.AsString;
     E.cells[i,j]:=str;
 
-    str:='';  //место работы, должность и стаж
+    str:='';  //РјРµСЃС‚Рѕ СЂР°Р±РѕС‚С‹, РґРѕР»Р¶РЅРѕСЃС‚СЊ Рё СЃС‚Р°Р¶
     inc(j);
     if dmAbiturientOtchety.adospAbitZhurnalCname_pred.AsString<>'' then
       str:=dmAbiturientOtchety.adospAbitZhurnalCname_pred.AsString;
@@ -1391,21 +1391,21 @@ begin
         str:=dmAbiturientOtchety.adospAbitZhurnalcDolgnost.AsString;
     if (dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString<>'') then
       if str<>'' then
-        str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' лет'
+        str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' Р»РµС‚'
       else
-        str:=dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' лет';
+        str:=dmAbiturientOtchety.adospAbitZhurnalStazYear.AsString+' Р»РµС‚';
     if dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString<>'' then
       if str<>'' then
-        str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' месяцев'
+        str:=str+', '+dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' РјРµСЃСЏС†РµРІ'
       else
-        str:=dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' месяцев';
+        str:=dmAbiturientOtchety.adospAbitZhurnalStazMonth.AsString+' РјРµСЃСЏС†РµРІ';
 
     E.cells[i,j]:=str;   inc(j);
 
     E.cells[i,j]:=dmAbiturientOtchety.adospAbitZhurnalCname_kat_zach.AsString;
      inc(j);
 
-    //вывод документов
+    //РІС‹РІРѕРґ РґРѕРєСѓРјРµРЅС‚РѕРІ
     str:='';
     if dmAbiturientOtchety.adospAbitDocsForZhurnal.Locate('nCode',dmAbiturientOtchety.adospAbitZhurnalnCode.Value,[loCaseInsensitive]) then
     begin
@@ -1415,9 +1415,9 @@ begin
         if (dmAbiturientOtchety.adospAbitDocsForZhurnalIk_vid_doc.Value=6) then
         begin
           if str='' then
-            str:='аттестат'
+            str:='Р°С‚С‚РµСЃС‚Р°С‚'
           else
-            str:=str+'; '+'аттестат';
+            str:=str+'; '+'Р°С‚С‚РµСЃС‚Р°С‚';
         end
         else
         begin
@@ -1427,18 +1427,18 @@ begin
             str:=str+'; '+dmAbiturientOtchety.adospAbitDocsForZhurnalcvid_doc.AsString;
         end;
         if dmAbiturientOtchety.adospAbitDocsForZhurnalCd_seria.AsString<>'' then
-           str:=str+' серия '+dmAbiturientOtchety.adospAbitDocsForZhurnalCd_seria.AsString;
+           str:=str+' СЃРµСЂРёСЏ '+dmAbiturientOtchety.adospAbitDocsForZhurnalCd_seria.AsString;
         if dmAbiturientOtchety.adospAbitDocsForZhurnalNp_number.AsString<>'' then
-           str:=str+' № '+dmAbiturientOtchety.adospAbitDocsForZhurnalNp_number.AsString;
+           str:=str+' в„– '+dmAbiturientOtchety.adospAbitDocsForZhurnalNp_number.AsString;
         if dmAbiturientOtchety.adospAbitDocsForZhurnalDd_vidan.AsString<>'' then
-           str:=str+' выдан '+dmAbiturientOtchety.adospAbitDocsForZhurnalDd_vidan.AsString+' г.';
+           str:=str+' РІС‹РґР°РЅ '+dmAbiturientOtchety.adospAbitDocsForZhurnalDd_vidan.AsString+' Рі.';
         dmAbiturientOtchety.adospAbitDocsForZhurnal.Next;
       end;
     end;
     E.cells[i,j]:=str;  inc(j);
 
-    //вывод адресов
-    str:='';  //фактический
+    //РІС‹РІРѕРґ Р°РґСЂРµСЃРѕРІ
+    str:='';  //С„Р°РєС‚РёС‡РµСЃРєРёР№
     if dmAbiturientOtchety.adospAbitZhurnalIk_Street_fact.AsString<>'' then
       if dmAbiturientOtchety.adospAbitAddressForZhurnal.Locate('Ik_street',
           dmAbiturientOtchety.adospAbitZhurnalIk_Street_fact.Value,[loCaseInsensitive]) then
@@ -1446,7 +1446,7 @@ begin
             str:=dmAbiturientOtchety.adospAbitAddressForZhurnalAddress.AsString+', '+
               dmAbiturientOtchety.adospAbitZhurnalAddressf.AsString;
       end;
-    //прописка
+    //РїСЂРѕРїРёСЃРєР°
     if (dmAbiturientOtchety.adospAbitZhurnalIk_Street_prop.AsString<>'') and
         (dmAbiturientOtchety.adospAbitZhurnalIk_Street_prop.Value<>dmAbiturientOtchety.adospAbitZhurnalIk_Street_fact.Value)or
         (dmAbiturientOtchety.adospAbitZhurnalAddressf.Value<>dmAbiturientOtchety.adospAbitZhurnalAddressp.Value) then
@@ -1461,7 +1461,7 @@ begin
               dmAbiturientOtchety.adospAbitZhurnalAddressp.AsString;
       end;
 
-    //номера телефонов
+    //РЅРѕРјРµСЂР° С‚РµР»РµС„РѕРЅРѕРІ
     if (dmAbiturientOtchety.adospAbitZhurnalctelefon.AsString<>'') then
       if (str<>'') then
         str := str+'; '+dmAbiturientOtchety.adospAbitZhurnalctelefon.AsString
@@ -1476,16 +1476,16 @@ begin
     E.cells[i,j]:=str;
      inc(j);
     if dmAbiturientOtchety.adospAbitZhurnalLobchegit.Value then
-      E.cells[i,j]:='Да'
+      E.cells[i,j]:='Р”Р°'
     else
-      E.cells[i,j]:='Нет';   inc(j);
+      E.cells[i,j]:='РќРµС‚';   inc(j);
 
     if dmAbiturientOtchety.adospAbitZhurnalik_medal.Value<>1 then
-      E.cells[i,j]:='Да'
+      E.cells[i,j]:='Р”Р°'
     else
-      E.cells[i,j]:='Нет';
+      E.cells[i,j]:='РќРµС‚';
      j:=j+3;;
-    //вывод ин. языков
+    //РІС‹РІРѕРґ РёРЅ. СЏР·С‹РєРѕРІ
     str:='';
     if dmAbiturientOtchety.adospAbitLangForZhurnal.Locate('nCode',dmAbiturientOtchety.adospAbitZhurnalnCode.Value,[loCaseInsensitive])
       then
@@ -1500,9 +1500,9 @@ begin
       end;
     E.cells[i,j]:=str;  inc(j);
 
-    //вывод экзаменов
-    balls:=0;  //общее кол-во баллов
-    exCount:=0; //кол-во экзаменов
+    //РІС‹РІРѕРґ СЌРєР·Р°РјРµРЅРѕРІ
+    balls:=0;  //РѕР±С‰РµРµ РєРѕР»-РІРѕ Р±Р°Р»Р»РѕРІ
+    exCount:=0; //РєРѕР»-РІРѕ СЌРєР·Р°РјРµРЅРѕРІ
 
     if dmAbiturientOtchety.adospAbitExForZhurnal.Locate('NN_abit',dmAbiturientOtchety.adospAbitZhurnalNN_abit.Value,[loCaseInsensitive])
       then
@@ -1525,42 +1525,42 @@ begin
             str:='+';
         end;
         case dmAbiturientOtchety.adospAbitExForZhurnalik_disc.Value of
-          1:  //математика
+          1:  //РјР°С‚РµРјР°С‚РёРєР°
               E.cells[i,j]:=str;
-          2:  //физика
+          2:  //С„РёР·РёРєР°
               E.cells[i,j+1]:=str;
-          3:  //русский
+          3:  //СЂСѓСЃСЃРєРёР№
             if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString<>'' then
-            begin   //не учитываем русский
+            begin   //РЅРµ СѓС‡РёС‚С‹РІР°РµРј СЂСѓСЃСЃРєРёР№
               if not dmAbiturientOtchety.adospAbitZhurnal.FieldByName('lRussian').AsBoolean then
               begin
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value=0 then
-                  E.cells[i,j+2]:='незачет';
+                  E.cells[i,j+2]:='РЅРµР·Р°С‡РµС‚';
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value=1 then
-                  E.cells[i,j+2]:='зачет';
+                  E.cells[i,j+2]:='Р·Р°С‡РµС‚';
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value>1 then
                   E.cells[i,j+2]:=dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString;
               end
-              else    //учитываем
+              else    //СѓС‡РёС‚С‹РІР°РµРј
                 E.cells[i,j+2]:=dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString;
             end
             else
               E.cells[i,j+2]:='+';
-          4:  //информатику
+          4:  //РёРЅС„РѕСЂРјР°С‚РёРєСѓ
             E.cells[i,j+3]:=str;
-          5:  //обществознание
+          5:  //РѕР±С‰РµСЃС‚РІРѕР·РЅР°РЅРёРµ
             E.cells[i,j+4]:=str;
-          8:  //тв. конкурс
+          8:  //С‚РІ. РєРѕРЅРєСѓСЂСЃ
             E.cells[i,j+5]:=str;
-          7:  //физ. культ.
+          7:  //С„РёР·. РєСѓР»СЊС‚.
             E.cells[i,j+6]:=str;
-          9:  //черчение
+          9:  //С‡РµСЂС‡РµРЅРёРµ
             E.cells[i,j+7]:=str;
-          10:  //композиция
+          10:  //РєРѕРјРїРѕР·РёС†РёСЏ
             E.cells[i,j+8]:=str;
-          11:  //рисунок
+          11:  //СЂРёСЃСѓРЅРѕРє
             E.cells[i,j+9]:=str;
-          12:  //биология
+          12:  //Р±РёРѕР»РѕРіРёСЏ
             E.cells[i,j+10]:=str;
         end;
         dmAbiturientOtchety.adospAbitExForZhurnal.Next;
@@ -1572,46 +1572,46 @@ begin
       E.cells[i,j]:=IntToStr(balls);
     j:= j+4;
     if dmAbiturientOtchety.adospAbitZhurnal.FieldByName('IsMain').AsBoolean then
-      E.cells[i,j]:= 'Да'
+      E.cells[i,j]:= 'Р”Р°'
     else
-      E.cells[i,j]:= 'Нет';
+      E.cells[i,j]:= 'РќРµС‚';
     //if ik_spec_fac= 73 then
      // str:='
     dmAbiturientOtchety.adospAbitZhurnal.Next;
     inc(k);
     inc(i);
   end;
-  //указываем факультет, специальность и дату
+  //СѓРєР°Р·С‹РІР°РµРј С„Р°РєСѓР»СЊС‚РµС‚, СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ Рё РґР°С‚Сѓ
   dmUgtuStructure.adoqSpecFac.Open;
   dmUgtuStructure.adoqSpecFac.Filter:='';
   if dmUgtuStructure.adoqSpecFac.Locate('ik_spec_fac',ik_spec_fac,[loCaseInsensitive]) then
   begin
      str:=dmUgtuStructure.adoqSpecFacCname_spec.AsString;
-     FindRange := E.Cells.Replace(What := '#Спец#',Replacement:=str);
+     FindRange := E.Cells.Replace(What := '#РЎРїРµС†#',Replacement:=str);
      str:=dmUgtuStructure.adoqSpecFacCshort_name_fac.AsString;
-     FindRange := E.Cells.Replace(What := '#Фак#',Replacement:=str);
+     FindRange := E.Cells.Replace(What := '#Р¤Р°Рє#',Replacement:=str);
     if (dmUgtuStructure.adoqSpecFacik_direction.AsInteger=2) then
        E.ActiveSheet.Name:=dmUgtuStructure.adoqSpecFacCshort_name_fac.AsString+' '+dmUgtuStructure.adoqSpecFacCshort_spec.AsString
      else
        E.ActiveSheet.Name:=dmUgtuStructure.adoqSpecFacCshort_name_fac.AsString+' '+dmUgtuStructure.adoqSpecFacCshort_spec.AsString
                     +dmUgtuStructure.adoqSpecFacik_direction.AsString;
   end;
-  FindRange := E.Cells.Replace(What := '#Дата#',Replacement:=ZhDate);
+  FindRange := E.Cells.Replace(What := '#Р”Р°С‚Р°#',Replacement:=ZhDate);
 end;
 
-//Экспорт журнала за 1 день и по определенной специальности
+//Р­РєСЃРїРѕСЂС‚ Р¶СѓСЂРЅР°Р»Р° Р·Р° 1 РґРµРЅСЊ Рё РїРѕ РѕРїСЂРµРґРµР»РµРЅРЅРѕР№ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 function TAbitOtchetsController.ExportDaysMagToExcel(ik_spec_fac:Variant; zurDate:TDateTime): boolean;
 var  E:Variant;
   str:string;
 begin
   result:=false;
-//открываем прoцедуры журнала
+//РѕС‚РєСЂС‹РІР°РµРј РїСЂoС†РµРґСѓСЂС‹ Р¶СѓСЂРЅР°Р»Р°
   if not OpenAllStat(null,ik_spec_fac,zurDate) then
   begin
     exit;
   end;
 
-  TApplicationController.GetInstance.AddLogEntry('Печать журнала специальности за '+DateToStr(zurDate));
+  TApplicationController.GetInstance.AddLogEntry('РџРµС‡Р°С‚СЊ Р¶СѓСЂРЅР°Р»Р° СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё Р·Р° '+DateToStr(zurDate));
 
   E := CreateOleObject('Excel.Application');
   try
@@ -1630,7 +1630,7 @@ begin
    except
     on Ex:Exception do
     begin
-    raise EApplicationException.Create('Произошла ошибка при экспорте отчета в Excel.', Ex);
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РѕС‚С‡РµС‚Р° РІ Excel.', Ex);
     E.Quit;
     end;
    end;
@@ -1639,14 +1639,14 @@ begin
   end;
 end;
 
-//задает размеры ячеек листа для журнала
-//принимает лист Excel
+//Р·Р°РґР°РµС‚ СЂР°Р·РјРµСЂС‹ СЏС‡РµРµРє Р»РёСЃС‚Р° РґР»СЏ Р¶СѓСЂРЅР°Р»Р°
+//РїСЂРёРЅРёРјР°РµС‚ Р»РёСЃС‚ Excel
 procedure TAbitOtchetsController.SetSizes(sh:Variant);
 var SmInPoint:real;
 begin
   try
-    SmInPoint:=0.035; //кол-во см в 1 точке
-    sh.PageSetup.Orientation:=2; //альбомная ориентация
+    SmInPoint:=0.035; //РєРѕР»-РІРѕ СЃРј РІ 1 С‚РѕС‡РєРµ
+    sh.PageSetup.Orientation:=2; //Р°Р»СЊР±РѕРјРЅР°СЏ РѕСЂРёРµРЅС‚Р°С†РёСЏ
       sh.Range['A1:AE1'].RowHeight:=22.5;
       sh.Range['A2:AE2'].RowHeight:=19;
       sh.Range['A3:AE3'].RowHeight:=84;
@@ -1673,7 +1673,7 @@ begin
       sh.Range['AD1'].ColumnWidth:=17;
       sh.Range['AE1'].ColumnWidth:=8.43;
       sh.Range['AF1'].ColumnWidth:=7;
-      //задаем поля в пикселях
+      //Р·Р°РґР°РµРј РїРѕР»СЏ РІ РїРёРєСЃРµР»СЏС…
       sh.PageSetup.LeftMargin:=1/SmInPoint;
       sh.PageSetup.RightMargin:=1/SmInPoint;
       sh.PageSetup.TopMargin:=1.2/SmInPoint;
@@ -1685,14 +1685,14 @@ begin
 
 end;
 
-//Экспорт всех доступных журналов
+//Р­РєСЃРїРѕСЂС‚ РІСЃРµС… РґРѕСЃС‚СѓРїРЅС‹С… Р¶СѓСЂРЅР°Р»РѕРІ
 function TAbitOtchetsController.ExportAllZhurnals(zurDate:TDateTime): boolean;
 var  E:Variant;
   str:string;
-  count:integer;  //кол-во листов в книге
-  fl:boolean;  //указывает, следует ли добавлять новый лист
+  count:integer;  //РєРѕР»-РІРѕ Р»РёСЃС‚РѕРІ РІ РєРЅРёРіРµ
+  fl:boolean;  //СѓРєР°Р·С‹РІР°РµС‚, СЃР»РµРґСѓРµС‚ Р»Рё РґРѕР±Р°РІР»СЏС‚СЊ РЅРѕРІС‹Р№ Р»РёСЃС‚
 begin
-  TApplicationController.GetInstance.AddLogEntry('Печать всех журналов специальностей за '+DateToStr(zurDate));
+  TApplicationController.GetInstance.AddLogEntry('РџРµС‡Р°С‚СЊ РІСЃРµС… Р¶СѓСЂРЅР°Р»РѕРІ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№ Р·Р° '+DateToStr(zurDate));
 
   E := CreateOleObject('Excel.Application');
   try
@@ -1701,20 +1701,20 @@ begin
 	  E.WorkBooks.Add(str);
 	  E.Visible := false;
 	  E.Sheets[1].Select;
-	  //определяем коды специальностей, на которые имеется доступ
-	  //у данного пользователя
+	  //РѕРїСЂРµРґРµР»СЏРµРј РєРѕРґС‹ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№, РЅР° РєРѕС‚РѕСЂС‹Рµ РёРјРµРµС‚СЃСЏ РґРѕСЃС‚СѓРї
+	  //Сѓ РґР°РЅРЅРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	  dm.adoqAbitSpecPermisions.Open;
-	  //начинаем цикл вывода по этим специальностям
+	  //РЅР°С‡РёРЅР°РµРј С†РёРєР» РІС‹РІРѕРґР° РїРѕ СЌС‚РёРј СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЏРј
 	  dm.adoqAbitSpecPermisions.First;
 	  fl:=true; count:=1;
 	  dmUgtuStructure.adoqSpecFac.Open;
 	  dmUgtuStructure.adoqSpecFac.Filter:='';
 	  while not dm.adoqAbitSpecPermisions.Eof do
 	  begin
-		//копируем лист
+		//РєРѕРїРёСЂСѓРµРј Р»РёСЃС‚
 		if fl then
 		begin
-		  //задаем размеры ячеек заполненного листа
+		  //Р·Р°РґР°РµРј СЂР°Р·РјРµСЂС‹ СЏС‡РµРµРє Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ Р»РёСЃС‚Р°
       try
 		    if E.Sheets.Count>1 then
 			    SetSizes(E.Sheets.item[count-1]);
@@ -1730,7 +1730,7 @@ begin
 		end;
 		if dmUgtuStructure.adoqSpecFac.Locate('ik_spec_fac',dm.adoqAbitSpecPermisionsik_spec_fac.Value,[loCaseInsensitive]) then
 		begin
-      //открываем прoцедуры журнала
+      //РѕС‚РєСЂС‹РІР°РµРј РїСЂoС†РµРґСѓСЂС‹ Р¶СѓСЂРЅР°Р»Р°
       if OpenAllStat(null,dmUgtuStructure.adoqSpecFacik_spec_fac.Value,zurDate) then
       begin
 
@@ -1745,12 +1745,12 @@ begin
 		end;
 		dm.adoqAbitSpecPermisions.Next;
 	  end;
-	  //задаем размеры ячеек заполненного листа
+	  //Р·Р°РґР°РµРј СЂР°Р·РјРµСЂС‹ СЏС‡РµРµРє Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ Р»РёСЃС‚Р°
 	  if E.Sheets.Count>2 then
 	  begin
 		  SetSizes(E.Sheets.item[count-2]);
 
-	    //удаляем лишние страницы
+	    //СѓРґР°Р»СЏРµРј Р»РёС€РЅРёРµ СЃС‚СЂР°РЅРёС†С‹
 		  E.DisplayAlerts:=false;
       E.Sheets[1].Select;
 		  //for count:=(count-1) to E.Sheets.count do
@@ -1769,7 +1769,7 @@ begin
    except
     on Ex:Exception do
     begin
-    raise EApplicationException.Create('Произошла ошибка при экспорте отчета в Excel.', Ex);
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РѕС‚С‡РµС‚Р° РІ Excel.', Ex);
     E.Quit;
     end;
    end;
@@ -1778,13 +1778,13 @@ begin
   end;
 end;
 
-//открывает все процедуры с данными для печати итогов
+//РѕС‚РєСЂС‹РІР°РµС‚ РІСЃРµ РїСЂРѕС†РµРґСѓСЂС‹ СЃ РґР°РЅРЅС‹РјРё РґР»СЏ РїРµС‡Р°С‚Рё РёС‚РѕРіРѕРІ
 function TAbitOtchetsController.OpenDataForItogi:boolean;
 begin
   result:=false;
   try
 
-		  dmAbiturientOtchety.adospAbitLangForZhurnal.Close;   //список ин. языков
+		  dmAbiturientOtchety.adospAbitLangForZhurnal.Close;   //СЃРїРёСЃРѕРє РёРЅ. СЏР·С‹РєРѕРІ
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.ProcedureName:='ABIT_get_LangvsForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.Parameters.Clear;
 		  {dmAbiturientOtchety.adospAbitLangForZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1792,7 +1792,7 @@ begin
 		  dmAbiturientOtchety.adospAbitLangForZhurnal.Parameters.CreateParameter('@NNyear',ftInteger,pdInput,4,year);
 		  }dmAbiturientOtchety.adospAbitLangForZhurnal.Open;
 
-		  dmAbiturientOtchety.adospAbitExForZhurnal.Close;   //список экзаменов
+		  dmAbiturientOtchety.adospAbitExForZhurnal.Close;   //СЃРїРёСЃРѕРє СЌРєР·Р°РјРµРЅРѕРІ
 		  dmAbiturientOtchety.adospAbitExForZhurnal.ProcedureName:='ABIT_Get_ekz_Spisok_ForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitExForZhurnal.Parameters.Clear;
 		 { dmAbiturientOtchety.adospAbitExForZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1800,7 +1800,7 @@ begin
 		  dmAbiturientOtchety.adospAbitExForZhurnal.Parameters.CreateParameter('@NNyear',ftInteger,pdInput,4,year);
 		 } dmAbiturientOtchety.adospAbitExForZhurnal.Open;
 
-		  dmAbiturientOtchety.adospAbitAddressForZhurnal.Close;   //адреса
+		  dmAbiturientOtchety.adospAbitAddressForZhurnal.Close;   //Р°РґСЂРµСЃР°
 		  dmAbiturientOtchety.adospAbitAddressForZhurnal.ProcedureName:='ABIT_get_AddrForZhurnal;1';
 		  dmAbiturientOtchety.adospAbitAddressForZhurnal.Parameters.Clear;
 		 { dmAbiturientOtchety.adospAbitAddressForZhurnal.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1811,17 +1811,17 @@ begin
 
   except
     on E:Exception do
-    raise EApplicationException.Create('Произошла ошибка при загрузке данных для отчета с сервера.', E);
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РґР°РЅРЅС‹С… РґР»СЏ РѕС‚С‡РµС‚Р° СЃ СЃРµСЂРІРµСЂР°.', E);
   end;
 end;
 
-//открывает список абитуриентов для печати итогов
+//РѕС‚РєСЂС‹РІР°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РґР»СЏ РїРµС‡Р°С‚Рё РёС‚РѕРіРѕРІ
 function TAbitOtchetsController.GetAbitListForItogi(year,ik_spec_fac:Variant):boolean;
 begin
   result:=false;
   try
-		  //открываем процедуры журнала
-		  dmAbiturientOtchety.adospItogiPostuplAbitList.Close;   //общая информация
+		  //РѕС‚РєСЂС‹РІР°РµРј РїСЂРѕС†РµРґСѓСЂС‹ Р¶СѓСЂРЅР°Р»Р°
+		  dmAbiturientOtchety.adospItogiPostuplAbitList.Close;   //РѕР±С‰Р°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ
 		  dmAbiturientOtchety.adospItogiPostuplAbitList.ProcedureName:='ABIT_get_AbitListForItogiPostupl;1';
 		  dmAbiturientOtchety.adospItogiPostuplAbitList.Parameters.Clear;
 		  dmAbiturientOtchety.adospItogiPostuplAbitList.Parameters.CreateParameter('@ik_spec_fac',ftInteger,pdInput,4,ik_spec_fac);
@@ -1833,12 +1833,12 @@ begin
 
   except
   on E:Exception do
-    raise EApplicationException.Create('Произошла ошибка при загрузке данных для отчета с сервера.', E);
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РґР°РЅРЅС‹С… РґР»СЏ РѕС‚С‡РµС‚Р° СЃ СЃРµСЂРІРµСЂР°.', E);
   end;
 end;
 
 
-//Непосредственно печать итогов по 1 специальности
+//РќРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РїРµС‡Р°С‚СЊ РёС‚РѕРіРѕРІ РїРѕ 1 СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 procedure TAbitOtchetsController.PrintItogiPost(ik_spec_fac:integer; E:Variant);
 var i,j,k,d,balls,exCount, m, count, abitcount:integer;
       //sh:Variant;
@@ -1847,12 +1847,12 @@ var i,j,k,d,balls,exCount, m, count, abitcount:integer;
       //FindRange: Variant;
       print:boolean;
 begin
-  m:=6;    //кол-во абитуриентов на одном листе
-  //определяем кол-во листов
+  m:=6;    //РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° РѕРґРЅРѕРј Р»РёСЃС‚Рµ
+  //РѕРїСЂРµРґРµР»СЏРµРј РєРѕР»-РІРѕ Р»РёСЃС‚РѕРІ
   count:=(dmAbiturientOtchety.adospItogiPostuplAbitList.RecordCount div m)+4;
   if (dmAbiturientOtchety.adospItogiPostuplAbitList.RecordCount mod m)>0 then
     inc(count);
-    //добавляем нужные страницы
+    //РґРѕР±Р°РІР»СЏРµРј РЅСѓР¶РЅС‹Рµ СЃС‚СЂР°РЅРёС†С‹
   for i:=1 to count-1 do
   begin
      E.Range['A1:Y'+inttoStr(3+m)].Copy;
@@ -1865,9 +1865,9 @@ begin
   dmUgtuStructure.adoqSpecFac.Open;
   dmUgtuStructure.adoqSpecFac.Filter:='';
   dmUgtuStructure.adoqSpecFac.Locate('ik_spec_fac',ik_spec_fac,[loCaseInsensitive]);
-  //начинаем вывод
-  i:=4; //№ строки в Excel
-  k:=1; //№ записываемого абитуриента
+  //РЅР°С‡РёРЅР°РµРј РІС‹РІРѕРґ
+  i:=4; //в„– СЃС‚СЂРѕРєРё РІ Excel
+  k:=1; //в„– Р·Р°РїРёСЃС‹РІР°РµРјРѕРіРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚Р°
   abitcount:=1;
   dmAbiturientOtchety.adospItogiPostuplAbitList.First;
   kat_zach:= '';
@@ -1907,27 +1907,27 @@ begin
       inc(i);
       continue;
     end;
-    //вывод общей информации
+    //РІС‹РІРѕРґ РѕР±С‰РµР№ РёРЅС„РѕСЂРјР°С†РёРё
     //E.cells[i,j]:=IntToStr(abitcount);
     inc(j);
     E.cells[i,j]:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('RegNomer').AsString; inc(j);
     E.cells[i,j]:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Studname').AsString; inc(j);
     E.cells[i,j]:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Dd_birth').AsString; inc(j);
     if dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('lSex').Value then
-       E.cells[i,j]:='М'
+       E.cells[i,j]:='Рњ'
     else
-       E.cells[i,j]:='Ж';   inc(j);
+       E.cells[i,j]:='Р–';   inc(j);
 
-    //образование
+    //РѕР±СЂР°Р·РѕРІР°РЅРёРµ
     str:='';
     str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('cName_zaved').AsString;
     if str<>'' then
-       str:=str+', '+dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Ngodokon').AsString+' год'
+       str:=str+', '+dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Ngodokon').AsString+' РіРѕРґ'
     else
-       str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Ngodokon').AsString+' год';
+       str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Ngodokon').AsString+' РіРѕРґ';
     E.cells[i,j]:=str;
 
-    str:='';  //место работы, должность
+    str:='';  //РјРµСЃС‚Рѕ СЂР°Р±РѕС‚С‹, РґРѕР»Р¶РЅРѕСЃС‚СЊ
      inc(j);
     if dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Cname_pred').AsString<>'' then
       str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Cname_pred').AsString;
@@ -1939,18 +1939,18 @@ begin
     E.cells[i,j]:=str;   inc(j);
     str:='';
     if (dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazYear').AsString<>'') then
-      str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazYear').AsString+' лет';
+      str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazYear').AsString+' Р»РµС‚';
     if dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazMonth').AsString<>'' then
       if str<>'' then
-        str:=str+', '+dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazMonth').AsString+' месяцев'
+        str:=str+', '+dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazMonth').AsString+' РјРµСЃСЏС†РµРІ'
       else
-        str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazMonth').AsString+' месяцев';
+        str:=dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('StazMonth').AsString+' РјРµСЃСЏС†РµРІ';
 
     E.cells[i,j]:=str;   inc(j);
 
 
-    //вывод адресa
-    str:='';  //фактический
+    //РІС‹РІРѕРґ Р°РґСЂРµСЃa
+    str:='';  //С„Р°РєС‚РёС‡РµСЃРєРёР№
     if dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Ik_Street_fact').AsString<>'' then
       if dmAbiturientOtchety.adospAbitAddressForZhurnal.Locate('Ik_street',
           dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Ik_Street_fact').Value,[loCaseInsensitive]) then
@@ -1963,21 +1963,21 @@ begin
 
      inc(j);
     if dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('ik_medal').Value<>1 then
-      E.cells[i,j]:='Да'
+      E.cells[i,j]:='Р”Р°'
     else
-      E.cells[i,j]:='Нет';
+      E.cells[i,j]:='РќРµС‚';
       inc(j);
     if dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('Lobchegit').Value then
-      E.cells[i,j]:='Да'
+      E.cells[i,j]:='Р”Р°'
     else
-      E.cells[i,j]:='Нет';   inc(j);
+      E.cells[i,j]:='РќРµС‚';   inc(j);
 
     if dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('ik_gorod').Value=504 then
-      E.cells[i,j]:='Да'
+      E.cells[i,j]:='Р”Р°'
     else
-      E.cells[i,j]:='Нет';   inc(j);
+      E.cells[i,j]:='РќРµС‚';   inc(j);
 
-    //вывод ин. языков
+    //РІС‹РІРѕРґ РёРЅ. СЏР·С‹РєРѕРІ
     str:='';
     if dmAbiturientOtchety.adospAbitLangForZhurnal.Locate('nCode',
         dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('nCode').Value,[loCaseInsensitive])
@@ -1994,9 +1994,9 @@ begin
       end;
     E.cells[i,j]:=str;  inc(j);
 
-    //вывод экзаменов
-    balls:=0;  //общее кол-во баллов
-    exCount:=0; //кол-во экзаменов
+    //РІС‹РІРѕРґ СЌРєР·Р°РјРµРЅРѕРІ
+    balls:=0;  //РѕР±С‰РµРµ РєРѕР»-РІРѕ Р±Р°Р»Р»РѕРІ
+    exCount:=0; //РєРѕР»-РІРѕ СЌРєР·Р°РјРµРЅРѕРІ
     print:=false;
     if dmAbiturientOtchety.adospAbitExForZhurnal.Locate('NN_abit',
         dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('NN_abit').Value,[loCaseInsensitive])
@@ -2025,42 +2025,42 @@ begin
         end;
 
         case dmAbiturientOtchety.adospAbitExForZhurnalik_disc.Value of
-          1:  //математика
+          1:  //РјР°С‚РµРјР°С‚РёРєР°
               E.cells[i,j]:=str;
-          2:  //физика
+          2:  //С„РёР·РёРєР°
               E.cells[i,j+1]:=str;
-          3:  //русский
+          3:  //СЂСѓСЃСЃРєРёР№
             if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString<>'' then
-            begin   //не учитываем русский
+            begin   //РЅРµ СѓС‡РёС‚С‹РІР°РµРј СЂСѓСЃСЃРєРёР№
               if not dmAbiturientOtchety.adospItogiPostuplAbitList.FieldByName('lRussian').AsBoolean then
               begin
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value=0 then
-                  E.cells[i,j+2]:='незачет';
+                  E.cells[i,j+2]:='РЅРµР·Р°С‡РµС‚';
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value=1 then
-                  E.cells[i,j+2]:='зачет';
+                  E.cells[i,j+2]:='Р·Р°С‡РµС‚';
                 if dmAbiturientOtchety.adospAbitExForZhurnalcosenka.Value>1 then
                   E.cells[i,j+2]:=dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString;
               end
-              else    //учитываем
+              else    //СѓС‡РёС‚С‹РІР°РµРј
                 E.cells[i,j+2]:=dmAbiturientOtchety.adospAbitExForZhurnalcosenka.AsString;
             end
             else
               E.cells[i,j+2]:='+';
-          4:  //информатику
+          4:  //РёРЅС„РѕСЂРјР°С‚РёРєСѓ
             E.cells[i,j+3]:=str;
-          5:  //обществознание
+          5:  //РѕР±С‰РµСЃС‚РІРѕР·РЅР°РЅРёРµ
             E.cells[i,j+4]:=str;
-          8:  //тв. конкурс
+          8:  //С‚РІ. РєРѕРЅРєСѓСЂСЃ
             E.cells[i,j+5]:=str;
-          7:  //физ. культ.
+          7:  //С„РёР·. РєСѓР»СЊС‚.
             E.cells[i,j+6]:=str;
-          9:  //черчение
+          9:  //С‡РµСЂС‡РµРЅРёРµ
             E.cells[i,j+7]:=str;
-          10:  //композиция
+          10:  //РєРѕРјРїРѕР·РёС†РёСЏ
             E.cells[i,j+8]:=str;
-          11:  //рисунок
+          11:  //СЂРёСЃСѓРЅРѕРє
             E.cells[i,j+9]:=str;
-          12:  //биология
+          12:  //Р±РёРѕР»РѕРіРёСЏ
             E.cells[i,j+10]:=str;
         end;
         dmAbiturientOtchety.adospAbitExForZhurnal.Next;
@@ -2082,7 +2082,7 @@ begin
     inc(i);
     inc(abitcount);
   end;
-  //указываем факультет, специальность и дату
+  //СѓРєР°Р·С‹РІР°РµРј С„Р°РєСѓР»СЊС‚РµС‚, СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ Рё РґР°С‚Сѓ
   dmUgtuStructure.adoqSpecFac.Open;
   dmUgtuStructure.adoqSpecFac.Filter:='';
   if dmUgtuStructure.adoqSpecFac.Locate('ik_spec_fac',ik_spec_fac,[loCaseInsensitive]) then
@@ -2097,14 +2097,14 @@ begin
   E.Range['A'+inttoStr(i)+':Y'+inttoStr((i+100))].Delete;
 end;
 
-//задает размеры ячеек листа для журнала
-//принимает лист Excel
+//Р·Р°РґР°РµС‚ СЂР°Р·РјРµСЂС‹ СЏС‡РµРµРє Р»РёСЃС‚Р° РґР»СЏ Р¶СѓСЂРЅР°Р»Р°
+//РїСЂРёРЅРёРјР°РµС‚ Р»РёСЃС‚ Excel
 procedure TAbitOtchetsController.SetItogiSizes(sh, sh1:Variant);
 //var SmInPoint:real;
 begin
-    {SmInPoint:=0.035; //кол-во см в 1 точке
+    {SmInPoint:=0.035; //РєРѕР»-РІРѕ СЃРј РІ 1 С‚РѕС‡РєРµ
     sh.PageSetup.PaperSize:=xlPaperA3;
-    sh.PageSetup.Orientation:=sh1.PageSetup.Orientation; //альбомная ориентация
+    sh.PageSetup.Orientation:=sh1.PageSetup.Orientation; //Р°Р»СЊР±РѕРјРЅР°СЏ РѕСЂРёРµРЅС‚Р°С†РёСЏ
       sh.Range['A1:AE1'].RowHeight:=sh1.Range['A1:AE1'].RowHeight;
       sh.Range['A2:AE2'].RowHeight:=sh1.Range['A2:AE2'].RowHeight;
       sh.Range['A3:AE3'].RowHeight:=sh1.Range['A3:AE3'].RowHeight;
@@ -2130,7 +2130,7 @@ begin
       sh.Range['AC1'].ColumnWidth:=sh1.Range['AC1'].ColumnWidth;
       sh.Range['AD1'].ColumnWidth:=sh1.Range['AD1'].ColumnWidth;
       sh.Range['AE1'].ColumnWidth:=sh1.Range['AE1'].ColumnWidth;
-      //задаем поля в пикселях
+      //Р·Р°РґР°РµРј РїРѕР»СЏ РІ РїРёРєСЃРµР»СЏС…
       sh.PageSetup.LeftMargin:=sh1.PageSetup.LeftMargin;
       sh.PageSetup.RightMargin:=sh1.PageSetup.RightMargin;
       sh.PageSetup.TopMargin:=sh1.PageSetup.TopMargin;
@@ -2140,12 +2140,12 @@ begin
 end;
 
 
-//Экспорт итогов поступления (списки)  для специальности
+//Р­РєСЃРїРѕСЂС‚ РёС‚РѕРіРѕРІ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ (СЃРїРёСЃРєРё)  РґР»СЏ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 procedure TAbitOtchetsController.ExportItogiPostuplForSpec(year, ik_spec_fac:variant);
 var  E:Variant;
   str:string;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Экспорт итогов поступления по специальности.');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ РёС‚РѕРіРѕРІ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ РїРѕ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё.');
 
   E := CreateOleObject('Excel.Application');
   try
@@ -2155,14 +2155,14 @@ begin
 	  E.Visible := false;
     E.DisplayAlerts:= false;
 	  E.Sheets[1].Select;
-    OpenDataForItogi; //открываем необходимые данные
-	  //начинаем цикл вывода по этим специальностям
+    OpenDataForItogi; //РѕС‚РєСЂС‹РІР°РµРј РЅРµРѕР±С…РѕРґРёРјС‹Рµ РґР°РЅРЅС‹Рµ
+	  //РЅР°С‡РёРЅР°РµРј С†РёРєР» РІС‹РІРѕРґР° РїРѕ СЌС‚РёРј СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЏРј
 
 	  dmUgtuStructure.adoqSpecFac.Open;
 	  dmUgtuStructure.adoqSpecFac.Filter:='';
 		if dmUgtuStructure.adoqSpecFac.Locate('ik_spec_fac',ik_spec_fac,[loCaseInsensitive]) then
 		begin
-      //открываем прoцедуры журнала
+      //РѕС‚РєСЂС‹РІР°РµРј РїСЂoС†РµРґСѓСЂС‹ Р¶СѓСЂРЅР°Р»Р°
       if GetAbitListForItogi(year,ik_spec_fac) then
       begin
         PrintItogiPost(dmUgtuStructure.adoqSpecFacik_spec_fac.Value, E);
@@ -2176,7 +2176,7 @@ begin
    except
     on Ex:Exception do
     begin
-    raise EApplicationException.Create('Произошла ошибка при экспорте отчета в Excel.', Ex);
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РѕС‚С‡РµС‚Р° РІ Excel.', Ex);
     E.Quit;
     end;
    end;
@@ -2186,14 +2186,14 @@ begin
 end;
 
 
-//Экспорт итогов поступления (списки)
+//Р­РєСЃРїРѕСЂС‚ РёС‚РѕРіРѕРІ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ (СЃРїРёСЃРєРё)
 procedure TAbitOtchetsController.ExportItogiPostupl(year:variant);
 var  E:Variant;
   str:string;
-  count:integer;  //кол-во листов в книге
-  fl:boolean;  //указывает, следует ли добавлять новый лист
+  count:integer;  //РєРѕР»-РІРѕ Р»РёСЃС‚РѕРІ РІ РєРЅРёРіРµ
+  fl:boolean;  //СѓРєР°Р·С‹РІР°РµС‚, СЃР»РµРґСѓРµС‚ Р»Рё РґРѕР±Р°РІР»СЏС‚СЊ РЅРѕРІС‹Р№ Р»РёСЃС‚
 begin
-  TApplicationController.GetInstance.AddLogEntry('Печать общих итогов поступления.');
+  TApplicationController.GetInstance.AddLogEntry('РџРµС‡Р°С‚СЊ РѕР±С‰РёС… РёС‚РѕРіРѕРІ РїРѕСЃС‚СѓРїР»РµРЅРёСЏ.');
 
   E := CreateOleObject('Excel.Application');
   try
@@ -2203,11 +2203,11 @@ begin
 	  E.Visible := false;
     E.DisplayAlerts:= false;
 	  E.Sheets[1].Select;
-    OpenDataForItogi; //открываем необходимые данные
-	  //определяем коды специальностей, на которые имеется доступ
-	  //у данного пользователя
+    OpenDataForItogi; //РѕС‚РєСЂС‹РІР°РµРј РЅРµРѕР±С…РѕРґРёРјС‹Рµ РґР°РЅРЅС‹Рµ
+	  //РѕРїСЂРµРґРµР»СЏРµРј РєРѕРґС‹ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№, РЅР° РєРѕС‚РѕСЂС‹Рµ РёРјРµРµС‚СЃСЏ РґРѕСЃС‚СѓРї
+	  //Сѓ РґР°РЅРЅРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	  dm.adoqAbitSpecPermisions.Open;
-	  //начинаем цикл вывода по этим специальностям
+	  //РЅР°С‡РёРЅР°РµРј С†РёРєР» РІС‹РІРѕРґР° РїРѕ СЌС‚РёРј СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЏРј
 	  dm.adoqAbitSpecPermisions.First;
 	  fl:=true; count:=1;
 	  dmUgtuStructure.adoqSpecFac.Open;
@@ -2215,19 +2215,19 @@ begin
 	  while not dm.adoqAbitSpecPermisions.Eof do
     //if not dm.adoqAbitSpecPermisions.Eof then
 	  begin
-		//копируем лист
+		//РєРѕРїРёСЂСѓРµРј Р»РёСЃС‚
 		if fl then
 		begin
-		  //задаем размеры ячеек заполненного листа
+		  //Р·Р°РґР°РµРј СЂР°Р·РјРµСЂС‹ СЏС‡РµРµРє Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ Р»РёСЃС‚Р°
 		  {if E.Sheets.Count>1 then
 			SetSizes(E.Sheets.item[count-1]);  }
 		  E.sheets.Add(after:=E.sheets.item[count]);
 		  inc(count);
 		 { E.Sheets.item[count-1].Range['A1:Y'+inttoStr(3+4)].Copy;
 		  E.Sheets.item[count].Range['A1:Y'+inttoStr(3+4)].Insert;   }
-      E.Sheets[1].Range['A1:Y'+inttoStr(50)].EntireColumn.Copy(EmptyParam); // поместим в БО
+      E.Sheets[1].Range['A1:Y'+inttoStr(50)].EntireColumn.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
       E.Sheets[count].Paste(E.Sheets.item[count].Range['A1:Y'+inttoStr(50), EmptyParam], EmptyParam);
-      E.Sheets[1].Range['A1:Y'+inttoStr(50)].EntireRow.Copy(EmptyParam); // поместим в БО
+      E.Sheets[1].Range['A1:Y'+inttoStr(50)].EntireRow.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
       E.Sheets[count].Paste(E.Sheets.item[count].Range['A1:Y'+inttoStr(50), EmptyParam], EmptyParam);
       E.Sheets[count].PageSetup.PaperSize:=xlPaperA3;
 		  E.Sheets[count-1].Select;
@@ -2235,7 +2235,7 @@ begin
 		end;
 		if dmUgtuStructure.adoqSpecFac.Locate('ik_spec_fac',dm.adoqAbitSpecPermisionsik_spec_fac.Value,[loCaseInsensitive]) then
 		begin
-      //открываем прoцедуры журнала
+      //РѕС‚РєСЂС‹РІР°РµРј РїСЂoС†РµРґСѓСЂС‹ Р¶СѓСЂРЅР°Р»Р°
       if GetAbitListForItogi(year,dmUgtuStructure.adoqSpecFacik_spec_fac.Value) then
       begin
         PrintItogiPost(dmUgtuStructure.adoqSpecFacik_spec_fac.Value, E);
@@ -2244,12 +2244,12 @@ begin
 		end;
 		dm.adoqAbitSpecPermisions.Next;
 	  end;
-	  //задаем размеры ячеек заполненного листа
+	  //Р·Р°РґР°РµРј СЂР°Р·РјРµСЂС‹ СЏС‡РµРµРє Р·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ Р»РёСЃС‚Р°
 	  if E.Sheets.Count>2 then
 	  begin
 		  //SetItogiSizes(E.Sheets.item[count-2],E.Sheets.item[1]);
 
-	    //удаляем лишние страницы
+	    //СѓРґР°Р»СЏРµРј Р»РёС€РЅРёРµ СЃС‚СЂР°РЅРёС†С‹
       E.Sheets[1].Select;
 		  //for count:=(count-1) to E.Sheets.count do
       E.Sheets.item[count].Delete;
@@ -2266,7 +2266,7 @@ begin
    except
     on Ex:Exception do
     begin
-    raise EApplicationException.Create('Произошла ошибка при экспорте отчета в Excel.', Ex);
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РѕС‚С‡РµС‚Р° РІ Excel.', Ex);
     E.Quit;
     end;
    end;
@@ -2275,10 +2275,10 @@ begin
   end;
 end;
 
-//экспорт списка абитуриентов на дополнительную специальность в Excel
+//СЌРєСЃРїРѕСЂС‚ СЃРїРёСЃРєР° Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅСѓСЋ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ РІ Excel
 procedure TAbitOtchetsController.ExportAbitListForDopspecToExcel(nnyear:integer );
-const l=2;            //кол-во строк заголовка
-      m=46;           //кол-во абитуриентов на 1 странице
+const l=2;            //РєРѕР»-РІРѕ СЃС‚СЂРѕРє Р·Р°РіРѕР»РѕРІРєР°
+      m=46;           //РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° 1 СЃС‚СЂР°РЅРёС†Рµ
       exEnd='G';
 var
   E: Variant;
@@ -2307,7 +2307,7 @@ begin
           if (specNumber<>tempStoredProc.FieldByName('SpecNumber').Value) or
               (tempStoredProc.Eof) then
           begin
-            //перенастраиваем старую специальность
+            //РїРµСЂРµРЅР°СЃС‚СЂР°РёРІР°РµРј СЃС‚Р°СЂСѓСЋ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
             if specNumber > -1 then
             begin
               dec(i);
@@ -2321,11 +2321,11 @@ begin
             end;
             if tempStoredProc.Eof then
                break;
-            //добавляем страницу и настраиваем
+            //РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂР°РЅРёС†Сѓ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј
             E.sheets.Add(after:=E.sheets.item[pagecount-1]);
-						E.Sheets[1].Range['A1:'+exEnd+inttoStr(50)].EntireColumn.Copy(EmptyParam); // поместим в БО
+						E.Sheets[1].Range['A1:'+exEnd+inttoStr(50)].EntireColumn.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
 						E.Sheets[pagecount].Paste(E.Sheets.item[pagecount].Range['A1:'+exEnd+inttoStr(50), EmptyParam], EmptyParam);
-						E.Sheets[1].Range['A1:'+exEnd+inttoStr(50)].EntireRow.Copy(EmptyParam); // поместим в БО
+						E.Sheets[1].Range['A1:'+exEnd+inttoStr(50)].EntireRow.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
 						E.Sheets[pagecount].Paste(E.Sheets.item[pagecount].Range['A1:'+exEnd+inttoStr(50), EmptyParam], EmptyParam);
             E.Sheets[pagecount].PageSetup.LeftMargin:=E.Sheets[1].PageSetup.LeftMargin;
             E.Sheets[pagecount].PageSetup.RightMargin:=E.Sheets[1].PageSetup.RightMargin;
@@ -2334,19 +2334,19 @@ begin
             E.Sheets[pagecount].PageSetup.Orientation:=E.Sheets[1].PageSetup.Orientation;
             specNumber:=tempStoredProc.FieldByName('SpecNumber').Value;
 
-            E.Sheets[pagecount].name:= IntToStr(SpecNumber)+'-я специальность';
+            E.Sheets[pagecount].name:= IntToStr(SpecNumber)+'-СЏ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ';
             E.Sheets[pagecount].Select;
             E.Cells.Replace(What := '#SpecNumber#',Replacement:=IntToStr(SpecNumber));
-            //проверка на повтор названия специальности
+            //РїСЂРѕРІРµСЂРєР° РЅР° РїРѕРІС‚РѕСЂ РЅР°Р·РІР°РЅРёСЏ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
             i:= l+1;
             inc(pagecount);
             abitcount:=1;
           end;
 
-          //добавляем заголовок
+          //РґРѕР±Р°РІР»СЏРµРј Р·Р°РіРѕР»РѕРІРѕРє
           if (abitcount>1) and (((abitcount-1) mod m)=0) or (tempStoredProc.Eof) then
           begin                  // +exEnd+inttoStr(l)
-				 		E.Sheets[pagecount-1].Range['A1:'+exEnd+inttoStr(l)].EntireRow.Copy(EmptyParam); // поместим в БО
+				 		E.Sheets[pagecount-1].Range['A1:'+exEnd+inttoStr(l)].EntireRow.Copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
 						E.Sheets[pagecount-1].Paste(E.Sheets[pagecount-1].Range['A'+inttoStr(i)+':'+exEnd+inttoStr(i+l-1), EmptyParam], EmptyParam);
             dec(i);
             {if tempStoredProc.Eof then
@@ -2377,7 +2377,7 @@ begin
 
         except
             E.Quit;
-            raise EApplicationException.Create('Ошибка при экспорте в Excel');
+            raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ Excel');
         end;
 
 
@@ -2390,7 +2390,7 @@ begin
         else
         begin
           E.Quit;
-          raise EApplicationException.Create('Таких абитуриентов нет.');
+          raise EApplicationException.Create('РўР°РєРёС… Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅРµС‚.');
         end;
       finally
         E:= UnAssigned;
@@ -2402,7 +2402,7 @@ begin
     end;
 end;
 
-//открывает список абитуриентов для доп. специальности
+//РѕС‚РєСЂС‹РІР°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РґР»СЏ РґРѕРї. СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 function TAbitOtchetsController.OpenAbitListForDopSpec( nnyear:integer):TADOStoredProc;
 begin
   Result := TADOStoredProc.Create(nil);
@@ -2414,7 +2414,7 @@ begin
 end;
 
 
-//открывает данные для экспорта заявления на карточку Газпрома
+//РѕС‚РєСЂС‹РІР°РµС‚ РґР°РЅРЅС‹Рµ РґР»СЏ СЌРєСЃРїРѕСЂС‚Р° Р·Р°СЏРІР»РµРЅРёСЏ РЅР° РєР°СЂС‚РѕС‡РєСѓ Р“Р°Р·РїСЂРѕРјР°
 function TAbitOtchetsController.GetAbitDataForGazpromZayavl(NNAbit:integer):TADOStoredProc;
 begin
   Result := TADOStoredProc.Create(nil);
@@ -2433,7 +2433,7 @@ var W, MyRange, table:variant;
     i: integer;
     DataForStatement: TADOStoredProc;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Экспорт в Word заявления на карточку Газпром.');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ РІ Word Р·Р°СЏРІР»РµРЅРёСЏ РЅР° РєР°СЂС‚РѕС‡РєСѓ Р“Р°Р·РїСЂРѕРј.');
   DataForStatement:= GetAbitDataForGazpromZayavl(NNAbit);
 	try
 	  W:=CreateOleObject('Word.Application');
@@ -2453,7 +2453,7 @@ begin
     TGeneralController.Instance.FindAndInsert(W,'#SotTelNumber#',DataForStatement.FieldByName('cSotTel').AsString);
     TGeneralController.Instance.FindAndInsert(W,'#eMail#',DataForStatement.FieldByName('cEmail').AsString);
     TGeneralController.Instance.FindAndInsert(W,'#Passport#',DataForStatement.FieldByName('PCd_kem_vidan').AsString);
-    TGeneralController.Instance.FindAndInsert(W,'#Non#','Серия Номер Выдан');
+    TGeneralController.Instance.FindAndInsert(W,'#Non#','РЎРµСЂРёСЏ РќРѕРјРµСЂ Р’С‹РґР°РЅ');
 
     LastName:= DataForStatement.FieldByName('TrLastName').AsString;
     FirstName:= DataForStatement.FieldByName('TrFirstName').AsString;
@@ -2492,15 +2492,15 @@ begin
 end;
 
 
-//****************Экспорт заявления в Excel*******************
-//открывает список абитуриентов для доп. специальности
+//****************Р­РєСЃРїРѕСЂС‚ Р·Р°СЏРІР»РµРЅРёСЏ РІ Excel*******************
+//РѕС‚РєСЂС‹РІР°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РґР»СЏ РґРѕРї. СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 procedure TAbitOtchetsController.ExportZayavl(NN_abit:integer);
 var
   E: Variant;
   TmplFile: String;
   FindRange: Variant;
 //  Range: Variant;
-  str, str1: String;   // строка, которую будем вставлять в нужное место в шаблоне
+  str, str1: String;   // СЃС‚СЂРѕРєР°, РєРѕС‚РѕСЂСѓСЋ Р±СѓРґРµРј РІСЃС‚Р°РІР»СЏС‚СЊ РІ РЅСѓР¶РЅРѕРµ РјРµСЃС‚Рѕ РІ С€Р°Р±Р»РѕРЅРµ
   i: Integer;
 begin
   try
@@ -2539,7 +2539,7 @@ begin
       on Ex:Exception do
       begin
         E.Quit;
-        raise EApplicationException.Create('Ошибка при экспорте заявления в Excel', Ex);
+        raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ Р·Р°СЏРІР»РµРЅРёСЏ РІ Excel', Ex);
       end;
       end;
     finally
@@ -2553,56 +2553,56 @@ begin
 
 end;
 
-//экспортируем данные в заявление
+//СЌРєСЃРїРѕСЂС‚РёСЂСѓРµРј РґР°РЅРЅС‹Рµ РІ Р·Р°СЏРІР»РµРЅРёРµ
 procedure TAbitOtchetsController.FillTheZayavl(E:OleVariant);
 var
   FindRange: Variant;
   i: Integer;
-  paspMonth: string;  //месяц выдачи паспорта
-  zayavlMonth: string;  //месяц выдачи заявления
+  paspMonth: string;  //РјРµСЃСЏС† РІС‹РґР°С‡Рё РїР°СЃРїРѕСЂС‚Р°
+  zayavlMonth: string;  //РјРµСЃСЏС† РІС‹РґР°С‡Рё Р·Р°СЏРІР»РµРЅРёСЏ
   str, str1:string;
 begin
 
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Экспорт заявления '+dmAbiturientAction.adospPrintZayavlClastname.AsString);
-	  // вывод общих сведений
+    TApplicationController.GetInstance.AddLogEntry('РђР±РёС‚СѓСЂРёРµРЅС‚. Р­РєСЃРїРѕСЂС‚ Р·Р°СЏРІР»РµРЅРёСЏ '+dmAbiturientAction.adospPrintZayavlClastname.AsString);
+	  // РІС‹РІРѕРґ РѕР±С‰РёС… СЃРІРµРґРµРЅРёР№
 	  str := dmAbiturientAction.adospPrintZayavlRegNomer.AsString;
-	  FindRange := E.Cells.Replace(What := '#Номер#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РќРѕРјРµСЂ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlClastname.AsString;
-	  FindRange := E.Cells.Replace(What := '#Фамилия#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р¤Р°РјРёР»РёСЏ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlCfirstname.AsString;
-	  FindRange := E.Cells.Replace(What := '#Имя#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РРјСЏ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlCotch.AsString;
-	  FindRange := E.Cells.Replace(What := '#Отчество#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РћС‚С‡РµСЃС‚РІРѕ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlDd_birth.AsString;
-	  FindRange := E.Cells.Replace(What := '#ДатаР#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р”Р°С‚Р°Р #',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlCplacebirth.AsString;
-	  FindRange := E.Cells.Replace(What := '#МестоР#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РњРµСЃС‚РѕР #',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlc_grazd.AsString;
-	  FindRange := E.Cells.Replace(What := '#Гражд#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р“СЂР°Р¶Рґ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavludostover.AsString;
-	  FindRange := E.Cells.Replace(What := '#Пасп#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РџР°СЃРї#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlPCd_seria.AsString;
-	  FindRange := E.Cells.Replace(What := '#СерияП#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РЎРµСЂРёСЏРџ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlPNp_number.AsString;
-	  FindRange := E.Cells.Replace(What := '#НомерП#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РќРѕРјРµСЂРџ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlPDate.AsString;
-	  FindRange := E.Cells.Replace(What := '#ДатаВыд#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р”Р°С‚Р°Р’С‹Рґ#',Replacement:=str);
     paspMonth := GetMonthR(dmAbiturientAction.adospPrintZayavlPMonth.Value);
-	  FindRange := E.Cells.Replace(What := '#Месяц#',Replacement:=paspMonth);
+	  FindRange := E.Cells.Replace(What := '#РњРµСЃСЏС†#',Replacement:=paspMonth);
 	  str := dmAbiturientAction.adospPrintZayavlPYear.AsString;
-	  FindRange := E.Cells.Replace(What := '#Год#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р“РѕРґ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlPCd_kem_vidan.AsString;
-	  FindRange := E.Cells.Replace(What := '#Выдан#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р’С‹РґР°РЅ#',Replacement:=str);
 	  if (dmAbiturientAction.adospPrintZayavlcIndex_fact.AsString='') then
 		  str := ''
 	  else
       str:=dmAbiturientAction.adospPrintZayavlcIndex_fact.AsString+', ';
 	  str:=str+dmAbiturientAction.adospPrintZayavlAddress1.AsString;
-	  FindRange := E.Cells.Replace(What := '#Адрес1#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РђРґСЂРµСЃ1#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlAddress2.AsString;
-	  FindRange := E.Cells.Replace(What := '#Адрес2#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РђРґСЂРµСЃ2#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlAddress3.AsString;
-	  FindRange := E.Cells.Replace(What := '#Адрес3#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РђРґСЂРµСЃ3#',Replacement:=str);
 	  str := '';
 	  if (dmAbiturientAction.adospPrintZayavlctelefon.AsString<>'') then
 		  str := dmAbiturientAction.adospPrintZayavlctelefon.AsString;
@@ -2614,11 +2614,11 @@ begin
 		    str := dmAbiturientAction.adospPrintZayavlcSotTel.AsString ;
     end;
 
-	  FindRange := E.Cells.Replace(What := '#Телефон#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РўРµР»РµС„РѕРЅ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlCname_spec.AsString;
-	  FindRange := E.Cells.Replace(What := '#Спец#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РЎРїРµС†#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlCname_fac.AsString;
-	  FindRange := E.Cells.Replace(What := '#Фак#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р¤Р°Рє#',Replacement:=str);
 	  if dmAbiturientAction.adospPrintZayavl.FieldByName('Ik_form_ed').AsInteger=1 then
 		 E.Range['B'+inttostr(26)+':B'+inttostr(26)]:='R'
 	  else
@@ -2633,28 +2633,28 @@ begin
 
 
 	  str := dmAbiturientAction.adospPrintZayavlNgodokon.AsString;
-	  FindRange := E.Cells.Replace(What := '#ГодОк#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р“РѕРґРћРє#',Replacement:=str);
 	  case dmAbiturientAction.adospPrintZayavlAIk_vid_doc.AsInteger of
-		  6: //общеобразовательное полное
+		  6: //РѕР±С‰РµРѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅРѕРµ РїРѕР»РЅРѕРµ
 		    E.Range['AD4:AD4']:='R';
-      14: //общеобразовательное основное
+      14: //РѕР±С‰РµРѕР±СЂР°Р·РѕРІР°С‚РµР»СЊРЅРѕРµ РѕСЃРЅРѕРІРЅРѕРµ
 		    E.Range['AD3:AD3']:='R';
-		  8: //начальное
+		  8: //РЅР°С‡Р°Р»СЊРЅРѕРµ
 		    E.Range['AC5:AC5']:='R';
-		  7: //среднее
+		  7: //СЃСЂРµРґРЅРµРµ
 		    E.Range['AC6:AC6']:='R';
 	  end;
 
     if (dmAbiturientAction.adospPrintZayavlAIk_vid_doc.AsInteger=14) then
-      str:= 'ГИА'
+      str:= 'Р“РРђ'
     else
-      str:= 'ЕГЭ';
-	  FindRange := E.Cells.Replace(What := '#ВидЭкз#',Replacement:=str);
+      str:= 'Р•Р“Р­';
+	  FindRange := E.Cells.Replace(What := '#Р’РёРґР­РєР·#',Replacement:=str);
 
 	  str := dmAbiturientAction.adospPrintZayavlACd_seria.AsString;
-	  FindRange := E.Cells.Replace(What := '#Серия#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РЎРµСЂРёСЏ#',Replacement:=str);
 	  str := dmAbiturientAction.adospPrintZayavlANp_number.AsString;
-	  FindRange := E.Cells.Replace(What := '#НомерАт#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#РќРѕРјРµСЂРђС‚#',Replacement:=str);
 	  if dmAbiturientAction.adospPrintZayavlik_medal.AsInteger<>1 then
 		  E.Range['X'+inttostr(8)+':X'+inttostr(8)]:='R';
 
@@ -2677,7 +2677,7 @@ begin
 	  if (not dmAbiturientAction.adospPrintZayavlIsNotFirstEducation.AsBoolean) then
 		 E.Range['AA'+inttostr(18)+':AA'+inttostr(18)]:='R';
 
-	  //вывод иностранных языков
+	  //РІС‹РІРѕРґ РёРЅРѕСЃС‚СЂР°РЅРЅС‹С… СЏР·С‹РєРѕРІ
 
 
 	  dmStudentSelectionProcs.aspSelLanguage.First;
@@ -2694,42 +2694,42 @@ begin
 			    str:=str+', '+dmStudentSelectionProcs.aspSelLanguageLang.AsString;
       end;
 			case dmStudentSelectionProcs.aspSelLanguageIk_lang.AsInteger of
-			  0: //не изучал
+			  0: //РЅРµ РёР·СѓС‡Р°Р»
 				 E.Range['Y'+inttostr(12)+':Y'+inttostr(12)]:='R';
-			  1: //английский
+			  1: //Р°РЅРіР»РёР№СЃРєРёР№
 				 E.Range['Q'+inttostr(11)+':Q'+inttostr(11)]:='R';
-			  2: //французский
+			  2: //С„СЂР°РЅС†СѓР·СЃРєРёР№
 				 E.Range['AB'+inttostr(11)+':AB'+inttostr(11)]:='R';
-			  3: //немецкий
+			  3: //РЅРµРјРµС†РєРёР№
 				 E.Range['X'+inttostr(11)+':X'+inttostr(11)]:='R';
-			  4: //другой
+			  4: //РґСЂСѓРіРѕР№
 				 E.Range['P'+inttostr(12)+':P'+inttostr(12)]:='R';
 			end;
 			dmStudentSelectionProcs.aspSelLanguage.Next;
 	  end;
 
-	  FindRange := E.Cells.Replace(What := '#ДругойЯз#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р”СЂСѓРіРѕР№РЇР·#',Replacement:=str);
 	  if (str<>'') then
 		  E.Range['P'+inttostr(12)+':P'+inttostr(12)]:='R';
 
 	  str:=dmAbiturientAction.adospPrintZayavlCLgot.AsString;
-	  FindRange := E.Cells.Replace(What := '#Льготы#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р›СЊРіРѕС‚С‹#',Replacement:=str);
 	  str:=dmAbiturientAction.adospPrintZayavlFIO.AsString;
-	  FindRange := E.Cells.Replace(What := '#ФИО#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р¤РРћ#',Replacement:=str);
 
-	  //вывод экзаменов
+	  //РІС‹РІРѕРґ СЌРєР·Р°РјРµРЅРѕРІ
 	  //E.Sheets[1].Select;
 	  dmAbiturientOtchety.adoPrintExams.First;
-	  i:=33; //вывод имеющихся оценок
+	  i:=33; //РІС‹РІРѕРґ РёРјРµСЋС‰РёС…СЃСЏ РѕС†РµРЅРѕРє
 	  while (not dmAbiturientOtchety.adoPrintExams.Eof)
 		  and (dmAbiturientOtchety.adoPrintExamscosenka.Value>-1) do
 	  begin
 			E.Cells[i,1]:='   '+dmAbiturientOtchety.adoPrintExamsname_disc.AsString;
 			E.Range['D'+inttostr(i)+':D'+inttostr(i)]:=dmAbiturientOtchety.adoPrintExamscosenka.AsString;
 			case dmAbiturientOtchety.adoPrintExamsik_sdach.AsInteger of
-				3:  //олимпиада
+				3:  //РѕР»РёРјРїРёР°РґР°
 				E.Range['I'+inttostr(i)+':I'+inttostr(i)]:='+';
-				5:  //ЕГЭ
+				5:  //Р•Р“Р­
 				E.Range['H'+inttostr(i)+':H'+inttostr(i)]:='+';
 			end;
 			E.Range['J'+inttostr(i)+':J'+inttostr(i)]:=dmAbiturientOtchety.adoPrintExamsNNvedom.AsString;
@@ -2738,20 +2738,20 @@ begin
 	  end;
 
 	  str := dmAbiturientAction.adospPrintZayavlZDate.AsString;
-	  FindRange := E.Cells.Replace(What := '#ДатаЗ#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р”Р°С‚Р°Р—#',Replacement:=str);
     zayavlMonth := GetMonthR(dmAbiturientAction.adospPrintZayavlZMonth.AsInteger);
-	  FindRange := E.Cells.Replace(What := '#МесяцЗ#',Replacement:=zayavlMonth);
+	  FindRange := E.Cells.Replace(What := '#РњРµСЃСЏС†Р—#',Replacement:=zayavlMonth);
 	  str := dmAbiturientAction.adospPrintZayavlZYear.AsString;
-	  FindRange := E.Cells.Replace(What := '#ГодЗ#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р“РѕРґР—#',Replacement:=str);
     str := dmAbiturientAction.adospPrintZayavl.FieldByName('cEmail').AsString;
-	  FindRange := E.Cells.Replace(What := '#ЭлАдрес#',Replacement:=str);
+	  FindRange := E.Cells.Replace(What := '#Р­Р»РђРґСЂРµСЃ#',Replacement:=str);
 
     if (dmAbiturientAction.adospPrintZayavl.FieldByName('currentIK_kat_zaved').AsInteger < 4) then
       E.Range['O21:Z21'].VerticalAlignment:=integer(xlVAlignDistributed);
 	  str := dmAbiturientAction.adospPrintZayavl.FieldByName('EducationLevelName').AsString;
 	  FindRange := E.Cells.Replace(What := '#educLevel#',Replacement:=str);
 
-	  //вывод экзаменов, которые будут сдаваться
+	  //РІС‹РІРѕРґ СЌРєР·Р°РјРµРЅРѕРІ, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ СЃРґР°РІР°С‚СЊСЃСЏ
 	  dmAbiturientOtchety.adoPrintExams.Filter:='cosenka<0';
 	  dmAbiturientOtchety.adoPrintExams.Filtered:=true;
 	  str := '';
@@ -2761,7 +2761,7 @@ begin
 	  begin
 		  E.Cells[i,3]:= str+dmAbiturientOtchety.adoPrintExamsname_disc.AsString;
 			{case dmAbiturientOtchety.adoPrintExamsik_sdach.AsInteger of
-				5:  //ЕГЭ
+				5:  //Р•Р“Р­
 				  E.Range['G'+inttostr(i)+':G'+inttostr(i)]:='R';
         else }
           E.Range['N'+inttostr(i)+':N'+inttostr(i)]:='R';
@@ -2770,7 +2770,7 @@ begin
 		  dmAbiturientOtchety.adoPrintExams.Next;
 	  end;
 
-	  //в доп сведения добавляем данные о дипломах
+	  //РІ РґРѕРї СЃРІРµРґРµРЅРёСЏ РґРѕР±Р°РІР»СЏРµРј РґР°РЅРЅС‹Рµ Рѕ РґРёРїР»РѕРјР°С…
 	  str:=dmAbiturientAction.adospPrintZayavlCdopsved.AsString;
 	  dmAbiturientAction.adospAbit_docsForZayavl.First;
 	  str1:='';
@@ -2781,9 +2781,9 @@ begin
 			else
 			  str1:=str1+', '+ dmAbiturientAction.adospAbit_docsForZayavlcvid_doc.AsString+' ';
 			if (dmAbiturientAction.adospAbit_docsForZayavlCd_seria.AsString<>'') then
-			  str1:= str1+'серия '+dmAbiturientAction.adospAbit_docsForZayavlCd_seria.AsString+' ';
+			  str1:= str1+'СЃРµСЂРёСЏ '+dmAbiturientAction.adospAbit_docsForZayavlCd_seria.AsString+' ';
 			if (dmAbiturientAction.adospAbit_docsForZayavlNp_number.AsString<>'') then
-			  str1:= str1+'№ '+dmAbiturientAction.adospAbit_docsForZayavlNp_number.AsString+'';
+			  str1:= str1+'в„– '+dmAbiturientAction.adospAbit_docsForZayavlNp_number.AsString+'';
 			dmAbiturientAction.adospAbit_docsForZayavl.Next;
 	  end;
 	  if (str1<>'') and (str<>'') then
@@ -2796,14 +2796,14 @@ begin
 end;
 
 
-//экспорт отчета по предварительному зачислению
+//СЌРєСЃРїРѕСЂС‚ РѕС‚С‡РµС‚Р° РїРѕ РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕРјСѓ Р·Р°С‡РёСЃР»РµРЅРёСЋ
 procedure TAbitOtchetsController.ExportPredvSpisok(NNyear:integer);
 var
   E: Variant;
   TmplFile: String;
   FindRange: Variant;
 //  Range: Variant;
-  str, str1: String;   // строка, которую будем вставлять в нужное место в шаблоне
+  str, str1: String;   // СЃС‚СЂРѕРєР°, РєРѕС‚РѕСЂСѓСЋ Р±СѓРґРµРј РІСЃС‚Р°РІР»СЏС‚СЊ РІ РЅСѓР¶РЅРѕРµ РјРµСЃС‚Рѕ РІ С€Р°Р±Р»РѕРЅРµ
   i: Integer;
 begin
   try
@@ -2826,7 +2826,7 @@ begin
       on Ex:Exception do
       begin
         E.Quit;
-        raise EApplicationException.Create('Ошибка при экспорте заявления в Excel', Ex);
+        raise EApplicationException.Create('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ Р·Р°СЏРІР»РµРЅРёСЏ РІ Excel', Ex);
       end;
       end;
     finally
@@ -2841,8 +2841,8 @@ begin
 end;
 
 
-//****************Экспорт заявления в Excel*******************
-//открывает список абитуриентов для доп. специальности
+//****************Р­РєСЃРїРѕСЂС‚ Р·Р°СЏРІР»РµРЅРёСЏ РІ Excel*******************
+//РѕС‚РєСЂС‹РІР°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РґР»СЏ РґРѕРї. СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
 procedure TAbitOtchetsController.ExportEnrollAgreement(NN_abit:integer);
 var
   Report:TReportBase;
@@ -2856,14 +2856,14 @@ begin
 end;
 
 
-// экспорт протокола о зачислении в Excel
+// СЌРєСЃРїРѕСЂС‚ РїСЂРѕС‚РѕРєРѕР»Р° Рѕ Р·Р°С‡РёСЃР»РµРЅРёРё РІ Excel
 procedure TAbitOtchetsController.ExportProtokolToExcel(year: integer);
 const
-  l = 12; // кол-во строк заголовка
-  m = 1000; // кол-во абитуриентов на 1 странице
+  l = 12; // РєРѕР»-РІРѕ СЃС‚СЂРѕРє Р·Р°РіРѕР»РѕРІРєР°
+  m = 1000; // РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ РЅР° 1 СЃС‚СЂР°РЅРёС†Рµ
   exEnd = 'E';
   RowHeigh = 45;
-  ResultState = 'Допустить';
+  ResultState = 'Р”РѕРїСѓСЃС‚РёС‚СЊ';
 var
   E: Variant;
   pagecount, spec: Integer;
@@ -2879,17 +2879,16 @@ begin
   else
     dateProt:=Date;
 
-  if not TGeneralController.Instance.SetReportDate(dateProt, 'протокола') then
+  if not TGeneralController.Instance.SetReportDate(dateProt, 'РїСЂРѕС‚РѕРєРѕР»Р°') then
     exit;
 
-  TApplicationController.GetInstance.AddLogEntry
-    ('Экспорт протокола зачисления в Excel');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ РїСЂРѕС‚РѕРєРѕР»Р° Р·Р°С‡РёСЃР»РµРЅРёСЏ РІ Excel');
+
   with DMAbiturientNabor.adospAbitGetPostupStatistika do
   begin
     DisableControls;
-      // отсортировать
+      // РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ
     currentSort := sort;
-      //sort := 'dd_pod_zayav,Cshort_name_fac, cname_spec, ik_spec_fac, fio';
     sort := 'ik_spec_fac';
     spec := -1;
     AbitCount := 1;
@@ -2913,7 +2912,7 @@ begin
             if (spec <> FieldByName('ik_spec_fac').Value) or (Eof) then
             begin
 
-              // перенастраиваем старую специальность
+              // РїРµСЂРµРЅР°СЃС‚СЂР°РёРІР°РµРј СЃС‚Р°СЂСѓСЋ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
               if spec > -1 then
               begin
                 dec(i);
@@ -2921,21 +2920,18 @@ begin
 
                 if j > 0 then
                 begin
-                  E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
-                    ].Borders.Weight := 2;
-                  E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)
-                    ].RowHeight := RowHeigh;
-                  E.Range['A' + IntToStr(i+1) + ':' + exEnd + IntToStr(i+3)
-                    ].RowHeight := 19;
+                  E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)].Borders.Weight := 2;
+                  E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)].RowHeight := RowHeigh;
+                  E.Range['A' + IntToStr(i+1) + ':' + exEnd + IntToStr(i+3)].RowHeight := 19;
                 end;
 
                 inc(i);
-                E.Cells[i, 1] :='Ответственный секретарь';
+                E.Cells[i, 1] :='РћС‚РІРµС‚СЃС‚РІРµРЅРЅС‹Р№ СЃРµРєСЂРµС‚Р°СЂСЊ';
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
 
                 inc(i);
-                E.Cells[i, 1] :='приемной комиссии';
+                E.Cells[i, 1] :='РїСЂРёРµРјРЅРѕР№ РєРѕРјРёСЃСЃРёРё';
                 E.Cells[i, 5] := HeadOfPrCom;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].Merge(true);
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].Merge(true);
@@ -2951,29 +2947,22 @@ begin
               if Eof then
                 break;
 
-              // добавляем страницу и настраиваем
+              // РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂР°РЅРёС†Сѓ Рё РЅР°СЃС‚СЂР°РёРІР°РµРј
               E.Sheets.add(after := E.Sheets.Item[pagecount - 1]);
-              E.Sheets[1].Range['A1:' + exEnd + IntToStr(50)
-                ].EntireColumn.copy(EmptyParam); // поместим в БО
-              E.Sheets[pagecount].Paste(E.Sheets.Item[pagecount].Range
-                ['A1:' + exEnd + IntToStr(50), EmptyParam], EmptyParam);
-              E.Sheets[1].Range['A1:' + exEnd + IntToStr(50)
-                ].EntireRow.copy(EmptyParam); // поместим в БО
-              E.Sheets[pagecount].Paste(E.Sheets.Item[pagecount].Range
-                ['A1:' + exEnd + IntToStr(50), EmptyParam], EmptyParam);
-              E.Sheets[pagecount].PageSetup.LeftMargin :=
-                E.Sheets[1].PageSetup.LeftMargin;
-              E.Sheets[pagecount].PageSetup.RightMargin :=
-                E.Sheets[1].PageSetup.RightMargin;
-              E.Sheets[pagecount].PageSetup.TopMargin :=
-                E.Sheets[1].PageSetup.TopMargin;
-              E.Sheets[pagecount].PageSetup.BottomMargin :=
-                E.Sheets[1].PageSetup.BottomMargin;
-              E.Sheets[pagecount].PageSetup.Orientation :=
-                E.Sheets[1].PageSetup.Orientation;
-              E.Sheets[pagecount].Name := FieldByName('Cshort_name_fac').AsString + ' ' +
-                  FieldByName('Cshort_spec').AsString +
-                  FieldByName('ik_spec_fac').AsString;
+              E.Sheets[1].Range['A1:' + exEnd + IntToStr(50)].EntireColumn.copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
+              E.Sheets[pagecount].Paste(E.Sheets.Item[pagecount].Range['A1:' + exEnd + IntToStr(50), EmptyParam], EmptyParam);
+              E.Sheets[1].Range['A1:' + exEnd + IntToStr(50)].EntireRow.copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
+              E.Sheets[pagecount].Paste(E.Sheets.Item[pagecount].Range['A1:' + exEnd + IntToStr(50), EmptyParam], EmptyParam);
+              E.Sheets[pagecount].PageSetup.LeftMargin := E.Sheets[1].PageSetup.LeftMargin;
+              E.Sheets[pagecount].PageSetup.RightMargin := E.Sheets[1].PageSetup.RightMargin;
+              E.Sheets[pagecount].PageSetup.TopMargin := E.Sheets[1].PageSetup.TopMargin;
+              E.Sheets[pagecount].PageSetup.BottomMargin := E.Sheets[1].PageSetup.BottomMargin;
+              E.Sheets[pagecount].PageSetup.Orientation := E.Sheets[1].PageSetup.Orientation;
+              E.Sheets[pagecount].Name := FieldByName('Cshort_name_fac').AsString
+                  + ' '
+                  + FieldByName('Cshort_spec').AsString
+                  + FieldByName('ik_spec_fac').AsString;
+
               E.Sheets[pagecount].Select;
               spec := FieldByName('ik_spec_fac').Value;
               i := l + 1;
@@ -2981,26 +2970,23 @@ begin
               AbitCount := 1;
             end;
 
-            if (DateToStr(dateProt) <> DateToStr(FieldByName('dd_pod_zayav').Value))
-                or ( not FieldByName('IsMain').AsBoolean) then
-            begin
+            if (DateToStr(dateProt) <> FieldByName('dd_pod_zayav').AsString)
+                or (not FieldByName('IsMain').AsBoolean)
+            then begin
               Next;
               Continue;
             end;
 
-            // добавляем заголовок
-            if (AbitCount > 1) and (((AbitCount - 1) mod m) = 0) then
-            begin // +exEnd+inttoStr(l)
-              E.Sheets[1].Range['A1:' + exEnd + IntToStr(l)
-                ].EntireRow.copy(EmptyParam); // поместим в БО
-              E.Sheets[pagecount - 1]
-                .Paste(E.Sheets[pagecount - 1].Range['A' + IntToStr(i) + ':' +
-                exEnd + IntToStr(i + l - 1), EmptyParam], EmptyParam);
+            // РґРѕР±Р°РІР»СЏРµРј Р·Р°РіРѕР»РѕРІРѕРє
+            if (AbitCount > 1) and (((AbitCount - 1) mod m) = 0)
+            then begin
+              E.Sheets[1].Range['A1:' + exEnd + IntToStr(l)].EntireRow.copy(EmptyParam); // РїРѕРјРµСЃС‚РёРј РІ Р‘Рћ
+              E.Sheets[pagecount - 1].Paste(E.Sheets[pagecount - 1].Range['A' + IntToStr(i)
+                  + ':'
+                  + exEnd + IntToStr(i + l - 1), EmptyParam], EmptyParam);
               dec(i);
-              E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)
-                ].Borders.Weight := 2;
-              E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)
-                ].RowHeight := RowHeigh;
+              E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)].Borders.Weight := 2;
+              E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)].RowHeight := RowHeigh;
               i := i + l + 1;
             end;
 
@@ -3009,10 +2995,10 @@ begin
             inc(j);
             E.Cells[i, j] := FieldByName('fio').AsString;
             inc(j);
-
             tempStr:= '';
-            if (FieldByName('Realy_postup').AsBoolean) then
-              tempStr:= ' (оригинал)';
+
+            if (FieldByName('Realy_postup').AsBoolean) then tempStr:= ' (РѕСЂРёРіРёРЅР°Р»)';
+
             E.Cells[i, j] := FieldByName('zach').AsString + tempStr;
             inc(j);
 
@@ -3030,21 +3016,20 @@ begin
           begin
             E.Quit;
             raise EApplicationException.Create
-              ('Ошибка при экспорте в Excel', Ex);
+              ('РћС€РёР±РєР° РїСЂРё СЌРєСЃРїРѕСЂС‚Рµ РІ Excel', Ex);
           end;
         end;
 
-        if (AbitCount > 1) or (pagecount > 1) then
-        begin
+        if (AbitCount > 1) or (pagecount > 1)
+        then begin
           E.Sheets[1].Delete;
           E.Sheets[1].Select;
-          // E.Sheets[1].PageSetup.LeftFooter:='&5' + TApplicationController.GetInstance.DocumentFooter;
           E.Visible := true;
         end
         else
         begin
           E.Quit;
-          raise EApplicationException.Create('Нет зачисленных абитуриентов');
+          raise EApplicationException.Create('РќРµС‚ Р·Р°С‡РёСЃР»РµРЅРЅС‹С… Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ');
         end;
 
       finally
