@@ -139,25 +139,25 @@ type
   protected
      function DoApply: Boolean;override;
      procedure DoCancel; override;
-     //выполнение функции с фильтром на уровне сервера
+     //РІС‹РїРѕР»РЅРµРЅРёРµ С„СѓРЅРєС†РёРё СЃ С„РёР»СЊС‚СЂРѕРј РЅР° СѓСЂРѕРІРЅРµ СЃРµСЂРІРµСЂР°
      procedure LoadDataFromFunction(Target: TADOQuery);
      procedure LoadDataFromQuery(Target: TADOQuery);
 
-     //настройка основного списка
+     //РЅР°СЃС‚СЂРѕР№РєР° РѕСЃРЅРѕРІРЅРѕРіРѕ СЃРїРёСЃРєР°
      procedure LoadMainList;
-     //загружает список наборов
+     //Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РЅР°Р±РѕСЂРѕРІ
      procedure LoadNaborList();
-     //загружает список абитуриентов
+     //Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ
      procedure LoadAbitList();
-     //загружает статистику по набору для объекта (узлa) @objectType:
-     //1 - весь год, 2 - факультет, 3 - специальность
-     //@objectID - код соответствующего объекта
+     //Р·Р°РіСЂСѓР¶Р°РµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕ РЅР°Р±РѕСЂСѓ РґР»СЏ РѕР±СЉРµРєС‚Р° (СѓР·Р»a) @objectType:
+     //1 - РІРµСЃСЊ РіРѕРґ, 2 - С„Р°РєСѓР»СЊС‚РµС‚, 3 - СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
+     //@objectID - РєРѕРґ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРіРѕ РѕР±СЉРµРєС‚Р°
      procedure LoadNaborStatistik;
-     //загружает список лишних экзаменов
+     //Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє Р»РёС€РЅРёС… СЌРєР·Р°РјРµРЅРѕРІ
      procedure LoadEcxessExamsList();
-     //загружает все индивидуальные достижения с баллами
+     //Р·Р°РіСЂСѓР¶Р°РµС‚ РІСЃРµ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Рµ РґРѕСЃС‚РёР¶РµРЅРёСЏ СЃ Р±Р°Р»Р»Р°РјРё
      procedure LoadIndBalls();
-     //загружает абитуриентов, подавших заявление по сети
+     //Р·Р°РіСЂСѓР¶Р°РµС‚ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ, РїРѕРґР°РІС€РёС… Р·Р°СЏРІР»РµРЅРёРµ РїРѕ СЃРµС‚Рё
      procedure LoadNetworkAbit;
 
      procedure RefreshDataSet(dataSet:TADODataSet);
@@ -174,11 +174,11 @@ type
     procedure Load();
     procedure DoRefreshFrame; override;
     procedure WidthSet(sender:TStringGrid;size:real);
-    // Получает год набора
+    // РџРѕР»СѓС‡Р°РµС‚ РіРѕРґ РЅР°Р±РѕСЂР°
     property year:Integer read GetYear;
-    // Получает код факультета
+    // РџРѕР»СѓС‡Р°РµС‚ РєРѕРґ С„Р°РєСѓР»СЊС‚РµС‚Р°
     property fc:Integer read GetikFac;
-    // Получает код специальности факультета
+    // РџРѕР»СѓС‡Р°РµС‚ РєРѕРґ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё С„Р°РєСѓР»СЊС‚РµС‚Р°
     property sp:Integer read GetikSpecfac;
   end;
 
@@ -199,7 +199,7 @@ AbiturientNaborProcs, AbiturientFacade,
 constructor TfmAbitNabor.CreateFrame(AOwner:TComponent; AObject:TObject; AConn:TADOConnection);
 begin
   inherited;
-  //создаем DataSet
+  //СЃРѕР·РґР°РµРј DataSet
   DS_nabor.DataSet:= TADODataSet.Create(nil);
 end;
 
@@ -219,66 +219,66 @@ begin
 
 end;
 
-//настройка основного списка
+//РЅР°СЃС‚СЂРѕР№РєР° РѕСЃРЅРѕРІРЅРѕРіРѕ СЃРїРёСЃРєР°
 procedure TfmAbitNabor.LoadMainList;
 begin
   dsMain.DataSet := nil;
   fac_spec.TabVisible:= false;
 
-  if FrameObject is TDBNodeRecruitObject then //ВЫБРАН весь набор
+  if FrameObject is TDBNodeRecruitObject then //Р’Р«Р‘Р РђРќ РІРµСЃСЊ РЅР°Р±РѕСЂ
   begin
     PageControl1.ActivePage := naborpage;
-    fac_spec.Caption := 'Факультеты';
-    //PageControl1.Pages[0].Caption := 'Факультеты';
+    fac_spec.Caption := 'Р¤Р°РєСѓР»СЊС‚РµС‚С‹';
+    //PageControl1.Pages[0].Caption := 'Р¤Р°РєСѓР»СЊС‚РµС‚С‹';
     dsMain.DataSet := (FrameObject as TDBNodeRecruitObject).DataSet;
     dbgrdMain.Columns[0].Visible := false;
-    dbgrdMain.Columns[1].Title.Caption := 'Название';
-    dbgrdMain.Columns[2].Title.Caption := 'Короткое название';
+    dbgrdMain.Columns[1].Title.Caption := 'РќР°Р·РІР°РЅРёРµ';
+    dbgrdMain.Columns[2].Title.Caption := 'РљРѕСЂРѕС‚РєРѕРµ РЅР°Р·РІР°РЅРёРµ';
     dbgrdMain.Columns[3].Visible := false;
     dbgrdMain.Columns[4].Visible := false;
     dbgrdMain.Columns[5].Visible := false;
-    frmMain.StatusBar1.Panels[1].Text:='Количество факультетов: ' + IntToStr(dsMain.DataSet.RecordCount);
+    frmMain.StatusBar1.Panels[1].Text:='РљРѕР»РёС‡РµСЃС‚РІРѕ С„Р°РєСѓР»СЊС‚РµС‚РѕРІ: ' + IntToStr(dsMain.DataSet.RecordCount);
     naborpage.TabVisible:=true;
   end;
-  //ВЫБРАН факультет
+  //Р’Р«Р‘Р РђРќ С„Р°РєСѓР»СЊС‚РµС‚
   if FrameObject is TDBNodeFacRecObject then
   begin
     PageControl1.ActivePage := naborpage;
-    fac_spec.Caption := 'Специальности';
-    //PageControl1.Pages[0].Caption := 'Специальности';
+    fac_spec.Caption := 'РЎРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё';
+    //PageControl1.Pages[0].Caption := 'РЎРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё';
     dsMain.DataSet := (FrameObject as TDBNodeFacRecObject).AdoDataset;
     dbgrdMain.Columns[0].Visible := false;
     dbgrdMain.Columns[1].Visible := false;
     dbgrdMain.Columns[2].Visible := false;
     dbgrdMain.Columns[3].Visible := false;
-    dbgrdMain.Columns[4].Title.Caption := 'Номер';
+    dbgrdMain.Columns[4].Title.Caption := 'РќРѕРјРµСЂ';
   //  dbgrdMain.Columns[4].Width := 30;
-    dbgrdMain.Columns[5].Title.Caption := 'Название';
-    dbgrdMain.Columns[6].Title.Caption := 'Короткое название';
+    dbgrdMain.Columns[5].Title.Caption := 'РќР°Р·РІР°РЅРёРµ';
+    dbgrdMain.Columns[6].Title.Caption := 'РљРѕСЂРѕС‚РєРѕРµ РЅР°Р·РІР°РЅРёРµ';
    // dbgrdMain.Columns[6].Width := 57;
     dbgrdMain.Columns[6].Alignment := taCenter;
     dbgrdMain.Columns[7].Visible := false;
     dbgrdMain.Columns[8].Visible := false;
     dbgrdMain.Columns[9].Visible := false;
-    dbgrdMain.Columns[10].Title.Caption := 'Направление обучения';
+    dbgrdMain.Columns[10].Title.Caption := 'РќР°РїСЂР°РІР»РµРЅРёРµ РѕР±СѓС‡РµРЅРёСЏ';
     dbgrdMain.Columns[11].Visible := false;
-    dbgrdMain.Columns[12].Title.Caption := 'Форма обучения';
+    dbgrdMain.Columns[12].Title.Caption := 'Р¤РѕСЂРјР° РѕР±СѓС‡РµРЅРёСЏ';
     dbgrdMain.Columns[13].Visible := false;
     dbgrdMain.Columns[14].Visible := false;
     dbgrdMain.Columns[15].Visible := false;
-    frmMain.StatusBar1.Panels[0].Text:='Факультет: ' + TDBNodeFacRecObject(FrameObject).Name;
-    frmMain.StatusBar1.Panels[1].Text:='Количество специальностей: ' + IntToStr(dsMain.DataSet.RecordCount);
+    frmMain.StatusBar1.Panels[0].Text:='Р¤Р°РєСѓР»СЊС‚РµС‚: ' + TDBNodeFacRecObject(FrameObject).Name;
+    frmMain.StatusBar1.Panels[1].Text:='РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚РµР№: ' + IntToStr(dsMain.DataSet.RecordCount);
     naborpage.TabVisible:=true;
   end;
 
-  //специальность
+  //СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
   if FrameObject is TDBNodeSpecRecObject then
   begin
     PageControl1.ActivePage := tsNaborDisc;
-    {PageControl1.Pages[0].Caption := 'Абитуриенты';
+    {PageControl1.Pages[0].Caption := 'РђР±РёС‚СѓСЂРёРµРЅС‚С‹';
     dsMain.DataSet := (FrameObject as TDBNodeSpecRecObject).AdoDataset;
 
-    // TODO: мрак, переделать
+    // TODO: РјСЂР°Рє, РїРµСЂРµРґРµР»Р°С‚СЊ
 
     With dbgrdMain do begin
 
@@ -290,15 +290,15 @@ begin
     FieldColumns['cmedal'].Visible := true;
     FieldColumns['cname_zach'].Visible := true;
 
-    FieldColumns['NameStud'].Title.Caption := 'ФИО';
-    FieldColumns['dd_pod_zayav'].Title.Caption:= 'Дата подачи';
-    FieldColumns['cmedal'].Title.Caption := 'Медаль';
-    FieldColumns['cname_zach'].Title.Caption := 'Состояние зачисления';
+    FieldColumns['NameStud'].Title.Caption := 'Р¤РРћ';
+    FieldColumns['dd_pod_zayav'].Title.Caption:= 'Р”Р°С‚Р° РїРѕРґР°С‡Рё';
+    FieldColumns['cmedal'].Title.Caption := 'РњРµРґР°Р»СЊ';
+    FieldColumns['cname_zach'].Title.Caption := 'РЎРѕСЃС‚РѕСЏРЅРёРµ Р·Р°С‡РёСЃР»РµРЅРёСЏ';
     end;
 
-    frmMain.StatusBar1.Panels[0].Text:='Специальность: ' + TDBNodeFacRecObject(FrameObject).Name;
+    frmMain.StatusBar1.Panels[0].Text:='РЎРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ: ' + TDBNodeFacRecObject(FrameObject).Name;
 
-    //вычисляем кол-во абитуриентов, которые не отчислены
+    //РІС‹С‡РёСЃР»СЏРµРј РєРѕР»-РІРѕ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅРµ РѕС‚С‡РёСЃР»РµРЅС‹
     i:=0;
     dsMain.DataSet.DisableControls;
     dsMain.DataSet.First;
@@ -309,8 +309,8 @@ begin
       dsMain.DataSet.Next;
     end;
     dsMain.DataSet.EnableControls;
-    frmMain.StatusBar1.Panels[1].Text:='Абитуриентов: ' + IntToStr(i); }
-    //скрываем вкладку общих данных набора
+    frmMain.StatusBar1.Panels[1].Text:='РђР±РёС‚СѓСЂРёРµРЅС‚РѕРІ: ' + IntToStr(i); }
+    //СЃРєСЂС‹РІР°РµРј РІРєР»Р°РґРєСѓ РѕР±С‰РёС… РґР°РЅРЅС‹С… РЅР°Р±РѕСЂР°
     naborpage.TabVisible:=false;
     fac_spec.TabVisible:=false;
     //PageControl1.ActivePage := statpage;
@@ -320,26 +320,26 @@ begin
   PageControl1Change(nil);
 end;
 
-//выполнение функции с фильтром на уровне сервера применяется,
-//так как все фильтры для датасетов одинаковые на данном фрейме
+//РІС‹РїРѕР»РЅРµРЅРёРµ С„СѓРЅРєС†РёРё СЃ С„РёР»СЊС‚СЂРѕРј РЅР° СѓСЂРѕРІРЅРµ СЃРµСЂРІРµСЂР° РїСЂРёРјРµРЅСЏРµС‚СЃСЏ,
+//С‚Р°Рє РєР°Рє РІСЃРµ С„РёР»СЊС‚СЂС‹ РґР»СЏ РґР°С‚Р°СЃРµС‚РѕРІ РѕРґРёРЅР°РєРѕРІС‹Рµ РЅР° РґР°РЅРЅРѕРј С„СЂРµР№РјРµ
 procedure TfmAbitNabor.LoadDataFromFunction(Target: TADOQuery);
 var sqlFilter: string;
 begin
-  //загружаем статистику
+  //Р·Р°РіСЂСѓР¶Р°РµРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ
   with Target do
   begin
     Close;
 
     SQL[1]:= '('+IntToStr(year)+')';
 
-    //исходя из текущего объекта устанавливаем фильтр на уровне сервера
+    //РёСЃС…РѕРґСЏ РёР· С‚РµРєСѓС‰РµРіРѕ РѕР±СЉРµРєС‚Р° СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„РёР»СЊС‚СЂ РЅР° СѓСЂРѕРІРЅРµ СЃРµСЂРІРµСЂР°
     sqlFilter:= '';
 
-    //факультет
+    //С„Р°РєСѓР»СЊС‚РµС‚
     if FrameObject is TDBNodeFacRecObject then
       sqlFilter:='(ik_fac =' + inttostr(fc)+')';
 
-    //специальность
+    //СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
     if FrameObject is TDBNodeSpecRecObject then
       sqlFilter:='(ik_spec_fac =' + inttostr(sp)+')';
 
@@ -350,26 +350,26 @@ begin
   end;
 end;
 
-//выполнение функции с фильтром на уровне сервера применяется,
-//так как все фильтры для датасетов одинаковые на данном фрейме
+//РІС‹РїРѕР»РЅРµРЅРёРµ С„СѓРЅРєС†РёРё СЃ С„РёР»СЊС‚СЂРѕРј РЅР° СѓСЂРѕРІРЅРµ СЃРµСЂРІРµСЂР° РїСЂРёРјРµРЅСЏРµС‚СЃСЏ,
+//С‚Р°Рє РєР°Рє РІСЃРµ С„РёР»СЊС‚СЂС‹ РґР»СЏ РґР°С‚Р°СЃРµС‚РѕРІ РѕРґРёРЅР°РєРѕРІС‹Рµ РЅР° РґР°РЅРЅРѕРј С„СЂРµР№РјРµ
 procedure TfmAbitNabor.LoadDataFromQuery(Target: TADOQuery);
 var sqlFilter: string;
 begin
-  //загружаем статистику
+  //Р·Р°РіСЂСѓР¶Р°РµРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ
   with Target do
   begin
     Close;
 
     SQL[1]:='where '+ '(NNyear='+IntToStr(year)+')';
 
-    //исходя из текущего объекта устанавливаем фильтр на уровне сервера
+    //РёСЃС…РѕРґСЏ РёР· С‚РµРєСѓС‰РµРіРѕ РѕР±СЉРµРєС‚Р° СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„РёР»СЊС‚СЂ РЅР° СѓСЂРѕРІРЅРµ СЃРµСЂРІРµСЂР°
     sqlFilter:= '';
 
-    //факультет
+    //С„Р°РєСѓР»СЊС‚РµС‚
     if FrameObject is TDBNodeFacRecObject then
       sqlFilter:='and (ik_fac =' + inttostr(fc)+')';
 
-    //специальность
+    //СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
     if FrameObject is TDBNodeSpecRecObject then
       sqlFilter:='and (ik_spec_fac =' + inttostr(sp)+')';
 
@@ -382,12 +382,12 @@ end;
 
 procedure TfmAbitNabor.LoadEcxessExamsList;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка списка лишних экзаменов.');
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° Р»РёС€РЅРёС… СЌРєР·Р°РјРµРЅРѕРІ.');
 
   LoadDataFromFunction(DMAbiturientNabor.adoqExamsErrors);
 
 
-  //настройка отображаемых столбцов
+  //РЅР°СЃС‚СЂРѕР№РєР° РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… СЃС‚РѕР»Р±С†РѕРІ
   if FrameObject is TDBNodeFacRecObject then
   begin
     dbgExamsErrors.Columns[1].Visible := false;
@@ -403,10 +403,10 @@ end;
 
 procedure TfmAbitNabor.LoadIndBalls;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка индивидуальных достижений.');
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р—Р°РіСЂСѓР·РєР° РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… РґРѕСЃС‚РёР¶РµРЅРёР№.');
   LoadDataFromFunction(DMAbiturientNabor.adoIndBall);
 
-  //настройка отображаемых столбцов
+  //РЅР°СЃС‚СЂРѕР№РєР° РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… СЃС‚РѕР»Р±С†РѕРІ
   if FrameObject is TDBNodeFacRecObject then
   begin
     dbgIndBalls.Columns[1].Visible := false;
@@ -419,33 +419,33 @@ begin
   end;
 end;
 
-//загружает список наборов
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃРїРёСЃРѕРє РЅР°Р±РѕСЂРѕРІ
 procedure TfmAbitNabor.LoadNaborList();
 begin
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка списка наборов.');
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° РЅР°Р±РѕСЂРѕРІ.');
   LoadDataFromFunction(DMAbiturientNabor.adoqNaborList);
 end;
 
 
 
-//загружает статистику по наборам
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕ РЅР°Р±РѕСЂР°Рј
 procedure TfmAbitNabor.LoadAbitList();
 begin
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка списка абитуриентов.');
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р—Р°РіСЂСѓР·РєР° СЃРїРёСЃРєР° Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ.');
 
   LoadDataFromFunction(DMAbiturientNabor.adospAbitGetPostupStatistika);
 
-  //загружаем статистику
+  //Р·Р°РіСЂСѓР¶Р°РµРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ
   with DMAbiturientNabor.adospAbitGetPostupStatistika do
   begin
-    //подсчет действительных заявлений для специальности
+    //РїРѕРґСЃС‡РµС‚ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… Р·Р°СЏРІР»РµРЅРёР№ РґР»СЏ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚Рё
     if FrameObject is TDBNodeSpecRecObject then
     begin
       Filter:='(realy_postup=1) and (ik_type_zach <> 3)';
       Filtered:=true;
 
       frmMain.StatusBar1.Panels[1].Text:=frmMain.StatusBar1.Panels[1].Text+
-          '  Действительных заявлений: ' +IntToStr(RecordCount);
+          '  Р”РµР№СЃС‚РІРёС‚РµР»СЊРЅС‹С… Р·Р°СЏРІР»РµРЅРёР№: ' +IntToStr(RecordCount);
 
       Filtered:=false;
       Filter:='';
@@ -453,7 +453,7 @@ begin
   end;
 
 
-  //настройка отображаемых столбцов
+  //РЅР°СЃС‚СЂРѕР№РєР° РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… СЃС‚РѕР»Р±С†РѕРІ
   if FrameObject is TDBNodeFacRecObject then
   begin
     dbgrdStatistika.Columns[3].Visible := false;
@@ -466,44 +466,44 @@ begin
   end;
 end;
 
-//загружает статистику по набору для объекта (узлa) @objectType:
-//1 - весь год, 2 - факультет, 3 - специальность
-//@objectID - код соответствующего объекта
+//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕ РЅР°Р±РѕСЂСѓ РґР»СЏ РѕР±СЉРµРєС‚Р° (СѓР·Р»a) @objectType:
+//1 - РІРµСЃСЊ РіРѕРґ, 2 - С„Р°РєСѓР»СЊС‚РµС‚, 3 - СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
+//@objectID - РєРѕРґ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРіРѕ РѕР±СЉРµРєС‚Р°
 procedure TfmAbitNabor.LoadNaborStatistik;
 var objectType, objectID: integer;
 begin
-    //ВЫБРАН весь набор (год)
+    //Р’Р«Р‘Р РђРќ РІРµСЃСЊ РЅР°Р±РѕСЂ (РіРѕРґ)
   if FrameObject is TDBNodeRecruitObject then
   begin
     objectType:= 1;
     objectID:= year;
   end;
 
-  //факультет
+  //С„Р°РєСѓР»СЊС‚РµС‚
   if FrameObject is TDBNodeFacRecObject then
   begin
     objectType:= 2;
     objectID:= fc;
   end;
 
-  //специальность
+  //СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
   if FrameObject is TDBNodeSpecRecObject then
   begin
     objectType:= 3;
     objectID:= (FrameObject as TDBNodeSpecRecObject).NNRecord;
   end;
 
-  //загружаем данные
+  //Р·Р°РіСЂСѓР¶Р°РµРј РґР°РЅРЅС‹Рµ
   TAbitNaborController.Instance.GetNaborStatistik(objectType, objectID, year);
 end;
 
 
 procedure TfmAbitNabor.LoadNetworkAbit;
 begin
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Загрузка интернет-абитуриентов.');
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р—Р°РіСЂСѓР·РєР° РёРЅС‚РµСЂРЅРµС‚-Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ.');
   LoadDataFromFunction(DMAbiturientNabor.adoNetworkAbit);
 
-  //настройка отображаемых столбцов
+  //РЅР°СЃС‚СЂРѕР№РєР° РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… СЃС‚РѕР»Р±С†РѕРІ
   if FrameObject is TDBNodeFacRecObject then
   begin
     dbgNetwork.Columns[1].Visible := false;
@@ -519,18 +519,18 @@ end;
 procedure TfmAbitNabor.Load();
 begin
   try
-    //ПОЛУЧАЕМ ДАННЫЕ НАБОРА ДЛЯ КОНКРЕТНОГО ГОДА
+    //РџРћР›РЈР§РђР•Рњ Р”РђРќРќР«Р• РќРђР‘РћР Рђ Р”Р›РЇ РљРћРќРљР Р•РўРќРћР“Рћ Р“РћР”Рђ
     fac_spec.Show;
 
-    LoadMainList; //грузим основной список
+    LoadMainList; //РіСЂСѓР·РёРј РѕСЃРЅРѕРІРЅРѕР№ СЃРїРёСЃРѕРє
   except
     on E:Exception do
-    raise EApplicationException.Create('Произошла ошибка при загрузке набора', E) ;
+    raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РЅР°Р±РѕСЂР°', E) ;
   end;
 
 end;
 
-//подгоняем ширину
+//РїРѕРґРіРѕРЅСЏРµРј С€РёСЂРёРЅСѓ
 procedure TfmAbitNabor.WidthSet(sender:TStringGrid;size:real);
 var i,j:integer;
     s:integer;
@@ -588,7 +588,7 @@ end;
 procedure TfmAbitNabor.ToolButton10Click(Sender: TObject);
 begin
   inherited;
-  if (MessageBox(Handle, '           Удалить запись?','ИС "УГТУ"',
+  if (MessageBox(Handle, '           РЈРґР°Р»РёС‚СЊ Р·Р°РїРёСЃСЊ?','РРЎ "РЈР“РўРЈ"',
           MB_YESNO) = IDYES) then
   begin
       //DMAbiturientNabor.adoqNaborDiscs.Edit;
@@ -616,55 +616,55 @@ end;
 procedure TfmAbitNabor.PageControl1Change(Sender: TObject);
 begin
   inherited;
-  //Скрываем ПАНЕЛЬ С СОХРАНЕНИЕМ И ОТКАТОМ ИЗМЕНЕНИЙ
+  //РЎРєСЂС‹РІР°РµРј РџРђРќР•Р›Р¬ РЎ РЎРћРҐР РђРќР•РќРР•Рњ Р РћРўРљРђРўРћРњ РР—РњР•РќР•РќРР™
   pnlSave.Visible:=false;
 
   if (PageControl1.ActivePage = naborpage) and
         (not DMAbiturientNabor.adoqNaborList.Active) then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Наборы. Переход на вкладку Общие сведения о наборе.');
+    TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РћР±С‰РёРµ СЃРІРµРґРµРЅРёСЏ Рѕ РЅР°Р±РѕСЂРµ.');
     try
-      LoadNaborList;  //грузим список наборов
+      LoadNaborList;  //РіСЂСѓР·РёРј СЃРїРёСЃРѕРє РЅР°Р±РѕСЂРѕРІ
     except
     on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при загрузке данных набора',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РґР°РЅРЅС‹С… РЅР°Р±РѕСЂР°',E);
     end;
   end;
 
-  //загружаем общий список абитуриентов
+  //Р·Р°РіСЂСѓР¶Р°РµРј РѕР±С‰РёР№ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ
   if (PageControl1.ActivePage = statpage) and
         (not DMAbiturientNabor.adospAbitGetPostupStatistika.Active) then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Общий список абитуриентов');
+    TApplicationController.GetInstance.AddLogEntry('РђР±РёС‚СѓСЂРёРµРЅС‚. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РћР±С‰РёР№ СЃРїРёСЃРѕРє Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ');
     try
-      LoadAbitList;  //грузим статистику наборов
+      LoadAbitList;  //РіСЂСѓР·РёРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ РЅР°Р±РѕСЂРѕРІ
     except
     on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при загрузке статистики набора',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ СЃС‚Р°С‚РёСЃС‚РёРєРё РЅР°Р±РѕСЂР°',E);
     end;
   end;
 
-  //загружаем статистику по узлу
+  //Р·Р°РіСЂСѓР¶Р°РµРј СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїРѕ СѓР·Р»Сѓ
   if (PageControl1.ActivePage = tsNaborStatistik) and
         (not DMAbiturientNabor.adospAbitNaborStatistik.Active) then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Статитстика по набору');
+    TApplicationController.GetInstance.AddLogEntry('РђР±РёС‚СѓСЂРёРµРЅС‚. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РЎС‚Р°С‚РёС‚СЃС‚РёРєР° РїРѕ РЅР°Р±РѕСЂСѓ');
     try
-      LoadNaborStatistik;  //грузим список наборов
+      LoadNaborStatistik;  //РіСЂСѓР·РёРј СЃРїРёСЃРѕРє РЅР°Р±РѕСЂРѕРІ
     except
     on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при загрузке статистики по набору',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ СЃС‚Р°С‚РёСЃС‚РёРєРё РїРѕ РЅР°Р±РѕСЂСѓ',E);
     end;
   end;
 
   if (PageControl1.ActivePage = tsNaborDisc) then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Вступительные экзамены');
+    TApplicationController.GetInstance.AddLogEntry('РђР±РёС‚СѓСЂРёРµРЅС‚. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ Р’СЃС‚СѓРїРёС‚РµР»СЊРЅС‹Рµ СЌРєР·Р°РјРµРЅС‹');
     try
-      LoadDataFromQuery(DMAbiturientNabor.adoqNaborDiscs);  //грузим список наборов
-      //Показываем ПАНЕЛЬ С СОХРАНЕНИЕМ И ОТКАТОМ ИЗМЕНЕНИЙ
+      LoadDataFromQuery(DMAbiturientNabor.adoqNaborDiscs);  //РіСЂСѓР·РёРј СЃРїРёСЃРѕРє РЅР°Р±РѕСЂРѕРІ
+      //РџРѕРєР°Р·С‹РІР°РµРј РџРђРќР•Р›Р¬ РЎ РЎРћРҐР РђРќР•РќРР•Рњ Р РћРўРљРђРўРћРњ РР—РњР•РќР•РќРР™
 
-      //настройка отображаемых столбцов
+      //РЅР°СЃС‚СЂРѕР№РєР° РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… СЃС‚РѕР»Р±С†РѕРІ
     if FrameObject is TDBNodeRecruitObject then
     begin
       dbgNaborDiscs.Options:=dbgNaborDiscs.Options - [DBGridEh.dgEditing];
@@ -693,46 +693,46 @@ begin
     ToolButton10.Visible:=pnlSave.Visible;
     except
     on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при загрузке Вступительных экзаменов',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ Р’СЃС‚СѓРїРёС‚РµР»СЊРЅС‹С… СЌРєР·Р°РјРµРЅРѕРІ',E);
     end;
   end;
 
-  //загружаем лишние экзамены
+  //Р·Р°РіСЂСѓР¶Р°РµРј Р»РёС€РЅРёРµ СЌРєР·Р°РјРµРЅС‹
   if (PageControl1.ActivePage = tsExamsErrors) and
         (not DMAbiturientNabor.adoqExamsErrors.Active) then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Лишние экзамены');
+    TApplicationController.GetInstance.AddLogEntry('РђР±РёС‚СѓСЂРёРµРЅС‚. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ Р›РёС€РЅРёРµ СЌРєР·Р°РјРµРЅС‹');
     try
-      LoadEcxessExamsList;  //грузим список наборов
+      LoadEcxessExamsList;  //РіСЂСѓР·РёРј СЃРїРёСЃРѕРє РЅР°Р±РѕСЂРѕРІ
     except
     on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при загрузке списка лишних экзаменов',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ СЃРїРёСЃРєР° Р»РёС€РЅРёС… СЌРєР·Р°РјРµРЅРѕРІ',E);
     end;
   end;
 
-  //загружаем индивидуальные достижения
+  //Р·Р°РіСЂСѓР¶Р°РµРј РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Рµ РґРѕСЃС‚РёР¶РµРЅРёСЏ
   if (PageControl1.ActivePage = IndBalls) {and
         (not DMAbiturientNabor.adoIndBall.Active)} then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Индивидуальные достижения');
+    TApplicationController.GetInstance.AddLogEntry('РђР±РёС‚СѓСЂРёРµРЅС‚. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹Рµ РґРѕСЃС‚РёР¶РµРЅРёСЏ');
     try
       LoadIndBalls;
     except
       on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при загрузке индивидуальных достижений',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РёРЅРґРёРІРёРґСѓР°Р»СЊРЅС‹С… РґРѕСЃС‚РёР¶РµРЅРёР№',E);
     end;
   end;
 
-  //загружаем Интернет-абитуриентов
+  //Р·Р°РіСЂСѓР¶Р°РµРј РРЅС‚РµСЂРЅРµС‚-Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ
   if (PageControl1.ActivePage = Network) {and
         (not DMAbiturientNabor.adoIndBall.Active)} then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Абитуриент. Переход на вкладку Интернет-абитуриенты');
+    TApplicationController.GetInstance.AddLogEntry('РђР±РёС‚СѓСЂРёРµРЅС‚. РџРµСЂРµС…РѕРґ РЅР° РІРєР»Р°РґРєСѓ РРЅС‚РµСЂРЅРµС‚-Р°Р±РёС‚СѓСЂРёРµРЅС‚С‹');
     try
       LoadNetworkAbit;
     except
       on E:Exception do
-      raise EApplicationException.Create('Произошла ошибка при загрузке абитуриентов, подавших заявление по сети',E);
+      raise EApplicationException.Create('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ Р°Р±РёС‚СѓСЂРёРµРЅС‚РѕРІ, РїРѕРґР°РІС€РёС… Р·Р°СЏРІР»РµРЅРёРµ РїРѕ СЃРµС‚Рё',E);
     end;
   end;
 
@@ -744,7 +744,7 @@ begin
   inherited;
   if (PageControl1.ActivePage = tsNaborDisc) and Modified then
   Begin
-    if (MessageBox(Handle, 'Сохранить изменения во вкладке Вступительные экзамены?','ИС "УГТУ"',
+    if (MessageBox(Handle, 'РЎРѕС…СЂР°РЅРёС‚СЊ РёР·РјРµРЅРµРЅРёСЏ РІРѕ РІРєР»Р°РґРєРµ Р’СЃС‚СѓРїРёС‚РµР»СЊРЅС‹Рµ СЌРєР·Р°РјРµРЅС‹?','РРЎ "РЈР“РўРЈ"',
           MB_YESNO) = IDYES) then
       actSaveMinBallsExecute(Sender)
     else
@@ -762,16 +762,16 @@ begin
   dataSet.Sort:= sort;
 end;
 
-//задает (получает) год набора
+//Р·Р°РґР°РµС‚ (РїРѕР»СѓС‡Р°РµС‚) РіРѕРґ РЅР°Р±РѕСЂР°
 function TfmAbitNabor.GetikFac: Integer;
 begin
   result:= 0;
 
-  //ВЫБРАН факультет
+  //Р’Р«Р‘Р РђРќ С„Р°РєСѓР»СЊС‚РµС‚
   if FrameObject is TDBNodeFacRecObject then
     result:= TDBNodeFacRecObject(FrameObject).ik;
 
-  //специальность
+  //СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
   if FrameObject is TDBNodeSpecRecObject then
     result:= TDBNodeFacRecObject(TDBNodeSpecRecObject(FrameObject).Node.Parent.Data).ik;
 
@@ -781,7 +781,7 @@ function TfmAbitNabor.GetikSpecfac: Integer;
 begin
   result:= 0;
 
-  //специальность
+  //СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
   if FrameObject is TDBNodeSpecRecObject then
     result:=TDBNodeSpecRecObject(FrameObject).ik;
 
@@ -790,15 +790,15 @@ end;
 function TfmAbitNabor.GetYear: integer;
 begin
   result:= -1;
-  //ВЫБРАН весь набор
+  //Р’Р«Р‘Р РђРќ РІРµСЃСЊ РЅР°Р±РѕСЂ
   if FrameObject is TDBNodeRecruitObject then
     result:= TDBNodeRecruitObject(FrameObject).ik;
 
-  //ВЫБРАН факультет
+  //Р’Р«Р‘Р РђРќ С„Р°РєСѓР»СЊС‚РµС‚
   if FrameObject is TDBNodeFacRecObject then
     result:= TDBNodeRecruitObject(TDBNodeFacRecObject(FrameObject).Node.Parent.Data).ik;
 
-  //специальность
+  //СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ
   if FrameObject is TDBNodeSpecRecObject then
     result:= TDBNodeRecruitObject(TDBNodeSpecRecObject(FrameObject).Node.Parent.Parent.Data).ik;
 
@@ -806,14 +806,14 @@ end;
 
 procedure TfmAbitNabor.actAddNaborExecute(Sender: TObject);
 begin
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Добавление набора.');
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р”РѕР±Р°РІР»РµРЅРёРµ РЅР°Р±РѕСЂР°.');
 
   frmNewNabor:=TfrmNewNabor.Create(self);
   try
     Abit_add_nabor_dialog.type_dialog:=1;
     frmNewNabor.year:= year;
 
-    //если фрейм факультет, то его не может изменить
+    //РµСЃР»Рё С„СЂРµР№Рј С„Р°РєСѓР»СЊС‚РµС‚, С‚Рѕ РµРіРѕ РЅРµ РјРѕР¶РµС‚ РёР·РјРµРЅРёС‚СЊ
     if fc<>0 then
 			frmNewNabor.Setikfac(fc)
     else frmNewNabor.dbcmbxFac.Enabled:=true;
@@ -836,7 +836,7 @@ end;
 procedure TfmAbitNabor.actEditNaborExecute(Sender: TObject);
 begin
   inherited;
-  TApplicationController.GetInstance.AddLogEntry('Наборы. Редактирование набора '+nabor.Fields[0].AsString + ', '+ nabor.Fields[1].AsString);
+  TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РЅР°Р±РѕСЂР° '+nabor.Fields[0].AsString + ', '+ nabor.Fields[1].AsString);
 
   frmNewNabor:=TfrmNewNabor.Create(self);
   try
@@ -887,11 +887,11 @@ end;
 procedure TfmAbitNabor.actImportNaborExecute(Sender: TObject);
 begin
   inherited;
-    //импортирование доступно только для фрейма общего набор
+    //РёРјРїРѕСЂС‚РёСЂРѕРІР°РЅРёРµ РґРѕСЃС‚СѓРїРЅРѕ С‚РѕР»СЊРєРѕ РґР»СЏ С„СЂРµР№РјР° РѕР±С‰РµРіРѕ РЅР°Р±РѕСЂ
   if not (FrameObject is TDBNodeRecruitObject)  then
     exit;
 
-  if (MessageBox(Handle, 'При импорте плановых наборов из подсистемы "Нагрузка" будут созданы все наборы, которые заполнил учебный отдел. Для них будут указаны плановые наборы на контракт и бюджет. Продолжать выполнение функции?','ИС "УГТУ"',
+  if (MessageBox(Handle, 'РџСЂРё РёРјРїРѕСЂС‚Рµ РїР»Р°РЅРѕРІС‹С… РЅР°Р±РѕСЂРѕРІ РёР· РїРѕРґСЃРёСЃС‚РµРјС‹ "РќР°РіСЂСѓР·РєР°" Р±СѓРґСѓС‚ СЃРѕР·РґР°РЅС‹ РІСЃРµ РЅР°Р±РѕСЂС‹, РєРѕС‚РѕСЂС‹Рµ Р·Р°РїРѕР»РЅРёР» СѓС‡РµР±РЅС‹Р№ РѕС‚РґРµР». Р”Р»СЏ РЅРёС… Р±СѓРґСѓС‚ СѓРєР°Р·Р°РЅС‹ РїР»Р°РЅРѕРІС‹Рµ РЅР°Р±РѕСЂС‹ РЅР° РєРѕРЅС‚СЂР°РєС‚ Рё Р±СЋРґР¶РµС‚. РџСЂРѕРґРѕР»Р¶Р°С‚СЊ РІС‹РїРѕР»РЅРµРЅРёРµ С„СѓРЅРєС†РёРё?','РРЎ "РЈР“РўРЈ"',
           MB_YESNO) = IDYES) then
   begin
     TAbitNaborController.Instance.ImportNabor(year);
@@ -908,7 +908,7 @@ end;
 procedure TfmAbitNabor.actImportNaborUpdate(Sender: TObject);
 begin
   inherited;
-  //импортирование доступно только для фрейма набор
+  //РёРјРїРѕСЂС‚РёСЂРѕРІР°РЅРёРµ РґРѕСЃС‚СѓРїРЅРѕ С‚РѕР»СЊРєРѕ РґР»СЏ С„СЂРµР№РјР° РЅР°Р±РѕСЂ
   actImportNabor.Enabled:= (FrameObject is TDBNodeRecruitObject) and
     (nabor.DataSource.DataSet.RecordCount<1);
 
@@ -922,10 +922,10 @@ end;
 
 procedure TfmAbitNabor.actDelNaborExecute(Sender: TObject);
 begin
-  if (MessageBox(Handle, '           Удалить набор?','ИС "УГТУ"',
+  if (MessageBox(Handle, '           РЈРґР°Р»РёС‚СЊ РЅР°Р±РѕСЂ?','РРЎ "РЈР“РўРЈ"',
           MB_YESNO) = IDYES) then
   begin
-    TApplicationController.GetInstance.AddLogEntry('Наборы. Удаление набора '+nabor.Fields[0].AsString + ', '+ nabor.Fields[1].AsString);
+    TApplicationController.GetInstance.AddLogEntry('РќР°Р±РѕСЂС‹. РЈРґР°Р»РµРЅРёРµ РЅР°Р±РѕСЂР° '+nabor.Fields[0].AsString + ', '+ nabor.Fields[1].AsString);
 
     TAbitNaborController.Instance.DelNabor(nabor.DataSource.DataSet.FieldByName('NNrecord').AsInteger);
 
@@ -937,7 +937,7 @@ end;
 
 procedure TfmAbitNabor.actDelNaborUpdate(Sender: TObject);
 begin
-  //удалить набор можно, только если к нему нет прикрепленных абитуреинтов
+  //СѓРґР°Р»РёС‚СЊ РЅР°Р±РѕСЂ РјРѕР¶РЅРѕ, С‚РѕР»СЊРєРѕ РµСЃР»Рё Рє РЅРµРјСѓ РЅРµС‚ РїСЂРёРєСЂРµРїР»РµРЅРЅС‹С… Р°Р±РёС‚СѓСЂРµРёРЅС‚РѕРІ
   if (nabor.DataSource.DataSet.Active) and (nabor.RowCount>1) then
     actDelNabor.Enabled:= (nabor.DataSource.DataSet.FieldByName('factBudjet').AsInteger=0) and
         (nabor.DataSource.DataSet.FieldByName('factCKP').AsInteger=0) and
@@ -972,7 +972,7 @@ begin
   inherited;
  { if (Value>100 or Value<0) then
     try
-      //оставляем только первый символ
+      //РѕСЃС‚Р°РІР»СЏРµРј С‚РѕР»СЊРєРѕ РїРµСЂРІС‹Р№ СЃРёРјРІРѕР»
       Text:= CheckOcenka(Value);
       Value:= String(Value)[1]+;
     except
@@ -1012,8 +1012,8 @@ var
   Report:TReportBase;
 begin
   inherited;
-  TApplicationController.GetInstance.AddLogEntry('Экспорт в Excel отчета по вступительным экзаменам.');
-  TApplicationController.GetInstance.AddLogEntry('Загрузка данных.');
+  TApplicationController.GetInstance.AddLogEntry('Р­РєСЃРїРѕСЂС‚ РІ Excel РѕС‚С‡РµС‚Р° РїРѕ РІСЃС‚СѓРїРёС‚РµР»СЊРЅС‹Рј СЌРєР·Р°РјРµРЅР°Рј.');
+  TApplicationController.GetInstance.AddLogEntry('Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С….');
   LoadDataFromQuery(DMAbiturientNabor.adoqAbitExams);
     Report := TReportBase.CreateReport(TAbitExamsReport);
     Report.FreeOnComplete := true;
@@ -1041,7 +1041,7 @@ end;
 procedure TfmAbitNabor.actPrintExamStatisticExecute(Sender: TObject);
 begin
   inherited;
-  TApplicationController.GetInstance.AddLogEntry('Печать отчета статистики по вступительным экзаменам.');
+  TApplicationController.GetInstance.AddLogEntry('РџРµС‡Р°С‚СЊ РѕС‚С‡РµС‚Р° СЃС‚Р°С‚РёСЃС‚РёРєРё РїРѕ РІСЃС‚СѓРїРёС‚РµР»СЊРЅС‹Рј СЌРєР·Р°РјРµРЅР°Рј.');
   TAbitOtchetsController.Instance.ExamsStatToExcel(year,fc,sp,false);
 end;
 
