@@ -1,4 +1,4 @@
-unit uAbitOtchetsController;
+﻿unit uAbitOtchetsController;
  {#Author tanyav@ist.ugtu.net}
 interface
 uses
@@ -2872,15 +2872,11 @@ var
   FindRange: Variant;
   dateProt: TDateTime;
 begin
-  if ((YearOf(Date)<>year) and (year>2000)) or (MonthOf(Date) < 6) or (MonthOf(Date) > 8) then
-  begin
-     dateProt:=StrToDate('15.07.'+IntToStr(year));
-  end
-  else
-    dateProt:=Date;
+  if ((YearOf(Date)<>year) and (year>2000)) or (MonthOf(Date) < 6) or (MonthOf(Date) > 8)
+  then dateProt:=StrToDate('15.07.'+IntToStr(year))
+  else dateProt := Date;
 
-  if not TGeneralController.Instance.SetReportDate(dateProt, 'протокола') then
-    exit;
+  if not TGeneralController.Instance.SetReportDate(dateProt, 'протокола') then exit;
 
   TApplicationController.GetInstance.AddLogEntry('Экспорт протокола зачисления в Excel');
 
@@ -2902,24 +2898,22 @@ begin
       path := ExtractFilePath(Application.ExeName) + 'reports\AbitProtocol.XLT';
       E.WorkBooks.add(path);
       E.DisplayAlerts := false;
-
-      //E.Visible := true;
         try
           pagecount := 2;
           while true do
           begin
 
-            if (spec <> FieldByName('ik_spec_fac').Value) or (Eof) then
-            begin
+            if (spec <> FieldByName('ik_spec_fac').Value) or (Eof)
+            then begin
 
               // перенастраиваем старую специальность
-              if spec > -1 then
-              begin
+              if spec > -1
+              then begin
                 dec(i);
-                j := ((AbitCount - 1) mod m);
+                j := (AbitCount - 1) mod m;
 
-                if j > 0 then
-                begin
+                if j > 0
+                then begin
                   E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)].Borders.Weight := 2;
                   E.Range['A' + IntToStr(i - j) + ':' + exEnd + IntToStr(i)].RowHeight := RowHeigh;
                   E.Range['A' + IntToStr(i+1) + ':' + exEnd + IntToStr(i+3)].RowHeight := 19;
@@ -2938,14 +2932,9 @@ begin
                 E.Range['A'+IntToStr(i)+':B'+IntToStr(i)].HorizontalAlignment:= 2 ;
                 E.Range['D'+IntToStr(i)+':E'+IntToStr(i)].HorizontalAlignment:= 4 ;
 
-	              FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(dateProt));
-	              FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(dateProt)));
-	              FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(dateProt));
-                FindRange := E.Cells.Replace(What := '#Spec#',Replacement:=FieldByName('specFullName').AsString);
               end;
 
-              if Eof then
-                break;
+              if Eof then break;
 
               // добавляем страницу и настраиваем
               E.Sheets.add(after := E.Sheets.Item[pagecount - 1]);
@@ -2959,19 +2948,24 @@ begin
               E.Sheets[pagecount].PageSetup.BottomMargin := E.Sheets[1].PageSetup.BottomMargin;
               E.Sheets[pagecount].PageSetup.Orientation := E.Sheets[1].PageSetup.Orientation;
               E.Sheets[pagecount].Name := FieldByName('Cshort_name_fac').AsString
-                  + ' '
-                  + FieldByName('Cshort_spec').AsString
-                  + FieldByName('ik_spec_fac').AsString;
+                                            + ' '
+                                            + FieldByName('Cshort_spec').AsString
+                                            + FieldByName('ik_spec_fac').AsString;
 
               E.Sheets[pagecount].Select;
               spec := FieldByName('ik_spec_fac').Value;
               i := l + 1;
               inc(pagecount);
               AbitCount := 1;
+
+
+	            FindRange := E.Cells.Replace(What := '#D#',Replacement:=DayOf(dateProt));
+	            FindRange := E.Cells.Replace(What := '#Mn#',Replacement:=GetMonthR(MonthOf(dateProt)));
+	            FindRange := E.Cells.Replace(What := '#Y#',Replacement:=YearOf(dateProt));
+              FindRange := E.Cells.Replace(What := '#Spec#',Replacement:=FieldByName('specFullName').AsString);
             end;
 
-            if (DateToStr(dateProt) <> FieldByName('dd_pod_zayav').AsString)
-                or (not FieldByName('IsMain').AsBoolean)
+            if (DateToStr(dateProt) <> FieldByName('dd_pod_zayav').AsString) or (not FieldByName('IsMain').AsBoolean)
             then begin
               Next;
               Continue;
@@ -2981,9 +2975,8 @@ begin
             if (AbitCount > 1) and (((AbitCount - 1) mod m) = 0)
             then begin
               E.Sheets[1].Range['A1:' + exEnd + IntToStr(l)].EntireRow.copy(EmptyParam); // поместим в БО
-              E.Sheets[pagecount - 1].Paste(E.Sheets[pagecount - 1].Range['A' + IntToStr(i)
-                  + ':'
-                  + exEnd + IntToStr(i + l - 1), EmptyParam], EmptyParam);
+              E.Sheets[pagecount - 1]
+               .Paste(E.Sheets[pagecount - 1].Range['A' + IntToStr(i) + ':' + exEnd + IntToStr(i + l - 1), EmptyParam], EmptyParam);
               dec(i);
               E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)].Borders.Weight := 2;
               E.Range['A' + IntToStr(i - m) + ':' + exEnd + IntToStr(i)].RowHeight := RowHeigh;
@@ -3015,8 +3008,7 @@ begin
           on Ex: Exception do
           begin
             E.Quit;
-            raise EApplicationException.Create
-              ('Ошибка при экспорте в Excel', Ex);
+            raise EApplicationException.Create('Ошибка при экспорте в Excel', Ex);
           end;
         end;
 
