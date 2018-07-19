@@ -2871,6 +2871,9 @@ var
   i, j, AbitCount: Integer;
   FindRange: Variant;
   dateProt: TDateTime;
+
+  nameSheet, ik_spec_fac: string;
+
 begin
   if ((YearOf(Date)<>year) and (year>2000)) or (MonthOf(Date) < 6) or (MonthOf(Date) > 8)
   then dateProt:=StrToDate('15.07.'+IntToStr(year))
@@ -2947,10 +2950,19 @@ begin
               E.Sheets[pagecount].PageSetup.TopMargin := E.Sheets[1].PageSetup.TopMargin;
               E.Sheets[pagecount].PageSetup.BottomMargin := E.Sheets[1].PageSetup.BottomMargin;
               E.Sheets[pagecount].PageSetup.Orientation := E.Sheets[1].PageSetup.Orientation;
-              E.Sheets[pagecount].Name := FieldByName('Cshort_name_fac').AsString
+
+              nameSheet := FieldByName('Cshort_name_fac').AsString
                                             + ' '
                                             + FieldByName('Cshort_spec').AsString
                                             + FieldByName('ik_spec_fac').AsString;
+              if nameSheet.Length < 32
+              then begin
+                E.Sheets[pagecount].Name := nameSheet;
+              end
+              else begin
+                ik_spec_fac := FieldByName('ik_spec_fac').AsString;
+                E.Sheets[pagecount].Name := nameSheet.Substring(0, 31 - ik_spec_fac.Length - 3 ) + '...' + ik_spec_fac;
+              end;
 
               E.Sheets[pagecount].Select;
               spec := FieldByName('ik_spec_fac').Value;
